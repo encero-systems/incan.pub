@@ -1,0 +1,21 @@
+# Adoption manifest for the crates.io package `serde` 1.0.228.
+#
+# `build.rs` emits one `rustc-cfg` answer and writes `private.rs` into `OUT_DIR`, which `src/lib.rs`
+# includes. The committed file under `out/` is that generated input; its content depends on the package
+# version only.
+
+[project]
+name = "serde"
+version = "1.0.228"
+
+[source]
+registry = "https://github.com/rust-lang/crates.io-index"
+checksum = "sha256:9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["alloc", "default", "derive", "serde_derive", "std"]
+cfg = ["if_docsrs_then_no_serde_core"]
+out = [{ name = "private.rs", path = "out/private.rs", digest = "sha256:f8e9470772811a1bdcd201fb21e14cbf37a57d192b38cd98f66bd4a83442c26b" }]
