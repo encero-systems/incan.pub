@@ -1,0 +1,461 @@
+<title>incan.pub</title>
+<meta name="description" content="How the Incan registry declares, admits and attests build facts for crates it does not host.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --inc-bg: #030304;
+    --inc-panel: rgba(8, 9, 12, 0.88);
+    --inc-panel-strong: rgba(6, 7, 10, 0.96);
+    --inc-text: #e4ebf2;
+    --inc-muted: #c1c8d0;
+    --inc-dim: #8b939c;
+    --inc-gold-1: #fff0b7;
+    --inc-gold-2: #ffc15a;
+    --inc-gold-3: #ff8d1f;
+    --inc-cyan: #48f0ef;
+    --inc-red: #ff5c69;
+    --inc-green: #7aeeb2;
+    --inc-border: rgba(196, 126, 54, 0.18);
+    --inc-border-bright: rgba(255, 193, 90, 0.34);
+    --inc-radius: 18px;
+    --inc-font-body: "Exo 2", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    --inc-font-display: Brawler, Georgia, "Times New Roman", serif;
+    --inc-font-mono: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, monospace;
+    --measure: 66ch;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--inc-bg);
+    background-image:
+      radial-gradient(1200px 600px at 78% -10%, rgba(255, 141, 31, 0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(72, 240, 239, 0.05), transparent 60%);
+    color: var(--inc-text);
+    font-family: var(--inc-font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 76rem; margin: 0 auto; padding-block: 2.5rem 4rem; padding-inline: clamp(16px, 4vw, 40px); }
+  a { color: var(--inc-gold-2); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--inc-gold-1); text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--inc-cyan); outline-offset: 3px; border-radius: 4px; }
+  code, pre, .mono { font-family: var(--inc-font-mono); font-size: 0.86em; }
+  code { color: var(--inc-gold-1); background: rgba(255, 193, 90, 0.08); padding: 0.08em 0.38em; border-radius: 6px; }
+  h1, h2, h3 { font-family: var(--inc-font-display); font-weight: 700; line-height: 1.12; letter-spacing: -0.005em; text-wrap: balance; margin: 0; color: var(--inc-text); }
+  h2 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); }
+  h3 { font-size: 1.2rem; font-weight: 700; }
+  p { margin: 0; max-width: var(--measure); }
+  strong { font-weight: 600; color: var(--inc-text); }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--inc-gold-2); }
+  .kicker.cyan { color: var(--inc-cyan); }
+  section { margin-top: clamp(3rem, 7vw, 5.5rem); }
+  .heading { display: grid; gap: 0.9rem; margin-bottom: 1.8rem; }
+  .heading p { color: var(--inc-muted); }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 3rem; align-items: center; margin-top: 0; }
+  .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); display: grid; }
+  .hero h1 span:last-child { color: var(--inc-gold-2); }
+  .hero .lead { font-size: 1.2rem; color: var(--inc-muted); margin-top: 1.4rem; }
+  .hero .truth { margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--inc-border); color: var(--inc-muted); font-size: 0.98rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.8rem; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.15rem; border-radius: 999px; border: 1px solid var(--inc-border-bright); color: var(--inc-gold-1); font-weight: 500; font-size: 0.95rem; background: rgba(255, 193, 90, 0.06); }
+  .btn.primary { background: linear-gradient(180deg, var(--inc-gold-2), var(--inc-gold-3)); color: #1b1206; border-color: transparent; }
+  .btn:hover, .btn:focus-visible { text-decoration: none; filter: brightness(1.08); }
+
+  /* the ledger (hero visual) */
+  .ledger { position: relative; border: 1px solid var(--inc-border-bright); border-radius: var(--inc-radius); background: var(--inc-panel-strong); padding: 1.2rem 1.3rem 1.3rem; box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,240,183,0.08); overflow: hidden; }
+  .ledger::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 27px, rgba(255,193,90,0.035) 27px 28px); pointer-events: none; }
+  .ledger header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.9rem; position: relative; }
+  .ledger header span { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--inc-gold-2); font-weight: 600; }
+  .ledger header small { color: var(--inc-dim); font-family: var(--inc-font-mono); font-size: 0.72rem; }
+  .ledger ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; position: relative; }
+  .ledger li { display: grid; grid-template-columns: 4.2rem 5.2rem 1fr auto; gap: 0.8rem; align-items: baseline; font-family: var(--inc-font-mono); font-size: 0.8rem; color: var(--inc-muted); padding: 0.28rem 0.5rem; border-radius: 8px; }
+  .ledger li.live { background: rgba(255, 193, 90, 0.08); outline: 1px solid var(--inc-border-bright); color: var(--inc-text); }
+  .ledger li .seq { color: var(--inc-dim); }
+  .ledger li .kind { color: var(--inc-gold-2); font-weight: 600; }
+  .ledger li .kind.attest { color: var(--inc-green); }
+  .ledger li .kind.publish { color: var(--inc-cyan); }
+  .ledger li .status { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inc-dim); }
+  .ledger li .status.attested { color: var(--inc-green); }
+  .ledger footer { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px dashed var(--inc-border); font-size: 0.82rem; color: var(--inc-dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; position: relative; }
+  .ledger footer b { color: var(--inc-muted); font-weight: 500; }
+
+  /* local nav */
+  .localnav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; align-items: center; margin-top: 2.6rem; padding: 0.9rem 0; border-top: 1px solid var(--inc-border); border-bottom: 1px solid var(--inc-border); font-size: 0.9rem; }
+  .localnav span { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--inc-dim); font-weight: 600; margin-right: 0.4rem; }
+  .localnav a { color: var(--inc-muted); }
+
+  /* route cards */
+  .routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .route { display: grid; gap: 0.5rem; padding: 1.3rem 1.3rem 1.2rem; border: 1px solid var(--inc-border); border-radius: var(--inc-radius); background: var(--inc-panel); color: var(--inc-text); align-content: start; position: relative; }
+  .route:hover, .route:focus-visible { text-decoration: none; border-color: var(--inc-border-bright); }
+  .route .num { font-family: var(--inc-font-mono); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--inc-gold-2); }
+  .route strong { font-family: var(--inc-font-display); font-size: 1.25rem; font-weight: 700; }
+  .route span.desc { color: var(--inc-muted); font-size: 0.95rem; }
+  .route em { font-style: normal; color: var(--inc-gold-1); font-size: 0.9rem; margin-top: 0.3rem; }
+  .route.consumer .num, .route.consumer em { color: var(--inc-cyan); }
+
+  /* thesis */
+  .thesis-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+  .thesis-grid article { padding: 1.3rem; border-radius: 14px; background: var(--inc-panel); border: 1px solid var(--inc-border); display: grid; gap: 0.45rem; align-content: start; }
+  .thesis-grid article span { font-family: var(--inc-font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inc-gold-2); }
+  .thesis-grid article strong { font-family: var(--inc-font-display); font-size: 1.15rem; }
+  .thesis-grid article p { color: var(--inc-muted); font-size: 0.95rem; }
+  .conclusion { margin-top: 1.6rem; padding: 1.2rem 1.4rem; border-left: 3px solid var(--inc-gold-2); color: var(--inc-muted); background: rgba(255, 193, 90, 0.05); border-radius: 0 12px 12px 0; }
+
+  /* the loop board */
+  .board { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 1rem; align-items: stretch; margin-top: 1.6rem; }
+  .column { display: grid; gap: 0.7rem; align-content: start; }
+  .column > p { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--inc-gold-2); }
+  .column.consumer > p { color: var(--inc-cyan); }
+  .step { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.8rem; padding: 0.9rem 1rem; border: 1px solid var(--inc-border); border-radius: 14px; background: var(--inc-panel); align-items: start; }
+  .step .n { font-family: var(--inc-font-mono); font-size: 0.78rem; color: var(--inc-gold-2); padding-top: 0.15rem; }
+  .step strong { display: block; font-size: 0.98rem; }
+  .step small { display: block; color: var(--inc-muted); font-size: 0.88rem; line-height: 1.5; }
+  .step code { font-size: 0.78rem; }
+  .step.external { border-color: rgba(72, 240, 239, 0.28); }
+  .step.external .n { color: var(--inc-cyan); }
+  .center { border: 1px solid var(--inc-border-bright); border-radius: var(--inc-radius); background: var(--inc-panel-strong); padding: 1.2rem 1.3rem; display: grid; gap: 0.9rem; align-content: start; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+  .center h3 { font-size: 1.35rem; }
+  .center .sub { color: var(--inc-muted); font-size: 0.95rem; }
+  .verbs { display: grid; gap: 0.5rem; }
+  .verbs div { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem; align-items: baseline; font-size: 0.9rem; color: var(--inc-muted); }
+  .verbs code { white-space: nowrap; }
+  .rule { display: grid; gap: 0.35rem; padding-top: 0.9rem; border-top: 1px dashed var(--inc-border); }
+  .rule span { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inc-red); font-weight: 600; }
+  .rule ul { margin: 0; padding-left: 1.1rem; color: var(--inc-muted); font-size: 0.9rem; display: grid; gap: 0.2rem; }
+
+  /* event inspector */
+  .inspector { margin-top: 1.4rem; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 1rem; }
+  .inspector pre { margin: 0; padding: 1.1rem 1.2rem; border-radius: 14px; background: #06070a; border: 1px solid var(--inc-border); color: var(--inc-muted); font-size: 0.78rem; line-height: 1.55; overflow-x: auto; }
+  .inspector pre .k { color: var(--inc-gold-1); }
+  .inspector pre .v { color: var(--inc-text); }
+  .inspector pre .c { color: var(--inc-cyan); }
+  .inspector aside { display: grid; gap: 0.8rem; align-content: start; padding: 1.1rem 1.2rem; border-radius: 14px; border: 1px solid var(--inc-border); background: var(--inc-panel); }
+  .inspector aside p.kick { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--inc-gold-2); font-weight: 600; }
+  .inspector dl { margin: 0; display: grid; gap: 0.55rem; }
+  .inspector dl div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 0.6rem; font-size: 0.9rem; }
+  .inspector dt { color: var(--inc-dim); }
+  .inspector dd { margin: 0; color: var(--inc-text); }
+  .inspector dd code { font-size: 0.8rem; }
+
+  /* status ladder */
+  .ladder { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 1.6rem; border: 1px solid var(--inc-border); border-radius: var(--inc-radius); overflow: hidden; background: var(--inc-panel); }
+  .ladder article { padding: 1.3rem 1.3rem 1.4rem; display: grid; gap: 0.5rem; align-content: start; border-right: 1px solid var(--inc-border); }
+  .ladder article:last-child { border-right: 0; }
+  .ladder .pill { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--inc-font-mono); font-size: 0.76rem; letter-spacing: 0.06em; padding: 0.22rem 0.6rem; border-radius: 999px; border: 1px solid var(--inc-border); color: var(--inc-muted); width: fit-content; }
+  .ladder .pill::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--inc-dim); }
+  .ladder .harvested .pill { color: var(--inc-gold-1); border-color: var(--inc-border-bright); }
+  .ladder .harvested .pill::before { background: var(--inc-gold-2); }
+  .ladder .attested .pill { color: var(--inc-green); border-color: rgba(122, 238, 178, 0.35); }
+  .ladder .attested .pill::before { background: var(--inc-green); }
+  .ladder strong { font-family: var(--inc-font-display); font-size: 1.15rem; }
+  .ladder p { color: var(--inc-muted); font-size: 0.93rem; }
+
+  /* boundary quote */
+  .manifesto { margin-top: clamp(3rem, 7vw, 5rem); display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start; padding: 1.6rem 1.8rem; border-radius: var(--inc-radius); background: linear-gradient(135deg, rgba(255,193,90,0.10), rgba(72,240,239,0.05)); border: 1px solid var(--inc-border-bright); }
+  .manifesto span.q { font-family: var(--inc-font-display); font-size: 4rem; line-height: 0.6; color: var(--inc-gold-2); }
+  .manifesto strong { font-family: var(--inc-font-display); font-size: 1.5rem; display: block; }
+  .manifesto p { color: var(--inc-muted); margin-top: 0.4rem; }
+
+  /* comparison */
+  .compare { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1rem; margin-top: 1.6rem; align-items: start; }
+  .table { border: 1px solid var(--inc-border); border-radius: var(--inc-radius); overflow: hidden; background: var(--inc-panel); }
+  .table .row { display: grid; grid-template-columns: 1fr 7rem 1fr; gap: 1rem; padding: 0.95rem 1.2rem; border-top: 1px solid var(--inc-border); font-size: 0.92rem; color: var(--inc-muted); align-items: start; }
+  .table .row:first-child { border-top: 0; background: rgba(255,193,90,0.06); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--inc-gold-2); }
+  .table .row b { color: var(--inc-text); font-weight: 600; }
+  .table .row .ok { color: var(--inc-text); }
+  .now, .north { padding: 1.3rem; border-radius: var(--inc-radius); border: 1px solid var(--inc-border); background: var(--inc-panel); display: grid; gap: 0.6rem; align-content: start; }
+  .now p.kick, .north p.kick { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--inc-gold-2); }
+  .north p.kick { color: var(--inc-dim); }
+  .now strong, .north strong { font-family: var(--inc-font-display); font-size: 1.2rem; }
+  .now ul, .north ul { margin: 0.3rem 0 0; padding-left: 1.1rem; color: var(--inc-muted); font-size: 0.93rem; display: grid; gap: 0.25rem; }
+  .north { border-style: dashed; }
+  .north small { color: var(--inc-dim); font-size: 0.82rem; }
+  .side { display: grid; gap: 1rem; }
+
+  /* closing boundary */
+  .closing { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 1.2rem; margin-top: clamp(3rem, 7vw, 5rem); }
+  .commands { padding: 1.3rem; border-radius: var(--inc-radius); border: 1px solid var(--inc-border); background: #06070a; display: grid; gap: 0.6rem; align-content: start; }
+  .commands p { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--inc-gold-2); }
+  .commands code { display: block; background: transparent; color: var(--inc-text); padding: 0.35rem 0; font-size: 0.85rem; overflow-x: auto; white-space: pre; }
+  .commands code span { color: var(--inc-gold-2); margin-right: 0.6rem; }
+  .commands a { font-size: 0.9rem; margin-top: 0.4rem; }
+  .boundary { padding: 1.4rem 1.5rem; border-radius: var(--inc-radius); border: 1px solid var(--inc-border-bright); background: var(--inc-panel-strong); display: grid; gap: 0.7rem; align-content: start; }
+  .boundary p.kick { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--inc-gold-2); }
+  .boundary ul { margin: 0.2rem 0 0; padding-left: 1.1rem; color: var(--inc-muted); font-size: 0.95rem; display: grid; gap: 0.3rem; }
+  .boundary small { color: var(--inc-dim); font-size: 0.85rem; }
+  .end { margin-top: 3rem; color: var(--inc-dim); font-size: 0.9rem; text-align: center; max-width: none; }
+
+  @media (max-width: 900px) {
+    .hero, .board, .inspector, .compare, .closing { grid-template-columns: 1fr; }
+    .routes, .thesis-grid, .ladder { grid-template-columns: 1fr; }
+    .ladder article { border-right: 0; border-top: 1px solid var(--inc-border); }
+    .ladder article:first-child { border-top: 0; }
+    .table .row { grid-template-columns: 1fr; gap: 0.3rem; }
+    .table .row:first-child { display: none; }
+    .table .row b::before { content: "· "; color: var(--inc-gold-2); }
+    .ledger li { grid-template-columns: 3.6rem 4.6rem 1fr; }
+    .ledger li .status { grid-column: 2 / -1; }
+    .inspector dl div { grid-template-columns: 1fr; gap: 0.1rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .ledger li.live { animation: settle 900ms ease-out both; }
+    @keyframes settle { from { background: rgba(255,193,90,0.22); } to { background: rgba(255,193,90,0.08); } }
+  }
+</style>
+
+<div class="page">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div>
+    <span class="kicker">A registry that keeps its receipts</span>
+    <h1 id="hero-title"><span>Declare once.</span><span>Prove per crate.</span></h1>
+    <p class="lead">incan.pub is where Oven's build facts become publications. It holds what a crate's <code>build.rs</code> would have discovered as declared, bound records — so Oven can compile the crate without ever running the script — and it keeps, for every binding, how firmly that declaration has been proven.</p>
+    <div class="actions">
+      <a class="btn primary" href="#why">Why it exists</a>
+      <a class="btn" href="#loop">See the loop</a>
+      <a class="btn" href="#proof">Read a record</a>
+      <a class="btn" href="https://github.com/encero-systems/incan.pub">Open the repository ↗</a>
+    </div>
+    <p class="truth"><strong>Interim means explicit boundaries.</strong> The signed HTTPS registry of RFC 125 is where this is going; today the log is a git repository, a commit is the signed event, and <code>HEAD</code> is the checkpoint the toolchain pins.</p>
+  </div>
+
+  <figure class="ledger" aria-label="The incan.pub event log, as published today">
+    <header><span>Event log · crates-io scope</span><small>9 events · 4 records · 5 bound facts</small></header>
+    <ol>
+      <li><span class="seq">000001</span><span class="kind publish">publish</span><span>libm 0.2.16 · sha256:b6d2cec3…</span><span class="status">record</span></li>
+      <li class="live"><span class="seq">000002</span><span class="kind">fact</span><span>libm · rustc 1.98.0 · aarch64 · release</span><span class="status">harvested</span></li>
+      <li><span class="seq">000003</span><span class="kind">fact</span><span>libm · rustc 1.98.0 · aarch64 · debug</span><span class="status">harvested</span></li>
+      <li><span class="seq">000004</span><span class="kind publish">publish</span><span>proc-macro2 1.0.106 · sha256:8fd00f0b…</span><span class="status">record</span></li>
+      <li><span class="seq">000005</span><span class="kind">fact</span><span>proc-macro2 · rustc 1.98.0 · aarch64 · release</span><span class="status">harvested</span></li>
+      <li><span class="seq">000006</span><span class="kind publish">publish</span><span>serde 1.0.228 · sha256:9a8e94ea…</span><span class="status">record</span></li>
+      <li><span class="seq">000007</span><span class="kind">fact</span><span>serde · release · out: private.rs</span><span class="status">harvested</span></li>
+      <li><span class="seq">000008</span><span class="kind publish">publish</span><span>serde_core 1.0.228 · sha256:41d385c7…</span><span class="status">record</span></li>
+      <li><span class="seq">000009</span><span class="kind">fact</span><span>serde_core · release · out: private.rs</span><span class="status">harvested</span></li>
+    </ol>
+    <footer><span><b>Next event kinds:</b> attest · asset · yank · advisory</span><span><b>Checksums:</b> verified against crates.io</span></footer>
+  </figure>
+</section>
+
+<nav class="localnav" aria-label="Page sections">
+  <span>Explore incan.pub</span>
+  <a href="#hero-title">Overview</a>
+  <a href="#loop">The loop</a>
+  <a href="#proof">Record & status</a>
+  <a href="#boundary">Notary, not judge</a>
+  <a href="#compare">Versus the alternatives</a>
+  <a href="#interim">Interim boundary</a>
+</nav>
+
+<section aria-labelledby="routes-title">
+  <div class="heading">
+    <h2 id="routes-title">One registry, three sides.</h2>
+    <p>Every publication is touched by a producer, the registry, and a consumer — and each side has exactly the verbs it needs.</p>
+  </div>
+  <div class="routes">
+    <a class="route" href="#loop">
+      <span class="num">PRODUCE</span>
+      <strong>Incan publishes</strong>
+      <span class="desc"><code>oven publish</code> a Loaf; <code>oven harvest</code> a crate's observed facts as a proposal; bake it natively and attest the result.</span>
+      <em>What Incan does →</em>
+    </a>
+    <a class="route" href="#proof">
+      <span class="num">MANAGE</span>
+      <strong>The registry admits</strong>
+      <span class="desc">Verifies identity, immutability, checksums against crates.io, and record shape; folds events into projections; carries status.</span>
+      <em>What pub does →</em>
+    </a>
+    <a class="route consumer" href="#loop">
+      <span class="num">CONSUME</span>
+      <strong>Oven selects</strong>
+      <span class="desc">Reads one index line, verifies the checksum it names, fetches the rendered record, and applies the binding that equals its own selection — or refuses.</span>
+      <em>What a consumer reads →</em>
+    </a>
+  </div>
+</section>
+
+<section id="why" aria-labelledby="why-title">
+  <div class="heading">
+    <span class="kicker">Why incan.pub exists</span>
+    <h2 id="why-title">A build script is a question. The registry publishes the answer.</h2>
+    <p>Under RFC 119 Oven never executes <code>build.rs</code>. What the script would have probed — compile-time flags, generated inputs, linked libraries — is declared instead. Upstream crates don't ship that declaration, and the answers are constants only under one exact toolchain, target, profile and feature set. Somebody has to publish them, per selection, with provenance.</p>
+  </div>
+  <div class="thesis-grid">
+    <article><span>01 · Declaration</span><strong>A fact is bound, not guessed.</strong><p>Each record names the compiler, target, profile and features it was derived under. <code>libm</code> enables <code>optimizations_enabled</code> above opt-level 1, so its release and debug records differ — and a consumer applies neither to any other selection.</p></article>
+    <article><span>02 · Provenance</span><strong>Harvest is observation. Publishing is declaration.</strong><p>Cargo observes what a script emitted on one machine; a reviewable step turns that into a registry fact. The evidence — receipt, Cargo lock digest, Cargo version — travels on the event.</p></article>
+    <article><span>03 · Proof</span><strong>Real is a status you can read.</strong><p>A binding is <code>harvested</code> until an Oven-baked unit is shown byte-equivalent to Cargo's; then it is <code>attested</code>. That word is on the index line, per binding, before anything is downloaded.</p></article>
+  </div>
+  <p class="conclusion"><strong>The innovation is not hosting manifests for other people's crates.</strong> It is making a build fact a first-class publication — with an identity, a binding, evidence, and a status — so that "Oven is real" is something a consumer can check per crate rather than take on faith.</p>
+</section>
+
+<section id="loop" aria-labelledby="loop-title">
+  <div class="heading">
+    <span class="kicker">The loop</span>
+    <h2 id="loop-title">What Incan does to get things in. What pub does to keep them honest.</h2>
+    <p>The registry is built first and the compiler reads only its projections, so the shape of publication can change without a compiler change.</p>
+  </div>
+  <div class="board">
+    <div class="column" aria-label="Producer side">
+      <p>Incan → pub</p>
+      <div class="step"><span class="n">01</span><div><strong>Publish a Loaf</strong><small><code>oven publish</code> bakes, signs and uploads a source Loaf; publisher-built assets ride along. Unchanged from RFC 125.</small></div></div>
+      <div class="step"><span class="n">02</span><div><strong>Harvest a crate</strong><small><code>oven harvest libm@0.2.16</code> runs the Cargo-compatibility publisher once under one exact selection and emits a proposal: the bound record plus the evidence of its observation.</small></div></div>
+      <div class="step"><span class="n">03</span><div><strong>Admit the proposal</strong><small>An identity authorised for the <code>crates-io</code> scope submits it. It becomes a <code>fact</code> event. Identical proposals are no-ops; a conflicting one is refused.</small></div></div>
+      <div class="step"><span class="n">04</span><div><strong>Bake natively, attest</strong><small>Oven compiles the crate from the record. The RFC 124 unit becomes an <code>asset</code>; equal identity with Cargo's unit becomes an <code>attest</code>.</small></div></div>
+      <div class="step"><span class="n">05</span><div><strong>Pin</strong><small>The toolchain manifest pins a checkpoint — today, a commit. <code>oven.lock</code> records where every unit came from.</small></div></div>
+    </div>
+
+    <div class="center" aria-label="Registry side">
+      <span class="kicker">pub</span>
+      <h3>Admit. Project. Checkpoint. Answer.</h3>
+      <p class="sub">The only authored thing is the event log. Everything a consumer reads is folded from it.</p>
+      <div class="verbs">
+        <div><code>registry.py check</code><span>Admission: contiguous log, content identities, immutable versions, closed and sorted records, committed <code>out</code> bytes, checksums verified against the live crates.io index.</span></div>
+        <div><code>registry.py build</code><span>Projection: renders every <code>crates-io/&lt;name&gt;/&lt;version&gt;/loaf.toml</code> and the sparse index from the events. Never edited by hand.</span></div>
+        <div><code>publish</code> · <code>add-fact</code> · <code>attest</code><span>The producer verbs, each appending exactly one event.</span></div>
+      </div>
+      <div class="rule">
+        <span>Refused, with the rule named</span>
+        <ul>
+          <li>a tampered event, or a gap in the sequence</li>
+          <li>a second <code>publish</code> of one version</li>
+          <li>a <code>fact</code> that contradicts an existing binding</li>
+          <li>a checksum crates.io does not publish</li>
+          <li>an <code>env</code> key — script environment is not a fact</li>
+          <li>a hand-edited projection</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="column consumer" aria-label="Consumer side">
+      <p>pub → Oven</p>
+      <div class="step external"><span class="n">a</span><div><strong>Read the index line</strong><small>One JSON line per package version, in the crates.io sparse path scheme: name, version, source checksum, and every binding with its status.</small></div></div>
+      <div class="step external"><span class="n">b</span><div><strong>Verify the source</strong><small>The checksum must be the one the consumer's own lock names for that crates.io archive. A different source is a refusal, never a near-miss.</small></div></div>
+      <div class="step external"><span class="n">c</span><div><strong>Select by exact binding</strong><small>Toolchain, target, profile and features must all equal the record's. No record matching means the crate is not adopted for this selection.</small></div></div>
+      <div class="step external"><span class="n">d</span><div><strong>Govern, cross-check, refuse</strong><small>While the compatibility path still runs, declared <code>cfg</code> and <code>out</code> must equal what was observed. A consumer may accept only <code>attested</code> bindings.</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof" aria-labelledby="proof-title">
+  <div class="heading">
+    <span class="kicker">Inspect · a record</span>
+    <h2 id="proof-title">The event says what was declared, by whom, on what evidence.</h2>
+    <p>This is event 000002 as published: the release-profile record for <code>libm</code>. Its <code>id</code> is the digest of its own body — change a character and admission refuses the log.</p>
+  </div>
+  <div class="inspector">
+<pre aria-label="Event 000002"><span class="k">"kind"</span>: <span class="v">"fact"</span>,
+<span class="k">"subject"</span>: { <span class="k">"scope"</span>: <span class="c">"crates-io"</span>, <span class="k">"name"</span>: <span class="v">"libm"</span>, <span class="k">"version"</span>: <span class="v">"0.2.16"</span> },
+<span class="k">"fact"</span>: {
+  <span class="k">"toolchain"</span>: <span class="v">"rustc 1.98.0 (88d9e12ae 2026-08-18)"</span>,
+  <span class="k">"target"</span>:    <span class="v">"aarch64-apple-darwin"</span>,
+  <span class="k">"profile"</span>:   <span class="v">"release"</span>,
+  <span class="k">"features"</span>:  [<span class="v">"arch"</span>, <span class="v">"default"</span>],
+  <span class="k">"cfg"</span>:       [<span class="v">"arch_enabled"</span>, <span class="v">"optimizations_enabled"</span>]
+},
+<span class="k">"evidence"</span>: {
+  <span class="k">"method"</span>: <span class="v">"compatibility publisher observation"</span>,
+  <span class="k">"cargo_version"</span>: <span class="v">"cargo 1.96.0-nightly (e84cb639e 2026-03-21)"</span>,
+  <span class="k">"cargo_lock_digest"</span>: <span class="v">"sha256:b74440e4…"</span>
+},
+<span class="k">"actor"</span>: <span class="v">"encero-systems/incan.pub maintainers"</span>,
+<span class="k">"id"</span>:    <span class="v">"sha256:ff50e6bd5da4c0…"</span></pre>
+    <aside aria-label="What the record deliberately leaves out">
+      <p class="kick">What is not in it</p>
+      <dl>
+        <div><dt>No environment</dt><dd><code>libm</code>'s script reemits <code>CFG_OPT_LEVEL</code> for its own test logging. Nothing compiles against it, so it is not a fact. There is no key to put it in.</dd></div>
+        <div><dt>No source</dt><dd>The registry never mirrors a <code>.crate</code>. It names one by checksum and confirms crates.io publishes that checksum for that version.</dd></div>
+        <div><dt>No guess</dt><dd><code>proc-macro2</code> answers <code>proc_macro_span</code> only under <code>RUSTC_BOOTSTRAP</code>. A harvest that ran with ambient state is not a fact of the toolchain, and its record does not carry that answer.</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <div class="ladder" aria-label="Binding status ladder">
+    <article><span class="pill">proposed</span><strong>A harvest emitted it.</strong><p>Observed by the compatibility publisher on one machine. Nothing has been published yet; a reviewer sees the evidence and the environment the harvest ran under.</p></article>
+    <article class="harvested"><span class="pill">harvested</span><strong>The registry admitted it.</strong><p>A <code>fact</code> event exists. The binding is on the index line and a consumer may select it — and, while both paths coexist, cross-checks it against what Cargo observed.</p></article>
+    <article class="attested"><span class="pill">attested</span><strong>Oven reproduced the bytes.</strong><p>An <code>attest</code> event names an Oven-baked unit whose RFC 124 identity equals the Cargo-built unit's. This is where "real" stops being an adjective.</p></article>
+  </div>
+</section>
+
+<aside id="boundary" class="manifesto" aria-label="The registry's boundary">
+  <span class="q" aria-hidden="true">“</span>
+  <div>
+    <strong>The registry is a notary, not a judge.</strong>
+    <p>It cannot know that a <code>cfg</code> answer is true. It verifies form, binding, authorisation and immutability, and it stores references to the three places truth actually lives: the harvest evidence, the attested asset, and the consumer's own cross-check. Trust is a policy the consumer sets — accept <code>harvested</code>, or insist on <code>attested</code>.</p>
+  </div>
+</aside>
+
+<section id="compare" aria-labelledby="compare-title">
+  <div class="heading">
+    <span class="kicker">Versus the alternatives</span>
+    <h2 id="compare-title">The same crate, three ways to build it.</h2>
+  </div>
+  <div class="compare">
+    <div class="table" role="table" aria-label="Comparison of build approaches">
+      <div class="row" role="row"><span role="columnheader">Cargo runs build.rs</span><b role="columnheader">Concern</b><span role="columnheader">incan.pub record</span></div>
+      <div class="row" role="row"><span role="cell">Every build probes the environment again; the answer lives nowhere.</span><b role="cell">Facts</b><span class="ok" role="cell">Declared once per binding, with the evidence they came from.</span></div>
+      <div class="row" role="row"><span role="cell">Arbitrary script code executes at build time.</span><b role="cell">Execution</b><span class="ok" role="cell">Nothing executes. Resolution reads an index line and a manifest.</span></div>
+      <div class="row" role="row"><span role="cell">Correct by convention; a probe may differ per machine.</span><b role="cell">Truth</b><span class="ok" role="cell">Cross-checked while both paths exist; attested when bytes match.</span></div>
+      <div class="row" role="row"><span role="cell">A vendored fork carries the whole source and drifts from upstream.</span><b role="cell">Ownership</b><span class="ok" role="cell">The source stays on crates.io; only the declaration is published, bound by checksum.</span></div>
+      <div class="row" role="row"><span role="cell">A patched directory with a removal condition.</span><b role="cell">Lifetime</b><span class="ok" role="cell">Records accrue per toolchain and target; versions are immutable; state is events.</span></div>
+    </div>
+    <div class="side">
+      <div class="now">
+        <p class="kick">Interim · available now</p>
+        <strong>A registry, not a folder</strong>
+        <ul>
+          <li>Append-only event log with content identities</li>
+          <li>Rendered records and sparse index as projections</li>
+          <li>Admission in CI, checksums verified against crates.io</li>
+          <li><code>publish</code> · <code>add-fact</code> · <code>attest</code></li>
+          <li>Four records, five bindings: libm, proc-macro2, serde, serde_core</li>
+        </ul>
+      </div>
+      <div class="north">
+        <p class="kick">North star · RFC 125</p>
+        <strong>The same events, signed</strong>
+        <ul>
+          <li>Keyless signatures and a transparency log</li>
+          <li>Trusted publishing from harvest CI</li>
+          <li>Baked assets per RFC 124 unit, by builder kind</li>
+          <li>Signed index checkpoints served over HTTPS</li>
+        </ul>
+        <small>Planned. The event shapes are fixed now so that only transport and signing change.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="interim" class="closing" aria-labelledby="interim-title">
+  <div class="commands">
+    <p>Operate the registry</p>
+    <code><span>$</span>scripts/registry.py check</code>
+    <code><span>$</span>scripts/registry.py publish libm 0.2.16 sha256:b6d2…</code>
+    <code><span>$</span>scripts/registry.py add-fact proposal.toml</code>
+    <code><span>$</span>scripts/registry.py attest libm 0.2.16 --profile release …</code>
+    <code><span>$</span>scripts/registry.py build</code>
+    <a href="https://github.com/encero-systems/incan.pub/blob/main/docs/model.md">Read the model from both ends →</a>
+  </div>
+  <div class="boundary">
+    <p class="kick">Interim boundary</p>
+    <h2 id="interim-title">Small by design. Explicit by default.</h2>
+    <span>incan.pub today publishes external-source records for the crates the 0.6 standard-library closure needs. It does not yet claim:</span>
+    <ul>
+      <li>source Loaf publication, scopes, or ownership beyond the toolchain-operated <code>crates-io</code> scope;</li>
+      <li>baked-asset storage or distribution;</li>
+      <li>signatures beyond the git commit, or a served checkpoint;</li>
+      <li>a home for a script-emitted value that a compilation <em>does</em> observe — a typed constant is the open question;</li>
+      <li>the <code>link</code> and <code>tool</code> publisher-side work of RFC 119, reserved until their grammar exists.</li>
+    </ul>
+    <small>Those belong to RFC 125's signed form and later 0.6 slices. If a record cannot honestly bind a consumer's selection, the consumer is told so and stops.</small>
+  </div>
+</section>
+
+<p class="end">Repository: <a href="https://github.com/encero-systems/incan.pub">encero-systems/incan.pub</a> · Tracking: <a href="https://github.com/encero-systems/incan/issues/1666">incan#1666</a> · Specification: RFC 125, RFC 119, RFC 124.</p>
+
+</div>

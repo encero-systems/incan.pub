@@ -22,6 +22,7 @@ crates-io/<name>/<version>/loaf.toml   projection: the external-source record as
 crates-io/<name>/<version>/out/...     committed generated inputs a record names
 index/...                              projection: static sparse index, one JSON line per package version
 docs/model.md                          the loop, from both ends
+docs/explanation.html                  the explanation page (self-contained HTML, incapunk styling)
 docs/external-source-record.md         the record, its events, and the rendered manifest
 docs/harvest-proposal.md               what `oven harvest` emits and `add-fact` admits
 scripts/registry.py                    admission (`check`), projection (`build`), and the publishing verbs
