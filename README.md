@@ -1,10 +1,10 @@
 # incan.pub
 
-The registry for Oven-built projects, as specified by [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md). This repository is its interim home. Today it holds one kind of content: **adoption manifests** for crates.io packages.
+The registry for Oven-built projects, as specified by [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md). This repository is its interim home. Today it holds one kind of publication: **external-source records** for crates.io packages, and the event log they are folded from. [docs/model.md](docs/model.md) states what Incan does to publish and what the registry does to manage.
 
-## What an adoption manifest is
+## What an external-source record is
 
-Oven never executes a package's `build.rs`. Under [RFC 119](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/119_oven_native_rust_build_facets_and_cargo_interoperation.md) a build script is inert source inventory; what it would have discovered is declared instead, as `cfg` answers, committed `out` inputs, `link` work and `tool` work. A crates.io package graduates to Oven-native when it has a `loaf.toml` whose declared facts cover its build inputs. Upstream packages do not ship that manifest, so this repository holds it for them: one `loaf.toml` per package version, describing exactly one crates.io source by checksum.
+Oven never executes a package's `build.rs`. Under [RFC 119](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/119_oven_native_rust_build_facets_and_cargo_interoperation.md) a build script is inert source inventory; what it would have discovered is declared instead, as `cfg` answers, committed `out` inputs, `link` work and `tool` work. A crates.io package graduates to Oven-native when it has a `loaf.toml` whose declared facts cover its build inputs. Upstream packages do not ship that manifest, so this registry publishes it for them: an external-source record per package version, describing exactly one crates.io source by checksum. RFC 125 names this object as one of the two publications a baked asset may derive from.
 
 Each manifest is a set of **bound fact records**. A record states the facts for one exact selection — toolchain, target, profile and enabled features — because a probe's answer is a constant only under that selection. `libm` enables `optimizations_enabled` above opt-level 1, so its release and debug records differ; `proc-macro2` answers by compiler version, so every record names the compiler. A consumer applies a record only when its own selection matches the record's binding and refuses otherwise. It never interpolates between records and never falls back to running the script.
 
@@ -17,18 +17,23 @@ Each manifest is a set of **bound fact records**. A record states the facts for 
 ## Layout
 
 ```
-index/...                              static sparse index, one JSON line per package version (crates.io path scheme)
-crates-io/<name>/<version>/loaf.toml   the adoption manifest for one crates.io package version
+events/NNNNNN-<kind>-<subject>.json    the append-only event log; the only thing that is authored
+crates-io/<name>/<version>/loaf.toml   projection: the external-source record as a consumer reads it
 crates-io/<name>/<version>/out/...     committed generated inputs a record names
-docs/adoption-manifest.md              the manifest format
-scripts/registry.py                    builds the index from the manifests and validates the repository
+index/...                              projection: static sparse index, one JSON line per package version
+docs/model.md                          the loop, from both ends
+docs/external-source-record.md         the record, its events, and the rendered manifest
+docs/harvest-proposal.md               what `oven harvest` emits and `add-fact` admits
+scripts/registry.py                    admission (`check`), projection (`build`), and the publishing verbs
 ```
 
-The index is a projection of the manifests and is never edited by hand: `scripts/registry.py build` regenerates it, and `scripts/registry.py check` (run in CI on every change) refuses a repository whose manifests, committed generated inputs, or index disagree. A client reads the index line for a package, verifies the crates.io checksum it names, fetches the manifest, and selects the record whose binding equals its own selection.
+Nothing under `crates-io/**/loaf.toml` or `index/` is edited by hand: `scripts/registry.py build` regenerates both from the events, and `scripts/registry.py check` — run in CI on every change — refuses a repository whose events, committed generated inputs or projections disagree, and verifies every record's checksum against the live crates.io index. A client reads the index line for a package, verifies the checksum it names, fetches the rendered manifest, and selects the record whose binding equals its own selection; the line also says whether that binding is merely `harvested` or `attested`.
+
+In this transport a commit is the signed event and `HEAD` is the checkpoint the toolchain pins. The signed HTTPS form of RFC 125 changes how these files arrive, not what they say.
 
 ## How facts get here
 
-A fact is harvested, not guessed. Oven's Cargo-compatibility publisher already observes each unit's build-script directives and generated outputs under one exact selection; a record is proposed from that observation and proven by literal artifact equivalence against the Cargo-built unit. A harvest is only a fact of the toolchain when nothing ambient influenced it: a probe answered under `RUSTC_BOOTSTRAP`, for example, is not a stable compiler's answer and must not be recorded as one.
+A fact is harvested, not guessed. Oven's Cargo-compatibility publisher observes each unit's build-script directives and generated outputs under one exact selection; `oven harvest` emits that observation as a [proposal](docs/harvest-proposal.md), and `scripts/registry.py add-fact` admits it as a `fact` event. A binding becomes `attested` when an Oven-baked unit is proven equivalent to the Cargo-built one. A harvest is only a fact of the toolchain when nothing ambient influenced it: a probe answered under `RUSTC_BOOTSTRAP`, for example, is not a stable compiler's answer and must not be recorded as one.
 
 ## Status
 

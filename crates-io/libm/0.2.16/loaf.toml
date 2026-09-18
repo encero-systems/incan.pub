@@ -1,10 +1,12 @@
-# Adoption manifest for the crates.io package `libm` 0.2.16.
+# External-source record for the crates.io package `libm` 0.2.16.
 #
 # `build.rs` probes the opt-level, the enabled Cargo features and the target architecture, then emits
 # `rustc-cfg` answers. Under a frozen toolchain those answers are constants; each `[[rust.facts]]` record
 # below states them for one exact selection. The script also reemits `CFG_CARGO_FEATURES`, `CFG_OPT_LEVEL`
 # and `CFG_TARGET_FEATURES` through `rustc-env` for its own test logging; no compilation of the library
 # observes them, so they are not facts and do not appear here.
+#
+# Projection of the incan.pub event log; regenerate with scripts/registry.py build, never edit.
 
 [project]
 name = "libm"
@@ -17,13 +19,13 @@ checksum = "sha256:b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
-profile = "release"
+profile = "debug"
 features = ["arch", "default"]
-cfg = ["arch_enabled", "optimizations_enabled"]
+cfg = ["arch_enabled"]
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
-profile = "debug"
+profile = "release"
 features = ["arch", "default"]
-cfg = ["arch_enabled"]
+cfg = ["arch_enabled", "optimizations_enabled"]

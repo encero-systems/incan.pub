@@ -1,0 +1,18 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-09-18T12:01:06Z",
+  "id": "sha256:1866bf263ab556b8efe698bb41b58f79d9169ff1ab933d4c6a285d407d4c7325",
+  "kind": "publish",
+  "notes": "External-source record for the crates.io package `proc-macro2` 1.0.106.\n\n`build.rs` probes the compiler's proc-macro span support and emits `rustc-cfg` answers; the `OUT_DIR`\nit touches holds no generated input the library includes. Which answers appear depends on the exact\ncompiler, which is why every record binds the toolchain. `proc_macro_span` is emitted only by a nightly\ncompiler or when `RUSTC_BOOTSTRAP` is present in the script's environment; a stable publisher that never\nsets it observes the three answers below, and a harvest that ran with `RUSTC_BOOTSTRAP` set must not be\nrecorded as a fact of the toolchain.",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "source": {
+    "checksum": "sha256:8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934",
+    "registry": "https://github.com/rust-lang/crates.io-index"
+  },
+  "subject": {
+    "name": "proc-macro2",
+    "scope": "crates-io",
+    "version": "1.0.106"
+  }
+}
