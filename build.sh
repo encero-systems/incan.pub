@@ -7,6 +7,9 @@
 set -eu
 cd "$(dirname "$0")"
 export INCAN_NO_BANNER=1
+# A fresh checkout has no project inspection authority yet: the bake establishes it for the `rust::` imports in
+# src/host.incn, then test and build reuse the sealed Loaf.
+incan oven bake --project .
 incan test
 mkdir -p target
 incan build src/main.incn --report json --report-output target/build-report.json
