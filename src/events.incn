@@ -1,0 +1,217 @@
+"""
+The event log: reading it in sequence and appending to it.
+
+`events/NNNNNN-<kind>-<subject>.json`, one event per file, six-digit sequence, no gaps. Every event carries
+`schema`, `kind`, `at`, `actor`, `subject` and an `id` equal to the digest of its canonical body; a file whose id does
+not match its body is refused before any rule is applied to it. In this transport the commit is the signature, so
+`signature` is written as `null` and reserved for the signed form.
+"""
+
+from std.datetime import DateTime
+from std.fs import Path
+from std.json import JsonValue, parse
+
+from canonical import canonical, digest_text, pretty
+from registry import event_kinds, event_schema, keys_of, parse_digits, scope
+
+
+@derive(Clone)
+pub class Event:
+    """One admitted-in-shape event, with its file label for refusals."""
+
+    pub label: str
+    pub kind: str
+    pub at: str
+    pub actor: str
+    pub name: str
+    pub version: str
+    pub body: JsonValue
+
+    def payload(self, key: str) -> JsonValue:
+        """The named payload member, or an empty object when the event has none."""
+        match self.body.get(key):
+            Some(value) => return value
+            None => return JsonValue.object({})
+
+
+pub def event_id(event: JsonValue) -> Result[str, str]:
+    """The identity of an event: the digest of its canonical body without `id` and `signature`."""
+    mut body: Dict[str, JsonValue] = {}
+    for key in event.keys():
+        if key != "id" and key != "signature":
+            body[key] = event.get(key).unwrap()
+    return Ok(digest_text(canonical(JsonValue.object(body))?))
+
+
+pub def event_files(root: Path) -> Result[list[str], str]:
+    """The event file names in sequence order."""
+    events_dir = root / "events"
+    if not events_dir.is_dir():
+        return Ok([])
+    mut names: list[str] = []
+    match events_dir.iterdir():
+        Ok(children) =>
+            for child in children:
+                if child.is_file() and child.name().endswith(".json"):
+                    names.append(child.name())
+        Err(error) => return Err(f"events/: {error.message()}")
+    return Ok(sorted(names))
+
+
+pub def load_events(root: Path) -> Result[list[Event], str]:
+    """Read the log in sequence order, refusing gaps, tampering and unknown shapes."""
+    mut events: list[Event] = []
+    mut expected = 1
+    for name in event_files(root)?:
+        label = f"events/{name}"
+        kind = file_kind(name, expected, label)?
+        text = read_text(root / "events" / name, label)?
+        event = parse_event(text, label)?
+        event_kind = string_member(event, "kind")
+        if not event_kinds().contains(event_kind) or event_kind != kind:
+            kinds = ", ".join(event_kinds())
+            return Err(f"{label}: kind must be one of {kinds} and match the file name")
+        if string_member(event, "schema") != event_schema():
+            return Err(f"{label}: schema must be {event_schema()}")
+        if string_member(event, "id") != event_id(event)?:
+            return Err(f"{label}: id does not match the canonical event body")
+        subject = member(event, "subject")
+        subject_name = string_member(subject, "name")
+        subject_version = string_member(subject, "version")
+        if string_member(subject, "scope") != scope() or len(subject_name) == 0 or len(subject_version) == 0:
+            return Err(f"{label}: subject must name a crates-io package version")
+        at = string_member(event, "at")
+        actor = string_member(event, "actor")
+        if len(at) == 0 or len(actor) == 0:
+            return Err(f"{label}: `at` and `actor` are required")
+        events.append(Event(
+            label=label,
+            kind=event_kind,
+            at=at,
+            actor=actor,
+            name=subject_name,
+            version=subject_version,
+            body=event,
+        ))
+        expected += 1
+    return Ok(events)
+
+
+def file_kind(name: str, expected: int, label: str) -> Result[str, str]:
+    """Check `NNNNNN-<kind>-<subject>.json` against the expected sequence number and return the kind."""
+    shape = f"{label}: sequence must be contiguous six-digit numbers in file order"
+    if len(name) < 8 or name[6:7] != "-":
+        return Err(shape)
+    match parse_digits(name[0:6]):
+        Some(sequence) =>
+            if sequence != expected:
+                return Err(shape)
+        None => return Err(shape)
+    rest = name[7:len(name) - 5]
+    parts = rest.split("-")
+    if len(parts) < 2 or len(parts[0]) == 0:
+        return Err(shape)
+    for character in parts[0]:
+        if not "abcdefghijklmnopqrstuvwxyz".contains(character):
+            return Err(shape)
+    return Ok(parts[0])
+
+
+pub def append_event(root: Path, kind: str, name: str, version: str, actor: str, payload: Dict[str, JsonValue]) -> Result[str, str]:
+    """Write the next event of the log and return its path relative to the root."""
+    events_dir = root / "events"
+    match events_dir.mkdir(parents=true, exist_ok=true):
+        Ok(_) => pass
+        Err(error) => return Err(f"events/: {error.message()}")
+    sequence = len(event_files(root)?) + 1
+    mut body: Dict[str, JsonValue] = {}
+    body["schema"] = JsonValue.string(event_schema())
+    body["kind"] = JsonValue.string(kind)
+    body["at"] = JsonValue.string(timestamp()?)
+    body["actor"] = JsonValue.string(actor)
+    body["subject"] = JsonValue.object({
+        "scope": JsonValue.string(scope()),
+        "name": JsonValue.string(name),
+        "version": JsonValue.string(version),
+    })
+    for key in keys_of(payload):
+        body[key] = payload[key]
+    identity = event_id(JsonValue.object(body))?
+    body["id"] = JsonValue.string(identity)
+    body["signature"] = JsonValue.null()
+    slug = f"{scope()}-{name}-{version}".replace("/", "-")
+    file_name = f"{sequence_text(sequence)}-{kind}-{slug}.json"
+    relative = f"events/{file_name}"
+    write_text(root / "events" / file_name, pretty(JsonValue.object(body))? + "\n", relative)?
+    return Ok(relative)
+
+
+def sequence_text(sequence: int) -> str:
+    mut text = str(sequence)
+    while len(text) < 6:
+        text = "0" + text
+    return text
+
+
+pub def read_text(path: Path, label: str) -> Result[str, str]:
+    match path.read_text("utf-8", "strict"):
+        Ok(text) => return Ok(text)
+        Err(error) => return Err(f"{label}: {error.message()}")
+
+
+pub def write_text(path: Path, text: str, label: str) -> Result[None, str]:
+    match path.parent().mkdir(parents=true, exist_ok=true):
+        Ok(_) => pass
+        Err(error) => return Err(f"{label}: {error.message()}")
+    match path.write_text(text, "utf-8", "strict", None):
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(f"{label}: {error.message()}")
+
+
+pub def parse_event(text: str, label: str) -> Result[JsonValue, str]:
+    match parse(text):
+        Ok(value) =>
+            if not value.is_object():
+                return Err(f"{label}: an event is a JSON object")
+            return Ok(value)
+        Err(error) => return Err(f"{label}: not valid JSON: {error.message()}")
+
+
+pub def member(value: JsonValue, key: str) -> JsonValue:
+    """The named object member, or an empty object when absent or when `value` is not an object."""
+    match value.get(key):
+        Some(child) => return child
+        None => return JsonValue.object({})
+
+
+pub def string_member(value: JsonValue, key: str) -> str:
+    """The named string member, or the empty string when absent or not a string."""
+    match value.get(key):
+        Some(child) =>
+            match child.as_str():
+                Some(text) => return text
+                None => return ""
+        None => return ""
+
+
+pub def string_list_member(value: JsonValue, key: str) -> Option[list[str]]:
+    """The named member as a list of strings, or `None` when absent or not such a list."""
+    match value.get(key):
+        Some(child) =>
+            match child.as_array():
+                Some(items) =>
+                    mut out: list[str] = []
+                    for item in items:
+                        match item.as_str():
+                            Some(text) => out.append(text)
+                            None => return None
+                    return Some(out)
+                None => return None
+        None => return None
+
+
+def timestamp() -> Result[str, str]:
+    """The current UTC time as the log spells it."""
+    match DateTime.utc_now().strftime("%Y-%m-%dT%H:%M:%SZ"):
+        Ok(text) => return Ok(text)
+        Err(error) => return Err(f"clock: {error.message()}")

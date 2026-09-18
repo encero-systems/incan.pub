@@ -1,0 +1,22 @@
+"""
+The host boundary: the few Rust interop calls the tool needs, kept in one module so the rest is plain Incan.
+
+`std.environ` reads variables, not the argument vector, and `str` has no byte view of its own in this release; both
+come from Rust's standard library here and nowhere else.
+"""
+
+from rust::std::env import args
+from rust::std::string import String as RustString
+
+
+pub def argv() -> list[str]:
+    """Return the process arguments, program name first."""
+    mut out: list[str] = []
+    for argument in args():
+        out.append(argument)
+    return out
+
+
+pub def utf8_bytes(text: str) -> bytes:
+    """Return the UTF-8 encoding of `text`."""
+    return RustString.from(text).into_bytes()

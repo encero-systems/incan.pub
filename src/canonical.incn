@@ -1,0 +1,124 @@
+"""
+Canonical JSON and content identities.
+
+An event's `id` is the SHA-256 of its canonical body: object keys sorted, no whitespace, strings escaped the JSON
+way with only `"`, `\\` and control characters escaped, UTF-8 otherwise. The same serializer writes index lines, so
+a projection has one spelling. Floats are not admitted: the registry states digests, names and lists, and a number
+with a fraction has more than one JSON spelling.
+"""
+
+from std.encoding import hex
+from std.hash import sha256
+from std.json import JsonValue
+
+from host import utf8_bytes
+
+
+def hex_digits() -> str:
+    return "0123456789abcdef"
+
+
+pub def digest_bytes(data: bytes) -> str:
+    """Return the `sha256:` identity of `data`."""
+    return "sha256:" + hex.hexlify(sha256.digest(data))
+
+
+pub def digest_text(text: str) -> str:
+    """Return the `sha256:` identity of the UTF-8 encoding of `text`."""
+    return digest_bytes(utf8_bytes(text))
+
+
+pub def is_sha256_identity(value: str) -> bool:
+    """Return whether `value` is `sha256:` followed by exactly 64 lowercase hex digits."""
+    if not value.startswith("sha256:") or len(value) != 71:
+        return false
+    for character in value[7:]:
+        if not hex_digits().contains(character):
+            return false
+    return true
+
+
+pub def json_string(text: str) -> str:
+    """Return `text` as a quoted JSON string literal."""
+    mut out = "\""
+    for character in text:
+        if character == "\"":
+            out = out + "\\\""
+        elif character == "\\":
+            out = out + "\\\\"
+        elif character == "\n":
+            out = out + "\\n"
+        elif character == "\r":
+            out = out + "\\r"
+        elif character == "\t":
+            out = out + "\\t"
+        else:
+            encoded = utf8_bytes(character)
+            code = int(encoded[0])
+            if len(encoded) == 1 and code < 32:
+                if code == 8:
+                    out = out + "\\b"
+                elif code == 12:
+                    out = out + "\\f"
+                else:
+                    out = out + "\\u00" + hex_digits()[code // 16:code // 16 + 1] + hex_digits()[code % 16:code % 16 + 1]
+            else:
+                out = out + character
+    return out + "\""
+
+
+pub def canonical(value: JsonValue) -> Result[str, str]:
+    """Serialize `value` in canonical form, or say why it has none."""
+    if value.is_null():
+        return Ok("null")
+    if value.is_bool():
+        if value.as_bool().unwrap():
+            return Ok("true")
+        return Ok("false")
+    if value.is_int():
+        return Ok(str(value.as_int().unwrap()))
+    if value.is_str():
+        return Ok(json_string(value.as_str().unwrap()))
+    if value.is_array():
+        mut parts: list[str] = []
+        for item in value.as_array().unwrap():
+            parts.append(canonical(item)?)
+        return Ok("[" + ",".join(parts) + "]")
+    if value.is_object():
+        mut members: list[str] = []
+        for key in sorted(value.keys()):
+            members.append(json_string(key) + ":" + canonical(value.get(key).unwrap())?)
+        return Ok("{" + ",".join(members) + "}")
+    return Err("a number with a fraction or exponent has no canonical spelling")
+
+
+pub def pretty(value: JsonValue) -> Result[str, str]:
+    """Serialize `value` for a committed file: sorted keys, two-space indentation, one member per line."""
+    return pretty_at(value, 0)
+
+
+def pretty_at(value: JsonValue, depth: int) -> Result[str, str]:
+    if value.is_array():
+        items = value.as_array().unwrap()
+        if len(items) == 0:
+            return Ok("[]")
+        mut lines: list[str] = []
+        for item in items:
+            lines.append(indent(depth + 1) + pretty_at(item, depth + 1)?)
+        return Ok("[\n" + ",\n".join(lines) + "\n" + indent(depth) + "]")
+    if value.is_object():
+        keys = sorted(value.keys())
+        if len(keys) == 0:
+            return Ok("{}")
+        mut lines: list[str] = []
+        for key in keys:
+            lines.append(indent(depth + 1) + json_string(key) + ": " + pretty_at(value.get(key).unwrap(), depth + 1)?)
+        return Ok("{\n" + ",\n".join(lines) + "\n" + indent(depth) + "}")
+    return canonical(value)
+
+
+def indent(depth: int) -> str:
+    mut out = ""
+    for _ in range(depth):
+        out = out + "  "
+    return out

@@ -315,8 +315,8 @@
       <h3>Admit. Project. Checkpoint. Answer.</h3>
       <p class="sub">The only authored thing is the event log. Everything a consumer reads is folded from it.</p>
       <div class="verbs">
-        <div><code>registry.py check</code><span>Admission: contiguous log, content identities, immutable versions, closed and sorted records, committed <code>out</code> bytes, checksums verified against the live crates.io index.</span></div>
-        <div><code>registry.py build</code><span>Projection: renders every <code>crates-io/&lt;name&gt;/&lt;version&gt;/loaf.toml</code> and the sparse index from the events. Never edited by hand.</span></div>
+        <div><code>incan-pub check</code><span>Admission: contiguous log, content identities, immutable versions, closed and sorted records, committed <code>out</code> bytes, checksums verified against a snapshot of the crates.io index.</span></div>
+        <div><code>incan-pub build</code><span>Projection: renders every <code>crates-io/&lt;name&gt;/&lt;version&gt;/loaf.toml</code> and the sparse index from the events. Never edited by hand.</span></div>
         <div><code>publish</code> · <code>add-fact</code> · <code>attest</code><span>The producer verbs, each appending exactly one event.</span></div>
       </div>
       <div class="rule">
@@ -434,11 +434,11 @@
 <section id="interim" class="closing" aria-labelledby="interim-title">
   <div class="commands">
     <p>Operate the registry</p>
-    <code><span>$</span>scripts/registry.py check</code>
-    <code><span>$</span>scripts/registry.py publish libm 0.2.16 sha256:b6d2…</code>
-    <code><span>$</span>scripts/registry.py add-fact proposal.toml</code>
-    <code><span>$</span>scripts/registry.py attest libm 0.2.16 --profile release …</code>
-    <code><span>$</span>scripts/registry.py build</code>
+    <code><span>$</span>incan-pub check</code>
+    <code><span>$</span>incan-pub publish libm 0.2.16 sha256:b6d2…</code>
+    <code><span>$</span>incan-pub add-fact proposal.json</code>
+    <code><span>$</span>incan-pub attest libm 0.2.16 --profile release …</code>
+    <code><span>$</span>incan-pub build</code>
     <a href="https://github.com/encero-systems/incan.pub/blob/main/docs/model.md">Read the model from both ends →</a>
   </div>
   <div class="boundary">
@@ -452,7 +452,7 @@
       <li>a home for a script-emitted value that a compilation <em>does</em> observe — a typed constant is the open question;</li>
       <li>the <code>link</code> and <code>tool</code> publisher-side work of RFC 119, reserved until their grammar exists.</li>
     </ul>
-    <small>Those belong to RFC 125's signed form and later 0.6 slices. If a record cannot honestly bind a consumer's selection, the consumer is told so and stops.</small>
+    <small>Those belong to RFC 125’s signed form and later 0.6 slices. v0 is repository-based: the tool on <code>main</code>, the data on the <code>index</code> branch the toolchain pins by commit — see <a href="https://github.com/encero-systems/incan.pub/blob/main/docs/v0.md">docs/v0.md</a>. If a record cannot honestly bind a consumer’s selection, the consumer is told so and stops.</small>
   </div>
 </section>
 

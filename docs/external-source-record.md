@@ -2,7 +2,7 @@
 
 An external-source record is the registry's publication *about* a package whose source it does not host: a crates.io crate. It binds to that source by checksum and declares, per bound selection, the RFC 119 build facts Oven needs to compile the crate without executing its build script. RFC 125 names this object as one of the two publications a baked asset may derive from.
 
-A record is not a file anyone edits. It is the fold of the events published for `crates-io/<name>@<version>`; `scripts/registry.py build` renders it as `crates-io/<name>/<version>/loaf.toml` for consumers that read `loaf.toml`.
+A record is not a file anyone edits. It is the fold of the events published for `crates-io/<name>@<version>`; `incan-pub build` renders it as `crates-io/<name>/<version>/loaf.toml` for consumers that read `loaf.toml`.
 
 ## Events that make up a record
 

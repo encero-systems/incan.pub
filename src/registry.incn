@@ -1,0 +1,252 @@
+"""
+The registry's things, as the fold of the event log produces them.
+
+A `Record` is one external-source record: the publication about one crates.io package version, with the bound
+facts, attestations, assets and governance events that accrued to it. The rendered `loaf.toml` and the index line
+are projections of a `Record`; nothing here is authored.
+"""
+
+from std.json import JsonValue
+
+
+pub def event_schema() -> str:
+    return "incan.pub/event/1"
+
+
+pub def crates_io_index() -> str:
+    """The registry an external-source record binds to."""
+    return "https://github.com/rust-lang/crates.io-index"
+
+
+pub def crates_io_sparse_root() -> str:
+    return "https://index.crates.io"
+
+
+pub def scope() -> str:
+    return "crates-io"
+
+
+pub def status_harvested() -> str:
+    return "harvested"
+
+
+pub def status_attested() -> str:
+    return "attested"
+
+
+pub def event_kinds() -> list[str]:
+    """The event vocabulary, in the order the documentation lists it."""
+    return ["publish", "fact", "attest", "asset", "yank", "unyank", "advisory"]
+
+
+pub def profiles() -> list[str]:
+    return ["release", "debug"]
+
+
+pub def builders() -> list[str]:
+    return ["publisher", "registry", "local"]
+
+
+@derive(Clone)
+pub class Binding:
+    """One exact selection: the toolchain, target, profile and complete feature set a fact holds under."""
+
+    pub toolchain: str
+    pub target: str
+    pub profile: str
+    pub features: list[str]
+
+    def key(self) -> str:
+        """
+        A sort and lookup key that orders bindings as the tuple (toolchain, target, profile, features) would.
+
+        Tab and newline sort below every printable character and admission refuses them inside a binding field, so
+        joining with them preserves lexicographic tuple order.
+        """
+        return self.toolchain + "\t" + self.target + "\t" + self.profile + "\t" + "\n".join(self.features)
+
+    def to_json(self) -> JsonValue:
+        return JsonValue.object({
+            "toolchain": JsonValue.string(self.toolchain),
+            "target": JsonValue.string(self.target),
+            "profile": JsonValue.string(self.profile),
+            "features": string_list_json(self.features),
+        })
+
+
+@derive(Clone)
+pub class OutEntry:
+    """A committed generated input: what the build script would have written to `OUT_DIR`."""
+
+    pub name: str
+    pub path: str
+    pub digest: str
+
+
+@derive(Clone)
+pub class Attestation:
+    """An Oven-baked unit proven equivalent to the Cargo-built one, for one binding."""
+
+    pub asset: str
+    pub unit_identity: str
+    pub reference: str
+
+
+@derive(Clone)
+pub class Fact:
+    """One bound fact record and what has since been established about it."""
+
+    pub binding: Binding
+    pub cfg: list[str]
+    pub out: list[OutEntry]
+    pub harvested_from: Option[str]
+    pub comparable: str
+    pub status: str
+    pub attestations: list[Attestation]
+
+
+@derive(Clone)
+pub class Asset:
+    """A baked unit available for one binding."""
+
+    pub binding: Binding
+    pub archive: str
+    pub unit_identity: str
+    pub builder: str
+    pub attestation: str
+
+
+@derive(Clone)
+pub class Record:
+    """The external-source record for one crates.io package version."""
+
+    pub name: str
+    pub version: str
+    pub registry: str
+    pub checksum: str
+    pub notes: str
+    pub adopter: str
+    pub facts: Dict[str, Fact]
+    pub yanked: bool
+    pub assets: list[Asset]
+    pub advisories: list[JsonValue]
+
+    def sorted_facts(self) -> list[Fact]:
+        """The bound facts in binding order."""
+        mut out: list[Fact] = []
+        for key in sorted(keys_of(self.facts)):
+            out.append(self.facts[key])
+        return out
+
+
+pub def record_key(name: str, version: str) -> str:
+    """The lookup key of a record; sorts as the pair (name, version) would."""
+    return name + "\t" + version
+
+
+pub def string_list_json(values: list[str]) -> JsonValue:
+    mut items: list[JsonValue] = []
+    for value in values:
+        items.append(JsonValue.string(value))
+    return JsonValue.array(items)
+
+
+pub def sorted_unique(values: list[str]) -> bool:
+    """Return whether `values` is strictly increasing."""
+    mut index = 1
+    while index < len(values):
+        if not (values[index - 1] < values[index]):
+            return false
+        index += 1
+    return true
+
+
+pub def sparse_index_path(name: str) -> str:
+    """The sparse-index path of a package, relative to the index root, following the crates.io scheme."""
+    lower = name.lower()
+    if len(lower) == 1:
+        return "1/" + lower
+    if len(lower) == 2:
+        return "2/" + lower
+    if len(lower) == 3:
+        return "3/" + lower[0:1] + "/" + lower
+    return lower[0:2] + "/" + lower[2:4] + "/" + lower
+
+
+pub def crates_io_sparse_url(name: str) -> str:
+    """Where crates.io publishes the index lines of `name`."""
+    return crates_io_sparse_root() + "/" + sparse_index_path(name)
+
+
+pub def compare_versions(left: str, right: str) -> int:
+    """
+    Order two version strings: dot, dash and plus separate parts; numeric parts compare as numbers and sort before
+    other parts; the shorter version sorts first when every shared part is equal.
+    """
+    left_parts = version_parts(left)
+    right_parts = version_parts(right)
+    mut index = 0
+    while index < len(left_parts) and index < len(right_parts):
+        ordering = compare_part(left_parts[index], right_parts[index])
+        if ordering != 0:
+            return ordering
+        index += 1
+    if len(left_parts) < len(right_parts):
+        return -1
+    if len(left_parts) > len(right_parts):
+        return 1
+    return 0
+
+
+def version_parts(version: str) -> list[str]:
+    return version.replace("+", ".").replace("-", ".").split(".")
+
+
+def compare_part(left: str, right: str) -> int:
+    left_number = parse_digits(left)
+    right_number = parse_digits(right)
+    match left_number:
+        Some(a) =>
+            match right_number:
+                Some(b) =>
+                    if a < b:
+                        return -1
+                    if a > b:
+                        return 1
+                    return 0
+                None => return -1
+        None =>
+            match right_number:
+                Some(_) => return 1
+                None =>
+                    if left < right:
+                        return -1
+                    if left > right:
+                        return 1
+                    return 0
+
+
+pub def parse_digits(text: str) -> Option[int]:
+    """Parse a non-empty string of ASCII digits, or return `None`."""
+    if len(text) == 0:
+        return None
+    mut value = 0
+    for character in text:
+        mut digit = -1
+        for index, candidate in enumerate("0123456789"):
+            if candidate == character:
+                digit = index
+        if digit < 0:
+            return None
+        value = value * 10 + digit
+    return Some(value)
+
+
+pub def keys_of[T](entries: Dict[str, T]) -> list[str]:
+    """The keys of a dictionary as a list, in the container's order; `sorted()` it for a stable one."""
+    return [key for key in entries.keys()]
+
+
+pub def has_key[T](entries: Dict[str, T], key: str) -> bool:
+    """Whether `entries` holds `key`."""
+    return key in keys_of(entries)

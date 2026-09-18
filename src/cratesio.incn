@@ -1,0 +1,61 @@
+"""
+The crates.io cross-check: a record's checksum must be the one crates.io publishes for that version.
+
+The registry never mirrors archives and this tool never opens a socket: CI snapshots the index lines the log names
+(`incan-pub index-urls` lists them) and `check --crates-io-index DIR` reads the snapshot. A snapshot is a directory
+laid out like the crates.io sparse index, one file per package, one JSON line per version.
+"""
+
+from std.fs import Path
+from std.json import parse_jsonl
+
+from events import read_text, string_member
+from registry import Record, crates_io_sparse_url, has_key, keys_of, sparse_index_path
+
+
+pub def verify_checksums(state: Dict[str, Record], snapshot: Path) -> Result[list[str], str]:
+    """Return every disagreement between the log and the snapshot; empty when crates.io agrees with every record."""
+    mut problems: list[str] = []
+    mut published_by_name: Dict[str, Dict[str, str]] = {}
+    for key in sorted(keys_of(state)):
+        record = state[key]
+        if not has_key(published_by_name, record.name):
+            published_by_name[record.name] = read_snapshot(snapshot, record.name)?
+        published = published_by_name[record.name]
+        expected = record.checksum[7:]
+        if not has_key(published, record.version):
+            problems.append(f"{record.name} {record.version}: crates.io publishes no such version")
+        elif published[record.version] != expected:
+            problems.append(
+                f"{record.name} {record.version}: crates.io checksum {published[record.version]} differs from the record's {expected}"
+            )
+    return Ok(problems)
+
+
+def read_snapshot(snapshot: Path, name: str) -> Result[Dict[str, str], str]:
+    """The checksums crates.io publishes for `name`, by version, from the snapshot file."""
+    relative = sparse_index_path(name)
+    path = snapshot / relative
+    if not path.is_file():
+        return Err(f"the crates.io index snapshot has no file for `{name}` ({relative}); fetch {crates_io_sparse_url(name)}")
+    text = read_text(path, relative)?
+    mut checksums: Dict[str, str] = {}
+    match parse_jsonl(text):
+        Ok(lines) =>
+            for line in lines:
+                checksums[string_member(line, "vers")] = string_member(line, "cksum")
+        Err(error) => return Err(f"{relative}: not a crates.io index file: {error.message()}")
+    return Ok(checksums)
+
+
+pub def index_urls(state: Dict[str, Record]) -> list[str]:
+    """One `name<TAB>relative-path<TAB>url` line per package the log names, for a snapshot script to fetch."""
+    mut names: list[str] = []
+    for key in sorted(keys_of(state)):
+        name = state[key].name
+        if not names.contains(name):
+            names.append(name)
+    mut lines: list[str] = []
+    for name in names:
+        lines.append(name + "\t" + sparse_index_path(name) + "\t" + crates_io_sparse_url(name))
+    return lines

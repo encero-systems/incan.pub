@@ -1,0 +1,180 @@
+"""
+Projections: the rendered external-source record and the sparse index, derived from the folded state.
+
+Nothing here is authored. `build` writes exactly these files; `check` refuses a checkout whose committed files differ
+from them by a byte.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+
+from canonical import canonical, json_string
+from events import read_text, write_text
+from registry import Record, compare_versions, has_key, keys_of, record_key, sparse_index_path
+
+
+pub def manifest_notice() -> str:
+    return "# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit."
+
+
+pub def render_manifest(record: Record) -> str:
+    """The external-source record as the `loaf.toml` a consumer reads."""
+    mut lines: list[str] = []
+    notes = record.notes.strip()
+    if len(notes) > 0:
+        for line in notes.split("\n"):
+            trimmed = rstrip(line)
+            if len(trimmed) == 0:
+                lines.append("#")
+            else:
+                lines.append("# " + trimmed)
+        lines.append("#")
+    lines.append(manifest_notice())
+    lines.append("")
+    lines.append("[project]")
+    lines.append("name = " + json_string(record.name))
+    lines.append("version = " + json_string(record.version))
+    lines.append("")
+    lines.append("[source]")
+    lines.append("registry = " + json_string(record.registry))
+    lines.append("checksum = " + json_string(record.checksum))
+    for fact in record.sorted_facts():
+        lines.append("")
+        lines.append("[[rust.facts]]")
+        lines.append("toolchain = " + json_string(fact.binding.toolchain))
+        lines.append("target = " + json_string(fact.binding.target))
+        lines.append("profile = " + json_string(fact.binding.profile))
+        lines.append("features = " + toml_list(fact.binding.features))
+        lines.append("cfg = " + toml_list(fact.cfg))
+        if len(fact.out) > 0:
+            mut entries: list[str] = []
+            for entry in fact.out:
+                entries.append(
+                    "{ name = " + json_string(entry.name) + ", path = " + json_string(entry.path)
+                    + ", digest = " + json_string(entry.digest) + " }"
+                )
+            lines.append("out = [" + ", ".join(entries) + "]")
+        match fact.harvested_from:
+            Some(receipt) => lines.append("harvested-from = " + json_string(receipt))
+            None => pass
+    return "\n".join(lines) + "\n"
+
+
+def toml_list(values: list[str]) -> str:
+    mut items: list[str] = []
+    for value in values:
+        items.append(json_string(value))
+    return "[" + ", ".join(items) + "]"
+
+
+def rstrip(text: str) -> str:
+    mut end = len(text)
+    while end > 0 and (text[end - 1:end] == " " or text[end - 1:end] == "\t" or text[end - 1:end] == "\r"):
+        end -= 1
+    return text[0:end]
+
+
+pub def index_line(record: Record) -> JsonValue:
+    """One index line: enough to select the manifest and decide which bindings are adopted, and how firmly."""
+    mut facts: list[JsonValue] = []
+    for fact in record.sorted_facts():
+        mut entry = fact.binding.to_json()
+        entry.set("status", JsonValue.string(fact.status)).unwrap()
+        facts.append(entry)
+    return JsonValue.object({
+        "name": JsonValue.string(record.name),
+        "vers": JsonValue.string(record.version),
+        "cksum": JsonValue.string(record.checksum),
+        "source": JsonValue.string("crates-io"),
+        "adopter": JsonValue.string(record.adopter),
+        "manifest": JsonValue.string(f"crates-io/{record.name}/{record.version}/loaf.toml"),
+        "yanked": JsonValue.bool(record.yanked),
+        "facts": JsonValue.array(facts),
+        "assets": JsonValue.int(len(record.assets)),
+    })
+
+
+pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], str]:
+    """Every projection file, by path relative to the root."""
+    mut files: Dict[str, str] = {}
+    mut versions_by_name: Dict[str, list[str]] = {}
+    for key in sorted(keys_of(state)):
+        record = state[key]
+        files[f"crates-io/{record.name}/{record.version}/loaf.toml"] = render_manifest(record)
+        mut versions: list[str] = []
+        if has_key(versions_by_name, record.name):
+            versions = versions_by_name[record.name]
+        versions.append(record.version)
+        versions_by_name[record.name] = versions
+    for name in sorted(keys_of(versions_by_name)):
+        mut text = ""
+        for version in sort_versions(versions_by_name[name]):
+            text = text + canonical(index_line(state[record_key(name, version)]))? + "\n"
+        files["index/" + sparse_index_path(name)] = text
+    return Ok(files)
+
+
+def sort_versions(versions: list[str]) -> list[str]:
+    """Selection sort by `compare_versions`; a package has few versions."""
+    mut remaining = versions.clone()
+    mut out: list[str] = []
+    while len(remaining) > 0:
+        mut best = 0
+        mut index = 1
+        while index < len(remaining):
+            if compare_versions(remaining[index], remaining[best]) < 0:
+                best = index
+            index += 1
+        out.append(remaining[best])
+        remaining.remove(best)
+    return out
+
+
+pub def committed_projections(root: Path) -> Result[Dict[str, str], str]:
+    """The projection files a checkout holds, by path relative to the root."""
+    mut files: Dict[str, str] = {}
+    collect_files(root / "index", "index", files, false)?
+    collect_files(root / "crates-io", "crates-io", files, true)?
+    return Ok(files)
+
+
+def collect_files(directory: Path, relative: str, mut files: Dict[str, str], manifests_only: bool) -> Result[None, str]:
+    if not directory.is_dir():
+        return Ok(None)
+    match directory.iterdir():
+        Ok(children) =>
+            for child in children:
+                child_relative = relative + "/" + child.name()
+                if child.is_dir():
+                    collect_files(child, child_relative, files, manifests_only)?
+                elif child.is_file() and (not manifests_only or child.name() == "loaf.toml"):
+                    files.insert(child_relative, read_text(child, child_relative)?)
+            return Ok(None)
+        Err(error) => return Err(f"{relative}/: {error.message()}")
+
+
+pub def stale_projections(committed: Dict[str, str], wanted: Dict[str, str]) -> list[str]:
+    """Paths present on one side only, followed by paths whose content differs; empty when the sides agree."""
+    mut stale: list[str] = []
+    for path in sorted(keys_of(committed)):
+        if not has_key(wanted, path):
+            stale.append(path)
+    for path in sorted(keys_of(wanted)):
+        if not has_key(committed, path):
+            stale.append(path)
+    for path in sorted(keys_of(wanted)):
+        if has_key(committed, path) and committed[path] != wanted[path]:
+            stale.append(path)
+    return stale
+
+
+pub def write_projections(root: Path, committed: Dict[str, str], wanted: Dict[str, str]) -> Result[None, str]:
+    """Replace the committed projections with the wanted ones, removing files no record produces any more."""
+    for path in sorted(keys_of(committed)):
+        if not has_key(wanted, path):
+            match (root / path).unlink():
+                Ok(_) => pass
+                Err(error) => return Err(f"{path}: {error.message()}")
+    for path in sorted(keys_of(wanted)):
+        write_text(root / path, wanted[path], path)?
+    return Ok(None)

@@ -1,0 +1,306 @@
+"""
+incan-pub: the interim registry's tool. Admission (`check`), projection (`build`) and the publishing verbs.
+
+    incan-pub check [--root DIR] [--crates-io-index DIR]
+    incan-pub build [--root DIR]
+    incan-pub index-urls [--root DIR]
+    incan-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
+    incan-pub add-fact PROPOSAL.json [--actor ACTOR] [--root DIR]
+    incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
+                     --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
+
+`--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
+`refused: <rule>` and exits non-zero.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+
+from admission import describe_binding, replay, validate_binding, validate_fact
+from canonical import is_sha256_identity
+from cratesio import index_urls, verify_checksums
+from events import append_event, load_events, member, parse_event, read_text, string_member, write_text
+from host import argv
+from projection import committed_projections, render_projections, stale_projections, write_projections
+from registry import Record, crates_io_index, has_key, keys_of, record_key
+
+
+def default_actor() -> str:
+    return "encero-systems/incan.pub maintainers"
+
+
+@derive(Clone)
+class Invocation:
+    """The parsed command line: the verb, its positional arguments and its `--flag value` options."""
+
+    pub command: str
+    pub positional: list[str]
+    pub options: Dict[str, str]
+
+    def option(self, name: str) -> Option[str]:
+        if has_key(self.options, name):
+            return Some(self.options[name])
+        return None
+
+    def root(self) -> Path:
+        match self.option("root"):
+            Some(directory) => return Path(directory)
+            None => return Path(".")
+
+    def actor(self) -> str:
+        match self.option("actor"):
+            Some(actor) => return actor
+            None => return default_actor()
+
+    def require(self, name: str) -> Result[str, str]:
+        match self.option(name):
+            Some(value) => return Ok(value)
+            None => return Err(f"`--{name}` is required")
+
+
+def parse_invocation(arguments: list[str]) -> Result[Invocation, str]:
+    if len(arguments) < 2:
+        return Err("usage: incan-pub <check|build|index-urls|publish|add-fact|attest> [arguments]")
+    mut positional: list[str] = []
+    mut options: Dict[str, str] = {}
+    mut index = 2
+    while index < len(arguments):
+        argument = arguments[index]
+        if argument.startswith("--"):
+            if index + 1 >= len(arguments):
+                return Err(f"`{argument}` requires a value")
+            options[argument[2:]] = arguments[index + 1]
+            index += 2
+        else:
+            positional.append(argument)
+            index += 1
+    return Ok(Invocation(command=arguments[1], positional=positional, options=options))
+
+
+def main() -> Result[None, str]:
+    match run(argv()):
+        Ok(_) => return Ok(None)
+        Err(message) =>
+            println(f"refused: {message}")
+            return Err("refused")
+
+
+def run(arguments: list[str]) -> Result[None, str]:
+    invocation = parse_invocation(arguments)?
+    if invocation.command == "check":
+        return check(invocation)
+    if invocation.command == "build":
+        return build(invocation)
+    if invocation.command == "index-urls":
+        state = replay(load_events(invocation.root())?, invocation.root())?
+        for line in index_urls(state):
+            println(line)
+        return Ok(None)
+    if invocation.command == "publish":
+        return publish(invocation)
+    if invocation.command == "add-fact":
+        return add_fact(invocation)
+    if invocation.command == "attest":
+        return attest(invocation)
+    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact or attest")
+
+
+def check(invocation: Invocation) -> Result[None, str]:
+    root = invocation.root()
+    events = load_events(root)?
+    state = replay(events, root)?
+    wanted = render_projections(state)?
+    committed = committed_projections(root)?
+    stale = stale_projections(committed, wanted)
+    if len(stale) > 0:
+        listed = ", ".join(stale)
+        return Err(f"projections are out of date for [{listed}]; run incan-pub build")
+    mut verified = false
+    match invocation.option("crates-io-index"):
+        Some(directory) =>
+            problems = verify_checksums(state, Path(directory))?
+            if len(problems) > 0:
+                return Err("crates.io disagrees with the log: " + "; ".join(problems))
+            verified = true
+        None => pass
+    verification = verification_note(verified)
+    mut facts = 0
+    mut attested = 0
+    for key in keys_of(state):
+        for fact in state[key].sorted_facts():
+            facts += 1
+            if fact.status == "attested":
+                attested += 1
+    println(
+        f"ok: {len(events)} event(s), {len(state)} record(s), {facts} bound fact(s) ({attested} attested), "
+        + f"projections in sync, {verification}"
+    )
+    return Ok(None)
+
+
+def build(invocation: Invocation) -> Result[None, str]:
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    wanted = render_projections(state)?
+    write_projections(root, committed_projections(root)?, wanted)?
+    mut facts = 0
+    for key in keys_of(state):
+        facts += len(state[key].facts)
+    println(f"built: {len(state)} record(s), {facts} bound fact(s)")
+    return Ok(None)
+
+
+def publish(invocation: Invocation) -> Result[None, str]:
+    if len(invocation.positional) != 3:
+        return Err("usage: incan-pub publish NAME VERSION CHECKSUM [--notes FILE]")
+    name = invocation.positional[0]
+    version = invocation.positional[1]
+    checksum = invocation.positional[2]
+    if not is_sha256_identity(checksum):
+        return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    if has_key(state, record_key(name, version)):
+        return Err(f"{name} {version} is already published; versions are immutable")
+    mut notes = ""
+    match invocation.option("notes"):
+        Some(file) => notes = read_text(Path(file), file)?.strip()
+        None => pass
+    mut payload: Dict[str, JsonValue] = {}
+    payload["source"] = JsonValue.object({
+        "registry": JsonValue.string(crates_io_index()),
+        "checksum": JsonValue.string(checksum),
+    })
+    payload["notes"] = JsonValue.string(notes)
+    written = append_event(root, "publish", name, version, invocation.actor(), payload)?
+    println(f"published record: {written}")
+    return build(invocation)
+
+
+def add_fact(invocation: Invocation) -> Result[None, str]:
+    if len(invocation.positional) != 1:
+        return Err("usage: incan-pub add-fact PROPOSAL.json")
+    proposal_path = Path(invocation.positional[0])
+    proposal = parse_event(read_text(proposal_path, invocation.positional[0])?, "proposal")?
+    project = member(proposal, "project")
+    source = member(proposal, "source")
+    evidence = member(proposal, "evidence")
+    name = string_member(project, "name")
+    version = string_member(project, "version")
+    mut facts: list[JsonValue] = []
+    match member(proposal, "rust").get("facts"):
+        Some(value) =>
+            match value.as_array():
+                Some(items) => facts = items
+                None => pass
+        None => pass
+    if len(name) == 0 or len(version) == 0 or len(facts) != 1:
+        return Err("a proposal names one package version and carries exactly one rust.facts record")
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    key = record_key(name, version)
+    if not has_key(state, key):
+        return Err(f"{name} {version} has no external-source record; publish it first")
+    record = state[key]
+    if string_member(source, "checksum") != record.checksum:
+        return Err("the proposal binds a different source checksum than the published record")
+    mut fact = facts[0]
+    receipt = string_member(evidence, "receipt")
+    if len(receipt) > 0:
+        fact.set("harvested-from", JsonValue.string(receipt)).unwrap()
+    stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
+    label = f"proposal {proposal_path.name()}"
+    typed = validate_fact(fact, name, version, label, root)?
+    binding_key = typed.binding.key()
+    if has_key(record.facts, binding_key):
+        if record.facts[binding_key].comparable != typed.comparable:
+            return Err("the proposal's binding already has a different record; a fact is immutable")
+        println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
+        return Ok(None)
+    mut payload: Dict[str, JsonValue] = {}
+    payload["fact"] = fact
+    payload["evidence"] = evidence
+    written = append_event(root, "fact", name, version, invocation.actor(), payload)?
+    println(f"admitted fact: {written}")
+    return build(invocation)
+
+
+def stage_generated_inputs(fact: JsonValue, proposal_dir: Path, out_dir: Path) -> Result[None, str]:
+    """Copy the proposal's `out` files under the record, refusing to overwrite a committed input with other bytes."""
+    mut entries: list[JsonValue] = []
+    match fact.get("out"):
+        Some(value) =>
+            match value.as_array():
+                Some(items) => entries = items
+                None => pass
+        None => pass
+    for entry in entries:
+        entry_name = string_member(entry, "name")
+        entry_path = string_member(entry, "path")
+        staged = proposal_dir / entry_path
+        if not staged.is_file():
+            return Err(f"proposal out `{entry_name}` names a missing file {entry_path}")
+        destination = out_dir / entry_path
+        mut staged_bytes: bytes = b""
+        match staged.read_bytes():
+            Ok(data) => staged_bytes = data
+            Err(error) => return Err(f"proposal out `{entry_name}`: {error.message()}")
+        if destination.exists():
+            match destination.read_bytes():
+                Ok(existing) =>
+                    if existing != staged_bytes:
+                        return Err(f"committed generated input {entry_path} already exists with different bytes")
+                Err(error) => return Err(f"{entry_path}: {error.message()}")
+            continue
+        match destination.parent().mkdir(parents=true, exist_ok=true):
+            Ok(_) => pass
+            Err(error) => return Err(f"{entry_path}: {error.message()}")
+        match destination.write_bytes(staged_bytes):
+            Ok(_) => pass
+            Err(error) => return Err(f"{entry_path}: {error.message()}")
+    return Ok(None)
+
+
+def attest(invocation: Invocation) -> Result[None, str]:
+    if len(invocation.positional) != 2:
+        return Err("usage: incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b] --asset SHA --unit-identity SHA --attestation REF")
+    name = invocation.positional[0]
+    version = invocation.positional[1]
+    mut features: list[str] = []
+    match invocation.option("features"):
+        Some(text) =>
+            for feature in text.split(","):
+                if len(feature) > 0:
+                    features.append(feature)
+        None => pass
+    mut feature_values: list[JsonValue] = []
+    for feature in features:
+        feature_values.append(JsonValue.string(feature))
+    binding = JsonValue.object({
+        "toolchain": JsonValue.string(invocation.require("toolchain")?),
+        "target": JsonValue.string(invocation.require("target")?),
+        "profile": JsonValue.string(invocation.require("profile")?),
+        "features": JsonValue.array(feature_values),
+    })
+    typed = validate_binding(binding, "attest")?
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    key = record_key(name, version)
+    if not has_key(state, key) or not has_key(state[key].facts, typed.key()):
+        return Err("attestation must name a published record and one of its bound facts")
+    mut payload: Dict[str, JsonValue] = {}
+    payload["binding"] = binding
+    payload["attestation"] = JsonValue.object({
+        "asset": JsonValue.string(invocation.require("asset")?),
+        "unit_identity": JsonValue.string(invocation.require("unit-identity")?),
+        "reference": JsonValue.string(invocation.require("attestation")?),
+    })
+    written = append_event(root, "attest", name, version, invocation.actor(), payload)?
+    println(f"attested: {written}")
+    return build(invocation)
+
+
+def verification_note(verified: bool) -> str:
+    if verified:
+        return "crates.io checksums verified"
+    return "checksums not verified: no crates.io index snapshot given"

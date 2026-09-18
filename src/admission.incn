@@ -1,0 +1,221 @@
+"""
+Admission: folding the log into the registry's current state, applying every rule in order.
+
+The registry is a notary, not a judge. These rules establish that an event is well-formed, that it names something
+that exists, that nothing published is changed, and that committed bytes match the digests that name them. They
+cannot establish that a `cfg` answer is true; that is what harvest evidence and attestation are for.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+
+from canonical import canonical, digest_bytes, is_sha256_identity
+from events import Event, member, string_list_member, string_member
+from registry import (
+    Asset,
+    Attestation,
+    Binding,
+    Fact,
+    OutEntry,
+    Record,
+    builders,
+    crates_io_index,
+    has_key,
+    profiles,
+    record_key,
+    sorted_unique,
+    status_attested,
+    status_harvested,
+)
+
+
+pub def replay(events: list[Event], root: Path) -> Result[Dict[str, Record], str]:
+    """Fold the log into the current state, or say which event breaks which rule."""
+    mut state: Dict[str, Record] = {}
+    for event in events:
+        key = record_key(event.name, event.version)
+        if event.kind == "publish":
+            if has_key(state, key):
+                return Err(f"{event.label}: {event.name} {event.version} is already published; versions are immutable")
+            source = event.payload("source")
+            checksum = string_member(source, "checksum")
+            if string_member(source, "registry") != crates_io_index() or not is_sha256_identity(checksum):
+                return Err(f"{event.label}: source must name the crates.io index and a `sha256:` checksum")
+            state[key] = Record(
+                name=event.name,
+                version=event.version,
+                registry=crates_io_index(),
+                checksum=checksum,
+                notes=string_member(event.body, "notes"),
+                adopter=event.actor,
+                facts={},
+                yanked=false,
+                assets=[],
+                advisories=[],
+            )
+            continue
+        if not has_key(state, key):
+            return Err(f"{event.label}: {event.name} {event.version} has no publish event before this {event.kind}")
+        mut record = state[key]
+        if event.kind == "fact":
+            fact = validate_fact(event.payload("fact"), event.name, event.version, event.label, root)?
+            binding_key = fact.binding.key()
+            if has_key(record.facts, binding_key):
+                if record.facts[binding_key].comparable != fact.comparable:
+                    return Err(f"{event.label}: binding {describe_binding(fact.binding)} already has a different record; a fact is immutable")
+                continue
+            record.facts[binding_key] = fact
+        elif event.kind == "attest":
+            binding = validate_binding(event.payload("binding"), event.label)?
+            binding_key = binding.key()
+            if not has_key(record.facts, binding_key):
+                return Err(f"{event.label}: attestation names a binding with no fact record")
+            attestation = event.payload("attestation")
+            for field in ["asset", "unit_identity", "reference"]:
+                if len(string_member(attestation, field)) == 0:
+                    return Err(f"{event.label}: attestation requires `{field}`")
+            asset = string_member(attestation, "asset")
+            unit_identity = string_member(attestation, "unit_identity")
+            if not is_sha256_identity(asset) or not is_sha256_identity(unit_identity):
+                return Err(f"{event.label}: attestation asset and unit identity must be `sha256:` identities")
+            mut fact = record.facts[binding_key]
+            fact.attestations.append(Attestation(
+                asset=asset,
+                unit_identity=unit_identity,
+                reference=string_member(attestation, "reference"),
+            ))
+            fact.status = status_attested()
+            record.facts[binding_key] = fact
+        elif event.kind == "asset":
+            asset = event.payload("asset")
+            for field in ["archive", "unit_identity", "builder", "attestation"]:
+                if len(string_member(asset, field)) == 0:
+                    return Err(f"{event.label}: asset requires `{field}`")
+            if not builders().contains(string_member(asset, "builder")):
+                return Err(f"{event.label}: asset builder must be publisher, registry or local")
+            binding = validate_binding(event.payload("binding"), event.label)?
+            if not has_key(record.facts, binding.key()):
+                return Err(f"{event.label}: asset names a binding with no fact record")
+            record.assets.append(Asset(
+                binding=binding,
+                archive=string_member(asset, "archive"),
+                unit_identity=string_member(asset, "unit_identity"),
+                builder=string_member(asset, "builder"),
+                attestation=string_member(asset, "attestation"),
+            ))
+        elif event.kind == "yank":
+            record.yanked = true
+        elif event.kind == "unyank":
+            record.yanked = false
+        elif event.kind == "advisory":
+            record.advisories.append(event.payload("advisory"))
+        state[key] = record
+    return Ok(state)
+
+
+pub def validate_binding(binding: JsonValue, label: str) -> Result[Binding, str]:
+    """Check the four binding keys and return the typed binding."""
+    for key in ["toolchain", "target", "profile", "features"]:
+        if not binding.contains_key(key):
+            return Err(f"{label}: missing binding key `{key}`")
+    toolchain = string_member(binding, "toolchain")
+    target = string_member(binding, "target")
+    profile = string_member(binding, "profile")
+    if len(toolchain.strip()) == 0 or toolchain.contains("\t") or toolchain.contains("\n"):
+        return Err(f"{label}: toolchain must name the exact compiler")
+    if len(target.strip()) == 0 or target.contains("\t") or target.contains("\n"):
+        return Err(f"{label}: target must name a triple")
+    if not profiles().contains(profile):
+        allowed = ", ".join(profiles())
+        return Err(f"{label}: profile must be one of {allowed}")
+    match string_list_member(binding, "features"):
+        Some(features) =>
+            if not sorted_unique(features):
+                return Err(f"{label}: features must be a sorted, unique list")
+            for feature in features:
+                if feature.contains("\t") or feature.contains("\n"):
+                    return Err(f"{label}: features must be a sorted, unique list")
+            return Ok(Binding(toolchain=toolchain, target=target, profile=profile, features=features))
+        None => return Err(f"{label}: features must be a sorted, unique list")
+
+
+pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root: Path) -> Result[Fact, str]:
+    """Check one bound fact record against the vocabulary and the committed generated inputs it names."""
+    binding = validate_binding(fact, label)?
+    mut unknown: list[str] = []
+    for key in sorted(fact.keys()):
+        if not ["toolchain", "target", "profile", "features", "cfg", "out", "harvested-from"].contains(key):
+            unknown.append(key)
+    if len(unknown) > 0:
+        listed = ", ".join(unknown)
+        return Err(f"{label}: unknown fact keys [{listed}]; script-emitted environment has no key here")
+    mut cfg: list[str] = []
+    match string_list_member(fact, "cfg"):
+        Some(values) =>
+            if not sorted_unique(values):
+                return Err(f"{label}: cfg must be a sorted, unique list; an empty list is a stated fact")
+            cfg = values
+        None => return Err(f"{label}: cfg must be a sorted, unique list; an empty list is a stated fact")
+    out_dir = root / "crates-io" / name / version
+    mut out: list[OutEntry] = []
+    mut names: list[str] = []
+    mut out_items: list[JsonValue] = []
+    match fact.get("out"):
+        Some(value) =>
+            match value.as_array():
+                Some(items) => out_items = items
+                None => return Err(f"{label}: out must be a list of entries")
+        None => pass
+    for entry in out_items:
+        for field in ["name", "path", "digest"]:
+            if not entry.contains_key(field):
+                return Err(f"{label}: out entry missing `{field}`")
+        entry_name = string_member(entry, "name")
+        entry_path = string_member(entry, "path")
+        entry_digest = string_member(entry, "digest")
+        if entry_path.startswith("/") or entry_path.split("/").contains(".."):
+            return Err(f"{label}: out `{entry_name}` must be a plain relative path")
+        committed = out_dir / entry_path
+        if not committed.is_file():
+            return Err(f"{label}: out `{entry_name}` names a missing committed file {entry_path}")
+        match committed.read_bytes():
+            Ok(data) =>
+                if digest_bytes(data) != entry_digest:
+                    return Err(f"{label}: out `{entry_name}` digest does not match the committed bytes")
+            Err(error) => return Err(f"{label}: out `{entry_name}`: {error.message()}")
+        if names.contains(entry_name):
+            return Err(f"{label}: out `{entry_name}` is declared twice")
+        names.append(entry_name)
+        out.append(OutEntry(name=entry_name, path=entry_path, digest=entry_digest))
+    mut harvested_from: Option[str] = None
+    match fact.get("harvested-from"):
+        Some(_) =>
+            harvested = string_member(fact, "harvested-from")
+            if not is_sha256_identity(harvested):
+                return Err(f"{label}: harvested-from must be a `sha256:` receipt identity")
+            harvested_from = Some(harvested)
+        None => pass
+    return Ok(Fact(
+        binding=binding,
+        cfg=cfg,
+        out=out,
+        harvested_from=harvested_from,
+        comparable=fact_comparable(fact)?,
+        status=status_harvested(),
+        attestations=[],
+    ))
+
+
+def fact_comparable(fact: JsonValue) -> Result[str, str]:
+    """The part of a fact record that a later record for the same binding must repeat exactly: `cfg` and `out`."""
+    mut subset: Dict[str, JsonValue] = {}
+    for key in ["cfg", "out"]:
+        match fact.get(key):
+            Some(value) => subset[key] = value
+            None => pass
+    return canonical(JsonValue.object(subset))
+
+
+pub def describe_binding(binding: Binding) -> str:
+    features = ", ".join(binding.features)
+    return f"({binding.toolchain}, {binding.target}, {binding.profile}, [{features}])"

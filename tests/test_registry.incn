@@ -1,0 +1,388 @@
+"""
+The admission rules, the canonical identity and the projections, each exercised on a scratch checkout.
+
+Every refusal the tool can give is produced here at least once, by the exact rule that gives it. The identity
+test pins the canonical form to the seed events, so a change to the serializer that would orphan the published log
+fails here first.
+"""
+
+from std.fs import Path
+from std.json import JsonValue, parse
+from std.tempfile import TemporaryDirectory
+from std.testing import assert_eq, assert_is_err, assert_true
+
+from admission import replay
+from canonical import canonical, digest_text, is_sha256_identity, pretty
+from events import append_event, event_id, load_events, write_text
+from projection import committed_projections, render_projections, stale_projections, write_projections
+from registry import compare_versions, record_key, sparse_index_path
+
+
+def libm_checksum() -> str:
+    return "sha256:b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
+
+
+def toolchain() -> str:
+    return "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+
+
+def target() -> str:
+    return "aarch64-apple-darwin"
+
+
+def seed_publish() -> str:
+    return """{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-09-18T12:01:06Z",
+  "id": "sha256:10a2b96c691803e48fc109a0b4baeae9f39dcbf2cee3b1a415fa9076a5184b95",
+  "kind": "publish",
+  "notes": "External-source record for the crates.io package `libm` 0.2.16.\\n\\n`build.rs` probes the opt-level, the enabled Cargo features and the target architecture, then emits\\n`rustc-cfg` answers. Under a frozen toolchain those answers are constants; each `[[rust.facts]]` record\\nbelow states them for one exact selection. The script also reemits `CFG_CARGO_FEATURES`, `CFG_OPT_LEVEL`\\nand `CFG_TARGET_FEATURES` through `rustc-env` for its own test logging; no compilation of the library\\nobserves them, so they are not facts and do not appear here.",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "source": {
+    "checksum": "sha256:b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981",
+    "registry": "https://github.com/rust-lang/crates.io-index"
+  },
+  "subject": {
+    "name": "libm",
+    "scope": "crates-io",
+    "version": "0.2.16"
+  }
+}"""
+
+
+def seed_fact() -> str:
+    return """{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-09-18T12:01:06Z",
+  "evidence": {
+    "cargo_lock_digest": "sha256:b74440e4b6387c724c9a44b977572f5e8348bd19a47b3be7bd426e06909fa39a",
+    "cargo_manifest_digest": "sha256:b3d7724708b38471d584c9292c009036fa51778418c24bc44c94572943737f2d",
+    "cargo_version": "cargo 1.96.0-nightly (e84cb639e 2026-03-21)",
+    "method": "compatibility publisher observation"
+  },
+  "fact": {
+    "cfg": ["arch_enabled", "optimizations_enabled"],
+    "features": ["arch", "default"],
+    "profile": "release",
+    "target": "aarch64-apple-darwin",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:ff50e6bd5da4c049691e14ca5bc2900ffe1470e1b05cc371445f5f3c3f4fe07f",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {"name": "libm", "scope": "crates-io", "version": "0.2.16"}
+}"""
+
+
+# ---------------------------------------------------------------- identity ---------------------------------------
+
+
+def test_the_seed_events_keep_their_identity() -> None:
+    """The ids the seed log was published with are the digests this serializer computes."""
+    publish = parse(seed_publish()).unwrap()
+    assert_eq(event_id(publish).unwrap(), "sha256:10a2b96c691803e48fc109a0b4baeae9f39dcbf2cee3b1a415fa9076a5184b95")
+    fact = parse(seed_fact()).unwrap()
+    assert_eq(event_id(fact).unwrap(), "sha256:ff50e6bd5da4c049691e14ca5bc2900ffe1470e1b05cc371445f5f3c3f4fe07f")
+
+
+def test_canonical_form_sorts_keys_and_escapes_only_what_json_requires() -> None:
+    value = parse("{\"z\": [1, true, null], \"a\": {\"y\": \"q\\\"b\\\\s\\n\\t\\u0001\\u00e9\"}}").unwrap()
+    assert_eq(canonical(value).unwrap(), "{\"a\":{\"y\":\"q\\\"b\\\\s\\n\\t\\u0001é\"},\"z\":[1,true,null]}")
+    assert_is_err(canonical(parse("{\"x\": 1.5}").unwrap()))
+
+
+def test_pretty_form_is_the_committed_spelling() -> None:
+    value = parse("{\"b\": [], \"a\": {\"d\": 1, \"c\": [\"x\"]}, \"e\": {}}").unwrap()
+    assert_eq(pretty(value).unwrap(), "{\n  \"a\": {\n    \"c\": [\n      \"x\"\n    ],\n    \"d\": 1\n  },\n  \"b\": [],\n  \"e\": {}\n}")
+
+
+def test_sha256_identities_are_exactly_71_lowercase_characters() -> None:
+    assert_true(is_sha256_identity(libm_checksum()))
+    assert_true(not is_sha256_identity(libm_checksum().upper()))
+    assert_true(not is_sha256_identity(libm_checksum() + "0"))
+    assert_true(not is_sha256_identity("md5:b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"))
+    assert_eq(digest_text(""), "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+
+
+def test_sparse_index_paths_follow_the_crates_io_scheme() -> None:
+    assert_eq(sparse_index_path("a"), "1/a")
+    assert_eq(sparse_index_path("ab"), "2/ab")
+    assert_eq(sparse_index_path("abc"), "3/a/abc")
+    assert_eq(sparse_index_path("serde_core"), "se/rd/serde_core")
+    assert_eq(sparse_index_path("Proc-Macro2"), "pr/oc/proc-macro2")
+
+
+def test_versions_order_numerically_and_longer_spellings_after_their_prefix() -> None:
+    assert_true(compare_versions("0.9.0", "1.0.2") < 0)
+    assert_true(compare_versions("1.0.2", "1.0.10") < 0)
+    assert_true(compare_versions("1.0.10", "1.0.10") == 0)
+    assert_true(compare_versions("1.0.0", "1.0.0-alpha") < 0)
+    assert_true(compare_versions("1.0.0-alpha", "1.0.0-beta") < 0)
+
+
+# ---------------------------------------------------------------- admission --------------------------------------
+
+
+def scratch() -> TemporaryDirectory:
+    return TemporaryDirectory.try_new().unwrap()
+
+
+def publish_libm(root: Path) -> None:
+    mut payload: Dict[str, JsonValue] = {}
+    payload["source"] = JsonValue.object({
+        "registry": JsonValue.string("https://github.com/rust-lang/crates.io-index"),
+        "checksum": JsonValue.string(libm_checksum()),
+    })
+    payload["notes"] = JsonValue.string("A note.\n\nA second paragraph.")
+    append_event(root, "publish", "libm", "0.2.16", "tests", payload).unwrap()
+
+
+def binding(profile: str) -> Dict[str, JsonValue]:
+    mut out: Dict[str, JsonValue] = {}
+    out["toolchain"] = JsonValue.string(toolchain())
+    out["target"] = JsonValue.string(target())
+    out["profile"] = JsonValue.string(profile)
+    out["features"] = JsonValue.array([JsonValue.string("arch"), JsonValue.string("default")])
+    return out
+
+
+def fact_with(profile: str, cfg: list[str]) -> JsonValue:
+    mut members = binding(profile)
+    mut values: list[JsonValue] = []
+    for item in cfg:
+        values.append(JsonValue.string(item))
+    members["cfg"] = JsonValue.array(values)
+    return JsonValue.object(members)
+
+
+def add_fact(root: Path, fact: JsonValue) -> None:
+    mut payload: Dict[str, JsonValue] = {}
+    payload["fact"] = fact
+    payload["evidence"] = JsonValue.object({"method": JsonValue.string("test")})
+    append_event(root, "fact", "libm", "0.2.16", "tests", payload).unwrap()
+
+
+def write_raw_event(root: Path, sequence: str, kind: str, body_text: str) -> None:
+    """Write an event whose id is computed for it, so only the rule under test can refuse it."""
+    mut body = parse(body_text).unwrap()
+    identity = event_id(body).unwrap()
+    body.set("id", JsonValue.string(identity)).unwrap()
+    body.set("signature", JsonValue.null()).unwrap()
+    write_text(root / "events" / f"{sequence}-{kind}-crates-io-libm-0.2.16.json", pretty(body).unwrap() + "\n", "event").unwrap()
+
+
+def refusal(root: Path) -> str:
+    match load_events(root):
+        Ok(events) =>
+            match replay(events, root):
+                Ok(_) => return ""
+                Err(message) => return message
+        Err(message) => return message
+
+
+def test_a_version_is_published_once() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    publish_libm(root)
+    assert_eq(refusal(root), "events/000002-publish-crates-io-libm-0.2.16.json: libm 0.2.16 is already published; versions are immutable")
+
+
+def test_a_fact_needs_its_publish_event_first() -> None:
+    directory = scratch()
+    root = directory.path()
+    add_fact(root, fact_with("release", []))
+    assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: libm 0.2.16 has no publish event before this fact")
+
+
+def test_a_publish_must_name_crates_io_and_a_checksum() -> None:
+    directory = scratch()
+    root = directory.path()
+    write_raw_event(root, "000001", "publish", "{\"schema\": \"incan.pub/event/1\", \"kind\": \"publish\", \"at\": \"t\", \"actor\": \"tests\", \"subject\": {\"scope\": \"crates-io\", \"name\": \"libm\", \"version\": \"0.2.16\"}, \"source\": {\"registry\": \"https://example.invalid\", \"checksum\": \"" + libm_checksum() + "\"}}")
+    assert_eq(refusal(root), "events/000001-publish-crates-io-libm-0.2.16.json: source must name the crates.io index and a `sha256:` checksum")
+
+
+def test_the_log_has_no_gaps() -> None:
+    directory = scratch()
+    root = directory.path()
+    write_raw_event(root, "000002", "publish", "{\"schema\": \"incan.pub/event/1\", \"kind\": \"publish\", \"at\": \"t\", \"actor\": \"tests\", \"subject\": {\"scope\": \"crates-io\", \"name\": \"libm\", \"version\": \"0.2.16\"}, \"source\": {\"registry\": \"https://github.com/rust-lang/crates.io-index\", \"checksum\": \"" + libm_checksum() + "\"}}")
+    assert_eq(refusal(root), "events/000002-publish-crates-io-libm-0.2.16.json: sequence must be contiguous six-digit numbers in file order")
+
+
+def test_a_tampered_event_is_refused_before_any_rule() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    path = root / "events" / "000001-publish-crates-io-libm-0.2.16.json"
+    text = path.read_text("utf-8", "strict").unwrap()
+    write_text(path, text.replace("A second paragraph.", "A forged paragraph."), "event").unwrap()
+    assert_eq(refusal(root), "events/000001-publish-crates-io-libm-0.2.16.json: id does not match the canonical event body")
+
+
+def test_the_file_name_must_carry_the_event_kind() -> None:
+    directory = scratch()
+    root = directory.path()
+    write_raw_event(root, "000001", "fact", "{\"schema\": \"incan.pub/event/1\", \"kind\": \"publish\", \"at\": \"t\", \"actor\": \"tests\", \"subject\": {\"scope\": \"crates-io\", \"name\": \"libm\", \"version\": \"0.2.16\"}, \"source\": {\"registry\": \"https://github.com/rust-lang/crates.io-index\", \"checksum\": \"" + libm_checksum() + "\"}}")
+    assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: kind must be one of publish, fact, attest, asset, yank, unyank, advisory and match the file name")
+
+
+def test_a_fact_speaks_only_the_record_vocabulary() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    mut fact = fact_with("release", [])
+    fact.set("env", JsonValue.object({})).unwrap()
+    add_fact(root, fact)
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: unknown fact keys [env]; script-emitted environment has no key here")
+
+
+def test_cfg_and_features_are_sorted_and_unique() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", ["optimizations_enabled", "arch_enabled"]))
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: cfg must be a sorted, unique list; an empty list is a stated fact")
+
+
+def test_the_profile_is_release_or_debug() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("bench", []))
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: profile must be one of release, debug")
+
+
+def test_a_committed_generated_input_must_exist_and_match_its_digest() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    mut fact = fact_with("release", [])
+    fact.set("out", JsonValue.array([JsonValue.object({
+        "name": JsonValue.string("private.rs"),
+        "path": JsonValue.string("out/private.rs"),
+        "digest": JsonValue.string(digest_text("pub const X: u8 = 1;\n")),
+    })])).unwrap()
+    add_fact(root, fact)
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: out `private.rs` names a missing committed file out/private.rs")
+    write_text(root / "crates-io" / "libm" / "0.2.16" / "out" / "private.rs", "pub const X: u8 = 2;\n", "out").unwrap()
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: out `private.rs` digest does not match the committed bytes")
+    write_text(root / "crates-io" / "libm" / "0.2.16" / "out" / "private.rs", "pub const X: u8 = 1;\n", "out").unwrap()
+    assert_eq(refusal(root), "")
+
+
+def test_a_generated_input_path_stays_under_the_record() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    mut fact = fact_with("release", [])
+    fact.set("out", JsonValue.array([JsonValue.object({
+        "name": JsonValue.string("escape"),
+        "path": JsonValue.string("../../../etc/passwd"),
+        "digest": JsonValue.string(digest_text("")),
+    })])).unwrap()
+    add_fact(root, fact)
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: out `escape` must be a plain relative path")
+
+
+def test_a_fact_is_immutable_and_its_repetition_is_a_no_op() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", ["arch_enabled"]))
+    add_fact(root, fact_with("release", ["arch_enabled"]))
+    assert_eq(refusal(root), "")
+    add_fact(root, fact_with("release", []))
+    assert_eq(refusal(root), "events/000004-fact-crates-io-libm-0.2.16.json: binding (" + toolchain() + ", " + target() + ", release, [arch, default]) already has a different record; a fact is immutable")
+
+
+def attest_release(root: Path, asset: str) -> None:
+    mut payload: Dict[str, JsonValue] = {}
+    payload["binding"] = JsonValue.object(binding("release"))
+    payload["attestation"] = JsonValue.object({
+        "asset": JsonValue.string(asset),
+        "unit_identity": JsonValue.string(digest_text("unit")),
+        "reference": JsonValue.string("attestations/1"),
+    })
+    append_event(root, "attest", "libm", "0.2.16", "tests", payload).unwrap()
+
+
+def test_an_attestation_names_a_bound_fact_with_sha256_identities() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    attest_release(root, digest_text("asset"))
+    assert_eq(refusal(root), "events/000002-attest-crates-io-libm-0.2.16.json: attestation names a binding with no fact record")
+
+
+def test_an_attestation_turns_the_binding_attested() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", []))
+    attest_release(root, "not-a-digest")
+    assert_eq(refusal(root), "events/000003-attest-crates-io-libm-0.2.16.json: attestation asset and unit identity must be `sha256:` identities")
+    directory_two = scratch()
+    root_two = directory_two.path()
+    publish_libm(root_two)
+    add_fact(root_two, fact_with("release", []))
+    attest_release(root_two, digest_text("asset"))
+    state = replay(load_events(root_two).unwrap(), root_two).unwrap()
+    record = state[record_key("libm", "0.2.16")]
+    assert_eq(record.sorted_facts()[0].status, "attested")
+    assert_eq(len(record.sorted_facts()[0].attestations), 1)
+
+
+def test_an_asset_names_a_known_builder() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", []))
+    mut payload: Dict[str, JsonValue] = {}
+    payload["binding"] = JsonValue.object(binding("release"))
+    payload["asset"] = JsonValue.object({
+        "archive": JsonValue.string(digest_text("archive")),
+        "unit_identity": JsonValue.string(digest_text("unit")),
+        "builder": JsonValue.string("someone"),
+        "attestation": JsonValue.string("attestations/1"),
+    })
+    append_event(root, "asset", "libm", "0.2.16", "tests", payload).unwrap()
+    assert_eq(refusal(root), "events/000003-asset-crates-io-libm-0.2.16.json: asset builder must be publisher, registry or local")
+
+
+# ---------------------------------------------------------------- projections ------------------------------------
+
+
+def test_projections_are_rendered_from_the_fold_and_compared_byte_for_byte() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", ["arch_enabled", "optimizations_enabled"]))
+    add_fact(root, fact_with("debug", ["arch_enabled"]))
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    wanted = render_projections(state).unwrap()
+    assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 2)
+    write_projections(root, committed_projections(root).unwrap(), wanted).unwrap()
+    assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 0)
+    manifest = wanted["crates-io/libm/0.2.16/loaf.toml"]
+    assert_true(manifest.startswith("# A note.\n#\n# A second paragraph.\n#\n# Projection of the incan.pub event log"))
+    assert_true(manifest.contains("\n[project]\nname = \"libm\"\nversion = \"0.2.16\"\n"))
+    assert_true(manifest.contains("\n[source]\nregistry = \"https://github.com/rust-lang/crates.io-index\"\nchecksum = \"" + libm_checksum() + "\"\n"))
+    assert_true(manifest.contains("\n[[rust.facts]]\ntoolchain = \"" + toolchain() + "\"\ntarget = \"" + target() + "\"\nprofile = \"debug\"\nfeatures = [\"arch\", \"default\"]\ncfg = [\"arch_enabled\"]\n\n[[rust.facts]]"))
+    assert_true(manifest.endswith("profile = \"release\"\nfeatures = [\"arch\", \"default\"]\ncfg = [\"arch_enabled\", \"optimizations_enabled\"]\n"))
+    index = wanted["index/li/bm/libm"]
+    assert_eq(index, "{\"adopter\":\"tests\",\"assets\":0,\"cksum\":\"" + libm_checksum() + "\",\"facts\":[{\"features\":[\"arch\",\"default\"],\"profile\":\"debug\",\"status\":\"harvested\",\"target\":\"" + target() + "\",\"toolchain\":\"" + toolchain() + "\"},{\"features\":[\"arch\",\"default\"],\"profile\":\"release\",\"status\":\"harvested\",\"target\":\"" + target() + "\",\"toolchain\":\"" + toolchain() + "\"}],\"manifest\":\"crates-io/libm/0.2.16/loaf.toml\",\"name\":\"libm\",\"source\":\"crates-io\",\"vers\":\"0.2.16\",\"yanked\":false}\n")
+
+
+def test_a_yank_shows_on_the_index_line_and_a_stale_projection_is_named() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    write_projections(root, committed_projections(root).unwrap(), render_projections(state).unwrap()).unwrap()
+    append_event(root, "yank", "libm", "0.2.16", "tests", {}).unwrap()
+    yanked = replay(load_events(root).unwrap(), root).unwrap()
+    wanted = render_projections(yanked).unwrap()
+    assert_true(wanted["index/li/bm/libm"].contains("\"yanked\":true"))
+    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["index/li/bm/libm"])
