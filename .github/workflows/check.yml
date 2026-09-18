@@ -1,0 +1,36 @@
+name: check
+
+on:
+  push:
+    branches: [index]
+  pull_request:
+    branches: [index]
+
+jobs:
+  registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the index branch
+        uses: actions/checkout@v4
+        with:
+          path: index
+      - name: Check out the tool
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: tool
+      - name: Install the Incan toolchain
+        run: |
+          curl -fsSL https://github.com/encero-systems/incan/releases/download/v0.5.1/install.sh \
+            | bash -s -- --manifest https://github.com/encero-systems/incan/releases/download/v0.5.1/manifest.json \
+                         --bin-dir "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Build incan-pub
+        working-directory: tool
+        run: ./build.sh
+      - name: Snapshot the crates.io index lines the log names
+        working-directory: index
+        run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/incan-pub .crates-io-snapshot
+      - name: Admit the log and compare the projections
+        working-directory: index
+        run: ../tool/target/incan-pub check --crates-io-index .crates-io-snapshot

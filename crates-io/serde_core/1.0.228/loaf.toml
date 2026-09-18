@@ -1,0 +1,22 @@
+# External-source record for the crates.io package `serde_core` 1.0.228.
+#
+# `build.rs` writes `private.rs` into `OUT_DIR`, which `src/lib.rs` includes, and emits no `rustc-cfg`
+# answer for this selection. The committed file under `out/` is that generated input.
+#
+# Projection of the incan.pub event log; regenerate with scripts/registry.py build, never edit.
+
+[project]
+name = "serde_core"
+version = "1.0.228"
+
+[source]
+registry = "https://github.com/rust-lang/crates.io-index"
+checksum = "sha256:41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["alloc", "default", "result", "std"]
+cfg = []
+out = [{ name = "private.rs", path = "out/private.rs", digest = "sha256:27ad1b5fb4eebeb1da6419cbfad3ac1922ed1d817fcbab0a1dae1bdfd38d8307" }]
