@@ -25,6 +25,9 @@ jobs:
             | bash -s -- --manifest https://github.com/encero-systems/incan/releases/download/v0.5.1/manifest.json \
                          --bin-dir "$HOME/.local/bin"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Warm the Cargo registry the 0.5.1 test envelope needs
+        working-directory: tool
+        run: ./scripts/prewarm-toolchain.sh
       - name: Build incan-pub
         working-directory: tool
         run: ./build.sh
