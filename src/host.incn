@@ -2,7 +2,7 @@
 The host boundary: the few Rust interop calls the tool needs, kept in one module so the rest is plain Incan.
 
 `std.environ` reads variables, not the argument vector, and `str` has no byte view of its own in this release; both
-come from Rust's standard library here and nowhere else.
+come from Rust’s standard library here and nowhere else, until 0.6 offers them (encero-systems/incan#1668).
 """
 
 from rust::std::env import args

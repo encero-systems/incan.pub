@@ -243,7 +243,12 @@ pub def parse_digits(text: str) -> Option[int]:
 
 
 pub def keys_of[T](entries: Dict[str, T]) -> list[str]:
-    """The keys of a dictionary as a list, in the container's order; `sorted()` it for a stable one."""
+    """
+    The keys of a dictionary as a list, in the container's order; `sorted()` it for a stable one.
+
+    0.5.1 scaffolding: on that toolchain a mutable `Dict` has no `contains_key` and `.keys()` lowers to a Rust
+    iterator outside a comprehension. Both go with the switch to 0.6 (encero-systems/incan#1668).
+    """
     return [key for key in entries.keys()]
 
 
