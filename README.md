@@ -17,10 +17,14 @@ Each manifest is a set of **bound fact records**. A record states the facts for 
 ## Layout
 
 ```
+index/...                              static sparse index, one JSON line per package version (crates.io path scheme)
 crates-io/<name>/<version>/loaf.toml   the adoption manifest for one crates.io package version
 crates-io/<name>/<version>/out/...     committed generated inputs a record names
 docs/adoption-manifest.md              the manifest format
+scripts/registry.py                    builds the index from the manifests and validates the repository
 ```
+
+The index is a projection of the manifests and is never edited by hand: `scripts/registry.py build` regenerates it, and `scripts/registry.py check` (run in CI on every change) refuses a repository whose manifests, committed generated inputs, or index disagree. A client reads the index line for a package, verifies the crates.io checksum it names, fetches the manifest, and selects the record whose binding equals its own selection.
 
 ## How facts get here
 
