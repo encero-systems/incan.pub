@@ -9,7 +9,7 @@ from std.fs import Path
 from std.json import JsonValue
 
 from canonical import canonical, json_string
-from events import read_text, write_text
+from events import read_text, string_member, write_text
 from registry import Record, compare_versions, has_key, keys_of, record_key, sparse_index_path
 
 
@@ -28,6 +28,14 @@ pub def render_manifest(record: Record) -> str:
                 lines.append("#")
             else:
                 lines.append("# " + trimmed)
+        lines.append("#")
+    for advisory in record.advisories:
+        for line in string_member(advisory, "text").strip().split("\n"):
+            trimmed = rstrip(line)
+            if len(trimmed) == 0:
+                lines.append("#")
+            else:
+                lines.append("# Advisory: " + trimmed)
         lines.append("#")
     lines.append(manifest_notice())
     lines.append("")
@@ -91,6 +99,7 @@ pub def index_line(record: Record) -> JsonValue:
         "yanked": JsonValue.bool(record.yanked),
         "facts": JsonValue.array(facts),
         "assets": JsonValue.int(len(record.assets)),
+        "advisories": JsonValue.int(len(record.advisories)),
     })
 
 

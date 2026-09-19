@@ -108,7 +108,10 @@ pub def replay(events: list[Event], root: Path) -> Result[Dict[str, Record], str
         elif event.kind == "unyank":
             record.yanked = false
         elif event.kind == "advisory":
-            record.advisories.append(event.payload("advisory"))
+            advisory = event.payload("advisory")
+            if len(string_member(advisory, "text").strip()) == 0:
+                return Err(f"{event.label}: an advisory carries a non-empty `text`")
+            record.advisories.append(advisory)
         state[key] = record
     return Ok(state)
 

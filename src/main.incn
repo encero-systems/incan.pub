@@ -8,6 +8,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
+    incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero.
@@ -114,7 +115,9 @@ def run(arguments: list[str]) -> Result[None, str]:
         return add_fact(invocation)
     if invocation.command == "attest":
         return attest(invocation)
-    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact or attest")
+    if invocation.command == "advise":
+        return advise(invocation)
+    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, attest or advise")
 
 
 def check(invocation: Invocation) -> Result[None, str]:
@@ -333,6 +336,26 @@ def attest(invocation: Invocation) -> Result[None, str]:
     })
     written = append_event(root, "attest", name, version, invocation.actor(), payload)?
     println(f"attested: {written}")
+    return build(invocation)
+
+
+def advise(invocation: Invocation) -> Result[None, str]:
+    """Record something a consumer of a record should know; rendered as a header comment and counted on the index line."""
+    if len(invocation.positional) != 2:
+        return Err("usage: incan-pub advise NAME VERSION --text TEXT")
+    name = invocation.positional[0]
+    version = invocation.positional[1]
+    text = invocation.require("text")?.strip()
+    if len(text) == 0:
+        return Err("an advisory carries a non-empty `text`")
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    if not has_key(state, record_key(name, version)):
+        return Err(f"{name} {version} has no external-source record")
+    mut payload: Dict[str, JsonValue] = {}
+    payload["advisory"] = JsonValue.object({"text": JsonValue.string(text)})
+    written = append_event(root, "advisory", name, version, invocation.actor(), payload)?
+    println(f"advised: {written}")
     return build(invocation)
 
 

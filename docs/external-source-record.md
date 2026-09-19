@@ -12,7 +12,8 @@ A record is not a file anyone edits. It is the fold of the events published for 
 | `fact` | one bound fact record was harvested | binding not yet present, or present with identical `cfg` and `out`; committed `out` bytes match their digests; no key outside the vocabulary below |
 | `attest` | an Oven-baked unit for one binding was proven equivalent to the Cargo-built unit | names an existing binding; carries the asset digest, the RFC 124 unit identity and an attestation reference; sets the binding's status to `attested` |
 | `asset` | a baked unit for one binding is available | names an existing binding, the archive digest, unit identity, builder kind (`publisher`, `registry`, `local`) and attestation |
-| `yank` / `unyank` / `advisory` | governance | recorded; surfaced on the index line |
+| `yank` / `unyank` | governance | recorded; `yanked` on the index line |
+| `advisory` | something a consumer of the record should know, in `text` | non-empty `text`; rendered as `# Advisory:` header lines of the record and counted on the index line (`advisories`) |
 
 Every event carries `schema`, `kind`, `at`, `actor`, `subject`, and an `id` that is the digest of its canonical body; a tampered event fails admission. In the interim git transport the commit is the signature and `HEAD` is the checkpoint; the `signature` field is reserved for the signed form.
 

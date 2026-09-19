@@ -50,7 +50,7 @@ cd ../incan.pub-index
 ../incan.pub/target/incan-pub check --crates-io-index .crates-io-snapshot
 ```
 
-`publish NAME VERSION CHECKSUM [--notes FILE]` creates a record, `add-fact PROPOSAL.json` admits a harvested fact, `attest …` records an equivalence-attested asset; each appends one event and rebuilds the projections. `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built by the released toolchain; see the last section of [docs/v0.md](docs/v0.md) for why that is a rule.
+`publish NAME VERSION CHECKSUM [--notes FILE]` creates a record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know; each appends one event and rebuilds the projections. `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built by the released toolchain; see the last section of [docs/v0.md](docs/v0.md) for why that is a rule.
 
 ## How facts get here
 
