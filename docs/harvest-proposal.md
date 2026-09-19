@@ -37,7 +37,7 @@ A JSON file beside any committed generated inputs it names. It mirrors the rende
 }
 ```
 
-`evidence.hazards` names ambient variables present when the publisher ran that a stable toolchain never has (`RUSTC_BOOTSTRAP`); the harvest records them, admission refuses a proposal that names any. Other evidence keys are recorded verbatim on the event.
+`evidence.hazards` names ambient state under which a build script's answers are not a stable toolchain's: `RUSTC_BOOTSTRAP` in the script's environment, or a nightly `rustc` compiling the units. The harvest records them, admission refuses a proposal that names any, and an empty list is the stated absence. Provenance that changes no answer is not a hazard and does not belong in the list: the compatibility publisher's Cargo is nightly by design (`--unit-graph` is nightly-only) while every unit is compiled by the retained stable `rustc`; that Cargo is recorded verbatim in `cargo_version`, the compiler in `rustc_identity`. Other evidence keys are recorded verbatim on the event.
 
 Exactly one `rust.facts` record per proposal. `out` paths are relative to the proposal file; admission copies the named files under `crates-io/<name>/<version>/out/` and refuses a file that would overwrite a committed input with different bytes. The directory a bake writes is `DIR/<name>-<version>-<profile>/proposal.json` beside `out/…`. The proposal is JSON rather than TOML because it is an intermediate the compiler writes and the tool reads, and the event it becomes is JSON; the rendered `loaf.toml` stays the consumer's format.
 
@@ -51,4 +51,4 @@ Exactly one `rust.facts` record per proposal. `out` paths are relative to the pr
 
 ## What a harvest must not do
 
-A harvest that ran with ambient state a stable publisher never has — `RUSTC_BOOTSTRAP`, a nightly compiler, host tooling leaking into probes — is not a fact of the toolchain. `proc-macro2` emits `proc_macro_span` only under such state; the record for it does not carry that answer. The bake records what it ran under in `evidence.hazards`, and admission refuses a proposal that names any.
+A harvest that ran with ambient state a stable publisher never has — `RUSTC_BOOTSTRAP`, a nightly compiler, host tooling leaking into probes — is not a fact of the toolchain. `proc-macro2` emits `proc_macro_span` only under such state; the record for it does not carry that answer. The bake records what it ran under in `evidence.hazards`, and admission refuses a proposal that names any. A script whose `rustc-env` values the capture cannot prove unread is refused by the harvest itself (`environment-observed`), not proposed; such a crate keeps a hand-made record until the typed-constant question (incan#1666) is settled.
