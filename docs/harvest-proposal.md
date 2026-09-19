@@ -43,7 +43,7 @@ Exactly one `rust.facts` record per proposal. `out` paths are relative to the pr
 
 ## What admission checks
 
-- The package version has a `publish` event, or `--publish [--notes FILE]` creates it from the proposal's name, version and checksum; either way the proposal's checksum equals the record's.
+- The package version has a `publish` event, or `--publish [--notes FILE]` creates it from the proposal's name, version and checksum, with `--notes` or else a top-level `notes` string in the proposal as the record's header; either way the proposal's checksum equals the record's.
 - `evidence.hazards` is empty.
 - The binding is not yet present, or is present with identical `cfg` and `out` (the proposal is then a no-op).
 - `cfg` and `features` are sorted and unique; every `out` file exists and matches its digest; no key outside the record vocabulary.

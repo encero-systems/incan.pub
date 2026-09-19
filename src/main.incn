@@ -224,7 +224,7 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         checksum = string_member(source, "checksum")
         if not is_sha256_identity(checksum):
             return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
-        mut notes = ""
+        mut notes = string_member(proposal, "notes").strip()
         match invocation.option("notes"):
             Some(file) => notes = read_text(Path(file), file)?.strip()
             None => pass
