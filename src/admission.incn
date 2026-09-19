@@ -207,13 +207,22 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
 
 
 def fact_comparable(fact: JsonValue) -> Result[str, str]:
-    """The part of a fact record that a later record for the same binding must repeat exactly: `cfg` and `out`."""
+    """
+    The part of a fact record that a later record for the same binding must repeat exactly: `cfg` and `out`.
+
+    An absent `out` and an empty one both say "no generated input", so they compare equal; the rendered record spells
+    both the same way, by omitting the key.
+    """
     mut subset: Dict[str, JsonValue] = {}
-    for key in ["cfg", "out"]:
-        match fact.get(key):
-            Some(value) => subset[key] = value
-            None => pass
+    subset["cfg"] = member_or(fact, "cfg", JsonValue.array([]))
+    subset["out"] = member_or(fact, "out", JsonValue.array([]))
     return canonical(JsonValue.object(subset))
+
+
+def member_or(value: JsonValue, key: str, fallback: JsonValue) -> JsonValue:
+    match value.get(key):
+        Some(child) => return child
+        None => return fallback
 
 
 pub def describe_binding(binding: Binding) -> str:

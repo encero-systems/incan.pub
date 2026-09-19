@@ -401,3 +401,17 @@ def test_a_hazardous_harvest_is_named_in_its_evidence_and_refused_by_the_tool() 
     match string_list_member(clean.get("evidence").unwrap(), "hazards"):
         Some(names) => assert_eq(len(names), 0)
         None => assert_true(false, "an empty hazards list is still a list")
+
+
+def test_an_absent_out_and_an_empty_out_are_the_same_stated_absence() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", ["arch_enabled"]))
+    mut with_empty_out = fact_with("release", ["arch_enabled"])
+    with_empty_out.set("out", JsonValue.array([])).unwrap()
+    add_fact(root, with_empty_out)
+    assert_eq(refusal(root), "")
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    assert_eq(len(state[record_key("libm", "0.2.16")].facts), 1)
+
