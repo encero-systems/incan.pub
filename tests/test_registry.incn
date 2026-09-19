@@ -13,7 +13,7 @@ from std.testing import assert_eq, assert_is_err, assert_true
 
 from admission import replay
 from canonical import canonical, digest_text, is_sha256_identity, pretty
-from events import append_event, event_id, load_events, write_text
+from events import append_event, event_id, load_events, string_list_member, write_text
 from projection import committed_projections, render_projections, stale_projections, write_projections
 from registry import compare_versions, record_key, sparse_index_path
 
@@ -386,3 +386,18 @@ def test_a_yank_shows_on_the_index_line_and_a_stale_projection_is_named() -> Non
     wanted = render_projections(yanked).unwrap()
     assert_true(wanted["index/li/bm/libm"].contains("\"yanked\":true"))
     assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["index/li/bm/libm"])
+
+
+# ---------------------------------------------------------------- proposals --------------------------------------
+
+
+def test_a_hazardous_harvest_is_named_in_its_evidence_and_refused_by_the_tool() -> None:
+    """`add-fact` refuses `evidence.hazards`; the library-level rule is that such a fact never reaches the log."""
+    proposal = parse("{\"evidence\": {\"method\": \"compatibility publisher observation\", \"hazards\": [\"RUSTC_BOOTSTRAP\"]}}").unwrap()
+    match string_list_member(proposal.get("evidence").unwrap(), "hazards"):
+        Some(names) => assert_eq(names, ["RUSTC_BOOTSTRAP"])
+        None => assert_true(false, "hazards is a list of names")
+    clean = parse("{\"evidence\": {\"hazards\": []}}").unwrap()
+    match string_list_member(clean.get("evidence").unwrap(), "hazards"):
+        Some(names) => assert_eq(len(names), 0)
+        None => assert_true(false, "an empty hazards list is still a list")

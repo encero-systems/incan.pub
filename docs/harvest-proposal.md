@@ -1,6 +1,6 @@
 # Harvest proposal
 
-A harvest proposal is what `oven harvest` emits and what `incan-pub add-fact` admits: one bound fact record for one crates.io package version, observed by the compatibility publisher under one exact selection, with the evidence that observation left behind.
+A harvest proposal is what the release bake emits with `--harvest-dir` (`oven legacy-cargo bake-loafs --envelope release --harvest-dir DIR`, one proposal per registry unit whose build script the compatibility publisher observed, per profile) and what `incan-pub add-fact` admits: one bound fact record for one crates.io package version, observed under one exact selection, with the evidence that observation left behind.
 
 Harvest is observation. Admitting the proposal is declaration. The two are kept apart so that what Cargo happened to do on one machine never becomes a registry fact without a reviewable step in between.
 
@@ -30,22 +30,25 @@ A JSON file beside any committed generated inputs it names. It mirrors the rende
   "evidence": {
     "method": "compatibility publisher observation",
     "receipt": "sha256:…",
-    "cargo_version": "cargo 1.98.0 (…)",
-    "cargo_lock_digest": "sha256:…",
-    "cargo_manifest_digest": "sha256:…"
+    "rustc_identity": "sha256:…",
+    "host": "aarch64-apple-darwin",
+    "hazards": []
   }
 }
 ```
 
-Exactly one `rust.facts` record per proposal. `out` paths are relative to the proposal file; admission copies the named files under `crates-io/<name>/<version>/out/` and refuses a file that would overwrite a committed input with different bytes. The proposal is JSON rather than TOML because it is an intermediate the compiler writes and the tool reads, and the event it becomes is JSON; the rendered `loaf.toml` stays the consumer's format.
+`evidence.hazards` names ambient variables present when the publisher ran that a stable toolchain never has (`RUSTC_BOOTSTRAP`); the harvest records them, admission refuses a proposal that names any. Other evidence keys are recorded verbatim on the event.
+
+Exactly one `rust.facts` record per proposal. `out` paths are relative to the proposal file; admission copies the named files under `crates-io/<name>/<version>/out/` and refuses a file that would overwrite a committed input with different bytes. The directory a bake writes is `DIR/<name>-<version>-<profile>/proposal.json` beside `out/…`. The proposal is JSON rather than TOML because it is an intermediate the compiler writes and the tool reads, and the event it becomes is JSON; the rendered `loaf.toml` stays the consumer's format.
 
 ## What admission checks
 
-- The package version has a `publish` event; the proposal's checksum equals the record's.
+- The package version has a `publish` event, or `--publish [--notes FILE]` creates it from the proposal's name, version and checksum; either way the proposal's checksum equals the record's.
+- `evidence.hazards` is empty.
 - The binding is not yet present, or is present with identical `cfg` and `out` (the proposal is then a no-op).
 - `cfg` and `features` are sorted and unique; every `out` file exists and matches its digest; no key outside the record vocabulary.
-- `evidence.receipt`, when present, becomes the record's `harvested-from` and must be a `sha256:` identity. Other evidence keys are recorded verbatim on the event.
+- `evidence.receipt`, when present, becomes the record's `harvested-from` and must be a `sha256:` identity.
 
 ## What a harvest must not do
 
-A harvest that ran with ambient state a stable publisher never has — `RUSTC_BOOTSTRAP`, a nightly compiler, host tooling leaking into probes — is not a fact of the toolchain. `proc-macro2` emits `proc_macro_span` only under such state; the record for it does not carry that answer. The harvest tool should record what it ran under, and a reviewer should refuse a proposal whose evidence shows it.
+A harvest that ran with ambient state a stable publisher never has — `RUSTC_BOOTSTRAP`, a nightly compiler, host tooling leaking into probes — is not a fact of the toolchain. `proc-macro2` emits `proc_macro_span` only under such state; the record for it does not carry that answer. The bake records what it ran under in `evidence.hazards`, and admission refuses a proposal that names any.

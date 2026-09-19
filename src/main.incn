@@ -5,7 +5,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub build [--root DIR]
     incan-pub index-urls [--root DIR]
     incan-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
-    incan-pub add-fact PROPOSAL.json [--actor ACTOR] [--root DIR]
+    incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
 
@@ -19,10 +19,15 @@ from std.json import JsonValue
 from admission import describe_binding, replay, validate_binding, validate_fact
 from canonical import is_sha256_identity
 from cratesio import index_urls, verify_checksums
-from events import append_event, load_events, member, parse_event, read_text, string_member, write_text
+from events import append_event, load_events, member, parse_event, read_text, string_list_member, string_member
 from host import argv
 from projection import committed_projections, render_projections, stale_projections, write_projections
 from registry import Record, crates_io_index, has_key, keys_of, record_key
+
+
+def flags() -> list[str]:
+    """Options that take no value."""
+    return ["publish"]
 
 
 def default_actor() -> str:
@@ -52,6 +57,9 @@ class Invocation:
             Some(actor) => return actor
             None => return default_actor()
 
+    def flag(self, name: str) -> bool:
+        return has_key(self.options, name)
+
     def require(self, name: str) -> Result[str, str]:
         match self.option(name):
             Some(value) => return Ok(value)
@@ -67,6 +75,10 @@ def parse_invocation(arguments: list[str]) -> Result[Invocation, str]:
     while index < len(arguments):
         argument = arguments[index]
         if argument.startswith("--"):
+            if flags().contains(argument[2:]):
+                options[argument[2:]] = "true"
+                index += 1
+                continue
             if index + 1 >= len(arguments):
                 return Err(f"`{argument}` requires a value")
             options[argument[2:]] = arguments[index + 1]
@@ -196,11 +208,35 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         None => pass
     if len(name) == 0 or len(version) == 0 or len(facts) != 1:
         return Err("a proposal names one package version and carries exactly one rust.facts record")
+    hazards = string_list_member(evidence, "hazards")
+    match hazards:
+        Some(names) =>
+            if len(names) > 0:
+                listed = ", ".join(names)
+                return Err(f"the harvest ran under ambient state a stable publisher never has ({listed}); its answers are not facts of the toolchain")
+        None => pass
     root = invocation.root()
-    state = replay(load_events(root)?, root)?
+    mut state = replay(load_events(root)?, root)?
     key = record_key(name, version)
     if not has_key(state, key):
-        return Err(f"{name} {version} has no external-source record; publish it first")
+        if not invocation.flag("publish"):
+            return Err(f"{name} {version} has no external-source record; publish it first or pass --publish")
+        checksum = string_member(source, "checksum")
+        if not is_sha256_identity(checksum):
+            return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
+        mut notes = ""
+        match invocation.option("notes"):
+            Some(file) => notes = read_text(Path(file), file)?.strip()
+            None => pass
+        mut publication: Dict[str, JsonValue] = {}
+        publication["source"] = JsonValue.object({
+            "registry": JsonValue.string(crates_io_index()),
+            "checksum": JsonValue.string(checksum),
+        })
+        publication["notes"] = JsonValue.string(notes)
+        published = append_event(root, "publish", name, version, invocation.actor(), publication)?
+        println(f"published record: {published}")
+        state = replay(load_events(root)?, root)?
     record = state[key]
     if string_member(source, "checksum") != record.checksum:
         return Err("the proposal binds a different source checksum than the published record")
