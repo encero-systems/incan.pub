@@ -617,3 +617,29 @@ def test_a_drop_is_read_as_its_proposals_and_the_refusals_beside_them() -> None:
     assert_eq(refusals, ["gamma-3.0.0-release"])
     assert_eq(drop_contradictions(proposals, refusals), ["gamma-3.0.0-release"])
     assert_eq(len(drop_contradictions(["alpha-1.0.0-release"], refusals)), 0)
+
+
+def test_a_generated_file_has_exactly_one_producer() -> None:
+    """`out.name` and a tool output's path are one namespace: committed because observed, or produced by a tool."""
+    mut committed = fact_with("release", [])
+    committed.set("out", JsonValue.array([JsonValue.object({
+        "name": JsonValue.string("bindings.rs"),
+        "path": JsonValue.string("out/bindings.rs"),
+        "digest": JsonValue.string(digest_text("generated")),
+    })])).unwrap()
+    mut producing = tool_record()
+    producing.set("outputs", JsonValue.array([JsonValue.object({
+        "name": JsonValue.string("bindings"),
+        "kind": JsonValue.string("file"),
+        "path": JsonValue.string("bindings.rs"),
+    })])).unwrap()
+    committed.set("tool", JsonValue.array([producing])).unwrap()
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    write_text(root / "crates-io" / "libm" / "0.2.16" / "out" / "bindings.rs", "generated", "out").unwrap()
+    add_fact(root, committed)
+    assert_eq(
+        refusal(root),
+        "events/000002-fact-crates-io-libm-0.2.16.json: generated file `bindings.rs` is declared by tool `bindgen` and committed as out `bindings.rs`",
+    )

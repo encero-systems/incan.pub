@@ -193,6 +193,7 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
         names.append(entry_name)
         out.append(OutEntry(name=entry_name, path=entry_path, digest=entry_digest))
     validate_producers(fact, label)?
+    validate_one_producer_per_generated_file(fact, names, label)?
     mut harvested_from: Option[str] = None
     match fact.get("harvested-from"):
         Some(_) =>
@@ -256,6 +257,25 @@ pub def describe_binding(binding: Binding) -> str:
 # generator run. A record declares the work and its complete inputs; the product bytes are an asset, which is why an
 # output carries no digest. The registry admits the declaration, never runs it, and refuses anything it cannot bind:
 # an executable without an identity, an input without a digest, an argument naming something undeclared.
+
+
+def validate_one_producer_per_generated_file(fact: JsonValue, out_names: list[str], label: str) -> Result[None, str]:
+    """
+    Refuse a generated file that two producers claim.
+
+    An `out` entry's `name` and a tool output's `path` are the same `OUT_DIR`-relative namespace — an `out` entry's
+    `path` only says where the committed bytes sit — so a generated file is declared exactly once: committed because
+    it was merely observed, or produced by a declared tool. Two claims on one file is the ambiguity RFC 119 refuses
+    rather than resolves by order.
+    """
+    for record in producer_records(fact, "tool", label)?:
+        producer = string_member(record, "name")
+        for output in producer_records(record, "outputs", label)?:
+            path = string_member(output, "path")
+            for name in out_names:
+                if paths_overlap(name, path):
+                    return Err(f"{label}: generated file `{path}` is declared by tool `{producer}` and committed as out `{name}`")
+    return Ok(None)
 
 
 pub def validate_producers(fact: JsonValue, label: str) -> Result[None, str]:

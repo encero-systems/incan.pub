@@ -37,6 +37,8 @@ Every event carries `schema`, `kind`, `at`, `actor`, `subject`, and an `id` that
 | `tool` | publisher-side generation: a named producer, its target predicate, the exact `executable`, ordered `arguments`, explicit `environment`, the complete `inputs` closure, and the `outputs` contract |
 | `harvested-from` | the compatibility receipt whose capture proposed the record, when the harvest recorded one |
 
+`out.name` and `tool.outputs[].path` use the same path namespace relative to `OUT_DIR`; an `out` entry's `path` only says where its committed bytes sit. A generated file or tree is declared exactly once — committed as an `out` input because it was merely observed, or produced by a declared `tool` — and equal or overlapping paths across those fields are refused.
+
 `link` and `tool` are rendered as `[[rust.facts.link]]` and `[[rust.facts.tool]]` sub-tables of the record they belong to. A producer name is claimed once across both lists; an argument or environment entry names a literal or one of that producer's own declared artifacts, never a path; an `outputs` entry carries no digest, because the product bytes are an asset rather than a fact.
 
 A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment has no key: a value no compilation observes is not a fact; a value one does observe is a typed constant this record does not yet model ([encero-systems/incan#1666](https://github.com/encero-systems/incan/issues/1666)).
