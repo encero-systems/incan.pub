@@ -23,8 +23,7 @@ This repository is the interim registry of [RFC 125](https://github.com/encero-s
 A harvest drop is a directory of `<name>-<version>-<profile>/proposal.json` plus the `out/` files each proposal names, produced by the release bake ([docs/harvest-proposal.md](docs/harvest-proposal.md) is the contract). Against a checkout of `index`:
 
 ```sh
-for p in <drop>/*/; do incan-pub add-fact "$p/proposal.json" --publish; done
-incan-pub build
+incan-pub admit-drop <drop>                      # cross-checks the drop, then admits every proposal in order
 incan-pub check --crates-io-index <snapshot>     # scripts/snapshot-crates-io-index.sh writes the snapshot
 git commit && git push
 ```
@@ -33,7 +32,7 @@ Then report the resulting `index` HEAD: that commit is what a toolchain manifest
 
 Records the harvest declines to propose (a script whose emitted environment it cannot prove unread, reserved `link`/`tool` work) keep whatever record they have. Do not hand-write a fact to fill the gap.
 
-Cross-check the drop before admitting it: a package named in `refusals-<profile>.json` must not also have a proposal for that profile. Admission cannot catch that contradiction — a fact that omits work the script does says nothing about the work it omits — so the drop is where it is caught. Refuse the whole drop back to the harvest rather than admitting the part that parses.
+`admit-drop` performs the one check that needs the whole drop: a package named in `refusals-<profile>.json` must not also have a proposal for that profile. Admission cannot catch that contradiction one proposal at a time — a fact that omits work the script does says nothing about the work it omits — so the drop is refused whole, and nothing is admitted. `add-fact` remains for a single proposal.
 
 ## Where the contract lives
 

@@ -6,6 +6,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub index-urls [--root DIR]
     incan-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
     incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
+    incan-pub admit-drop DIR [--actor ACTOR] [--root DIR]
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
@@ -20,6 +21,7 @@ from std.json import JsonValue
 from admission import describe_binding, replay, validate_binding, validate_fact
 from canonical import is_sha256_identity
 from cratesio import index_urls, verify_checksums
+from drop import drop_contradictions, drop_proposals, drop_refusals
 from events import append_event, load_events, member, parse_event, read_text, string_list_member, string_member
 from host import argv
 from projection import committed_projections, render_projections, stale_projections, write_projections
@@ -113,11 +115,13 @@ def run(arguments: list[str]) -> Result[None, str]:
         return publish(invocation)
     if invocation.command == "add-fact":
         return add_fact(invocation)
+    if invocation.command == "admit-drop":
+        return admit_drop(invocation)
     if invocation.command == "attest":
         return attest(invocation)
     if invocation.command == "advise":
         return advise(invocation)
-    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, attest or advise")
+    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest or advise")
 
 
 def check(invocation: Invocation) -> Result[None, str]:
@@ -195,8 +199,28 @@ def publish(invocation: Invocation) -> Result[None, str]:
 def add_fact(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 1:
         return Err("usage: incan-pub add-fact PROPOSAL.json")
-    proposal_path = Path(invocation.positional[0])
-    proposal = parse_event(read_text(proposal_path, invocation.positional[0])?, "proposal")?
+    mut notes_override: Option[str] = None
+    match invocation.option("notes"):
+        Some(file) => notes_override = Some(read_text(Path(file), file)?.strip())
+        None => pass
+    admit_proposal(
+        invocation.root(),
+        Path(invocation.positional[0]),
+        invocation.actor(),
+        invocation.flag("publish"),
+        notes_override,
+    )?
+    return build(invocation)
+
+
+def admit_proposal(root: Path, proposal_path: Path, actor: str, publish: bool, notes_override: Option[str]) -> Result[str, str]:
+    """
+    Admit one harvest proposal, returning what it did: `published`, `admitted` or `no-op`.
+
+    The caller rebuilds the projections once it has admitted everything it means to, so a drop of hundreds of
+    proposals folds the log once rather than once per proposal.
+    """
+    proposal = parse_event(read_text(proposal_path, proposal_path.name())?, "proposal")?
     project = member(proposal, "project")
     source = member(proposal, "source")
     evidence = member(proposal, "evidence")
@@ -211,25 +235,24 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         None => pass
     if len(name) == 0 or len(version) == 0 or len(facts) != 1:
         return Err("a proposal names one package version and carries exactly one rust.facts record")
-    hazards = string_list_member(evidence, "hazards")
-    match hazards:
+    match string_list_member(evidence, "hazards"):
         Some(names) =>
             if len(names) > 0:
                 listed = ", ".join(names)
                 return Err(f"the harvest ran under ambient state a stable publisher never has ({listed}); its answers are not facts of the toolchain")
         None => pass
-    root = invocation.root()
     mut state = replay(load_events(root)?, root)?
     key = record_key(name, version)
+    mut created = false
     if not has_key(state, key):
-        if not invocation.flag("publish"):
+        if not publish:
             return Err(f"{name} {version} has no external-source record; publish it first or pass --publish")
         checksum = string_member(source, "checksum")
         if not is_sha256_identity(checksum):
             return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
         mut notes = string_member(proposal, "notes").strip()
-        match invocation.option("notes"):
-            Some(file) => notes = read_text(Path(file), file)?.strip()
+        match notes_override:
+            Some(text) => notes = text
             None => pass
         mut publication: Dict[str, JsonValue] = {}
         publication["source"] = JsonValue.object({
@@ -237,9 +260,10 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
             "checksum": JsonValue.string(checksum),
         })
         publication["notes"] = JsonValue.string(notes)
-        published = append_event(root, "publish", name, version, invocation.actor(), publication)?
+        published = append_event(root, "publish", name, version, actor, publication)?
         println(f"published record: {published}")
         state = replay(load_events(root)?, root)?
+        created = true
     record = state[key]
     if string_member(source, "checksum") != record.checksum:
         return Err("the proposal binds a different source checksum than the published record")
@@ -255,12 +279,49 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         if record.facts[binding_key].comparable != typed.comparable:
             return Err("the proposal's binding already has a different record; a fact is immutable")
         println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
-        return Ok(None)
+        return Ok("no-op")
     mut payload: Dict[str, JsonValue] = {}
     payload["fact"] = fact
     payload["evidence"] = evidence
-    written = append_event(root, "fact", name, version, invocation.actor(), payload)?
+    written = append_event(root, "fact", name, version, actor, payload)?
     println(f"admitted fact: {written}")
+    if created:
+        return Ok("published")
+    return Ok("admitted")
+
+
+def admit_drop(invocation: Invocation) -> Result[None, str]:
+    """
+    Admit a whole harvest drop: every `<name>-<version>-<profile>/proposal.json` under one directory.
+
+    The drop is checked before anything is admitted, because a contradiction between what a harvest proposed and
+    what it refused is invisible once the proposals are read one at a time: a fact that omits work the script does
+    says nothing about the work it omits. A refusal names the drop and admits none of it.
+    """
+    if len(invocation.positional) != 1:
+        return Err("usage: incan-pub admit-drop DIR")
+    drop = Path(invocation.positional[0])
+    proposals = drop_proposals(drop)?
+    if len(proposals) == 0:
+        return Err(f"{invocation.positional[0]} holds no `<name>-<version>-<profile>/proposal.json`")
+    contradictions = drop_contradictions(proposals, drop_refusals(drop)?)
+    if len(contradictions) > 0:
+        listed = ", ".join(contradictions)
+        return Err(f"the drop both proposes and refuses [{listed}]; a record that omits the work its refusal names would declare less than the script does")
+    root = invocation.root()
+    mut published = 0
+    mut admitted = 0
+    mut repeated = 0
+    for subject in proposals:
+        outcome = admit_proposal(root, drop / subject / "proposal.json", invocation.actor(), true, None)?
+        if outcome == "published":
+            published += 1
+            admitted += 1
+        elif outcome == "admitted":
+            admitted += 1
+        else:
+            repeated += 1
+    println(f"drop admitted: {len(proposals)} proposal(s), {published} record(s) published, {admitted} fact(s) admitted, {repeated} already on record")
     return build(invocation)
 
 

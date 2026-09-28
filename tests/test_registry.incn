@@ -13,6 +13,7 @@ from std.testing import assert_eq, assert_is_err, assert_true
 
 from admission import fact_comparable, replay
 from canonical import canonical, digest_text, is_sha256_identity, pretty
+from drop import drop_contradictions, drop_proposals, drop_refusals
 from events import append_event, event_id, load_events, string_list_member, write_text
 from projection import committed_projections, render_projections, stale_projections, write_projections
 from registry import compare_versions, record_key, sparse_index_path
@@ -598,3 +599,21 @@ def test_an_advisory_is_rendered_on_the_record_and_counted_on_the_index_line() -
     empty["advisory"] = JsonValue.object({"text": JsonValue.string("  ")})
     append_event(root, "advisory", "libm", "0.2.16", "tests", empty).unwrap()
     assert_eq(refusal(root), "events/000003-advisory-crates-io-libm-0.2.16.json: an advisory carries a non-empty `text`")
+
+
+# ---------------------------------------------------------------- drops -----------------------------------------
+
+
+def test_a_drop_is_read_as_its_proposals_and_the_refusals_beside_them() -> None:
+    directory = scratch()
+    drop = directory.path()
+    for subject in ["alpha-1.0.0-release", "alpha-1.0.0-debug", "gamma-3.0.0-release"]:
+        write_text(drop / subject / "proposal.json", "{}\n", "proposal").unwrap()
+    write_text(drop / "refusals-release.json", "[{\"package\": \"gamma\", \"version\": \"3.0.0\", \"reason\": \"linked-libraries\"}]\n", "refusals").unwrap()
+    write_text(drop / "refusals-debug.json", "[]\n", "refusals").unwrap()
+    proposals = drop_proposals(drop).unwrap()
+    assert_eq(proposals, ["alpha-1.0.0-debug", "alpha-1.0.0-release", "gamma-3.0.0-release"])
+    refusals = drop_refusals(drop).unwrap()
+    assert_eq(refusals, ["gamma-3.0.0-release"])
+    assert_eq(drop_contradictions(proposals, refusals), ["gamma-3.0.0-release"])
+    assert_eq(len(drop_contradictions(["alpha-1.0.0-release"], refusals)), 0)

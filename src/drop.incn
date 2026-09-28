@@ -1,0 +1,70 @@
+"""
+Reading a harvest drop: the proposals it holds, the refusals beside them, and the contradiction between the two.
+
+A drop is a directory the release bake writes: one `<name>-<version>-<profile>/` per proposed binding, each with its
+`proposal.json` and the `out/` files it names, plus one `refusals-<profile>.json` per capture naming what the harvest
+declined to propose and why. Admission reads one proposal at a time and cannot see across them, so the one check that
+needs the whole drop lives here.
+"""
+
+from std.fs import Path
+
+from events import parse_event, read_text, string_member
+
+
+pub def drop_proposals(drop: Path) -> Result[list[str], str]:
+    """The directory names of a drop that hold a proposal, in a stable order."""
+    mut names: list[str] = []
+    match drop.iterdir():
+        Ok(children) =>
+            for child in children:
+                if child.is_dir() and (child / "proposal.json").is_file():
+                    names.append(child.name())
+        Err(error) => return Err(f"{drop.name()}: {error.message()}")
+    return Ok(sorted(names))
+
+
+pub def drop_refusals(drop: Path) -> Result[list[str], str]:
+    """
+    What the harvest refused, as the `<name>-<version>-<profile>` subjects a proposal directory would be named.
+
+    A refusal entry states `package`, `version` and `reason`; the profile comes from the file it sits in, because a
+    refusal is per capture.
+    """
+    mut subjects: list[str] = []
+    match drop.iterdir():
+        Ok(children) =>
+            for child in children:
+                name = child.name()
+                if not child.is_file() or not name.startswith("refusals-") or not name.endswith(".json"):
+                    continue
+                profile = name[9:len(name) - 5]
+                entries = parse_event("{\"entries\": " + read_text(child, name)? + "}", name)?
+                match entries.get("entries"):
+                    Some(value) =>
+                        match value.as_array():
+                            Some(items) =>
+                                for item in items:
+                                    package = string_member(item, "package")
+                                    version = string_member(item, "version")
+                                    if len(package) > 0 and len(version) > 0:
+                                        subjects.append(f"{package}-{version}-{profile}")
+                            None => return Err(f"{name}: a refusals file is a list of entries")
+                    None => pass
+        Err(error) => return Err(f"{drop.name()}: {error.message()}")
+    return Ok(subjects)
+
+
+pub def drop_contradictions(proposals: list[str], refusals: list[str]) -> list[str]:
+    """
+    The subjects a drop both proposes and refuses.
+
+    A record that omits the work its own refusal names declares less than the script does, and nothing downstream can
+    see the omission: a fact says nothing about what it leaves out. So the contradiction is caught here, against the
+    whole drop, and none of it is admitted.
+    """
+    mut contradictions: list[str] = []
+    for subject in proposals:
+        if refusals.contains(subject) and not contradictions.contains(subject):
+            contradictions.append(subject)
+    return contradictions
