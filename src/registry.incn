@@ -51,12 +51,7 @@ pub def fact_keys() -> list[str]:
     Closed by design: a value a compilation never observes is not a fact, and a value it does observe needs a key
     the compiler reads, so the vocabulary grows only when `RustFactRecord` does.
     """
-    return binding_keys() + ["cfg", "out", "harvested-from"]
-
-
-pub def reserved_fact_keys() -> list[str]:
-    """RFC 119 names these as declared build work; they enter the vocabulary when their manifest grammar is fixed."""
-    return ["link", "tool"]
+    return binding_keys() + ["cfg", "out", "link", "tool", "harvested-from"]
 
 
 pub def profiles() -> list[str]:
@@ -119,6 +114,8 @@ pub class Fact:
     pub binding: Binding
     pub cfg: list[str]
     pub out: list[OutEntry]
+    pub link: list[JsonValue]
+    pub tool: list[JsonValue]
     pub harvested_from: Option[str]
     pub comparable: str
     pub status: str
@@ -157,6 +154,11 @@ pub class Record:
         for key in sorted(keys_of(self.facts)):
             out.append(self.facts[key])
         return out
+
+
+pub def producer_key_order() -> list[str]:
+    """The order a producer record renders its keys in: identity, then invocation, then closure."""
+    return ["name", "target", "language", "executable", "arguments", "environment", "sources", "inputs", "outputs", "library"]
 
 
 pub def record_key(name: str, version: str) -> str:

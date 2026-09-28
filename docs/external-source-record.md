@@ -33,7 +33,11 @@ Every event carries `schema`, `kind`, `at`, `actor`, `subject`, and an `id` that
 | `features` | complete enabled Cargo feature set, sorted |
 | `cfg` | `--cfg` answers, sorted; an empty list is a stated fact |
 | `out` | committed generated inputs: `name`, `path` (relative to the manifest), `digest` |
+| `link` | publisher-side native compilation: a named producer, its target predicate, source `language`, the exact `executable` it runs, ordered `arguments`, explicit `environment`, the complete `sources` closure, and the `library` those sources produce |
+| `tool` | publisher-side generation: a named producer, its target predicate, the exact `executable`, ordered `arguments`, explicit `environment`, the complete `inputs` closure, and the `outputs` contract |
 | `harvested-from` | the compatibility receipt whose capture proposed the record, when the harvest recorded one |
+
+`link` and `tool` are rendered as `[[rust.facts.link]]` and `[[rust.facts.tool]]` sub-tables of the record they belong to. A producer name is claimed once across both lists; an argument or environment entry names a literal or one of that producer's own declared artifacts, never a path; an `outputs` entry carries no digest, because the product bytes are an asset rather than a fact.
 
 A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment has no key: a value no compilation observes is not a fact; a value one does observe is a typed constant this record does not yet model ([encero-systems/incan#1666](https://github.com/encero-systems/incan/issues/1666)).
 
@@ -45,7 +49,7 @@ The vocabulary grows only with the compiler's `RustFactRecord`, because the rend
 
 | requirement | why |
 |---|---|
-| every byte the key names is committed under the record and bound by a `sha256:` digest | a consumer compiles from the record without running anything; a path outside it, a symlink, or an unbound byte is refused |
+| every byte the key names is bound by a `sha256:` digest, under an owner that can produce it: committed beside the record for a generated input, or owner-relative inside an already-checksummed source or an immutable toolchain or provider for a declared input or executable | a consumer compiles from the record without running anything, and a publisher that cannot produce the exact bytes refuses rather than substituting; an unbound byte, an absolute or escaping path, or a URI is refused |
 | lists are sorted and duplicate-free; a logical name is claimed once per record | RFC 119 refuses ambiguity rather than resolving it by path or order |
 | an omitted key and a stated absence — an empty list or table — are one fact | an explicit "no linked libraries" and no key at all say the same thing, and the record renders both by omitting the key |
 | the value is derived from the observation alone | no capture ordering, no absolute path, no host-specific spelling: two harvests of one binding must produce the same bytes |

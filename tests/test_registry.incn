@@ -228,16 +228,153 @@ def test_the_file_name_must_carry_the_event_kind() -> None:
     assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: kind must be one of publish, fact, attest, asset, yank, unyank, advisory and match the file name")
 
 
-def test_reserved_keys_are_named_as_reserved_rather_than_unknown() -> None:
-    """`link` and `tool` are RFC 119 work the vocabulary will carry; the refusal says so instead of calling them junk."""
+def sha(seed: str) -> str:
+    return digest_text(seed)
+
+
+def executable(name: str) -> JsonValue:
+    """An executable the publisher selected: identified by owner and bytes, never carried by the registry."""
+    return JsonValue.object({
+        "name": JsonValue.string(name),
+        "owner": JsonValue.string(sha("owner")),
+        "path": JsonValue.string("bin/" + name),
+        "digest": JsonValue.string(sha(name)),
+    })
+
+
+def source_artifact(name: str, path: str) -> JsonValue:
+    return JsonValue.object({
+        "name": JsonValue.string(name),
+        "kind": JsonValue.string("file"),
+        "path": JsonValue.string(path),
+        "digest": JsonValue.string(sha(path)),
+    })
+
+
+def link_record() -> JsonValue:
+    return JsonValue.object({
+        "name": JsonValue.string("helper"),
+        "target": JsonValue.string("aarch64-apple-darwin"),
+        "language": JsonValue.string("c"),
+        "executable": executable("cc"),
+        "arguments": JsonValue.array([
+            JsonValue.object({"literal": JsonValue.string("-O2")}),
+            JsonValue.object({"input": JsonValue.string("helper_c")}),
+        ]),
+        "environment": JsonValue.array([
+            JsonValue.object({"name": JsonValue.string("SOURCE_DATE_EPOCH"), "literal": JsonValue.string("0")}),
+        ]),
+        "sources": JsonValue.array([source_artifact("helper_c", "c/helper.c")]),
+        "library": JsonValue.object({"name": JsonValue.string("sys_helper"), "kind": JsonValue.string("static")}),
+    })
+
+
+def tool_record() -> JsonValue:
+    return JsonValue.object({
+        "name": JsonValue.string("bindgen"),
+        "target": JsonValue.string("aarch64-apple-darwin"),
+        "executable": executable("bindgen"),
+        "arguments": JsonValue.array([JsonValue.object({"output": JsonValue.string("bindings")})]),
+        "environment": JsonValue.array([]),
+        "inputs": JsonValue.array([source_artifact("header", "include/helper.h")]),
+        "outputs": JsonValue.array([
+            JsonValue.object({
+                "name": JsonValue.string("bindings"),
+                "kind": JsonValue.string("file"),
+                "path": JsonValue.string("bindings.rs"),
+            }),
+        ]),
+    })
+
+
+def fact_with_producers(link: list[JsonValue], tool: list[JsonValue]) -> JsonValue:
+    mut fact = fact_with("release", [])
+    fact.set("link", JsonValue.array(link)).unwrap()
+    fact.set("tool", JsonValue.array(tool)).unwrap()
+    return fact
+
+
+def producer_refusal(fact: JsonValue) -> str:
     directory = scratch()
     root = directory.path()
     publish_libm(root)
-    mut fact = fact_with("release", [])
-    fact.set("link", JsonValue.object({})).unwrap()
-    fact.set("tool", JsonValue.object({})).unwrap()
     add_fact(root, fact)
-    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: fact keys [link, tool] are reserved until their manifest grammar is fixed; a unit that needs them is refused by the harvest, not declared short")
+    return refusal(root)
+
+
+def test_declared_publisher_work_is_admitted_and_rendered_as_its_own_sub_tables() -> None:
+    """A `link` and a `tool` record round-trip into the manifest the compiler parses, sub-tables after the record."""
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with_producers([link_record()], [tool_record()]))
+    assert_eq(refusal(root), "")
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    manifest = render_projections(state).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
+    assert_true(manifest.contains("\ncfg = []\n\n[[rust.facts.link]]\nname = \"helper\"\n"))
+    assert_true(manifest.contains("\nlanguage = \"c\"\n"))
+    assert_true(manifest.contains("\nexecutable = { digest = \"" + sha("cc") + "\", name = \"cc\", owner = \"" + sha("owner") + "\", path = \"bin/cc\" }\n"))
+    assert_true(manifest.contains("\narguments = [{ literal = \"-O2\" }, { input = \"helper_c\" }]\n"))
+    assert_true(manifest.contains("\nsources = [{ digest = \"" + sha("c/helper.c") + "\", kind = \"file\", name = \"helper_c\", path = \"c/helper.c\" }]\n"))
+    assert_true(manifest.contains("\nlibrary = { kind = \"static\", name = \"sys_helper\" }\n"))
+    assert_true(manifest.contains("\n[[rust.facts.tool]]\nname = \"bindgen\"\n"))
+    assert_true(manifest.contains("\noutputs = [{ kind = \"file\", name = \"bindings\", path = \"bindings.rs\" }]\n"))
+    assert_true(not manifest.contains("environment = []"), "a stated absence renders as an omission")
+
+
+def test_publisher_work_is_refused_when_it_names_what_it_does_not_declare() -> None:
+    """Each refusal is one rule: a name claimed twice, a reference to nothing, an identity that is not bytes."""
+    mut second = link_record()
+    second.set("name", JsonValue.string("bindgen")).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([second], [tool_record()])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: publisher work name `bindgen` is declared twice",
+    )
+    mut dangling = tool_record()
+    dangling.set("arguments", JsonValue.array([JsonValue.object({"input": JsonValue.string("absent")})])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([], [dangling])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: tool `bindgen`: argument references undeclared input `absent`",
+    )
+    mut unbound = tool_record()
+    unbound.set("executable", JsonValue.object({
+        "name": JsonValue.string("bindgen"),
+        "owner": JsonValue.string("bindgen-0.69"),
+        "path": JsonValue.string("bin/bindgen"),
+        "digest": JsonValue.string(sha("bindgen")),
+    })).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([], [unbound])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: tool `bindgen`: executable owner must be a `sha256:` identity",
+    )
+
+
+def test_a_product_digest_belongs_to_the_asset_and_a_source_must_leave_no_gap() -> None:
+    """The work/asset boundary and the closure rule, the two ways a record could quietly declare less than the work."""
+    mut digested = tool_record()
+    digested.set("outputs", JsonValue.array([JsonValue.object({
+        "name": JsonValue.string("bindings"),
+        "kind": JsonValue.string("file"),
+        "path": JsonValue.string("bindings.rs"),
+        "digest": JsonValue.string(sha("bindings.rs")),
+    })])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([], [digested])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: tool `bindgen`: outputs has unknown keys [digest]; a product digest belongs to the asset",
+    )
+    mut sourceless = link_record()
+    sourceless.set("sources", JsonValue.array([])).unwrap()
+    sourceless.set("arguments", JsonValue.array([])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([sourceless], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: sources must declare the complete, non-empty source closure",
+    )
+    mut escaping = link_record()
+    escaping.set("sources", JsonValue.array([source_artifact("helper_c", "../../etc/passwd")])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([escaping], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: sources `helper_c` path `../../etc/passwd` must be a plain owner-relative path",
+    )
 
 
 def test_immutability_covers_every_fact_key_the_vocabulary_gains() -> None:

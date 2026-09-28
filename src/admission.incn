@@ -25,7 +25,6 @@ from registry import (
     has_key,
     profiles,
     record_key,
-    reserved_fact_keys,
     sorted_unique,
     status_attested,
     status_harvested,
@@ -149,15 +148,9 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
     """Check one bound fact record against the vocabulary and the committed generated inputs it names."""
     binding = validate_binding(fact, label)?
     mut unknown: list[str] = []
-    mut reserved: list[str] = []
     for key in sorted(fact.keys()):
-        if reserved_fact_keys().contains(key):
-            reserved.append(key)
-        elif not fact_keys().contains(key):
+        if not fact_keys().contains(key):
             unknown.append(key)
-    if len(reserved) > 0:
-        listed = ", ".join(reserved)
-        return Err(f"{label}: fact keys [{listed}] are reserved until their manifest grammar is fixed; a unit that needs them is refused by the harvest, not declared short")
     if len(unknown) > 0:
         listed = ", ".join(unknown)
         return Err(f"{label}: unknown fact keys [{listed}]; script-emitted environment has no key here")
@@ -199,6 +192,7 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
             return Err(f"{label}: out `{entry_name}` is declared twice")
         names.append(entry_name)
         out.append(OutEntry(name=entry_name, path=entry_path, digest=entry_digest))
+    validate_producers(fact, label)?
     mut harvested_from: Option[str] = None
     match fact.get("harvested-from"):
         Some(_) =>
@@ -211,6 +205,8 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
         binding=binding,
         cfg=cfg,
         out=out,
+        link=producer_records(fact, "link", label)?,
+        tool=producer_records(fact, "tool", label)?,
         harvested_from=harvested_from,
         comparable=fact_comparable(fact)?,
         status=status_harvested(),
@@ -252,3 +248,280 @@ def is_stated_absence(value: JsonValue) -> bool:
 pub def describe_binding(binding: Binding) -> str:
     features = ", ".join(binding.features)
     return f"({binding.toolchain}, {binding.target}, {binding.profile}, [{features}])"
+
+
+# ---------------------------------------------------------------- producers -------------------------------------
+#
+# `link` and `tool` are the publisher-side work RFC 119 declares: a native compile into a named library, and a
+# generator run. A record declares the work and its complete inputs; the product bytes are an asset, which is why an
+# output carries no digest. The registry admits the declaration, never runs it, and refuses anything it cannot bind:
+# an executable without an identity, an input without a digest, an argument naming something undeclared.
+
+
+pub def validate_producers(fact: JsonValue, label: str) -> Result[None, str]:
+    """Check both producer lists of one record: sorted by unique name, one name space across the two, each closed."""
+    mut work_names: list[str] = []
+    for kind in ["link", "tool"]:
+        mut previous = ""
+        for record in producer_records(fact, kind, label)?:
+            name = string_member(record, "name")
+            validate_producer_name(name, f"{label}: {kind} name")?
+            if len(previous) > 0 and not (previous < name):
+                return Err(f"{label}: {kind} must be sorted by unique name")
+            previous = name.to_string()
+            if work_names.contains(name):
+                return Err(f"{label}: publisher work name `{name}` is declared twice")
+            work_names.append(name.to_string())
+            validate_producer(record, kind, f"{label}: {kind} `{name}`")?
+    return Ok(None)
+
+
+def producer_records(fact: JsonValue, kind: str, label: str) -> Result[list[JsonValue], str]:
+    match fact.get(kind):
+        Some(value) =>
+            match value.as_array():
+                Some(items) => return Ok(items)
+                None => return Err(f"{label}: {kind} must be a list of producer records")
+        None => return Ok([])
+
+
+def validate_producer(record: JsonValue, kind: str, label: str) -> Result[None, str]:
+    """Check one `link` or `tool` record against its closed shape and its own declared names."""
+    mut allowed = ["arguments", "environment", "executable", "name", "target"]
+    if kind == "link":
+        allowed = allowed + ["language", "library", "sources"]
+    else:
+        allowed = allowed + ["inputs", "outputs"]
+    mut unknown: list[str] = []
+    for key in sorted(record.keys()):
+        if not allowed.contains(key):
+            unknown.append(key)
+    if len(unknown) > 0:
+        listed = ", ".join(unknown)
+        return Err(f"{label}: unknown keys [{listed}]")
+    target = string_member(record, "target")
+    if len(target.strip()) == 0 or target.strip() != target:
+        return Err(f"{label}: target must name an exact triple or a `cfg(...)` predicate")
+    validate_executable(member(record, "executable"), label)?
+    input_names = validate_artifacts(record, producer_input_key(kind), label)?
+    output_names = validate_outputs(record, label)?
+    for name in input_names:
+        if output_names.contains(name):
+            return Err(f"{label}: logical name `{name}` is claimed as both an input and an output")
+    validate_arguments(record, input_names, output_names, label)?
+    validate_environment(record, input_names, label)?
+    if kind == "link":
+        if len(input_names) == 0:
+            return Err(f"{label}: sources must declare the complete, non-empty source closure")
+        library = member(record, "library")
+        mut library_unknown: list[str] = []
+        for key in sorted(library.keys()):
+            if not ["kind", "name"].contains(key):
+                library_unknown.append(key)
+        if len(library_unknown) > 0:
+            listed = ", ".join(library_unknown)
+            return Err(f"{label}: library has unknown keys [{listed}]")
+        validate_producer_name(string_member(library, "name"), f"{label}: library name")?
+        if not ["dynamic", "static"].contains(string_member(library, "kind")):
+            return Err(f"{label}: library kind must be `static` or `dynamic`")
+        if not ["assembly", "c", "cpp"].contains(string_member(record, "language")):
+            return Err(f"{label}: language must be `c`, `cpp` or `assembly`")
+    elif len(output_names) == 0:
+        return Err(f"{label}: outputs must declare the complete, non-empty output contract")
+    return Ok(None)
+
+
+def producer_input_key(kind: str) -> str:
+    """A link declares `sources`, a tool declares `inputs`; both are one complete, digest-bound input closure."""
+    if kind == "tool":
+        return "inputs"
+    return "sources"
+
+
+def validate_executable(executable: JsonValue, label: str) -> Result[None, str]:
+    """An executable is identified, not carried: an owner identity, an owner-relative path, and its exact bytes."""
+    mut unknown: list[str] = []
+    for key in sorted(executable.keys()):
+        if not ["digest", "name", "owner", "path"].contains(key):
+            unknown.append(key)
+    if len(unknown) > 0:
+        listed = ", ".join(unknown)
+        return Err(f"{label}: executable has unknown keys [{listed}]")
+    validate_producer_name(string_member(executable, "name"), f"{label}: executable name")?
+    validate_portable_path(string_member(executable, "path"), f"{label}: executable path")?
+    for key in ["digest", "owner"]:
+        if not is_sha256_identity(string_member(executable, key)):
+            return Err(f"{label}: executable {key} must be a `sha256:` identity")
+    return Ok(None)
+
+
+def validate_artifacts(record: JsonValue, key: str, label: str) -> Result[list[str], str]:
+    """Check one complete input closure: sorted by unique name, every byte bound, a tree cataloged in full."""
+    mut names: list[str] = []
+    mut paths: list[str] = []
+    mut previous = ""
+    for artifact in producer_records(record, key, label)?:
+        mut unknown: list[str] = []
+        for member_key in sorted(artifact.keys()):
+            if not ["digest", "kind", "members", "name", "path"].contains(member_key):
+                unknown.append(member_key)
+        if len(unknown) > 0:
+            listed = ", ".join(unknown)
+            return Err(f"{label}: {key} has unknown keys [{listed}]")
+        name = string_member(artifact, "name")
+        validate_producer_name(name, f"{label}: {key} name")?
+        if len(previous) > 0 and not (previous < name):
+            return Err(f"{label}: {key} must be sorted by unique name")
+        previous = name.to_string()
+        path = string_member(artifact, "path")
+        validate_portable_path(path, f"{label}: {key} `{name}` path")?
+        for existing in paths:
+            if paths_overlap(existing, path):
+                return Err(f"{label}: {key} path `{path}` overlaps another declared path")
+        paths.append(path)
+        if not is_sha256_identity(string_member(artifact, "digest")):
+            return Err(f"{label}: {key} `{name}` digest must be a `sha256:` identity")
+        kind = string_member(artifact, "kind")
+        if not ["file", "tree"].contains(kind):
+            return Err(f"{label}: {key} `{name}` kind must be `file` or `tree`")
+        members = producer_records(artifact, "members", label)?
+        if kind == "file" and len(members) > 0:
+            return Err(f"{label}: file {key} `{name}` cannot declare tree members")
+        mut previous_member = ""
+        for entry in members:
+            member_path = string_member(entry, "path")
+            validate_portable_path(member_path, f"{label}: tree {key} `{name}` member")?
+            if len(previous_member) > 0 and not (previous_member < member_path):
+                return Err(f"{label}: tree {key} `{name}` members must be sorted and unique")
+            previous_member = member_path.to_string()
+            if not is_sha256_identity(string_member(entry, "digest")):
+                return Err(f"{label}: tree {key} `{name}` member `{member_path}` digest must be a `sha256:` identity")
+        names.append(name.to_string())
+    return Ok(names)
+
+
+def validate_outputs(record: JsonValue, label: str) -> Result[list[str], str]:
+    """An output is a contract, not bytes: a name, a kind and a path under the product root, with no digest."""
+    mut names: list[str] = []
+    mut paths: list[str] = []
+    mut previous = ""
+    for output in producer_records(record, "outputs", label)?:
+        mut unknown: list[str] = []
+        for key in sorted(output.keys()):
+            if not ["kind", "name", "path"].contains(key):
+                unknown.append(key)
+        if len(unknown) > 0:
+            listed = ", ".join(unknown)
+            return Err(f"{label}: outputs has unknown keys [{listed}]; a product digest belongs to the asset")
+        name = string_member(output, "name")
+        validate_producer_name(name, f"{label}: outputs name")?
+        if len(previous) > 0 and not (previous < name):
+            return Err(f"{label}: outputs must be sorted by unique name")
+        previous = name.to_string()
+        path = string_member(output, "path")
+        validate_portable_path(path, f"{label}: outputs `{name}` path")?
+        for existing in paths:
+            if paths_overlap(existing, path):
+                return Err(f"{label}: outputs path `{path}` overlaps another declared path")
+        paths.append(path)
+        if not ["file", "tree"].contains(string_member(output, "kind")):
+            return Err(f"{label}: outputs `{name}` kind must be `file` or `tree`")
+        names.append(name.to_string())
+    return Ok(names)
+
+
+def validate_arguments(record: JsonValue, inputs: list[str], outputs: list[str], label: str) -> Result[None, str]:
+    """Every argument is a literal or a reference to something this record declares; no path reaches the command line."""
+    for argument in producer_records(record, "arguments", label)?:
+        keys = sorted(argument.keys())
+        if len(keys) != 1 or not ["input", "literal", "output"].contains(keys[0]):
+            return Err(f"{label}: each argument states exactly one of literal, input or output")
+        value = string_member(argument, keys[0])
+        if keys[0] == "input" and not inputs.contains(value):
+            return Err(f"{label}: argument references undeclared input `{value}`")
+        if keys[0] == "output" and not outputs.contains(value):
+            return Err(f"{label}: argument references undeclared output `{value}`")
+        if keys[0] == "literal" and value.contains("\0"):
+            return Err(f"{label}: a literal argument cannot contain NUL")
+    return Ok(None)
+
+
+def validate_environment(record: JsonValue, inputs: list[str], label: str) -> Result[None, str]:
+    """The environment is explicit and closed: a sorted set of names, each an inline value or a declared input."""
+    mut previous = ""
+    for entry in producer_records(record, "environment", label)?:
+        mut unknown: list[str] = []
+        for key in sorted(entry.keys()):
+            if not ["input", "literal", "name"].contains(key):
+                unknown.append(key)
+        if len(unknown) > 0:
+            listed = ", ".join(unknown)
+            return Err(f"{label}: environment has unknown keys [{listed}]")
+        name = string_member(entry, "name")
+        if not is_environment_name(name):
+            return Err(f"{label}: environment name `{name}` is invalid")
+        if len(previous) > 0 and not (previous < name):
+            return Err(f"{label}: environment must be sorted by unique name")
+        previous = name.to_string()
+        mut stated = 0
+        for key in ["input", "literal"]:
+            if entry.contains_key(key):
+                stated += 1
+        if stated != 1:
+            return Err(f"{label}: environment `{name}` states exactly one of literal or input")
+        if entry.contains_key("input") and not inputs.contains(string_member(entry, "input")):
+            input_name = string_member(entry, "input")
+            return Err(f"{label}: environment `{name}` references undeclared input `{input_name}`")
+    return Ok(None)
+
+
+def validate_producer_name(value: str, label: str) -> Result[None, str]:
+    """A producer-local name is referenced from arguments and the environment, so it stays plain ASCII."""
+    if not is_producer_name(value):
+        return Err(f"{label} `{value}` must use ASCII letters, digits, `.`, `-` or `_`")
+    return Ok(None)
+
+
+def is_producer_name(value: str) -> bool:
+    if len(value) == 0 or value.strip() != value:
+        return false
+    for character in value:
+        if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_".contains(character):
+            return false
+    return true
+
+
+def is_environment_name(value: str) -> bool:
+    if len(value) == 0:
+        return false
+    for character in value:
+        if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_".contains(character):
+            return false
+    return true
+
+
+def validate_portable_path(value: str, label: str) -> Result[None, str]:
+    """
+    A declared path is owner-relative and portable: no root, no drive, no URI, no `~`, no `..`, no trailing space.
+
+    The owner is the record for a committed input, and the immutable owner the executable names for a producer
+    input, so a path that leaves it would bind bytes nobody can name.
+    """
+    if len(value.strip()) == 0 or value.strip() != value or value.startswith("/") or value.startswith("~"):
+        return Err(f"{label} `{value}` must be a plain owner-relative path")
+    if value.startswith("//") or value.contains("\\") or value.contains("://") or value.startswith("file:"):
+        return Err(f"{label} `{value}` must be a plain owner-relative path")
+    if len(value) > 1 and value[1:2] == ":":
+        return Err(f"{label} `{value}` must be a plain owner-relative path")
+    for segment in value.split("/"):
+        if len(segment) == 0 or segment == "." or segment == "..":
+            return Err(f"{label} `{value}` must be a plain owner-relative path")
+    return Ok(None)
+
+
+def paths_overlap(left: str, right: str) -> bool:
+    """Whether two owner-relative paths name the same place or one contains the other."""
+    if left == right:
+        return true
+    return left.startswith(right + "/") or right.startswith(left + "/")
+

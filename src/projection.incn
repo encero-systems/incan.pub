@@ -10,7 +10,7 @@ from std.json import JsonValue
 
 from canonical import canonical, json_string
 from events import read_text, string_member, write_text
-from registry import Record, compare_versions, has_key, keys_of, record_key, sparse_index_path
+from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key, sparse_index_path
 
 
 pub def manifest_notice() -> str:
@@ -65,7 +65,72 @@ pub def render_manifest(record: Record) -> str:
         match fact.harvested_from:
             Some(receipt) => lines.append("harvested-from = " + json_string(receipt))
             None => pass
+        # Publisher work renders after every key of its own `[[rust.facts]]` element: a sub-table header ends the
+        # parent table, so a scalar written here would belong to the producer instead of the record.
+        for index, producers in enumerate([fact.link, fact.tool]):
+            kind = producer_kind(index)
+            for producer in producers:
+                lines.append("")
+                lines.append("[[rust.facts." + kind + "]]")
+                mut rendered: list[str] = []
+                for key in producer_key_order():
+                    match producer.get(key):
+                        Some(value) =>
+                            rendered.append(key)
+                            if not is_stated_absence(value):
+                                lines.append(key + " = " + toml_value(value))
+                        None => pass
+                for key in sorted(producer.keys()):
+                    if not rendered.contains(key):
+                        match producer.get(key):
+                            Some(value) => lines.append(key + " = " + toml_value(value))
+                            None => pass
     return "\n".join(lines) + "\n"
+
+
+def producer_kind(index: int) -> str:
+    """The producer list at this position: link first, then tool, as the record renders them."""
+    if index == 1:
+        return "tool"
+    return "link"
+
+
+def toml_value(value: JsonValue) -> str:
+    """One JSON value as the TOML the compiler reads: strings quoted, collections inline, tables keyed in order."""
+    match value.as_str():
+        Some(text) => return json_string(text)
+        None => pass
+    match value.as_int():
+        Some(number) => return str(number)
+        None => pass
+    match value.as_bool():
+        Some(flag) =>
+            if flag:
+                return "true"
+            return "false"
+        None => pass
+    match value.as_array():
+        Some(items) =>
+            mut parts: list[str] = []
+            for item in items:
+                parts.append(toml_value(item))
+            return "[" + ", ".join(parts) + "]"
+        None => pass
+    mut members: list[str] = []
+    for key in sorted(value.keys()):
+        match value.get(key):
+            Some(child) => members.append(key + " = " + toml_value(child))
+            None => pass
+    return "{ " + ", ".join(members) + " }"
+
+
+def is_stated_absence(value: JsonValue) -> bool:
+    """An empty list or table says what omitting the key says, and the record spells it by omitting the key."""
+    if value.is_array():
+        return value.len() == 0
+    if value.is_object():
+        return len(value.keys()) == 0
+    return false
 
 
 def toml_list(values: list[str]) -> str:
