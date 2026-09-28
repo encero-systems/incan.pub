@@ -37,6 +37,22 @@ Every event carries `schema`, `kind`, `at`, `actor`, `subject`, and an `id` that
 
 A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment has no key: a value no compilation observes is not a fact; a value one does observe is a typed constant this record does not yet model ([encero-systems/incan#1666](https://github.com/encero-systems/incan/issues/1666)).
 
+### The vocabulary is closed
+
+A record states only the keys in the table above, and `link` and `tool` are reserved: RFC 119 names them as declared build work, and a proposal that carries either is refused by name until their manifest grammar is fixed. A unit that needs them is refused by the harvest rather than declared short.
+
+The vocabulary grows only with the compiler's `RustFactRecord`, because the rendered record is a manifest the compiler parses; a key the compiler does not read is not a fact it can apply. A key entering the vocabulary must satisfy what the existing keys satisfy:
+
+| requirement | why |
+|---|---|
+| every byte the key names is committed under the record and bound by a `sha256:` digest | a consumer compiles from the record without running anything; a path outside it, a symlink, or an unbound byte is refused |
+| lists are sorted and duplicate-free; a logical name is claimed once per record | RFC 119 refuses ambiguity rather than resolving it by path or order |
+| an omitted key and a stated absence — an empty list or table — are one fact | an explicit "no linked libraries" and no key at all say the same thing, and the record renders both by omitting the key |
+| the value is derived from the observation alone | no capture ordering, no absolute path, no host-specific spelling: two harvests of one binding must produce the same bytes |
+| a repeated binding repeats the key exactly | immutability compares every fact key except the binding and `harvested-from`, so a key is immutable from the day it is admitted |
+
+A record declares work and its inputs; the product of that work is an `asset`. A declared `link` names its sources and the library it produces, not the built archive; the archive is an attested asset or the consumer's own bake.
+
 ## Status
 
 The index line carries, per binding, `status`: `harvested` until an `attest` event exists for it, then `attested`. A record's truth has three sources, and the registry stores references to them rather than judging it: the harvest evidence (what Cargo observed), the attested asset (Oven reproduced the bytes), and the consumer's cross-check while both paths coexist. A consumer may refuse `harvested` records by policy.

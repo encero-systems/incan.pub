@@ -18,11 +18,14 @@ from registry import (
     Fact,
     OutEntry,
     Record,
+    binding_keys,
     builders,
     crates_io_index,
+    fact_keys,
     has_key,
     profiles,
     record_key,
+    reserved_fact_keys,
     sorted_unique,
     status_attested,
     status_harvested,
@@ -146,9 +149,15 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
     """Check one bound fact record against the vocabulary and the committed generated inputs it names."""
     binding = validate_binding(fact, label)?
     mut unknown: list[str] = []
+    mut reserved: list[str] = []
     for key in sorted(fact.keys()):
-        if not ["toolchain", "target", "profile", "features", "cfg", "out", "harvested-from"].contains(key):
+        if reserved_fact_keys().contains(key):
+            reserved.append(key)
+        elif not fact_keys().contains(key):
             unknown.append(key)
+    if len(reserved) > 0:
+        listed = ", ".join(reserved)
+        return Err(f"{label}: fact keys [{listed}] are reserved until their manifest grammar is fixed; a unit that needs them is refused by the harvest, not declared short")
     if len(unknown) > 0:
         listed = ", ".join(unknown)
         return Err(f"{label}: unknown fact keys [{listed}]; script-emitted environment has no key here")
@@ -209,23 +218,35 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
     ))
 
 
-def fact_comparable(fact: JsonValue) -> Result[str, str]:
+pub def fact_comparable(fact: JsonValue) -> Result[str, str]:
     """
-    The part of a fact record that a later record for the same binding must repeat exactly: `cfg` and `out`.
+    Everything a later record for the same binding must repeat exactly: every fact key except the binding itself and
+    `harvested-from`, which names the observation rather than the answer.
 
-    An absent `out` and an empty one both say "no generated input", so they compare equal; the rendered record spells
-    both the same way, by omitting the key.
+    Reading the keys off the record instead of naming `cfg` and `out` means a key the vocabulary gains later is
+    immutable on the day it is admitted, rather than silently ignorable until someone remembers this function.
+    An omitted key and a stated absence — an empty list or table — are the same fact, and the rendered record
+    spells both by omitting the key.
     """
     mut subset: Dict[str, JsonValue] = {}
-    subset["cfg"] = member_or(fact, "cfg", JsonValue.array([]))
-    subset["out"] = member_or(fact, "out", JsonValue.array([]))
+    for key in sorted(fact.keys()):
+        if binding_keys().contains(key) or key == "harvested-from":
+            continue
+        match fact.get(key):
+            Some(value) =>
+                if not is_stated_absence(value):
+                    subset[key] = value
+            None => pass
     return canonical(JsonValue.object(subset))
 
 
-def member_or(value: JsonValue, key: str, fallback: JsonValue) -> JsonValue:
-    match value.get(key):
-        Some(child) => return child
-        None => return fallback
+def is_stated_absence(value: JsonValue) -> bool:
+    """Whether a value says exactly what omitting its key says: an empty list or an empty table."""
+    if value.is_array():
+        return value.len() == 0
+    if value.is_object():
+        return len(value.keys()) == 0
+    return false
 
 
 pub def describe_binding(binding: Binding) -> str:

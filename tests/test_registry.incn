@@ -11,7 +11,7 @@ from std.json import JsonValue, parse
 from std.tempfile import TemporaryDirectory
 from std.testing import assert_eq, assert_is_err, assert_true
 
-from admission import replay
+from admission import fact_comparable, replay
 from canonical import canonical, digest_text, is_sha256_identity, pretty
 from events import append_event, event_id, load_events, string_list_member, write_text
 from projection import committed_projections, render_projections, stale_projections, write_projections
@@ -228,6 +228,35 @@ def test_the_file_name_must_carry_the_event_kind() -> None:
     assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: kind must be one of publish, fact, attest, asset, yank, unyank, advisory and match the file name")
 
 
+def test_reserved_keys_are_named_as_reserved_rather_than_unknown() -> None:
+    """`link` and `tool` are RFC 119 work the vocabulary will carry; the refusal says so instead of calling them junk."""
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    mut fact = fact_with("release", [])
+    fact.set("link", JsonValue.object({})).unwrap()
+    fact.set("tool", JsonValue.object({})).unwrap()
+    add_fact(root, fact)
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: fact keys [link, tool] are reserved until their manifest grammar is fixed; a unit that needs them is refused by the harvest, not declared short")
+
+
+def test_immutability_covers_every_fact_key_the_vocabulary_gains() -> None:
+    """
+    The comparison reads the record's own keys, so a key admitted later is immutable from its first day.
+
+    Simulated here by comparing two records that differ only outside `cfg` and `out`: the vocabulary refuses such a
+    key today, so the check is on the comparison itself.
+    """
+    left = parse("{\"toolchain\": \"t\", \"target\": \"x\", \"profile\": \"release\", \"features\": [], \"cfg\": [], \"link\": [\"static=z\"]}").unwrap()
+    right = parse("{\"toolchain\": \"t\", \"target\": \"x\", \"profile\": \"release\", \"features\": [], \"cfg\": [], \"link\": [\"static=q\"]}").unwrap()
+    assert_true(fact_comparable(left).unwrap() != fact_comparable(right).unwrap())
+    absent = parse("{\"toolchain\": \"t\", \"target\": \"x\", \"profile\": \"release\", \"features\": [], \"cfg\": []}").unwrap()
+    empty = parse("{\"toolchain\": \"t\", \"target\": \"x\", \"profile\": \"release\", \"features\": [], \"cfg\": [], \"link\": [], \"tool\": {}}").unwrap()
+    assert_eq(fact_comparable(absent).unwrap(), fact_comparable(empty).unwrap())
+    other_receipt = parse("{\"toolchain\": \"t\", \"target\": \"x\", \"profile\": \"release\", \"features\": [], \"cfg\": [], \"harvested-from\": \"sha256:x\"}").unwrap()
+    assert_eq(fact_comparable(absent).unwrap(), fact_comparable(other_receipt).unwrap())
+
+
 def test_a_fact_speaks_only_the_record_vocabulary() -> None:
     directory = scratch()
     root = directory.path()
@@ -432,4 +461,3 @@ def test_an_advisory_is_rendered_on_the_record_and_counted_on_the_index_line() -
     empty["advisory"] = JsonValue.object({"text": JsonValue.string("  ")})
     append_event(root, "advisory", "libm", "0.2.16", "tests", empty).unwrap()
     assert_eq(refusal(root), "events/000003-advisory-crates-io-libm-0.2.16.json: an advisory carries a non-empty `text`")
-

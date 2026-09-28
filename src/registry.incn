@@ -39,6 +39,26 @@ pub def event_kinds() -> list[str]:
     return ["publish", "fact", "attest", "asset", "yank", "unyank", "advisory"]
 
 
+pub def binding_keys() -> list[str]:
+    """The four keys that select a fact: a record binds to exactly this tuple."""
+    return ["features", "profile", "target", "toolchain"]
+
+
+pub def fact_keys() -> list[str]:
+    """
+    The complete vocabulary of a bound fact record.
+
+    Closed by design: a value a compilation never observes is not a fact, and a value it does observe needs a key
+    the compiler reads, so the vocabulary grows only when `RustFactRecord` does.
+    """
+    return binding_keys() + ["cfg", "out", "harvested-from"]
+
+
+pub def reserved_fact_keys() -> list[str]:
+    """RFC 119 names these as declared build work; they enter the vocabulary when their manifest grammar is fixed."""
+    return ["link", "tool"]
+
+
 pub def profiles() -> list[str]:
     return ["release", "debug"]
 

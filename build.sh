@@ -7,6 +7,11 @@
 set -eu
 cd "$(dirname "$0")"
 export INCAN_NO_BANNER=1
+# Own Oven home. The default `~/.incan` is shared with every other toolchain on the machine, and a store entry
+# written by one toolchain is an integrity failure to another ("manifest identity does not match its immutable
+# content"); the same lesson as a shared Cargo target. Override INCAN_HOME to reuse a warm store deliberately.
+export INCAN_HOME="${INCAN_HOME:-$PWD/target/incan-home}"
+mkdir -p "$INCAN_HOME"
 # A fresh checkout has no project inspection authority yet: the bake establishes it for the `rust::` imports in
 # src/host.incn, then test and build reuse the sealed Loaf.
 incan oven bake --project .

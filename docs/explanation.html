@@ -305,7 +305,7 @@
       <p>Incan → pub</p>
       <div class="step"><span class="n">01</span><div><strong>Publish a Loaf</strong><small><code>oven publish</code> bakes, signs and uploads a source Loaf; publisher-built assets ride along. Unchanged from RFC 125.</small></div></div>
       <div class="step"><span class="n">02</span><div><strong>Harvest a crate</strong><small><code>oven harvest libm@0.2.16</code> runs the Cargo-compatibility publisher once under one exact selection and emits a proposal: the bound record plus the evidence of its observation.</small></div></div>
-      <div class="step"><span class="n">03</span><div><strong>Admit the proposal</strong><small>An identity authorised for the <code>crates-io</code> scope submits it. It becomes a <code>fact</code> event. Identical proposals are no-ops; a conflicting one is refused.</small></div></div>
+      <div class="step"><span class="n">03</span><div><strong>Admit the proposal</strong><small>An identity authorized for the <code>crates-io</code> scope submits it. It becomes a <code>fact</code> event. Identical proposals are no-ops; a conflicting one is refused.</small></div></div>
       <div class="step"><span class="n">04</span><div><strong>Bake natively, attest</strong><small>Oven compiles the crate from the record. The RFC 124 unit becomes an <code>asset</code>; equal identity with Cargo's unit becomes an <code>attest</code>.</small></div></div>
       <div class="step"><span class="n">05</span><div><strong>Pin</strong><small>The toolchain manifest pins a checkpoint — today, a commit. <code>oven.lock</code> records where every unit came from.</small></div></div>
     </div>
@@ -386,7 +386,7 @@
   <span class="q" aria-hidden="true">“</span>
   <div>
     <strong>The registry is a notary, not a judge.</strong>
-    <p>It cannot know that a <code>cfg</code> answer is true. It verifies form, binding, authorisation and immutability, and it stores references to the three places truth actually lives: the harvest evidence, the attested asset, and the consumer's own cross-check. Trust is a policy the consumer sets — accept <code>harvested</code>, or insist on <code>attested</code>.</p>
+    <p>It cannot know that a <code>cfg</code> answer is true. It verifies form, binding, authorization and immutability, and it stores references to the three places truth actually lives: the harvest evidence, the attested asset, and the consumer's own cross-check. Trust is a policy the consumer sets — accept <code>harvested</code>, or insist on <code>attested</code>.</p>
   </div>
 </aside>
 
