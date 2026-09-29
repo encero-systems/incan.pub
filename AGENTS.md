@@ -30,7 +30,7 @@ git commit && git push
 
 Then report the resulting `index` HEAD: that commit is what a toolchain manifest pins and what the next release bake consumes. A proposal admission refuses goes back to whoever harvested it verbatim — the fix belongs on the harvest side, never in the proposal or the log. An identical binding is a no-op; a different one for a binding already on record is a refusal, and that refusal is the point: it is how a record made by hand gets checked against the machine.
 
-Records the harvest declines to propose (a script whose emitted environment it cannot prove unread, reserved `link`/`tool` work) keep whatever record they have. Do not hand-write a fact to fill the gap.
+Records the harvest declines to propose keep whatever record they have: a script whose emitted environment it cannot prove is unread, or link or tool work whose closure it cannot bind completely. Do not hand-write a fact to fill the gap — an incomplete declaration is worse than none, because a consumer cannot tell that it is incomplete.
 
 `admit-drop` performs the one check that needs the whole drop: a package named in `refusals-<profile>.json` must not also have a proposal for that profile. Admission cannot catch that contradiction one proposal at a time — a fact that omits work the script does says nothing about the work it omits — so the drop is refused whole, and nothing is admitted. `add-fact` remains for a single proposal.
 
