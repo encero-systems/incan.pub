@@ -240,13 +240,34 @@ pub def unclaimed_generated_inputs(root: Path, state: Dict[str, Record]) -> Resu
         for fact in record.sorted_facts():
             for entry in fact.out:
                 claimed.append(f"crates-io/{record.name}/{record.version}/{entry.path}")
-    mut committed: Dict[str, str] = {}
-    collect_files(root / "crates-io", "crates-io", committed, false)?
+    mut committed: list[str] = []
+    collect_paths(root / "crates-io", "crates-io", committed)?
     mut unclaimed: list[str] = []
-    for path in sorted(keys_of(committed)):
+    for path in sorted(committed):
         if not path.endswith("/loaf.toml") and not claimed.contains(path):
             unclaimed.append(path)
     return Ok(unclaimed)
+
+
+def collect_paths(directory: Path, relative: str, mut paths: list[str]) -> Result[None, str]:
+    """
+    Every regular file below `directory`, by path relative to the root.
+
+    Paths only: a committed generated input can be any bytes a build script wrote — `proto_descriptor.bin` is a
+    protobuf descriptor — and reading one as text would refuse a record for being what it is.
+    """
+    if not directory.is_dir():
+        return Ok(None)
+    match directory.iterdir():
+        Ok(children) =>
+            for child in children:
+                child_relative = relative + "/" + child.name()
+                if child.is_dir():
+                    collect_paths(child, child_relative, paths)?
+                elif child.is_file():
+                    paths.append(child_relative)
+            return Ok(None)
+        Err(error) => return Err(f"{relative}/: {error.message()}")
 
 
 pub def stale_projections(committed: Dict[str, str], wanted: Dict[str, str]) -> list[str]:

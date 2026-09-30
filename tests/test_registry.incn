@@ -669,3 +669,15 @@ def test_committed_bytes_no_record_names_are_named_by_check() -> None:
     assert_eq(len(unclaimed_generated_inputs(root, state).unwrap()), 0)
     write_text(root / "crates-io" / "libm" / "0.2.16" / "out" / "orphan.rs", "staged and never admitted", "out").unwrap()
     assert_eq(unclaimed_generated_inputs(root, state).unwrap(), ["crates-io/libm/0.2.16/out/orphan.rs"])
+
+
+def test_a_committed_generated_input_may_be_any_bytes() -> None:
+    """A build script writes what it writes: a protobuf descriptor is not text, and naming it must not read it."""
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    binary = root / "crates-io" / "libm" / "0.2.16" / "out" / "proto_descriptor.bin"
+    binary.parent().mkdir(parents=true, exist_ok=true).unwrap()
+    binary.write_bytes(b"\x00\x01\x80\xff").unwrap()
+    assert_eq(unclaimed_generated_inputs(root, state).unwrap(), ["crates-io/libm/0.2.16/out/proto_descriptor.bin"])
