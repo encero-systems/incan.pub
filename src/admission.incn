@@ -323,11 +323,16 @@ def validate_producer(record: JsonValue, kind: str, label: str) -> Result[None, 
     if len(target.strip()) == 0 or target.strip() != target:
         return Err(f"{label}: target must name an exact triple or a `cfg(...)` predicate")
     validate_executable(member(record, "executable"), label)?
-    input_names = validate_artifacts(record, producer_input_key(kind), label)?
+    input_key = producer_input_key(kind)
+    input_names = validate_artifacts(record, input_key, label)?
     output_names = validate_outputs(record, label)?
     for name in input_names:
         if output_names.contains(name):
             return Err(f"{label}: logical name `{name}` is claimed as both an input and an output")
+    for input_path in declared_paths(record, input_key, label)?:
+        for output_path in declared_paths(record, "outputs", label)?:
+            if paths_overlap(input_path, output_path):
+                return Err(f"{label}: input path `{input_path}` overlaps output path `{output_path}`")
     validate_arguments(record, input_names, output_names, label)?
     validate_environment(record, input_names, label)?
     if kind == "link":
@@ -348,6 +353,14 @@ def validate_producer(record: JsonValue, kind: str, label: str) -> Result[None, 
     elif len(output_names) == 0:
         return Err(f"{label}: outputs must declare the complete, non-empty output contract")
     return Ok(None)
+
+
+def declared_paths(record: JsonValue, key: str, label: str) -> Result[list[str], str]:
+    """The paths one declared list states, in declaration order."""
+    mut paths: list[str] = []
+    for entry in producer_records(record, key, label)?:
+        paths.append(string_member(entry, "path"))
+    return Ok(paths)
 
 
 def producer_input_key(kind: str) -> str:
@@ -393,10 +406,9 @@ def validate_artifacts(record: JsonValue, key: str, label: str) -> Result[list[s
             return Err(f"{label}: {key} must be sorted by unique name")
         previous = name.to_string()
         path = string_member(artifact, "path")
+        # No overlap rule among declared inputs: an include directory legitimately contains the sources compiled
+        # from it, which is how every C crate passes `-I`. Overlap matters only against what the work produces.
         validate_portable_path(path, f"{label}: {key} `{name}` path")?
-        for existing in paths:
-            if paths_overlap(existing, path):
-                return Err(f"{label}: {key} path `{path}` overlaps another declared path")
         paths.append(path)
         if not is_sha256_identity(string_member(artifact, "digest")):
             return Err(f"{label}: {key} `{name}` digest must be a `sha256:` identity")
