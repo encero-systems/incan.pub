@@ -20,6 +20,14 @@ checksum = "sha256:8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "proc-macro"]
+cfg = ["proc_macro_span_file", "proc_macro_span_location", "wrap_proc_macro"]
+harvested-from = "sha256:c2bb3c42eca04b6d7306af8e02e464e34d024d127b55c94e48f0d3b836c4e7a3"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "proc-macro"]
 cfg = ["proc_macro_span_file", "proc_macro_span_location", "wrap_proc_macro"]
