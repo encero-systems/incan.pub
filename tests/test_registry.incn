@@ -15,7 +15,13 @@ from admission import fact_comparable, replay
 from canonical import canonical, digest_text, is_sha256_identity, pretty
 from drop import drop_contradictions, drop_proposals, drop_refusals
 from events import append_event, event_id, load_events, string_list_member, write_text
-from projection import committed_projections, render_projections, stale_projections, write_projections
+from projection import (
+    committed_projections,
+    render_projections,
+    stale_projections,
+    unclaimed_generated_inputs,
+    write_projections,
+)
 from registry import compare_versions, record_key, sparse_index_path
 
 
@@ -643,3 +649,14 @@ def test_a_generated_file_has_exactly_one_producer() -> None:
         refusal(root),
         "events/000002-fact-crates-io-libm-0.2.16.json: generated file `bindings.rs` is declared by tool `bindgen` and committed as out `bindings.rs`",
     )
+
+
+def test_committed_bytes_no_record_names_are_named_by_check() -> None:
+    """A file staged for a proposal that then refused is invisible to the projection comparison, so check names it."""
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    assert_eq(len(unclaimed_generated_inputs(root, state).unwrap()), 0)
+    write_text(root / "crates-io" / "libm" / "0.2.16" / "out" / "orphan.rs", "staged and never admitted", "out").unwrap()
+    assert_eq(unclaimed_generated_inputs(root, state).unwrap(), ["crates-io/libm/0.2.16/out/orphan.rs"])

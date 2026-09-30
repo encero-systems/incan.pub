@@ -24,7 +24,13 @@ from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals
 from events import append_event, load_events, member, parse_event, read_text, string_list_member, string_member
 from host import argv
-from projection import committed_projections, render_projections, stale_projections, write_projections
+from projection import (
+    committed_projections,
+    render_projections,
+    stale_projections,
+    unclaimed_generated_inputs,
+    write_projections,
+)
 from registry import Record, crates_io_index, has_key, keys_of, record_key
 
 
@@ -134,6 +140,10 @@ def check(invocation: Invocation) -> Result[None, str]:
     if len(stale) > 0:
         listed = ", ".join(stale)
         return Err(f"projections are out of date for [{listed}]; run incan-pub build")
+    unclaimed = unclaimed_generated_inputs(root, state)?
+    if len(unclaimed) > 0:
+        listed = ", ".join(unclaimed)
+        return Err(f"committed bytes no record names: [{listed}]; remove them or admit the fact that names them")
     mut verified = false
     match invocation.option("crates-io-index"):
         Some(directory) =>
@@ -241,15 +251,34 @@ def admit_proposal(root: Path, proposal_path: Path, actor: str, publish: bool, n
                 listed = ", ".join(names)
                 return Err(f"the harvest ran under ambient state a stable publisher never has ({listed}); its answers are not facts of the toolchain")
         None => pass
-    mut state = replay(load_events(root)?, root)?
+    if string_member(source, "registry") != crates_io_index():
+        return Err("source must name the crates.io index; this registry adopts no other upstream")
+    checksum = string_member(source, "checksum")
+    if not is_sha256_identity(checksum):
+        return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
+    state = replay(load_events(root)?, root)?
     key = record_key(name, version)
-    mut created = false
-    if not has_key(state, key):
-        if not publish:
-            return Err(f"{name} {version} has no external-source record; publish it first or pass --publish")
-        checksum = string_member(source, "checksum")
-        if not is_sha256_identity(checksum):
-            return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
+    create = not has_key(state, key)
+    if create and not publish:
+        return Err(f"{name} {version} has no external-source record; publish it first or pass --publish")
+    if not create and checksum != state[key].checksum:
+        return Err("the proposal binds a different source checksum than the published record")
+    # Everything the proposal can be refused for is decided before the log is touched. The log is append-only, so a
+    # publish written for a proposal that then refuses is a record nothing can ever retract.
+    mut fact = facts[0]
+    receipt = string_member(evidence, "receipt")
+    if len(receipt) > 0:
+        fact.set("harvested-from", JsonValue.string(receipt)).unwrap()
+    stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
+    label = f"proposal {proposal_path.name()}"
+    typed = validate_fact(fact, name, version, label, root)?
+    binding_key = typed.binding.key()
+    if not create and has_key(state[key].facts, binding_key):
+        if state[key].facts[binding_key].comparable != typed.comparable:
+            return Err("the proposal's binding already has a different record; a fact is immutable")
+        println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
+        return Ok("no-op")
+    if create:
         mut notes = string_member(proposal, "notes").strip()
         match notes_override:
             Some(text) => notes = text
@@ -262,30 +291,12 @@ def admit_proposal(root: Path, proposal_path: Path, actor: str, publish: bool, n
         publication["notes"] = JsonValue.string(notes)
         published = append_event(root, "publish", name, version, actor, publication)?
         println(f"published record: {published}")
-        state = replay(load_events(root)?, root)?
-        created = true
-    record = state[key]
-    if string_member(source, "checksum") != record.checksum:
-        return Err("the proposal binds a different source checksum than the published record")
-    mut fact = facts[0]
-    receipt = string_member(evidence, "receipt")
-    if len(receipt) > 0:
-        fact.set("harvested-from", JsonValue.string(receipt)).unwrap()
-    stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
-    label = f"proposal {proposal_path.name()}"
-    typed = validate_fact(fact, name, version, label, root)?
-    binding_key = typed.binding.key()
-    if has_key(record.facts, binding_key):
-        if record.facts[binding_key].comparable != typed.comparable:
-            return Err("the proposal's binding already has a different record; a fact is immutable")
-        println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
-        return Ok("no-op")
     mut payload: Dict[str, JsonValue] = {}
     payload["fact"] = fact
     payload["evidence"] = evidence
     written = append_event(root, "fact", name, version, actor, payload)?
     println(f"admitted fact: {written}")
-    if created:
+    if create:
         return Ok("published")
     return Ok("admitted")
 

@@ -227,6 +227,28 @@ def collect_files(directory: Path, relative: str, mut files: Dict[str, str], man
         Err(error) => return Err(f"{relative}/: {error.message()}")
 
 
+pub def unclaimed_generated_inputs(root: Path, state: Dict[str, Record]) -> Result[list[str], str]:
+    """
+    Committed bytes under `crates-io/` that no fact names.
+
+    A file staged for a proposal that then refused, or one a later record stopped naming, is not caught by comparing
+    projections: the comparison reads what the records produce, and an unclaimed file is exactly what they do not.
+    """
+    mut claimed: list[str] = []
+    for key in sorted(keys_of(state)):
+        record = state[key]
+        for fact in record.sorted_facts():
+            for entry in fact.out:
+                claimed.append(f"crates-io/{record.name}/{record.version}/{entry.path}")
+    mut committed: Dict[str, str] = {}
+    collect_files(root / "crates-io", "crates-io", committed, false)?
+    mut unclaimed: list[str] = []
+    for path in sorted(keys_of(committed)):
+        if not path.endswith("/loaf.toml") and not claimed.contains(path):
+            unclaimed.append(path)
+    return Ok(unclaimed)
+
+
 pub def stale_projections(committed: Dict[str, str], wanted: Dict[str, str]) -> list[str]:
     """Paths present on one side only, followed by paths whose content differs; empty when the sides agree."""
     mut stale: list[str] = []
