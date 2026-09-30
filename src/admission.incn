@@ -405,16 +405,28 @@ def validate_artifacts(record: JsonValue, key: str, label: str) -> Result[list[s
         if len(previous) > 0 and not (previous < name):
             return Err(f"{label}: {key} must be sorted by unique name")
         previous = name.to_string()
-        path = string_member(artifact, "path")
-        # No overlap rule among declared inputs: an include directory legitimately contains the sources compiled
-        # from it, which is how every C crate passes `-I`. Overlap matters only against what the work produces.
-        validate_portable_path(path, f"{label}: {key} `{name}` path")?
-        paths.append(path)
-        if not is_sha256_identity(string_member(artifact, "digest")):
-            return Err(f"{label}: {key} `{name}` digest must be a `sha256:` identity")
         kind = string_member(artifact, "kind")
         if not ["file", "tree"].contains(kind):
             return Err(f"{label}: {key} `{name}` kind must be `file` or `tree`")
+        path = string_member(artifact, "path")
+        # No overlap rule among declared inputs: an include directory legitimately contains the sources compiled
+        # from it, which is how every C crate passes `-I`. Overlap matters only against what the work produces.
+        #
+        # A tree may name the owner root as `.`, which is how a crate that keeps its `config.h` beside its sources
+        # passes itself as an include directory. Nothing else may: a file, an output or an executable at `.` names
+        # a directory where bytes are expected.
+        # Written as nested ifs rather than `not (kind == "tree" and path == ".")`: on the 0.5.1 toolchain that
+        # builds this tool, a negated parenthesized `and` in an `if` guard is always false, so the guarded check
+        # never runs (encero-systems/incan, reported against the 0.6 line).
+        mut owner_root = false
+        if kind == "tree":
+            if path == ".":
+                owner_root = true
+        if not owner_root:
+            validate_portable_path(path, f"{label}: {key} `{name}` path")?
+        paths.append(path)
+        if not is_sha256_identity(string_member(artifact, "digest")):
+            return Err(f"{label}: {key} `{name}` digest must be a `sha256:` identity")
         members = producer_records(artifact, "members", label)?
         if kind == "file" and len(members) > 0:
             return Err(f"{label}: file {key} `{name}` cannot declare tree members")
@@ -523,16 +535,24 @@ def validate_arguments(record: JsonValue, inputs: list[str], outputs: list[str],
 
 
 def validate_argument_list(arguments: list[JsonValue], inputs: list[str], outputs: list[str], label: str) -> Result[None, str]:
-    """Every argument is a literal or a reference to something the record declares; no path reaches the command line."""
+    """
+    Every argument is a literal or a reference to something the record names; no host path reaches the command line.
+
+    Four forms: a `literal`, a declared `input`, a declared `output`, and an `owner` path, which resolves inside the
+    immutable owner the executable names — how a compile points at its SDK and resource directory without knowing
+    where that owner sits on any particular machine.
+    """
     for argument in arguments:
         keys = sorted(argument.keys())
-        if len(keys) != 1 or not ["input", "literal", "output"].contains(keys[0]):
-            return Err(f"{label}: each argument states exactly one of literal, input or output")
+        if len(keys) != 1 or not ["input", "literal", "output", "owner"].contains(keys[0]):
+            return Err(f"{label}: each argument states exactly one of literal, input, output or owner")
         value = string_member(argument, keys[0])
         if keys[0] == "input" and not inputs.contains(value):
             return Err(f"{label}: argument references undeclared input `{value}`")
         if keys[0] == "output" and not outputs.contains(value):
             return Err(f"{label}: argument references undeclared output `{value}`")
+        if keys[0] == "owner":
+            validate_portable_path(value, f"{label}: owner argument")?
         if keys[0] == "literal" and value.contains("\0"):
             return Err(f"{label}: a literal argument cannot contain NUL")
     return Ok(None)
