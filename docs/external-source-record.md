@@ -33,9 +33,11 @@ Every event carries `schema`, `kind`, `at`, `actor`, `subject`, and an `id` that
 | `features` | complete enabled Cargo feature set, sorted |
 | `cfg` | `--cfg` answers, sorted; an empty list is a stated fact |
 | `out` | committed generated inputs: `name`, `path` (relative to the manifest), `digest` |
-| `link` | publisher-side native compilation: a named producer, its target predicate, source `language`, the exact `executable` it runs, ordered `arguments`, explicit `environment`, the complete `sources` closure, and the `library` those sources produce |
+| `link` | publisher-side native compilation: a named producer, its target predicate, the exact `executable` it runs, explicit `environment`, the complete `sources` closure, the `objects` it compiles them into, and the `library` those objects produce |
 | `tool` | publisher-side generation: a named producer, its target predicate, the exact `executable`, ordered `arguments`, explicit `environment`, the complete `inputs` closure, and the `outputs` contract |
 | `harvested-from` | the compatibility receipt whose capture proposed the record, when the harvest recorded one |
+
+Each entry of `objects` is one compile: `name`, `language` (`c`, `cpp` or `assembly`) and ordered `arguments`. An object names its own file exactly once, as the single output its argv references, so the name and the command cannot drift; its argv references at least one declared source, and every declared source is compiled by some object, which is what makes `sources` a closure rather than a bag. Object and source names share one namespace. No archiver appears in a record: the archive is a deterministic function of the objects, and its digest belongs to the asset's receipt.
 
 `out.name` and `tool.outputs[].path` use the same path namespace relative to `OUT_DIR`; an `out` entry's `path` only says where its committed bytes sit. A generated file or tree is declared exactly once — committed as an `out` input because it was merely observed, or produced by a declared `tool` — and equal or overlapping paths across those fields are refused.
 

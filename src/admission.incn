@@ -307,11 +307,11 @@ def producer_records(fact: JsonValue, kind: str, label: str) -> Result[list[Json
 
 def validate_producer(record: JsonValue, kind: str, label: str) -> Result[None, str]:
     """Check one `link` or `tool` record against its closed shape and its own declared names."""
-    mut allowed = ["arguments", "environment", "executable", "name", "target"]
+    mut allowed = ["environment", "executable", "name", "target"]
     if kind == "link":
-        allowed = allowed + ["language", "library", "sources"]
+        allowed = allowed + ["library", "objects", "sources"]
     else:
-        allowed = allowed + ["inputs", "outputs"]
+        allowed = allowed + ["arguments", "inputs", "outputs"]
     mut unknown: list[str] = []
     for key in sorted(record.keys()):
         if not allowed.contains(key):
@@ -333,6 +333,7 @@ def validate_producer(record: JsonValue, kind: str, label: str) -> Result[None, 
     if kind == "link":
         if len(input_names) == 0:
             return Err(f"{label}: sources must declare the complete, non-empty source closure")
+        validate_objects(record, input_names, label)?
         library = member(record, "library")
         mut library_unknown: list[str] = []
         for key in sorted(library.keys()):
@@ -344,8 +345,6 @@ def validate_producer(record: JsonValue, kind: str, label: str) -> Result[None, 
         validate_producer_name(string_member(library, "name"), f"{label}: library name")?
         if not ["dynamic", "static"].contains(string_member(library, "kind")):
             return Err(f"{label}: library kind must be `static` or `dynamic`")
-        if not ["assembly", "c", "cpp"].contains(string_member(record, "language")):
-            return Err(f"{label}: language must be `c`, `cpp` or `assembly`")
     elif len(output_names) == 0:
         return Err(f"{label}: outputs must declare the complete, non-empty output contract")
     return Ok(None)
@@ -450,9 +449,70 @@ def validate_outputs(record: JsonValue, label: str) -> Result[list[str], str]:
     return Ok(names)
 
 
+def validate_objects(record: JsonValue, sources: list[str], label: str) -> Result[None, str]:
+    """
+    Check a link record's object closure: one compile per object file, each naming what it compiles.
+
+    An object states its own file name once, as the single output its argv references, so the name and the argv
+    cannot drift. Every object compiles at least one declared source and every declared source is compiled by some
+    object, which is what makes `sources` the closure rather than a bag.
+    """
+    objects = producer_records(record, "objects", label)?
+    if len(objects) == 0:
+        return Err(f"{label}: objects must declare the complete, non-empty object closure")
+    mut previous = ""
+    mut compiled: list[str] = []
+    for object in objects:
+        mut unknown: list[str] = []
+        for key in sorted(object.keys()):
+            if not ["arguments", "language", "name"].contains(key):
+                unknown.append(key)
+        if len(unknown) > 0:
+            listed = ", ".join(unknown)
+            return Err(f"{label}: objects has unknown keys [{listed}]")
+        name = string_member(object, "name")
+        validate_producer_name(name, f"{label}: objects name")?
+        if len(previous) > 0 and not (previous < name):
+            return Err(f"{label}: objects must be sorted by unique name")
+        previous = name.to_string()
+        if sources.contains(name):
+            return Err(f"{label}: logical name `{name}` is claimed as both a source and an object")
+        if not ["assembly", "c", "cpp"].contains(string_member(object, "language")):
+            return Err(f"{label}: object `{name}` language must be `c`, `cpp` or `assembly`")
+        arguments = producer_records(object, "arguments", label)?
+        validate_argument_list(arguments, sources, [name], f"{label}: object `{name}`")?
+        produced = argument_references(arguments, "output")
+        if len(produced) != 1:
+            return Err(f"{label}: object `{name}` argv names its own object file exactly once and no other output")
+        referenced = argument_references(arguments, "input")
+        if len(referenced) == 0:
+            return Err(f"{label}: object `{name}` argv must reference at least one declared source")
+        for source in referenced:
+            if not compiled.contains(source):
+                compiled.append(source)
+    for source in sources:
+        if not compiled.contains(source):
+            return Err(f"{label}: source `{source}` is compiled by no object; sources is the closure, not a bag")
+    return Ok(None)
+
+
+def argument_references(arguments: list[JsonValue], key: str) -> list[str]:
+    """Every name an argv references under `key`, which is `input` or `output`."""
+    mut names: list[str] = []
+    for argument in arguments:
+        if argument.contains_key(key):
+            names.append(string_member(argument, key))
+    return names
+
+
 def validate_arguments(record: JsonValue, inputs: list[str], outputs: list[str], label: str) -> Result[None, str]:
-    """Every argument is a literal or a reference to something this record declares; no path reaches the command line."""
-    for argument in producer_records(record, "arguments", label)?:
+    """Check a record-level argv, which only a `tool` producer carries."""
+    return validate_argument_list(producer_records(record, "arguments", label)?, inputs, outputs, label)
+
+
+def validate_argument_list(arguments: list[JsonValue], inputs: list[str], outputs: list[str], label: str) -> Result[None, str]:
+    """Every argument is a literal or a reference to something the record declares; no path reaches the command line."""
+    for argument in arguments:
         keys = sorted(argument.keys())
         if len(keys) != 1 or not ["input", "literal", "output"].contains(keys[0]):
             return Err(f"{label}: each argument states exactly one of literal, input or output")

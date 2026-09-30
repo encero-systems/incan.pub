@@ -258,20 +258,30 @@ def source_artifact(name: str, path: str) -> JsonValue:
     })
 
 
+def object_record(name: str, source: str) -> JsonValue:
+    """One compile: its own object file named once, as the single output its argv references."""
+    return JsonValue.object({
+        "name": JsonValue.string(name),
+        "language": JsonValue.string("c"),
+        "arguments": JsonValue.array([
+            JsonValue.object({"literal": JsonValue.string("-O2")}),
+            JsonValue.object({"input": JsonValue.string(source)}),
+            JsonValue.object({"literal": JsonValue.string("-o")}),
+            JsonValue.object({"output": JsonValue.string(name)}),
+        ]),
+    })
+
+
 def link_record() -> JsonValue:
     return JsonValue.object({
         "name": JsonValue.string("helper"),
         "target": JsonValue.string("aarch64-apple-darwin"),
-        "language": JsonValue.string("c"),
         "executable": executable("cc"),
-        "arguments": JsonValue.array([
-            JsonValue.object({"literal": JsonValue.string("-O2")}),
-            JsonValue.object({"input": JsonValue.string("helper_c")}),
-        ]),
         "environment": JsonValue.array([
             JsonValue.object({"name": JsonValue.string("SOURCE_DATE_EPOCH"), "literal": JsonValue.string("0")}),
         ]),
         "sources": JsonValue.array([source_artifact("helper_c", "c/helper.c")]),
+        "objects": JsonValue.array([object_record("helper.o", "helper_c")]),
         "library": JsonValue.object({"name": JsonValue.string("sys_helper"), "kind": JsonValue.string("static")}),
     })
 
@@ -319,9 +329,8 @@ def test_declared_publisher_work_is_admitted_and_rendered_as_its_own_sub_tables(
     state = replay(load_events(root).unwrap(), root).unwrap()
     manifest = render_projections(state).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
     assert_true(manifest.contains("\ncfg = []\n\n[[rust.facts.link]]\nname = \"helper\"\n"))
-    assert_true(manifest.contains("\nlanguage = \"c\"\n"))
     assert_true(manifest.contains("\nexecutable = { digest = \"" + sha("cc") + "\", name = \"cc\", owner = \"" + sha("owner") + "\", path = \"bin/cc\" }\n"))
-    assert_true(manifest.contains("\narguments = [{ literal = \"-O2\" }, { input = \"helper_c\" }]\n"))
+    assert_true(manifest.contains("\nobjects = [{ arguments = [{ literal = \"-O2\" }, { input = \"helper_c\" }, { literal = \"-o\" }, { output = \"helper.o\" }], language = \"c\", name = \"helper.o\" }]\n"))
     assert_true(manifest.contains("\nsources = [{ digest = \"" + sha("c/helper.c") + "\", kind = \"file\", name = \"helper_c\", path = \"c/helper.c\" }]\n"))
     assert_true(manifest.contains("\nlibrary = { kind = \"static\", name = \"sys_helper\" }\n"))
     assert_true(manifest.contains("\n[[rust.facts.tool]]\nname = \"bindgen\"\n"))
@@ -371,7 +380,7 @@ def test_a_product_digest_belongs_to_the_asset_and_a_source_must_leave_no_gap() 
     )
     mut sourceless = link_record()
     sourceless.set("sources", JsonValue.array([])).unwrap()
-    sourceless.set("arguments", JsonValue.array([])).unwrap()
+    sourceless.set("objects", JsonValue.array([])).unwrap()
     assert_eq(
         producer_refusal(fact_with_producers([sourceless], [])),
         "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: sources must declare the complete, non-empty source closure",
@@ -681,3 +690,49 @@ def test_a_committed_generated_input_may_be_any_bytes() -> None:
     binary.parent().mkdir(parents=true, exist_ok=true).unwrap()
     binary.write_bytes(b"\x00\x01\x80\xff").unwrap()
     assert_eq(unclaimed_generated_inputs(root, state).unwrap(), ["crates-io/libm/0.2.16/out/proto_descriptor.bin"])
+
+
+def test_every_object_compiles_a_source_and_every_source_is_compiled() -> None:
+    """The object closure is what makes a link record checkable: one compile per file, nothing unaccounted for."""
+    mut nameless = link_record()
+    nameless.set("objects", JsonValue.array([JsonValue.object({
+        "name": JsonValue.string("helper.o"),
+        "language": JsonValue.string("c"),
+        "arguments": JsonValue.array([JsonValue.object({"input": JsonValue.string("helper_c")})]),
+    })])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([nameless], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: object `helper.o` argv names its own object file exactly once and no other output",
+    )
+    mut borrowed = link_record()
+    borrowed.set("objects", JsonValue.array([
+        object_record("helper.o", "helper_c"),
+        JsonValue.object({
+            "name": JsonValue.string("other.o"),
+            "language": JsonValue.string("c"),
+            "arguments": JsonValue.array([
+                JsonValue.object({"input": JsonValue.string("helper_c")}),
+                JsonValue.object({"output": JsonValue.string("helper.o")}),
+            ]),
+        }),
+    ])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([borrowed], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: object `other.o`: argument references undeclared output `helper.o`",
+    )
+    mut unread = link_record()
+    unread.set("sources", JsonValue.array([
+        source_artifact("helper_c", "c/helper.c"),
+        source_artifact("spare_c", "c/spare.c"),
+    ])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([unread], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: source `spare_c` is compiled by no object; sources is the closure, not a bag",
+    )
+    mut collided = link_record()
+    collided.set("objects", JsonValue.array([object_record("helper_c", "helper_c")])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([collided], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: logical name `helper_c` is claimed as both a source and an object",
+    )
+

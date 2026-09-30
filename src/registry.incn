@@ -158,7 +158,7 @@ pub class Record:
 
 pub def producer_key_order() -> list[str]:
     """The order a producer record renders its keys in: identity, then invocation, then closure."""
-    return ["name", "target", "language", "executable", "arguments", "environment", "sources", "inputs", "outputs", "library"]
+    return ["name", "target", "executable", "arguments", "environment", "sources", "objects", "inputs", "outputs", "library"]
 
 
 pub def record_key(name: str, version: str) -> str:
