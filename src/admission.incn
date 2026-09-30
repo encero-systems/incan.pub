@@ -415,9 +415,10 @@ def validate_artifacts(record: JsonValue, key: str, label: str) -> Result[list[s
         # A tree may name the owner root as `.`, which is how a crate that keeps its `config.h` beside its sources
         # passes itself as an include directory. Nothing else may: a file, an output or an executable at `.` names
         # a directory where bytes are expected.
-        # Written as nested ifs rather than `not (kind == "tree" and path == ".")`: on the 0.5.1 toolchain that
-        # builds this tool, a negated parenthesized `and` in an `if` guard is always false, so the guarded check
-        # never runs (encero-systems/incan, reported against the 0.6 line).
+        # Written as nested ifs rather than as one negated conjunction: the 0.5.1 toolchain that builds this tool
+        # lowers a negated parenthesized `and` to a constant false, so the check it guards never runs.
+        # Correct on 0.6, where fixtures now pin it (encero-systems/incan#1966); this shape goes when the tool
+        # moves off 0.5.1, and `build.sh` refuses it until then.
         mut owner_root = false
         if kind == "tree":
             if path == ".":

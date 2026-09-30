@@ -12,6 +12,13 @@ export INCAN_NO_BANNER=1
 # content"); the same lesson as a shared Cargo target. Override INCAN_HOME to reuse a warm store deliberately.
 export INCAN_HOME="${INCAN_HOME:-$PWD/target/incan-home}"
 mkdir -p "$INCAN_HOME"
+# The 0.5.1 toolchain lowers a negated parenthesized `and` to a constant false, so `if not (A and B):` never runs
+# the body it guards — a validator written that way silently stops validating, and only a test asserting the exact
+# refusal notices. Correct on 0.6 (encero-systems/incan#1966); refused here until this tool moves off 0.5.1.
+if grep -rn 'not ([^)]* and ' src tests; then
+  printf 'build.sh: `not (A and B)` above is mis-lowered to a constant false by the 0.5.1 toolchain; write it as nested ifs or `not A or not B`\n' >&2
+  exit 1
+fi
 # A fresh checkout has no project inspection authority yet: the bake establishes it for the `rust::` imports in
 # src/host.incn, then test and build reuse the sealed Loaf.
 incan oven bake --project .
