@@ -9,7 +9,7 @@ needs the whole drop lives here.
 
 from std.fs import Path
 
-from events import parse_event, read_text, string_member
+from events import member, parse_event, read_text, string_member
 
 
 pub def drop_proposals(drop: Path) -> Result[list[str], str]:
@@ -52,6 +52,33 @@ pub def drop_refusals(drop: Path) -> Result[list[str], str]:
                             None => return Err(f"{name}: a refusals file is a list of entries")
                     None => pass
         Err(error) => return Err(f"{drop.name()}: {error.message()}")
+    return Ok(subjects)
+
+
+pub def proposal_subjects(drop: Path, directories: list[str]) -> Result[list[str], str]:
+    """
+    The `<name>-<version>-<profile>` subject each proposal states, read from the proposal rather than its directory.
+
+    A harvest names a directory for a reader's benefit and may add a suffix when one package version carries two
+    bindings in a closure, so the directory name is a convenience and the proposal is the authority.
+    """
+    mut subjects: list[str] = []
+    for directory in directories:
+        path = drop / directory / "proposal.json"
+        proposal = parse_event(read_text(path, directory)?, directory)?
+        project = member(proposal, "project")
+        mut profile = ""
+        match member(proposal, "rust").get("facts"):
+            Some(value) =>
+                match value.as_array():
+                    Some(items) =>
+                        if len(items) > 0:
+                            profile = string_member(items[0], "profile")
+                    None => pass
+            None => pass
+        name = string_member(project, "name")
+        version = string_member(project, "version")
+        subjects.append(f"{name}-{version}-{profile}")
     return Ok(subjects)
 
 

@@ -21,7 +21,7 @@ from std.json import JsonValue
 from admission import describe_binding, replay, validate_binding, validate_fact
 from canonical import is_sha256_identity
 from cratesio import index_urls, verify_checksums
-from drop import drop_contradictions, drop_proposals, drop_refusals
+from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from events import append_event, load_events, member, parse_event, read_text, string_list_member, string_member
 from host import argv
 from projection import (
@@ -315,7 +315,7 @@ def admit_drop(invocation: Invocation) -> Result[None, str]:
     proposals = drop_proposals(drop)?
     if len(proposals) == 0:
         return Err(f"{invocation.positional[0]} holds no `<name>-<version>-<profile>/proposal.json`")
-    contradictions = drop_contradictions(proposals, drop_refusals(drop)?)
+    contradictions = drop_contradictions(proposal_subjects(drop, proposals)?, drop_refusals(drop)?)
     if len(contradictions) > 0:
         listed = ", ".join(contradictions)
         return Err(f"the drop both proposes and refuses [{listed}]; a record that omits the work its refusal names would declare less than the script does")

@@ -13,7 +13,7 @@ from std.testing import assert_eq, assert_is_err, assert_true
 
 from admission import fact_comparable, replay
 from canonical import canonical, digest_text, is_sha256_identity, pretty
-from drop import drop_contradictions, drop_proposals, drop_refusals
+from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from events import append_event, event_id, load_events, string_list_member, write_text
 from projection import (
     committed_projections,
@@ -613,15 +613,24 @@ def test_an_advisory_is_rendered_on_the_record_and_counted_on_the_index_line() -
 def test_a_drop_is_read_as_its_proposals_and_the_refusals_beside_them() -> None:
     directory = scratch()
     drop = directory.path()
-    for subject in ["alpha-1.0.0-release", "alpha-1.0.0-debug", "gamma-3.0.0-release"]:
-        write_text(drop / subject / "proposal.json", "{}\n", "proposal").unwrap()
+    # The third directory carries a suffix, as a harvest adds when one package version has two bindings in a
+    # closure: the subject comes from the proposal, so the contradiction is caught by content, not by file name.
+    for subject in ["alpha-1.0.0-release", "alpha-1.0.0-debug", "gamma-3.0.0-release-9f2a"]:
+        name = subject.split("-")[0]
+        write_text(
+            drop / subject / "proposal.json",
+            "{\"project\": {\"name\": \"" + name + "\", \"version\": \"" + subject.split("-")[1] + "\"}, \"rust\": {\"facts\": [{\"profile\": \"" + subject.split("-")[2] + "\"}]}}\n",
+            "proposal",
+        ).unwrap()
     write_text(drop / "refusals-release.json", "[{\"package\": \"gamma\", \"version\": \"3.0.0\", \"reason\": \"linked-libraries\"}]\n", "refusals").unwrap()
     write_text(drop / "refusals-debug.json", "[]\n", "refusals").unwrap()
     proposals = drop_proposals(drop).unwrap()
-    assert_eq(proposals, ["alpha-1.0.0-debug", "alpha-1.0.0-release", "gamma-3.0.0-release"])
+    assert_eq(proposals, ["alpha-1.0.0-debug", "alpha-1.0.0-release", "gamma-3.0.0-release-9f2a"])
     refusals = drop_refusals(drop).unwrap()
     assert_eq(refusals, ["gamma-3.0.0-release"])
-    assert_eq(drop_contradictions(proposals, refusals), ["gamma-3.0.0-release"])
+    subjects = proposal_subjects(drop, proposals).unwrap()
+    assert_eq(subjects, ["alpha-1.0.0-debug", "alpha-1.0.0-release", "gamma-3.0.0-release"])
+    assert_eq(drop_contradictions(subjects, refusals), ["gamma-3.0.0-release"])
     assert_eq(len(drop_contradictions(["alpha-1.0.0-release"], refusals)), 0)
 
 
