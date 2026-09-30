@@ -1,0 +1,43 @@
+# harvested from the release capture at 85b4160
+#
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "blake3"
+version = "1.8.5"
+
+[source]
+registry = "https://github.com/rust-lang/crates.io-index"
+checksum = "sha256:0aa83c34e62843d924f905e0f5c866eb1dd6545fc4d719e803d9ba6030371fce"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "std"]
+cfg = ["blake3_neon"]
+harvested-from = "sha256:2907e0a4f95e91bf063e9df55a3cdae872e57600b24f7aa4f1a772db626802fc"
+
+[[rust.facts.link]]
+name = "blake3_neon"
+target = "aarch64-apple-darwin"
+executable = { digest = "sha256:1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9", name = "clang", owner = "sha256:e0d2598f3189d2ff4a17c787e9645214bd22613a2f72baaa7d37daa1342c5673", path = "usr/bin/clang" }
+sources = [{ digest = "sha256:67e88d017a82df1b76d5f841e7b7215135a007486ac14c5be1407e1bca5201b0", kind = "file", name = "source-c-blake3-neon-c", path = "c/blake3_neon.c" }]
+objects = [{ arguments = [{ literal = "-isysroot" }, { owner = "SDKs/MacOSX27.0.sdk" }, { literal = "-resource-dir" }, { owner = "usr/lib/clang/21" }, { literal = "-O0" }, { literal = "-ffunction-sections" }, { literal = "-fdata-sections" }, { literal = "-fPIC" }, { literal = "--target=arm64-apple-macosx" }, { literal = "-mmacosx-version-min=27.0" }, { literal = "-Wall" }, { literal = "-Wextra" }, { literal = "-std=c11" }, { literal = "-o" }, { output = "blake3_neon.o" }, { literal = "-c" }, { input = "source-c-blake3-neon-c" }], language = "c", name = "blake3_neon.o" }]
+library = { kind = "static", name = "blake3_neon" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["default", "std"]
+cfg = ["blake3_neon"]
+harvested-from = "sha256:29d1e5c41f665f38848ae0ec4887041bc13bedabb54230dd5df6e99b5d3c2c37"
+
+[[rust.facts.link]]
+name = "blake3_neon"
+target = "aarch64-apple-darwin"
+executable = { digest = "sha256:1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9", name = "clang", owner = "sha256:e0d2598f3189d2ff4a17c787e9645214bd22613a2f72baaa7d37daa1342c5673", path = "usr/bin/clang" }
+sources = [{ digest = "sha256:67e88d017a82df1b76d5f841e7b7215135a007486ac14c5be1407e1bca5201b0", kind = "file", name = "source-c-blake3-neon-c", path = "c/blake3_neon.c" }]
+objects = [{ arguments = [{ literal = "-isysroot" }, { owner = "SDKs/MacOSX27.0.sdk" }, { literal = "-resource-dir" }, { owner = "usr/lib/clang/21" }, { literal = "-O3" }, { literal = "-ffunction-sections" }, { literal = "-fdata-sections" }, { literal = "-fPIC" }, { literal = "--target=arm64-apple-macosx" }, { literal = "-mmacosx-version-min=27.0" }, { literal = "-Wall" }, { literal = "-Wextra" }, { literal = "-std=c11" }, { literal = "-o" }, { output = "blake3_neon.o" }, { literal = "-c" }, { input = "source-c-blake3-neon-c" }], language = "c", name = "blake3_neon.o" }]
+library = { kind = "static", name = "blake3_neon" }

@@ -1,0 +1,133 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-09-30T15:01:46Z",
+  "evidence": {
+    "cargo_lock_digest": "sha256:142e768793cb02fc5e987181ecf2b00d42e5b880dd09ce0dfed8f0562406c698",
+    "cargo_manifest_digest": "sha256:f6ef3fd350c0e7df05a125d75ca0f7e5235aa50e100d8b4eb52ac8f798f422f5",
+    "cargo_version": "cargo 1.96.0-nightly (e84cb639e 2026-03-21)",
+    "compiler_probes": [
+      "sha256:4308b0dccece12bef613e2cd5cc4713ce7e90678962bfba9a2580376ce8f63c0",
+      "sha256:d5f3989c25abfaeea4d2b5c6ff0bf44cff6db9a842cc225e9fb38a6dcd0cdcdb"
+    ],
+    "hazards": [],
+    "host": "aarch64-apple-darwin",
+    "method": "compatibility publisher observation",
+    "receipt": "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c",
+    "rustc_identity": "sha256:b0d1a3dd0b5db29f6fee2afacaa1800268f3035a43ab642b22208d04d2511d39"
+  },
+  "fact": {
+    "cfg": [
+      "asm",
+      "link_asm",
+      "switchable_stack"
+    ],
+    "features": [],
+    "harvested-from": "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c",
+    "link": [
+      {
+        "environment": [],
+        "executable": {
+          "digest": "sha256:1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9",
+          "name": "clang",
+          "owner": "sha256:e0d2598f3189d2ff4a17c787e9645214bd22613a2f72baaa7d37daa1342c5673",
+          "path": "usr/bin/clang"
+        },
+        "library": {
+          "kind": "static",
+          "name": "psm_s"
+        },
+        "name": "psm_s",
+        "objects": [
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-Wall"
+              },
+              {
+                "literal": "-Wextra"
+              },
+              {
+                "literal": "-xassembler-with-cpp"
+              },
+              {
+                "literal": "-DCFG_TARGET_OS_macos"
+              },
+              {
+                "literal": "-DCFG_TARGET_ARCH_aarch64"
+              },
+              {
+                "literal": "-DCFG_TARGET_ENV_"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "aarch_aapcs64.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-src-arch-aarch-aapcs64-s"
+              }
+            ],
+            "language": "assembly",
+            "name": "aarch_aapcs64.o"
+          }
+        ],
+        "sources": [
+          {
+            "digest": "sha256:b3bee30c8c7ba9df981c2adc313249b8ce27d94925a1c1322e5b80c994ae14ee",
+            "kind": "file",
+            "name": "source-src-arch-aarch-aapcs64-s",
+            "path": "src/arch/aarch_aapcs64.s"
+          }
+        ],
+        "target": "aarch64-apple-darwin"
+      }
+    ],
+    "out": [],
+    "profile": "release",
+    "target": "aarch64-apple-darwin",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:19ba7e3d953a122eb06e9bff75e22385a4e2ee08131c4760964fa7f16ca1966b",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "psm",
+    "scope": "crates-io",
+    "version": "0.1.32"
+  }
+}

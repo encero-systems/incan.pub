@@ -1,0 +1,4496 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-09-30T15:00:07Z",
+  "evidence": {
+    "cargo_lock_digest": "sha256:0c941b089e5d903ba1f79c5e7af7d99937768ceb4a2b0c6486fd4b01d4c534bc",
+    "cargo_manifest_digest": "sha256:908826af005a98bf70a117839800535770cf76c4d5b416e2ab0a5535f1ba3366",
+    "cargo_version": "cargo 1.96.0-nightly (e84cb639e 2026-03-21)",
+    "compiler_probes": [
+      "sha256:4308b0dccece12bef613e2cd5cc4713ce7e90678962bfba9a2580376ce8f63c0",
+      "sha256:671f548f66bc6dc3f2ea15bdefed846677dca8ecf867a9bb899f76e5e30e4964",
+      "sha256:6b7364d8070dc89789e1027fc79ead10892e1744f50ab0da8a2e786768e9863e",
+      "sha256:78d02ee0d7775f99bdd225c22a57246d7e4bf9e4f129166df296acf237e4cd9a",
+      "sha256:aaeed14df1394b30a972714189475578ec0ee46a9b19ba7b85343c81f5127c7a",
+      "sha256:bdf64330ddea9d79e505be7aadf2789778d3bcc47b12ad89002c064800304176",
+      "sha256:cf6a7f1c2632215491e57be1443d6414f8e9242e9f06fd0e9d96fc7f3447989c",
+      "sha256:e56e8c89c886f0062b5757cb93929c7b1b8fc1b5c53093d4b9df102e18febfab"
+    ],
+    "hazards": [],
+    "host": "aarch64-apple-darwin",
+    "method": "compatibility publisher observation",
+    "receipt": "sha256:29d1e5c41f665f38848ae0ec4887041bc13bedabb54230dd5df6e99b5d3c2c37",
+    "rustc_identity": "sha256:b0d1a3dd0b5db29f6fee2afacaa1800268f3035a43ab642b22208d04d2511d39"
+  },
+  "fact": {
+    "cfg": [],
+    "features": [
+      "legacy",
+      "std",
+      "zdict_builder"
+    ],
+    "harvested-from": "sha256:29d1e5c41f665f38848ae0ec4887041bc13bedabb54230dd5df6e99b5d3c2c37",
+    "link": [
+      {
+        "environment": [],
+        "executable": {
+          "digest": "sha256:1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9",
+          "name": "clang",
+          "owner": "sha256:e0d2598f3189d2ff4a17c787e9645214bd22613a2f72baaa7d37daa1342c5673",
+          "path": "usr/bin/clang"
+        },
+        "library": {
+          "kind": "static",
+          "name": "zstd"
+        },
+        "name": "zstd",
+        "objects": [
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "cover.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-dictBuilder-cover-c"
+              }
+            ],
+            "language": "c",
+            "name": "cover.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "debug.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-debug-c"
+              }
+            ],
+            "language": "c",
+            "name": "debug.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "divsufsort.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-dictBuilder-divsufsort-c"
+              }
+            ],
+            "language": "c",
+            "name": "divsufsort.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "entropy_common.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-entropy-common-c"
+              }
+            ],
+            "language": "c",
+            "name": "entropy_common.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "error_private.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-error-private-c"
+              }
+            ],
+            "language": "c",
+            "name": "error_private.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "fastcover.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-dictBuilder-fastcover-c"
+              }
+            ],
+            "language": "c",
+            "name": "fastcover.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "fse_compress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-fse-compress-c"
+              }
+            ],
+            "language": "c",
+            "name": "fse_compress.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "fse_decompress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-fse-decompress-c"
+              }
+            ],
+            "language": "c",
+            "name": "fse_decompress.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "hist.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-hist-c"
+              }
+            ],
+            "language": "c",
+            "name": "hist.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "huf_compress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-huf-compress-c"
+              }
+            ],
+            "language": "c",
+            "name": "huf_compress.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "huf_decompress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-decompress-huf-decompress-c"
+              }
+            ],
+            "language": "c",
+            "name": "huf_decompress.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "huf_decompress_amd64.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-decompress-huf-decompress-amd64-S"
+              }
+            ],
+            "language": "assembly",
+            "name": "huf_decompress_amd64.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "pool.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-pool-c"
+              }
+            ],
+            "language": "c",
+            "name": "pool.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "threading.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-threading-c"
+              }
+            ],
+            "language": "c",
+            "name": "threading.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zdict.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-dictBuilder-zdict-c"
+              }
+            ],
+            "language": "c",
+            "name": "zdict.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_common.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-common-zstd-common-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_common.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_compress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-compress-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_compress.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_compress_literals.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-compress-literals-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_compress_literals.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_compress_sequences.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-compress-sequences-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_compress_sequences.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_compress_superblock.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-compress-superblock-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_compress_superblock.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_ddict.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-decompress-zstd-ddict-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_ddict.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_decompress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-decompress-zstd-decompress-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_decompress.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_decompress_block.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-decompress-zstd-decompress-block-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_decompress_block.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_double_fast.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-double-fast-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_double_fast.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_fast.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-fast-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_fast.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_lazy.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-lazy-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_lazy.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_ldm.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-ldm-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_ldm.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_opt.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-opt-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_opt.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_preSplit.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstd-preSplit-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_preSplit.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v01.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v01-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v01.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v02.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v02-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v02.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v03.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v03-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v03.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v04.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v04-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v04.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v05.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v05-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v05.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v06.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v06-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v06.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstd_v07.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-legacy-zstd-v07-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstd_v07.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-isysroot"
+              },
+              {
+                "owner": "SDKs/MacOSX27.0.sdk"
+              },
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "usr/lib/clang/21"
+              },
+              {
+                "literal": "-O3"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "--target=arm64-apple-macosx"
+              },
+              {
+                "literal": "-mmacosx-version-min=27.0"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-common"
+              },
+              {
+                "literal": "-I"
+              },
+              {
+                "input": "include-zstd-lib-legacy"
+              },
+              {
+                "literal": "-w"
+              },
+              {
+                "literal": "-fvisibility=hidden"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fmerge-all-constants"
+              },
+              {
+                "literal": "-DZSTD_LIB_DEPRECATED=0"
+              },
+              {
+                "literal": "-DXXH_PRIVATE_API="
+              },
+              {
+                "literal": "-DZSTDLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZDICTLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTDERRORLIB_VISIBILITY="
+              },
+              {
+                "literal": "-DZSTD_LEGACY_SUPPORT=1"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "zstdmt_compress.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-zstd-lib-compress-zstdmt-compress-c"
+              }
+            ],
+            "language": "c",
+            "name": "zstdmt_compress.o"
+          }
+        ],
+        "sources": [
+          {
+            "digest": "sha256:bcc68c183ba0675b338c13dd5020a785e0ead142416e43f7797c4cf6d596c06a",
+            "kind": "tree",
+            "members": [
+              {
+                "digest": "sha256:6a718e8edaca112abdc0bdfa7de67edefaa44c8d9e514b79672ab58ab3a9118a",
+                "path": "common/allocations.h"
+              },
+              {
+                "digest": "sha256:5bb7693a35d7ce03f8715c0b1e237062285e052250fdd34f72f38e7e92365090",
+                "path": "common/bits.h"
+              },
+              {
+                "digest": "sha256:a9461685c9add6f609078acc950a08db4c02e6e6a849d550f45182ba2ae38556",
+                "path": "common/bitstream.h"
+              },
+              {
+                "digest": "sha256:d19829705d8039437ffba873df2b58d20d7b876d58da479121d2e515df55cbf7",
+                "path": "common/compiler.h"
+              },
+              {
+                "digest": "sha256:23d520b536a6f23114e66549d03a967b1f24b15560c5b1ebd47ee392ccee4a1c",
+                "path": "common/cpu.h"
+              },
+              {
+                "digest": "sha256:7ab1ea104acf3243fc1cd4e6d2514046f1dfc1101c7c676145c8da080e8c24ca",
+                "path": "common/debug.c"
+              },
+              {
+                "digest": "sha256:8260cd5087b8309679c61b772b535688993c61a675a30481b8ae55b45740ba15",
+                "path": "common/debug.h"
+              },
+              {
+                "digest": "sha256:7dfce29c6bc807645b1f0c373dad94bbb49603b175a84e72d1739bf9df65feb8",
+                "path": "common/entropy_common.c"
+              },
+              {
+                "digest": "sha256:3f5873b2626ca1cdf554b7ec7b04ea0ef296fd0f6882d7fad42448b7e2dbb41c",
+                "path": "common/error_private.c"
+              },
+              {
+                "digest": "sha256:ae077bb433eb150ee247410a0357f910b9c07be839c6a9abe0b2e6b18ceb716d",
+                "path": "common/error_private.h"
+              },
+              {
+                "digest": "sha256:5235ce1e512bf80204d013b1f4cecd776fdaa9effddb48308bce08f6d0b84499",
+                "path": "common/fse.h"
+              },
+              {
+                "digest": "sha256:84eba7030a036b36363a5108e760428ce549f1a833bec6464dc755f6ed51a6fb",
+                "path": "common/fse_decompress.c"
+              },
+              {
+                "digest": "sha256:9a83d899c8c9bf03389d482562090ec2443bc0f87f27864a2b891b180333f2d4",
+                "path": "common/huf.h"
+              },
+              {
+                "digest": "sha256:4dd5fe76fa30a020cd4b3af3134ae143920300a1fe54baac1a5da73297e66783",
+                "path": "common/mem.h"
+              },
+              {
+                "digest": "sha256:9431e26cf7ca46ffb878f17df31198046664d592ae208dfbe3715e82b87af79d",
+                "path": "common/pool.c"
+              },
+              {
+                "digest": "sha256:bca19a2408e85f31bad3a13f205de92ac26ecda0c5af96fdd7f213ce03d9fc78",
+                "path": "common/pool.h"
+              },
+              {
+                "digest": "sha256:75e2b43968b70decc6bd17876833be04894035594ddc1e745cd6b70be8265637",
+                "path": "common/portability_macros.h"
+              },
+              {
+                "digest": "sha256:50448323b46a8e1bde042ee88ec44fcfc646f3d4aeba8a06be54d26a710ed78d",
+                "path": "common/threading.c"
+              },
+              {
+                "digest": "sha256:9ca63027ea64046acacccbe056a414d37ea7ea428ce299fe08abe53c204c5c65",
+                "path": "common/threading.h"
+              },
+              {
+                "digest": "sha256:8444d064922f434b67b708a987981aa21dfeece735b48c82d31f7027d0ccef03",
+                "path": "common/xxhash.c"
+              },
+              {
+                "digest": "sha256:8cb837b21a8fe9a6b9dbcd0961ab16e733bfcbfa9e003f3a496ce07ae80aa8ee",
+                "path": "common/xxhash.h"
+              },
+              {
+                "digest": "sha256:f49eb8023a90d3de925373bd9ee0d36ed46b26c529840b64220397446cd73795",
+                "path": "common/zstd_common.c"
+              },
+              {
+                "digest": "sha256:9c77ea7d0afa8d5c868a7839e178a446a82d88eb75fd56f2fd7d9d96c5ab7c11",
+                "path": "common/zstd_deps.h"
+              },
+              {
+                "digest": "sha256:ad3d95ce2b81a8c5c6b00cfe6323d8e80cacb690d3b5883725cd0d939f4f576f",
+                "path": "common/zstd_internal.h"
+              },
+              {
+                "digest": "sha256:17f6daa4c7e97055cd1ed7bcf4d9241a4e79b465f083c5d732fda1df2f0be11e",
+                "path": "common/zstd_trace.h"
+              },
+              {
+                "digest": "sha256:d764daa89b7a636d26fe96ff3536c5075e9867fb5dddbf8c9d57023a8ff4a155",
+                "path": "compress/clevels.h"
+              },
+              {
+                "digest": "sha256:5070807a489757b87c1e1f50332b099e8ffe22971228218111eef64d3321ae82",
+                "path": "compress/fse_compress.c"
+              },
+              {
+                "digest": "sha256:1a613082642b9cabdeecd3b5929f7230cbb2f8344a28f5010f3aec12cb647ab8",
+                "path": "compress/hist.c"
+              },
+              {
+                "digest": "sha256:9e3363e69d5fa35c1f6e8d2970c6c2453c06fd8a8ab3cc516a14c77d07cdea35",
+                "path": "compress/hist.h"
+              },
+              {
+                "digest": "sha256:0be78471f5175e49bbacb898d8b107bb8f7e13adc84780e0625be5861f016086",
+                "path": "compress/huf_compress.c"
+              },
+              {
+                "digest": "sha256:10c315ae609d49b2fc431521aa95908086e69fd917991c5ed9a875af3d1208e8",
+                "path": "compress/zstd_compress.c"
+              },
+              {
+                "digest": "sha256:ab7754413cef565da559bda7eb738bc2b3708c48877cb9ec37aff767d32c57d1",
+                "path": "compress/zstd_compress_internal.h"
+              },
+              {
+                "digest": "sha256:a8f25f1bd4c0d2d9dda3355d2103c9dfbd0b7056bfd373e29e923662bfea5596",
+                "path": "compress/zstd_compress_literals.c"
+              },
+              {
+                "digest": "sha256:02270cd6bc060279217861776a53adb67f8d7e54f47f59d2a4ddcef2e705fe2d",
+                "path": "compress/zstd_compress_literals.h"
+              },
+              {
+                "digest": "sha256:3f4334c19ed770c4007bc12df4098026d4eb1a6fbebfbf36df58054e7babc3e9",
+                "path": "compress/zstd_compress_sequences.c"
+              },
+              {
+                "digest": "sha256:361d108d7d452ed26f0ae4b39964f8e62166ed91d03347a5229e5d228734efc8",
+                "path": "compress/zstd_compress_sequences.h"
+              },
+              {
+                "digest": "sha256:dd62ed79ee1feec78b2e5bfc63417ccbdcda426f4220d112b0fcd8a9d0c7e667",
+                "path": "compress/zstd_compress_superblock.c"
+              },
+              {
+                "digest": "sha256:6b097999ea1d91776ca5a12e5ee02c1ed15edfcd31ba07b9ada94b0955195677",
+                "path": "compress/zstd_compress_superblock.h"
+              },
+              {
+                "digest": "sha256:ed77c2739b18b9800b97785262526a1dd4f385311ca5c2caa20b6f2a35f3735d",
+                "path": "compress/zstd_cwksp.h"
+              },
+              {
+                "digest": "sha256:9f6d003c2fe1208737bec685910324220424ba47d0323fa30d9d5f53c50e91da",
+                "path": "compress/zstd_double_fast.c"
+              },
+              {
+                "digest": "sha256:d9c29c9c004f572532265e12af78d5949c0908f4ef0bb0158977bcf80e1cf92b",
+                "path": "compress/zstd_double_fast.h"
+              },
+              {
+                "digest": "sha256:8037320f321836652e73ab6cbf7b8f1f4c97cef38835ac6b4aaf0af716aa398d",
+                "path": "compress/zstd_fast.c"
+              },
+              {
+                "digest": "sha256:dffdf43fae7ee10a2acc04e6a5eaaf03f7d3572898117a06c330d647eed5591d",
+                "path": "compress/zstd_fast.h"
+              },
+              {
+                "digest": "sha256:dd6ccf357165dc8cb574ea56a34ff1db57b7b31728b32103d0c6b72319fd45b1",
+                "path": "compress/zstd_lazy.c"
+              },
+              {
+                "digest": "sha256:6f13007fbd6824058a73b097960446defe265e33b22c7c6dc2304dcf53998bbf",
+                "path": "compress/zstd_lazy.h"
+              },
+              {
+                "digest": "sha256:4a2bef3612ae4a9e15a78a55541a152091fa8ba160410db24d495bd6dd57249e",
+                "path": "compress/zstd_ldm.c"
+              },
+              {
+                "digest": "sha256:bd0cb86041d3a72fd7846e141a41aadae229c8e331a2117df7f6b70a1b4cb08c",
+                "path": "compress/zstd_ldm.h"
+              },
+              {
+                "digest": "sha256:7285ac8ba1f0fa57a8cd8158bd427ded4e70e32a58e73b57c420b83a76e5e6e3",
+                "path": "compress/zstd_ldm_geartab.h"
+              },
+              {
+                "digest": "sha256:625936ee3fb02d789abb894c1fbc2918ee47582434094c963b630da13532c876",
+                "path": "compress/zstd_opt.c"
+              },
+              {
+                "digest": "sha256:9b677efbae28909034d3c24f37dc5c4295d267cf477bf04e14653579f90d8b6e",
+                "path": "compress/zstd_opt.h"
+              },
+              {
+                "digest": "sha256:8d7da15de31318ebb7dfe2f2e2c79f05b0d0563dcb92d4525814d05a279d0d64",
+                "path": "compress/zstd_preSplit.c"
+              },
+              {
+                "digest": "sha256:910facb2e3442e42a6952c514223c4502d95ed957bf7dc73982b3b03785b361b",
+                "path": "compress/zstd_preSplit.h"
+              },
+              {
+                "digest": "sha256:c83db699b4041bf4db89c5558db490dd295635f1eeefd60b643fbc862bbac7b5",
+                "path": "compress/zstdmt_compress.c"
+              },
+              {
+                "digest": "sha256:033fb25d96b4295c3d0158edf4d1bd4067f42aac39427706754e6c034b20f80f",
+                "path": "compress/zstdmt_compress.h"
+              },
+              {
+                "digest": "sha256:710a88d877d5dc5c83a4f839392996f337ec81cf38006c4a5be6042de5b54828",
+                "path": "decompress/huf_decompress.c"
+              },
+              {
+                "digest": "sha256:7fe53316261517a8f877b793f3bfba8305a3f9ff05c5947f1d709aaff346f1dc",
+                "path": "decompress/huf_decompress_amd64.S"
+              },
+              {
+                "digest": "sha256:38bf812283d61f4cd1f6aea30f84b43317418257c4e6fc198b09b436bd484397",
+                "path": "decompress/zstd_ddict.c"
+              },
+              {
+                "digest": "sha256:a97a250fd2f956e3ae419ddde68ae1f9fe4025bc0373254058d31bbd352fa71c",
+                "path": "decompress/zstd_ddict.h"
+              },
+              {
+                "digest": "sha256:029580818b7e9cd38d9d07c63516b00ceaa943ffcfbd099fc5ccbe3628fa362f",
+                "path": "decompress/zstd_decompress.c"
+              },
+              {
+                "digest": "sha256:9cb8bcb07aeb87e4717a9c8a86d20832dc525dde2c1b72efdaaab7c937f43b87",
+                "path": "decompress/zstd_decompress_block.c"
+              },
+              {
+                "digest": "sha256:62ee0c6ae3f7353020538397f436b59743da8acb922068841b346f480f7078ac",
+                "path": "decompress/zstd_decompress_block.h"
+              },
+              {
+                "digest": "sha256:73217b49a644c0fcf567b70677cae31449ba9f50a235ef3b681001c3f36dc56d",
+                "path": "decompress/zstd_decompress_internal.h"
+              },
+              {
+                "digest": "sha256:fcd83d7f05dc7bc6e52da6200878e05d7dc4906cf2ccfa70ce4c753e1fdc2422",
+                "path": "deprecated/zbuff.h"
+              },
+              {
+                "digest": "sha256:9c2f0f5debd0632ea52d8776eff332227a90396bfec079159b3c29340e018215",
+                "path": "deprecated/zbuff_common.c"
+              },
+              {
+                "digest": "sha256:b31a0a39d6546639b1d3e68c28632d0dd2651c2a7dba34a5a522cc6def43a842",
+                "path": "deprecated/zbuff_compress.c"
+              },
+              {
+                "digest": "sha256:d567f0df10c98c6751accc2d71338437e77682b1492aab6e8e4ed09d75df572c",
+                "path": "deprecated/zbuff_decompress.c"
+              },
+              {
+                "digest": "sha256:2419631b20b0f4867d0f3c178fc4a3006d05f58e8ce3ce6657133f85ed40d683",
+                "path": "dictBuilder/cover.c"
+              },
+              {
+                "digest": "sha256:6e2906e7e5c486a5b7f479f60210ff67d068b2c58744ad6a936ba5a9f4a23755",
+                "path": "dictBuilder/cover.h"
+              },
+              {
+                "digest": "sha256:2081acb08865f623857d2c0dcb0e79fce9489f01416528c30cfee7097915c616",
+                "path": "dictBuilder/divsufsort.c"
+              },
+              {
+                "digest": "sha256:14c16c2f67019875a2ea6cd07a4e803adfadce448e0b80351c51e5f910230d38",
+                "path": "dictBuilder/divsufsort.h"
+              },
+              {
+                "digest": "sha256:0b8b511e6370e89cb257d1a4b4d8e77add5537ffb999cfe5e7e59e454c93f38f",
+                "path": "dictBuilder/fastcover.c"
+              },
+              {
+                "digest": "sha256:dbe57910c9d446bbf2195f31bdba5cffef2c80b93c0325e9df8c9ffa744b0aa3",
+                "path": "dictBuilder/zdict.c"
+              },
+              {
+                "digest": "sha256:90ecc3816d28da0e0537c610fe99209fb9603b1ecdb764bd1228a5226f5c7484",
+                "path": "legacy/zstd_legacy.h"
+              },
+              {
+                "digest": "sha256:8f439ec4d83f13caaa4ee86d8de74660a38cade89b48bedf3943a9315b98e167",
+                "path": "legacy/zstd_v01.c"
+              },
+              {
+                "digest": "sha256:51e06e92b87abe35f617d9e65c6f26b4b1b50485cda6bf34f5b23bb6e1727b13",
+                "path": "legacy/zstd_v01.h"
+              },
+              {
+                "digest": "sha256:ffedd2b0e4dae744b8592656050f2c56eb4c8ccad1795fb3efeceb7924808712",
+                "path": "legacy/zstd_v02.c"
+              },
+              {
+                "digest": "sha256:341dd36148b7080eae742bb21196740482c4d94a97024f47ad1e7c0f2bb20e6b",
+                "path": "legacy/zstd_v02.h"
+              },
+              {
+                "digest": "sha256:1d69626197b9c76d28012b78fc66bcc3077bf8d796ff6f82457666d3271e7f3d",
+                "path": "legacy/zstd_v03.c"
+              },
+              {
+                "digest": "sha256:e9d7ccc971055129a14e3b81f0e9494a638e3d9c0b4b36413252d6b3adc90cf2",
+                "path": "legacy/zstd_v03.h"
+              },
+              {
+                "digest": "sha256:a80d9591ff3fc387a05e8e075713af9ad34596dc5c8681666346a716013a6e14",
+                "path": "legacy/zstd_v04.c"
+              },
+              {
+                "digest": "sha256:c8c31b9db45c1b559688738f280331a5f3bce5b275cf4c71e8a41282f406134e",
+                "path": "legacy/zstd_v04.h"
+              },
+              {
+                "digest": "sha256:62170472e18505b3347e563cdb1eba439312bb53385663730ac58cd92f3c4678",
+                "path": "legacy/zstd_v05.c"
+              },
+              {
+                "digest": "sha256:6fb3be7f31544cee69cfb421d5bc6e34e72f4e2612b38cb38d47032a8531acdf",
+                "path": "legacy/zstd_v05.h"
+              },
+              {
+                "digest": "sha256:d2cadc9e2906fe50e9c9564bdcb291582532060fdcec9c4bc5f0ee4370182b75",
+                "path": "legacy/zstd_v06.c"
+              },
+              {
+                "digest": "sha256:138728fdc9de7ebd5c7ffdf471b8b324cafa8e0ab638c6f4d9c048296cfe23ab",
+                "path": "legacy/zstd_v06.h"
+              },
+              {
+                "digest": "sha256:ae9f3c0a440b0f61d0ce44b06ee7ed3d256e10f3cb7dbbd9834d6c13625ac944",
+                "path": "legacy/zstd_v07.c"
+              },
+              {
+                "digest": "sha256:b682d3dffc64564fdf6f19d67baece362a1b7075c0140a80ce54e17f79961b49",
+                "path": "legacy/zstd_v07.h"
+              },
+              {
+                "digest": "sha256:abacadb94e3f79e591f4b1648e839b0160fbf4291211fd01bdba1380269b245c",
+                "path": "zdict.h"
+              },
+              {
+                "digest": "sha256:9b4bc8245565c98ccfc61c07749928b57e7c0f6fddb0530c4f6aa1971893d88b",
+                "path": "zstd.h"
+              },
+              {
+                "digest": "sha256:66a8c3f71d12ea6e797e4f622f31f3f8f81c41b36f48cad4f5de7d8bfb6aac0a",
+                "path": "zstd_errors.h"
+              }
+            ],
+            "name": "include-zstd-lib",
+            "path": "zstd/lib"
+          },
+          {
+            "digest": "sha256:32e646d431d33b9817089dd737eae1dbf60c9a182ba5b9d740a08d1ba3571108",
+            "kind": "tree",
+            "members": [
+              {
+                "digest": "sha256:6a718e8edaca112abdc0bdfa7de67edefaa44c8d9e514b79672ab58ab3a9118a",
+                "path": "allocations.h"
+              },
+              {
+                "digest": "sha256:5bb7693a35d7ce03f8715c0b1e237062285e052250fdd34f72f38e7e92365090",
+                "path": "bits.h"
+              },
+              {
+                "digest": "sha256:a9461685c9add6f609078acc950a08db4c02e6e6a849d550f45182ba2ae38556",
+                "path": "bitstream.h"
+              },
+              {
+                "digest": "sha256:d19829705d8039437ffba873df2b58d20d7b876d58da479121d2e515df55cbf7",
+                "path": "compiler.h"
+              },
+              {
+                "digest": "sha256:23d520b536a6f23114e66549d03a967b1f24b15560c5b1ebd47ee392ccee4a1c",
+                "path": "cpu.h"
+              },
+              {
+                "digest": "sha256:7ab1ea104acf3243fc1cd4e6d2514046f1dfc1101c7c676145c8da080e8c24ca",
+                "path": "debug.c"
+              },
+              {
+                "digest": "sha256:8260cd5087b8309679c61b772b535688993c61a675a30481b8ae55b45740ba15",
+                "path": "debug.h"
+              },
+              {
+                "digest": "sha256:7dfce29c6bc807645b1f0c373dad94bbb49603b175a84e72d1739bf9df65feb8",
+                "path": "entropy_common.c"
+              },
+              {
+                "digest": "sha256:3f5873b2626ca1cdf554b7ec7b04ea0ef296fd0f6882d7fad42448b7e2dbb41c",
+                "path": "error_private.c"
+              },
+              {
+                "digest": "sha256:ae077bb433eb150ee247410a0357f910b9c07be839c6a9abe0b2e6b18ceb716d",
+                "path": "error_private.h"
+              },
+              {
+                "digest": "sha256:5235ce1e512bf80204d013b1f4cecd776fdaa9effddb48308bce08f6d0b84499",
+                "path": "fse.h"
+              },
+              {
+                "digest": "sha256:84eba7030a036b36363a5108e760428ce549f1a833bec6464dc755f6ed51a6fb",
+                "path": "fse_decompress.c"
+              },
+              {
+                "digest": "sha256:9a83d899c8c9bf03389d482562090ec2443bc0f87f27864a2b891b180333f2d4",
+                "path": "huf.h"
+              },
+              {
+                "digest": "sha256:4dd5fe76fa30a020cd4b3af3134ae143920300a1fe54baac1a5da73297e66783",
+                "path": "mem.h"
+              },
+              {
+                "digest": "sha256:9431e26cf7ca46ffb878f17df31198046664d592ae208dfbe3715e82b87af79d",
+                "path": "pool.c"
+              },
+              {
+                "digest": "sha256:bca19a2408e85f31bad3a13f205de92ac26ecda0c5af96fdd7f213ce03d9fc78",
+                "path": "pool.h"
+              },
+              {
+                "digest": "sha256:75e2b43968b70decc6bd17876833be04894035594ddc1e745cd6b70be8265637",
+                "path": "portability_macros.h"
+              },
+              {
+                "digest": "sha256:50448323b46a8e1bde042ee88ec44fcfc646f3d4aeba8a06be54d26a710ed78d",
+                "path": "threading.c"
+              },
+              {
+                "digest": "sha256:9ca63027ea64046acacccbe056a414d37ea7ea428ce299fe08abe53c204c5c65",
+                "path": "threading.h"
+              },
+              {
+                "digest": "sha256:8444d064922f434b67b708a987981aa21dfeece735b48c82d31f7027d0ccef03",
+                "path": "xxhash.c"
+              },
+              {
+                "digest": "sha256:8cb837b21a8fe9a6b9dbcd0961ab16e733bfcbfa9e003f3a496ce07ae80aa8ee",
+                "path": "xxhash.h"
+              },
+              {
+                "digest": "sha256:f49eb8023a90d3de925373bd9ee0d36ed46b26c529840b64220397446cd73795",
+                "path": "zstd_common.c"
+              },
+              {
+                "digest": "sha256:9c77ea7d0afa8d5c868a7839e178a446a82d88eb75fd56f2fd7d9d96c5ab7c11",
+                "path": "zstd_deps.h"
+              },
+              {
+                "digest": "sha256:ad3d95ce2b81a8c5c6b00cfe6323d8e80cacb690d3b5883725cd0d939f4f576f",
+                "path": "zstd_internal.h"
+              },
+              {
+                "digest": "sha256:17f6daa4c7e97055cd1ed7bcf4d9241a4e79b465f083c5d732fda1df2f0be11e",
+                "path": "zstd_trace.h"
+              }
+            ],
+            "name": "include-zstd-lib-common",
+            "path": "zstd/lib/common"
+          },
+          {
+            "digest": "sha256:bed78ee6e3d6182501d95374911f822b090f9ffcb956445bb55a24268e61ccda",
+            "kind": "tree",
+            "members": [
+              {
+                "digest": "sha256:90ecc3816d28da0e0537c610fe99209fb9603b1ecdb764bd1228a5226f5c7484",
+                "path": "zstd_legacy.h"
+              },
+              {
+                "digest": "sha256:8f439ec4d83f13caaa4ee86d8de74660a38cade89b48bedf3943a9315b98e167",
+                "path": "zstd_v01.c"
+              },
+              {
+                "digest": "sha256:51e06e92b87abe35f617d9e65c6f26b4b1b50485cda6bf34f5b23bb6e1727b13",
+                "path": "zstd_v01.h"
+              },
+              {
+                "digest": "sha256:ffedd2b0e4dae744b8592656050f2c56eb4c8ccad1795fb3efeceb7924808712",
+                "path": "zstd_v02.c"
+              },
+              {
+                "digest": "sha256:341dd36148b7080eae742bb21196740482c4d94a97024f47ad1e7c0f2bb20e6b",
+                "path": "zstd_v02.h"
+              },
+              {
+                "digest": "sha256:1d69626197b9c76d28012b78fc66bcc3077bf8d796ff6f82457666d3271e7f3d",
+                "path": "zstd_v03.c"
+              },
+              {
+                "digest": "sha256:e9d7ccc971055129a14e3b81f0e9494a638e3d9c0b4b36413252d6b3adc90cf2",
+                "path": "zstd_v03.h"
+              },
+              {
+                "digest": "sha256:a80d9591ff3fc387a05e8e075713af9ad34596dc5c8681666346a716013a6e14",
+                "path": "zstd_v04.c"
+              },
+              {
+                "digest": "sha256:c8c31b9db45c1b559688738f280331a5f3bce5b275cf4c71e8a41282f406134e",
+                "path": "zstd_v04.h"
+              },
+              {
+                "digest": "sha256:62170472e18505b3347e563cdb1eba439312bb53385663730ac58cd92f3c4678",
+                "path": "zstd_v05.c"
+              },
+              {
+                "digest": "sha256:6fb3be7f31544cee69cfb421d5bc6e34e72f4e2612b38cb38d47032a8531acdf",
+                "path": "zstd_v05.h"
+              },
+              {
+                "digest": "sha256:d2cadc9e2906fe50e9c9564bdcb291582532060fdcec9c4bc5f0ee4370182b75",
+                "path": "zstd_v06.c"
+              },
+              {
+                "digest": "sha256:138728fdc9de7ebd5c7ffdf471b8b324cafa8e0ab638c6f4d9c048296cfe23ab",
+                "path": "zstd_v06.h"
+              },
+              {
+                "digest": "sha256:ae9f3c0a440b0f61d0ce44b06ee7ed3d256e10f3cb7dbbd9834d6c13625ac944",
+                "path": "zstd_v07.c"
+              },
+              {
+                "digest": "sha256:b682d3dffc64564fdf6f19d67baece362a1b7075c0140a80ce54e17f79961b49",
+                "path": "zstd_v07.h"
+              }
+            ],
+            "name": "include-zstd-lib-legacy",
+            "path": "zstd/lib/legacy"
+          },
+          {
+            "digest": "sha256:7ab1ea104acf3243fc1cd4e6d2514046f1dfc1101c7c676145c8da080e8c24ca",
+            "kind": "file",
+            "name": "source-zstd-lib-common-debug-c",
+            "path": "zstd/lib/common/debug.c"
+          },
+          {
+            "digest": "sha256:7dfce29c6bc807645b1f0c373dad94bbb49603b175a84e72d1739bf9df65feb8",
+            "kind": "file",
+            "name": "source-zstd-lib-common-entropy-common-c",
+            "path": "zstd/lib/common/entropy_common.c"
+          },
+          {
+            "digest": "sha256:3f5873b2626ca1cdf554b7ec7b04ea0ef296fd0f6882d7fad42448b7e2dbb41c",
+            "kind": "file",
+            "name": "source-zstd-lib-common-error-private-c",
+            "path": "zstd/lib/common/error_private.c"
+          },
+          {
+            "digest": "sha256:84eba7030a036b36363a5108e760428ce549f1a833bec6464dc755f6ed51a6fb",
+            "kind": "file",
+            "name": "source-zstd-lib-common-fse-decompress-c",
+            "path": "zstd/lib/common/fse_decompress.c"
+          },
+          {
+            "digest": "sha256:9431e26cf7ca46ffb878f17df31198046664d592ae208dfbe3715e82b87af79d",
+            "kind": "file",
+            "name": "source-zstd-lib-common-pool-c",
+            "path": "zstd/lib/common/pool.c"
+          },
+          {
+            "digest": "sha256:50448323b46a8e1bde042ee88ec44fcfc646f3d4aeba8a06be54d26a710ed78d",
+            "kind": "file",
+            "name": "source-zstd-lib-common-threading-c",
+            "path": "zstd/lib/common/threading.c"
+          },
+          {
+            "digest": "sha256:f49eb8023a90d3de925373bd9ee0d36ed46b26c529840b64220397446cd73795",
+            "kind": "file",
+            "name": "source-zstd-lib-common-zstd-common-c",
+            "path": "zstd/lib/common/zstd_common.c"
+          },
+          {
+            "digest": "sha256:5070807a489757b87c1e1f50332b099e8ffe22971228218111eef64d3321ae82",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-fse-compress-c",
+            "path": "zstd/lib/compress/fse_compress.c"
+          },
+          {
+            "digest": "sha256:1a613082642b9cabdeecd3b5929f7230cbb2f8344a28f5010f3aec12cb647ab8",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-hist-c",
+            "path": "zstd/lib/compress/hist.c"
+          },
+          {
+            "digest": "sha256:0be78471f5175e49bbacb898d8b107bb8f7e13adc84780e0625be5861f016086",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-huf-compress-c",
+            "path": "zstd/lib/compress/huf_compress.c"
+          },
+          {
+            "digest": "sha256:10c315ae609d49b2fc431521aa95908086e69fd917991c5ed9a875af3d1208e8",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-compress-c",
+            "path": "zstd/lib/compress/zstd_compress.c"
+          },
+          {
+            "digest": "sha256:a8f25f1bd4c0d2d9dda3355d2103c9dfbd0b7056bfd373e29e923662bfea5596",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-compress-literals-c",
+            "path": "zstd/lib/compress/zstd_compress_literals.c"
+          },
+          {
+            "digest": "sha256:3f4334c19ed770c4007bc12df4098026d4eb1a6fbebfbf36df58054e7babc3e9",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-compress-sequences-c",
+            "path": "zstd/lib/compress/zstd_compress_sequences.c"
+          },
+          {
+            "digest": "sha256:dd62ed79ee1feec78b2e5bfc63417ccbdcda426f4220d112b0fcd8a9d0c7e667",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-compress-superblock-c",
+            "path": "zstd/lib/compress/zstd_compress_superblock.c"
+          },
+          {
+            "digest": "sha256:9f6d003c2fe1208737bec685910324220424ba47d0323fa30d9d5f53c50e91da",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-double-fast-c",
+            "path": "zstd/lib/compress/zstd_double_fast.c"
+          },
+          {
+            "digest": "sha256:8037320f321836652e73ab6cbf7b8f1f4c97cef38835ac6b4aaf0af716aa398d",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-fast-c",
+            "path": "zstd/lib/compress/zstd_fast.c"
+          },
+          {
+            "digest": "sha256:dd6ccf357165dc8cb574ea56a34ff1db57b7b31728b32103d0c6b72319fd45b1",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-lazy-c",
+            "path": "zstd/lib/compress/zstd_lazy.c"
+          },
+          {
+            "digest": "sha256:4a2bef3612ae4a9e15a78a55541a152091fa8ba160410db24d495bd6dd57249e",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-ldm-c",
+            "path": "zstd/lib/compress/zstd_ldm.c"
+          },
+          {
+            "digest": "sha256:625936ee3fb02d789abb894c1fbc2918ee47582434094c963b630da13532c876",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-opt-c",
+            "path": "zstd/lib/compress/zstd_opt.c"
+          },
+          {
+            "digest": "sha256:8d7da15de31318ebb7dfe2f2e2c79f05b0d0563dcb92d4525814d05a279d0d64",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstd-preSplit-c",
+            "path": "zstd/lib/compress/zstd_preSplit.c"
+          },
+          {
+            "digest": "sha256:c83db699b4041bf4db89c5558db490dd295635f1eeefd60b643fbc862bbac7b5",
+            "kind": "file",
+            "name": "source-zstd-lib-compress-zstdmt-compress-c",
+            "path": "zstd/lib/compress/zstdmt_compress.c"
+          },
+          {
+            "digest": "sha256:7fe53316261517a8f877b793f3bfba8305a3f9ff05c5947f1d709aaff346f1dc",
+            "kind": "file",
+            "name": "source-zstd-lib-decompress-huf-decompress-amd64-S",
+            "path": "zstd/lib/decompress/huf_decompress_amd64.S"
+          },
+          {
+            "digest": "sha256:710a88d877d5dc5c83a4f839392996f337ec81cf38006c4a5be6042de5b54828",
+            "kind": "file",
+            "name": "source-zstd-lib-decompress-huf-decompress-c",
+            "path": "zstd/lib/decompress/huf_decompress.c"
+          },
+          {
+            "digest": "sha256:38bf812283d61f4cd1f6aea30f84b43317418257c4e6fc198b09b436bd484397",
+            "kind": "file",
+            "name": "source-zstd-lib-decompress-zstd-ddict-c",
+            "path": "zstd/lib/decompress/zstd_ddict.c"
+          },
+          {
+            "digest": "sha256:9cb8bcb07aeb87e4717a9c8a86d20832dc525dde2c1b72efdaaab7c937f43b87",
+            "kind": "file",
+            "name": "source-zstd-lib-decompress-zstd-decompress-block-c",
+            "path": "zstd/lib/decompress/zstd_decompress_block.c"
+          },
+          {
+            "digest": "sha256:029580818b7e9cd38d9d07c63516b00ceaa943ffcfbd099fc5ccbe3628fa362f",
+            "kind": "file",
+            "name": "source-zstd-lib-decompress-zstd-decompress-c",
+            "path": "zstd/lib/decompress/zstd_decompress.c"
+          },
+          {
+            "digest": "sha256:2419631b20b0f4867d0f3c178fc4a3006d05f58e8ce3ce6657133f85ed40d683",
+            "kind": "file",
+            "name": "source-zstd-lib-dictBuilder-cover-c",
+            "path": "zstd/lib/dictBuilder/cover.c"
+          },
+          {
+            "digest": "sha256:2081acb08865f623857d2c0dcb0e79fce9489f01416528c30cfee7097915c616",
+            "kind": "file",
+            "name": "source-zstd-lib-dictBuilder-divsufsort-c",
+            "path": "zstd/lib/dictBuilder/divsufsort.c"
+          },
+          {
+            "digest": "sha256:0b8b511e6370e89cb257d1a4b4d8e77add5537ffb999cfe5e7e59e454c93f38f",
+            "kind": "file",
+            "name": "source-zstd-lib-dictBuilder-fastcover-c",
+            "path": "zstd/lib/dictBuilder/fastcover.c"
+          },
+          {
+            "digest": "sha256:dbe57910c9d446bbf2195f31bdba5cffef2c80b93c0325e9df8c9ffa744b0aa3",
+            "kind": "file",
+            "name": "source-zstd-lib-dictBuilder-zdict-c",
+            "path": "zstd/lib/dictBuilder/zdict.c"
+          },
+          {
+            "digest": "sha256:8f439ec4d83f13caaa4ee86d8de74660a38cade89b48bedf3943a9315b98e167",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v01-c",
+            "path": "zstd/lib/legacy/zstd_v01.c"
+          },
+          {
+            "digest": "sha256:ffedd2b0e4dae744b8592656050f2c56eb4c8ccad1795fb3efeceb7924808712",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v02-c",
+            "path": "zstd/lib/legacy/zstd_v02.c"
+          },
+          {
+            "digest": "sha256:1d69626197b9c76d28012b78fc66bcc3077bf8d796ff6f82457666d3271e7f3d",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v03-c",
+            "path": "zstd/lib/legacy/zstd_v03.c"
+          },
+          {
+            "digest": "sha256:a80d9591ff3fc387a05e8e075713af9ad34596dc5c8681666346a716013a6e14",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v04-c",
+            "path": "zstd/lib/legacy/zstd_v04.c"
+          },
+          {
+            "digest": "sha256:62170472e18505b3347e563cdb1eba439312bb53385663730ac58cd92f3c4678",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v05-c",
+            "path": "zstd/lib/legacy/zstd_v05.c"
+          },
+          {
+            "digest": "sha256:d2cadc9e2906fe50e9c9564bdcb291582532060fdcec9c4bc5f0ee4370182b75",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v06-c",
+            "path": "zstd/lib/legacy/zstd_v06.c"
+          },
+          {
+            "digest": "sha256:ae9f3c0a440b0f61d0ce44b06ee7ed3d256e10f3cb7dbbd9834d6c13625ac944",
+            "kind": "file",
+            "name": "source-zstd-lib-legacy-zstd-v07-c",
+            "path": "zstd/lib/legacy/zstd_v07.c"
+          }
+        ],
+        "target": "aarch64-apple-darwin"
+      }
+    ],
+    "out": [],
+    "profile": "release",
+    "target": "aarch64-apple-darwin",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:9c04fbae3a90d1ffd98b9d75d0b8011c5958ecc8fc85b524f2676583c6a2a8f4",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "zstd-sys",
+    "scope": "crates-io",
+    "version": "2.0.16+zstd.1.5.7"
+  }
+}

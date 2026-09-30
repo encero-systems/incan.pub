@@ -1,0 +1,27 @@
+# harvested from the release capture at b1a5c57
+#
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "psm"
+version = "0.1.32"
+
+[source]
+registry = "https://github.com/rust-lang/crates.io-index"
+checksum = "sha256:4dcd034599e63b970727f70d79e02d62390a4a84f7c6b827c27c46d5ac3fa622"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = []
+cfg = ["asm", "link_asm", "switchable_stack"]
+harvested-from = "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c"
+
+[[rust.facts.link]]
+name = "psm_s"
+target = "aarch64-apple-darwin"
+executable = { digest = "sha256:1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9", name = "clang", owner = "sha256:e0d2598f3189d2ff4a17c787e9645214bd22613a2f72baaa7d37daa1342c5673", path = "usr/bin/clang" }
+sources = [{ digest = "sha256:b3bee30c8c7ba9df981c2adc313249b8ce27d94925a1c1322e5b80c994ae14ee", kind = "file", name = "source-src-arch-aarch-aapcs64-s", path = "src/arch/aarch_aapcs64.s" }]
+objects = [{ arguments = [{ literal = "-isysroot" }, { owner = "SDKs/MacOSX27.0.sdk" }, { literal = "-resource-dir" }, { owner = "usr/lib/clang/21" }, { literal = "-O3" }, { literal = "-ffunction-sections" }, { literal = "-fdata-sections" }, { literal = "-fPIC" }, { literal = "--target=arm64-apple-macosx" }, { literal = "-mmacosx-version-min=27.0" }, { literal = "-Wall" }, { literal = "-Wextra" }, { literal = "-xassembler-with-cpp" }, { literal = "-DCFG_TARGET_OS_macos" }, { literal = "-DCFG_TARGET_ARCH_aarch64" }, { literal = "-DCFG_TARGET_ENV_" }, { literal = "-o" }, { output = "aarch_aapcs64.o" }, { literal = "-c" }, { input = "source-src-arch-aarch-aapcs64-s" }], language = "assembly", name = "aarch_aapcs64.o" }]
+library = { kind = "static", name = "psm_s" }
