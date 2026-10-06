@@ -35,7 +35,7 @@ Records the harvest declines to propose keep whatever record they have: a script
 
 ## Adopting crates.io packages
 
-Adoption turns a crates.io package version into a Loaf ([RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md), "Adoption from crates.io"): one `adopt` event per version, whose manifest follows RFC 119's Rust facet grammar and whose source Loaf archive is stored by digest. Admission refuses an `adopt` event whose dependencies are not adopted yet, optional and target-conditional ones included, so `adopt` plans the whole closure first and appends in dependency order. Against a checkout of `index`:
+Adoption turns a crates.io package version into a Loaf ([RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md), "Adoption from crates.io"): one `adopt` event per version, whose manifest follows RFC 119's Rust facet grammar and whose source Loaf archive is stored by digest. Admission refuses an `adopt` event while a dependency active under the version's default features, on any target, is not adopted yet, so `adopt` plans the whole closure first and appends in dependency order. Against a checkout of `index`:
 
 ```sh
 incan-pub adopt --records --cache <cache> --blobs <blob store>   # or: adopt NAME VERSION ...

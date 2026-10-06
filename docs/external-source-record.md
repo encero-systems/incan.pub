@@ -9,7 +9,7 @@ A record is not a file anyone edits. It is the fold of the events published for 
 | event | meaning | admission |
 |---|---|---|
 | `publish` | the record exists for one `(name, version)` and names the crates.io source checksum | published once; checksum is the one crates.io publishes for that version |
-| `adopt` | the version is adopted as a Loaf: its Rust facet, features, dependencies, provenance, and the digests of its manifest and source Loaf archive | once per version, an identical repeat is a no-op; the manifest digest is the digest of the manifest the payload renders; every dependency is already adopted; on a published record, the checksum matches |
+| `adopt` | the version is adopted as a Loaf: its Rust facet, features, dependencies, provenance, and the digests of its manifest and source Loaf archive | once per version, an identical repeat is a no-op; the manifest digest is the digest of the manifest the payload renders; every dependency active under the default features is already adopted; on a published record, the checksum matches |
 | `fact` | one bound fact record was harvested | binding not yet present, or present with identical `cfg` and `out`; committed `out` bytes match their digests; no key outside the vocabulary below |
 | `attest` | an Oven-baked unit for one binding was proven equivalent to the Cargo-built unit | names an existing binding; carries the asset digest, the RFC 124 unit identity and an attestation reference; sets the binding's status to `attested` |
 | `asset` | a baked unit for one binding is available | names an existing binding, the archive digest, unit identity, builder kind (`publisher`, `registry`, `local`) and attestation |

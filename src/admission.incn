@@ -9,7 +9,7 @@ cannot establish that a `cfg` answer is true; that is what harvest evidence and 
 from std.fs import Path
 from std.json import JsonValue
 
-from adoption import adoption_from_payload, loaf_name, render_adopted_manifest
+from adoption import adoption_from_payload, loaf_name, render_adopted_manifest, required_dependencies
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity
 from events import Event, member, string_list_member, string_member
 from registry import (
@@ -110,7 +110,7 @@ pub def adopted_versions(state: Dict[str, Record]) -> Dict[str, list[str]]:
 def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: Event) -> Result[Record, str]:
     """
     Admit an `adopt` event: a payload in shape, a manifest digest the payload reproduces, and every dependency
-    requirement, optional and target-conditional ones included, already met by an adopted version.
+    requirement active under its default features, on any target, already met by an adopted version.
     """
     label = event.label
     adoption = adoption_from_payload(event.body, label)?
@@ -124,7 +124,7 @@ def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: E
         return Err(f"{label}: `manifest` and `archive` must be `sha256:` identities")
     if digest_text(render_adopted_manifest(adoption)) != manifest:
         return Err(f"{label}: `manifest` is not the digest of the manifest this payload renders")
-    for dependency in adoption.dependencies:
+    for dependency in required_dependencies(adoption):
         if not requirement_met(adopted, dependency.package, dependency.req, label)?:
             return Err(
                 f"{label}: dependency `{dependency.key}` ({loaf_name(dependency.package)} {dependency.req}) has no adopted version; "

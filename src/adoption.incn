@@ -62,6 +62,39 @@ pub model Adoption:
         return loaf_name(self.package)
 
 
+pub def required_dependencies(adoption: Adoption) -> list[Dependency]:
+    """
+    The declarations a pin must already hold adopted: every one active under the version's default features, on any
+    target. That is each non-optional declaration, and each optional one the default feature set enables through
+    `dep:x`, a non-weak `x/f`, or a feature that does. A feature beyond the defaults may name a dependency the pin
+    does not hold; a remote provider answers it "not published" and the local store adopts it on demand.
+    """
+    mut active: list[str] = []
+    mut pending: list[str] = []
+    mut seen: list[str] = []
+    if "default" in adoption.features:
+        pending.append("default")
+    while len(pending) > 0:
+        feature = pending.pop()
+        if seen.contains(feature) or feature not in adoption.features:
+            continue
+        seen.append(feature)
+        for item in adoption.features[feature]:
+            if item.startswith("dep:"):
+                active.append(item[4:])
+            elif item.contains("?/"):
+                pass
+            elif item.contains("/"):
+                active.append(item.split("/")[0])
+            else:
+                pending.append(item)
+    mut out: list[Dependency] = []
+    for dependency in adoption.dependencies:
+        if not dependency.optional or active.contains(dependency.key):
+            out.append(dependency)
+    return out
+
+
 pub def loaf_name(package: str) -> str:
     """The Loaf a crates.io package is adopted as: the registry-owned `crates-io` scope."""
     return "crates-io/" + package

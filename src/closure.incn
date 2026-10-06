@@ -2,17 +2,17 @@
 Adopting package versions together with everything they depend on.
 
 Admission refuses an `adopt` event whose dependencies are not adopted yet, so versions are adopted in dependency
-order, after the whole closure is planned. A requirement, optional and target-conditional ones included, is met by a
-version already adopted or planned; otherwise by the newest crates.io version satisfying it, preferring one that is
-not yanked. Each planned version is downloaded once into the cache and verified against the crates.io checksum
-before it is read, then translated, and its source Loaf archive is stored under its digest in the blob store.
-Nothing is appended to the log until the plan is complete and ordered.
+order, after the whole closure is planned. A requirement active under a version's default features, on any target,
+is met by a version already adopted or planned; otherwise by the newest crates.io version satisfying it, preferring
+one that is not yanked. Each planned version is downloaded once into the cache and verified against the crates.io
+checksum before it is read, then translated, and its source Loaf archive is stored under its digest in the blob
+store. Nothing is appended to the log until the plan is complete and ordered.
 """
 
 from std.fs import Path
 from std.json import JsonValue, parse_jsonl
 
-from adoption import Adoption, render_adopted_manifest, source_archive, translate, unpack_crate
+from adoption import Adoption, render_adopted_manifest, required_dependencies, source_archive, translate, unpack_crate
 from canonical import digest_bytes, digest_text
 from events import read_text, string_member
 from host import download
@@ -107,7 +107,7 @@ pub def plan_closure(
         planned[key] = item
         remember(known, package, version)
         println(f"planned: {package} {version}")
-        for dependency in item.adoption.dependencies:
+        for dependency in required_dependencies(item.adoption):
             if met(known, dependency.package, dependency.req)?:
                 continue
             choice = choose(crates_io_lines(cache, dependency.package)?, dependency.package, dependency.req)?
@@ -129,7 +129,7 @@ def dependency_order(planned: Dict[str, Planned], adopted: Dict[str, list[str]])
         for key in remaining:
             item = planned[key]
             mut satisfied = true
-            for dependency in item.adoption.dependencies:
+            for dependency in required_dependencies(item.adoption):
                 if not met(done, dependency.package, dependency.req)?:
                     satisfied = false
                     break

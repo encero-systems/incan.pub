@@ -29,7 +29,7 @@ pub def render_manifest(record: Record) -> Result[str, str]:
     match record.adopt:
         Some(payload) =>
             adoption = adoption_from_payload(payload, f"{record.name} {record.version}")?
-            lines.append(rstrip(render_adopted_manifest(adoption)))
+            lines.append(render_adopted_manifest(adoption).strip())
         None =>
             lines.append("[project]")
             lines.append("name = " + json_string(record.name))

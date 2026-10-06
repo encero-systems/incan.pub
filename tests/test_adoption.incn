@@ -13,7 +13,16 @@ from std.tempfile import TemporaryDirectory
 from std.testing import assert_eq, assert_is_err, assert_true
 
 from admission import replay
-from adoption import Adoption, Dependency, adoption_payload, render_adopted_manifest, source_archive, translate, unpack_crate
+from adoption import (
+    Adoption,
+    Dependency,
+    adoption_payload,
+    render_adopted_manifest,
+    required_dependencies,
+    source_archive,
+    translate,
+    unpack_crate,
+)
 from canonical import canonical, digest_text
 from events import append_event, load_events
 from projection import render_projections
@@ -218,6 +227,26 @@ def test_the_adopted_manifest_states_the_rust_facet_grammar() -> None:
     assert_eq(archive[1].data, manifest.encode())
 
 
+def test_a_pin_must_hold_what_the_default_features_activate_and_nothing_beyond() -> None:
+    adoption = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    mut keys: list[str] = []
+    for dependency in required_dependencies(adoption):
+        keys.append(dependency.key)
+    # `default` reaches `std`, whose `log/std` names a required dependency and whose `serde?/std` is weak, so
+    # neither optional dependency is active under the defaults.
+    assert_eq(keys, ["libc", "libc", "log", "winapi"])
+    line = parse("""{"name":"d","vers":"1.0.0","cksum":"3333333333333333333333333333333333333333333333333333333333333333","deps":[
+{"name":"a","req":"1","features":[],"optional":true,"default_features":true,"target":null,"kind":"normal"},
+{"name":"b","req":"1","features":[],"optional":true,"default_features":true,"target":null,"kind":"normal"},
+{"name":"c","req":"1","features":[],"optional":true,"default_features":true,"target":null,"kind":"normal"}],
+"features":{"default":["extra"],"extra":["dep:a","b/x"],"later":["c"]}}""").unwrap()
+    manifest = "[package]\nname = \"d\"\nversion = \"1.0.0\"\n"
+    mut active: list[str] = []
+    for dependency in required_dependencies(translate(line, demo_files(manifest)).unwrap()):
+        active.append(dependency.key)
+    assert_eq(active, ["a", "b"])
+
+
 def leaf(version: str) -> Adoption:
     return Adoption(
         package="leaf",
@@ -242,7 +271,7 @@ def top() -> Adoption:
         edition="2021",
         root="src/lib.rs",
         features={},
-        dependencies=[Dependency(key="leaf", package="leaf", req="^1.2", features=[], default_features=true, optional=true, target=None)],
+        dependencies=[Dependency(key="leaf", package="leaf", req="^1.2", features=[], default_features=true, optional=false, target=None)],
     )
 
 
@@ -278,7 +307,7 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     files = render_projections(state).unwrap()
     line = parse(files["index/crates-io/top"].strip()).unwrap()
     assert_eq(canonical(line.get("rust").unwrap()).unwrap(), "{\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
-    assert_eq(canonical(line.get("deps").unwrap()).unwrap(), "[{\"default-features\":true,\"features\":[],\"loaf\":\"crates-io/leaf\",\"name\":\"leaf\",\"optional\":true,\"req\":\"^1.2\"}]")
+    assert_eq(canonical(line.get("deps").unwrap()).unwrap(), "[{\"default-features\":true,\"features\":[],\"loaf\":\"crates-io/leaf\",\"name\":\"leaf\",\"optional\":false,\"req\":\"^1.2\"}]")
     assert_eq(line.get("cksum").unwrap().as_str().unwrap(), digest_text("archive top"))
     assert_eq(line.get("name").unwrap().as_str().unwrap(), "crates-io/top")
     assert_true(files["crates-io/top/1.0.0/loaf.toml"].contains("\n[rust]\nname = \"top\"\n"))
