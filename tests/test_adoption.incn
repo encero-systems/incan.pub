@@ -16,6 +16,7 @@ from admission import replay
 from adoption import (
     Adoption,
     Dependency,
+    adoption_from_payload,
     adoption_payload,
     render_adopted_manifest,
     required_dependencies,
@@ -255,6 +256,7 @@ def leaf(version: str) -> Adoption:
         rust_name="leaf",
         rust_type="lib",
         edition="2021",
+        build_script=None,
         root="src/lib.rs",
         features={"default": []},
         dependencies=[],
@@ -269,6 +271,7 @@ def top() -> Adoption:
         rust_name="top",
         rust_type="lib",
         edition="2021",
+        build_script=None,
         root="src/lib.rs",
         features={},
         dependencies=[Dependency(key="leaf", package="leaf", req="^1.2", features=[], default_features=true, optional=false, target=None)],
@@ -325,6 +328,7 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
         rust_name=original.rust_name,
         rust_type=original.rust_type,
         edition="2018",
+        build_script=None,
         root=original.root,
         features=original.features,
         dependencies=original.dependencies,
@@ -350,6 +354,7 @@ def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -
         rust_name="leaf",
         rust_type="lib",
         edition="2018",
+        build_script=None,
         root="src/lib.rs",
         features={"default": []},
         dependencies=[],
@@ -364,3 +369,35 @@ def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -
     assert_eq(refusal(root), "")
     files = render_projections(replay(events, root).unwrap()).unwrap()
     assert_true(files["crates-io/leaf/1.2.0/loaf.toml"].contains("edition = \"2018\""))
+
+
+def test_adoption_states_whether_the_package_declares_a_build_script() -> None:
+    """RFC 119 rule 1: a declared `build` path or a root `build.rs` makes `build-script = true`; otherwise false."""
+    plain = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    assert_eq(plain.build_script, Some(false))
+    assert_true(render_adopted_manifest(plain).contains("\nedition = \"2021\"\nbuild-script = false\n"))
+    mut files = demo_files(demo_manifest())
+    files.append(TarEntry(path="build.rs", executable=false, data=b"fn main() {}\n"))
+    scripted = translate(demo_line(), files).unwrap()
+    assert_eq(scripted.build_script, Some(true))
+    assert_true(render_adopted_manifest(scripted).contains("\nbuild-script = true\n"))
+    turned_off = translate(demo_line(), demo_files(demo_manifest().replace("name = \"demo\"\nversion", "build = false\nname = \"demo\"\nversion"))).unwrap()
+    assert_eq(turned_off.build_script, Some(false))
+    mut elsewhere = demo_files(demo_manifest().replace("name = \"demo\"\nversion", "build = \"tools/gen.rs\"\nname = \"demo\"\nversion"))
+    elsewhere.append(TarEntry(path="tools/gen.rs", executable=false, data=b"fn main() {}\n"))
+    assert_eq(translate(demo_line(), elsewhere).unwrap().build_script, Some(true))
+
+
+def test_an_adoption_made_before_build_script_was_stated_reads_back_unstated() -> None:
+    """An older payload has no `build-script`; it reads back as unstated and renders exactly as it did."""
+    mut older = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    older.build_script = None
+    manifest = render_adopted_manifest(older)
+    assert_true(not manifest.contains("build-script"))
+    payload = adoption_payload(older, digest_text(manifest), digest_text("archive"))
+    mut body = JsonValue.object(payload)
+    body.set("subject", JsonValue.object({"name": JsonValue.string("demo"), "version": JsonValue.string("1.0.0")})).unwrap()
+    assert_eq(adoption_from_payload(body, "demo 1.0.0").unwrap().build_script, None)
+    stated = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    stated_body = JsonValue.object(adoption_payload(stated, digest_text(render_adopted_manifest(stated)), digest_text("archive")))
+    assert_eq(adoption_from_payload(stated_body, "demo 1.0.0").unwrap().build_script, Some(false))

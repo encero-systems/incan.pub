@@ -55,6 +55,7 @@ pub model Adoption:
     pub rust_name: str
     pub rust_type: str
     pub edition: str
+    pub build_script: Option[bool]
     pub root: str
     pub features: Dict[str, list[str]]
     pub dependencies: list[Dependency]
@@ -138,6 +139,9 @@ pub def translate(line: JsonValue, files: list[TarEntry]) -> Result[Adoption, st
         return Err(f"{label}: the archive has no Cargo.toml")
     mut adoption = library_target(package, version, manifest_text, paths)?
     adoption.checksum = "sha256:" + checksum
+    match declared_build_script(parse_manifest(manifest_text, label)?, paths, label)?:
+        Some(_) => adoption.build_script = Some(true)
+        None => adoption.build_script = Some(false)
     adoption.dependencies = dependencies(line, label)?
     adoption.features = features(line, adoption.dependencies, label)?
     return Ok(adoption)
@@ -196,6 +200,7 @@ def library_target(package: str, version: str, manifest_text: str, paths: list[s
         rust_name=name,
         rust_type=kind,
         edition=edition,
+        build_script=None,
         root=root,
         features={},
         dependencies=[],
@@ -206,6 +211,33 @@ def parse_manifest(text: str, label: str) -> Result[TomlValue, str]:
     match TomlValue.parse(text):
         Ok(document) => return Ok(document)
         Err(error) => return Err(f"{label}: Cargo.toml does not parse: {error.message()}")
+
+
+pub def declared_build_script(manifest: TomlValue, paths: list[str], label: str) -> Result[Option[str], str]:
+    """
+    The build script the published manifest declares (RFC 125): the path `package.build` names, or a root `build.rs`
+    when it names none. `build = false` turns the script off; `build = true` asks for the root `build.rs`.
+    """
+    match manifest.get_optional[str]("package.build"):
+        Ok(found) =>
+            match found:
+                Some(path) =>
+                    if not paths.contains(path):
+                        return Err(f"{label}: package.build names `{path}`, which is not in the archive")
+                    return Ok(Some(path))
+                None => pass
+        Err(_) =>
+            match manifest.get_optional[bool]("package.build"):
+                Ok(found) =>
+                    match found:
+                        Some(flag) =>
+                            if not flag:
+                                return Ok(None)
+                        None => pass
+                Err(error) => return Err(f"{label}: package.build: {error.message()}")
+    if paths.contains("build.rs"):
+        return Ok(Some("build.rs"))
+    return Ok(None)
 
 
 def dependencies(line: JsonValue, label: str) -> Result[list[Dependency], str]:
@@ -380,12 +412,16 @@ pub def features_json(table: Dict[str, list[str]]) -> JsonValue:
 
 
 pub def rust_json(adoption: Adoption) -> JsonValue:
-    """The `[rust]` table verbatim, as the index line carries it."""
-    return JsonValue.object({
+    """The `[rust]` table verbatim, as the index line carries it; `build-script` only where the adoption states it."""
+    mut facet = JsonValue.object({
         "name": JsonValue.string(adoption.rust_name),
         "type": JsonValue.string(adoption.rust_type),
         "edition": JsonValue.string(adoption.edition),
     })
+    match adoption.build_script:
+        Some(flag) => facet.set("build-script", JsonValue.bool(flag)).unwrap()
+        None => pass
+    return facet
 
 
 pub def provenance_json(adoption: Adoption) -> JsonValue:
@@ -446,6 +482,14 @@ pub def adoption_from_payload(body: JsonValue, label: str) -> Result[Adoption, s
     for field in ["name", "edition", "root"]:
         if len(string_member(facet, field)) == 0:
             return Err(f"{label}: rust.{field} is required")
+    # Adoptions made before RFC 119 stated `build-script` lack it; they read back as unstated, not as false.
+    mut build_script: Option[bool] = None
+    match facet.get("build-script"):
+        Some(value) =>
+            match value.as_bool():
+                Some(flag) => build_script = Some(flag)
+                None => return Err(f"{label}: rust.build-script must be true or false")
+        None => pass
     return Ok(Adoption(
         package=string_member(adopted, "package"),
         version=string_member(adopted, "version"),
@@ -453,6 +497,7 @@ pub def adoption_from_payload(body: JsonValue, label: str) -> Result[Adoption, s
         rust_name=string_member(facet, "name"),
         rust_type=kind,
         edition=string_member(facet, "edition"),
+        build_script=build_script,
         root=string_member(facet, "root"),
         features=table,
         dependencies=deps,
@@ -501,6 +546,13 @@ pub def render_adopted_manifest(adoption: Adoption) -> str:
     lines.append("name = " + json_string(adoption.rust_name))
     lines.append("type = " + json_string(adoption.rust_type))
     lines.append("edition = " + json_string(adoption.edition))
+    match adoption.build_script:
+        Some(flag) =>
+            if flag:
+                lines.append("build-script = true")
+            else:
+                lines.append("build-script = false")
+        None => pass
     if adoption.root != conventional_root():
         lines.append("")
         lines.append("[rust.source]")

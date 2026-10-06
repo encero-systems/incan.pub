@@ -206,11 +206,15 @@ pub def index_line(record: Record) -> JsonValue:
             line["cksum"] = member(payload, "archive")
             line["facets"] = JsonValue.array([JsonValue.string("rust")])
             mut facet = member(payload, "rust")
-            line["rust"] = JsonValue.object({
+            mut facet_line = JsonValue.object({
                 "name": member(facet, "name"),
                 "type": member(facet, "type"),
                 "edition": member(facet, "edition"),
             })
+            match facet.get("build-script"):
+                Some(flag) => facet_line.set("build-script", flag).unwrap()
+                None => pass
+            line["rust"] = facet_line
             line["deps"] = member(payload, "deps")
             line["features"] = member(payload, "features")
             line["adopted"] = member(payload, "adopted")

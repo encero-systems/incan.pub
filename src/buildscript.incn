@@ -20,6 +20,7 @@ from std.json import JsonValue
 from std.toml import TomlValue
 
 from canonical import canonical, digest_bytes, digest_text, pretty
+from adoption import declared_build_script
 from closure import crates_io_lines, find_line
 from events import member, string_list_member, string_member, write_text
 from graph import graph_text
@@ -113,25 +114,11 @@ def cargo_manifest(files: list[TarEntry], label: str) -> Result[TomlValue, str]:
 
 
 def build_script(manifest: TomlValue, files: list[TarEntry], label: str) -> Result[Option[str], str]:
-    """The build script's path: `package.build` when it names one, `build.rs` when present and not turned off."""
+    """The build script adoption records the package as declaring (`declared_build_script`)."""
     mut paths: list[str] = []
     for file in files:
         paths.append(file.path)
-    match manifest.get_optional[str]("package.build"):
-        Ok(found) =>
-            match found:
-                Some(path) =>
-                    if not paths.contains(path):
-                        return Err(f"{label}: package.build names `{path}`, which is not in the archive")
-                    return Ok(Some(path))
-                None => pass
-        Err(_) =>
-            match manifest.get_optional[bool]("package.build"):
-                Ok(_) => return Ok(None)
-                Err(error) => return Err(f"{label}: package.build: {error.message()}")
-    if paths.contains("build.rs"):
-        return Ok(Some("build.rs"))
-    return Ok(None)
+    return declared_build_script(manifest, paths, label)
 
 
 def build_dependencies(
