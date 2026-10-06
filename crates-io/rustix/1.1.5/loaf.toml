@@ -67,6 +67,13 @@ cfg = ["apple", "bsd", "libc", "lower_upper_exp_for_non_zero", "rustc_diagnostic
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["alloc", "default", "std"]
+cfg = ["apple", "bsd", "libc", "lower_upper_exp_for_non_zero", "rustc_diagnostics"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["alloc", "default", "fs", "std"]
 cfg = ["apple", "bsd", "libc", "lower_upper_exp_for_non_zero", "rustc_diagnostics"]
