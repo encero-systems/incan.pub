@@ -728,7 +728,23 @@ def test_every_object_compiles_a_source_and_every_source_is_compiled() -> None:
     ])).unwrap()
     assert_eq(
         producer_refusal(fact_with_producers([unread], [])),
-        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: source `spare_c` is compiled by no object; sources is the closure, not a bag",
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: source `spare_c` is named by no object's arguments or reads; sources is the closure, not a bag",
+    )
+    mut read = link_record()
+    read.set("sources", JsonValue.array([
+        source_artifact("helper_c", "c/helper.c"),
+        source_artifact("helper_h", "c/helper.h"),
+    ])).unwrap()
+    mut reading = object_record("helper.o", "helper_c")
+    reading.set("reads", JsonValue.array([JsonValue.string("helper_h")])).unwrap()
+    read.set("objects", JsonValue.array([reading])).unwrap()
+    assert_eq(producer_refusal(fact_with_producers([read], [])), "")
+    mut misread = object_record("helper.o", "helper_c")
+    misread.set("reads", JsonValue.array([JsonValue.string("absent_h")])).unwrap()
+    read.set("objects", JsonValue.array([misread])).unwrap()
+    assert_eq(
+        producer_refusal(fact_with_producers([read], [])),
+        "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: object `helper.o` reads `absent_h`, which is not a declared source",
     )
     mut collided = link_record()
     collided.set("objects", JsonValue.array([object_record("helper_c", "helper_c")])).unwrap()

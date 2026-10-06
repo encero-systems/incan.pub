@@ -335,8 +335,14 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
             "language": JsonValue.string(source_language(compile.source)?),
             "arguments": JsonValue.array(arguments),
         }))
+    # Every file a compile read must reach it: through an input its arguments name, or through its `reads`.
     if read_set:
-        covered(reads, sources, manifest_dir, out_dir, owner_root)?
+        mut index = 0
+        while index < len(objects):
+            implicit = implicit_reads(member_compiles[index].invocation.reads, objects[index], sources, manifest_dir, out_dir, owner_root)?
+            if len(implicit) > 0:
+                objects[index].set("reads", JsonValue.array([JsonValue.string(name) for name in implicit])).unwrap()
+            index += 1
     mut inputs: list[JsonValue] = []
     for name in sorted(list(sources.keys())):
         inputs.append(sources[name])
@@ -524,33 +530,69 @@ pub def tree_from_members(name: str, relative: str, members: list[list[str]]) ->
     }))
 
 
-def covered(reads: list[str], sources: Dict[str, JsonValue], manifest_dir: str, out_dir: str, owner_root: str) -> Result[None, str]:
-    """Every file the compiles read is a declared input or lies in the compiler's owner closure."""
-    mut files: list[str] = []
-    mut trees: list[str] = []
-    for name in sources.keys():
-        source = sources[name]
-        path = string_member(source, "path")
-        mut absolute = manifest_dir
-        if path != ".":
-            absolute = manifest_dir + "/" + path
-        if string_member(source, "kind") == "tree":
-            trees.append(absolute)
-        else:
-            files.append(absolute)
+def implicit_reads(
+    reads: list[str],
+    object: JsonValue,
+    mut sources: Dict[str, JsonValue],
+    manifest_dir: str,
+    out_dir: str,
+    owner_root: str,
+) -> Result[list[str], str]:
+    """
+    The declared sources one compile reads without its arguments naming them, sorted (RFC 119 `reads`). A file the
+    compile reads that no declared input holds becomes a declared file source. Reads from `OUT_DIR`, and reads outside
+    the package and the compiler's owner closure, are refused.
+    """
+    mut named: list[str] = []
+    match object.get("arguments"):
+        Some(arguments) =>
+            for argument in arguments.as_array().unwrap_or([]):
+                input = string_member(argument, "input")
+                if len(input) > 0:
+                    named.append(input)
+        None => pass
+    mut implicit: list[str] = []
     for path in reads:
         if beneath(path, out_dir):
-            return Err(f"the compiles read `{path}` from OUT_DIR, which cannot be adopted")
-        if beneath(path, manifest_dir):
-            mut found = files.contains(path)
-            for tree in trees:
-                if beneath(path, tree) and path != tree:
-                    found = true
-            if not found:
-                return Err(f"the compiles read `{path[len(manifest_dir) + 1:]}`, which no declared input covers")
-        elif not beneath(path, owner_root):
-            return Err(f"the compiles read `{path}`, outside the package and the compiler owner")
-    return Ok(None)
+            return Err(f"the compile reads `{path}` from OUT_DIR, which cannot be adopted")
+        if not beneath(path, manifest_dir):
+            if beneath(path, owner_root):
+                continue
+            return Err(f"the compile reads `{path}`, outside the package and the compiler owner")
+        holders = holding_sources(path, sources, manifest_dir)
+        mut reached = false
+        for holder in holders:
+            if named.contains(holder):
+                reached = true
+        if reached:
+            continue
+        mut name = ""
+        if len(holders) > 0:
+            name = holders[0]
+        else:
+            relative = portable_beneath(manifest_dir, path, "read file")?
+            name = logical_name("source", relative)
+            insert_source(sources, name, file_artifact(name, relative, path)?)?
+        if not implicit.contains(name):
+            implicit.append(name)
+    return Ok(sorted(implicit))
+
+
+def holding_sources(path: str, sources: Dict[str, JsonValue], manifest_dir: str) -> list[str]:
+    """The declared sources that hold `path`: the file itself, or a tree it lies in, by name."""
+    mut out: list[str] = []
+    for name in sorted(list(sources.keys())):
+        source = sources[name]
+        relative = string_member(source, "path")
+        mut absolute = manifest_dir
+        if relative != ".":
+            absolute = manifest_dir + "/" + relative
+        if string_member(source, "kind") == "tree":
+            if beneath(path, absolute) and path != absolute:
+                out.append(name)
+        elif absolute == path:
+            out.append(name)
+    return out
 
 
 def visit_tree(directory: str, prefix: str, mut members: list[list[str]]) -> Result[None, str]:

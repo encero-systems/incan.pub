@@ -620,7 +620,7 @@ def validate_objects(record: JsonValue, sources: list[str], label: str) -> Resul
     for object in objects:
         mut unknown: list[str] = []
         for key in sorted(object.keys()):
-            if not ["arguments", "language", "name"].contains(key):
+            if not ["arguments", "language", "name", "reads"].contains(key):
                 unknown.append(key)
         if len(unknown) > 0:
             listed = ", ".join(unknown)
@@ -642,13 +642,35 @@ def validate_objects(record: JsonValue, sources: list[str], label: str) -> Resul
         referenced = argument_references(arguments, "input")
         if len(referenced) == 0:
             return Err(f"{label}: object `{name}` argv must reference at least one declared source")
-        for source in referenced:
+        for source in referenced + object_reads(object, sources, name, label)?:
             if not compiled.contains(source):
                 compiled.append(source)
     for source in sources:
         if not compiled.contains(source):
-            return Err(f"{label}: source `{source}` is compiled by no object; sources is the closure, not a bag")
+            return Err(f"{label}: source `{source}` is named by no object's arguments or reads; sources is the closure, not a bag")
     return Ok(None)
+
+
+def object_reads(object: JsonValue, sources: list[str], name: str, label: str) -> Result[list[str], str]:
+    """
+    An object's `reads` (RFC 119): declared sources its compile reads without its arguments naming them, as its
+    dependency output reported at recording. Sorted, unique, and every one declared.
+    """
+    if not object.contains_key("reads"):
+        return Ok([])
+    mut out: list[str] = []
+    match string_list_member(object, "reads"):
+        Some(names) =>
+            if len(names) == 0:
+                return Err(f"{label}: object `{name}` reads is omitted when empty, never stated as []")
+            for read in names:
+                if not sources.contains(read):
+                    return Err(f"{label}: object `{name}` reads `{read}`, which is not a declared source")
+                if len(out) > 0 and not (out[len(out) - 1] < read):
+                    return Err(f"{label}: object `{name}` reads must be sorted and unique")
+                out.append(read)
+        None => return Err(f"{label}: object `{name}` reads must be a list of declared source names")
+    return Ok(out)
 
 
 def argument_references(arguments: list[JsonValue], key: str) -> list[str]:
