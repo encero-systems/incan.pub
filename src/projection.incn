@@ -184,6 +184,13 @@ pub def index_line(record: Record) -> JsonValue:
     for fact in record.sorted_facts():
         mut entry = fact.binding.to_json()
         entry.set("status", JsonValue.string(fact.status)).unwrap()
+        # A native fact applies only where its executables' owners are present (RFC 119 rule 6); a client picks among
+        # one binding's facts by the owners it has.
+        if len(fact.owners) > 0:
+            mut owners: list[JsonValue] = []
+            for owner in fact.owners:
+                owners.append(JsonValue.string(owner))
+            entry.set("owners", JsonValue.array(owners)).unwrap()
         facts.append(entry)
     mut line: Dict[str, JsonValue] = {
         "name": JsonValue.string(loaf_name(record.name)),

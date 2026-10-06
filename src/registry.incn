@@ -120,6 +120,19 @@ pub class Fact:
     pub comparable: str
     pub status: str
     pub attestations: list[Attestation]
+    pub owners: list[str]
+
+    def key(self) -> str:
+        return fact_key(self.binding, self.owners)
+
+
+pub def fact_key(binding: Binding, owners: list[str]) -> str:
+    """
+    How a fact is selected (RFC 119 rule 6): its binding, then the sorted owner identities of the executables its `link`
+    and `tool` records run, so one binding holds one fact per compiler owner. A fact with neither has no owners and
+    applies wherever its binding does. The tab keeps every fact of one binding together, owner-free first.
+    """
+    return binding.key() + "\t" + "\n".join(owners)
 
 
 @derive(Clone)

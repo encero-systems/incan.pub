@@ -8,7 +8,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
     incan-pub admit-drop DIR [--actor ACTOR] [--root DIR]
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
-                     --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
+                     --asset SHA --unit-identity SHA --attestation REF [--owners SHA,...] [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
     incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
@@ -32,7 +32,18 @@ store source Loaf archives are written to by digest.
 from std.fs import Path
 from std.json import JsonValue
 
-from admission import admit_asset, adopt_payload, adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
+from admission import (
+    admit_asset,
+    adopt_payload,
+    adopted_versions,
+    describe_binding,
+    describe_owners,
+    fact_owners,
+    replay,
+    replay_onto,
+    validate_binding,
+    validate_fact,
+)
 from adoption import adoption_payload, loaf_name
 from canonical import canonical, digest_bytes, is_sha256_identity, pretty
 from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
@@ -63,7 +74,7 @@ from projection import (
     unclaimed_generated_inputs,
     write_projections,
 )
-from registry import Record, builders, crates_io_index, has_key, keys_of, record_key
+from registry import Record, builders, crates_io_index, fact_key, has_key, keys_of, record_key
 
 
 def flags() -> list[str]:
@@ -401,7 +412,7 @@ def settle_binding(
     a refusal when it differs, unless `rewrite` replaces a record that is wrong because of a bug in place.
     """
     typed = validate_fact(fact, name, version, label, root)?
-    binding_key = typed.binding.key()
+    binding_key = typed.key()
     if create or not has_key(state[key].facts, binding_key):
         stage_graph(evidence, proposal_path.parent(), root)?
         return Ok("new")
@@ -409,10 +420,11 @@ def settle_binding(
         println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
         return Ok("no-op")
     if not rewrite:
-        return Err("the proposal's binding already has a different record; a fact is immutable")
+        return Err(f"the proposal's binding{describe_owners(typed.owners)} already has a different record; a fact is immutable")
     for event in load_events(root)?:
         if event.kind == "fact" and event.name == name and event.version == version:
-            if validate_binding(member(event.body, "fact"), event.label)?.key() == binding_key:
+            recorded = member(event.body, "fact")
+            if fact_key(validate_binding(recorded, event.label)?, fact_owners(recorded)) == binding_key:
                 stage_graph(evidence, proposal_path.parent(), root)?
                 rewrite_event(root, event.label, event.body, {"fact": fact, "evidence": evidence})?
                 println(f"rewritten: {event.label}")
@@ -522,13 +534,23 @@ def attest(invocation: Invocation) -> Result[None, str]:
         "features": JsonValue.array(feature_values),
     })
     typed = validate_binding(binding, "attest")?
+    mut owners: list[str] = []
+    for owner in invocation.option("owners").unwrap_or("").split(","):
+        if len(owner) > 0:
+            owners.append(owner)
+    owners = sorted(owners)
     root = invocation.root()
     state = replay(load_events(root)?, root)?
     key = record_key(name, version)
-    if not has_key(state, key) or not has_key(state[key].facts, typed.key()):
+    if not has_key(state, key) or not has_key(state[key].facts, fact_key(typed, owners)):
         return Err("attestation must name a published record and one of its bound facts")
     mut payload: Dict[str, JsonValue] = {}
     payload["binding"] = binding
+    if len(owners) > 0:
+        mut owner_values: list[JsonValue] = []
+        for owner in owners:
+            owner_values.append(JsonValue.string(owner))
+        payload["owners"] = JsonValue.array(owner_values)
     payload["attestation"] = JsonValue.object({
         "asset": JsonValue.string(invocation.require("asset")?),
         "unit_identity": JsonValue.string(invocation.require("unit-identity")?),

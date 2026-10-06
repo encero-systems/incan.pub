@@ -23,6 +23,7 @@ from registry import (
     binding_keys,
     builders,
     crates_io_index,
+    fact_key,
     fact_keys,
     has_key,
     profiles,
@@ -192,15 +193,22 @@ def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Recor
     if event.kind == "fact":
         validate_evidence(event.payload("evidence"), root, event.label)?
         fact = validate_fact(event.payload("fact"), event.name, event.version, event.label, root)?
-        binding_key = fact.binding.key()
-        if has_key(record.facts, binding_key):
-            if record.facts[binding_key].comparable != fact.comparable:
-                return Err(f"{event.label}: binding {describe_binding(fact.binding)} already has a different record; a fact is immutable")
+        selected = fact.key()
+        if has_key(record.facts, selected):
+            if record.facts[selected].comparable != fact.comparable:
+                return Err(f"{event.label}: binding {describe_binding(fact.binding)}{describe_owners(fact.owners)} already has a different record; a fact is immutable")
             return Ok(record)
-        record.facts[binding_key] = fact
+        record.facts[selected] = fact
     elif event.kind == "attest":
         binding = validate_binding(event.payload("binding"), event.label)?
-        binding_key = binding.key()
+        mut owners: list[str] = []
+        match string_list_member(event.body, "owners"):
+            Some(values) =>
+                if not sorted_unique(values):
+                    return Err(f"{event.label}: owners must be a sorted, unique list")
+                owners = values
+            None => pass
+        binding_key = fact_key(binding, owners)
         if not has_key(record.facts, binding_key):
             return Err(f"{event.label}: attestation names a binding with no fact record")
         attestation = event.payload("attestation")
@@ -259,7 +267,7 @@ pub def admit_asset(initial: Record, binding_value: JsonValue, asset: JsonValue,
     match record.adopt:
         Some(_) => pass
         None => return Err(f"{label}: an asset is compiled from an adopted source Loaf; {record.name} {record.version} is not adopted")
-    if len(record.facts) > 0 and not has_key(record.facts, binding.key()):
+    if len(record.facts) > 0 and not has_binding(record, binding):
         return Err(f"{label}: asset names a binding with no fact record; this record's units compile under its facts")
     unit_identity = string_member(asset, "unit_identity")
     archive = string_member(asset, "archive")
@@ -365,17 +373,51 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
                 return Err(f"{label}: harvested-from must be a `sha256:` receipt identity")
             harvested_from = Some(harvested)
         None => pass
+    link = producer_records(fact, "link", label)?
+    tool = producer_records(fact, "tool", label)?
     return Ok(Fact(
         binding=binding,
         cfg=cfg,
         out=out,
-        link=producer_records(fact, "link", label)?,
-        tool=producer_records(fact, "tool", label)?,
+        link=link,
+        tool=tool,
         harvested_from=harvested_from,
         comparable=fact_comparable(fact)?,
         status=status_harvested(),
         attestations=[],
+        owners=executable_owners(link + tool),
     ))
+
+
+pub def executable_owners(records: list[JsonValue]) -> list[str]:
+    """The sorted, unique owner identities of the executables `link` and `tool` records run."""
+    mut owners: list[str] = []
+    for record in records:
+        owner = string_member(member(record, "executable"), "owner")
+        if not owners.contains(owner):
+            owners.append(owner)
+    return sorted(owners)
+
+
+pub def fact_owners(fact: JsonValue) -> list[str]:
+    """`executable_owners` of a fact as it is written in an event."""
+    mut records: list[JsonValue] = []
+    for table in ["link", "tool"]:
+        match fact.get(table):
+            Some(value) =>
+                match value.as_array():
+                    Some(items) => records = records + items
+                    None => pass
+            None => pass
+    return executable_owners(records)
+
+
+def has_binding(record: Record, binding: Binding) -> bool:
+    """Whether any fact of the record, under whatever owners, holds for `binding`."""
+    for fact in record.sorted_facts():
+        if fact.binding.key() == binding.key():
+            return true
+    return false
 
 
 pub def fact_comparable(fact: JsonValue) -> Result[str, str]:
@@ -412,6 +454,14 @@ def is_stated_absence(value: JsonValue) -> bool:
 pub def describe_binding(binding: Binding) -> str:
     features = ", ".join(binding.features)
     return f"({binding.toolchain}, {binding.target}, {binding.profile}, [{features}])"
+
+
+pub def describe_owners(owners: list[str]) -> str:
+    """` under owners [...]` for a fact whose link or tool executables name owners; nothing for one without."""
+    if len(owners) == 0:
+        return ""
+    listed = ", ".join(owners)
+    return f" under owners [{listed}]"
 
 
 # ---------------------------------------------------------------- producers -------------------------------------

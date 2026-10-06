@@ -60,7 +60,7 @@ The vocabulary grows only with the compiler's `RustFactRecord`, because the rend
 | lists are sorted and duplicate-free; a logical name is claimed once per record | RFC 119 refuses ambiguity rather than resolving it by path or order |
 | an omitted key and a stated absence — an empty list or table — are one fact | an explicit "no linked libraries" and no key at all say the same thing, and the record renders both by omitting the key |
 | the value is derived from the observation alone | no capture ordering, no absolute path, no host-specific spelling: two harvests of one binding must produce the same bytes |
-| a repeated binding repeats the key exactly | immutability compares every fact key except the binding and `harvested-from`, so a key is immutable from the day it is admitted |
+| a repeated binding repeats the key exactly, per compiler owner | immutability compares every fact key except the binding and `harvested-from`, so a key is immutable from the day it is admitted. A fact with `link` or `tool` records is selected by its binding and the owner identities of their executables (RFC 119 rule 6), so one binding holds one such fact per owner: the same build recorded on another machine is another fact, not a conflict |
 
 A record declares work and its inputs; the product of that work is an `asset`. A declared `link` names its sources and the library it produces, not the built archive; the archive is an attested asset or the consumer's own bake.
 
