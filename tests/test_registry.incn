@@ -527,6 +527,8 @@ def test_an_asset_names_a_known_builder() -> None:
     payload["asset"] = JsonValue.object({
         "archive": JsonValue.string(digest_text("archive")),
         "unit_identity": JsonValue.string(digest_text("unit")),
+        "entry": JsonValue.string(digest_text("entry")),
+        "payload": JsonValue.string(digest_text("payload")),
         "builder": JsonValue.string("someone"),
         "attestation": JsonValue.string("attestations/1"),
     })

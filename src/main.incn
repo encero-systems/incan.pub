@@ -18,6 +18,10 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
                           [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
     incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
+    incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...]
+    incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]
+    incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
+    incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
@@ -28,7 +32,7 @@ store source Loaf archives are written to by digest.
 from std.fs import Path
 from std.json import JsonValue
 
-from admission import adopt_payload, adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
+from admission import admit_asset, adopt_payload, adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
 from adoption import adoption_payload, loaf_name
 from canonical import canonical, digest_bytes, is_sha256_identity, pretty
 from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
@@ -37,7 +41,8 @@ from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_su
 from buildscript import Selection, record_proposal
 from graph import stage_graph, unclaimed_graphs, validate_graph
 from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
-from oci import Layer, Registry, SOURCE_ARTIFACT, SOURCE_LAYER, SOURCE_REPOSITORY, push, repository, version_tag
+from oci import Layer, Registry, SOURCE_ARTIFACT, SOURCE_LAYER, SOURCE_REPOSITORY, anonymous_fetch, push, repository, version_tag
+from units import Packed, closure_units, pack_unit, push_units, read_units, write_units
 from events import (
     append_event,
     event_files,
@@ -58,7 +63,7 @@ from projection import (
     unclaimed_generated_inputs,
     write_projections,
 )
-from registry import Record, crates_io_index, has_key, keys_of, record_key
+from registry import Record, builders, crates_io_index, has_key, keys_of, record_key
 
 
 def flags() -> list[str]:
@@ -177,7 +182,15 @@ def run(arguments: list[str]) -> Result[None, str]:
         return native_convert(invocation)
     if invocation.command == "push-source":
         return push_source(invocation)
-    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise, adopt, readopt or record-fact")
+    if invocation.command == "pack-units":
+        return pack_units(invocation)
+    if invocation.command == "push-units":
+        return push_units_verb(invocation)
+    if invocation.command == "admit-assets":
+        return admit_assets(invocation)
+    if invocation.command == "fetch-sources":
+        return fetch_sources(invocation)
+    return Err(f"unknown command `{invocation.command}`; see the usage at the top of src/main.incn")
 
 
 def check(invocation: Invocation) -> Result[None, str]:
@@ -760,15 +773,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
         made = prepare(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?)?
         if made.archive != digest:
             return Err(f"{name} {version}: adoption no longer reproduces archive {digest}; push it from a blob store that holds it")
-    work = invocation.require("work")?
-    match Path(work).mkdir(parents=true, exist_ok=true):
-        Ok(_) => pass
-        Err(error) => return Err(f"{work}: {error.message()}")
-    registry = Registry(
-        host=invocation.option("registry").unwrap_or("ghcr.io"),
-        namespace=invocation.option("namespace").unwrap_or("encero-systems/incan.pub"),
-        work=work,
-    )
+    registry = registry_of(invocation)?
     repository_name = repository(registry, "crates-io", name)
     tag = version_tag(version)?
     layer = Layer(
@@ -781,9 +786,141 @@ def push_source(invocation: Invocation) -> Result[None, str]:
         "dev.incan.loaf.name": loaf_name(name),
         "dev.incan.loaf.version": version,
     }
-    pushed = push(registry, repository_name, tag, SOURCE_ARTIFACT, [layer], annotations)?
+    pushed = push(registry, repository_name, tag, SOURCE_ARTIFACT, [layer], annotations, false)?
     println(f"pushed: {registry.host}/{repository_name}:{tag} {pushed}")
     return Ok(None)
+
+
+def pack_units(invocation: Invocation) -> Result[None, str]:
+    """
+    Pack the units one `incan oven compile-closure` run compiled, one archive each, and list them in `units.json`.
+
+    `--only` keeps the units of the named `NAME@VERSION`s; each must match a unit the closure compiled.
+    """
+    if len(invocation.positional) != 1:
+        return Err("usage: incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...]")
+    closure = invocation.positional[0]
+    out = make_directory(invocation.require("out")?)?
+    mut only: list[str] = []
+    for item in invocation.option("only").unwrap_or("").split(","):
+        if len(item) > 0:
+            only.append(item)
+    mut packed: list[Packed] = []
+    mut matched: list[str] = []
+    for unit in closure_units(closure)?:
+        selector = unit.loaf[10:] + "@" + unit.version
+        if len(only) > 0 and not only.contains(selector):
+            continue
+        matched.append(selector)
+        item = pack_unit(closure + "/closure-store/store", unit, out)?
+        println(f"packed: {item.name} {item.version} {item.unit} {item.archive}")
+        packed.append(item)
+    for selector in only:
+        if not matched.contains(selector):
+            return Err(f"--only names {selector}, which the closure did not compile")
+    return write_units(out, packed)
+
+
+def push_units_verb(invocation: Invocation) -> Result[None, str]:
+    """Push packed units, one tag per binding, and write the asset proposals `admit-assets` records."""
+    if len(invocation.positional) != 1:
+        return Err("usage: incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]")
+    builder = invocation.require("builder")?
+    if not builders().contains(builder):
+        return Err("--builder must be publisher, registry or local")
+    attestation = invocation.require("attestation")?
+    proposals = make_directory(invocation.require("proposals")?)?
+    registry = registry_of(invocation)?
+    for line in push_units(registry, read_units(invocation.positional[0])?, builder, attestation, proposals)?:
+        println(f"pushed: {line}")
+    return Ok(None)
+
+
+def admit_assets(invocation: Invocation) -> Result[None, str]:
+    """
+    Record the asset proposals a bake wrote, then rebuild the projections.
+
+    Each proposal is decided against the folded log before anything is written, and its archive is then pulled
+    without credentials, as any consumer would, and must arrive with its digest: the index never names an asset that
+    is private, missing or other bytes.
+    """
+    if len(invocation.positional) != 1:
+        return Err("usage: incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]")
+    directory = invocation.positional[0]
+    root = invocation.root()
+    mut state = replay(load_events(root)?, root)?
+    work = make_directory(invocation.require("work")?)?
+    mut names: list[str] = []
+    match Path(directory).iterdir():
+        Ok(children) =>
+            for child in children:
+                if child.name().endswith(".json"):
+                    names.append(child.name())
+        Err(error) => return Err(f"{directory}: {error.message()}")
+    for file_name in sorted(names):
+        label = f"asset proposal {file_name}"
+        proposal = parse_event(read_text(Path(directory + "/" + file_name), file_name)?, label)?
+        name = string_member(proposal, "name")
+        version = string_member(proposal, "version")
+        key = record_key(name, version)
+        if not has_key(state, key):
+            return Err(f"{label}: {name} {version} has no record")
+        asset = member(proposal, "asset")
+        record = admit_asset(state[key], member(proposal, "binding"), asset, label)?
+        if len(record.assets) == len(state[key].assets):
+            println(f"no-op: {label} is already recorded")
+            continue
+        location = member(asset, "location")
+        source = Registry(host=string_member(location, "registry"), namespace="", work=work)
+        anonymous_fetch(source, string_member(location, "repository"), string_member(asset, "archive"), work + "/fetched.tar")?
+        mut payload: Dict[str, JsonValue] = {}
+        payload["binding"] = member(proposal, "binding")
+        payload["asset"] = asset
+        written = append_event(root, "asset", name, version, invocation.actor(), payload)?
+        state[key] = record
+        println(f"admitted asset: {written}")
+    return build(invocation)
+
+
+def fetch_sources(invocation: Invocation) -> Result[None, str]:
+    """
+    Put the source Loaf archive of every unit a resolution lock names into `--blobs`, pulled from the registry without
+    credentials and checked against the digest the lock gives it; an archive already there is kept.
+    """
+    if len(invocation.positional) != 1:
+        return Err("usage: incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
+    lock = parse_event(read_text(Path(invocation.positional[0]), invocation.positional[0])?, "lock")?
+    blobs = make_directory(invocation.require("blobs")? + "/sha256")?
+    registry = registry_of(invocation)?
+    match member(lock, "units").as_array():
+        Some(units) =>
+            for unit in units:
+                loaf = string_member(unit, "loaf")
+                digest = string_member(unit, "archive_digest")
+                if not loaf.startswith("crates-io/") or not is_sha256_identity(digest):
+                    return Err(f"lock: unit {canonical(unit)?} names no crates.io Loaf archive")
+                destination = blobs + "/" + digest[7:] + ".tar"
+                if not Path(destination).is_file():
+                    anonymous_fetch(registry, repository(registry, "crates-io", loaf[10:]), digest, destination)?
+                    version = string_member(unit, "version")
+                    println(f"fetched: {loaf} {version} {digest}")
+            return Ok(None)
+        None => return Err("lock: no `units`")
+
+
+def registry_of(invocation: Invocation) -> Result[Registry, str]:
+    """The registry `--registry` and `--namespace` name (GHCR under this repository by default), working in `--work`."""
+    return Ok(Registry(
+        host=invocation.option("registry").unwrap_or("ghcr.io"),
+        namespace=invocation.option("namespace").unwrap_or("encero-systems/incan.pub"),
+        work=make_directory(invocation.require("work")?)?,
+    ))
+
+
+def make_directory(path: str) -> Result[str, str]:
+    match Path(path).mkdir(parents=true, exist_ok=true):
+        Ok(_) => return Ok(path)
+        Err(error) => return Err(f"{path}: {error.message()}")
 
 
 def verify_archives(state: Dict[str, Record], blobs: Path) -> Result[list[str], str]:

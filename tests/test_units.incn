@@ -1,0 +1,225 @@
+"""
+Compiled units as assets: packing a store entry, tagging a binding, and admitting an asset onto an adopted record.
+"""
+
+from std.fs import Path
+from std.json import JsonValue, parse
+from std.tempfile import TemporaryDirectory
+from std.testing import assert_eq, assert_true
+
+from admission import replay
+from adoption import Adoption, adoption_payload, render_adopted_manifest
+from canonical import canonical, digest_bytes, digest_text
+from events import append_event, load_events, write_text
+from projection import render_projections
+from host import environment_value
+from registry import Binding, record_key
+from tar import read_archive
+from units import CompiledUnit, closure_units, pack_unit, unit_tag
+
+
+def error_of[T](result: Result[T, str]) -> str:
+    match result:
+        Ok(_) => return ""
+        Err(message) => return message
+
+
+def scratch(name: str) -> str:
+    """A fresh directory under the system temporary directory, as a path string."""
+    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/incan-pub-units-" + name
+    path = Path(location)
+    if path.is_dir():
+        path.remove_tree().unwrap()
+    path.mkdir(parents=true, exist_ok=true).unwrap()
+    return location
+
+
+def refusal(root: Path) -> str:
+    match replay(load_events(root).unwrap(), root):
+        Ok(_) => return ""
+        Err(message) => return message
+
+
+def leaf() -> Adoption:
+    return Adoption(
+        package="leaf",
+        version="1.2.0",
+        checksum=digest_text("leaf"),
+        rust_name="leaf",
+        rust_type="lib",
+        edition="2021",
+        root="src/lib.rs",
+        features={"default": []},
+        dependencies=[],
+    )
+
+
+def adopt_leaf(root: Path) -> None:
+    payload = adoption_payload(leaf(), digest_text(render_adopted_manifest(leaf())), digest_text("archive leaf"))
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", payload).unwrap()
+
+
+def binding_json(profile: str) -> JsonValue:
+    return JsonValue.object({
+        "toolchain": JsonValue.string("rustc 1.98.0 (88d9e12ae 2026-08-18)"),
+        "target": JsonValue.string("aarch64-apple-darwin"),
+        "profile": JsonValue.string(profile),
+        "features": JsonValue.array([JsonValue.string("default")]),
+    })
+
+
+def add_asset(root: Path, profile: str, unit: str, archive: str) -> None:
+    mut payload: Dict[str, JsonValue] = {}
+    payload["binding"] = binding_json(profile)
+    payload["asset"] = JsonValue.object({
+        "archive": JsonValue.string(digest_text(archive)),
+        "unit_identity": JsonValue.string(digest_text(unit)),
+        "entry": JsonValue.string(digest_text("entry " + unit)),
+        "payload": JsonValue.string(digest_text("payload " + unit)),
+        "builder": JsonValue.string("registry"),
+        "attestation": JsonValue.string("https://github.com/encero-systems/incan.pub/attestations/1"),
+        "location": JsonValue.object({
+            "registry": JsonValue.string("ghcr.io"),
+            "repository": JsonValue.string("encero-systems/incan.pub/crates-io/leaf"),
+            "tag": JsonValue.string("1.2.0-000000000000"),
+        }),
+    })
+    append_event(root, "asset", "leaf", "1.2.0", "tests", payload).unwrap()
+
+
+def test_an_asset_is_compiled_from_an_adopted_version_and_one_unit_has_one_archive() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt_leaf(root)
+    add_asset(root, "debug", "unit", "archive")
+    add_asset(root, "debug", "unit", "archive")
+    assert_eq(refusal(root), "")
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    assert_eq(len(state[record_key("leaf", "1.2.0")].assets), 1)
+    add_asset(root, "debug", "unit", "other archive")
+    assert_eq(
+        refusal(root),
+        "events/000004-asset-crates-io-leaf-1.2.0.json: unit " + digest_text("unit") + " already has asset " + digest_text("archive") + "; a second archive for one unit is a determinism conflict",
+    )
+    published = TemporaryDirectory.try_new().unwrap()
+    published_root = published.path()
+    mut publication: Dict[str, JsonValue] = {}
+    publication["source"] = JsonValue.object({
+        "registry": JsonValue.string("https://github.com/rust-lang/crates.io-index"),
+        "checksum": JsonValue.string(digest_text("leaf")),
+    })
+    publication["notes"] = JsonValue.string("")
+    append_event(published_root, "publish", "leaf", "1.2.0", "tests", publication).unwrap()
+    add_asset(published_root, "debug", "unit", "archive")
+    assert_eq(
+        refusal(published_root),
+        "events/000002-asset-crates-io-leaf-1.2.0.json: an asset is compiled from an adopted source Loaf; leaf 1.2.0 is not adopted",
+    )
+
+
+def test_an_asset_of_a_record_with_facts_names_one_of_their_bindings() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt_leaf(root)
+    mut fact = binding_json("release")
+    fact.set("cfg", JsonValue.array([])).unwrap()
+    mut payload: Dict[str, JsonValue] = {}
+    payload["fact"] = fact
+    payload["evidence"] = JsonValue.object({"method": JsonValue.string("test")})
+    append_event(root, "fact", "leaf", "1.2.0", "tests", payload).unwrap()
+    add_asset(root, "release", "release unit", "release archive")
+    assert_eq(refusal(root), "")
+    add_asset(root, "debug", "debug unit", "debug archive")
+    assert_eq(
+        refusal(root),
+        "events/000004-asset-crates-io-leaf-1.2.0.json: asset names a binding with no fact record; this record's units compile under its facts",
+    )
+
+
+def test_the_asset_manifest_lists_every_asset_beside_the_manifest() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt_leaf(root)
+    add_asset(root, "release", "b", "archive b")
+    add_asset(root, "debug", "a", "archive a")
+    files = render_projections(replay(load_events(root).unwrap(), root).unwrap()).unwrap()
+    manifest = parse(files["crates-io/leaf/1.2.0/assets.json"]).unwrap()
+    assets = manifest.get("assets").unwrap().as_array().unwrap()
+    assert_eq(len(assets), 2)
+    assert_eq(canonical(assets[0].get("binding").unwrap()).unwrap(), canonical(binding_json("debug")).unwrap())
+    assert_eq(assets[1].get("unit_identity").unwrap().as_str().unwrap(), digest_text("b"))
+    assert_eq(manifest.get("name").unwrap().as_str().unwrap(), "crates-io/leaf")
+    assert_true(files["index/crates-io/leaf"].contains("\"assets\":2"))
+
+
+def test_a_binding_tag_is_the_version_tag_and_twelve_hex_digits_of_the_binding() -> None:
+    binding = Binding(toolchain="rustc 1.98.0 (88d9e12ae 2026-08-18)", target="aarch64-apple-darwin", profile="debug", features=["default"])
+    digest = digest_text(canonical(binding.to_json()).unwrap())
+    assert_eq(unit_tag("2.1.0+zstd.1.5.7", binding).unwrap(), "2.1.0_zstd.1.5.7-" + digest[7:19])
+
+
+def entry_with(directory: str, rlib: bytes) -> CompiledUnit:
+    """A store entry as compile-closure leaves it, bookkeeping files included."""
+    payload = b"{\"loaf\":\"crates-io/leaf\"}"
+    tool = b"#!/bin/sh\n"
+    entry = digest_text("entry")
+    unit = digest_text("unit")
+    artifact = JsonValue.object({
+        "identity": JsonValue.string(entry),
+        "receipt_identity": JsonValue.string(unit),
+        "intent": binding_json("debug"),
+        "payload": JsonValue.object({"digest": JsonValue.string(digest_bytes(payload))}),
+        "materialized_files": JsonValue.array([
+            JsonValue.object({
+                "relative_path": JsonValue.string("libleaf.rlib"),
+                "digest": JsonValue.string(digest_bytes(b"rlib")),
+                "executable": JsonValue.bool(false),
+            }),
+            JsonValue.object({
+                "relative_path": JsonValue.string("bin/tool"),
+                "digest": JsonValue.string(digest_bytes(tool)),
+                "executable": JsonValue.bool(true),
+            }),
+        ]),
+    })
+    base = directory + "/store/entries/sha256-" + entry[7:]
+    Path(base + "/artifacts/bin").mkdir(parents=true, exist_ok=true).unwrap()
+    write_text(Path(base + "/artifact.json"), canonical(artifact).unwrap(), "artifact.json").unwrap()
+    Path(base + "/payload").write_bytes(payload).unwrap()
+    Path(base + "/artifacts/libleaf.rlib").write_bytes(rlib).unwrap()
+    Path(base + "/artifacts/bin/tool").write_bytes(tool).unwrap()
+    Path(base + "/last-used").write_bytes(b"1759780000").unwrap()
+    Path(base + "/.active.lock").write_bytes(b"").unwrap()
+    return CompiledUnit(loaf="crates-io/leaf", version="1.2.0", unit=unit, entry=entry)
+
+
+def test_a_store_entry_packs_into_one_deterministic_archive_without_bookkeeping() -> None:
+    store = scratch("pack")
+    unit = entry_with(store, b"rlib")
+    first = pack_unit(store + "/store", unit, store).unwrap()
+    second = pack_unit(store + "/store", unit, store).unwrap()
+    assert_eq(first.archive, second.archive)
+    assert_eq(first.name, "leaf")
+    assert_eq(first.binding.profile, "debug")
+    entries = read_archive(Path(first.path).read_bytes().unwrap()).unwrap()
+    mut paths: list[str] = []
+    for entry in entries:
+        paths.append(entry.path)
+        if entry.path == "artifacts/bin/tool":
+            assert_true(entry.executable)
+    assert_eq(", ".join(paths), "artifact.json, artifacts/bin/tool, artifacts/libleaf.rlib, payload")
+    corrupt_store = scratch("corrupt")
+    other = entry_with(corrupt_store, b"not the rlib")
+    assert_eq(
+        error_of(pack_unit(corrupt_store + "/store", other, corrupt_store)),
+        "crates-io/leaf 1.2.0: artifacts/libleaf.rlib does not have the digest artifact.json gives it",
+    )
+
+
+def test_a_closure_without_units_predates_them() -> None:
+    closure = scratch("closure")
+    write_text(Path(closure + "/closure.json"), "{\"externs\":{},\"refused\":[]}", "closure.json").unwrap()
+    assert_eq(
+        error_of(closure_units(closure)),
+        closure + "/closure.json: no `units`; it was written by a compile-closure that predates them",
+    )

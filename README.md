@@ -29,6 +29,7 @@ index
   events/NNNNNN-<kind>-<subject>.json      the append-only event log; the only thing that is authored
   index/crates-io/<name>                   projection: one JSON line per version, enough to resolve the whole graph
   crates-io/<name>/<version>/loaf.toml     projection: the adopted manifest followed by its bound facts
+  crates-io/<name>/<version>/assets.json   projection: the asset manifest, once a version has assets
   crates-io/<name>/<version>/out/...       committed generated inputs a fact names
   graphs/<hex>.json                        the resolutions facts were selected from: roots, target, host
 
@@ -36,7 +37,7 @@ blob store (outside git)
   sha256/<hex>.tar                         source Loaf archives by digest
 ```
 
-Nothing under `index/` or `crates-io/**/loaf.toml` is edited by hand: `incan-pub build` regenerates both from the events, and `incan-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
+Nothing under `index/`, `crates-io/**/loaf.toml` or `crates-io/**/assets.json` is edited by hand: `incan-pub build` regenerates both from the events, and `incan-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
 
 In this transport a commit is the signed event and `HEAD` of `index` is the checkpoint the toolchain pins. The signed HTTPS form of RFC 125 changes how these files arrive, not what they say.
 
@@ -50,7 +51,7 @@ cd ../incan.pub-index
 ../incan.pub/target/incan-pub adopt --records --cache <cache> --blobs <blob store>
 ```
 
-`adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, `readopt NAME VERSION ...` rewrites an adoption that is wrong because of a bug, and `record-fact NAME VERSION ...` records a build fact by running the build script sandboxed under one binding. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built on the Incan dev line; [AGENTS.md](AGENTS.md) says how.
+`adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, `readopt NAME VERSION ...` rewrites an adoption that is wrong because of a bug, and `record-fact NAME VERSION ...` records a build fact by running the build script sandboxed under one binding. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know, and `admit-assets DIR` records the compiled units a bake pushed to the registry. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built on the Incan dev line; [AGENTS.md](AGENTS.md) says how.
 
 ## How facts get here
 

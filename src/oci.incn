@@ -83,12 +83,27 @@ pub def descriptor(media_type: str, digest: str, size: int, annotations: Dict[st
     return JsonValue.object(fields)
 
 
-pub def push(registry: Registry, repository_name: str, tag: str, artifact_type: str, layers: list[Layer], annotations: Dict[str, str]) -> Result[str, str]:
-    """Upload every layer and the empty config unless present, then the manifest under `tag`; return its digest."""
+pub def push(
+    registry: Registry,
+    repository_name: str,
+    tag: str,
+    artifact_type: str,
+    layers: list[Layer],
+    annotations: Dict[str, str],
+    merge: bool,
+) -> Result[str, str]:
+    """
+    Upload every layer and the empty config unless present, then the manifest under `tag`; return its digest.
+
+    With `merge`, the layers the tag already lists are kept and the new ones are added after them, so a tag that names
+    a set (every unit compiled under one binding) grows instead of losing what an earlier push put there.
+    """
     token = bearer(registry, repository_name)?
     auth = registry.work + "/auth.curl"
     write_text(Path(auth), "header = \"Authorization: Bearer " + token + "\"\n", "auth.curl")?
     mut descriptors: list[JsonValue] = []
+    if merge:
+        descriptors = present_layers(registry, repository_name, tag, auth)?
     config = registry.work + "/config.json"
     write_text(Path(config), "{}", "config.json")?
     upload(registry, repository_name, auth, config)?
@@ -96,7 +111,8 @@ pub def push(registry: Registry, repository_name: str, tag: str, artifact_type: 
         data = read_bytes(layer.path)?
         digest = digest_bytes(data)
         upload(registry, repository_name, auth, layer.path)?
-        descriptors.append(descriptor(layer.media_type, digest, len(data), layer.annotations))
+        if not listed_digests(descriptors).contains(digest):
+            descriptors.append(descriptor(layer.media_type, digest, len(data), layer.annotations))
     body = canonical(manifest(artifact_type, descriptors, annotations))?
     manifest_path = registry.work + "/manifest.json"
     write_text(Path(manifest_path), body, "manifest.json")?
@@ -106,6 +122,62 @@ pub def push(registry: Registry, repository_name: str, tag: str, artifact_type: 
         return Err(f"{repository_name}:{tag}: the manifest was refused with HTTP {status}: {response_text(registry)}")
     remove(auth)
     return Ok(digest_bytes(body.encode()))
+
+
+def present_layers(registry: Registry, repository_name: str, tag: str, auth: str) -> Result[list[JsonValue], str]:
+    """The layer descriptors the manifest under `tag` lists; none when the tag does not exist yet."""
+    url = "https://" + registry.host + "/v2/" + repository_name + "/manifests/" + tag
+    status = curl(registry, ["-H", f"Accept: {MANIFEST_TYPE}", url], auth)?
+    if status == "404":
+        return Ok([])
+    if status != "200":
+        return Err(f"{repository_name}:{tag}: reading the manifest was refused with HTTP {status}: {response_text(registry)}")
+    match JsonValue.parse(response_text(registry)):
+        Ok(present) =>
+            match present.get("layers"):
+                Some(layers) =>
+                    match layers.as_array():
+                        Some(items) => return Ok(items)
+                        None => return Err(f"{repository_name}:{tag}: the manifest's layers are not a list")
+                None => return Ok([])
+        Err(error) => return Err(f"{repository_name}:{tag}: the manifest is not JSON: {error.message()}")
+
+
+def listed_digests(descriptors: list[JsonValue]) -> list[str]:
+    mut out: list[str] = []
+    for item in descriptors:
+        out.append(string_member(item, "digest"))
+    return out
+
+
+pub def anonymous_fetch(registry: Registry, repository_name: str, digest: str, destination: str) -> Result[None, str]:
+    """
+    Fetch one blob as any consumer would, without credentials, and write it to `destination` if it has `digest`.
+
+    A package GHCR created private answers this with 401, so an asset that only its pusher can read is caught here.
+    """
+    url = "https://" + registry.host + "/token?service=" + registry.host + "&scope=repository:" + repository_name + ":pull"
+    none = registry.work + "/anonymous.curl"
+    write_text(Path(none), "", "anonymous.curl")?
+    status = curl(registry, [url], none)?
+    if status != "200":
+        return Err(f"{repository_name}: the token endpoint answered HTTP {status} to an anonymous pull")
+    mut token = ""
+    match JsonValue.parse(response_text(registry)):
+        Ok(answer) => token = string_member(answer, "token")
+        Err(error) => return Err(f"{repository_name}: the token endpoint answered no JSON: {error.message()}")
+    auth = registry.work + "/anonymous-auth.curl"
+    write_text(Path(auth), "header = \"Authorization: Bearer " + token + "\"\nlocation\n", "anonymous-auth.curl")?
+    fetched = curl(registry, ["https://" + registry.host + "/v2/" + repository_name + "/blobs/" + digest], auth)?
+    remove(auth)
+    if fetched != "200":
+        return Err(f"{repository_name}: an anonymous pull of {digest} answered HTTP {fetched}; is the package public?")
+    data = read_bytes(registry.work + "/response.body")?
+    if digest_bytes(data) != digest:
+        return Err(f"{repository_name}: an anonymous pull of {digest} returned other bytes")
+    match Path(destination).write_bytes(data):
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(f"{destination}: {error.message()}")
 
 
 def upload(registry: Registry, repository_name: str, auth: str, path: str) -> Result[None, str]:

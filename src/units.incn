@@ -1,0 +1,268 @@
+"""
+Compiled units as registry assets: one Oven store entry, packed into one deterministic archive.
+
+`incan oven compile-closure` leaves every unit it compiled in its store, one entry per unit, and lists them in the
+`units` of its `closure.json`: the Loaf, version, domain, features and profile, the unit identity (the entry's receipt
+identity) and the entry identity. An asset is one unit. Its archive holds what Oven's import verifies, and nothing
+else: the entry's `artifact.json`, its `payload`, and each file `artifact.json` lists under `artifacts/`, written with
+the rules of a source Loaf archive. Store bookkeeping (`last-used`, locks, byte caches) is no part of an entry. The
+binding an asset is filed under is the entry's `intent`: toolchain, target, profile and features.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+
+from admission import validate_binding
+from adoption import loaf_name
+from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, pretty
+from events import member, string_member, write_text
+from oci import Layer, Registry, SOURCE_REPOSITORY, push, repository, version_tag
+from registry import Binding
+from tar import TarEntry, write_archive
+
+pub const UNIT_ARTIFACT: str = "application/vnd.incan.unit.v1"
+pub const UNIT_LAYER: str = "application/vnd.incan.unit.v1.tar"
+
+
+@derive(Clone)
+pub model CompiledUnit:
+    """One unit a closure compiled: its Loaf and version, its unit identity and the store entry holding it."""
+
+    pub loaf: str
+    pub version: str
+    pub unit: str
+    pub entry: str
+
+
+@derive(Clone)
+pub model Packed:
+    """One unit's archive: the crates.io package it belongs to, its identities, its binding and the archive file."""
+
+    pub name: str
+    pub version: str
+    pub unit: str
+    pub entry: str
+    pub payload: str
+    pub binding: Binding
+    pub archive: str
+    pub path: str
+
+
+pub def closure_units(closure: str) -> Result[list[CompiledUnit], str]:
+    """The `units` of a `closure.json`; a closure that refused anything has no units to publish."""
+    value = read_json(closure + "/closure.json")?
+    refused = member(value, "refused")
+    if refused.is_array() and refused.len() > 0:
+        return Err(f"{closure}/closure.json: the closure refused {canonical(refused)?}")
+    match member(value, "units").as_array():
+        Some(items) =>
+            mut out: list[CompiledUnit] = []
+            for item in items:
+                unit = CompiledUnit(
+                    loaf=string_member(item, "loaf"),
+                    version=string_member(item, "version"),
+                    unit=string_member(item, "unit"),
+                    entry=string_member(item, "entry"),
+                )
+                if not unit.loaf.startswith("crates-io/") or len(unit.version) == 0:
+                    return Err(f"{closure}/closure.json: unit {canonical(item)?} names no adopted crates.io Loaf")
+                if not is_sha256_identity(unit.unit) or not is_sha256_identity(unit.entry):
+                    return Err(f"{closure}/closure.json: unit {unit.loaf} {unit.version} has no `sha256:` identities")
+                out.append(unit)
+            return Ok(out)
+        None => return Err(f"{closure}/closure.json: no `units`; it was written by a compile-closure that predates them")
+
+
+pub def pack_unit(store: str, unit: CompiledUnit, out: str) -> Result[Packed, str]:
+    """
+    Pack one store entry as `<out>/<archive hex>.tar`.
+
+    Every file is checked against the digest `artifact.json` gives it before it is packed, so an archive never carries
+    an entry the store itself would refuse.
+    """
+    label = f"{unit.loaf} {unit.version}"
+    directory = store + "/entries/sha256-" + unit.entry[7:]
+    artifact_bytes = read_bytes(directory + "/artifact.json")?
+    artifact = parse_json(artifact_bytes, directory + "/artifact.json")?
+    if string_member(artifact, "identity") != unit.entry or string_member(artifact, "receipt_identity") != unit.unit:
+        return Err(f"{label}: store entry {unit.entry} does not hold unit {unit.unit}")
+    binding = validate_binding(member(artifact, "intent"), f"{label} intent")?
+    payload_bytes = read_bytes(directory + "/payload")?
+    payload = string_member(member(artifact, "payload"), "digest")
+    if digest_bytes(payload_bytes) != payload:
+        return Err(f"{label}: the entry's payload is not {payload}")
+    mut entries: list[TarEntry] = [
+        TarEntry(path="artifact.json", executable=false, data=artifact_bytes),
+        TarEntry(path="payload", executable=false, data=payload_bytes),
+    ]
+    entries = entries + materialized_files(artifact, directory, label)?
+    archive = write_archive(entries)?
+    digest = digest_bytes(archive)
+    path = out + "/" + digest[7:] + ".tar"
+    match Path(path).write_bytes(archive):
+        Ok(_) => pass
+        Err(error) => return Err(f"{path}: {error.message()}")
+    return Ok(Packed(
+        name=unit.loaf[10:],
+        version=unit.version,
+        unit=unit.unit,
+        entry=unit.entry,
+        payload=payload,
+        binding=binding,
+        archive=digest,
+        path=path,
+    ))
+
+
+def materialized_files(artifact: JsonValue, directory: str, label: str) -> Result[list[TarEntry], str]:
+    """The files `artifact.json` lists, read from `artifacts/` and checked against their digests."""
+    mut out: list[TarEntry] = []
+    match member(artifact, "materialized_files").as_array():
+        Some(files) =>
+            for file in files:
+                relative = string_member(file, "relative_path")
+                if len(relative) == 0 or relative.startswith("/") or relative.contains(".."):
+                    return Err(f"{label}: artifact.json lists the file `{relative}`")
+                data = read_bytes(directory + "/artifacts/" + relative)?
+                if digest_bytes(data) != string_member(file, "digest"):
+                    return Err(f"{label}: artifacts/{relative} does not have the digest artifact.json gives it")
+                executable = member(file, "executable").as_bool().unwrap_or(false)
+                out.append(TarEntry(path="artifacts/" + relative, executable=executable, data=data))
+            return Ok(out)
+        None => return Err(f"{label}: artifact.json lists no `materialized_files`")
+
+
+pub def unit_tag(version: str, binding: Binding) -> Result[str, str]:
+    """A binding's tag: the version's tag, `-`, and the first 12 hex digits of the binding's canonical JSON digest."""
+    tag = version_tag(version)? + "-" + digest_text(canonical(binding.to_json())?)[7:19]
+    if len(tag) > 128:
+        return Err(f"version `{version}` is too long to tag a binding")
+    return Ok(tag)
+
+
+pub def push_units(registry: Registry, packed: list[Packed], builder: str, attestation: str, proposals: str) -> Result[list[str], str]:
+    """
+    Push every binding's units under that binding's tag, one layer per unit, and write one asset proposal per unit.
+
+    A tag gathers every unit compiled under its binding, whatever closure compiled it, so a push adds its layers to
+    those the tag already lists. The proposals are what `admit-assets` records on the index.
+    """
+    mut groups: Dict[str, list[Packed]] = {}
+    for item in packed:
+        key = item.name + "\t" + item.version + "\t" + item.binding.key()
+        mut members: list[Packed] = []
+        if key in groups:
+            members = groups[key]
+        members.append(item)
+        groups[key] = members
+    mut pushed: list[str] = []
+    for key in sorted(list(groups.keys())):
+        members = groups[key]
+        first = members[0]
+        repository_name = repository(registry, "crates-io", first.name)
+        binding_text = canonical(first.binding.to_json())?
+        tag = unit_tag(first.version, first.binding)?
+        mut layers: list[Layer] = []
+        for item in members:
+            layers.append(Layer(path=item.path, media_type=UNIT_LAYER, annotations={
+                "org.opencontainers.image.title": f"{item.name}-{item.version}-{item.unit[7:19]}.tar",
+                "dev.incan.unit.identity": item.unit,
+                "dev.incan.unit.entry": item.entry,
+                "dev.incan.binding": binding_text,
+            }))
+        annotations: Dict[str, str] = {
+            "org.opencontainers.image.source": SOURCE_REPOSITORY,
+            "dev.incan.loaf.name": loaf_name(first.name),
+            "dev.incan.loaf.version": first.version,
+            "dev.incan.binding": binding_text,
+        }
+        manifest_digest = push(registry, repository_name, tag, UNIT_ARTIFACT, layers, annotations, true)?
+        location = JsonValue.object({
+            "registry": JsonValue.string(registry.host),
+            "repository": JsonValue.string(repository_name),
+            "tag": JsonValue.string(tag),
+        })
+        for item in members:
+            proposal = JsonValue.object({
+                "name": JsonValue.string(item.name),
+                "version": JsonValue.string(item.version),
+                "binding": item.binding.to_json(),
+                "asset": JsonValue.object({
+                    "archive": JsonValue.string(item.archive),
+                    "unit_identity": JsonValue.string(item.unit),
+                    "entry": JsonValue.string(item.entry),
+                    "payload": JsonValue.string(item.payload),
+                    "builder": JsonValue.string(builder),
+                    "attestation": JsonValue.string(attestation),
+                    "location": location,
+                }),
+            })
+            write_text(Path(proposals + "/" + item.archive[7:] + ".json"), pretty(proposal)? + "\n", "asset proposal")?
+        pushed.append(f"{registry.host}/{repository_name}:{tag} {manifest_digest}")
+    return Ok(pushed)
+
+
+pub def packed_json(packed: Packed) -> JsonValue:
+    """One line of `units.json`, the list `pack-units` leaves beside the archives for `push-units`."""
+    return JsonValue.object({
+        "name": JsonValue.string(packed.name),
+        "version": JsonValue.string(packed.version),
+        "unit": JsonValue.string(packed.unit),
+        "entry": JsonValue.string(packed.entry),
+        "payload": JsonValue.string(packed.payload),
+        "binding": packed.binding.to_json(),
+        "archive": JsonValue.string(packed.archive),
+    })
+
+
+pub def packed_from_json(value: JsonValue, directory: str) -> Result[Packed, str]:
+    archive = string_member(value, "archive")
+    if not is_sha256_identity(archive):
+        return Err(f"{directory}/units.json: an archive is not a `sha256:` identity")
+    return Ok(Packed(
+        name=string_member(value, "name"),
+        version=string_member(value, "version"),
+        unit=string_member(value, "unit"),
+        entry=string_member(value, "entry"),
+        payload=string_member(value, "payload"),
+        binding=validate_binding(member(value, "binding"), f"{directory}/units.json")?,
+        archive=archive,
+        path=directory + "/" + archive[7:] + ".tar",
+    ))
+
+
+pub def write_units(directory: str, packed: list[Packed]) -> Result[None, str]:
+    mut items: list[JsonValue] = []
+    for item in packed:
+        items.append(packed_json(item))
+    return write_text(Path(directory + "/units.json"), pretty(JsonValue.array(items))? + "\n", "units.json")
+
+
+pub def read_units(directory: str) -> Result[list[Packed], str]:
+    value = read_json(directory + "/units.json")?
+    mut out: list[Packed] = []
+    match value.as_array():
+        Some(items) =>
+            for item in items:
+                out.append(packed_from_json(item, directory)?)
+        None => return Err(f"{directory}/units.json: not a list")
+    return Ok(out)
+
+
+def read_json(path: str) -> Result[JsonValue, str]:
+    return parse_json(read_bytes(path)?, path)
+
+
+def parse_json(data: bytes, path: str) -> Result[JsonValue, str]:
+    match data.decode():
+        Ok(text) =>
+            match JsonValue.parse(text):
+                Ok(value) => return Ok(value)
+                Err(error) => return Err(f"{path}: {error.message()}")
+        Err(_) => return Err(f"{path}: not UTF-8")
+
+
+def read_bytes(path: str) -> Result[bytes, str]:
+    match Path(path).read_bytes():
+        Ok(data) => return Ok(data)
+        Err(error) => return Err(f"{path}: {error.message()}")

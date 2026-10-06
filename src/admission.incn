@@ -220,22 +220,7 @@ def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Recor
         fact.status = status_attested()
         record.facts[binding_key] = fact
     elif event.kind == "asset":
-        asset = event.payload("asset")
-        for field in ["archive", "unit_identity", "builder", "attestation"]:
-            if len(string_member(asset, field)) == 0:
-                return Err(f"{event.label}: asset requires `{field}`")
-        if not builders().contains(string_member(asset, "builder")):
-            return Err(f"{event.label}: asset builder must be publisher, registry or local")
-        binding = validate_binding(event.payload("binding"), event.label)?
-        if not has_key(record.facts, binding.key()):
-            return Err(f"{event.label}: asset names a binding with no fact record")
-        record.assets.append(Asset(
-            binding=binding,
-            archive=string_member(asset, "archive"),
-            unit_identity=string_member(asset, "unit_identity"),
-            builder=string_member(asset, "builder"),
-            attestation=string_member(asset, "attestation"),
-        ))
+        record = admit_asset(record, event.payload("binding"), event.payload("asset"), event.label)?
     elif event.kind == "yank":
         record.yanked = true
     elif event.kind == "unyank":
@@ -245,6 +230,54 @@ def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Recor
         if len(string_member(advisory, "text").strip()) == 0:
             return Err(f"{event.label}: an advisory carries a non-empty `text`")
         record.advisories.append(advisory)
+    return Ok(record)
+
+
+pub def admit_asset(initial: Record, binding_value: JsonValue, asset: JsonValue, label: str) -> Result[Record, str]:
+    """
+    Add one baked unit to an adopted record, or return the record unchanged when it already holds that very asset.
+
+    A unit compiles from the adopted source Loaf, so the version must be adopted. A record with bound facts was compiled
+    under them, so the asset's binding must be one of them; a record with none has no build script to answer for. One
+    unit identity names one archive: a second archive for it is a determinism conflict and is refused, so a consumer
+    is never offered two payloads for one identity (RFC 125).
+    """
+    mut record = initial
+    for field in ["archive", "unit_identity", "entry", "payload", "builder", "attestation"]:
+        if len(string_member(asset, field)) == 0:
+            return Err(f"{label}: asset requires `{field}`")
+    for field in ["archive", "unit_identity", "entry", "payload"]:
+        if not is_sha256_identity(string_member(asset, field)):
+            return Err(f"{label}: asset `{field}` must be a `sha256:` identity")
+    if not builders().contains(string_member(asset, "builder")):
+        return Err(f"{label}: asset builder must be publisher, registry or local")
+    location = member(asset, "location")
+    for field in ["registry", "repository", "tag"]:
+        if len(string_member(location, field)) == 0:
+            return Err(f"{label}: asset location requires `{field}`")
+    binding = validate_binding(binding_value, label)?
+    match record.adopt:
+        Some(_) => pass
+        None => return Err(f"{label}: an asset is compiled from an adopted source Loaf; {record.name} {record.version} is not adopted")
+    if len(record.facts) > 0 and not has_key(record.facts, binding.key()):
+        return Err(f"{label}: asset names a binding with no fact record; this record's units compile under its facts")
+    unit_identity = string_member(asset, "unit_identity")
+    archive = string_member(asset, "archive")
+    for present in record.assets:
+        if present.unit_identity == unit_identity:
+            if present.archive == archive:
+                return Ok(record)
+            return Err(f"{label}: unit {unit_identity} already has asset {present.archive}; a second archive for one unit is a determinism conflict")
+    record.assets.append(Asset(
+        binding=binding,
+        archive=archive,
+        unit_identity=unit_identity,
+        entry=string_member(asset, "entry"),
+        payload=string_member(asset, "payload"),
+        builder=string_member(asset, "builder"),
+        attestation=string_member(asset, "attestation"),
+        location=location,
+    ))
     return Ok(record)
 
 

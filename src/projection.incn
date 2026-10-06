@@ -9,7 +9,7 @@ from std.fs import Path
 from std.json import JsonValue
 
 from adoption import adoption_from_payload, loaf_name, render_adopted_manifest
-from canonical import canonical, json_string
+from canonical import canonical, json_string, pretty
 from events import member, read_text, string_member, write_text
 from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
 
@@ -215,6 +215,34 @@ pub def index_line(record: Record) -> JsonValue:
     return JsonValue.object(line)
 
 
+pub def render_asset_manifest(record: Record) -> Result[str, str]:
+    """
+    The per-version asset manifest (RFC 125): every admitted asset with its binding, archive digest, unit and entry
+    identities, payload digest, builder kind, attestation and registry location, ordered by binding and unit. A client
+    decides from it which units it can fetch before it downloads anything.
+    """
+    mut by_key: Dict[str, JsonValue] = {}
+    for asset in record.assets:
+        by_key[asset.binding.key() + "\n\n" + asset.unit_identity] = asset.to_json()
+    mut assets: list[JsonValue] = []
+    for key in sorted(keys_of(by_key)):
+        assets.append(by_key[key])
+    return Ok(pretty(JsonValue.object({
+        "name": JsonValue.string(loaf_name(record.name)),
+        "vers": JsonValue.string(record.version),
+        "assets": JsonValue.array(assets),
+    }))? + "\n")
+
+
+def is_projection_file(path: str) -> bool:
+    """
+    `crates-io/<name>/<version>/loaf.toml` and the `assets.json` beside it are rendered; everything else under a version
+    is a generated input, `out/assets.json` included.
+    """
+    parts = path.split("/")
+    return len(parts) == 4 and (parts[3] == "loaf.toml" or parts[3] == "assets.json")
+
+
 pub def index_path(name: str) -> str:
     """Where a package's index file lives: `index/<scope>/<name>` (RFC 125), every package here in `crates-io`."""
     return "index/" + loaf_name(name)
@@ -227,6 +255,8 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
     for key in sorted(keys_of(state)):
         record = state[key]
         files[f"crates-io/{record.name}/{record.version}/loaf.toml"] = render_manifest(record)?
+        if len(record.assets) > 0:
+            files[f"crates-io/{record.name}/{record.version}/assets.json"] = render_asset_manifest(record)?
         mut versions: list[str] = []
         if has_key(versions_by_name, record.name):
             versions = versions_by_name[record.name]
@@ -273,7 +303,7 @@ def collect_files(directory: Path, relative: str, mut files: Dict[str, str], man
                 child_relative = relative + "/" + child.name()
                 if child.is_dir():
                     collect_files(child, child_relative, files, manifests_only)?
-                elif child.is_file() and (not manifests_only or child.name() == "loaf.toml"):
+                elif child.is_file() and (not manifests_only or is_projection_file(child_relative)):
                     files.insert(child_relative, read_text(child, child_relative)?)
             return Ok(None)
         Err(error) => return Err(f"{relative}/: {error.message()}")
@@ -296,7 +326,7 @@ pub def unclaimed_generated_inputs(root: Path, state: Dict[str, Record]) -> Resu
     collect_paths(root / "crates-io", "crates-io", committed)?
     mut unclaimed: list[str] = []
     for path in sorted(committed):
-        if not path.endswith("/loaf.toml") and not claimed.contains(path):
+        if not is_projection_file(path) and not claimed.contains(path):
             unclaimed.append(path)
     return Ok(unclaimed)
 

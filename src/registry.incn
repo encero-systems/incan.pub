@@ -124,13 +124,31 @@ pub class Fact:
 
 @derive(Clone)
 pub class Asset:
-    """A baked unit available for one binding."""
+    """
+    A baked unit available for one binding: the archive holding its store entry, the unit and entry identities and
+    payload digest inside it, who built it and on what attestation, and where the archive is pushed.
+    """
 
     pub binding: Binding
     pub archive: str
     pub unit_identity: str
+    pub entry: str
+    pub payload: str
     pub builder: str
     pub attestation: str
+    pub location: JsonValue
+
+    def to_json(self) -> JsonValue:
+        return JsonValue.object({
+            "binding": self.binding.to_json(),
+            "archive": JsonValue.string(self.archive),
+            "unit_identity": JsonValue.string(self.unit_identity),
+            "entry": JsonValue.string(self.entry),
+            "payload": JsonValue.string(self.payload),
+            "builder": JsonValue.string(self.builder),
+            "attestation": JsonValue.string(self.attestation),
+            "location": self.location,
+        })
 
 
 @derive(Clone)
