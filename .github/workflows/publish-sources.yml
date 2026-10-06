@@ -2,7 +2,8 @@ name: publish-sources
 
 # Push adopted versions' source Loaf archives to the GitHub Container Registry, as packages linked to this repository.
 # Each archive is rebuilt by adoption on the runner and must have exactly the digest the index names. The tool is the
-# binary the check workflow published for this commit (`toolchain/incan-pub:<commit>-<triple>`).
+# binary the check workflow published for this commit's tool key (`toolchain/incan-pub:<tool key>-<triple>`; see
+# check.yml).
 
 on:
   workflow_dispatch:
@@ -19,6 +20,10 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out the tool
+        uses: actions/checkout@v4
+        with:
+          path: tool
       - name: Check out the index branch
         uses: actions/checkout@v4
         with:
@@ -28,9 +33,10 @@ jobs:
         uses: oras-project/setup-oras@v1
       - name: Download the tool
         run: |
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$GITHUB_SHA-x86_64-unknown-linux-gnu" \
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-x86_64-unknown-linux-gnu" \
             --output "$RUNNER_TEMP/tool" \
-            || { echo "::error::no incan-pub binary for $GITHUB_SHA yet; the check workflow publishes it when it passes"; exit 1; }
+            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       - name: Push the source Loaf archives
         working-directory: index

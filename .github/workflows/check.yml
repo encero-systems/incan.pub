@@ -1,9 +1,11 @@
 name: check
 
 # Test and build the tool on every OS a workflow runs it on, admit the published log with it, and on a push to main
-# publish the binary as `ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:<commit>-<target triple>`. The bake and
+# publish the binary as `ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:<tool key>-<target triple>`. The bake and
 # publish-sources workflows pull that binary instead of building the tool, which from an empty Oven home spends most
-# of a run compiling the standard library.
+# of a run compiling the standard library. The tool key is the git hash of the listing of everything the binary is
+# built from: build.sh, loaf.toml, oven.lock, src, tests, and this file, which pins the compiler. A commit that changes
+# none of them, a workflow edit say, keeps the key and so the binary.
 
 on:
   push:
@@ -76,11 +78,13 @@ jobs:
           REGISTRY_USER: ${{ github.actor }}
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
           tar -czf incan-pub.tar.gz -C tool/target incan-pub
           printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
-          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$GITHUB_SHA-$TRIPLE" \
+          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" \
             --artifact-type application/vnd.incan.tool.v1 \
             --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
             --annotation "dev.incan.tool.commit=$GITHUB_SHA" \
+            --annotation "dev.incan.tool.key=$key" \
             --annotation "dev.incan.toolchain.target=$TRIPLE" \
             incan-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip
