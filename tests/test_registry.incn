@@ -11,10 +11,10 @@ from std.json import JsonValue, parse
 from std.tempfile import TemporaryDirectory
 from std.testing import assert_eq, assert_is_err, assert_true
 
-from admission import fact_comparable, replay
+from admission import fact_comparable, replay, replay_onto
 from canonical import canonical, digest_text, is_sha256_identity, pretty
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
-from events import append_event, event_id, load_events, string_list_member, write_text
+from events import append_event, event_id, load_events, load_events_after, string_list_member, write_text
 from projection import (
     committed_projections,
     render_projections,
@@ -802,4 +802,31 @@ def test_an_argument_may_point_into_the_owner_the_executable_names() -> None:
         producer_refusal(fact_with_producers([absolute], [])),
         "events/000002-fact-crates-io-libm-0.2.16.json: link `helper`: object `helper.o`: owner argument `/Library/Developer/CommandLineTools` must be a plain owner-relative path",
     )
+
+
+# ---------------------------------------------------------------- incremental fold ------------------------------
+
+
+def test_folding_a_prefix_then_the_rest_equals_folding_the_whole_log() -> None:
+    """
+    A drop folds the log once and then only what each proposal appends, so the two must agree at every split.
+
+    The log mixes a publish, facts, an attestation, an advisory and a yank, so every rule the fold applies is
+    exercised on both sides of each split point.
+    """
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    add_fact(root, fact_with("release", ["arch_enabled", "optimizations_enabled"]))
+    add_fact(root, fact_with("debug", ["arch_enabled"]))
+    attest_release(root, digest_text("asset"))
+    mut advisory: Dict[str, JsonValue] = {}
+    advisory["advisory"] = JsonValue.object({"text": JsonValue.string("A note for consumers.")})
+    append_event(root, "advisory", "libm", "0.2.16", "tests", advisory).unwrap()
+    append_event(root, "yank", "libm", "0.2.16", "tests", {}).unwrap()
+    whole = render_projections(replay(load_events(root).unwrap(), root).unwrap()).unwrap()
+    for split in range(7):
+        prefix = load_events(root).unwrap()[0:split]
+        folded = replay_onto(replay(prefix, root).unwrap(), load_events_after(root, split).unwrap(), root).unwrap()
+        assert_eq(render_projections(folded).unwrap(), whole)
 

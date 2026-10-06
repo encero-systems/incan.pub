@@ -18,11 +18,21 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
 from std.fs import Path
 from std.json import JsonValue
 
-from admission import describe_binding, replay, validate_binding, validate_fact
+from admission import describe_binding, replay, replay_onto, validate_binding, validate_fact
 from canonical import is_sha256_identity
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
-from events import append_event, load_events, member, parse_event, read_text, string_list_member, string_member
+from events import (
+    append_event,
+    event_files,
+    load_events,
+    load_events_after,
+    member,
+    parse_event,
+    read_text,
+    string_list_member,
+    string_member,
+)
 from host import argv
 from projection import (
     committed_projections,
@@ -213,8 +223,10 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
     match invocation.option("notes"):
         Some(file) => notes_override = Some(read_text(Path(file), file)?.strip())
         None => pass
+    root = invocation.root()
     admit_proposal(
-        invocation.root(),
+        root,
+        replay(load_events(root)?, root)?,
         Path(invocation.positional[0]),
         invocation.actor(),
         invocation.flag("publish"),
@@ -223,12 +235,19 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
     return build(invocation)
 
 
-def admit_proposal(root: Path, proposal_path: Path, actor: str, publish: bool, notes_override: Option[str]) -> Result[str, str]:
+def admit_proposal(
+    root: Path,
+    state: Dict[str, Record],
+    proposal_path: Path,
+    actor: str,
+    publish: bool,
+    notes_override: Option[str],
+) -> Result[str, str]:
     """
-    Admit one harvest proposal, returning what it did: `published`, `admitted` or `no-op`.
+    Admit one harvest proposal against `state`, returning what it did: `published`, `admitted` or `no-op`.
 
-    The caller rebuilds the projections once it has admitted everything it means to, so a drop of hundreds of
-    proposals folds the log once rather than once per proposal.
+    `state` is the fold of the log as it stands; the caller folds whatever this appends before the next proposal,
+    and rebuilds the projections once it has admitted everything it means to.
     """
     proposal = parse_event(read_text(proposal_path, proposal_path.name())?, "proposal")?
     project = member(proposal, "project")
@@ -256,7 +275,6 @@ def admit_proposal(root: Path, proposal_path: Path, actor: str, publish: bool, n
     checksum = string_member(source, "checksum")
     if not is_sha256_identity(checksum):
         return Err("checksum must be `sha256:` plus 64 lowercase hex digits")
-    state = replay(load_events(root)?, root)?
     key = record_key(name, version)
     create = not has_key(state, key)
     if create and not publish:
@@ -320,11 +338,16 @@ def admit_drop(invocation: Invocation) -> Result[None, str]:
         listed = ", ".join(contradictions)
         return Err(f"the drop both proposes and refuses [{listed}]; a record that omits the work its refusal names would declare less than the script does")
     root = invocation.root()
+    mut state = replay(load_events(root)?, root)?
+    mut folded = len(event_files(root)?)
     mut published = 0
     mut admitted = 0
     mut repeated = 0
     for subject in proposals:
-        outcome = admit_proposal(root, drop / subject / "proposal.json", invocation.actor(), true, None)?
+        outcome = admit_proposal(root, state, drop / subject / "proposal.json", invocation.actor(), true, None)?
+        appended = load_events_after(root, folded)?
+        state = replay_onto(state, appended, root)?
+        folded += len(appended)
         if outcome == "published":
             published += 1
             admitted += 1

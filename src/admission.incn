@@ -33,7 +33,17 @@ from registry import (
 
 pub def replay(events: list[Event], root: Path) -> Result[Dict[str, Record], str]:
     """Fold the log into the current state, or say which event breaks which rule."""
-    mut state: Dict[str, Record] = {}
+    return replay_onto({}, events, root)
+
+
+pub def replay_onto(initial: Dict[str, Record], events: list[Event], root: Path) -> Result[Dict[str, Record], str]:
+    """
+    Fold more events onto a state already folded from the events before them.
+
+    Folding is a left fold, so the state after a prefix plus the events after it is the state after the whole log;
+    that is what lets a drop fold the log once and then only what each proposal appends.
+    """
+    mut state = initial
     for event in events:
         key = record_key(event.name, event.version)
         if event.kind == "publish":

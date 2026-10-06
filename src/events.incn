@@ -60,41 +60,56 @@ pub def event_files(root: Path) -> Result[list[str], str]:
 
 pub def load_events(root: Path) -> Result[list[Event], str]:
     """Read the log in sequence order, refusing gaps, tampering and unknown shapes."""
+    return load_events_after(root, 0)
+
+
+pub def load_events_after(root: Path, count: int) -> Result[list[Event], str]:
+    """
+    Read the events after the first `count`, still checking each one's sequence number against its position.
+
+    A drop admits hundreds of proposals into a log of thousands of events; reading only what each proposal appended
+    keeps admission linear in the drop instead of re-reading the whole log once per proposal.
+    """
     mut events: list[Event] = []
-    mut expected = 1
-    for name in event_files(root)?:
-        label = f"events/{name}"
-        kind = file_kind(name, expected, label)?
-        text = read_text(root / "events" / name, label)?
-        event = parse_event(text, label)?
-        event_kind = string_member(event, "kind")
-        if not event_kinds().contains(event_kind) or event_kind != kind:
-            kinds = ", ".join(event_kinds())
-            return Err(f"{label}: kind must be one of {kinds} and match the file name")
-        if string_member(event, "schema") != event_schema():
-            return Err(f"{label}: schema must be {event_schema()}")
-        if string_member(event, "id") != event_id(event)?:
-            return Err(f"{label}: id does not match the canonical event body")
-        subject = member(event, "subject")
-        subject_name = string_member(subject, "name")
-        subject_version = string_member(subject, "version")
-        if string_member(subject, "scope") != scope() or len(subject_name) == 0 or len(subject_version) == 0:
-            return Err(f"{label}: subject must name a crates-io package version")
-        at = string_member(event, "at")
-        actor = string_member(event, "actor")
-        if len(at) == 0 or len(actor) == 0:
-            return Err(f"{label}: `at` and `actor` are required")
-        events.append(Event(
-            label=label,
-            kind=event_kind,
-            at=at,
-            actor=actor,
-            name=subject_name,
-            version=subject_version,
-            body=event,
-        ))
+    mut expected = count + 1
+    for name in event_files(root)?[count:]:
+        events.append(load_event(root, name, expected)?)
         expected += 1
     return Ok(events)
+
+
+def load_event(root: Path, name: str, expected: int) -> Result[Event, str]:
+    """Read one event file at its expected sequence number, refusing tampering and unknown shapes."""
+    label = f"events/{name}"
+    kind = file_kind(name, expected, label)?
+    text = read_text(root / "events" / name, label)?
+    event = parse_event(text, label)?
+    event_kind = string_member(event, "kind")
+    if not event_kinds().contains(event_kind) or event_kind != kind:
+        kinds = ", ".join(event_kinds())
+        return Err(f"{label}: kind must be one of {kinds} and match the file name")
+    if string_member(event, "schema") != event_schema():
+        return Err(f"{label}: schema must be {event_schema()}")
+    if string_member(event, "id") != event_id(event)?:
+        return Err(f"{label}: id does not match the canonical event body")
+    subject = member(event, "subject")
+    subject_name = string_member(subject, "name")
+    subject_version = string_member(subject, "version")
+    if string_member(subject, "scope") != scope() or len(subject_name) == 0 or len(subject_version) == 0:
+        return Err(f"{label}: subject must name a crates-io package version")
+    at = string_member(event, "at")
+    actor = string_member(event, "actor")
+    if len(at) == 0 or len(actor) == 0:
+        return Err(f"{label}: `at` and `actor` are required")
+    return Ok(Event(
+        label=label,
+        kind=event_kind,
+        at=at,
+        actor=actor,
+        name=subject_name,
+        version=subject_version,
+        body=event,
+    ))
 
 
 def file_kind(name: str, expected: int, label: str) -> Result[str, str]:
