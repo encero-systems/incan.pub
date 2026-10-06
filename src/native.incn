@@ -34,6 +34,8 @@ pub model Invocation:
     pub manifest_dir: str
     pub out_dir: str
     pub target: str
+    pub reads: list[str]
+    pub read_set: bool
 
 
 @derive(Clone)
@@ -89,9 +91,24 @@ pub def run_wrapper(role: str) -> Result[int, str]:
     if len(executable) == 0:
         return Err(f"no INCAN_PUB_NATIVE_{role.upper()} names the {role} this wrapper stands for")
     arguments = argv()[1:]
-    code = run_passthrough(executable, arguments)?
+    trace = environment_value(trace_variable()).unwrap_or("")
+    directory = working_directory()?
+    # A compile also writes its dependency file, the exact set of files it read; the object is unchanged.
+    mut depfile = ""
+    mut actual = arguments
+    if role != "ar" and arguments.contains("-c") and not names_dependency_output(arguments):
+        depfile = trace + "/" + digest_text(directory + "\n" + "\n".join(arguments))[7:] + ".d"
+        actual = arguments + ["-MD", "-MF", depfile]
+    code = run_passthrough(executable, actual)?
     if code != 0:
         return Ok(code)
+    mut reads: list[JsonValue] = []
+    if len(depfile) > 0:
+        for path in dependency_reads(depfile, directory)?:
+            reads.append(JsonValue.string(path))
+        match Path(depfile).unlink():
+            Ok(_) => pass
+            Err(error) => return Err(f"native trace: {error.message()}")
     mut reason = "compile"
     if role == "ar":
         reason = "archive"
@@ -101,17 +118,53 @@ pub def run_wrapper(role: str) -> Result[int, str]:
     record = JsonValue.object({
         "reason": JsonValue.string(reason),
         "executable": JsonValue.string(executable),
-        "directory": JsonValue.string(working_directory()?),
+        "directory": JsonValue.string(directory),
         "arguments": JsonValue.array(values),
         "manifest_dir": JsonValue.string(environment_value("CARGO_MANIFEST_DIR").unwrap_or("")),
         "out_dir": JsonValue.string(environment_value("OUT_DIR").unwrap_or("")),
         "target": JsonValue.string(environment_value("TARGET").unwrap_or("")),
+        "reads": JsonValue.array(reads),
+        "read_set": JsonValue.bool(len(depfile) > 0),
     })
     text = canonical(record)?
-    trace = environment_value(trace_variable()).unwrap_or("")
     match Path(trace + "/" + digest_text(text)[7:] + ".json").write_text(text, "utf-8", "strict", None):
         Ok(_) => return Ok(0)
         Err(error) => return Err(f"native trace: {error.message()}")
+
+
+def names_dependency_output(arguments: list[str]) -> bool:
+    """Whether the compile already writes a dependency file, which the wrapper then leaves alone."""
+    for argument in arguments:
+        if argument == "-M" or argument == "-MM" or argument == "-MD" or argument == "-MMD" or argument == "-MF":
+            return true
+    return false
+
+
+def dependency_reads(depfile: str, directory: str) -> Result[list[str], str]:
+    """The files a dependency file lists after its target, resolved and canonical."""
+    mut text = ""
+    match Path(depfile).read_text("utf-8", "strict"):
+        Ok(content) => text = content
+        Err(error) => return Err(f"{depfile}: {error.message()}")
+    if text.contains("\\ "):
+        return Err(f"{depfile}: a read path contains a space")
+    mut out: list[str] = []
+    mut after_target = false
+    for token in text.replace("\\\n", " ").split_whitespace():
+        if not after_target:
+            if token.endswith(":"):
+                after_target = true
+            continue
+        path = resolve(directory, token)?
+        if not out.contains(path):
+            out.append(path)
+    return Ok(out)
+
+
+def flag_member(value: JsonValue, key: str) -> bool:
+    match value.get(key):
+        Some(found) => return found.as_bool().unwrap_or(false)
+        None => return false
 
 
 pub def read_traces(directory: str) -> Result[list[Invocation], str]:
@@ -139,6 +192,8 @@ pub def read_traces(directory: str) -> Result[list[Invocation], str]:
                             manifest_dir=string_member(value, "manifest_dir"),
                             out_dir=string_member(value, "out_dir"),
                             target=string_member(value, "target"),
+                            reads=string_list_member(value, "reads").unwrap_or([]),
+                            read_set=flag_member(value, "read_set"),
                         ))
                     Err(error) => return Err(f"native trace {name}: {error.message()}")
             Err(error) => return Err(f"native trace {name}: {error.message()}")
@@ -245,6 +300,15 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
     mut objects: list[JsonValue] = []
     mut object_names: list[str] = []
     mut owner_paths = [executable_path, resource_path, sysroot_path]
+    # The archive's read set: every file its compiles read, when every compile reported one.
+    mut reads: list[str] = []
+    mut read_set = true
+    for compile in member_compiles:
+        if not compile.invocation.read_set:
+            read_set = false
+        for path in compile.invocation.reads:
+            if not reads.contains(path):
+                reads.append(path)
     for compile in member_compiles:
         if beneath(compile.source, out_dir):
             return Err("compile source is generated inside OUT_DIR and cannot be adopted")
@@ -261,6 +325,8 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
             manifest_dir=manifest_dir,
             out_dir=out_dir,
             owner_root=owner_root,
+            reads=reads,
+            read_set=read_set,
         )
         for argument in object_arguments(compile.invocation.arguments, source_name, object_name, context, sources, owner_paths)?:
             arguments.append(argument)
@@ -269,6 +335,8 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
             "language": JsonValue.string(source_language(compile.source)?),
             "arguments": JsonValue.array(arguments),
         }))
+    if read_set:
+        covered(reads, sources, manifest_dir, out_dir, owner_root)?
     mut inputs: list[JsonValue] = []
     for name in sorted(list(sources.keys())):
         inputs.append(sources[name])
@@ -283,7 +351,7 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
         }),
         "environment": JsonValue.array([]),
         "sources": JsonValue.array(inputs),
-        "objects": JsonValue.array(objects),
+        "objects": JsonValue.array(sorted_by_name(objects)),
         "library": JsonValue.object({"name": JsonValue.string(library), "kind": JsonValue.string("static")}),
     }))
 
@@ -294,6 +362,8 @@ model PathContext:
     pub manifest_dir: str
     pub out_dir: str
     pub owner_root: str
+    pub reads: list[str]
+    pub read_set: bool
 
 
 def implicit_arguments(arguments: list[str], sysroot_path: str, resource_path: str) -> list[JsonValue]:
@@ -387,7 +457,10 @@ def path_argument(
         name = logical_name("include", relative)
         mut artifact = JsonValue.null()
         if Path(path).is_dir():
-            artifact = tree_artifact(name, relative, path)?
+            if context.read_set:
+                artifact = read_tree_artifact(name, relative, path, context.reads)?
+            else:
+                artifact = tree_artifact(name, relative, path)?
         else:
             artifact = file_artifact(name, relative, path)?
         insert_source(sources, name, artifact)?
@@ -422,10 +495,23 @@ pub def tree_artifact(name: str, relative: str, root: str) -> Result[JsonValue, 
     """A crate include tree with its members and the executor's canonical tree digest."""
     mut members: list[list[str]] = []
     visit_tree(root, "", members)?
-    mut sorted_members = sort_pairs(members)
+    return tree_from_members(name, relative, members)
+
+
+pub def read_tree_artifact(name: str, relative: str, root: str, reads: list[str]) -> Result[JsonValue, str]:
+    """An include tree cataloged by what the compiles read beneath it, never by everything that sits there."""
+    mut members: list[list[str]] = []
+    for path in reads:
+        if beneath(path, root) and path != root:
+            members.append([path[len(root) + 1:], file_digest(path)?])
+    return tree_from_members(name, relative, members)
+
+
+pub def tree_from_members(name: str, relative: str, members: list[list[str]]) -> Result[JsonValue, str]:
+    """A tree artifact from `[path, digest]` members, with the executor's canonical tree digest."""
     mut encoded: list[str] = []
     mut values: list[JsonValue] = []
-    for pair in sorted_members:
+    for pair in sort_pairs(members):
         encoded.append("{\"path\":" + json_string(pair[0]) + ",\"digest\":" + json_string(pair[1]) + "}")
         values.append(JsonValue.object({"path": JsonValue.string(pair[0]), "digest": JsonValue.string(pair[1])}))
     tree = "[\"incan.oven.publisher-artifact-tree/1\",[" + ",".join(encoded) + "]]"
@@ -436,6 +522,35 @@ pub def tree_artifact(name: str, relative: str, root: str) -> Result[JsonValue, 
         "digest": JsonValue.string(digest_text(tree)),
         "members": JsonValue.array(values),
     }))
+
+
+def covered(reads: list[str], sources: Dict[str, JsonValue], manifest_dir: str, out_dir: str, owner_root: str) -> Result[None, str]:
+    """Every file the compiles read is a declared input or lies in the compiler's owner closure."""
+    mut files: list[str] = []
+    mut trees: list[str] = []
+    for name in sources.keys():
+        source = sources[name]
+        path = string_member(source, "path")
+        mut absolute = manifest_dir
+        if path != ".":
+            absolute = manifest_dir + "/" + path
+        if string_member(source, "kind") == "tree":
+            trees.append(absolute)
+        else:
+            files.append(absolute)
+    for path in reads:
+        if beneath(path, out_dir):
+            return Err(f"the compiles read `{path}` from OUT_DIR, which cannot be adopted")
+        if beneath(path, manifest_dir):
+            mut found = files.contains(path)
+            for tree in trees:
+                if beneath(path, tree) and path != tree:
+                    found = true
+            if not found:
+                return Err(f"the compiles read `{path[len(manifest_dir) + 1:]}`, which no declared input covers")
+        elif not beneath(path, owner_root):
+            return Err(f"the compiles read `{path}`, outside the package and the compiler owner")
+    return Ok(None)
 
 
 def visit_tree(directory: str, prefix: str, mut members: list[list[str]]) -> Result[None, str]:
@@ -671,3 +786,14 @@ def is_hex(text: str) -> bool:
         if not "0123456789abcdefABCDEF".contains(character):
             return false
     return true
+
+
+def sorted_by_name(records: list[JsonValue]) -> list[JsonValue]:
+    """Records in the order admission requires: by their unique `name`."""
+    mut by_name: Dict[str, JsonValue] = {}
+    for record in records:
+        by_name[string_member(record, "name")] = record
+    mut out: list[JsonValue] = []
+    for name in sorted(list(by_name.keys())):
+        out.append(by_name[name])
+    return out

@@ -14,6 +14,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
+                          [--incan PATH --build-lock LOCK.json]
                           [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
 
@@ -60,7 +61,7 @@ from registry import Record, crates_io_index, has_key, keys_of, record_key
 
 def flags() -> list[str]:
     """Options that take no value."""
-    return ["publish", "records"]
+    return ["publish", "records", "rewrite"]
 
 
 def default_actor() -> str:
@@ -273,6 +274,7 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         invocation.actor(),
         invocation.flag("publish"),
         notes_override,
+        false,
     )?
     return build(invocation)
 
@@ -284,6 +286,7 @@ def admit_proposal(
     actor: str,
     publish: bool,
     notes_override: Option[str],
+    rewrite: bool,
 ) -> Result[str, str]:
     """
     Admit one harvest proposal against `state`, returning what it did: `published`, `admitted` or `no-op`.
@@ -329,16 +332,17 @@ def admit_proposal(
     receipt = string_member(evidence, "receipt")
     if len(receipt) > 0:
         fact.set("harvested-from", JsonValue.string(receipt)).unwrap()
-    stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
+    staged = stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
     label = f"proposal {proposal_path.name()}"
-    typed = validate_fact(fact, name, version, label, root)?
-    binding_key = typed.binding.key()
-    if not create and has_key(state[key].facts, binding_key):
-        if state[key].facts[binding_key].comparable != typed.comparable:
-            return Err("the proposal's binding already has a different record; a fact is immutable")
-        println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
-        return Ok("no-op")
-    stage_graph(evidence, proposal_path.parent(), root)?
+    # A refused proposal leaves nothing behind: the files it staged would otherwise be bytes no record names.
+    match settle_binding(root, state, key, name, version, fact, evidence, proposal_path, label, create, rewrite):
+        Ok(outcome) =>
+            if outcome != "new":
+                return Ok(outcome)
+        Err(message) =>
+            for path in staged:
+                path.unlink().unwrap()
+            return Err(message)
     if create:
         mut notes = string_member(proposal, "notes").strip()
         match notes_override:
@@ -360,6 +364,43 @@ def admit_proposal(
     if create:
         return Ok("published")
     return Ok("admitted")
+
+
+def settle_binding(
+    root: Path,
+    state: Dict[str, Record],
+    key: str,
+    name: str,
+    version: str,
+    fact: JsonValue,
+    evidence: JsonValue,
+    proposal_path: Path,
+    label: str,
+    create: bool,
+    rewrite: bool,
+) -> Result[str, str]:
+    """
+    Decide what a proposal's binding needs: `new` when nothing is on record, `no-op` when the record is the same, and
+    a refusal when it differs, unless `rewrite` replaces a record that is wrong because of a bug in place.
+    """
+    typed = validate_fact(fact, name, version, label, root)?
+    binding_key = typed.binding.key()
+    if create or not has_key(state[key].facts, binding_key):
+        stage_graph(evidence, proposal_path.parent(), root)?
+        return Ok("new")
+    if state[key].facts[binding_key].comparable == typed.comparable:
+        println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
+        return Ok("no-op")
+    if not rewrite:
+        return Err("the proposal's binding already has a different record; a fact is immutable")
+    for event in load_events(root)?:
+        if event.kind == "fact" and event.name == name and event.version == version:
+            if validate_binding(member(event.body, "fact"), event.label)?.key() == binding_key:
+                stage_graph(evidence, proposal_path.parent(), root)?
+                rewrite_event(root, event.label, event.body, {"fact": fact, "evidence": evidence})?
+                println(f"rewritten: {event.label}")
+                return Ok("rewritten")
+    return Err(f"{name} {version} {describe_binding(typed.binding)} has no fact event to rewrite")
 
 
 def admit_drop(invocation: Invocation) -> Result[None, str]:
@@ -387,7 +428,7 @@ def admit_drop(invocation: Invocation) -> Result[None, str]:
     mut admitted = 0
     mut repeated = 0
     for subject in proposals:
-        outcome = admit_proposal(root, state, drop / subject / "proposal.json", invocation.actor(), true, None)?
+        outcome = admit_proposal(root, state, drop / subject / "proposal.json", invocation.actor(), true, None, false)?
         appended = load_events_after(root, folded)?
         state = replay_onto(state, appended, root)?
         folded += len(appended)
@@ -402,8 +443,12 @@ def admit_drop(invocation: Invocation) -> Result[None, str]:
     return build(invocation)
 
 
-def stage_generated_inputs(fact: JsonValue, proposal_dir: Path, out_dir: Path) -> Result[None, str]:
-    """Copy the proposal's `out` files under the record, refusing to overwrite a committed input with other bytes."""
+def stage_generated_inputs(fact: JsonValue, proposal_dir: Path, out_dir: Path) -> Result[list[Path], str]:
+    """
+    Copy the proposal's `out` files under the record, refusing to overwrite a committed input with other bytes, and
+    return the files it newly wrote so a refusal can take them back.
+    """
+    mut written: list[Path] = []
     mut entries: list[JsonValue] = []
     match fact.get("out"):
         Some(value) =>
@@ -433,9 +478,9 @@ def stage_generated_inputs(fact: JsonValue, proposal_dir: Path, out_dir: Path) -
             Ok(_) => pass
             Err(error) => return Err(f"{entry_path}: {error.message()}")
         match destination.write_bytes(staged_bytes):
-            Ok(_) => pass
+            Ok(_) => written.append(destination)
             Err(error) => return Err(f"{entry_path}: {error.message()}")
-    return Ok(None)
+    return Ok(written)
 
 
 def attest(invocation: Invocation) -> Result[None, str]:
@@ -592,7 +637,7 @@ def record_fact(invocation: Invocation) -> Result[None, str]:
     selection = selection_of(invocation)?
     match record_proposal(name, version, adopt, state[key].checksum, invocation.require("blobs")?, invocation.require("cache")?, invocation.require("work")?, selection)?:
         Some(proposal) =>
-            admit_proposal(root, state, Path(proposal), invocation.actor(), false, None)?
+            admit_proposal(root, state, Path(proposal), invocation.actor(), false, None, invocation.flag("rewrite"))?
             return build(invocation)
         None =>
             println(f"no build script: {name} {version} needs no fact")
@@ -643,6 +688,9 @@ def selection_of(invocation: Invocation) -> Result[Selection, str]:
         cxx=invocation.option("cxx").unwrap_or(""),
         ar=invocation.option("ar").unwrap_or(""),
         sysroot=invocation.option("sysroot").unwrap_or(""),
+        incan=invocation.option("incan").unwrap_or(""),
+        build_lock=invocation.option("build-lock").unwrap_or(""),
+        pin=canonical_path(invocation.option("root").unwrap_or("."))?,
     ))
 
 
