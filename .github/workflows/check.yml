@@ -37,6 +37,8 @@ jobs:
       - name: Build the Incan toolchain
         working-directory: incan
         run: cargo build -p incan-cli
+      - name: Add the Rust target the standard library's vocab desugarer builds for
+        run: rustup target add wasm32-wasip1
       - name: Test and build incan-pub
         working-directory: tool
         run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
