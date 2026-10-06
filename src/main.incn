@@ -27,6 +27,7 @@ from canonical import digest_bytes, is_sha256_identity
 from closure import blob_path, plan_closure
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
+from graph import stage_graph, unclaimed_graphs
 from events import (
     append_event,
     event_files,
@@ -157,7 +158,7 @@ def check(invocation: Invocation) -> Result[None, str]:
     if len(stale) > 0:
         listed = ", ".join(stale)
         return Err(f"projections are out of date for [{listed}]; run incan-pub build")
-    unclaimed = unclaimed_generated_inputs(root, state)?
+    unclaimed = unclaimed_generated_inputs(root, state)? + unclaimed_graphs(root, events)?
     if len(unclaimed) > 0:
         listed = ", ".join(unclaimed)
         return Err(f"committed bytes no record names: [{listed}]; remove them or admit the fact that names them")
@@ -302,6 +303,7 @@ def admit_proposal(
     if len(receipt) > 0:
         fact.set("harvested-from", JsonValue.string(receipt)).unwrap()
     stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
+    stage_graph(evidence, proposal_path.parent(), root)?
     label = f"proposal {proposal_path.name()}"
     typed = validate_fact(fact, name, version, label, root)?
     binding_key = typed.binding.key()

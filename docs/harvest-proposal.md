@@ -39,6 +39,8 @@ A JSON file beside any committed generated inputs it names. It mirrors the rende
 
 `evidence.hazards` names ambient state under which a build script's answers are not a stable toolchain's: `RUSTC_BOOTSTRAP` in the script's environment, or a nightly `rustc` compiling the units. The harvest records them, admission refuses a proposal that names any, and an empty list is the stated absence. Provenance that changes no answer is not a hazard and does not belong in the list: the compatibility publisher's Cargo is nightly by design (`--unit-graph` is nightly-only) while every unit is compiled by the retained stable `rustc`; that Cargo is recorded verbatim in `cargo_version`, the compiler in `rustc_identity`. Other evidence keys are recorded verbatim on the event.
 
+`evidence.domain` and `evidence.graph` say how the binding's feature set was reached, so a resolver can reproduce it from the fact alone. `domain` is `host` or `target`: the domain the unit was compiled in. `graph` is the `sha256:` identity of the resolution it came from, and the proposal ships that graph as `graph.json` beside `proposal.json`: its canonical JSON on one line, holding `roots` (the resolution's root requests, each `{name, loaf, req, features, default-features}` plus `target` when conditional, in the index line's spelling), and the `target` and `host` triples. The identity is the digest of that line. The two keys come together or not at all; they are evidence rather than fact keys because no compilation observes them.
+
 Exactly one `rust.facts` record per proposal, and `cfg` is always present — an empty list is the stated absence, an omitted key is a refusal. A proposal is admitted or refused whole: everything it can be refused for is decided before anything is appended, because the log is append-only and a publish written for a proposal that then refuses can never be retracted. `out` paths are relative to the proposal file; admission copies the named files under `crates-io/<name>/<version>/out/` and refuses a file that would overwrite a committed input with different bytes. The directory a bake writes is `DIR/<name>-<version>-<profile>/proposal.json` beside `out/…`. The proposal is JSON rather than TOML because it is an intermediate the compiler writes and the tool reads, and the event it becomes is JSON; the rendered `loaf.toml` stays the consumer's format.
 
 ## What admission checks
@@ -49,6 +51,7 @@ Exactly one `rust.facts` record per proposal, and `cfg` is always present — an
 - The binding is not yet present, or is present with identical `cfg` and `out` (the proposal is then a no-op).
 - `cfg` and `features` are sorted and unique; every `out` file exists and matches its digest; no key outside the record vocabulary.
 - `evidence.receipt`, when present, becomes the record's `harvested-from` and must be a `sha256:` identity.
+- `evidence.domain` and `evidence.graph` come together or not at all; the domain is `host` or `target`; the shipped `graph.json` is in its canonical spelling, is the graph its identity names, and is in shape. Admission commits it once as `graphs/<hex>.json`, and `check` refuses a committed graph no fact names.
 
 ## What a harvest must not do
 

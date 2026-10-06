@@ -1,0 +1,155 @@
+"""
+Selection graphs: the roots a bound fact's feature set was resolved from, and the domain its unit sat in.
+
+A fact recorded from a resolution names, in its evidence, the `domain` its unit was compiled in (`host` or `target`)
+and the `graph` it came from: the digest of a graph file committed once under `graphs/`, holding the resolution's root
+requests as Loaf dependencies and its target and host triples. A resolver can then reproduce the fact's feature set
+from the graph alone, for every fact that names one. Both describe how a selection was reached, not what a
+compilation observes, so they are evidence and not fact keys; the fact vocabulary stays the compiler's.
+"""
+
+from std.fs import Path
+from std.json import JsonValue, parse
+
+from canonical import canonical, digest_text, is_sha256_identity
+from events import Event, member, read_text, string_list_member, string_member, write_text
+from semver import parse_requirement
+from target import normalize_target
+
+
+pub def graph_relative(digest: str) -> str:
+    """Where a graph file is committed: `graphs/<hex>.json`."""
+    return "graphs/" + digest[7:] + ".json"
+
+
+pub def graph_text(graph: JsonValue) -> Result[str, str]:
+    """A graph file's bytes: its canonical JSON on one line. Its identity is the digest of that line."""
+    return Ok(canonical(graph)? + "\n")
+
+
+pub def validate_evidence(evidence: JsonValue, root: Path, label: str) -> Result[None, str]:
+    """A fact's `domain` and `graph`, which come together or not at all, and the committed graph they name."""
+    named_domain = evidence.contains_key("domain")
+    named_graph = evidence.contains_key("graph")
+    if not named_domain and not named_graph:
+        return Ok(None)
+    if named_domain != named_graph:
+        return Err(f"{label}: evidence names a `domain` and a `graph` together, or neither")
+    domain = string_member(evidence, "domain")
+    if domain != "host" and domain != "target":
+        return Err(f"{label}: evidence `domain` must be host or target")
+    digest = string_member(evidence, "graph")
+    if not is_sha256_identity(digest):
+        return Err(f"{label}: evidence `graph` must be a `sha256:` identity")
+    relative = graph_relative(digest)
+    path = root / relative
+    if not path.is_file():
+        return Err(f"{label}: evidence names graph {digest}, but {relative} is not committed")
+    check_graph_text(read_text(path, relative)?, digest, relative)?
+    return Ok(None)
+
+
+def check_graph_text(text: str, digest: str, label: str) -> Result[None, str]:
+    """A graph file in its one spelling, with the identity it is named by, and in shape."""
+    mut graph = JsonValue.null()
+    match parse(text):
+        Ok(value) => graph = value
+        Err(error) => return Err(f"{label}: not valid JSON: {error.message()}")
+    if graph_text(graph)? != text:
+        return Err(f"{label}: a graph file is its canonical JSON on one line")
+    if digest_text(canonical(graph)?) != digest:
+        return Err(f"{label}: the file is not the graph {digest}")
+    return validate_graph(graph, label)
+
+
+pub def validate_graph(graph: JsonValue, label: str) -> Result[None, str]:
+    """`roots`, `target` and `host`, and nothing else; every root a Loaf dependency in the index line's spelling."""
+    if not graph.is_object():
+        return Err(f"{label}: a graph is a JSON object")
+    for key in graph.keys():
+        if key != "roots" and key != "target" and key != "host":
+            return Err(f"{label}: a graph holds `roots`, `target` and `host` only, not `{key}`")
+    for key in ["target", "host"]:
+        triple = string_member(graph, key)
+        if len(triple) == 0 or triple.contains(" "):
+            return Err(f"{label}: graph `{key}` must be a target triple")
+    mut roots: list[JsonValue] = []
+    match graph.get("roots"):
+        Some(value) =>
+            match value.as_array():
+                Some(items) => roots = items
+                None => return Err(f"{label}: graph `roots` must be a list")
+        None => return Err(f"{label}: graph `roots` is required")
+    if len(roots) == 0:
+        return Err(f"{label}: a graph has at least one root")
+    for root_request in roots:
+        validate_root(root_request, label)?
+    return Ok(None)
+
+
+def validate_root(request: JsonValue, label: str) -> Result[None, str]:
+    for key in request.keys():
+        if not ["name", "loaf", "req", "features", "default-features", "target"].contains(key):
+            return Err(f"{label}: a root holds name, loaf, req, features, default-features and target only, not `{key}`")
+    name = string_member(request, "name")
+    loaf = string_member(request, "loaf")
+    pieces = loaf.split("/")
+    if len(name) == 0 or len(pieces) != 2 or len(pieces[0]) == 0 or len(pieces[1]) == 0:
+        return Err(f"{label}: a root names its key and a `<scope>/<name>` Loaf")
+    parse_requirement(string_member(request, "req"))?
+    if string_list_member(request, "features") == None:
+        return Err(f"{label}: root `{name}` features must be a list of strings")
+    match request.get("default-features"):
+        Some(value) =>
+            if value.as_bool() == None:
+                return Err(f"{label}: root `{name}` default-features must be a boolean")
+        None => return Err(f"{label}: root `{name}` must state default-features")
+    match request.get("target"):
+        Some(value) =>
+            match value.as_str():
+                Some(text) =>
+                    if normalize_target(text)? != text:
+                        return Err(f"{label}: root `{name}` target must be in its canonical spelling")
+                None => return Err(f"{label}: root `{name}` target must be a string")
+        None => pass
+    return Ok(None)
+
+
+pub def stage_graph(evidence: JsonValue, proposal_dir: Path, root: Path) -> Result[None, str]:
+    """Commit the `graph.json` a proposal ships beside itself, when its evidence names one."""
+    if not evidence.contains_key("graph"):
+        return Ok(None)
+    digest = string_member(evidence, "graph")
+    if not is_sha256_identity(digest):
+        return Err("evidence `graph` must be a `sha256:` identity")
+    staged = proposal_dir / "graph.json"
+    if not staged.is_file():
+        return Err(f"the proposal's evidence names graph {digest}, but it ships no graph.json")
+    text = read_text(staged, "graph.json")?
+    check_graph_text(text, digest, "graph.json")?
+    relative = graph_relative(digest)
+    if not (root / relative).is_file():
+        write_text(root / relative, text, relative)?
+    return Ok(None)
+
+
+pub def unclaimed_graphs(root: Path, events: list[Event]) -> Result[list[str], str]:
+    """Committed graph files no fact names."""
+    mut claimed: list[str] = []
+    for event in events:
+        if event.kind == "fact":
+            digest = string_member(member(event.body, "evidence"), "graph")
+            if is_sha256_identity(digest):
+                claimed.append(graph_relative(digest))
+    mut unclaimed: list[str] = []
+    directory = root / "graphs"
+    if not directory.is_dir():
+        return Ok(unclaimed)
+    match directory.iterdir():
+        Ok(children) =>
+            for child in children:
+                relative = "graphs/" + child.name()
+                if not claimed.contains(relative):
+                    unclaimed.append(relative)
+        Err(error) => return Err(f"graphs/: {error.message()}")
+    return Ok(sorted(unclaimed))

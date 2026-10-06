@@ -1,0 +1,124 @@
+"""
+Selection graphs on facts: a fact may name the domain its unit sat in and the graph its feature set came from, and
+the graph is a committed file in one canonical spelling that a resolver can start from.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+from std.tempfile import TemporaryDirectory
+from std.testing import assert_eq, assert_true
+
+from admission import replay
+from canonical import canonical, digest_text
+from events import append_event, load_events, write_text
+from graph import graph_relative, graph_text, unclaimed_graphs
+
+
+def toolchain() -> str:
+    return "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+
+
+def triple() -> str:
+    return "aarch64-apple-darwin"
+
+
+def a_graph() -> JsonValue:
+    return JsonValue.object({
+        "roots": JsonValue.array([
+            JsonValue.object({
+                "name": JsonValue.string("libm"),
+                "loaf": JsonValue.string("crates-io/libm"),
+                "req": JsonValue.string("^0.2"),
+                "features": JsonValue.array([JsonValue.string("arch")]),
+                "default-features": JsonValue.bool(true),
+            }),
+        ]),
+        "target": JsonValue.string(triple()),
+        "host": JsonValue.string(triple()),
+    })
+
+
+def graph_digest(graph: JsonValue) -> str:
+    return digest_text(canonical(graph).unwrap())
+
+
+def publish(root: Path) -> None:
+    mut payload: Dict[str, JsonValue] = {}
+    payload["source"] = JsonValue.object({
+        "registry": JsonValue.string("https://github.com/rust-lang/crates.io-index"),
+        "checksum": JsonValue.string("sha256:b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"),
+    })
+    payload["notes"] = JsonValue.string("")
+    append_event(root, "publish", "libm", "0.2.16", "tests", payload).unwrap()
+
+
+def fact_with_evidence(root: Path, evidence: Dict[str, JsonValue]) -> None:
+    mut payload: Dict[str, JsonValue] = {}
+    payload["fact"] = JsonValue.object({
+        "toolchain": JsonValue.string(toolchain()),
+        "target": JsonValue.string(triple()),
+        "profile": JsonValue.string("debug"),
+        "features": JsonValue.array([JsonValue.string("arch"), JsonValue.string("default")]),
+        "cfg": JsonValue.array([]),
+    })
+    payload["evidence"] = JsonValue.object(evidence)
+    append_event(root, "fact", "libm", "0.2.16", "tests", payload).unwrap()
+
+
+def refusal(root: Path) -> str:
+    match replay(load_events(root).unwrap(), root):
+        Ok(_) => return ""
+        Err(message) => return message
+
+
+def test_a_fact_names_its_domain_and_a_committed_graph() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    graph = a_graph()
+    digest = graph_digest(graph)
+    write_text(root / graph_relative(digest), graph_text(graph).unwrap(), "graph").unwrap()
+    publish(root)
+    fact_with_evidence(root, {"domain": JsonValue.string("target"), "graph": JsonValue.string(digest)})
+    assert_eq(refusal(root), "")
+    assert_eq(len(unclaimed_graphs(root, load_events(root).unwrap()).unwrap()), 0)
+
+
+def test_a_graph_must_be_committed_in_its_one_spelling() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    graph = a_graph()
+    digest = graph_digest(graph)
+    publish(root)
+    fact_with_evidence(root, {"domain": JsonValue.string("host"), "graph": JsonValue.string(digest)})
+    assert_eq(
+        refusal(root),
+        f"events/000002-fact-crates-io-libm-0.2.16.json: evidence names graph {digest}, but {graph_relative(digest)} is not committed",
+    )
+    write_text(root / graph_relative(digest), canonical(graph).unwrap() + "\n\n", "graph").unwrap()
+    assert_eq(refusal(root), f"{graph_relative(digest)}: a graph file is its canonical JSON on one line")
+
+
+def test_a_domain_and_a_graph_come_together_and_the_domain_is_host_or_target() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    publish(root)
+    fact_with_evidence(root, {"domain": JsonValue.string("target")})
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: evidence names a `domain` and a `graph` together, or neither")
+    other = TemporaryDirectory.try_new().unwrap()
+    other_root = other.path()
+    graph = a_graph()
+    digest = graph_digest(graph)
+    write_text(other_root / graph_relative(digest), graph_text(graph).unwrap(), "graph").unwrap()
+    publish(other_root)
+    fact_with_evidence(other_root, {"domain": JsonValue.string("build"), "graph": JsonValue.string(digest)})
+    assert_eq(refusal(other_root), "events/000002-fact-crates-io-libm-0.2.16.json: evidence `domain` must be host or target")
+
+
+def test_a_graph_no_fact_names_is_unclaimed() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    graph = a_graph()
+    digest = graph_digest(graph)
+    write_text(root / graph_relative(digest), graph_text(graph).unwrap(), "graph").unwrap()
+    publish(root)
+    assert_eq(unclaimed_graphs(root, load_events(root).unwrap()).unwrap(), [graph_relative(digest)])

@@ -12,6 +12,7 @@ from std.json import JsonValue
 from adoption import adoption_from_payload, loaf_name, render_adopted_manifest, required_dependencies
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity
 from events import Event, member, string_list_member, string_member
+from graph import validate_evidence
 from registry import (
     Asset,
     Attestation,
@@ -189,6 +190,7 @@ def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Recor
     """Fold one event about an existing record: a bound fact, an attestation, an asset, a yank or an advisory."""
     mut record = initial
     if event.kind == "fact":
+        validate_evidence(event.payload("evidence"), root, event.label)?
         fact = validate_fact(event.payload("fact"), event.name, event.version, event.label, root)?
         binding_key = fact.binding.key()
         if has_key(record.facts, binding_key):

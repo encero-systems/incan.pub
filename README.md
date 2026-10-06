@@ -30,6 +30,7 @@ index
   index/crates-io/<name>                   projection: one JSON line per version, enough to resolve the whole graph
   crates-io/<name>/<version>/loaf.toml     projection: the adopted manifest followed by its bound facts
   crates-io/<name>/<version>/out/...       committed generated inputs a fact names
+  graphs/<hex>.json                        the resolutions facts were selected from: roots, target, host
 
 blob store (outside git)
   sha256/<hex>.tar                         source Loaf archives by digest
