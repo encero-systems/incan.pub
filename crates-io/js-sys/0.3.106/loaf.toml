@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/js-sys"
+version = "0.3.106"
+
+[project.features]
+default = ["std", "unsafe-eval"]
+futures-core-03-stream = ["dep:futures-util", "dep:futures-core"]
+std = ["wasm-bindgen/std", "dep:futures-util", "futures-util/std"]
+unsafe-eval = []
+
+[rust]
+name = "js_sys"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.8", default-features = false, optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.31", default-features = false, optional = true }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "=0.2.129", default-features = false }

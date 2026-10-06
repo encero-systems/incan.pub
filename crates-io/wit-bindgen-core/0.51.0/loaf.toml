@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wit-bindgen-core"
+version = "0.51.0"
+
+[project.features]
+clap = ["dep:clap"]
+serde = ["dep:serde"]
+
+[rust]
+name = "wit_bindgen_core"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.72" }
+clap = { loaf = "crates-io/clap", version = "^4.3.19", features = ["derive"], optional = true }
+heck = { loaf = "crates-io/heck", version = "^0.5" }
+serde = { loaf = "crates-io/serde", version = "^1.0.218", features = ["derive"], optional = true }
+wit-parser = { loaf = "crates-io/wit-parser", version = "^0.244.0" }

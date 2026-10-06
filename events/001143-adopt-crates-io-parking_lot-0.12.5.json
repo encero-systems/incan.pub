@@ -1,0 +1,66 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:93857453250e3077bd71ff98b6a65ea6621a19bb0f559a85248955ac12c45a1a",
+    "package": "parking_lot",
+    "registry": "crates-io",
+    "version": "0.12.5"
+  },
+  "archive": "sha256:b4b0b75f4345ee967d1b200266ca8ab2aa34559d5799594b789ea26798949db2",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lock_api",
+      "name": "lock_api",
+      "optional": false,
+      "req": "^0.4.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking_lot_core",
+      "name": "parking_lot_core",
+      "optional": false,
+      "req": "^0.9.12"
+    }
+  ],
+  "features": {
+    "arc_lock": [
+      "lock_api/arc_lock"
+    ],
+    "deadlock_detection": [
+      "parking_lot_core/deadlock_detection"
+    ],
+    "default": [],
+    "hardware-lock-elision": [],
+    "nightly": [
+      "parking_lot_core/nightly",
+      "lock_api/nightly"
+    ],
+    "owning_ref": [
+      "lock_api/owning_ref"
+    ],
+    "send_guard": [],
+    "serde": [
+      "lock_api/serde"
+    ]
+  },
+  "id": "sha256:e4764e2d5f5daffa039671093de28904774237cc64ca5016f6c39ea9c28b412b",
+  "kind": "adopt",
+  "manifest": "sha256:bb2779c112ce7de268e98ca4824829e2a984f23a5bfa21063ecd85e512e5e53d",
+  "rust": {
+    "edition": "2021",
+    "name": "parking_lot",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "parking_lot",
+    "scope": "crates-io",
+    "version": "0.12.5"
+  }
+}

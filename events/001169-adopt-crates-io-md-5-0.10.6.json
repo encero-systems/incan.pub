@@ -1,0 +1,73 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d89e7ee0cfbedfc4da3340218492196241d89eefb6dab27de5df917a6d2e78cf",
+    "package": "md-5",
+    "registry": "crates-io",
+    "version": "0.10.6"
+  },
+  "archive": "sha256:6efac14219235ed70ec8397eb9572821ac19a9fbf8869acaf482bf36097dda8a",
+  "at": "2026-10-06T13:11:45Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.10.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/md5-asm",
+      "name": "md5-asm",
+      "optional": true,
+      "req": "^0.5",
+      "target": "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))"
+    }
+  ],
+  "features": {
+    "asm": [
+      "md5-asm"
+    ],
+    "default": [
+      "std"
+    ],
+    "force-soft": [],
+    "loongarch64_asm": [],
+    "md5-asm": [
+      "dep:md5-asm"
+    ],
+    "oid": [
+      "digest/oid"
+    ],
+    "std": [
+      "digest/std"
+    ]
+  },
+  "id": "sha256:fb5a08fd131fee57e4a509bbe7e5fe7630de8d7748e9e14d974abbbf1da0c386",
+  "kind": "adopt",
+  "manifest": "sha256:c66cf3b74c1bf3caaf07fb44c27f75e63e0665ba48fd01f8758b40a8d50b023a",
+  "rust": {
+    "edition": "2018",
+    "name": "md5",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "md-5",
+    "scope": "crates-io",
+    "version": "0.10.6"
+  }
+}

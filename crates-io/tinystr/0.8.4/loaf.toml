@@ -3,12 +3,27 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "tinystr"
+name = "crates-io/tinystr"
 version = "0.8.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:b1e27c91459209c2986af3dcf603a5a74a4368754ce37414f59acc971167f643"
+[project.features]
+alloc = ["serde_core?/alloc", "zerovec?/alloc"]
+databake = ["dep:databake"]
+default = ["alloc"]
+serde = ["dep:serde_core"]
+std = []
+zerovec = ["dep:zerovec"]
+
+[rust]
+name = "tinystr"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", default-features = false, optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.3", default-features = false }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", default-features = false, optional = true }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.7", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,59 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ed2bf2547551a7053d6fdfafda3f938979645c44812fbfcda098faae3f1a362d",
+    "package": "redox_syscall",
+    "registry": "crates-io",
+    "version": "0.5.18"
+  },
+  "archive": "sha256:c63ca8db88fa10be4e452e2798cf3277942b48073aae1a067c91d692a4498af3",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "userspace"
+    ],
+    "rustc-dep-of-std": [
+      "core",
+      "bitflags/rustc-dep-of-std"
+    ],
+    "std": [],
+    "userspace": []
+  },
+  "id": "sha256:7f1010400dfd8389c69553592785cb08199a66de7ea417e89959c917e1f10a23",
+  "kind": "adopt",
+  "manifest": "sha256:c43926fb2655b19e8aed39a5df7e1a147b1547e701397bbd0b43dc5a3800c6c0",
+  "rust": {
+    "edition": "2021",
+    "name": "syscall",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "redox_syscall",
+    "scope": "crates-io",
+    "version": "0.5.18"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1",
+    "package": "hashbrown",
+    "registry": "crates-io",
+    "version": "0.14.5"
+  },
+  "archive": "sha256:19291c5c03564cb4dade32151f28b671887d78f43c4b313d329868292cf52ab5",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ahash",
+      "name": "ahash",
+      "optional": true,
+      "req": "^0.8.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/allocator-api2",
+      "name": "allocator-api2",
+      "optional": true,
+      "req": "^0.2.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compiler_builtins",
+      "name": "compiler_builtins",
+      "optional": true,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/equivalent",
+      "name": "equivalent",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv",
+      "optional": true,
+      "req": "^0.7.42"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.25"
+    }
+  ],
+  "features": {
+    "ahash": [
+      "dep:ahash"
+    ],
+    "alloc": [
+      "dep:alloc"
+    ],
+    "allocator-api2": [
+      "dep:allocator-api2"
+    ],
+    "compiler_builtins": [
+      "dep:compiler_builtins"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "ahash",
+      "inline-more",
+      "allocator-api2"
+    ],
+    "equivalent": [
+      "dep:equivalent"
+    ],
+    "inline-more": [],
+    "nightly": [
+      "allocator-api2?/nightly"
+    ],
+    "raw": [],
+    "rayon": [
+      "dep:rayon"
+    ],
+    "rkyv": [
+      "dep:rkyv"
+    ],
+    "rustc-dep-of-std": [
+      "nightly",
+      "core",
+      "compiler_builtins",
+      "alloc",
+      "rustc-internal-api"
+    ],
+    "rustc-internal-api": [],
+    "serde": [
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:9bb76414ded4ecfd38c8cbb3b477b5fbb12beee259b743f7fce350ec4c1c7665",
+  "kind": "adopt",
+  "manifest": "sha256:9c196c942833675a5a511ce41402cbcee81c3da2a5b140ba0e65f5d3d753c7c0",
+  "rust": {
+    "edition": "2021",
+    "name": "hashbrown",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hashbrown",
+    "scope": "crates-io",
+    "version": "0.14.5"
+  }
+}

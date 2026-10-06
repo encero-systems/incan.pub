@@ -3,12 +3,27 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "md-5"
+name = "crates-io/md-5"
 version = "0.10.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d89e7ee0cfbedfc4da3340218492196241d89eefb6dab27de5df917a6d2e78cf"
+[project.features]
+asm = ["md5-asm"]
+default = ["std"]
+force-soft = []
+loongarch64_asm = []
+md5-asm = ["dep:md5-asm"]
+oid = ["digest/oid"]
+std = ["digest/std"]
+
+[rust]
+name = "md5"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+digest = { loaf = "crates-io/digest", version = "^0.10.7" }
+md5-asm = { loaf = "crates-io/md5-asm", version = "^0.5", optional = true, target = "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

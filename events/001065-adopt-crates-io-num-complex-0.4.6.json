@@ -1,0 +1,105 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495",
+    "package": "num-complex",
+    "registry": "crates-io",
+    "version": "0.4.6"
+  },
+  "archive": "sha256:7de9f5b55b34de50496632bfc73843f75fc692362a8628958d3cfcf0feb99db3",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytecheck",
+      "name": "bytecheck",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytemuck",
+      "name": "bytemuck",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.18"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "bytecheck": [
+      "dep:bytecheck"
+    ],
+    "bytemuck": [
+      "dep:bytemuck"
+    ],
+    "default": [
+      "std"
+    ],
+    "libm": [
+      "num-traits/libm"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "rkyv": [
+      "dep:rkyv"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "num-traits/std"
+    ]
+  },
+  "id": "sha256:6f014df36dcddca87556c80c8b26835ee3b2c1e91c93e38aa4ab1d26c48ea2c3",
+  "kind": "adopt",
+  "manifest": "sha256:ac06a31ba6708eef2ecd80b9f88b80a1d758d15b860d533371a1bfca69d10457",
+  "rust": {
+    "edition": "2021",
+    "name": "num_complex",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "num-complex",
+    "scope": "crates-io",
+    "version": "0.4.6"
+  }
+}

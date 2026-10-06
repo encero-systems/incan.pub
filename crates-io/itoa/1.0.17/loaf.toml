@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "itoa"
+name = "crates-io/itoa"
 version = "1.0.17"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2"
+[project.features]
+no-panic = ["dep:no-panic"]
+
+[rust]
+name = "itoa"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+no-panic = { loaf = "crates-io/no-panic", version = "^0.1", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

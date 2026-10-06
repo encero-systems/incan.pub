@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "base64"
+name = "crates-io/base64"
 version = "0.22.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
+[project.features]
+alloc = []
+default = ["std"]
+std = ["alloc"]
+
+[rust]
+name = "base64"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,33 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "prost-build"
+name = "crates-io/prost-build"
 version = "0.14.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:03da047801ff44bb6a4d407d4860c05fd70bb81714e6b2f3812603d5b145b042"
+[project.features]
+cleanup-markdown = ["dep:pulldown-cmark", "dep:pulldown-cmark-to-cmark"]
+default = ["format"]
+format = ["dep:prettyplease", "dep:syn"]
+
+[rust]
+name = "prost_build"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+heck = { loaf = "crates-io/heck", version = ">=0.4, <=0.5" }
+itertools = { loaf = "crates-io/itertools", version = ">=0.10, <=0.14", features = ["use_alloc"], default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.4" }
+multimap = { loaf = "crates-io/multimap", version = ">=0.8, <=0.10", default-features = false }
+petgraph = { loaf = "crates-io/petgraph", version = "^0.8", features = ["std"], default-features = false }
+prettyplease = { loaf = "crates-io/prettyplease", version = "^0.2", optional = true }
+prost = { loaf = "crates-io/prost", version = "^0.14.4", default-features = false }
+prost-types = { loaf = "crates-io/prost-types", version = "^0.14.4", default-features = false }
+pulldown-cmark = { loaf = "crates-io/pulldown-cmark", version = "^0.13", default-features = false, optional = true }
+pulldown-cmark-to-cmark = { loaf = "crates-io/pulldown-cmark-to-cmark", version = "^22", optional = true }
+regex = { loaf = "crates-io/regex", version = "^1.8.1", features = ["std", "unicode-bool"], default-features = false }
+syn = { loaf = "crates-io/syn", version = "^2", features = ["full"], optional = true }
+tempfile = { loaf = "crates-io/tempfile", version = "^3", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,82 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:21ca356ad6425cecb6eb7b28e4f659f1ee7880fbb1a16127de7dd62901efee9e",
+    "package": "arrow-schema",
+    "registry": "crates-io",
+    "version": "58.4.0"
+  },
+  "archive": "sha256:ce1b2c5e4d1d41746097f87015b6335abc76fef28cf1df7809054cc2a48ed05d",
+  "at": "2026-10-06T13:11:39Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rc",
+        "std"
+      ],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "canonical_extension_types": [
+      "dep:serde_core",
+      "dep:serde_json"
+    ],
+    "ffi": [
+      "bitflags"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:6510abf99d2b678f54a4b12f619ce8b34f4c71b4beb7f8f424b06139a1eab386",
+  "kind": "adopt",
+  "manifest": "sha256:14b21af7e86607c47e76b213e438067389a0fd65157589158f8ed68e1cd0474f",
+  "rust": {
+    "edition": "2024",
+    "name": "arrow_schema",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "arrow-schema",
+    "scope": "crates-io",
+    "version": "58.4.0"
+  }
+}

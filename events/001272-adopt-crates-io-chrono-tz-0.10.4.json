@@ -1,0 +1,92 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a6139a8597ed92cf816dfb33f5dd6cf0bb93a6adc938f11039f371bc5bcd26c3",
+    "package": "chrono-tz",
+    "registry": "crates-io",
+    "version": "0.10.4"
+  },
+  "archive": "sha256:6ed90ab5db81d35f2f9b7fb418a499245a57687a9f5ebb499420fc0980807d24",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": false,
+      "req": "^0.4.25"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/phf",
+      "name": "phf",
+      "optional": false,
+      "req": "^0.12"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.99"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/uncased",
+      "name": "uncased",
+      "optional": true,
+      "req": "^0.9"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "case-insensitive": [
+      "dep:uncased",
+      "chrono-tz-build",
+      "phf/uncased"
+    ],
+    "chrono-tz-build": [],
+    "default": [
+      "std"
+    ],
+    "filter-by-regex": [
+      "chrono-tz-build"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": []
+  },
+  "id": "sha256:062c9a7f86cc558b1bdc3c7592382ac0f2e2d7923fc46d7138864cd43292e2f5",
+  "kind": "adopt",
+  "manifest": "sha256:eb57dd875280b6bb9440e8807ec197f1e772bd913373f6832459f72020b9794d",
+  "rust": {
+    "edition": "2021",
+    "name": "chrono_tz",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "chrono-tz",
+    "scope": "crates-io",
+    "version": "0.10.4"
+  }
+}

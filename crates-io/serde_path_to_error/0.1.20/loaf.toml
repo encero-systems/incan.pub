@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "serde_path_to_error"
+name = "crates-io/serde_path_to_error"
 version = "0.1.20"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:10a9ff822e371bb5403e391ecd83e182e0e77ba7f6fe0160b795797109d1b457"
+[rust]
+name = "serde_path_to_error"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", default-features = false, target = "cfg(any())" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", features = ["alloc"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

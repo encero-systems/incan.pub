@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "form_urlencoded"
+name = "crates-io/form_urlencoded"
 version = "1.2.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:cb4cb245038516f5f85277875cdaa4f7d2c9a0fa0468de06ed190163b1581fcf"
+[project.features]
+alloc = ["percent-encoding/alloc"]
+default = ["std"]
+std = ["alloc", "percent-encoding/std"]
+
+[rust]
+name = "form_urlencoded"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3.0", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

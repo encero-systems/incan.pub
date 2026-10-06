@@ -1,0 +1,105 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9bb54f33acc68fd454578d9820b0bde1a1a3d17aa17bb7b6595806d02886d409",
+    "package": "wasm-bindgen",
+    "registry": "crates-io",
+    "version": "0.2.129"
+  },
+  "archive": "sha256:ca7587aa307780c3bf9a2f6054fcbcb739c2a5d3e2d18d8d1305796bc2229e67",
+  "at": "2026-10-06T13:11:46Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen-macro",
+      "name": "wasm-bindgen-macro",
+      "optional": false,
+      "req": "=0.2.129"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen-shared",
+      "name": "wasm-bindgen-shared",
+      "optional": false,
+      "req": "=0.2.129"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "enable-interning": [
+      "std"
+    ],
+    "gg-alloc": [],
+    "msrv": [],
+    "rustversion": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde-serialize": [
+      "serde",
+      "serde_json",
+      "std"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "spans": [],
+    "std": [],
+    "strict-macro": [
+      "wasm-bindgen-macro/strict-macro"
+    ],
+    "xxx_debug_only_print_generated_code": []
+  },
+  "id": "sha256:cbfcf3cff93414504b6c2bc955832c63b1ac9bdad8eb600f58ce88fa9d438e4c",
+  "kind": "adopt",
+  "manifest": "sha256:201ea33e6d519462f7c0c9dd009b5ef529fd5b8556025b85225ef666c5574b1a",
+  "rust": {
+    "edition": "2021",
+    "name": "wasm_bindgen",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasm-bindgen",
+    "scope": "crates-io",
+    "version": "0.2.129"
+  }
+}

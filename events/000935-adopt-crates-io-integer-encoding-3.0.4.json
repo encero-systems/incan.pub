@@ -1,0 +1,76 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8bb03732005da905c88227371639bf1ad885cc712789c011c31c5fb3ab3ccf02",
+    "package": "integer-encoding",
+    "registry": "crates-io",
+    "version": "3.0.4"
+  },
+  "archive": "sha256:ef15db2cc5765300a0961eaa5263286191abbadf52e719c89282733fe737b552",
+  "at": "2026-10-06T13:11:40Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-trait",
+      "name": "async-trait",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "io"
+      ],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "io-util"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "async-trait": [
+      "dep:async-trait"
+    ],
+    "futures-util": [
+      "dep:futures-util"
+    ],
+    "futures_async": [
+      "futures-util",
+      "async-trait"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "tokio_async": [
+      "tokio",
+      "async-trait"
+    ]
+  },
+  "id": "sha256:70d7623cb83d8a2ae4b589525a1cf151b4ca567905c6072c70e44126aeb90526",
+  "kind": "adopt",
+  "manifest": "sha256:cbdba98ec5bd20916282eb35fb6031c59373eb2f78826267df6676df4827b80f",
+  "rust": {
+    "edition": "2018",
+    "name": "integer_encoding",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "integer-encoding",
+    "scope": "crates-io",
+    "version": "3.0.4"
+  }
+}

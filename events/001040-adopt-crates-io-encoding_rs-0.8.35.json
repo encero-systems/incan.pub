@@ -1,0 +1,83 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:75030f3c4f45dafd7586dd6780965a8c7e8e285a5ecb86713e63a79c5b2766f3",
+    "package": "encoding_rs",
+    "registry": "crates-io",
+    "version": "0.8.35"
+  },
+  "archive": "sha256:763a82fbdda688ff4c8225a360b0e49d6b3477344bf86c4768d7798a888a37ab",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/any_all_workaround",
+      "name": "any_all_workaround",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "any_all_workaround": [
+      "dep:any_all_workaround"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "fast-big5-hanzi-encode": [],
+    "fast-gb-hanzi-encode": [],
+    "fast-hangul-encode": [],
+    "fast-hanja-encode": [],
+    "fast-kanji-encode": [],
+    "fast-legacy-encode": [
+      "fast-hangul-encode",
+      "fast-hanja-encode",
+      "fast-kanji-encode",
+      "fast-gb-hanzi-encode",
+      "fast-big5-hanzi-encode"
+    ],
+    "less-slow-big5-hanzi-encode": [],
+    "less-slow-gb-hanzi-encode": [],
+    "less-slow-kanji-encode": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "simd-accel": [
+      "any_all_workaround"
+    ]
+  },
+  "id": "sha256:399a527efe2389f6e4ac27102b8718aee89a4f7ed29810232e617c2186335eea",
+  "kind": "adopt",
+  "manifest": "sha256:edd607eada5d05bf56d4ec8f0c6adb0cb87b13716aeff4149babd937fc090812",
+  "rust": {
+    "edition": "2018",
+    "name": "encoding_rs",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "encoding_rs",
+    "scope": "crates-io",
+    "version": "0.8.35"
+  }
+}

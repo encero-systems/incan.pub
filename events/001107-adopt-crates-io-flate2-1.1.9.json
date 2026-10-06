@@ -1,0 +1,172 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:843fba2746e448b37e26a819579957415c8cef339bf08564fe8b7ddbd959573c",
+    "package": "flate2",
+    "registry": "crates-io",
+    "version": "1.1.9"
+  },
+  "archive": "sha256:b09595a79a1e9f3ebad2e69e5da265bc9f9254160967221d2df3f36e751cdeeb",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cloudflare-zlib-sys",
+      "name": "cloudflare-zlib-sys",
+      "optional": true,
+      "req": "^0.3.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crc32fast",
+      "name": "crc32fast",
+      "optional": true,
+      "req": "^1.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/document-features",
+      "name": "document-features",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libz-ng-sys",
+      "name": "libz-ng-sys",
+      "optional": true,
+      "req": "^1.1.16"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libz-sys",
+      "name": "libz-sys",
+      "optional": true,
+      "req": "^1.1.20"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "simd",
+        "with-alloc"
+      ],
+      "loaf": "crates-io/miniz_oxide",
+      "name": "miniz_oxide",
+      "optional": false,
+      "req": "^0.8.5",
+      "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"emscripten\")))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "simd",
+        "with-alloc"
+      ],
+      "loaf": "crates-io/miniz_oxide",
+      "name": "miniz_oxide",
+      "optional": true,
+      "req": "^0.8.5"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rust-allocator",
+        "std"
+      ],
+      "loaf": "crates-io/zlib-rs",
+      "name": "zlib-rs",
+      "optional": true,
+      "req": "^0.6.0"
+    }
+  ],
+  "features": {
+    "any_c_zlib": [
+      "any_zlib"
+    ],
+    "any_impl": [],
+    "any_zlib": [
+      "any_impl"
+    ],
+    "cloudflare-zlib-sys": [
+      "dep:cloudflare-zlib-sys"
+    ],
+    "cloudflare_zlib": [
+      "any_c_zlib",
+      "cloudflare-zlib-sys",
+      "dep:crc32fast"
+    ],
+    "default": [
+      "rust_backend"
+    ],
+    "document-features": [
+      "dep:document-features"
+    ],
+    "libz-ng-sys": [
+      "dep:libz-ng-sys"
+    ],
+    "libz-sys": [
+      "dep:libz-sys"
+    ],
+    "miniz-sys": [
+      "rust_backend"
+    ],
+    "miniz_oxide": [
+      "any_impl",
+      "dep:miniz_oxide",
+      "dep:crc32fast"
+    ],
+    "rust_backend": [
+      "miniz_oxide",
+      "any_impl"
+    ],
+    "zlib": [
+      "any_c_zlib",
+      "libz-sys",
+      "dep:crc32fast"
+    ],
+    "zlib-default": [
+      "any_c_zlib",
+      "libz-sys",
+      "dep:libz-sys",
+      "libz-sys/default",
+      "dep:crc32fast"
+    ],
+    "zlib-ng": [
+      "any_c_zlib",
+      "libz-ng-sys",
+      "dep:crc32fast"
+    ],
+    "zlib-ng-compat": [
+      "zlib",
+      "libz-sys",
+      "dep:libz-sys",
+      "libz-sys/zlib-ng",
+      "dep:crc32fast"
+    ],
+    "zlib-rs": [
+      "any_zlib",
+      "dep:zlib-rs"
+    ]
+  },
+  "id": "sha256:e62c733b1f32a99b994832cb7518ddaeb7ac4e04a174817cd84eabc57c679070",
+  "kind": "adopt",
+  "manifest": "sha256:fb42b6a7b6406cd5103b912938657b6b8fefb44678a4a09bf02375788304baf8",
+  "rust": {
+    "edition": "2018",
+    "name": "flate2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "flate2",
+    "scope": "crates-io",
+    "version": "1.1.9"
+  }
+}

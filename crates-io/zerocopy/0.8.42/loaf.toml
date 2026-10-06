@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "zerocopy"
+name = "crates-io/zerocopy"
 version = "0.8.42"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:f2578b716f8a7a858b7f02d5bd870c14bf4ddbbcf3a4c05414ba6503640505e3"
+[project.features]
+__internal_use_only_features_that_work_on_stable = ["alloc", "derive", "simd", "std"]
+alloc = []
+derive = ["zerocopy-derive"]
+float-nightly = []
+simd = []
+simd-nightly = ["simd"]
+std = ["alloc"]
+zerocopy-derive = ["dep:zerocopy-derive"]
+
+[rust]
+name = "zerocopy"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+zerocopy-derive = [{ loaf = "crates-io/zerocopy-derive", version = "=0.8.42", target = "cfg(any())" }, { loaf = "crates-io/zerocopy-derive", version = "=0.8.42", optional = true }]
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

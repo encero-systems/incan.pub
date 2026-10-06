@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "rand_core"
+name = "crates-io/rand_core"
 version = "0.9.5"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:76afc826de14238e6e8c374ddcc1fa19e374fd8dd986b0d2af0d02377261d83c"
+[project.features]
+os_rng = ["dep:getrandom"]
+serde = ["dep:serde"]
+std = ["getrandom?/std"]
+
+[rust]
+name = "rand_core"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+getrandom = { loaf = "crates-io/getrandom", version = "^0.3.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

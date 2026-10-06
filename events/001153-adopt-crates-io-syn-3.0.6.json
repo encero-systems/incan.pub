@@ -1,0 +1,78 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee",
+    "package": "syn",
+    "registry": "crates-io",
+    "version": "3.0.6"
+  },
+  "archive": "sha256:54b8f708b674e17c51fd66ee68787d696dfc36ad88b3eb15f7a77847108c07b8",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0.91"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": true,
+      "req": "^1.0.35"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-ident",
+      "name": "unicode-ident",
+      "optional": false,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "clone-impls": [],
+    "default": [
+      "derive",
+      "parsing",
+      "printing",
+      "clone-impls",
+      "proc-macro"
+    ],
+    "derive": [],
+    "extra-traits": [],
+    "fold": [],
+    "full": [],
+    "parsing": [],
+    "printing": [
+      "dep:quote"
+    ],
+    "proc-macro": [
+      "proc-macro2/proc-macro",
+      "quote?/proc-macro"
+    ],
+    "test": [],
+    "visit": [],
+    "visit-mut": []
+  },
+  "id": "sha256:480dfb2f57666f10dddde81529128f6a71b20dc203ffa34c4a21974fcb3389ad",
+  "kind": "adopt",
+  "manifest": "sha256:84578df897d9021cbf50f05c2581ccbfd58aef4c7e504f2677ac6551390f2b67",
+  "rust": {
+    "edition": "2021",
+    "name": "syn",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "syn",
+    "scope": "crates-io",
+    "version": "3.0.6"
+  }
+}

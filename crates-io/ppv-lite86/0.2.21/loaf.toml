@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "ppv-lite86"
+name = "crates-io/ppv-lite86"
 version = "0.2.21"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:85eae3c4ed2f50dcfe72643da4befc30deadb458a9b590d720cde2f2b1e97da9"
+[project.features]
+default = ["std"]
+no_simd = []
+simd = []
+std = []
+
+[rust]
+name = "ppv_lite86"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+zerocopy = { loaf = "crates-io/zerocopy", version = "^0.8.23", features = ["simd"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

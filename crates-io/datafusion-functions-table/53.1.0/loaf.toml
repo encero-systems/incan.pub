@@ -3,12 +3,23 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-functions-table"
+name = "crates-io/datafusion-functions-table"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:72b40d3f5bbb3905f9ccb1ce9485a9595c77b69758a7c24d3ba79e334ff51e7e"
+[rust]
+name = "datafusion_functions_table"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.89" }
+datafusion-catalog = { loaf = "crates-io/datafusion-catalog", version = "^53.1.0" }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-plan = { loaf = "crates-io/datafusion-physical-plan", version = "^53.1.0" }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+paste = { loaf = "crates-io/paste", version = "^1.0.15" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

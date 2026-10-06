@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "slab"
+name = "crates-io/slab"
 version = "0.4.12"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "slab"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0.95", features = ["alloc"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

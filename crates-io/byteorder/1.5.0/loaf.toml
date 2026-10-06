@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "byteorder"
+name = "crates-io/byteorder"
 version = "1.5.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
+[project.features]
+default = ["std"]
+i128 = []
+std = []
+
+[rust]
+name = "byteorder"
+type = "lib"
+edition = "2021"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

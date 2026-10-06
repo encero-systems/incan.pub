@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "cfg-if"
+name = "crates-io/cfg-if"
 version = "1.0.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
+[project.features]
+core = ["dep:core"]
+rustc-dep-of-std = ["core"]
+
+[rust]
+name = "cfg_if"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

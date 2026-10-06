@@ -1,0 +1,76 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:47d9d19d1d6efa0109d2f65ff4c85cddd50bd572e5a00127ab10987290bcefae",
+    "package": "litemap",
+    "registry": "crates-io",
+    "version": "0.8.3"
+  },
+  "archive": "sha256:775fdb969642613220de0ab06a57cc2c040c2affa1de99266cfed35bfd81f7a8",
+  "at": "2026-10-06T13:11:40Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/yoke",
+      "name": "yoke",
+      "optional": true,
+      "req": "^0.8.3"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "databake": [
+      "dep:databake"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "alloc"
+    ],
+    "testing": [
+      "alloc"
+    ],
+    "yoke": [
+      "dep:yoke"
+    ]
+  },
+  "id": "sha256:5552667dd326dd6142e5ae76b89f2f4afa1a1dcd8a070a174270a2000d8b6dab",
+  "kind": "adopt",
+  "manifest": "sha256:dce98af27421d8fb7750bf13589bd2351ec32281234b13629925f269a0565e8f",
+  "rust": {
+    "edition": "2021",
+    "name": "litemap",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "litemap",
+    "scope": "crates-io",
+    "version": "0.8.3"
+  }
+}

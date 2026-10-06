@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "serde_urlencoded"
+name = "crates-io/serde_urlencoded"
 version = "0.7.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d3491c14715ca2294c4d6a88f15e84739788c1d030eed8c110436aafdaa2f3fd"
+[rust]
+name = "serde_urlencoded"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+form_urlencoded = { loaf = "crates-io/form_urlencoded", version = "^1" }
+itoa = { loaf = "crates-io/itoa", version = "^1" }
+ryu = { loaf = "crates-io/ryu", version = "^1" }
+serde = { loaf = "crates-io/serde", version = "^1.0.69" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

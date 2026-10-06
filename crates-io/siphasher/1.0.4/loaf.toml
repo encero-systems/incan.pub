@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "siphasher"
+name = "crates-io/siphasher"
 version = "1.0.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:33f4fe9184a62d842c9ef383018f3306d8ba224fd9d836f56d7288308847c256"
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+serde_json = ["dep:serde_json"]
+serde_no_std = ["serde", "dep:serde", "serde/alloc"]
+serde_std = ["std", "serde", "dep:serde", "serde/std"]
+std = []
+
+[rust]
+name = "siphasher"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

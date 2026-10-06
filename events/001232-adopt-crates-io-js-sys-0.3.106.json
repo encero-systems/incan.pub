@@ -1,0 +1,77 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7883d941dae510fb2d978fc3fe018c71c9e2892fd38854de3e8b92c2e5ad9cc5",
+    "package": "js-sys",
+    "registry": "crates-io",
+    "version": "0.3.106"
+  },
+  "archive": "sha256:8e04b779baabf55575b3d98c96452677a062572f297f8188cba8ceb4515ac463",
+  "at": "2026-10-06T13:11:46Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": true,
+      "req": "^0.3.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.31"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": false,
+      "req": "=0.2.129"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "unsafe-eval"
+    ],
+    "futures-core-03-stream": [
+      "dep:futures-util",
+      "dep:futures-core"
+    ],
+    "std": [
+      "wasm-bindgen/std",
+      "dep:futures-util",
+      "futures-util/std"
+    ],
+    "unsafe-eval": []
+  },
+  "id": "sha256:c4aa9b419e4b7353c87ebf1f52165f626e9b5773fdaf61fe850653a0dad352aa",
+  "kind": "adopt",
+  "manifest": "sha256:767ab3bc2d7d36b0e698f49926e4e5108ba1cff15f6eead3eb097fb4137e59bc",
+  "rust": {
+    "edition": "2021",
+    "name": "js_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "js-sys",
+    "scope": "crates-io",
+    "version": "0.3.106"
+  }
+}

@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "crc32fast"
+name = "crates-io/crc32fast"
 version = "1.5.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:9481c1c90cbf2ac953f07c8d4a58aa3945c425b7185c9154d67a65e4230da511"
+[project.features]
+default = ["std"]
+nightly = []
+std = []
+
+[rust]
+name = "crc32fast"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

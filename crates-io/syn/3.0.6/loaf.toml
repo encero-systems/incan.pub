@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "syn"
+name = "crates-io/syn"
 version = "3.0.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee"
+[project.features]
+clone-impls = []
+default = ["derive", "parsing", "printing", "clone-impls", "proc-macro"]
+derive = []
+extra-traits = []
+fold = []
+full = []
+parsing = []
+printing = ["dep:quote"]
+proc-macro = ["proc-macro2/proc-macro", "quote?/proc-macro"]
+test = []
+visit = []
+visit-mut = []
+
+[rust]
+name = "syn"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.91", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1.0.35", default-features = false, optional = true }
+unicode-ident = { loaf = "crates-io/unicode-ident", version = "^1" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

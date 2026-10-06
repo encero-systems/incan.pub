@@ -3,12 +3,46 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-common"
+name = "crates-io/datafusion-common"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d72a11ca44a95e1081870d3abb80c717496e8a7acb467a1d3e932bb636af5cc2"
+[project.features]
+apache-avro = ["dep:apache-avro"]
+avro = ["apache-avro"]
+backtrace = []
+force_hash_collisions = []
+object_store = ["dep:object_store"]
+parquet = ["dep:parquet"]
+parquet_encryption = ["parquet", "dep:parquet", "parquet/encryption", "dep:hex"]
+recursive_protection = ["dep:recursive"]
+sql = ["sqlparser"]
+sqlparser = ["dep:sqlparser"]
+
+[rust]
+name = "datafusion_common"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", features = ["runtime-rng"], default-features = false }
+apache-avro = { loaf = "crates-io/apache-avro", version = "^0.21", features = ["bzip", "snappy", "xz", "zstandard"], default-features = false, optional = true }
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+arrow-ipc = { loaf = "crates-io/arrow-ipc", version = "^58.0.0", features = ["lz4"], default-features = false }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.44", default-features = false }
+half = { loaf = "crates-io/half", version = "^2.7.0", default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.16.1" }
+hex = { loaf = "crates-io/hex", version = "^0.4.3", optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.13.0" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+libc = { loaf = "crates-io/libc", version = "^0.2.180" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+object_store = { loaf = "crates-io/object_store", version = "^0.13.1", default-features = false, optional = true }
+parquet = { loaf = "crates-io/parquet", version = "^58.0.0", features = ["arrow", "async", "object_store"], optional = true }
+paste = { loaf = "crates-io/paste", version = "^1.0.15" }
+recursive = { loaf = "crates-io/recursive", version = "^0.1.1", optional = true }
+sqlparser = { loaf = "crates-io/sqlparser", version = "^0.61.0", features = ["std", "visitor"], default-features = false, optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["macros", "rt", "sync"] }
+web-time = { loaf = "crates-io/web-time", version = "^1.1.0", target = "cfg(target_family = \"wasm\")" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

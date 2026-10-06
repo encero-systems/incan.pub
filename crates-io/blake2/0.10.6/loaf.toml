@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "blake2"
+name = "crates-io/blake2"
 version = "0.10.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:46502ad458c9a52b69d4d4d32775c788b7a1b85e8bc9d482d92250fc0e3f8efe"
+[project.features]
+default = ["std"]
+reset = []
+simd = []
+simd_asm = ["simd_opt"]
+simd_opt = ["simd"]
+size_opt = []
+std = ["digest/std"]
+
+[rust]
+name = "blake2"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.10.3", features = ["mac"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

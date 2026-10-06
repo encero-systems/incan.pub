@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "anyhow"
+name = "crates-io/anyhow"
 version = "1.0.104"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470"
+[project.features]
+backtrace = []
+default = ["std"]
+std = []
+
+[rust]
+name = "anyhow"
+type = "lib"
+edition = "2021"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

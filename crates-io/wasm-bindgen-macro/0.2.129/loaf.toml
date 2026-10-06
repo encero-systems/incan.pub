@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasm-bindgen-macro"
+version = "0.2.129"
+
+[project.features]
+strict-macro = ["wasm-bindgen-macro-support/strict-macro"]
+
+[rust]
+name = "wasm_bindgen_macro"
+type = "proc-macro"
+edition = "2021"
+
+[dependencies]
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+wasm-bindgen-macro-support = { loaf = "crates-io/wasm-bindgen-macro-support", version = "=0.2.129" }

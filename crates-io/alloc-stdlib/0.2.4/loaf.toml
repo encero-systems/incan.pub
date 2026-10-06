@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "alloc-stdlib"
+name = "crates-io/alloc-stdlib"
 version = "0.2.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:0e76a019e91224d279006ff972f1e984179a6e9feb050adba6ce8274aef23195"
+[project.features]
+unsafe = ["alloc-no-stdlib/unsafe"]
+
+[rust]
+name = "alloc_stdlib"
+type = "lib"
+edition = "2015"
+
+[dependencies]
+alloc-no-stdlib = { loaf = "crates-io/alloc-no-stdlib", version = ">=2.0.4, <3.0.0" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

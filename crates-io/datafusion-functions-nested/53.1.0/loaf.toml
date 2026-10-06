@@ -3,12 +3,36 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-functions-nested"
+name = "crates-io/datafusion-functions-nested"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:ef13a858e20d50f0a9bb5e96e7ac82b4e7597f247515bccca4fdd2992df0212a"
+[project.features]
+default = ["sql"]
+sql = ["datafusion-expr/sql"]
+
+[rust]
+name = "datafusion_functions_nested"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+arrow-ord = { loaf = "crates-io/arrow-ord", version = "^58.0.0", default-features = false }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", default-features = false }
+datafusion-doc = { loaf = "crates-io/datafusion-doc", version = "^53.1.0" }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-expr-common = { loaf = "crates-io/datafusion-expr-common", version = "^53.1.0" }
+datafusion-functions = { loaf = "crates-io/datafusion-functions", version = "^53.1.0" }
+datafusion-functions-aggregate = { loaf = "crates-io/datafusion-functions-aggregate", version = "^53.1.0" }
+datafusion-functions-aggregate-common = { loaf = "crates-io/datafusion-functions-aggregate-common", version = "^53.1.0" }
+datafusion-macros = { loaf = "crates-io/datafusion-macros", version = "^53.1.0" }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.16.1" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14", features = ["use_std"] }
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+paste = { loaf = "crates-io/paste", version = "^1.0.15" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

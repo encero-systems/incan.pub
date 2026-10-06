@@ -1,0 +1,80 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:707f49d46706bacf8a2b00d51dace3f9de527c13eec3778f570c411f89e69967",
+    "package": "stacker",
+    "registry": "crates-io",
+    "version": "0.1.25"
+  },
+  "archive": "sha256:a899b14c0d9925b48d11f62ec4759eacaaa5d6a7f8658d1939f932a367bdd65a",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.156"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/psm",
+      "name": "psm",
+      "optional": false,
+      "req": "^0.1.7"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_System_Memory",
+        "Win32_System_Threading"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.60.0, <0.62.0",
+      "target": "arm64ec-pc-windows-msvc"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_System_Memory",
+        "Win32_System_Threading"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.60.0, <0.62.0",
+      "target": "cfg(all(windows, not(target_arch = \"arm64ec\")))"
+    }
+  ],
+  "features": {},
+  "id": "sha256:225d59dae58ed81c9ee6f7ec632a87ede65cec43056e633c56639693d3170e90",
+  "kind": "adopt",
+  "manifest": "sha256:c23680778f4eac227bf2146cebda62ff4159b2fd8d0d9332b138b363db5681d5",
+  "rust": {
+    "edition": "2021",
+    "name": "stacker",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "stacker",
+    "scope": "crates-io",
+    "version": "0.1.25"
+  }
+}

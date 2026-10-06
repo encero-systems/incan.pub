@@ -3,12 +3,95 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion"
+name = "crates-io/datafusion"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:93db0e623840612f7f2cd757f7e8a8922064192363732c88692e0870016e141b"
+[project.features]
+array_expressions = ["nested_expressions"]
+avro = ["datafusion-common/avro", "datafusion-datasource-avro"]
+backtrace = ["datafusion-common/backtrace"]
+bzip2 = ["dep:bzip2"]
+compression = ["liblzma", "bzip2", "flate2", "zstd", "datafusion-datasource-arrow/compression", "datafusion-datasource/compression"]
+crypto_expressions = ["datafusion-functions/crypto_expressions"]
+datafusion-datasource-avro = ["dep:datafusion-datasource-avro"]
+datafusion-datasource-parquet = ["dep:datafusion-datasource-parquet"]
+datafusion-functions-nested = ["dep:datafusion-functions-nested"]
+datafusion-sql = ["dep:datafusion-sql"]
+datetime_expressions = ["datafusion-functions/datetime_expressions"]
+default = ["nested_expressions", "crypto_expressions", "datetime_expressions", "encoding_expressions", "regex_expressions", "string_expressions", "unicode_expressions", "compression", "parquet", "recursive_protection", "sql"]
+encoding_expressions = ["datafusion-functions/encoding_expressions"]
+extended_tests = []
+flate2 = ["dep:flate2"]
+force_hash_collisions = ["datafusion-physical-plan/force_hash_collisions", "datafusion-common/force_hash_collisions"]
+liblzma = ["dep:liblzma"]
+math_expressions = ["datafusion-functions/math_expressions"]
+nested_expressions = ["datafusion-functions-nested"]
+parquet = ["datafusion-common/parquet", "dep:parquet", "datafusion-datasource-parquet"]
+parquet_encryption = ["parquet", "dep:parquet", "parquet/encryption", "datafusion-common/parquet_encryption", "datafusion-datasource-parquet", "dep:datafusion-datasource-parquet", "datafusion-datasource-parquet/parquet_encryption"]
+recursive_protection = ["datafusion-common/recursive_protection", "datafusion-expr/recursive_protection", "datafusion-optimizer/recursive_protection", "datafusion-physical-optimizer/recursive_protection", "datafusion-physical-expr/recursive_protection", "datafusion-sql?/recursive_protection", "sqlparser?/recursive-protection"]
+regex_expressions = ["datafusion-functions/regex_expressions"]
+serde = ["dep:serde", "arrow-schema/serde"]
+sql = ["datafusion-common/sql", "datafusion-functions-nested?/sql", "datafusion-sql", "sqlparser"]
+sqlparser = ["dep:sqlparser"]
+string_expressions = ["datafusion-functions/string_expressions"]
+unicode_expressions = ["datafusion-sql?/unicode_expressions", "datafusion-functions/unicode_expressions"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "datafusion"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^58.0.0", features = ["canonical_extension_types"], default-features = false }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.89" }
+bytes = { loaf = "crates-io/bytes", version = "^1.11" }
+bzip2 = { loaf = "crates-io/bzip2", version = "^0.6.1", optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.44", default-features = false }
+datafusion-catalog = { loaf = "crates-io/datafusion-catalog", version = "^53.1.0" }
+datafusion-catalog-listing = { loaf = "crates-io/datafusion-catalog-listing", version = "^53.1.0" }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", features = ["object_store"], default-features = false }
+datafusion-common-runtime = { loaf = "crates-io/datafusion-common-runtime", version = "^53.1.0" }
+datafusion-datasource = { loaf = "crates-io/datafusion-datasource", version = "^53.1.0", default-features = false }
+datafusion-datasource-arrow = { loaf = "crates-io/datafusion-datasource-arrow", version = "^53.1.0", default-features = false }
+datafusion-datasource-avro = { loaf = "crates-io/datafusion-datasource-avro", version = "^53.1.0", default-features = false, optional = true }
+datafusion-datasource-csv = { loaf = "crates-io/datafusion-datasource-csv", version = "^53.1.0", default-features = false }
+datafusion-datasource-json = { loaf = "crates-io/datafusion-datasource-json", version = "^53.1.0", default-features = false }
+datafusion-datasource-parquet = { loaf = "crates-io/datafusion-datasource-parquet", version = "^53.1.0", default-features = false, optional = true }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-expr-common = { loaf = "crates-io/datafusion-expr-common", version = "^53.1.0" }
+datafusion-functions = { loaf = "crates-io/datafusion-functions", version = "^53.1.0" }
+datafusion-functions-aggregate = { loaf = "crates-io/datafusion-functions-aggregate", version = "^53.1.0" }
+datafusion-functions-nested = { loaf = "crates-io/datafusion-functions-nested", version = "^53.1.0", default-features = false, optional = true }
+datafusion-functions-table = { loaf = "crates-io/datafusion-functions-table", version = "^53.1.0" }
+datafusion-functions-window = { loaf = "crates-io/datafusion-functions-window", version = "^53.1.0" }
+datafusion-optimizer = { loaf = "crates-io/datafusion-optimizer", version = "^53.1.0", default-features = false }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-adapter = { loaf = "crates-io/datafusion-physical-expr-adapter", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
+datafusion-physical-optimizer = { loaf = "crates-io/datafusion-physical-optimizer", version = "^53.1.0" }
+datafusion-physical-plan = { loaf = "crates-io/datafusion-physical-plan", version = "^53.1.0" }
+datafusion-session = { loaf = "crates-io/datafusion-session", version = "^53.1.0" }
+datafusion-sql = { loaf = "crates-io/datafusion-sql", version = "^53.1.0", optional = true }
+flate2 = { loaf = "crates-io/flate2", version = "^1.1.9", optional = true }
+futures = { loaf = "crates-io/futures", version = "^0.3" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+liblzma = { loaf = "crates-io/liblzma", version = "^0.4.6", features = ["static"], optional = true }
+log = { loaf = "crates-io/log", version = "^0.4" }
+object_store = { loaf = "crates-io/object_store", version = "^0.13.1", default-features = false }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+parquet = { loaf = "crates-io/parquet", version = "^58.0.0", features = ["arrow", "async", "object_store"], optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.9" }
+regex = { loaf = "crates-io/regex", version = "^1.12" }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], default-features = false, optional = true }
+sqlparser = { loaf = "crates-io/sqlparser", version = "^0.61.0", features = ["std", "visitor"], default-features = false, optional = true }
+tempfile = { loaf = "crates-io/tempfile", version = "^3" }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["macros", "rt", "sync"] }
+url = { loaf = "crates-io/url", version = "^2.5.7" }
+uuid = { loaf = "crates-io/uuid", version = "^1.21", features = ["js", "v4"] }
+zstd = { loaf = "crates-io/zstd", version = "^0.13", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

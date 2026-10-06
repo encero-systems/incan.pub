@@ -3,12 +3,16 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "rustc_version"
+name = "crates-io/rustc_version"
 version = "0.4.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:cfcb3a22ef46e85b45de6ee7e79d063319ebb6594faafcf1c225ea92ab6e9b92"
+[rust]
+name = "rustc_version"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+semver = { loaf = "crates-io/semver", version = "^1.0" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,80 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b1e27c91459209c2986af3dcf603a5a74a4368754ce37414f59acc971167f643",
+    "package": "tinystr",
+    "registry": "crates-io",
+    "version": "0.8.4"
+  },
+  "archive": "sha256:5ab656a743437a7f2c9689f45a99e7abb09a060a7d6a8a375d99da82da0aaf39",
+  "at": "2026-10-06T13:11:46Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": true,
+      "req": "^0.11.7"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde_core?/alloc",
+      "zerovec?/alloc"
+    ],
+    "databake": [
+      "dep:databake"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "std": [],
+    "zerovec": [
+      "dep:zerovec"
+    ]
+  },
+  "id": "sha256:9fb57ecc9affd2f4159fd38f81b401ce4f16a51fb6334fc3bb40c5a846c4800b",
+  "kind": "adopt",
+  "manifest": "sha256:5ec2cc4963f79b753113d4add1e9a5e147538167ed99229ae4b8a9b2107eb878",
+  "rust": {
+    "edition": "2021",
+    "name": "tinystr",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tinystr",
+    "scope": "crates-io",
+    "version": "0.8.4"
+  }
+}

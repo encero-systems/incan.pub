@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "arrow-json"
+name = "crates-io/arrow-json"
 version = "58.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:b8a96aed3931c076adee39ec2a40d8219fc7f09e79bcdaca1df16272993e1e14"
+[rust]
+name = "arrow_json"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow-array = { loaf = "crates-io/arrow-array", version = "^58.4.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^58.4.0" }
+arrow-cast = { loaf = "crates-io/arrow-cast", version = "^58.4.0" }
+arrow-ord = { loaf = "crates-io/arrow-ord", version = "^58.4.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^58.4.0" }
+arrow-select = { loaf = "crates-io/arrow-select", version = "^58.4.0" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.40", features = ["clock"], default-features = false }
+half = { loaf = "crates-io/half", version = "^2.1", default-features = false }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.0", features = ["std"], default-features = false }
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+lexical-core = { loaf = "crates-io/lexical-core", version = "^1.0", default-features = false }
+memchr = { loaf = "crates-io/memchr", version = "^2.7.4" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19", features = ["std"], default-features = false }
+ryu = { loaf = "crates-io/ryu", version = "^1.0" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", features = ["std"], default-features = false }
+simdutf8 = { loaf = "crates-io/simdutf8", version = "^0.1.5", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

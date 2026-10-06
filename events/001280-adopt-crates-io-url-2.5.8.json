@@ -1,0 +1,93 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ff67a8a4397373c3ef660812acab3268222035010ab8680ec4215f38ba3d0eed",
+    "package": "url",
+    "registry": "crates-io",
+    "version": "2.5.8"
+  },
+  "archive": "sha256:ee70aa56b37921b40b4b858dc17791b30626f1285c4456994a5023a906152b74",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/form_urlencoded",
+      "name": "form_urlencoded",
+      "optional": false,
+      "req": "^1.2.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "compiled_data"
+      ],
+      "loaf": "crates-io/idna",
+      "name": "idna",
+      "optional": false,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/percent-encoding",
+      "name": "percent-encoding",
+      "optional": false,
+      "req": "^2.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "debugger_visualizer": [],
+    "default": [
+      "std"
+    ],
+    "expose_internals": [],
+    "serde": [
+      "dep:serde",
+      "dep:serde_derive"
+    ],
+    "std": [
+      "idna/std",
+      "percent-encoding/std",
+      "form_urlencoded/std",
+      "serde?/std"
+    ]
+  },
+  "id": "sha256:7d8c9873efb9918030208d46f4ce0c2bd0c25ea10697539bea571071c82a4d41",
+  "kind": "adopt",
+  "manifest": "sha256:beafad94788ccbd806017e0f18ae0b41f58ae44bd30450a861828c1b746a25d8",
+  "rust": {
+    "edition": "2018",
+    "name": "url",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "url",
+    "scope": "crates-io",
+    "version": "2.5.8"
+  }
+}

@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-functions-aggregate-common"
+name = "crates-io/datafusion-functions-aggregate-common"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:b511250349407db7c43832ab2de63f5557b19a20dfd236b39ca2c04468b50d47"
+[rust]
+name = "datafusion_functions_aggregate_common"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", features = ["runtime-rng"], default-features = false }
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", default-features = false }
+datafusion-expr-common = { loaf = "crates-io/datafusion-expr-common", version = "^53.1.0" }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

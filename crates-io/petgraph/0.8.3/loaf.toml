@@ -3,12 +3,40 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "petgraph"
+name = "crates-io/petgraph"
 version = "0.8.3"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:8701b58ea97060d5e5b155d383a69952a60943f0e6dfe30b04c287beb0b27455"
+[project.features]
+all = ["unstable", "quickcheck", "matrix_graph", "stable_graph", "graphmap", "rayon", "dot_parser"]
+default = ["std", "graphmap", "stable_graph", "matrix_graph"]
+dot_parser = ["std", "dep:dot-parser", "dep:dot-parser-macros"]
+generate = []
+graphmap = []
+matrix_graph = []
+quickcheck = ["std", "dep:quickcheck", "graphmap", "stable_graph"]
+rayon = ["std", "dep:rayon", "indexmap/rayon", "hashbrown/rayon"]
+serde = ["dep:serde"]
+serde-1 = ["serde", "serde_derive"]
+serde_derive = ["dep:serde_derive"]
+stable_graph = ["serde?/alloc"]
+std = ["indexmap/std"]
+unstable = ["generate"]
+
+[rust]
+name = "petgraph"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+dot-parser = { loaf = "crates-io/dot-parser", version = "^0.5.1", optional = true }
+dot-parser-macros = { loaf = "crates-io/dot-parser-macros", version = "^0.5.1", optional = true }
+fixedbitset = { loaf = "crates-io/fixedbitset", version = "^0.5.7", default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.15.0", features = ["default-hasher", "inline-more"], default-features = false }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.5.0", default-features = false }
+quickcheck = { loaf = "crates-io/quickcheck", version = "^0.8", default-features = false, optional = true }
+rayon = { loaf = "crates-io/rayon", version = "^1.5.3", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

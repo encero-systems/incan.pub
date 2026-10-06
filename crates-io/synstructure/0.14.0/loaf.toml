@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "synstructure"
+name = "crates-io/synstructure"
 version = "0.14.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:901704edd0dfe137f1987838ee4f259e4e063c31371bdb423f7ae38ec6f77f02"
+[project.features]
+default = ["proc-macro"]
+proc-macro = ["proc-macro2/proc-macro", "syn/proc-macro", "quote/proc-macro"]
+
+[rust]
+name = "synstructure"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.60", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1", default-features = false }
+syn = { loaf = "crates-io/syn", version = "^3", features = ["clone-impls", "derive", "extra-traits", "parsing", "printing", "visit"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

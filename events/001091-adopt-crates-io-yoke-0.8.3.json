@@ -1,0 +1,75 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:709fe23a0424b6a435d82152b1bd3fdfb0833487d5fa90d05d42762a9891fef5",
+    "package": "yoke",
+    "registry": "crates-io",
+    "version": "0.8.3"
+  },
+  "archive": "sha256:03e8b3c23acf24b587217f735a8dbc7d94d112d178fd81cc523fef0efd861377",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": false,
+      "req": "^1.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/yoke-derive",
+      "name": "yoke-derive",
+      "optional": true,
+      "req": "^0.8.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerofrom",
+      "name": "zerofrom",
+      "optional": true,
+      "req": "^0.1.6"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "stable_deref_trait/alloc",
+      "zerofrom",
+      "dep:zerofrom",
+      "zerofrom/alloc"
+    ],
+    "default": [
+      "alloc",
+      "zerofrom"
+    ],
+    "derive": [
+      "dep:yoke-derive",
+      "zerofrom",
+      "dep:zerofrom",
+      "zerofrom/derive"
+    ],
+    "serde": [],
+    "zerofrom": [
+      "dep:zerofrom"
+    ]
+  },
+  "id": "sha256:e2100659632a210d767c0f245f701c79d939d6adaf69fd612342c719b47c9679",
+  "kind": "adopt",
+  "manifest": "sha256:567a2061939dccf96654942daf36a26ed84d83b409a69bbcb73c47cd666f57de",
+  "rust": {
+    "edition": "2021",
+    "name": "yoke",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "yoke",
+    "scope": "crates-io",
+    "version": "0.8.3"
+  }
+}

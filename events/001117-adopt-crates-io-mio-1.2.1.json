@@ -1,0 +1,89 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:02bd0af71c67b473010cbbc60715ee815645a4dc942899111f494b4b737d6fda",
+    "package": "mio",
+    "registry": "crates-io",
+    "version": "1.2.1"
+  },
+  "archive": "sha256:44f9b05ce879bdabea372a62d4275f885d7faea0887e4cab7e97423b63195525",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.183",
+      "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasi",
+      "name": "wasi",
+      "optional": false,
+      "req": "^0.11.0",
+      "target": "cfg(target_os = \"wasi\")"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Wdk_Foundation",
+        "Wdk_Storage_FileSystem",
+        "Wdk_System_IO",
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_Security",
+        "Win32_Storage_FileSystem",
+        "Win32_System_IO",
+        "Win32_System_WindowsProgramming"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.61",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "default": [
+      "log"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "net": [],
+    "os-ext": [
+      "os-poll",
+      "windows-sys/Win32_System_Pipes",
+      "windows-sys/Win32_Security"
+    ],
+    "os-poll": []
+  },
+  "id": "sha256:5f1ba67805946d8a493c6f399eda4590cb82c1c28fca16b75f383d01bcab99d0",
+  "kind": "adopt",
+  "manifest": "sha256:4177e39ebfaddb92688ad8e2b9e3eae32f9d44c65220ea359ca8a28d443ebe48",
+  "rust": {
+    "edition": "2021",
+    "name": "mio",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "mio",
+    "scope": "crates-io",
+    "version": "1.2.1"
+  }
+}

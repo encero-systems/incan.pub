@@ -1,0 +1,56 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:da7c62ceae207dd37ea5b845da6a0696c799f85e97da1ab5b7910be3c1c80223",
+    "package": "fastrand",
+    "registry": "crates-io",
+    "version": "2.5.0"
+  },
+  "archive": "sha256:b496482807e5e4448d6c691b040e4d6c87284a4443c10af120b74c17e25a2ad5",
+  "at": "2026-10-06T13:11:40Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "wasm_js"
+      ],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4",
+      "target": "cfg(all(any(target_arch = \"wasm32\", target_arch = \"wasm64\"), target_os = \"unknown\"))"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "std"
+    ],
+    "getrandom": [
+      "dep:getrandom"
+    ],
+    "js": [
+      "std",
+      "getrandom"
+    ],
+    "std": [
+      "alloc"
+    ]
+  },
+  "id": "sha256:4a18f785112e4f425be1d5d1b2dfcc4f1c87e031e31c48553c1626d56cf85116",
+  "kind": "adopt",
+  "manifest": "sha256:bf982cc149443833bbbd0c0bb06dd17830a53540d9245f88eae7ab62f7efc357",
+  "rust": {
+    "edition": "2018",
+    "name": "fastrand",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fastrand",
+    "scope": "crates-io",
+    "version": "2.5.0"
+  }
+}

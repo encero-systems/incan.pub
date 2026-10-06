@@ -3,12 +3,29 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-physical-optimizer"
+name = "crates-io/datafusion-physical-optimizer"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7cb13397809a425918f608dfe8653f332015a3e330004ab191b4404187238b95"
+[project.features]
+recursive_protection = ["dep:recursive"]
+
+[rust]
+name = "datafusion_physical_optimizer"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", default-features = false }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-expr-common = { loaf = "crates-io/datafusion-expr-common", version = "^53.1.0" }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
+datafusion-physical-plan = { loaf = "crates-io/datafusion-physical-plan", version = "^53.1.0" }
+datafusion-pruning = { loaf = "crates-io/datafusion-pruning", version = "^53.1.0" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+recursive = { loaf = "crates-io/recursive", version = "^0.1.1", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

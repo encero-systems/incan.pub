@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasm-bindgen-futures"
+version = "0.4.79"
+
+[project.features]
+default = ["std"]
+futures-core-03-stream = ["js-sys/futures-core-03-stream"]
+std = ["wasm-bindgen/std", "js-sys/std"]
+
+[rust]
+name = "wasm_bindgen_futures"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+js-sys = { loaf = "crates-io/js-sys", version = "=0.3.106", default-features = false }
+tokio = { loaf = "crates-io/tokio", version = "^1", features = ["rt", "time"], default-features = false, target = "cfg(all(target_os = \"emscripten\", wasm_bindgen_unstable_tokio))" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "=0.2.129", default-features = false }

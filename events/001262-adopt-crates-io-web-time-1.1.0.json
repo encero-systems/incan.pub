@@ -1,0 +1,61 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5a6580f308b1fad9207618087a65c04e7a10bc77e02c8e84e9b00dd4b12fa0bb",
+    "package": "web-time",
+    "registry": "crates-io",
+    "version": "1.1.0"
+  },
+  "archive": "sha256:014fb6ae624a8bd623f336e89dc524e6d90eada300e422bb2bb52a593dad4c68",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": false,
+      "req": "^0.3.20",
+      "target": "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1",
+      "target": "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": false,
+      "req": "^0.2.70",
+      "target": "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))"
+    }
+  ],
+  "features": {
+    "serde": [
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:0e10fc9a27b383cfde9f9f57d84b1b8f5772e4e001cf444a986e58d1d4bb7356",
+  "kind": "adopt",
+  "manifest": "sha256:cc8909cd7f53aaf2798050c6fbcbdd654ad0c91f888e95c0c5afeb4e3f9e6a0a",
+  "rust": {
+    "edition": "2021",
+    "name": "web_time",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "web-time",
+    "scope": "crates-io",
+    "version": "1.1.0"
+  }
+}

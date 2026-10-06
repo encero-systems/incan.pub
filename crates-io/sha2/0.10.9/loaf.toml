@@ -3,12 +3,31 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "sha2"
+name = "crates-io/sha2"
 version = "0.10.9"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283"
+[project.features]
+asm = ["sha2-asm"]
+asm-aarch64 = ["asm"]
+compress = []
+default = ["std"]
+force-soft = []
+force-soft-compact = []
+loongarch64_asm = []
+oid = ["digest/oid"]
+sha2-asm = ["dep:sha2-asm"]
+std = ["digest/std"]
+
+[rust]
+name = "sha2"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.2", target = "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))" }
+digest = { loaf = "crates-io/digest", version = "^0.10.7" }
+sha2-asm = { loaf = "crates-io/sha2-asm", version = "^0.6.1", optional = true, target = "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

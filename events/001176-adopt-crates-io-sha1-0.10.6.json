@@ -1,0 +1,83 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e3bf829a2d51ab4a5ddf1352d8470c140cadc8301b2ae1789db023f01cedd6ba",
+    "package": "sha1",
+    "registry": "crates-io",
+    "version": "0.10.6"
+  },
+  "archive": "sha256:97d66404ea74bbfbfbb01bc31452bf82a1f43a64dd67f3393ff00ac166311fa6",
+  "at": "2026-10-06T13:11:45Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86\", target_arch = \"x86_64\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.10.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha1-asm",
+      "name": "sha1-asm",
+      "optional": true,
+      "req": "^0.5",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86\", target_arch = \"x86_64\"))"
+    }
+  ],
+  "features": {
+    "asm": [
+      "sha1-asm"
+    ],
+    "compress": [],
+    "default": [
+      "std"
+    ],
+    "force-soft": [],
+    "loongarch64_asm": [],
+    "oid": [
+      "digest/oid"
+    ],
+    "sha1-asm": [
+      "dep:sha1-asm"
+    ],
+    "std": [
+      "digest/std"
+    ]
+  },
+  "id": "sha256:fd8393fbf53538cdb381c0c550f1d41b11492fc1380747390e79b5eac307e03d",
+  "kind": "adopt",
+  "manifest": "sha256:39e14ec72922f92cb76523c822cfa672191d75957cfeff4fcae368299a69bc1c",
+  "rust": {
+    "edition": "2018",
+    "name": "sha1",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "sha1",
+    "scope": "crates-io",
+    "version": "0.10.6"
+  }
+}

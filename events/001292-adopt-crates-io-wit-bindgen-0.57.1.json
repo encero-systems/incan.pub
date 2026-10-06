@@ -1,0 +1,107 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1ebf944e87a7c253233ad6766e082e3cd714b5d03812acc24c318f549614536e",
+    "package": "wit-bindgen",
+    "registry": "crates-io",
+    "version": "0.57.1"
+  },
+  "archive": "sha256:715314cb4141e34e4393b2f397461c3fb1702ca198dbfb3fe6b7fef775a4d497",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.11.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures",
+      "name": "futures",
+      "optional": true,
+      "req": "^0.3.30"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen-rust-macro",
+      "name": "wit-bindgen-rust-macro",
+      "optional": true,
+      "req": "^0.57.1"
+    }
+  ],
+  "features": {
+    "async": [],
+    "async-spawn": [
+      "async",
+      "dep:futures",
+      "std"
+    ],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "default": [
+      "macros",
+      "realloc",
+      "async",
+      "std",
+      "bitflags",
+      "macro-string"
+    ],
+    "futures-stream": [
+      "async",
+      "dep:futures"
+    ],
+    "inter-task-wakeup": [
+      "async"
+    ],
+    "macro-string": [
+      "wit-bindgen-rust-macro?/macro-string"
+    ],
+    "macros": [
+      "dep:wit-bindgen-rust-macro"
+    ],
+    "realloc": [],
+    "rustc-dep-of-std": [
+      "dep:core",
+      "dep:alloc"
+    ],
+    "std": []
+  },
+  "id": "sha256:c9a65c0c527181661db5e7f49b3dac3e5966d91db688d2cc72134d9e0034a342",
+  "kind": "adopt",
+  "manifest": "sha256:07cb2659f96fe1297763b65352472d92bb2a21a1ee6269d589bdd85d489fd8e0",
+  "rust": {
+    "edition": "2024",
+    "name": "wit_bindgen",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-bindgen",
+    "scope": "crates-io",
+    "version": "0.57.1"
+  }
+}

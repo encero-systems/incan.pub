@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "futures-task"
+name = "crates-io/futures-task"
 version = "0.3.32"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:037711b3d59c33004d3856fbdc83b99d4ff37a24768fa1be9ce3538a1cde4393"
+[project.features]
+alloc = []
+cfg-target-has-atomic = []
+default = ["std"]
+std = ["alloc"]
+unstable = []
+
+[rust]
+name = "futures_task"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

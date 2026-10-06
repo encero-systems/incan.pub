@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/signal-hook"
+version = "0.3.18"
+
+[project.features]
+cc = []
+channel = []
+default = ["channel", "iterator"]
+extended-siginfo = ["channel", "iterator", "extended-siginfo-raw"]
+extended-siginfo-raw = ["cc"]
+iterator = ["channel"]
+
+[rust]
+name = "signal_hook"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+signal-hook-registry = { loaf = "crates-io/signal-hook-registry", version = "^1.4" }

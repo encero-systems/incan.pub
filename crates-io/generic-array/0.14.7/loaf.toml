@@ -3,12 +3,23 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "generic-array"
+name = "crates-io/generic-array"
 version = "0.14.7"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a"
+[project.features]
+more_lengths = []
+serde = ["dep:serde"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "generic_array"
+type = "lib"
+edition = "2015"
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+typenum = { loaf = "crates-io/typenum", version = "^1.12" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

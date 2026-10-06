@@ -1,0 +1,61 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a",
+    "package": "tracing-core",
+    "registry": "crates-io",
+    "version": "0.1.36"
+  },
+  "archive": "sha256:7d005e243d73beae3c0dfc04810317346ed49cd58bd1cb0b2f5344880c7fda0b",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.13.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/valuable",
+      "name": "valuable",
+      "optional": true,
+      "req": "^0.1.0",
+      "target": "cfg(tracing_unstable)"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "valuable?/std"
+    ],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "std": [
+      "once_cell"
+    ],
+    "valuable": [
+      "dep:valuable"
+    ]
+  },
+  "id": "sha256:c384c5648a6f10d1942185735eb8a3493b1fe97d56a95f6c0aae6ec3ea372f67",
+  "kind": "adopt",
+  "manifest": "sha256:536ff7816f89069664721b38446befed024233733e003922633296e611e80278",
+  "rust": {
+    "edition": "2018",
+    "name": "tracing_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tracing-core",
+    "scope": "crates-io",
+    "version": "0.1.36"
+  }
+}

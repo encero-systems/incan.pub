@@ -1,0 +1,195 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2e5a6c098c7a3b6547378093f5cc30bc54fd361ce711e05293a5cc589562739b",
+    "package": "object",
+    "registry": "crates-io",
+    "version": "0.39.1"
+  },
+  "archive": "sha256:05810379d687320c0924a1c69b9c1d689e1128a807d34bd46b648af3fec12b20",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crc32fast",
+      "name": "crc32fast",
+      "optional": true,
+      "req": "^1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.17.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": true,
+      "req": "^2.14"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.4.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ruzstd",
+      "name": "ruzstd",
+      "optional": true,
+      "req": "^0.8.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": true,
+      "req": "^0.247.0"
+    }
+  ],
+  "features": {
+    "all": [
+      "read",
+      "write",
+      "build",
+      "std",
+      "compression",
+      "wasm"
+    ],
+    "alloc": [
+      "dep:alloc"
+    ],
+    "archive": [],
+    "build": [
+      "build_core",
+      "write_std",
+      "elf"
+    ],
+    "build_core": [
+      "read_core",
+      "write_core"
+    ],
+    "cargo-all": [],
+    "coff": [],
+    "compression": [
+      "dep:flate2",
+      "dep:ruzstd",
+      "std"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "read",
+      "compression"
+    ],
+    "doc": [
+      "all"
+    ],
+    "elf": [],
+    "macho": [],
+    "pe": [
+      "coff"
+    ],
+    "read": [
+      "read_core",
+      "archive",
+      "coff",
+      "elf",
+      "macho",
+      "pe",
+      "xcoff"
+    ],
+    "read_core": [],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc",
+      "memchr/rustc-dep-of-std"
+    ],
+    "std": [
+      "memchr/std"
+    ],
+    "unaligned": [],
+    "unstable": [],
+    "unstable-all": [
+      "all",
+      "unstable"
+    ],
+    "wasm": [
+      "dep:wasmparser"
+    ],
+    "write": [
+      "write_std",
+      "coff",
+      "elf",
+      "macho",
+      "pe",
+      "xcoff"
+    ],
+    "write_core": [
+      "dep:crc32fast",
+      "dep:indexmap",
+      "dep:hashbrown"
+    ],
+    "write_std": [
+      "write_core",
+      "std",
+      "indexmap?/std",
+      "crc32fast?/std"
+    ],
+    "xcoff": []
+  },
+  "id": "sha256:0d0f8dce946b459ca3d4fdeda6645edd26f451fd1855ad2e732ba14a7af6bbe0",
+  "kind": "adopt",
+  "manifest": "sha256:415392f8f655f3b35b8ac7a72dce2415e13cfe748200000f98fcc4a01cac3815",
+  "rust": {
+    "edition": "2018",
+    "name": "object",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "object",
+    "scope": "crates-io",
+    "version": "0.39.1"
+  }
+}

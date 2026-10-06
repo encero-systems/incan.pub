@@ -1,0 +1,160 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8701b58ea97060d5e5b155d383a69952a60943f0e6dfe30b04c287beb0b27455",
+    "package": "petgraph",
+    "registry": "crates-io",
+    "version": "0.8.3"
+  },
+  "archive": "sha256:ebd85e2fec2db6cdc02a0647f5c28d336ff19c58c139364192cb696cd092e334",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/dot-parser",
+      "name": "dot-parser",
+      "optional": true,
+      "req": "^0.5.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/dot-parser-macros",
+      "name": "dot-parser-macros",
+      "optional": true,
+      "req": "^0.5.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/fixedbitset",
+      "name": "fixedbitset",
+      "optional": false,
+      "req": "^0.5.7"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher",
+        "inline-more"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.15.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/quickcheck",
+      "name": "quickcheck",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.5.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "all": [
+      "unstable",
+      "quickcheck",
+      "matrix_graph",
+      "stable_graph",
+      "graphmap",
+      "rayon",
+      "dot_parser"
+    ],
+    "default": [
+      "std",
+      "graphmap",
+      "stable_graph",
+      "matrix_graph"
+    ],
+    "dot_parser": [
+      "std",
+      "dep:dot-parser",
+      "dep:dot-parser-macros"
+    ],
+    "generate": [],
+    "graphmap": [],
+    "matrix_graph": [],
+    "quickcheck": [
+      "std",
+      "dep:quickcheck",
+      "graphmap",
+      "stable_graph"
+    ],
+    "rayon": [
+      "std",
+      "dep:rayon",
+      "indexmap/rayon",
+      "hashbrown/rayon"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde-1": [
+      "serde",
+      "serde_derive"
+    ],
+    "serde_derive": [
+      "dep:serde_derive"
+    ],
+    "stable_graph": [
+      "serde?/alloc"
+    ],
+    "std": [
+      "indexmap/std"
+    ],
+    "unstable": [
+      "generate"
+    ]
+  },
+  "id": "sha256:2f0e43fa39623958ac88033dd3940d978bdada21f68ab45b20658be5e71a1152",
+  "kind": "adopt",
+  "manifest": "sha256:5234095f3c4ec7df50b27fb531aabbf8c9935152d56c36f2318429c2c61bf31c",
+  "rust": {
+    "edition": "2021",
+    "name": "petgraph",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "petgraph",
+    "scope": "crates-io",
+    "version": "0.8.3"
+  }
+}

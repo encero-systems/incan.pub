@@ -3,12 +3,74 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "object_store"
+name = "crates-io/object_store"
 version = "0.13.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:622acbc9100d3c10e2ee15804b0caa40e55c933d5aa53814cd520805b7958a49"
+[project.features]
+aws = ["cloud", "md-5"]
+azure = ["cloud", "httparse"]
+base64 = ["dep:base64"]
+cloud = ["serde", "serde_json", "quick-xml", "hyper", "reqwest", "dep:reqwest", "reqwest/stream", "chrono/serde", "base64", "rand", "ring", "http-body-util", "form_urlencoded", "serde_urlencoded", "tokio"]
+default = ["fs"]
+form_urlencoded = ["dep:form_urlencoded"]
+fs = ["walkdir", "tokio"]
+gcp = ["cloud", "rustls-pki-types"]
+http = ["cloud"]
+http-body-util = ["dep:http-body-util"]
+httparse = ["dep:httparse"]
+hyper = ["dep:hyper"]
+integration = ["rand", "tokio"]
+md-5 = ["dep:md-5"]
+quick-xml = ["dep:quick-xml"]
+rand = ["dep:rand"]
+reqwest = ["dep:reqwest"]
+ring = ["dep:ring"]
+rustls-pki-types = ["dep:rustls-pki-types"]
+serde = ["dep:serde"]
+serde_json = ["dep:serde_json"]
+serde_urlencoded = ["dep:serde_urlencoded"]
+tls-webpki-roots = ["reqwest?/rustls-tls-webpki-roots"]
+tokio = ["dep:tokio", "dep:tracing"]
+walkdir = ["dep:walkdir"]
+
+[rust]
+name = "object_store"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.53" }
+base64 = { loaf = "crates-io/base64", version = "^0.22", features = ["std"], default-features = false, optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.0" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.34", features = ["clock"], default-features = false }
+form_urlencoded = { loaf = "crates-io/form_urlencoded", version = "^1.2", optional = true }
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3", features = ["sink"], target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3" }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3", features = ["sink"] }
+http = { loaf = "crates-io/http", version = "^1.2.0" }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1.2", optional = true }
+httparse = { loaf = "crates-io/httparse", version = "^1.8.0", features = ["std"], default-features = false, optional = true }
+humantime = { loaf = "crates-io/humantime", version = "^2.1" }
+hyper = { loaf = "crates-io/hyper", version = "^1.2", default-features = false, optional = true }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+md-5 = { loaf = "crates-io/md-5", version = "^0.10.6", default-features = false, optional = true }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.1" }
+quick-xml = { loaf = "crates-io/quick-xml", version = "^0.39.0", features = ["overlapped-lists", "serialize"], optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.10", features = ["std", "std_rng", "thread_rng"], default-features = false, optional = true }
+reqwest = { loaf = "crates-io/reqwest", version = "^0.12", features = ["http2", "rustls-tls-native-roots"], default-features = false, optional = true }
+ring = { loaf = "crates-io/ring", version = "^0.17", features = ["std"], default-features = false, optional = true }
+rustls-pki-types = { loaf = "crates-io/rustls-pki-types", version = "^1.9", features = ["std"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", features = ["std"], default-features = false, optional = true }
+serde_urlencoded = { loaf = "crates-io/serde_urlencoded", version = "^0.7", optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1.29.0", features = ["io-util", "macros", "rt", "sync", "time"], optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", optional = true }
+url = { loaf = "crates-io/url", version = "^2.2" }
+walkdir = { loaf = "crates-io/walkdir", version = "^2", optional = true }
+wasm-bindgen-futures = { loaf = "crates-io/wasm-bindgen-futures", version = "^0.4.18", target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
+web-time = { loaf = "crates-io/web-time", version = "^1.1.0", target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

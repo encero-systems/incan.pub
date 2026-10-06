@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-common-runtime"
+name = "crates-io/datafusion-common-runtime"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:89f4afaed29670ec4fd6053643adc749fe3f4bc9d1ce1b8c5679b22c67d12def"
+[rust]
+name = "datafusion_common_runtime"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+futures = { loaf = "crates-io/futures", version = "^0.3" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["macros", "rt", "sync"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

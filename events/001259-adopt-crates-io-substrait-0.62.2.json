@@ -1,0 +1,139 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:62fc4b483a129b9772ccb9c3f7945a472112fdd9140da87f8a4e7f1d44e045d0",
+    "package": "substrait",
+    "registry": "crates-io",
+    "version": "0.62.2"
+  },
+  "archive": "sha256:d5baf0e28daec1b9fd353dbd63ff4e05909952931f0212270404a7d3e64f27f9",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hex",
+      "name": "hex",
+      "optional": true,
+      "req": "^0.4.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pbjson",
+      "name": "pbjson",
+      "optional": true,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pbjson-types",
+      "name": "pbjson-types",
+      "optional": true,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prost",
+      "name": "prost",
+      "optional": false,
+      "req": "^0.14.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prost-types",
+      "name": "prost-types",
+      "optional": false,
+      "req": "^0.14.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/regress",
+      "name": "regress",
+      "optional": false,
+      "req": "^0.10.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/semver",
+      "name": "semver",
+      "optional": true,
+      "req": "^1.0.27"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": false,
+      "req": "^1.0.228"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": false,
+      "req": "^1.0.145"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_yaml",
+      "name": "serde_yaml",
+      "optional": true,
+      "req": "^0.9.34"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": true,
+      "req": "^2.0.17"
+    }
+  ],
+  "features": {
+    "default": [],
+    "embed-descriptor": [],
+    "extensions": [
+      "dep:serde_yaml"
+    ],
+    "parse": [
+      "dep:hex",
+      "dep:thiserror",
+      "semver"
+    ],
+    "protoc": [],
+    "semver": [
+      "dep:semver"
+    ],
+    "serde": [
+      "dep:pbjson",
+      "dep:pbjson-types"
+    ]
+  },
+  "id": "sha256:dc3eb905a1d0aafed84a1562b60681467c7123acf5252d52d2f5c8ea814cbe5a",
+  "kind": "adopt",
+  "manifest": "sha256:2f95b7e29f52f79c0419899e2c6bea97d91ceab2ee08742b386b71a7882feb68",
+  "rust": {
+    "edition": "2024",
+    "name": "substrait",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "substrait",
+    "scope": "crates-io",
+    "version": "0.62.2"
+  }
+}

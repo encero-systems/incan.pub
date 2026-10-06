@@ -1,0 +1,139 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a",
+    "package": "hashbrown",
+    "registry": "crates-io",
+    "version": "0.17.1"
+  },
+  "archive": "sha256:9d89bc787c92a1506b4b124c1f24eead6cd9fde80e1b64c49c47cd8b53e72708",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/allocator-api2",
+      "name": "allocator-api2",
+      "optional": true,
+      "req": "^0.2.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/equivalent",
+      "name": "equivalent",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/foldhash",
+      "name": "foldhash",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.9.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220",
+      "target": "cfg(any())"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.221"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:alloc"
+    ],
+    "allocator-api2": [
+      "dep:allocator-api2"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "default-hasher",
+      "inline-more",
+      "allocator-api2",
+      "equivalent",
+      "raw-entry"
+    ],
+    "default-hasher": [
+      "dep:foldhash"
+    ],
+    "equivalent": [
+      "dep:equivalent"
+    ],
+    "inline-more": [],
+    "nightly": [
+      "foldhash?/nightly"
+    ],
+    "raw-entry": [],
+    "rayon": [
+      "dep:rayon"
+    ],
+    "rustc-dep-of-std": [
+      "nightly",
+      "core",
+      "alloc",
+      "rustc-internal-api"
+    ],
+    "rustc-internal-api": [],
+    "serde": [
+      "dep:serde_core",
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:3e584041ec634f0af0532153c8da1a6352091de2d86f62d8fbe805b57d72ce84",
+  "kind": "adopt",
+  "manifest": "sha256:6e48b66c21356fdd992fda10c8751f6593fd5edd4aa9219a664b8c14bb68af57",
+  "rust": {
+    "edition": "2024",
+    "name": "hashbrown",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hashbrown",
+    "scope": "crates-io",
+    "version": "0.17.1"
+  }
+}

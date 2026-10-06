@@ -1,0 +1,125 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4ea269c3bd32f0a32c321907a2ae912ba6f4649bb0fc764a15627e99a7095a3f",
+    "package": "zerotrie",
+    "registry": "crates-io",
+    "version": "0.2.5"
+  },
+  "archive": "sha256:cdbd12d7fe722d0a0e09be5b129ab86fe5564f9b8576e8dc8dd7c9935206cdcc",
+  "at": "2026-10-06T13:11:46Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/litemap",
+      "name": "litemap",
+      "optional": true,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/yoke",
+      "name": "yoke",
+      "optional": true,
+      "req": "^0.8.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerofrom",
+      "name": "zerofrom",
+      "optional": true,
+      "req": "^0.1.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": true,
+      "req": "^0.11.7"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "zerovec?/alloc"
+    ],
+    "databake": [
+      "dep:databake",
+      "zerovec?/databake"
+    ],
+    "default": [],
+    "dense": [
+      "dep:zerovec"
+    ],
+    "litemap": [
+      "dep:litemap",
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "dep:litemap",
+      "alloc",
+      "litemap",
+      "litemap/serde",
+      "zerovec?/serde"
+    ],
+    "yoke": [
+      "dep:yoke"
+    ],
+    "zerofrom": [
+      "dep:zerofrom"
+    ],
+    "zerovec": [
+      "dep:zerovec"
+    ]
+  },
+  "id": "sha256:b2dd7ef0b2515e32fe81f92ff07837ac67a1e7701aa976c778c8ab98de9f3e0e",
+  "kind": "adopt",
+  "manifest": "sha256:8f08813f490998486f9f44e563483ab85d1dad68ae73d14115103ffb19ced559",
+  "rust": {
+    "edition": "2021",
+    "name": "zerotrie",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "zerotrie",
+    "scope": "crates-io",
+    "version": "0.2.5"
+  }
+}

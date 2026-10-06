@@ -3,12 +3,16 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "block-buffer"
+name = "crates-io/block-buffer"
 version = "0.10.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71"
+[rust]
+name = "block_buffer"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+generic-array = { loaf = "crates-io/generic-array", version = "^0.14" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

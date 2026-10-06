@@ -3,12 +3,43 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-datasource-parquet"
+name = "crates-io/datafusion-datasource-parquet"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:32a8e0365e0e08e8ff94d912f0ababcf9065a1a304018ba90b1fc83c855b4997"
+[project.features]
+parquet_encryption = ["parquet/encryption", "datafusion-common/parquet_encryption", "datafusion-execution/parquet_encryption"]
+
+[rust]
+name = "datafusion_datasource_parquet"
+type = "lib"
+edition = "2024"
+
+[rust.source]
+root = "src/mod.rs"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.89" }
+bytes = { loaf = "crates-io/bytes", version = "^1.11" }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", features = ["object_store", "parquet"], default-features = false }
+datafusion-common-runtime = { loaf = "crates-io/datafusion-common-runtime", version = "^53.1.0" }
+datafusion-datasource = { loaf = "crates-io/datafusion-datasource", version = "^53.1.0", default-features = false }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-functions-aggregate-common = { loaf = "crates-io/datafusion-functions-aggregate-common", version = "^53.1.0" }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-adapter = { loaf = "crates-io/datafusion-physical-expr-adapter", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
+datafusion-physical-plan = { loaf = "crates-io/datafusion-physical-plan", version = "^53.1.0" }
+datafusion-pruning = { loaf = "crates-io/datafusion-pruning", version = "^53.1.0" }
+datafusion-session = { loaf = "crates-io/datafusion-session", version = "^53.1.0" }
+futures = { loaf = "crates-io/futures", version = "^0.3" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+object_store = { loaf = "crates-io/object_store", version = "^0.13.1", default-features = false }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+parquet = { loaf = "crates-io/parquet", version = "^58.0.0", features = ["arrow", "async", "object_store"], default-features = false }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["macros", "rt", "sync"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

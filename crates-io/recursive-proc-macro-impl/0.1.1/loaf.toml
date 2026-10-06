@@ -3,12 +3,17 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "recursive-proc-macro-impl"
+name = "crates-io/recursive-proc-macro-impl"
 version = "0.1.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:76009fbe0614077fc1a2ce255e3a1881a2e3a3527097d5dc6d8212c585e7e38b"
+[rust]
+name = "recursive_proc_macro_impl"
+type = "proc-macro"
+edition = "2021"
+
+[dependencies]
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^2.0", features = ["full"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

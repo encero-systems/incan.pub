@@ -3,12 +3,16 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "humantime"
+name = "crates-io/humantime"
 version = "2.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:15cdd26707701c53297e2fa6afb323d55fbc1d0810c3aec078ae3ef0424c3c15"
+[project.features]
+mu = []
+
+[rust]
+name = "humantime"
+type = "lib"
+edition = "2021"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

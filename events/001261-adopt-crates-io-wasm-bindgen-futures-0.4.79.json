@@ -1,0 +1,69 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3cbab34de2d982e9b48e18d216d04c4a6f641066ff19ffb699980f591ee3610e",
+    "package": "wasm-bindgen-futures",
+    "registry": "crates-io",
+    "version": "0.4.79"
+  },
+  "archive": "sha256:fc85f77e1916ecc2f0cc8e0655bb485e514179fb5f6a24b4b4de16fbd98ad182",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": false,
+      "req": "=0.3.106"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rt",
+        "time"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(all(target_os = \"emscripten\", wasm_bindgen_unstable_tokio))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": false,
+      "req": "=0.2.129"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "futures-core-03-stream": [
+      "js-sys/futures-core-03-stream"
+    ],
+    "std": [
+      "wasm-bindgen/std",
+      "js-sys/std"
+    ]
+  },
+  "id": "sha256:66a3b25012906e8d5079a81d8b9db2b8b587d5f3abf771caef60654417071e43",
+  "kind": "adopt",
+  "manifest": "sha256:af8c6a3dbeb3366a5e4d35162b929097cfe99504548f613a0f749d7028e9bfba",
+  "rust": {
+    "edition": "2021",
+    "name": "wasm_bindgen_futures",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasm-bindgen-futures",
+    "scope": "crates-io",
+    "version": "0.4.79"
+  }
+}

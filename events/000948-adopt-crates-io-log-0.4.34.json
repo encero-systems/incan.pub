@@ -1,0 +1,135 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f9f8bd3e56ce4dfc153cf470fffbfa98c7620958b312ca5c3a4b8d5181fd13c6",
+    "package": "log",
+    "registry": "crates-io",
+    "version": "0.4.34"
+  },
+  "archive": "sha256:9c5811056c9c726d7412467c91d8e1bd4ff8631e3ac94822b709412e60a3d800",
+  "at": "2026-10-06T13:11:40Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sval",
+      "name": "sval",
+      "optional": true,
+      "req": "^2.16"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sval_ref",
+      "name": "sval_ref",
+      "optional": true,
+      "req": "^2.16"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "inline-i128"
+      ],
+      "loaf": "crates-io/value-bag",
+      "name": "value-bag",
+      "optional": true,
+      "req": "^1.12"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "kv": [],
+    "kv_serde": [
+      "kv_std",
+      "value-bag",
+      "dep:value-bag",
+      "value-bag/serde",
+      "serde"
+    ],
+    "kv_std": [
+      "std",
+      "kv",
+      "value-bag",
+      "dep:value-bag",
+      "value-bag/error"
+    ],
+    "kv_sval": [
+      "kv",
+      "value-bag",
+      "dep:value-bag",
+      "value-bag/sval",
+      "sval",
+      "sval_ref"
+    ],
+    "kv_unstable": [
+      "kv",
+      "value-bag"
+    ],
+    "kv_unstable_serde": [
+      "kv_serde",
+      "kv_unstable_std"
+    ],
+    "kv_unstable_std": [
+      "kv_std",
+      "kv_unstable"
+    ],
+    "kv_unstable_sval": [
+      "kv_sval",
+      "kv_unstable"
+    ],
+    "max_level_debug": [],
+    "max_level_error": [],
+    "max_level_info": [],
+    "max_level_off": [],
+    "max_level_trace": [],
+    "max_level_warn": [],
+    "release_max_level_debug": [],
+    "release_max_level_error": [],
+    "release_max_level_info": [],
+    "release_max_level_off": [],
+    "release_max_level_trace": [],
+    "release_max_level_warn": [],
+    "serde": [
+      "serde_core"
+    ],
+    "serde_core": [
+      "dep:serde_core"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "sval": [
+      "dep:sval"
+    ],
+    "sval_ref": [
+      "dep:sval_ref"
+    ],
+    "value-bag": [
+      "dep:value-bag"
+    ]
+  },
+  "id": "sha256:b879f809bd143adad5cb78ca692e279c7401021545d592a96d864407760e78b1",
+  "kind": "adopt",
+  "manifest": "sha256:8f3f45fad257b8ab4b735eedfbbd7fa07bef39eaf2ca53f1b6ed1b3702554f0e",
+  "rust": {
+    "edition": "2021",
+    "name": "log",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "log",
+    "scope": "crates-io",
+    "version": "0.4.34"
+  }
+}

@@ -3,12 +3,35 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "indexmap"
+name = "crates-io/indexmap"
 version = "2.14.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:cc4e190f5d26ca7051642629da2c52fc03bde85a03197c99408dcd291734c855"
+[project.features]
+arbitrary = ["dep:arbitrary"]
+borsh = ["dep:borsh"]
+default = ["std"]
+quickcheck = ["dep:quickcheck"]
+rayon = ["dep:rayon"]
+serde = ["dep:serde_core", "dep:serde"]
+std = []
+sval = ["dep:sval"]
+test_debug = []
+
+[rust]
+name = "indexmap"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0", default-features = false, optional = true }
+borsh = { loaf = "crates-io/borsh", version = "^1.2", default-features = false, optional = true }
+equivalent = { loaf = "crates-io/equivalent", version = "^1.0", default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17", default-features = false }
+quickcheck = { loaf = "crates-io/quickcheck", version = "^1.0", default-features = false, optional = true }
+rayon = { loaf = "crates-io/rayon", version = "^1.9", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", default-features = false, optional = true, target = "cfg(any())" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", default-features = false, optional = true }
+sval = { loaf = "crates-io/sval", version = "^2", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

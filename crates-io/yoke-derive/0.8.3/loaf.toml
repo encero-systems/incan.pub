@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "yoke-derive"
+name = "crates-io/yoke-derive"
 version = "0.8.3"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:33811428bee40dbceb6d545e95754741d17a6aef9a4849f0fd62e2ba4f412a78"
+[rust]
+name = "yoke_derive"
+type = "proc-macro"
+edition = "2021"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.61" }
+quote = { loaf = "crates-io/quote", version = "^1.0.44" }
+syn = { loaf = "crates-io/syn", version = "^3.0", features = ["fold", "visit"] }
+synstructure = { loaf = "crates-io/synstructure", version = "^0.14.0" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

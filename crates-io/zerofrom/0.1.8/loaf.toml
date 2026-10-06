@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "zerofrom"
+name = "crates-io/zerofrom"
 version = "0.1.8"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:0ec05a11813ea801ff6d75110ad09cd0824ddba17dfe17128ea0d5f68e6c5272"
+[project.features]
+alloc = []
+default = ["alloc"]
+derive = ["dep:zerofrom-derive"]
+
+[rust]
+name = "zerofrom"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+zerofrom-derive = { loaf = "crates-io/zerofrom-derive", version = "^0.1.6", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

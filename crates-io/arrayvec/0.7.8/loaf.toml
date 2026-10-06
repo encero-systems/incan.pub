@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "arrayvec"
+name = "crates-io/arrayvec"
 version = "0.7.8"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
+[project.features]
+borsh = ["dep:borsh"]
+default = ["std"]
+serde = ["dep:serde"]
+std = []
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "arrayvec"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+borsh = { loaf = "crates-io/borsh", version = "^1.2.0", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.4", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

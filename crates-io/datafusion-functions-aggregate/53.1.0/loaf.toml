@@ -3,12 +3,29 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-functions-aggregate"
+name = "crates-io/datafusion-functions-aggregate"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:00aa6217e56098ba84e0a338176fe52f0a84cca398021512c6c8c5eff806d0ad"
+[rust]
+name = "datafusion_functions_aggregate"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", features = ["runtime-rng"], default-features = false }
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", default-features = false }
+datafusion-doc = { loaf = "crates-io/datafusion-doc", version = "^53.1.0" }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-functions-aggregate-common = { loaf = "crates-io/datafusion-functions-aggregate-common", version = "^53.1.0" }
+datafusion-macros = { loaf = "crates-io/datafusion-macros", version = "^53.1.0" }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
+half = { loaf = "crates-io/half", version = "^2.7.0", default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2" }
+paste = { loaf = "crates-io/paste", version = "^1.0.15" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,57 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-datasource"
+name = "crates-io/datafusion-datasource"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:e9fb386e1691355355a96419978a0022b7947b44d4a24a6ea99f00b6b485cbb6"
+[project.features]
+async-compression = ["dep:async-compression"]
+bzip2 = ["dep:bzip2"]
+compression = ["async-compression", "liblzma", "bzip2", "flate2", "zstd", "tokio-util"]
+default = ["compression"]
+flate2 = ["dep:flate2"]
+liblzma = ["dep:liblzma"]
+tempfile = ["dep:tempfile"]
+tokio-util = ["dep:tokio-util"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "datafusion_datasource"
+type = "lib"
+edition = "2024"
+
+[rust.source]
+root = "src/mod.rs"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+async-compression = { loaf = "crates-io/async-compression", version = "^0.4.40", features = ["bzip2", "gzip", "tokio", "xz", "zstd"], optional = true }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.89" }
+bytes = { loaf = "crates-io/bytes", version = "^1.11" }
+bzip2 = { loaf = "crates-io/bzip2", version = "^0.6.1", optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.44", default-features = false }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", features = ["object_store"], default-features = false }
+datafusion-common-runtime = { loaf = "crates-io/datafusion-common-runtime", version = "^53.1.0" }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-adapter = { loaf = "crates-io/datafusion-physical-expr-adapter", version = "^53.1.0", default-features = false }
+datafusion-physical-expr-common = { loaf = "crates-io/datafusion-physical-expr-common", version = "^53.1.0", default-features = false }
+datafusion-physical-plan = { loaf = "crates-io/datafusion-physical-plan", version = "^53.1.0" }
+datafusion-session = { loaf = "crates-io/datafusion-session", version = "^53.1.0" }
+flate2 = { loaf = "crates-io/flate2", version = "^1.1.9", optional = true }
+futures = { loaf = "crates-io/futures", version = "^0.3" }
+glob = { loaf = "crates-io/glob", version = "^0.3.0" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+liblzma = { loaf = "crates-io/liblzma", version = "^0.4.6", features = ["static"], optional = true }
+log = { loaf = "crates-io/log", version = "^0.4" }
+object_store = { loaf = "crates-io/object_store", version = "^0.13.1", default-features = false }
+rand = { loaf = "crates-io/rand", version = "^0.9" }
+tempfile = { loaf = "crates-io/tempfile", version = "^3", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["macros", "rt", "sync"] }
+tokio-util = { loaf = "crates-io/tokio-util", version = "^0.7.17", features = ["io"], optional = true }
+url = { loaf = "crates-io/url", version = "^2.5.7" }
+zstd = { loaf = "crates-io/zstd", version = "^0.13", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

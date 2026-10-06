@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "pbjson-build"
+name = "crates-io/pbjson-build"
 version = "0.8.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:af22d08a625a2213a78dbb0ffa253318c5c79ce3133d32d296655a7bdfb02095"
+[rust]
+name = "pbjson_build"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+heck = { loaf = "crates-io/heck", version = "^0.5" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+prost = { loaf = "crates-io/prost", version = "^0.14" }
+prost-types = { loaf = "crates-io/prost-types", version = "^0.14" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

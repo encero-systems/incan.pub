@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "simd-adler32"
+name = "crates-io/simd-adler32"
 version = "0.3.10"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3a219298ac11a56ea9a6d2120044824d6f01aeb034955e7af7bc16858527deea"
+[project.features]
+const-generics = []
+default = ["std", "const-generics"]
+nightly = []
+std = []
+
+[rust]
+name = "simd_adler32"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

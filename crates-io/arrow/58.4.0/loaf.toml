@@ -3,12 +3,50 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "arrow"
+name = "crates-io/arrow"
 version = "58.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:6cfdd0833e32a9874d2b55089333ad310c0be208aafa277385ce2461dec90be3"
+[project.features]
+arrow-csv = ["dep:arrow-csv"]
+arrow-ipc = ["dep:arrow-ipc"]
+arrow-json = ["dep:arrow-json"]
+async = ["arrow-array/async"]
+canonical_extension_types = ["arrow-schema/canonical_extension_types"]
+chrono-tz = ["arrow-array/chrono-tz"]
+csv = ["arrow-csv"]
+default = ["csv", "ipc", "json"]
+ffi = ["arrow-schema/ffi", "arrow-data/ffi", "arrow-array/ffi"]
+force_validate = ["arrow-array/force_validate", "arrow-data/force_validate"]
+ipc = ["arrow-ipc"]
+ipc_compression = ["ipc", "arrow-ipc", "dep:arrow-ipc", "arrow-ipc/lz4", "arrow-ipc/zstd"]
+json = ["arrow-json"]
+pool = ["arrow-array/pool"]
+prettyprint = ["arrow-cast/prettyprint"]
+pyarrow = ["ffi", "dep:arrow-pyarrow"]
+test_utils = ["dep:rand", "dep:half"]
+
+[rust]
+name = "arrow"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow-arith = { loaf = "crates-io/arrow-arith", version = "^58.4.0" }
+arrow-array = { loaf = "crates-io/arrow-array", version = "^58.4.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^58.4.0" }
+arrow-cast = { loaf = "crates-io/arrow-cast", version = "^58.4.0" }
+arrow-csv = { loaf = "crates-io/arrow-csv", version = "^58.4.0", optional = true }
+arrow-data = { loaf = "crates-io/arrow-data", version = "^58.4.0" }
+arrow-ipc = { loaf = "crates-io/arrow-ipc", version = "^58.4.0", optional = true }
+arrow-json = { loaf = "crates-io/arrow-json", version = "^58.4.0", optional = true }
+arrow-ord = { loaf = "crates-io/arrow-ord", version = "^58.4.0" }
+arrow-pyarrow = { loaf = "crates-io/arrow-pyarrow", version = "^58.4.0", optional = true }
+arrow-row = { loaf = "crates-io/arrow-row", version = "^58.4.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^58.4.0" }
+arrow-select = { loaf = "crates-io/arrow-select", version = "^58.4.0" }
+arrow-string = { loaf = "crates-io/arrow-string", version = "^58.4.0" }
+half = { loaf = "crates-io/half", version = "^2.1", features = ["rand_distr"], default-features = false, optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.9", features = ["std", "std_rng", "thread_rng"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

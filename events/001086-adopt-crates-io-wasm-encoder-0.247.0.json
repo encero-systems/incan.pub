@@ -1,0 +1,62 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:30b6733b8b91d010a6ac5b0fb237dc46a19650bc4c67db66857e2e787d437204",
+    "package": "wasm-encoder",
+    "registry": "crates-io",
+    "version": "0.247.0"
+  },
+  "archive": "sha256:8d939d3c7af2e57f7c60b952826c536258f7ce06b5b5d70b543097899bad2236",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/leb128fmt",
+      "name": "leb128fmt",
+      "optional": false,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "simd"
+      ],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": true,
+      "req": "^0.247.0"
+    }
+  ],
+  "features": {
+    "component-model": [
+      "wasmparser?/component-model"
+    ],
+    "default": [
+      "std",
+      "component-model"
+    ],
+    "std": [
+      "wasmparser?/std"
+    ],
+    "wasmparser": [
+      "dep:wasmparser"
+    ]
+  },
+  "id": "sha256:fc24305b161fdab0b4b1114176479c0ee11b64cd98f5fc15108a495acd94d554",
+  "kind": "adopt",
+  "manifest": "sha256:9e43e500bf6af7638b8b3e580ba09515f1db912e0f43f32f7203e51378d9913b",
+  "rust": {
+    "edition": "2021",
+    "name": "wasm_encoder",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasm-encoder",
+    "scope": "crates-io",
+    "version": "0.247.0"
+  }
+}

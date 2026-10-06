@@ -1,0 +1,152 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd",
+    "package": "getrandom",
+    "registry": "crates-io",
+    "version": "0.3.4"
+  },
+  "archive": "sha256:dead628af7ce5c7dbacbd2a6434f8f0e3fd4d89d3c4a41e8b953123b133af7fb",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": true,
+      "req": "^0.3.77",
+      "target": "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\"), target_feature = \"atomics\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(target_os = \"netbsd\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(target_os = \"solaris\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(target_os = \"vxworks\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/r-efi",
+      "name": "r-efi",
+      "optional": false,
+      "req": "^5.1",
+      "target": "cfg(all(target_os = \"uefi\", getrandom_backend = \"efi_rng\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasip2",
+      "name": "wasip2",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p2\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": true,
+      "req": "^0.2.98",
+      "target": "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\")))"
+    }
+  ],
+  "features": {
+    "std": [],
+    "wasm_js": [
+      "dep:wasm-bindgen",
+      "dep:js-sys"
+    ]
+  },
+  "id": "sha256:251b2a662ed460a737e73ffec5c001cf60a8164dcd7e38772e650ac427da11eb",
+  "kind": "adopt",
+  "manifest": "sha256:f1402412fe71f2a088a5f14c061511d2d98beaf3bf373ec68292f4c2d3856614",
+  "rust": {
+    "edition": "2021",
+    "name": "getrandom",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "getrandom",
+    "scope": "crates-io",
+    "version": "0.3.4"
+  }
+}

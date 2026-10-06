@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "litemap"
+name = "crates-io/litemap"
 version = "0.8.3"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:47d9d19d1d6efa0109d2f65ff4c85cddd50bd572e5a00127ab10987290bcefae"
+[project.features]
+alloc = []
+databake = ["dep:databake"]
+default = ["alloc"]
+serde = ["dep:serde_core", "alloc"]
+testing = ["alloc"]
+yoke = ["dep:yoke"]
+
+[rust]
+name = "litemap"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", features = ["alloc"], default-features = false, optional = true }
+yoke = { loaf = "crates-io/yoke", version = "^0.8.3", features = ["derive"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

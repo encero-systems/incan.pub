@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "foldhash"
+name = "crates-io/foldhash"
 version = "0.2.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
+[project.features]
+default = ["std"]
+nightly = []
+std = []
+
+[rust]
+name = "foldhash"
+type = "lib"
+edition = "2021"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,102 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b63fbc4a50860e98e7b2aa7804ded1db5cbc3aff9193adaff57a6931bf7c4b4c",
+    "package": "miniz_oxide",
+    "registry": "crates-io",
+    "version": "0.9.1"
+  },
+  "archive": "sha256:69cb6bc56591d2eef2804147c719e5555cbf050322fb1f6e9f55d9ce6ca69a55",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/adler2",
+      "name": "adler2",
+      "optional": false,
+      "req": "^2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/simd-adler32",
+      "name": "simd-adler32",
+      "optional": true,
+      "req": "^0.3.8"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:alloc"
+    ],
+    "block-boundary": [],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "with-alloc"
+    ],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc",
+      "adler2/rustc-dep-of-std"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "simd": [
+      "simd-adler32"
+    ],
+    "simd-adler32": [
+      "dep:simd-adler32"
+    ],
+    "std": [
+      "serde?/std"
+    ],
+    "with-alloc": []
+  },
+  "id": "sha256:a32a989d122777ae9ea0667fe03654e248539a43e1f8dcd083bb9c257dea75e5",
+  "kind": "adopt",
+  "manifest": "sha256:4b9b99012c5f0925511bdf652a3c65e4a24938fa50fb488a926b18d02daefcc5",
+  "rust": {
+    "edition": "2021",
+    "name": "miniz_oxide",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "miniz_oxide",
+    "scope": "crates-io",
+    "version": "0.9.1"
+  }
+}

@@ -3,12 +3,31 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "axum-core"
+name = "crates-io/axum-core"
 version = "0.5.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:08c78f31d7b1291f7ee735c1c6780ccde7785daae9a9206026862dab7d8792d1"
+[project.features]
+__private_docs = ["dep:tower-http"]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "axum_core"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1.2" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3" }
+http = { loaf = "crates-io/http", version = "^1.0.0" }
+http-body = { loaf = "crates-io/http-body", version = "^1.0.0" }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1.0" }
+mime = { loaf = "crates-io/mime", version = "^0.3.16" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.7" }
+sync_wrapper = { loaf = "crates-io/sync_wrapper", version = "^1.0.0" }
+tower-http = { loaf = "crates-io/tower-http", version = "^0.6.0", features = ["limit"], optional = true }
+tower-layer = { loaf = "crates-io/tower-layer", version = "^0.3" }
+tower-service = { loaf = "crates-io/tower-service", version = "^0.3" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.37", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

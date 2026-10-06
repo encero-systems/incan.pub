@@ -3,12 +3,29 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "regex-syntax"
+name = "crates-io/regex-syntax"
 version = "0.8.11"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
+[project.features]
+arbitrary = ["dep:arbitrary"]
+default = ["std", "unicode"]
+std = []
+unicode = ["unicode-age", "unicode-bool", "unicode-case", "unicode-gencat", "unicode-perl", "unicode-script", "unicode-segment"]
+unicode-age = []
+unicode-bool = []
+unicode-case = []
+unicode-gencat = []
+unicode-perl = []
+unicode-script = []
+unicode-segment = []
+
+[rust]
+name = "regex_syntax"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.3.0", features = ["derive"], optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

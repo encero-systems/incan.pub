@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "zerovec-derive"
+name = "crates-io/zerovec-derive"
 version = "0.11.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:34df6fc39dbd26ddc9c10e6a2984476e13acce22e64e4487636ef494369225da"
+[rust]
+name = "zerovec_derive"
+type = "proc-macro"
+edition = "2021"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.61" }
+quote = { loaf = "crates-io/quote", version = "^1.0.44" }
+syn = { loaf = "crates-io/syn", version = "^3.0", features = ["extra-traits"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

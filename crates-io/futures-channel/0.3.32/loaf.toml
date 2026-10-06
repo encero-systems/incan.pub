@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "futures-channel"
+name = "crates-io/futures-channel"
 version = "0.3.32"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:07bbe89c50d7a535e539b8c17bc0b49bdb77747034daa8087407d655f3f7cc1d"
+[project.features]
+alloc = ["futures-core/alloc"]
+cfg-target-has-atomic = []
+default = ["std"]
+futures-sink = ["dep:futures-sink"]
+sink = ["futures-sink"]
+std = ["alloc", "futures-core/std"]
+unstable = []
+
+[rust]
+name = "futures_channel"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.32", default-features = false }
+futures-sink = { loaf = "crates-io/futures-sink", version = "^0.3.32", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

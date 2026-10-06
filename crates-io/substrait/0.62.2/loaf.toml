@@ -3,12 +3,35 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "substrait"
+name = "crates-io/substrait"
 version = "0.62.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:62fc4b483a129b9772ccb9c3f7945a472112fdd9140da87f8a4e7f1d44e045d0"
+[project.features]
+default = []
+embed-descriptor = []
+extensions = ["dep:serde_yaml"]
+parse = ["dep:hex", "dep:thiserror", "semver"]
+protoc = []
+semver = ["dep:semver"]
+serde = ["dep:pbjson", "dep:pbjson-types"]
+
+[rust]
+name = "substrait"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+hex = { loaf = "crates-io/hex", version = "^0.4.3", optional = true }
+pbjson = { loaf = "crates-io/pbjson", version = "^0.8.0", optional = true }
+pbjson-types = { loaf = "crates-io/pbjson-types", version = "^0.8.0", optional = true }
+prost = { loaf = "crates-io/prost", version = "^0.14.1" }
+prost-types = { loaf = "crates-io/prost-types", version = "^0.14.1" }
+regress = { loaf = "crates-io/regress", version = "^0.10.4" }
+semver = { loaf = "crates-io/semver", version = "^1.0.27", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.228", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.145" }
+serde_yaml = { loaf = "crates-io/serde_yaml", version = "^0.9.34", optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.17", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

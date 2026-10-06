@@ -3,12 +3,27 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "url"
+name = "crates-io/url"
 version = "2.5.8"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:ff67a8a4397373c3ef660812acab3268222035010ab8680ec4215f38ba3d0eed"
+[project.features]
+debugger_visualizer = []
+default = ["std"]
+expose_internals = []
+serde = ["dep:serde", "dep:serde_derive"]
+std = ["idna/std", "percent-encoding/std", "form_urlencoded/std", "serde?/std"]
+
+[rust]
+name = "url"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+form_urlencoded = { loaf = "crates-io/form_urlencoded", version = "^1.2.2", features = ["alloc"], default-features = false }
+idna = { loaf = "crates-io/idna", version = "^1.1.0", features = ["alloc", "compiled_data"], default-features = false }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3.2", features = ["alloc"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

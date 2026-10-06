@@ -1,0 +1,91 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a7c1c839d570d835527c9a5e4db7cb2198683a988cb9d7293fc8674e6bd58fc8",
+    "package": "ruzstd",
+    "registry": "crates-io",
+    "version": "0.8.3"
+  },
+  "archive": "sha256:63617c3d8674e58a90c2e8bb48b216859d632f1be39ce64a08777df508671b41",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compiler_builtins",
+      "name": "compiler_builtins",
+      "optional": true,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/fastrand",
+      "name": "fastrand",
+      "optional": true,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "xxhash64"
+      ],
+      "loaf": "crates-io/twox-hash",
+      "name": "twox-hash",
+      "optional": true,
+      "req": "^2.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "hash",
+      "std"
+    ],
+    "dict_builder": [
+      "std",
+      "dep:fastrand"
+    ],
+    "fuzz_exports": [],
+    "hash": [
+      "dep:twox-hash"
+    ],
+    "rustc-dep-of-std": [
+      "dep:compiler_builtins",
+      "dep:core",
+      "dep:alloc"
+    ],
+    "std": []
+  },
+  "id": "sha256:d20f9299833ecf525d6f82e61c870cd59afddfbb5373f77ff6034181b4b4962e",
+  "kind": "adopt",
+  "manifest": "sha256:845095935477e61fcdc1d8a50e1dd2cc57c9c73e24eb3805fff807c5480a3cd9",
+  "rust": {
+    "edition": "2018",
+    "name": "ruzstd",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ruzstd",
+    "scope": "crates-io",
+    "version": "0.8.3"
+  }
+}

@@ -3,12 +3,29 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "arrow-ipc"
+name = "crates-io/arrow-ipc"
 version = "58.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:29a908a11fcfb3fb2f6730f4ac15e367bc644e419155e96238f68cf3adde572b"
+[project.features]
+default = []
+lz4 = ["lz4_flex"]
+lz4_flex = ["dep:lz4_flex"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "arrow_ipc"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow-array = { loaf = "crates-io/arrow-array", version = "^58.4.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^58.4.0" }
+arrow-data = { loaf = "crates-io/arrow-data", version = "^58.4.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^58.4.0" }
+arrow-select = { loaf = "crates-io/arrow-select", version = "^58.4.0" }
+flatbuffers = { loaf = "crates-io/flatbuffers", version = "^25.2.10", default-features = false }
+lz4_flex = { loaf = "crates-io/lz4_flex", version = "^0.13", features = ["frame", "std"], default-features = false, optional = true }
+zstd = { loaf = "crates-io/zstd", version = "^0.13.0", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

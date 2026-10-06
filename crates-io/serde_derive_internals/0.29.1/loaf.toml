@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "serde_derive_internals"
+name = "crates-io/serde_derive_internals"
 version = "0.29.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:18d26a20a969b9e3fdf2fc2d9f21eda6c40e2de84c9408bb5d3b05d499aae711"
+[rust]
+name = "serde_derive_internals"
+type = "lib"
+edition = "2015"
+
+[rust.source]
+root = "lib.rs"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.74", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1.0.35", default-features = false }
+syn = { loaf = "crates-io/syn", version = "^2.0.46", features = ["clone-impls", "derive", "parsing", "printing"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

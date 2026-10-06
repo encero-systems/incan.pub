@@ -1,0 +1,65 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:07bbe89c50d7a535e539b8c17bc0b49bdb77747034daa8087407d655f3f7cc1d",
+    "package": "futures-channel",
+    "registry": "crates-io",
+    "version": "0.3.32"
+  },
+  "archive": "sha256:0c6dc0ad9dba5208a2236bd8ffd301b9baf94ba935e58018eea3b56cec334297",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-sink",
+      "name": "futures-sink",
+      "optional": true,
+      "req": "^0.3.32"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "futures-core/alloc"
+    ],
+    "cfg-target-has-atomic": [],
+    "default": [
+      "std"
+    ],
+    "futures-sink": [
+      "dep:futures-sink"
+    ],
+    "sink": [
+      "futures-sink"
+    ],
+    "std": [
+      "alloc",
+      "futures-core/std"
+    ],
+    "unstable": []
+  },
+  "id": "sha256:bd3c28228f979ed078db714f8dde7b50cf032a44edb7b9e0e2de9014d310ff49",
+  "kind": "adopt",
+  "manifest": "sha256:7d88dc532cf91ab56178ad0463dc66728927084092852e491909acd34741a9dd",
+  "rust": {
+    "edition": "2018",
+    "name": "futures_channel",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "futures-channel",
+    "scope": "crates-io",
+    "version": "0.3.32"
+  }
+}

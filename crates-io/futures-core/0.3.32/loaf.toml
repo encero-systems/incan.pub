@@ -3,12 +3,24 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "futures-core"
+name = "crates-io/futures-core"
 version = "0.3.32"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7e3450815272ef58cec6d564423f6e755e25379b217b0bc688e295ba24df6b1d"
+[project.features]
+alloc = []
+cfg-target-has-atomic = []
+default = ["std"]
+portable-atomic = ["dep:portable-atomic"]
+std = ["alloc"]
+unstable = []
+
+[rust]
+name = "futures_core"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.3", features = ["require-cas"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,227 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:389ca41296e6190b48053de0321d02a77f32f8a5d2461dd38762c0593805c6d6",
+    "package": "futures-util",
+    "registry": "crates-io",
+    "version": "0.3.32"
+  },
+  "archive": "sha256:d89e1c3ad768bfd68d9da71c2745f6ee8f9dd08ce82e0c8cf7d1c1d361e227d0",
+  "at": "2026-10-06T13:11:45Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-channel",
+      "name": "futures-channel",
+      "optional": true,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": true,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-macro",
+      "name": "futures-macro",
+      "optional": true,
+      "req": "=0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-sink",
+      "name": "futures-sink",
+      "optional": true,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-task",
+      "name": "futures-task",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures",
+      "name": "futures_01",
+      "optional": true,
+      "req": "^0.1.25"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.26"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/slab",
+      "name": "slab",
+      "optional": true,
+      "req": "^0.4.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/spin",
+      "name": "spin",
+      "optional": true,
+      "req": "^0.10.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio-io",
+      "name": "tokio-io",
+      "optional": true,
+      "req": "^0.1.9"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "futures-core/alloc",
+      "futures-task/alloc",
+      "slab"
+    ],
+    "async-await": [],
+    "async-await-macro": [
+      "async-await",
+      "futures-macro"
+    ],
+    "bilock": [],
+    "cfg-target-has-atomic": [],
+    "channel": [
+      "std",
+      "futures-channel"
+    ],
+    "compat": [
+      "std",
+      "futures_01",
+      "libc"
+    ],
+    "default": [
+      "std",
+      "async-await",
+      "async-await-macro"
+    ],
+    "futures-channel": [
+      "dep:futures-channel"
+    ],
+    "futures-io": [
+      "dep:futures-io"
+    ],
+    "futures-macro": [
+      "dep:futures-macro"
+    ],
+    "futures-sink": [
+      "dep:futures-sink"
+    ],
+    "futures_01": [
+      "dep:futures_01"
+    ],
+    "io": [
+      "std",
+      "futures-io",
+      "memchr"
+    ],
+    "io-compat": [
+      "io",
+      "compat",
+      "tokio-io",
+      "libc"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "memchr": [
+      "dep:memchr"
+    ],
+    "portable-atomic": [
+      "futures-core/portable-atomic"
+    ],
+    "sink": [
+      "futures-sink"
+    ],
+    "slab": [
+      "dep:slab"
+    ],
+    "spin": [
+      "dep:spin"
+    ],
+    "std": [
+      "alloc",
+      "futures-core/std",
+      "futures-task/std",
+      "slab",
+      "dep:slab",
+      "slab/std"
+    ],
+    "tokio-io": [
+      "dep:tokio-io"
+    ],
+    "unstable": [
+      "futures-core/unstable",
+      "futures-task/unstable"
+    ],
+    "write-all-vectored": [
+      "io"
+    ]
+  },
+  "id": "sha256:c16c104cabea8382cf46ca44194c6b49dc6c29d07b0be1cbec5a93a5997c47b8",
+  "kind": "adopt",
+  "manifest": "sha256:70ffa83e6b92de1a8856c79e5ccc84ade80740c7df8a78f5f27aa7245eb920c3",
+  "rust": {
+    "edition": "2018",
+    "name": "futures_util",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "futures-util",
+    "scope": "crates-io",
+    "version": "0.3.32"
+  }
+}

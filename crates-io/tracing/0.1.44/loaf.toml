@@ -3,12 +3,41 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "tracing"
+name = "crates-io/tracing"
 version = "0.1.44"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:63e71662fa4b2a2c3a26f570f037eb95bb1f85397f3cd8076caed2f026a6d100"
+[project.features]
+async-await = []
+attributes = ["tracing-attributes"]
+default = ["std", "attributes"]
+log = ["dep:log"]
+log-always = ["log"]
+max_level_debug = []
+max_level_error = []
+max_level_info = []
+max_level_off = []
+max_level_trace = []
+max_level_warn = []
+release_max_level_debug = []
+release_max_level_error = []
+release_max_level_info = []
+release_max_level_off = []
+release_max_level_trace = []
+release_max_level_warn = []
+std = ["tracing-core/std"]
+tracing-attributes = ["dep:tracing-attributes"]
+valuable = ["tracing-core/valuable"]
+
+[rust]
+name = "tracing"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+log = { loaf = "crates-io/log", version = "^0.4.17", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.9" }
+tracing-attributes = { loaf = "crates-io/tracing-attributes", version = "^0.1.31", optional = true }
+tracing-core = { loaf = "crates-io/tracing-core", version = "^0.1.36", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,28 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "comfy-table"
+name = "crates-io/comfy-table"
 version = "7.2.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:958c5d6ecf1f214b4c2bbbbf6ab9523a864bd136dcf71a7e8904799acfe1ad47"
+[project.features]
+_debug = []
+_integration_test = []
+custom_styling = ["dep:ansi-str", "dep:console", "tty"]
+default = ["tty"]
+reexport_crossterm = ["tty"]
+tty = ["dep:crossterm"]
+
+[rust]
+name = "comfy_table"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+ansi-str = { loaf = "crates-io/ansi-str", version = "^0.9", optional = true }
+console = { loaf = "crates-io/console", version = "^0.16", optional = true }
+crossterm = [{ loaf = "crates-io/crossterm", version = "^0.29", features = ["windows"], default-features = false, optional = true, target = "cfg(windows)" }, { loaf = "crates-io/crossterm", version = "^0.29", default-features = false, optional = true, target = "cfg(not(windows))" }]
+unicode-segmentation = { loaf = "crates-io/unicode-segmentation", version = "^1" }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.2" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,58 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "tower"
+name = "crates-io/tower"
 version = "0.5.3"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:ebe5ef63511595f1344e2d5cfa636d973292adc0eec1f0ad45fae9f0851ab1d4"
+[project.features]
+balance = ["discover", "load", "ready-cache", "make", "slab", "util"]
+buffer = ["tokio", "dep:tokio", "tokio/sync", "tokio/rt", "tokio-util", "tracing", "pin-project-lite"]
+discover = ["futures-core", "pin-project-lite"]
+filter = ["futures-util", "pin-project-lite"]
+full = ["balance", "buffer", "discover", "filter", "hedge", "limit", "load", "load-shed", "make", "ready-cache", "reconnect", "retry", "spawn-ready", "steer", "timeout", "util"]
+futures-core = ["dep:futures-core"]
+futures-util = ["dep:futures-util"]
+hdrhistogram = ["dep:hdrhistogram"]
+hedge = ["util", "filter", "futures-util", "hdrhistogram", "tokio", "dep:tokio", "tokio/time", "tracing"]
+indexmap = ["dep:indexmap"]
+limit = ["tokio", "dep:tokio", "tokio/time", "tokio/sync", "tokio-util", "tracing", "pin-project-lite"]
+load = ["tokio", "dep:tokio", "tokio/time", "tracing", "pin-project-lite"]
+load-shed = ["pin-project-lite"]
+log = ["tracing", "dep:tracing", "tracing/log"]
+make = ["pin-project-lite", "tokio"]
+pin-project-lite = ["dep:pin-project-lite"]
+ready-cache = ["futures-core", "futures-util", "indexmap", "tokio", "dep:tokio", "tokio/sync", "tracing", "pin-project-lite"]
+reconnect = ["make", "tracing"]
+retry = ["tokio", "dep:tokio", "tokio/time", "util"]
+slab = ["dep:slab"]
+spawn-ready = ["futures-util", "tokio", "dep:tokio", "tokio/sync", "tokio/rt", "util", "tracing"]
+steer = []
+sync_wrapper = ["dep:sync_wrapper"]
+timeout = ["pin-project-lite", "tokio", "dep:tokio", "tokio/time"]
+tokio = ["dep:tokio"]
+tokio-stream = []
+tokio-util = ["dep:tokio-util"]
+tracing = ["dep:tracing"]
+util = ["futures-core", "futures-util", "pin-project-lite", "sync_wrapper"]
+
+[rust]
+name = "tower"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.22", optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.22", features = ["alloc"], default-features = false, optional = true }
+hdrhistogram = { loaf = "crates-io/hdrhistogram", version = "^7.0", default-features = false, optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.0.2", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.7", optional = true }
+slab = { loaf = "crates-io/slab", version = "^0.4.9", optional = true }
+sync_wrapper = { loaf = "crates-io/sync_wrapper", version = "^1", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.6.2", optional = true }
+tokio-util = { loaf = "crates-io/tokio-util", version = "^0.7.0", default-features = false, optional = true }
+tower-layer = { loaf = "crates-io/tower-layer", version = "^0.3.3" }
+tower-service = { loaf = "crates-io/tower-service", version = "^0.3.3" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.2", features = ["std"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

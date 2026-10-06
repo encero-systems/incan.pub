@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "sync_wrapper"
+name = "crates-io/sync_wrapper"
 version = "1.0.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:0bf256ce5efdfa370213c1dabab5935a12e49f2c58d15e9eac2870d3b4f27263"
+[project.features]
+futures = ["futures-core"]
+futures-core = ["dep:futures-core"]
+
+[rust]
+name = "sync_wrapper"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

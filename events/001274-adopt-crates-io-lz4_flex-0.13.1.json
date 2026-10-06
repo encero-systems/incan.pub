@@ -1,0 +1,57 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7ef0d4ed8669f8f8826eb00dc878084aa8f253506c4fd5e8f58f5bce72ddb97e",
+    "package": "lz4_flex",
+    "registry": "crates-io",
+    "version": "0.13.1"
+  },
+  "archive": "sha256:ca3e46e546e9f6c12f8fea13bd7dede80622d72ba4d327bd2b2c2d456a1b16f8",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "xxhash32"
+      ],
+      "loaf": "crates-io/twox-hash",
+      "name": "twox-hash",
+      "optional": true,
+      "req": "^2.0.0"
+    }
+  ],
+  "features": {
+    "checked-decode": [],
+    "default": [
+      "std",
+      "safe-encode",
+      "safe-decode",
+      "frame",
+      "checked-decode"
+    ],
+    "frame": [
+      "std",
+      "dep:twox-hash"
+    ],
+    "nightly": [],
+    "safe-decode": [],
+    "safe-encode": [],
+    "std": []
+  },
+  "id": "sha256:cde2e17c3d57dcd303d72696bbcbb1b289b856d3e7e963c9f6743aa17f809bcd",
+  "kind": "adopt",
+  "manifest": "sha256:7ce0006a80a281d20d0d951ddd9bdd22a69e814f21e77fddf438d9fbafda4d26",
+  "rust": {
+    "edition": "2021",
+    "name": "lz4_flex",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "lz4_flex",
+    "scope": "crates-io",
+    "version": "0.13.1"
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:98fc98460ba0ad5317075d3632b8dfc45d0be8c4a49347c2a38272019717614a",
+    "package": "compression-codecs",
+    "registry": "crates-io",
+    "version": "0.4.45"
+  },
+  "archive": "sha256:079539f833e808e39337c9b1f566bd4e7bc290535c91931c766d6bda468856ca",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/brotli",
+      "name": "brotli",
+      "optional": true,
+      "req": "^9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bzip2",
+      "name": "bzip2",
+      "optional": true,
+      "req": "^0.6.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compression-core",
+      "name": "compression-core",
+      "optional": false,
+      "req": "^0.4.33"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/deflate64",
+      "name": "deflate64",
+      "optional": true,
+      "req": "^0.1.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1.1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/liblzma",
+      "name": "liblzma",
+      "optional": true,
+      "req": "^0.4.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zstd",
+      "name": "libzstd",
+      "optional": true,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lz4",
+      "name": "lz4",
+      "optional": true,
+      "req": "^1.28.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "compression",
+        "decompression",
+        "std"
+      ],
+      "loaf": "crates-io/mbrotli",
+      "name": "mbrotli",
+      "optional": true,
+      "req": "^0.5.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zstd-safe",
+      "name": "zstd-safe",
+      "optional": true,
+      "req": "^8"
+    }
+  ],
+  "features": {
+    "all-algorithms": [
+      "brotli",
+      "bzip2",
+      "deflate",
+      "gzip",
+      "lz4",
+      "lzma",
+      "xz-parallel",
+      "xz",
+      "zlib",
+      "zstd",
+      "deflate64"
+    ],
+    "brotli": [
+      "dep:brotli"
+    ],
+    "brotli-mbrotli": [
+      "dep:mbrotli"
+    ],
+    "bzip2": [
+      "dep:bzip2"
+    ],
+    "deflate": [
+      "flate2"
+    ],
+    "deflate64": [
+      "dep:deflate64"
+    ],
+    "flate2": [
+      "dep:flate2"
+    ],
+    "gzip": [
+      "flate2",
+      "memchr"
+    ],
+    "libzstd": [
+      "dep:libzstd"
+    ],
+    "lz4": [
+      "dep:lz4"
+    ],
+    "lzma": [
+      "dep:liblzma"
+    ],
+    "memchr": [
+      "dep:memchr"
+    ],
+    "xz": [
+      "lzma"
+    ],
+    "xz-parallel": [
+      "xz",
+      "dep:liblzma",
+      "liblzma/parallel"
+    ],
+    "xz2": [
+      "xz"
+    ],
+    "zlib": [
+      "flate2"
+    ],
+    "zstd": [
+      "libzstd",
+      "zstd-safe"
+    ],
+    "zstd-safe": [
+      "dep:zstd-safe"
+    ],
+    "zstdmt": [
+      "zstd",
+      "zstd-safe",
+      "dep:zstd-safe",
+      "zstd-safe/zstdmt"
+    ]
+  },
+  "id": "sha256:8bda5301cf779d4b20b8bc8241cd83647d85f8a7377ba8dbd90fb88b9310d6e1",
+  "kind": "adopt",
+  "manifest": "sha256:00b592d23d72beb632a5ae0e515fc2a993b5b25f04016b53d877775466162599",
+  "rust": {
+    "edition": "2018",
+    "name": "compression_codecs",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "compression-codecs",
+    "scope": "crates-io",
+    "version": "0.4.45"
+  }
+}

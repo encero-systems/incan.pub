@@ -1,0 +1,174 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:12f9cf5f235641ed274641dd81c3f28d870e276763d0797aeeab72317b1c646f",
+    "package": "icu_normalizer",
+    "registry": "crates-io",
+    "version": "2.3.0"
+  },
+  "archive": "sha256:7d6b2fc48158fd2689079e4d05375f2a564d50f56700e46af65457db46b324c6",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/harfbuzz-traits",
+      "name": "harfbuzz-traits",
+      "optional": true,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_collections",
+      "name": "icu_collections",
+      "optional": false,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_normalizer_data",
+      "name": "icu_normalizer_data",
+      "optional": true,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_properties",
+      "name": "icu_properties",
+      "optional": true,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_provider",
+      "name": "icu_provider",
+      "optional": false,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.10.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/utf16_iter",
+      "name": "utf16_iter",
+      "optional": true,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/utf8_iter",
+      "name": "utf8_iter",
+      "optional": true,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/write16",
+      "name": "write16",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": false,
+      "req": "^0.11.7"
+    }
+  ],
+  "features": {
+    "compiled_data": [
+      "dep:icu_normalizer_data",
+      "icu_properties?/compiled_data",
+      "icu_provider/baked"
+    ],
+    "datagen": [
+      "serde",
+      "dep:databake",
+      "icu_properties",
+      "icu_collections/databake",
+      "zerovec/databake",
+      "icu_properties?/datagen",
+      "icu_provider/export"
+    ],
+    "default": [
+      "compiled_data",
+      "utf8_iter",
+      "utf16_iter"
+    ],
+    "harfbuzz_traits": [
+      "dep:harfbuzz-traits"
+    ],
+    "icu_properties": [
+      "dep:icu_properties"
+    ],
+    "serde": [
+      "dep:serde",
+      "icu_collections/serde",
+      "zerovec/serde",
+      "icu_properties?/serde",
+      "icu_provider/serde"
+    ],
+    "utf16_iter": [
+      "dep:utf16_iter",
+      "dep:write16"
+    ],
+    "utf8_iter": [
+      "dep:utf8_iter"
+    ],
+    "write16": []
+  },
+  "id": "sha256:79b4e4e714b056c13e3ec0916f2ee32597bbb885a785bac5c1b83efdf71c5aa8",
+  "kind": "adopt",
+  "manifest": "sha256:d5a5f4c95def66eba1935f70e186e00339fce4ca479db07b2636069d26dba97c",
+  "rust": {
+    "edition": "2024",
+    "name": "icu_normalizer",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_normalizer",
+    "scope": "crates-io",
+    "version": "2.3.0"
+  }
+}

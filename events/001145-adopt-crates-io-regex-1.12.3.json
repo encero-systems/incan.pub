@@ -1,0 +1,162 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e10754a14b9137dd7b1e3e5b0493cc9171fdd105e0ab477f51b72e7f3ac0e276",
+    "package": "regex",
+    "registry": "crates-io",
+    "version": "1.12.3"
+  },
+  "archive": "sha256:b32e506befecf49df72cc03ee88e67fd8a0de697c1e05ea96055dc3f7de5ec84",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/aho-corasick",
+      "name": "aho-corasick",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "meta",
+        "nfa-pikevm",
+        "syntax"
+      ],
+      "loaf": "crates-io/regex-automata",
+      "name": "regex-automata",
+      "optional": false,
+      "req": "^0.4.12"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/regex-syntax",
+      "name": "regex-syntax",
+      "optional": false,
+      "req": "^0.8.5"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "perf",
+      "unicode",
+      "regex-syntax/default"
+    ],
+    "logging": [
+      "aho-corasick?/logging",
+      "memchr?/logging",
+      "regex-automata/logging"
+    ],
+    "pattern": [],
+    "perf": [
+      "perf-cache",
+      "perf-dfa",
+      "perf-onepass",
+      "perf-backtrack",
+      "perf-inline",
+      "perf-literal"
+    ],
+    "perf-backtrack": [
+      "regex-automata/nfa-backtrack"
+    ],
+    "perf-cache": [],
+    "perf-dfa": [
+      "regex-automata/hybrid"
+    ],
+    "perf-dfa-full": [
+      "regex-automata/dfa-build",
+      "regex-automata/dfa-search"
+    ],
+    "perf-inline": [
+      "regex-automata/perf-inline"
+    ],
+    "perf-literal": [
+      "dep:aho-corasick",
+      "dep:memchr",
+      "regex-automata/perf-literal"
+    ],
+    "perf-onepass": [
+      "regex-automata/dfa-onepass"
+    ],
+    "std": [
+      "aho-corasick?/std",
+      "memchr?/std",
+      "regex-automata/std",
+      "regex-syntax/std"
+    ],
+    "unicode": [
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment",
+      "regex-automata/unicode",
+      "regex-syntax/unicode"
+    ],
+    "unicode-age": [
+      "regex-automata/unicode-age",
+      "regex-syntax/unicode-age"
+    ],
+    "unicode-bool": [
+      "regex-automata/unicode-bool",
+      "regex-syntax/unicode-bool"
+    ],
+    "unicode-case": [
+      "regex-automata/unicode-case",
+      "regex-syntax/unicode-case"
+    ],
+    "unicode-gencat": [
+      "regex-automata/unicode-gencat",
+      "regex-syntax/unicode-gencat"
+    ],
+    "unicode-perl": [
+      "regex-automata/unicode-perl",
+      "regex-automata/unicode-word-boundary",
+      "regex-syntax/unicode-perl"
+    ],
+    "unicode-script": [
+      "regex-automata/unicode-script",
+      "regex-syntax/unicode-script"
+    ],
+    "unicode-segment": [
+      "regex-automata/unicode-segment",
+      "regex-syntax/unicode-segment"
+    ],
+    "unstable": [
+      "pattern"
+    ],
+    "use_std": [
+      "std"
+    ]
+  },
+  "id": "sha256:6b11d492cf1def46591cc554d91455712fd1d61aecd35c93ba5f808b6892ec27",
+  "kind": "adopt",
+  "manifest": "sha256:34e6eccb8cc82b00311ab9de0d66a99cfbcbe9d2d4fff257590b99f29ea1ada4",
+  "rust": {
+    "edition": "2021",
+    "name": "regex",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "regex",
+    "scope": "crates-io",
+    "version": "1.12.3"
+  }
+}

@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-catalog"
+name = "crates-io/datafusion-catalog"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:37cefde60b26a7f4ff61e9d2ff2833322f91df2b568d7238afe67bde5bdffb66"
+[rust]
+name = "datafusion_catalog"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.89" }
+dashmap = { loaf = "crates-io/dashmap", version = "^6.0.1" }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", default-features = false }
+datafusion-common-runtime = { loaf = "crates-io/datafusion-common-runtime", version = "^53.1.0" }
+datafusion-datasource = { loaf = "crates-io/datafusion-datasource", version = "^53.1.0", default-features = false }
+datafusion-execution = { loaf = "crates-io/datafusion-execution", version = "^53.1.0", default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+datafusion-physical-plan = { loaf = "crates-io/datafusion-physical-plan", version = "^53.1.0" }
+datafusion-session = { loaf = "crates-io/datafusion-session", version = "^53.1.0" }
+futures = { loaf = "crates-io/futures", version = "^0.3" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+object_store = { loaf = "crates-io/object_store", version = "^0.13.1", default-features = false }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["macros", "rt", "sync"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-substrait"
+name = "crates-io/datafusion-substrait"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:98494539a5468979cc42d86c7bc5f0f8cb71ee5c742694c26fc34efdd29dd2e5"
+[project.features]
+default = ["physical"]
+physical = ["datafusion/parquet"]
+protoc = ["substrait/protoc"]
+
+[rust]
+name = "datafusion_substrait"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+async-recursion = { loaf = "crates-io/async-recursion", version = "^1.0" }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.89" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.44", default-features = false }
+datafusion = { loaf = "crates-io/datafusion", version = "^53.1.0", features = ["sql"], default-features = false }
+half = { loaf = "crates-io/half", version = "^2.7.0", default-features = false }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+object_store = { loaf = "crates-io/object_store", version = "^0.13.1", default-features = false }
+pbjson-types = { loaf = "crates-io/pbjson-types", version = "^0.8.0" }
+prost = { loaf = "crates-io/prost", version = "^0.14.1" }
+substrait = { loaf = "crates-io/substrait", version = "=0.62.2", features = ["serde"] }
+tokio = { loaf = "crates-io/tokio", version = "^1.48", features = ["fs", "macros", "rt", "sync"] }
+url = { loaf = "crates-io/url", version = "^2.5.7" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

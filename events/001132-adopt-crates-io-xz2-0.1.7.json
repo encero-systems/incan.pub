@@ -1,0 +1,68 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:388c44dc09d76f1536602ead6d325eb532f5c122f17782bd57fb47baeeb767e2",
+    "package": "xz2",
+    "registry": "crates-io",
+    "version": "0.1.7"
+  },
+  "archive": "sha256:f1477736ea87216343582d642a50e8be4394f4a8b18b4a21dcad9763aa472a9e",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures",
+      "name": "futures",
+      "optional": true,
+      "req": "^0.1.26"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lzma-sys",
+      "name": "lzma-sys",
+      "optional": false,
+      "req": "^0.1.18"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio-io",
+      "name": "tokio-io",
+      "optional": true,
+      "req": "^0.1.12"
+    }
+  ],
+  "features": {
+    "futures": [
+      "dep:futures"
+    ],
+    "static": [
+      "lzma-sys/static"
+    ],
+    "tokio": [
+      "tokio-io",
+      "futures"
+    ],
+    "tokio-io": [
+      "dep:tokio-io"
+    ]
+  },
+  "id": "sha256:c416e9530634e6b5c5dcf50fce84cf708bac2f355f48ba3047feb5c0b9433b75",
+  "kind": "adopt",
+  "manifest": "sha256:1622e97a367736fb8b2e2d33b8d44144d17f0acabf32a628bd0deb275de6e51c",
+  "rust": {
+    "edition": "2018",
+    "name": "xz2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "xz2",
+    "scope": "crates-io",
+    "version": "0.1.7"
+  }
+}

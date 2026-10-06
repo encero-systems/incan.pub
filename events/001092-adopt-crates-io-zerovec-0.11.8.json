@@ -1,0 +1,117 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bb0464e17806c1d976d5cba29399c7f08e516e279e2ba493f63123b5fca67dd8",
+    "package": "zerovec",
+    "registry": "crates-io",
+    "version": "0.11.8"
+  },
+  "archive": "sha256:2e49fc69b6d2d083cd546b1215c00a8f08b0b9ed2fe6aeca943ccff0f9b84cfc",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/schemars",
+      "name": "schemars",
+      "optional": true,
+      "req": "^1.0.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "xxhash64"
+      ],
+      "loaf": "crates-io/twox-hash",
+      "name": "twox-hash",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/yoke",
+      "name": "yoke",
+      "optional": true,
+      "req": "^0.8.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerofrom",
+      "name": "zerofrom",
+      "optional": false,
+      "req": "^0.1.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec-derive",
+      "name": "zerovec-derive",
+      "optional": true,
+      "req": "^0.11.5"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde?/alloc"
+    ],
+    "databake": [
+      "dep:databake"
+    ],
+    "derive": [
+      "dep:zerovec-derive"
+    ],
+    "hashmap": [
+      "dep:twox-hash",
+      "alloc"
+    ],
+    "schemars": [
+      "dep:schemars",
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [],
+    "yoke": [
+      "dep:yoke"
+    ]
+  },
+  "id": "sha256:23f789c364f15780e903072332a6da5a2e7402fbc8334b4fb1dedb409bc5a308",
+  "kind": "adopt",
+  "manifest": "sha256:82c37af6888ec3d98c3ee706569bdb0aecf258eb272bf3960b1a286ae0b45e7b",
+  "rust": {
+    "edition": "2021",
+    "name": "zerovec",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "zerovec",
+    "scope": "crates-io",
+    "version": "0.11.8"
+  }
+}

@@ -3,12 +3,17 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "shlex"
+name = "crates-io/shlex"
 version = "2.0.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba"
+[project.features]
+default = ["std"]
+std = []
+
+[rust]
+name = "shlex"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

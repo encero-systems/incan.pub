@@ -1,0 +1,74 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b67efb37e106e55ce722a510d6b5f9c17f083e5fc79afc2badeb12cc313d9487",
+    "package": "wasip2",
+    "registry": "crates-io",
+    "version": "1.0.4+wasi-0.2.12"
+  },
+  "archive": "sha256:a9ad75d248430f782ecb5602b5775fa864e2bbba0f5fa725bb2ac3bd21a6b14c",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen",
+      "name": "wit-bindgen",
+      "optional": false,
+      "req": "^0.57.1"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:alloc"
+    ],
+    "bitflags": [
+      "wit-bindgen/bitflags"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "std",
+      "bitflags"
+    ],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc",
+      "wit-bindgen/rustc-dep-of-std"
+    ],
+    "std": []
+  },
+  "id": "sha256:8784ad632fea2d9aef5fc17c76a1794118f132dcfa6944f921099bbc2a24e4af",
+  "kind": "adopt",
+  "manifest": "sha256:eac761235efbdad27e87c3796a73bb7b87a82706fdb8e16dd43948912e87a9b4",
+  "rust": {
+    "edition": "2021",
+    "name": "wasip2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasip2",
+    "scope": "crates-io",
+    "version": "1.0.4+wasi-0.2.12"
+  }
+}

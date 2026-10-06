@@ -1,0 +1,40 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crossterm"
+version = "0.29.0"
+
+[project.features]
+bracketed-paste = []
+default = ["bracketed-paste", "events", "windows", "derive-more"]
+derive-more = ["dep:derive_more"]
+event-stream = ["dep:futures-core", "events"]
+events = ["dep:mio", "dep:signal-hook", "dep:signal-hook-mio"]
+filedescriptor = ["dep:filedescriptor"]
+libc = ["dep:libc"]
+osc52 = ["dep:base64"]
+serde = ["dep:serde", "bitflags/serde"]
+use-dev-tty = ["filedescriptor", "rustix/process"]
+windows = ["dep:winapi", "dep:crossterm_winapi"]
+
+[rust]
+name = "crossterm"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22", optional = true }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.9" }
+crossterm_winapi = { loaf = "crates-io/crossterm_winapi", version = "^0.9.1", optional = true, target = "cfg(windows)" }
+derive_more = { loaf = "crates-io/derive_more", version = "^2.0.0", features = ["is_variant"], optional = true }
+document-features = { loaf = "crates-io/document-features", version = "^0.2.11" }
+filedescriptor = { loaf = "crates-io/filedescriptor", version = "^0.8", optional = true, target = "cfg(unix)" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2", default-features = false, optional = true, target = "cfg(unix)" }
+mio = { loaf = "crates-io/mio", version = "^1.0", features = ["os-poll"], optional = true, target = "cfg(unix)" }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+rustix = { loaf = "crates-io/rustix", version = "^1", features = ["std", "stdio", "termios"], default-features = false, target = "cfg(unix)" }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+signal-hook = { loaf = "crates-io/signal-hook", version = "^0.3.17", optional = true, target = "cfg(unix)" }
+signal-hook-mio = { loaf = "crates-io/signal-hook-mio", version = "^0.2.4", features = ["support-v1_0"], optional = true, target = "cfg(unix)" }
+winapi = { loaf = "crates-io/winapi", version = "^0.3.9", features = ["winerror", "winuser"], optional = true, target = "cfg(windows)" }

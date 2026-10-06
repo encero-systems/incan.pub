@@ -3,12 +3,34 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "sqlparser"
+name = "crates-io/sqlparser"
 version = "0.61.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:dbf5ea8d4d7c808e1af1cbabebca9a2abe603bcefc22294c5b95018d53200cb7"
+[project.features]
+bigdecimal = ["dep:bigdecimal"]
+default = ["std", "recursive-protection"]
+derive-dialect = ["sqlparser_derive"]
+json_example = ["serde_json", "serde"]
+recursive = ["dep:recursive"]
+recursive-protection = ["std", "recursive"]
+serde = ["dep:serde"]
+serde_json = ["dep:serde_json"]
+sqlparser_derive = ["dep:sqlparser_derive"]
+std = []
+visitor = ["sqlparser_derive"]
+
+[rust]
+name = "sqlparser"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+bigdecimal = { loaf = "crates-io/bigdecimal", version = "^0.4.1", features = ["serde"], optional = true }
+log = { loaf = "crates-io/log", version = "^0.4" }
+recursive = { loaf = "crates-io/recursive", version = "^0.1.1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["alloc", "derive"], default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", optional = true }
+sqlparser_derive = { loaf = "crates-io/sqlparser_derive", version = "^0.5.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

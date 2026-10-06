@@ -1,0 +1,102 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a3d06f0b082ba57c26b79407372e57cf2a1e28124f78e9479fe80322cf53420b",
+    "package": "tokio-stream",
+    "registry": "crates-io",
+    "version": "0.1.19"
+  },
+  "archive": "sha256:0b516a3082b8f985e59332bc29c35ca8d3441013e3524d69962ecfc2ef988679",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.11"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "sync"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": false,
+      "req": "^1.38.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio-util",
+      "name": "tokio-util",
+      "optional": true,
+      "req": "^0.7.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "time"
+    ],
+    "fs": [
+      "tokio/fs"
+    ],
+    "full": [
+      "time",
+      "net",
+      "io-util",
+      "fs",
+      "rt",
+      "sync",
+      "signal"
+    ],
+    "io-util": [
+      "tokio/io-util"
+    ],
+    "net": [
+      "tokio/net"
+    ],
+    "rt": [
+      "tokio/rt"
+    ],
+    "signal": [
+      "tokio/signal"
+    ],
+    "sync": [
+      "tokio/sync",
+      "tokio-util"
+    ],
+    "time": [
+      "tokio/time"
+    ],
+    "tokio-util": [
+      "dep:tokio-util"
+    ]
+  },
+  "id": "sha256:7c7d2f41b3a080e14e2fe43480c2535267285fbb478959d889d5a60f46b85cc5",
+  "kind": "adopt",
+  "manifest": "sha256:2db90e36702e3bda7b923a62073cad7114d2bd5141c2f863fc638c73e794052a",
+  "rust": {
+    "edition": "2021",
+    "name": "tokio_stream",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tokio-stream",
+    "scope": "crates-io",
+    "version": "0.1.19"
+  }
+}

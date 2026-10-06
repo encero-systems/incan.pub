@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "arrow-arith"
+name = "crates-io/arrow-arith"
 version = "58.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:0a41203398f0eaa6f7ec8e62c0da742a21abf282c148fc157f6c35c90e29981a"
+[rust]
+name = "arrow_arith"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow-array = { loaf = "crates-io/arrow-array", version = "^58.4.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^58.4.0" }
+arrow-data = { loaf = "crates-io/arrow-data", version = "^58.4.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^58.4.0" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.40", features = ["clock"], default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19", features = ["std"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,178 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7e7ca276ad3145661a65914e6daf131ca5120cd3dcee8f8f3214b8875184a148",
+    "package": "icu_properties",
+    "registry": "crates-io",
+    "version": "2.3.0"
+  },
+  "archive": "sha256:eafb6fe3376ca312704aa72e6537e5cc99d9d675d0e8bc61890e4e6d020cc471",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/harfbuzz-traits",
+      "name": "harfbuzz-traits",
+      "optional": true,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_collections",
+      "name": "icu_collections",
+      "optional": false,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "zerovec"
+      ],
+      "loaf": "crates-io/icu_locale_core",
+      "name": "icu_locale_core",
+      "optional": false,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_properties_data",
+      "name": "icu_properties_data",
+      "optional": true,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_provider",
+      "name": "icu_provider",
+      "optional": false,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.17"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/unicode-bidi",
+      "name": "unicode-bidi",
+      "optional": true,
+      "req": "^0.3.11"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "yoke",
+        "zerofrom"
+      ],
+      "loaf": "crates-io/zerotrie",
+      "name": "zerotrie",
+      "optional": false,
+      "req": "^0.2.5"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive",
+        "yoke"
+      ],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": false,
+      "req": "^0.11.7"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "zerovec/alloc",
+      "icu_collections/alloc",
+      "serde?/alloc"
+    ],
+    "compiled_data": [
+      "dep:icu_properties_data",
+      "icu_provider/baked"
+    ],
+    "datagen": [
+      "serde",
+      "dep:databake",
+      "zerovec/databake",
+      "icu_collections/databake",
+      "icu_locale_core/databake",
+      "zerotrie/databake",
+      "icu_provider/export"
+    ],
+    "default": [
+      "compiled_data"
+    ],
+    "harfbuzz_traits": [
+      "dep:harfbuzz-traits"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "serde": [
+      "dep:serde",
+      "icu_locale_core/serde",
+      "zerovec/serde",
+      "icu_collections/serde",
+      "icu_provider/serde",
+      "zerotrie/serde"
+    ],
+    "unicode_bidi": [
+      "dep:unicode-bidi"
+    ],
+    "unstable": []
+  },
+  "id": "sha256:a54f26441a99a05769c55bbf0dac377bc8e5844e165305a0c94f15d0d4f3f54d",
+  "kind": "adopt",
+  "manifest": "sha256:65f18a219b5208c58bf96943aa0b3ed3fca90c8a20d1f5b3a824ace737120048",
+  "rust": {
+    "edition": "2024",
+    "name": "icu_properties",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_properties",
+    "scope": "crates-io",
+    "version": "2.3.0"
+  }
+}

@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/libc"
+version = "0.2.190"
+
+[project.features]
+align = []
+const-extern-fn = []
+default = ["std"]
+extra_traits = []
+rustc-dep-of-std = ["align", "rustc-std-workspace-core"]
+rustc-std-workspace-core = ["dep:rustc-std-workspace-core"]
+std = []
+use_std = ["std"]
+
+[rust]
+name = "libc"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+rustc-std-workspace-core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.1", optional = true }

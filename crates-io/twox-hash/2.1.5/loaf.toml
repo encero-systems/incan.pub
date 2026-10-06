@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/twox-hash"
+version = "2.1.5"
+
+[project.features]
+alloc = []
+default = ["random", "xxhash32", "xxhash64", "xxhash3_64", "xxhash3_128", "std"]
+random = ["dep:rand"]
+serialize = ["dep:serde"]
+std = ["alloc"]
+xxhash32 = []
+xxhash3_128 = []
+xxhash3_64 = []
+xxhash64 = []
+
+[rust]
+name = "twox_hash"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+rand = { loaf = "crates-io/rand", version = ">=0.9.0, <=0.11.0", features = ["thread_rng"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.0", features = ["derive"], default-features = false, optional = true }

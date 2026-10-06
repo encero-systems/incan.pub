@@ -3,12 +3,16 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "ar_archive_writer"
+name = "crates-io/ar_archive_writer"
 version = "0.5.3"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:73cd58deff2140a0a8eae87e417bd01db68a33e148aa93d1e8cd837e55e312b6"
+[rust]
+name = "ar_archive_writer"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+object = { loaf = "crates-io/object", version = "^0.39", features = ["read", "std"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

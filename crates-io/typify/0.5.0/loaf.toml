@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "typify"
+name = "crates-io/typify"
 version = "0.5.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:e6d5bcc6f62eb1fa8aa4098f39b29f93dcb914e17158b76c50360911257aa629"
+[project.features]
+default = ["macro"]
+macro = ["typify-macro"]
+typify-macro = ["dep:typify-macro"]
+
+[rust]
+name = "typify"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+typify-impl = { loaf = "crates-io/typify-impl", version = "^0.5.0" }
+typify-macro = { loaf = "crates-io/typify-macro", version = "^0.5.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

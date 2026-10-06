@@ -1,0 +1,60 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c982642fa9e8606056828ee9a8505737230110bb1099153c79efe865c59d12ba",
+    "package": "aho-corasick",
+    "registry": "crates-io",
+    "version": "1.1.5"
+  },
+  "archive": "sha256:0bb5687a63a524060ba74d9a4cd65397c9f2b15f85ebd258de0c9b2138f74443",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2.4.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "perf-literal"
+    ],
+    "logging": [
+      "dep:log"
+    ],
+    "perf-literal": [
+      "dep:memchr"
+    ],
+    "std": [
+      "memchr?/std"
+    ]
+  },
+  "id": "sha256:7a216eda255730f1bca4e313e1f5f6d40625f0c0f2f1831e832b47e276346fef",
+  "kind": "adopt",
+  "manifest": "sha256:740897e0f8321917c630e95259f82315e05626c0672d0a62d5c43b71e7befc6d",
+  "rust": {
+    "edition": "2021",
+    "name": "aho_corasick",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "aho-corasick",
+    "scope": "crates-io",
+    "version": "1.1.5"
+  }
+}

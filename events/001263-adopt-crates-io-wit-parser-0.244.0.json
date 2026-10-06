@@ -1,0 +1,151 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ecc8ac4bc1dc3381b7f59c34f00b67e18f910c2c0f50015669dde7def656a736",
+    "package": "wit-parser",
+    "registry": "crates-io",
+    "version": "0.244.0"
+  },
+  "archive": "sha256:6f200477578d1de3197430b58ec4e194d7bca34ec559a86b10bfc4144b980691",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.58"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/id-arena",
+      "name": "id-arena",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/semver",
+      "name": "semver",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-xid",
+      "name": "unicode-xid",
+      "optional": false,
+      "req": "^0.2.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model",
+        "features",
+        "simd",
+        "std",
+        "validate"
+      ],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": true,
+      "req": "^0.244.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model"
+      ],
+      "loaf": "crates-io/wat",
+      "name": "wat",
+      "optional": true,
+      "req": "^1.244.0"
+    }
+  ],
+  "features": {
+    "decoding": [
+      "dep:wasmparser"
+    ],
+    "default": [
+      "serde",
+      "decoding"
+    ],
+    "serde": [
+      "dep:serde",
+      "dep:serde_derive",
+      "indexmap/serde",
+      "serde_json"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "wat": [
+      "decoding",
+      "dep:wat"
+    ]
+  },
+  "id": "sha256:7089fc246f8c8fb8c8fce0fe7069d6900c153608bf532fc3ad5e8632baccfe41",
+  "kind": "adopt",
+  "manifest": "sha256:761227ac78e787176513559693f833cb3a53a7288eaebe1eb980a700fa126088",
+  "rust": {
+    "edition": "2021",
+    "name": "wit_parser",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-parser",
+    "scope": "crates-io",
+    "version": "0.244.0"
+  }
+}

@@ -3,12 +3,29 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "winnow"
+name = "crates-io/winnow"
 version = "0.7.15"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:df79d97927682d2fd8adb29682d1140b343be4ac0f08fd68b7765d9c059d3945"
+[project.features]
+alloc = []
+debug = ["std", "dep:anstream", "dep:anstyle", "dep:is_terminal_polyfill", "dep:terminal_size"]
+default = ["std"]
+simd = ["dep:memchr"]
+std = ["alloc", "memchr?/std"]
+unstable-doc = ["alloc", "std", "simd", "unstable-recover"]
+unstable-recover = []
+
+[rust]
+name = "winnow"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+anstream = { loaf = "crates-io/anstream", version = "^0.6.15", optional = true }
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.8", optional = true }
+is_terminal_polyfill = { loaf = "crates-io/is_terminal_polyfill", version = "^1.48.1", optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.7", default-features = false, optional = true }
+terminal_size = { loaf = "crates-io/terminal_size", version = "^0.4.3", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

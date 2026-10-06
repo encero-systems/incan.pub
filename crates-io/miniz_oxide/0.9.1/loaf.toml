@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "miniz_oxide"
+name = "crates-io/miniz_oxide"
 version = "0.9.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:b63fbc4a50860e98e7b2aa7804ded1db5cbc3aff9193adaff57a6931bf7c4b4c"
+[project.features]
+alloc = ["dep:alloc"]
+block-boundary = []
+core = ["dep:core"]
+default = ["with-alloc"]
+rustc-dep-of-std = ["core", "alloc", "adler2/rustc-dep-of-std"]
+serde = ["dep:serde"]
+simd = ["simd-adler32"]
+simd-adler32 = ["dep:simd-adler32"]
+std = ["serde?/std"]
+with-alloc = []
+
+[rust]
+name = "miniz_oxide"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+adler2 = { loaf = "crates-io/adler2", version = "^2.0", default-features = false }
+alloc = { loaf = "crates-io/rustc-std-workspace-alloc", version = "^1.0.0", optional = true }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["alloc", "derive"], default-features = false, optional = true }
+simd-adler32 = { loaf = "crates-io/simd-adler32", version = "^0.3.8", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "lz4_flex"
+name = "crates-io/lz4_flex"
 version = "0.13.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7ef0d4ed8669f8f8826eb00dc878084aa8f253506c4fd5e8f58f5bce72ddb97e"
+[project.features]
+checked-decode = []
+default = ["std", "safe-encode", "safe-decode", "frame", "checked-decode"]
+frame = ["std", "dep:twox-hash"]
+nightly = []
+safe-decode = []
+safe-encode = []
+std = []
+
+[rust]
+name = "lz4_flex"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+twox-hash = { loaf = "crates-io/twox-hash", version = "^2.0.0", features = ["xxhash32"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

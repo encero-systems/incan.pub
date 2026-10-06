@@ -1,0 +1,161 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:665fe59e56cc9b419ca6fcca56673e3421d1a5011e3b65caf6b726fd9e041d10",
+    "package": "wasm-metadata",
+    "registry": "crates-io",
+    "version": "0.247.0"
+  },
+  "archive": "sha256:f841d5e2ad0471b07a74860c730d05fdf6febd3b4beef5f395e622f0e2df1048",
+  "at": "2026-10-06T13:11:48Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.58"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/auditable-serde",
+      "name": "auditable-serde",
+      "optional": true,
+      "req": "^0.9.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/clap",
+      "name": "clap",
+      "optional": true,
+      "req": "^4.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "serde",
+        "std"
+      ],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.14.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/spdx",
+      "name": "spdx",
+      "optional": true,
+      "req": "^0.13.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/url",
+      "name": "url",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model",
+        "std"
+      ],
+      "loaf": "crates-io/wasm-encoder",
+      "name": "wasm-encoder",
+      "optional": false,
+      "req": "^0.247.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model",
+        "hash-collections",
+        "simd",
+        "std"
+      ],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": false,
+      "req": "^0.247.0"
+    }
+  ],
+  "features": {
+    "clap": [
+      "dep:clap"
+    ],
+    "default": [
+      "oci",
+      "serde"
+    ],
+    "oci": [
+      "dep:auditable-serde",
+      "dep:flate2",
+      "dep:url",
+      "dep:spdx",
+      "dep:serde_json",
+      "serde"
+    ],
+    "serde": [
+      "dep:serde_derive",
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:d177dd6598702f781296a479e18cc5faedeb29194f06231dc626ea9d974e1f70",
+  "kind": "adopt",
+  "manifest": "sha256:0ccabb73f62b06ae6c6dce13c4a1383d2067ab2b4aafc324a3aefb488cf2e97b",
+  "rust": {
+    "edition": "2021",
+    "name": "wasm_metadata",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasm-metadata",
+    "scope": "crates-io",
+    "version": "0.247.0"
+  }
+}

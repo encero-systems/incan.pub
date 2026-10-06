@@ -1,0 +1,64 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:34b357333733e8260735ba5894eb928c02ecc69c78715f01a8019e7fa7f2db4c",
+    "package": "libbz2-rs-sys",
+    "registry": "crates-io",
+    "version": "0.2.5"
+  },
+  "archive": "sha256:72467c3895f006b5261aff26638c74c01862274e4588b8906bc93e05fec50f7a",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "__internal-fuzz-disable-checksum": [],
+    "c-allocator": [
+      "dep:libc"
+    ],
+    "custom-prefix": [
+      "export-symbols"
+    ],
+    "default": [
+      "std",
+      "stdio"
+    ],
+    "export-symbols": [],
+    "rust-allocator": [],
+    "semver-prefix": [
+      "export-symbols"
+    ],
+    "std": [
+      "rust-allocator"
+    ],
+    "stdio": [
+      "dep:libc"
+    ],
+    "testing-prefix": [
+      "export-symbols"
+    ]
+  },
+  "id": "sha256:f8774eaa0c484f060c8fcf768c4e40b6c89cf44925e40f16b51f903fc678105f",
+  "kind": "adopt",
+  "manifest": "sha256:707dc6bd71b72571dcadc873a0a8db84103e9e3a7c6232cb59f96418280be76b",
+  "rust": {
+    "edition": "2021",
+    "name": "libbz2_rs_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "libbz2-rs-sys",
+    "scope": "crates-io",
+    "version": "0.2.5"
+  }
+}

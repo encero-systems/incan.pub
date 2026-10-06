@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/litrs"
+version = "1.0.0"
+
+[project.features]
+check_suffix = ["unicode-xid"]
+proc-macro2 = ["dep:proc-macro2"]
+unicode-xid = ["dep:unicode-xid"]
+
+[rust]
+name = "litrs"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.63", optional = true }
+unicode-xid = { loaf = "crates-io/unicode-xid", version = "^0.2.4", optional = true }

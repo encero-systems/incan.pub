@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/spdx"
+version = "0.13.6"
+
+[project.features]
+default = []
+detection = ["std", "regex", "unicode-normalization"]
+detection-cache = ["std", "detection", "zstd"]
+detection-inline-cache = ["std", "detection-cache"]
+detection-parallel = ["std", "detection", "rayon"]
+rayon = ["dep:rayon"]
+regex = ["dep:regex"]
+std = ["regex?/std", "unicode-normalization?/std"]
+text = []
+unicode-normalization = ["dep:unicode-normalization"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "spdx"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+rayon = { loaf = "crates-io/rayon", version = "^1.11", optional = true }
+regex = { loaf = "crates-io/regex", version = "^1.12", features = ["perf", "unicode"], default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15" }
+unicode-normalization = { loaf = "crates-io/unicode-normalization", version = "^0.1", optional = true }
+zstd = { loaf = "crates-io/zstd", version = "^0.13", optional = true }

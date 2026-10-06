@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-sql"
+name = "crates-io/datafusion-sql"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:fa0d133ddf8b9b3b872acac900157f783e7b879fe9a6bccf389abebbfac45ec1"
+[project.features]
+default = ["unicode_expressions", "unparser"]
+recursive_protection = ["dep:recursive"]
+unicode_expressions = []
+unparser = []
+
+[rust]
+name = "datafusion_sql"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+bigdecimal = { loaf = "crates-io/bigdecimal", version = "^0.4.8" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.44", default-features = false }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0", features = ["sql"], default-features = false }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", features = ["sql"], default-features = false }
+datafusion-functions-nested = { loaf = "crates-io/datafusion-functions-nested", version = "^53.1.0", features = ["sql"], default-features = false }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.13.0" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+recursive = { loaf = "crates-io/recursive", version = "^0.1.1", optional = true }
+regex = { loaf = "crates-io/regex", version = "^1.12" }
+sqlparser = { loaf = "crates-io/sqlparser", version = "^0.61.0", features = ["std", "visitor"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

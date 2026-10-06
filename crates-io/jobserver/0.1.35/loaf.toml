@@ -3,12 +3,17 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "jobserver"
+name = "crates-io/jobserver"
 version = "0.1.35"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:1c00acbd29eabad4a2392fa0e921c874934dbbf4194312ad20f04a0ed67a3cb3"
+[rust]
+name = "jobserver"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", features = ["std"], target = "cfg(windows)" }
+libc = { loaf = "crates-io/libc", version = "^0.2.171", target = "cfg(unix)" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "multimap"
+name = "crates-io/multimap"
 version = "0.10.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:1d87ecb2933e8aeadb3e3a02b828fed80a7528047e68b4f424523a0981a3a084"
+[project.features]
+default = ["serde_impl"]
+serde = ["dep:serde"]
+serde_impl = ["serde"]
+
+[rust]
+name = "multimap"
+type = "lib"
+edition = "2015"
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

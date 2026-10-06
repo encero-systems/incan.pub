@@ -3,12 +3,47 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "log"
+name = "crates-io/log"
 version = "0.4.29"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
+[project.features]
+kv = []
+kv_serde = ["kv_std", "value-bag", "dep:value-bag", "value-bag/serde", "serde"]
+kv_std = ["std", "kv", "value-bag", "dep:value-bag", "value-bag/error"]
+kv_sval = ["kv", "value-bag", "dep:value-bag", "value-bag/sval", "sval", "sval_ref"]
+kv_unstable = ["kv", "value-bag"]
+kv_unstable_serde = ["kv_serde", "kv_unstable_std"]
+kv_unstable_std = ["kv_std", "kv_unstable"]
+kv_unstable_sval = ["kv_sval", "kv_unstable"]
+max_level_debug = []
+max_level_error = []
+max_level_info = []
+max_level_off = []
+max_level_trace = []
+max_level_warn = []
+release_max_level_debug = []
+release_max_level_error = []
+release_max_level_info = []
+release_max_level_off = []
+release_max_level_trace = []
+release_max_level_warn = []
+serde = ["serde_core"]
+serde_core = ["dep:serde_core"]
+std = []
+sval = ["dep:sval"]
+sval_ref = ["dep:sval_ref"]
+value-bag = ["dep:value-bag"]
+
+[rust]
+name = "log"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false, optional = true }
+sval = { loaf = "crates-io/sval", version = "^2.16", default-features = false, optional = true }
+sval_ref = { loaf = "crates-io/sval_ref", version = "^2.16", default-features = false, optional = true }
+value-bag = { loaf = "crates-io/value-bag", version = "^1.12", features = ["inline-i128"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

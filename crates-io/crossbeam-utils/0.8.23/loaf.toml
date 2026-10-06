@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "crossbeam-utils"
+name = "crates-io/crossbeam-utils"
 version = "0.8.23"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:a31eee39dddec8330830986fcd7625edb5a24ec90ea038215273bbc3adb08ac6"
+[project.features]
+default = ["std"]
+loom = ["dep:loom"]
+nightly = []
+std = []
+
+[rust]
+name = "crossbeam_utils"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+loom = { loaf = "crates-io/loom", version = "^0.7.1", optional = true, target = "cfg(crossbeam_loom)" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,38 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "icu_properties"
+name = "crates-io/icu_properties"
 version = "2.3.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7e7ca276ad3145661a65914e6daf131ca5120cd3dcee8f8f3214b8875184a148"
+[project.features]
+alloc = ["zerovec/alloc", "icu_collections/alloc", "serde?/alloc"]
+compiled_data = ["dep:icu_properties_data", "icu_provider/baked"]
+datagen = ["serde", "dep:databake", "zerovec/databake", "icu_collections/databake", "icu_locale_core/databake", "zerotrie/databake", "icu_provider/export"]
+default = ["compiled_data"]
+harfbuzz_traits = ["dep:harfbuzz-traits"]
+log = ["dep:log"]
+serde = ["dep:serde", "icu_locale_core/serde", "zerovec/serde", "icu_collections/serde", "icu_provider/serde", "zerotrie/serde"]
+unicode_bidi = ["dep:unicode-bidi"]
+unstable = []
+
+[rust]
+name = "icu_properties"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.3", default-features = false }
+harfbuzz-traits = { loaf = "crates-io/harfbuzz-traits", version = "^0.6.0", default-features = false, optional = true }
+icu_collections = { loaf = "crates-io/icu_collections", version = "~2.3.0", default-features = false }
+icu_locale_core = { loaf = "crates-io/icu_locale_core", version = "^2.3.0", features = ["zerovec"], default-features = false }
+icu_properties_data = { loaf = "crates-io/icu_properties_data", version = "~2.3.0", default-features = false, optional = true }
+icu_provider = { loaf = "crates-io/icu_provider", version = "^2.3.0", default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.17", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["derive"], default-features = false, optional = true }
+unicode-bidi = { loaf = "crates-io/unicode-bidi", version = "^0.3.11", default-features = false, optional = true }
+zerotrie = { loaf = "crates-io/zerotrie", version = "^0.2.5", features = ["yoke", "zerofrom"], default-features = false }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.7", features = ["derive", "yoke"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

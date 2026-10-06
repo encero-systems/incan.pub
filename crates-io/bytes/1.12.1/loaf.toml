@@ -3,12 +3,23 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "bytes"
+name = "crates-io/bytes"
 version = "1.12.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04"
+[project.features]
+default = ["std"]
+extra-platforms = ["dep:extra-platforms"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "bytes"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+extra-platforms = { loaf = "crates-io/portable-atomic", version = "^1.3", features = ["require-cas"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.60", features = ["alloc"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

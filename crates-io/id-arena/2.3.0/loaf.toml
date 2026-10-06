@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/id-arena"
+version = "2.3.0"
+
+[project.features]
+default = ["std"]
+rayon = ["dep:rayon"]
+std = []
+
+[rust]
+name = "id_arena"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+rayon = { loaf = "crates-io/rayon", version = "^1.0.3", optional = true }

@@ -3,12 +3,36 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "smallvec"
+name = "crates-io/smallvec"
 version = "1.16.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:f9395f0f0eee849a9b707b2f06bb92a6a422090e2123bb2ef8e87a0e61892a8e"
+[project.features]
+arbitrary = ["dep:arbitrary"]
+bincode = ["dep:bincode"]
+const_generics = []
+const_new = ["const_generics"]
+drain_filter = []
+drain_keep_rest = ["drain_filter"]
+impl_bincode = ["bincode", "unty"]
+malloc_size_of = ["dep:malloc_size_of"]
+may_dangle = []
+serde = ["dep:serde"]
+specialization = []
+union = []
+unty = ["dep:unty"]
+write = []
+
+[rust]
+name = "smallvec"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", optional = true }
+bincode = { loaf = "crates-io/bincode", version = "^2", default-features = false, optional = true }
+malloc_size_of = { loaf = "crates-io/malloc_size_of", version = "^0.1", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }
+unty = { loaf = "crates-io/unty", version = "^0.0.4", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

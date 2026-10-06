@@ -1,0 +1,196 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1aa79e62e7697b8e29b513a68abacf485adcd1fe8284a4316c5ae868e6633327",
+    "package": "chrono",
+    "registry": "crates-io",
+    "version": "0.4.45"
+  },
+  "archive": "sha256:5417e9314a0956a84d8de72f57d42d6fa50f6620c16135842a0b0ec33b8bd1f5",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/defmt",
+      "name": "defmt",
+      "optional": true,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fallback"
+      ],
+      "loaf": "crates-io/iana-time-zone",
+      "name": "iana-time-zone",
+      "optional": true,
+      "req": "^0.1.45",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": true,
+      "req": "^0.3",
+      "target": "cfg(all(target_arch = \"wasm32\", not(any(target_os = \"emscripten\", target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pure-rust-locales",
+      "name": "pure-rust-locales",
+      "optional": true,
+      "req": "^0.8.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv",
+      "optional": true,
+      "req": "^0.7.43"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.99"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": true,
+      "req": "^0.2",
+      "target": "cfg(all(target_arch = \"wasm32\", not(any(target_os = \"emscripten\", target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-link",
+      "name": "windows-link",
+      "optional": true,
+      "req": "^0.2",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "__internal_bench": [],
+    "alloc": [],
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "clock": [
+      "winapi",
+      "iana-time-zone",
+      "now"
+    ],
+    "core-error": [],
+    "default": [
+      "clock",
+      "std",
+      "oldtime",
+      "wasmbind"
+    ],
+    "defmt": [
+      "dep:defmt",
+      "pure-rust-locales?/defmt"
+    ],
+    "iana-time-zone": [
+      "dep:iana-time-zone"
+    ],
+    "js-sys": [
+      "dep:js-sys"
+    ],
+    "libc": [],
+    "now": [
+      "std"
+    ],
+    "oldtime": [],
+    "pure-rust-locales": [
+      "dep:pure-rust-locales"
+    ],
+    "rkyv": [
+      "dep:rkyv",
+      "rkyv",
+      "rkyv/size_32"
+    ],
+    "rkyv-16": [
+      "dep:rkyv",
+      "rkyv?/size_16"
+    ],
+    "rkyv-32": [
+      "dep:rkyv",
+      "rkyv?/size_32"
+    ],
+    "rkyv-64": [
+      "dep:rkyv",
+      "rkyv?/size_64"
+    ],
+    "rkyv-validation": [
+      "rkyv?/validation"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-locales": [
+      "pure-rust-locales"
+    ],
+    "wasm-bindgen": [
+      "dep:wasm-bindgen"
+    ],
+    "wasmbind": [
+      "wasm-bindgen",
+      "js-sys"
+    ],
+    "winapi": [
+      "windows-link"
+    ],
+    "windows-link": [
+      "dep:windows-link"
+    ]
+  },
+  "id": "sha256:510f406abf3ba03f9f3dae220b402125de5802d060668c7e2cb191acbd786589",
+  "kind": "adopt",
+  "manifest": "sha256:3bb7f7d75bb0e69ad180df0812028786fe391f9b2205a0dc2b76bd26fe877630",
+  "rust": {
+    "edition": "2021",
+    "name": "chrono",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "chrono",
+    "scope": "crates-io",
+    "version": "0.4.45"
+  }
+}

@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "bzip2"
+name = "crates-io/bzip2"
 version = "0.6.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:f3a53fac24f34a81bc9954b5d6cfce0c21e18ec6959f44f56e8e90e4bb7c346c"
+[project.features]
+bzip2-sys = ["dep:bzip2-sys"]
+default = ["dep:libbz2-rs-sys"]
+static = ["bzip2-sys?/static"]
+
+[rust]
+name = "bzip2"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+bzip2-sys = { loaf = "crates-io/bzip2-sys", version = "^0.1.13", optional = true }
+libbz2-rs-sys = { loaf = "crates-io/libbz2-rs-sys", version = "^0.2.1", features = ["rust-allocator"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

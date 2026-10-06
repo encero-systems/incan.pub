@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "fixedbitset"
+name = "crates-io/fixedbitset"
 version = "0.5.7"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99"
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "fixedbitset"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

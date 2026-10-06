@@ -1,0 +1,118 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0",
+    "package": "getrandom",
+    "registry": "crates-io",
+    "version": "0.2.17"
+  },
+  "archive": "sha256:abe04f8567efd5b2a45cae7a36a4aa84ace4893c864f32c7d2853764c7ec2981",
+  "at": "2026-10-06T13:11:42Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compiler_builtins",
+      "name": "compiler_builtins",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": true,
+      "req": "^0.3",
+      "target": "cfg(all(any(target_arch = \"wasm32\", target_arch = \"wasm64\"), target_os = \"unknown\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.154",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasi",
+      "name": "wasi",
+      "optional": false,
+      "req": "^0.11",
+      "target": "cfg(target_os = \"wasi\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": true,
+      "req": "^0.2.62",
+      "target": "cfg(all(any(target_arch = \"wasm32\", target_arch = \"wasm64\"), target_os = \"unknown\"))"
+    }
+  ],
+  "features": {
+    "compiler_builtins": [
+      "dep:compiler_builtins"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "custom": [],
+    "js": [
+      "wasm-bindgen",
+      "js-sys"
+    ],
+    "js-sys": [
+      "dep:js-sys"
+    ],
+    "linux_disable_fallback": [],
+    "rdrand": [],
+    "rustc-dep-of-std": [
+      "compiler_builtins",
+      "core",
+      "libc/rustc-dep-of-std",
+      "wasi/rustc-dep-of-std"
+    ],
+    "std": [],
+    "test-in-browser": [],
+    "wasm-bindgen": [
+      "dep:wasm-bindgen"
+    ]
+  },
+  "id": "sha256:d9695a614f68d709378ccad0e5bce9d7ef82c2a7e3d1afcb687084615668938a",
+  "kind": "adopt",
+  "manifest": "sha256:29e2abc642436df28acb34b1fd2a79c65ba65c5a85cdcbaf32412112eb035f10",
+  "rust": {
+    "edition": "2018",
+    "name": "getrandom",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "getrandom",
+    "scope": "crates-io",
+    "version": "0.2.17"
+  }
+}

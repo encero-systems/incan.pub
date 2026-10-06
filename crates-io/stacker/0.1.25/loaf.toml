@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "stacker"
+name = "crates-io/stacker"
 version = "0.1.25"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:707f49d46706bacf8a2b00d51dace3f9de527c13eec3778f570c411f89e69967"
+[rust]
+name = "stacker"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2.156" }
+psm = { loaf = "crates-io/psm", version = "^0.1.7" }
+windows-sys = [{ loaf = "crates-io/windows-sys", version = ">=0.60.0, <0.62.0", features = ["Win32_Foundation", "Win32_System_Memory", "Win32_System_Threading"], target = "arm64ec-pc-windows-msvc" }, { loaf = "crates-io/windows-sys", version = ">=0.60.0, <0.62.0", features = ["Win32_Foundation", "Win32_System_Memory", "Win32_System_Threading"], target = "cfg(all(windows, not(target_arch = \"arm64ec\")))" }]
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

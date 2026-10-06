@@ -3,12 +3,28 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "twox-hash"
+name = "crates-io/twox-hash"
 version = "2.1.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:5283634e518fe9e82c7b20520bb4bc209009fd16c82077c802f8111ecbb0117a"
+[project.features]
+alloc = []
+default = ["random", "xxhash32", "xxhash64", "xxhash3_64", "xxhash3_128", "std"]
+random = ["dep:rand"]
+serialize = ["dep:serde"]
+std = ["alloc"]
+xxhash32 = []
+xxhash3_128 = []
+xxhash3_64 = []
+xxhash64 = []
+
+[rust]
+name = "twox_hash"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+rand = { loaf = "crates-io/rand", version = ">=0.9.0, <=0.11.0", features = ["thread_rng"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.0", features = ["derive"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

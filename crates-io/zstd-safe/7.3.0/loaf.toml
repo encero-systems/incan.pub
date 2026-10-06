@@ -3,12 +3,34 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "zstd-safe"
+name = "crates-io/zstd-safe"
 version = "7.3.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:64d80649ab6db9d9f6f9c80a40becd948eda4714a0a5ac8c4d157a32231c7882"
+[project.features]
+arrays = []
+bindgen = ["zstd-sys/bindgen"]
+debug = ["zstd-sys/debug"]
+default = ["legacy", "arrays", "zdict_builder"]
+doc-cfg = []
+experimental = ["zstd-sys/experimental"]
+fat-lto = ["zstd-sys/fat-lto"]
+legacy = ["zstd-sys/legacy"]
+no_asm = ["zstd-sys/no_asm"]
+pkg-config = ["zstd-sys/pkg-config"]
+seekable = ["zstd-sys/seekable"]
+std = ["zstd-sys/std"]
+thin = ["zstd-sys/thin"]
+thin-lto = ["zstd-sys/thin-lto"]
+zdict_builder = ["zstd-sys/zdict_builder"]
+zstdmt = ["zstd-sys/zstdmt"]
+
+[rust]
+name = "zstd_safe"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+zstd-sys = { loaf = "crates-io/zstd-sys", version = "^2.0.15", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

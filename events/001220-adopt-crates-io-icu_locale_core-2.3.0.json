@@ -1,0 +1,109 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d56e28588da92eee5c3201a6eff33fabdd49b62269c8938d4ff050ce4d900deb",
+    "package": "icu_locale_core",
+    "registry": "crates-io",
+    "version": "2.3.0"
+  },
+  "archive": "sha256:beb1d6c98440b9f1feb250f98cdd0a92d731b8febbe958fa52e13173e71a6cb3",
+  "at": "2026-10-06T13:11:46Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/litemap",
+      "name": "litemap",
+      "optional": false,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tinystr",
+      "name": "tinystr",
+      "optional": false,
+      "req": "^0.8.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/writeable",
+      "name": "writeable",
+      "optional": false,
+      "req": "^0.6.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": true,
+      "req": "^0.11.7"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "litemap/alloc",
+      "tinystr/alloc",
+      "writeable/alloc",
+      "serde?/alloc"
+    ],
+    "databake": [
+      "dep:databake",
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde",
+      "tinystr/serde"
+    ],
+    "zerovec": [
+      "dep:zerovec",
+      "tinystr/zerovec"
+    ]
+  },
+  "id": "sha256:d98d0150ba78db16207adb4e5b3175d873cb4b39d30ec8af44cf988d844b6ab4",
+  "kind": "adopt",
+  "manifest": "sha256:9aa65503d45f85f35b4ba4b0d04e3d1827960910c19caf511865f0e36d53044e",
+  "rust": {
+    "edition": "2024",
+    "name": "icu_locale_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_locale_core",
+    "scope": "crates-io",
+    "version": "2.3.0"
+  }
+}

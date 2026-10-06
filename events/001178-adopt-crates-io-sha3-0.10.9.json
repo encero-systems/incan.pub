@@ -1,0 +1,71 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:77fd7028345d415a4034cf8777cd4f8ab1851274233b45f84e3d955502d93874",
+    "package": "sha3",
+    "registry": "crates-io",
+    "version": "0.10.9"
+  },
+  "archive": "sha256:3f10fbc0f96b19101968780c3a639803abc19de83b25a0d6fdffc9b2caf8acdb",
+  "at": "2026-10-06T13:11:45Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.10.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/keccak",
+      "name": "keccak",
+      "optional": false,
+      "req": "^0.1.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.6.0"
+    }
+  ],
+  "features": {
+    "asm": [
+      "keccak/asm"
+    ],
+    "default": [
+      "std"
+    ],
+    "oid": [
+      "digest/oid"
+    ],
+    "reset": [],
+    "std": [
+      "digest/std"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:d5cdb0ab872564e8787ab17413cf43707fcec82bb155e7843db199fe0f6578dd",
+  "kind": "adopt",
+  "manifest": "sha256:1ffe5bffc6a70da417305f7485cde570687aa710d48270d586d49d07e920ad38",
+  "rust": {
+    "edition": "2018",
+    "name": "sha3",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "sha3",
+    "scope": "crates-io",
+    "version": "0.10.9"
+  }
+}

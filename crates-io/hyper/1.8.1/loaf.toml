@@ -3,12 +3,45 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "hyper"
+name = "crates-io/hyper"
 version = "1.8.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:2ab2d4f250c3d7b1c9fcdff1cece94ea4e2dfbec68614f7b87cb205f24ca9d11"
+[project.features]
+capi = []
+client = ["dep:want", "dep:pin-project-lite", "dep:smallvec"]
+default = []
+ffi = ["dep:http-body-util", "dep:futures-util"]
+full = ["client", "http1", "http2", "server"]
+http1 = ["dep:atomic-waker", "dep:futures-channel", "dep:futures-core", "dep:httparse", "dep:itoa", "dep:pin-utils"]
+http2 = ["dep:futures-channel", "dep:futures-core", "dep:h2"]
+nightly = []
+server = ["dep:httpdate", "dep:pin-project-lite", "dep:smallvec"]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "hyper"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+atomic-waker = { loaf = "crates-io/atomic-waker", version = "^1.1.2", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.2" }
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3", optional = true }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.31", optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3", features = ["alloc"], default-features = false, optional = true }
+h2 = { loaf = "crates-io/h2", version = "^0.4.2", optional = true }
+http = { loaf = "crates-io/http", version = "^1" }
+http-body = { loaf = "crates-io/http-body", version = "^1" }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1", optional = true }
+httparse = { loaf = "crates-io/httparse", version = "^1.9", optional = true }
+httpdate = { loaf = "crates-io/httpdate", version = "^1.0", optional = true }
+itoa = { loaf = "crates-io/itoa", version = "^1", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.4", optional = true }
+pin-utils = { loaf = "crates-io/pin-utils", version = "^0.1", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.12", features = ["const_generics", "const_new"], optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1", features = ["sync"] }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", features = ["std"], default-features = false, optional = true }
+want = { loaf = "crates-io/want", version = "^0.3", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

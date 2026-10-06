@@ -3,12 +3,51 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "hyper-util"
+name = "crates-io/hyper-util"
 version = "0.1.20"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:96547c2556ec9d12fb1578c4eaf448b04993e7fb79cbaad930a656880a6bdfa0"
+[project.features]
+__internal_happy_eyeballs_tests = []
+client = ["hyper/client", "tokio", "dep:tokio", "tokio/net", "dep:tracing", "dep:futures-channel", "dep:tower-service"]
+client-legacy = ["client", "dep:socket2", "tokio", "dep:tokio", "tokio/sync", "dep:libc", "dep:futures-util"]
+client-pool = ["client", "dep:futures-util", "dep:tower-layer"]
+client-proxy = ["client", "dep:base64", "dep:ipnet", "dep:percent-encoding"]
+client-proxy-system = ["dep:system-configuration", "dep:windows-registry"]
+default = []
+full = ["client", "client-legacy", "client-pool", "client-proxy", "client-proxy-system", "server", "server-auto", "server-graceful", "service", "http1", "http2", "tokio", "tracing"]
+http1 = ["hyper/http1"]
+http2 = ["hyper/http2"]
+server = ["hyper/server"]
+server-auto = ["server", "http1", "http2"]
+server-graceful = ["server", "tokio", "dep:tokio", "tokio/sync"]
+service = ["dep:tower-service"]
+tokio = ["dep:tokio", "tokio", "tokio/rt", "tokio/time"]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "hyper_util"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.7.1" }
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3", optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.16", default-features = false, optional = true }
+http = { loaf = "crates-io/http", version = "^1.0" }
+http-body = { loaf = "crates-io/http-body", version = "^1.0.0" }
+hyper = { loaf = "crates-io/hyper", version = "^1.8.0" }
+ipnet = { loaf = "crates-io/ipnet", version = "^2.9", optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2", optional = true }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.4" }
+socket2 = { loaf = "crates-io/socket2", version = ">=0.5.9, <0.7", features = ["all"], optional = true }
+system-configuration = { loaf = "crates-io/system-configuration", version = "^0.7", optional = true, target = "cfg(target_os = \"macos\")" }
+tokio = { loaf = "crates-io/tokio", version = "^1", default-features = false, optional = true }
+tower-layer = { loaf = "crates-io/tower-layer", version = "^0.3", optional = true }
+tower-service = { loaf = "crates-io/tower-service", version = "^0.3", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", features = ["std"], default-features = false, optional = true }
+windows-registry = { loaf = "crates-io/windows-registry", version = ">=0.3, <0.7", optional = true, target = "cfg(windows)" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

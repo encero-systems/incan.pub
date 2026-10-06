@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "iana-time-zone"
+name = "crates-io/iana-time-zone"
 version = "0.1.65"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:e31bc9ad994ba00e440a8aa5c9ef0ec67d5cb5e5cb0cc7f8b744a35b389cc470"
+[project.features]
+fallback = []
+
+[rust]
+name = "iana_time_zone"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+android_system_properties = { loaf = "crates-io/android_system_properties", version = "^0.1.5", target = "cfg(target_os = \"android\")" }
+core-foundation-sys = { loaf = "crates-io/core-foundation-sys", version = "^0.8.6", target = "cfg(target_vendor = \"apple\")" }
+iana-time-zone-haiku = { loaf = "crates-io/iana-time-zone-haiku", version = "^0.1.1", target = "cfg(target_os = \"haiku\")" }
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.66", target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
+log = { loaf = "crates-io/log", version = "^0.4.14", target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.89", target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
+windows-core = { loaf = "crates-io/windows-core", version = ">=0.56, <=0.62", target = "cfg(target_os = \"windows\")" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,28 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "icu_locale_core"
+name = "crates-io/icu_locale_core"
 version = "2.3.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d56e28588da92eee5c3201a6eff33fabdd49b62269c8938d4ff050ce4d900deb"
+[project.features]
+alloc = ["litemap/alloc", "tinystr/alloc", "writeable/alloc", "serde?/alloc"]
+databake = ["dep:databake", "alloc"]
+serde = ["dep:serde", "tinystr/serde"]
+zerovec = ["dep:zerovec", "tinystr/zerovec"]
+
+[rust]
+name = "icu_locale_core"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.3", default-features = false }
+litemap = { loaf = "crates-io/litemap", version = "^0.8.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["derive"], default-features = false, optional = true }
+tinystr = { loaf = "crates-io/tinystr", version = "^0.8.4", default-features = false }
+writeable = { loaf = "crates-io/writeable", version = "^0.6.4", default-features = false }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.7", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

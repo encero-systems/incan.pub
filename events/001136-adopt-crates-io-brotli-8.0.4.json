@@ -1,0 +1,100 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5cc91aac060a7a1e25823bdccbfb6af1875b88f17c6daac97894eed8207166b3",
+    "package": "brotli",
+    "registry": "crates-io",
+    "version": "8.0.4"
+  },
+  "archive": "sha256:53ebab9caa7c638eea790aa32c547e93032263a4d185cb8d361a117e72e73160",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/alloc-no-stdlib",
+      "name": "alloc-no-stdlib",
+      "optional": false,
+      "req": ">=2.0.4, <3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/alloc-stdlib",
+      "name": "alloc-stdlib",
+      "optional": true,
+      "req": "~0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/brotli-decompressor",
+      "name": "brotli-decompressor",
+      "optional": false,
+      "req": "~5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "~0.10"
+    }
+  ],
+  "features": {
+    "alloc-stdlib": [
+      "dep:alloc-stdlib"
+    ],
+    "benchmark": [
+      "brotli-decompressor/benchmark"
+    ],
+    "billing": [],
+    "default": [
+      "std"
+    ],
+    "disable-timer": [
+      "brotli-decompressor/disable-timer"
+    ],
+    "disallow_large_window_size": [],
+    "external-literal-probability": [],
+    "ffi-api": [
+      "brotli-decompressor/ffi-api"
+    ],
+    "float64": [],
+    "floating_point_context_mixing": [],
+    "no-stdlib-ffi-binding": [],
+    "pass-through-ffi-panics": [],
+    "seccomp": [
+      "brotli-decompressor/seccomp"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "simd": [],
+    "std": [
+      "alloc-stdlib",
+      "brotli-decompressor/std"
+    ],
+    "validation": [
+      "sha2"
+    ],
+    "vector_scratch_space": []
+  },
+  "id": "sha256:86774357b32307a90ed37d8c74a5f595faf0ca9bcb2195c57705d5f1181ccb6c",
+  "kind": "adopt",
+  "manifest": "sha256:7d47ef23ebcae765f23d891c549ce48c8efe579364fb2cbd64d65d619fd46fef",
+  "rust": {
+    "edition": "2015",
+    "name": "brotli",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "brotli",
+    "scope": "crates-io",
+    "version": "8.0.4"
+  }
+}

@@ -3,12 +3,52 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "regex-automata"
+name = "crates-io/regex-automata"
 version = "0.4.14"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:6e1dd4122fc1595e8162618945476892eefca7b88c52820e74af6262213cae8f"
+[project.features]
+alloc = []
+default = ["std", "syntax", "perf", "unicode", "meta", "nfa", "dfa", "hybrid"]
+dfa = ["dfa-build", "dfa-search", "dfa-onepass"]
+dfa-build = ["nfa-thompson", "dfa-search"]
+dfa-onepass = ["nfa-thompson"]
+dfa-search = []
+hybrid = ["alloc", "nfa-thompson"]
+internal-instrument = ["internal-instrument-pikevm"]
+internal-instrument-pikevm = ["logging", "std"]
+logging = ["dep:log", "aho-corasick?/logging", "memchr?/logging"]
+meta = ["syntax", "nfa-pikevm"]
+nfa = ["nfa-thompson", "nfa-pikevm", "nfa-backtrack"]
+nfa-backtrack = ["nfa-thompson"]
+nfa-pikevm = ["nfa-thompson"]
+nfa-thompson = ["alloc"]
+perf = ["perf-inline", "perf-literal"]
+perf-inline = []
+perf-literal = ["perf-literal-substring", "perf-literal-multisubstring"]
+perf-literal-multisubstring = ["dep:aho-corasick"]
+perf-literal-substring = ["aho-corasick?/perf-literal", "dep:memchr"]
+std = ["regex-syntax?/std", "memchr?/std", "aho-corasick?/std", "alloc"]
+syntax = ["dep:regex-syntax", "alloc"]
+unicode = ["unicode-age", "unicode-bool", "unicode-case", "unicode-gencat", "unicode-perl", "unicode-script", "unicode-segment", "unicode-word-boundary", "regex-syntax?/unicode"]
+unicode-age = ["regex-syntax?/unicode-age"]
+unicode-bool = ["regex-syntax?/unicode-bool"]
+unicode-case = ["regex-syntax?/unicode-case"]
+unicode-gencat = ["regex-syntax?/unicode-gencat"]
+unicode-perl = ["regex-syntax?/unicode-perl"]
+unicode-script = ["regex-syntax?/unicode-script"]
+unicode-segment = ["regex-syntax?/unicode-segment"]
+unicode-word-boundary = []
+
+[rust]
+name = "regex_automata"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+aho-corasick = { loaf = "crates-io/aho-corasick", version = "^1.0.0", default-features = false, optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.14", optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.6.0", default-features = false, optional = true }
+regex-syntax = { loaf = "crates-io/regex-syntax", version = "^0.8.5", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

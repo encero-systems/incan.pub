@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "toml_datetime"
+name = "crates-io/toml_datetime"
 version = "1.1.1+spec-1.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3165f65f62e28e0115a00b2ebdd37eb6f3b641855f9d636d3cd4103767159ad7"
+[project.features]
+alloc = ["serde_core?/alloc"]
+default = ["std"]
+serde = ["dep:serde_core"]
+std = ["alloc", "serde_core?/std"]
+
+[rust]
+name = "toml_datetime"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.228", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

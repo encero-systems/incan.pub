@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "subtle"
+name = "crates-io/subtle"
 version = "2.6.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
+[project.features]
+const-generics = []
+core_hint_black_box = []
+default = ["std", "i128"]
+i128 = []
+nightly = []
+std = []
+
+[rust]
+name = "subtle"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

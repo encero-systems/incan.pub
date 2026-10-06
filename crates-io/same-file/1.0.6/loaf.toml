@@ -3,12 +3,16 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "same-file"
+name = "crates-io/same-file"
 version = "1.0.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0bd1b4d7b6b0b68378900502"
+[rust]
+name = "same_file"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+winapi-util = { loaf = "crates-io/winapi-util", version = "^0.1.1", target = "cfg(windows)" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

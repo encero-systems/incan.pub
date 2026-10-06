@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "futures-sink"
+name = "crates-io/futures-sink"
 version = "0.3.34"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:1944426bf7d03f1d14f708785e4b33efd750b36d48a157b836b3efc15ede8e1d"
+[project.features]
+alloc = []
+default = ["std"]
+std = ["alloc"]
+
+[rust]
+name = "futures_sink"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

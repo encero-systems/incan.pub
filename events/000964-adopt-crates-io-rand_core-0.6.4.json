@@ -1,0 +1,65 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c",
+    "package": "rand_core",
+    "registry": "crates-io",
+    "version": "0.6.4"
+  },
+  "archive": "sha256:0d5d806808704064c3250e4330e651ff40fd2f32517cc04bfbd953226227310d",
+  "at": "2026-10-06T13:11:41Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "getrandom": [
+      "dep:getrandom"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde1": [
+      "serde"
+    ],
+    "std": [
+      "alloc",
+      "getrandom",
+      "dep:getrandom",
+      "getrandom/std"
+    ]
+  },
+  "id": "sha256:5b76e506d71b89b807c3b2c5f32835553f1eb977fa480cf734670dee4f0dade8",
+  "kind": "adopt",
+  "manifest": "sha256:dc38dae10c4d8ac6f7fd14918658199b3ce44a36c3d0d26e4c066bcffd3f9073",
+  "rust": {
+    "edition": "2018",
+    "name": "rand_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rand_core",
+    "scope": "crates-io",
+    "version": "0.6.4"
+  }
+}

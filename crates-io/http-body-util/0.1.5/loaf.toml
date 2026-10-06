@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/http-body-util"
+version = "0.1.5"
+
+[project.features]
+channel = ["dep:tokio"]
+default = []
+full = ["channel"]
+
+[rust]
+name = "http_body_util"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", default-features = false }
+http = { loaf = "crates-io/http", version = "^1" }
+http-body = { loaf = "crates-io/http-body", version = "^1" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1", features = ["sync"], optional = true }

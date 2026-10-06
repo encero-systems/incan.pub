@@ -3,12 +3,17 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "walkdir"
+name = "crates-io/walkdir"
 version = "2.5.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b"
+[rust]
+name = "walkdir"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+same-file = { loaf = "crates-io/same-file", version = "^1.0.1" }
+winapi-util = { loaf = "crates-io/winapi-util", version = "^0.1.1", target = "cfg(windows)" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

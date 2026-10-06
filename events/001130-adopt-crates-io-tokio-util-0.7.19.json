@@ -1,0 +1,183 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:494815d09bf52b5548659851081238f0ca39ff638363907596da739561c62c52",
+    "package": "tokio-util",
+    "registry": "crates-io",
+    "version": "0.7.19"
+  },
+  "archive": "sha256:8bea0015e400c394b9c8c75fd8b2025f6c7ba511b0c13937a0f0febb09c13acd",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-sink",
+      "name": "futures-sink",
+      "optional": false,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.15.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.168",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/slab",
+      "name": "slab",
+      "optional": true,
+      "req": "^0.4.4"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "sync"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": false,
+      "req": "^1.47.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.29"
+    }
+  ],
+  "features": {
+    "__docs_rs": [
+      "futures-util"
+    ],
+    "codec": [
+      "libc"
+    ],
+    "compat": [
+      "futures-io"
+    ],
+    "default": [],
+    "full": [
+      "codec",
+      "compat",
+      "io-util",
+      "time",
+      "net",
+      "rt",
+      "join-map"
+    ],
+    "futures-io": [
+      "dep:futures-io"
+    ],
+    "futures-util": [
+      "dep:futures-util"
+    ],
+    "hashbrown": [
+      "dep:hashbrown"
+    ],
+    "io": [],
+    "io-util": [
+      "io",
+      "tokio/rt",
+      "tokio/io-util"
+    ],
+    "join-map": [
+      "rt",
+      "hashbrown"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "net": [
+      "tokio/net"
+    ],
+    "rt": [
+      "tokio/rt",
+      "tokio/sync",
+      "futures-util"
+    ],
+    "slab": [
+      "dep:slab"
+    ],
+    "time": [
+      "tokio/time",
+      "slab"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ]
+  },
+  "id": "sha256:f9ff92dd1ed3644db34a318492d8f2c8cf0739c8497d1d1d10e156a3ce2d6bc0",
+  "kind": "adopt",
+  "manifest": "sha256:d9b0bc2b4d23d6c44c4d07dd4e4d47cc978c4812fc732fa63ff7f66c12842236",
+  "rust": {
+    "edition": "2021",
+    "name": "tokio_util",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tokio-util",
+    "scope": "crates-io",
+    "version": "0.7.19"
+  }
+}

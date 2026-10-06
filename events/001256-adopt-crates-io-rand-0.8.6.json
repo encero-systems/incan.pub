@@ -1,0 +1,105 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5ca0ecfa931c29007047d1bc58e623ab12e5590e8c7cc53200d5202b69266d8a",
+    "package": "rand",
+    "registry": "crates-io",
+    "version": "0.8.6"
+  },
+  "archive": "sha256:871ee6c8589bd9edda8e7d309214b4d5abdabab90e4853c104b819d8b1e6d8de",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.22",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_chacha",
+      "name": "rand_chacha",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.103"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "rand_core/alloc"
+    ],
+    "default": [
+      "std",
+      "std_rng"
+    ],
+    "getrandom": [
+      "rand_core/getrandom"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "log": [],
+    "min_const_gen": [],
+    "nightly": [],
+    "rand_chacha": [
+      "dep:rand_chacha"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde1": [
+      "serde",
+      "rand_core/serde1"
+    ],
+    "small_rng": [],
+    "std": [
+      "rand_core/std",
+      "rand_chacha",
+      "dep:rand_chacha",
+      "rand_chacha/std",
+      "alloc",
+      "getrandom",
+      "libc"
+    ],
+    "std_rng": [
+      "rand_chacha"
+    ]
+  },
+  "id": "sha256:7f21323d76640c7c60f9c12ba55dbf10bef5605641b3f812955881b04f069920",
+  "kind": "adopt",
+  "manifest": "sha256:10142523e1f13c94d1f2c7bf63c9d122e4faa696b18c231f922634528f5d2269",
+  "rust": {
+    "edition": "2018",
+    "name": "rand",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rand",
+    "scope": "crates-io",
+    "version": "0.8.6"
+  }
+}

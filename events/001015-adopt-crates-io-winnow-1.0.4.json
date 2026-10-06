@@ -1,0 +1,109 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:23b97319f7b8343df12cc98938e5c3eb436064524c8d2b4e30a1d3a36eecdf81",
+    "package": "winnow",
+    "registry": "crates-io",
+    "version": "1.0.4"
+  },
+  "archive": "sha256:cd911c24bd559653b945a24b0ea1b701a78b43d29f2ee066c99c4247e16cb546",
+  "at": "2026-10-06T13:11:41Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstream",
+      "name": "anstream",
+      "optional": true,
+      "req": "^0.6.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle",
+      "name": "anstyle",
+      "optional": true,
+      "req": "^1.0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/is_terminal_polyfill",
+      "name": "is_terminal_polyfill",
+      "optional": true,
+      "req": "^1.48.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/terminal_size",
+      "name": "terminal_size",
+      "optional": true,
+      "req": "^0.4.3"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "ascii": [
+      "parser"
+    ],
+    "binary": [
+      "parser"
+    ],
+    "debug": [
+      "std",
+      "dep:anstream",
+      "dep:anstyle",
+      "dep:is_terminal_polyfill",
+      "dep:terminal_size"
+    ],
+    "default": [
+      "std",
+      "ascii",
+      "binary"
+    ],
+    "parser": [],
+    "simd": [
+      "dep:memchr"
+    ],
+    "std": [
+      "alloc",
+      "memchr?/std"
+    ],
+    "unstable-doc": [
+      "alloc",
+      "std",
+      "ascii",
+      "binary",
+      "simd",
+      "unstable-recover"
+    ],
+    "unstable-recover": [
+      "parser"
+    ]
+  },
+  "id": "sha256:8a8e0ca69e4e01234f96cb56eb5e3269e237d0d2f7a5aafcf8b896183a0ab694",
+  "kind": "adopt",
+  "manifest": "sha256:d3e97b374d05abb97e98f4ecc5b27982db32ce6f365312a97dc3c97c7ca0cf65",
+  "rust": {
+    "edition": "2021",
+    "name": "winnow",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "winnow",
+    "scope": "crates-io",
+    "version": "1.0.4"
+  }
+}

@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "num-integer"
+name = "crates-io/num-integer"
 version = "0.1.47"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7ce2d95d4b3734dc35aa2f45e1aa22cd416814592a4f9d9205e11affd5b8e10b"
+[project.features]
+default = ["std"]
+i128 = []
+std = ["num-traits/std"]
+
+[rust]
+name = "num_integer"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.11", features = ["i128"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

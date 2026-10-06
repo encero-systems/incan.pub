@@ -1,0 +1,146 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a3789ca2cd1c4e8ce71fe9bd6312566014e20ff3016fc87bc71c59ff93b5fa61",
+    "package": "async-compression",
+    "registry": "crates-io",
+    "version": "0.4.49"
+  },
+  "archive": "sha256:1bad41dd50a48cc75320f09ccc8f8fb57e2995fc342d29e8152b7cea38031bd5",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compression-codecs",
+      "name": "compression-codecs",
+      "optional": false,
+      "req": "^0.4.44"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compression-core",
+      "name": "compression-core",
+      "optional": false,
+      "req": "^0.4.33"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.24.2"
+    }
+  ],
+  "features": {
+    "all": [
+      "all-implementations",
+      "all-algorithms"
+    ],
+    "all-algorithms": [
+      "brotli",
+      "bzip2",
+      "deflate",
+      "deflate64",
+      "gzip",
+      "lz4",
+      "lzma",
+      "xz",
+      "xz-parallel",
+      "zlib",
+      "zstd"
+    ],
+    "all-implementations": [
+      "futures-io",
+      "tokio"
+    ],
+    "brotli": [
+      "compression-codecs/brotli"
+    ],
+    "brotli-mbrotli": [
+      "compression-codecs/brotli-mbrotli"
+    ],
+    "bzip2": [
+      "compression-codecs/bzip2"
+    ],
+    "deflate": [
+      "compression-codecs/deflate"
+    ],
+    "deflate64": [
+      "compression-codecs/deflate64"
+    ],
+    "futures-io": [
+      "dep:futures-io"
+    ],
+    "gzip": [
+      "compression-codecs/gzip"
+    ],
+    "lz4": [
+      "compression-codecs/lz4"
+    ],
+    "lzma": [
+      "compression-codecs/lzma"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "xz": [
+      "compression-codecs/xz",
+      "lzma"
+    ],
+    "xz-parallel": [
+      "compression-codecs/xz-parallel",
+      "xz"
+    ],
+    "xz2": [
+      "compression-codecs/xz2",
+      "xz"
+    ],
+    "zlib": [
+      "compression-codecs/zlib"
+    ],
+    "zstd": [
+      "compression-codecs/zstd"
+    ],
+    "zstdmt": [
+      "compression-codecs/zstdmt",
+      "zstd"
+    ]
+  },
+  "id": "sha256:29be2a64dde2a5f927f4fc8261c8799d5f18d85f277fcda1fd0ef36fa9c64342",
+  "kind": "adopt",
+  "manifest": "sha256:c7bed9a76ee53c9a46e25501cfdbdbec017a2ec5eb871b15b48b0b13a8eba419",
+  "rust": {
+    "edition": "2018",
+    "name": "async_compression",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "async-compression",
+    "scope": "crates-io",
+    "version": "0.4.49"
+  }
+}

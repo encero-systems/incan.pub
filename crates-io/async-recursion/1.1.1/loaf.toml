@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "async-recursion"
+name = "crates-io/async-recursion"
 version = "1.1.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3b43422f69d8ff38f95f1b2bb76517c91589a924d1559a0e935d7c8ce0274c11"
+[rust]
+name = "async_recursion"
+type = "proc-macro"
+edition = "2018"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1.0", default-features = false }
+syn = { loaf = "crates-io/syn", version = "^2.0", features = ["clone-impls", "full", "parsing", "printing", "proc-macro", "visit-mut"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

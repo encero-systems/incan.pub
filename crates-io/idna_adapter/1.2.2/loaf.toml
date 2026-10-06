@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "idna_adapter"
+name = "crates-io/idna_adapter"
 version = "1.2.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:cb68373c0d6620ef8105e855e7745e18b0d00d3bdb07fb532e434244cdb9a714"
+[project.features]
+compiled_data = ["icu_normalizer/compiled_data", "icu_properties/compiled_data"]
+
+[rust]
+name = "idna_adapter"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+icu_normalizer = { loaf = "crates-io/icu_normalizer", version = "^2.2", default-features = false }
+icu_properties = { loaf = "crates-io/icu_properties", version = "^2.2", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

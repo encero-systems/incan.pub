@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "lock_api"
+name = "crates-io/lock_api"
 version = "0.4.14"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:224399e74b87b5f3557511d98dff8b14089b3dadafcab6bb93eab67d3aace965"
+[project.features]
+arc_lock = []
+atomic_usize = []
+default = ["atomic_usize"]
+nightly = []
+owning_ref = ["dep:owning_ref"]
+serde = ["dep:serde"]
+
+[rust]
+name = "lock_api"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+owning_ref = { loaf = "crates-io/owning_ref", version = "^0.4.1", optional = true }
+scopeguard = { loaf = "crates-io/scopeguard", version = "^1.1.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.126", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "liblzma-sys"
+name = "crates-io/liblzma-sys"
 version = "0.4.9"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7c7e3581f367a78d7b7e7ae948d023310556f0cfc13156c2e4e00e25616492b9"
+[project.features]
+bindgen = []
+default = ["bindgen"]
+fat-lto = []
+parallel = []
+static = []
+thin-lto = []
+uncheck_liblzma_version = []
+wasm = ["static", "bindgen"]
+
+[rust]
+name = "liblzma_sys"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.67" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

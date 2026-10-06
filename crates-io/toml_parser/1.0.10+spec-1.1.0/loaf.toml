@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "toml_parser"
+name = "crates-io/toml_parser"
 version = "1.0.10+spec-1.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7df25b4befd31c4816df190124375d5a20c6b6921e2cad937316de3fccd63420"
+[project.features]
+alloc = []
+debug = ["std", "dep:anstream", "dep:anstyle"]
+default = ["std"]
+simd = ["winnow/simd"]
+std = ["alloc"]
+unsafe = []
+
+[rust]
+name = "toml_parser"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+anstream = { loaf = "crates-io/anstream", version = "^0.6.20", optional = true }
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.11", optional = true }
+winnow = { loaf = "crates-io/winnow", version = "^1.0.0", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

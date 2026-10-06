@@ -3,12 +3,28 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "libbz2-rs-sys"
+name = "crates-io/libbz2-rs-sys"
 version = "0.2.5"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:34b357333733e8260735ba5894eb928c02ecc69c78715f01a8019e7fa7f2db4c"
+[project.features]
+__internal-fuzz-disable-checksum = []
+c-allocator = ["dep:libc"]
+custom-prefix = ["export-symbols"]
+default = ["std", "stdio"]
+export-symbols = []
+rust-allocator = []
+semver-prefix = ["export-symbols"]
+std = ["rust-allocator"]
+stdio = ["dep:libc"]
+testing-prefix = ["export-symbols"]
+
+[rust]
+name = "libbz2_rs_sys"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

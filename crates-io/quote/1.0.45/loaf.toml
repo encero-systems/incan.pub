@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "quote"
+name = "crates-io/quote"
 version = "1.0.45"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924"
+[project.features]
+default = ["proc-macro"]
+proc-macro = ["proc-macro2/proc-macro"]
+
+[rust]
+name = "quote"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.80", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

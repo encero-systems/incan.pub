@@ -3,12 +3,18 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "async-trait"
+name = "crates-io/async-trait"
 version = "0.1.92"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:82f6aeea286b8eb4dd3431a1be1b59d290ace00f5bfd8e2a159bc2a05e2c1667"
+[rust]
+name = "async_trait"
+type = "proc-macro"
+edition = "2021"
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.74" }
+quote = { loaf = "crates-io/quote", version = "^1.0.35" }
+syn = { loaf = "crates-io/syn", version = "^3", features = ["clone-impls", "full", "parsing", "printing", "proc-macro", "visit-mut"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

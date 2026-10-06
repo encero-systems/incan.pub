@@ -3,12 +3,43 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "regex"
+name = "crates-io/regex"
 version = "1.13.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:f020237b6c8eed93db2e2cb53c00c60a8e1bc73da7d073199a1180401450218d"
+[project.features]
+default = ["std", "perf", "unicode", "regex-syntax/default"]
+logging = ["aho-corasick?/logging", "memchr?/logging", "regex-automata/logging"]
+pattern = []
+perf = ["perf-cache", "perf-dfa", "perf-onepass", "perf-backtrack", "perf-inline", "perf-literal"]
+perf-backtrack = ["regex-automata/nfa-backtrack"]
+perf-cache = []
+perf-dfa = ["regex-automata/hybrid"]
+perf-dfa-full = ["regex-automata/dfa-build", "regex-automata/dfa-search"]
+perf-inline = ["regex-automata/perf-inline"]
+perf-literal = ["dep:aho-corasick", "dep:memchr", "regex-automata/perf-literal"]
+perf-onepass = ["regex-automata/dfa-onepass"]
+std = ["aho-corasick?/std", "memchr?/std", "regex-automata/std", "regex-syntax/std"]
+unicode = ["unicode-age", "unicode-bool", "unicode-case", "unicode-gencat", "unicode-perl", "unicode-script", "unicode-segment", "regex-automata/unicode", "regex-syntax/unicode"]
+unicode-age = ["regex-automata/unicode-age", "regex-syntax/unicode-age"]
+unicode-bool = ["regex-automata/unicode-bool", "regex-syntax/unicode-bool"]
+unicode-case = ["regex-automata/unicode-case", "regex-syntax/unicode-case"]
+unicode-gencat = ["regex-automata/unicode-gencat", "regex-syntax/unicode-gencat"]
+unicode-perl = ["regex-automata/unicode-perl", "regex-automata/unicode-word-boundary", "regex-syntax/unicode-perl"]
+unicode-script = ["regex-automata/unicode-script", "regex-syntax/unicode-script"]
+unicode-segment = ["regex-automata/unicode-segment", "regex-syntax/unicode-segment"]
+unstable = ["pattern"]
+use_std = ["std"]
+
+[rust]
+name = "regex"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+aho-corasick = { loaf = "crates-io/aho-corasick", version = "^1.0.0", default-features = false, optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.6.0", default-features = false, optional = true }
+regex-automata = { loaf = "crates-io/regex-automata", version = "^0.4.16", features = ["alloc", "meta", "nfa-pikevm", "syntax"], default-features = false }
+regex-syntax = { loaf = "crates-io/regex-syntax", version = "^0.8.11", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

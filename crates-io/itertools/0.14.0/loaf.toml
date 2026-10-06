@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "itertools"
+name = "crates-io/itertools"
 version = "0.14.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:2b192c782037fadd9cfa75548310488aabdbf3d2da73885b31bd0abd03351285"
+[project.features]
+default = ["use_std"]
+use_alloc = []
+use_std = ["use_alloc", "either/use_std"]
+
+[rust]
+name = "itertools"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+either = { loaf = "crates-io/either", version = "^1.0", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

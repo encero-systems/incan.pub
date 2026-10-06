@@ -1,0 +1,44 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/compression-codecs"
+version = "0.4.45"
+
+[project.features]
+all-algorithms = ["brotli", "bzip2", "deflate", "gzip", "lz4", "lzma", "xz-parallel", "xz", "zlib", "zstd", "deflate64"]
+brotli = ["dep:brotli"]
+brotli-mbrotli = ["dep:mbrotli"]
+bzip2 = ["dep:bzip2"]
+deflate = ["flate2"]
+deflate64 = ["dep:deflate64"]
+flate2 = ["dep:flate2"]
+gzip = ["flate2", "memchr"]
+libzstd = ["dep:libzstd"]
+lz4 = ["dep:lz4"]
+lzma = ["dep:liblzma"]
+memchr = ["dep:memchr"]
+xz = ["lzma"]
+xz-parallel = ["xz", "dep:liblzma", "liblzma/parallel"]
+xz2 = ["xz"]
+zlib = ["flate2"]
+zstd = ["libzstd", "zstd-safe"]
+zstd-safe = ["dep:zstd-safe"]
+zstdmt = ["zstd", "zstd-safe", "dep:zstd-safe", "zstd-safe/zstdmt"]
+
+[rust]
+name = "compression_codecs"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+brotli = { loaf = "crates-io/brotli", version = "^9", optional = true }
+bzip2 = { loaf = "crates-io/bzip2", version = "^0.6.1", optional = true }
+compression-core = { loaf = "crates-io/compression-core", version = "^0.4.33" }
+deflate64 = { loaf = "crates-io/deflate64", version = "^0.1.10", optional = true }
+flate2 = { loaf = "crates-io/flate2", version = "^1.1.4", optional = true }
+liblzma = { loaf = "crates-io/liblzma", version = "^0.4.5", optional = true }
+libzstd = { loaf = "crates-io/zstd", version = "^0.14.0", default-features = false, optional = true }
+lz4 = { loaf = "crates-io/lz4", version = "^1.28.1", optional = true }
+mbrotli = { loaf = "crates-io/mbrotli", version = "^0.5.3", features = ["compression", "decompression", "std"], default-features = false, optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2", optional = true }
+zstd-safe = { loaf = "crates-io/zstd-safe", version = "^8", default-features = false, optional = true }

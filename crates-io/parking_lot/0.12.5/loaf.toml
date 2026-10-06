@@ -3,12 +3,27 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "parking_lot"
+name = "crates-io/parking_lot"
 version = "0.12.5"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:93857453250e3077bd71ff98b6a65ea6621a19bb0f559a85248955ac12c45a1a"
+[project.features]
+arc_lock = ["lock_api/arc_lock"]
+deadlock_detection = ["parking_lot_core/deadlock_detection"]
+default = []
+hardware-lock-elision = []
+nightly = ["parking_lot_core/nightly", "lock_api/nightly"]
+owning_ref = ["lock_api/owning_ref"]
+send_guard = []
+serde = ["lock_api/serde"]
+
+[rust]
+name = "parking_lot"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+lock_api = { loaf = "crates-io/lock_api", version = "^0.4.14" }
+parking_lot_core = { loaf = "crates-io/parking_lot_core", version = "^0.9.12" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

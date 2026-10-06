@@ -3,12 +3,27 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "potential_utf"
+name = "crates-io/potential_utf"
 version = "0.1.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:d83eb9bc6d8e5cf568e7a1101d60ee05e81ed50ea106026f3d18deeb046d7661"
+[project.features]
+alloc = ["serde_core?/alloc", "writeable", "dep:writeable", "writeable/alloc", "zerovec?/alloc"]
+databake = ["dep:databake"]
+default = ["alloc"]
+serde = ["dep:serde_core"]
+writeable = ["dep:writeable"]
+zerovec = ["dep:zerovec"]
+
+[rust]
+name = "potential_utf"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", default-features = false, optional = true }
+writeable = { loaf = "crates-io/writeable", version = "^0.6.4", default-features = false, optional = true }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.7", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "zmij"
+name = "crates-io/zmij"
 version = "1.0.21"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa"
+[project.features]
+no-panic = ["dep:no-panic"]
+
+[rust]
+name = "zmij"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+no-panic = { loaf = "crates-io/no-panic", version = "^0.1.36", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

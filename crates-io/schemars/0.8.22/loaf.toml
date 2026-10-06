@@ -3,12 +3,67 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "schemars"
+name = "crates-io/schemars"
 version = "0.8.22"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3fbf2ae1b8bc8e02df939598064d22402220cd5bbcca1c76f7d6a310974d5615"
+[project.features]
+arrayvec = ["arrayvec05"]
+arrayvec05 = ["dep:arrayvec05"]
+arrayvec07 = ["dep:arrayvec07"]
+bigdecimal = ["bigdecimal03"]
+bigdecimal03 = ["dep:bigdecimal03"]
+bigdecimal04 = ["dep:bigdecimal04"]
+bytes = ["dep:bytes"]
+chrono = ["dep:chrono"]
+default = ["derive"]
+derive = ["schemars_derive"]
+derive_json_schema = ["impl_json_schema"]
+either = ["dep:either"]
+enumset = ["dep:enumset"]
+impl_json_schema = ["derive"]
+indexmap = ["dep:indexmap"]
+indexmap1 = ["indexmap"]
+indexmap2 = ["dep:indexmap2"]
+preserve_order = ["indexmap"]
+raw_value = ["serde_json/raw_value"]
+rust_decimal = ["dep:rust_decimal"]
+schemars_derive = ["dep:schemars_derive"]
+semver = ["dep:semver"]
+smallvec = ["dep:smallvec"]
+smol_str = ["dep:smol_str"]
+ui_test = []
+url = ["dep:url"]
+uuid = ["uuid08"]
+uuid08 = ["dep:uuid08"]
+uuid1 = ["dep:uuid1"]
+
+[rust]
+name = "schemars"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+arrayvec05 = { loaf = "crates-io/arrayvec", version = "^0.5", default-features = false, optional = true }
+arrayvec07 = { loaf = "crates-io/arrayvec", version = "^0.7", default-features = false, optional = true }
+bigdecimal03 = { loaf = "crates-io/bigdecimal", version = "^0.3", default-features = false, optional = true }
+bigdecimal04 = { loaf = "crates-io/bigdecimal", version = "^0.4", default-features = false, optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.0", optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4", default-features = false, optional = true }
+dyn-clone = { loaf = "crates-io/dyn-clone", version = "^1.0" }
+either = { loaf = "crates-io/either", version = "^1.3", default-features = false, optional = true }
+enumset = { loaf = "crates-io/enumset", version = "^1.0", optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^1.2", features = ["serde-1"], optional = true }
+indexmap2 = { loaf = "crates-io/indexmap", version = "^2.0", features = ["serde"], optional = true }
+rust_decimal = { loaf = "crates-io/rust_decimal", version = "^1", default-features = false, optional = true }
+schemars_derive = { loaf = "crates-io/schemars_derive", version = "=0.8.22", optional = true }
+semver = { loaf = "crates-io/semver", version = "^1.0.9", features = ["serde"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.25" }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.0", optional = true }
+smol_str = { loaf = "crates-io/smol_str", version = "^0.1.17", optional = true }
+url = { loaf = "crates-io/url", version = "^2.0", default-features = false, optional = true }
+uuid08 = { loaf = "crates-io/uuid", version = "^0.8", default-features = false, optional = true }
+uuid1 = { loaf = "crates-io/uuid", version = "^1.0", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

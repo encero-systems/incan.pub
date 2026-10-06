@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "lexical-util"
+name = "crates-io/lexical-util"
 version = "1.0.7"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:2604dd126bb14f13fb5d1bd6a66155079cb9fa655b37f875b3a742c705dbed17"
+[project.features]
+compact = []
+default = ["std"]
+f128 = ["parse-floats", "write-floats"]
+f16 = ["parse-floats", "write-floats", "float16"]
+float16 = ["dep:float16"]
+format = []
+lint = []
+parse-floats = []
+parse-integers = []
+power-of-two = []
+radix = ["power-of-two"]
+std = []
+write-floats = []
+write-integers = []
+
+[rust]
+name = "lexical_util"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+float16 = { loaf = "crates-io/float16", version = "^0.1.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

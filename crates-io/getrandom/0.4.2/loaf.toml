@@ -3,12 +3,28 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "getrandom"
+name = "crates-io/getrandom"
 version = "0.4.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:0de51e6874e94e7bf76d726fc5d13ba782deca734ff60d5bb2fb2607c7406555"
+[project.features]
+std = []
+sys_rng = ["dep:rand_core"]
+wasm_js = ["dep:wasm-bindgen", "dep:js-sys"]
+
+[rust]
+name = "getrandom"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.77", default-features = false, optional = true, target = "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\"), target_feature = \"atomics\"))" }
+libc = [{ loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(target_os = \"netbsd\")" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(target_os = \"solaris\")" }, { loaf = "crates-io/libc", version = "^0.2.154", default-features = false, target = "cfg(target_os = \"vxworks\")" }]
+r-efi = { loaf = "crates-io/r-efi", version = "^6", default-features = false, target = "cfg(all(target_os = \"uefi\", getrandom_backend = \"efi_rng\"))" }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10.0", optional = true }
+wasip2 = { loaf = "crates-io/wasip2", version = "^1", default-features = false, target = "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p2\"))" }
+wasip3 = { loaf = "crates-io/wasip3", version = "^0.4", target = "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p3\"))" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.98", default-features = false, optional = true, target = "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\")))" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

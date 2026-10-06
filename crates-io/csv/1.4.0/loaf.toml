@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "csv"
+name = "crates-io/csv"
 version = "1.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:52cd9d68cf7efc6ddfaaee42e7288d3a99d613d4b50f76ce9827ae0c6e14f938"
+[rust]
+name = "csv"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+csv-core = { loaf = "crates-io/csv-core", version = "^0.1.11" }
+itoa = { loaf = "crates-io/itoa", version = "^1" }
+ryu = { loaf = "crates-io/ryu", version = "^1" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.221" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

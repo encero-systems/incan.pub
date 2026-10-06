@@ -1,0 +1,13 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cpufeatures"
+version = "0.3.1"
+
+[rust]
+name = "cpufeatures"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+libc = [{ loaf = "crates-io/libc", version = "^0.2.155", default-features = false, target = "cfg(all(target_arch = \"aarch64\", target_os = \"android\"))" }, { loaf = "crates-io/libc", version = "^0.2.155", default-features = false, target = "cfg(all(target_arch = \"aarch64\", target_os = \"linux\"))" }, { loaf = "crates-io/libc", version = "^0.2.155", default-features = false, target = "cfg(all(target_arch = \"aarch64\", target_vendor = \"apple\"))" }, { loaf = "crates-io/libc", version = "^0.2.155", default-features = false, target = "cfg(all(target_arch = \"loongarch64\", target_os = \"linux\"))" }]

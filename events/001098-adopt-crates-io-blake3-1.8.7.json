@@ -1,0 +1,143 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:6d9e454fc11f76977dc803893aff6304ed33d6a26efae8696573bea74baa27ae",
+    "package": "blake3",
+    "registry": "crates-io",
+    "version": "1.8.7"
+  },
+  "archive": "sha256:4f4ad26baba93fe0b134b50ea01fb32a235990af65c8f324706a82cf096a2154",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arrayvec",
+      "name": "arrayvec",
+      "optional": false,
+      "req": "^0.7.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/constant_time_eq",
+      "name": "constant_time_eq",
+      "optional": false,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.3.0",
+      "target": "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "mac"
+      ],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": true,
+      "req": "^0.11.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memmap2",
+      "name": "memmap2",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon-core",
+      "name": "rayon-core",
+      "optional": true,
+      "req": "^1.12.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "digest": [
+      "dep:digest"
+    ],
+    "mmap": [
+      "std",
+      "dep:memmap2"
+    ],
+    "neon": [],
+    "no_avx2": [],
+    "no_avx512": [],
+    "no_neon": [],
+    "no_sse2": [],
+    "no_sse41": [],
+    "prefer_intrinsics": [],
+    "pure": [],
+    "rayon": [
+      "dep:rayon-core"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "constant_time_eq/std"
+    ],
+    "traits-preview": [
+      "dep:digest"
+    ],
+    "wasm32_simd": [],
+    "zeroize": [
+      "dep:zeroize",
+      "arrayvec/zeroize"
+    ]
+  },
+  "id": "sha256:b3f16d8424cbfbe791623ad182d3e304da074c1023abc7250f03c061aa0222b6",
+  "kind": "adopt",
+  "manifest": "sha256:ce2e8f6acdeec3c55c1f4e120d87ac037ebcddab4223575caeaa9839b7c30532",
+  "rust": {
+    "edition": "2024",
+    "name": "blake3",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "blake3",
+    "scope": "crates-io",
+    "version": "1.8.7"
+  }
+}

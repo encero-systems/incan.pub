@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "thiserror"
+name = "crates-io/thiserror"
 version = "2.0.21"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:09e52cb86a36cede5cb101bf8908837b3e4c6e5e59fe7fd85c23fb56200d189e"
+[project.features]
+default = ["std"]
+std = []
+
+[rust]
+name = "thiserror"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+thiserror-impl = { loaf = "crates-io/thiserror-impl", version = "=2.0.21" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

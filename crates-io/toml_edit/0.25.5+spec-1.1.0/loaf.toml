@@ -3,12 +3,32 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "toml_edit"
+name = "crates-io/toml_edit"
 version = "0.25.5+spec-1.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:8ca1a40644a28bce036923f6a431df0b34236949d111cc07cb6dca830c9ef2e1"
+[project.features]
+debug = ["toml_parser?/debug", "dep:anstream", "dep:anstyle", "display"]
+default = ["parse", "display"]
+display = ["dep:toml_writer"]
+parse = ["dep:toml_parser", "dep:winnow"]
+serde = ["dep:serde_core", "toml_datetime/serde", "dep:serde_spanned"]
+unbounded = []
+
+[rust]
+name = "toml_edit"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+anstream = { loaf = "crates-io/anstream", version = "^0.6.20", optional = true }
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.11", optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.11.4", features = ["std"] }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.225", optional = true }
+serde_spanned = { loaf = "crates-io/serde_spanned", version = "^1.0.4", features = ["serde"], optional = true }
+toml_datetime = { loaf = "crates-io/toml_datetime", version = "^1.0.1" }
+toml_parser = { loaf = "crates-io/toml_parser", version = "^1.0.10", optional = true }
+toml_writer = { loaf = "crates-io/toml_writer", version = "^1.0.7", optional = true }
+winnow = { loaf = "crates-io/winnow", version = "^1.0.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

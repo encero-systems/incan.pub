@@ -3,12 +3,36 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "toml"
+name = "crates-io/toml"
 version = "0.9.12+spec-1.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:cf92845e79fc2e2def6a5d828f0801e29a2f8acc037becc5ab08595c7d5e9863"
+[project.features]
+debug = ["std", "toml_parser?/debug", "dep:anstream", "dep:anstyle"]
+default = ["std", "serde", "parse", "display"]
+display = ["dep:toml_writer"]
+fast_hash = ["preserve_order", "dep:foldhash"]
+parse = ["dep:toml_parser", "dep:winnow"]
+preserve_order = ["dep:indexmap", "std"]
+serde = ["dep:serde_core", "toml_datetime/serde", "serde_spanned/serde"]
+std = ["indexmap?/std", "serde_core?/std", "toml_parser?/std", "toml_writer?/std", "toml_datetime/std", "serde_spanned/std"]
+unbounded = []
+
+[rust]
+name = "toml"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+anstream = { loaf = "crates-io/anstream", version = "^0.6.20", optional = true }
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.11", optional = true }
+foldhash = { loaf = "crates-io/foldhash", version = "^0.2.0", default-features = false, optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.11.4", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.225", features = ["alloc"], default-features = false, optional = true }
+serde_spanned = { loaf = "crates-io/serde_spanned", version = "^1.0.4", features = ["alloc"], default-features = false }
+toml_datetime = { loaf = "crates-io/toml_datetime", version = "^0.7.5", features = ["alloc"], default-features = false }
+toml_parser = { loaf = "crates-io/toml_parser", version = "^1.0.7", features = ["alloc"], default-features = false, optional = true }
+toml_writer = { loaf = "crates-io/toml_writer", version = "^1.0.6", features = ["alloc"], default-features = false, optional = true }
+winnow = { loaf = "crates-io/winnow", version = "^0.7.13", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

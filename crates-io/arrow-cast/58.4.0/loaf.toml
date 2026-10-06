@@ -3,12 +3,34 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "arrow-cast"
+name = "crates-io/arrow-cast"
 version = "58.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3a8a327c9649f30d8406995f27642b68df354713cca3baaaf100f076f18d5f34"
+[project.features]
+comfy-table = ["dep:comfy-table"]
+force_validate = []
+prettyprint = ["comfy-table"]
+
+[rust]
+name = "arrow_cast"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow-array = { loaf = "crates-io/arrow-array", version = "^58.4.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^58.4.0" }
+arrow-data = { loaf = "crates-io/arrow-data", version = "^58.4.0" }
+arrow-ord = { loaf = "crates-io/arrow-ord", version = "^58.4.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^58.4.0" }
+arrow-select = { loaf = "crates-io/arrow-select", version = "^58.4.0" }
+atoi = { loaf = "crates-io/atoi", version = "^2.0.0" }
+base64 = { loaf = "crates-io/base64", version = "^0.22" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.40", features = ["clock"], default-features = false }
+comfy-table = { loaf = "crates-io/comfy-table", version = "^7", default-features = false, optional = true }
+half = { loaf = "crates-io/half", version = "^2.1", default-features = false }
+lexical-core = { loaf = "crates-io/lexical-core", version = "^1.0", features = ["parse-floats", "parse-integers", "write-floats", "write-integers"], default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19", features = ["std"], default-features = false }
+ryu = { loaf = "crates-io/ryu", version = "^1.0.16" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

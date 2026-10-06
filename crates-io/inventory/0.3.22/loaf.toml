@@ -3,12 +3,16 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "inventory"
+name = "crates-io/inventory"
 version = "0.3.22"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:009ae045c87e7082cb72dab0ccd01ae075dd00141ddc108f43a0ea150a9e7227"
+[rust]
+name = "inventory"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+rustversion = { loaf = "crates-io/rustversion", version = "^1.0", target = "cfg(target_family = \"wasm\")" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

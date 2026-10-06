@@ -1,0 +1,223 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2ab2d4f250c3d7b1c9fcdff1cece94ea4e2dfbec68614f7b87cb205f24ca9d11",
+    "package": "hyper",
+    "registry": "crates-io",
+    "version": "1.8.1"
+  },
+  "archive": "sha256:900c3a0d48ee9300d032f5a617bc476d64210a97910994e38c370674e25df8da",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-waker",
+      "name": "atomic-waker",
+      "optional": true,
+      "req": "^1.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-channel",
+      "name": "futures-channel",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": true,
+      "req": "^0.3.31"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/h2",
+      "name": "h2",
+      "optional": true,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body",
+      "name": "http-body",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body-util",
+      "name": "http-body-util",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/httparse",
+      "name": "httparse",
+      "optional": true,
+      "req": "^1.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/httpdate",
+      "name": "httpdate",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/itoa",
+      "name": "itoa",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": true,
+      "req": "^0.2.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-utils",
+      "name": "pin-utils",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "const_generics",
+        "const_new"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": "^1.12"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "sync"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/want",
+      "name": "want",
+      "optional": true,
+      "req": "^0.3"
+    }
+  ],
+  "features": {
+    "capi": [],
+    "client": [
+      "dep:want",
+      "dep:pin-project-lite",
+      "dep:smallvec"
+    ],
+    "default": [],
+    "ffi": [
+      "dep:http-body-util",
+      "dep:futures-util"
+    ],
+    "full": [
+      "client",
+      "http1",
+      "http2",
+      "server"
+    ],
+    "http1": [
+      "dep:atomic-waker",
+      "dep:futures-channel",
+      "dep:futures-core",
+      "dep:httparse",
+      "dep:itoa",
+      "dep:pin-utils"
+    ],
+    "http2": [
+      "dep:futures-channel",
+      "dep:futures-core",
+      "dep:h2"
+    ],
+    "nightly": [],
+    "server": [
+      "dep:httpdate",
+      "dep:pin-project-lite",
+      "dep:smallvec"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ]
+  },
+  "id": "sha256:72ecc3f8a3cca7816861e84b7e5e459ade36e327c1e2a658e3c8374a9eb25f22",
+  "kind": "adopt",
+  "manifest": "sha256:55ecbf90daf134c0c2266c67fa1595dca97c83dda0637aa2af339e8892edf07d",
+  "rust": {
+    "edition": "2021",
+    "name": "hyper",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hyper",
+    "scope": "crates-io",
+    "version": "1.8.1"
+  }
+}

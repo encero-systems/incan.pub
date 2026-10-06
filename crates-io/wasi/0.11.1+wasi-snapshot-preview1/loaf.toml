@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasi"
+version = "0.11.1+wasi-snapshot-preview1"
+
+[project.features]
+core = ["dep:core"]
+default = ["std"]
+rustc-dep-of-std = ["core", "rustc-std-workspace-alloc"]
+rustc-std-workspace-alloc = ["dep:rustc-std-workspace-alloc"]
+std = []
+
+[rust]
+name = "wasi"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0", optional = true }
+rustc-std-workspace-alloc = { loaf = "crates-io/rustc-std-workspace-alloc", version = "^1.0", optional = true }

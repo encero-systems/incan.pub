@@ -1,0 +1,75 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2fe0a34ca854fd4f20c07f696fc8675aec78f87d88d29f5e10257a7490a1b2e1",
+    "package": "liblzma",
+    "registry": "crates-io",
+    "version": "0.4.8"
+  },
+  "archive": "sha256:29c63e9bf3237b263800d5cbb26d384f1ea395308ca57abdcdd372325531f1bf",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/liblzma-sys",
+      "name": "liblzma-sys",
+      "optional": false,
+      "req": "^0.4.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num_cpus",
+      "name": "num_cpus",
+      "optional": true,
+      "req": "^1.16.0"
+    }
+  ],
+  "features": {
+    "bindgen": [
+      "liblzma-sys/bindgen"
+    ],
+    "default": [
+      "bindgen"
+    ],
+    "fat-lto": [
+      "liblzma-sys/fat-lto"
+    ],
+    "num_cpus": [
+      "dep:num_cpus"
+    ],
+    "parallel": [
+      "liblzma-sys/parallel",
+      "num_cpus"
+    ],
+    "static": [
+      "liblzma-sys/static"
+    ],
+    "thin-lto": [
+      "liblzma-sys/thin-lto"
+    ],
+    "uncheck_liblzma_version": [
+      "liblzma-sys/uncheck_liblzma_version"
+    ],
+    "wasm": [
+      "liblzma-sys/wasm"
+    ]
+  },
+  "id": "sha256:2ece5a6b88cc050992049f4bca9c99715faacb615fdb5af1126601c360c859ab",
+  "kind": "adopt",
+  "manifest": "sha256:d6ff82591e2c585a4c04f5c9a2d551d00c9dd73e7a498eb1b48f5e629df96f4f",
+  "rust": {
+    "edition": "2021",
+    "name": "liblzma",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "liblzma",
+    "scope": "crates-io",
+    "version": "0.4.8"
+  }
+}

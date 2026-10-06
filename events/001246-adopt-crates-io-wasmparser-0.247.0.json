@@ -1,0 +1,104 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8e6fb4c2bee46c5ea4d40f8cdb5c131725cd976718ec56f1c8e82fbde5fa2a80",
+    "package": "wasmparser",
+    "registry": "crates-io",
+    "version": "0.247.0"
+  },
+  "archive": "sha256:cea0fc0f31ce029890b314ed9923a269cac8577c9355b6c53baff1cd21334f53",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.4.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.17.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": true,
+      "req": "^2.14.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/semver",
+      "name": "semver",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.166"
+    }
+  ],
+  "features": {
+    "component-model": [
+      "dep:semver"
+    ],
+    "default": [
+      "std",
+      "validate",
+      "serde",
+      "features",
+      "component-model",
+      "hash-collections",
+      "simd"
+    ],
+    "features": [],
+    "hash-collections": [
+      "dep:hashbrown",
+      "dep:indexmap"
+    ],
+    "prefer-btree-collections": [],
+    "serde": [
+      "dep:serde",
+      "indexmap?/serde",
+      "hashbrown?/serde"
+    ],
+    "simd": [],
+    "std": [
+      "indexmap?/std"
+    ],
+    "try-op": [],
+    "validate": []
+  },
+  "id": "sha256:6fe13673dfd9c03a7af861b4427c4a299cd30f43849405640ed5e62e968fdc2a",
+  "kind": "adopt",
+  "manifest": "sha256:603cd20a88dffba86fde3e492326cec21b7fb1746459e34868fab6c6399d6cc2",
+  "rust": {
+    "edition": "2021",
+    "name": "wasmparser",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmparser",
+    "scope": "crates-io",
+    "version": "0.247.0"
+  }
+}

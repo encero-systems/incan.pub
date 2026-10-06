@@ -3,12 +3,22 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "xxhash-rust"
+name = "crates-io/xxhash-rust"
 version = "0.8.15"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:fdd20c5420375476fbd4394763288da7eb0cc0b8c11deed431a91562af7335d3"
+[project.features]
+const_xxh3 = []
+const_xxh32 = []
+const_xxh64 = []
+std = []
+xxh3 = []
+xxh32 = []
+xxh64 = []
+
+[rust]
+name = "xxhash_rust"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

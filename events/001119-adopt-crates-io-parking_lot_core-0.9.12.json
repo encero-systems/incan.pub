@@ -1,0 +1,101 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2621685985a2ebf1c516881c026032ac7deafcda1a2c9b7850dc81e3dfcb64c1",
+    "package": "parking_lot_core",
+    "registry": "crates-io",
+    "version": "0.9.12"
+  },
+  "archive": "sha256:aa839e83e752dac6385773142d9ce93016b606907ef5a73683aec12d23d98f46",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/backtrace",
+      "name": "backtrace",
+      "optional": true,
+      "req": "^0.3.60"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.95",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/petgraph",
+      "name": "petgraph",
+      "optional": true,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/redox_syscall",
+      "name": "redox_syscall",
+      "optional": false,
+      "req": "^0.5",
+      "target": "cfg(target_os = \"redox\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.6.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-link",
+      "name": "windows-link",
+      "optional": false,
+      "req": "^0.2.0",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "backtrace": [
+      "dep:backtrace"
+    ],
+    "deadlock_detection": [
+      "petgraph",
+      "backtrace"
+    ],
+    "nightly": [],
+    "petgraph": [
+      "dep:petgraph"
+    ]
+  },
+  "id": "sha256:4ee3340f4dd7ef8e19fb007d6f9b26c44cdbac53d84be5b6e9af55f1f6cb00e1",
+  "kind": "adopt",
+  "manifest": "sha256:639b9c28edf9645e2c06089e47876c6533f6eebc67370116e123021e5f2acd57",
+  "rust": {
+    "edition": "2021",
+    "name": "parking_lot_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "parking_lot_core",
+    "scope": "crates-io",
+    "version": "0.9.12"
+  }
+}

@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "atoi"
+name = "crates-io/atoi"
 version = "2.0.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:f28d99ec8bfea296261ca1af174f24225171fea9664ba9003cbebee704810528"
+[project.features]
+default = ["std"]
+std = ["num-traits/std"]
+
+[rust]
+name = "atoi"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.14", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

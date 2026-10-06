@@ -3,12 +3,21 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "http"
+name = "crates-io/http"
 version = "1.4.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:e3ba2a386d7f85a81f119ad7498ebe444d2e22c2af0b86b069416ace48b3311a"
+[project.features]
+default = ["std"]
+std = []
+
+[rust]
+name = "http"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+itoa = { loaf = "crates-io/itoa", version = "^1" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "serde_yaml"
+name = "crates-io/serde_yaml"
 version = "0.9.34+deprecated"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:6a8b1a1a2ebf674015cc02edccce75287f1a0130d394307b36743c2f5d504b47"
+[rust]
+name = "serde_yaml"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+indexmap = { loaf = "crates-io/indexmap", version = "^2.2.1" }
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+ryu = { loaf = "crates-io/ryu", version = "^1.0" }
+serde = { loaf = "crates-io/serde", version = "^1.0.195" }
+unsafe-libyaml = { loaf = "crates-io/unsafe-libyaml", version = "^0.2.11" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

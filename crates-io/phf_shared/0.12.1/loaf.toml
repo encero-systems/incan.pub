@@ -3,12 +3,24 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "phf_shared"
+name = "crates-io/phf_shared"
 version = "0.12.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:06005508882fb681fd97892ecff4b7fd0fee13ef1aa569f8695dae7ab9099981"
+[project.features]
+default = ["std"]
+std = []
+uncased = ["dep:uncased"]
+unicase = ["dep:unicase"]
+
+[rust]
+name = "phf_shared"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+siphasher = { loaf = "crates-io/siphasher", version = "^1.0" }
+uncased = { loaf = "crates-io/uncased", version = "^0.9.9", default-features = false, optional = true }
+unicase = { loaf = "crates-io/unicase", version = "^2.4.0", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

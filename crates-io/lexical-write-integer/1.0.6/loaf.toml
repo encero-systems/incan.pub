@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "lexical-write-integer"
+name = "crates-io/lexical-write-integer"
 version = "1.0.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:409851a618475d2d5796377cad353802345cba92c867d9fbcde9cf4eac4e14df"
+[project.features]
+compact = ["lexical-util/compact"]
+default = ["std"]
+format = ["lexical-util/format"]
+lint = ["lexical-util/lint"]
+power-of-two = ["lexical-util/power-of-two"]
+radix = ["lexical-util/radix", "power-of-two"]
+std = ["lexical-util/std"]
+
+[rust]
+name = "lexical_write_integer"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+lexical-util = { loaf = "crates-io/lexical-util", version = "^1.0.7", features = ["write-integers"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

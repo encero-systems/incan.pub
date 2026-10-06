@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "regress"
+name = "crates-io/regress"
 version = "0.10.5"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:2057b2325e68a893284d1538021ab90279adac1139957ca2a74426c6f118fb48"
+[project.features]
+backend-pikevm = []
+default = ["backend-pikevm", "std"]
+index-positions = []
+pattern = []
+prohibit-unsafe = []
+std = ["memchr/std"]
+utf16 = []
+
+[rust]
+name = "regress"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.16.0" }
+memchr = { loaf = "crates-io/memchr", version = "^2.4.0", default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "ryu"
+name = "crates-io/ryu"
 version = "1.0.23"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f"
+[project.features]
+no-panic = ["dep:no-panic"]
+small = []
+
+[rust]
+name = "ryu"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+no-panic = { loaf = "crates-io/no-panic", version = "^0.1", optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -1,0 +1,119 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:68f19d67e5a2795c94e73e0bb1cc1a7edeb2e28efd39e2e1c9b7a40c1108b11c",
+    "package": "ordered-float",
+    "registry": "crates-io",
+    "version": "2.10.1"
+  },
+  "archive": "sha256:828d021536642023cc86a984276b601baa1a7d991dc418b2d40e28283471e162",
+  "at": "2026-10-06T13:11:43Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proptest",
+      "name": "proptest",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.8.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "size_32"
+      ],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/schemars",
+      "name": "schemars",
+      "optional": true,
+      "req": "^0.6.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "default": [
+      "std"
+    ],
+    "proptest": [
+      "dep:proptest"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "randtest": [
+      "rand",
+      "dep:rand",
+      "rand/std",
+      "rand/std_rng"
+    ],
+    "rkyv": [
+      "dep:rkyv"
+    ],
+    "schemars": [
+      "dep:schemars"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "num-traits/std"
+    ]
+  },
+  "id": "sha256:c22f235f72fbbadd460a2a20149b38dbf600cdcf9c75681b09193d0f2bb34ff1",
+  "kind": "adopt",
+  "manifest": "sha256:de994713e72e5b12801acb5dc557393e71ff2da0d1a0de88dfd3675c835a9f58",
+  "rust": {
+    "edition": "2018",
+    "name": "ordered_float",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ordered-float",
+    "scope": "crates-io",
+    "version": "2.10.1"
+  }
+}

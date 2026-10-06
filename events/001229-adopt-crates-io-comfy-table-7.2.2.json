@@ -1,0 +1,99 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:958c5d6ecf1f214b4c2bbbbf6ab9523a864bd136dcf71a7e8904799acfe1ad47",
+    "package": "comfy-table",
+    "registry": "crates-io",
+    "version": "7.2.2"
+  },
+  "archive": "sha256:ceb9a33d3b148c41e9b5d019e682baa9e48db8066f892d11436b487df354df0d",
+  "at": "2026-10-06T13:11:46Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ansi-str",
+      "name": "ansi-str",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/console",
+      "name": "console",
+      "optional": true,
+      "req": "^0.16"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "windows"
+      ],
+      "loaf": "crates-io/crossterm",
+      "name": "crossterm",
+      "optional": true,
+      "req": "^0.29",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossterm",
+      "name": "crossterm",
+      "optional": true,
+      "req": "^0.29",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-segmentation",
+      "name": "unicode-segmentation",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": false,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "_debug": [],
+    "_integration_test": [],
+    "custom_styling": [
+      "dep:ansi-str",
+      "dep:console",
+      "tty"
+    ],
+    "default": [
+      "tty"
+    ],
+    "reexport_crossterm": [
+      "tty"
+    ],
+    "tty": [
+      "dep:crossterm"
+    ]
+  },
+  "id": "sha256:ff83f6417d5923449b3364ddcbc6f7fa843f151649afa9c64178c1fab45f2e74",
+  "kind": "adopt",
+  "manifest": "sha256:668ca40939e1117b6d891fb35f3419bc88b0799faec45cb2b127c7ec963fc7cd",
+  "rust": {
+    "edition": "2024",
+    "name": "comfy_table",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "comfy-table",
+    "scope": "crates-io",
+    "version": "7.2.2"
+  }
+}

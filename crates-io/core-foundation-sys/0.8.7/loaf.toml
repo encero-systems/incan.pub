@@ -3,12 +3,19 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "core-foundation-sys"
+name = "crates-io/core-foundation-sys"
 version = "0.8.7"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
+[project.features]
+default = ["link"]
+link = []
+mac_os_10_7_support = []
+mac_os_10_8_features = []
+
+[rust]
+name = "core_foundation_sys"
+type = "lib"
+edition = "2018"
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

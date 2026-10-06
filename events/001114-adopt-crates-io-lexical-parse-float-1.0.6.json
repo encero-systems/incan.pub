@@ -1,0 +1,83 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:52a9f232fbd6f550bc0137dcb5f99ab674071ac2d690ac69704593cb4abbea56",
+    "package": "lexical-parse-float",
+    "registry": "crates-io",
+    "version": "1.0.6"
+  },
+  "archive": "sha256:06431bf75f793179332c327d378210668d8320b969e9e11c5f2aec8b28abf090",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/lexical-parse-integer",
+      "name": "lexical-parse-integer",
+      "optional": false,
+      "req": "^1.0.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "parse-floats"
+      ],
+      "loaf": "crates-io/lexical-util",
+      "name": "lexical-util",
+      "optional": false,
+      "req": "^1.0.7"
+    }
+  ],
+  "features": {
+    "compact": [
+      "lexical-util/compact",
+      "lexical-parse-integer/compact"
+    ],
+    "default": [
+      "std"
+    ],
+    "f128": [
+      "lexical-util/f128"
+    ],
+    "f16": [
+      "lexical-util/f16"
+    ],
+    "format": [
+      "lexical-util/format",
+      "lexical-parse-integer/format"
+    ],
+    "lint": [
+      "lexical-util/lint",
+      "lexical-parse-integer/lint"
+    ],
+    "power-of-two": [
+      "lexical-util/power-of-two",
+      "lexical-parse-integer/power-of-two"
+    ],
+    "radix": [
+      "lexical-util/radix",
+      "lexical-parse-integer/radix",
+      "power-of-two"
+    ],
+    "std": [
+      "lexical-util/std",
+      "lexical-parse-integer/std"
+    ]
+  },
+  "id": "sha256:ebd02432c32330ce2c97865f53a89f7c9419fcce1f09e3c53584a69a927437d0",
+  "kind": "adopt",
+  "manifest": "sha256:146cea3c654b51b22f433c369fca486870c39249d1846d3bb8a10a31af6f5c5a",
+  "rust": {
+    "edition": "2021",
+    "name": "lexical_parse_float",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "lexical-parse-float",
+    "scope": "crates-io",
+    "version": "1.0.6"
+  }
+}

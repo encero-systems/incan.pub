@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "prost-derive"
+name = "crates-io/prost-derive"
 version = "0.14.4"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:b570b25f7617e43d59005d0990ccb79e950a423952cea19671b7a876da390adf"
+[rust]
+name = "prost_derive"
+type = "proc-macro"
+edition = "2021"
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.1" }
+itertools = { loaf = "crates-io/itertools", version = ">=0.10.1, <=0.14" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.60" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^2", features = ["extra-traits"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

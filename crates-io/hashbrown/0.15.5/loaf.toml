@@ -3,12 +3,37 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "hashbrown"
+name = "crates-io/hashbrown"
 version = "0.15.5"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1"
+[project.features]
+alloc = ["dep:alloc"]
+allocator-api2 = ["dep:allocator-api2"]
+core = ["dep:core"]
+default = ["default-hasher", "inline-more", "allocator-api2", "equivalent", "raw-entry"]
+default-hasher = ["dep:foldhash"]
+equivalent = ["dep:equivalent"]
+inline-more = []
+nightly = []
+raw-entry = []
+rayon = ["dep:rayon"]
+rustc-dep-of-std = ["nightly", "core", "alloc", "rustc-internal-api"]
+rustc-internal-api = []
+serde = ["dep:serde"]
+
+[rust]
+name = "hashbrown"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+alloc = { loaf = "crates-io/rustc-std-workspace-alloc", version = "^1.0.0", optional = true }
+allocator-api2 = { loaf = "crates-io/allocator-api2", version = "^0.2.9", features = ["alloc"], default-features = false, optional = true }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }
+equivalent = { loaf = "crates-io/equivalent", version = "^1.0", default-features = false, optional = true }
+foldhash = { loaf = "crates-io/foldhash", version = "^0.1.2", default-features = false, optional = true }
+rayon = { loaf = "crates-io/rayon", version = "^1.2", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.25", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,23 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "fastrand"
+name = "crates-io/fastrand"
 version = "2.3.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
+[project.features]
+alloc = []
+default = ["std"]
+getrandom = ["dep:getrandom"]
+js = ["std", "getrandom"]
+std = ["alloc"]
+
+[rust]
+name = "fastrand"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+getrandom = { loaf = "crates-io/getrandom", version = "^0.2", features = ["js"], optional = true, target = "cfg(all(any(target_arch = \"wasm32\", target_arch = \"wasm64\"), target_os = \"unknown\"))" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

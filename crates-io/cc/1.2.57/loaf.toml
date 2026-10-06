@@ -3,12 +3,23 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "cc"
+name = "crates-io/cc"
 version = "1.2.57"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:7a0dd1ca384932ff3641c8718a02769f1698e7563dc6974ffd03346116310423"
+[project.features]
+jobserver = []
+parallel = ["dep:libc", "dep:jobserver"]
+
+[rust]
+name = "cc"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+find-msvc-tools = { loaf = "crates-io/find-msvc-tools", version = "^0.1.9" }
+jobserver = { loaf = "crates-io/jobserver", version = "^0.1.30", default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.62", default-features = false, optional = true, target = "cfg(unix)" }
+shlex = { loaf = "crates-io/shlex", version = "^1.3.0" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

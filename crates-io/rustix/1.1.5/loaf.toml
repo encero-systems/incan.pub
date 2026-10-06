@@ -3,12 +3,59 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "rustix"
+name = "crates-io/rustix"
 version = "1.1.5"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:891efababe418670775f199f0d233d84843c227a0949a883ce15b37c78d6629d"
+[project.features]
+all-apis = ["event", "fs", "io_uring", "mm", "mount", "net", "param", "pipe", "process", "pty", "rand", "runtime", "shm", "stdio", "system", "termios", "thread", "time"]
+alloc = []
+core = ["dep:core"]
+default = ["std"]
+event = []
+fs = []
+io_uring = ["event", "fs", "net", "thread", "linux-raw-sys/io_uring"]
+libc = ["dep:libc"]
+libc_errno = ["dep:libc_errno"]
+linux_4_11 = []
+linux_5_1 = ["linux_4_11"]
+linux_5_11 = ["linux_5_1"]
+linux_latest = ["linux_5_11"]
+mm = []
+mount = []
+net = ["linux-raw-sys/net", "linux-raw-sys/netlink", "linux-raw-sys/if_ether", "linux-raw-sys/xdp"]
+param = []
+pipe = []
+process = ["linux-raw-sys/prctl"]
+pty = ["fs"]
+rand = []
+runtime = ["linux-raw-sys/prctl"]
+rustc-dep-of-std = ["core", "rustc-std-workspace-alloc", "linux-raw-sys/rustc-dep-of-std", "bitflags/rustc-dep-of-std"]
+rustc-std-workspace-alloc = ["dep:rustc-std-workspace-alloc"]
+shm = ["fs"]
+std = ["bitflags/std", "alloc", "libc?/std", "libc_errno?/std"]
+stdio = []
+system = ["linux-raw-sys/system"]
+termios = []
+thread = ["linux-raw-sys/prctl"]
+time = []
+try_close = []
+use-explicitly-provided-auxv = []
+use-libc = ["libc_errno", "libc"]
+use-libc-auxv = []
+
+[rust]
+name = "rustix"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.4.0", default-features = false }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }
+libc = [{ loaf = "crates-io/libc", version = "^0.2.182", default-features = false, target = "cfg(all(not(windows), any(rustix_use_libc, miri, not(all(target_os = \"linux\", any(target_endian = \"little\", any(target_arch = \"s390x\", target_arch = \"powerpc\")), any(target_arch = \"arm\", all(target_arch = \"aarch64\", target_pointer_width = \"64\"), target_arch = \"riscv64\", all(rustix_use_experimental_asm, target_arch = \"powerpc\"), all(rustix_use_experimental_asm, target_arch = \"powerpc64\"), all(rustix_use_experimental_asm, target_arch = \"s390x\"), all(rustix_use_experimental_asm, target_arch = \"mips\"), all(rustix_use_experimental_asm, target_arch = \"mips32r6\"), all(rustix_use_experimental_asm, target_arch = \"mips64\"), all(rustix_use_experimental_asm, target_arch = \"mips64r6\"), target_arch = \"x86\", all(target_arch = \"x86_64\", target_pointer_width = \"64\")))))))" }, { loaf = "crates-io/libc", version = "^0.2.182", default-features = false, optional = true, target = "cfg(all(not(rustix_use_libc), not(miri), target_os = \"linux\", any(target_endian = \"little\", any(target_arch = \"s390x\", target_arch = \"powerpc\")), any(target_arch = \"arm\", all(target_arch = \"aarch64\", target_pointer_width = \"64\"), target_arch = \"riscv64\", all(rustix_use_experimental_asm, target_arch = \"powerpc\"), all(rustix_use_experimental_asm, target_arch = \"powerpc64\"), all(rustix_use_experimental_asm, target_arch = \"s390x\"), all(rustix_use_experimental_asm, target_arch = \"mips\"), all(rustix_use_experimental_asm, target_arch = \"mips32r6\"), all(rustix_use_experimental_asm, target_arch = \"mips64\"), all(rustix_use_experimental_asm, target_arch = \"mips64r6\"), target_arch = \"x86\", all(target_arch = \"x86_64\", target_pointer_width = \"64\"))))" }]
+libc_errno = [{ loaf = "crates-io/errno", version = "^0.3.10", default-features = false, target = "cfg(all(not(windows), any(rustix_use_libc, miri, not(all(target_os = \"linux\", any(target_endian = \"little\", any(target_arch = \"s390x\", target_arch = \"powerpc\")), any(target_arch = \"arm\", all(target_arch = \"aarch64\", target_pointer_width = \"64\"), target_arch = \"riscv64\", all(rustix_use_experimental_asm, target_arch = \"powerpc\"), all(rustix_use_experimental_asm, target_arch = \"powerpc64\"), all(rustix_use_experimental_asm, target_arch = \"s390x\"), all(rustix_use_experimental_asm, target_arch = \"mips\"), all(rustix_use_experimental_asm, target_arch = \"mips32r6\"), all(rustix_use_experimental_asm, target_arch = \"mips64\"), all(rustix_use_experimental_asm, target_arch = \"mips64r6\"), target_arch = \"x86\", all(target_arch = \"x86_64\", target_pointer_width = \"64\")))))))" }, { loaf = "crates-io/errno", version = "^0.3.10", default-features = false, target = "cfg(windows)" }, { loaf = "crates-io/errno", version = "^0.3.10", default-features = false, optional = true, target = "cfg(all(not(rustix_use_libc), not(miri), target_os = \"linux\", any(target_endian = \"little\", any(target_arch = \"s390x\", target_arch = \"powerpc\")), any(target_arch = \"arm\", all(target_arch = \"aarch64\", target_pointer_width = \"64\"), target_arch = \"riscv64\", all(rustix_use_experimental_asm, target_arch = \"powerpc\"), all(rustix_use_experimental_asm, target_arch = \"powerpc64\"), all(rustix_use_experimental_asm, target_arch = \"s390x\"), all(rustix_use_experimental_asm, target_arch = \"mips\"), all(rustix_use_experimental_asm, target_arch = \"mips32r6\"), all(rustix_use_experimental_asm, target_arch = \"mips64\"), all(rustix_use_experimental_asm, target_arch = \"mips64r6\"), target_arch = \"x86\", all(target_arch = \"x86_64\", target_pointer_width = \"64\"))))" }]
+linux-raw-sys = [{ loaf = "crates-io/linux-raw-sys", version = "^0.12", features = ["auxvec", "elf", "errno", "general", "ioctl", "no_std"], default-features = false, target = "cfg(all(not(rustix_use_libc), not(miri), target_os = \"linux\", any(target_endian = \"little\", any(target_arch = \"s390x\", target_arch = \"powerpc\")), any(target_arch = \"arm\", all(target_arch = \"aarch64\", target_pointer_width = \"64\"), target_arch = \"riscv64\", all(rustix_use_experimental_asm, target_arch = \"powerpc\"), all(rustix_use_experimental_asm, target_arch = \"powerpc64\"), all(rustix_use_experimental_asm, target_arch = \"s390x\"), all(rustix_use_experimental_asm, target_arch = \"mips\"), all(rustix_use_experimental_asm, target_arch = \"mips32r6\"), all(rustix_use_experimental_asm, target_arch = \"mips64\"), all(rustix_use_experimental_asm, target_arch = \"mips64r6\"), target_arch = \"x86\", all(target_arch = \"x86_64\", target_pointer_width = \"64\"))))" }, { loaf = "crates-io/linux-raw-sys", version = "^0.12", features = ["general", "ioctl", "no_std"], default-features = false, target = "cfg(all(any(target_os = \"linux\", target_os = \"android\"), any(rustix_use_libc, miri, not(all(target_os = \"linux\", any(target_endian = \"little\", any(target_arch = \"s390x\", target_arch = \"powerpc\")), any(target_arch = \"arm\", all(target_arch = \"aarch64\", target_pointer_width = \"64\"), target_arch = \"riscv64\", all(rustix_use_experimental_asm, target_arch = \"powerpc\"), all(rustix_use_experimental_asm, target_arch = \"powerpc64\"), all(rustix_use_experimental_asm, target_arch = \"s390x\"), all(rustix_use_experimental_asm, target_arch = \"mips\"), all(rustix_use_experimental_asm, target_arch = \"mips32r6\"), all(rustix_use_experimental_asm, target_arch = \"mips64\"), all(rustix_use_experimental_asm, target_arch = \"mips64r6\"), target_arch = \"x86\", all(target_arch = \"x86_64\", target_pointer_width = \"64\")))))))" }]
+rustc-std-workspace-alloc = { loaf = "crates-io/rustc-std-workspace-alloc", version = "^1.0.0", optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <0.62", features = ["Win32_Foundation", "Win32_Networking_WinSock"], target = "cfg(windows)" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

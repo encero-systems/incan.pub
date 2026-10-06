@@ -1,0 +1,13 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crossterm_winapi"
+version = "0.9.1"
+
+[rust]
+name = "crossterm_winapi"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+winapi = { loaf = "crates-io/winapi", version = "^0.3.8", features = ["consoleapi", "handleapi", "impl-default", "processenv", "synchapi", "winbase"], target = "cfg(windows)" }

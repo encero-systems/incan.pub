@@ -3,12 +3,25 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "lexical-parse-integer"
+name = "crates-io/lexical-parse-integer"
 version = "1.0.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:9a7a039f8fb9c19c996cd7b2fcce303c1b2874fe1aca544edc85c4a5f8489b34"
+[project.features]
+compact = ["lexical-util/compact"]
+default = ["std"]
+format = ["lexical-util/format"]
+lint = ["lexical-util/lint"]
+power-of-two = ["lexical-util/power-of-two"]
+radix = ["lexical-util/radix", "power-of-two"]
+std = ["lexical-util/std"]
+
+[rust]
+name = "lexical_parse_integer"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+lexical-util = { loaf = "crates-io/lexical-util", version = "^1.0.7", features = ["parse-integers"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

@@ -3,12 +3,30 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "datafusion-optimizer"
+name = "crates-io/datafusion-optimizer"
 version = "53.1.0"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:e929015451a67f77d9d8b727b2bf3a40c4445fdef6cdc53281d7d97c76888ace"
+[project.features]
+recursive_protection = ["dep:recursive"]
+
+[rust]
+name = "datafusion_optimizer"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.44", default-features = false }
+datafusion-common = { loaf = "crates-io/datafusion-common", version = "^53.1.0" }
+datafusion-expr = { loaf = "crates-io/datafusion-expr", version = "^53.1.0", default-features = false }
+datafusion-expr-common = { loaf = "crates-io/datafusion-expr-common", version = "^53.1.0" }
+datafusion-physical-expr = { loaf = "crates-io/datafusion-physical-expr", version = "^53.1.0", default-features = false }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.13.0" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+recursive = { loaf = "crates-io/recursive", version = "^0.1.1", optional = true }
+regex = { loaf = "crates-io/regex", version = "^1.12" }
+regex-syntax = { loaf = "crates-io/regex-syntax", version = "^0.8.9" }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

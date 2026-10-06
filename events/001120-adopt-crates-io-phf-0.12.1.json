@@ -1,0 +1,79 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:913273894cec178f401a31ec4b656318d95473527be05c0752cc41cdc32be8b7",
+    "package": "phf",
+    "registry": "crates-io",
+    "version": "0.12.1"
+  },
+  "archive": "sha256:c0f4d228c4b681a85f59e8b4b22ac6ba12092faf9ea5f05904e429b3117c9917",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/phf_macros",
+      "name": "phf_macros",
+      "optional": true,
+      "req": "^0.12.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/phf_shared",
+      "name": "phf_shared",
+      "optional": false,
+      "req": "^0.12.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "macros": [
+      "phf_macros"
+    ],
+    "phf_macros": [
+      "dep:phf_macros"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "phf_shared/std",
+      "serde?/std"
+    ],
+    "uncased": [
+      "phf_macros?/uncased",
+      "phf_shared/uncased"
+    ],
+    "unicase": [
+      "phf_macros?/unicase",
+      "phf_shared/unicase"
+    ]
+  },
+  "id": "sha256:b43839557a3183761e351f26ecc3e7a80be2bb1fc4e0d3651774ba5ab3a37c4c",
+  "kind": "adopt",
+  "manifest": "sha256:997c6ac17afb90ab00bd2ad6456bba9418893e1f0259dcc2bf4cca65329ef802",
+  "rust": {
+    "edition": "2021",
+    "name": "phf",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "phf",
+    "scope": "crates-io",
+    "version": "0.12.1"
+  }
+}

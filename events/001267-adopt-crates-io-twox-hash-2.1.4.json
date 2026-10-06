@@ -1,0 +1,73 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5283634e518fe9e82c7b20520bb4bc209009fd16c82077c802f8111ecbb0117a",
+    "package": "twox-hash",
+    "registry": "crates-io",
+    "version": "2.1.4"
+  },
+  "archive": "sha256:9070cc072eae1dac2d408664229fc39c2e5d6841b166cb2dc3bd2309c421a055",
+  "at": "2026-10-06T13:11:47Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "thread_rng"
+      ],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": ">=0.9.0, <=0.11.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "random",
+      "xxhash32",
+      "xxhash64",
+      "xxhash3_64",
+      "xxhash3_128",
+      "std"
+    ],
+    "random": [
+      "dep:rand"
+    ],
+    "serialize": [
+      "dep:serde"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "xxhash32": [],
+    "xxhash3_128": [],
+    "xxhash3_64": [],
+    "xxhash64": []
+  },
+  "id": "sha256:365e501af45ff2db0e47c89d501e4302fb7d5ac510259df6b0bc5cf895d6c6c7",
+  "kind": "adopt",
+  "manifest": "sha256:8c4834f17d71294388b9ec67362b5addba0dc6f3652d216799cd6661c54c1b0d",
+  "rust": {
+    "edition": "2021",
+    "name": "twox_hash",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "twox-hash",
+    "scope": "crates-io",
+    "version": "2.1.4"
+  }
+}

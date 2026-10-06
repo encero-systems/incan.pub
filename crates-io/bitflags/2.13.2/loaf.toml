@@ -3,12 +3,26 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "bitflags"
+name = "crates-io/bitflags"
 version = "2.13.2"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:3ded4057c258ba199e2d26386d3af3780957ecaee6c4ef4041c6b4b8b97c0b06"
+[project.features]
+arbitrary = ["dep:arbitrary"]
+bytemuck = ["dep:bytemuck"]
+example_generated = []
+serde = ["serde_core"]
+serde_core = ["dep:serde_core"]
+std = []
+
+[rust]
+name = "bitflags"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0", optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.12", optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.228", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

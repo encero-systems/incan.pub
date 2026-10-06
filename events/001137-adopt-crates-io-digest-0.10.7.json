@@ -1,0 +1,106 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292",
+    "package": "digest",
+    "registry": "crates-io",
+    "version": "0.10.7"
+  },
+  "archive": "sha256:34bc8c2cca4d29ab3c0d2d151a9768efb15ef572360e28dadcb4612ae1a10f39",
+  "at": "2026-10-06T13:11:44Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/blobby",
+      "name": "blobby",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/block-buffer",
+      "name": "block-buffer",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/const-oid",
+      "name": "const-oid",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crypto-common",
+      "name": "crypto-common",
+      "optional": false,
+      "req": "^0.1.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": true,
+      "req": "^2.4"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "blobby": [
+      "dep:blobby"
+    ],
+    "block-buffer": [
+      "dep:block-buffer"
+    ],
+    "const-oid": [
+      "dep:const-oid"
+    ],
+    "core-api": [
+      "block-buffer"
+    ],
+    "default": [
+      "core-api"
+    ],
+    "dev": [
+      "blobby"
+    ],
+    "mac": [
+      "subtle"
+    ],
+    "oid": [
+      "const-oid"
+    ],
+    "rand_core": [
+      "crypto-common/rand_core"
+    ],
+    "std": [
+      "alloc",
+      "crypto-common/std"
+    ],
+    "subtle": [
+      "dep:subtle"
+    ]
+  },
+  "id": "sha256:f07feeb79d518fc19f8b07ae0fdc742a0199ff499d99cb0cd4bb08545dcad0ee",
+  "kind": "adopt",
+  "manifest": "sha256:f19e5332435ea139edc3381eb14939648898151164763dc86082b7a40f48dc4c",
+  "rust": {
+    "edition": "2018",
+    "name": "digest",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "digest",
+    "scope": "crates-io",
+    "version": "0.10.7"
+  }
+}

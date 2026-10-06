@@ -1,0 +1,87 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283",
+    "package": "sha2",
+    "registry": "crates-io",
+    "version": "0.10.9"
+  },
+  "archive": "sha256:22185d5fe9ee6a2f08850df6cb08e544452a267f9bf2b132b4007c6e6221468d",
+  "at": "2026-10-06T13:11:45Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.10.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha2-asm",
+      "name": "sha2-asm",
+      "optional": true,
+      "req": "^0.6.1",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))"
+    }
+  ],
+  "features": {
+    "asm": [
+      "sha2-asm"
+    ],
+    "asm-aarch64": [
+      "asm"
+    ],
+    "compress": [],
+    "default": [
+      "std"
+    ],
+    "force-soft": [],
+    "force-soft-compact": [],
+    "loongarch64_asm": [],
+    "oid": [
+      "digest/oid"
+    ],
+    "sha2-asm": [
+      "dep:sha2-asm"
+    ],
+    "std": [
+      "digest/std"
+    ]
+  },
+  "id": "sha256:948d2ab2de66de5cdc1d8a1665d52832bb2d8517a966a6d79c72d8f5eeaff49b",
+  "kind": "adopt",
+  "manifest": "sha256:aeb55d282a690eb0dd65d1ed00a313c4dc5d093d63df693f4cce2d95b6f40b8e",
+  "rust": {
+    "edition": "2018",
+    "name": "sha2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "sha2",
+    "scope": "crates-io",
+    "version": "0.10.9"
+  }
+}

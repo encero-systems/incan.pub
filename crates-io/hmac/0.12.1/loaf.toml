@@ -3,12 +3,20 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "hmac"
+name = "crates-io/hmac"
 version = "0.12.1"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
+[project.features]
+reset = []
+std = ["digest/std"]
+
+[rust]
+name = "hmac"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.10.3", features = ["mac"] }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

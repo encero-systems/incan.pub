@@ -3,12 +3,34 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "ahash"
+name = "crates-io/ahash"
 version = "0.8.12"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:5a15f179cd60c4584b8a8c596927aadc462e27f2ca70c04e0071964a73ba7a75"
+[project.features]
+atomic-polyfill = ["dep:portable-atomic", "once_cell/critical-section"]
+compile-time-rng = ["const-random"]
+const-random = ["dep:const-random"]
+default = ["std", "runtime-rng"]
+getrandom = ["dep:getrandom"]
+nightly-arm-aes = []
+no-rng = []
+runtime-rng = ["getrandom"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "ahash"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+const-random = { loaf = "crates-io/const-random", version = "^0.1.17", optional = true }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.3.1", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.18.0", features = ["alloc"], default-features = false, target = "cfg(not(all(target_arch = \"arm\", target_os = \"none\")))" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.0.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.117", optional = true }
+zerocopy = { loaf = "crates-io/zerocopy", version = "^0.8.24", features = ["simd"], default-features = false }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

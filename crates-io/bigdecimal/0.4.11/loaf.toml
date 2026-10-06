@@ -3,12 +3,29 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "bigdecimal"
+name = "crates-io/bigdecimal"
 version = "0.4.11"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:8fa3f3d8cbf4dffcfe4991de61d012bef509a409ecbe9dd41049bfe32b4d4653"
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+serde-json = ["serde", "dep:serde", "serde/derive", "serde_json"]
+serde_json = ["dep:serde_json"]
+std = ["num-bigint/std", "num-integer/std", "num-traits/std"]
+string-only = []
+
+[rust]
+name = "bigdecimal"
+type = "lib"
+edition = "2015"
+
+[dependencies]
+libm = { loaf = "crates-io/libm", version = "^0.2.6" }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", default-features = false }
+num-integer = { loaf = "crates-io/num-integer", version = "^0.1", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", features = ["alloc", "arbitrary_precision"], default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

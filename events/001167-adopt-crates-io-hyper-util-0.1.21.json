@@ -1,0 +1,277 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ddc03d96684f9226b8a787cdb71488417b53ab5ea8fdb1dac946cb9431cc8bff",
+    "package": "hyper-util",
+    "registry": "crates-io",
+    "version": "0.1.21"
+  },
+  "archive": "sha256:733467cbf9ffc67fd52d206e57c92995ccc5cae62eba3ac9312ddeb3d303dc86",
+  "at": "2026-10-06T13:11:45Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": true,
+      "req": "^0.23"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1.7.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-channel",
+      "name": "futures-channel",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.16"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body",
+      "name": "http-body",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/httparse",
+      "name": "httparse",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hyper",
+      "name": "hyper",
+      "optional": false,
+      "req": "^1.9.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ipnet",
+      "name": "ipnet",
+      "optional": true,
+      "req": "^2.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/percent-encoding",
+      "name": "percent-encoding",
+      "optional": true,
+      "req": "^2.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.4"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "all"
+      ],
+      "loaf": "crates-io/socket2",
+      "name": "socket2",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/system-configuration",
+      "name": "system-configuration",
+      "optional": true,
+      "req": "^0.7",
+      "target": "cfg(target_os = \"macos\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower-layer",
+      "name": "tower-layer",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower-service",
+      "name": "tower-service",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.36"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-registry",
+      "name": "windows-registry",
+      "optional": true,
+      "req": ">=0.3, <0.7",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "__internal_happy_eyeballs_tests": [],
+    "client": [
+      "hyper/client",
+      "dep:tracing",
+      "dep:futures-channel",
+      "dep:tower-service"
+    ],
+    "client-legacy": [
+      "client",
+      "tokio",
+      "dep:tokio",
+      "tokio/net",
+      "dep:socket2",
+      "tokio/sync",
+      "dep:libc",
+      "dep:futures-util",
+      "dep:httparse"
+    ],
+    "client-pool": [
+      "client",
+      "dep:futures-util",
+      "dep:tower-layer",
+      "tokio",
+      "dep:tokio",
+      "tokio/sync"
+    ],
+    "client-proxy": [
+      "client",
+      "dep:base64",
+      "dep:ipnet",
+      "dep:percent-encoding"
+    ],
+    "client-proxy-system": [
+      "dep:system-configuration",
+      "dep:windows-registry"
+    ],
+    "default": [],
+    "full": [
+      "client",
+      "client-legacy",
+      "client-pool",
+      "client-proxy",
+      "client-proxy-system",
+      "server",
+      "server-auto",
+      "server-graceful",
+      "service",
+      "http1",
+      "http2",
+      "tokio",
+      "tracing"
+    ],
+    "http1": [
+      "hyper/http1"
+    ],
+    "http2": [
+      "hyper/http2"
+    ],
+    "rt-tracing-exec-force": [
+      "tokio",
+      "tracing"
+    ],
+    "server": [
+      "hyper/server"
+    ],
+    "server-auto": [
+      "server",
+      "http1",
+      "http2"
+    ],
+    "server-graceful": [
+      "server",
+      "tokio",
+      "dep:tokio",
+      "tokio/sync"
+    ],
+    "service": [
+      "dep:tower-service"
+    ],
+    "tokio": [
+      "dep:tokio",
+      "tokio",
+      "tokio/rt",
+      "tokio/time"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ]
+  },
+  "id": "sha256:b9b8ae38f8958b6663a34cf49dbcb1909dac1472431da1890609ee7e6b376359",
+  "kind": "adopt",
+  "manifest": "sha256:57dcac38b717c9d13bc30e70d61ed17af34d43c3aaa634ad6e656ab7aea848bb",
+  "rust": {
+    "edition": "2024",
+    "name": "hyper_util",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hyper-util",
+    "scope": "crates-io",
+    "version": "0.1.21"
+  }
+}

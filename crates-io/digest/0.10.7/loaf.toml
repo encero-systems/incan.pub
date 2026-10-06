@@ -3,12 +3,34 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "digest"
+name = "crates-io/digest"
 version = "0.10.7"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292"
+[project.features]
+alloc = []
+blobby = ["dep:blobby"]
+block-buffer = ["dep:block-buffer"]
+const-oid = ["dep:const-oid"]
+core-api = ["block-buffer"]
+default = ["core-api"]
+dev = ["blobby"]
+mac = ["subtle"]
+oid = ["const-oid"]
+rand_core = ["crypto-common/rand_core"]
+std = ["alloc", "crypto-common/std"]
+subtle = ["dep:subtle"]
+
+[rust]
+name = "digest"
+type = "lib"
+edition = "2018"
+
+[dependencies]
+blobby = { loaf = "crates-io/blobby", version = "^0.3", optional = true }
+block-buffer = { loaf = "crates-io/block-buffer", version = "^0.10", optional = true }
+const-oid = { loaf = "crates-io/const-oid", version = "^0.9", optional = true }
+crypto-common = { loaf = "crates-io/crypto-common", version = "^0.1.3" }
+subtle = { loaf = "crates-io/subtle", version = "^2.4", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

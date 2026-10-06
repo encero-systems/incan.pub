@@ -3,12 +3,31 @@
 # Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
 
 [project]
-name = "num-complex"
+name = "crates-io/num-complex"
 version = "0.4.6"
 
-[source]
-registry = "https://github.com/rust-lang/crates.io-index"
-checksum = "sha256:73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
+[project.features]
+bytecheck = ["dep:bytecheck"]
+bytemuck = ["dep:bytemuck"]
+default = ["std"]
+libm = ["num-traits/libm"]
+rand = ["dep:rand"]
+rkyv = ["dep:rkyv"]
+serde = ["dep:serde"]
+std = ["num-traits/std"]
+
+[rust]
+name = "num_complex"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+bytecheck = { loaf = "crates-io/bytecheck", version = "^0.6", default-features = false, optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.18", features = ["i128"], default-features = false }
+rand = { loaf = "crates-io/rand", version = "^0.8", default-features = false, optional = true }
+rkyv = { loaf = "crates-io/rkyv", version = "^0.7", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
