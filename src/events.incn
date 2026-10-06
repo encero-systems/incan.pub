@@ -161,6 +161,27 @@ pub def append_event(root: Path, kind: str, name: str, version: str, actor: str,
     return Ok(relative)
 
 
+pub def rewrite_event(root: Path, label: str, existing: JsonValue, payload: Dict[str, JsonValue]) -> Result[None, str]:
+    """
+    Replace an event's payload in place, keeping its file, sequence, kind, subject, time and actor.
+
+    Interim, for an event that is wrong because of a bug: RFC 125 does not yet say how a defective event is
+    corrected, and until it does the log is rewritten rather than left wrong. The id is recomputed for the new body.
+    """
+    mut body: Dict[str, JsonValue] = {}
+    for key in ["schema", "kind", "at", "actor", "subject"]:
+        match existing.get(key):
+            Some(value) => body[key] = value
+            None => return Err(f"{label}: an event to rewrite must carry `{key}`")
+    for key in payload.keys():
+        body[key] = payload[key]
+    identity = event_id(JsonValue.object(body))?
+    body["id"] = JsonValue.string(identity)
+    body["signature"] = JsonValue.null()
+    write_text(root / label, pretty(JsonValue.object(body))? + "\n", label)?
+    return Ok(None)
+
+
 def sequence_text(sequence: int) -> str:
     mut text = str(sequence)
     while len(text) < 6:

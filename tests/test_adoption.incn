@@ -24,7 +24,7 @@ from adoption import (
     unpack_crate,
 )
 from canonical import canonical, digest_text
-from events import append_event, load_events
+from events import append_event, load_events, rewrite_event
 from projection import render_projections
 from semver import compare, parse_requirement, parse_version, satisfies
 from tar import TarEntry, read_archive, write_archive
@@ -336,3 +336,31 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
     payload = adoption_payload(leaf("1.0.0"), digest_text("not the manifest"), digest_text("archive"))
     append_event(other_root, "adopt", "leaf", "1.0.0", "tests", payload).unwrap()
     assert_eq(refusal(other_root), "events/000001-adopt-crates-io-leaf-1.0.0.json: `manifest` is not the digest of the manifest this payload renders")
+
+
+def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt(root, leaf("1.2.0"))
+    before = load_events(root).unwrap()[0]
+    corrected = Adoption(
+        package="leaf",
+        version="1.2.0",
+        checksum=digest_text("leaf 1.2.0"),
+        rust_name="leaf",
+        rust_type="lib",
+        edition="2018",
+        root="src/lib.rs",
+        features={"default": []},
+        dependencies=[],
+    )
+    payload = adoption_payload(corrected, digest_text(render_adopted_manifest(corrected)), digest_text("archive leaf"))
+    rewrite_event(root, before.label, before.body, payload).unwrap()
+    events = load_events(root).unwrap()
+    assert_eq(len(events), 1)
+    assert_eq(events[0].label, before.label)
+    assert_eq(events[0].at, before.at)
+    assert_true(canonical(events[0].body).unwrap() != canonical(before.body).unwrap())
+    assert_eq(refusal(root), "")
+    files = render_projections(replay(events, root).unwrap()).unwrap()
+    assert_true(files["crates-io/leaf/1.2.0/loaf.toml"].contains("edition = \"2018\""))

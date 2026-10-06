@@ -147,7 +147,7 @@ def dependency_order(planned: Dict[str, Planned], adopted: Dict[str, list[str]])
     return Ok(out)
 
 
-def find_line(lines: list[JsonValue], package: str, version: str) -> Result[JsonValue, str]:
+pub def find_line(lines: list[JsonValue], package: str, version: str) -> Result[JsonValue, str]:
     for line in lines:
         if string_member(line, "vers") == version:
             return Ok(line)

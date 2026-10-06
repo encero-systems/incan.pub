@@ -11,6 +11,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
                      --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
     incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
+    incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
@@ -21,10 +22,10 @@ store source Loaf archives are written to by digest.
 from std.fs import Path
 from std.json import JsonValue
 
-from admission import adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
+from admission import adopt_payload, adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
 from adoption import adoption_payload
-from canonical import digest_bytes, is_sha256_identity
-from closure import blob_path, plan_closure
+from canonical import canonical, digest_bytes, is_sha256_identity
+from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from graph import stage_graph, unclaimed_graphs
@@ -36,6 +37,7 @@ from events import (
     member,
     parse_event,
     read_text,
+    rewrite_event,
     string_list_member,
     string_member,
 )
@@ -145,7 +147,9 @@ def run(arguments: list[str]) -> Result[None, str]:
         return advise(invocation)
     if invocation.command == "adopt":
         return adopt(invocation)
-    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise or adopt")
+    if invocation.command == "readopt":
+        return readopt(invocation)
+    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise, adopt or readopt")
 
 
 def check(invocation: Invocation) -> Result[None, str]:
@@ -504,6 +508,41 @@ def adopt(invocation: Invocation) -> Result[None, str]:
         folded += len(appended)
         println(f"adopted: {written}")
     println(f"adoption: {len(plan)} version(s) adopted for {len(targets)} target(s)")
+    return build(invocation)
+
+
+def readopt(invocation: Invocation) -> Result[None, str]:
+    """
+    Rewrite the `adopt` events of versions whose adoption is wrong because of a translation bug.
+
+    Each named version is translated again with this tool; its `adopt` event keeps its place, time and actor and
+    takes the corrected payload. A version whose translation comes out the same is right, and right adoptions are not
+    rewritten, so it is refused. The whole log is folded again before the projections are rebuilt.
+    """
+    if len(invocation.positional) == 0 or len(invocation.positional) % 2 != 0:
+        return Err("usage: incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR")
+    cache = invocation.require("cache")?
+    blobs = invocation.require("blobs")?
+    root = invocation.root()
+    events = load_events(root)?
+    mut index = 0
+    while index < len(invocation.positional):
+        name = invocation.positional[index]
+        version = invocation.positional[index + 1]
+        index += 2
+        mut found = false
+        for event in events:
+            if event.kind == "adopt" and event.name == name and event.version == version:
+                found = true
+                item = prepare(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?)?
+                payload = adoption_payload(item.adoption, item.manifest, item.archive)
+                if canonical(JsonValue.object(payload))? == canonical(adopt_payload(event.body))?:
+                    return Err(f"{name} {version}: the translation comes out the same; a right adoption is not rewritten")
+                rewrite_event(root, event.label, event.body, payload)?
+                println(f"rewritten: {event.label}")
+        if not found:
+            return Err(f"{name} {version} has no adopt event to rewrite")
+    replay(load_events(root)?, root)?
     return build(invocation)
 
 
