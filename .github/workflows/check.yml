@@ -7,7 +7,9 @@ on:
     branches: [index]
 
 env:
-  # The Incan dev line the tool is built with. No release installs it yet, so CI builds the compiler at this commit.
+  # The Incan dev line the tool is built with, downloaded from the GHCR package the toolchain workflow on `main`
+  # pushes (`toolchain/incan:<commit>-<triple>`). The compiler reads its standard library from the checkout of this
+  # commit at `incan`.
   INCAN_COMMIT: 7bfe19aec30971e3377323ae9107ea5d642ebd96
 
 jobs:
@@ -29,14 +31,13 @@ jobs:
           repository: encero-systems/incan
           ref: ${{ env.INCAN_COMMIT }}
           path: incan
-      - name: Reuse the toolchain build for this commit
-        uses: actions/cache@v4
-        with:
-          path: incan/target
-          key: incan-cli-debug-${{ env.INCAN_COMMIT }}
-      - name: Build the Incan toolchain
-        working-directory: incan
-        run: cargo build -p incan-cli
+      - name: Install oras
+        uses: oras-project/setup-oras@v1
+      - name: Download the Incan compiler built at this commit
+        run: |
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$INCAN_COMMIT-x86_64-unknown-linux-gnu" --output "$RUNNER_TEMP/toolchain"
+          mkdir -p incan/target/debug
+          tar -xzf "$RUNNER_TEMP/toolchain/incan.tar.gz" -C incan/target/debug
       - name: Add the Rust target the standard library's vocab desugarer builds for
         run: rustup target add wasm32-wasip1
       - name: Build incan-pub
