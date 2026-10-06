@@ -2,18 +2,16 @@
   "actor": "encero-systems/incan.pub maintainers",
   "at": "2026-09-30T15:01:46Z",
   "evidence": {
-    "cargo_lock_digest": "sha256:142e768793cb02fc5e987181ecf2b00d42e5b880dd09ce0dfed8f0562406c698",
-    "cargo_manifest_digest": "sha256:f6ef3fd350c0e7df05a125d75ca0f7e5235aa50e100d8b4eb52ac8f798f422f5",
-    "cargo_version": "cargo 1.96.0-nightly (e84cb639e 2026-03-21)",
     "compiler_probes": [
       "sha256:4308b0dccece12bef613e2cd5cc4713ce7e90678962bfba9a2580376ce8f63c0",
-      "sha256:d5f3989c25abfaeea4d2b5c6ff0bf44cff6db9a842cc225e9fb38a6dcd0cdcdb"
+      "sha256:e44592917d1122ff050b8afa0f7b8bb053671da91cc00cc06aa5e180344d6d4d"
     ],
+    "domain": "target",
+    "graph": "sha256:f057db27975e15c4df8c460659485f9dc17bb9286b21c7602d74c889eaa72225",
     "hazards": [],
     "host": "aarch64-apple-darwin",
-    "method": "compatibility publisher observation",
-    "receipt": "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c",
-    "rustc_identity": "sha256:b0d1a3dd0b5db29f6fee2afacaa1800268f3035a43ab642b22208d04d2511d39"
+    "method": "registry build-script run",
+    "sandbox": "sandbox-exec: network denied, writes confined to the work directory"
   },
   "fact": {
     "cfg": [
@@ -22,7 +20,6 @@
       "switchable_stack"
     ],
     "features": [],
-    "harvested-from": "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c",
     "link": [
       {
         "environment": [],
@@ -102,7 +99,11 @@
               }
             ],
             "language": "assembly",
-            "name": "aarch_aapcs64.o"
+            "name": "aarch_aapcs64.o",
+            "reads": [
+              "source-src-arch-gnu-stack-note-s",
+              "source-src-arch-psm-h"
+            ]
           }
         ],
         "sources": [
@@ -111,17 +112,28 @@
             "kind": "file",
             "name": "source-src-arch-aarch-aapcs64-s",
             "path": "src/arch/aarch_aapcs64.s"
+          },
+          {
+            "digest": "sha256:485ed1b4bcc9e7e3b8d7767b158eb8cc8dfea62081647e7d27c4a796854aced8",
+            "kind": "file",
+            "name": "source-src-arch-gnu-stack-note-s",
+            "path": "src/arch/gnu_stack_note.s"
+          },
+          {
+            "digest": "sha256:2cebda3740aa73b167b8ec18e3d2202ca46e400a081a46329b86051abd1a872a",
+            "kind": "file",
+            "name": "source-src-arch-psm-h",
+            "path": "src/arch/psm.h"
           }
         ],
         "target": "aarch64-apple-darwin"
       }
     ],
-    "out": [],
     "profile": "release",
     "target": "aarch64-apple-darwin",
     "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
   },
-  "id": "sha256:19ba7e3d953a122eb06e9bff75e22385a4e2ee08131c4760964fa7f16ca1966b",
+  "id": "sha256:6f5cb5a81e5e95a19ba518fed37fb4ac334686614e6ea3b763e6c5ab796e18f1",
   "kind": "fact",
   "schema": "incan.pub/event/1",
   "signature": null,
