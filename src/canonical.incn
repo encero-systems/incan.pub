@@ -11,8 +11,6 @@ from std.encoding import hex
 from std.hash import sha256
 from std.json import JsonValue
 
-from host import utf8_bytes
-
 
 def hex_digits() -> str:
     return "0123456789abcdef"
@@ -25,7 +23,7 @@ pub def digest_bytes(data: bytes) -> str:
 
 pub def digest_text(text: str) -> str:
     """Return the `sha256:` identity of the UTF-8 encoding of `text`."""
-    return digest_bytes(utf8_bytes(text))
+    return digest_bytes(text.encode())
 
 
 pub def is_sha256_identity(value: str) -> bool:
@@ -53,7 +51,7 @@ pub def json_string(text: str) -> str:
         elif character == "\t":
             out = out + "\\t"
         else:
-            encoded = utf8_bytes(character)
+            encoded = character.encode()
             code = int(encoded[0])
             if len(encoded) == 1 and code < 32:
                 if code == 8:

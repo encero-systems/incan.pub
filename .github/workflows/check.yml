@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  # The Incan dev line this tool is built with. No release installs it yet, so CI builds the compiler at this commit.
+  INCAN_COMMIT: 7bfe19aec30971e3377323ae9107ea5d642ebd96
+
 jobs:
   tool:
     runs-on: ubuntu-latest
@@ -19,18 +23,23 @@ jobs:
         with:
           ref: index
           path: index
-      - name: Install the Incan toolchain
-        run: |
-          curl -fsSL https://github.com/encero-systems/incan/releases/download/v0.5.1/install.sh \
-            | bash -s -- --manifest https://github.com/encero-systems/incan/releases/download/v0.5.1/manifest.json \
-                         --bin-dir "$HOME/.local/bin"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Warm the Cargo registry the 0.5.1 test envelope needs
-        working-directory: tool
-        run: ./scripts/prewarm-toolchain.sh
+      - name: Check out the Incan toolchain
+        uses: actions/checkout@v4
+        with:
+          repository: encero-systems/incan
+          ref: ${{ env.INCAN_COMMIT }}
+          path: incan
+      - name: Reuse the toolchain build for this commit
+        uses: actions/cache@v4
+        with:
+          path: incan/target
+          key: incan-cli-debug-${{ env.INCAN_COMMIT }}
+      - name: Build the Incan toolchain
+        working-directory: incan
+        run: cargo build -p incan-cli
       - name: Test and build incan-pub
         working-directory: tool
-        run: ./build.sh
+        run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
       - name: Snapshot the crates.io index lines the log names
         working-directory: index
         run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/incan-pub .crates-io-snapshot

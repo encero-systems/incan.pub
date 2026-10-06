@@ -9,6 +9,7 @@ A record is not a file anyone edits. It is the fold of the events published for 
 | event | meaning | admission |
 |---|---|---|
 | `publish` | the record exists for one `(name, version)` and names the crates.io source checksum | published once; checksum is the one crates.io publishes for that version |
+| `adopt` | the version is adopted as a Loaf: its Rust facet, features, dependencies, provenance, and the digests of its manifest and source Loaf archive | once per version, an identical repeat is a no-op; the manifest digest is the digest of the manifest the payload renders; every dependency is already adopted; on a published record, the checksum matches |
 | `fact` | one bound fact record was harvested | binding not yet present, or present with identical `cfg` and `out`; committed `out` bytes match their digests; no key outside the vocabulary below |
 | `attest` | an Oven-baked unit for one binding was proven equivalent to the Cargo-built unit | names an existing binding; carries the asset digest, the RFC 124 unit identity and an attestation reference; sets the binding's status to `attested` |
 | `asset` | a baked unit for one binding is available | names an existing binding, the archive digest, unit identity, builder kind (`publisher`, `registry`, `local`) and attestation |
@@ -19,9 +20,11 @@ Every event carries `schema`, `kind`, `at`, `actor`, `subject`, and an `id` that
 
 ## The rendered `loaf.toml`
 
+For an adopted version, the rendered `loaf.toml` is the manifest the source Loaf archive carries, in RFC 119's Rust facet grammar (`[project]` with `name = "crates-io/<name>"` and `version`, `[project.features]`, `[rust]`, `[rust.source]` when the library root is not `src/lib.rs`, and `[dependencies]`), followed by the bound facts below. A dependency key declared once per target holds an array of entry tables, each with its own `target`. A version not yet adopted renders the v0 record instead:
+
 ### `[project]` — `name`, `version`.
 
-### `[source]` — `registry`, `checksum` (`sha256:` digest of the published `.crate` archive, as `oven.lock` records it).
+### `[source]` — `registry`, `checksum` (`sha256:` digest of the published `.crate` archive).
 
 ### `[[rust.facts]]` — one per bound selection, sorted by binding.
 

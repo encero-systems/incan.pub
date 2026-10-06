@@ -1,0 +1,133 @@
+"""
+Dependency targets: a canonical `cfg(...)` predicate, or an exact target triple kept verbatim.
+
+The canonical predicate is what RFC 119 rule 3 fixes: atoms are `ident` or `ident = "value"`, `all`, `any` and
+`not` separate their arguments with `, ` and carry no other whitespace, and arguments keep the order they were written
+in. Anything that does not parse is refused with the construct named, never repaired by guesswork.
+"""
+
+
+pub def normalize_target(text: str) -> Result[str, str]:
+    """The manifest spelling of a crates.io dependency target."""
+    trimmed = text.strip()
+    if not trimmed.startswith("cfg"):
+        if len(trimmed) == 0:
+            return Err("an empty target")
+        for character in trimmed:
+            if not is_ident_character(character) and character != "-" and character != ".":
+                return Err(f"target `{text}` is neither a cfg predicate nor a target triple")
+        return Ok(trimmed)
+    mut parser = CfgParser(tokens=tokenize(trimmed, text)?, position=0, source=text)
+    parser.expect_word("cfg")?
+    parser.expect("(")?
+    inner = parser.predicate()?
+    parser.expect(")")?
+    if not parser.at_end():
+        return Err(f"target `{text}`: text after the closing parenthesis")
+    return Ok("cfg(" + inner + ")")
+
+
+class CfgParser:
+    """Recursive descent over the tokens of one predicate; `position` is the next token to read."""
+
+    tokens: list[str]
+    position: int
+    source: str
+
+    def at_end(self) -> bool:
+        return self.position >= len(self.tokens)
+
+    def peek(self) -> str:
+        if self.position < len(self.tokens):
+            return self.tokens[self.position]
+        return ""
+
+    def next(mut self) -> Result[str, str]:
+        if self.position >= len(self.tokens):
+            return Err(f"target `{self.source}` ends early")
+        token = self.tokens[self.position]
+        self.position += 1
+        return Ok(token)
+
+    def expect(mut self, wanted: str) -> Result[None, str]:
+        token = self.next()?
+        if token != wanted:
+            return Err(f"target `{self.source}`: expected `{wanted}`, found `{shown(token)}`")
+        return Ok(None)
+
+    def expect_word(mut self, wanted: str) -> Result[None, str]:
+        return self.expect("w:" + wanted)
+
+    def predicate(mut self) -> Result[str, str]:
+        token = self.next()?
+        if not token.startswith("w:"):
+            return Err(f"target `{self.source}`: expected a cfg name, found `{shown(token)}`")
+        word = token[2:]
+        if self.peek() == "(":
+            if word != "all" and word != "any" and word != "not":
+                return Err(f"target `{self.source}`: `{word}(...)` is not all, any or not")
+            self.position += 1
+            mut arguments: list[str] = []
+            while self.peek() != ")":
+                arguments.append(self.predicate()?)
+                if self.peek() == ",":
+                    self.position += 1
+                elif self.peek() != ")":
+                    return Err(f"target `{self.source}`: expected `,` or `)` in {word}(...)")
+            self.position += 1
+            if word == "not" and len(arguments) != 1:
+                return Err(f"target `{self.source}`: not(...) takes exactly one predicate")
+            return Ok(word + "(" + ", ".join(arguments) + ")")
+        if self.peek() == "=":
+            self.position += 1
+            value = self.next()?
+            if not value.startswith("s:"):
+                return Err(f"target `{self.source}`: `{word} =` must be followed by a quoted value")
+            return Ok(word + " = \"" + value[2:] + "\"")
+        return Ok(word)
+
+
+def shown(token: str) -> str:
+    if token.startswith("w:") or token.startswith("s:"):
+        return token[2:]
+    return token
+
+
+def tokenize(text: str, source: str) -> Result[list[str], str]:
+    """Punctuation as itself, names as `w:<name>`, quoted values as `s:<value>`."""
+    mut tokens: list[str] = []
+    mut word = ""
+    mut in_string = false
+    mut value = ""
+    for character in text:
+        if in_string:
+            if character == "\"":
+                tokens.append("s:" + value)
+                value = ""
+                in_string = false
+            elif character == "\\":
+                return Err(f"target `{source}`: escapes in cfg values are not supported")
+            else:
+                value = value + character
+            continue
+        if is_ident_character(character):
+            word = word + character
+            continue
+        if len(word) > 0:
+            tokens.append("w:" + word)
+            word = ""
+        if character == "\"":
+            in_string = true
+        elif character == "(" or character == ")" or character == "," or character == "=":
+            tokens.append(character)
+        elif character != " " and character != "\t" and character != "\n":
+            return Err(f"target `{source}`: unexpected `{character}`")
+    if in_string:
+        return Err(f"target `{source}`: unterminated quoted value")
+    if len(word) > 0:
+        tokens.append("w:" + word)
+    return Ok(tokens)
+
+
+def is_ident_character(character: str) -> bool:
+    return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_".contains(character)

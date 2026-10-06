@@ -1,12 +1,12 @@
 """
 The host boundary: the few Rust interop calls the tool needs, kept in one module so the rest is plain Incan.
 
-`std.environ` reads variables, not the argument vector, and `str` has no byte view of its own in this release; both
-come from Rust’s standard library here and nowhere else, until 0.6 offers them (encero-systems/incan#1668).
+The standard library has no argument vector and no HTTP client; both come from Rust's standard library here and
+nowhere else. Downloads go through the host's `curl`, the one program adoption runs.
 """
 
 from rust::std::env import args
-from rust::std::string import String as RustString
+from rust::std::process import Command
 
 
 pub def argv() -> list[str]:
@@ -17,6 +17,14 @@ pub def argv() -> list[str]:
     return out
 
 
-pub def utf8_bytes(text: str) -> bytes:
-    """Return the UTF-8 encoding of `text`."""
-    return RustString.from(text).into_bytes()
+pub def download(url: str, destination: str) -> Result[None, str]:
+    """Fetch `url` into the file `destination`, failing on any HTTP error status."""
+    mut command = Command.new("curl")
+    # Each argument is passed as its own copy: handing the parameter itself to a Rust method moves it.
+    command.arg("-sSfL").arg("--retry").arg("3").arg("-o").arg(destination.to_string()).arg(url.to_string())
+    match command.status():
+        Ok(status) =>
+            if status.success():
+                return Ok(None)
+            return Err(f"download failed: {url}")
+        Err(error) => return Err(f"curl could not run: {error}")

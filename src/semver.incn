@@ -1,0 +1,300 @@
+"""
+Versions and requirements as crates.io states them, so adoption can decide what satisfies a dependency.
+
+A requirement is comma-joined comparators: `^ ~ = > >= < <=` or none (which means `^`), with `*`, `x` or `X`
+standing for a missing minor or patch, and a lone `*` matching every release. Matching follows the semantics the
+crates.io ecosystem resolves with: a comparator with missing parts matches the whole range those parts leave open,
+and a pre-release version satisfies a requirement only when some comparator names the same major, minor and patch
+with a pre-release of its own.
+"""
+
+from registry import parse_digits
+
+
+@derive(Clone)
+pub model Version:
+    pub major: int
+    pub minor: int
+    pub patch: int
+    pub pre: list[str]
+
+    def is_prerelease(self) -> bool:
+        return len(self.pre) > 0
+
+
+@derive(Clone)
+pub model Comparator:
+    pub op: str
+    pub major: int
+    pub minor: Option[int]
+    pub patch: Option[int]
+    pub pre: list[str]
+
+
+pub def parse_version(text: str) -> Result[Version, str]:
+    """`major.minor.patch`, an optional `-pre` and an ignored `+build`."""
+    core = text.split("+")[0]
+    pieces = core.split("-")
+    numbers = pieces[0].split(".")
+    if len(numbers) != 3:
+        return Err(f"`{text}` is not a version")
+    mut parts: list[int] = []
+    for number in numbers:
+        match parse_digits(number):
+            Some(value) => parts.append(value)
+            None => return Err(f"`{text}` is not a version")
+    mut pre: list[str] = []
+    if len(pieces) > 1:
+        pre = "-".join(pieces[1:]).split(".")
+    return Ok(Version(major=parts[0], minor=parts[1], patch=parts[2], pre=pre))
+
+
+pub def parse_requirement(text: str) -> Result[list[Comparator], str]:
+    """The comparators of a requirement; `*` alone is no comparator at all."""
+    mut comparators: list[Comparator] = []
+    for piece in text.split(","):
+        trimmed = piece.strip()
+        if trimmed == "*" or trimmed == "x" or trimmed == "X":
+            continue
+        if len(trimmed) == 0:
+            return Err(f"`{text}`: an empty comparator")
+        comparators.append(parse_comparator(trimmed, text)?)
+    return Ok(comparators)
+
+
+def parse_comparator(text: str, requirement: str) -> Result[Comparator, str]:
+    mut op = "^"
+    mut rest = text
+    for candidate in [">=", "<=", "=", ">", "<", "~", "^"]:
+        if rest.startswith(candidate):
+            op = candidate
+            rest = rest[len(candidate):].strip()
+            break
+    core = rest.split("+")[0]
+    pieces = core.split("-")
+    numbers = pieces[0].split(".")
+    if len(numbers) == 0 or len(numbers) > 3:
+        return Err(f"`{requirement}`: `{text}` is not a comparator")
+    refusal = f"`{requirement}`: `{text}` is not a comparator"
+    mut major = 0
+    match parse_digits(numbers[0]):
+        Some(value) => major = value
+        None => return Err(refusal)
+    mut minor: Option[int] = None
+    mut patch: Option[int] = None
+    mut wildcard = false
+    if len(numbers) > 1:
+        if is_wildcard(numbers[1]):
+            wildcard = true
+        else:
+            match parse_digits(numbers[1]):
+                Some(value) => minor = Some(value)
+                None => return Err(refusal)
+    if len(numbers) > 2:
+        if is_wildcard(numbers[2]):
+            wildcard = true
+        elif wildcard:
+            return Err(f"`{requirement}`: `{text}` names a patch after a wildcard minor")
+        else:
+            match parse_digits(numbers[2]):
+                Some(value) => patch = Some(value)
+                None => return Err(refusal)
+    if wildcard and op == "^" and not text.startswith("^"):
+        op = "="
+    mut pre: list[str] = []
+    if len(pieces) > 1:
+        if patch == None:
+            return Err(f"`{requirement}`: `{text}` names a pre-release without a patch")
+        pre = "-".join(pieces[1:]).split(".")
+    return Ok(Comparator(op=op, major=major, minor=minor, patch=patch, pre=pre))
+
+
+def is_wildcard(part: str) -> bool:
+    return part == "*" or part == "x" or part == "X"
+
+
+pub def satisfies(version: Version, comparators: list[Comparator]) -> bool:
+    """Whether `version` meets every comparator, with the pre-release rule applied."""
+    for comparator in comparators:
+        if not matches(comparator, version):
+            return false
+    if not version.is_prerelease():
+        return true
+    for comparator in comparators:
+        if pre_is_compatible(comparator, version):
+            return true
+    return false
+
+
+def matches(comparator: Comparator, version: Version) -> bool:
+    if comparator.op == "=":
+        return matches_exact(comparator, version)
+    if comparator.op == ">":
+        return matches_greater(comparator, version)
+    if comparator.op == ">=":
+        return matches_exact(comparator, version) or matches_greater(comparator, version)
+    if comparator.op == "<":
+        return matches_less(comparator, version)
+    if comparator.op == "<=":
+        return matches_exact(comparator, version) or matches_less(comparator, version)
+    if comparator.op == "~":
+        return matches_tilde(comparator, version)
+    return matches_caret(comparator, version)
+
+
+def matches_exact(comparator: Comparator, version: Version) -> bool:
+    if version.major != comparator.major:
+        return false
+    match comparator.minor:
+        Some(minor) =>
+            if version.minor != minor:
+                return false
+        None => pass
+    match comparator.patch:
+        Some(patch) =>
+            if version.patch != patch:
+                return false
+        None => pass
+    return compare_pre(version.pre, comparator.pre) == 0
+
+
+def matches_greater(comparator: Comparator, version: Version) -> bool:
+    if version.major != comparator.major:
+        return version.major > comparator.major
+    match comparator.minor:
+        Some(minor) =>
+            if version.minor != minor:
+                return version.minor > minor
+        None => return false
+    match comparator.patch:
+        Some(patch) =>
+            if version.patch != patch:
+                return version.patch > patch
+        None => return false
+    return compare_pre(version.pre, comparator.pre) > 0
+
+
+def matches_less(comparator: Comparator, version: Version) -> bool:
+    if version.major != comparator.major:
+        return version.major < comparator.major
+    match comparator.minor:
+        Some(minor) =>
+            if version.minor != minor:
+                return version.minor < minor
+        None => return false
+    match comparator.patch:
+        Some(patch) =>
+            if version.patch != patch:
+                return version.patch < patch
+        None => return false
+    return compare_pre(version.pre, comparator.pre) < 0
+
+
+def matches_tilde(comparator: Comparator, version: Version) -> bool:
+    if version.major != comparator.major:
+        return false
+    match comparator.minor:
+        Some(minor) =>
+            if version.minor != minor:
+                return false
+        None => pass
+    match comparator.patch:
+        Some(patch) =>
+            if version.patch != patch:
+                return version.patch > patch
+        None => pass
+    return compare_pre(version.pre, comparator.pre) >= 0
+
+
+def matches_caret(comparator: Comparator, version: Version) -> bool:
+    if version.major != comparator.major:
+        return false
+    mut minor = 0
+    match comparator.minor:
+        Some(value) => minor = value
+        None => return true
+    mut patch = 0
+    match comparator.patch:
+        Some(value) => patch = value
+        None =>
+            if comparator.major > 0:
+                return version.minor >= minor
+            return version.minor == minor
+    if comparator.major > 0:
+        if version.minor != minor:
+            return version.minor > minor
+        if version.patch != patch:
+            return version.patch > patch
+    elif minor > 0:
+        if version.minor != minor:
+            return false
+        if version.patch != patch:
+            return version.patch > patch
+    elif version.minor != minor or version.patch != patch:
+        return false
+    return compare_pre(version.pre, comparator.pre) >= 0
+
+
+def pre_is_compatible(comparator: Comparator, version: Version) -> bool:
+    if comparator.major != version.major or len(comparator.pre) == 0:
+        return false
+    match comparator.minor:
+        Some(minor) =>
+            if minor != version.minor:
+                return false
+        None => return false
+    match comparator.patch:
+        Some(patch) => return patch == version.patch
+        None => return false
+
+
+pub def compare(left: Version, right: Version) -> int:
+    """Precedence order: numbers first, then a release above any of its pre-releases."""
+    for pair in [[left.major, right.major], [left.minor, right.minor], [left.patch, right.patch]]:
+        if pair[0] != pair[1]:
+            if pair[0] < pair[1]:
+                return -1
+            return 1
+    return compare_pre(left.pre, right.pre)
+
+
+def compare_pre(left: list[str], right: list[str]) -> int:
+    """No pre-release sorts above any; otherwise identifier by identifier, numeric below alphanumeric."""
+    if len(left) == 0 and len(right) == 0:
+        return 0
+    if len(left) == 0:
+        return 1
+    if len(right) == 0:
+        return -1
+    mut index = 0
+    while index < len(left) and index < len(right):
+        ordering = compare_identifier(left[index], right[index])
+        if ordering != 0:
+            return ordering
+        index += 1
+    if len(left) < len(right):
+        return -1
+    if len(left) > len(right):
+        return 1
+    return 0
+
+
+def compare_identifier(left: str, right: str) -> int:
+    match parse_digits(left):
+        Some(a) =>
+            match parse_digits(right):
+                Some(b) =>
+                    if a < b:
+                        return -1
+                    if a > b:
+                        return 1
+                    return 0
+                None => return -1
+        None =>
+            if parse_digits(right) != None:
+                return 1
+    if left < right:
+        return -1
+    if left > right:
+        return 1
+    return 0

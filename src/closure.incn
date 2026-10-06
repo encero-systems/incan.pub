@@ -1,0 +1,220 @@
+"""
+Adopting package versions together with everything they depend on.
+
+Admission refuses an `adopt` event whose dependencies are not adopted yet, so versions are adopted in dependency
+order, after the whole closure is planned. A requirement, optional and target-conditional ones included, is met by a
+version already adopted or planned; otherwise by the newest crates.io version satisfying it, preferring one that is
+not yanked. Each planned version is downloaded once into the cache and verified against the crates.io checksum
+before it is read, then translated, and its source Loaf archive is stored under its digest in the blob store.
+Nothing is appended to the log until the plan is complete and ordered.
+"""
+
+from std.fs import Path
+from std.json import JsonValue, parse_jsonl
+
+from adoption import Adoption, render_adopted_manifest, source_archive, translate, unpack_crate
+from canonical import digest_bytes, digest_text
+from events import read_text, string_member
+from host import download
+from registry import crates_io_sparse_url, sparse_index_path
+from semver import Version, compare, parse_requirement, parse_version, satisfies
+
+
+@derive(Clone)
+pub model Planned:
+    """One version ready to adopt: what adoption decided, and the digests of the manifest and archive it produced."""
+
+    pub adoption: Adoption
+    pub manifest: str
+    pub archive: str
+
+
+pub def crates_io_lines(cache: str, package: str) -> Result[list[JsonValue], str]:
+    """Every crates.io index line of `package`, fetched into the cache the first time it is needed."""
+    relative = "index/" + sparse_index_path(package)
+    location = cache + "/" + relative
+    path = Path(location)
+    if not path.is_file():
+        make_parent(path, relative)?
+        download(crates_io_sparse_url(package), location)?
+    match parse_jsonl(read_text(path, relative)?):
+        Ok(lines) => return Ok(lines)
+        Err(error) => return Err(f"{relative}: not a crates.io index file: {error.message()}")
+
+
+pub def crate_archive(cache: str, package: str, version: str, checksum: str) -> Result[bytes, str]:
+    """The `.crate` of one version, fetched into the cache and checked against its crates.io checksum."""
+    relative = f"crates/{package}/{package}-{version}.crate"
+    location = cache + "/" + relative
+    path = Path(location)
+    if not path.is_file():
+        make_parent(path, relative)?
+        download(f"https://static.crates.io/crates/{package}/{package}-{version}.crate", location)?
+    mut data = b""
+    match path.read_bytes():
+        Ok(bytes_read) => data = bytes_read
+        Err(error) => return Err(f"{relative}: {error.message()}")
+    if digest_bytes(data) != "sha256:" + checksum:
+        return Err(f"{relative}: its digest is not the crates.io checksum {checksum}; remove it and adopt again")
+    return Ok(data)
+
+
+pub def prepare(cache: str, blobs: str, line: JsonValue) -> Result[Planned, str]:
+    """Translate one version and store its source Loaf archive; the log is not touched."""
+    package = string_member(line, "name")
+    version = string_member(line, "vers")
+    files = unpack_crate(package, version, crate_archive(cache, package, version, string_member(line, "cksum"))?)?
+    adoption = translate(line, files)?
+    manifest = render_adopted_manifest(adoption)
+    archive = source_archive(manifest, files)?
+    digest = digest_bytes(archive)
+    location = blobs + "/sha256/" + digest[7:] + ".tar"
+    path = Path(location)
+    if not path.is_file():
+        make_parent(path, location)?
+        match path.write_bytes(archive):
+            Ok(_) => pass
+            Err(error) => return Err(f"{location}: {error.message()}")
+    return Ok(Planned(adoption=adoption, manifest=digest_text(manifest), archive=digest))
+
+
+pub def blob_path(blobs: Path, digest: str) -> Path:
+    """Where a source Loaf archive lives in the blob store: `sha256/<hex>.tar`."""
+    return blobs / "sha256" / (digest[7:] + ".tar")
+
+
+pub def plan_closure(
+    adopted: Dict[str, list[str]],
+    targets: list[list[str]],
+    cache: str,
+    blobs: str,
+) -> Result[list[Planned], str]:
+    """Every version to adopt for `targets`, dependencies first."""
+    mut known: Dict[str, list[str]] = {}
+    for package in adopted.keys():
+        known[package] = adopted[package]
+    mut planned: Dict[str, Planned] = {}
+    mut queue = targets
+    mut position = 0
+    while position < len(queue):
+        package = queue[position][0]
+        version = queue[position][1]
+        position += 1
+        key = package + "\t" + version
+        if key in planned or (package in adopted and adopted[package].contains(version)):
+            continue
+        item = prepare(cache, blobs, find_line(crates_io_lines(cache, package)?, package, version)?)?
+        planned[key] = item
+        remember(known, package, version)
+        println(f"planned: {package} {version}")
+        for dependency in item.adoption.dependencies:
+            if met(known, dependency.package, dependency.req)?:
+                continue
+            choice = choose(crates_io_lines(cache, dependency.package)?, dependency.package, dependency.req)?
+            remember(known, dependency.package, choice)
+            queue.append([dependency.package, choice])
+    return dependency_order(planned, adopted)
+
+
+def dependency_order(planned: Dict[str, Planned], adopted: Dict[str, list[str]]) -> Result[list[Planned], str]:
+    """Repeatedly take every planned version whose requirements are already met; what never qualifies is a cycle."""
+    mut done: Dict[str, list[str]] = {}
+    for package in adopted.keys():
+        done[package] = adopted[package]
+    mut remaining = sorted(list(planned.keys()))
+    mut out: list[Planned] = []
+    while len(remaining) > 0:
+        mut waiting: list[str] = []
+        mut ready: list[Planned] = []
+        for key in remaining:
+            item = planned[key]
+            mut satisfied = true
+            for dependency in item.adoption.dependencies:
+                if not met(done, dependency.package, dependency.req)?:
+                    satisfied = false
+                    break
+            if satisfied:
+                ready.append(item)
+            else:
+                waiting.append(key)
+        if len(ready) == 0:
+            listed = ", ".join([key.replace("\t", " ") for key in waiting])
+            return Err(f"the closure has a dependency cycle no single adoption can open: [{listed}]")
+        for item in ready:
+            remember(done, item.adoption.package, item.adoption.version)
+            out.append(item)
+        remaining = waiting
+    return Ok(out)
+
+
+def find_line(lines: list[JsonValue], package: str, version: str) -> Result[JsonValue, str]:
+    for line in lines:
+        if string_member(line, "vers") == version:
+            return Ok(line)
+    return Err(f"crates.io publishes no {package} {version}")
+
+
+def choose(lines: list[JsonValue], package: str, requirement: str) -> Result[str, str]:
+    """The newest version satisfying `requirement`, preferring one that is not yanked."""
+    comparators = parse_requirement(requirement)?
+    mut best: Option[Version] = None
+    mut best_text = ""
+    mut best_yanked = true
+    for line in lines:
+        text = string_member(line, "vers")
+        match parse_version(text):
+            Ok(version) =>
+                if not satisfies(version, comparators):
+                    continue
+                yanked = flag(line, "yanked")
+                mut better = false
+                match best:
+                    Some(current) =>
+                        if best_yanked and not yanked:
+                            better = true
+                        elif best_yanked == yanked and compare(version, current) > 0:
+                            better = true
+                    None => better = true
+                if better:
+                    best = Some(version)
+                    best_text = text
+                    best_yanked = yanked
+            Err(_) => pass
+    if len(best_text) == 0:
+        return Err(f"no crates.io version of {package} satisfies `{requirement}`")
+    return Ok(best_text)
+
+
+def met(known: Dict[str, list[str]], package: str, requirement: str) -> Result[bool, str]:
+    comparators = parse_requirement(requirement)?
+    if package not in known:
+        return Ok(false)
+    for text in known[package]:
+        version = parse_version(text)?
+        if satisfies(version, comparators):
+            return Ok(true)
+    return Ok(false)
+
+
+def remember(mut known: Dict[str, list[str]], package: str, version: str) -> None:
+    mut versions: list[str] = []
+    if package in known:
+        versions = known[package]
+    if not versions.contains(version):
+        versions.append(version)
+    known[package] = versions
+
+
+def flag(value: JsonValue, key: str) -> bool:
+    match value.get(key):
+        Some(found) =>
+            match found.as_bool():
+                Some(flag_value) => return flag_value
+                None => return false
+        None => return false
+
+
+def make_parent(path: Path, label: str) -> Result[None, str]:
+    match path.parent().mkdir(parents=true, exist_ok=true):
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(f"{label}: {error.message()}")

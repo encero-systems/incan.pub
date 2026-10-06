@@ -9,7 +9,8 @@ cannot establish that a `cfg` answer is true; that is what harvest evidence and 
 from std.fs import Path
 from std.json import JsonValue
 
-from canonical import canonical, digest_bytes, is_sha256_identity
+from adoption import adoption_from_payload, loaf_name, render_adopted_manifest
+from canonical import canonical, digest_bytes, digest_text, is_sha256_identity
 from events import Event, member, string_list_member, string_member
 from registry import (
     Asset,
@@ -29,6 +30,7 @@ from registry import (
     status_attested,
     status_harvested,
 )
+from semver import parse_requirement, parse_version, satisfies
 
 
 pub def replay(events: list[Event], root: Path) -> Result[Dict[str, Record], str]:
@@ -44,88 +46,204 @@ pub def replay_onto(initial: Dict[str, Record], events: list[Event], root: Path)
     that is what lets a drop fold the log once and then only what each proposal appends.
     """
     mut state = initial
+    mut adopted = adopted_versions(state)
     for event in events:
         key = record_key(event.name, event.version)
         if event.kind == "publish":
-            if has_key(state, key):
+            if key in state:
                 return Err(f"{event.label}: {event.name} {event.version} is already published; versions are immutable")
-            source = event.payload("source")
-            checksum = string_member(source, "checksum")
-            if string_member(source, "registry") != crates_io_index() or not is_sha256_identity(checksum):
-                return Err(f"{event.label}: source must name the crates.io index and a `sha256:` checksum")
-            state[key] = Record(
-                name=event.name,
-                version=event.version,
-                registry=crates_io_index(),
-                checksum=checksum,
-                notes=string_member(event.body, "notes"),
-                adopter=event.actor,
-                facts={},
-                yanked=false,
-                assets=[],
-                advisories=[],
-            )
+            state[key] = fold_publish(event)?
             continue
-        if not has_key(state, key):
-            return Err(f"{event.label}: {event.name} {event.version} has no publish event before this {event.kind}")
-        mut record = state[key]
-        if event.kind == "fact":
-            fact = validate_fact(event.payload("fact"), event.name, event.version, event.label, root)?
-            binding_key = fact.binding.key()
-            if has_key(record.facts, binding_key):
-                if record.facts[binding_key].comparable != fact.comparable:
-                    return Err(f"{event.label}: binding {describe_binding(fact.binding)} already has a different record; a fact is immutable")
-                continue
-            record.facts[binding_key] = fact
-        elif event.kind == "attest":
-            binding = validate_binding(event.payload("binding"), event.label)?
-            binding_key = binding.key()
-            if not has_key(record.facts, binding_key):
-                return Err(f"{event.label}: attestation names a binding with no fact record")
-            attestation = event.payload("attestation")
-            for field in ["asset", "unit_identity", "reference"]:
-                if len(string_member(attestation, field)) == 0:
-                    return Err(f"{event.label}: attestation requires `{field}`")
-            asset = string_member(attestation, "asset")
-            unit_identity = string_member(attestation, "unit_identity")
-            if not is_sha256_identity(asset) or not is_sha256_identity(unit_identity):
-                return Err(f"{event.label}: attestation asset and unit identity must be `sha256:` identities")
-            mut fact = record.facts[binding_key]
-            fact.attestations.append(Attestation(
-                asset=asset,
-                unit_identity=unit_identity,
-                reference=string_member(attestation, "reference"),
-            ))
-            fact.status = status_attested()
-            record.facts[binding_key] = fact
-        elif event.kind == "asset":
-            asset = event.payload("asset")
-            for field in ["archive", "unit_identity", "builder", "attestation"]:
-                if len(string_member(asset, field)) == 0:
-                    return Err(f"{event.label}: asset requires `{field}`")
-            if not builders().contains(string_member(asset, "builder")):
-                return Err(f"{event.label}: asset builder must be publisher, registry or local")
-            binding = validate_binding(event.payload("binding"), event.label)?
-            if not has_key(record.facts, binding.key()):
-                return Err(f"{event.label}: asset names a binding with no fact record")
-            record.assets.append(Asset(
-                binding=binding,
-                archive=string_member(asset, "archive"),
-                unit_identity=string_member(asset, "unit_identity"),
-                builder=string_member(asset, "builder"),
-                attestation=string_member(asset, "attestation"),
-            ))
-        elif event.kind == "yank":
-            record.yanked = true
-        elif event.kind == "unyank":
-            record.yanked = false
-        elif event.kind == "advisory":
-            advisory = event.payload("advisory")
-            if len(string_member(advisory, "text").strip()) == 0:
-                return Err(f"{event.label}: an advisory carries a non-empty `text`")
-            record.advisories.append(advisory)
-        state[key] = record
+        if event.kind == "adopt":
+            state[key] = fold_adopt(state, adopted, event)?
+            mut versions: list[str] = []
+            if event.name in adopted:
+                versions = adopted[event.name]
+            if not versions.contains(event.version):
+                versions.append(event.version)
+            adopted[event.name] = versions
+            continue
+        if key not in state:
+            return Err(f"{event.label}: {event.name} {event.version} has no publish or adopt event before this {event.kind}")
+        state[key] = fold_record_event(state[key], event, root)?
     return Ok(state)
+
+
+def fold_publish(event: Event) -> Result[Record, str]:
+    """A v0 external-source record: the crates.io checksum, before anything is adopted or bound."""
+    source = event.payload("source")
+    checksum = string_member(source, "checksum")
+    if string_member(source, "registry") != crates_io_index() or not is_sha256_identity(checksum):
+        return Err(f"{event.label}: source must name the crates.io index and a `sha256:` checksum")
+    return Ok(Record(
+        name=event.name,
+        version=event.version,
+        registry=crates_io_index(),
+        checksum=checksum,
+        notes=string_member(event.body, "notes"),
+        adopter=event.actor,
+        facts={},
+        yanked=false,
+        assets=[],
+        advisories=[],
+        adopt=None,
+        publisher="",
+    ))
+
+
+pub def adopted_versions(state: Dict[str, Record]) -> Dict[str, list[str]]:
+    """The adopted versions of every package, which is what a dependency requirement is checked against."""
+    mut out: Dict[str, list[str]] = {}
+    for key in state.keys():
+        record = state[key]
+        match record.adopt:
+            Some(_) =>
+                mut versions: list[str] = []
+                if record.name in out:
+                    versions = out[record.name]
+                versions.append(record.version)
+                out[record.name] = versions
+            None => pass
+    return out
+
+
+def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: Event) -> Result[Record, str]:
+    """
+    Admit an `adopt` event: a payload in shape, a manifest digest the payload reproduces, and every dependency
+    requirement, optional and target-conditional ones included, already met by an adopted version.
+    """
+    label = event.label
+    adoption = adoption_from_payload(event.body, label)?
+    if adoption.package != event.name or adoption.version != event.version:
+        return Err(f"{label}: the adopted package and version must be the event's subject")
+    if not is_sha256_identity(adoption.checksum):
+        return Err(f"{label}: adopted.checksum must be a `sha256:` identity")
+    manifest = string_member(event.body, "manifest")
+    archive = string_member(event.body, "archive")
+    if not is_sha256_identity(manifest) or not is_sha256_identity(archive):
+        return Err(f"{label}: `manifest` and `archive` must be `sha256:` identities")
+    if digest_text(render_adopted_manifest(adoption)) != manifest:
+        return Err(f"{label}: `manifest` is not the digest of the manifest this payload renders")
+    for dependency in adoption.dependencies:
+        if not requirement_met(adopted, dependency.package, dependency.req, label)?:
+            return Err(
+                f"{label}: dependency `{dependency.key}` ({loaf_name(dependency.package)} {dependency.req}) has no adopted version; "
+                + "adoption is closed under dependencies"
+            )
+    payload = adopt_payload(event.body)
+    key = record_key(event.name, event.version)
+    if key not in state:
+        return Ok(Record(
+            name=event.name,
+            version=event.version,
+            registry=crates_io_index(),
+            checksum=adoption.checksum,
+            notes="",
+            adopter=event.actor,
+            facts={},
+            yanked=false,
+            assets=[],
+            advisories=[],
+            adopt=Some(payload),
+            publisher=event.actor,
+        ))
+    mut record = state[key]
+    match record.adopt:
+        Some(existing) =>
+            if canonical(existing)? != canonical(payload)?:
+                return Err(f"{label}: {event.name} {event.version} is already adopted differently; an adoption is immutable")
+            return Ok(record)
+        None => pass
+    if record.checksum != adoption.checksum:
+        return Err(f"{label}: the adopted checksum differs from the published record's")
+    record.adopt = Some(payload)
+    record.publisher = event.actor
+    return Ok(record)
+
+
+pub def adopt_payload(body: JsonValue) -> JsonValue:
+    """The members of an `adopt` event that state the adoption, without the event envelope."""
+    mut payload: Dict[str, JsonValue] = {}
+    for key in ["adopted", "rust", "features", "deps", "manifest", "archive"]:
+        match body.get(key):
+            Some(value) => payload[key] = value
+            None => pass
+    return JsonValue.object(payload)
+
+
+pub def requirement_met(adopted: Dict[str, list[str]], package: str, requirement: str, label: str) -> Result[bool, str]:
+    """Whether some adopted version of `package` satisfies `requirement`."""
+    comparators = parse_requirement(requirement)?
+    if package not in adopted:
+        return Ok(false)
+    for text in adopted[package]:
+        match parse_version(text):
+            Ok(version) =>
+                if satisfies(version, comparators):
+                    return Ok(true)
+            Err(message) => return Err(f"{label}: {message}")
+    return Ok(false)
+
+
+def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Record, str]:
+    """Fold one event about an existing record: a bound fact, an attestation, an asset, a yank or an advisory."""
+    mut record = initial
+    if event.kind == "fact":
+        fact = validate_fact(event.payload("fact"), event.name, event.version, event.label, root)?
+        binding_key = fact.binding.key()
+        if has_key(record.facts, binding_key):
+            if record.facts[binding_key].comparable != fact.comparable:
+                return Err(f"{event.label}: binding {describe_binding(fact.binding)} already has a different record; a fact is immutable")
+            return Ok(record)
+        record.facts[binding_key] = fact
+    elif event.kind == "attest":
+        binding = validate_binding(event.payload("binding"), event.label)?
+        binding_key = binding.key()
+        if not has_key(record.facts, binding_key):
+            return Err(f"{event.label}: attestation names a binding with no fact record")
+        attestation = event.payload("attestation")
+        for field in ["asset", "unit_identity", "reference"]:
+            if len(string_member(attestation, field)) == 0:
+                return Err(f"{event.label}: attestation requires `{field}`")
+        asset = string_member(attestation, "asset")
+        unit_identity = string_member(attestation, "unit_identity")
+        if not is_sha256_identity(asset) or not is_sha256_identity(unit_identity):
+            return Err(f"{event.label}: attestation asset and unit identity must be `sha256:` identities")
+        mut fact = record.facts[binding_key]
+        fact.attestations.append(Attestation(
+            asset=asset,
+            unit_identity=unit_identity,
+            reference=string_member(attestation, "reference"),
+        ))
+        fact.status = status_attested()
+        record.facts[binding_key] = fact
+    elif event.kind == "asset":
+        asset = event.payload("asset")
+        for field in ["archive", "unit_identity", "builder", "attestation"]:
+            if len(string_member(asset, field)) == 0:
+                return Err(f"{event.label}: asset requires `{field}`")
+        if not builders().contains(string_member(asset, "builder")):
+            return Err(f"{event.label}: asset builder must be publisher, registry or local")
+        binding = validate_binding(event.payload("binding"), event.label)?
+        if not has_key(record.facts, binding.key()):
+            return Err(f"{event.label}: asset names a binding with no fact record")
+        record.assets.append(Asset(
+            binding=binding,
+            archive=string_member(asset, "archive"),
+            unit_identity=string_member(asset, "unit_identity"),
+            builder=string_member(asset, "builder"),
+            attestation=string_member(asset, "attestation"),
+        ))
+    elif event.kind == "yank":
+        record.yanked = true
+    elif event.kind == "unyank":
+        record.yanked = false
+    elif event.kind == "advisory":
+        advisory = event.payload("advisory")
+        if len(string_member(advisory, "text").strip()) == 0:
+            return Err(f"{event.label}: an advisory carries a non-empty `text`")
+        record.advisories.append(advisory)
+    return Ok(record)
 
 
 pub def validate_binding(binding: JsonValue, label: str) -> Result[Binding, str]:

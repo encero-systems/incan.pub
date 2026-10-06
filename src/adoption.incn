@@ -1,0 +1,537 @@
+"""
+Adoption: turning one crates.io package version into a Loaf (RFC 125, "Adoption from crates.io").
+
+The inputs are the version's crates.io sparse-index line and its `.crate` archive, verified against the line's
+checksum before anything reads it. From the archive's published manifest only the edition and the library target
+are read; everything else comes from the index line under fixed rules:
+
+- development and build dependencies drop, and so does `links`;
+- a dependency keeps its rename as its key, and a key declared once per target stays one entry per declaration;
+- every implicit optional-dependency feature becomes an explicit feature;
+- a non-weak `x/f` on an optional `x` becomes `x`, `dep:x`, `x/f` when a feature `x` exists, else `dep:x`, `x/f`, so
+  the enabled feature set is the one the crates.io ecosystem resolves; a weak `x?/f` stays weak;
+- a member naming a dependency that dropped (a build-only optional dependency) drops with it, and the feature that
+  held it stays, so `cfg(feature = ...)` sees the same names.
+
+The result renders as the `loaf.toml` in RFC 119's Rust facet grammar and travels, with the package's files
+unchanged, in a deterministic source Loaf archive whose digest is the Loaf's identity.
+"""
+
+from std.compression import gzip
+from std.json import JsonValue
+from std.toml import TomlValue
+
+from canonical import canonical, json_string
+from events import member, string_list_member, string_member
+from tar import TarEntry, read_archive, write_archive
+from target import normalize_target
+
+
+pub def conventional_root() -> str:
+    return "src/lib.rs"
+
+
+@derive(Clone)
+pub model Dependency:
+    """One declaration of a dependency: its key is the extern name the package's code uses."""
+
+    pub key: str
+    pub package: str
+    pub req: str
+    pub features: list[str]
+    pub default_features: bool
+    pub optional: bool
+    pub target: Option[str]
+
+
+@derive(Clone)
+pub model Adoption:
+    """What adoption decided about one package version; the manifest and the index line are renderings of it."""
+
+    pub package: str
+    pub version: str
+    pub checksum: str
+    pub rust_name: str
+    pub rust_type: str
+    pub edition: str
+    pub root: str
+    pub features: Dict[str, list[str]]
+    pub dependencies: list[Dependency]
+
+    def loaf_name(self) -> str:
+        return loaf_name(self.package)
+
+
+pub def loaf_name(package: str) -> str:
+    """The Loaf a crates.io package is adopted as: the registry-owned `crates-io` scope."""
+    return "crates-io/" + package
+
+
+pub def unpack_crate(package: str, version: str, archive: bytes) -> Result[list[TarEntry], str]:
+    """The files of a `.crate`, relative to the package root; every entry must sit under `<package>-<version>/`."""
+    mut raw = b""
+    match gzip.decompress(archive):
+        Ok(data) => raw = data
+        Err(error) => return Err(f"{package} {version}: the .crate is not gzip: {error.message()}")
+    prefix = f"{package}-{version}/"
+    mut files: list[TarEntry] = []
+    for entry in read_archive(raw)?:
+        if not entry.path.startswith(prefix) or len(entry.path) == len(prefix):
+            return Err(f"{package} {version}: archive entry `{entry.path}` is outside `{prefix}`")
+        files.append(TarEntry(path=entry.path[len(prefix):], executable=entry.executable, data=entry.data))
+    return Ok(files)
+
+
+pub def translate(line: JsonValue, files: list[TarEntry]) -> Result[Adoption, str]:
+    """Adopt one package version from its index line and its unpacked files."""
+    package = string_member(line, "name")
+    version = string_member(line, "vers")
+    label = f"{package} {version}"
+    checksum = string_member(line, "cksum")
+    if len(package) == 0 or len(version) == 0 or len(checksum) != 64:
+        return Err(f"{label}: the index line lacks a name, version or checksum")
+    mut manifest_text = ""
+    mut paths: list[str] = []
+    for file in files:
+        paths.append(file.path)
+        if file.path == "Cargo.toml":
+            match file.data.decode():
+                Ok(text) => manifest_text = text
+                Err(error) => return Err(f"{label}: Cargo.toml is not UTF-8: {error}")
+        if file.path == "loaf.toml":
+            return Err(f"{label}: the package already carries a loaf.toml, and adoption writes one")
+    if len(manifest_text) == 0:
+        return Err(f"{label}: the archive has no Cargo.toml")
+    mut adoption = library_target(package, version, manifest_text, paths)?
+    adoption.checksum = "sha256:" + checksum
+    adoption.dependencies = dependencies(line, label)?
+    adoption.features = features(line, adoption.dependencies, label)?
+    return Ok(adoption)
+
+
+def library_target(package: str, version: str, manifest_text: str, paths: list[str]) -> Result[Adoption, str]:
+    """The edition and the library target, the only things read from the published manifest."""
+    label = f"{package} {version}"
+    document = parse_manifest(manifest_text, label)?
+    mut edition = "2015"
+    match document.get_optional[str]("package.edition"):
+        Ok(found) =>
+            match found:
+                Some(text) => edition = text
+                None => pass
+        Err(error) => return Err(f"{label}: package.edition: {error.message()}")
+    mut name = package.replace("-", "_")
+    mut root = conventional_root()
+    mut kind = "lib"
+    mut declared = false
+    match document.get_value_key("lib"):
+        Ok(lib) =>
+            declared = true
+            match lib.get_optional[str]("name"):
+                Ok(found) =>
+                    match found:
+                        Some(text) => name = text
+                        None => pass
+                Err(error) => return Err(f"{label}: lib.name: {error.message()}")
+            match lib.get_optional[str]("path"):
+                Ok(found) =>
+                    match found:
+                        Some(text) => root = text.replace("\\", "/")
+                        None => pass
+                Err(error) => return Err(f"{label}: lib.path: {error.message()}")
+            for key in ["proc-macro", "proc_macro"]:
+                match lib.get_value_key(key):
+                    Ok(flag) =>
+                        match flag.as_bool():
+                            Ok(value) =>
+                                if value:
+                                    kind = "proc-macro"
+                            Err(error) => return Err(f"{label}: lib.{key}: {error.message()}")
+                    Err(_) => pass
+        Err(_) => pass
+    if root.startswith("./"):
+        root = root[2:]
+    if not paths.contains(root):
+        if declared:
+            return Err(f"{label}: the library root `{root}` is not in the archive")
+        return Err(f"{label}: the package declares no library target")
+    return Ok(Adoption(
+        package=package,
+        version=version,
+        checksum="",
+        rust_name=name,
+        rust_type=kind,
+        edition=edition,
+        root=root,
+        features={},
+        dependencies=[],
+    ))
+
+
+def parse_manifest(text: str, label: str) -> Result[TomlValue, str]:
+    match TomlValue.parse(text):
+        Ok(document) => return Ok(document)
+        Err(error) => return Err(f"{label}: Cargo.toml does not parse: {error.message()}")
+
+
+def dependencies(line: JsonValue, label: str) -> Result[list[Dependency], str]:
+    """Normal dependencies only, one per declaration, ordered by key and then by their canonical spelling."""
+    mut by_order: Dict[str, Dependency] = {}
+    mut declarations: list[JsonValue] = []
+    match line.get("deps"):
+        Some(value) =>
+            match value.as_array():
+                Some(items) => declarations = items
+                None => return Err(f"{label}: `deps` is not a list")
+        None => pass
+    for declaration in declarations:
+        kind = string_member(declaration, "kind")
+        if kind == "dev" or kind == "build":
+            continue
+        if len(kind) > 0 and kind != "normal":
+            return Err(f"{label}: dependency kind `{kind}` is not normal, dev or build")
+        key = string_member(declaration, "name")
+        mut package = string_member(declaration, "package")
+        if len(package) == 0:
+            package = key
+        mut target: Option[str] = None
+        match declaration.get("target"):
+            Some(value) =>
+                match value.as_str():
+                    Some(text) => target = Some(normalize_target(text)?)
+                    None => pass
+            None => pass
+        mut requested: list[str] = []
+        match string_list_member(declaration, "features"):
+            Some(names) => requested = sorted_unique(names)
+            None => pass
+        dependency = Dependency(
+            key=key,
+            package=package,
+            req=string_member(declaration, "req"),
+            features=requested,
+            default_features=flag(declaration, "default_features", true),
+            optional=flag(declaration, "optional", false),
+            target=target,
+        )
+        order = key + "\t" + canonical(dependency_json(dependency))?
+        if order in by_order:
+            continue
+        by_order[order] = dependency
+    mut out: list[Dependency] = []
+    for order in sorted(list(by_order.keys())):
+        out.append(by_order[order])
+    return Ok(out)
+
+
+def features(line: JsonValue, kept: list[Dependency], label: str) -> Result[Dict[str, list[str]], str]:
+    """The feature table with implicit features explicit and members rewritten for the kept dependencies."""
+    mut raw: Dict[str, list[str]] = {}
+    for table in ["features", "features2"]:
+        match line.get(table):
+            Some(value) =>
+                match value.as_object():
+                    Some(entries) =>
+                        for name in entries.keys():
+                            match string_list_member(value, name):
+                                Some(members) => raw[name] = members
+                                None => return Err(f"{label}: feature `{name}` is not a list of members")
+                    None => return Err(f"{label}: `{table}` is not a table")
+            None => pass
+    mut normal_keys: list[str] = []
+    mut optional_keys: list[str] = []
+    for dependency in kept:
+        if not normal_keys.contains(dependency.key):
+            normal_keys.append(dependency.key)
+        if dependency.optional and not optional_keys.contains(dependency.key):
+            optional_keys.append(dependency.key)
+    mut dropped_optional: list[str] = []
+    match line.get("deps"):
+        Some(value) =>
+            for declaration in value.as_array().unwrap_or([]):
+                key = string_member(declaration, "name")
+                if flag(declaration, "optional", false) and not normal_keys.contains(key) and not dropped_optional.contains(key):
+                    dropped_optional.append(key)
+        None => pass
+    mut named_with_dep: list[str] = []
+    for name in raw.keys():
+        for item in raw[name]:
+            if item.startswith("dep:"):
+                named_with_dep.append(item[4:])
+    # Implicit features: an optional dependency no member names with `dep:` gets a feature of its own name.
+    mut table: Dict[str, list[str]] = {}
+    for name in raw.keys():
+        table[name] = raw[name]
+    for key in optional_keys + dropped_optional:
+        if not named_with_dep.contains(key) and key not in table:
+            table[key] = ["dep:" + key]
+    mut out: Dict[str, list[str]] = {}
+    for name in table.keys():
+        mut members: list[str] = []
+        for item in table[name]:
+            for rewritten in rewrite_member(item, normal_keys, optional_keys, table, label)?:
+                if not members.contains(rewritten):
+                    members.append(rewritten)
+        out[name] = members
+    return Ok(out)
+
+
+def rewrite_member(
+    item: str,
+    normal_keys: list[str],
+    optional_keys: list[str],
+    table: Dict[str, list[str]],
+    label: str,
+) -> Result[list[str], str]:
+    """One feature member as the Loaf states it; empty when it named a dependency that adoption dropped."""
+    if item.startswith("dep:"):
+        if normal_keys.contains(item[4:]):
+            return Ok([item])
+        return Ok([])
+    if item.contains("?/"):
+        key = item.split("?/")[0]
+        if normal_keys.contains(key):
+            return Ok([item])
+        return Ok([])
+    if item.contains("/"):
+        key = item.split("/")[0]
+        if not normal_keys.contains(key):
+            return Ok([])
+        if not optional_keys.contains(key):
+            return Ok([item])
+        if key in table:
+            return Ok([key, "dep:" + key, item])
+        return Ok(["dep:" + key, item])
+    if item not in table:
+        return Err(f"{label}: feature member `{item}` names no feature")
+    return Ok([item])
+
+
+def flag(value: JsonValue, key: str, absent: bool) -> bool:
+    match value.get(key):
+        Some(found) =>
+            match found.as_bool():
+                Some(flag_value) => return flag_value
+                None => return absent
+        None => return absent
+
+
+def sorted_unique(values: list[str]) -> list[str]:
+    mut out: list[str] = []
+    for value in sorted(values):
+        if not out.contains(value):
+            out.append(value)
+    return out
+
+
+pub def dependency_json(dependency: Dependency) -> JsonValue:
+    """One `deps[]` element as RFC 125 spells it; `target` is absent when the declaration is unconditional."""
+    mut entry: Dict[str, JsonValue] = {
+        "name": JsonValue.string(dependency.key),
+        "loaf": JsonValue.string(loaf_name(dependency.package)),
+        "req": JsonValue.string(dependency.req),
+        "features": strings_json(dependency.features),
+        "default-features": JsonValue.bool(dependency.default_features),
+        "optional": JsonValue.bool(dependency.optional),
+    }
+    match dependency.target:
+        Some(text) => entry["target"] = JsonValue.string(text)
+        None => pass
+    return JsonValue.object(entry)
+
+
+pub def features_json(table: Dict[str, list[str]]) -> JsonValue:
+    mut entries: Dict[str, JsonValue] = {}
+    for name in table.keys():
+        entries[name] = strings_json(table[name])
+    return JsonValue.object(entries)
+
+
+pub def rust_json(adoption: Adoption) -> JsonValue:
+    """The `[rust]` table verbatim, as the index line carries it."""
+    return JsonValue.object({
+        "name": JsonValue.string(adoption.rust_name),
+        "type": JsonValue.string(adoption.rust_type),
+        "edition": JsonValue.string(adoption.edition),
+    })
+
+
+pub def provenance_json(adoption: Adoption) -> JsonValue:
+    return JsonValue.object({
+        "registry": JsonValue.string("crates-io"),
+        "package": JsonValue.string(adoption.package),
+        "version": JsonValue.string(adoption.version),
+        "checksum": JsonValue.string(adoption.checksum),
+    })
+
+
+pub def adoption_payload(adoption: Adoption, manifest: str, archive: str) -> Dict[str, JsonValue]:
+    """The `adopt` event's payload: everything the projections need, plus the digests of what was produced."""
+    mut deps: list[JsonValue] = []
+    for dependency in adoption.dependencies:
+        deps.append(dependency_json(dependency))
+    mut facet = rust_json(adoption)
+    facet.set("root", JsonValue.string(adoption.root)).unwrap()
+    return {
+        "adopted": provenance_json(adoption),
+        "rust": facet,
+        "features": features_json(adoption.features),
+        "deps": JsonValue.array(deps),
+        "manifest": JsonValue.string(manifest),
+        "archive": JsonValue.string(archive),
+    }
+
+
+pub def adoption_from_payload(body: JsonValue, label: str) -> Result[Adoption, str]:
+    """Read an `adopt` event back into what it decided, refusing a payload that is not in shape."""
+    adopted = member(body, "adopted")
+    facet = member(body, "rust")
+    if string_member(adopted, "registry") != "crates-io":
+        return Err(f"{label}: adopted.registry must be crates-io")
+    mut deps: list[Dependency] = []
+    match body.get("deps"):
+        Some(value) =>
+            match value.as_array():
+                Some(items) =>
+                    for item in items:
+                        deps.append(dependency_from_json(item, label)?)
+                None => return Err(f"{label}: `deps` must be a list")
+        None => return Err(f"{label}: `deps` is required")
+    mut table: Dict[str, list[str]] = {}
+    match body.get("features"):
+        Some(value) =>
+            match value.as_object():
+                Some(entries) =>
+                    for name in entries.keys():
+                        match string_list_member(value, name):
+                            Some(members) => table[name] = members
+                            None => return Err(f"{label}: feature `{name}` must be a list of strings")
+                None => return Err(f"{label}: `features` must be a table")
+        None => return Err(f"{label}: `features` is required")
+    kind = string_member(facet, "type")
+    if kind != "lib" and kind != "proc-macro":
+        return Err(f"{label}: rust.type must be lib or proc-macro")
+    for field in ["name", "edition", "root"]:
+        if len(string_member(facet, field)) == 0:
+            return Err(f"{label}: rust.{field} is required")
+    return Ok(Adoption(
+        package=string_member(adopted, "package"),
+        version=string_member(adopted, "version"),
+        checksum=string_member(adopted, "checksum"),
+        rust_name=string_member(facet, "name"),
+        rust_type=kind,
+        edition=string_member(facet, "edition"),
+        root=string_member(facet, "root"),
+        features=table,
+        dependencies=deps,
+    ))
+
+
+def dependency_from_json(item: JsonValue, label: str) -> Result[Dependency, str]:
+    loaf = string_member(item, "loaf")
+    if not loaf.startswith("crates-io/") or len(string_member(item, "name")) == 0 or len(string_member(item, "req")) == 0:
+        return Err(f"{label}: a dependency names its key, a crates-io Loaf and a requirement")
+    mut target: Option[str] = None
+    match item.get("target"):
+        Some(value) =>
+            match value.as_str():
+                Some(text) => target = Some(text)
+                None => return Err(f"{label}: a dependency target is a string")
+        None => pass
+    mut requested: list[str] = []
+    match string_list_member(item, "features"):
+        Some(names) => requested = names
+        None => return Err(f"{label}: dependency features must be a list of strings")
+    return Ok(Dependency(
+        key=string_member(item, "name"),
+        package=loaf[10:],
+        req=string_member(item, "req"),
+        features=requested,
+        default_features=flag(item, "default-features", true),
+        optional=flag(item, "optional", false),
+        target=target,
+    ))
+
+
+pub def render_adopted_manifest(adoption: Adoption) -> str:
+    """The `loaf.toml` an adopted Loaf carries: the whole contract between the registry and Oven's resolver."""
+    mut lines: list[str] = []
+    lines.append("[project]")
+    lines.append("name = " + json_string(adoption.loaf_name()))
+    lines.append("version = " + json_string(adoption.version))
+    if len(adoption.features) > 0:
+        lines.append("")
+        lines.append("[project.features]")
+        for name in sorted(list(adoption.features.keys())):
+            lines.append(toml_key(name) + " = " + toml_strings(adoption.features[name]))
+    lines.append("")
+    lines.append("[rust]")
+    lines.append("name = " + json_string(adoption.rust_name))
+    lines.append("type = " + json_string(adoption.rust_type))
+    lines.append("edition = " + json_string(adoption.edition))
+    if adoption.root != conventional_root():
+        lines.append("")
+        lines.append("[rust.source]")
+        lines.append("root = " + json_string(adoption.root))
+    if len(adoption.dependencies) > 0:
+        lines.append("")
+        lines.append("[dependencies]")
+        mut keys: list[str] = []
+        for dependency in adoption.dependencies:
+            if not keys.contains(dependency.key):
+                keys.append(dependency.key)
+        for key in keys:
+            mut entries: list[str] = []
+            for dependency in adoption.dependencies:
+                if dependency.key == key:
+                    entries.append(inline_dependency(dependency))
+            if len(entries) == 1:
+                lines.append(toml_key(key) + " = " + entries[0])
+            else:
+                lines.append(toml_key(key) + " = [" + ", ".join(entries) + "]")
+    return "\n".join(lines) + "\n"
+
+
+def inline_dependency(dependency: Dependency) -> str:
+    mut fields = ["loaf = " + json_string(loaf_name(dependency.package)), "version = " + json_string(dependency.req)]
+    if len(dependency.features) > 0:
+        fields.append("features = " + toml_strings(dependency.features))
+    if not dependency.default_features:
+        fields.append("default-features = false")
+    if dependency.optional:
+        fields.append("optional = true")
+    match dependency.target:
+        Some(text) => fields.append("target = " + json_string(text))
+        None => pass
+    return "{ " + ", ".join(fields) + " }"
+
+
+def toml_key(name: str) -> str:
+    """A bare key when TOML allows one, a quoted key otherwise."""
+    if len(name) == 0:
+        return "\"\""
+    for character in name:
+        if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-".contains(character):
+            return json_string(name)
+    return name
+
+
+def toml_strings(values: list[str]) -> str:
+    mut items: list[str] = []
+    for value in values:
+        items.append(json_string(value))
+    return "[" + ", ".join(items) + "]"
+
+
+pub def source_archive(manifest: str, files: list[TarEntry]) -> Result[bytes, str]:
+    """The source Loaf: the generated manifest at the root and the package's files unchanged."""
+    mut entries = files.clone()
+    entries.append(TarEntry(path="loaf.toml", executable=false, data=manifest.encode()))
+    return write_archive(entries)
+
+
+def strings_json(values: list[str]) -> JsonValue:
+    mut items: list[JsonValue] = []
+    for value in values:
+        items.append(JsonValue.string(value))
+    return JsonValue.array(items)

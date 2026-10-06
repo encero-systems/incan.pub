@@ -8,17 +8,45 @@ from them by a byte.
 from std.fs import Path
 from std.json import JsonValue
 
+from adoption import adoption_from_payload, loaf_name, render_adopted_manifest
 from canonical import canonical, json_string
-from events import read_text, string_member, write_text
-from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key, sparse_index_path
+from events import member, read_text, string_member, write_text
+from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
 
 
 pub def manifest_notice() -> str:
     return "# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit."
 
 
-pub def render_manifest(record: Record) -> str:
-    """The external-source record as the `loaf.toml` a consumer reads."""
+pub def render_manifest(record: Record) -> Result[str, str]:
+    """
+    The record as the `loaf.toml` a consumer reads: the adopted Loaf's manifest followed by its bound facts, or, for a
+    version not yet adopted, the v0 external-source record.
+    """
+    mut lines = header_comments(record)
+    lines.append(manifest_notice())
+    lines.append("")
+    match record.adopt:
+        Some(payload) =>
+            adoption = adoption_from_payload(payload, f"{record.name} {record.version}")?
+            lines.append(rstrip(render_adopted_manifest(adoption)))
+        None =>
+            lines.append("[project]")
+            lines.append("name = " + json_string(record.name))
+            lines.append("version = " + json_string(record.version))
+            lines.append("")
+            lines.append("[source]")
+            lines.append("registry = " + json_string(record.registry))
+            lines.append("checksum = " + json_string(record.checksum))
+    for fact_lines in render_facts(record):
+        lines.append("")
+        for line in fact_lines:
+            lines.append(line)
+    return Ok("\n".join(lines) + "\n")
+
+
+def header_comments(record: Record) -> list[str]:
+    """The record's notes and advisories, as the comment block above the manifest."""
     mut lines: list[str] = []
     notes = record.notes.strip()
     if len(notes) > 0:
@@ -37,17 +65,14 @@ pub def render_manifest(record: Record) -> str:
             else:
                 lines.append("# Advisory: " + trimmed)
         lines.append("#")
-    lines.append(manifest_notice())
-    lines.append("")
-    lines.append("[project]")
-    lines.append("name = " + json_string(record.name))
-    lines.append("version = " + json_string(record.version))
-    lines.append("")
-    lines.append("[source]")
-    lines.append("registry = " + json_string(record.registry))
-    lines.append("checksum = " + json_string(record.checksum))
+    return lines
+
+
+def render_facts(record: Record) -> list[list[str]]:
+    """Each bound fact as its `[[rust.facts]]` element, producer sub-tables included, in binding order."""
+    mut blocks: list[list[str]] = []
     for fact in record.sorted_facts():
-        lines.append("")
+        mut lines: list[str] = []
         lines.append("[[rust.facts]]")
         lines.append("toolchain = " + json_string(fact.binding.toolchain))
         lines.append("target = " + json_string(fact.binding.target))
@@ -85,7 +110,8 @@ pub def render_manifest(record: Record) -> str:
                         match producer.get(key):
                             Some(value) => lines.append(key + " = " + toml_value(value))
                             None => pass
-    return "\n".join(lines) + "\n"
+        blocks.append(lines)
+    return blocks
 
 
 def producer_kind(index: int) -> str:
@@ -148,24 +174,50 @@ def rstrip(text: str) -> str:
 
 
 pub def index_line(record: Record) -> JsonValue:
-    """One index line: enough to select the manifest and decide which bindings are adopted, and how firmly."""
+    """
+    One index line (RFC 125, "Sparse index"). An adopted version carries everything resolution needs before any
+    record or archive is fetched: its Rust facet, its dependencies and its features, with `cksum` naming the source
+    Loaf archive and `adopted` the crates.io version it came from. A version not yet adopted keeps the v0 shape, its
+    `cksum` the crates.io checksum.
+    """
     mut facts: list[JsonValue] = []
     for fact in record.sorted_facts():
         mut entry = fact.binding.to_json()
         entry.set("status", JsonValue.string(fact.status)).unwrap()
         facts.append(entry)
-    return JsonValue.object({
-        "name": JsonValue.string(record.name),
+    mut line: Dict[str, JsonValue] = {
+        "name": JsonValue.string(loaf_name(record.name)),
         "vers": JsonValue.string(record.version),
-        "cksum": JsonValue.string(record.checksum),
-        "source": JsonValue.string("crates-io"),
-        "adopter": JsonValue.string(record.adopter),
         "manifest": JsonValue.string(f"crates-io/{record.name}/{record.version}/loaf.toml"),
         "yanked": JsonValue.bool(record.yanked),
         "facts": JsonValue.array(facts),
         "assets": JsonValue.int(len(record.assets)),
         "advisories": JsonValue.int(len(record.advisories)),
-    })
+    }
+    match record.adopt:
+        Some(payload) =>
+            line["cksum"] = member(payload, "archive")
+            line["facets"] = JsonValue.array([JsonValue.string("rust")])
+            mut facet = member(payload, "rust")
+            line["rust"] = JsonValue.object({
+                "name": member(facet, "name"),
+                "type": member(facet, "type"),
+                "edition": member(facet, "edition"),
+            })
+            line["deps"] = member(payload, "deps")
+            line["features"] = member(payload, "features")
+            line["adopted"] = member(payload, "adopted")
+            line["publisher"] = JsonValue.string(record.publisher)
+        None =>
+            line["cksum"] = JsonValue.string(record.checksum)
+            line["source"] = JsonValue.string("crates-io")
+            line["adopter"] = JsonValue.string(record.adopter)
+    return JsonValue.object(line)
+
+
+pub def index_path(name: str) -> str:
+    """Where a package's index file lives: `index/<scope>/<name>` (RFC 125), every package here in `crates-io`."""
+    return "index/" + loaf_name(name)
 
 
 pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], str]:
@@ -174,7 +226,7 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
     mut versions_by_name: Dict[str, list[str]] = {}
     for key in sorted(keys_of(state)):
         record = state[key]
-        files[f"crates-io/{record.name}/{record.version}/loaf.toml"] = render_manifest(record)
+        files[f"crates-io/{record.name}/{record.version}/loaf.toml"] = render_manifest(record)?
         mut versions: list[str] = []
         if has_key(versions_by_name, record.name):
             versions = versions_by_name[record.name]
@@ -184,7 +236,7 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
         mut text = ""
         for version in sort_versions(versions_by_name[name]):
             text = text + canonical(index_line(state[record_key(name, version)]))? + "\n"
-        files["index/" + sparse_index_path(name)] = text
+        files[index_path(name)] = text
     return Ok(files)
 
 

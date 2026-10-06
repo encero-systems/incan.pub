@@ -1,0 +1,296 @@
+"""
+POSIX tar: reading a crates.io package archive and writing a source Loaf archive.
+
+Reading accepts what package archives contain: ustar and GNU headers, GNU long names, and pax extended headers that
+carry a `path`. Directories are skipped; any other entry kind is refused rather than guessed at. Integrity is the
+caller's business: an archive is read only after its digest has been checked, so header checksums are not re-checked.
+
+Writing produces the one deterministic form RFC 125 fixes for source Loaves: uncompressed ustar, entries sorted by
+path bytes, regular files only, mode 0644 or 0755, mtime 0, uid and gid 0, empty owner names, a pax `path` record
+before any entry whose path ustar cannot hold, and two zero blocks at the end. The same entries always produce the
+same bytes, which is what makes the archive digest a source Loaf's identity.
+"""
+
+from std.io import BytesIO, Endian, IoError, _BytesIO
+
+const BLOCK: int = 512
+const NAME_WIDTH: int = 100
+const PREFIX_WIDTH: int = 155
+
+
+@derive(Clone)
+pub model TarEntry:
+    """One regular file: its path relative to the archive root, whether it is executable, and its bytes."""
+
+    pub path: str
+    pub executable: bool
+    pub data: bytes
+
+
+pub def read_archive(data: bytes) -> Result[list[TarEntry], str]:
+    """Every regular file in `data`, in archive order."""
+    stream = BytesIO(data)
+    mut entries: list[TarEntry] = []
+    mut pending_path: Option[str] = None
+    while stream.remaining() >= BLOCK:
+        header = read_exact(stream, BLOCK, "a header")?
+        if is_zero(header)?:
+            break
+        fields = BytesIO(header)
+        name = text_field(fields, NAME_WIDTH)?
+        mode = octal_field(fields, 8, name)?
+        skip(fields, 16, name)?
+        size = octal_field(fields, 12, name)?
+        skip(fields, 20, name)?
+        typeflag = text_field(fields, 1)?
+        skip(fields, 100, name)?
+        magic = text_field(fields, 6)?
+        skip(fields, 82, name)?
+        prefix = text_field(fields, PREFIX_WIDTH)?
+        content = read_exact(stream, size, name)?
+        skip(stream, padding(size), name)?
+        # Only POSIX ustar has a prefix field; a GNU header ("ustar " plus a space) uses those bytes for times.
+        mut path = name
+        if magic == "ustar" and len(prefix) > 0:
+            path = prefix + "/" + name
+        match pending_path:
+            Some(long_path) => path = long_path
+            None => pass
+        if typeflag == "L":
+            pending_path = Some(before_nul(decode_text(content, "a GNU long name")?))
+            continue
+        if typeflag == "x":
+            pending_path = pax_path(content)?
+            continue
+        if typeflag == "g":
+            continue
+        pending_path = None
+        if typeflag == "5":
+            continue
+        if typeflag == "0" or typeflag == "" or typeflag == "7":
+            entries.append(TarEntry(path=path, executable=(mode & 73) != 0, data=content))
+            continue
+        return Err(f"{path}: entry type `{typeflag}` is neither a regular file nor a directory")
+    return Ok(entries)
+
+
+pub def write_archive(entries: list[TarEntry]) -> Result[bytes, str]:
+    """The deterministic archive of `entries`; refuses two entries with one path."""
+    mut by_path: Dict[str, TarEntry] = {}
+    for entry in entries:
+        if entry.path in by_path:
+            return Err(f"{entry.path}: two entries with one path")
+        by_path[entry.path] = entry
+    out = BytesIO()
+    # `str` ordering compares Unicode scalars, which is the order of their UTF-8 bytes.
+    for path in sorted(list(by_path.keys())):
+        entry = by_path[path]
+        match ustar_split(path):
+            Some(split) => write_header(out, split[1], split[0], file_mode(entry.executable), len(entry.data), "0")?
+            None =>
+                record = pax_record("path", path)
+                write_header(out, "PaxHeader", "", "0000644", len(record), "x")?
+                write_data(out, record)?
+                write_header(out, last_component(path, NAME_WIDTH), "", file_mode(entry.executable), len(entry.data), "0")?
+        write_data(out, entry.data)?
+    write_bytes(out, zeros(2 * BLOCK))?
+    return Ok(out.getvalue())
+
+
+def file_mode(executable: bool) -> str:
+    if executable:
+        return "0000755"
+    return "0000644"
+
+
+def write_header(out: _BytesIO, name: str, prefix: str, mode: str, size: int, typeflag: str) -> Result[None, str]:
+    """One ustar header block; the checksum is the byte sum with its own field read as eight spaces."""
+    if size >= 8589934592:
+        return Err(f"{name}: a ustar entry holds less than 8 GiB")
+    unsummed = header_block(name, prefix, mode, size, typeflag, "        ")?
+    write_bytes(out, header_block(name, prefix, mode, size, typeflag, checksum_field(byte_sum(unsummed)?))?)?
+    return Ok(None)
+
+
+def checksum_field(total: int) -> str:
+    """Six octal digits, a NUL and a space, as every tar writer spells the checksum."""
+    return octal(total, 6) + nul() + " "
+
+
+def header_block(name: str, prefix: str, mode: str, size: int, typeflag: str, checksum: str) -> Result[bytes, str]:
+    block = BytesIO()
+    field(block, name, NAME_WIDTH, name)?
+    field(block, mode + nul(), 8, name)?
+    field(block, "0000000" + nul(), 8, name)?
+    field(block, "0000000" + nul(), 8, name)?
+    field(block, octal(size, 11) + nul(), 12, name)?
+    field(block, "00000000000" + nul(), 12, name)?
+    field(block, checksum, 8, name)?
+    field(block, typeflag, 1, name)?
+    field(block, "", 100, name)?
+    field(block, "ustar" + nul(), 6, name)?
+    field(block, "00", 2, name)?
+    field(block, "", 32, name)?
+    field(block, "", 32, name)?
+    field(block, "0000000" + nul(), 8, name)?
+    field(block, "0000000" + nul(), 8, name)?
+    field(block, prefix, PREFIX_WIDTH, name)?
+    field(block, "", 12, name)?
+    return Ok(block.getvalue())
+
+
+def field(block: _BytesIO, text: str, width: int, label: str) -> Result[None, str]:
+    """`text` as UTF-8, NUL-padded to `width` bytes."""
+    encoded = text.encode()
+    if len(encoded) > width:
+        return Err(f"{label}: `{text}` does not fit a {width}-byte header field")
+    write_bytes(block, encoded)?
+    write_bytes(block, zeros(width - len(encoded)))?
+    return Ok(None)
+
+
+def write_data(out: _BytesIO, data: bytes) -> Result[None, str]:
+    write_bytes(out, data)?
+    write_bytes(out, zeros(padding(len(data))))?
+    return Ok(None)
+
+
+def ustar_split(path: str) -> Option[list[str]]:
+    """`[prefix, name]` when ustar can hold `path`: the whole of it in `name`, or split at a `/` across both."""
+    if len(path.encode()) <= NAME_WIDTH:
+        return Some(["", path])
+    parts = path.split("/")
+    mut index = len(parts) - 1
+    while index > 0:
+        prefix = "/".join(parts[0:index])
+        name = "/".join(parts[index:])
+        if len(prefix.encode()) <= PREFIX_WIDTH and len(name.encode()) <= NAME_WIDTH and len(name) > 0:
+            return Some([prefix, name])
+        index -= 1
+    return None
+
+
+def last_component(path: str, width: int) -> str:
+    """A short stand-in name for an entry a pax record names in full; readers take the pax path."""
+    parts = path.split("/")
+    mut name = parts[len(parts) - 1]
+    while len(name.encode()) > width:
+        name = name[1:]
+    return name
+
+
+def pax_record(key: str, value: str) -> bytes:
+    """One pax record, `<length> <key>=<value>\\n`, where the length counts its own digits."""
+    body = " " + key + "=" + value + "\n"
+    base = len(body.encode())
+    mut length = base + 1
+    while len(str(length)) + base != length:
+        length = len(str(length)) + base
+    return (str(length) + body).encode()
+
+
+def pax_path(content: bytes) -> Result[Option[str], str]:
+    """The `path` a pax extended header sets, if it sets one."""
+    text = decode_text(content, "a pax header")?
+    mut found: Option[str] = None
+    for line in text.split("\n"):
+        pieces = line.split(" ")
+        if len(pieces) < 2:
+            continue
+        record = " ".join(pieces[1:])
+        if record.startswith("path="):
+            found = Some(record[5:])
+    return Ok(found)
+
+
+def padding(size: int) -> int:
+    remainder = size % BLOCK
+    if remainder == 0:
+        return 0
+    return BLOCK - remainder
+
+
+def octal(value: int, width: int) -> str:
+    """`value` in octal, zero-padded to `width` digits."""
+    mut digits = ""
+    mut rest = value
+    while rest > 0:
+        digits = str(rest % 8) + digits
+        rest = rest // 8
+    while len(digits) < width:
+        digits = "0" + digits
+    return digits
+
+
+def nul() -> str:
+    return b"\0".decode().unwrap()
+
+
+def before_nul(text: str) -> str:
+    return text.split(nul())[0]
+
+
+def decode_text(data: bytes, label: str) -> Result[str, str]:
+    match data.decode():
+        Ok(text) => return Ok(text)
+        Err(error) => return Err(f"{label} is not UTF-8: {error}")
+
+
+def text_field(fields: _BytesIO, width: int) -> Result[str, str]:
+    return Ok(before_nul(decode_text(read_exact(fields, width, "a header field")?, "a header field")?))
+
+
+def octal_field(fields: _BytesIO, width: int, label: str) -> Result[int, str]:
+    """A NUL- or space-terminated octal number; GNU's base-256 form for huge values is refused."""
+    text = text_field(fields, width)?.strip()
+    mut value = 0
+    for character in text:
+        mut digit = -1
+        for index, candidate in enumerate("01234567"):
+            if candidate == character:
+                digit = index
+        if digit < 0:
+            return Err(f"{label}: header number `{text}` is not octal")
+        value = value * 8 + digit
+    return Ok(value)
+
+
+def is_zero(block: bytes) -> Result[bool, str]:
+    return Ok(byte_sum(block)? == 0)
+
+
+def byte_sum(data: bytes) -> Result[int, str]:
+    stream = BytesIO(data)
+    mut total = 0
+    while stream.remaining() > 0:
+        read: Result[u8, IoError] = stream.read(Endian.Little)
+        match read:
+            Ok(byte) =>
+                wide: int = byte
+                total += wide
+            Err(error) => return Err(f"reading a header: {error.message()}")
+    return Ok(total)
+
+
+def zeros(count: int) -> bytes:
+    out = BytesIO()
+    for _ in range(count):
+        out.write(b"\0").unwrap()
+    return out.getvalue()
+
+
+def read_exact(stream: _BytesIO, size: int, label: str) -> Result[bytes, str]:
+    match stream.read_exact(size):
+        Ok(data) => return Ok(data)
+        Err(error) => return Err(f"{label}: the archive ends early ({error.message()})")
+
+
+def skip(stream: _BytesIO, size: int, label: str) -> Result[None, str]:
+    read_exact(stream, size, label)?
+    return Ok(None)
+
+
+def write_bytes(out: _BytesIO, data: bytes) -> Result[None, str]:
+    match out.write(data):
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(f"writing an archive: {error.message()}")

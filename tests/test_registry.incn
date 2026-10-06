@@ -201,7 +201,7 @@ def test_a_fact_needs_its_publish_event_first() -> None:
     directory = scratch()
     root = directory.path()
     add_fact(root, fact_with("release", []))
-    assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: libm 0.2.16 has no publish event before this fact")
+    assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: libm 0.2.16 has no publish or adopt event before this fact")
 
 
 def test_a_publish_must_name_crates_io_and_a_checksum() -> None:
@@ -232,7 +232,7 @@ def test_the_file_name_must_carry_the_event_kind() -> None:
     directory = scratch()
     root = directory.path()
     write_raw_event(root, "000001", "fact", "{\"schema\": \"incan.pub/event/1\", \"kind\": \"publish\", \"at\": \"t\", \"actor\": \"tests\", \"subject\": {\"scope\": \"crates-io\", \"name\": \"libm\", \"version\": \"0.2.16\"}, \"source\": {\"registry\": \"https://github.com/rust-lang/crates.io-index\", \"checksum\": \"" + libm_checksum() + "\"}}")
-    assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: kind must be one of publish, fact, attest, asset, yank, unyank, advisory and match the file name")
+    assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: kind must be one of publish, adopt, fact, attest, asset, yank, unyank, advisory and match the file name")
 
 
 def sha(seed: str) -> str:
@@ -554,8 +554,8 @@ def test_projections_are_rendered_from_the_fold_and_compared_byte_for_byte() -> 
     assert_true(manifest.contains("\n[source]\nregistry = \"https://github.com/rust-lang/crates.io-index\"\nchecksum = \"" + libm_checksum() + "\"\n"))
     assert_true(manifest.contains("\n[[rust.facts]]\ntoolchain = \"" + toolchain() + "\"\ntarget = \"" + target() + "\"\nprofile = \"debug\"\nfeatures = [\"arch\", \"default\"]\ncfg = [\"arch_enabled\"]\n\n[[rust.facts]]"))
     assert_true(manifest.endswith("profile = \"release\"\nfeatures = [\"arch\", \"default\"]\ncfg = [\"arch_enabled\", \"optimizations_enabled\"]\n"))
-    index = wanted["index/li/bm/libm"]
-    assert_eq(index, "{\"adopter\":\"tests\",\"advisories\":0,\"assets\":0,\"cksum\":\"" + libm_checksum() + "\",\"facts\":[{\"features\":[\"arch\",\"default\"],\"profile\":\"debug\",\"status\":\"harvested\",\"target\":\"" + target() + "\",\"toolchain\":\"" + toolchain() + "\"},{\"features\":[\"arch\",\"default\"],\"profile\":\"release\",\"status\":\"harvested\",\"target\":\"" + target() + "\",\"toolchain\":\"" + toolchain() + "\"}],\"manifest\":\"crates-io/libm/0.2.16/loaf.toml\",\"name\":\"libm\",\"source\":\"crates-io\",\"vers\":\"0.2.16\",\"yanked\":false}\n")
+    index = wanted["index/crates-io/libm"]
+    assert_eq(index, "{\"adopter\":\"tests\",\"advisories\":0,\"assets\":0,\"cksum\":\"" + libm_checksum() + "\",\"facts\":[{\"features\":[\"arch\",\"default\"],\"profile\":\"debug\",\"status\":\"harvested\",\"target\":\"" + target() + "\",\"toolchain\":\"" + toolchain() + "\"},{\"features\":[\"arch\",\"default\"],\"profile\":\"release\",\"status\":\"harvested\",\"target\":\"" + target() + "\",\"toolchain\":\"" + toolchain() + "\"}],\"manifest\":\"crates-io/libm/0.2.16/loaf.toml\",\"name\":\"crates-io/libm\",\"source\":\"crates-io\",\"vers\":\"0.2.16\",\"yanked\":false}\n")
 
 
 def test_a_yank_shows_on_the_index_line_and_a_stale_projection_is_named() -> None:
@@ -567,8 +567,8 @@ def test_a_yank_shows_on_the_index_line_and_a_stale_projection_is_named() -> Non
     append_event(root, "yank", "libm", "0.2.16", "tests", {}).unwrap()
     yanked = replay(load_events(root).unwrap(), root).unwrap()
     wanted = render_projections(yanked).unwrap()
-    assert_true(wanted["index/li/bm/libm"].contains("\"yanked\":true"))
-    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["index/li/bm/libm"])
+    assert_true(wanted["index/crates-io/libm"].contains("\"yanked\":true"))
+    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["index/crates-io/libm"])
 
 
 # ---------------------------------------------------------------- proposals --------------------------------------
@@ -610,7 +610,7 @@ def test_an_advisory_is_rendered_on_the_record_and_counted_on_the_index_line() -
     wanted = render_projections(state).unwrap()
     manifest = wanted["crates-io/libm/0.2.16/loaf.toml"]
     assert_true(manifest.contains("# A second paragraph.\n#\n# Advisory: The release binding was typed, not observed.\n# Advisory: See the fact events.\n#\n# Projection"))
-    assert_true(wanted["index/li/bm/libm"].contains("\"advisories\":1"))
+    assert_true(wanted["index/crates-io/libm"].contains("\"advisories\":1"))
     mut empty: Dict[str, JsonValue] = {}
     empty["advisory"] = JsonValue.object({"text": JsonValue.string("  ")})
     append_event(root, "advisory", "libm", "0.2.16", "tests", empty).unwrap()

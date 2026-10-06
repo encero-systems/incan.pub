@@ -36,7 +36,7 @@ pub def status_attested() -> str:
 
 pub def event_kinds() -> list[str]:
     """The event vocabulary, in the order the documentation lists it."""
-    return ["publish", "fact", "attest", "asset", "yank", "unyank", "advisory"]
+    return ["publish", "adopt", "fact", "attest", "asset", "yank", "unyank", "advisory"]
 
 
 pub def binding_keys() -> list[str]:
@@ -135,7 +135,12 @@ pub class Asset:
 
 @derive(Clone)
 pub class Record:
-    """The external-source record for one crates.io package version."""
+    """
+    The record of one crates.io package version: published as an external-source record, adopted as a Loaf.
+
+    `adopt` is the `adopt` event's payload once the version is adopted: its Rust facet, features, dependencies and
+    the digests of its manifest and source Loaf archive. A record without it is a v0 external-source record.
+    """
 
     pub name: str
     pub version: str
@@ -147,6 +152,8 @@ pub class Record:
     pub yanked: bool
     pub assets: list[Asset]
     pub advisories: list[JsonValue]
+    pub adopt: Option[JsonValue]
+    pub publisher: str
 
     def sorted_facts(self) -> list[Fact]:
         """The bound facts in binding order."""

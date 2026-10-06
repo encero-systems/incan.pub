@@ -10,16 +10,21 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
+    incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
-`refused: <rule>` and exits non-zero.
+`refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
+adopted, together with their dependency closure; `--cache` keeps what it downloads from crates.io and `--blobs` is the
+store source Loaf archives are written to by digest.
 """
 
 from std.fs import Path
 from std.json import JsonValue
 
-from admission import describe_binding, replay, replay_onto, validate_binding, validate_fact
-from canonical import is_sha256_identity
+from admission import adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
+from adoption import adoption_payload
+from canonical import digest_bytes, is_sha256_identity
+from closure import blob_path, plan_closure
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from events import (
@@ -46,7 +51,7 @@ from registry import Record, crates_io_index, has_key, keys_of, record_key
 
 def flags() -> list[str]:
     """Options that take no value."""
-    return ["publish"]
+    return ["publish", "records"]
 
 
 def default_actor() -> str:
@@ -137,7 +142,9 @@ def run(arguments: list[str]) -> Result[None, str]:
         return attest(invocation)
     if invocation.command == "advise":
         return advise(invocation)
-    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest or advise")
+    if invocation.command == "adopt":
+        return adopt(invocation)
+    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise or adopt")
 
 
 def check(invocation: Invocation) -> Result[None, str]:
@@ -162,7 +169,14 @@ def check(invocation: Invocation) -> Result[None, str]:
                 return Err("crates.io disagrees with the log: " + "; ".join(problems))
             verified = true
         None => pass
-    verification = verification_note(verified)
+    mut verification = verification_note(verified)
+    match invocation.option("blobs"):
+        Some(directory) =>
+            missing = verify_archives(state, Path(directory))?
+            if len(missing) > 0:
+                return Err("the blob store disagrees with the log: " + "; ".join(missing))
+            verification = verification + ", source Loaf archives verified"
+        None => pass
     mut facts = 0
     mut attested = 0
     for key in keys_of(state):
@@ -452,6 +466,64 @@ def advise(invocation: Invocation) -> Result[None, str]:
     written = append_event(root, "advisory", name, version, invocation.actor(), payload)?
     println(f"advised: {written}")
     return build(invocation)
+
+
+def adopt(invocation: Invocation) -> Result[None, str]:
+    """
+    Adopt versions and their dependency closure: plan everything, then append one `adopt` event per version in
+    dependency order, folding each before the next so admission checks every one as it lands.
+    """
+    if len(invocation.positional) % 2 != 0:
+        return Err("usage: incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR")
+    cache = invocation.require("cache")?
+    blobs = invocation.require("blobs")?
+    root = invocation.root()
+    mut state = replay(load_events(root)?, root)?
+    mut targets: list[list[str]] = []
+    mut index = 0
+    while index < len(invocation.positional):
+        targets.append([invocation.positional[index], invocation.positional[index + 1]])
+        index += 2
+    if invocation.flag("records"):
+        for key in sorted(list(state.keys())):
+            record = state[key]
+            match record.adopt:
+                Some(_) => pass
+                None => targets.append([record.name, record.version])
+    if len(targets) == 0:
+        return Err("name at least one version, or pass --records")
+    plan = plan_closure(adopted_versions(state), targets, cache, blobs)?
+    mut folded = len(event_files(root)?)
+    for item in plan:
+        payload = adoption_payload(item.adoption, item.manifest, item.archive)
+        written = append_event(root, "adopt", item.adoption.package, item.adoption.version, invocation.actor(), payload)?
+        appended = load_events_after(root, folded)?
+        state = replay_onto(state, appended, root)?
+        folded += len(appended)
+        println(f"adopted: {written}")
+    println(f"adoption: {len(plan)} version(s) adopted for {len(targets)} target(s)")
+    return build(invocation)
+
+
+def verify_archives(state: Dict[str, Record], blobs: Path) -> Result[list[str], str]:
+    """Every adopted record whose source Loaf archive is missing from the blob store or has other bytes."""
+    mut problems: list[str] = []
+    for key in sorted(list(state.keys())):
+        record = state[key]
+        match record.adopt:
+            Some(payload) =>
+                digest = string_member(payload, "archive")
+                path = blob_path(blobs, digest)
+                if not path.is_file():
+                    problems.append(f"{record.name} {record.version}: no archive {digest}")
+                    continue
+                match path.read_bytes():
+                    Ok(data) =>
+                        if digest_bytes(data) != digest:
+                            problems.append(f"{record.name} {record.version}: the stored archive is not {digest}")
+                    Err(error) => problems.append(f"{record.name} {record.version}: {error.message()}")
+            None => pass
+    return Ok(problems)
 
 
 def verification_note(verified: bool) -> str:
