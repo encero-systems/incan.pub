@@ -17,6 +17,29 @@ pub def argv() -> list[str]:
     return out
 
 
+@derive(Clone)
+pub model Ran:
+    """What a program run under `run_program` left behind."""
+
+    pub success: bool
+    pub stdout: bytes
+    pub stderr: bytes
+
+
+pub def run_program(program: str, arguments: list[str], environment: Dict[str, str], directory: str) -> Result[Ran, str]:
+    """Run `program` in `directory` with exactly `environment`: nothing of this process's environment leaks in."""
+    mut command = Command.new(program.to_string())
+    for argument in arguments:
+        command.arg(argument.to_string())
+    command.env_clear()
+    for key in environment.keys():
+        command.env(key.to_string(), environment[key].to_string())
+    command.current_dir(directory.to_string())
+    match command.output():
+        Ok(output) => return Ok(Ran(success=output.status.success(), stdout=output.stdout, stderr=output.stderr))
+        Err(error) => return Err(f"{program} could not run: {error}")
+
+
 pub def download(url: str, destination: str) -> Result[None, str]:
     """Fetch `url` into the file `destination`, failing on any HTTP error status."""
     mut command = Command.new("curl")

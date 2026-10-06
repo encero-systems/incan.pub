@@ -50,7 +50,7 @@ cd ../incan.pub-index
 ../incan.pub/target/incan-pub adopt --records --cache <cache> --blobs <blob store>
 ```
 
-`adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, and `readopt NAME VERSION ...` rewrites an adoption that is wrong because of a bug. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built on the Incan dev line; [AGENTS.md](AGENTS.md) says how.
+`adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, `readopt NAME VERSION ...` rewrites an adoption that is wrong because of a bug, and `record-fact NAME VERSION ...` records a build fact by running the build script sandboxed under one binding. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built on the Incan dev line; [AGENTS.md](AGENTS.md) says how.
 
 ## How facts get here
 

@@ -12,6 +12,8 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
     incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
+    incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
+                          --cache DIR --blobs DIR --work DIR [--actor ACTOR] [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
@@ -28,7 +30,8 @@ from canonical import canonical, digest_bytes, is_sha256_identity
 from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
-from graph import stage_graph, unclaimed_graphs
+from buildscript import Selection, record_proposal
+from graph import stage_graph, unclaimed_graphs, validate_graph
 from events import (
     append_event,
     event_files,
@@ -41,7 +44,7 @@ from events import (
     string_list_member,
     string_member,
 )
-from host import argv
+from host import argv, run_program
 from projection import (
     committed_projections,
     render_projections,
@@ -149,7 +152,9 @@ def run(arguments: list[str]) -> Result[None, str]:
         return adopt(invocation)
     if invocation.command == "readopt":
         return readopt(invocation)
-    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise, adopt or readopt")
+    if invocation.command == "record-fact":
+        return record_fact(invocation)
+    return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise, adopt, readopt or record-fact")
 
 
 def check(invocation: Invocation) -> Result[None, str]:
@@ -307,7 +312,6 @@ def admit_proposal(
     if len(receipt) > 0:
         fact.set("harvested-from", JsonValue.string(receipt)).unwrap()
     stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
-    stage_graph(evidence, proposal_path.parent(), root)?
     label = f"proposal {proposal_path.name()}"
     typed = validate_fact(fact, name, version, label, root)?
     binding_key = typed.binding.key()
@@ -316,6 +320,7 @@ def admit_proposal(
             return Err("the proposal's binding already has a different record; a fact is immutable")
         println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
         return Ok("no-op")
+    stage_graph(evidence, proposal_path.parent(), root)?
     if create:
         mut notes = string_member(proposal, "notes").strip()
         match notes_override:
@@ -544,6 +549,79 @@ def readopt(invocation: Invocation) -> Result[None, str]:
             return Err(f"{name} {version} has no adopt event to rewrite")
     replay(load_events(root)?, root)?
     return build(invocation)
+
+
+def record_fact(invocation: Invocation) -> Result[None, str]:
+    """
+    Record the build fact of one adopted version for one binding by running its build script, then admit it.
+
+    The graph file holds the resolution the binding's feature set came from (`deps` or `roots`, `target`, `host`);
+    it is committed with the fact. A version without a build script needs no fact and is reported as such.
+    """
+    if len(invocation.positional) != 2:
+        return Err("usage: incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH --cache DIR --blobs DIR --work DIR")
+    name = invocation.positional[0]
+    version = invocation.positional[1]
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    key = record_key(name, version)
+    if key not in state:
+        return Err(f"{name} {version} is not adopted")
+    mut adopt = JsonValue.null()
+    match state[key].adopt:
+        Some(payload) => adopt = payload
+        None => return Err(f"{name} {version} is not adopted")
+    selection = selection_of(invocation)?
+    match record_proposal(name, version, adopt, state[key].checksum, invocation.require("blobs")?, invocation.require("cache")?, invocation.require("work")?, selection)?:
+        Some(proposal) =>
+            admit_proposal(root, state, Path(proposal), invocation.actor(), false, None)?
+            return build(invocation)
+        None =>
+            println(f"no build script: {name} {version} needs no fact")
+            return Ok(None)
+
+
+def selection_of(invocation: Invocation) -> Result[Selection, str]:
+    """The binding from the command line, its toolchain identity read from the `rustc` that will compile the script."""
+    rustc = invocation.require("rustc")?
+    version = run_program(rustc, ["--version"], {"PATH": "/usr/bin:/bin"}, ".")?
+    if not version.success:
+        return Err(f"{rustc} --version failed")
+    mut toolchain = ""
+    match version.stdout.decode():
+        Ok(text) => toolchain = text.strip()
+        Err(error) => return Err(f"{rustc} --version: {error}")
+    mut features: list[str] = []
+    for feature in invocation.option("features").unwrap_or("").split(","):
+        if len(feature) > 0:
+            features.append(feature)
+    profile = invocation.require("profile")?
+    domain = invocation.require("domain")?
+    if profile != "debug" and profile != "release":
+        return Err("`--profile` is debug or release")
+    if domain != "host" and domain != "target":
+        return Err("`--domain` is host or target")
+    graph_file = invocation.require("graph")?
+    described = parse_event(read_text(Path(graph_file), graph_file)?, graph_file)?
+    mut roots = member(described, "roots")
+    if described.contains_key("deps"):
+        roots = member(described, "deps")
+    graph = JsonValue.object({
+        "roots": roots,
+        "target": JsonValue.string(string_member(described, "target")),
+        "host": JsonValue.string(string_member(described, "host")),
+    })
+    validate_graph(graph, graph_file)?
+    return Ok(Selection(
+        toolchain=toolchain,
+        rustc=rustc,
+        target=string_member(described, "target"),
+        host=string_member(described, "host"),
+        profile=profile,
+        features=sorted(features),
+        domain=domain,
+        graph=graph,
+    ))
 
 
 def verify_archives(state: Dict[str, Record], blobs: Path) -> Result[list[str], str]:

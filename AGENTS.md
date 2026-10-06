@@ -45,6 +45,10 @@ git commit && git push
 
 `--cache` keeps the crates.io index files and `.crate` archives adoption downloads, each checked against its crates.io checksum before it is read; `--blobs` receives every source Loaf archive as `sha256/<hex>.tar`. A requirement no adopted version meets is met by the newest crates.io version satisfying it, preferring one that is not yanked. Report the resulting `index` HEAD as for a harvest.
 
+## Recording build facts
+
+A version with a build script needs a fact for every binding a consumer selects (RFC 125, "Adoption from crates.io", rule 6). `incan-pub record-fact NAME VERSION --features a,b --profile P --domain target|host --graph <roots.json> --rustc <pinned rustc> --cache <cache> --blobs <blob store> --work <dir>` compiles the script with that `rustc` and runs it under `sandbox-exec` with the network closed, writes confined to its work directory, and an environment built only from the binding. Its `rustc-cfg` answers and `OUT_DIR` files become the fact, which is admitted like any harvested proposal, with the domain and the graph in its evidence. A version without a build script is reported as needing no fact. A script with build dependencies, or one that prints link, environment or metadata directives, is refused until a recorder for that work exists.
+
 ## Correcting a wrong adoption
 
 For the time being, an adoption that is wrong because of a bug is rewritten in place: fix the translation, then run `incan-pub readopt NAME VERSION ... --cache <cache> --blobs <blob store>` against a checkout of `index`. Each named `adopt` event keeps its place, time and actor and takes the corrected payload. A version whose translation comes out the same is right and is refused, so right adoptions never change. Commit, push and report the new `index` HEAD as for any other change.

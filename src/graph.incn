@@ -89,8 +89,8 @@ pub def validate_graph(graph: JsonValue, label: str) -> Result[None, str]:
 
 def validate_root(request: JsonValue, label: str) -> Result[None, str]:
     for key in request.keys():
-        if not ["name", "loaf", "req", "features", "default-features", "target"].contains(key):
-            return Err(f"{label}: a root holds name, loaf, req, features, default-features and target only, not `{key}`")
+        if not ["name", "loaf", "req", "features", "default-features", "optional", "target"].contains(key):
+            return Err(f"{label}: a root holds name, loaf, req, features, default-features, optional and target only, not `{key}`")
     name = string_member(request, "name")
     loaf = string_member(request, "loaf")
     pieces = loaf.split("/")
