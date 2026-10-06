@@ -1,0 +1,55 @@
+name: toolchain
+
+# Build the Incan compiler once per operating system at one commit and publish it as an asset of the prerelease
+# `incan-<12 hex>`, so the other workflows download it instead of building it or keeping its target directory in the
+# Actions cache. No Incan release installs the dev line yet; this goes away when one does.
+#
+# The binary is not relocatable: it prepares its standard library from the source tree it was built in, at that
+# absolute path (INCAN_SOURCE_ROOT and INCAN_STDLIB move part of it, not the derive provider). Every job of this
+# repository has the same workspace path, so a job that downloads the binary checks out `encero-systems/incan` at the
+# same commit into `incan`, exactly where this workflow built it. The binary only runs under the file name `incan`.
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: "Full encero-systems/incan commit to build"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            asset: incan-x86_64-unknown-linux-gnu.tar.gz
+          - runner: macos-latest
+            asset: incan-aarch64-apple-darwin.tar.gz
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Check out the Incan toolchain
+        uses: actions/checkout@v4
+        with:
+          repository: encero-systems/incan
+          ref: ${{ inputs.commit }}
+          path: incan
+      - name: Build the Incan CLI
+        working-directory: incan
+        run: cargo build -p incan-cli
+      - name: Publish the binary
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT: ${{ inputs.commit }}
+          ASSET: ${{ matrix.asset }}
+        run: |
+          tag="incan-${COMMIT:0:12}"
+          tar -czf "$ASSET" -C incan/target/debug incan
+          # Both jobs try to create the release; the one that loses the race uploads into the other's.
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --prerelease --target main \
+            --title "Incan toolchain ${COMMIT:0:12}" \
+            --notes "The \`incan\` CLI built at encero-systems/incan@$COMMIT, for this repository's workflows. Not an Incan release." \
+            || gh release view "$tag" --repo "$GITHUB_REPOSITORY" > /dev/null
+          gh release upload "$tag" "$ASSET" --repo "$GITHUB_REPOSITORY" --clobber
