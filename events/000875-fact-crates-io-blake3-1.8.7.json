@@ -2,18 +2,16 @@
   "actor": "encero-systems/incan.pub maintainers",
   "at": "2026-09-30T15:00:32Z",
   "evidence": {
-    "cargo_lock_digest": "sha256:142e768793cb02fc5e987181ecf2b00d42e5b880dd09ce0dfed8f0562406c698",
-    "cargo_manifest_digest": "sha256:f6ef3fd350c0e7df05a125d75ca0f7e5235aa50e100d8b4eb52ac8f798f422f5",
-    "cargo_version": "cargo 1.96.0-nightly (e84cb639e 2026-03-21)",
     "compiler_probes": [
-      "sha256:4308b0dccece12bef613e2cd5cc4713ce7e90678962bfba9a2580376ce8f63c0",
-      "sha256:c93390131bcee5e40fd86810675cedab127212047623185de4ec024256565a98"
+      "sha256:3a0b8dba26bd8b7a7de2219bd095a3196af1e3ab3926d46af4f707710f623295",
+      "sha256:4308b0dccece12bef613e2cd5cc4713ce7e90678962bfba9a2580376ce8f63c0"
     ],
+    "domain": "target",
+    "graph": "sha256:f057db27975e15c4df8c460659485f9dc17bb9286b21c7602d74c889eaa72225",
     "hazards": [],
     "host": "aarch64-apple-darwin",
-    "method": "compatibility publisher observation",
-    "receipt": "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c",
-    "rustc_identity": "sha256:b0d1a3dd0b5db29f6fee2afacaa1800268f3035a43ab642b22208d04d2511d39"
+    "method": "registry build-script run",
+    "sandbox": "sandbox-exec: network denied, writes confined to the work directory"
   },
   "fact": {
     "cfg": [
@@ -23,7 +21,6 @@
       "default",
       "std"
     ],
-    "harvested-from": "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c",
     "link": [
       {
         "environment": [],
@@ -94,10 +91,26 @@
               }
             ],
             "language": "c",
-            "name": "blake3_neon.o"
+            "name": "blake3_neon.o",
+            "reads": [
+              "source-c-blake3-h",
+              "source-c-blake3-impl-h"
+            ]
           }
         ],
         "sources": [
+          {
+            "digest": "sha256:81bbb11ad1909341565dce4914cc0e5c29718eca27e6950b28f9226a91aaf8c5",
+            "kind": "file",
+            "name": "source-c-blake3-h",
+            "path": "c/blake3.h"
+          },
+          {
+            "digest": "sha256:d388dca3574602c8849805ea3c8c0a12d082ac0e428756f305e111942f099af4",
+            "kind": "file",
+            "name": "source-c-blake3-impl-h",
+            "path": "c/blake3_impl.h"
+          },
           {
             "digest": "sha256:67e88d017a82df1b76d5f841e7b7215135a007486ac14c5be1407e1bca5201b0",
             "kind": "file",
@@ -108,12 +121,11 @@
         "target": "aarch64-apple-darwin"
       }
     ],
-    "out": [],
     "profile": "release",
     "target": "aarch64-apple-darwin",
     "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
   },
-  "id": "sha256:72f8b102e0d7f0d68c3a62901852c91837cde0439476a3fa3cf0b8adde301179",
+  "id": "sha256:eec14dc4c3ca0a53712020c21c5858ba7af512f2da2295a7ab68ec54bed249db",
   "kind": "fact",
   "schema": "incan.pub/event/1",
   "signature": null,
