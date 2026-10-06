@@ -47,7 +47,7 @@ git commit && git push
 
 ## Correcting a wrong adoption
 
-For the time being, an adoption that is wrong because of a bug is rewritten in place: fix the translation, then run `incan-pub readopt NAME VERSION ... --cache <cache> --blobs <blob store>` against a checkout of `index`. Each named `adopt` event keeps its place, time and actor and takes the corrected payload. A version whose translation comes out the same is right and is refused, so right adoptions never change. The archive the wrong adoption named stays in the blob store, so a lock that pinned it still verifies. Commit, push and report the new `index` HEAD as for any other change.
+For the time being, an adoption that is wrong because of a bug is rewritten in place: fix the translation, then run `incan-pub readopt NAME VERSION ... --cache <cache> --blobs <blob store>` against a checkout of `index`. Each named `adopt` event keeps its place, time and actor and takes the corrected payload. A version whose translation comes out the same is right and is refused, so right adoptions never change. Commit, push and report the new `index` HEAD as for any other change.
 
 ## Where the contract lives
 
