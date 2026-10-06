@@ -1,12 +1,13 @@
 """
 The host boundary: the few Rust interop calls the tool needs, kept in one module so the rest is plain Incan.
 
-The standard library has no argument vector and no HTTP client; both come from Rust's standard library here and
-nowhere else. Downloads go through the host's `curl`, the one program adoption runs.
+The standard library has no argument vector, no HTTP client, no symlink reading and no process control; those come
+from Rust's standard library here and nowhere else. Downloads go through the host's `curl`.
 """
 
-from rust::std::env import args
-from rust::std::process import Command
+from rust::std::env import args, current_dir, current_exe, var
+from rust::std::fs import canonicalize, read_link
+from rust::std::process import Command, exit
 
 
 pub def argv() -> list[str]:
@@ -38,6 +39,59 @@ pub def run_program(program: str, arguments: list[str], environment: Dict[str, s
     match command.output():
         Ok(output) => return Ok(Ran(success=output.status.success(), stdout=output.stdout, stderr=output.stderr))
         Err(error) => return Err(f"{program} could not run: {error}")
+
+
+pub def run_passthrough(program: str, arguments: list[str]) -> Result[int, str]:
+    """Run `program` with this process's environment, working directory and standard streams; return its exit code."""
+    mut command = Command.new(program.to_string())
+    for argument in arguments:
+        command.arg(argument.to_string())
+    match command.status():
+        Ok(status) =>
+            code: i32 = status.code().unwrap_or(1)
+            wide: int = code
+            return Ok(wide)
+        Err(error) => return Err(f"{program} could not run: {error}")
+
+
+pub def environment_value(name: str) -> Option[str]:
+    """One variable of this process's environment."""
+    match var(name.to_string()):
+        Ok(value) => return Some(value)
+        Err(_) => return None
+
+
+pub def working_directory() -> Result[str, str]:
+    """This process's working directory, canonical."""
+    match current_dir():
+        Ok(directory) => return canonical_path(directory.to_string_lossy().to_string())
+        Err(error) => return Err(f"working directory: {error}")
+
+
+pub def executable_path() -> Result[str, str]:
+    """The running executable, canonical."""
+    match current_exe():
+        Ok(path) => return canonical_path(path.to_string_lossy().to_string())
+        Err(error) => return Err(f"current executable: {error}")
+
+
+pub def canonical_path(path: str) -> Result[str, str]:
+    """`path` with every symlink and `.`/`..` resolved; it must exist."""
+    match canonicalize(path.to_string()):
+        Ok(resolved) => return Ok(resolved.to_string_lossy().to_string())
+        Err(error) => return Err(f"{path}: {error}")
+
+
+pub def link_target(path: str) -> Result[str, str]:
+    """What the symlink at `path` points to, as written."""
+    match read_link(path.to_string()):
+        Ok(target) => return Ok(target.to_string_lossy().to_string())
+        Err(error) => return Err(f"{path}: {error}")
+
+
+pub def exit_with(code: int) -> None:
+    narrow: i32 = code.saturating_resize[i32]()
+    exit(narrow)
 
 
 pub def download(url: str, destination: str) -> Result[None, str]:

@@ -23,7 +23,8 @@ from canonical import canonical, digest_bytes, digest_text, pretty
 from closure import crates_io_lines, find_line
 from events import member, string_member, write_text
 from graph import graph_text
-from host import Ran, run_program
+from host import Ran, canonical_path, executable_path, run_program
+from native import Compiler, Conversion, Invocation, convert, read_traces, trace_variable
 from registry import crates_io_index
 from semver import parse_version
 from tar import TarEntry, read_archive
@@ -41,6 +42,10 @@ pub model Selection:
     pub features: list[str]
     pub domain: str
     pub graph: JsonValue
+    pub cc: str
+    pub cxx: str
+    pub ar: str
+    pub sysroot: str
 
 
 pub def record_proposal(
@@ -72,8 +77,9 @@ pub def record_proposal(
                 make_dir(base + "/" + directory)?
             executable = compile_script(script, package_dir, base, string_member(member(adopt, "rust"), "edition"), selection, label)?
             ran = run_script(executable, package, version, manifest, package_dir, base, selection, label)?
-            cfg = directives(ran, label)?
-            return Ok(Some(write_proposal(package, version, checksum, base, cfg, selection)?))
+            observed = directives(ran, label, manifest_string(manifest, "package.links") != "", base + "/out")?
+            native = native_work(observed, base, selection, label)?
+            return Ok(Some(write_proposal(package, version, checksum, base, observed.cfg, native, selection)?))
         None => return Ok(None)
 
 
@@ -222,6 +228,8 @@ def script_environment(
     environment["RUSTC"] = selection.rustc
     environment["RUSTDOC"] = selection.rustc.replace("/rustc", "/rustdoc")
     environment["CARGO_ENCODED_RUSTFLAGS"] = ""
+    if len(selection.cc) > 0:
+        native_wrappers(environment, base, selection)?
     return Ok(environment)
 
 
@@ -250,9 +258,22 @@ def target_cfg(selection: Selection, base: str, label: str) -> Result[Dict[str, 
     return Ok(out)
 
 
-def directives(ran: Ran, label: str) -> Result[list[str], str]:
-    """The `cfg` answers a build script printed, refusing any directive this recorder cannot state."""
+@derive(Clone)
+model Directives:
+    """What a build script said that becomes a fact: `cfg` answers and the static libraries it links."""
+
+    pub cfg: list[str]
+    pub libraries: list[str]
+
+
+def directives(ran: Ran, label: str, links: bool, out_dir: str) -> Result[Directives, str]:
+    """
+    The script's directives, refusing any this recorder cannot state. A `static=` library is stated by the link record
+    of its archive, so its search path must be `OUT_DIR`; a package that declares `links` may also print metadata for
+    its dependents, which carries no Oven authority.
+    """
     mut cfg: list[str] = []
+    mut libraries: list[str] = []
     for line in text_of(ran.stdout).split("\n"):
         mut rest = ""
         if line.startswith("cargo::"):
@@ -267,16 +288,105 @@ def directives(ran: Ran, label: str) -> Result[list[str], str]:
         if key == "rustc-cfg":
             if not cfg.contains(value):
                 cfg.append(value)
-        elif key != "rustc-check-cfg" and key != "rerun-if-changed" and key != "rerun-if-env-changed" and key != "warning":
+        elif key == "rustc-link-lib":
+            if not value.startswith("static="):
+                return Err(f"{label}: the build script links `{value}`, which is not a static library it builds")
+            libraries.append(value)
+        elif key == "rustc-link-search":
+            if value != "native=" + out_dir:
+                return Err(f"{label}: the build script searches `{value}` for libraries, outside its OUT_DIR")
+        elif key == "rustc-check-cfg" or key == "rerun-if-changed" or key == "rerun-if-env-changed" or key == "warning":
+            pass
+        elif not links or key.startswith("rustc-") or key == "error":
             return Err(f"{label}: the build script prints `{key}`, which this recorder cannot state yet")
-    return Ok(sorted(cfg))
+    return Ok(Directives(cfg=sorted(cfg), libraries=libraries))
 
 
-def write_proposal(package: str, version: str, checksum: str, base: str, cfg: list[str], selection: Selection) -> Result[str, str]:
+def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selection) -> Result[None, str]:
+    """`CC`, `CXX` and `AR` name copies of this tool that run the explicit tools and trace each successful run."""
+    tool = executable_path()?
+    make_dir(base + "/bin")?
+    make_dir(base + "/trace")?
+    for name in ["cc", "c++", "ar"]:
+        match Path(tool).copy(Path(base + "/bin/" + name), true, true):
+            Ok(_) => pass
+            Err(error) => return Err(f"native wrapper {name}: {error.message()}")
+    environment["CC"] = base + "/bin/cc"
+    environment["CXX"] = base + "/bin/c++"
+    environment["AR"] = base + "/bin/ar"
+    environment[trace_variable()] = base + "/trace"
+    environment["INCAN_PUB_NATIVE_CC"] = selection.cc
+    environment["INCAN_PUB_NATIVE_CXX"] = selection.cxx
+    environment["INCAN_PUB_NATIVE_AR"] = selection.ar
+    # The explicit compiler finds its headers through SDKROOT; the link record names that sysroot as an owner path.
+    environment["SDKROOT"] = canonical_path(selection.sysroot)?
+    return Ok(None)
+
+
+def native_work(observed: Directives, base: str, selection: Selection, label: str) -> Result[Conversion, str]:
+    """The link records for what the script compiled and archived; none when it built no native code."""
+    traces = read_traces(base + "/trace")?
+    if len(observed.libraries) == 0 and len(traces) == 0:
+        return Ok(Conversion(records=[], probes=[], products=[]))
+    if len(selection.cc) == 0:
+        return Err(f"{label}: the build script builds native code; pass --cc, --cxx, --ar and --sysroot")
+    mut compilers: list[Compiler] = []
+    for executable in [selection.cc, selection.cxx]:
+        compilers.append(Compiler(
+            executable=canonical_path(executable)?,
+            resource_dir=resource_directory(executable, base)?,
+            sysroot=canonical_path(selection.sysroot)?,
+        ))
+    match convert(traces, observed.libraries, compilers):
+        Ok(conversion) =>
+            mut products = conversion.products
+            for trace in traces:
+                for output in compile_outputs(trace):
+                    if not products.contains(output):
+                        products.append(output)
+            return Ok(Conversion(records=conversion.records, probes=conversion.probes, products=products))
+        Err(message) => return Err(f"{label}: {message}")
+
+
+def resource_directory(compiler: str, base: str) -> Result[str, str]:
+    ran = run_program(compiler, ["-print-resource-dir"], plain_environment(base), base)?
+    if not ran.success:
+        return Err(f"{compiler} did not report its resource directory")
+    return canonical_path(text_of(ran.stdout).strip())
+
+
+def compile_outputs(trace: Invocation) -> list[str]:
+    """The files a compile wrote, probes included, so none of them is mistaken for a committed input."""
+    mut out: list[str] = []
+    mut index = 0
+    while index + 1 < len(trace.arguments):
+        if trace.arguments[index] == "-o":
+            mut value = trace.arguments[index + 1]
+            if not value.startswith("/"):
+                value = trace.directory + "/" + value
+            match canonical_path(value):
+                Ok(resolved) => out.append(resolved)
+                Err(_) => pass
+        index += 1
+    return out
+
+
+def write_proposal(
+    package: str,
+    version: str,
+    checksum: str,
+    base: str,
+    cfg: list[str],
+    native: Conversion,
+    selection: Selection,
+) -> Result[str, str]:
     """A proposal directory in the harvest shape: proposal.json, its `out` files and the graph it names."""
     proposal_dir = base + "/proposal"
+    out_dir = canonical_path(base + "/out")?
     mut out: list[JsonValue] = []
     for relative in files_below(Path(base + "/out"), "")?:
+        if native.products.contains(out_dir + "/" + relative):
+            continue
         mut data = b""
         match Path(base + "/out/" + relative).read_bytes():
             Ok(read) => data = read
@@ -302,6 +412,8 @@ def write_proposal(package: str, version: str, checksum: str, base: str, cfg: li
     }
     if len(out) > 0:
         fact["out"] = JsonValue.array(out)
+    if len(native.records) > 0:
+        fact["link"] = JsonValue.array(native.records)
     graph_line = graph_text(selection.graph)?
     write_text(Path(proposal_dir + "/graph.json"), graph_line, "graph.json")?
     proposal = JsonValue.object({
@@ -315,6 +427,7 @@ def write_proposal(package: str, version: str, checksum: str, base: str, cfg: li
             "host": JsonValue.string(selection.host),
             "sandbox": JsonValue.string("sandbox-exec: network denied, writes confined to the work directory"),
             "hazards": JsonValue.array([]),
+            "compiler_probes": JsonValue.array([JsonValue.string(probe) for probe in native.probes]),
         }),
     })
     write_text(Path(proposal_dir + "/proposal.json"), pretty(proposal)? + "\n", "proposal.json")?

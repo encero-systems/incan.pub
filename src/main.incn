@@ -13,7 +13,9 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
-                          --cache DIR --blobs DIR --work DIR [--actor ACTOR] [--root DIR]
+                          --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
+                          [--actor ACTOR] [--root DIR]
+    incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
@@ -26,12 +28,13 @@ from std.json import JsonValue
 
 from admission import adopt_payload, adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
 from adoption import adoption_payload
-from canonical import canonical, digest_bytes, is_sha256_identity
+from canonical import canonical, digest_bytes, is_sha256_identity, pretty
 from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from buildscript import Selection, record_proposal
 from graph import stage_graph, unclaimed_graphs, validate_graph
+from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
 from events import (
     append_event,
     event_files,
@@ -44,7 +47,7 @@ from events import (
     string_list_member,
     string_member,
 )
-from host import argv, run_program
+from host import argv, canonical_path, exit_with, run_program
 from projection import (
     committed_projections,
     render_projections,
@@ -120,6 +123,19 @@ def parse_invocation(arguments: list[str]) -> Result[Invocation, str]:
 
 
 def main() -> Result[None, str]:
+    # Under a build script, copies of this tool stand in for the C compiler and the archiver (src/native.incn).
+    match wrapper_role():
+        Some(role) =>
+            match run_wrapper(role):
+                Ok(code) =>
+                    if code != 0:
+                        exit_with(code)
+                    return Ok(None)
+                Err(message) =>
+                    println(f"incan-pub native wrapper: {message}")
+                    exit_with(1)
+                    return Ok(None)
+        None => pass
     match run(argv()):
         Ok(_) => return Ok(None)
         Err(message) =>
@@ -154,6 +170,8 @@ def run(arguments: list[str]) -> Result[None, str]:
         return readopt(invocation)
     if invocation.command == "record-fact":
         return record_fact(invocation)
+    if invocation.command == "native-convert":
+        return native_convert(invocation)
     return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise, adopt, readopt or record-fact")
 
 
@@ -621,7 +639,46 @@ def selection_of(invocation: Invocation) -> Result[Selection, str]:
         features=sorted(features),
         domain=domain,
         graph=graph,
+        cc=invocation.option("cc").unwrap_or(""),
+        cxx=invocation.option("cxx").unwrap_or(""),
+        ar=invocation.option("ar").unwrap_or(""),
+        sysroot=invocation.option("sysroot").unwrap_or(""),
     ))
+
+
+def native_convert(invocation: Invocation) -> Result[None, str]:
+    """Print the link records a directory of native traces converts to: the inspection side of `record-fact`."""
+    compilers = [
+        Compiler(
+            executable=canonical_path(invocation.require("cc")?)?,
+            resource_dir=compiler_resource_dir(invocation.require("cc")?)?,
+            sysroot=canonical_path(invocation.require("sysroot")?)?,
+        ),
+        Compiler(
+            executable=canonical_path(invocation.require("cxx")?)?,
+            resource_dir=compiler_resource_dir(invocation.require("cxx")?)?,
+            sysroot=canonical_path(invocation.require("sysroot")?)?,
+        ),
+    ]
+    mut libraries: list[str] = []
+    for library in invocation.require("libraries")?.split(","):
+        if len(library) > 0:
+            libraries.append(library)
+    conversion = convert(read_traces(invocation.require("trace")?)?, libraries, compilers)?
+    println(pretty(JsonValue.object({
+        "link": JsonValue.array(conversion.records),
+        "compiler_probes": JsonValue.array([JsonValue.string(probe) for probe in conversion.probes]),
+    }))?)
+    return Ok(None)
+
+
+def compiler_resource_dir(compiler: str) -> Result[str, str]:
+    ran = run_program(compiler, ["-print-resource-dir"], {"PATH": "/usr/bin:/bin"}, ".")?
+    if not ran.success:
+        return Err(f"{compiler} did not report its resource directory")
+    match ran.stdout.decode():
+        Ok(text) => return canonical_path(text.strip())
+        Err(error) => return Err(f"{compiler}: {error}")
 
 
 def verify_archives(state: Dict[str, Record], blobs: Path) -> Result[list[str], str]:

@@ -1,0 +1,673 @@
+"""
+Native work observed while a build script runs: its C and C++ compiles and the archives it makes, turned into the
+`link` records RFC 119 declares.
+
+While a build script runs, `CC`, `CXX` and `AR` name copies of this tool. Each copy runs the explicit compiler or
+archiver it stands for and, after a successful run, writes one trace file naming the executable, its working
+directory, its arguments and the package's `CARGO_MANIFEST_DIR`, `OUT_DIR` and `TARGET`. After the script, the traces
+are converted under the rules the earlier harvest used, so a record made here equals one made there:
+
+- every object an archive holds comes from one plain `-c SOURCE -o OBJECT` compile by one explicit compiler, and every
+  `static=<name>` library the script links has exactly one archive `lib<name>.a`;
+- crate paths become declared inputs (a file, or a tree with its members), paths in the compiler's installation become
+  owner paths, and nothing may come from `OUT_DIR`;
+- the compiler is identified by the digest of an inventory of everything its owner paths reach;
+- a compile whose object is never archived is a probe, recorded only as evidence.
+"""
+
+from std.fs import Path
+from std.json import JsonValue, parse
+
+from canonical import canonical, digest_bytes, digest_text, json_string
+from events import string_list_member, string_member
+from host import argv, canonical_path, environment_value, link_target, run_passthrough, working_directory
+
+
+@derive(Clone)
+pub model Invocation:
+    """One successful compiler or archiver run, as its wrapper recorded it."""
+
+    pub reason: str
+    pub executable: str
+    pub directory: str
+    pub arguments: list[str]
+    pub manifest_dir: str
+    pub out_dir: str
+    pub target: str
+
+
+@derive(Clone)
+pub model Compiler:
+    """An explicit compiler with the resource directory and sysroot that belong to it, all canonical."""
+
+    pub executable: str
+    pub resource_dir: str
+    pub sysroot: str
+
+
+@derive(Clone)
+pub model Conversion:
+    """The link records one script's native work comes to, its probes, and the `OUT_DIR` files that work produced."""
+
+    pub records: list[JsonValue]
+    pub probes: list[str]
+    pub products: list[str]
+
+
+@derive(Clone)
+model Compile:
+    pub invocation: Invocation
+    pub source: str
+    pub output: str
+
+
+pub def trace_variable() -> str:
+    return "INCAN_PUB_NATIVE_TRACE"
+
+
+pub def wrapper_role() -> Option[str]:
+    """`cc`, `cxx` or `ar` when this process is a trace wrapper, from the name it was run under."""
+    if environment_value(trace_variable()) == None:
+        return None
+    arguments = argv()
+    if len(arguments) == 0:
+        return None
+    pieces = arguments[0].split("/")
+    name = pieces[len(pieces) - 1]
+    if name == "cc":
+        return Some("cc")
+    if name == "c++":
+        return Some("cxx")
+    if name == "ar":
+        return Some("ar")
+    return None
+
+
+pub def run_wrapper(role: str) -> Result[int, str]:
+    """Run the real tool for `role`; after a successful run, write its trace file."""
+    executable = environment_value("INCAN_PUB_NATIVE_" + role.upper()).unwrap_or("")
+    if len(executable) == 0:
+        return Err(f"no INCAN_PUB_NATIVE_{role.upper()} names the {role} this wrapper stands for")
+    arguments = argv()[1:]
+    code = run_passthrough(executable, arguments)?
+    if code != 0:
+        return Ok(code)
+    mut reason = "compile"
+    if role == "ar":
+        reason = "archive"
+    mut values: list[JsonValue] = []
+    for argument in arguments:
+        values.append(JsonValue.string(argument))
+    record = JsonValue.object({
+        "reason": JsonValue.string(reason),
+        "executable": JsonValue.string(executable),
+        "directory": JsonValue.string(working_directory()?),
+        "arguments": JsonValue.array(values),
+        "manifest_dir": JsonValue.string(environment_value("CARGO_MANIFEST_DIR").unwrap_or("")),
+        "out_dir": JsonValue.string(environment_value("OUT_DIR").unwrap_or("")),
+        "target": JsonValue.string(environment_value("TARGET").unwrap_or("")),
+    })
+    text = canonical(record)?
+    trace = environment_value(trace_variable()).unwrap_or("")
+    match Path(trace + "/" + digest_text(text)[7:] + ".json").write_text(text, "utf-8", "strict", None):
+        Ok(_) => return Ok(0)
+        Err(error) => return Err(f"native trace: {error.message()}")
+
+
+pub def read_traces(directory: str) -> Result[list[Invocation], str]:
+    """Every trace a script's wrappers wrote, in file-name order."""
+    mut out: list[Invocation] = []
+    path = Path(directory)
+    if not path.is_dir():
+        return Ok(out)
+    mut names: list[str] = []
+    match path.iterdir():
+        Ok(children) =>
+            for child in children:
+                names.append(child.name())
+        Err(error) => return Err(f"native trace: {error.message()}")
+    for name in sorted(names):
+        match Path(directory + "/" + name).read_text("utf-8", "strict"):
+            Ok(text) =>
+                match parse(text):
+                    Ok(value) =>
+                        out.append(Invocation(
+                            reason=string_member(value, "reason"),
+                            executable=string_member(value, "executable"),
+                            directory=string_member(value, "directory"),
+                            arguments=string_list_member(value, "arguments").unwrap_or([]),
+                            manifest_dir=string_member(value, "manifest_dir"),
+                            out_dir=string_member(value, "out_dir"),
+                            target=string_member(value, "target"),
+                        ))
+                    Err(error) => return Err(f"native trace {name}: {error.message()}")
+            Err(error) => return Err(f"native trace {name}: {error.message()}")
+    return Ok(out)
+
+
+pub def convert(traces: list[Invocation], libraries: list[str], compilers: list[Compiler]) -> Result[Conversion, str]:
+    """One link record per archive the script made, after proving every archived object has exactly one compile."""
+    mut compiles: list[Invocation] = []
+    for trace in traces:
+        if trace.reason == "compile":
+            compiles.append(trace)
+    if len(compiles) == 0:
+        return Err("native adoption observed no compiler invocation")
+    mut library_names: list[str] = []
+    for library in libraries:
+        if library.startswith("static="):
+            library_names.append(library[7:])
+    mut archives: Dict[str, list[str]] = {}
+    for trace in traces:
+        if trace.reason == "archive":
+            pair = archive_members(trace)?
+            mut members: list[str] = []
+            if pair[0] in archives:
+                members = archives[pair[0]]
+            for member in pair[1:]:
+                members.append(member)
+            archives[pair[0]] = members
+    if len(archives) == 0:
+        return Err("native adoption observed no archive path")
+    mut archived: list[str] = []
+    for archive in archives.keys():
+        for member in archives[archive]:
+            archived.append(member)
+    mut parsed: Dict[str, Compile] = {}
+    mut probes: list[str] = []
+    for invocation in compiles:
+        mut handled = false
+        match plain_compile(invocation):
+            Ok(found) =>
+                if archived.contains(found.output):
+                    if found.output in parsed:
+                        return Err("one archived object has more than one observed compile")
+                    parsed[found.output] = found
+                    handled = true
+                elif beneath(found.source, canonical_path(invocation.manifest_dir)?):
+                    return Err(f"compiled object `{last_component(found.output)}` was never archived")
+            Err(_) => pass
+        if not handled:
+            probes.append(probe_digest(invocation, compilers)?)
+    mut records: list[JsonValue] = []
+    mut matched: list[str] = []
+    mut products: list[str] = []
+    for archive in sorted(list(archives.keys())):
+        archive_name = last_component(archive)
+        if not archive_name.startswith("lib") or not archive_name.endswith(".a"):
+            return Err(f"archive path `{archive_name}` has no matching `static=<name>` link library")
+        library = archive_name[3:len(archive_name) - 2]
+        if not library_names.contains(library):
+            return Err(f"archive path `{archive_name}` has no matching `static=<name>` link library")
+        mut member_compiles: list[Compile] = []
+        mut seen: list[str] = []
+        for member in archives[archive]:
+            if member not in parsed:
+                return Err(f"archive member `{last_component(member)}` was never compiled")
+            if seen.contains(member):
+                return Err(f"archive `{archive_name}` contains one object more than once")
+            seen.append(member)
+            member_compiles.append(parsed[member])
+        records.append(link_record(member_compiles, library, compilers)?)
+        matched.append(library)
+        products.append(archive)
+        for member in archives[archive]:
+            products.append(member)
+    if len(parsed) != len(unique(archived)):
+        return Err("the rebuilt archive member set does not equal the non-probe compile outputs")
+    for name in library_names:
+        if not matched.contains(name):
+            return Err(f"static link library `{name}` has no matching archive path")
+    return Ok(Conversion(records=records, probes=sorted(probes), products=products))
+
+
+def link_record(member_compiles: list[Compile], library: str, compilers: list[Compiler]) -> Result[JsonValue, str]:
+    """One typed `link` record for the ordered members of one archive."""
+    first = member_compiles[0].invocation
+    manifest_dir = canonical_path(first.manifest_dir)?
+    out_dir = canonical_path(first.out_dir)?
+    target = first.target
+    mut executables: list[str] = []
+    for compile in member_compiles:
+        if canonical_path(compile.invocation.manifest_dir)? != manifest_dir or compile.invocation.target != target:
+            return Err("native compiles disagree on CARGO_MANIFEST_DIR or TARGET")
+        executable = canonical_path(compile.invocation.executable)?
+        if not executables.contains(executable):
+            executables.append(executable)
+    if len(executables) != 1:
+        return Err("one archive combines objects from different compiler executables")
+    authority = compiler_for(executables[0], compilers)?
+    owner_root = common_ancestor([authority.executable, authority.resource_dir, authority.sysroot])?
+    executable_path = portable_beneath(owner_root, authority.executable, "compiler executable")?
+    resource_path = portable_beneath(owner_root, authority.resource_dir, "compiler resource directory")?
+    sysroot_path = portable_beneath(owner_root, authority.sysroot, "C sysroot")?
+    mut sources: Dict[str, JsonValue] = {}
+    mut objects: list[JsonValue] = []
+    mut object_names: list[str] = []
+    mut owner_paths = [executable_path, resource_path, sysroot_path]
+    for compile in member_compiles:
+        if beneath(compile.source, out_dir):
+            return Err("compile source is generated inside OUT_DIR and cannot be adopted")
+        source_relative = portable_beneath(manifest_dir, compile.source, "compile source")?
+        source_name = logical_name("source", source_relative)
+        insert_source(sources, source_name, file_artifact(source_name, source_relative, compile.source)?)?
+        object_name = stable_object_name(compile.output)?
+        if object_names.contains(object_name):
+            return Err(f"native object name `{object_name}` collides after stripping the cc hash prefix")
+        object_names.append(object_name)
+        mut arguments = implicit_arguments(compile.invocation.arguments, sysroot_path, resource_path)
+        context = PathContext(
+            directory=compile.invocation.directory,
+            manifest_dir=manifest_dir,
+            out_dir=out_dir,
+            owner_root=owner_root,
+        )
+        for argument in object_arguments(compile.invocation.arguments, source_name, object_name, context, sources, owner_paths)?:
+            arguments.append(argument)
+        objects.append(JsonValue.object({
+            "name": JsonValue.string(object_name),
+            "language": JsonValue.string(source_language(compile.source)?),
+            "arguments": JsonValue.array(arguments),
+        }))
+    mut inputs: list[JsonValue] = []
+    for name in sorted(list(sources.keys())):
+        inputs.append(sources[name])
+    return Ok(JsonValue.object({
+        "name": JsonValue.string(library),
+        "target": JsonValue.string(target),
+        "executable": JsonValue.object({
+            "name": JsonValue.string(last_component(authority.executable)),
+            "owner": JsonValue.string(owner_identity(owner_root, owner_paths)?),
+            "path": JsonValue.string(executable_path),
+            "digest": JsonValue.string(file_digest(authority.executable)?),
+        }),
+        "environment": JsonValue.array([]),
+        "sources": JsonValue.array(inputs),
+        "objects": JsonValue.array(objects),
+        "library": JsonValue.object({"name": JsonValue.string(library), "kind": JsonValue.string("static")}),
+    }))
+
+
+@derive(Clone)
+model PathContext:
+    pub directory: str
+    pub manifest_dir: str
+    pub out_dir: str
+    pub owner_root: str
+
+
+def implicit_arguments(arguments: list[str], sysroot_path: str, resource_path: str) -> list[JsonValue]:
+    """`-isysroot` and `-resource-dir` made explicit, so a replay names the owner paths the compiler reads."""
+    mut has_sysroot = false
+    mut has_resource = false
+    for argument in arguments:
+        if argument == "-isysroot" or argument == "--sysroot" or argument.startswith("--sysroot="):
+            has_sysroot = true
+        if argument == "-resource-dir" or argument.startswith("-resource-dir="):
+            has_resource = true
+    mut out: list[JsonValue] = []
+    if not has_sysroot:
+        out.append(literal("-isysroot"))
+        out.append(JsonValue.object({"owner": JsonValue.string(sysroot_path)}))
+    if not has_resource:
+        out.append(literal("-resource-dir"))
+        out.append(JsonValue.object({"owner": JsonValue.string(resource_path)}))
+    return out
+
+
+def object_arguments(
+    arguments: list[str],
+    source_name: str,
+    object_name: str,
+    context: PathContext,
+    mut sources: Dict[str, JsonValue],
+    mut owner_paths: list[str],
+) -> Result[list[JsonValue], str]:
+    """The observed argument vector with its source, object and paths named instead of spelled."""
+    mut out: list[JsonValue] = []
+    mut index = 0
+    while index < len(arguments):
+        argument = arguments[index]
+        if argument == "-c":
+            out.append(literal("-c"))
+            out.append(JsonValue.object({"input": JsonValue.string(source_name)}))
+            index += 2
+            continue
+        if argument == "-o":
+            out.append(literal("-o"))
+            out.append(JsonValue.object({"output": JsonValue.string(object_name)}))
+            index += 2
+            continue
+        if argument == "-I" or argument == "-isysroot" or argument == "--sysroot" or argument == "-resource-dir":
+            if index + 1 >= len(arguments):
+                return Err(f"{argument} has no value")
+            out.append(literal(argument))
+            out.append(path_argument(arguments[index + 1], context, sources, owner_paths)?)
+            index += 2
+            continue
+        mut flag = ""
+        mut value = ""
+        if argument.startswith("--sysroot="):
+            flag = "--sysroot"
+            value = argument[10:]
+        elif argument.startswith("-resource-dir="):
+            flag = "-resource-dir"
+            value = argument[14:]
+        elif argument.startswith("-I") and len(argument) > 2:
+            flag = "-I"
+            value = argument[2:]
+        if len(flag) > 0:
+            out.append(literal(flag))
+            out.append(path_argument(value, context, sources, owner_paths)?)
+            index += 1
+            continue
+        if argument.startswith("/"):
+            out.append(path_argument(argument, context, sources, owner_paths)?)
+            index += 1
+            continue
+        out.append(literal(argument))
+        index += 1
+    return Ok(out)
+
+
+def path_argument(
+    value: str,
+    context: PathContext,
+    mut sources: Dict[str, JsonValue],
+    mut owner_paths: list[str],
+) -> Result[JsonValue, str]:
+    """A path-taking argument as a crate input or a compiler-owner path; anything else is refused."""
+    path = resolve(context.directory, value)?
+    if beneath(path, context.out_dir):
+        return Err("compiler input is generated inside OUT_DIR and cannot be adopted")
+    if beneath(path, context.manifest_dir):
+        mut relative = "."
+        if path != context.manifest_dir:
+            relative = portable_beneath(context.manifest_dir, path, "crate input")?
+        name = logical_name("include", relative)
+        mut artifact = JsonValue.null()
+        if Path(path).is_dir():
+            artifact = tree_artifact(name, relative, path)?
+        else:
+            artifact = file_artifact(name, relative, path)?
+        insert_source(sources, name, artifact)?
+        return Ok(JsonValue.object({"input": JsonValue.string(name)}))
+    if beneath(path, context.owner_root):
+        relative = portable_beneath(context.owner_root, path, "compiler owner input")?
+        if not owner_paths.contains(relative):
+            owner_paths.append(relative)
+        return Ok(JsonValue.object({"owner": JsonValue.string(relative)}))
+    return Err("absolute compiler input is outside the crate and compiler owner")
+
+
+def insert_source(mut sources: Dict[str, JsonValue], name: str, artifact: JsonValue) -> Result[None, str]:
+    if name in sources:
+        if canonical(sources[name])? != canonical(artifact)?:
+            return Err(f"source name `{name}` collides after portable normalization")
+        return Ok(None)
+    sources[name] = artifact
+    return Ok(None)
+
+
+def file_artifact(name: str, relative: str, path: str) -> Result[JsonValue, str]:
+    return Ok(JsonValue.object({
+        "name": JsonValue.string(name),
+        "kind": JsonValue.string("file"),
+        "path": JsonValue.string(relative),
+        "digest": JsonValue.string(file_digest(path)?),
+    }))
+
+
+pub def tree_artifact(name: str, relative: str, root: str) -> Result[JsonValue, str]:
+    """A crate include tree with its members and the executor's canonical tree digest."""
+    mut members: list[list[str]] = []
+    visit_tree(root, "", members)?
+    mut sorted_members = sort_pairs(members)
+    mut encoded: list[str] = []
+    mut values: list[JsonValue] = []
+    for pair in sorted_members:
+        encoded.append("{\"path\":" + json_string(pair[0]) + ",\"digest\":" + json_string(pair[1]) + "}")
+        values.append(JsonValue.object({"path": JsonValue.string(pair[0]), "digest": JsonValue.string(pair[1])}))
+    tree = "[\"incan.oven.publisher-artifact-tree/1\",[" + ",".join(encoded) + "]]"
+    return Ok(JsonValue.object({
+        "name": JsonValue.string(name),
+        "kind": JsonValue.string("tree"),
+        "path": JsonValue.string(relative),
+        "digest": JsonValue.string(digest_text(tree)),
+        "members": JsonValue.array(values),
+    }))
+
+
+def visit_tree(directory: str, prefix: str, mut members: list[list[str]]) -> Result[None, str]:
+    for name in sorted_children(directory)?:
+        location = directory + "/" + name
+        path = Path(location)
+        if path.is_symlink():
+            return Err("crate include tree contains a symlink")
+        if path.is_dir():
+            visit_tree(location, prefix + name + "/", members)?
+        elif path.is_file():
+            members.append([prefix + name, file_digest(location)?])
+        else:
+            return Err("crate include tree contains a special file")
+    return Ok(None)
+
+
+pub def owner_identity(root: str, paths: list[str]) -> Result[str, str]:
+    """
+    The digest of a canonical inventory of everything `paths` reach below `root`: one `kind<TAB>path<TAB>value` line per
+    entry, sorted by path, where a file's value is its digest, a symlink's is its target and a directory's is empty.
+    Directories are walked without following symlinks.
+    """
+    mut entries: Dict[str, str] = {}
+    for relative in paths:
+        inventory(root, relative, entries)?
+    mut lines: list[str] = []
+    for relative in sorted(list(entries.keys())):
+        lines.append(entries[relative])
+    if len(lines) == 0:
+        return Ok(digest_text(""))
+    return Ok(digest_text("\n".join(lines) + "\n"))
+
+
+def inventory(root: str, relative: str, mut entries: Dict[str, str]) -> Result[None, str]:
+    if relative in entries:
+        return Ok(None)
+    location = root + "/" + relative
+    path = Path(location)
+    if path.is_symlink():
+        entries[relative] = "symlink\t" + relative + "\t" + link_target(location)?
+        return Ok(None)
+    if path.is_file():
+        entries[relative] = "file\t" + relative + "\t" + file_digest(location)?
+        return Ok(None)
+    if not path.is_dir():
+        return Err(f"{location}: a compiler owner path is neither a file, a directory nor a symlink")
+    entries[relative] = "dir\t" + relative + "\t"
+    for name in sorted_children(location)?:
+        inventory(root, relative + "/" + name, entries)?
+    return Ok(None)
+
+
+def probe_digest(invocation: Invocation, compilers: list[Compiler]) -> Result[str, str]:
+    """A non-archived compile, normalized so its evidence does not name machine paths."""
+    manifest_dir = canonical_path(invocation.manifest_dir)?
+    out_dir = canonical_path(invocation.out_dir)?
+    executable = canonical_path(invocation.executable)?
+    authority = compiler_for(executable, compilers)?
+    owner_root = common_ancestor([executable, authority.resource_dir, authority.sysroot])?
+    mut arguments: list[str] = []
+    for argument in invocation.arguments:
+        arguments.append(json_string(normalize(argument, manifest_dir, out_dir, owner_root)))
+    mut target = "null"
+    if len(invocation.target) > 0:
+        target = json_string(invocation.target)
+    encoded = "[\"incan.oven.native-compiler-probe/1\"," + json_string(normalize(invocation.executable, manifest_dir, out_dir, owner_root)) + ",[" + ",".join(arguments) + "]," + target + "]"
+    return Ok(digest_text(encoded))
+
+
+def normalize(value: str, manifest_dir: str, out_dir: str, owner_root: str) -> str:
+    return value.replace(manifest_dir, "<package>").replace(out_dir, "<out>").replace(owner_root, "<owner>")
+
+
+def compiler_for(executable: str, compilers: list[Compiler]) -> Result[Compiler, str]:
+    for compiler in compilers:
+        if canonical_path(compiler.executable)? == executable:
+            return Ok(compiler)
+    return Err("native compile used a compiler other than the explicit C or C++ compiler")
+
+
+def plain_compile(invocation: Invocation) -> Result[Compile, str]:
+    """Exactly one `-c` source and one `-o` object, resolved."""
+    mut sources: list[str] = []
+    mut outputs: list[str] = []
+    mut index = 0
+    while index + 1 < len(invocation.arguments):
+        if invocation.arguments[index] == "-c":
+            sources.append(invocation.arguments[index + 1])
+        if invocation.arguments[index] == "-o":
+            outputs.append(invocation.arguments[index + 1])
+        index += 1
+    if len(sources) != 1 or len(outputs) != 1:
+        return Err("native invocation is not a plain compile with exactly one `-c` source and `-o` object")
+    return Ok(Compile(
+        invocation=invocation,
+        source=resolve(invocation.directory, sources[0])?,
+        output=resolve(invocation.directory, outputs[0])?,
+    ))
+
+
+def archive_members(invocation: Invocation) -> Result[list[str], str]:
+    """The archive path first, then the objects the operation names; an index-only run names none."""
+    mut archive = ""
+    mut out: list[str] = []
+    for argument in invocation.arguments:
+        if len(archive) == 0 and argument.endswith(".a"):
+            archive = resolve(invocation.directory, argument)?
+            continue
+        if len(archive) > 0 and argument.endswith(".o"):
+            out.append(resolve(invocation.directory, argument)?)
+    if len(archive) == 0:
+        return Err("archive invocation did not name an archive path")
+    return Ok([archive] + out)
+
+
+pub def stable_object_name(path: str) -> Result[str, str]:
+    """The object's file name without cc-rs's hexadecimal hash prefix."""
+    name = last_component(path)
+    if not name.endswith(".o"):
+        return Err(f"native compile output `{name}` is not an object file")
+    pieces = name.split("-")
+    if len(pieces) > 1 and len(pieces[0]) >= 8 and is_hex(pieces[0]):
+        return Ok("-".join(pieces[1:]))
+    return Ok(name)
+
+
+def source_language(path: str) -> Result[str, str]:
+    for suffix in [".c"]:
+        if path.endswith(suffix):
+            return Ok("c")
+    for suffix in [".cc", ".cpp", ".cxx"]:
+        if path.endswith(suffix):
+            return Ok("cpp")
+    for suffix in [".s", ".S", ".asm"]:
+        if path.endswith(suffix):
+            return Ok("assembly")
+    return Err("cannot classify native source language from its extension")
+
+
+def resolve(directory: str, value: str) -> Result[str, str]:
+    if value.startswith("/"):
+        return canonical_path(value)
+    return canonical_path(directory + "/" + value)
+
+
+def beneath(path: str, root: str) -> bool:
+    return path == root or path.startswith(root + "/")
+
+
+pub def portable_beneath(owner: str, path: str, field: str) -> Result[str, str]:
+    if not path.startswith(owner + "/"):
+        return Err(f"{field} is outside its owner")
+    relative = path[len(owner) + 1:]
+    for component in relative.split("/"):
+        if len(component) == 0 or component == "." or component == "..":
+            return Err(f"{field} does not have a portable relative path")
+    return Ok(relative)
+
+
+pub def common_ancestor(paths: list[str]) -> Result[str, str]:
+    """The longest directory every path lies beneath."""
+    mut candidate = paths[0]
+    while len(candidate) > 1:
+        mut all_beneath = true
+        for path in paths:
+            if not beneath(path, candidate):
+                all_beneath = false
+        if all_beneath:
+            return Ok(candidate)
+        pieces = candidate.split("/")
+        candidate = "/".join(pieces[0:len(pieces) - 1])
+    return Err("compiler, resource directory, and sysroot have no common owner root")
+
+
+pub def logical_name(prefix: str, path: str) -> str:
+    """`<prefix>-` followed by the path with every byte that is not an ASCII letter or digit replaced by `-`."""
+    mut out = prefix + "-"
+    for character in path:
+        if "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".contains(character):
+            out = out + character
+        else:
+            for _ in range(len(character.encode())):
+                out = out + "-"
+    return out
+
+
+def literal(value: str) -> JsonValue:
+    return JsonValue.object({"literal": JsonValue.string(value)})
+
+
+def file_digest(path: str) -> Result[str, str]:
+    match Path(path).read_bytes():
+        Ok(data) => return Ok(digest_bytes(data))
+        Err(error) => return Err(f"{path}: {error.message()}")
+
+
+def sorted_children(directory: str) -> Result[list[str], str]:
+    mut names: list[str] = []
+    match Path(directory).iterdir():
+        Ok(children) =>
+            for child in children:
+                names.append(child.name())
+        Err(error) => return Err(f"{directory}: {error.message()}")
+    return Ok(sorted(names))
+
+
+def sort_pairs(pairs: list[list[str]]) -> list[list[str]]:
+    mut by_first: Dict[str, list[str]] = {}
+    for pair in pairs:
+        by_first[pair[0]] = pair
+    mut out: list[list[str]] = []
+    for key in sorted(list(by_first.keys())):
+        out.append(by_first[key])
+    return out
+
+
+def unique(values: list[str]) -> list[str]:
+    mut out: list[str] = []
+    for value in values:
+        if not out.contains(value):
+            out.append(value)
+    return out
+
+
+def last_component(path: str) -> str:
+    pieces = path.split("/")
+    return pieces[len(pieces) - 1]
+
+
+def is_hex(text: str) -> bool:
+    for character in text:
+        if not "0123456789abcdefABCDEF".contains(character):
+            return false
+    return true

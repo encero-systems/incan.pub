@@ -1,0 +1,74 @@
+"""
+Native work: the naming, path and identity rules a link record is built from.
+
+The conversion as a whole is checked against a recorded link record by replaying its compiles through the trace
+wrappers; these tests pin the pieces it is made of, on scratch trees whose expected digests are written out here.
+"""
+
+from std.fs import Path
+from std.testing import assert_eq, assert_is_err, assert_true
+
+from canonical import digest_bytes, digest_text
+from host import environment_value
+from native import common_ancestor, logical_name, owner_identity, portable_beneath, stable_object_name, tree_artifact
+from events import string_member
+
+
+def scratch(name: str) -> str:
+    """A fresh directory under the system temporary directory, as a path string."""
+    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/incan-pub-native-" + name
+    path = Path(location)
+    if path.is_dir():
+        path.remove_tree().unwrap()
+    path.mkdir(parents=true, exist_ok=true).unwrap()
+    return location
+
+
+def test_an_object_name_drops_the_cc_hash_prefix_only() -> None:
+    assert_eq(stable_object_name("/out/0123abcd4567ef89-debug.o").unwrap(), "debug.o")
+    assert_eq(stable_object_name("/out/zstd-common.o").unwrap(), "zstd-common.o")
+    assert_is_err(stable_object_name("/out/libzstd.a"))
+
+
+def test_a_logical_name_keeps_letters_and_digits_and_dashes_the_rest() -> None:
+    assert_eq(logical_name("include", "zstd/lib"), "include-zstd-lib")
+    assert_eq(logical_name("source", "zstd/lib/common/debug.c"), "source-zstd-lib-common-debug-c")
+    assert_eq(logical_name("include", "."), "include--")
+
+
+def test_the_owner_root_is_the_longest_shared_directory() -> None:
+    root = common_ancestor(["/a/b/usr/bin/clang", "/a/b/usr/lib/clang/21", "/a/b/SDKs/X.sdk"]).unwrap()
+    assert_eq(root, "/a/b")
+    assert_eq(portable_beneath(root, "/a/b/usr/bin/clang", "compiler").unwrap(), "usr/bin/clang")
+    assert_is_err(portable_beneath(root, "/a/c/x", "compiler"))
+
+
+def test_a_tree_digest_covers_every_member_by_path_then_digest() -> None:
+    root = scratch("tree")
+    Path(root + "/sub").mkdir(parents=true, exist_ok=true).unwrap()
+    Path(root + "/b.h").write_bytes(b"B").unwrap()
+    Path(root + "/sub/a.h").write_bytes(b"A").unwrap()
+    tree = tree_artifact("include-x", "x", root).unwrap()
+    expected = "[\"incan.oven.publisher-artifact-tree/1\",[{\"path\":\"b.h\",\"digest\":\"" + digest_bytes(b"B") + "\"},{\"path\":\"sub/a.h\",\"digest\":\"" + digest_bytes(b"A") + "\"}]]"
+    assert_eq(string_member(tree, "digest"), digest_text(expected))
+    assert_eq(string_member(tree, "kind"), "tree")
+    Path(root).remove_tree().unwrap()
+
+
+def test_an_owner_identity_inventories_files_directories_and_symlinks() -> None:
+    root = scratch("owner")
+    Path(root + "/bin").mkdir(parents=true, exist_ok=true).unwrap()
+    Path(root + "/bin/clang").write_bytes(b"compiler").unwrap()
+    Path(root + "/sdk/include").mkdir(parents=true, exist_ok=true).unwrap()
+    Path(root + "/sdk/include/header.h").write_bytes(b"header").unwrap()
+    Path(root + "/sdk/include/alias.h").symlink_to("header.h").unwrap()
+    expected = (
+        "file\tbin/clang\t" + digest_bytes(b"compiler") + "\n"
+        + "dir\tsdk\t\n"
+        + "dir\tsdk/include\t\n"
+        + "symlink\tsdk/include/alias.h\theader.h\n"
+        + "file\tsdk/include/header.h\t" + digest_bytes(b"header") + "\n"
+    )
+    assert_eq(owner_identity(root, ["sdk", "bin/clang"]).unwrap(), digest_text(expected))
+    assert_eq(owner_identity(root, ["bin/clang", "sdk"]).unwrap(), digest_text(expected))
+    Path(root).remove_tree().unwrap()
