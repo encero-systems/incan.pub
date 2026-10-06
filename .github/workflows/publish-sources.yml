@@ -38,8 +38,16 @@ jobs:
           INCAN_PUB_REGISTRY_USER: ${{ github.actor }}
           INCAN_PUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSIONS: ${{ inputs.versions }}
+        # A version whose adoption no longer reproduces its archive is refused by push-source; the others still go up,
+        # and the run fails at the end naming every refused version.
         run: |
+          refused=""
           for pair in $VERSIONS; do
             "$RUNNER_TEMP/tool/incan-pub" push-source "${pair%@*}" "${pair#*@}" \
-              --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/work"
+              --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/work" \
+              || refused="$refused $pair"
           done
+          if [ -n "$refused" ]; then
+            echo "::error::not pushed:$refused"
+            exit 1
+          fi
