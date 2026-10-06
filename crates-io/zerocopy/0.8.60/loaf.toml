@@ -21,3 +21,17 @@ edition = "2021"
 
 [dependencies]
 zerocopy-derive = [{ loaf = "crates-io/zerocopy-derive", version = "=0.8.60", target = "cfg(any())" }, { loaf = "crates-io/zerocopy-derive", version = "=0.8.60", optional = true }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["simd"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["simd"]
+cfg = []

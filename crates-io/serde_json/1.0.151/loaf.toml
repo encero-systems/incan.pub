@@ -33,10 +33,24 @@ zmij = { loaf = "crates-io/zmij", version = "^1.0" }
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "raw_value", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "indexmap", "preserve_order", "std"]
 cfg = ["fast_arithmetic=\"64\""]
 harvested-from = "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["default", "raw_value", "std"]
+cfg = ["fast_arithmetic=\"64\""]
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"

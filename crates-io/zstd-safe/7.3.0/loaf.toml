@@ -35,6 +35,20 @@ zstd-sys = { loaf = "crates-io/zstd-sys", version = "^2.0.15", default-features 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["arrays", "legacy", "std", "zdict_builder"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["arrays", "legacy", "std", "zdict_builder"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["std"]
 cfg = []
