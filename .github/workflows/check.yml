@@ -1,10 +1,19 @@
 name: check
 
+# Test and build the tool on every OS a workflow runs it on, admit the published log with it, and on a push to main
+# publish the binary as `ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:<commit>-<target triple>`. The bake and
+# publish-sources workflows pull that binary instead of building the tool, which from an empty Oven home spends most
+# of a run compiling the standard library.
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
+  packages: write
 
 env:
   # The Incan dev line this tool is built with, downloaded from the GHCR package the toolchain workflow pushes
@@ -14,7 +23,17 @@ env:
 
 jobs:
   tool:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            triple: x86_64-unknown-linux-gnu
+          - runner: macos-latest
+            triple: aarch64-apple-darwin
+    runs-on: ${{ matrix.runner }}
+    env:
+      TRIPLE: ${{ matrix.triple }}
     steps:
       - name: Check out the tool
         uses: actions/checkout@v4
@@ -35,7 +54,7 @@ jobs:
         uses: oras-project/setup-oras@v1
       - name: Download the Incan compiler built at this commit
         run: |
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$INCAN_COMMIT-x86_64-unknown-linux-gnu" --output "$RUNNER_TEMP/toolchain"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$INCAN_COMMIT-$TRIPLE" --output "$RUNNER_TEMP/toolchain"
           mkdir -p incan/target/debug
           tar -xzf "$RUNNER_TEMP/toolchain/incan.tar.gz" -C incan/target/debug
       - name: Add the Rust target the standard library's vocab desugarer builds for
@@ -44,8 +63,24 @@ jobs:
         working-directory: tool
         run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
       - name: Snapshot the crates.io index lines the log names
+        if: matrix.triple == 'x86_64-unknown-linux-gnu'
         working-directory: index
         run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/incan-pub .crates-io-snapshot
       - name: Admit the published log with this tool
+        if: matrix.triple == 'x86_64-unknown-linux-gnu'
         working-directory: index
         run: ../tool/target/incan-pub check --crates-io-index .crates-io-snapshot
+      - name: Publish the tool binary
+        if: github.event_name == 'push'
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tar -czf incan-pub.tar.gz -C tool/target incan-pub
+          printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
+          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$GITHUB_SHA-$TRIPLE" \
+            --artifact-type application/vnd.incan.tool.v1 \
+            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
+            --annotation "dev.incan.tool.commit=$GITHUB_SHA" \
+            --annotation "dev.incan.toolchain.target=$TRIPLE" \
+            incan-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip

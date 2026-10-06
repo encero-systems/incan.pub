@@ -18,7 +18,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
                           [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
     incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
-    incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...]
+    incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]
     incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
     incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
@@ -53,7 +53,7 @@ from buildscript import Selection, record_proposal
 from graph import stage_graph, unclaimed_graphs, validate_graph
 from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
 from oci import Layer, Registry, SOURCE_ARTIFACT, SOURCE_LAYER, SOURCE_REPOSITORY, anonymous_fetch, push, repository, version_tag
-from units import Packed, closure_units, pack_unit, push_units, read_units, write_units
+from units import Packed, pack_closure, push_units, read_units, reproduction_differences, write_units
 from events import (
     append_event,
     event_files,
@@ -817,29 +817,29 @@ def pack_units(invocation: Invocation) -> Result[None, str]:
     """
     Pack the units one `incan oven compile-closure` run compiled, one archive each, and list them in `units.json`.
 
-    `--only` keeps the units of the named `NAME@VERSION`s; each must match a unit the closure compiled.
+    `--only` keeps the units of the named `NAME@VERSION`s; each must match a unit the closure compiled. `--reproduces`
+    names a second compile of the same closure in another root, and every unit must come out of it with the same unit
+    identity, entry and archive bytes: a unit that depends on where it was compiled is refused before it is published.
     """
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...]")
-    closure = invocation.positional[0]
+        return Err("usage: incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]")
     out = make_directory(invocation.require("out")?)?
     mut only: list[str] = []
     for item in invocation.option("only").unwrap_or("").split(","):
         if len(item) > 0:
             only.append(item)
-    mut packed: list[Packed] = []
-    mut matched: list[str] = []
-    for unit in closure_units(closure)?:
-        selector = unit.loaf[10:] + "@" + unit.version
-        if len(only) > 0 and not only.contains(selector):
-            continue
-        matched.append(selector)
-        item = pack_unit(closure + "/closure-store/store", unit, out)?
+    packed = pack_closure(invocation.positional[0], only, out)?
+    match invocation.option("reproduces"):
+        Some(other) =>
+            again = pack_closure(other, only, make_directory(out + "/reproduction")?)?
+            differences = reproduction_differences(packed, again)
+            if len(differences) > 0:
+                listed = "; ".join(differences)
+                return Err(f"the closure does not reproduce in another root, so its units name the machine: {listed}")
+            println(f"reproduced: {len(packed)} unit(s) identical in both roots")
+        None => pass
+    for item in packed:
         println(f"packed: {item.name} {item.version} {item.unit} {item.archive}")
-        packed.append(item)
-    for selector in only:
-        if not matched.contains(selector):
-            return Err(f"--only names {selector}, which the closure did not compile")
     return write_units(out, packed)
 
 

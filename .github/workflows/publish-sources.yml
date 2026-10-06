@@ -1,7 +1,8 @@
 name: publish-sources
 
 # Push adopted versions' source Loaf archives to the GitHub Container Registry, as packages linked to this repository.
-# Each archive is rebuilt by adoption on the runner and must have exactly the digest the index names.
+# Each archive is rebuilt by adoption on the runner and must have exactly the digest the index names. The tool is the
+# binary the check workflow published for this commit (`toolchain/incan-pub:<commit>-<triple>`).
 
 on:
   workflow_dispatch:
@@ -14,43 +15,23 @@ permissions:
   contents: read
   packages: write
 
-env:
-  # The Incan dev line the tool is built with, downloaded from the GHCR package the toolchain workflow pushes
-  # (`toolchain/incan:<commit>-<triple>`). The compiler reads its standard library from the checkout of this commit
-  # at `incan`.
-  INCAN_COMMIT: 7bfe19aec30971e3377323ae9107ea5d642ebd96
-
 jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the tool
-        uses: actions/checkout@v4
-        with:
-          path: tool
       - name: Check out the index branch
         uses: actions/checkout@v4
         with:
           ref: index
           path: index
-      - name: Check out the Incan toolchain
-        uses: actions/checkout@v4
-        with:
-          repository: encero-systems/incan
-          ref: ${{ env.INCAN_COMMIT }}
-          path: incan
       - name: Install oras
         uses: oras-project/setup-oras@v1
-      - name: Download the Incan compiler built at this commit
+      - name: Download the tool
         run: |
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$INCAN_COMMIT-x86_64-unknown-linux-gnu" --output "$RUNNER_TEMP/toolchain"
-          mkdir -p incan/target/debug
-          tar -xzf "$RUNNER_TEMP/toolchain/incan.tar.gz" -C incan/target/debug
-      - name: Add the Rust target the standard library's vocab desugarer builds for
-        run: rustup target add wasm32-wasip1
-      - name: Build incan-pub
-        working-directory: tool
-        run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$GITHUB_SHA-x86_64-unknown-linux-gnu" \
+            --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no incan-pub binary for $GITHUB_SHA yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       - name: Push the source Loaf archives
         working-directory: index
         env:
@@ -59,6 +40,6 @@ jobs:
           VERSIONS: ${{ inputs.versions }}
         run: |
           for pair in $VERSIONS; do
-            ../tool/target/incan-pub push-source "${pair%@*}" "${pair#*@}" \
+            "$RUNNER_TEMP/tool/incan-pub" push-source "${pair%@*}" "${pair#*@}" \
               --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/work"
           done

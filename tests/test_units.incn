@@ -15,7 +15,7 @@ from projection import render_projections
 from host import environment_value
 from registry import Binding, record_key
 from tar import read_archive
-from units import CompiledUnit, closure_units, pack_unit, unit_tag
+from units import CompiledUnit, Packed, closure_units, pack_unit, reproduction_differences, unit_tag
 
 
 def error_of[T](result: Result[T, str]) -> str:
@@ -220,4 +220,29 @@ def test_a_closure_without_units_predates_them() -> None:
     assert_eq(
         error_of(closure_units(closure)),
         closure + "/closure.json: no `units`; it was written by a compile-closure that predates them",
+    )
+
+
+def packed_as(unit: str, archive: str) -> Packed:
+    return Packed(
+        name="leaf",
+        version="1.2.0",
+        unit=digest_text(unit),
+        entry=digest_text("entry " + unit),
+        payload=digest_text("payload"),
+        binding=Binding(toolchain="rustc 1.98.0 (88d9e12ae 2026-08-18)", target="aarch64-apple-darwin", profile="debug", features=["default"]),
+        archive=digest_text(archive),
+        path="",
+    )
+
+
+def test_a_unit_must_come_out_the_same_when_compiled_in_another_root() -> None:
+    assert_eq(len(reproduction_differences([packed_as("unit", "archive")], [packed_as("unit", "archive")])), 0)
+    assert_eq(
+        reproduction_differences([packed_as("unit", "archive")], [packed_as("unit", "other bytes")]),
+        ["leaf 1.2.0 is unit " + digest_text("unit") + " with archive " + digest_text("archive") + " in one root and unit " + digest_text("unit") + " with archive " + digest_text("other bytes") + " in the other"],
+    )
+    assert_eq(
+        reproduction_differences([packed_as("unit", "archive")], []),
+        ["leaf 1.2.0 was compiled in only one root", "one root compiled 1 unit(s) and the other 0"],
     )

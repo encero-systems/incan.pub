@@ -4,6 +4,9 @@ name: bake
 # Registry as an asset, under a build-provenance attestation over the unit archives. A shard is a directory under
 # `bake/` holding the root requests (`roots.json`) and the resolution Oven compiles them under (`lock.json`).
 #
+# Every unit is compiled twice, in two roots, and `pack-units --reproduces` refuses the run unless both give the same unit
+# identity, entry and archive bytes: a unit that depends on where it was compiled is never published.
+#
 # The run proposes; it does not record. It uploads the asset proposals as the `asset-proposals` artifact, and
 # `incan-pub admit-assets` on a checkout of `index` records them after pulling each archive anonymously, so the index
 # stays the authority. Packages this workflow creates take the visibility of this public repository; a package first
@@ -30,9 +33,9 @@ permissions:
   attestations: write
 
 env:
-  # The compiler the tool is built with, and the one whose `oven compile-closure` lists the units it compiled. Both are
-  # downloaded from the GHCR package the toolchain workflow pushes (`toolchain/incan:<commit>-<triple>`).
-  TOOL_INCAN: 7bfe19aec30971e3377323ae9107ea5d642ebd96
+  # The compiler whose `oven compile-closure` lists the units it compiled, downloaded from the GHCR package the toolchain
+  # workflow pushes (`toolchain/incan:<commit>-<triple>`). The tool itself is the binary the check workflow published
+  # for this commit (`toolchain/incan-pub:<commit>-<triple>`).
   CLOSURE_INCAN: e62f768676a3fff0810b09c3bfd7755ef553f0a5
   RUST_TOOLCHAIN: 1.98.0
 
@@ -51,51 +54,46 @@ jobs:
           path: index
       - name: Install oras
         uses: oras-project/setup-oras@v1
-      - name: Download the Incan compilers
+      - name: Download the tool and the closure compiler
         run: |
-          for commit in "$TOOL_INCAN" "$CLOSURE_INCAN"; do
-            directory="$RUNNER_TEMP/incan-${commit:0:12}"
-            oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$commit-aarch64-apple-darwin" --output "$directory"
-            tar -xzf "$directory/incan.tar.gz" -C "$directory"
-          done
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$GITHUB_SHA-aarch64-apple-darwin" \
+            --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no incan-pub binary for $GITHUB_SHA yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$CLOSURE_INCAN-aarch64-apple-darwin" --output "$RUNNER_TEMP/incan"
+          tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
       - name: Install the Rust toolchain the units are compiled with
-        run: |
-          rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
-          rustup target add wasm32-wasip1
-      - name: Check out the tool's compiler sources
-        uses: actions/checkout@v4
-        with:
-          repository: encero-systems/incan
-          ref: ${{ env.TOOL_INCAN }}
-          path: incan
-      - name: Build incan-pub
-        working-directory: tool
-        run: INCAN="$RUNNER_TEMP/incan-${TOOL_INCAN:0:12}/incan" ./build.sh
+        run: rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
       - name: Fetch the shard's source Loaf archives
         env:
           SHARD: ${{ inputs.shard }}
-        run: tool/target/incan-pub fetch-sources "tool/bake/$SHARD/lock.json" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
+        run: |
+          "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/bake/$SHARD/lock.json" \
+            --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
       - name: Check out the closure compiler's sources
         uses: actions/checkout@v4
         with:
           repository: encero-systems/incan
           ref: ${{ env.CLOSURE_INCAN }}
           path: incan
-      - name: Compile the shard
+      - name: Compile the shard twice, in two roots
         env:
           SHARD: ${{ inputs.shard }}
-          INCAN_HOME: ${{ runner.temp }}/closure-home
           INCAN_NO_BANNER: "1"
         run: |
-          "$RUNNER_TEMP/incan-${CLOSURE_INCAN:0:12}/incan" oven compile-closure \
-            --pin "$GITHUB_WORKSPACE/index" --index-commit "$(git -C index rev-parse HEAD)" \
-            --roots "tool/bake/$SHARD/roots.json" --lock "tool/bake/$SHARD/lock.json" --profile debug \
-            --out "$RUNNER_TEMP/closure/closure.json" --blobs "$RUNNER_TEMP/blobs/sha256" \
-            --rustc "$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
-      - name: Pack the compiled units
+          for root in first second; do
+            INCAN_HOME="$RUNNER_TEMP/$root/home" "$RUNNER_TEMP/incan/incan" oven compile-closure \
+              --pin "$GITHUB_WORKSPACE/index" --index-commit "$(git -C index rev-parse HEAD)" \
+              --roots "tool/bake/$SHARD/roots.json" --lock "tool/bake/$SHARD/lock.json" --profile debug \
+              --out "$RUNNER_TEMP/$root/closure/closure.json" --blobs "$RUNNER_TEMP/blobs/sha256" \
+              --rustc "$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
+          done
+      - name: Pack the units, refusing any that differ between the two roots
         env:
           ONLY: ${{ inputs.only }}
-        run: tool/target/incan-pub pack-units "$RUNNER_TEMP/closure" --out "$RUNNER_TEMP/units" --only "$ONLY"
+        run: |
+          "$RUNNER_TEMP/tool/incan-pub" pack-units "$RUNNER_TEMP/first/closure" --out "$RUNNER_TEMP/units" --only "$ONLY" \
+            --reproduces "$RUNNER_TEMP/second/closure"
       - name: Attest the unit archives
         id: attest
         uses: actions/attest-build-provenance@v2
@@ -107,7 +105,7 @@ jobs:
           INCAN_PUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ATTESTATION: ${{ steps.attest.outputs.attestation-url }}
         run: |
-          tool/target/incan-pub push-units "$RUNNER_TEMP/units" --builder registry --attestation "$ATTESTATION" \
+          "$RUNNER_TEMP/tool/incan-pub" push-units "$RUNNER_TEMP/units" --builder registry --attestation "$ATTESTATION" \
             --proposals "$RUNNER_TEMP/proposals" --work "$RUNNER_TEMP/push"
       - name: Upload the asset proposals
         uses: actions/upload-artifact@v4

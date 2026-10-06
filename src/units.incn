@@ -114,6 +114,61 @@ pub def pack_unit(store: str, unit: CompiledUnit, out: str) -> Result[Packed, st
     ))
 
 
+pub def pack_closure(closure: str, only: list[str], out: str) -> Result[list[Packed], str]:
+    """
+    Pack every unit a closure compiled into `out`, or with `only` just the units of those `NAME@VERSION`s, each of which
+    must match a unit the closure compiled.
+    """
+    mut packed: list[Packed] = []
+    mut matched: list[str] = []
+    for unit in closure_units(closure)?:
+        selector = unit.loaf[10:] + "@" + unit.version
+        if len(only) > 0 and not only.contains(selector):
+            continue
+        matched.append(selector)
+        packed.append(pack_unit(closure + "/closure-store/store", unit, out)?)
+    for selector in only:
+        if not matched.contains(selector):
+            return Err(f"--only names {selector}, which {closure} did not compile")
+    return Ok(packed)
+
+
+pub def reproduction_differences(first: list[Packed], second: list[Packed]) -> list[str]:
+    """
+    How two compiles of one closure disagree, unit by unit: nothing when every unit has the same unit identity, entry
+    and archive in both. Units pair up by package, version and binding, in the order the closure lists them.
+    """
+    mut by_selection: Dict[str, list[Packed]] = {}
+    for item in second:
+        key = selection_key(item)
+        mut members: list[Packed] = []
+        if key in by_selection:
+            members = by_selection[key]
+        members.append(item)
+        by_selection[key] = members
+    mut taken: Dict[str, int] = {}
+    mut differences: list[str] = []
+    for item in first:
+        key = selection_key(item)
+        mut index = 0
+        if key in taken:
+            index = taken[key]
+        taken[key] = index + 1
+        if key not in by_selection or index >= len(by_selection[key]):
+            differences.append(f"{item.name} {item.version} was compiled in only one root")
+            continue
+        other = by_selection[key][index]
+        if other.unit != item.unit or other.entry != item.entry or other.archive != item.archive:
+            differences.append(f"{item.name} {item.version} is unit {item.unit} with archive {item.archive} in one root and unit {other.unit} with archive {other.archive} in the other")
+    if len(first) != len(second):
+        differences.append(f"one root compiled {len(first)} unit(s) and the other {len(second)}")
+    return differences
+
+
+def selection_key(item: Packed) -> str:
+    return item.name + "\t" + item.version + "\t" + item.binding.key()
+
+
 def materialized_files(artifact: JsonValue, directory: str, label: str) -> Result[list[TarEntry], str]:
     """The files `artifact.json` lists, read from `artifacts/` and checked against their digests."""
     mut out: list[TarEntry] = []
