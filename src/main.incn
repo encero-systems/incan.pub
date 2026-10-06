@@ -17,6 +17,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
                           [--incan PATH --build-lock LOCK.json]
                           [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
+    incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
@@ -28,7 +29,7 @@ from std.fs import Path
 from std.json import JsonValue
 
 from admission import adopt_payload, adopted_versions, describe_binding, replay, replay_onto, validate_binding, validate_fact
-from adoption import adoption_payload
+from adoption import adoption_payload, loaf_name
 from canonical import canonical, digest_bytes, is_sha256_identity, pretty
 from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
 from cratesio import index_urls, verify_checksums
@@ -36,6 +37,7 @@ from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_su
 from buildscript import Selection, record_proposal
 from graph import stage_graph, unclaimed_graphs, validate_graph
 from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
+from oci import Layer, Registry, SOURCE_ARTIFACT, SOURCE_LAYER, SOURCE_REPOSITORY, push, repository, version_tag
 from events import (
     append_event,
     event_files,
@@ -173,6 +175,8 @@ def run(arguments: list[str]) -> Result[None, str]:
         return record_fact(invocation)
     if invocation.command == "native-convert":
         return native_convert(invocation)
+    if invocation.command == "push-source":
+        return push_source(invocation)
     return Err(f"unknown command `{invocation.command}`; expected check, build, index-urls, publish, add-fact, admit-drop, attest, advise, adopt, readopt or record-fact")
 
 
@@ -727,6 +731,59 @@ def compiler_resource_dir(compiler: str) -> Result[str, str]:
     match ran.stdout.decode():
         Ok(text) => return canonical_path(text.strip())
         Err(error) => return Err(f"{compiler}: {error}")
+
+
+def push_source(invocation: Invocation) -> Result[None, str]:
+    """
+    Push an adopted version's source Loaf archive to the registry as `<namespace>/crates-io/<name>:<version>`.
+
+    The archive comes from the blob store; on a machine whose store does not hold it, adoption is run again and its
+    archive must have exactly the digest the index names, so a push can never carry other bytes than the adoption.
+    """
+    if len(invocation.positional) != 2:
+        return Err("usage: incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
+    name = invocation.positional[0]
+    version = invocation.positional[1]
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    key = record_key(name, version)
+    if key not in state:
+        return Err(f"{name} {version} is not adopted")
+    mut digest = ""
+    match state[key].adopt:
+        Some(payload) => digest = string_member(payload, "archive")
+        None => return Err(f"{name} {version} is not adopted")
+    blobs = invocation.require("blobs")?
+    archive = blobs + "/sha256/" + digest[7:] + ".tar"
+    if not Path(archive).is_file():
+        cache = invocation.require("cache")?
+        made = prepare(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?)?
+        if made.archive != digest:
+            return Err(f"{name} {version}: adoption no longer reproduces archive {digest}; push it from a blob store that holds it")
+    work = invocation.require("work")?
+    match Path(work).mkdir(parents=true, exist_ok=true):
+        Ok(_) => pass
+        Err(error) => return Err(f"{work}: {error.message()}")
+    registry = Registry(
+        host=invocation.option("registry").unwrap_or("ghcr.io"),
+        namespace=invocation.option("namespace").unwrap_or("encero-systems/incan.pub"),
+        work=work,
+    )
+    repository_name = repository(registry, "crates-io", name)
+    tag = version_tag(version)?
+    layer = Layer(
+        path=archive,
+        media_type=SOURCE_LAYER,
+        annotations={"org.opencontainers.image.title": f"{name}-{version}.tar", "dev.incan.loaf.archive": digest},
+    )
+    annotations: Dict[str, str] = {
+        "org.opencontainers.image.source": SOURCE_REPOSITORY,
+        "dev.incan.loaf.name": loaf_name(name),
+        "dev.incan.loaf.version": version,
+    }
+    pushed = push(registry, repository_name, tag, SOURCE_ARTIFACT, [layer], annotations)?
+    println(f"pushed: {registry.host}/{repository_name}:{tag} {pushed}")
+    return Ok(None)
 
 
 def verify_archives(state: Dict[str, Record], blobs: Path) -> Result[list[str], str]:

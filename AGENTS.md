@@ -53,6 +53,10 @@ A script that compiles C or C++ needs `--cc`, `--cxx`, `--ar` and `--sysroot`: `
 
 An include tree lists only the files the compiles read beneath it, taken from each compile's dependency file, and every file a compile reads must be a declared input or lie in the compiler's owner closure; a file it reads without its arguments naming it is a declared source listed in that object's `reads` (RFC 119). `out` is the `OUT_DIR` files the crate's own sources include. `--rewrite` replaces a binding's fact in place when it is wrong because of a bug, keeping its place, time and actor.
 
+## Publishing to the registry
+
+Source Loaf archives and compiled units are stored on the GitHub Container Registry as packages linked to this repository, `ghcr.io/encero-systems/incan.pub/crates-io/<name>`; the `index` branch stays the authority and every fetch is verified against it. `incan-pub push-source NAME VERSION` pushes one adopted version's source archive under the tag `<version>` (`+` written `_`), rebuilding the archive by adoption when the blob store lacks it and refusing a digest other than the index names. Pushes run in the `publish-sources` workflow with its `GITHUB_TOKEN`; credentials reach the tool as `INCAN_PUB_REGISTRY_USER` and `INCAN_PUB_REGISTRY_TOKEN` and reach curl only through a config file.
+
 ## Correcting a wrong adoption
 
 For the time being, an adoption that is wrong because of a bug is rewritten in place: fix the translation, then run `incan-pub readopt NAME VERSION ... --cache <cache> --blobs <blob store>` against a checkout of `index`. Each named `adopt` event keeps its place, time and actor and takes the corrected payload. A version whose translation comes out the same is right and is refused, so right adoptions never change. Commit, push and report the new `index` HEAD as for any other change.

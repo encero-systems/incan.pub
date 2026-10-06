@@ -1,0 +1,63 @@
+name: publish-sources
+
+# Push adopted versions' source Loaf archives to the GitHub Container Registry, as packages linked to this repository.
+# Each archive is rebuilt by adoption on the runner and must have exactly the digest the index names.
+
+on:
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: "Space-separated NAME@VERSION pairs, as adopted on the index branch"
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  # The Incan dev line the tool is built with. No release installs it yet, so the compiler is built at this commit.
+  INCAN_COMMIT: 7bfe19aec30971e3377323ae9107ea5d642ebd96
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the tool
+        uses: actions/checkout@v4
+        with:
+          path: tool
+      - name: Check out the index branch
+        uses: actions/checkout@v4
+        with:
+          ref: index
+          path: index
+      - name: Check out the Incan toolchain
+        uses: actions/checkout@v4
+        with:
+          repository: encero-systems/incan
+          ref: ${{ env.INCAN_COMMIT }}
+          path: incan
+      - name: Reuse the toolchain build for this commit
+        uses: actions/cache@v4
+        with:
+          path: incan/target
+          key: incan-cli-debug-${{ env.INCAN_COMMIT }}
+      - name: Build the Incan toolchain
+        working-directory: incan
+        run: cargo build -p incan-cli
+      - name: Add the Rust target the standard library's vocab desugarer builds for
+        run: rustup target add wasm32-wasip1
+      - name: Build incan-pub
+        working-directory: tool
+        run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
+      - name: Push the source Loaf archives
+        working-directory: index
+        env:
+          INCAN_PUB_REGISTRY_USER: ${{ github.actor }}
+          INCAN_PUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSIONS: ${{ inputs.versions }}
+        run: |
+          for pair in $VERSIONS; do
+            ../tool/target/incan-pub push-source "${pair%@*}" "${pair#*@}" \
+              --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/work"
+          done

@@ -1,0 +1,211 @@
+"""
+Pushing to an OCI registry: blobs by digest and one manifest per tag, over the host's `curl`.
+
+incan.pub stores source Loaf archives and compiled units on the GitHub Container Registry, as packages linked to its
+repository. The index stays the authority: the registry only holds bytes under their digests, and every consumer
+verifies what it fetches. This module speaks just enough of the OCI distribution API to put them there: a bearer token
+for the repository, `HEAD` to skip a blob already present, a monolithic upload (`POST`, then `PUT ?digest=`), and a
+manifest `PUT` by tag. Credentials come from `INCAN_PUB_REGISTRY_USER` and `INCAN_PUB_REGISTRY_TOKEN` (in a workflow,
+the actor and `GITHUB_TOKEN` with `packages: write`) and only ever reach curl through a config file, never its argv.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+
+from canonical import canonical, digest_bytes, json_string
+from events import string_member, write_text
+from host import environment_value, run_program
+
+pub const MANIFEST_TYPE: str = "application/vnd.oci.image.manifest.v1+json"
+pub const EMPTY_TYPE: str = "application/vnd.oci.empty.v1+json"
+pub const SOURCE_ARTIFACT: str = "application/vnd.incan.loaf.source.v1"
+pub const SOURCE_LAYER: str = "application/vnd.incan.loaf.source.v1.tar"
+pub const SOURCE_REPOSITORY: str = "https://github.com/encero-systems/incan.pub"
+
+
+@derive(Clone)
+pub model Layer:
+    """One blob a manifest lists: the file holding it, its media type, and what it says about itself."""
+
+    pub path: str
+    pub media_type: str
+    pub annotations: Dict[str, str]
+
+
+@derive(Clone)
+pub model Registry:
+    """Where to push: the registry host and the namespace every repository sits under."""
+
+    pub host: str
+    pub namespace: str
+    pub work: str
+
+
+pub def repository(registry: Registry, scope: str, name: str) -> str:
+    """The repository of one Loaf: `<namespace>/<scope>/<name>`, lowercase as OCI requires."""
+    return (registry.namespace + "/" + scope + "/" + name).lower()
+
+
+pub def version_tag(version: str) -> Result[str, str]:
+    """
+    A version as a tag. Tags cannot hold `+`, and semver never uses `_`, so `+` becomes `_` and the mapping is
+    reversible; anything else a tag cannot hold is refused.
+    """
+    tag = version.replace("+", "_")
+    if len(tag) == 0 or len(tag) > 128 or tag.startswith(".") or tag.startswith("-"):
+        return Err(f"version `{version}` does not make a tag")
+    for character in tag:
+        if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.-".contains(character):
+            return Err(f"version `{version}` does not make a tag")
+    return Ok(tag)
+
+
+pub def manifest(artifact_type: str, layers: list[JsonValue], annotations: Dict[str, str]) -> JsonValue:
+    """An OCI 1.1 artifact manifest with the empty config, the given layer descriptors and annotations."""
+    return JsonValue.object({
+        "schemaVersion": JsonValue.int(2),
+        "mediaType": JsonValue.string(MANIFEST_TYPE),
+        "artifactType": JsonValue.string(artifact_type),
+        "config": descriptor(EMPTY_TYPE, digest_bytes(b"{}"), 2, {}),
+        "layers": JsonValue.array(layers),
+        "annotations": strings_object(annotations),
+    })
+
+
+pub def descriptor(media_type: str, digest: str, size: int, annotations: Dict[str, str]) -> JsonValue:
+    mut fields: Dict[str, JsonValue] = {
+        "mediaType": JsonValue.string(media_type),
+        "digest": JsonValue.string(digest),
+        "size": JsonValue.int(size),
+    }
+    if len(annotations) > 0:
+        fields["annotations"] = strings_object(annotations)
+    return JsonValue.object(fields)
+
+
+pub def push(registry: Registry, repository_name: str, tag: str, artifact_type: str, layers: list[Layer], annotations: Dict[str, str]) -> Result[str, str]:
+    """Upload every layer and the empty config unless present, then the manifest under `tag`; return its digest."""
+    token = bearer(registry, repository_name)?
+    auth = registry.work + "/auth.curl"
+    write_text(Path(auth), "header = \"Authorization: Bearer " + token + "\"\n", "auth.curl")?
+    mut descriptors: list[JsonValue] = []
+    config = registry.work + "/config.json"
+    write_text(Path(config), "{}", "config.json")?
+    upload(registry, repository_name, auth, config)?
+    for layer in layers:
+        data = read_bytes(layer.path)?
+        digest = digest_bytes(data)
+        upload(registry, repository_name, auth, layer.path)?
+        descriptors.append(descriptor(layer.media_type, digest, len(data), layer.annotations))
+    body = canonical(manifest(artifact_type, descriptors, annotations))?
+    manifest_path = registry.work + "/manifest.json"
+    write_text(Path(manifest_path), body, "manifest.json")?
+    url = "https://" + registry.host + "/v2/" + repository_name + "/manifests/" + tag
+    status = curl(registry, ["-X", "PUT", "-H", f"Content-Type: {MANIFEST_TYPE}", "--data-binary", "@" + manifest_path, url], auth)?
+    if status != "201":
+        return Err(f"{repository_name}:{tag}: the manifest was refused with HTTP {status}: {response_text(registry)}")
+    remove(auth)
+    return Ok(digest_bytes(body.encode()))
+
+
+def upload(registry: Registry, repository_name: str, auth: str, path: str) -> Result[None, str]:
+    """Put one blob under its digest, skipping it when the registry already holds it."""
+    digest = digest_bytes(read_bytes(path)?)
+    base = "https://" + registry.host + "/v2/" + repository_name + "/blobs/"
+    if curl(registry, ["--head", base + digest], auth)? == "200":
+        return Ok(None)
+    started = curl(registry, ["-X", "POST", base + "uploads/"], auth)?
+    if started != "202":
+        return Err(f"{repository_name}: starting an upload was refused with HTTP {started}: {response_text(registry)}")
+    mut location = header_value(registry, "location")?
+    if location.startswith("/"):
+        location = "https://" + registry.host + location
+    mut separator = "?"
+    if location.contains("?"):
+        separator = "&"
+    finished = curl(registry, [
+        "-X", "PUT",
+        "-H", "Content-Type: application/octet-stream",
+        "--data-binary", "@" + path,
+        location + separator + "digest=" + digest.replace(":", "%3A"),
+    ], auth)?
+    if finished != "201":
+        return Err(f"{repository_name}: uploading {digest} was refused with HTTP {finished}: {response_text(registry)}")
+    return Ok(None)
+
+
+def bearer(registry: Registry, repository_name: str) -> Result[str, str]:
+    """A token for pulling and pushing one repository, from the registry's token endpoint."""
+    user = environment_value("INCAN_PUB_REGISTRY_USER").unwrap_or("")
+    secret = environment_value("INCAN_PUB_REGISTRY_TOKEN").unwrap_or("")
+    if len(user) == 0 or len(secret) == 0:
+        return Err("pushing needs INCAN_PUB_REGISTRY_USER and INCAN_PUB_REGISTRY_TOKEN")
+    login = registry.work + "/login.curl"
+    write_text(Path(login), "user = " + json_string(user + ":" + secret) + "\n", "login.curl")?
+    url = "https://" + registry.host + "/token?service=" + registry.host + "&scope=repository:" + repository_name + ":pull,push"
+    status = curl(registry, [url], login)?
+    remove(login)
+    if status != "200":
+        return Err(f"{repository_name}: the token endpoint answered HTTP {status}")
+    match JsonValue.parse(response_text(registry)):
+        Ok(answer) =>
+            token = string_member(answer, "token")
+            if len(token) == 0:
+                return Err(f"{repository_name}: the token endpoint returned no token")
+            return Ok(token)
+        Err(error) => return Err(f"{repository_name}: the token endpoint answered no JSON: {error.message()}")
+
+
+def curl(registry: Registry, arguments: list[str], config: str) -> Result[str, str]:
+    """Run one request; the body and headers land in the work directory and the HTTP status is returned."""
+    ran = run_program("curl", [
+        "-sS",
+        "-K", config,
+        "-o", registry.work + "/response.body",
+        "-D", registry.work + "/response.headers",
+        "-w", "%{http_code}",
+    ] + arguments, {"PATH": "/usr/bin:/bin:/usr/local/bin", "HOME": registry.work}, registry.work)?
+    if not ran.success:
+        match ran.stderr.decode("utf-8", "replace"):
+            Ok(text) => return Err(f"curl: {text.strip()}")
+            Err(_) => return Err("curl failed")
+    match ran.stdout.decode():
+        Ok(text) => return Ok(text.strip())
+        Err(_) => return Err("curl wrote a status that is not text")
+
+
+def header_value(registry: Registry, name: str) -> Result[str, str]:
+    """One header of the last response, its name compared without case."""
+    match Path(registry.work + "/response.headers").read_text("utf-8", "replace"):
+        Ok(text) =>
+            for line in text.split("\n"):
+                pieces = line.split(":")
+                if len(pieces) > 1 and pieces[0].strip().lower() == name:
+                    return Ok(":".join(pieces[1:]).strip())
+            return Err(f"the response has no `{name}` header")
+        Err(error) => return Err(f"response headers: {error.message()}")
+
+
+def response_text(registry: Registry) -> str:
+    match Path(registry.work + "/response.body").read_text("utf-8", "replace"):
+        Ok(text) => return text.strip()
+        Err(_) => return ""
+
+
+def read_bytes(path: str) -> Result[bytes, str]:
+    match Path(path).read_bytes():
+        Ok(data) => return Ok(data)
+        Err(error) => return Err(f"{path}: {error.message()}")
+
+
+def remove(path: str) -> None:
+    match Path(path).unlink():
+        Ok(_) => pass
+        Err(_) => pass
+
+
+def strings_object(values: Dict[str, str]) -> JsonValue:
+    mut entries: Dict[str, JsonValue] = {}
+    for key in values.keys():
+        entries[key] = JsonValue.string(values[key])
+    return JsonValue.object(entries)
