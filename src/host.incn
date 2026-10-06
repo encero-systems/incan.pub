@@ -20,7 +20,7 @@ pub def argv() -> list[str]:
 pub def download(url: str, destination: str) -> Result[None, str]:
     """Fetch `url` into the file `destination`, failing on any HTTP error status."""
     mut command = Command.new("curl")
-    # Each argument is passed as its own copy: handing the parameter itself to a Rust method moves it.
+    # Each argument is passed as its own copy: handing the parameter itself to a Rust method moves it (encero-systems/incan#1611).
     command.arg("-sSfL").arg("--retry").arg("3").arg("-o").arg(destination.to_string()).arg(url.to_string())
     match command.status():
         Ok(status) =>
