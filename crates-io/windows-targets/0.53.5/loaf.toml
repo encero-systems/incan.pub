@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/windows-targets"
+version = "0.53.5"
+
+[rust]
+name = "windows_targets"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+windows-link = { loaf = "crates-io/windows-link", version = "^0.2.1", default-features = false, target = "cfg(windows_raw_dylib)" }
+windows_aarch64_gnullvm = { loaf = "crates-io/windows_aarch64_gnullvm", version = "^0.53.0", target = "aarch64-pc-windows-gnullvm" }
+windows_aarch64_msvc = { loaf = "crates-io/windows_aarch64_msvc", version = "^0.53.0", target = "cfg(all(target_arch = \"aarch64\", target_env = \"msvc\", not(windows_raw_dylib)))" }
+windows_i686_gnu = { loaf = "crates-io/windows_i686_gnu", version = "^0.53.0", target = "cfg(all(target_arch = \"x86\", target_env = \"gnu\", not(target_abi = \"llvm\"), not(windows_raw_dylib)))" }
+windows_i686_gnullvm = { loaf = "crates-io/windows_i686_gnullvm", version = "^0.53.0", target = "i686-pc-windows-gnullvm" }
+windows_i686_msvc = { loaf = "crates-io/windows_i686_msvc", version = "^0.53.0", target = "cfg(all(target_arch = \"x86\", target_env = \"msvc\", not(windows_raw_dylib)))" }
+windows_x86_64_gnu = { loaf = "crates-io/windows_x86_64_gnu", version = "^0.53.0", target = "cfg(all(target_arch = \"x86_64\", target_env = \"gnu\", not(target_abi = \"llvm\"), not(windows_raw_dylib)))" }
+windows_x86_64_gnullvm = { loaf = "crates-io/windows_x86_64_gnullvm", version = "^0.53.0", target = "x86_64-pc-windows-gnullvm" }
+windows_x86_64_msvc = { loaf = "crates-io/windows_x86_64_msvc", version = "^0.53.0", target = "cfg(all(any(target_arch = \"x86_64\", target_arch = \"arm64ec\"), target_env = \"msvc\", not(windows_raw_dylib)))" }

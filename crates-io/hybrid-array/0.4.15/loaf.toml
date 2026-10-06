@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hybrid-array"
+version = "0.4.15"
+
+[project.features]
+alloc = []
+arbitrary = ["dep:arbitrary"]
+bytemuck = ["dep:bytemuck"]
+ctutils = ["dep:ctutils"]
+extra-sizes = []
+serde = ["dep:serde"]
+subtle = ["dep:subtle"]
+zerocopy = ["dep:zerocopy"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "hybrid_array"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1", default-features = false, optional = true }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2", features = ["const-generics"], default-features = false, optional = true }
+typenum = { loaf = "crates-io/typenum", version = "^1.20", features = ["const-generics"] }
+zerocopy = { loaf = "crates-io/zerocopy", version = "^0.8", features = ["derive"], optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8", default-features = false, optional = true }

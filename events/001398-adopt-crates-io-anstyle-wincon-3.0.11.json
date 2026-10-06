@@ -1,0 +1,59 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:291e6a250ff86cd4a820112fb8898808a366d8f9f58ce16d1f538353ad55747d",
+    "package": "anstyle-wincon",
+    "registry": "crates-io",
+    "version": "3.0.11"
+  },
+  "archive": "sha256:c5cf4878a49ac63eee5496f244fd9cb5aae15f8dbb3aa563ccf42df87eb0a8f5",
+  "at": "2026-10-06T22:24:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle",
+      "name": "anstyle",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell_polyfill",
+      "name": "once_cell_polyfill",
+      "optional": false,
+      "req": "^1.56.1",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_System_Console"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.60.2, <0.62",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:35b0d62ddc85692a5c5d09116c75c5f53e7e4bf61a552caecf04e35243e3d6c9",
+  "kind": "adopt",
+  "manifest": "sha256:c758fe9aba5c00fca6909e1417afa594024eefd79ef05f3d0d35160723277c6a",
+  "rust": {
+    "edition": "2021",
+    "name": "anstyle_wincon",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "anstyle-wincon",
+    "scope": "crates-io",
+    "version": "3.0.11"
+  }
+}

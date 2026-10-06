@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crypto-common"
+version = "0.2.2"
+
+[project.features]
+getrandom = ["rand_core", "dep:getrandom"]
+rand_core = ["dep:rand_core"]
+zeroize = ["hybrid-array/zeroize"]
+
+[rust]
+name = "crypto_common"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", features = ["sys_rng"], optional = true }
+hybrid-array = { loaf = "crates-io/hybrid-array", version = "^0.4.7" }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", optional = true }

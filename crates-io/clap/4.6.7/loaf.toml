@@ -1,0 +1,37 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/clap"
+version = "4.6.7"
+
+[project.features]
+cargo = ["clap_builder/cargo"]
+color = ["clap_builder/color"]
+debug = ["clap_builder/debug", "clap_derive?/debug"]
+default = ["std", "color", "help", "usage", "error-context", "suggestions"]
+deprecated = ["clap_builder/deprecated", "clap_derive?/deprecated"]
+derive = ["dep:clap_derive"]
+env = ["clap_builder/env"]
+error-context = ["clap_builder/error-context"]
+help = ["clap_builder/help"]
+std = ["clap_builder/std"]
+string = ["clap_builder/string"]
+suggestions = ["clap_builder/suggestions"]
+unicode = ["clap_builder/unicode"]
+unstable-derive-ui-tests = []
+unstable-doc = ["clap_builder/unstable-doc", "derive"]
+unstable-ext = ["clap_builder/unstable-ext"]
+unstable-markdown = ["dep:clap_derive", "clap_derive/unstable-markdown"]
+unstable-styles = ["clap_builder/unstable-styles"]
+unstable-v5 = ["clap_builder/unstable-v5", "clap_derive?/unstable-v5", "deprecated"]
+usage = ["clap_builder/usage"]
+wrap_help = ["clap_builder/wrap_help"]
+
+[rust]
+name = "clap"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+clap_builder = { loaf = "crates-io/clap_builder", version = "=4.6.7", default-features = false }
+clap_derive = { loaf = "crates-io/clap_derive", version = "=4.6.7", optional = true }

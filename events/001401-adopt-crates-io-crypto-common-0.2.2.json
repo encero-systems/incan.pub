@@ -1,0 +1,67 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ce6e4c961d6cd6c9a86db418387425e8bdeaf05b3c8bc1411e6dca4c252f1453",
+    "package": "crypto-common",
+    "registry": "crates-io",
+    "version": "0.2.2"
+  },
+  "archive": "sha256:91a45ac3d1ef5c29f74f9e28e09fa0ac4c407592bcfe693dea15e3cfd020a1c4",
+  "at": "2026-10-06T22:24:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "sys_rng"
+      ],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hybrid-array",
+      "name": "hybrid-array",
+      "optional": false,
+      "req": "^0.4.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.10"
+    }
+  ],
+  "features": {
+    "getrandom": [
+      "rand_core",
+      "dep:getrandom"
+    ],
+    "rand_core": [
+      "dep:rand_core"
+    ],
+    "zeroize": [
+      "hybrid-array/zeroize"
+    ]
+  },
+  "id": "sha256:707e00b640ed72a49cae7f6fbc795e6c466446ad428b827ee2edb13cbfad7a88",
+  "kind": "adopt",
+  "manifest": "sha256:5745e2413edefc1e310759135a2bff6f131b166571a1403815951e313b54aeac",
+  "rust": {
+    "edition": "2024",
+    "name": "crypto_common",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "crypto-common",
+    "scope": "crates-io",
+    "version": "0.2.2"
+  }
+}

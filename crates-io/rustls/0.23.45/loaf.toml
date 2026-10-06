@@ -1,0 +1,42 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rustls"
+version = "0.23.45"
+
+[project.features]
+aws-lc-rs = ["aws_lc_rs"]
+aws_lc_rs = ["dep:aws-lc-rs", "webpki/aws-lc-rs", "aws-lc-rs/aws-lc-sys", "aws-lc-rs/prebuilt-nasm"]
+brotli = ["dep:brotli", "dep:brotli-decompressor", "std"]
+custom-provider = []
+default = ["aws_lc_rs", "logging", "prefer-post-quantum", "std", "tls12"]
+fips = ["aws_lc_rs", "aws-lc-rs?/fips", "webpki/aws-lc-rs-fips"]
+hashbrown = ["dep:hashbrown"]
+log = ["dep:log"]
+logging = ["log"]
+prefer-post-quantum = ["aws_lc_rs"]
+read_buf = ["rustversion", "std"]
+ring = ["dep:ring", "webpki/ring"]
+rustversion = []
+std = ["webpki/std", "pki-types/std", "once_cell/std"]
+tls12 = []
+zlib = ["dep:zlib-rs"]
+
+[rust]
+name = "rustls"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+aws-lc-rs = { loaf = "crates-io/aws-lc-rs", version = "^1.18", default-features = false, optional = true }
+brotli = { loaf = "crates-io/brotli", version = "^8", features = ["std"], default-features = false, optional = true }
+brotli-decompressor = { loaf = "crates-io/brotli-decompressor", version = "^5.0.0", optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.15", features = ["default-hasher", "inline-more"], default-features = false, optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.8", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.16", features = ["alloc", "race"], default-features = false }
+pki-types = { loaf = "crates-io/rustls-pki-types", version = "^1.12", features = ["alloc"] }
+ring = { loaf = "crates-io/ring", version = "^0.17", optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2.5.0", default-features = false }
+webpki = { loaf = "crates-io/rustls-webpki", version = "^0.103.14", features = ["alloc"], default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8" }
+zlib-rs = { loaf = "crates-io/zlib-rs", version = "^0.6", optional = true }

@@ -1,0 +1,69 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:446ba717509524cb3f22f17ecc096f10f4822d76ab5c0b9822c5f9c284e825f4",
+    "package": "sha2",
+    "registry": "crates-io",
+    "version": "0.11.0"
+  },
+  "archive": "sha256:40f27391f3d06b075b398125c07731990ecd0e3daf35e8b19bdca927a6da54ce",
+  "at": "2026-10-06T22:24:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.11"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "digest/alloc"
+    ],
+    "default": [
+      "alloc",
+      "oid"
+    ],
+    "oid": [
+      "digest/oid"
+    ],
+    "zeroize": [
+      "digest/zeroize"
+    ]
+  },
+  "id": "sha256:151e9928f76265d1f8e7cc123d6782606dc5b2e056a210541240546ec70b73ed",
+  "kind": "adopt",
+  "manifest": "sha256:f7d498725c6bf6da1e9cc37ecd4dc88c74109735553a6ed65872ebf3331794a4",
+  "rust": {
+    "edition": "2024",
+    "name": "sha2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "sha2",
+    "scope": "crates-io",
+    "version": "0.11.0"
+  }
+}

@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/anstream"
+version = "1.0.0"
+
+[project.features]
+auto = ["dep:anstyle-query"]
+default = ["auto", "wincon"]
+test = []
+wincon = ["dep:anstyle-wincon"]
+
+[rust]
+name = "anstream"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.0" }
+anstyle-parse = { loaf = "crates-io/anstyle-parse", version = "^1.0.0" }
+anstyle-query = { loaf = "crates-io/anstyle-query", version = "^1.0.0", optional = true }
+anstyle-wincon = { loaf = "crates-io/anstyle-wincon", version = "^3.0.5", optional = true, target = "cfg(windows)" }
+colorchoice = { loaf = "crates-io/colorchoice", version = "^1.0.0" }
+is_terminal_polyfill = { loaf = "crates-io/is_terminal_polyfill", version = "^1.48" }
+utf8parse = { loaf = "crates-io/utf8parse", version = "^0.2.2" }

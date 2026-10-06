@@ -1,0 +1,45 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/generic-array"
+version = "1.4.5"
+
+[project.features]
+alloc = []
+arbitrary = ["dep:arbitrary"]
+as_slice = ["dep:as-slice"]
+bitvec = ["dep:bitvec", "const-default"]
+bytecheck-0_8 = ["dep:bytecheck-0_8"]
+bytemuck = ["dep:bytemuck"]
+compat-0_14 = ["dep:generic_array-0_14"]
+const-default = ["dep:const-default"]
+faster-hex = ["dep:faster-hex"]
+hybrid-array-0_4 = ["dep:hybrid-array-0_4"]
+internals = []
+rkyv-0_8 = ["dep:rkyv-0_8"]
+rkyv-0_8-full = ["rkyv-0_8", "bytecheck-0_8"]
+serde = ["dep:serde_core"]
+subtle = ["dep:subtle"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "generic_array"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", default-features = false, optional = true }
+as-slice = { loaf = "crates-io/as-slice", version = "^0.2", default-features = false, optional = true }
+bitvec = { loaf = "crates-io/bitvec", version = "=1.0.1", default-features = false, optional = true }
+bytecheck-0_8 = { loaf = "crates-io/bytecheck", version = "^0.8", default-features = false, optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1", default-features = false, optional = true }
+const-default = { loaf = "crates-io/const-default", version = "^1", default-features = false, optional = true }
+faster-hex = { loaf = "crates-io/faster-hex", version = "^0.10", default-features = false, optional = true }
+generic_array-0_14 = { loaf = "crates-io/generic-array", version = "^0.14", default-features = false, optional = true }
+hybrid-array-0_4 = { loaf = "crates-io/hybrid-array", version = "^0.4", default-features = false, optional = true }
+rkyv-0_8 = { loaf = "crates-io/rkyv", version = "^0.8", default-features = false, optional = true }
+rustversion = { loaf = "crates-io/rustversion", version = "^1" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2", default-features = false, optional = true }
+typenum = { loaf = "crates-io/typenum", version = "^1.20.1", features = ["const-generics"] }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

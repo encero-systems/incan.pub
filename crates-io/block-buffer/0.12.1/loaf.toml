@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/block-buffer"
+version = "0.12.1"
+
+[project.features]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "block_buffer"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+hybrid-array = { loaf = "crates-io/hybrid-array", version = "^0.4" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8", default-features = false, optional = true }

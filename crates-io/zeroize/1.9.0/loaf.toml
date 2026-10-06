@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zeroize"
+version = "1.9.0"
+
+[project.features]
+aarch64 = []
+alloc = []
+default = ["alloc"]
+derive = ["zeroize_derive"]
+serde = ["dep:serde"]
+simd = []
+std = ["alloc"]
+zeroize_derive = ["dep:zeroize_derive"]
+
+[rust]
+name = "zeroize"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }
+zeroize_derive = { loaf = "crates-io/zeroize_derive", version = "^1.5", optional = true }

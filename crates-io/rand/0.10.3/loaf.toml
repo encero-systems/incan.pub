@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rand"
+version = "0.10.3"
+
+[project.features]
+alloc = []
+chacha = ["dep:chacha20"]
+default = ["std", "std_rng", "sys_rng", "thread_rng"]
+log = []
+serde = ["dep:serde"]
+simd_support = []
+std = ["alloc", "getrandom?/std"]
+std_rng = ["dep:chacha20"]
+sys_rng = ["dep:getrandom", "getrandom/sys_rng"]
+thread_rng = ["std", "std_rng", "sys_rng"]
+unbiased = []
+
+[rust]
+name = "rand"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+chacha20 = { loaf = "crates-io/chacha20", version = "^0.10.0", features = ["rng"], default-features = false, optional = true }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4.0", optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.103", features = ["derive"], optional = true }

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rustc-hash"
+version = "2.1.3"
+
+[project.features]
+default = ["std"]
+nightly = []
+rand = ["dep:rand", "std"]
+std = []
+
+[rust]
+name = "rustc_hash"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+rand = { loaf = "crates-io/rand", version = "^0.9", optional = true }

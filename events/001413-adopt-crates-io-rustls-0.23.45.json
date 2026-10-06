@@ -1,0 +1,196 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0d41d731c7d2f962d1ccc364cec258de3c0e93b38c2fb3ba97ac74513048d634",
+    "package": "rustls",
+    "registry": "crates-io",
+    "version": "0.23.45"
+  },
+  "archive": "sha256:a024712ec0ee5b6b28f0e2b1568b59d54cfe3a638a3c8180a8fd09d1264d927f",
+  "at": "2026-10-06T22:24:12Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/aws-lc-rs",
+      "name": "aws-lc-rs",
+      "optional": true,
+      "req": "^1.18"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/brotli",
+      "name": "brotli",
+      "optional": true,
+      "req": "^8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/brotli-decompressor",
+      "name": "brotli-decompressor",
+      "optional": true,
+      "req": "^5.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher",
+        "inline-more"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.8"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "race"
+      ],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.16"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/rustls-pki-types",
+      "name": "pki-types",
+      "optional": false,
+      "req": "^1.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ring",
+      "name": "ring",
+      "optional": true,
+      "req": "^0.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": false,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/rustls-webpki",
+      "name": "webpki",
+      "optional": false,
+      "req": "^0.103.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": false,
+      "req": "^1.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zlib-rs",
+      "name": "zlib-rs",
+      "optional": true,
+      "req": "^0.6"
+    }
+  ],
+  "features": {
+    "aws-lc-rs": [
+      "aws_lc_rs"
+    ],
+    "aws_lc_rs": [
+      "dep:aws-lc-rs",
+      "webpki/aws-lc-rs",
+      "aws-lc-rs/aws-lc-sys",
+      "aws-lc-rs/prebuilt-nasm"
+    ],
+    "brotli": [
+      "dep:brotli",
+      "dep:brotli-decompressor",
+      "std"
+    ],
+    "custom-provider": [],
+    "default": [
+      "aws_lc_rs",
+      "logging",
+      "prefer-post-quantum",
+      "std",
+      "tls12"
+    ],
+    "fips": [
+      "aws_lc_rs",
+      "aws-lc-rs?/fips",
+      "webpki/aws-lc-rs-fips"
+    ],
+    "hashbrown": [
+      "dep:hashbrown"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "logging": [
+      "log"
+    ],
+    "prefer-post-quantum": [
+      "aws_lc_rs"
+    ],
+    "read_buf": [
+      "rustversion",
+      "std"
+    ],
+    "ring": [
+      "dep:ring",
+      "webpki/ring"
+    ],
+    "rustversion": [],
+    "std": [
+      "webpki/std",
+      "pki-types/std",
+      "once_cell/std"
+    ],
+    "tls12": [],
+    "zlib": [
+      "dep:zlib-rs"
+    ]
+  },
+  "id": "sha256:e406082fbff2cdc105cd0851feaf0227fffc4e4a405506267d4da656347c6787",
+  "kind": "adopt",
+  "manifest": "sha256:a2db1a3c797e038156c43122a3b75b81e737278ace78bc566c2cbd19ccc2dc0d",
+  "rust": {
+    "edition": "2021",
+    "name": "rustls",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rustls",
+    "scope": "crates-io",
+    "version": "0.23.45"
+  }
+}

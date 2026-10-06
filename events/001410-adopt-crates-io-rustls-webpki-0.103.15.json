@@ -1,0 +1,89 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f3c3cf1d8b1e7d4927e2d154c3fcb02979afb9939629c62cd9048d4f07b60ac2",
+    "package": "rustls-webpki",
+    "registry": "crates-io",
+    "version": "0.103.15"
+  },
+  "archive": "sha256:c818ac633575574c96025c00a421c9da034b02436160dedb572340fa42a77ccb",
+  "at": "2026-10-06T22:24:12Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/aws-lc-rs",
+      "name": "aws-lc-rs",
+      "optional": true,
+      "req": "^1.18"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rustls-pki-types",
+      "name": "pki-types",
+      "optional": false,
+      "req": "^1.12"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ring",
+      "name": "ring",
+      "optional": true,
+      "req": "^0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/untrusted",
+      "name": "untrusted",
+      "optional": false,
+      "req": "^0.9"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "ring?/alloc",
+      "pki-types/alloc"
+    ],
+    "aws-lc-rs": [
+      "dep:aws-lc-rs",
+      "aws-lc-rs/aws-lc-sys",
+      "aws-lc-rs/prebuilt-nasm"
+    ],
+    "aws-lc-rs-fips": [
+      "dep:aws-lc-rs",
+      "aws-lc-rs/fips"
+    ],
+    "aws-lc-rs-unstable": [
+      "aws-lc-rs"
+    ],
+    "default": [
+      "std"
+    ],
+    "ring": [
+      "dep:ring"
+    ],
+    "std": [
+      "alloc",
+      "pki-types/std"
+    ]
+  },
+  "id": "sha256:e2d875cc57171af56e5ef708f1ef4a07bb286f662d8239d048ab1e02c7ec693a",
+  "kind": "adopt",
+  "manifest": "sha256:4bd310a98f9b06af3397629cd24ce5bbf113a8fb6d29222f8774248152553bb2",
+  "rust": {
+    "edition": "2021",
+    "name": "webpki",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rustls-webpki",
+    "scope": "crates-io",
+    "version": "0.103.15"
+  }
+}

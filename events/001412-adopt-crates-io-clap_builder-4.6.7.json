@@ -1,0 +1,146 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ec0797fb7aeb1406c84efac526901f7ec3ead2124f946b494e72879d4b54704d",
+    "package": "clap_builder",
+    "registry": "crates-io",
+    "version": "4.6.7"
+  },
+  "archive": "sha256:d22f087d35face301e26db1a78c94d76fe4a94627eab1024a251b6e96b4a0e97",
+  "at": "2026-10-06T22:24:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstream",
+      "name": "anstream",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle",
+      "name": "anstyle",
+      "optional": false,
+      "req": "^1.0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/backtrace",
+      "name": "backtrace",
+      "optional": true,
+      "req": "^0.3.76"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/clap_lex",
+      "name": "clap_lex",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/strsim",
+      "name": "strsim",
+      "optional": true,
+      "req": "^0.11.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/terminal_size",
+      "name": "terminal_size",
+      "optional": true,
+      "req": "^0.4.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicase",
+      "name": "unicase",
+      "optional": true,
+      "req": "^2.9.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": true,
+      "req": "^0.2.2"
+    }
+  ],
+  "features": {
+    "cargo": [],
+    "color": [
+      "dep:anstream"
+    ],
+    "debug": [
+      "dep:backtrace"
+    ],
+    "default": [
+      "std",
+      "color",
+      "help",
+      "usage",
+      "error-context",
+      "suggestions"
+    ],
+    "deprecated": [],
+    "env": [],
+    "error-context": [],
+    "help": [],
+    "std": [
+      "anstyle/std"
+    ],
+    "string": [],
+    "suggestions": [
+      "dep:strsim",
+      "error-context"
+    ],
+    "unicode": [
+      "dep:unicode-width",
+      "dep:unicase"
+    ],
+    "unstable-doc": [
+      "cargo",
+      "wrap_help",
+      "env",
+      "unicode",
+      "string",
+      "unstable-ext"
+    ],
+    "unstable-ext": [],
+    "unstable-styles": [
+      "color"
+    ],
+    "unstable-v5": [
+      "deprecated"
+    ],
+    "usage": [],
+    "wrap_help": [
+      "help",
+      "dep:terminal_size"
+    ]
+  },
+  "id": "sha256:1de1589114461eb27b34d40d481ed63e9f6008c4b4b76c35bb89c35efdf1d3be",
+  "kind": "adopt",
+  "manifest": "sha256:4846c7599f82d26534a379f293fcb5261d7fa515d18da35d3c1821743eb03d90",
+  "rust": {
+    "edition": "2024",
+    "name": "clap_builder",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "clap_builder",
+    "scope": "crates-io",
+    "version": "4.6.7"
+  }
+}

@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/socket2"
+version = "0.6.5"
+
+[project.features]
+all = []
+
+[rust]
+name = "socket2"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.172", target = "cfg(any(unix, target_os = \"wasi\"))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.60, <0.62", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_System_IO", "Win32_System_Threading", "Win32_System_WindowsProgramming"], target = "cfg(windows)" }

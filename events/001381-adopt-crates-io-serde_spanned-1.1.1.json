@@ -1,0 +1,53 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:6662b5879511e06e8999a8a235d848113e942c9124f211511b16466ee2995f26",
+    "package": "serde_spanned",
+    "registry": "crates-io",
+    "version": "1.1.1"
+  },
+  "archive": "sha256:f74769e74c0f5fb05745e6fa279826ea8a3f6ed564f90bb756608b33ed255019",
+  "at": "2026-10-06T22:24:11Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.228"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde_core?/alloc"
+    ],
+    "default": [
+      "std",
+      "serde"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "std": [
+      "alloc",
+      "serde_core?/std"
+    ]
+  },
+  "id": "sha256:82c6f65ab2207dd5baf78531685575540c8d36cb939dfbbd2491da82ae222fda",
+  "kind": "adopt",
+  "manifest": "sha256:0537cf0d49068325e70553d3f653b877a37f09834cabf4e211a105443cc5884e",
+  "rust": {
+    "edition": "2024",
+    "name": "serde_spanned",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "serde_spanned",
+    "scope": "crates-io",
+    "version": "1.1.1"
+  }
+}

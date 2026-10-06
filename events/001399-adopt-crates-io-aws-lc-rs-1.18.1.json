@@ -1,0 +1,102 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b281d307588d634de920874890732659e2e7672f72b5e10e81badc1a8a83621e",
+    "package": "aws-lc-rs",
+    "registry": "crates-io",
+    "version": "1.18.1"
+  },
+  "archive": "sha256:b89728d4afd12e66644dffa1736942070cdbc5f5a80f9842e4c02aac5a7a4b6c",
+  "at": "2026-10-06T22:24:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/aws-lc-fips-sys",
+      "name": "aws-lc-fips-sys",
+      "optional": true,
+      "req": "^0.14.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/aws-lc-sys",
+      "name": "aws-lc-sys",
+      "optional": true,
+      "req": "^0.45.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/untrusted",
+      "name": "untrusted",
+      "optional": true,
+      "req": "^0.7.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": false,
+      "req": "^1.8.1"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "asan": [
+      "aws-lc-sys?/asan",
+      "aws-lc-fips-sys?/asan"
+    ],
+    "aws-lc-sys": [
+      "dep:aws-lc-sys"
+    ],
+    "bindgen": [
+      "aws-lc-sys?/bindgen",
+      "aws-lc-fips-sys?/bindgen"
+    ],
+    "default": [
+      "aws-lc-sys",
+      "alloc",
+      "ring-io",
+      "ring-sig-verify"
+    ],
+    "dev-tests-only": [],
+    "fips": [
+      "dep:aws-lc-fips-sys"
+    ],
+    "legacy-des": [
+      "aws-lc-sys?/all-bindings"
+    ],
+    "non-fips": [
+      "aws-lc-sys"
+    ],
+    "prebuilt-nasm": [
+      "aws-lc-sys?/prebuilt-nasm"
+    ],
+    "ring-io": [
+      "dep:untrusted"
+    ],
+    "ring-sig-verify": [
+      "dep:untrusted"
+    ],
+    "test_logging": [],
+    "unstable": []
+  },
+  "id": "sha256:f0d9c54045a2813a1a06b569c1c2ea98dd26178fdc89758394df8f00187a9c45",
+  "kind": "adopt",
+  "manifest": "sha256:8a5b37cc7da4e4ed48a51261d3c9524f2963c01a26ec83fc0d05dbd458af6635",
+  "rust": {
+    "edition": "2021",
+    "name": "aws_lc_rs",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "aws-lc-rs",
+    "scope": "crates-io",
+    "version": "1.18.1"
+  }
+}

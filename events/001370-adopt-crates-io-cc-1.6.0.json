@@ -1,0 +1,69 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f74872d07caf508b30a21f6836e7d7016a2eaf7d9ff4f48deaa58cd8a0407630",
+    "package": "cc",
+    "registry": "crates-io",
+    "version": "1.6.0"
+  },
+  "archive": "sha256:a551cdaa5acf97c7ee51f3436718a94ace055c94451c3e33972da80769e7b132",
+  "at": "2026-10-06T22:24:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/find-msvc-tools",
+      "name": "find-msvc-tools",
+      "optional": false,
+      "req": "^0.1.14"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/jobserver",
+      "name": "jobserver",
+      "optional": true,
+      "req": "^0.1.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.168",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/shlex",
+      "name": "shlex",
+      "optional": false,
+      "req": "^2.0.1"
+    }
+  ],
+  "features": {
+    "jobserver": [],
+    "parallel": [
+      "dep:jobserver",
+      "dep:libc"
+    ]
+  },
+  "id": "sha256:540cf8ce52d1580382b5905402e6329d70af3c9b5d2c01705b060b088fa0b1fa",
+  "kind": "adopt",
+  "manifest": "sha256:769ddea694d7aef5a3a802fe023caa653b3bd12fc7600a625ce427398779059b",
+  "rust": {
+    "edition": "2021",
+    "name": "cc",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cc",
+    "scope": "crates-io",
+    "version": "1.6.0"
+  }
+}

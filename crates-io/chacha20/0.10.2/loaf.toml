@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/chacha20"
+version = "0.10.2"
+
+[project.features]
+cipher = ["dep:cipher"]
+default = ["cipher"]
+legacy = ["cipher"]
+rng = ["dep:rand_core"]
+xchacha = ["cipher"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "chacha20"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+cipher = { loaf = "crates-io/cipher", version = "^0.5", features = ["stream-wrapper"], optional = true }
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.3", target = "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))" }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8.1", default-features = false, optional = true }

@@ -1,0 +1,99 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:824a212faf96e9acacdbd09febd34438f8f711fb84e09a8916013cd7815ca28d",
+    "package": "anstream",
+    "registry": "crates-io",
+    "version": "1.0.0"
+  },
+  "archive": "sha256:f30e6919942b9bab0844f0e529694185300c7a0c0fef5d8c67f35c3337a12b2d",
+  "at": "2026-10-06T22:24:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle",
+      "name": "anstyle",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle-parse",
+      "name": "anstyle-parse",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle-query",
+      "name": "anstyle-query",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle-wincon",
+      "name": "anstyle-wincon",
+      "optional": true,
+      "req": "^3.0.5",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/colorchoice",
+      "name": "colorchoice",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/is_terminal_polyfill",
+      "name": "is_terminal_polyfill",
+      "optional": false,
+      "req": "^1.48"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/utf8parse",
+      "name": "utf8parse",
+      "optional": false,
+      "req": "^0.2.2"
+    }
+  ],
+  "features": {
+    "auto": [
+      "dep:anstyle-query"
+    ],
+    "default": [
+      "auto",
+      "wincon"
+    ],
+    "test": [],
+    "wincon": [
+      "dep:anstyle-wincon"
+    ]
+  },
+  "id": "sha256:702ce8ff438df9c09109086ffca2b39e3667aec84b94065699d1a756e643676f",
+  "kind": "adopt",
+  "manifest": "sha256:a155f4c4584ebf3ec867dce23b128beee9eb2cb6e643a2e7babcf4f1d054a133",
+  "rust": {
+    "edition": "2021",
+    "name": "anstream",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "anstream",
+    "scope": "crates-io",
+    "version": "1.0.0"
+  }
+}

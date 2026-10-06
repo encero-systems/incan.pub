@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cipher"
+version = "0.5.2"
+
+[project.features]
+alloc = []
+blobby = ["dep:blobby"]
+block-buffer = ["dep:block-buffer"]
+block-padding = ["inout/block-padding"]
+dev = ["blobby"]
+getrandom = ["common/getrandom"]
+rand_core = ["common/rand_core"]
+stream-wrapper = ["block-buffer"]
+zeroize = ["dep:zeroize", "common/zeroize", "block-buffer?/zeroize"]
+
+[rust]
+name = "cipher"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+blobby = { loaf = "crates-io/blobby", version = "^0.4", optional = true }
+block-buffer = { loaf = "crates-io/block-buffer", version = "^0.12", optional = true }
+common = { loaf = "crates-io/crypto-common", version = "^0.2.2" }
+inout = { loaf = "crates-io/inout", version = "^0.2.2" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8", default-features = false, optional = true }

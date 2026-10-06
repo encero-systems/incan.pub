@@ -1,0 +1,56 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c3d1e2c7f27f8d4cb10542a02c49005dbd6e93095799d6f3be745fae9f8fedd4",
+    "package": "socket2",
+    "registry": "crates-io",
+    "version": "0.6.5"
+  },
+  "archive": "sha256:2e147020cb70eb27f8a76ac7a5435ccd15dac57944dcf00026b6d41eca036da4",
+  "at": "2026-10-06T22:24:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.172",
+      "target": "cfg(any(unix, target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_System_IO",
+        "Win32_System_Threading",
+        "Win32_System_WindowsProgramming"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.60, <0.62",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "all": []
+  },
+  "id": "sha256:91c5a1d5c3602c03eeda7b4bf3f7b6c69845cfa96b9e0faada504315c905b391",
+  "kind": "adopt",
+  "manifest": "sha256:f8420cd0efe1f55198915c648192844cf5eb2c79e9e99cfb33d1606b707f4c28",
+  "rust": {
+    "edition": "2021",
+    "name": "socket2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "socket2",
+    "scope": "crates-io",
+    "version": "0.6.5"
+  }
+}

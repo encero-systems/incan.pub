@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/digest"
+version = "0.11.3"
+
+[project.features]
+alloc = []
+blobby = ["dep:blobby"]
+block-api = ["dep:block-buffer"]
+default = ["block-api"]
+dev = ["blobby"]
+getrandom = ["common/getrandom", "rand_core"]
+mac = ["dep:ctutils"]
+oid = ["dep:const-oid"]
+rand_core = ["common/rand_core"]
+zeroize = ["dep:zeroize", "block-buffer?/zeroize"]
+
+[rust]
+name = "digest"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+blobby = { loaf = "crates-io/blobby", version = "^0.4", optional = true }
+block-buffer = { loaf = "crates-io/block-buffer", version = "^0.12", optional = true }
+common = { loaf = "crates-io/crypto-common", version = "^0.2" }
+const-oid = { loaf = "crates-io/const-oid", version = "^0.10", optional = true }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4", optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.7", default-features = false, optional = true }

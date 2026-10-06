@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cc"
+version = "1.6.0"
+
+[project.features]
+jobserver = []
+parallel = ["dep:jobserver", "dep:libc"]
+
+[rust]
+name = "cc"
+type = "lib"
+edition = "2021"
+
+[dependencies]
+find-msvc-tools = { loaf = "crates-io/find-msvc-tools", version = "^0.1.14" }
+jobserver = { loaf = "crates-io/jobserver", version = "^0.1.32", default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.168", default-features = false, optional = true, target = "cfg(unix)" }
+shlex = { loaf = "crates-io/shlex", version = "^2.0.1" }

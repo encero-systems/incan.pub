@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/serde_spanned"
+version = "1.1.1"
+
+[project.features]
+alloc = ["serde_core?/alloc"]
+default = ["std", "serde"]
+serde = ["dep:serde_core"]
+std = ["alloc", "serde_core?/std"]
+
+[rust]
+name = "serde_spanned"
+type = "lib"
+edition = "2024"
+
+[dependencies]
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.228", default-features = false, optional = true }
