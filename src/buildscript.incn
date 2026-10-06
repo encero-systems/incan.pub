@@ -78,7 +78,9 @@ pub def record_proposal(
                 write_file(package_dir + "/" + file.path, file.data)?
             for directory in ["out", "tmp", "home", "proposal"]:
                 make_dir(base + "/" + directory)?
-            executable = compile_script(script, package_dir, base, string_member(member(adopt, "rust"), "edition"), linked, selection, label)?
+            package_environment = package_variables(package, version, manifest, package_dir, base)?
+            edition = string_member(member(adopt, "rust"), "edition")
+            executable = compile_script(script, package_dir, base, edition, linked, package_environment, selection, label)?
             ran = run_script(executable, package, version, manifest, package_dir, base, selection, label)?
             observed = directives(ran, label, manifest_string(manifest, "package.links") != "", base + "/out")?
             native = native_work(observed, base, selection, label)?
@@ -269,10 +271,15 @@ def compile_script(
     base: str,
     edition: str,
     linked: list[list[str]],
+    package_environment: Dict[str, str],
     selection: Selection,
     label: str,
 ) -> Result[str, str]:
-    """`build_script_build` for the host, its features visible as `cfg(feature)`, linked against its build dependencies."""
+    """
+    `build_script_build` for the host, its features visible as `cfg(feature)`, linked against its build dependencies.
+
+    The package variables are set while it compiles, as Cargo sets them: a script may read `env!("CARGO_PKG_NAME")`.
+    """
     executable = base + "/build-script-build"
     mut arguments = [
         script,
@@ -290,7 +297,9 @@ def compile_script(
     for pair in linked:
         arguments.append(pair[0])
         arguments.append(pair[1])
-    ran = run_program(selection.rustc, arguments, plain_environment(base), package_dir)?
+    mut environment = package_environment
+    environment["CARGO_CRATE_NAME"] = "build_script_build"
+    ran = run_program(selection.rustc, arguments, environment, package_dir)?
     if not ran.success:
         return Err(f"{label}: the build script does not compile: {text_of(ran.stderr)}")
     return Ok(executable)
@@ -314,16 +323,8 @@ def run_script(
     return Ok(ran)
 
 
-def script_environment(
-    package: str,
-    version: str,
-    manifest: TomlValue,
-    package_dir: str,
-    base: str,
-    selection: Selection,
-    label: str,
-) -> Result[Dict[str, str], str]:
-    """The environment a build script reads, built from the binding and the package alone."""
+def package_variables(package: str, version: str, manifest: TomlValue, package_dir: str, base: str) -> Result[Dict[str, str], str]:
+    """What Cargo tells a build script about its package, both while compiling it and while running it."""
     mut environment = plain_environment(base)
     parsed = parse_version(version)?
     environment["CARGO_MANIFEST_DIR"] = package_dir
@@ -337,6 +338,20 @@ def script_environment(
     for key in ["description", "homepage", "repository", "license", "license-file", "rust-version", "readme"]:
         environment["CARGO_PKG_" + key.upper().replace("-", "_")] = manifest_string(manifest, "package." + key)
     environment["CARGO_PKG_AUTHORS"] = ":".join(manifest_strings(manifest, "package.authors"))
+    return Ok(environment)
+
+
+def script_environment(
+    package: str,
+    version: str,
+    manifest: TomlValue,
+    package_dir: str,
+    base: str,
+    selection: Selection,
+    label: str,
+) -> Result[Dict[str, str], str]:
+    """The environment a build script reads, built from the binding and the package alone."""
+    mut environment = package_variables(package, version, manifest, package_dir, base)?
     for feature in selection.features:
         environment["CARGO_FEATURE_" + feature.upper().replace("-", "_")] = "1"
     environment["CARGO_CFG_FEATURE"] = ",".join(selection.features)
