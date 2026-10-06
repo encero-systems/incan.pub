@@ -193,7 +193,7 @@ def test_translation_rewrites_features_for_the_loaf_grammar() -> None:
     features = translate(demo_line(), demo_files(demo_manifest())).unwrap().features
     assert_eq(features["default"], ["std"])
     assert_eq(features["std"], ["log/std", "serde?/std"])
-    assert_eq(features["derive"], ["serde", "dep:serde", "serde/derive"])
+    assert_eq(features["derive"], ["dep:serde", "serde/derive"])
     assert_eq(features["serde"], ["dep:serde"])
     assert_eq(features["async"], ["dep:futures"])
     assert_true("futures" not in features)
@@ -215,7 +215,7 @@ def test_a_proc_macro_and_its_default_name_come_from_the_manifest() -> None:
 def test_the_adopted_manifest_states_the_rust_facet_grammar() -> None:
     manifest = render_adopted_manifest(translate(demo_line(), demo_files(demo_manifest())).unwrap())
     assert_true(manifest.startswith("[project]\nname = \"crates-io/demo\"\nversion = \"1.0.0\"\n\n[project.features]\n"))
-    assert_true(manifest.contains("\nderive = [\"serde\", \"dep:serde\", \"serde/derive\"]\n"))
+    assert_true(manifest.contains("\nderive = [\"dep:serde\", \"serde/derive\"]\n"))
     assert_true(manifest.contains("\n[rust]\nname = \"demo\"\ntype = \"lib\"\nedition = \"2021\"\n"))
     assert_true(not manifest.contains("[rust.source]"))
     assert_true(manifest.contains("\nfutures = { loaf = \"crates-io/futures-util\", version = \"^0.3\", optional = true }\n"))

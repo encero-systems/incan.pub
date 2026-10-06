@@ -8,8 +8,9 @@ are read; everything else comes from the index line under fixed rules:
 - development and build dependencies drop, and so does `links`;
 - a dependency keeps its rename as its key, and a key declared once per target stays one entry per declaration;
 - every implicit optional-dependency feature becomes an explicit feature;
-- a non-weak `x/f` on an optional `x` becomes `x`, `dep:x`, `x/f` when a feature `x` exists, else `dep:x`, `x/f`, so
-  the enabled feature set is the one the crates.io ecosystem resolves; a weak `x?/f` stays weak;
+- a non-weak `x/f` on an optional `x` becomes `dep:x`, `x/f`; a weak `x?/f` stays weak. Whether `x/f` also enables a
+  feature named `x` depends on whether a declaration of `x` applies to the selected target, so that is the
+  resolver's rule (RFC 119), not a member written here;
 - a member naming a dependency that dropped (a build-only optional dependency) drops with it, and the feature that
   held it stays, so `cfg(feature = ...)` sees the same names.
 
@@ -332,8 +333,6 @@ def rewrite_member(
             return Ok([])
         if not optional_keys.contains(key):
             return Ok([item])
-        if key in table:
-            return Ok([key, "dep:" + key, item])
         return Ok(["dep:" + key, item])
     if item not in table:
         return Err(f"{label}: feature member `{item}` names no feature")
