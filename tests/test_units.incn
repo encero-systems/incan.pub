@@ -117,7 +117,8 @@ def test_an_asset_is_compiled_from_an_adopted_version_and_one_unit_has_one_archi
     )
 
 
-def test_an_asset_of_a_record_with_facts_names_one_of_their_bindings() -> None:
+def test_an_asset_needs_no_fact_for_its_binding() -> None:
+    """A package without a build script compiles under any binding; its harvested empty fact covers only one."""
     directory = TemporaryDirectory.try_new().unwrap()
     root = directory.path()
     adopt_leaf(root)
@@ -130,10 +131,7 @@ def test_an_asset_of_a_record_with_facts_names_one_of_their_bindings() -> None:
     add_asset(root, "release", "release unit", "release archive")
     assert_eq(refusal(root), "")
     add_asset(root, "debug", "debug unit", "debug archive")
-    assert_eq(
-        refusal(root),
-        "events/000004-asset-crates-io-leaf-1.2.0.json: asset names a binding with no fact record; this record's units compile under its facts",
-    )
+    assert_eq(refusal(root), "")
 
 
 def test_the_asset_manifest_lists_every_asset_beside_the_manifest() -> None:

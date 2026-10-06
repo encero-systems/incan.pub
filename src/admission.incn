@@ -245,10 +245,12 @@ pub def admit_asset(initial: Record, binding_value: JsonValue, asset: JsonValue,
     """
     Add one baked unit to an adopted record, or return the record unchanged when it already holds that very asset.
 
-    A unit compiles from the adopted source Loaf, so the version must be adopted. A record with bound facts was compiled
-    under them, so the asset's binding must be one of them; a record with none has no build script to answer for. One
-    unit identity names one archive: a second archive for it is a determinism conflict and is refused, so a consumer
-    is never offered two payloads for one identity (RFC 125).
+    A unit compiles from the adopted source Loaf, so the version must be adopted. Facts are not checked: a unit's identity
+    retains the cfg facts and generated inputs it compiled under (RFC 119 rule 9), so a unit compiled without the facts
+    a plan selects never matches that plan, and only the crate archive, which admission does not read, says whether a
+    binding needs a fact at all (a package without a build script needs none). One unit identity names one archive: a
+    second archive for it is a determinism conflict and is refused, so a consumer is never offered two payloads for one
+    identity (RFC 125).
     """
     mut record = initial
     for field in ["archive", "unit_identity", "entry", "payload", "builder", "attestation"]:
@@ -267,8 +269,6 @@ pub def admit_asset(initial: Record, binding_value: JsonValue, asset: JsonValue,
     match record.adopt:
         Some(_) => pass
         None => return Err(f"{label}: an asset is compiled from an adopted source Loaf; {record.name} {record.version} is not adopted")
-    if len(record.facts) > 0 and not has_binding(record, binding):
-        return Err(f"{label}: asset names a binding with no fact record; this record's units compile under its facts")
     unit_identity = string_member(asset, "unit_identity")
     archive = string_member(asset, "archive")
     for present in record.assets:
@@ -410,14 +410,6 @@ pub def fact_owners(fact: JsonValue) -> list[str]:
                     None => pass
             None => pass
     return executable_owners(records)
-
-
-def has_binding(record: Record, binding: Binding) -> bool:
-    """Whether any fact of the record, under whatever owners, holds for `binding`."""
-    for fact in record.sorted_facts():
-        if fact.binding.key() == binding.key():
-            return true
-    return false
 
 
 pub def fact_comparable(fact: JsonValue) -> Result[str, str]:
