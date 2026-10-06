@@ -27,6 +27,14 @@ serde_derive = { loaf = "crates-io/serde_derive", version = "^1", optional = tru
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "derive", "serde_derive", "std"]
+cfg = ["if_docsrs_then_no_serde_core"]
+out = [{ name = "private.rs", path = "out/private.rs", digest = "sha256:edaefc31eb178d1c82d9ab94c18a374316f8ff13ad55147cc631698dc9498162" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "derive", "serde_derive", "std"]
 cfg = ["if_docsrs_then_no_serde_core"]

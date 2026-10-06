@@ -23,6 +23,13 @@ unicode-ident = { loaf = "crates-io/unicode-ident", version = "^1.0" }
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "proc-macro"]
+cfg = ["proc_macro_span_file", "proc_macro_span_location", "wrap_proc_macro"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "proc-macro"]
 cfg = ["proc_macro_span_file", "proc_macro_span_location", "wrap_proc_macro"]
