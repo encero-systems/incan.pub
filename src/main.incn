@@ -15,7 +15,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
                           [--incan PATH --build-lock LOCK.json]
-                          [--actor ACTOR] [--root DIR]
+                          [--propose] [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
     incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]
@@ -79,7 +79,7 @@ from registry import Record, builders, crates_io_index, fact_key, has_key, keys_
 
 def flags() -> list[str]:
     """Options that take no value."""
-    return ["publish", "records", "rewrite"]
+    return ["propose", "publish", "records", "rewrite"]
 
 
 def default_actor() -> str:
@@ -655,7 +655,8 @@ def readopt(invocation: Invocation) -> Result[None, str]:
 
 def record_fact(invocation: Invocation) -> Result[None, str]:
     """
-    Record the build fact of one adopted version for one binding by running its build script, then admit it.
+    Record the build fact of one adopted version for one binding by running its build script, then admit it; with
+    `--propose`, leave the proposal for `add-fact` instead (how a runner records facts the index admits elsewhere).
 
     The graph file holds the resolution the binding's feature set came from (`deps` or `roots`, `target`, `host`);
     it is committed with the fact. A version without a build script needs no fact and is reported as such.
@@ -676,6 +677,9 @@ def record_fact(invocation: Invocation) -> Result[None, str]:
     selection = selection_of(invocation)?
     match record_proposal(name, version, adopt, state[key].checksum, invocation.require("blobs")?, invocation.require("cache")?, invocation.require("work")?, selection)?:
         Some(proposal) =>
+            if invocation.flag("propose"):
+                println(f"proposed: {proposal}")
+                return Ok(None)
             admit_proposal(root, state, Path(proposal), invocation.actor(), false, None, invocation.flag("rewrite"))?
             return build(invocation)
         None =>

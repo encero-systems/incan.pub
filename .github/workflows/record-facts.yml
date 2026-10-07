@@ -1,0 +1,100 @@
+name: record-facts
+
+# Record build facts on a GitHub-hosted runner of the target's platform, for bindings a shard selects that have no fact
+# on the index yet. A build script runs where its target runs: Linux facts are recorded on Linux. Each binding is one
+# line of a tab-separated file under bake/facts/: name, version, features (comma-separated, possibly empty), profile,
+# domain (target or host), and the graph file the binding's feature set came from.
+#
+# `incan-pub record-fact --propose` compiles and runs each build script in the platform's sandbox (bubblewrap on Linux,
+# sandbox-exec on macOS) and leaves a proposal; the run uploads them as the `fact-proposals` artifact, and `incan-pub
+# add-fact` on a checkout of `index` admits them, so the index stays the authority. A binding the recorder refuses is
+# listed in `refused.tsv` in the same artifact and does not fail the others.
+#
+# Only GitHub-hosted runners run this. A self-hosted runner never attaches to this public repository, where pull
+# requests from forks could reach it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "The target the facts hold for, recorded on a runner of that platform"
+        required: true
+        default: x86_64-unknown-linux-gnu
+        type: choice
+        options: [x86_64-unknown-linux-gnu, aarch64-apple-darwin]
+      bindings:
+        description: "The bindings file under bake/facts/"
+        required: true
+
+permissions:
+  contents: read
+
+env:
+  RUST_TOOLCHAIN: 1.98.0
+
+jobs:
+  record:
+    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-latest' || 'macos-latest' }}
+    env:
+      TARGET: ${{ inputs.target }}
+      BINDINGS: ${{ inputs.bindings }}
+    steps:
+      - name: Check out the tool
+        uses: actions/checkout@v4
+        with:
+          path: tool
+      - name: Check out the index branch
+        uses: actions/checkout@v4
+        with:
+          ref: index
+          path: index
+      - name: Install oras
+        uses: oras-project/setup-oras@v1
+      - name: Download the tool
+        run: |
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+      - name: Install the Rust toolchain the build scripts are compiled with
+        run: rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
+      - name: Install the build-script sandbox
+        if: runner.os == 'Linux'
+        # Ubuntu confines unprivileged user namespaces, which bubblewrap needs for its network namespace.
+        run: |
+          sudo apt-get install -y bubblewrap
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Fetch the source Loaf archives of the bindings' shards
+        run: |
+          cut -f6 "tool/$BINDINGS" | sort -u | while read -r graph; do
+            "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/$(dirname "$graph")/lock.json" \
+              --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
+          done
+      - name: Record each binding's fact as a proposal
+        run: |
+          rustc="$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
+          mkdir -p "$RUNNER_TEMP/proposals"
+          : > "$RUNNER_TEMP/proposals/refused.tsv"
+          index=0
+          while IFS="$(printf '\t')" read -r name version features profile domain graph; do
+            index=$((index + 1))
+            work="$RUNNER_TEMP/work/$index"
+            if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
+                --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
+                --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose 2>&1)"; then
+              echo "$output"
+              proposal="$(printf '%s\n' "$output" | sed -n 's/^proposed: //p')"
+              if [ -n "$proposal" ]; then
+                cp -R "$proposal" "$RUNNER_TEMP/proposals/$index-$name-$version"
+              fi
+            else
+              printf '%s\t%s\t%s\t%s\n' "$name" "$version" "$features" "$(printf '%s' "$output" | tail -1)" >> "$RUNNER_TEMP/proposals/refused.tsv"
+            fi
+          done < "tool/$BINDINGS"
+          echo "proposals: $(find "$RUNNER_TEMP/proposals" -name proposal.json | wc -l), refused: $(wc -l < "$RUNNER_TEMP/proposals/refused.tsv")"
+      - name: Upload the fact proposals
+        uses: actions/upload-artifact@v4
+        with:
+          name: fact-proposals
+          path: ${{ runner.temp }}/proposals
+          include-hidden-files: true

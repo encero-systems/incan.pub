@@ -5,8 +5,8 @@ binding, and read what it said (RFC 125, "Adoption from crates.io", rule 6).
 A binding is a toolchain, target, profile and complete feature set. The script runs from a fresh copy of the adopted
 Loaf's files, with an environment built only from the binding: the target's `cfg` answers as the selected `rustc`
 prints them, the features, the package's metadata, an empty `OUT_DIR` and the profile's levels. Nothing of the
-recorder's own environment reaches it; on the host it runs under `sandbox-exec` with the network closed and writes
-confined to its work directory.
+recorder's own environment reaches it; it runs under `sandbox-exec` (macOS) or bubblewrap (Linux) with the network
+closed and writes confined to its work directory.
 
 What the script prints becomes the fact: each `rustc-cfg` a `cfg` answer, each file written to `OUT_DIR` a committed
 `out` input. `rerun-if-*`, `rustc-check-cfg` and `warning` carry no Oven authority and are ignored. Anything this
@@ -303,11 +303,45 @@ def run_script(
     label: str,
 ) -> Result[Ran, str]:
     environment = script_environment(package, version, manifest, package_dir, base, selection, label)?
-    sandbox = "(version 1)(allow default)(deny network*)(deny file-write*)(allow file-write* (subpath \"" + base + "\") (literal \"/dev/null\"))"
-    ran = run_program("/usr/bin/sandbox-exec", ["-p", sandbox, executable], environment, package_dir)?
+    ran = run_sandboxed(executable, environment, package_dir, base, label)?
     if not ran.success:
         return Err(f"{label}: the build script failed: {text_of(ran.stderr)}")
     return Ok(ran)
+
+
+const SANDBOX_EXEC: str = "/usr/bin/sandbox-exec"
+const BUBBLEWRAP: str = "/usr/bin/bwrap"
+
+
+def run_sandboxed(executable: str, environment: Dict[str, str], package_dir: str, base: str, label: str) -> Result[Ran, str]:
+    """
+    Run a build script with the network closed and writes confined to its work directory: `sandbox-exec` on macOS,
+    bubblewrap on Linux (a private network namespace, the root read-only, only the work directory writable). A host
+    with neither is refused rather than trusted: a fact recorded outside the sandbox could hold what the network said.
+    """
+    if Path(SANDBOX_EXEC).is_file():
+        profile = "(version 1)(allow default)(deny network*)(deny file-write*)(allow file-write* (subpath \"" + base + "\") (literal \"/dev/null\"))"
+        return run_program(SANDBOX_EXEC, ["-p", profile, executable], environment, package_dir)
+    if Path(BUBBLEWRAP).is_file():
+        return run_program(BUBBLEWRAP, [
+            "--unshare-net",
+            "--ro-bind", "/", "/",
+            "--dev", "/dev",
+            "--proc", "/proc",
+            "--bind", base, base,
+            "--chdir", package_dir,
+            "--die-with-parent",
+            "--",
+            executable,
+        ], environment, package_dir)
+    return Err(f"{label}: this host has no build-script sandbox; install bubblewrap (Linux) or run on macOS")
+
+
+def sandbox_description() -> str:
+    """How the build script was confined, for the fact's evidence."""
+    if Path(SANDBOX_EXEC).is_file():
+        return "sandbox-exec: network denied, writes confined to the work directory"
+    return "bubblewrap: network namespace unshared, root read-only, writes confined to the work directory"
 
 
 def package_variables(package: str, version: str, manifest: TomlValue, package_dir: str, base: str) -> Result[Dict[str, str], str]:
@@ -562,7 +596,7 @@ def write_proposal(
             "domain": JsonValue.string(selection.domain),
             "graph": JsonValue.string(digest_text(canonical(selection.graph)?)),
             "host": JsonValue.string(selection.host),
-            "sandbox": JsonValue.string("sandbox-exec: network denied, writes confined to the work directory"),
+            "sandbox": JsonValue.string(sandbox_description()),
             "hazards": JsonValue.array([]),
             "compiler_probes": JsonValue.array([JsonValue.string(probe) for probe in native.probes]),
         }),
