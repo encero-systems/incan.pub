@@ -8,7 +8,7 @@ from them by a byte.
 from std.fs import Path
 from std.json import JsonValue
 
-from adoption import about_from_json, adoption_from_payload, loaf_name, render_adopted_manifest
+from adoption import about_from_json, adoption_from_payload, loaf_name, render_adopted_manifest, shown
 from canonical import canonical, json_string, pretty
 from events import member, read_text, string_member, write_text
 from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
@@ -258,7 +258,7 @@ pub def render_package_page(name: str, records: list[Record]) -> str:
             match record.adopt:
                 Some(payload) =>
                     match about_from_json(payload):
-                        Some(about) => description = about.description
+                        Some(about) => description = shown(about).description
                         None => pass
                 None => pass
     mut intro = f"The crates.io package [{name}](https://crates.io/crates/{name}), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves."
@@ -291,8 +291,8 @@ def package_page_row(record: Record) -> str:
             adopted = record.adopted_at[0:10]
             match about_from_json(payload):
                 Some(about) =>
-                    license = about.license
-                    if len(license) == 0 and len(about.license_file) > 0:
+                    license = shown(about).license
+                    if len(license) == 0 and len(shown(about).license_file) > 0:
                         license = "see its LICENSE"
                     if len(license) == 0:
                         license = "none declared"

@@ -24,6 +24,7 @@ from adoption import (
     loaf_files,
     render_adopted_manifest,
     required_dependencies,
+    shown,
     source_archive,
     translate,
     unpack_crate,
@@ -500,6 +501,13 @@ def test_about_records_authors_and_rust_version_for_the_package_environment() ->
                     assert_eq(read_back.rust_version, "1.70")
                 None => assert_true(false, "the payload carries about")
         None => assert_true(false, "a new adoption records what its manifest says about the package")
+    # A multi-line description is recorded as Cargo hands it over, last newline included; shown trims it.
+    multi = demo_manifest().replace("name = \"demo\"\nversion", "description = \"\"\"\nTwo\nlines\n\"\"\"\nname = \"demo\"\nversion")
+    match translate(demo_line(), demo_files(multi)).unwrap().about:
+        Some(about) =>
+            assert_eq(about.description, "Two\nlines\n")
+            assert_eq(shown(about).description, "Two\nlines")
+        None => assert_true(false, "a new adoption records about")
     # A plain manifest says neither, and an `about` recorded before either was read reads back empty.
     plain = translate(demo_line(), demo_files(demo_manifest())).unwrap()
     match plain.about:

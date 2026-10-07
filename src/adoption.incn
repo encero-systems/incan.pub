@@ -725,14 +725,18 @@ const ABOUT_KEYS: FrozenList[str] = [
 
 
 pub def about_of(manifest: TomlValue, label: str) -> Result[About, str]:
-    """The `package` table's descriptive strings and `authors`; a key that is absent, or not of its type, is empty."""
+    """
+    The `package` table's descriptive strings and `authors`, exactly as written, since Cargo hands them to a compiling
+    crate as written (a multi-line description keeps its last newline); a key that is absent, or not of its type, is
+    empty. `shown` trims them for display.
+    """
     mut values: Dict[str, str] = {}
     for key in ABOUT_KEYS:
         values[key] = ""
         match manifest.get_optional[str]("package." + key):
             Ok(found) =>
                 match found:
-                    Some(text) => values[key] = text.strip()
+                    Some(text) => values[key] = text
                     None => pass
             Err(_) => pass
     mut authors: list[str] = []
@@ -750,6 +754,21 @@ pub def about_of(manifest: TomlValue, label: str) -> Result[About, str]:
         rust_version=values["rust-version"],
         authors=authors,
     ))
+
+
+pub def shown(about: About) -> About:
+    """`about` as the registry shows and compares it: each string trimmed of surrounding whitespace."""
+    return About(
+        license=about.license.strip(),
+        license_file=about.license_file.strip(),
+        readme=about.readme.strip(),
+        description=about.description.strip(),
+        repository=about.repository.strip(),
+        homepage=about.homepage.strip(),
+        documentation=about.documentation.strip(),
+        rust_version=about.rust_version.strip(),
+        authors=about.authors,
+    )
 
 
 pub def about_of_files(files: list[TarEntry], label: str) -> Result[About, str]:
@@ -802,7 +821,8 @@ pub def loaf_files(adoption: Adoption, files: list[TarEntry]) -> list[TarEntry]:
     """
     mut out = files.clone()
     match adoption.about:
-        Some(about) =>
+        Some(recorded) =>
+            about = shown(recorded)
             mut paths: list[str] = []
             for file in files:
                 paths.append(file.path)
