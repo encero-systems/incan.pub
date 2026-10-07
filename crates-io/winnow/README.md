@@ -4,7 +4,7 @@ The crates.io package [winnow](https://crates.io/crates/winnow), adopted by [inc
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.0.4](1.0.4/loaf.toml) | 2026-10-06 | MIT | 0 | 7 | [units](1.0.4/assets.json) |
+| [1.0.4](1.0.4/loaf.toml) | 2026-10-06 | MIT | 0 | 9 | [units](1.0.4/assets.json) |
 | [1.0.0](1.0.0/loaf.toml) | 2026-10-06 | MIT | 2 | 0 |  |
 | [0.7.15](0.7.15/loaf.toml) | 2026-10-06 | MIT | 2 | 0 |  |
 

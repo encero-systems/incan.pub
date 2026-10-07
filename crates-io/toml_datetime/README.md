@@ -4,7 +4,7 @@ The crates.io package [toml_datetime](https://crates.io/crates/toml_datetime), a
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.1.1+spec-1.1.0](1.1.1+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 7 | [units](1.1.1+spec-1.1.0/assets.json) |
+| [1.1.1+spec-1.1.0](1.1.1+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 9 | [units](1.1.1+spec-1.1.0/assets.json) |
 | [0.7.5+spec-1.1.0](0.7.5+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.6.11](0.6.11/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 

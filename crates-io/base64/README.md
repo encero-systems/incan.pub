@@ -4,8 +4,8 @@ The crates.io package [base64](https://crates.io/crates/base64), adopted by [inc
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.23.1](0.23.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 4 | [units](0.23.1/assets.json) |
-| [0.22.1](0.22.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 0 |  |
+| [0.23.1](0.23.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 5 | [units](0.23.1/assets.json) |
+| [0.22.1](0.22.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 3 | [units](0.22.1/assets.json) |
 | [0.21.7](0.21.7/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 | [0.13.1](0.13.1/loaf.toml) | 2026-10-07 | MIT/Apache-2.0 | 0 | 0 |  |
 

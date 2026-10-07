@@ -4,7 +4,7 @@ The crates.io package [object](https://crates.io/crates/object), adopted by [inc
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.40.0](0.40.0/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 0 | 1 | [units](0.40.0/assets.json) |
+| [0.40.0](0.40.0/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 0 | 2 | [units](0.40.0/assets.json) |
 | [0.39.1](0.39.1/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 3 | 1 | [units](0.39.1/assets.json) |
 | [0.37.3](0.37.3/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 4 | 1 | [units](0.37.3/assets.json) |
 
