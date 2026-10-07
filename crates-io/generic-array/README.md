@@ -4,7 +4,7 @@ The crates.io package [generic-array](https://crates.io/crates/generic-array), a
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.4.5](1.4.5/loaf.toml) | 2026-10-06 | MIT | 0 | 1 | [units](1.4.5/assets.json) |
+| [1.4.5](1.4.5/loaf.toml) | 2026-10-06 | MIT | 0 | 2 | [units](1.4.5/assets.json) |
 | [0.14.9](0.14.9/loaf.toml) | 2026-10-06 | MIT | 1 | 0 |  |
 | [0.14.7](0.14.7/loaf.toml) | 2026-10-06 | MIT | 2 | 0 |  |
 
