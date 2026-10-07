@@ -1,12 +1,12 @@
 anyhow	1.0.104	default,std	debug	target	bake/top100-linux/anyhow/roots.json
 aws-lc-rs	1.18.1	aws-lc-sys,prebuilt-nasm	debug	target	bake/top100-linux/rustls/roots.json
 crossbeam-utils	0.8.23	default,std	debug	target	bake/top100-linux/crossbeam-utils/roots.json
+getrandom	0.4.3		debug	target	bake/top100-linux/getrandom/roots.json
 getrandom	0.4.3	std,sys_rng	debug	target	bake/top100-linux/rand/roots.json
-getrandom	0.4.3	target	debug	sha256:8617610be75a052665d09f967cd645c33ef7741ed52b8e5222b6f5ccc2399536	bake/top100-linux//roots.json
+libc	0.2.190		debug	target	bake/top100-linux/getrandom/roots.json
 libc	0.2.190	default,std	debug	target	bake/top100-linux/libc/roots.json
 libc	0.2.190	std	debug	target	bake/top100-linux/errno/roots.json
-libc	0.2.190	target	debug	sha256:3fec3f472ffb15d260e8fc2fe33ed7601db935fcfc7cf5a9b277af6967cc3e71	bake/top100-linux//roots.json
-parking_lot_core	0.9.12	target	debug	sha256:89aa69a3756c71b41e74d7bd7a4071bfd42e458a23be7b675b6d6dbc9be91fd3	bake/top100-linux//roots.json
+parking_lot_core	0.9.12		debug	target	bake/top100-linux/parking_lot_core/roots.json
 proc-macro2	1.0.107	default,proc-macro	debug	host	bake/top100-linux/thiserror/roots.json
 proc-macro2	1.0.107	default,proc-macro	debug	target	bake/top100-linux/proc-macro2/roots.json
 proc-macro2	1.0.107	proc-macro	debug	host	bake/top100-linux/serde_derive/roots.json
@@ -16,7 +16,7 @@ quote	1.0.47	default,proc-macro	debug	target	bake/top100-linux/quote/roots.json
 quote	1.0.47	proc-macro	debug	host	bake/top100-linux/serde_derive/roots.json
 quote	1.0.47	proc-macro	debug	target	bake/top100-linux/syn/roots.json
 rustix	1.1.5	alloc,default,std	debug	target	bake/top100-linux/rustix/roots.json
-rustversion	1.0.23	host	debug	sha256:53bf0676df34d80a5508f1b22bb73dd64a3e031af7e5fc2609593267fd67164d	bake/top100-linux//roots.json
+rustversion	1.0.23		debug	host	bake/top100-linux/generic-array/roots.json
 serde	1.0.229	default,std	debug	target	bake/top100-linux/serde/roots.json
 serde_core	1.0.229	alloc,std	debug	target	bake/top100-linux/toml/roots.json
 serde_core	1.0.229	default,result,std	debug	target	bake/top100-linux/serde_core/roots.json
@@ -24,13 +24,13 @@ serde_core	1.0.229	result,std	debug	target	bake/top100-linux/serde/roots.json
 serde_core	1.0.229	std	debug	target	bake/top100-linux/serde_json/roots.json
 serde_json	1.0.151	default,std	debug	target	bake/top100-linux/serde_json/roots.json
 thiserror	2.0.21	default,std	debug	target	bake/top100-linux/thiserror/roots.json
-windows_aarch64_gnullvm	0.53.1	target	debug	sha256:f673e503da50e9295a22e7221306b91c5c1b417c81c517edcea682b15b551a69	bake/top100-linux//roots.json
-windows_aarch64_msvc	0.53.1	target	debug	sha256:c594d81c357f1fd83f513dd574c2b4ebf7f9c7ad6de672afabcaa87df8ef431f	bake/top100-linux//roots.json
-windows_i686_gnu	0.53.1	target	debug	sha256:805b650751a63564a7d47efff52b8fa35f7115174d83a4eeaaeb62a2988ee4b4	bake/top100-linux//roots.json
-windows_i686_msvc	0.53.1	target	debug	sha256:6fd77c744d112cc1d08aeacb902ea93f455ae423a3d77ec3701611a4da1ae8c7	bake/top100-linux//roots.json
-windows_x86_64_gnu	0.53.1	target	debug	sha256:a38ee5fc0b0f034aa135afb9e82c6e05c647471ae2807654ed0a193da3734689	bake/top100-linux//roots.json
-windows_x86_64_gnullvm	0.53.1	target	debug	sha256:cbe1f53a155352af4e179b4826d8a645902e02bd519d5f780276dacfada94314	bake/top100-linux//roots.json
-windows_x86_64_msvc	0.53.1	target	debug	sha256:4986a0d3a5a75ccda3024036dff97766bbf96f63b20506cc6ff25928eabdf4db	bake/top100-linux//roots.json
+windows_aarch64_gnullvm	0.53.1		debug	target	bake/top100-linux/windows_aarch64_gnullvm/roots.json
+windows_aarch64_msvc	0.53.1		debug	target	bake/top100-linux/windows_aarch64_msvc/roots.json
+windows_i686_gnu	0.53.1		debug	target	bake/top100-linux/windows_i686_gnu/roots.json
+windows_i686_msvc	0.53.1		debug	target	bake/top100-linux/windows_i686_msvc/roots.json
+windows_x86_64_gnu	0.53.1		debug	target	bake/top100-linux/windows-targets/roots.json
+windows_x86_64_gnullvm	0.53.1		debug	target	bake/top100-linux/windows_x86_64_gnullvm/roots.json
+windows_x86_64_msvc	0.53.1		debug	target	bake/top100-linux/windows_x86_64_msvc/roots.json
+zerocopy	0.8.60		debug	target	bake/top100-linux/zerocopy/roots.json
 zerocopy	0.8.60	simd	debug	target	bake/top100-linux/rand_chacha/roots.json
-zerocopy	0.8.60	target	debug	sha256:4b7160e9c25432a989883f3740134c36e81fc4af6e62dd6ccd3390200732386b	bake/top100-linux//roots.json
-zmij	1.0.23	target	debug	sha256:95543d1823c32220ade82651984d26619e3779a89cc46ebc1fd24f5c6f4cd828	bake/top100-linux//roots.json
+zmij	1.0.23		debug	target	bake/top100-linux/serde_json/roots.json
