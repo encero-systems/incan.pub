@@ -101,3 +101,18 @@ wasmtime-winch = { loaf = "crates-io/wasmtime-internal-winch", version = "=36.0.
 wasmtime-wmemcheck = { loaf = "crates-io/wasmtime-internal-wmemcheck", version = "=36.0.17", optional = true }
 wat = { loaf = "crates-io/wat", version = "^1.236.0", optional = true }
 windows-sys = { loaf = "crates-io/windows-sys", version = "^0.60.0", features = ["Win32_Foundation", "Win32_Security", "Win32_Storage_FileSystem", "Win32_System_Diagnostics_Debug", "Win32_System_Kernel", "Win32_System_Memory", "Win32_System_SystemInformation"], optional = true, target = "cfg(target_os = \"windows\")" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["async", "component-model", "cranelift", "once_cell", "runtime", "std", "wasmtime-jit-icache-coherence"]
+cfg = ["has_host_compiler_backend", "has_native_signals", "has_virtual_memory"]
+
+[[rust.facts.link]]
+name = "wasmtime-helpers"
+target = "aarch64-apple-darwin"
+executable = { digest = "sha256:1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9", name = "clang", owner = "sha256:e0d2598f3189d2ff4a17c787e9645214bd22613a2f72baaa7d37daa1342c5673", path = "usr/bin/clang" }
+sources = [{ digest = "sha256:5b94d7ce4683a32a07470c6785d4aefdbfbfae174d7dda66abc74333c4e91dd3", kind = "file", name = "source-src-runtime-vm-helpers-c", path = "src/runtime/vm/helpers.c" }]
+objects = [{ arguments = [{ literal = "-isysroot" }, { owner = "SDKs/MacOSX27.0.sdk" }, { literal = "-resource-dir" }, { owner = "usr/lib/clang/21" }, { literal = "-O0" }, { literal = "-ffunction-sections" }, { literal = "-fdata-sections" }, { literal = "-fPIC" }, { literal = "-g" }, { literal = "-gdwarf-2" }, { literal = "-fno-omit-frame-pointer" }, { literal = "-mno-omit-leaf-frame-pointer" }, { literal = "--target=arm64-apple-macosx" }, { literal = "-mmacosx-version-min=27.0" }, { literal = "-Wall" }, { literal = "-Wextra" }, { literal = "-DCFG_TARGET_OS_macos" }, { literal = "-DCFG_TARGET_ARCH_aarch64" }, { literal = "-DVERSIONED_SUFFIX=_36_0_17" }, { literal = "-o" }, { output = "helpers.o" }, { literal = "-c" }, { input = "source-src-runtime-vm-helpers-c" }], language = "c", name = "helpers.o" }]
+library = { kind = "static", name = "wasmtime-helpers" }
