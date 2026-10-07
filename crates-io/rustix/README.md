@@ -4,7 +4,7 @@ The crates.io package [rustix](https://crates.io/crates/rustix), adopted by [inc
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.1.5](1.1.5/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 26 | 2 | [units](1.1.5/assets.json) |
+| [1.1.5](1.1.5/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 27 | 4 | [units](1.1.5/assets.json) |
 | [1.1.4](1.1.4/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 3 | 0 |  |
 | [0.38.44](0.38.44/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 1 | 0 |  |
 

@@ -6,7 +6,7 @@ code.
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.6.0](1.6.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 3 | [units](1.6.0/assets.json) |
+| [1.6.0](1.6.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 4 | [units](1.6.0/assets.json) |
 | [1.5.1](1.5.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 0 |  |
 | [1.2.57](1.2.57/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 

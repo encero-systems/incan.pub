@@ -4,7 +4,7 @@ The crates.io package [rustc-hash](https://crates.io/crates/rustc-hash), adopted
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [2.1.3](2.1.3/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 0 | 3 | [units](2.1.3/assets.json) |
+| [2.1.3](2.1.3/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 0 | 4 | [units](2.1.3/assets.json) |
 | [2.1.1](2.1.1/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 0 | 0 |  |
 | [1.1.0](1.1.0/loaf.toml) | 2026-10-07 | Apache-2.0/MIT | 0 | 0 |  |
 
