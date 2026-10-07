@@ -73,12 +73,13 @@ pub def record_proposal(
         Some(script) =>
             base = work + "/" + package + "-" + version + "-" + selection.profile
             reset(base)?
+            # Before anything runs: compiling the build dependencies already uses this TMPDIR and HOME.
+            for directory in ["out", "tmp", "home", "proposal"]:
+                make_dir(base + "/" + directory)?
             linked = build_dependencies(cache, blobs, package, version, base, selection, label)?
             package_dir = base + "/package"
             for file in files:
                 write_file(package_dir + "/" + file.path, file.data)?
-            for directory in ["out", "tmp", "home", "proposal"]:
-                make_dir(base + "/" + directory)?
             package_environment = package_variables(package, version, manifest, package_dir, base)?
             edition = string_member(member(adopt, "rust"), "edition")
             executable = compile_script(script, package_dir, base, edition, linked, package_environment, selection, label)?
