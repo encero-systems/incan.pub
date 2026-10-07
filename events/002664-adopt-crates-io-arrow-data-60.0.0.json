@@ -1,0 +1,92 @@
+{
+  "about": {
+    "description": "Array data abstractions for Apache Arrow",
+    "documentation": "",
+    "homepage": "https://github.com/apache/arrow-rs",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/apache/arrow-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5aa06d5e22786c4966ffc4d2f171d0cb65d95f6bdea108a14e8c335e9faa437f",
+    "package": "arrow-data",
+    "registry": "crates-io",
+    "version": "60.0.0"
+  },
+  "archive": "sha256:4436e7e3a1507b075f83e09ec37eb8b4404ec7abfcd791ee3a7bed577d6f4a9b",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-buffer",
+      "name": "arrow-buffer",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-schema",
+      "name": "arrow-schema",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/half",
+      "name": "half",
+      "optional": false,
+      "req": "^2.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/num-integer",
+      "name": "num-integer",
+      "optional": false,
+      "req": "^0.1.46"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.19"
+    }
+  ],
+  "features": {
+    "ffi": [
+      "arrow-schema/ffi"
+    ],
+    "force_validate": [],
+    "pool": [
+      "arrow-buffer/pool"
+    ]
+  },
+  "id": "sha256:2d84e43a30176201f4c481b135be2af9c4479f60e077d4820d050728a1d1aa1d",
+  "kind": "adopt",
+  "manifest": "sha256:fde14b59ff74f4f8604af6132b6cadf9836bfe6e402947e00d45785fcc732efd",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "arrow_data",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "arrow-data",
+    "scope": "crates-io",
+    "version": "60.0.0"
+  }
+}

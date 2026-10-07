@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/whoami"
+version = "2.1.3"
+
+[project.features]
+default = ["std", "wasi-wasite", "wasm-web"]
+force-stub = []
+std = ["dep:libc", "dep:libredox", "dep:objc2-system-configuration", "libc?/std", "web-sys?/std"]
+wasi-wasite = ["dep:wasite"]
+wasm-web = ["dep:web-sys"]
+
+[rust]
+name = "whoami"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.186", default-features = false, optional = true, target = "cfg(all(any(target_vendor = \"apple\", target_os = \"linux\", target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"netbsd\", target_os = \"openbsd\", target_os = \"illumos\", target_os = \"hurd\"), not(target_arch = \"wasm32\")))" }
+libredox = { loaf = "crates-io/libredox", version = "^0.1.17", features = ["call"], default-features = false, optional = true, target = "cfg(all(target_os = \"redox\", not(target_arch = \"wasm32\")))" }
+objc2-system-configuration = { loaf = "crates-io/objc2-system-configuration", version = "^0.3.2", features = ["SCDynamicStore", "SCDynamicStoreCopySpecific"], default-features = false, optional = true, target = "cfg(target_vendor = \"apple\")" }
+wasite = { loaf = "crates-io/wasite", version = "^1.0.2", default-features = false, optional = true, target = "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\"))" }
+web-sys = { loaf = "crates-io/web-sys", version = "^0.3.85", features = ["Document", "Location", "Navigator", "Window"], default-features = false, optional = true, target = "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\"), not(daku)))" }

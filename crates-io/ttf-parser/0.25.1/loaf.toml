@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ttf-parser"
+version = "0.25.1"
+
+[project.features]
+apple-layout = []
+core_maths = ["dep:core_maths"]
+default = ["std", "opentype-layout", "apple-layout", "variable-fonts", "glyph-names"]
+glyph-names = []
+gvar-alloc = ["std"]
+no-std-float = ["core_maths"]
+opentype-layout = []
+std = []
+variable-fonts = []
+
+[rust]
+name = "ttf_parser"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+core_maths = { loaf = "crates-io/core_maths", version = "^0.1.0", optional = true }

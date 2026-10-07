@@ -1,0 +1,44 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bytemuck"
+version = "1.25.2"
+
+[project.features]
+aarch64_simd = []
+align_offset = []
+alloc_uninit = []
+avx512_simd = []
+bytemuck_derive = ["dep:bytemuck_derive"]
+const_zeroed = []
+derive = ["bytemuck_derive"]
+extern_crate_alloc = []
+extern_crate_std = ["extern_crate_alloc"]
+impl_core_error = []
+latest_stable_rust = ["aarch64_simd", "avx512_simd", "align_offset", "alloc_uninit", "const_zeroed", "derive", "impl_core_error", "min_const_generics", "must_cast", "must_cast_extra", "pod_saturating", "track_caller", "transparentwrapper_extra", "wasm_simd", "zeroable_atomics", "zeroable_maybe_uninit", "zeroable_unwind_fn"]
+min_const_generics = []
+must_cast = []
+must_cast_extra = ["must_cast"]
+nightly_docs = []
+nightly_float = []
+nightly_portable_simd = ["rustversion"]
+nightly_stdsimd = []
+pod_saturating = []
+rustversion = ["dep:rustversion"]
+track_caller = []
+transparentwrapper_extra = []
+unsound_ptr_pod_impl = []
+wasm_simd = []
+zeroable_atomics = []
+zeroable_maybe_uninit = []
+zeroable_unwind_fn = []
+
+[rust]
+name = "bytemuck"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bytemuck_derive = { loaf = "crates-io/bytemuck_derive", version = "^1.10.2", optional = true }
+rustversion = { loaf = "crates-io/rustversion", version = "^1.0.22", optional = true }

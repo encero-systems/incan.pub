@@ -1,0 +1,56 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ordered-float"
+version = "5.5.0"
+
+[project.features]
+arbitrary = ["dep:arbitrary"]
+borsh = ["dep:borsh"]
+bytemuck = ["dep:bytemuck"]
+default = ["std"]
+derive-visitor = ["dep:derive-visitor"]
+facet = ["dep:facet"]
+libm = ["num-traits/libm"]
+num-cmp = ["dep:num-cmp"]
+proptest = ["dep:proptest"]
+rand = ["dep:rand"]
+randtest = ["dep:rand", "rand/std", "rand/std_rng"]
+rkyv = ["rkyv_32"]
+rkyv_08 = ["rkyv_08_32"]
+rkyv_08_16 = ["dep:rkyv_08", "rkyv_08?/pointer_width_16"]
+rkyv_08_32 = ["dep:rkyv_08", "rkyv_08?/pointer_width_32"]
+rkyv_08_64 = ["dep:rkyv_08", "rkyv_08?/pointer_width_64"]
+rkyv_08_ck = ["dep:rkyv_08", "rkyv_08?/bytecheck"]
+rkyv_16 = ["dep:rkyv", "rkyv?/size_16"]
+rkyv_32 = ["dep:rkyv", "rkyv?/size_32"]
+rkyv_64 = ["dep:rkyv", "rkyv?/size_64"]
+rkyv_ck = ["rkyv?/validation"]
+schemars = ["dep:schemars"]
+schemars1 = ["dep:schemars1"]
+serde = ["dep:serde", "rand?/serde1"]
+speedy = ["dep:speedy"]
+std = ["num-traits/std"]
+
+[rust]
+name = "ordered_float"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0.0", optional = true }
+borsh = { loaf = "crates-io/borsh", version = "^1.2.0", default-features = false, optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.12.2", default-features = false, optional = true }
+derive-visitor = { loaf = "crates-io/derive-visitor", version = "^0.4.0", optional = true }
+facet = { loaf = "crates-io/facet", version = "^0.46.5", features = ["alloc"], default-features = false, optional = true }
+num-cmp = { loaf = "crates-io/num-cmp", version = "^0.1.0", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.9", default-features = false }
+proptest = { loaf = "crates-io/proptest", version = "^1.0.0", optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.8.3", default-features = false, optional = true }
+rkyv = { loaf = "crates-io/rkyv", version = "^0.7.41", features = ["rend"], default-features = false, optional = true }
+rkyv_08 = { loaf = "crates-io/rkyv", version = "^0.8", default-features = false, optional = true }
+schemars = { loaf = "crates-io/schemars", version = "^0.8.8", optional = true }
+schemars1 = { loaf = "crates-io/schemars", version = "^1.2", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+speedy = { loaf = "crates-io/speedy", version = "^0.8.3", default-features = false, optional = true }

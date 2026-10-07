@@ -1,0 +1,131 @@
+{
+  "about": {
+    "description": "Make retry like a built-in feature provided by Rust.",
+    "documentation": "https://docs.rs/backon",
+    "homepage": "",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Xuanwo/backon"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cffb0e931875b666fc4fcb20fee52e9bbd1ef836fd9e9e04ec21555f9f85f7ef",
+    "package": "backon",
+    "registry": "crates-io",
+    "version": "1.6.0"
+  },
+  "archive": "sha256:29dee2a82aeff47ee434bf74ceffa9fa7bcfa3fda61305909d3b34a257fdbe10",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/embassy-time",
+      "name": "embassy-time",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/fastrand",
+      "name": "fastrand",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "gloo-timers"
+      ],
+      "loaf": "crates-io/futures-timer",
+      "name": "futures-timer",
+      "optional": true,
+      "req": "^3.0.3",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-timer",
+      "name": "futures-timer",
+      "optional": true,
+      "req": "^3.0.3",
+      "target": "cfg(not(target_arch = \"wasm32\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/gloo-timers",
+      "name": "gloo-timers",
+      "optional": true,
+      "req": "^0.3",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1",
+      "target": "cfg(not(target_arch = \"wasm32\"))"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "std-blocking-sleep",
+      "tokio-sleep",
+      "gloo-timers-sleep"
+    ],
+    "embassy-sleep": [
+      "embassy-time"
+    ],
+    "embassy-time": [
+      "dep:embassy-time"
+    ],
+    "futures-timer": [
+      "dep:futures-timer"
+    ],
+    "futures-timer-sleep": [
+      "futures-timer"
+    ],
+    "gloo-timers": [
+      "dep:gloo-timers"
+    ],
+    "gloo-timers-sleep": [
+      "dep:gloo-timers",
+      "gloo-timers/futures"
+    ],
+    "std": [
+      "fastrand/std"
+    ],
+    "std-blocking-sleep": [],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "tokio-sleep": [
+      "dep:tokio",
+      "tokio/time"
+    ]
+  },
+  "id": "sha256:7cfc696bb4f7f0af183cbc28daca0d000ee32aae4bba502848df9ebba26689a1",
+  "kind": "adopt",
+  "manifest": "sha256:506c9b681bdfecf6bfd6f128987712ca795e775030fda11f4167d84d9f6afc7f",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "backon",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "backon",
+    "scope": "crates-io",
+    "version": "1.6.0"
+  }
+}

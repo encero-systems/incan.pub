@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/borsh-derive"
+version = "1.8.1"
+
+[project.features]
+default = []
+force_exhaustive_checks = []
+schema = []
+
+[rust]
+name = "borsh_derive"
+type = "proc-macro"
+edition = "2018"
+build-script = false
+
+[dependencies]
+once_cell = { loaf = "crates-io/once_cell", version = "^1.18.0" }
+proc-macro-crate = { loaf = "crates-io/proc-macro-crate", version = "^3" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^3.0", features = ["fold", "full"] }

@@ -1,0 +1,44 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bindgen"
+version = "0.73.2"
+
+[project.features]
+__cli = ["dep:clap", "dep:clap_complete"]
+__testing_only_extra_assertions = []
+__testing_only_libclang_16 = []
+__testing_only_libclang_20 = []
+__testing_only_libclang_22 = []
+default = ["logging", "prettyplease", "runtime"]
+experimental = ["dep:annotate-snippets"]
+libcpp = ["clang-sys/libcpp"]
+logging = ["dep:log"]
+prettyplease = ["dep:prettyplease"]
+runtime = ["clang-sys/runtime"]
+static = ["clang-sys/static"]
+
+[rust]
+name = "bindgen"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[rust.source]
+root = "lib.rs"
+
+[dependencies]
+annotate-snippets = { loaf = "crates-io/annotate-snippets", version = "^0.11.4", optional = true }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.2.1" }
+cexpr = { loaf = "crates-io/cexpr", version = "^0.6" }
+clang-sys = { loaf = "crates-io/clang-sys", version = "^1", features = ["clang_11_0"] }
+clap = { loaf = "crates-io/clap", version = "^4", features = ["derive"], optional = true }
+clap_complete = { loaf = "crates-io/clap_complete", version = "^4", optional = true }
+log = { loaf = "crates-io/log", version = "^0.4", optional = true }
+prettyplease = { loaf = "crates-io/prettyplease", version = ">=0.2.7, <0.4", features = ["verbatim"], optional = true }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.80" }
+quote = { loaf = "crates-io/quote", version = "^1", default-features = false }
+regex = { loaf = "crates-io/regex", version = "^1.5.3", features = ["std", "unicode-perl"], default-features = false }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.0" }
+shlex = { loaf = "crates-io/shlex", version = "^2" }
+syn = { loaf = "crates-io/syn", version = ">=2, <4", features = ["extra-traits", "full", "visit-mut"] }

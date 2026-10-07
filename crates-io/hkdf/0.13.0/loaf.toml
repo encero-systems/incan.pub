@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hkdf"
+version = "0.13.0"
+
+[project.features]
+kdf = ["dep:kdf"]
+
+[rust]
+name = "hkdf"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+hmac = { loaf = "crates-io/hmac", version = "^0.13" }
+kdf = { loaf = "crates-io/kdf", version = "^0.1", optional = true }

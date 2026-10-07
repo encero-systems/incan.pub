@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/eyre"
+version = "0.6.14"
+
+[project.features]
+auto-install = []
+default = ["auto-install", "track-caller"]
+track-caller = []
+
+[rust]
+name = "eyre"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+indenter = { loaf = "crates-io/indenter", version = "^0.3.0" }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.18.0" }

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/poly1305"
+version = "0.9.1"
+
+[project.features]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "poly1305"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.3", target = "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))" }
+universal-hash = { loaf = "crates-io/universal-hash", version = "^0.6" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

@@ -1,0 +1,205 @@
+{
+  "about": {
+    "description": "Fast parser combinators on arbitrary streams with zero-copy support.",
+    "documentation": "https://docs.rs/combine",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Marwes/combine"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cfc320937d09e6de266b31b9afb480f197d7a861be86be7cb2ea7e5d1bfffc5e",
+    "package": "combine",
+    "registry": "crates-io",
+    "version": "4.6.8"
+  },
+  "archive": "sha256:31bcca26cb609cb3e43b0ac8f3662121acbc615320d419fe2f61c3731e682ea0",
+  "at": "2026-10-07T07:41:57Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes_05",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core-03",
+      "optional": true,
+      "req": "^0.3.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io-03",
+      "optional": true,
+      "req": "^0.3.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/regex",
+      "name": "regex",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "io-util"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio-02-dep",
+      "optional": true,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio-03-dep",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio-dep",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "codec"
+      ],
+      "loaf": "crates-io/tokio-util",
+      "name": "tokio-util",
+      "optional": true,
+      "req": "^0.7"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "bytes_05": [
+      "dep:bytes_05"
+    ],
+    "default": [
+      "std"
+    ],
+    "futures-03": [
+      "pin-project",
+      "std",
+      "futures-core-03",
+      "futures-io-03",
+      "pin-project-lite"
+    ],
+    "futures-core-03": [
+      "dep:futures-core-03"
+    ],
+    "futures-io-03": [
+      "dep:futures-io-03"
+    ],
+    "mp4": [],
+    "pin-project": [
+      "pin-project-lite"
+    ],
+    "pin-project-lite": [
+      "dep:pin-project-lite"
+    ],
+    "regex": [
+      "dep:regex"
+    ],
+    "std": [
+      "memchr/std",
+      "bytes",
+      "alloc"
+    ],
+    "tokio": [
+      "tokio-dep",
+      "dep:tokio-util",
+      "tokio-util/io",
+      "futures-core-03",
+      "pin-project-lite"
+    ],
+    "tokio-02": [
+      "pin-project",
+      "std",
+      "tokio-02-dep",
+      "futures-core-03",
+      "pin-project-lite",
+      "bytes_05"
+    ],
+    "tokio-02-dep": [
+      "dep:tokio-02-dep"
+    ],
+    "tokio-03": [
+      "pin-project",
+      "std",
+      "tokio-03-dep",
+      "futures-core-03",
+      "pin-project-lite"
+    ],
+    "tokio-03-dep": [
+      "dep:tokio-03-dep"
+    ],
+    "tokio-dep": [
+      "dep:tokio-dep"
+    ],
+    "tokio-util": [
+      "dep:tokio-util"
+    ]
+  },
+  "id": "sha256:89725c15167cc6b8c460aa044bd38ef037ed406b58940d6fe75fcdf8d6127123",
+  "kind": "adopt",
+  "manifest": "sha256:2d5d28e1d00598b5fa277c0c33076325cef442ef71dc413b0090ca628bc1da7a",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "combine",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "combine",
+    "scope": "crates-io",
+    "version": "4.6.8"
+  }
+}

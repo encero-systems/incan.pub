@@ -1,0 +1,51 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/insta"
+version = "1.49.0"
+
+[project.features]
+_cargo_insta_internal = ["clap"]
+clap = ["dep:clap"]
+colors = ["console"]
+console = ["dep:console"]
+csv = ["dep:csv", "serde"]
+default = ["colors"]
+filters = ["regex", "strip-ansi-escapes"]
+glob = ["walkdir", "globset"]
+globset = ["dep:globset"]
+json = ["serde"]
+pest = ["dep:pest"]
+pest_derive = ["dep:pest_derive"]
+redactions = ["pest", "pest_derive", "serde"]
+regex = ["dep:regex"]
+ron = ["dep:ron", "serde"]
+serde = ["dep:serde"]
+strip-ansi-escapes = ["dep:strip-ansi-escapes"]
+toml = ["dep:toml_edit", "dep:toml_writer", "serde"]
+walkdir = ["dep:walkdir"]
+yaml = ["serde"]
+
+[rust]
+name = "insta"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+clap = { loaf = "crates-io/clap", version = "^4.1", features = ["derive", "env"], optional = true }
+console = { loaf = "crates-io/console", version = "^0.16", features = ["std"], default-features = false, optional = true }
+csv = { loaf = "crates-io/csv", version = "^1.1.6", optional = true }
+globset = { loaf = "crates-io/globset", version = "^0.4.6", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.20.2" }
+pest = { loaf = "crates-io/pest", version = "^2.1.3", optional = true }
+pest_derive = { loaf = "crates-io/pest_derive", version = "^2.1.0", optional = true }
+regex = { loaf = "crates-io/regex", version = "^1.6.0", features = ["std", "unicode"], default-features = false, optional = true }
+ron = { loaf = "crates-io/ron", version = "^0.12.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.117", optional = true }
+similar = { loaf = "crates-io/similar", version = "^2.1.0", features = ["inline"] }
+strip-ansi-escapes = { loaf = "crates-io/strip-ansi-escapes", version = "^0.2", optional = true }
+tempfile = { loaf = "crates-io/tempfile", version = "^3" }
+toml_edit = { loaf = "crates-io/toml_edit", version = "^0.25.0", features = ["display", "parse", "serde"], optional = true }
+toml_writer = { loaf = "crates-io/toml_writer", version = "^1", optional = true }
+walkdir = { loaf = "crates-io/walkdir", version = "^2.3.1", optional = true }

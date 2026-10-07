@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/radium"
+version = "1.1.1"
+
+[project.features]
+portable-atomic = ["dep:portable-atomic"]
+portable-atomic-fallback = ["portable-atomic", "dep:portable-atomic", "portable-atomic/fallback"]
+
+[rust]
+name = "radium"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", default-features = false, optional = true }

@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/borsh"
+version = "1.8.1"
+
+[project.features]
+ascii = ["dep:ascii"]
+borsh-derive = ["dep:borsh-derive"]
+bson = ["dep:bson"]
+bytes = ["dep:bytes"]
+de_strict_order = []
+default = ["std"]
+derive = ["borsh-derive"]
+hashbrown = ["dep:hashbrown"]
+indexmap = ["dep:indexmap"]
+rc = []
+std = ["bytes?/std"]
+unstable__schema = ["derive", "dep:borsh-derive", "borsh-derive/schema"]
+uuid = ["dep:uuid"]
+
+[rust]
+name = "borsh"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+ascii = { loaf = "crates-io/ascii", version = "^1.1", optional = true }
+borsh-derive = { loaf = "crates-io/borsh-derive", version = "~1.8.1", optional = true }
+bson = { loaf = "crates-io/bson", version = "^2", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1", default-features = false, optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = ">=0.11, <0.16.0", optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2", optional = true }
+uuid = { loaf = "crates-io/uuid", version = "^1", default-features = false, optional = true }

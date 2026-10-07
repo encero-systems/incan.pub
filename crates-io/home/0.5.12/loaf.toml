@@ -1,0 +1,14 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/home"
+version = "0.5.12"
+
+[rust]
+name = "home"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_System_Com", "Win32_UI_Shell"], target = "cfg(windows)" }

@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/arbitrary"
+version = "1.4.2"
+
+[project.features]
+derive = ["derive_arbitrary"]
+derive_arbitrary = ["dep:derive_arbitrary"]
+
+[rust]
+name = "arbitrary"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+derive_arbitrary = { loaf = "crates-io/derive_arbitrary", version = "~1.4.0", optional = true }

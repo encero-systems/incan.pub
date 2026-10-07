@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/unicode-bidi"
+version = "0.3.18"
+
+[project.features]
+bench_it = []
+default = ["std", "hardcoded-data"]
+flame = ["dep:flame"]
+flame_it = ["flame", "flamer"]
+flamer = ["dep:flamer"]
+hardcoded-data = []
+serde = ["dep:serde"]
+smallvec = ["dep:smallvec"]
+std = []
+unstable = []
+with_serde = ["serde"]
+
+[rust]
+name = "unicode_bidi"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+flame = { loaf = "crates-io/flame", version = "^0.2", optional = true }
+flamer = { loaf = "crates-io/flamer", version = "^0.4", optional = true }
+serde = { loaf = "crates-io/serde", version = ">=0.8, <2.0", features = ["derive"], default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = ">=1.13", features = ["union"], optional = true }

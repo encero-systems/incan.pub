@@ -1,0 +1,376 @@
+{
+  "about": {
+    "description": "Bindings to the CoreGraphics framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e022c9d066895efa1345f8e33e584b9f958da2fd4cd116792e15e07e4720a807",
+    "package": "objc2-core-graphics",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:35708e28e669ca662478772d0333d64d85f0a4dfdc2b9eafe9f69e07d1f9b3df",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/dispatch2",
+      "name": "dispatch2",
+      "optional": true,
+      "req": ">=0.3.0, <0.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.80"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": true,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/objc2-core-foundation",
+      "name": "objc2-core-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "IOSurfaceRef"
+      ],
+      "loaf": "crates-io/objc2-io-surface",
+      "name": "objc2-io-surface",
+      "optional": true,
+      "req": "^0.3.2",
+      "target": "cfg(not(target_os = \"watchos\"))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "MTLDevice"
+      ],
+      "loaf": "crates-io/objc2-metal",
+      "name": "objc2-metal",
+      "optional": true,
+      "req": "^0.3.2",
+      "target": "cfg(not(target_os = \"watchos\"))"
+    }
+  ],
+  "features": {
+    "CGAffineTransform": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGBase": [],
+    "CGBitmapContext": [
+      "bitflags",
+      "objc2-core-foundation/CFByteOrder",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "CGColor": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGColorConversionInfo": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "CGColorSpace": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFData"
+    ],
+    "CGContext": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGConvertColorDataWithFormat": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGDataConsumer": [
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFURL"
+    ],
+    "CGDataProvider": [
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFURL"
+    ],
+    "CGDirectDisplay": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGDirectDisplayMetal": [],
+    "CGDirectPalette": [],
+    "CGDisplayConfiguration": [
+      "bitflags",
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGDisplayFade": [],
+    "CGDisplayStream": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFRunLoop"
+    ],
+    "CGEXRToneMappingGamma": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGError": [],
+    "CGEvent": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFMachPort"
+    ],
+    "CGEventSource": [
+      "objc2-core-foundation/CFDate"
+    ],
+    "CGEventTypes": [
+      "bitflags"
+    ],
+    "CGFont": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGFunction": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGGeometry": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGGradient": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGITUToneMapping": [],
+    "CGImage": [
+      "bitflags",
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGLayer": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGPDFArray": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGPDFContentStream": [
+      "objc2-core-foundation/CFArray"
+    ],
+    "CGPDFContext": [
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFURL"
+    ],
+    "CGPDFDictionary": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGPDFDocument": [
+      "bitflags",
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFURL"
+    ],
+    "CGPDFObject": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGPDFOperatorTable": [],
+    "CGPDFPage": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGPDFScanner": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGPDFStream": [
+      "objc2-core-foundation/CFData"
+    ],
+    "CGPDFString": [
+      "objc2-core-foundation/CFDate"
+    ],
+    "CGPSConverter": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGPath": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGPattern": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGRemoteOperation": [
+      "bitflags",
+      "objc2-core-foundation/CFCGTypes",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFMachPort"
+    ],
+    "CGRenderingBufferProvider": [
+      "objc2-core-foundation/CFData"
+    ],
+    "CGSession": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGShading": [
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGToneMapping": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "CGWindow": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFCGTypes"
+    ],
+    "CGWindowLevel": [],
+    "alloc": [],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "block2": [
+      "dep:block2"
+    ],
+    "default": [
+      "std",
+      "CGAffineTransform",
+      "CGBase",
+      "CGBitmapContext",
+      "CGColor",
+      "CGColorConversionInfo",
+      "CGColorSpace",
+      "CGContext",
+      "CGConvertColorDataWithFormat",
+      "CGDataConsumer",
+      "CGDataProvider",
+      "CGDirectDisplay",
+      "CGDirectDisplayMetal",
+      "CGDirectPalette",
+      "CGDisplayConfiguration",
+      "CGDisplayFade",
+      "CGDisplayStream",
+      "CGEXRToneMappingGamma",
+      "CGError",
+      "CGEvent",
+      "CGEventSource",
+      "CGEventTypes",
+      "CGFont",
+      "CGFunction",
+      "CGGeometry",
+      "CGGradient",
+      "CGITUToneMapping",
+      "CGImage",
+      "CGLayer",
+      "CGPDFArray",
+      "CGPDFContentStream",
+      "CGPDFContext",
+      "CGPDFDictionary",
+      "CGPDFDocument",
+      "CGPDFObject",
+      "CGPDFOperatorTable",
+      "CGPDFPage",
+      "CGPDFScanner",
+      "CGPDFStream",
+      "CGPDFString",
+      "CGPSConverter",
+      "CGPath",
+      "CGPattern",
+      "CGRemoteOperation",
+      "CGRenderingBufferProvider",
+      "CGSession",
+      "CGShading",
+      "CGToneMapping",
+      "CGWindow",
+      "CGWindowLevel",
+      "bitflags",
+      "block2",
+      "dispatch2",
+      "libc",
+      "objc2",
+      "objc2-metal"
+    ],
+    "dispatch2": [
+      "dep:dispatch2"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "objc2": [
+      "dep:objc2",
+      "dispatch2?/objc2",
+      "objc2-core-foundation/objc2",
+      "objc2-io-surface?/objc2"
+    ],
+    "objc2-io-surface": [
+      "dep:objc2-io-surface"
+    ],
+    "objc2-metal": [
+      "dep:objc2-metal"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": []
+  },
+  "id": "sha256:533a768194809025d6175692b928f0539e557645d38527fbd212a2ab5cfb7db8",
+  "kind": "adopt",
+  "manifest": "sha256:8d647f517cbfafe98a0fcc1ab79009579d5d7aed52a92f137b7a5601f83b0158",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_core_graphics",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-core-graphics",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

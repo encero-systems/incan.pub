@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/serde-untagged"
+version = "0.1.9"
+
+[rust]
+name = "serde_untagged"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+erased-serde = { loaf = "crates-io/erased-serde", version = "^0.4.2", features = ["alloc"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", default-features = false, target = "cfg(any())" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", features = ["alloc"], default-features = false }
+typeid = { loaf = "crates-io/typeid", version = "^1" }

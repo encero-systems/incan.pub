@@ -1,0 +1,49 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/quinn-proto"
+version = "0.11.19"
+
+[project.features]
+__rustls-post-quantum-test = []
+arbitrary = ["dep:arbitrary"]
+aws-lc-rs = ["dep:aws-lc-rs", "aws-lc-rs?/aws-lc-sys", "aws-lc-rs?/prebuilt-nasm"]
+aws-lc-rs-fips = ["aws-lc-rs", "aws-lc-rs?/fips"]
+bloom = ["dep:fastbloom"]
+default = ["rustls-ring", "log", "bloom"]
+log = ["tracing/log"]
+platform-verifier = ["dep:rustls-platform-verifier"]
+qlog = ["dep:qlog"]
+ring = ["dep:ring"]
+rustls = ["rustls-ring"]
+rustls-aws-lc-rs = ["dep:rustls", "rustls?/aws-lc-rs", "aws-lc-rs"]
+rustls-aws-lc-rs-fips = ["rustls-aws-lc-rs", "aws-lc-rs-fips"]
+rustls-log = ["rustls?/logging"]
+rustls-ring = ["dep:rustls", "rustls?/ring", "ring"]
+
+[rust]
+name = "quinn_proto"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0.1", features = ["derive"], optional = true }
+aws-lc-rs = { loaf = "crates-io/aws-lc-rs", version = "^1.9", default-features = false, optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+fastbloom = { loaf = "crates-io/fastbloom", version = "^0.17", default-features = false, optional = true }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", features = ["wasm_js"], default-features = false, target = "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))" }
+lru-slab = { loaf = "crates-io/lru-slab", version = "^0.1.2" }
+qlog = { loaf = "crates-io/qlog", version = "^0.15.2", optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.10.1" }
+rand_pcg = { loaf = "crates-io/rand_pcg", version = "^0.10" }
+ring = [{ loaf = "crates-io/ring", version = "^0.17", features = ["wasm32_unknown_unknown_js"], target = "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))" }, { loaf = "crates-io/ring", version = "^0.17", optional = true }]
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2" }
+rustls = { loaf = "crates-io/rustls", version = "^0.23.5", features = ["std"], default-features = false, optional = true }
+rustls-pki-types = { loaf = "crates-io/rustls-pki-types", version = "^1.7", features = ["web"], target = "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))" }
+rustls-platform-verifier = { loaf = "crates-io/rustls-platform-verifier", version = "^0.7", optional = true }
+slab = { loaf = "crates-io/slab", version = "^0.4.6" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.3" }
+tinyvec = { loaf = "crates-io/tinyvec", version = "^1.1", features = ["alloc"] }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.10", features = ["std"], default-features = false }
+web-time = { loaf = "crates-io/web-time", version = "^1", target = "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))" }

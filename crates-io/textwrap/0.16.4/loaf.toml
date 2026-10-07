@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/textwrap"
+version = "0.16.4"
+
+[project.features]
+default = ["std", "unicode-linebreak", "unicode-width", "smawk"]
+hyphenation = ["std", "dep:hyphenation"]
+icu_segmenter = ["dep:icu_segmenter"]
+smawk = ["std", "dep:smawk"]
+std = ["unicode-width?/default"]
+terminal_size = ["std", "dep:terminal_size"]
+unicode-linebreak = ["std", "icu_segmenter"]
+unicode-linebreak-complex = ["unicode-linebreak", "dep:icu_segmenter", "icu_segmenter/auto"]
+unicode-width = ["dep:unicode-width"]
+
+[rust]
+name = "textwrap"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+hyphenation = { loaf = "crates-io/hyphenation", version = "^0.8.4", features = ["embed_en-us"], optional = true }
+icu_segmenter = { loaf = "crates-io/icu_segmenter", version = "^2.3.0", features = ["compiled_data"], default-features = false, optional = true }
+smawk = { loaf = "crates-io/smawk", version = "^0.3.2", optional = true }
+terminal_size = { loaf = "crates-io/terminal_size", version = "^0.4.0", optional = true }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.2.0", default-features = false, optional = true }

@@ -1,0 +1,172 @@
+{
+  "about": {
+    "description": "A fast and concurrent cache library inspired by Java Caffeine",
+    "documentation": "https://docs.rs/moka/",
+    "homepage": "",
+    "license": "(MIT OR Apache-2.0) AND Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/moka-rs/moka"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4293f18e7567a1caf3c584855554377025c65e0aa445344d04171f5ad63d19b9",
+    "package": "moka",
+    "registry": "crates-io",
+    "version": "0.12.16"
+  },
+  "archive": "sha256:dc3c82306ad4584348cbff62801c7abead3cac3a0ec3ab27d7ea18d2346cd8ac",
+  "at": "2026-10-07T07:44:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-lock",
+      "name": "async-lock",
+      "optional": true,
+      "req": "^3.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-channel",
+      "name": "crossbeam-channel",
+      "optional": false,
+      "req": "^0.5.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-epoch",
+      "name": "crossbeam-epoch",
+      "optional": false,
+      "req": "^0.9.20"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": false,
+      "req": "^0.8.21"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/equivalent",
+      "name": "equivalent",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/event-listener",
+      "name": "event-listener",
+      "optional": true,
+      "req": "^5.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking_lot",
+      "name": "parking_lot",
+      "optional": false,
+      "req": "^0.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": false,
+      "req": "^1.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quanta",
+      "name": "quanta",
+      "optional": true,
+      "req": "^0.12.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tagptr",
+      "name": "tagptr",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "v4"
+      ],
+      "loaf": "crates-io/uuid",
+      "name": "uuid",
+      "optional": false,
+      "req": "^1.1"
+    }
+  ],
+  "features": {
+    "atomic64": [],
+    "default": [],
+    "future": [
+      "dep:async-lock",
+      "dep:event-listener",
+      "dep:futures-util"
+    ],
+    "logging": [
+      "dep:log"
+    ],
+    "quanta": [
+      "dep:quanta"
+    ],
+    "sync": [],
+    "unstable-debug-counters": [
+      "future"
+    ]
+  },
+  "id": "sha256:83859522345d3aea94bae68018e3afe79abee756c5c783e05b8c4308d6b4aa92",
+  "kind": "adopt",
+  "manifest": "sha256:0bef75a8745a40471ed17240d323bd34eb2d696502b9683b5aec7b1826a3b1e6",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "moka",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "moka",
+    "scope": "crates-io",
+    "version": "0.12.16"
+  }
+}

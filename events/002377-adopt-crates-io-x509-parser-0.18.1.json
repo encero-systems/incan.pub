@@ -1,0 +1,153 @@
+{
+  "about": {
+    "description": "Parser for the X.509 v3 format (RFC 5280 certificates)",
+    "documentation": "",
+    "homepage": "https://github.com/rusticata/x509-parser",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rusticata/x509-parser.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d43b0f71ce057da06bc0851b23ee24f3f86190b07203dd8f567d0b706a185202",
+    "package": "x509-parser",
+    "registry": "crates-io",
+    "version": "0.18.1"
+  },
+  "archive": "sha256:ed0642d606ac15638cdb3a7f7dc2e80a060773144065eefdd7bead2aa902b60d",
+  "at": "2026-10-07T07:43:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "datetime"
+      ],
+      "loaf": "crates-io/asn1-rs",
+      "name": "asn1-rs",
+      "optional": false,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/aws-lc-rs",
+      "name": "aws-lc-rs",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/data-encoding",
+      "name": "data-encoding",
+      "optional": false,
+      "req": "^2.2.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "bigint"
+      ],
+      "loaf": "crates-io/der-parser",
+      "name": "der-parser",
+      "optional": false,
+      "req": "^10.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lazy_static",
+      "name": "lazy_static",
+      "optional": false,
+      "req": "^1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/nom",
+      "name": "nom",
+      "optional": false,
+      "req": "^7.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "crypto",
+        "x509",
+        "x962"
+      ],
+      "loaf": "crates-io/oid-registry",
+      "name": "oid-registry",
+      "optional": false,
+      "req": "^0.8.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ring",
+      "name": "ring",
+      "optional": true,
+      "req": "^0.17.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rusticata-macros",
+      "name": "rusticata-macros",
+      "optional": false,
+      "req": "^4.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "formatting"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": false,
+      "req": "^0.3.35"
+    }
+  ],
+  "features": {
+    "aws-lc-rs": [
+      "dep:aws-lc-rs"
+    ],
+    "default": [],
+    "ring": [
+      "dep:ring"
+    ],
+    "validate": [],
+    "verify": [
+      "ring"
+    ],
+    "verify-aws": [
+      "aws-lc-rs"
+    ]
+  },
+  "id": "sha256:c9a8ae73f404c5332f616ff8385c160c0e03826cfc11485d5c11b6d1290f46d4",
+  "kind": "adopt",
+  "manifest": "sha256:b0171eb690f044a5947c0dc08191c2ddd7b9d000ee43940e54bc4a505b9e15a6",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "x509_parser",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "x509-parser",
+    "scope": "crates-io",
+    "version": "0.18.1"
+  }
+}

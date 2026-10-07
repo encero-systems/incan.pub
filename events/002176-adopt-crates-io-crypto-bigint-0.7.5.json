@@ -1,0 +1,166 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of a big integer library which has been designed from\nthe ground-up for use in cryptographic applications. Provides constant-time,\nno_std-friendly implementations of modern formulas using const generics.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/crypto-bigint"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1a52aa3fcda4e6302a9f48734f234d35d4721b96f8fe07d073f07ce9df4f0271",
+    "package": "crypto-bigint",
+    "registry": "crates-io",
+    "version": "0.7.5"
+  },
+  "archive": "sha256:b7aef68e2642173df2354036e963d6a70905909b1df3e8c17c12cea53fd620da",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpubits",
+      "name": "cpubits",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ctutils",
+      "name": "ctutils",
+      "optional": false,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "sys_rng"
+      ],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hybrid-array",
+      "name": "hybrid-array",
+      "optional": true,
+      "req": "^0.4.12"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.19"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rlp",
+      "name": "rlp",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": true,
+      "req": "^2.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serdect?/alloc"
+    ],
+    "default": [
+      "rand_core"
+    ],
+    "der": [
+      "dep:der",
+      "hybrid-array"
+    ],
+    "extra-sizes": [],
+    "getrandom": [
+      "dep:getrandom",
+      "rand_core"
+    ],
+    "hybrid-array": [
+      "dep:hybrid-array"
+    ],
+    "rand_core": [
+      "dep:rand_core"
+    ],
+    "rlp": [
+      "dep:rlp"
+    ],
+    "serde": [
+      "dep:serdect"
+    ],
+    "subtle": [
+      "dep:subtle",
+      "ctutils/subtle",
+      "hybrid-array?/subtle"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:34b54566b1b771c0fb318594923713ace41a6c9cad2861cb38881834086e0907",
+  "kind": "adopt",
+  "manifest": "sha256:9283f42d37660dc8f8bfe1dda1aeb473c75829b4ee15dae5c02849cb53d704e4",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "crypto_bigint",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "crypto-bigint",
+    "scope": "crates-io",
+    "version": "0.7.5"
+  }
+}

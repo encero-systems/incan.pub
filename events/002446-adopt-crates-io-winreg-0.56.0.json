@@ -1,0 +1,91 @@
+{
+  "about": {
+    "description": "Rust bindings to MS Windows Registry API",
+    "documentation": "https://docs.rs/winreg",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/gentoo90/winreg-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7d6f32a0ff4a9f6f01231eb2059cc85479330739333e0e58cadf03b6af2cca10",
+    "package": "winreg",
+    "registry": "crates-io",
+    "version": "0.56.0"
+  },
+  "archive": "sha256:d7f2bf2365b3163089b178e1c948da881a28a730558f92f301f04b8946a7cd0a",
+  "at": "2026-10-07T07:44:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": true,
+      "req": "^0.4.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Security",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Diagnostics_Debug",
+        "Win32_System_Registry",
+        "Win32_System_Time"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.59, <=0.61"
+    }
+  ],
+  "features": {
+    "chrono": [
+      "dep:chrono"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serialization-serde": [
+      "transactions",
+      "serde"
+    ],
+    "transactions": []
+  },
+  "id": "sha256:e1effa905d231f18a6e687ffca51f2b4756332cb435d87196fc74f01632f00fc",
+  "kind": "adopt",
+  "manifest": "sha256:355ee85291b7971c21f006de57ed8ec9db5d7990804d6ec67cb68688c9e9c409",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "winreg",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "winreg",
+    "scope": "crates-io",
+    "version": "0.56.0"
+  }
+}

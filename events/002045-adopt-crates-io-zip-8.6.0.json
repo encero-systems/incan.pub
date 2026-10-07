@@ -1,0 +1,377 @@
+{
+  "about": {
+    "description": "Library to support the reading and writing of zip files.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/zip-rs/zip2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2d04a6b5381502aa6087c94c669499eb1602eb9c5e8198e534de571f7154809b",
+    "package": "zip",
+    "registry": "crates-io",
+    "version": "8.6.0"
+  },
+  "archive": "sha256:0240f2caccf9955e6d1daa50e78c3facf11ac95a5359f66b63ea2a805fe6e132",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/aes",
+      "name": "aes",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitstream-io",
+      "name": "bitstream-io",
+      "optional": true,
+      "req": "^4.9"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bzip2",
+      "name": "bzip2",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": true,
+      "req": "^0.4.27"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/constant_time_eq",
+      "name": "constant_time_eq",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crc32fast",
+      "name": "crc32fast",
+      "optional": false,
+      "req": "^1.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/deflate64",
+      "name": "deflate64",
+      "optional": true,
+      "req": "^0.1.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "wasm_js"
+      ],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4",
+      "target": "cfg(not(target_arch = \"wasm32\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "zeroize"
+      ],
+      "loaf": "crates-io/hmac",
+      "name": "hmac",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/jiff",
+      "name": "jiff",
+      "optional": true,
+      "req": "^0.2.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "encoder",
+        "optimization",
+        "std",
+        "xz"
+      ],
+      "loaf": "crates-io/lzma-rust2",
+      "name": "lzma-rust2",
+      "optional": true,
+      "req": "^0.16.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/nt-time",
+      "name": "nt-time",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pbkdf2",
+      "name": "pbkdf2",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ppmd-rust",
+      "name": "ppmd-rust",
+      "optional": true,
+      "req": "^1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha1",
+      "name": "sha1",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "wasm-bindgen"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.47",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.47",
+      "target": "cfg(not(target_arch = \"wasm32\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/typed-path",
+      "name": "typed-path",
+      "optional": false,
+      "req": "^0.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zopfli",
+      "name": "zopfli",
+      "optional": true,
+      "req": "^0.8.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zstd",
+      "name": "zstd",
+      "optional": true,
+      "req": "^0.13.3"
+    }
+  ],
+  "features": {
+    "_arbitrary": [
+      "dep:arbitrary"
+    ],
+    "_bzip2_any": [],
+    "_deflate-any": [],
+    "aes-crypto": [
+      "dep:aes",
+      "dep:constant_time_eq",
+      "dep:getrandom",
+      "getrandom/std",
+      "dep:hmac",
+      "dep:pbkdf2",
+      "dep:sha1",
+      "dep:zeroize"
+    ],
+    "bitstream-io": [
+      "dep:bitstream-io"
+    ],
+    "bzip2": [
+      "dep:bzip2",
+      "bzip2/default",
+      "_bzip2_any"
+    ],
+    "bzip2-rs": [
+      "dep:bzip2",
+      "bzip2/bzip2-sys",
+      "_bzip2_any"
+    ],
+    "chrono": [
+      "dep:chrono"
+    ],
+    "default": [
+      "aes-crypto",
+      "bzip2",
+      "deflate64",
+      "deflate",
+      "lzma",
+      "ppmd",
+      "time",
+      "zstd",
+      "xz"
+    ],
+    "deflate": [
+      "deflate-zopfli",
+      "deflate-flate2-zlib-rs"
+    ],
+    "deflate-flate2": [
+      "_deflate-any",
+      "dep:flate2"
+    ],
+    "deflate-flate2-zlib": [
+      "deflate-flate2",
+      "dep:flate2",
+      "flate2/zlib"
+    ],
+    "deflate-flate2-zlib-ng": [
+      "deflate-flate2",
+      "dep:flate2",
+      "flate2/zlib-ng"
+    ],
+    "deflate-flate2-zlib-ng-compat": [
+      "deflate-flate2",
+      "dep:flate2",
+      "flate2/zlib-ng-compat"
+    ],
+    "deflate-flate2-zlib-rs": [
+      "deflate-flate2",
+      "dep:flate2",
+      "flate2/zlib-rs"
+    ],
+    "deflate-zopfli": [
+      "dep:zopfli",
+      "_deflate-any"
+    ],
+    "deflate64": [
+      "dep:deflate64"
+    ],
+    "deprecated-time": [],
+    "getrandom": [
+      "dep:getrandom"
+    ],
+    "jiff-02": [
+      "dep:jiff"
+    ],
+    "legacy-zip": [
+      "bitstream-io"
+    ],
+    "lzma": [
+      "dep:lzma-rust2"
+    ],
+    "nt-time": [
+      "dep:nt-time"
+    ],
+    "ppmd": [
+      "dep:ppmd-rust"
+    ],
+    "time": [
+      "dep:time"
+    ],
+    "unreserved": [],
+    "xz": [
+      "dep:lzma-rust2"
+    ],
+    "zstd": [
+      "dep:zstd"
+    ]
+  },
+  "id": "sha256:a20255bb1b9d22573b933343e8dbf4456ef0ac195a17316c5d5700c2da1a1519",
+  "kind": "adopt",
+  "manifest": "sha256:82598c6945aef4d82d4dd42a58fdaa7ebc35c2e3439b61864fcf7ef435969ed6",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "zip",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "zip",
+    "scope": "crates-io",
+    "version": "8.6.0"
+  }
+}

@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aws-credential-types"
+version = "1.3.0"
+
+[project.features]
+hardcoded-credentials = []
+test-util = ["aws-smithy-runtime-api/test-util"]
+
+[rust]
+name = "aws_credential_types"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+aws-smithy-async = { loaf = "crates-io/aws-smithy-async", version = "^1.3.0" }
+aws-smithy-runtime-api = { loaf = "crates-io/aws-smithy-runtime-api", version = "^1.13.0", features = ["client", "http-auth"] }
+aws-smithy-types = { loaf = "crates-io/aws-smithy-types", version = "^1.6.1" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.7.0" }

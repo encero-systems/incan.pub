@@ -1,0 +1,103 @@
+{
+  "about": {
+    "description": "X25519 elliptic curve Diffie-Hellman key exchange in pure-Rust, using curve25519-dalek.",
+    "documentation": "https://docs.rs/x25519-dalek",
+    "homepage": "https://github.com/dalek-cryptography/curve25519-dalek",
+    "license": "BSD-3-Clause",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/dalek-cryptography/curve25519-dalek/tree/main/x25519-dalek"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e7e8131a03190127fb2263afc72b322ecadae46b6ff8c6f399ff5d02f5559af6",
+    "package": "x25519-dalek",
+    "registry": "crates-io",
+    "version": "3.0.0"
+  },
+  "archive": "sha256:5e3420bd9fe8fde485963a42df7be007ca4e559c0976a3781d8da1a573a3ebe3",
+  "at": "2026-10-07T07:45:35Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/curve25519-dalek",
+      "name": "curve25519-dalek",
+      "optional": false,
+      "req": "^5.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "default": [
+      "precomputed-tables",
+      "zeroize"
+    ],
+    "getrandom": [
+      "dep:getrandom"
+    ],
+    "precomputed-tables": [
+      "curve25519-dalek/precomputed-tables"
+    ],
+    "reusable_secrets": [],
+    "serde": [
+      "dep:serde",
+      "curve25519-dalek/serde"
+    ],
+    "static_secrets": [],
+    "zeroize": [
+      "dep:zeroize",
+      "curve25519-dalek/zeroize"
+    ]
+  },
+  "id": "sha256:643d34f8e280524466ec121a604da28bca544cda26c3ed408fc420a3f230c8fc",
+  "kind": "adopt",
+  "manifest": "sha256:c9cdc9af042dc39bb7e83d9e9ea1d894115b7300c99ce9a6b17559450f0f2d81",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "x25519_dalek",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "x25519-dalek",
+    "scope": "crates-io",
+    "version": "3.0.0"
+  }
+}

@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/core-graphics"
+version = "0.23.2"
+
+[project.features]
+default = ["link"]
+elcapitan = []
+highsierra = []
+link = ["core-foundation/link", "core-graphics-types/link"]
+
+[rust]
+name = "core_graphics"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^1.0" }
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.9", default-features = false }
+core-graphics-types = { loaf = "crates-io/core-graphics-types", version = "^0.1", default-features = false }
+foreign-types = { loaf = "crates-io/foreign-types", version = "^0.5.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2" }

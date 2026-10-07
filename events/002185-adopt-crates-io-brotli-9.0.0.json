@@ -1,0 +1,113 @@
+{
+  "about": {
+    "description": "A brotli compressor and decompressor that with an interface avoiding the rust stdlib. This makes it suitable for embedded devices and kernels. It is designed with a pluggable allocator so that the standard lib's allocator may be employed. The default build also includes a stdlib allocator and stream interface. Disable this with --features=no-stdlib. All included code is safe.",
+    "documentation": "https://docs.rs/brotli/",
+    "homepage": "https://github.com/dropbox/rust-brotli",
+    "license": "BSD-3-Clause AND MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/dropbox/rust-brotli"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f8b851b75c23ca7873623d612fe49bd1989aeb03d08fb9432187eb253d3d4c6b",
+    "package": "brotli",
+    "registry": "crates-io",
+    "version": "9.0.0"
+  },
+  "archive": "sha256:01288f35249e75e82feecb2f0efddb5b1275b26ecbce4deb8227c49ad3ad0622",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/alloc-no-stdlib",
+      "name": "alloc-no-stdlib",
+      "optional": false,
+      "req": ">=3.0.0, <4.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/alloc-stdlib",
+      "name": "alloc-stdlib",
+      "optional": true,
+      "req": ">=0.3.0, <0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/brotli-decompressor",
+      "name": "brotli-decompressor",
+      "optional": false,
+      "req": "~6.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "~0.10"
+    }
+  ],
+  "features": {
+    "alloc-stdlib": [
+      "dep:alloc-stdlib"
+    ],
+    "benchmark": [
+      "brotli-decompressor/benchmark"
+    ],
+    "billing": [],
+    "default": [
+      "std"
+    ],
+    "disable-timer": [
+      "brotli-decompressor/disable-timer"
+    ],
+    "disallow_large_window_size": [],
+    "external-literal-probability": [],
+    "ffi-api": [
+      "brotli-decompressor/ffi-api"
+    ],
+    "float64": [],
+    "floating_point_context_mixing": [],
+    "no-stdlib-ffi-binding": [],
+    "pass-through-ffi-panics": [],
+    "portable-float": [],
+    "safe": [],
+    "seccomp": [
+      "alloc-no-stdlib/unsafe",
+      "brotli-decompressor/seccomp"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "simd": [],
+    "std": [
+      "alloc-stdlib",
+      "brotli-decompressor/std"
+    ],
+    "validation": [
+      "sha2"
+    ],
+    "vector_scratch_space": []
+  },
+  "id": "sha256:d04dff0723daeba1aa6d8d67557142bd55ab9eb1eaa6d8d2f3badc1f322b6bce",
+  "kind": "adopt",
+  "manifest": "sha256:4c64aec6eafbb38fb10ae591a560e30e89862ae64654fe882d75732345db0492",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "brotli",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "brotli",
+    "scope": "crates-io",
+    "version": "9.0.0"
+  }
+}

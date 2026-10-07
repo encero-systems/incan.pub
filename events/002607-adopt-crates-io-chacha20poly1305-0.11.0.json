@@ -1,0 +1,107 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the ChaCha20Poly1305 Authenticated Encryption\nwith Additional Data Cipher (RFC 8439) with optional architecture-specific\nhardware acceleration. Also contains implementations of the XChaCha20Poly1305\nextended nonce variant of ChaCha20Poly1305, and the reduced-round\nChaCha8Poly1305 and ChaCha12Poly1305 lightweight variants.",
+    "documentation": "https://docs.rs/chacha20poly1305",
+    "homepage": "https://github.com/RustCrypto/AEADs/tree/master/chacha20poly1305",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/AEADs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9b89e1c441e926b9c82a8d023f6e1b7ae0adcfaa7d621814e4d60789bac751cb",
+    "package": "chacha20poly1305",
+    "registry": "crates-io",
+    "version": "0.11.0"
+  },
+  "archive": "sha256:338ccd3ff31b352bff15860fa06dedd7d8c047e4196c7e5c2d7b8c550290c54a",
+  "at": "2026-10-07T07:45:01Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/aead",
+      "name": "aead",
+      "optional": false,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "xchacha"
+      ],
+      "loaf": "crates-io/chacha20",
+      "name": "chacha20",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cipher",
+      "name": "cipher",
+      "optional": false,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/poly1305",
+      "name": "poly1305",
+      "optional": false,
+      "req": "^0.9"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.8"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "aead/alloc"
+    ],
+    "arrayvec": [
+      "aead/arrayvec"
+    ],
+    "bytes": [
+      "aead/bytes"
+    ],
+    "default": [
+      "alloc",
+      "getrandom"
+    ],
+    "getrandom": [
+      "aead/getrandom"
+    ],
+    "rand_core": [
+      "aead/rand_core"
+    ],
+    "reduced-round": [],
+    "zeroize": [
+      "dep:zeroize",
+      "chacha20/zeroize"
+    ]
+  },
+  "id": "sha256:0db9f32ebf7c415e65b426e7f88e10250d86cb02ae38bc4040856cfc6ce7c624",
+  "kind": "adopt",
+  "manifest": "sha256:0555ce74a92765d17aee260537e769ad9be47f5a3a85bf5fd0b3a388d916c1a2",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "chacha20poly1305",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "chacha20poly1305",
+    "scope": "crates-io",
+    "version": "0.11.0"
+  }
+}

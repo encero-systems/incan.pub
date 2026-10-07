@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/const_format_proc_macros"
+version = "0.2.34"
+
+[project.features]
+all = ["derive"]
+debug = ["dep:syn", "syn/extra-traits"]
+default = []
+derive = ["syn", "dep:syn", "syn/derive", "syn/printing"]
+syn = ["dep:syn"]
+
+[rust]
+name = "const_format_proc_macros"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.19" }
+quote = { loaf = "crates-io/quote", version = "^1.0.7" }
+syn = { loaf = "crates-io/syn", version = "^1.0.38", features = ["parsing", "proc-macro"], default-features = false, optional = true }
+unicode-xid = { loaf = "crates-io/unicode-xid", version = "^0.2" }

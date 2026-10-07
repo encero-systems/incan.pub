@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/objc2-security-foundation"
+version = "0.3.2"
+
+[project.features]
+SFAuthorization = ["objc2-foundation/NSError", "objc2-foundation/NSObject"]
+SFDefines = []
+alloc = []
+default = ["std", "SFAuthorization", "SFDefines", "objc2-security"]
+objc2-security = ["dep:objc2-security"]
+std = ["alloc"]
+unstable-darwin-objc = []
+
+[rust]
+name = "objc2_security_foundation"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+objc2 = { loaf = "crates-io/objc2", version = ">=0.6.2, <0.8.0", features = ["std"], default-features = false }
+objc2-foundation = { loaf = "crates-io/objc2-foundation", version = "^0.3.2", features = ["alloc"], default-features = false }
+objc2-security = { loaf = "crates-io/objc2-security", version = "^0.3.2", features = ["Authorization", "objc2"], default-features = false, optional = true }

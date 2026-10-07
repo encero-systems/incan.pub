@@ -1,0 +1,169 @@
+{
+  "about": {
+    "description": "Tooling for working with `*.wit` and component files together.",
+    "documentation": "https://docs.rs/wit-component",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasm-tools/tree/main/crates/wit-component"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:092f783dee3253265fcde131475055f8c275ac0176a9c0396db1dc7b5544bfb4",
+    "package": "wit-component",
+    "registry": "crates-io",
+    "version": "0.259.0"
+  },
+  "archive": "sha256:a5a2db1e82aed60c21ed408a1237415c7318c634c3c206f01103078e68103607",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.58"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.3.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.17"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": false,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": false,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "wasmparser"
+      ],
+      "loaf": "crates-io/wasm-encoder",
+      "name": "wasm-encoder",
+      "optional": false,
+      "req": "^0.259.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-metadata",
+      "name": "wasm-metadata",
+      "optional": false,
+      "req": "^0.259.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model",
+        "simd",
+        "std"
+      ],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": false,
+      "req": "^0.259.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wast",
+      "name": "wast",
+      "optional": true,
+      "req": "^259.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wat",
+      "name": "wat",
+      "optional": true,
+      "req": "^1.259.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "decoding",
+        "serde"
+      ],
+      "loaf": "crates-io/wit-parser",
+      "name": "wit-parser",
+      "optional": false,
+      "req": "^0.259.0"
+    }
+  ],
+  "features": {
+    "dummy-module": [
+      "dep:wat"
+    ],
+    "semver-check": [
+      "dummy-module"
+    ],
+    "wat": [
+      "dep:wast",
+      "dep:wat"
+    ]
+  },
+  "id": "sha256:5fbb5bb1f3d44498e25ef166de10a28726b1419e1ba7ef34a0c728a84b90cb57",
+  "kind": "adopt",
+  "manifest": "sha256:8457275671531ccf1c2c33aa07fed6d1479f967eaff8a8ec3abd7d5b95d8bca4",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wit_component",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-component",
+    "scope": "crates-io",
+    "version": "0.259.0"
+  }
+}

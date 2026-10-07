@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pbkdf2"
+version = "0.13.0"
+
+[project.features]
+alloc = ["mcf?/alloc", "password-hash?/alloc"]
+default = ["hmac"]
+getrandom = ["dep:password-hash", "password-hash/getrandom"]
+hmac = ["dep:hmac"]
+kdf = ["sha2", "dep:kdf"]
+mcf = ["sha2", "password-hash", "dep:mcf"]
+password-hash = ["dep:password-hash"]
+phc = ["dep:password-hash", "password-hash/phc", "sha2"]
+rand_core = ["dep:password-hash", "password-hash/rand_core"]
+sha2 = ["hmac", "dep:sha2"]
+
+[rust]
+name = "pbkdf2"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.11", features = ["mac"] }
+hmac = { loaf = "crates-io/hmac", version = "^0.13", default-features = false, optional = true }
+kdf = { loaf = "crates-io/kdf", version = "^0.1", optional = true }
+mcf = { loaf = "crates-io/mcf", version = "^0.6", features = ["base64"], default-features = false, optional = true }
+password-hash = { loaf = "crates-io/password-hash", version = "^0.6", default-features = false, optional = true }
+sha2 = { loaf = "crates-io/sha2", version = "^0.11", default-features = false, optional = true }

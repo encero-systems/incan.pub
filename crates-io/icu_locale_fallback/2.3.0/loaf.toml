@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/icu_locale_fallback"
+version = "2.3.0"
+
+[project.features]
+compiled_data = ["dep:icu_locale_fallback_data", "icu_provider/baked"]
+datagen = ["serde", "dep:databake", "zerovec/databake", "icu_locale_core/databake", "tinystr/databake", "icu_provider/export"]
+default = ["compiled_data"]
+serde = ["dep:serde", "icu_locale_core/serde", "tinystr/serde", "zerovec/serde", "icu_provider/serde", "potential_utf/serde"]
+std = ["icu_provider/std"]
+
+[rust]
+name = "icu_locale_fallback"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+icu_locale_core = { loaf = "crates-io/icu_locale_core", version = "^2.3.0", features = ["alloc", "zerovec"], default-features = false }
+icu_locale_fallback_data = { loaf = "crates-io/icu_locale_fallback_data", version = "~2.3.0", default-features = false, optional = true }
+icu_provider = { loaf = "crates-io/icu_provider", version = "^2.3.0", features = ["alloc"], default-features = false }
+potential_utf = { loaf = "crates-io/potential_utf", version = "^0.1.3", features = ["alloc", "zerovec"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["alloc", "derive"], default-features = false, optional = true }
+tinystr = { loaf = "crates-io/tinystr", version = "^0.8.4", features = ["alloc", "zerovec"], default-features = false }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.7", features = ["alloc", "yoke"], default-features = false }

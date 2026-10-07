@@ -1,0 +1,114 @@
+{
+  "about": {
+    "description": "FFI bindings to the various libwayland-*.so libraries. You should only need this crate if you are working on custom wayland protocol extensions. Look at the crate wayland-client for usable bindings.",
+    "documentation": "https://docs.rs/wayland-sys/",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smithay/wayland-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d8eab23fefc9e41f8e841df4a9c707e8a8c4ed26e944ef69297184de2785e3be",
+    "package": "wayland-sys",
+    "registry": "crates-io",
+    "version": "0.31.11"
+  },
+  "archive": "sha256:ab6bd8d7e754391201e5004dabf5b39854b0d3385896715a2748da5b2337abf2",
+  "at": "2026-10-07T07:45:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/dlib",
+      "name": "dlib",
+      "optional": true,
+      "req": "^0.5.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memoffset",
+      "name": "memoffset",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "client": [
+      "dep:dlib",
+      "dep:log"
+    ],
+    "cursor": [
+      "client"
+    ],
+    "dlopen": [
+      "once_cell"
+    ],
+    "egl": [
+      "client"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "libwayland_client_1_23": [],
+    "libwayland_server_1_22": [],
+    "libwayland_server_1_23": [
+      "libwayland_server_1_22"
+    ],
+    "memoffset": [
+      "dep:memoffset"
+    ],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "server": [
+      "libc",
+      "memoffset",
+      "dep:dlib",
+      "dep:log"
+    ]
+  },
+  "id": "sha256:a597c9a3c0018b1e25ff3e290bca67790a72876b6abab7df218c2a71a235aca1",
+  "kind": "adopt",
+  "manifest": "sha256:3d1f60e8ab339c13128d8bfa94fdc14d18c65dd929d32b3bdbaeb38bd753f959",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "wayland_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wayland-sys",
+    "scope": "crates-io",
+    "version": "0.31.11"
+  }
+}

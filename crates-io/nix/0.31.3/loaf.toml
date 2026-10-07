@@ -1,0 +1,57 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/nix"
+version = "0.31.3"
+
+[project.features]
+acct = []
+aio = ["pin-utils"]
+default = []
+dir = ["fs"]
+env = []
+event = ["poll"]
+fanotify = []
+feature = []
+fs = []
+hostname = []
+inotify = []
+ioctl = []
+kmod = []
+memoffset = ["dep:memoffset"]
+mman = []
+mount = ["uio"]
+mqueue = ["fs"]
+net = ["socket"]
+personality = []
+pin-utils = ["dep:pin-utils"]
+poll = []
+process = []
+pthread = []
+ptrace = ["process"]
+quota = []
+reboot = []
+resource = []
+sched = ["process"]
+signal = ["process"]
+socket = ["memoffset"]
+syslog = []
+term = []
+time = []
+ucontext = ["signal"]
+uio = []
+user = ["feature"]
+zerocopy = ["fs", "uio"]
+
+[rust]
+name = "nix"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.3.3" }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2.186", features = ["extra_traits"] }
+memoffset = { loaf = "crates-io/memoffset", version = "^0.9", optional = true }
+pin-utils = { loaf = "crates-io/pin-utils", version = "^0.1.0", optional = true }

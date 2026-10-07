@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/secp256k1"
+version = "0.33.1"
+
+[project.features]
+alloc = ["secp256k1-sys/alloc"]
+arbitrary = ["dep:arbitrary"]
+default = ["std"]
+global-context = ["std"]
+global-context-less-secure = ["global-context"]
+lowmemory = ["secp256k1-sys/lowmemory"]
+rand = ["dep:rand"]
+recovery = ["secp256k1-sys/recovery"]
+serde = ["dep:serde"]
+std = ["alloc", "secp256k1-sys/std", "rand?/std", "rand?/std_rng", "rand?/thread_rng", "rand?/small_rng"]
+
+[rust]
+name = "secp256k1"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.4.1", optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.9", default-features = false, optional = true }
+secp256k1-sys = { loaf = "crates-io/secp256k1-sys", version = "^0.14.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.103", default-features = false, optional = true }

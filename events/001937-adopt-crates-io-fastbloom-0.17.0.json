@@ -1,0 +1,120 @@
+{
+  "about": {
+    "description": "The fastest Bloom filter in Rust. No accuracy compromises. Full concurrency support and compatible with any hasher.",
+    "documentation": "",
+    "homepage": "https://github.com/tomtomwombat/fastbloom/",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tomtomwombat/fastbloom/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ef975e30683b2d965054bb0a836f8973857c4ebf6acf274fe46617cd285060d8",
+    "package": "fastbloom",
+    "registry": "crates-io",
+    "version": "0.17.0"
+  },
+  "archive": "sha256:15963306ef96dd17626767051b817ee643aeafcf1925a291c7426a3d5a75207d",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/foldhash",
+      "name": "foldhash",
+      "optional": false,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libm",
+      "name": "libm",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loom",
+      "name": "loom",
+      "optional": true,
+      "req": "^0.7.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "fallback"
+      ],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": false,
+      "req": "^1.13.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.9.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.203"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/siphasher",
+      "name": "siphasher",
+      "optional": false,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "rand"
+    ],
+    "loom": [
+      "dep:loom"
+    ],
+    "rand": [
+      "std",
+      "dep:rand"
+    ],
+    "serde": [
+      "dep:serde",
+      "siphasher/serde_std",
+      "portable-atomic/serde"
+    ],
+    "std": [
+      "portable-atomic/std"
+    ]
+  },
+  "id": "sha256:2e4420e4bdd67fdf59b749ed9586044a59cc8d1b12c13134c64e442f4058bec5",
+  "kind": "adopt",
+  "manifest": "sha256:ae1a2a0c613ec6c71a4e807fa03684476707bdf14b6e0c0190fd725514070cd2",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "fastbloom",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fastbloom",
+    "scope": "crates-io",
+    "version": "0.17.0"
+  }
+}

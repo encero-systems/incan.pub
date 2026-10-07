@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tiff"
+version = "0.11.3"
+
+[project.features]
+default = ["deflate", "fax", "jpeg", "lzw"]
+deflate = ["dep:flate2"]
+fax = ["dep:fax34"]
+jpeg = ["dep:zune-jpeg"]
+lzw = ["dep:weezl"]
+webp = ["dep:image-webp"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "tiff"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+fax34 = { loaf = "crates-io/fax", version = "^0.2.6", optional = true }
+flate2 = { loaf = "crates-io/flate2", version = "^1.0.20", optional = true }
+half = { loaf = "crates-io/half", version = "^2.4.1" }
+image-webp = { loaf = "crates-io/image-webp", version = "^0.2.4", optional = true }
+quick-error = { loaf = "crates-io/quick-error", version = "^2.0.1" }
+weezl = { loaf = "crates-io/weezl", version = "^0.1.10", optional = true }
+zstd = { loaf = "crates-io/zstd", version = "^0.13", optional = true }
+zune-jpeg = { loaf = "crates-io/zune-jpeg", version = "^0.5.1", optional = true }

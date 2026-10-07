@@ -1,0 +1,107 @@
+{
+  "about": {
+    "description": "A diff library for Rust",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/mitsuhiko/similar"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bbbb5d9659141646ae647b42fe094daf6c6192d1620870b449d9557f748b2daa",
+    "package": "similar",
+    "registry": "crates-io",
+    "version": "2.7.0"
+  },
+  "archive": "sha256:71d9180827d3ec5e63f403a6fa0b875f6e0b2568e508cdee09ffc733ef4f4b56",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bstr",
+      "name": "bstr",
+      "optional": true,
+      "req": "^1.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.130"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-segmentation",
+      "name": "unicode-segmentation",
+      "optional": true,
+      "req": "^1.7.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/web-time",
+      "name": "web-time",
+      "optional": true,
+      "req": "^1.1"
+    }
+  ],
+  "features": {
+    "bstr": [
+      "dep:bstr"
+    ],
+    "bytes": [
+      "bstr",
+      "text"
+    ],
+    "default": [
+      "text"
+    ],
+    "inline": [
+      "text"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "text": [],
+    "unicode": [
+      "text",
+      "unicode-segmentation",
+      "bstr?/unicode",
+      "bstr?/std"
+    ],
+    "unicode-segmentation": [
+      "dep:unicode-segmentation"
+    ],
+    "wasm32_web_time": [
+      "web-time"
+    ],
+    "web-time": [
+      "dep:web-time"
+    ]
+  },
+  "id": "sha256:f78016fbabba9dd17c9f61f8f67cfe519466b0c3fb5e6036429028e6e98c307a",
+  "kind": "adopt",
+  "manifest": "sha256:c90088ce7e2ace86aa0998bd618aafa234c28c44189bd3d66655fcec7cb022ca",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "similar",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "similar",
+    "scope": "crates-io",
+    "version": "2.7.0"
+  }
+}

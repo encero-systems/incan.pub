@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/atomic"
+version = "0.6.1"
+
+[project.features]
+default = ["fallback"]
+fallback = []
+nightly = []
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "atomic"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.13.1" }
+serde = { loaf = "crates-io/serde", version = "^1.0.219", default-features = false, optional = true }

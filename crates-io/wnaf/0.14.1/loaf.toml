@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wnaf"
+version = "0.14.1"
+
+[project.features]
+alloc = ["array/alloc", "ff/alloc", "group/alloc"]
+default = ["alloc"]
+
+[rust]
+name = "wnaf"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+array = { loaf = "crates-io/hybrid-array", version = "^0.4.13" }
+ff = { loaf = "crates-io/ff", version = "^0.14", default-features = false }
+group = { loaf = "crates-io/group", version = "^0.14", default-features = false }
+primefield = { loaf = "crates-io/primefield", version = "^0.14", default-features = false }

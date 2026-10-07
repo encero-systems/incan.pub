@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/native-tls"
+version = "0.2.18"
+
+[project.features]
+alpn = ["security-framework/alpn"]
+alpn-accept = []
+default = []
+vendored = ["openssl/vendored"]
+
+[rust]
+name = "native_tls"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.170", target = "cfg(target_vendor = \"apple\")" }
+log = { loaf = "crates-io/log", version = "^0.4.27", target = "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))" }
+openssl = { loaf = "crates-io/openssl", version = "^0.10.75", target = "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))" }
+openssl-probe = { loaf = "crates-io/openssl-probe", version = "^0.2.1", target = "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))" }
+openssl-sys = { loaf = "crates-io/openssl-sys", version = "^0.9.111", target = "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))" }
+schannel = { loaf = "crates-io/schannel", version = "^0.1.28", target = "cfg(target_os = \"windows\")" }
+security-framework = { loaf = "crates-io/security-framework", version = "^3.5.1", target = "cfg(target_vendor = \"apple\")" }
+security-framework-sys = { loaf = "crates-io/security-framework-sys", version = "^2.15.0", target = "cfg(target_vendor = \"apple\")" }
+tempfile = { loaf = "crates-io/tempfile", version = "^3.1.0", target = "cfg(target_os = \"macos\")" }

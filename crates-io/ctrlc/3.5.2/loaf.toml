@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ctrlc"
+version = "3.5.2"
+
+[project.features]
+termination = []
+
+[rust]
+name = "ctrlc"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+dispatch2 = { loaf = "crates-io/dispatch2", version = "^0.3", target = "cfg(target_vendor = \"apple\")" }
+nix = { loaf = "crates-io/nix", version = "^0.31", features = ["signal"], default-features = false, target = "cfg(unix)" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_Security", "Win32_System_Console", "Win32_System_Threading"], target = "cfg(windows)" }

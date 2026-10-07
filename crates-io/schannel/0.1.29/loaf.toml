@@ -1,0 +1,14 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/schannel"
+version = "0.1.29"
+
+[rust]
+name = "schannel"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_Security_Authentication_Identity", "Win32_Security_Credentials", "Win32_Security_Cryptography", "Win32_System_LibraryLoader", "Win32_System_Memory", "Win32_System_SystemInformation"] }

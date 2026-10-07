@@ -1,0 +1,98 @@
+{
+  "about": {
+    "description": "Fast byte array to hex string conversion",
+    "documentation": "https://docs.rs/const-hex",
+    "homepage": "https://github.com/danipopes/const-hex",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/danipopes/const-hex"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0e59eef12462b0f9b0a3620219be5d639afd79fe39dff0a42c3997061f9298b4",
+    "package": "const-hex",
+    "registry": "crates-io",
+    "version": "1.19.3"
+  },
+  "archive": "sha256:4ac4e88b8c928852f1f9ff30ade9c5c0b99381d2b07f169322d79a9e509f431b",
+  "at": "2026-10-07T07:43:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/proptest",
+      "name": "proptest",
+      "optional": true,
+      "req": "^1.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "__fuzzing": [
+      "dep:proptest",
+      "std"
+    ],
+    "alloc": [
+      "serde_core?/alloc",
+      "proptest?/alloc"
+    ],
+    "core-error": [],
+    "default": [
+      "std"
+    ],
+    "force-generic": [],
+    "hex": [],
+    "nightly": [],
+    "portable-simd": [],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "std": [
+      "serde_core?/std",
+      "proptest?/std",
+      "alloc"
+    ]
+  },
+  "id": "sha256:0029024d226987c724975e4450e361e943d0ea39e5f3a42085a41470a0e507dc",
+  "kind": "adopt",
+  "manifest": "sha256:01fb2b8a86ba82b329a42ba0745b93b69302957f6a85f93e28bc59de7761f966",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "const_hex",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "const-hex",
+    "scope": "crates-io",
+    "version": "1.19.3"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "about": {
+    "description": "Helpful macros for working with enums and strings",
+    "documentation": "https://docs.rs/strum",
+    "homepage": "https://github.com/Peternator7/strum",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Peternator7/strum"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9628de9b8791db39ceda2b119bbe13134770b56c138ec1d3af810d045c04f9bd",
+    "package": "strum",
+    "registry": "crates-io",
+    "version": "0.28.0"
+  },
+  "archive": "sha256:85b0c4a80f2a3600ac12b3c5f1f8c2eb699d740587556fe027122a083bca5181",
+  "at": "2026-10-07T07:41:58Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "macros"
+      ],
+      "loaf": "crates-io/phf",
+      "name": "phf",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/strum_macros",
+      "name": "strum_macros",
+      "optional": true,
+      "req": "^0.28"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "derive": [
+      "strum_macros"
+    ],
+    "phf": [
+      "dep:phf"
+    ],
+    "std": [],
+    "strum_macros": [
+      "dep:strum_macros"
+    ]
+  },
+  "id": "sha256:bc8e76b25ff053b8fd01ce8f03f985c52e6526fabc634506ba6cc95ed2798f46",
+  "kind": "adopt",
+  "manifest": "sha256:34db87041f37fc3fbd1098793b52d592674ecab2f177b13bd9c0fc2936e4ee35",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "strum",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "strum",
+    "scope": "crates-io",
+    "version": "0.28.0"
+  }
+}

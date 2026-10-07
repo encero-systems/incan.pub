@@ -1,0 +1,36 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ratatui-widgets"
+version = "0.3.2"
+
+[project.features]
+all-widgets = ["calendar"]
+calendar = ["dep:time"]
+default = ["all-widgets"]
+document-features = ["dep:document-features"]
+serde = ["dep:serde", "ratatui-core/serde"]
+std = ["serde?/std", "time?/local-offset"]
+unstable = ["unstable-rendered-line-info"]
+unstable-rendered-line-info = []
+
+[rust]
+name = "ratatui_widgets"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.12" }
+document-features = { loaf = "crates-io/document-features", version = "^0.2", optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17" }
+indoc = { loaf = "crates-io/indoc", version = "^2" }
+instability = { loaf = "crates-io/instability", version = "^0.3" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14", features = ["use_alloc"], default-features = false }
+line-clipping = { loaf = "crates-io/line-clipping", version = "^0.3" }
+ratatui-core = { loaf = "crates-io/ratatui-core", version = "^0.1.2" }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], default-features = false, optional = true }
+strum = { loaf = "crates-io/strum", version = "^0.28", features = ["derive"], default-features = false }
+time = { loaf = "crates-io/time", version = "^0.3.47", default-features = false, optional = true }
+unicode-segmentation = { loaf = "crates-io/unicode-segmentation", version = "^1" }
+unicode-width = { loaf = "crates-io/unicode-width", version = ">=0.2.0" }

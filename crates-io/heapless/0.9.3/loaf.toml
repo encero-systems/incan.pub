@@ -1,0 +1,37 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/heapless"
+version = "0.9.3"
+
+[project.features]
+alloc = []
+bytes = ["dep:bytes"]
+defmt = ["dep:defmt"]
+"embedded-io-v0.7" = ["dep:embedded-io"]
+mpmc_large = []
+nightly = []
+portable-atomic = ["dep:portable-atomic"]
+portable-atomic-critical-section = ["dep:portable-atomic", "portable-atomic", "portable-atomic?/critical-section"]
+portable-atomic-unsafe-assume-single-core = ["dep:portable-atomic", "portable-atomic", "portable-atomic?/unsafe-assume-single-core"]
+serde = ["dep:serde_core"]
+ufmt = ["dep:ufmt", "dep:ufmt-write"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "heapless"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1", default-features = false, optional = true }
+defmt = { loaf = "crates-io/defmt", version = "^1.0.1", optional = true }
+embedded-io = { loaf = "crates-io/embedded-io", version = "^0.7", optional = true }
+hash32 = { loaf = "crates-io/hash32", version = "^0.3.0" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.0", optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1", default-features = false, optional = true }
+stable_deref_trait = { loaf = "crates-io/stable_deref_trait", version = "^1", default-features = false, target = "cfg(any(target_arch = \"arm\", target_pointer_width = \"32\", target_pointer_width = \"64\"))" }
+ufmt = { loaf = "crates-io/ufmt", version = "^0.2", optional = true }
+ufmt-write = { loaf = "crates-io/ufmt-write", version = "^0.1", optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8", features = ["derive"], default-features = false, optional = true }

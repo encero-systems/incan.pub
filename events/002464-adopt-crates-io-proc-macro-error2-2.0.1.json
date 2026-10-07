@@ -1,0 +1,80 @@
+{
+  "about": {
+    "description": "Almost drop-in replacement to panics in proc-macros",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/GnomedDev/proc-macro-error-2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:11ec05c52be0a07b08061f7dd003e7d7092e0472bc731b4af7bb1ef876109802",
+    "package": "proc-macro-error2",
+    "registry": "crates-io",
+    "version": "2.0.1"
+  },
+  "archive": "sha256:9821149ed48493312598bb0909d1b31868881f024909690bfd407a9899c64680",
+  "at": "2026-10-07T07:44:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro-error-attr2",
+      "name": "proc-macro-error-attr2",
+      "optional": false,
+      "req": "=2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": true,
+      "req": "^2"
+    }
+  ],
+  "features": {
+    "default": [
+      "syn-error"
+    ],
+    "nightly": [],
+    "syn-error": [
+      "dep:syn"
+    ]
+  },
+  "id": "sha256:681000b8c22ec12e300b3a0c22a2dbbf290efd58937f8026ef65fe132c345391",
+  "kind": "adopt",
+  "manifest": "sha256:12170ee54d5ba6ef42d0feeaf8a3b99ff7c6b7744578ce857029095af11b8d52",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "proc_macro_error2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "proc-macro-error2",
+    "scope": "crates-io",
+    "version": "2.0.1"
+  }
+}

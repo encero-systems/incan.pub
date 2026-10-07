@@ -1,0 +1,108 @@
+{
+  "about": {
+    "description": "Library for building and interfacing with finite fields",
+    "documentation": "https://docs.rs/ff/",
+    "homepage": "https://github.com/zkcrypto/ff",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/zkcrypto/ff"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a1f686ab92a9fb0eaf188f6c6c87b89490baa6fdb0db4544ba4dc47f7942489f",
+    "package": "ff",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:f208e36b6db922849e2d079ccff010907520b14b27af8d6a4b20e09d8033d171",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bitvec",
+      "name": "bitvec",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/byteorder",
+      "name": "byteorder",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ff_derive",
+      "name": "ff_derive",
+      "optional": true,
+      "req": "^0.14"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": false,
+      "req": "^2.2.1"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "bits": [
+      "bitvec",
+      "ff_derive?/bits"
+    ],
+    "bitvec": [
+      "dep:bitvec"
+    ],
+    "byteorder": [
+      "dep:byteorder"
+    ],
+    "default": [
+      "bits",
+      "std"
+    ],
+    "derive": [
+      "byteorder",
+      "ff_derive"
+    ],
+    "ff_derive": [
+      "dep:ff_derive"
+    ],
+    "std": [
+      "alloc"
+    ]
+  },
+  "id": "sha256:63d513aa408ca0819eb2d2a743fe07b903eb9c77e0a73ad5b843e8cf3760daff",
+  "kind": "adopt",
+  "manifest": "sha256:84ce83cfba6f1deef15fc33a368eee9c75d445d45ecf5b38d4381f8e1ceb7f59",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ff",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ff",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

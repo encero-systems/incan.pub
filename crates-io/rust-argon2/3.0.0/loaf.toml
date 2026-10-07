@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rust-argon2"
+version = "3.0.0"
+
+[project.features]
+crossbeam-utils = ["dep:crossbeam-utils"]
+default = ["crossbeam-utils"]
+serde = ["dep:serde"]
+
+[rust]
+name = "argon2"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22" }
+blake2b_simd = { loaf = "crates-io/blake2b_simd", version = "^1.0" }
+constant_time_eq = { loaf = "crates-io/constant_time_eq", version = "^0.4.2" }
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }

@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/arc-swap"
+version = "1.9.2"
+
+[project.features]
+experimental-strategies = []
+experimental-thread-local = []
+internal-test-strategies = []
+serde = ["dep:serde"]
+weak = []
+
+[rust]
+name = "arc_swap"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+rustversion = { loaf = "crates-io/rustversion", version = "^1" }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["rc"], optional = true }

@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tikv-jemalloc-sys"
+version = "0.7.1+5.3.1-0-g81034ce1f1373e37dc865038e1bc8eeecf559ce8"
+
+[project.features]
+background_threads = ["background_threads_runtime_support"]
+background_threads_runtime_support = []
+debug = []
+default = ["background_threads_runtime_support"]
+disable_cache_oblivious = []
+disable_initial_exec_tls = []
+override_allocator_on_supported_platforms = ["unprefixed_malloc_on_supported_platforms"]
+profiling = []
+profiling_libunwind = ["profiling"]
+stats = []
+unprefixed_malloc_on_supported_platforms = []
+
+[rust]
+name = "tikv_jemalloc_sys"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.8", default-features = false }

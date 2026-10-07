@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ark-ff-macros"
+version = "0.6.0"
+
+[rust]
+name = "ark_ff_macros"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", default-features = false }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^2.0", features = ["extra-traits", "full"] }

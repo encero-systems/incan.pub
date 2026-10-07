@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/keccak"
+version = "0.2.2"
+
+[project.features]
+parallel = ["dep:hybrid-array"]
+
+[rust]
+name = "keccak"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.3", target = "cfg(target_arch = \"aarch64\")" }
+hybrid-array = { loaf = "crates-io/hybrid-array", version = "^0.4", optional = true }

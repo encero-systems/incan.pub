@@ -1,0 +1,93 @@
+{
+  "about": {
+    "description": "Runtime support for perfect hash function data structures",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-phf/rust-phf"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:010378780309880b08997fae13be7834dba947d36393bd372f2b1556deb2a2f6",
+    "package": "phf",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:581acd320c815407af140e1b7f2bed70bc62fc0b1c24c1764668498637bddf0b",
+  "at": "2026-10-07T07:41:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/phf_macros",
+      "name": "phf_macros",
+      "optional": true,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/phf_shared",
+      "name": "phf_shared",
+      "optional": false,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "macros": [
+      "phf_macros"
+    ],
+    "phf_macros": [
+      "dep:phf_macros"
+    ],
+    "ptrhash": [
+      "phf_macros?/ptrhash",
+      "phf_shared/ptrhash"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "phf_shared/std",
+      "serde?/std"
+    ],
+    "uncased": [
+      "phf_macros?/uncased",
+      "phf_shared/uncased"
+    ],
+    "unicase": [
+      "phf_macros?/unicase",
+      "phf_shared/unicase"
+    ]
+  },
+  "id": "sha256:86b586953e601c44773fd411d639e86f4eadf493ea03c07c7879a207dfebb374",
+  "kind": "adopt",
+  "manifest": "sha256:1370e8525424ad700004e4d562effad0356e1bae5be5d847130ce9a2949d4743",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "phf",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "phf",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

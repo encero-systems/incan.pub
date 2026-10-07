@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/strum"
+version = "0.28.0"
+
+[project.features]
+default = ["std"]
+derive = ["strum_macros"]
+phf = ["dep:phf"]
+std = []
+strum_macros = ["dep:strum_macros"]
+
+[rust]
+name = "strum"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+phf = { loaf = "crates-io/phf", version = "^0.13", features = ["macros"], optional = true }
+strum_macros = { loaf = "crates-io/strum_macros", version = "^0.28", optional = true }

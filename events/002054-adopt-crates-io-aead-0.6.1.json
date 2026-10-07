@@ -1,0 +1,105 @@
+{
+  "about": {
+    "description": "Traits for Authenticated Encryption with Associated Data (AEAD) algorithms,\nsuch as AES-GCM as ChaCha20Poly1305, which provide a high-level API",
+    "documentation": "https://docs.rs/aead",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/traits"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1973cfbc1a2daf9cf550e74e1f088c28e7f7d8c1e1418fb6c9dc5184b7e84c99",
+    "package": "aead",
+    "registry": "crates-io",
+    "version": "0.6.1"
+  },
+  "archive": "sha256:35370e84c563b5a619b2edf2e5a8184a0cd8483a2df69d5a69f2e54d8d30f328",
+  "at": "2026-10-07T07:42:49Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arrayvec",
+      "name": "arrayvec",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/blobby",
+      "name": "blobby",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1.11.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crypto-common",
+      "name": "common",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/inout",
+      "name": "inout",
+      "optional": false,
+      "req": "^0.2.2"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "arrayvec": [
+      "dep:arrayvec"
+    ],
+    "blobby": [
+      "dep:blobby"
+    ],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "default": [
+      "rand_core"
+    ],
+    "dev": [
+      "blobby",
+      "alloc"
+    ],
+    "getrandom": [
+      "common/getrandom",
+      "rand_core"
+    ],
+    "rand_core": [
+      "common/rand_core"
+    ]
+  },
+  "id": "sha256:30cc1a4c27013663a1b95dcd4d8f80928b5a6c9b8ab39c4f79c8d2f92cae7102",
+  "kind": "adopt",
+  "manifest": "sha256:783033d82d3f66eab9c14f2e2b9eddee538646c21b7e2b425b616a4406020c84",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "aead",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "aead",
+    "scope": "crates-io",
+    "version": "0.6.1"
+  }
+}

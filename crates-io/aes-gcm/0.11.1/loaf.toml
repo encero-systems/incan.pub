@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aes-gcm"
+version = "0.11.1"
+
+[project.features]
+aes = ["dep:aes"]
+alloc = ["aead/alloc"]
+arrayvec = ["aead/arrayvec"]
+bytes = ["aead/bytes"]
+default = ["aes", "alloc", "getrandom"]
+getrandom = ["aead/getrandom"]
+hazmat = []
+rand_core = ["aead/rand_core"]
+zeroize = ["dep:zeroize", "aes?/zeroize", "ghash/zeroize"]
+
+[rust]
+name = "aes_gcm"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+aead = { loaf = "crates-io/aead", version = "^0.6", default-features = false }
+aes = { loaf = "crates-io/aes", version = "^0.9", optional = true }
+cipher = { loaf = "crates-io/cipher", version = "^0.5" }
+ctr = { loaf = "crates-io/ctr", version = "^0.10" }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4" }
+ghash = { loaf = "crates-io/ghash", version = "^0.6", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

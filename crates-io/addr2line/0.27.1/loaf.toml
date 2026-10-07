@@ -1,0 +1,40 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/addr2line"
+version = "0.27.1"
+
+[project.features]
+all = ["bin", "wasm"]
+alloc = ["dep:alloc"]
+bin = ["loader", "rustc-demangle", "cpp_demangle", "fallible-iterator", "smallvec", "dep:clap"]
+cargo-all = []
+core = ["dep:core"]
+cpp_demangle = ["dep:cpp_demangle"]
+default = ["rustc-demangle", "cpp_demangle", "loader", "fallible-iterator", "smallvec"]
+fallible-iterator = ["dep:fallible-iterator"]
+loader = ["std", "dep:object", "dep:memmap2", "dep:typed-arena"]
+rustc-demangle = ["dep:rustc-demangle"]
+rustc-dep-of-std = ["core", "alloc", "gimli/rustc-dep-of-std"]
+smallvec = ["dep:smallvec"]
+std = ["gimli/std"]
+wasm = ["dep:object", "object/wasm"]
+
+[rust]
+name = "addr2line"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+alloc = { loaf = "crates-io/rustc-std-workspace-alloc", version = "^1.0.0", optional = true }
+clap = { loaf = "crates-io/clap", version = "^4.3.21", features = ["wrap_help"], optional = true }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }
+cpp_demangle = { loaf = "crates-io/cpp_demangle", version = "^0.5", features = ["alloc"], default-features = false, optional = true }
+fallible-iterator = { loaf = "crates-io/fallible-iterator", version = "^0.3.0", default-features = false, optional = true }
+gimli = { loaf = "crates-io/gimli", version = "^0.34.0", features = ["read"], default-features = false }
+memmap2 = { loaf = "crates-io/memmap2", version = "^0.9.4", optional = true }
+object = { loaf = "crates-io/object", version = "^0.40.0", features = ["compression", "read"], default-features = false, optional = true }
+rustc-demangle = { loaf = "crates-io/rustc-demangle", version = "^0.1", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1", default-features = false, optional = true }
+typed-arena = { loaf = "crates-io/typed-arena", version = "^2", optional = true }

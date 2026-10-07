@@ -1,0 +1,40 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/asn1-rs"
+version = "0.7.2"
+
+[project.features]
+bigint = ["num-bigint"]
+bits = ["bitvec"]
+bitvec = ["dep:bitvec"]
+colored = ["dep:colored"]
+cookie-factory = ["dep:cookie-factory"]
+datetime = ["time"]
+debug = ["std", "colored"]
+default = ["std"]
+num-bigint = ["dep:num-bigint"]
+serialize = ["cookie-factory"]
+std = []
+time = ["dep:time"]
+trace = ["debug"]
+
+[rust]
+name = "asn1_rs"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+asn1-rs-derive = { loaf = "crates-io/asn1-rs-derive", version = "^0.6" }
+asn1-rs-impl = { loaf = "crates-io/asn1-rs-impl", version = "^0.2" }
+bitvec = { loaf = "crates-io/bitvec", version = "^1.0", optional = true }
+colored = { loaf = "crates-io/colored", version = "^3.0", optional = true }
+cookie-factory = { loaf = "crates-io/cookie-factory", version = "^0.3.0", optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.2" }
+nom = { loaf = "crates-io/nom", version = "^7.0", features = ["std"], default-features = false }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.14" }
+rusticata-macros = { loaf = "crates-io/rusticata-macros", version = "^4.0" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.0" }
+time = { loaf = "crates-io/time", version = "^0.3", features = ["formatting", "macros", "parsing"], optional = true }

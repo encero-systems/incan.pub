@@ -1,0 +1,71 @@
+{
+  "about": {
+    "description": "WASIp1 API bindings for Rust",
+    "documentation": "https://docs.rs/wasi",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasi"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b5e26842486624357dbeb8f0381cf1fb42f022291fd787d4a816768fec8cc760",
+    "package": "wasip1",
+    "registry": "crates-io",
+    "version": "1.0.0"
+  },
+  "archive": "sha256:18c2459f8b9a58433b2a54897e6f34368f589a6203e77729f40de2a938a015b9",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:alloc"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "std"
+    ],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc"
+    ],
+    "std": []
+  },
+  "id": "sha256:563b444683112a01828151d06eef051670df2eeafaab07e14277188445215031",
+  "kind": "adopt",
+  "manifest": "sha256:b7af6d3de465ece503f50cb982daeb7bd48c89de100be3355e1d044838803d1d",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "wasip1",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasip1",
+    "scope": "crates-io",
+    "version": "1.0.0"
+  }
+}

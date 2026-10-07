@@ -1,0 +1,67 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zbus"
+version = "5.19.0"
+
+[project.features]
+async-executor = ["dep:async-executor"]
+async-fs = []
+async-io = ["dep:async-io", "async-executor", "async-fs", "async-task", "async-lock", "async-process", "blocking"]
+async-lock = ["dep:async-lock"]
+async-process = ["dep:async-process"]
+async-task = ["dep:async-task"]
+blocking = ["dep:blocking"]
+blocking-api = ["zbus_macros/blocking-api"]
+bus-impl = ["p2p"]
+camino = ["zvariant/camino"]
+chrono = ["zvariant/chrono"]
+default = ["async-io", "blocking-api"]
+heapless = ["zvariant/heapless"]
+option-as-array = ["zvariant/option-as-array"]
+p2p = ["uuid/v4"]
+serde_bytes = ["zvariant/serde_bytes"]
+time = ["zvariant/time"]
+tokio = ["dep:tokio"]
+tokio-vsock = ["dep:tokio-vsock", "tokio"]
+url = ["zvariant/url"]
+uuid = ["zvariant/uuid"]
+vsock = ["dep:vsock", "async-io"]
+
+[rust]
+name = "zbus"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+async-broadcast = { loaf = "crates-io/async-broadcast", version = "^0.7.0" }
+async-executor = { loaf = "crates-io/async-executor", version = "^1.11.0", optional = true }
+async-io = { loaf = "crates-io/async-io", version = "^2.3.2", optional = true }
+async-lock = { loaf = "crates-io/async-lock", version = "^3.3.0", optional = true }
+async-process = { loaf = "crates-io/async-process", version = "^2.2.2", optional = true }
+async-recursion = [{ loaf = "crates-io/async-recursion", version = "^1.1.1", target = "cfg(unix)" }, { loaf = "crates-io/async-recursion", version = "^1.1.1", target = "cfg(windows)" }]
+async-task = { loaf = "crates-io/async-task", version = "^4.7.1", optional = true }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.80" }
+blocking = { loaf = "crates-io/blocking", version = "^1.6.0", optional = true }
+enumflags2 = { loaf = "crates-io/enumflags2", version = "^0.7.9", features = ["serde"] }
+event-listener = { loaf = "crates-io/event-listener", version = "^5.3.0" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.30" }
+futures-lite = { loaf = "crates-io/futures-lite", version = "^2.6.0", features = ["std"], default-features = false }
+hex = { loaf = "crates-io/hex", version = "^0.4.3" }
+libc = { loaf = "crates-io/libc", version = "^0.2", default-features = false, target = "cfg(unix)" }
+ordered-stream = { loaf = "crates-io/ordered-stream", version = "^0.2" }
+rustix = { loaf = "crates-io/rustix", version = "^1.1.2", features = ["net", "process", "std"], default-features = false, target = "cfg(unix)" }
+serde = { loaf = "crates-io/serde", version = "^1.0.200", features = ["derive"] }
+serde_repr = { loaf = "crates-io/serde_repr", version = "^0.1.19" }
+tokio = { loaf = "crates-io/tokio", version = "^1.37.0", features = ["fs", "io-util", "net", "process", "rt", "rt-multi-thread", "sync", "time", "tracing"], optional = true }
+tokio-vsock = { loaf = "crates-io/tokio-vsock", version = "^0.7", optional = true, target = "cfg(target_os = \"linux\")" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.40" }
+uds_windows = { loaf = "crates-io/uds_windows", version = "^1.1.0", target = "cfg(windows)" }
+uuid = { loaf = "crates-io/uuid", version = "^1.8.0", features = ["serde"] }
+vsock = { loaf = "crates-io/vsock", version = "^0.5.0", optional = true, target = "cfg(target_os = \"linux\")" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_NetworkManagement", "Win32_NetworkManagement_IpHelper", "Win32_Networking", "Win32_Networking_WinSock", "Win32_Security_Authorization", "Win32_System_IO", "Win32_System_Memory", "Win32_System_Threading", "Win32_System_WindowsProgramming"], target = "cfg(windows)" }
+winnow = { loaf = "crates-io/winnow", version = "^1.0" }
+zbus_macros = { loaf = "crates-io/zbus_macros", version = "^5.19.0" }
+zbus_names = { loaf = "crates-io/zbus_names", version = "^4.3.4" }
+zvariant = { loaf = "crates-io/zvariant", version = "^5.14.0", features = ["enumflags2"] }

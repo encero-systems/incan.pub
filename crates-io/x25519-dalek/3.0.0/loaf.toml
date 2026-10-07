@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/x25519-dalek"
+version = "3.0.0"
+
+[project.features]
+default = ["precomputed-tables", "zeroize"]
+getrandom = ["dep:getrandom"]
+precomputed-tables = ["curve25519-dalek/precomputed-tables"]
+reusable_secrets = []
+serde = ["dep:serde", "curve25519-dalek/serde"]
+static_secrets = []
+zeroize = ["dep:zeroize", "curve25519-dalek/zeroize"]
+
+[rust]
+name = "x25519_dalek"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+curve25519-dalek = { loaf = "crates-io/curve25519-dalek", version = "^5.0.0", default-features = false }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

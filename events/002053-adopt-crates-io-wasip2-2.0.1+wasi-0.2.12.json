@@ -1,0 +1,84 @@
+{
+  "about": {
+    "description": "WASIp2 API bindings for Rust",
+    "documentation": "https://docs.rs/wasip2",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasi-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:89aafd4b69fb41a64cfd5d7f214cde92ab422ec4d9bcd55fcc816d3f5f49bbf3",
+    "package": "wasip2",
+    "registry": "crates-io",
+    "version": "2.0.1+wasi-0.2.12"
+  },
+  "archive": "sha256:83854a751c97ba39c066323a570f6f5688bbe2c44ee4c17c7505ebd6fdedc520",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen",
+      "name": "wit-bindgen",
+      "optional": false,
+      "req": "^0.62.0"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:alloc"
+    ],
+    "bitflags": [
+      "wit-bindgen/bitflags"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "std",
+      "bitflags"
+    ],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc",
+      "wit-bindgen/rustc-dep-of-std"
+    ],
+    "std": []
+  },
+  "id": "sha256:a23f2bcc62f066456517476d34b0575a18dfb875acb74d3b5c358e2e5c28bd1d",
+  "kind": "adopt",
+  "manifest": "sha256:de30c1a22ca932eafb3d6c5143cd4ff53cb5ebdbda54eb7dfbeb7b41335f40b1",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "wasip2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasip2",
+    "scope": "crates-io",
+    "version": "2.0.1+wasi-0.2.12"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "about": {
+    "description": "A heavily optimized deflate decompressor in Pure Rust",
+    "documentation": "",
+    "homepage": "https://github.com/etemesi254/zune-image/tree/main/zune-inflate",
+    "license": "MIT OR Apache-2.0 OR Zlib",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": ""
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:73ab332fe2f6680068f3582b16a24f90ad7096d5d39b974d1c0aff0125116f02",
+    "package": "zune-inflate",
+    "registry": "crates-io",
+    "version": "0.2.54"
+  },
+  "archive": "sha256:f55ab9378b1d12f330a87c885e4fc3b0ffeb37e687249af0e5a298f56113e9b1",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/simd-adler32",
+      "name": "simd-adler32",
+      "optional": true,
+      "req": "^0.3.4"
+    }
+  ],
+  "features": {
+    "default": [
+      "zlib",
+      "gzip",
+      "std"
+    ],
+    "gzip": [],
+    "simd-adler32": [
+      "dep:simd-adler32"
+    ],
+    "std": [
+      "dep:simd-adler32",
+      "simd-adler32/std"
+    ],
+    "zlib": [
+      "simd-adler32"
+    ]
+  },
+  "id": "sha256:de2c2d6b1c978da3906a7372eb6178d113a4d3f0c660efdd88c7bb249a21845f",
+  "kind": "adopt",
+  "manifest": "sha256:2c8d674d4e803c76480e7c57eaa2d8012f18673777b851989657c4103794d01d",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "zune_inflate",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "zune-inflate",
+    "scope": "crates-io",
+    "version": "0.2.54"
+  }
+}

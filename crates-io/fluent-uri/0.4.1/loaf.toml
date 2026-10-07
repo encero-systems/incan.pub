@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fluent-uri"
+version = "0.4.1"
+
+[project.features]
+alloc = ["borrow-or-share/alloc", "serde?/alloc"]
+default = ["std"]
+impl-error = []
+net = []
+serde = ["dep:serde"]
+std = ["alloc", "impl-error"]
+
+[rust]
+name = "fluent_uri"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+borrow-or-share = { loaf = "crates-io/borrow-or-share", version = "^0.2.4", default-features = false }
+ref-cast = { loaf = "crates-io/ref-cast", version = "^1.0" }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }

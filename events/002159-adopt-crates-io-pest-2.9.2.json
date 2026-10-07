@@ -1,0 +1,103 @@
+{
+  "about": {
+    "description": "The Elegant Parser",
+    "documentation": "https://docs.rs/pest",
+    "homepage": "https://pest.rs/",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "_README.md",
+    "repository": "https://github.com/pest-parser/pest"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:45d3aca230fad2e6f6317ca0a72724338c4960cb97168a85cdee66df4a9a21a8",
+    "package": "pest",
+    "registry": "crates-io",
+    "version": "2.9.2"
+  },
+  "archive": "sha256:5e8e43f91498e0eee198854df3cb14acefd4f74a1b026c8ac667ba6c4f79335e",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2.4.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fancy"
+      ],
+      "loaf": "crates-io/miette",
+      "name": "miette",
+      "optional": true,
+      "req": "^7.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.145"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0.85"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ucd-trie",
+      "name": "ucd-trie",
+      "optional": false,
+      "req": "^0.1.5"
+    }
+  ],
+  "features": {
+    "const_prec_climber": [],
+    "default": [
+      "std",
+      "memchr"
+    ],
+    "memchr": [
+      "dep:memchr"
+    ],
+    "miette-error": [
+      "std",
+      "pretty-print",
+      "dep:miette"
+    ],
+    "pretty-print": [
+      "dep:serde",
+      "dep:serde_json"
+    ],
+    "std": [
+      "ucd-trie/std"
+    ]
+  },
+  "id": "sha256:a5792498bc07b864d47e881040659acd27e1cb571fabe8c6d84cf673fde78d27",
+  "kind": "adopt",
+  "manifest": "sha256:4196e56eb1c62d57822f9c14c72d72ced9151f91636300473bc0346efb3ca0ad",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "pest",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pest",
+    "scope": "crates-io",
+    "version": "2.9.2"
+  }
+}

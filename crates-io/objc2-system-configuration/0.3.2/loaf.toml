@@ -1,0 +1,44 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/objc2-system-configuration"
+version = "0.3.2"
+
+[project.features]
+CaptiveNetwork = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFDictionary"]
+DHCPClientPreferences = []
+SCDynamicStore = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFRunLoop"]
+SCDynamicStoreCopyDHCPInfo = ["objc2-core-foundation/CFData", "objc2-core-foundation/CFDate", "objc2-core-foundation/CFDictionary"]
+SCDynamicStoreCopySpecific = ["objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFString"]
+SCDynamicStoreKey = []
+SCNetwork = []
+SCNetworkConfiguration = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFNumber"]
+SCNetworkConnection = ["objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFRunLoop"]
+SCNetworkReachability = ["bitflags", "objc2-core-foundation/CFRunLoop"]
+SCPreferences = ["bitflags", "objc2-core-foundation/CFArray", "objc2-core-foundation/CFData", "objc2-core-foundation/CFRunLoop"]
+SCPreferencesPath = ["objc2-core-foundation/CFDictionary"]
+SCPreferencesSetSpecific = ["objc2-core-foundation/CFString"]
+SCSchemaDefinitions = []
+alloc = []
+bitflags = ["dep:bitflags"]
+default = ["std", "CaptiveNetwork", "DHCPClientPreferences", "SCDynamicStore", "SCDynamicStoreCopyDHCPInfo", "SCDynamicStoreCopySpecific", "SCDynamicStoreKey", "SCNetwork", "SCNetworkConfiguration", "SCNetworkConnection", "SCNetworkReachability", "SCPreferences", "SCPreferencesPath", "SCPreferencesSetSpecific", "SCSchemaDefinitions", "bitflags", "dispatch2", "libc", "objc2", "objc2-security"]
+dispatch2 = ["dep:dispatch2"]
+libc = ["dep:libc"]
+objc2 = ["dep:objc2", "dispatch2?/objc2", "objc2-core-foundation/objc2", "objc2-security?/objc2"]
+objc2-security = ["dep:objc2-security"]
+std = ["alloc"]
+unstable-darwin-objc = []
+
+[rust]
+name = "objc2_system_configuration"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.5.0", features = ["std"], default-features = false, optional = true }
+dispatch2 = { loaf = "crates-io/dispatch2", version = ">=0.3.0, <0.5.0", features = ["alloc"], default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.80", default-features = false, optional = true }
+objc2 = { loaf = "crates-io/objc2", version = ">=0.6.2, <0.8.0", features = ["std"], default-features = false, optional = true }
+objc2-core-foundation = { loaf = "crates-io/objc2-core-foundation", version = "^0.3.2", features = ["CFError"], default-features = false }
+objc2-security = { loaf = "crates-io/objc2-security", version = "^0.3.2", features = ["Authorization"], default-features = false, optional = true }

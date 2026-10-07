@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ipnetwork"
+version = "0.21.1"
+
+[project.features]
+default = []
+schemars = ["dep:schemars"]
+serde = ["dep:serde"]
+
+[rust]
+name = "ipnetwork"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+schemars = { loaf = "crates-io/schemars", version = "^0.8.17", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.200", optional = true }

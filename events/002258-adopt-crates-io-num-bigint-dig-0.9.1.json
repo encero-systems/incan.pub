@@ -1,0 +1,163 @@
+{
+  "about": {
+    "description": "Big integer implementation for Rust",
+    "documentation": "https://docs.rs/num-bigint-dig",
+    "homepage": "https://github.com/dignifiedquire/num-bigint",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/dignifiedquire/num-bigint"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a7f9a86e097b0d187ad0e65667c2f58b9254671e86e7dbb78036b16692eae099",
+    "package": "num-bigint-dig",
+    "registry": "crates-io",
+    "version": "0.9.1"
+  },
+  "archive": "sha256:3f51cc83a7f6a6d72850af42cf2b92344dc044a623cc4daf540951de5a396595",
+  "at": "2026-10-07T07:43:31Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libm",
+      "name": "libm",
+      "optional": false,
+      "req": "^0.2.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-integer",
+      "name": "num-integer",
+      "optional": false,
+      "req": "^0.1.39"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-iter",
+      "name": "num-iter",
+      "optional": false,
+      "req": "^0.1.37"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.10.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.5"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "default": [
+      "std",
+      "u64_digit"
+    ],
+    "fuzz": [
+      "arbitrary",
+      "smallvec/arbitrary"
+    ],
+    "i128": [],
+    "nightly": [],
+    "prime": [
+      "dep:rand",
+      "rand/std_rng"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "num-integer/std",
+      "num-traits/std",
+      "smallvec/write",
+      "dep:rand",
+      "rand/std",
+      "dep:serde",
+      "serde/std"
+    ],
+    "u64_digit": [],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:ac46f3af215e62e378779895001bd908e1cfd586f2999d135b28bc15756b3a56",
+  "kind": "adopt",
+  "manifest": "sha256:9877332744394216ba9a0d518e199d64661a010ee2c57623842d5dba86b7205a",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "num_bigint_dig",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "num-bigint-dig",
+    "scope": "crates-io",
+    "version": "0.9.1"
+  }
+}

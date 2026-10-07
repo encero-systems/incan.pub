@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/defmt-macros"
+version = "1.1.1"
+
+[project.features]
+unstable-test = []
+
+[rust]
+name = "defmt_macros"
+type = "proc-macro"
+edition = "2021"
+build-script = true
+
+[dependencies]
+defmt-parser = { loaf = "crates-io/defmt-parser", version = "=1.0.0" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^2", features = ["extra-traits", "full"] }

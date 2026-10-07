@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/num-iter"
+version = "0.1.46"
+
+[project.features]
+default = ["std"]
+i128 = []
+std = ["num-integer/std", "num-traits/std"]
+
+[rust]
+name = "num_iter"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+num-integer = { loaf = "crates-io/num-integer", version = "^0.1.46", features = ["i128"], default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.11", features = ["i128"], default-features = false }

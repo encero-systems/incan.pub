@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/windows-collections"
+version = "0.100.0"
+
+[project.features]
+default = ["std"]
+std = ["windows-core/std"]
+
+[rust]
+name = "windows_collections"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+windows-core = { loaf = "crates-io/windows-core", version = "^0.100.0", default-features = false }

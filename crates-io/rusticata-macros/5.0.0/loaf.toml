@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rusticata-macros"
+version = "5.0.0"
+
+[project.features]
+default = ["std"]
+std = ["nom/std"]
+
+[rust]
+name = "rusticata_macros"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+nom = { loaf = "crates-io/nom", version = "^8.0", features = ["alloc"], default-features = false }

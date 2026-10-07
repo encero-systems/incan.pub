@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/derive_builder_core"
+version = "0.20.2"
+
+[project.features]
+alloc = []
+clippy = []
+lib_has_std = []
+
+[rust]
+name = "derive_builder_core"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+darling = { loaf = "crates-io/darling", version = "^0.20.10" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.37" }
+quote = { loaf = "crates-io/quote", version = "^1.0.35" }
+syn = { loaf = "crates-io/syn", version = "^2.0.15", features = ["extra-traits", "full"] }

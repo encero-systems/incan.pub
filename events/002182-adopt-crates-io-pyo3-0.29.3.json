@@ -1,0 +1,461 @@
+{
+  "about": {
+    "description": "Bindings to Python interpreter",
+    "documentation": "https://docs.rs/crate/pyo3/",
+    "homepage": "https://github.com/pyo3/pyo3",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/pyo3/pyo3"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:700d18fa267b73b9b521fd7e13580e2f446916f176cacee1ab63fcc8191f1655",
+    "package": "pyo3",
+    "registry": "crates-io",
+    "version": "0.29.3"
+  },
+  "archive": "sha256:5c72b9e648d0c2445f5af281a3fcca4c80ecb7effe63f510f9aa3dbff9c40a2c",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": true,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bigdecimal",
+      "name": "bigdecimal",
+      "optional": true,
+      "req": "^0.4.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": true,
+      "req": "^0.4.25"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/chrono-tz",
+      "name": "chrono-tz",
+      "optional": true,
+      "req": ">=0.10, <0.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/either",
+      "name": "either",
+      "optional": true,
+      "req": "^1.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/eyre",
+      "name": "eyre",
+      "optional": true,
+      "req": ">=0.6.8, <0.7"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": ">=0.15.0, <0.18"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fallback"
+      ],
+      "loaf": "crates-io/iana-time-zone",
+      "name": "iana-time-zone",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": true,
+      "req": ">=2.5.0, <3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/inventory",
+      "name": "inventory",
+      "optional": true,
+      "req": "^0.3.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/jiff",
+      "name": "jiff-02",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.62"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lock_api",
+      "name": "lock_api",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": true,
+      "req": "^0.4.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-complex",
+      "name": "num-complex",
+      "optional": true,
+      "req": ">=0.4.6, <0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-rational",
+      "name": "num-rational",
+      "optional": true,
+      "req": "^0.4.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": true,
+      "req": "^0.2.16"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.21"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ordered-float",
+      "name": "ordered-float",
+      "optional": true,
+      "req": "^5.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking_lot",
+      "name": "parking_lot",
+      "optional": true,
+      "req": "^0.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": false,
+      "req": "^1.0",
+      "target": "cfg(not(target_has_atomic = \"64\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pyo3-ffi",
+      "name": "pyo3-ffi",
+      "optional": false,
+      "req": "=0.29.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pyo3-macros",
+      "name": "pyo3-macros",
+      "optional": true,
+      "req": "=0.29.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rust_decimal",
+      "name": "rust_decimal",
+      "optional": true,
+      "req": "^1.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.38"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/uuid",
+      "name": "uuid",
+      "optional": true,
+      "req": "^1.12.0"
+    }
+  ],
+  "features": {
+    "abi3": [
+      "pyo3-ffi/abi3"
+    ],
+    "abi3-py310": [
+      "abi3-py311",
+      "pyo3-ffi/abi3-py310"
+    ],
+    "abi3-py311": [
+      "abi3-py312",
+      "pyo3-ffi/abi3-py311"
+    ],
+    "abi3-py312": [
+      "abi3-py313",
+      "pyo3-ffi/abi3-py312"
+    ],
+    "abi3-py313": [
+      "abi3-py314",
+      "pyo3-ffi/abi3-py313"
+    ],
+    "abi3-py314": [
+      "abi3-py315",
+      "pyo3-ffi/abi3-py314"
+    ],
+    "abi3-py315": [
+      "abi3",
+      "pyo3-ffi/abi3-py315"
+    ],
+    "abi3-py38": [
+      "abi3-py39",
+      "pyo3-ffi/abi3-py38"
+    ],
+    "abi3-py39": [
+      "abi3-py310",
+      "pyo3-ffi/abi3-py39"
+    ],
+    "abi3t": [
+      "pyo3-ffi/abi3t"
+    ],
+    "abi3t-py315": [
+      "abi3t",
+      "pyo3-ffi/abi3t-py315"
+    ],
+    "anyhow": [
+      "dep:anyhow"
+    ],
+    "arc_lock": [
+      "lock_api",
+      "dep:lock_api",
+      "lock_api/arc_lock",
+      "parking_lot?/arc_lock"
+    ],
+    "auto-initialize": [],
+    "bigdecimal": [
+      "dep:bigdecimal",
+      "num-bigint"
+    ],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "chrono": [
+      "dep:chrono"
+    ],
+    "chrono-local": [
+      "dep:chrono",
+      "chrono/clock",
+      "dep:iana-time-zone"
+    ],
+    "chrono-tz": [
+      "dep:chrono-tz"
+    ],
+    "default": [
+      "macros"
+    ],
+    "either": [
+      "dep:either"
+    ],
+    "experimental-async": [
+      "macros",
+      "dep:pyo3-macros",
+      "pyo3-macros/experimental-async"
+    ],
+    "experimental-inspect": [
+      "dep:pyo3-macros",
+      "pyo3-macros/experimental-inspect"
+    ],
+    "extension-module": [
+      "pyo3-ffi/extension-module"
+    ],
+    "eyre": [
+      "dep:eyre"
+    ],
+    "full": [
+      "macros",
+      "anyhow",
+      "arc_lock",
+      "bigdecimal",
+      "bytes",
+      "chrono",
+      "chrono-local",
+      "chrono-tz",
+      "either",
+      "experimental-async",
+      "experimental-inspect",
+      "eyre",
+      "hashbrown",
+      "indexmap",
+      "jiff-02",
+      "lock_api",
+      "num-bigint",
+      "num-complex",
+      "num-rational",
+      "ordered-float",
+      "parking_lot",
+      "py-clone",
+      "rust_decimal",
+      "serde",
+      "smallvec",
+      "time",
+      "uuid"
+    ],
+    "generate-import-lib": [
+      "pyo3-ffi/generate-import-lib"
+    ],
+    "hashbrown": [
+      "dep:hashbrown"
+    ],
+    "indexmap": [
+      "dep:indexmap"
+    ],
+    "inventory": [
+      "dep:inventory"
+    ],
+    "jiff-02": [
+      "dep:jiff-02"
+    ],
+    "lock_api": [
+      "dep:lock_api"
+    ],
+    "macros": [
+      "pyo3-macros"
+    ],
+    "multiple-pymethods": [
+      "inventory",
+      "dep:pyo3-macros",
+      "pyo3-macros/multiple-pymethods"
+    ],
+    "nightly": [],
+    "num-bigint": [
+      "dep:num-bigint",
+      "dep:num-traits"
+    ],
+    "num-complex": [
+      "dep:num-complex"
+    ],
+    "num-rational": [
+      "dep:num-rational"
+    ],
+    "ordered-float": [
+      "dep:ordered-float"
+    ],
+    "parking_lot": [
+      "dep:parking_lot",
+      "lock_api"
+    ],
+    "py-clone": [],
+    "pyo3-macros": [
+      "dep:pyo3-macros"
+    ],
+    "rust_decimal": [
+      "dep:rust_decimal"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "smallvec": [
+      "dep:smallvec"
+    ],
+    "time": [
+      "dep:time"
+    ],
+    "uuid": [
+      "dep:uuid"
+    ]
+  },
+  "id": "sha256:58971e6e17159e6d4d0d685a088fc7ed57489ca8c47156b8fb1c50d6e5f37bf6",
+  "kind": "adopt",
+  "manifest": "sha256:0212fcbd4c2bb460ac0d56a45295943d2f26ea250f5888410be1a1719d5473b8",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "pyo3",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pyo3",
+    "scope": "crates-io",
+    "version": "0.29.3"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "about": {
+    "description": "System-level helper functions for the dirs and directories crates.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/dirs-dev/dirs-sys-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e01a3366d27ee9890022452ee61b2b63a67e6f13f58900b651ff5665f0bb1fab",
+    "package": "dirs-sys",
+    "registry": "crates-io",
+    "version": "0.5.0"
+  },
+  "archive": "sha256:a9ea5bb83e44753ded42a6584fc03103ef335e86188f22b87c7f41fc212a7930",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/option-ext",
+      "name": "option-ext",
+      "optional": false,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/redox_users",
+      "name": "redox_users",
+      "optional": false,
+      "req": "^0.5",
+      "target": "cfg(target_os = \"redox\")"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Globalization",
+        "Win32_System_Com",
+        "Win32_UI_Shell"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.59.0",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:18cb7b69e6a90abe0f0097d637c356462ca59d7cb0becb272f02c6291f6d90e8",
+  "kind": "adopt",
+  "manifest": "sha256:b919191be5f85f8916356c7e948e51d469c944763b5f80057d04bd83e7a2eb3f",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "dirs_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "dirs-sys",
+    "scope": "crates-io",
+    "version": "0.5.0"
+  }
+}

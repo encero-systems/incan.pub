@@ -1,0 +1,119 @@
+{
+  "about": {
+    "description": "Notify async tasks or threads",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/event-listener"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5a23add41df1562121a9393cb065eab5146a1242410f23a644851e90cfd669d2",
+    "package": "event-listener",
+    "registry": "crates-io",
+    "version": "5.4.2"
+  },
+  "archive": "sha256:a00ab3525f20329cd9c4f5408fb8e65a2a680a448da387b5f7abaa14d56c3760",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/critical-section",
+      "name": "critical-section",
+      "optional": true,
+      "req": "^1.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loom",
+      "name": "loom",
+      "optional": true,
+      "req": "^0.7",
+      "target": "cfg(loom)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking",
+      "name": "parking",
+      "optional": true,
+      "req": "^2.0.0",
+      "target": "cfg(not(target_family = \"wasm\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.12"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/portable-atomic-util",
+      "name": "portable-atomic-util",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable_atomic_crate",
+      "optional": true,
+      "req": "^1.2.0"
+    }
+  ],
+  "features": {
+    "critical-section": [
+      "dep:critical-section"
+    ],
+    "default": [
+      "std"
+    ],
+    "loom": [
+      "parking?/loom",
+      "dep:loom"
+    ],
+    "parking": [
+      "dep:parking"
+    ],
+    "portable-atomic": [
+      "portable-atomic-util",
+      "portable_atomic_crate"
+    ],
+    "portable-atomic-util": [
+      "dep:portable-atomic-util"
+    ],
+    "portable_atomic_crate": [
+      "dep:portable_atomic_crate"
+    ],
+    "std": [
+      "parking"
+    ]
+  },
+  "id": "sha256:22df29c2d195b3be817c31802a077aa8bec5a1166b0cb101084d625df830199c",
+  "kind": "adopt",
+  "manifest": "sha256:f5fa1c716cab3bdbc1501c40dc099f00ba83f38ee8baa857deb56396d16f090a",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "event_listener",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "event-listener",
+    "scope": "crates-io",
+    "version": "5.4.2"
+  }
+}

@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/deadpool"
+version = "0.12.3"
+
+[project.features]
+default = ["managed", "unmanaged"]
+managed = []
+rt_async-std_1 = ["deadpool-runtime/async-std_1"]
+rt_tokio_1 = ["deadpool-runtime/tokio_1"]
+serde = ["dep:serde"]
+unmanaged = []
+
+[rust]
+name = "deadpool"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+deadpool-runtime = { loaf = "crates-io/deadpool-runtime", version = "^0.1" }
+lazy_static = { loaf = "crates-io/lazy_static", version = "^1.5.0" }
+num_cpus = { loaf = "crates-io/num_cpus", version = "^1.11.1" }
+serde = { loaf = "crates-io/serde", version = "^1.0.103", features = ["derive"], optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.5", features = ["sync"] }

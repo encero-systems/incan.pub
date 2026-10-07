@@ -1,0 +1,112 @@
+{
+  "about": {
+    "description": "Import libs for Windows",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "readme.md",
+    "repository": "https://github.com/microsoft/windows-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9b724f72796e036ab90c1021d4780d4d3d648aca59e491e6b98e725b84e99973",
+    "package": "windows-targets",
+    "registry": "crates-io",
+    "version": "0.52.6"
+  },
+  "archive": "sha256:6254490f5197a721e25d11288f5d2c944b6244c111c2cd59baed52b76d5d8941",
+  "at": "2026-10-07T07:41:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_aarch64_gnullvm",
+      "name": "windows_aarch64_gnullvm",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "aarch64-pc-windows-gnullvm"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_aarch64_msvc",
+      "name": "windows_aarch64_msvc",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "cfg(all(target_arch = \"aarch64\", target_env = \"msvc\", not(windows_raw_dylib)))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_i686_gnu",
+      "name": "windows_i686_gnu",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "cfg(all(target_arch = \"x86\", target_env = \"gnu\", not(target_abi = \"llvm\"), not(windows_raw_dylib)))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_i686_gnullvm",
+      "name": "windows_i686_gnullvm",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "i686-pc-windows-gnullvm"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_i686_msvc",
+      "name": "windows_i686_msvc",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "cfg(all(target_arch = \"x86\", target_env = \"msvc\", not(windows_raw_dylib)))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_x86_64_gnu",
+      "name": "windows_x86_64_gnu",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "cfg(all(target_arch = \"x86_64\", target_env = \"gnu\", not(target_abi = \"llvm\"), not(windows_raw_dylib)))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_x86_64_gnullvm",
+      "name": "windows_x86_64_gnullvm",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "x86_64-pc-windows-gnullvm"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows_x86_64_msvc",
+      "name": "windows_x86_64_msvc",
+      "optional": false,
+      "req": "^0.52.6",
+      "target": "cfg(all(any(target_arch = \"x86_64\", target_arch = \"arm64ec\"), target_env = \"msvc\", not(windows_raw_dylib)))"
+    }
+  ],
+  "features": {},
+  "id": "sha256:9946fb387c59d2c6cefd348667f589a0f4a41c9cbe6a75d20d638ad7624b1bb6",
+  "kind": "adopt",
+  "manifest": "sha256:92d4064da0572fa765d0191710ff22256251839e82ee478664a27d703d0eae25",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "windows_targets",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "windows-targets",
+    "scope": "crates-io",
+    "version": "0.52.6"
+  }
+}

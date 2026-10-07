@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bitvec"
+version = "1.1.1"
+
+[project.features]
+alloc = []
+atomic = []
+default = ["atomic", "std"]
+serde = ["dep:serde"]
+std = ["alloc"]
+testing = []
+
+[rust]
+name = "bitvec"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+funty = { loaf = "crates-io/funty", version = "^2.0", default-features = false }
+radium = { loaf = "crates-io/radium", version = "^0.7" }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }
+tap = { loaf = "crates-io/tap", version = "^1" }
+wyz = { loaf = "crates-io/wyz", version = "^0.5", default-features = false }

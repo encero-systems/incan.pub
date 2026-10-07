@@ -1,0 +1,66 @@
+{
+  "about": {
+    "description": "LZMA / LZMA2 / LZIP / XZ compression ported from 'tukaani xz for java'",
+    "documentation": "",
+    "homepage": "https://github.com/hasenbanck/lzma-rust2/",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hasenbanck/lzma-rust2/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ca93e534d1142d1d0dcca6d25fe302508a5dfb40b302802904577725ea0b695b",
+    "package": "lzma-rust2",
+    "registry": "crates-io",
+    "version": "0.16.5"
+  },
+  "archive": "sha256:9d0e254a76e22c4853fa79c33cc2032565df8ac090abf7175db401b9a3aa21f3",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.11"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "encoder",
+      "optimization",
+      "lzip",
+      "xz"
+    ],
+    "encoder": [],
+    "lzip": [],
+    "optimization": [],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "std": [],
+    "xz": [
+      "sha2"
+    ]
+  },
+  "id": "sha256:b14145fd09835f5d5a114bec5b0048733e17de34df41a46fc49c0376200e2ed7",
+  "kind": "adopt",
+  "manifest": "sha256:70751a9b1e05851c401e051b823b60a1ecab1398325d9b618d9f522d78086d83",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "lzma_rust2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "lzma-rust2",
+    "scope": "crates-io",
+    "version": "0.16.5"
+  }
+}

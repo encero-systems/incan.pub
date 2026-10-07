@@ -1,0 +1,68 @@
+{
+  "about": {
+    "description": "Dead simple async pool utitities for sync managers",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bikeshedder/deadpool"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:092966b41edc516079bdf31ec78a2e0588d1d0c08f78b91d8307215928642b2b",
+    "package": "deadpool-runtime",
+    "registry": "crates-io",
+    "version": "0.1.4"
+  },
+  "archive": "sha256:17e0bf92826f2a651fdeeccbb2aa76b85f5a7ec4997084f84dc38e38fbbea3c2",
+  "at": "2026-10-07T07:45:02Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "unstable"
+      ],
+      "loaf": "crates-io/async-std",
+      "name": "async-std_1",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "rt",
+        "time"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio_1",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "async-std_1": [
+      "dep:async-std_1"
+    ],
+    "tokio_1": [
+      "dep:tokio_1"
+    ]
+  },
+  "id": "sha256:7f20f6a20e807cdebe7d2af32f865ec0fdad714a3059b9ddc0bef6d24c143fc9",
+  "kind": "adopt",
+  "manifest": "sha256:15cfbe8cfadf02049b4f5a8fedb75e1a6e0d156c20b7696c8ccb2295abf3d2c0",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "deadpool_runtime",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "deadpool-runtime",
+    "scope": "crates-io",
+    "version": "0.1.4"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "about": {
+    "description": "A wrapper over a platform's native TLS implementation",
+    "documentation": "",
+    "homepage": "https://lib.rs/crates/native-tls",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-native-tls/rust-native-tls"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:465500e14ea162429d264d44189adc38b199b62b1c21eea9f69e4b73cb03bbf2",
+    "package": "native-tls",
+    "registry": "crates-io",
+    "version": "0.2.18"
+  },
+  "archive": "sha256:ebe9270f08d47f940409ebfc2b5f283e0dc25a33895457d124381af5c8c41856",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.170",
+      "target": "cfg(target_vendor = \"apple\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.27",
+      "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/openssl",
+      "name": "openssl",
+      "optional": false,
+      "req": "^0.10.75",
+      "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/openssl-probe",
+      "name": "openssl-probe",
+      "optional": false,
+      "req": "^0.2.1",
+      "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/openssl-sys",
+      "name": "openssl-sys",
+      "optional": false,
+      "req": "^0.9.111",
+      "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/schannel",
+      "name": "schannel",
+      "optional": false,
+      "req": "^0.1.28",
+      "target": "cfg(target_os = \"windows\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/security-framework",
+      "name": "security-framework",
+      "optional": false,
+      "req": "^3.5.1",
+      "target": "cfg(target_vendor = \"apple\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/security-framework-sys",
+      "name": "security-framework-sys",
+      "optional": false,
+      "req": "^2.15.0",
+      "target": "cfg(target_vendor = \"apple\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tempfile",
+      "name": "tempfile",
+      "optional": false,
+      "req": "^3.1.0",
+      "target": "cfg(target_os = \"macos\")"
+    }
+  ],
+  "features": {
+    "alpn": [
+      "security-framework/alpn"
+    ],
+    "alpn-accept": [],
+    "default": [],
+    "vendored": [
+      "openssl/vendored"
+    ]
+  },
+  "id": "sha256:0b83485799ca705949b26e8f720b33456237d5e45e15bd607a689f8af23e106e",
+  "kind": "adopt",
+  "manifest": "sha256:4f013b3f659eef6650f38489febbeef218d4e924907e9e50ad0dfee908042323",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "native_tls",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "native-tls",
+    "scope": "crates-io",
+    "version": "0.2.18"
+  }
+}

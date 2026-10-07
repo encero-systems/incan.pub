@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/num_enum"
+version = "0.7.6"
+
+[project.features]
+complex-expressions = ["num_enum_derive/complex-expressions"]
+default = ["std"]
+external_doc = []
+std = ["num_enum_derive/std"]
+
+[rust]
+name = "num_enum"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+num_enum_derive = { loaf = "crates-io/num_enum_derive", version = "=0.7.6", default-features = false }
+rustversion = { loaf = "crates-io/rustversion", version = "^1.0.4" }

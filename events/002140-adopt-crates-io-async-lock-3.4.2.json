@@ -1,0 +1,85 @@
+{
+  "about": {
+    "description": "Async synchronization primitives",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/async-lock"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:290f7f2596bd5b78a9fec8088ccd89180d7f9f55b94b0576823bbbdc72ee8311",
+    "package": "async-lock",
+    "registry": "crates-io",
+    "version": "3.4.2"
+  },
+  "archive": "sha256:a4093e1d9eeb54d8104fcae7741a9b1af00d00d0e6f88fb9c41e679d7a12de23",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/event-listener",
+      "name": "event-listener",
+      "optional": false,
+      "req": "^5.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/event-listener-strategy",
+      "name": "event-listener-strategy",
+      "optional": false,
+      "req": "^0.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loom",
+      "name": "loom",
+      "optional": true,
+      "req": "^0.7",
+      "target": "cfg(loom)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.11"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "loom": [
+      "event-listener/loom",
+      "dep:loom"
+    ],
+    "std": [
+      "event-listener/std",
+      "event-listener-strategy/std"
+    ]
+  },
+  "id": "sha256:f8d995eb249de97d008e80d94ad455ce4068b58ae0bb2c7755c128ce7d8d058b",
+  "kind": "adopt",
+  "manifest": "sha256:846adbc2d23fe5466c9e1271cddd4c37873284725d532fc2672695e1edc8d2e0",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "async_lock",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "async-lock",
+    "scope": "crates-io",
+    "version": "3.4.2"
+  }
+}

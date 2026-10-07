@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/os_pipe"
+version = "1.2.3"
+
+[project.features]
+io_safety = []
+
+[rust]
+name = "os_pipe"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.62", target = "cfg(not(windows))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.28, <=0.61", features = ["Win32_Foundation", "Win32_Security", "Win32_System_Pipes"], target = "cfg(windows)" }

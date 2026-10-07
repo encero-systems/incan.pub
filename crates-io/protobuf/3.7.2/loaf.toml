@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/protobuf"
+version = "3.7.2"
+
+[project.features]
+bytes = ["dep:bytes"]
+default = []
+with-bytes = ["bytes"]
+
+[rust]
+name = "protobuf"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1.1", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.9.0" }
+protobuf-support = { loaf = "crates-io/protobuf-support", version = "=3.7.2" }
+thiserror = { loaf = "crates-io/thiserror", version = "^1.0.30" }

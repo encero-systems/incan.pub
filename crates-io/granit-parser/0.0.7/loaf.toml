@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/granit-parser"
+version = "0.0.7"
+
+[project.features]
+debug_prints = []
+
+[rust]
+name = "granit_parser"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arraydeque = { loaf = "crates-io/arraydeque", version = "^0.5.1", default-features = false }
+smallvec = { loaf = "crates-io/smallvec", version = ">=1.0.0, <2.0.0" }

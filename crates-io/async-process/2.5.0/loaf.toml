@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-process"
+version = "2.5.0"
+
+[project.features]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "async_process"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-channel = { loaf = "crates-io/async-channel", version = "^2.0.0", target = "cfg(any(windows, target_os = \"linux\"))" }
+async-io = { loaf = "crates-io/async-io", version = "^2.3.0" }
+async-lock = { loaf = "crates-io/async-lock", version = "^3.0.0", target = "cfg(unix)" }
+async-signal = { loaf = "crates-io/async-signal", version = "^0.2.3", target = "cfg(unix)" }
+async-task = { loaf = "crates-io/async-task", version = "^4.7.0", target = "cfg(any(windows, target_os = \"linux\"))" }
+blocking = { loaf = "crates-io/blocking", version = "^1.0.0", target = "cfg(windows)" }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+event-listener = { loaf = "crates-io/event-listener", version = "^5.1.0" }
+futures-lite = { loaf = "crates-io/futures-lite", version = "^2.0.0" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0", features = ["fs", "process", "std"], default-features = false, target = "cfg(unix)" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.40", default-features = false, optional = true }

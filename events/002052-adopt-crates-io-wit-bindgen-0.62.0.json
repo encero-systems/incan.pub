@@ -1,0 +1,118 @@
+{
+  "about": {
+    "description": "Rust bindings generator and runtime support for WIT and the component model.\nUsed when compiling Rust programs to the component model.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wit-bindgen"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:53cb4b5556c3a791e86838ea287782bdafa704d55b0e68b5b81a3a16b9ea5f4b",
+    "package": "wit-bindgen",
+    "registry": "crates-io",
+    "version": "0.62.0"
+  },
+  "archive": "sha256:20cd913079794ce985b59195709058432aed1c9b3c3628357f667c37a4f83ed8",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.11.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/futures",
+      "name": "futures",
+      "optional": true,
+      "req": "^0.3.30"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen-rust-macro",
+      "name": "wit-bindgen-rust-macro",
+      "optional": true,
+      "req": "^0.62.0"
+    }
+  ],
+  "features": {
+    "async": [],
+    "async-spawn": [
+      "async",
+      "dep:futures"
+    ],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "default": [
+      "macros",
+      "realloc",
+      "async",
+      "std",
+      "bitflags",
+      "macro-string"
+    ],
+    "futures-stream": [
+      "async",
+      "dep:futures"
+    ],
+    "inter-task-wakeup": [
+      "async"
+    ],
+    "macro-string": [
+      "wit-bindgen-rust-macro?/macro-string"
+    ],
+    "macros": [
+      "dep:wit-bindgen-rust-macro"
+    ],
+    "realloc": [],
+    "rustc-dep-of-std": [
+      "dep:core",
+      "dep:alloc"
+    ],
+    "std": []
+  },
+  "id": "sha256:b434763400d8abd168edc02af1021362bd5bbc1a53412a6b3dbcb6d41a1bcc83",
+  "kind": "adopt",
+  "manifest": "sha256:a0886632c4800ef99c1ba276a31aabb9ddfe6da000d6f81953dc1a9916f98391",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wit_bindgen",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-bindgen",
+    "scope": "crates-io",
+    "version": "0.62.0"
+  }
+}

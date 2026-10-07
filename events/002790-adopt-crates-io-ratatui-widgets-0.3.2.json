@@ -1,0 +1,175 @@
+{
+  "about": {
+    "description": "A collection of Ratatui widgets for building terminal user interfaces using Ratatui.",
+    "documentation": "https://docs.rs/ratatui-widgets",
+    "homepage": "https://ratatui.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ratatui/ratatui"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:66e3d19bcc9130ca376277d93b60767ff121ace3be06f5f95f81dd68956407d1",
+    "package": "ratatui-widgets",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:894cc82caa90f5f25ba6d4483af5564a824431a15c6948b5553eb8e120713606",
+  "at": "2026-10-07T07:45:36Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/document-features",
+      "name": "document-features",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/indoc",
+      "name": "indoc",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/instability",
+      "name": "instability",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "use_alloc"
+      ],
+      "loaf": "crates-io/itertools",
+      "name": "itertools",
+      "optional": false,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/line-clipping",
+      "name": "line-clipping",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-core",
+      "name": "ratatui-core",
+      "optional": false,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/strum",
+      "name": "strum",
+      "optional": false,
+      "req": "^0.28"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.47"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-segmentation",
+      "name": "unicode-segmentation",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": false,
+      "req": ">=0.2.0"
+    }
+  ],
+  "features": {
+    "all-widgets": [
+      "calendar"
+    ],
+    "calendar": [
+      "dep:time"
+    ],
+    "default": [
+      "all-widgets"
+    ],
+    "document-features": [
+      "dep:document-features"
+    ],
+    "serde": [
+      "dep:serde",
+      "ratatui-core/serde"
+    ],
+    "std": [
+      "serde?/std",
+      "time?/local-offset"
+    ],
+    "unstable": [
+      "unstable-rendered-line-info"
+    ],
+    "unstable-rendered-line-info": []
+  },
+  "id": "sha256:a247b9df884b0cd38eb04afb69b6a4b12a8417a61335d672552400cb978869d1",
+  "kind": "adopt",
+  "manifest": "sha256:b96589d97fefa31a6377877ed8712a5783175e13fb91ff0a75b86851f6465386",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ratatui_widgets",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ratatui-widgets",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

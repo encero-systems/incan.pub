@@ -1,0 +1,84 @@
+{
+  "about": {
+    "description": "Convenience crate for working with JavaScript timers",
+    "documentation": "",
+    "homepage": "https://github.com/rustwasm/gloo",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rustwasm/gloo/tree/master/crates/timers"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bbb143cf96099802033e0d4f4963b19fd2e0b728bcf076cd9cf7f6634f092994",
+    "package": "gloo-timers",
+    "registry": "crates-io",
+    "version": "0.3.0"
+  },
+  "archive": "sha256:f4796d5a0642b2e6a1973bea3abb6eb4dc30fff4c30ecc3377f1407c67684730",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-channel",
+      "name": "futures-channel",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": false,
+      "req": "^0.3.31"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": false,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "default": [],
+    "futures": [
+      "futures-core",
+      "futures-channel"
+    ],
+    "futures-channel": [
+      "dep:futures-channel"
+    ],
+    "futures-core": [
+      "dep:futures-core"
+    ]
+  },
+  "id": "sha256:e05c5716e6c75ce3dcba6daa32d729b535c36c373a17b6f8ed6010d410577048",
+  "kind": "adopt",
+  "manifest": "sha256:acc9b40a819bd94ce398e236963656139a07b6ef08777e8ed23758ac5decdb1f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "gloo_timers",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "gloo-timers",
+    "scope": "crates-io",
+    "version": "0.3.0"
+  }
+}

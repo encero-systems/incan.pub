@@ -1,0 +1,33 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/icu_segmenter"
+version = "2.3.0"
+
+[project.features]
+auto = ["lstm"]
+compiled_data = ["dep:icu_segmenter_data", "dep:icu_locale_fallback", "icu_locale_fallback?/compiled_data", "icu_provider/baked"]
+datagen = ["serde", "dep:databake", "potential_utf/databake", "zerovec/databake", "icu_collections/databake", "icu_provider/export"]
+default = ["compiled_data", "auto"]
+lstm = ["dep:core_maths"]
+serde = ["dep:serde", "potential_utf/serde", "zerovec/serde", "icu_collections/serde", "icu_provider/serde"]
+unstable = []
+
+[rust]
+name = "icu_segmenter"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+core_maths = { loaf = "crates-io/core_maths", version = "^0.1.0", default-features = false, optional = true }
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+icu_collections = { loaf = "crates-io/icu_collections", version = "~2.3.0", default-features = false }
+icu_locale_fallback = { loaf = "crates-io/icu_locale_fallback", version = "~2.3.0", default-features = false, optional = true }
+icu_provider = { loaf = "crates-io/icu_provider", version = "^2.3.0", default-features = false }
+icu_segmenter_data = { loaf = "crates-io/icu_segmenter_data", version = "~2.3.0", default-features = false, optional = true }
+potential_utf = { loaf = "crates-io/potential_utf", version = "^0.1.3", features = ["alloc", "zerovec"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["alloc", "derive"], default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.10.0", default-features = false }
+utf8_iter = { loaf = "crates-io/utf8_iter", version = "^1.0.2", default-features = false }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.7", features = ["alloc", "yoke"], default-features = false }

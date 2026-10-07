@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sec1"
+version = "0.8.1"
+
+[project.features]
+alloc = ["der?/alloc", "zeroize?/alloc"]
+ctutils = ["dep:ctutils"]
+default = ["der", "point"]
+der = ["dep:der", "zeroize"]
+pem = ["alloc", "dep:der", "der/pem"]
+point = ["dep:base16ct", "dep:hybrid-array"]
+serde = ["dep:serdect"]
+std = ["alloc", "der?/std"]
+subtle = ["dep:subtle"]
+zeroize = ["dep:zeroize", "der?/zeroize"]
+
+[rust]
+name = "sec1"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base16ct = { loaf = "crates-io/base16ct", version = "^1", default-features = false, optional = true }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4", optional = true }
+der = { loaf = "crates-io/der", version = "^0.8", features = ["oid"], optional = true }
+hybrid-array = { loaf = "crates-io/hybrid-array", version = "^0.4.6", default-features = false, optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.4", features = ["alloc"], default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2", default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

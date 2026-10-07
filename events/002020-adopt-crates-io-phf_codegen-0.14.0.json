@@ -1,0 +1,80 @@
+{
+  "about": {
+    "description": "Codegen library for PHF types",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-phf/rust-phf"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:41b585a510fb76fdebead6897982ef2a03a21d8e6cbcca904999742a4afc6ffe",
+    "package": "phf_codegen",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:9bae37ce8331145c1674d80ded0e12c768d507f3e893beff80730e60e70961a3",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/phf_generator",
+      "name": "phf_generator",
+      "optional": false,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/phf_shared",
+      "name": "phf_shared",
+      "optional": false,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "ptrhash": [
+      "phf_generator/ptrhash"
+    ],
+    "quote": [
+      "dep:proc-macro2",
+      "dep:quote"
+    ]
+  },
+  "id": "sha256:3fac25308657e9c1d800970a00fabd88def38e9cb4e7fe83453458b3210b7978",
+  "kind": "adopt",
+  "manifest": "sha256:ebb7da802223c9fef82b391a12b02ae3615f577728092c68dc5b24350f70bbff",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "phf_codegen",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "phf_codegen",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

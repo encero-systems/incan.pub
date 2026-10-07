@@ -1,0 +1,160 @@
+{
+  "about": {
+    "description": "A progress bar and cli reporting library for Rust",
+    "documentation": "https://docs.rs/indicatif",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/console-rs/indicatif"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9433806cd6b4ec1aba79c021c7e4c58fb4c3b9977c085062e611ac929998fb0c",
+    "package": "indicatif",
+    "registry": "crates-io",
+    "version": "0.18.6"
+  },
+  "archive": "sha256:14fb69733dfd37977b214009a8e9733d2d00ce6bf9da54f45ebb577e74124a89",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "ansi-parsing",
+        "std"
+      ],
+      "loaf": "crates-io/console",
+      "name": "console",
+      "optional": false,
+      "req": "^0.16.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": false,
+      "req": "^1.12.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "io-util"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-segmentation",
+      "name": "unicode-segmentation",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unit-prefix",
+      "name": "unit-prefix",
+      "optional": false,
+      "req": "^0.5.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/vt100",
+      "name": "vt100",
+      "optional": true,
+      "req": "^0.16.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/web-time",
+      "name": "web-time",
+      "optional": true,
+      "req": "^1.1.0",
+      "target": "cfg(target_arch = \"wasm32\")"
+    }
+  ],
+  "features": {
+    "default": [
+      "unicode-width",
+      "wasmbind"
+    ],
+    "futures": [
+      "dep:futures-core"
+    ],
+    "improved_unicode": [
+      "unicode-segmentation",
+      "unicode-width"
+    ],
+    "in_memory": [
+      "vt100"
+    ],
+    "rayon": [
+      "dep:rayon"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "unicode-segmentation": [
+      "dep:unicode-segmentation"
+    ],
+    "unicode-width": [
+      "dep:unicode-width",
+      "console/unicode-width"
+    ],
+    "vt100": [
+      "dep:vt100"
+    ],
+    "wasmbind": [
+      "dep:web-time"
+    ]
+  },
+  "id": "sha256:31ea3894e4053102826237d79af5778c1a68807d49d8245424a24014e0df233c",
+  "kind": "adopt",
+  "manifest": "sha256:f0dd5ab4fa57b1fbbfbd276cc6bf98b43871e7185de825fc52c17f53a7f43e43",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "indicatif",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "indicatif",
+    "scope": "crates-io",
+    "version": "0.18.6"
+  }
+}

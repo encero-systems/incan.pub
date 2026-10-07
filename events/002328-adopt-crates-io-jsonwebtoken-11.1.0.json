@@ -1,0 +1,216 @@
+{
+  "about": {
+    "description": "Create and decode JWTs in a strongly typed way.",
+    "documentation": "",
+    "homepage": "https://github.com/Keats/jsonwebtoken",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Keats/jsonwebtoken"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e75fe14a82d81e5f5af639997db37d8b96045938a7ac6ab18cdbe1c7467e05e1",
+    "package": "jsonwebtoken",
+    "registry": "crates-io",
+    "version": "11.1.0"
+  },
+  "archive": "sha256:b5a495c160561cef2d59608c26687e7d902ba938b5fa0ffbb7f1f6fba2445cb4",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/aws-lc-rs",
+      "name": "aws-lc-rs",
+      "optional": true,
+      "req": "^1.15.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": false,
+      "req": "^0.22"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "pkcs8"
+      ],
+      "loaf": "crates-io/ed25519-dalek",
+      "name": "ed25519-dalek",
+      "optional": true,
+      "req": "^2.1.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "reset"
+      ],
+      "loaf": "crates-io/hmac",
+      "name": "hmac",
+      "optional": true,
+      "req": "^0.12.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "ecdsa"
+      ],
+      "loaf": "crates-io/p256",
+      "name": "p256",
+      "optional": true,
+      "req": "^0.13.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "ecdsa"
+      ],
+      "loaf": "crates-io/p384",
+      "name": "p384",
+      "optional": true,
+      "req": "^0.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pem",
+      "name": "pem",
+      "optional": true,
+      "req": "^3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.8.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rsa",
+      "name": "rsa",
+      "optional": true,
+      "req": "^0.9.6"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": false,
+      "req": "^1.0.228"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.10.7"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/signature",
+      "name": "signature",
+      "optional": false,
+      "req": "^2.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/simple_asn1",
+      "name": "simple_asn1",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": false,
+      "req": "^1.8.2"
+    }
+  ],
+  "features": {
+    "aws_lc_rs": [
+      "dep:aws-lc-rs"
+    ],
+    "default": [
+      "use_pem"
+    ],
+    "rust_crypto": [
+      "dep:ed25519-dalek",
+      "dep:hmac",
+      "dep:p256",
+      "dep:p384",
+      "dep:rand",
+      "dep:rsa",
+      "dep:sha2"
+    ],
+    "use_pem": [
+      "dep:pem",
+      "dep:simple_asn1"
+    ]
+  },
+  "id": "sha256:d94099a1c9ddf855d9522022a9407cb6543e31ad0c43e7da9c9232ea9dfdb1bb",
+  "kind": "adopt",
+  "manifest": "sha256:4f6801894a29549717ecb4affdd80e21afa1a61180430fa762a605203c6b7fdc",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "jsonwebtoken",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "jsonwebtoken",
+    "scope": "crates-io",
+    "version": "11.1.0"
+  }
+}

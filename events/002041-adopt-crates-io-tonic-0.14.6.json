@@ -1,0 +1,348 @@
+{
+  "about": {
+    "description": "A gRPC over HTTP/2 implementation focused on high performance, interoperability, and flexibility.",
+    "documentation": "",
+    "homepage": "https://github.com/hyperium/tonic",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hyperium/tonic"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ac2a5518c70fa84342385732db33fb3f44bc4cc748936eb5833d2df34d6445ef",
+    "package": "tonic",
+    "registry": "crates-io",
+    "version": "0.14.6"
+  },
+  "archive": "sha256:abf28440b8c7ee30a1bde766f2412465bd12c00fb1806193af700ceb9b302cbc",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-trait",
+      "name": "async-trait",
+      "optional": true,
+      "req": "^0.1.13"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/axum",
+      "name": "axum",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": false,
+      "req": "^0.22"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/h2",
+      "name": "h2",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body",
+      "name": "http-body",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body-util",
+      "name": "http-body-util",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "http1",
+        "http2"
+      ],
+      "loaf": "crates-io/hyper",
+      "name": "hyper",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hyper-timeout",
+      "name": "hyper-timeout",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "tokio"
+      ],
+      "loaf": "crates-io/hyper-util",
+      "name": "hyper-util",
+      "optional": true,
+      "req": "^0.1.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/percent-encoding",
+      "name": "percent-encoding",
+      "optional": false,
+      "req": "^2.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project",
+      "name": "pin-project",
+      "optional": false,
+      "req": "^1.0.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustls-native-certs",
+      "name": "rustls-native-certs",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "all"
+      ],
+      "loaf": "crates-io/socket2",
+      "name": "socket2",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sync_wrapper",
+      "name": "sync_wrapper",
+      "optional": false,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "logging",
+        "tls12"
+      ],
+      "loaf": "crates-io/tokio-rustls",
+      "name": "tokio-rustls",
+      "optional": true,
+      "req": "^0.26.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio-stream",
+      "name": "tokio-stream",
+      "optional": false,
+      "req": "^0.1.16"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tower",
+      "name": "tower",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower-layer",
+      "name": "tower-layer",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower-service",
+      "name": "tower-service",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/webpki-roots",
+      "name": "webpki-roots",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zstd",
+      "name": "zstd",
+      "optional": true,
+      "req": "^0.13.0"
+    }
+  ],
+  "features": {
+    "_tls-any": [
+      "dep:tokio",
+      "tokio?/rt",
+      "tokio?/macros",
+      "tls-connect-info"
+    ],
+    "channel": [
+      "dep:hyper",
+      "hyper?/client",
+      "dep:hyper-util",
+      "hyper-util?/client-legacy",
+      "dep:tower",
+      "tower?/balance",
+      "tower?/buffer",
+      "tower?/discover",
+      "tower?/limit",
+      "tower?/load-shed",
+      "tower?/util",
+      "dep:tokio",
+      "tokio?/time",
+      "dep:hyper-timeout"
+    ],
+    "codegen": [
+      "dep:async-trait"
+    ],
+    "default": [
+      "router",
+      "transport",
+      "codegen"
+    ],
+    "deflate": [
+      "dep:flate2"
+    ],
+    "gzip": [
+      "dep:flate2"
+    ],
+    "router": [
+      "dep:axum",
+      "dep:tower",
+      "tower?/util"
+    ],
+    "server": [
+      "dep:h2",
+      "dep:hyper",
+      "hyper?/server",
+      "dep:hyper-util",
+      "hyper-util?/service",
+      "hyper-util?/server-auto",
+      "dep:socket2",
+      "dep:tokio",
+      "tokio?/macros",
+      "tokio?/net",
+      "tokio?/time",
+      "tokio-stream/net",
+      "dep:tower",
+      "tower?/util",
+      "tower?/limit",
+      "tower?/load-shed"
+    ],
+    "tls-aws-lc": [
+      "_tls-any",
+      "dep:tokio-rustls",
+      "tokio-rustls/aws-lc-rs"
+    ],
+    "tls-connect-info": [
+      "dep:tokio-rustls"
+    ],
+    "tls-native-roots": [
+      "_tls-any",
+      "channel",
+      "dep:rustls-native-certs"
+    ],
+    "tls-ring": [
+      "_tls-any",
+      "dep:tokio-rustls",
+      "tokio-rustls/ring"
+    ],
+    "tls-webpki-roots": [
+      "_tls-any",
+      "channel",
+      "dep:webpki-roots"
+    ],
+    "transport": [
+      "server",
+      "channel"
+    ],
+    "zstd": [
+      "dep:zstd"
+    ]
+  },
+  "id": "sha256:e1135729aa09810969dcb07273047128d0a703699a49c7396425c5b100f81c02",
+  "kind": "adopt",
+  "manifest": "sha256:4c1a32cef2b1763d63f056358edc4525d7601ad66921d18510464c96d5acac7e",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "tonic",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tonic",
+    "scope": "crates-io",
+    "version": "0.14.6"
+  }
+}

@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/opentelemetry"
+version = "0.33.0"
+
+[project.features]
+default = ["trace", "metrics", "logs", "internal-logs", "futures"]
+experimental_context_observer = []
+experimental_metrics_bound_instruments = ["metrics"]
+futures = ["futures-core", "futures-sink", "pin-project-lite"]
+futures-core = ["dep:futures-core"]
+futures-sink = ["dep:futures-sink"]
+internal-logs = ["tracing"]
+logs = []
+metrics = []
+pin-project-lite = ["dep:pin-project-lite"]
+testing = ["trace"]
+thiserror = ["dep:thiserror"]
+trace = ["futures", "thiserror"]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "opentelemetry"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", optional = true }
+futures-sink = { loaf = "crates-io/futures-sink", version = "^0.3", optional = true }
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.63", target = "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2", optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2", default-features = false, optional = true }
+tracing = { loaf = "crates-io/tracing", version = ">=0.1.40", default-features = false, optional = true }

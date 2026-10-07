@@ -1,0 +1,67 @@
+{
+  "about": {
+    "description": "Low-level bindings to the system libz library (also known as zlib).",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-lang/libz-sys"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:85bc9657773828b90eeb625adff10eeac83cc21bbfd8e23a03eaa8a33c9e28d9",
+    "package": "libz-sys",
+    "registry": "crates-io",
+    "version": "1.1.29"
+  },
+  "archive": "sha256:765a86fe559ffbe4aa1aa5dc9c6f7ce9b6091ad71d4079e8f436c49ca71ffebf",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.43"
+    }
+  ],
+  "features": {
+    "asm": [],
+    "cmake": [],
+    "default": [
+      "libc",
+      "stock-zlib"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "static": [],
+    "stock-zlib": [],
+    "zlib-ng": [
+      "libc",
+      "cmake"
+    ],
+    "zlib-ng-no-cmake-experimental-community-maintained": [
+      "libc"
+    ]
+  },
+  "id": "sha256:bbebab1686ee992b79d7d1bc85791b8015994f34438db708e237d93d0739a8ac",
+  "kind": "adopt",
+  "manifest": "sha256:82effd671674b78ad67da64cb59cb61e0fda3ca443e00c1d4ba5d3b341910b7c",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "libz_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "libz-sys",
+    "scope": "crates-io",
+    "version": "1.1.29"
+  }
+}

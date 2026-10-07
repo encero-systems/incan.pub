@@ -1,0 +1,396 @@
+{
+  "about": {
+    "description": "Bindings to the Security framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:709fe137109bd1e8b5a99390f77a7d8b2961dafc1a1c5db8f2e60329ad6d895a",
+    "package": "objc2-security",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:e1bf0aca8076911d0e72866f9c423dd4fdef22d881b24544c0260dcc4cdf3e3e",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.80"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": true,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/objc2-core-foundation",
+      "name": "objc2-core-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "AuthSession": [
+      "bitflags"
+    ],
+    "Authorization": [
+      "bitflags"
+    ],
+    "AuthorizationDB": [
+      "objc2-core-foundation/CFBundle",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "AuthorizationPlugin": [
+      "bitflags",
+      "objc2-core-foundation/CFArray"
+    ],
+    "AuthorizationTags": [],
+    "CMSDecoder": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate"
+    ],
+    "CMSEncoder": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate"
+    ],
+    "CSCommon": [
+      "bitflags"
+    ],
+    "CipherSuite": [],
+    "CodeSigning": [],
+    "SecACL": [
+      "bitflags",
+      "objc2-core-foundation/CFArray"
+    ],
+    "SecAccess": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecAccessControl": [
+      "bitflags",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecAsn1Coder": [],
+    "SecAsn1Templates": [],
+    "SecAsn1Types": [],
+    "SecBase": [],
+    "SecCertificate": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecCertificateOIDs": [],
+    "SecCode": [
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError",
+      "objc2-core-foundation/CFURL"
+    ],
+    "SecCodeHost": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFURL"
+    ],
+    "SecCustomTransform": [
+      "objc2-core-foundation/CFError"
+    ],
+    "SecDecodeTransform": [
+      "objc2-core-foundation/CFError"
+    ],
+    "SecDigestTransform": [
+      "objc2-core-foundation/CFError"
+    ],
+    "SecEncodeTransform": [
+      "objc2-core-foundation/CFError"
+    ],
+    "SecEncryptTransform": [
+      "objc2-core-foundation/CFError"
+    ],
+    "SecIdentity": [
+      "objc2-core-foundation/CFArray"
+    ],
+    "SecIdentitySearch": [],
+    "SecImportExport": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "SecItem": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "SecKey": [
+      "bitflags",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecKeychain": [
+      "bitflags",
+      "objc2-core-foundation/CFArray"
+    ],
+    "SecKeychainItem": [
+      "objc2-core-foundation/CFData"
+    ],
+    "SecKeychainSearch": [],
+    "SecPolicy": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "SecPolicySearch": [],
+    "SecProtocolMetadata": [],
+    "SecProtocolObject": [],
+    "SecProtocolOptions": [],
+    "SecProtocolTypes": [
+      "objc2-core-foundation/CFArray"
+    ],
+    "SecRandom": [],
+    "SecReadTransform": [],
+    "SecRequirement": [
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecSharedCredential": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecSignVerifyTransform": [
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecStaticCode": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError",
+      "objc2-core-foundation/CFURL"
+    ],
+    "SecTask": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecTransform": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecTransformReadTransform": [
+      "objc2-core-foundation/CFStream"
+    ],
+    "SecTrust": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFError"
+    ],
+    "SecTrustSettings": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate"
+    ],
+    "SecTrustedApplication": [
+      "objc2-core-foundation/CFData"
+    ],
+    "SecureDownload": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFURL"
+    ],
+    "SecureTransport": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData"
+    ],
+    "alloc": [],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "block2": [
+      "dep:block2"
+    ],
+    "certextensions": [],
+    "cssm": [],
+    "cssmaci": [],
+    "cssmapi": [],
+    "cssmapple": [],
+    "cssmcli": [],
+    "cssmconfig": [],
+    "cssmcspi": [],
+    "cssmdli": [],
+    "cssmerr": [],
+    "cssmkrapi": [],
+    "cssmkrspi": [],
+    "cssmspi": [],
+    "cssmtpi": [],
+    "cssmtype": [],
+    "default": [
+      "std",
+      "AuthSession",
+      "Authorization",
+      "AuthorizationDB",
+      "AuthorizationPlugin",
+      "AuthorizationTags",
+      "CMSDecoder",
+      "CMSEncoder",
+      "CSCommon",
+      "CipherSuite",
+      "CodeSigning",
+      "SecACL",
+      "SecAccess",
+      "SecAccessControl",
+      "SecAsn1Coder",
+      "SecAsn1Templates",
+      "SecAsn1Types",
+      "SecBase",
+      "SecCertificate",
+      "SecCertificateOIDs",
+      "SecCode",
+      "SecCodeHost",
+      "SecCustomTransform",
+      "SecDecodeTransform",
+      "SecDigestTransform",
+      "SecEncodeTransform",
+      "SecEncryptTransform",
+      "SecIdentity",
+      "SecIdentitySearch",
+      "SecImportExport",
+      "SecItem",
+      "SecKey",
+      "SecKeychain",
+      "SecKeychainItem",
+      "SecKeychainSearch",
+      "SecPolicy",
+      "SecPolicySearch",
+      "SecProtocolMetadata",
+      "SecProtocolObject",
+      "SecProtocolOptions",
+      "SecProtocolTypes",
+      "SecRandom",
+      "SecReadTransform",
+      "SecRequirement",
+      "SecSharedCredential",
+      "SecSignVerifyTransform",
+      "SecStaticCode",
+      "SecTask",
+      "SecTransform",
+      "SecTransformReadTransform",
+      "SecTrust",
+      "SecTrustSettings",
+      "SecTrustedApplication",
+      "SecureDownload",
+      "SecureTransport",
+      "bitflags",
+      "block2",
+      "certextensions",
+      "cssm",
+      "cssmaci",
+      "cssmapi",
+      "cssmapple",
+      "cssmcli",
+      "cssmconfig",
+      "cssmcspi",
+      "cssmdli",
+      "cssmerr",
+      "cssmkrapi",
+      "cssmkrspi",
+      "cssmspi",
+      "cssmtpi",
+      "cssmtype",
+      "eisl",
+      "emmspi",
+      "emmtype",
+      "libc",
+      "mds",
+      "mds_schema",
+      "objc2",
+      "oids",
+      "oidsalg",
+      "oidsattr",
+      "oidsbase",
+      "oidscert",
+      "oidscrl",
+      "x509defs"
+    ],
+    "eisl": [],
+    "emmspi": [],
+    "emmtype": [],
+    "libc": [
+      "dep:libc"
+    ],
+    "mds": [],
+    "mds_schema": [],
+    "objc2": [
+      "dep:objc2",
+      "objc2-core-foundation/objc2"
+    ],
+    "oids": [],
+    "oidsalg": [],
+    "oidsattr": [],
+    "oidsbase": [],
+    "oidscert": [],
+    "oidscrl": [],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": [],
+    "x509defs": []
+  },
+  "id": "sha256:8cb0104d7f6fad3e7a4ffe15dc6e79f888f48db584968d6cf3168100bf8a7f88",
+  "kind": "adopt",
+  "manifest": "sha256:c0f40d9f4cd477bd66045c8df65e23e0d845d6748449efa4bbb8adce2f8f1868",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_security",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-security",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

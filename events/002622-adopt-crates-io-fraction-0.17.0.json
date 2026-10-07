@@ -1,0 +1,155 @@
+{
+  "about": {
+    "description": "Lossless fractions and decimals; drop-in float replacement",
+    "documentation": "https://docs.rs/fraction/",
+    "homepage": "https://github.com/dnsl48/fraction.git",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/dnsl48/fraction.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e246562084dde8ebbcc943b261c406ce4f68e5032ec28029a251a47d6a295500",
+    "package": "fraction",
+    "registry": "crates-io",
+    "version": "0.17.0"
+  },
+  "archive": "sha256:d1a31e2b3c1b1d290ca312b82b21f419585985f5742407a9950cc209ae1c53c8",
+  "at": "2026-10-07T07:45:02Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/byteorder",
+      "name": "byteorder",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/juniper",
+      "name": "juniper",
+      "optional": true,
+      "req": "^0.15"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num",
+      "name": "num",
+      "optional": false,
+      "req": "^0.4.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": true,
+      "req": "^0.4.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/postgres-types",
+      "name": "postgres-types",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "byteorder": [
+      "dep:byteorder"
+    ],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "default": [
+      "with-bigint",
+      "with-decimal",
+      "with-dynaint"
+    ],
+    "juniper": [
+      "dep:juniper"
+    ],
+    "num-bigint": [
+      "dep:num-bigint"
+    ],
+    "postgres-types": [
+      "dep:postgres-types"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_derive": [
+      "dep:serde_derive"
+    ],
+    "with-approx": [
+      "with-bigint"
+    ],
+    "with-bigint": [
+      "num/num-bigint",
+      "num/std",
+      "num-bigint"
+    ],
+    "with-decimal": [],
+    "with-dynaint": [],
+    "with-juniper-support": [
+      "juniper"
+    ],
+    "with-postgres-support": [
+      "postgres-types",
+      "byteorder",
+      "bytes"
+    ],
+    "with-serde-support": [
+      "serde",
+      "serde_derive",
+      "num/serde"
+    ],
+    "with-unicode": []
+  },
+  "id": "sha256:27205aa0ee983fd5d9a4ac06b504cd91b2d2119f661287a62f52d928d6928550",
+  "kind": "adopt",
+  "manifest": "sha256:9c19ab4abe840f01274e90aa6e3b67a71a9b5868cc2af4c91871ac4867148fe1",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "fraction",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fraction",
+    "scope": "crates-io",
+    "version": "0.17.0"
+  }
+}

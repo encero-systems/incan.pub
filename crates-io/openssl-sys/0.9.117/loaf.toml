@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/openssl-sys"
+version = "0.9.117"
+
+[project.features]
+aws-lc = ["dep:aws-lc-sys"]
+aws-lc-fips = ["dep:aws-lc-fips-sys"]
+bindgen = []
+bssl-sys = ["dep:bssl-sys"]
+openssl-src = []
+unstable_boringssl = ["bssl-sys"]
+vendored = ["openssl-src"]
+
+[rust]
+name = "openssl_sys"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+aws-lc-fips-sys = { loaf = "crates-io/aws-lc-fips-sys", version = "^0.13", features = ["bindgen", "ssl"], optional = true }
+aws-lc-sys = { loaf = "crates-io/aws-lc-sys", version = "^0.41", features = ["ssl"], optional = true }
+bssl-sys = { loaf = "crates-io/bssl-sys", version = "^0.1.0", optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2" }

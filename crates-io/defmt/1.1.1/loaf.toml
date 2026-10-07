@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/defmt"
+version = "1.1.1"
+
+[project.features]
+alloc = []
+avoid-default-panic = []
+encoding-raw = []
+encoding-rzcobs = []
+ip_in_core = []
+unstable-test = ["defmt-macros/unstable-test"]
+
+[rust]
+name = "defmt"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^1" }
+defmt-macros = { loaf = "crates-io/defmt-macros", version = "=1.1.1" }

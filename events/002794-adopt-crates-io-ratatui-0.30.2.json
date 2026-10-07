@@ -1,0 +1,230 @@
+{
+  "about": {
+    "description": "A library that's all about cooking up terminal user interfaces",
+    "documentation": "https://docs.rs/ratatui/latest/ratatui/",
+    "homepage": "https://ratatui.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ratatui/ratatui"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3274ba0a2c5e1bcad2a2005d20f4dc59dad26b2eb0940fb094500dba4099d57d",
+    "package": "ratatui",
+    "registry": "crates-io",
+    "version": "0.30.2"
+  },
+  "archive": "sha256:fa6a967158ce50702b429d3e522f493c02a5f326cf027d3a45275ee8b8cb647b",
+  "at": "2026-10-07T07:45:36Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/document-features",
+      "name": "document-features",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/instability",
+      "name": "instability",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "libm"
+      ],
+      "loaf": "crates-io/palette",
+      "name": "palette",
+      "optional": true,
+      "req": "^0.7.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-core",
+      "name": "ratatui-core",
+      "optional": false,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-crossterm",
+      "name": "ratatui-crossterm",
+      "optional": true,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-macros",
+      "name": "ratatui-macros",
+      "optional": true,
+      "req": "^0.7.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-termina",
+      "name": "ratatui-termina",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-termion",
+      "name": "ratatui-termion",
+      "optional": true,
+      "req": "^0.1.2",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-termwiz",
+      "name": "ratatui-termwiz",
+      "optional": true,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ratatui-widgets",
+      "name": "ratatui-widgets",
+      "optional": false,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "all-widgets": [
+      "widget-calendar"
+    ],
+    "crossterm": [
+      "dep:ratatui-crossterm",
+      "std"
+    ],
+    "crossterm_0_28": [
+      "crossterm",
+      "dep:ratatui-crossterm",
+      "ratatui-crossterm/crossterm_0_28"
+    ],
+    "crossterm_0_29": [
+      "crossterm",
+      "dep:ratatui-crossterm",
+      "ratatui-crossterm/crossterm_0_29"
+    ],
+    "default": [
+      "all-widgets",
+      "crossterm",
+      "layout-cache",
+      "macros",
+      "underline-color"
+    ],
+    "document-features": [
+      "dep:document-features"
+    ],
+    "layout-cache": [
+      "ratatui-core/layout-cache"
+    ],
+    "macros": [
+      "dep:ratatui-macros"
+    ],
+    "palette": [
+      "dep:palette",
+      "ratatui-core/palette"
+    ],
+    "portable-atomic": [
+      "ratatui-core/portable-atomic"
+    ],
+    "scrolling-regions": [
+      "ratatui-core/scrolling-regions",
+      "ratatui-crossterm?/scrolling-regions",
+      "ratatui-termina?/scrolling-regions",
+      "ratatui-termion?/scrolling-regions",
+      "ratatui-termwiz?/scrolling-regions"
+    ],
+    "serde": [
+      "dep:serde",
+      "ratatui-core/serde",
+      "ratatui-crossterm?/serde",
+      "ratatui-termina?/serde",
+      "ratatui-termion?/serde",
+      "ratatui-termwiz?/serde",
+      "ratatui-widgets/serde"
+    ],
+    "std": [
+      "ratatui-core/std",
+      "ratatui-widgets/std",
+      "serde?/std"
+    ],
+    "termina": [
+      "dep:ratatui-termina",
+      "std"
+    ],
+    "termion": [
+      "dep:ratatui-termion",
+      "std"
+    ],
+    "termwiz": [
+      "dep:ratatui-termwiz",
+      "std"
+    ],
+    "underline-color": [
+      "ratatui-core/underline-color",
+      "ratatui-crossterm?/underline-color",
+      "ratatui-termina?/underline-color",
+      "ratatui-termwiz?/underline-color"
+    ],
+    "unstable": [
+      "unstable-backend-writer",
+      "unstable-rendered-line-info",
+      "unstable-widget-ref"
+    ],
+    "unstable-backend-writer": [
+      "ratatui-crossterm?/unstable-backend-writer",
+      "ratatui-termina?/unstable-backend-writer",
+      "ratatui-termion?/unstable-backend-writer"
+    ],
+    "unstable-rendered-line-info": [
+      "ratatui-widgets/unstable-rendered-line-info"
+    ],
+    "unstable-widget-ref": [],
+    "widget-calendar": [
+      "ratatui-widgets/calendar"
+    ]
+  },
+  "id": "sha256:4864ab55bd3b6317d1fb8de019ded0f4416965387a9aa25a668f8461a0875010",
+  "kind": "adopt",
+  "manifest": "sha256:3242eb694abb720aadfac2c872b4be90504f538a0e2d81d566eb627222085c08",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ratatui",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ratatui",
+    "scope": "crates-io",
+    "version": "0.30.2"
+  }
+}

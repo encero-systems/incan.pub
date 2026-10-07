@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-io"
+version = "2.6.0"
+
+[project.features]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "async_io"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+concurrent-queue = { loaf = "crates-io/concurrent-queue", version = "^2.2.0" }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.28", features = ["std"], default-features = false }
+futures-lite = { loaf = "crates-io/futures-lite", version = "^2.0.0", default-features = false }
+parking = { loaf = "crates-io/parking", version = "^2.0.0" }
+polling = { loaf = "crates-io/polling", version = "^3.4.0" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.7", features = ["fs", "net", "std"], default-features = false }
+slab = { loaf = "crates-io/slab", version = "^0.4.2" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.37", default-features = false, optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation"], target = "cfg(windows)" }

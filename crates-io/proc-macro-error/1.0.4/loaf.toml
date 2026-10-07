@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/proc-macro-error"
+version = "1.0.4"
+
+[project.features]
+default = ["syn-error"]
+syn = ["dep:syn"]
+syn-error = ["syn"]
+
+[rust]
+name = "proc_macro_error"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+proc-macro-error-attr = { loaf = "crates-io/proc-macro-error-attr", version = "=1.0.4" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^1", default-features = false, optional = true }

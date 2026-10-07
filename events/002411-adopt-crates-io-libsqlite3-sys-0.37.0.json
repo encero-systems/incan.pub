@@ -1,0 +1,106 @@
+{
+  "about": {
+    "description": "Native bindings to the libsqlite3 library",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rusqlite/rusqlite"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b1f111c8c41e7c61a49cd34e44c7619462967221a6443b0ec299e0ac30cfb9b1",
+    "package": "libsqlite3-sys",
+    "registry": "crates-io",
+    "version": "0.37.0"
+  },
+  "archive": "sha256:f2a4eda2f0505f20d6af95e8b547ec6aed0af129ba9d968a08e88bbcc48dce2f",
+  "at": "2026-10-07T07:43:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/openssl-sys",
+      "name": "openssl-sys",
+      "optional": true,
+      "req": "^0.9.103"
+    }
+  ],
+  "features": {
+    "bindgen": [],
+    "buildtime_bindgen": [
+      "bindgen",
+      "pkg-config",
+      "vcpkg"
+    ],
+    "bundled": [
+      "cc",
+      "bundled_bindings"
+    ],
+    "bundled-sqlcipher": [
+      "bundled"
+    ],
+    "bundled-sqlcipher-vendored-openssl": [
+      "bundled-sqlcipher",
+      "dep:openssl-sys",
+      "openssl-sys/vendored"
+    ],
+    "bundled-windows": [
+      "cc",
+      "bundled_bindings"
+    ],
+    "bundled_bindings": [],
+    "cc": [],
+    "column_metadata": [],
+    "default": [
+      "min_sqlite_version_3_34_1"
+    ],
+    "in_gecko": [],
+    "loadable_extension": [
+      "prettyplease",
+      "quote",
+      "syn"
+    ],
+    "min_sqlite_version_3_34_1": [
+      "pkg-config",
+      "vcpkg"
+    ],
+    "openssl-sys": [
+      "dep:openssl-sys"
+    ],
+    "pkg-config": [],
+    "prettyplease": [],
+    "preupdate_hook": [
+      "buildtime_bindgen"
+    ],
+    "quote": [],
+    "session": [
+      "preupdate_hook",
+      "buildtime_bindgen"
+    ],
+    "sqlcipher": [],
+    "syn": [],
+    "unlock_notify": [],
+    "vcpkg": [],
+    "wasm32-wasi-vfs": [],
+    "with-asan": []
+  },
+  "id": "sha256:5c750a6122910fae1feffef433e354c58c0685d335a930abfd51504699b1eec1",
+  "kind": "adopt",
+  "manifest": "sha256:4ca7d0aea463a1d7d0fd41b96c239bf521adc594df0c868a03a48d47c02d32b4",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "libsqlite3_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "libsqlite3-sys",
+    "scope": "crates-io",
+    "version": "0.37.0"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "about": {
+    "description": "A brotli decompressor that with an interface avoiding the rust stdlib. This makes it suitable for embedded devices and kernels. It is designed with a pluggable allocator so that the standard lib's allocator may be employed. The default build also includes a stdlib allocator and stream interface. Disable this with --features=no-stdlib. Alternatively, --features=unsafe turns off array bounds checks and memory initialization but provides a safe interface for the caller.  Without adding the --features=unsafe argument, all included code is safe. For compression in addition to this library, download https://github.com/dropbox/rust-brotli",
+    "documentation": "https://github.com/dropbox/rust-brotli-decompressor/blob/master/README.md",
+    "homepage": "https://github.com/dropbox/rust-brotli-decompressor",
+    "license": "BSD-3-Clause/MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/dropbox/rust-brotli-decompressor"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:941cd9bd4ddab83cb46fa5a2d428f1c857b24ac78cb876cf7beb710840934bd7",
+    "package": "brotli-decompressor",
+    "registry": "crates-io",
+    "version": "6.0.1"
+  },
+  "archive": "sha256:426309c74f1d9fb74ce24d4c9c827aa07d277eb376f83c44d0f75762de3ec43c",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/alloc-no-stdlib",
+      "name": "alloc-no-stdlib",
+      "optional": false,
+      "req": ">=3.0.0, <4.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/alloc-stdlib",
+      "name": "alloc-stdlib",
+      "optional": true,
+      "req": ">=0.3.0, <0.4"
+    }
+  ],
+  "features": {
+    "alloc-stdlib": [
+      "dep:alloc-stdlib"
+    ],
+    "benchmark": [],
+    "default": [
+      "std"
+    ],
+    "disable-timer": [],
+    "ffi-api": [],
+    "no-stdlib-ffi-binding": [
+      "ffi-api"
+    ],
+    "pass-through-ffi-panics": [],
+    "seccomp": [
+      "alloc-no-stdlib/unsafe"
+    ],
+    "std": [
+      "alloc-stdlib"
+    ],
+    "unsafe": [
+      "alloc-no-stdlib/unsafe",
+      "dep:alloc-stdlib",
+      "alloc-stdlib/unsafe"
+    ]
+  },
+  "id": "sha256:7d9e8dee460ae787009a7f0f43aab5deeffb34505162d8754bc37e439e911e54",
+  "kind": "adopt",
+  "manifest": "sha256:e1f57d5a312ef2a814d70d4d367e5d4dfc62769ef56f262a6f7b3c554a5478ad",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "brotli_decompressor",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "brotli-decompressor",
+    "scope": "crates-io",
+    "version": "6.0.1"
+  }
+}

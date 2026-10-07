@@ -1,0 +1,52 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/quinn"
+version = "0.11.12"
+
+[project.features]
+__rustls-post-quantum-test = ["dep:rustls", "rustls/prefer-post-quantum", "rustls-aws-lc-rs", "proto/__rustls-post-quantum-test"]
+async-io = ["dep:async-io"]
+async-std = ["dep:async-std"]
+aws-lc-rs = ["proto/aws-lc-rs"]
+aws-lc-rs-fips = ["proto/aws-lc-rs-fips"]
+bloom = ["proto/bloom"]
+default = ["log", "platform-verifier", "runtime-tokio", "rustls-ring", "bloom"]
+futures-io = ["dep:futures-io"]
+lock_tracking = []
+log = ["tracing/log", "proto/log", "udp/log"]
+platform-verifier = ["proto/platform-verifier"]
+qlog = ["proto/qlog"]
+ring = ["proto/ring"]
+runtime-async-std = ["async-io", "async-std"]
+runtime-smol = ["async-io", "smol"]
+runtime-tokio = ["tokio/time", "tokio/rt", "tokio/net"]
+rustls = ["rustls-ring"]
+rustls-aws-lc-rs = ["dep:rustls", "aws-lc-rs", "proto/rustls-aws-lc-rs", "proto/aws-lc-rs"]
+rustls-aws-lc-rs-fips = ["dep:rustls", "aws-lc-rs-fips", "proto/rustls-aws-lc-rs-fips", "proto/aws-lc-rs-fips"]
+rustls-log = ["rustls?/logging"]
+rustls-ring = ["dep:rustls", "ring", "proto/rustls-ring", "proto/ring"]
+smol = ["dep:smol"]
+
+[rust]
+name = "quinn"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+async-io = { loaf = "crates-io/async-io", version = "^2", optional = true }
+async-std = { loaf = "crates-io/async-std", version = "^1.11", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.19", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2" }
+proto = { loaf = "crates-io/quinn-proto", version = "^0.11.18", default-features = false }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2" }
+rustls = { loaf = "crates-io/rustls", version = "^0.23.5", features = ["std"], default-features = false, optional = true }
+smol = { loaf = "crates-io/smol", version = "^2", optional = true }
+socket2 = { loaf = "crates-io/socket2", version = ">=0.5, <0.7", target = "cfg(not(all(target_family = \"wasm\", target_os = \"unknown\")))" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.3" }
+tokio = { loaf = "crates-io/tokio", version = "^1.28.1", features = ["sync"] }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.10", features = ["std"], default-features = false }
+udp = { loaf = "crates-io/quinn-udp", version = "^0.5", features = ["tracing"], default-features = false }
+web-time = { loaf = "crates-io/web-time", version = "^1", target = "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))" }

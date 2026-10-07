@@ -1,0 +1,69 @@
+{
+  "about": {
+    "description": "Parse and encode PEM-encoded data.",
+    "documentation": "https://docs.rs/pem/",
+    "homepage": "https://github.com/jcreekmore/pem-rs.git",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/jcreekmore/pem-rs.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1d30c53c26bc5b31a98cd02d20f25a7c8567146caf63ed593a9d87b2775291be",
+    "package": "pem",
+    "registry": "crates-io",
+    "version": "3.0.6"
+  },
+  "archive": "sha256:3e639e7f738496331cccfb624e9e715e3b43c55b10c8d590c18556520acbc8f9",
+  "at": "2026-10-07T07:43:31Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": false,
+      "req": "^0.22.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "std": [
+      "base64/std",
+      "serde_core?/std"
+    ]
+  },
+  "id": "sha256:7b971bdd77c907ba5cd344d3822f8384e79a6467c3e740cee3b018bedb3993f9",
+  "kind": "adopt",
+  "manifest": "sha256:21d6dd19c2ceccc27eb7a727780ae184566123ddf44733627ce050262ce21b75",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "pem",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pem",
+    "scope": "crates-io",
+    "version": "3.0.6"
+  }
+}

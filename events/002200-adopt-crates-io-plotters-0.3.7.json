@@ -1,0 +1,279 @@
+{
+  "about": {
+    "description": "A Rust drawing library focus on data plotting for both WASM and native applications",
+    "documentation": "",
+    "homepage": "https://plotters-rs.github.io/",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/plotters-rs/plotters"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5aeb6f403d7a4911efb1e33402027fc44f29b5bf6def3effcc22d7bb75f2b747",
+    "package": "plotters",
+    "registry": "crates-io",
+    "version": "0.3.7"
+  },
+  "archive": "sha256:fbd2cea52d22047699807c8014131241768421938e96998444fddee6f037d0b3",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ab_glyph",
+      "name": "ab_glyph",
+      "optional": true,
+      "req": "^0.2.12",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": true,
+      "req": "^0.4.32"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/font-kit",
+      "name": "font-kit",
+      "optional": true,
+      "req": "^0.14.2",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "bmp",
+        "jpeg",
+        "png"
+      ],
+      "loaf": "crates-io/image",
+      "name": "image",
+      "optional": true,
+      "req": "^0.24.3",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lazy_static",
+      "name": "lazy_static",
+      "optional": true,
+      "req": "^1.4.0",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.8.0",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pathfinder_geometry",
+      "name": "pathfinder_geometry",
+      "optional": true,
+      "req": "^0.5.1",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/plotters-backend",
+      "name": "plotters-backend",
+      "optional": false,
+      "req": "^0.3.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/plotters-bitmap",
+      "name": "plotters-bitmap",
+      "optional": true,
+      "req": "^0.3.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/plotters-svg",
+      "name": "plotters-svg",
+      "optional": true,
+      "req": "^0.3.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ttf-parser",
+      "name": "ttf-parser",
+      "optional": true,
+      "req": "^0.20.0",
+      "target": "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": false,
+      "req": "^0.2.89",
+      "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "CanvasRenderingContext2d",
+        "Document",
+        "DomRect",
+        "Element",
+        "HtmlCanvasElement",
+        "HtmlElement",
+        "Node",
+        "Window"
+      ],
+      "loaf": "crates-io/web-sys",
+      "name": "web-sys",
+      "optional": false,
+      "req": "^0.3.66",
+      "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))"
+    }
+  ],
+  "features": {
+    "ab_glyph": [
+      "dep:ab_glyph",
+      "once_cell"
+    ],
+    "all_elements": [
+      "errorbar",
+      "candlestick",
+      "boxplot",
+      "histogram"
+    ],
+    "all_series": [
+      "area_series",
+      "line_series",
+      "point_series",
+      "surface_series"
+    ],
+    "area_series": [],
+    "bitmap_backend": [
+      "plotters-bitmap"
+    ],
+    "bitmap_encoder": [
+      "dep:plotters-bitmap",
+      "plotters-bitmap/image_encoder"
+    ],
+    "bitmap_gif": [
+      "dep:plotters-bitmap",
+      "plotters-bitmap/gif_backend"
+    ],
+    "boxplot": [],
+    "candlestick": [],
+    "chrono": [
+      "dep:chrono"
+    ],
+    "colormaps": [],
+    "datetime": [
+      "chrono"
+    ],
+    "default": [
+      "bitmap_backend",
+      "bitmap_encoder",
+      "bitmap_gif",
+      "svg_backend",
+      "chrono",
+      "ttf",
+      "image",
+      "deprecated_items",
+      "all_series",
+      "all_elements",
+      "full_palette",
+      "colormaps"
+    ],
+    "deprecated_items": [],
+    "errorbar": [],
+    "evcxr": [
+      "svg_backend"
+    ],
+    "evcxr_bitmap": [
+      "evcxr",
+      "bitmap_backend",
+      "dep:plotters-svg",
+      "plotters-svg/bitmap_encoder"
+    ],
+    "font-kit": [
+      "dep:font-kit"
+    ],
+    "fontconfig-dlopen": [
+      "dep:font-kit",
+      "font-kit/source-fontconfig-dlopen"
+    ],
+    "full_palette": [],
+    "histogram": [],
+    "image": [
+      "dep:image"
+    ],
+    "lazy_static": [
+      "dep:lazy_static"
+    ],
+    "line_series": [],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "pathfinder_geometry": [
+      "dep:pathfinder_geometry"
+    ],
+    "plotters-bitmap": [
+      "dep:plotters-bitmap"
+    ],
+    "plotters-svg": [
+      "dep:plotters-svg"
+    ],
+    "point_series": [],
+    "surface_series": [],
+    "svg_backend": [
+      "plotters-svg"
+    ],
+    "ttf": [
+      "font-kit",
+      "ttf-parser",
+      "lazy_static",
+      "pathfinder_geometry"
+    ],
+    "ttf-parser": [
+      "dep:ttf-parser"
+    ]
+  },
+  "id": "sha256:f9cc8f2ef1f8fd4ca1028873295dc174c4d36822dd9cb38f75be4329a84f1570",
+  "kind": "adopt",
+  "manifest": "sha256:d93687d9060e9660916eb0fc0144484138d5733f9eee9f44a9bb1acbe3876b04",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "plotters",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "plotters",
+    "scope": "crates-io",
+    "version": "0.3.7"
+  }
+}

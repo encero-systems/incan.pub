@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/inotify-sys"
+version = "0.1.8"
+
+[project.features]
+freebsd-native = []
+
+[rust]
+name = "inotify_sys"
+type = "lib"
+edition = "2015"
+build-script = true
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2" }

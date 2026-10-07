@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/lzma-rust2"
+version = "0.16.5"
+
+[project.features]
+default = ["std", "encoder", "optimization", "lzip", "xz"]
+encoder = []
+lzip = []
+optimization = []
+sha2 = ["dep:sha2"]
+std = []
+xz = ["sha2"]
+
+[rust]
+name = "lzma_rust2"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+sha2 = { loaf = "crates-io/sha2", version = "^0.11", optional = true }

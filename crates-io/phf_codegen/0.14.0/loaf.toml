@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/phf_codegen"
+version = "0.14.0"
+
+[project.features]
+ptrhash = ["phf_generator/ptrhash"]
+quote = ["dep:proc-macro2", "dep:quote"]
+
+[rust]
+name = "phf_codegen"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+phf_generator = { loaf = "crates-io/phf_generator", version = "^0.14.0" }
+phf_shared = { loaf = "crates-io/phf_shared", version = "^0.14.0" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1", optional = true }
+quote = { loaf = "crates-io/quote", version = "^1", optional = true }

@@ -1,0 +1,116 @@
+{
+  "about": {
+    "description": "Futures, streams, and async I/O combinators",
+    "documentation": "https://docs.rs/futures-lite",
+    "homepage": "https://github.com/smol-rs/futures-lite",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/futures-lite"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f78e10609fe0e0b3f4157ffab1876319b5b0db102a2c60dc4626306dc46b44ad",
+    "package": "futures-lite",
+    "registry": "crates-io",
+    "version": "2.6.1"
+  },
+  "archive": "sha256:39f84050472ab93d4a9ea25b41efb3df05bce892e382160a802a6be7058493a6",
+  "at": "2026-10-07T07:42:49Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/fastrand",
+      "name": "fastrand",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": true,
+      "req": "^0.3.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": true,
+      "req": "^2.3.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking",
+      "name": "parking",
+      "optional": true,
+      "req": "^2.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "race",
+      "std"
+    ],
+    "fastrand": [
+      "dep:fastrand"
+    ],
+    "futures-io": [
+      "dep:futures-io"
+    ],
+    "memchr": [
+      "dep:memchr"
+    ],
+    "parking": [
+      "dep:parking"
+    ],
+    "race": [
+      "fastrand"
+    ],
+    "std": [
+      "alloc",
+      "dep:fastrand",
+      "fastrand/std",
+      "futures-io",
+      "parking"
+    ]
+  },
+  "id": "sha256:817c2637ac87cc127f2ed47bc99b6c3f14011b2c12b85077f150dc1454eaf561",
+  "kind": "adopt",
+  "manifest": "sha256:65ab16bc931289279988ed304ee48f5752273da6560ec6a6ebae2d533c26568f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "futures_lite",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "futures-lite",
+    "scope": "crates-io",
+    "version": "2.6.1"
+  }
+}

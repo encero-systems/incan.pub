@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/web_atoms"
+version = "0.3.0"
+
+[project.features]
+serde = ["string_cache/serde_support"]
+
+[rust]
+name = "web_atoms"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[rust.source]
+root = "lib.rs"
+
+[dependencies]
+phf = { loaf = "crates-io/phf", version = "^0.14" }
+string_cache = { loaf = "crates-io/string_cache", version = "^0.11.0", default-features = false }

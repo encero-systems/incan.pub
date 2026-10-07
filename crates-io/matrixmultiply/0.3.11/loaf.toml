@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/matrixmultiply"
+version = "0.3.11"
+
+[project.features]
+avx512 = []
+cgemm = []
+constconf = []
+default = ["std", "avx512"]
+num_cpus = ["dep:num_cpus"]
+once_cell = ["dep:once_cell"]
+std = []
+thread-tree = ["dep:thread-tree"]
+threading = ["thread-tree", "std", "once_cell", "num_cpus"]
+
+[rust]
+name = "matrixmultiply"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+num_cpus = { loaf = "crates-io/num_cpus", version = "^1.13", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.7", optional = true }
+rawpointer = { loaf = "crates-io/rawpointer", version = "^0.2" }
+thread-tree = { loaf = "crates-io/thread-tree", version = "^0.3.2", optional = true }

@@ -1,0 +1,63 @@
+{
+  "about": {
+    "description": "Gets the size of your Linux or Windows terminal",
+    "documentation": "https://docs.rs/terminal_size",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/eminence/terminal-size"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:230a1b821ccbd75b185820a1f1ff7b14d21da1e442e22c0863ea5f08771a8874",
+    "package": "terminal_size",
+    "registry": "crates-io",
+    "version": "0.4.4"
+  },
+  "archive": "sha256:bff1cf17a07e95aacda46cc9d4cd6dbb2fe1915d0324adeaf0c14c46b2041407",
+  "at": "2026-10-07T07:44:00Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "termios"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.1",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_System_Console"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.59, <=0.61",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:72d3dc99c2ca4bb1d9644855daa062046e409cf205420a13da110a643ae09f62",
+  "kind": "adopt",
+  "manifest": "sha256:5bf6cef0640475ecfe29c451718ef307f629018891bd7c839d3a2198134b6b06",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "terminal_size",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "terminal_size",
+    "scope": "crates-io",
+    "version": "0.4.4"
+  }
+}

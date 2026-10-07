@@ -1,0 +1,42 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fern"
+version = "0.7.1"
+
+[project.features]
+chrono = ["dep:chrono"]
+colored = ["dep:colored"]
+date-based = ["chrono"]
+libc = ["dep:libc"]
+meta-logging-in-format = []
+reopen-03 = ["reopen03", "libc"]
+reopen-1 = ["reopen1", "libc"]
+reopen03 = ["dep:reopen03"]
+reopen1 = ["dep:reopen1"]
+syslog-3 = ["syslog3"]
+syslog-4 = ["syslog4"]
+syslog-6 = ["syslog6"]
+syslog-7 = ["syslog7"]
+syslog3 = ["dep:syslog3"]
+syslog4 = ["dep:syslog4"]
+syslog6 = ["dep:syslog6"]
+syslog7 = ["dep:syslog7"]
+
+[rust]
+name = "fern"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+chrono = { loaf = "crates-io/chrono", version = "^0.4", features = ["clock", "std"], default-features = false, optional = true }
+colored = { loaf = "crates-io/colored", version = "^2.1.0", optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.58", optional = true, target = "cfg(not(windows))" }
+log = { loaf = "crates-io/log", version = "^0.4", features = ["std"] }
+reopen03 = { loaf = "crates-io/reopen", version = "^0.3", optional = true, target = "cfg(not(windows))" }
+reopen1 = { loaf = "crates-io/reopen", version = "~1", features = ["signals"], optional = true, target = "cfg(not(windows))" }
+syslog3 = { loaf = "crates-io/syslog", version = "^3", optional = true, target = "cfg(not(windows))" }
+syslog4 = { loaf = "crates-io/syslog", version = "^4", optional = true, target = "cfg(not(windows))" }
+syslog6 = { loaf = "crates-io/syslog", version = "^6", optional = true, target = "cfg(not(windows))" }
+syslog7 = { loaf = "crates-io/syslog", version = "^7", optional = true, target = "cfg(not(windows))" }

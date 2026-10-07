@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zeroize_derive"
+version = "1.5.0"
+
+[rust]
+name = "zeroize_derive"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^2", features = ["extra-traits", "full", "visit"] }

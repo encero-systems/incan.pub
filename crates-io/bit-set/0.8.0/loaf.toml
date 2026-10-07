@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bit-set"
+version = "0.8.0"
+
+[project.features]
+default = ["std"]
+serde = ["dep:serde", "bit-vec/serde"]
+std = ["bit-vec/std"]
+
+[rust]
+name = "bit_set"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+bit-vec = { loaf = "crates-io/bit-vec", version = "^0.8.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }

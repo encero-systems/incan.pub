@@ -1,0 +1,77 @@
+{
+  "about": {
+    "description": "Rust fixture based test framework. It use procedural macro\nto implement fixtures and table based tests.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/la10736/rstest"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:948203e6d13b83e51a90d7cf236dd58a0065f23f4b902f00f306e7eb2bd09b9c",
+    "package": "rstest",
+    "registry": "crates-io",
+    "version": "0.27.0"
+  },
+  "archive": "sha256:6600da1813fa8fbe616c6829a2aa4041fb44b70139de63d47f5e903375075e31",
+  "at": "2026-10-07T07:44:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-timer",
+      "name": "futures-timer",
+      "optional": true,
+      "req": "^3.0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.30"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rstest_macros",
+      "name": "rstest_macros",
+      "optional": false,
+      "req": "^0.27.0"
+    }
+  ],
+  "features": {
+    "async-timeout": [
+      "dep:futures-timer",
+      "dep:futures-util",
+      "rstest_macros/async-timeout"
+    ],
+    "crate-name": [
+      "rstest_macros/crate-name"
+    ],
+    "default": [
+      "async-timeout",
+      "crate-name"
+    ]
+  },
+  "id": "sha256:2bc8c334705a07aa5252daa44be7611dc3ffb8f5c3dabc01ccab1a17930e244f",
+  "kind": "adopt",
+  "manifest": "sha256:962f074e7bb9f73213e5addeec6ad58ab88d786eff534fd8e857194d106f0d1e",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "rstest",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rstest",
+    "scope": "crates-io",
+    "version": "0.27.0"
+  }
+}

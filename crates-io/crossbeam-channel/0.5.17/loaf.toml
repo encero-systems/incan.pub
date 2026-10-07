@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crossbeam-channel"
+version = "0.5.17"
+
+[project.features]
+default = ["std"]
+std = ["crossbeam-utils/std"]
+
+[rust]
+name = "crossbeam_channel"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.18", default-features = false }

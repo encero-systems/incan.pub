@@ -1,0 +1,135 @@
+{
+  "about": {
+    "description": "Rust bindings generator for WIT and the component model, typically used through\nthe `wit-bindgen` crate's `generate!` macro.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bytecodealliance/wit-bindgen"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:84ba5213d4332c260a0d4e69e34b0f7e4b85ddae10b6ebfbac00d9c185ba628a",
+    "package": "wit-bindgen-rust",
+    "registry": "crates-io",
+    "version": "0.62.0"
+  },
+  "archive": "sha256:bee7b47d951d450c96bd51b38e608f9200048e1a26dd82b5ea08a3de6d95539a",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.102"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/clap",
+      "name": "clap",
+      "optional": true,
+      "req": "^4.6.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/heck",
+      "name": "heck",
+      "optional": false,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prettyplease",
+      "name": "prettyplease",
+      "optional": false,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.228"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "printing"
+      ],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": "^3.0.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-metadata",
+      "name": "wasm-metadata",
+      "optional": false,
+      "req": "^0.259.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen-core",
+      "name": "wit-bindgen-core",
+      "optional": false,
+      "req": "^0.62.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wit-component",
+      "name": "wit-component",
+      "optional": false,
+      "req": "^0.259.0"
+    }
+  ],
+  "features": {
+    "clap": [
+      "dep:clap",
+      "wit-bindgen-core/clap"
+    ],
+    "serde": [
+      "dep:serde",
+      "wit-bindgen-core/serde"
+    ]
+  },
+  "id": "sha256:0246c46c07b38cbffdd3ea3e96d4735ec605c8ad92d352d93220457d01c7772f",
+  "kind": "adopt",
+  "manifest": "sha256:ac1474e46a84664087a6f18b13bc9f429769d59ebdee8515f24475914bf721b7",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wit_bindgen_rust",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-bindgen-rust",
+    "scope": "crates-io",
+    "version": "0.62.0"
+  }
+}

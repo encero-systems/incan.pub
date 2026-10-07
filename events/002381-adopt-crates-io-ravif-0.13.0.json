@@ -1,0 +1,119 @@
+{
+  "about": {
+    "description": "rav1e-based pure Rust library for encoding images in AVIF format (powers the `cavif` tool)",
+    "documentation": "",
+    "homepage": "https://lib.rs/crates/ravif",
+    "license": "BSD-3-Clause",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/kornelski/cavif-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e52310197d971b0f5be7fe6b57530dcd27beb35c1b013f29d66c1ad73fbbcc45",
+    "package": "ravif",
+    "registry": "crates-io",
+    "version": "0.13.0"
+  },
+  "archive": "sha256:47bc243b373242530bca06109605462f542acc7c9ef3ff552525014ad159ebe3",
+  "at": "2026-10-07T07:43:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/avif-serialize",
+      "name": "avif-serialize",
+      "optional": false,
+      "req": "^0.8.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/imgref",
+      "name": "imgref",
+      "optional": false,
+      "req": "^1.12.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loop9",
+      "name": "loop9",
+      "optional": false,
+      "req": "^0.1.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quick-error",
+      "name": "quick-error",
+      "optional": false,
+      "req": "^2.0.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "wasm"
+      ],
+      "loaf": "crates-io/rav1e",
+      "name": "rav1e",
+      "optional": false,
+      "req": "^0.8",
+      "target": "cfg(target = \"wasm32-unknown-unknown\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rav1e",
+      "name": "rav1e",
+      "optional": false,
+      "req": "^0.8.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.11.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rgb",
+      "name": "rgb",
+      "optional": false,
+      "req": "^0.8.52"
+    }
+  ],
+  "features": {
+    "asm": [
+      "rav1e/asm"
+    ],
+    "default": [
+      "asm",
+      "threading"
+    ],
+    "threading": [
+      "dep:rayon",
+      "rav1e/threading"
+    ]
+  },
+  "id": "sha256:176434c972b7f4c9785cb7a3f70376942c39b9a6705d554464dea5c9b4c24267",
+  "kind": "adopt",
+  "manifest": "sha256:a54504030f471b8e8e291ab6007ea7d38c0d019c42c80658cdb1682f929785ab",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ravif",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ravif",
+    "scope": "crates-io",
+    "version": "0.13.0"
+  }
+}

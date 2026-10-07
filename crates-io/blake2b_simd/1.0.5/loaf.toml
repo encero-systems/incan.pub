@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/blake2b_simd"
+version = "1.0.5"
+
+[project.features]
+default = ["std"]
+std = ["constant_time_eq/std"]
+uninline_portable = []
+
+[rust]
+name = "blake2b_simd"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.0", default-features = false }
+constant_time_eq = { loaf = "crates-io/constant_time_eq", version = "^0.4.2", default-features = false }

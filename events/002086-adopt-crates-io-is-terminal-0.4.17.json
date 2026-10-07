@@ -1,0 +1,71 @@
+{
+  "about": {
+    "description": "Test whether a given stream is a terminal",
+    "documentation": "https://docs.rs/is-terminal",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/sunfishcode/is-terminal"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46",
+    "package": "is-terminal",
+    "registry": "crates-io",
+    "version": "0.4.17"
+  },
+  "archive": "sha256:3d01fbd6f17066dea36d0348f2c310ea3fde434ce5f92c8d71102faced0dc0ee",
+  "at": "2026-10-07T07:42:50Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hermit-abi",
+      "name": "hermit-abi",
+      "optional": false,
+      "req": "^0.5.0",
+      "target": "cfg(target_os = \"hermit\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(any(unix, target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Console"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.52, <0.62",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:beb6ced0b142f1e24daebfc891ddeaee5af4b8d6a8ea406006900c603c82ae98",
+  "kind": "adopt",
+  "manifest": "sha256:20c33cb662cf1f24fd27d0ee6fae6e3a5fa225dd48bbba5dfaa9d37ddc404b17",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "is_terminal",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "is-terminal",
+    "scope": "crates-io",
+    "version": "0.4.17"
+  }
+}

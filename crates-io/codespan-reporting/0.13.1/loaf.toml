@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/codespan-reporting"
+version = "0.13.1"
+
+[project.features]
+ascii-only = []
+default = ["std", "termcolor"]
+serde = ["dep:serde"]
+serialization = ["serde"]
+std = ["serde?/std"]
+termcolor = ["std", "dep:termcolor"]
+
+[rust]
+name = "codespan_reporting"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1", features = ["alloc", "derive"], default-features = false, optional = true }
+termcolor = { loaf = "crates-io/termcolor", version = "^1.0.4", optional = true }
+unicode-width = { loaf = "crates-io/unicode-width", version = ">=0.1, <0.3" }

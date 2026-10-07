@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wyz"
+version = "0.6.1"
+
+[project.features]
+alloc = []
+default = ["std"]
+once_cell = ["dep:once_cell"]
+std = ["alloc"]
+
+[rust]
+name = "wyz"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+once_cell = { loaf = "crates-io/once_cell", version = "^1", optional = true }
+tap = { loaf = "crates-io/tap", version = "^1.0.1" }

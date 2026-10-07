@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rusty-fork"
+version = "0.3.1"
+
+[project.features]
+default = ["timeout"]
+timeout = ["wait-timeout"]
+wait-timeout = ["dep:wait-timeout"]
+
+[rust]
+name = "rusty_fork"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+fnv = { loaf = "crates-io/fnv", version = "^1.0" }
+quick-error = { loaf = "crates-io/quick-error", version = "^1.2" }
+tempfile = { loaf = "crates-io/tempfile", version = "^3.0" }
+wait-timeout = { loaf = "crates-io/wait-timeout", version = "^0.2", optional = true }

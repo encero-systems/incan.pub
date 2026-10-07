@@ -1,0 +1,75 @@
+{
+  "about": {
+    "description": "Types used by the notify crate",
+    "documentation": "https://docs.rs/notify-types",
+    "homepage": "https://github.com/notify-rs/notify",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/notify-rs/notify.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:42b8cfee0e339a0337359f3c88165702ac6e600dc01c0cc9579a92d62b08477a",
+    "package": "notify-types",
+    "registry": "crates-io",
+    "version": "2.1.0"
+  },
+  "archive": "sha256:08198b1c951366930e23db15f88f4d21f4bd380caef81ae13593c55f6501decf",
+  "at": "2026-10-07T07:44:00Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.89"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/web-time",
+      "name": "web-time",
+      "optional": true,
+      "req": "^1.1.0"
+    }
+  ],
+  "features": {
+    "serde": [
+      "dep:serde",
+      "bitflags/serde"
+    ],
+    "serialization-compat-6": [],
+    "web-time": [
+      "dep:web-time"
+    ]
+  },
+  "id": "sha256:3f6bb6a850f855e9e7f5ab13b3ec7fa40359f9d7e9b89c568dcdb3ebb51691cf",
+  "kind": "adopt",
+  "manifest": "sha256:243d9cd81979ef9ab03f1226b24b00bbbafd47f9bf2519ea142d234e1b3190f9",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "notify_types",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "notify-types",
+    "scope": "crates-io",
+    "version": "2.1.0"
+  }
+}

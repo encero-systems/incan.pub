@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cargo_metadata"
+version = "0.23.1"
+
+[project.features]
+builder = ["derive_builder"]
+default = []
+derive_builder = ["dep:derive_builder"]
+unstable = []
+
+[rust]
+name = "cargo_metadata"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+camino = { loaf = "crates-io/camino", version = "^1.1.10", features = ["serde1"] }
+cargo-platform = { loaf = "crates-io/cargo-platform", version = "^0.3.0" }
+derive_builder = { loaf = "crates-io/derive_builder", version = "^0.20", optional = true }
+semver = { loaf = "crates-io/semver", version = "^1.0.26", features = ["serde"] }
+serde = { loaf = "crates-io/serde", version = "^1.0.219", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.142", features = ["unbounded_depth"] }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.12" }

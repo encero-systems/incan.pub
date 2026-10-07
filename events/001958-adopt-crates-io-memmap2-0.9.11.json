@@ -1,0 +1,61 @@
+{
+  "about": {
+    "description": "Cross-platform Rust API for memory-mapped file IO",
+    "documentation": "https://docs.rs/memmap2",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RazrFalcon/memmap2-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d1219ed1b7f229ee7104d281dd01d6802fe28bb6e95d292942c4daacdeb798c0",
+    "package": "memmap2",
+    "registry": "crates-io",
+    "version": "0.9.11"
+  },
+  "archive": "sha256:4dad1a932387e7a13cc077c6e317ae8fb8b08e99d43ec1b0a8502bcd1b2929e9",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.151",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "stable_deref_trait": [
+      "dep:stable_deref_trait"
+    ]
+  },
+  "id": "sha256:b56e3d5686132dc62cdf16f317663da1e2227524cc8da322ebc908cb41566a9e",
+  "kind": "adopt",
+  "manifest": "sha256:dff39a4d2134f70dd3523d3ae68e4b02cd365b84d17eb9b359e6ac5fb386ee45",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "memmap2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "memmap2",
+    "scope": "crates-io",
+    "version": "0.9.11"
+  }
+}

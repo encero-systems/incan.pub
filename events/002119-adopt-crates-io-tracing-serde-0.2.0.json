@@ -1,0 +1,86 @@
+{
+  "about": {
+    "description": "A compatibility layer for serializing trace data with `serde`",
+    "documentation": "",
+    "homepage": "https://tokio.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tokio-rs/tracing"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:704b1aeb7be0d0a84fc9828cae51dab5970fee5088f83d1dd7ee6f6246fc6ff1",
+    "package": "tracing-serde",
+    "registry": "crates-io",
+    "version": "0.2.0"
+  },
+  "archive": "sha256:2ca49e70e3a12acc5dabcfebaf6b6bdff4ed213b9f7ae114c380285302c2210e",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tracing-core",
+      "name": "tracing-core",
+      "optional": false,
+      "req": "^0.1.28"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/valuable-serde",
+      "name": "valuable-serde",
+      "optional": true,
+      "req": "^0.1.0",
+      "target": "cfg(tracing_unstable)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/valuable",
+      "name": "valuable_crate",
+      "optional": true,
+      "req": "^0.1.0",
+      "target": "cfg(tracing_unstable)"
+    }
+  ],
+  "features": {
+    "valuable": [
+      "valuable_crate",
+      "valuable-serde",
+      "tracing-core/valuable"
+    ],
+    "valuable-serde": [
+      "dep:valuable-serde"
+    ],
+    "valuable_crate": [
+      "dep:valuable_crate"
+    ]
+  },
+  "id": "sha256:4b35d93b7f8fb69813adfa2a6698406ade472f11f84b424af2ba172fb48cefdd",
+  "kind": "adopt",
+  "manifest": "sha256:3625cfb88f614df9201ae57129c53844b1e2cebf914a8a7eb13b8145a148044f",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "tracing_serde",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tracing-serde",
+    "scope": "crates-io",
+    "version": "0.2.0"
+  }
+}

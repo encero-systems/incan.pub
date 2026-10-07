@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/v_frame"
+version = "0.3.9"
+
+[project.features]
+profiling = ["dep:profiling"]
+serde = ["dep:serde"]
+serialize = ["serde", "aligned-vec/serde"]
+tracing = ["profiling", "dep:tracing", "dep:profiling", "profiling/profile-with-tracing"]
+
+[rust]
+name = "v_frame"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+aligned-vec = { loaf = "crates-io/aligned-vec", version = ">=0.5.0, <0.7" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2" }
+profiling = { loaf = "crates-io/profiling", version = "^1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.40", optional = true }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2", target = "wasm32-unknown-unknown" }

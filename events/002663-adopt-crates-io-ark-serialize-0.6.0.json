@@ -1,0 +1,133 @@
+{
+  "about": {
+    "description": "A library for serializing types in the arkworks ecosystem",
+    "documentation": "https://docs.rs/ark-serialize/",
+    "homepage": "https://arkworks.rs",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/arkworks-rs/algebra"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a74dd304fd536fb95d0a328e72be759209cc496a9da094c5bc56e5fea4f9e86b",
+    "package": "ark-serialize",
+    "registry": "crates-io",
+    "version": "0.6.0"
+  },
+  "archive": "sha256:0ad7208b3af1c4cc18ad7dce654f26ddea85bb13aa2796e19e6958b2dd9df462",
+  "at": "2026-10-07T07:45:03Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ark-serialize-derive",
+      "name": "ark-serialize-derive",
+      "optional": true,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ark-std",
+      "name": "ark-std",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": false,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "base64"
+      ],
+      "loaf": "crates-io/serde-encoded-bytes",
+      "name": "serde-encoded-bytes",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_with",
+      "name": "serde_with",
+      "optional": true,
+      "req": "^3.12"
+    }
+  ],
+  "features": {
+    "ark-serialize-derive": [
+      "dep:ark-serialize-derive"
+    ],
+    "default": [],
+    "derive": [
+      "ark-serialize-derive"
+    ],
+    "parallel": [
+      "rayon"
+    ],
+    "rayon": [
+      "dep:rayon"
+    ],
+    "serde": [
+      "dep:serde",
+      "dep:serde-encoded-bytes",
+      "dep:serde_with"
+    ],
+    "serde_with": [
+      "serde",
+      "dep:serde_with"
+    ],
+    "std": [
+      "ark-std/std",
+      "serde_with?/std"
+    ]
+  },
+  "id": "sha256:3f3b2cccda30aef7c4208be9a7e6b04c9dd4f5b830e9a0287710c9a0a6d4f8e0",
+  "kind": "adopt",
+  "manifest": "sha256:e8c77c42c6bc438f01f3731e23b1daae96969d1c7f551a70997760704bd10ed9",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ark_serialize",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ark-serialize",
+    "scope": "crates-io",
+    "version": "0.6.0"
+  }
+}

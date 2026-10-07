@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/serdect"
+version = "0.4.3"
+
+[project.features]
+alloc = ["base16ct/alloc", "serde/alloc"]
+default = ["alloc"]
+derive = ["serde/derive"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "serdect"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base16ct = { loaf = "crates-io/base16ct", version = "^1", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.184", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

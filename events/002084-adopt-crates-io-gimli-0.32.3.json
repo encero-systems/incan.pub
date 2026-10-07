@@ -1,0 +1,113 @@
+{
+  "about": {
+    "description": "A library for reading and writing the DWARF debugging format.",
+    "documentation": "https://docs.rs/gimli",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/gimli-rs/gimli"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e629b9b98ef3dd8afe6ca2bd0f89306cec16d43d907889945bc5d6687f2f13c7",
+    "package": "gimli",
+    "registry": "crates-io",
+    "version": "0.32.3"
+  },
+  "archive": "sha256:16b9fd237b1feec8432612fdcb5d33911863ede8d9b59fdce2c43d1c945129e1",
+  "at": "2026-10-07T07:42:50Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/fallible-iterator",
+      "name": "fallible-iterator",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": true,
+      "req": "^1.1.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "read-all",
+      "write"
+    ],
+    "endian-reader": [
+      "read",
+      "dep:stable_deref_trait"
+    ],
+    "fallible-iterator": [
+      "dep:fallible-iterator"
+    ],
+    "read": [
+      "read-core"
+    ],
+    "read-all": [
+      "read",
+      "std",
+      "fallible-iterator",
+      "endian-reader"
+    ],
+    "read-core": [],
+    "rustc-dep-of-std": [
+      "dep:core",
+      "dep:alloc"
+    ],
+    "std": [
+      "fallible-iterator?/std",
+      "stable_deref_trait?/std"
+    ],
+    "write": [
+      "dep:indexmap"
+    ]
+  },
+  "id": "sha256:91f91902a85cdafe9e837838e077ede894f7b44829903830a56b432fe01d32da",
+  "kind": "adopt",
+  "manifest": "sha256:3bd4093838d7f7ea4462c0fb554500f0048c0f6dbcc4eb114baac252346a8a31",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "gimli",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "gimli",
+    "scope": "crates-io",
+    "version": "0.32.3"
+  }
+}

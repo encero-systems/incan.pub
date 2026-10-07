@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/system-deps"
+version = "9.0.0"
+
+[project.features]
+binary = ["dep:system-deps-meta", "system-deps-meta/binary", "dep:which", "toml/serde"]
+default = []
+gz = ["dep:system-deps-meta", "system-deps-meta/gz"]
+inno = ["dep:system-deps-meta", "system-deps-meta/inno"]
+pkg = ["dep:system-deps-meta", "system-deps-meta/pkg"]
+system-deps-meta = ["dep:system-deps-meta"]
+xz = ["dep:system-deps-meta", "system-deps-meta/xz"]
+zip = ["dep:system-deps-meta", "system-deps-meta/zip"]
+
+[rust]
+name = "system_deps"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+cfg-expr = { loaf = "crates-io/cfg-expr", version = ">=0.17, <0.21", features = ["targets"] }
+heck = { loaf = "crates-io/heck", version = "^0.5" }
+pkg-config = { loaf = "crates-io/pkg-config", version = "^0.3.34" }
+system-deps-meta = { loaf = "crates-io/system-deps-meta", version = "^9.0.0", optional = true }
+toml = { loaf = "crates-io/toml", version = "^1", features = ["parse", "std"], default-features = false }
+version-compare = { loaf = "crates-io/version-compare", version = "^0.2" }
+which = { loaf = "crates-io/which", version = "^8", optional = true }

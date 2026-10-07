@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cbc"
+version = "0.2.1"
+
+[project.features]
+alloc = ["cipher/alloc"]
+block-padding = ["cipher/block-padding"]
+default = ["block-padding"]
+zeroize = ["cipher/zeroize"]
+
+[rust]
+name = "cbc"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cipher = { loaf = "crates-io/cipher", version = "^0.5.2" }

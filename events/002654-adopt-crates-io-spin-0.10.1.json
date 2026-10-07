@@ -1,0 +1,100 @@
+{
+  "about": {
+    "description": "Spin-based synchronization primitives",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/mvdnes/spin-rs.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:023a211cb3138dbc438680b32560ad89f699977624c9f8dbb95a47d5b4c07dd3",
+    "package": "spin",
+    "registry": "crates-io",
+    "version": "0.10.1"
+  },
+  "archive": "sha256:2ffa02d7ec6db620f7534d674d7f1c781eee41f7ab704f23c94143e0a99badbb",
+  "at": "2026-10-07T07:45:03Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lock_api",
+      "name": "lock_api_crate",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "require-cas"
+      ],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": true,
+      "req": "^1.3"
+    }
+  ],
+  "features": {
+    "barrier": [
+      "mutex"
+    ],
+    "default": [
+      "lock_api",
+      "mutex",
+      "spin_mutex",
+      "rwlock",
+      "once",
+      "lazy",
+      "barrier"
+    ],
+    "fair_mutex": [
+      "mutex"
+    ],
+    "lazy": [
+      "once"
+    ],
+    "lock_api": [
+      "dep:lock_api_crate"
+    ],
+    "mutex": [],
+    "once": [],
+    "portable-atomic": [
+      "dep:portable-atomic"
+    ],
+    "portable_atomic": [
+      "portable-atomic"
+    ],
+    "rwlock": [],
+    "spin_mutex": [
+      "mutex"
+    ],
+    "std": [],
+    "ticket_mutex": [
+      "mutex"
+    ],
+    "use_ticket_mutex": [
+      "mutex",
+      "ticket_mutex"
+    ]
+  },
+  "id": "sha256:25248db1db95b7d7c5b0539a7a6152a9d7816aa9118c8ca58d1ffa0024b99b40",
+  "kind": "adopt",
+  "manifest": "sha256:4100d42d9e3b23c7d7e9786ab33cec75b2be404c51bcf8b1f34318e327fefb65",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "spin",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "spin",
+    "scope": "crates-io",
+    "version": "0.10.1"
+  }
+}

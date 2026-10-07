@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rstest"
+version = "0.27.0"
+
+[project.features]
+async-timeout = ["dep:futures-timer", "dep:futures-util", "rstest_macros/async-timeout"]
+crate-name = ["rstest_macros/crate-name"]
+default = ["async-timeout", "crate-name"]
+
+[rust]
+name = "rstest"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+futures-timer = { loaf = "crates-io/futures-timer", version = "^3.0.3", optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.30", default-features = false, optional = true }
+rstest_macros = { loaf = "crates-io/rstest_macros", version = "^0.27.0", default-features = false }

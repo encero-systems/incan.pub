@@ -1,0 +1,103 @@
+{
+  "about": {
+    "description": "X.509 Subject Public Key Info (RFC5280) describing public keys as well as their\nassociated AlgorithmIdentifiers (i.e. OIDs)",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/formats/tree/master/spki"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d91ed6c858b01f942cd56b37a94b3e0a1798290327d1236e4d9cf4eaca44d29d",
+    "package": "spki",
+    "registry": "crates-io",
+    "version": "0.7.3"
+  },
+  "archive": "sha256:7ee0cf1d7714290c06cea017be85034dbb5e0c1fa542be50e60c454311f5691b",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/base64ct",
+      "name": "base64ct",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": false,
+      "req": "^0.7.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.10"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "base64ct?/alloc",
+      "der/alloc"
+    ],
+    "arbitrary": [
+      "std",
+      "dep:arbitrary",
+      "der/arbitrary"
+    ],
+    "base64": [
+      "dep:base64ct"
+    ],
+    "fingerprint": [
+      "sha2"
+    ],
+    "pem": [
+      "alloc",
+      "der/pem"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "std": [
+      "der/std",
+      "alloc"
+    ]
+  },
+  "id": "sha256:407c0dc63471166c5d3d22d178b401deda1c485cb110167249ad3f41ef746b1d",
+  "kind": "adopt",
+  "manifest": "sha256:0b8069bc89caa1b6371b3237958d3ac3fa3fc9e2cd63dab0487497eb8c4cff0e",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "spki",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "spki",
+    "scope": "crates-io",
+    "version": "0.7.3"
+  }
+}

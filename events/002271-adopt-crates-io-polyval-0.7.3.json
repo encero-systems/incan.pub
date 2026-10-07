@@ -1,0 +1,78 @@
+{
+  "about": {
+    "description": "POLYVAL is a GHASH-like universal hash over GF(2^128) useful for constructing\na Message Authentication Code (MAC)",
+    "documentation": "https://docs.rs/polyval",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/universal-hashes"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f0fa31d631f2b2cb2a544d0aa321ce847a94764d701ca2becc411138b93d49cd",
+    "package": "polyval",
+    "registry": "crates-io",
+    "version": "0.7.3"
+  },
+  "archive": "sha256:ca5569acce47b4cebaa7442f1ee916ee865e8cbb3f83a5deab5db8cc13d1f3f5",
+  "at": "2026-10-07T07:43:31Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpubits",
+      "name": "cpubits",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86\", target_arch = \"x86_64\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/universal-hash",
+      "name": "universal-hash",
+      "optional": false,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "hazmat": [],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:58d60f95dfa76130e8135d22deb3fa7ecf70f832ca28512dc69abf7d0266c3e7",
+  "kind": "adopt",
+  "manifest": "sha256:e1f40869066d103dea96613d19c31da19978840da69b7611ea13b563338ec66a",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "polyval",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "polyval",
+    "scope": "crates-io",
+    "version": "0.7.3"
+  }
+}

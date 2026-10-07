@@ -1,0 +1,125 @@
+{
+  "about": {
+    "description": "Data structures and logic for resolving, assigning, and deleting by JSON Pointers (RFC 6901)",
+    "documentation": "https://docs.rs/jsonptr",
+    "homepage": "https://github.com/chanced/jsonptr",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/chanced/jsonptr"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a5a3cc660ba5d72bce0b3bb295bf20847ccbb40fd423f3f05b61273672e561fe",
+    "package": "jsonptr",
+    "registry": "crates-io",
+    "version": "0.7.1"
+  },
+  "archive": "sha256:2c7e822a0326459dda697140edd9a2da0b9023c0e8f4399c0d3fb86f3a279cd0",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "fancy"
+      ],
+      "loaf": "crates-io/miette",
+      "name": "miette",
+      "optional": true,
+      "req": "^7.4.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.203"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0.119"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": true,
+      "req": "^1.0.109",
+      "target": "cfg(any())"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/toml",
+      "name": "toml",
+      "optional": true,
+      "req": "^0.8"
+    }
+  ],
+  "features": {
+    "assign": [],
+    "default": [
+      "std",
+      "serde",
+      "json",
+      "resolve",
+      "assign",
+      "delete"
+    ],
+    "delete": [
+      "resolve"
+    ],
+    "json": [
+      "dep:serde_json",
+      "serde"
+    ],
+    "miette": [
+      "dep:miette",
+      "std"
+    ],
+    "resolve": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "dep:serde",
+      "serde/std",
+      "serde_json?/std"
+    ],
+    "syn": [
+      "dep:syn"
+    ],
+    "toml": [
+      "dep:toml",
+      "serde",
+      "std"
+    ]
+  },
+  "id": "sha256:f13dd8b537d177fe8e6d4eada6ed265ce66890856b3154ca79e56b16451cbb1e",
+  "kind": "adopt",
+  "manifest": "sha256:d7fabb42c326f2966d69d480965021a809320c4ad885e2b0acba4f2df85a7499",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "jsonptr",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "jsonptr",
+    "scope": "crates-io",
+    "version": "0.7.1"
+  }
+}

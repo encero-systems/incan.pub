@@ -1,0 +1,87 @@
+{
+  "about": {
+    "description": "Create static TimeZone values for Jiff (useful in core-only environments).",
+    "documentation": "https://docs.rs/jiff-tzdb",
+    "homepage": "https://github.com/BurntSushi/jiff/tree/master/crates/jiff-static",
+    "license": "Unlicense OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/BurntSushi/jiff"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:378268a1116ad67ae6228701118ac9f491d78fda38a40a1f1a9e1348de6f7212",
+    "package": "jiff-static",
+    "registry": "crates-io",
+    "version": "0.2.37"
+  },
+  "archive": "sha256:8c620aaeea7d8a7bbd91ed1fc61daf7ae413beb41533937eba1bc725200b5080",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/jiff-core",
+      "name": "jcore",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/jiff-tzdb",
+      "name": "jiff-tzdb",
+      "optional": true,
+      "req": "^0.1.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1.0.38"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": "^2.0.98"
+    }
+  ],
+  "features": {
+    "default": [],
+    "perf-inline": [],
+    "tz-fat": [],
+    "tzdb": [
+      "dep:jiff-tzdb"
+    ]
+  },
+  "id": "sha256:7eb4255b31717f8db6b7c1fad24702bb376e2c34b386099bf98cde3e5b17d14f",
+  "kind": "adopt",
+  "manifest": "sha256:dee504b3df3626e128735ab95aca70e782df5b6f03186b713baa999750d2f56d",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "jiff_static",
+    "root": "src/lib.rs",
+    "type": "proc-macro"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "jiff-static",
+    "scope": "crates-io",
+    "version": "0.2.37"
+  }
+}

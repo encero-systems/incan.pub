@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/which"
+version = "8.0.6"
+
+[project.features]
+default = ["real-sys"]
+real-sys = ["dep:libc"]
+regex = ["dep:regex"]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "which"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2", optional = true, target = "cfg(any(unix, target_os = \"wasi\", target_os = \"redox\"))" }
+regex = { loaf = "crates-io/regex", version = "^1.10.2", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.40", default-features = false, optional = true }

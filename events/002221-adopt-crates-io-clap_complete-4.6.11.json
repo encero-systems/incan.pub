@@ -1,0 +1,108 @@
+{
+  "about": {
+    "description": "Generate shell completion scripts for your clap::Command",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/clap-rs/clap"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:037e2a1a92236d0aff7e845093f64661d6df4c02c9fcc61a60e9e1d736fa392f",
+    "package": "clap_complete",
+    "registry": "crates-io",
+    "version": "4.6.11"
+  },
+  "archive": "sha256:cf6893599531b93e1d789cbcd5489c2c3eaa521c20fceacd7efd7ecad681e217",
+  "at": "2026-10-07T07:43:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/clap",
+      "name": "clap",
+      "optional": false,
+      "req": "^4.6.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/clap_lex",
+      "name": "clap_lex",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/completest",
+      "name": "completest",
+      "optional": true,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/completest-pty",
+      "name": "completest-pty",
+      "optional": true,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/is_executable",
+      "name": "is_executable",
+      "optional": true,
+      "req": "^1.0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/shlex",
+      "name": "shlex",
+      "optional": true,
+      "req": "^2.0.0"
+    }
+  ],
+  "features": {
+    "debug": [
+      "clap/debug"
+    ],
+    "default": [],
+    "unstable-doc": [
+      "unstable-dynamic"
+    ],
+    "unstable-dynamic": [
+      "dep:clap_lex",
+      "dep:shlex",
+      "dep:is_executable",
+      "clap/unstable-ext"
+    ],
+    "unstable-shell-tests": [
+      "dep:completest",
+      "dep:completest-pty"
+    ]
+  },
+  "id": "sha256:0cf9cc06ac9775de3e9479f784cdf237a9f64670c60802bffa0b1b013b868886",
+  "kind": "adopt",
+  "manifest": "sha256:f3651274c6984578fad595e023128f4eae343fa8a9253fb2a596370ebbb0a090",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "clap_complete",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "clap_complete",
+    "scope": "crates-io",
+    "version": "4.6.11"
+  }
+}

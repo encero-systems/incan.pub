@@ -1,0 +1,93 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/kube-client"
+version = "4.2.0"
+
+[project.features]
+__non_core = ["tracing", "serde-saphyr", "base64"]
+admission = ["kube-core/admission"]
+aws-lc-rs = ["hyper-rustls?/aws-lc-rs"]
+base64 = ["dep:base64"]
+bytes = ["dep:bytes"]
+client = ["config", "__non_core", "hyper", "hyper-util", "http-body", "http-body-util", "tower", "tower-http", "hyper-timeout", "jiff", "jsonpath-rust", "bytes", "futures", "tokio", "tokio-util", "either"]
+config = ["__non_core", "pem"]
+default = ["client", "ring"]
+either = ["dep:either"]
+form_urlencoded = ["dep:form_urlencoded"]
+futures = ["dep:futures"]
+gzip = ["client", "dep:tower-http", "tower-http/decompression-gzip"]
+http-body = ["dep:http-body"]
+http-body-util = ["dep:http-body-util"]
+http-proxy = ["dep:hyper-util", "hyper-util/client-proxy"]
+hyper = ["dep:hyper"]
+hyper-openssl = ["dep:hyper-openssl"]
+hyper-rustls = ["dep:hyper-rustls"]
+hyper-timeout = ["dep:hyper-timeout"]
+hyper-util = ["dep:hyper-util"]
+hyper-util-tracing = ["dep:hyper-util", "hyper-util/tracing"]
+jiff = ["dep:jiff"]
+jsonpatch = ["kube-core/jsonpatch"]
+jsonpath-rust = ["dep:jsonpath-rust"]
+kubelet-debug = ["ws", "kube-core/kubelet-debug"]
+oauth = ["client", "tame-oauth"]
+oidc = ["client", "form_urlencoded"]
+openssl = ["dep:openssl"]
+openssl-tls = ["openssl", "hyper-openssl"]
+pem = ["dep:pem"]
+ring = ["hyper-rustls?/ring"]
+rustls = ["dep:rustls"]
+rustls-tls = ["rustls", "hyper-rustls", "dep:rustls-platform-verifier"]
+serde-saphyr = ["dep:serde-saphyr"]
+socks5 = ["dep:hyper-util", "hyper-util/client-proxy"]
+tame-oauth = ["dep:tame-oauth"]
+tokio = ["dep:tokio"]
+tokio-tungstenite = ["dep:tokio-tungstenite"]
+tokio-util = ["dep:tokio-util"]
+tower = ["dep:tower"]
+tower-http = ["dep:tower-http"]
+tracing = ["dep:tracing"]
+unstable-client = []
+webpki-roots = ["dep:hyper-rustls", "hyper-rustls/webpki-roots"]
+ws = ["client", "tokio-tungstenite", "kube-core/ws", "dep:tokio", "tokio/macros"]
+
+[rust]
+name = "kube_client"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22.1", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.9.0", optional = true }
+either = { loaf = "crates-io/either", version = "^1.6.1", optional = true }
+form_urlencoded = { loaf = "crates-io/form_urlencoded", version = "^1.2.0", optional = true }
+futures = { loaf = "crates-io/futures", version = "^0.3.17", features = ["std"], default-features = false, optional = true }
+http = { loaf = "crates-io/http", version = "^1.1.0" }
+http-body = { loaf = "crates-io/http-body", version = "^1.0.1", optional = true }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1.2", optional = true }
+hyper = { loaf = "crates-io/hyper", version = "^1.6.0", features = ["client", "http1"], optional = true }
+hyper-openssl = { loaf = "crates-io/hyper-openssl", version = "^0.10.2", features = ["client-legacy", "tokio"], optional = true }
+hyper-rustls = { loaf = "crates-io/hyper-rustls", version = "^0.27.1", features = ["http1", "logging", "native-tokio", "tls12"], default-features = false, optional = true }
+hyper-timeout = { loaf = "crates-io/hyper-timeout", version = "^0.5.1", optional = true }
+hyper-util = { loaf = "crates-io/hyper-util", version = "^0.1.16", features = ["client", "client-legacy", "http1", "tokio"], optional = true }
+jiff = { loaf = "crates-io/jiff", version = "^0.2.16", features = ["serde", "std"], default-features = false, optional = true }
+jsonpath-rust = { loaf = "crates-io/jsonpath-rust", version = "^1", optional = true }
+k8s-openapi = { loaf = "crates-io/k8s-openapi", version = "^0.28.0", default-features = false }
+kube-core = { loaf = "crates-io/kube-core", version = "=4.2.0" }
+openssl = { loaf = "crates-io/openssl", version = "^0.10.61", optional = true }
+pem = { loaf = "crates-io/pem", version = "^3.0.1", optional = true }
+rustls = { loaf = "crates-io/rustls", version = "^0.23.27", default-features = false, optional = true }
+rustls-platform-verifier = { loaf = "crates-io/rustls-platform-verifier", version = "^0.7.0", optional = true }
+secrecy = { loaf = "crates-io/secrecy", version = "^0.10.2" }
+serde = { loaf = "crates-io/serde", version = "^1.0.221", features = ["derive"] }
+serde-saphyr = { loaf = "crates-io/serde-saphyr", version = "^0.0.29", optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.127" }
+tame-oauth = { loaf = "crates-io/tame-oauth", version = "^0.10.0", features = ["gcp"], optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.15" }
+tokio = { loaf = "crates-io/tokio", version = "^1.35", features = ["rt", "signal", "sync", "time"], optional = true }
+tokio-tungstenite = { loaf = "crates-io/tokio-tungstenite", version = "^0.29.0", optional = true }
+tokio-util = { loaf = "crates-io/tokio-util", version = "^0.7.0", features = ["codec", "io"], optional = true }
+tower = { loaf = "crates-io/tower", version = "^0.5.1", features = ["buffer", "filter", "retry", "util"], optional = true }
+tower-http = { loaf = "crates-io/tower-http", version = "^0.6.4", features = ["auth", "map-response-body", "trace", "util"], optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.36", features = ["log"], optional = true }

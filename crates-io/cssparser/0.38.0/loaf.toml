@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cssparser"
+version = "0.38.0"
+
+[project.features]
+bench = []
+default = ["fast_match_byte", "fast_match_color"]
+fast_match_byte = ["dep:cssparser-macros"]
+fast_match_color = ["dep:phf"]
+malloc_size_of = ["dep:malloc_size_of"]
+serde = ["dep:serde"]
+skip_long_tests = []
+
+[rust]
+name = "cssparser"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cssparser-macros = { loaf = "crates-io/cssparser-macros", version = "^0.7.0", optional = true }
+dtoa-short = { loaf = "crates-io/dtoa-short", version = "^0.3" }
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+malloc_size_of = { loaf = "crates-io/malloc_size_of", version = "^0.1", default-features = false, optional = true }
+phf = { loaf = "crates-io/phf", version = "^0.14.0", features = ["macros"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.0" }

@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bit-vec"
+version = "0.8.0"
+
+[project.features]
+borsh = ["dep:borsh"]
+borsh_std = ["dep:borsh", "borsh/std"]
+default = ["std"]
+miniserde = ["dep:miniserde"]
+nanoserde = ["dep:nanoserde"]
+serde = ["dep:serde"]
+serde_no_std = ["dep:serde", "serde/alloc"]
+serde_std = ["std", "dep:serde", "serde/std"]
+std = []
+
+[rust]
+name = "bit_vec"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+borsh = { loaf = "crates-io/borsh", version = "^1.5", features = ["derive"], default-features = false, optional = true }
+miniserde = { loaf = "crates-io/miniserde", version = "^0.1", optional = true }
+nanoserde = { loaf = "crates-io/nanoserde", version = "^0.1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], default-features = false, optional = true }

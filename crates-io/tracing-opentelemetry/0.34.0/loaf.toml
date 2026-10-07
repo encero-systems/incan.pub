@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tracing-opentelemetry"
+version = "0.34.0"
+
+[project.features]
+default = ["tracing-log", "metrics"]
+lazy_static = ["dep:lazy_static"]
+metrics = ["opentelemetry/metrics", "smallvec"]
+smallvec = ["dep:smallvec"]
+tracing-log = ["dep:tracing-log"]
+
+[rust]
+name = "tracing_opentelemetry"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.64", target = "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))" }
+lazy_static = { loaf = "crates-io/lazy_static", version = "^1.0.2", optional = true }
+opentelemetry = { loaf = "crates-io/opentelemetry", version = "^0.33.0", features = ["trace"], default-features = false }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.0", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.35", features = ["std"], default-features = false }
+tracing-core = { loaf = "crates-io/tracing-core", version = "^0.1.28" }
+tracing-log = { loaf = "crates-io/tracing-log", version = "^0.2.0", default-features = false, optional = true }
+tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3.22", features = ["registry", "std"], default-features = false }
+web-time = { loaf = "crates-io/web-time", version = "^1.0.0", target = "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))" }

@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/serial_test"
+version = "4.0.1"
+
+[project.features]
+async = ["dep:futures-executor", "dep:futures-util", "serial_test_derive/async"]
+default = ["logging", "async"]
+docsrs = ["dep:document-features"]
+file_locks = ["dep:fslock"]
+logging = ["dep:log"]
+test_logging = ["logging", "dep:env_logger", "serial_test_derive/test_logging"]
+
+[rust]
+name = "serial_test"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+document-features = { loaf = "crates-io/document-features", version = "^0.2", optional = true }
+env_logger = { loaf = "crates-io/env_logger", version = ">=0.6.1", default-features = false, optional = true }
+fslock = { loaf = "crates-io/fslock", version = "^0.2", features = ["std"], default-features = false, optional = true }
+futures-executor = { loaf = "crates-io/futures-executor", version = "^0.3", features = ["std"], default-features = false, optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3", features = ["std"], default-features = false, optional = true }
+log = { loaf = "crates-io/log", version = ">=0.4.4", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.19", features = ["std"], default-features = false }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12", default-features = false }
+serial_test_derive = { loaf = "crates-io/serial_test_derive", version = "~4.0.1" }

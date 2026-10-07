@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ipconfig"
+version = "0.3.4"
+
+[project.features]
+computer = ["dep:windows-registry", "dep:windows-result"]
+default = ["computer"]
+
+[rust]
+name = "ipconfig"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+socket2 = { loaf = "crates-io/socket2", version = "^0.6.0", target = "cfg(windows)" }
+widestring = { loaf = "crates-io/widestring", version = "^1.0.2", target = "cfg(windows)" }
+windows-registry = { loaf = "crates-io/windows-registry", version = "^0.6.1", optional = true, target = "cfg(windows)" }
+windows-result = { loaf = "crates-io/windows-result", version = "^0.4.1", optional = true, target = "cfg(windows)" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_System_Registry"], target = "cfg(windows)" }

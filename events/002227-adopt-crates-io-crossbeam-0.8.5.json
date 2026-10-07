@@ -1,0 +1,121 @@
+{
+  "about": {
+    "description": "Tools for concurrent programming",
+    "documentation": "",
+    "homepage": "https://github.com/crossbeam-rs/crossbeam",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/crossbeam-rs/crossbeam"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e71406cd8807725f7ac2f999a4cdd32e98f829fdf65f528343cebf945e41df1e",
+    "package": "crossbeam",
+    "registry": "crates-io",
+    "version": "0.8.5"
+  },
+  "archive": "sha256:31cad6bc30cc425f777efc3c9eafb8c6b50fbdc3f508ab32348d014b940c69cf",
+  "at": "2026-10-07T07:43:30Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-channel",
+      "name": "crossbeam-channel",
+      "optional": true,
+      "req": "^0.5.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-deque",
+      "name": "crossbeam-deque",
+      "optional": true,
+      "req": "^0.8.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-epoch",
+      "name": "crossbeam-epoch",
+      "optional": true,
+      "req": "^0.9.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-queue",
+      "name": "crossbeam-queue",
+      "optional": true,
+      "req": "^0.3.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": false,
+      "req": "^0.8.18"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:crossbeam-epoch",
+      "crossbeam-epoch/alloc",
+      "dep:crossbeam-queue",
+      "crossbeam-queue/alloc"
+    ],
+    "crossbeam-channel": [
+      "dep:crossbeam-channel"
+    ],
+    "crossbeam-deque": [
+      "dep:crossbeam-deque"
+    ],
+    "crossbeam-epoch": [
+      "dep:crossbeam-epoch"
+    ],
+    "crossbeam-queue": [
+      "dep:crossbeam-queue"
+    ],
+    "default": [
+      "std"
+    ],
+    "nightly": [
+      "dep:crossbeam-epoch",
+      "crossbeam-epoch/nightly",
+      "crossbeam-utils/nightly",
+      "dep:crossbeam-queue",
+      "crossbeam-queue/nightly"
+    ],
+    "std": [
+      "alloc",
+      "dep:crossbeam-channel",
+      "crossbeam-channel/std",
+      "dep:crossbeam-deque",
+      "crossbeam-deque/std",
+      "dep:crossbeam-epoch",
+      "crossbeam-epoch/std",
+      "dep:crossbeam-queue",
+      "crossbeam-queue/std",
+      "crossbeam-utils/std"
+    ]
+  },
+  "id": "sha256:6938ada32579f23b80e0a842c89d700159efa88f64cd55d41b31fdb7c6d35ae5",
+  "kind": "adopt",
+  "manifest": "sha256:054666a1a6e129835f5666d3dcd68886d58b03b1355ecec73276d89d16efbef0",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "crossbeam",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "crossbeam",
+    "scope": "crates-io",
+    "version": "0.8.5"
+  }
+}

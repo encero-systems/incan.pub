@@ -1,0 +1,107 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rav1e"
+version = "0.8.1"
+
+[project.features]
+aom-sys = ["dep:aom-sys"]
+asm = ["nasm-rs", "cc"]
+av-metrics = ["dep:av-metrics"]
+backtrace = ["dep:backtrace"]
+bench = []
+binaries = ["ivf", "y4m", "clap", "clap_complete", "scan_fmt", "fern", "console", "av-metrics", "nom"]
+byteorder = ["dep:byteorder"]
+capi = ["scan_fmt"]
+cc = []
+channel-api = ["crossbeam"]
+check_asm = []
+clap = ["dep:clap"]
+clap_complete = ["dep:clap_complete"]
+console = ["dep:console"]
+crossbeam = ["dep:crossbeam"]
+dav1d-sys = ["dep:dav1d-sys"]
+decode_test = ["aom-sys"]
+decode_test_dav1d = ["dav1d-sys"]
+default = ["binaries", "asm", "threading", "signal_support", "git_version"]
+desync_finder = ["backtrace"]
+dump_ivf = ["ivf"]
+dump_lookahead_data = ["byteorder", "image"]
+fern = ["dep:fern"]
+git_version = []
+image = ["dep:image"]
+ivf = ["dep:ivf"]
+nasm-rs = []
+nom = ["dep:nom"]
+quick_test = []
+scan_fmt = ["dep:scan_fmt"]
+serde = ["dep:serde"]
+serde-big-array = ["dep:serde-big-array"]
+serialize = ["serde", "toml", "v_frame/serialize", "serde-big-array", "av1-grain/serialize"]
+signal-hook = ["dep:signal-hook"]
+signal_support = ["signal-hook"]
+threading = ["rayon/threads"]
+toml = ["dep:toml"]
+tracing = ["profiling/profile-with-tracing", "tracing-subscriber", "tracing-chrome", "dep:tracing"]
+tracing-chrome = ["dep:tracing-chrome"]
+tracing-subscriber = ["dep:tracing-subscriber"]
+unstable = []
+wasm = ["wasm-bindgen"]
+wasm-bindgen = ["dep:wasm-bindgen"]
+y4m = ["dep:y4m"]
+
+[rust]
+name = "rav1e"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+aligned-vec = { loaf = "crates-io/aligned-vec", version = "^0.6.0" }
+aom-sys = { loaf = "crates-io/aom-sys", version = "^0.3.3", optional = true }
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.3", target = "cfg(fuzzing)" }
+arg_enum_proc_macro = { loaf = "crates-io/arg_enum_proc_macro", version = "^0.3.4" }
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7" }
+av-metrics = { loaf = "crates-io/av-metrics", version = "^0.9.1", default-features = false, optional = true }
+av-scenechange = { loaf = "crates-io/av-scenechange", version = "^0.14.1", default-features = false }
+av1-grain = { loaf = "crates-io/av1-grain", version = "^0.2.3" }
+backtrace = { loaf = "crates-io/backtrace", version = "^0.3", optional = true }
+bitstream-io = { loaf = "crates-io/bitstream-io", version = "^4.1.0" }
+byteorder = { loaf = "crates-io/byteorder", version = "^1.5.0", optional = true }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+clap = { loaf = "crates-io/clap", version = "^4.5", features = ["color", "derive", "std", "wrap_help"], default-features = false, optional = true }
+clap_complete = { loaf = "crates-io/clap_complete", version = "^4.5", optional = true }
+console = { loaf = "crates-io/console", version = "^0.15", optional = true }
+crossbeam = { loaf = "crates-io/crossbeam", version = "^0.8", optional = true }
+dav1d-sys = { loaf = "crates-io/libdav1d-sys", version = "^0.7.0", optional = true }
+fern = { loaf = "crates-io/fern", version = "^0.7", optional = true }
+image = { loaf = "crates-io/image", version = "^0.25.0", features = ["png"], default-features = false, optional = true }
+interpolate_name = { loaf = "crates-io/interpolate_name", version = "^0.2.4", target = "cfg(fuzzing)" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14" }
+ivf = { loaf = "crates-io/ivf", version = "^0.1", optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+libfuzzer-sys = { loaf = "crates-io/libfuzzer-sys", version = "^0.4.7", target = "cfg(fuzzing)" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+new_debug_unreachable = { loaf = "crates-io/new_debug_unreachable", version = "^1.0.4" }
+nom = { loaf = "crates-io/nom", version = "^8.0.0", optional = true }
+noop_proc_macro = { loaf = "crates-io/noop_proc_macro", version = "^0.3.0" }
+num-derive = { loaf = "crates-io/num-derive", version = "^0.4" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2" }
+paste = { loaf = "crates-io/paste", version = "^1.0" }
+profiling = { loaf = "crates-io/profiling", version = "^1" }
+rand = { loaf = "crates-io/rand", version = "^0.9", target = "cfg(fuzzing)" }
+rand_chacha = { loaf = "crates-io/rand_chacha", version = "^0.9", target = "cfg(fuzzing)" }
+rayon = { loaf = "crates-io/maybe-rayon", version = "^0.1", default-features = false }
+scan_fmt = { loaf = "crates-io/scan_fmt", version = "^0.2.6", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+serde-big-array = { loaf = "crates-io/serde-big-array", version = "^0.5.1", optional = true }
+signal-hook = { loaf = "crates-io/signal-hook", version = "^0.3", optional = true, target = "cfg(unix)" }
+simd_helpers = { loaf = "crates-io/simd_helpers", version = "^0.1" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0" }
+toml = { loaf = "crates-io/toml", version = "^0.8", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.40", optional = true }
+tracing-chrome = { loaf = "crates-io/tracing-chrome", version = "^0.7.1", optional = true }
+tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3.18", optional = true }
+v_frame = { loaf = "crates-io/v_frame", version = "^0.3.7" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.90", optional = true }
+y4m = { loaf = "crates-io/y4m", version = "^0.8", optional = true }

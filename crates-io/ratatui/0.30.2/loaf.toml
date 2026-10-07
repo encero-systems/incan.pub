@@ -1,0 +1,48 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ratatui"
+version = "0.30.2"
+
+[project.features]
+all-widgets = ["widget-calendar"]
+crossterm = ["dep:ratatui-crossterm", "std"]
+crossterm_0_28 = ["crossterm", "dep:ratatui-crossterm", "ratatui-crossterm/crossterm_0_28"]
+crossterm_0_29 = ["crossterm", "dep:ratatui-crossterm", "ratatui-crossterm/crossterm_0_29"]
+default = ["all-widgets", "crossterm", "layout-cache", "macros", "underline-color"]
+document-features = ["dep:document-features"]
+layout-cache = ["ratatui-core/layout-cache"]
+macros = ["dep:ratatui-macros"]
+palette = ["dep:palette", "ratatui-core/palette"]
+portable-atomic = ["ratatui-core/portable-atomic"]
+scrolling-regions = ["ratatui-core/scrolling-regions", "ratatui-crossterm?/scrolling-regions", "ratatui-termina?/scrolling-regions", "ratatui-termion?/scrolling-regions", "ratatui-termwiz?/scrolling-regions"]
+serde = ["dep:serde", "ratatui-core/serde", "ratatui-crossterm?/serde", "ratatui-termina?/serde", "ratatui-termion?/serde", "ratatui-termwiz?/serde", "ratatui-widgets/serde"]
+std = ["ratatui-core/std", "ratatui-widgets/std", "serde?/std"]
+termina = ["dep:ratatui-termina", "std"]
+termion = ["dep:ratatui-termion", "std"]
+termwiz = ["dep:ratatui-termwiz", "std"]
+underline-color = ["ratatui-core/underline-color", "ratatui-crossterm?/underline-color", "ratatui-termina?/underline-color", "ratatui-termwiz?/underline-color"]
+unstable = ["unstable-backend-writer", "unstable-rendered-line-info", "unstable-widget-ref"]
+unstable-backend-writer = ["ratatui-crossterm?/unstable-backend-writer", "ratatui-termina?/unstable-backend-writer", "ratatui-termion?/unstable-backend-writer"]
+unstable-rendered-line-info = ["ratatui-widgets/unstable-rendered-line-info"]
+unstable-widget-ref = []
+widget-calendar = ["ratatui-widgets/calendar"]
+
+[rust]
+name = "ratatui"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+document-features = { loaf = "crates-io/document-features", version = "^0.2", optional = true }
+instability = { loaf = "crates-io/instability", version = "^0.3" }
+palette = { loaf = "crates-io/palette", version = "^0.7.6", features = ["libm"], default-features = false, optional = true }
+ratatui-core = { loaf = "crates-io/ratatui-core", version = "^0.1.2" }
+ratatui-crossterm = { loaf = "crates-io/ratatui-crossterm", version = "^0.1.2", optional = true }
+ratatui-macros = { loaf = "crates-io/ratatui-macros", version = "^0.7.2", optional = true }
+ratatui-termina = { loaf = "crates-io/ratatui-termina", version = "^0.1.0", optional = true }
+ratatui-termion = { loaf = "crates-io/ratatui-termion", version = "^0.1.2", optional = true, target = "cfg(not(windows))" }
+ratatui-termwiz = { loaf = "crates-io/ratatui-termwiz", version = "^0.1.2", optional = true }
+ratatui-widgets = { loaf = "crates-io/ratatui-widgets", version = "^0.3.2", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], default-features = false, optional = true }

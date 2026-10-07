@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/encode_unicode"
+version = "1.0.0"
+
+[project.features]
+ascii = ["dep:ascii"]
+default = ["std"]
+std = []
+
+[rust]
+name = "encode_unicode"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ascii = { loaf = "crates-io/ascii", version = "^1.0.0", default-features = false, optional = true }

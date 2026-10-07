@@ -1,0 +1,51 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/x11rb-protocol"
+version = "0.14.0"
+
+[project.features]
+all-extensions = ["composite", "damage", "dbe", "dpms", "dri2", "dri3", "glx", "present", "randr", "record", "render", "res", "screensaver", "shape", "shm", "sync", "xevie", "xf86dri", "xf86vidmode", "xfixes", "xinerama", "xinput", "xkb", "xprint", "xselinux", "xtest", "xv", "xvmc"]
+composite = ["xfixes"]
+damage = ["xfixes"]
+dbe = []
+default = ["std"]
+dpms = []
+dri2 = []
+dri3 = []
+extra-traits = []
+glx = []
+present = ["randr", "xfixes", "sync", "dri3"]
+randr = ["render"]
+record = []
+render = []
+request-parsing = []
+res = []
+resource_manager = ["std"]
+screensaver = []
+serde = ["dep:serde"]
+shape = []
+shm = []
+std = []
+sync = []
+xevie = []
+xf86dri = []
+xf86vidmode = []
+xfixes = ["render", "shape"]
+xinerama = []
+xinput = ["xfixes"]
+xkb = []
+xprint = []
+xselinux = []
+xtest = []
+xv = ["shm"]
+xvmc = ["xv"]
+
+[rust]
+name = "x11rb_protocol"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], optional = true }

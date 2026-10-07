@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hdrhistogram"
+version = "7.6.0"
+
+[project.features]
+bench_private = []
+default = ["serialization", "sync"]
+serialization = ["dep:flate2", "dep:nom", "dep:base64"]
+sync = ["dep:crossbeam-channel"]
+
+[rust]
+name = "hdrhistogram"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22.1", optional = true }
+byteorder = { loaf = "crates-io/byteorder", version = "^1.0.0" }
+crossbeam-channel = { loaf = "crates-io/crossbeam-channel", version = "^0.5.15", optional = true }
+flate2 = { loaf = "crates-io/flate2", version = "^1.0.3", optional = true }
+nom = { loaf = "crates-io/nom", version = "^8.0.0", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2" }

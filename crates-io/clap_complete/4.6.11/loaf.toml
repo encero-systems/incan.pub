@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/clap_complete"
+version = "4.6.11"
+
+[project.features]
+debug = ["clap/debug"]
+default = []
+unstable-doc = ["unstable-dynamic"]
+unstable-dynamic = ["dep:clap_lex", "dep:shlex", "dep:is_executable", "clap/unstable-ext"]
+unstable-shell-tests = ["dep:completest", "dep:completest-pty"]
+
+[rust]
+name = "clap_complete"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+clap = { loaf = "crates-io/clap", version = "^4.6.6", features = ["std"], default-features = false }
+clap_lex = { loaf = "crates-io/clap_lex", version = "^1.0.0", optional = true }
+completest = { loaf = "crates-io/completest", version = "^1.1.0", optional = true }
+completest-pty = { loaf = "crates-io/completest-pty", version = "^1.1.0", optional = true }
+is_executable = { loaf = "crates-io/is_executable", version = "^1.0.5", optional = true }
+shlex = { loaf = "crates-io/shlex", version = "^2.0.0", optional = true }

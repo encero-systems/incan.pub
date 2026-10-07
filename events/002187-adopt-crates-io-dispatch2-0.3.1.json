@@ -1,0 +1,98 @@
+{
+  "about": {
+    "description": "Bindings and wrappers for Apple's Grand Central Dispatch (GCD)",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1e0e367e4e7da84520dedcac1901e4da967309406d1e51017ae1abfb97adbd38",
+    "package": "dispatch2",
+    "registry": "crates-io",
+    "version": "0.3.1"
+  },
+  "archive": "sha256:ff04372fb06f1cbdb86400911bfb828f6df5dd34a5849fab72d9d2926f3a974d",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.80"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": true,
+      "req": ">=0.6.2, <0.8.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "block2": [
+      "dep:block2"
+    ],
+    "default": [
+      "std",
+      "block2",
+      "libc",
+      "objc2"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "objc2": [
+      "dep:objc2"
+    ],
+    "std": [
+      "alloc"
+    ]
+  },
+  "id": "sha256:67e7e6387dc72ee0dad5d0003090f7f44a81318cc52677556737b507354d2042",
+  "kind": "adopt",
+  "manifest": "sha256:a58607bf2d7c04ca093b427ec57fcbcd5d65427e08ee3a70244549aae28c5fb5",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "dispatch2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "dispatch2",
+    "scope": "crates-io",
+    "version": "0.3.1"
+  }
+}

@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-channel"
+version = "2.5.0"
+
+[project.features]
+default = ["std"]
+portable-atomic = ["concurrent-queue/portable-atomic", "event-listener-strategy/portable-atomic", "dep:portable-atomic-util", "dep:portable-atomic"]
+std = ["concurrent-queue/std", "event-listener-strategy/std"]
+
+[rust]
+name = "async_channel"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+concurrent-queue = { loaf = "crates-io/concurrent-queue", version = "^2.5", default-features = false }
+event-listener-strategy = { loaf = "crates-io/event-listener-strategy", version = "^0.5.4", default-features = false }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.5", default-features = false }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.11" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", features = ["require-cas"], default-features = false, optional = true }
+portable-atomic-util = { loaf = "crates-io/portable-atomic-util", version = "^0.2", features = ["alloc"], default-features = false, optional = true }

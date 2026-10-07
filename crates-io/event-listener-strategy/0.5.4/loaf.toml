@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/event-listener-strategy"
+version = "0.5.4"
+
+[project.features]
+default = ["std"]
+loom = ["event-listener/loom"]
+portable-atomic = ["event-listener/portable-atomic"]
+std = ["event-listener/std"]
+
+[rust]
+name = "event_listener_strategy"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+event-listener = { loaf = "crates-io/event-listener", version = "^5.0.0", default-features = false }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.12" }

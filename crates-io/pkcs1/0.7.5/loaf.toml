@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pkcs1"
+version = "0.7.5"
+
+[project.features]
+alloc = ["der/alloc", "zeroize", "pkcs8?/alloc"]
+pem = ["alloc", "der/pem", "pkcs8?/pem"]
+pkcs8 = ["dep:pkcs8"]
+std = ["der/std", "alloc"]
+zeroize = ["der/zeroize"]
+
+[rust]
+name = "pkcs1"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+der = { loaf = "crates-io/der", version = "^0.7", features = ["oid"] }
+pkcs8 = { loaf = "crates-io/pkcs8", version = "^0.10", default-features = false, optional = true }
+spki = { loaf = "crates-io/spki", version = "^0.7" }

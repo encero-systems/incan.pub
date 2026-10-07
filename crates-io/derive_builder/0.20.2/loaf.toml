@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/derive_builder"
+version = "0.20.2"
+
+[project.features]
+alloc = ["derive_builder_macro/alloc"]
+clippy = ["derive_builder_macro/clippy"]
+default = ["std"]
+std = ["derive_builder_macro/lib_has_std"]
+
+[rust]
+name = "derive_builder"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+derive_builder_macro = { loaf = "crates-io/derive_builder_macro", version = "=0.20.2" }

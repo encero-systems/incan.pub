@@ -1,0 +1,11 @@
+# crates-io/pin-project
+
+The crates.io package [pin-project](https://crates.io/crates/pin-project), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves. A crate for safe and ergonomic pin-projection.
+
+| Version | Adopted | License | Build facts | Compiled units | |
+|---|---|---|---|---|---|
+| [1.1.13](1.1.13/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 0 | 0 |  |
+
+Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/pin-project`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/pin-project](../../index/crates-io/pin-project), the units by each version's `assets.json`.
+
+<!-- Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit. -->

@@ -1,0 +1,138 @@
+{
+  "about": {
+    "description": "safe generic simd",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/sarah-quinones/pulp/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:046aa45b989642ec2e4717c8e72d677b13edd831a4d3b6cf37d9a3e54912496a",
+    "package": "pulp",
+    "registry": "crates-io",
+    "version": "0.22.3"
+  },
+  "archive": "sha256:71d428f57f64f835ff87a9ccb1671787e781adea2cb9ca4ed845f5489480c7c4",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "aarch64_simd",
+        "wasm_simd"
+      ],
+      "loaf": "crates-io/bytemuck",
+      "name": "bytemuck",
+      "optional": false,
+      "req": "^1.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libm",
+      "name": "libm",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "bytemuck"
+      ],
+      "loaf": "crates-io/num-complex",
+      "name": "num-complex",
+      "optional": false,
+      "req": "^0.4.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/paste",
+      "name": "paste",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pulp-macro",
+      "name": "pulp-macro",
+      "optional": true,
+      "req": "^0.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/pulp-wasm-simd-flag",
+      "name": "pulp-wasm-simd-flag",
+      "optional": false,
+      "req": "^0.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/raw-cpuid",
+      "name": "raw-cpuid",
+      "optional": false,
+      "req": "^11.5.0",
+      "target": "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/reborrow",
+      "name": "reborrow",
+      "optional": false,
+      "req": "^0.5"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "x86-v3",
+      "relaxed-simd"
+    ],
+    "macro": [
+      "dep:pulp-macro"
+    ],
+    "nightly": [
+      "bytemuck/nightly_stdsimd"
+    ],
+    "relaxed-simd": [
+      "pulp-wasm-simd-flag/relaxed-simd"
+    ],
+    "std": [],
+    "x86-v3": [],
+    "x86-v4": [
+      "bytemuck/avx512_simd"
+    ]
+  },
+  "id": "sha256:e03bd7a55c7bdae91599f5fe23de389b197b35ea5f5917cebe98bfcb47c50bff",
+  "kind": "adopt",
+  "manifest": "sha256:80efc69697af541c785b5b99229c73c3298baed4c7a4e0525f6fe54c74859cf1",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "pulp",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pulp",
+    "scope": "crates-io",
+    "version": "0.22.3"
+  }
+}

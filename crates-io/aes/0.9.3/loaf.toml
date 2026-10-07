@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aes"
+version = "0.9.3"
+
+[project.features]
+hazmat = []
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "aes"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cipher = { loaf = "crates-io/cipher", version = "^0.5" }
+cpubits = { loaf = "crates-io/cpubits", version = "^0.1" }
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.3", target = "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.9", default-features = false, optional = true }

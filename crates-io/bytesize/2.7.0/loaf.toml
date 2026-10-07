@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bytesize"
+version = "2.7.0"
+
+[project.features]
+arbitrary = ["dep:arbitrary"]
+default = ["std"]
+serde = ["dep:serde_core"]
+std = []
+
+[rust]
+name = "bytesize"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1", optional = true }

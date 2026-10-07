@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aws-smithy-async"
+version = "1.3.0"
+
+[project.features]
+rt-tokio = ["tokio/time"]
+test-util = ["rt-tokio", "tokio/rt"]
+
+[rust]
+name = "aws_smithy_async"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.29", default-features = false }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.14" }
+tokio = { loaf = "crates-io/tokio", version = "^1.49.0", features = ["sync"] }

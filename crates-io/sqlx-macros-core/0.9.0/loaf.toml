@@ -1,0 +1,74 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sqlx-macros-core"
+version = "0.9.0"
+
+[project.features]
+_rt-async-global-executor = ["async-global-executor", "sqlx-core/_rt-async-global-executor"]
+_rt-async-std = ["async-std", "sqlx-core/_rt-async-std"]
+_rt-smol = ["smol", "sqlx-core/_rt-smol"]
+_rt-tokio = ["tokio", "sqlx-core/_rt-tokio"]
+_sqlite = []
+_tls-native-tls = ["sqlx-core/_tls-native-tls"]
+_tls-rustls-aws-lc-rs = ["sqlx-core/_tls-rustls-aws-lc-rs"]
+_tls-rustls-ring-native-roots = ["sqlx-core/_tls-rustls-ring-native-roots"]
+_tls-rustls-ring-webpki = ["sqlx-core/_tls-rustls-ring-webpki"]
+async-global-executor = ["dep:async-global-executor"]
+async-std = ["dep:async-std"]
+bigdecimal = ["sqlx-core/bigdecimal", "sqlx-mysql?/bigdecimal", "sqlx-postgres?/bigdecimal"]
+bit-vec = ["sqlx-core/bit-vec", "sqlx-postgres?/bit-vec"]
+chrono = ["sqlx-core/chrono", "sqlx-mysql?/chrono", "sqlx-postgres?/chrono", "sqlx-sqlite?/chrono"]
+default = []
+derive = []
+ipnet = ["sqlx-core/ipnet", "sqlx-postgres?/ipnet"]
+ipnetwork = ["sqlx-core/ipnetwork", "sqlx-postgres?/ipnetwork"]
+json = ["sqlx-core/json", "sqlx-mysql?/json", "sqlx-postgres?/json", "sqlx-sqlite?/json"]
+mac_address = ["sqlx-core/mac_address", "sqlx-postgres?/mac_address"]
+macros = ["thiserror"]
+migrate = ["sqlx-core/migrate"]
+mysql = ["sqlx-mysql"]
+mysql-rsa = ["mysql", "dep:sqlx-mysql", "sqlx-mysql/rsa"]
+postgres = ["sqlx-postgres"]
+rust_decimal = ["sqlx-core/rust_decimal", "sqlx-mysql?/rust_decimal", "sqlx-postgres?/rust_decimal"]
+smol = ["dep:smol"]
+sqlite = ["_sqlite", "dep:sqlx-sqlite", "sqlx-sqlite/bundled"]
+sqlite-load-extension = ["dep:sqlx-sqlite", "sqlx-sqlite/load-extension"]
+sqlite-unbundled = ["_sqlite", "dep:sqlx-sqlite", "sqlx-sqlite/unbundled"]
+sqlx-mysql = ["dep:sqlx-mysql"]
+sqlx-postgres = ["dep:sqlx-postgres"]
+sqlx-sqlite = ["dep:sqlx-sqlite"]
+sqlx-toml = ["sqlx-core/sqlx-toml", "sqlx-sqlite?/sqlx-toml"]
+thiserror = ["dep:thiserror"]
+time = ["sqlx-core/time", "sqlx-mysql?/time", "sqlx-postgres?/time", "sqlx-sqlite?/time"]
+tokio = ["dep:tokio"]
+uuid = ["sqlx-core/uuid", "sqlx-mysql?/uuid", "sqlx-postgres?/uuid", "sqlx-sqlite?/uuid"]
+
+[rust]
+name = "sqlx_macros_core"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-global-executor = { loaf = "crates-io/async-global-executor", version = "^3.1", features = ["async-io"], default-features = false, optional = true }
+async-std = { loaf = "crates-io/async-std", version = "^1.13", optional = true }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+dotenvy = { loaf = "crates-io/dotenvy", version = "^0.15.7", default-features = false }
+either = { loaf = "crates-io/either", version = "^1.6.1" }
+heck = { loaf = "crates-io/heck", version = "^0.5" }
+hex = { loaf = "crates-io/hex", version = "^0.4.3" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.83", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1.0.35", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.219", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.142" }
+sha2 = { loaf = "crates-io/sha2", version = "^0.10.0" }
+smol = { loaf = "crates-io/smol", version = "^2.0", default-features = false, optional = true }
+sqlx-core = { loaf = "crates-io/sqlx-core", version = "=0.9.0", features = ["offline"] }
+sqlx-mysql = { loaf = "crates-io/sqlx-mysql", version = "=0.9.0", features = ["migrate", "offline"], default-features = false, optional = true }
+sqlx-postgres = { loaf = "crates-io/sqlx-postgres", version = "=0.9.0", features = ["migrate", "offline"], optional = true }
+sqlx-sqlite = { loaf = "crates-io/sqlx-sqlite", version = "=0.9.0", features = ["migrate", "offline"], optional = true }
+syn = { loaf = "crates-io/syn", version = "^2.0.87", features = ["clone-impls", "derive", "full", "parsing", "printing"], default-features = false }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.18", features = ["std"], default-features = false, optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.25.0", features = ["fs", "io-util", "net", "rt", "sync", "time"], default-features = false, optional = true }
+url = { loaf = "crates-io/url", version = "^2.2.2" }

@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/markup5ever"
+version = "0.40.0"
+
+[project.features]
+serde = ["web_atoms/serde"]
+
+[rust]
+name = "markup5ever"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[rust.source]
+root = "lib.rs"
+
+[dependencies]
+log = { loaf = "crates-io/log", version = "^0.4" }
+tendril = { loaf = "crates-io/tendril", version = "^0.5" }
+web_atoms = { loaf = "crates-io/web_atoms", version = "^0.3.0" }

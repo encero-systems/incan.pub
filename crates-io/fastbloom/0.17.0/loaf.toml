@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fastbloom"
+version = "0.17.0"
+
+[project.features]
+default = ["std", "rand"]
+loom = ["dep:loom"]
+rand = ["std", "dep:rand"]
+serde = ["dep:serde", "siphasher/serde_std", "portable-atomic/serde"]
+std = ["portable-atomic/std"]
+
+[rust]
+name = "fastbloom"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+foldhash = { loaf = "crates-io/foldhash", version = "^0.2.0", default-features = false }
+libm = { loaf = "crates-io/libm", version = "^0.2" }
+loom = { loaf = "crates-io/loom", version = "^0.7.2", optional = true }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.13.1", features = ["fallback"], default-features = false }
+rand = { loaf = "crates-io/rand", version = "^0.9.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.203", features = ["derive"], optional = true }
+siphasher = { loaf = "crates-io/siphasher", version = "^1.0.0", default-features = false }

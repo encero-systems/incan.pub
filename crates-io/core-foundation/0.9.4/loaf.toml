@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/core-foundation"
+version = "0.9.4"
+
+[project.features]
+chrono = ["dep:chrono"]
+default = ["link"]
+link = ["core-foundation-sys/link"]
+mac_os_10_7_support = ["core-foundation-sys/mac_os_10_7_support"]
+mac_os_10_8_features = ["core-foundation-sys/mac_os_10_8_features"]
+uuid = ["dep:uuid"]
+with-chrono = ["chrono"]
+with-uuid = ["uuid"]
+
+[rust]
+name = "core_foundation"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+chrono = { loaf = "crates-io/chrono", version = "^0.4", optional = true }
+core-foundation-sys = { loaf = "crates-io/core-foundation-sys", version = "^0.8.6", default-features = false }
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+uuid = { loaf = "crates-io/uuid", version = "^0.5", optional = true }

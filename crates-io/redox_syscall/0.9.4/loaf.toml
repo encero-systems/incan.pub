@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/redox_syscall"
+version = "0.9.4"
+
+[project.features]
+core = ["dep:core"]
+default = ["userspace"]
+rustc-dep-of-std = ["core", "bitflags/rustc-dep-of-std"]
+std = []
+userspace = []
+
+[rust]
+name = "syscall"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.4" }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }

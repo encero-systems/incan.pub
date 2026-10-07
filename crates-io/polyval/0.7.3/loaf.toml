@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/polyval"
+version = "0.7.3"
+
+[project.features]
+hazmat = []
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "polyval"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cpubits = { loaf = "crates-io/cpubits", version = "^0.1" }
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.3", target = "cfg(any(target_arch = \"aarch64\", target_arch = \"x86\", target_arch = \"x86_64\"))" }
+universal-hash = { loaf = "crates-io/universal-hash", version = "^0.6" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

@@ -1,0 +1,93 @@
+{
+  "about": {
+    "description": "Core type support for COM and Windows",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "readme.md",
+    "repository": "https://github.com/microsoft/windows-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:803590c6856f51d15fa2e9fabe4f4703122c8737f72ef2741b4ac09d4c2192f5",
+    "package": "windows-core",
+    "registry": "crates-io",
+    "version": "0.100.0"
+  },
+  "archive": "sha256:818e742ee32f6a29fca1b2d735025425b5a1621f969a3100fb31c4cdc97beb54",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-implement",
+      "name": "windows-implement",
+      "optional": true,
+      "req": "^0.100.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-interface",
+      "name": "windows-interface",
+      "optional": true,
+      "req": "^0.100.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-link",
+      "name": "windows-link",
+      "optional": false,
+      "req": "^0.100.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-result",
+      "name": "windows-result",
+      "optional": false,
+      "req": "^0.100.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-strings",
+      "name": "windows-strings",
+      "optional": false,
+      "req": "^0.100.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "proc-macros"
+    ],
+    "proc-macros": [
+      "dep:windows-implement",
+      "dep:windows-interface"
+    ],
+    "std": [
+      "windows-result/std",
+      "windows-strings/std"
+    ]
+  },
+  "id": "sha256:ba79fd23dab210a339434d69b3f1dd82aae70fb6d7b61e0ef0156a2b36a3418f",
+  "kind": "adopt",
+  "manifest": "sha256:27ccbf9acc2744be3446989f302d03c83688e6aa596d3a2ef3ae9e85fc693929",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "windows_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "windows-core",
+    "scope": "crates-io",
+    "version": "0.100.0"
+  }
+}

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-task"
+version = "4.7.1"
+
+[project.features]
+default = ["std"]
+portable-atomic = ["dep:portable-atomic"]
+std = []
+
+[rust]
+name = "async_task"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", default-features = false, optional = true }

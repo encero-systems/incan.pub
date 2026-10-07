@@ -1,0 +1,70 @@
+{
+  "about": {
+    "description": "Fastest LZ4 implementation in Rust, no unsafe by default.",
+    "documentation": "",
+    "homepage": "https://github.com/pseitz/lz4_flex",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/pseitz/lz4_flex"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ecbdfe44b1bd960b68170b417450a628c43f7cf56bb3c5317e61cb230ee7f226",
+    "package": "lz4_flex",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:0cee0aa991a4e45dced4981c54aeb3ed5a1b07d7f4e0855f0cc81122b6f93177",
+  "at": "2026-10-07T07:43:59Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "xxhash32"
+      ],
+      "loaf": "crates-io/twox-hash",
+      "name": "twox-hash",
+      "optional": true,
+      "req": "^2.0.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "checked-decode": [],
+    "default": [
+      "std",
+      "safe-encode",
+      "safe-decode",
+      "frame",
+      "checked-decode"
+    ],
+    "frame": [
+      "std",
+      "dep:twox-hash"
+    ],
+    "nightly": [],
+    "safe-decode": [],
+    "safe-encode": [],
+    "std": [
+      "alloc"
+    ]
+  },
+  "id": "sha256:85be20e0bd1a45ac2bf7a41ebfdd4aa43bb7a9e169919a914eebf631d4933484",
+  "kind": "adopt",
+  "manifest": "sha256:1e7bb6956fad8f9af44c187c97889d1e64ccce2a3b73ad1fa7da0bf200b969af",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "lz4_flex",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "lz4_flex",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

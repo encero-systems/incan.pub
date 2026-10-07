@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/nom"
+version = "8.0.0"
+
+[project.features]
+alloc = []
+default = ["std"]
+docsrs = []
+std = ["alloc", "memchr/std"]
+
+[rust]
+name = "nom"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+memchr = { loaf = "crates-io/memchr", version = "^2.3", default-features = false }

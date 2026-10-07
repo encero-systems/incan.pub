@@ -1,0 +1,121 @@
+{
+  "about": {
+    "description": "Library for word wrapping, indenting, and dedenting strings. Has optional support for Unicode and emojis as well as machine hyphenation.",
+    "documentation": "https://docs.rs/textwrap/",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/mgeisler/textwrap"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:6ecfad6c3abc80a577f2b91c1e412ee57e7a060d430b553c1b0c940974ebcd49",
+    "package": "textwrap",
+    "registry": "crates-io",
+    "version": "0.16.4"
+  },
+  "archive": "sha256:714aab009b7fdb7655232f5661cff5b33140968cc55b949b3792cc2f9f43b111",
+  "at": "2026-10-07T07:43:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "embed_en-us"
+      ],
+      "loaf": "crates-io/hyphenation",
+      "name": "hyphenation",
+      "optional": true,
+      "req": "^0.8.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "compiled_data"
+      ],
+      "loaf": "crates-io/icu_segmenter",
+      "name": "icu_segmenter",
+      "optional": true,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smawk",
+      "name": "smawk",
+      "optional": true,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/terminal_size",
+      "name": "terminal_size",
+      "optional": true,
+      "req": "^0.4.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": true,
+      "req": "^0.2.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "unicode-linebreak",
+      "unicode-width",
+      "smawk"
+    ],
+    "hyphenation": [
+      "std",
+      "dep:hyphenation"
+    ],
+    "icu_segmenter": [
+      "dep:icu_segmenter"
+    ],
+    "smawk": [
+      "std",
+      "dep:smawk"
+    ],
+    "std": [
+      "unicode-width?/default"
+    ],
+    "terminal_size": [
+      "std",
+      "dep:terminal_size"
+    ],
+    "unicode-linebreak": [
+      "std",
+      "icu_segmenter"
+    ],
+    "unicode-linebreak-complex": [
+      "unicode-linebreak",
+      "dep:icu_segmenter",
+      "icu_segmenter/auto"
+    ],
+    "unicode-width": [
+      "dep:unicode-width"
+    ]
+  },
+  "id": "sha256:475e66fecdd1baefaa9809b85db02db6daf20478ebbb3aefdacdea527ab02edb",
+  "kind": "adopt",
+  "manifest": "sha256:aa45e35405e61b562886ebf560848976498e78d7f7dee22ba58bb655c661f740",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "textwrap",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "textwrap",
+    "scope": "crates-io",
+    "version": "0.16.4"
+  }
+}

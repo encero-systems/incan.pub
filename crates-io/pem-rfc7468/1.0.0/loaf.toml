@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pem-rfc7468"
+version = "1.0.0"
+
+[project.features]
+alloc = ["base64ct/alloc"]
+std = ["alloc", "base64ct/std"]
+
+[rust]
+name = "pem_rfc7468"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64ct = { loaf = "crates-io/base64ct", version = "^1.4" }

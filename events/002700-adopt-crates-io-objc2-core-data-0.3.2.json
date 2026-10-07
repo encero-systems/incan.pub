@@ -1,0 +1,502 @@
+{
+  "about": {
+    "description": "Bindings to the CoreData framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0b402a653efbb5e82ce4df10683b6b28027616a2715e90009947d50b8dd298fa",
+    "package": "objc2-core-data",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:6f67bfc0bcf93d9d6df6706e4e8caf72054ae44296797e2881e799859e1d0a4b",
+  "at": "2026-10-07T07:45:05Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": false,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "CKContainer",
+        "CKDatabase",
+        "CKRecord",
+        "CKRecordID",
+        "CKRecordZoneID",
+        "CKShare",
+        "CKShareMetadata",
+        "CKShareParticipant",
+        "CKUserIdentityLookupInfo"
+      ],
+      "loaf": "crates-io/objc2-cloud-kit",
+      "name": "objc2-cloud-kit",
+      "optional": true,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "CSSearchableIndex",
+        "CSSearchableItemAttributeSet"
+      ],
+      "loaf": "crates-io/objc2-core-spotlight",
+      "name": "objc2-core-spotlight",
+      "optional": true,
+      "req": "^0.3.2",
+      "target": "cfg(not(any(target_os = \"tvos\", target_os = \"watchos\")))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/objc2-foundation",
+      "name": "objc2-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "CloudKit": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSSet"
+    ],
+    "CoreDataDefines": [],
+    "CoreDataErrors": [
+      "objc2-foundation/NSString"
+    ],
+    "NSAtomicStore": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSSet",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSAtomicStoreCacheNode": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSString"
+    ],
+    "NSAttributeDescription": [
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "NSBatchDeleteRequest": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSObject"
+    ],
+    "NSBatchInsertRequest": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "NSBatchUpdateRequest": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSPredicate",
+      "objc2-foundation/NSString"
+    ],
+    "NSCompositeAttributeDescription": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSObject"
+    ],
+    "NSCoreDataCoreSpotlightDelegate": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSNotification",
+      "objc2-foundation/NSString"
+    ],
+    "NSCustomMigrationStage": [
+      "objc2-foundation/NSError"
+    ],
+    "NSDerivedAttributeDescription": [
+      "objc2-foundation/NSExpression",
+      "objc2-foundation/NSObject"
+    ],
+    "NSEntityDescription": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSEnumerator",
+      "objc2-foundation/NSExpression",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "NSEntityMapping": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSExpression",
+      "objc2-foundation/NSString"
+    ],
+    "NSEntityMigrationPolicy": [
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString"
+    ],
+    "NSExpressionDescription": [
+      "objc2-foundation/NSExpression",
+      "objc2-foundation/NSObject"
+    ],
+    "NSFetchIndexDescription": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSPredicate",
+      "objc2-foundation/NSString"
+    ],
+    "NSFetchIndexElementDescription": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "NSFetchRequest": [
+      "bitflags",
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSPredicate",
+      "objc2-foundation/NSSortDescriptor",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSValue"
+    ],
+    "NSFetchRequestExpression": [
+      "objc2-foundation/NSCoder",
+      "objc2-foundation/NSExpression",
+      "objc2-foundation/NSObject"
+    ],
+    "NSFetchedPropertyDescription": [
+      "objc2-foundation/NSObject"
+    ],
+    "NSFetchedResultsController": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSIndexPath",
+      "objc2-foundation/NSOrderedCollectionDifference",
+      "objc2-foundation/NSString",
+      "NSFetchRequest"
+    ],
+    "NSIncrementalStore": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSIncrementalStoreNode": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSString"
+    ],
+    "NSLightweightMigrationStage": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSString"
+    ],
+    "NSManagedObject": [
+      "bitflags",
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSKeyValueObserving",
+      "objc2-foundation/NSSet",
+      "objc2-foundation/NSString"
+    ],
+    "NSManagedObjectContext": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSLock",
+      "objc2-foundation/NSNotification",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSSet",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSUndoManager"
+    ],
+    "NSManagedObjectID": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSURL"
+    ],
+    "NSManagedObjectModel": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSBundle",
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSEnumerator",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSSet",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSManagedObjectModelReference": [
+      "objc2-foundation/NSBundle",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSMappingModel": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSBundle",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSMergePolicy": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString"
+    ],
+    "NSMigrationManager": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSMigrationStage": [
+      "objc2-foundation/NSString"
+    ],
+    "NSPersistentCloudKitContainer": [
+      "bitflags",
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString"
+    ],
+    "NSPersistentCloudKitContainerEvent": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSNotification",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSUUID"
+    ],
+    "NSPersistentCloudKitContainerEventRequest": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSObject"
+    ],
+    "NSPersistentCloudKitContainerOptions": [
+      "objc2-foundation/NSString"
+    ],
+    "NSPersistentContainer": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSPersistentHistoryChange": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSSet"
+    ],
+    "NSPersistentHistoryChangeRequest": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSObject"
+    ],
+    "NSPersistentHistoryToken": [
+      "objc2-foundation/NSObject"
+    ],
+    "NSPersistentHistoryTransaction": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSNotification",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "NSPersistentStore": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSPersistentStoreCoordinator": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSLock",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL",
+      "objc2-foundation/NSValue"
+    ],
+    "NSPersistentStoreDescription": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSURL"
+    ],
+    "NSPersistentStoreRequest": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSObject"
+    ],
+    "NSPersistentStoreResult": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSProgress",
+      "NSFetchRequest"
+    ],
+    "NSPropertyDescription": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSPredicate",
+      "objc2-foundation/NSString"
+    ],
+    "NSPropertyMapping": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSExpression",
+      "objc2-foundation/NSString"
+    ],
+    "NSQueryGenerationToken": [
+      "objc2-foundation/NSObject"
+    ],
+    "NSRelationshipDescription": [
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSObject"
+    ],
+    "NSSaveChangesRequest": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSSet"
+    ],
+    "NSStagedMigrationManager": [
+      "objc2-foundation/NSArray"
+    ],
+    "alloc": [],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "block2": [
+      "dep:block2"
+    ],
+    "default": [
+      "std",
+      "CloudKit",
+      "CoreDataDefines",
+      "CoreDataErrors",
+      "NSAtomicStore",
+      "NSAtomicStoreCacheNode",
+      "NSAttributeDescription",
+      "NSBatchDeleteRequest",
+      "NSBatchInsertRequest",
+      "NSBatchUpdateRequest",
+      "NSCompositeAttributeDescription",
+      "NSCoreDataCoreSpotlightDelegate",
+      "NSCustomMigrationStage",
+      "NSDerivedAttributeDescription",
+      "NSEntityDescription",
+      "NSEntityMapping",
+      "NSEntityMigrationPolicy",
+      "NSExpressionDescription",
+      "NSFetchIndexDescription",
+      "NSFetchIndexElementDescription",
+      "NSFetchRequest",
+      "NSFetchRequestExpression",
+      "NSFetchedPropertyDescription",
+      "NSFetchedResultsController",
+      "NSIncrementalStore",
+      "NSIncrementalStoreNode",
+      "NSLightweightMigrationStage",
+      "NSManagedObject",
+      "NSManagedObjectContext",
+      "NSManagedObjectID",
+      "NSManagedObjectModel",
+      "NSManagedObjectModelReference",
+      "NSMappingModel",
+      "NSMergePolicy",
+      "NSMigrationManager",
+      "NSMigrationStage",
+      "NSPersistentCloudKitContainer",
+      "NSPersistentCloudKitContainerEvent",
+      "NSPersistentCloudKitContainerEventRequest",
+      "NSPersistentCloudKitContainerOptions",
+      "NSPersistentContainer",
+      "NSPersistentHistoryChange",
+      "NSPersistentHistoryChangeRequest",
+      "NSPersistentHistoryToken",
+      "NSPersistentHistoryTransaction",
+      "NSPersistentStore",
+      "NSPersistentStoreCoordinator",
+      "NSPersistentStoreDescription",
+      "NSPersistentStoreRequest",
+      "NSPersistentStoreResult",
+      "NSPropertyDescription",
+      "NSPropertyMapping",
+      "NSQueryGenerationToken",
+      "NSRelationshipDescription",
+      "NSSaveChangesRequest",
+      "NSStagedMigrationManager",
+      "bitflags",
+      "block2",
+      "objc2-cloud-kit"
+    ],
+    "gnustep-1-7": [],
+    "gnustep-1-8": [],
+    "gnustep-1-9": [],
+    "gnustep-2-0": [],
+    "gnustep-2-1": [],
+    "objc2-cloud-kit": [
+      "dep:objc2-cloud-kit"
+    ],
+    "objc2-core-spotlight": [
+      "dep:objc2-core-spotlight"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": []
+  },
+  "id": "sha256:22888ff45225853698feaf52890f6cf2256beeaa62e309db23a47cca4f78dc5c",
+  "kind": "adopt",
+  "manifest": "sha256:4a155fb7383ea7e8b194f6b1ea6b1d925891b9b3e8003038c6816d92079c19eb",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_core_data",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-core-data",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

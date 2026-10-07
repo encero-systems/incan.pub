@@ -1,0 +1,194 @@
+{
+  "about": {
+    "description": "Bindings to the IOKit framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:33fafba39597d6dc1fb709123dfa8289d39406734be322956a69f0931c73bb15",
+    "package": "objc2-io-kit",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:7e6a7292c69d1661eddd1eb571c6de93479ec9a7b5893f770828ca9b56f96b52",
+  "at": "2026-10-07T07:43:31Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "block2"
+      ],
+      "loaf": "crates-io/dispatch2",
+      "name": "dispatch2",
+      "optional": true,
+      "req": ">=0.3.0, <0.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.80"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": true,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "CFArray",
+        "CFData",
+        "CFDictionary",
+        "CFPlugInCOM",
+        "CFRunLoop",
+        "CFURL",
+        "CFUUID"
+      ],
+      "loaf": "crates-io/objc2-core-foundation",
+      "name": "objc2-core-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "AppleUSBDefinitions": [],
+    "IOUSBHostFamilyDefinitions": [],
+    "IOUSBLib": [
+      "objc2-core-foundation/CFPlugInCOM",
+      "objc2-core-foundation/CFRunLoop",
+      "objc2-core-foundation/CFUUID"
+    ],
+    "USB": [],
+    "USBSpec": [],
+    "alloc": [],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "block2": [
+      "dep:block2"
+    ],
+    "default": [
+      "std",
+      "AppleUSBDefinitions",
+      "IOUSBHostFamilyDefinitions",
+      "IOUSBLib",
+      "USB",
+      "USBSpec",
+      "bitflags",
+      "block2",
+      "dispatch2",
+      "graphics",
+      "hid",
+      "hidsystem",
+      "libc",
+      "network",
+      "objc2",
+      "ps",
+      "pwr_mgt",
+      "serial",
+      "usb"
+    ],
+    "dispatch2": [
+      "dep:dispatch2"
+    ],
+    "graphics": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFPlugInCOM",
+      "objc2-core-foundation/CFUUID"
+    ],
+    "hid": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFPlugInCOM",
+      "objc2-core-foundation/CFRunLoop",
+      "objc2-core-foundation/CFSet",
+      "objc2-core-foundation/CFUUID"
+    ],
+    "hidsystem": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "network": [],
+    "objc2": [
+      "dep:objc2",
+      "dispatch2?/objc2",
+      "objc2-core-foundation/objc2"
+    ],
+    "ps": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFPlugInCOM",
+      "objc2-core-foundation/CFRunLoop",
+      "objc2-core-foundation/CFSet",
+      "objc2-core-foundation/CFUUID"
+    ],
+    "pwr_mgt": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "serial": [],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": [],
+    "usb": []
+  },
+  "id": "sha256:884165da283a7d6fc61ee2caabb68156c839d156fb70e3ace36ce8474fbca3dd",
+  "kind": "adopt",
+  "manifest": "sha256:4a3c73beda8aa3e75905c927b22ffd80787108674430c2125588d1250b9adbc9",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_io_kit",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-io-kit",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

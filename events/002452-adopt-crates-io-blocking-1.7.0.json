@@ -1,0 +1,94 @@
+{
+  "about": {
+    "description": "A thread pool for isolating blocking I/O in async programs",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/blocking"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a70e4329df6cb94385eed412ec92375c3cdd8a6e502493d1229b6414e4036dfa",
+    "package": "blocking",
+    "registry": "crates-io",
+    "version": "1.7.0"
+  },
+  "archive": "sha256:533a25e7a77d9a1c3e6153044a70bc637d61a9e7110841ef3663ae5023ff057c",
+  "at": "2026-10-07T07:44:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-channel",
+      "name": "async-channel",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-task",
+      "name": "async-task",
+      "optional": false,
+      "req": "^4.4.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": false,
+      "req": "^0.3.28"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-lite",
+      "name": "futures-lite",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/piper",
+      "name": "piper",
+      "optional": false,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.37"
+    }
+  ],
+  "features": {
+    "tracing": [
+      "dep:tracing"
+    ]
+  },
+  "id": "sha256:492fb7a5e2af0bea13e0f18ac2ff231614226f65621cfd83840a131f484966f0",
+  "kind": "adopt",
+  "manifest": "sha256:819ad38f7f34ef7b81e0d478387903476f5ee923e005a3bee9b6aa199a4351e5",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "blocking",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "blocking",
+    "scope": "crates-io",
+    "version": "1.7.0"
+  }
+}

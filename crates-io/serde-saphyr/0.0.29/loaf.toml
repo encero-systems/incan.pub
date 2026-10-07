@@ -1,0 +1,46 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/serde-saphyr"
+version = "0.0.29"
+
+[project.features]
+default = ["serialize", "deserialize"]
+deserialize = ["dep:num-traits", "dep:annotate-snippets", "dep:granit-parser", "dep:smallvec", "dep:encoding_rs_io", "dep:ahash"]
+figment = ["dep:figment", "deserialize"]
+figment2 = ["dep:figment2", "deserialize"]
+garde = ["dep:garde", "deserialize"]
+huge_documents = []
+include = ["deserialize"]
+include_fs = ["include"]
+miette = ["dep:miette", "deserialize"]
+properties = ["deserialize"]
+robotics = ["deserialize"]
+serde_derived_types = ["dep:serde"]
+serialize = ["dep:base64", "dep:num-traits", "dep:zmij", "dep:nohash-hasher"]
+validator = ["dep:validator", "deserialize"]
+
+[rust]
+name = "serde_saphyr"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", optional = true }
+annotate-snippets = { loaf = "crates-io/annotate-snippets", version = "^0.12", optional = true }
+base64 = { loaf = "crates-io/base64", version = ">=0.21.0, <=0.22.1", optional = true }
+encoding_rs_io = { loaf = "crates-io/encoding_rs_io", version = "^0.1", optional = true }
+figment = { loaf = "crates-io/figment", version = "^0.10", optional = true }
+figment2 = { loaf = "crates-io/figment2", version = "^0.11", optional = true }
+garde = { loaf = "crates-io/garde", version = ">=0.19.0, <0.24", features = ["derive"], optional = true }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.3", features = ["wasm_js"], target = "cfg(target_arch = \"wasm32\")" }
+granit-parser = { loaf = "crates-io/granit-parser", version = "^0.0.7", optional = true }
+miette = { loaf = "crates-io/miette", version = "^7", features = ["fancy"], optional = true }
+nohash-hasher = { loaf = "crates-io/nohash-hasher", version = "^0.2", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = ">=0.2.0, <=0.2.19", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1" }
+smallvec = { loaf = "crates-io/smallvec", version = ">=1.0.0, <1.16.0", optional = true }
+validator = { loaf = "crates-io/validator", version = ">=0.11, <0.21", features = ["derive"], optional = true }
+zmij = { loaf = "crates-io/zmij", version = "^1.0", optional = true }

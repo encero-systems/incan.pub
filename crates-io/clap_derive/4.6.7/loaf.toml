@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/clap_derive"
+version = "4.6.7"
+
+[project.features]
+debug = []
+default = []
+deprecated = []
+raw-deprecated = ["deprecated"]
+unstable-markdown = ["dep:pulldown-cmark", "dep:anstyle"]
+unstable-v5 = ["deprecated"]
+
+[rust]
+name = "clap_derive"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.14", optional = true }
+heck = { loaf = "crates-io/heck", version = "^0.5.0" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.106" }
+pulldown-cmark = { loaf = "crates-io/pulldown-cmark", version = "^0.13.3", default-features = false, optional = true }
+quote = { loaf = "crates-io/quote", version = "^1.0.45" }
+syn = { loaf = "crates-io/syn", version = "^3.0.2", features = ["full"] }

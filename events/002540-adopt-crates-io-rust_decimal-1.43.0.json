@@ -1,0 +1,334 @@
+{
+  "about": {
+    "description": "Decimal number implementation written in pure Rust suitable for financial and fixed-precision calculations.",
+    "documentation": "https://docs.rs/rust_decimal/",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/paupino/rust-decimal"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7653272e75dcac41dc199fbea6f5797633994fafd339943c06c9af16bf29cd3a",
+    "package": "rust_decimal",
+    "registry": "crates-io",
+    "version": "1.43.0"
+  },
+  "archive": "sha256:8e903faf835cc751719b4c30bc90e0b29941495e9d2ecea8f348a43b5c246220",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arrayvec",
+      "name": "arrayvec",
+      "optional": false,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive",
+        "unstable__schema"
+      ],
+      "loaf": "crates-io/borsh",
+      "name": "borsh",
+      "optional": true,
+      "req": "^1.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytemuck",
+      "name": "bytemuck",
+      "optional": true,
+      "req": "^1.17.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytemuck_derive",
+      "name": "bytemuck_derive",
+      "optional": true,
+      "req": "^1.7.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/diesel",
+      "name": "diesel",
+      "optional": true,
+      "req": "^2.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ndarray",
+      "name": "ndarray",
+      "optional": true,
+      "req": "^0.15.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/postgres-types",
+      "name": "postgres-types",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/proptest",
+      "name": "proptest",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.8.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand-0_9",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rocket",
+      "name": "rocket",
+      "optional": true,
+      "req": "^0.5.0-rc.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rust_decimal_macros",
+      "name": "rust_decimal_macros",
+      "optional": true,
+      "req": "^1.37.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio-postgres",
+      "name": "tokio-postgres",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": true,
+      "req": "^0.2",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zmij",
+      "name": "zmij",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "align16": [],
+    "borsh": [
+      "dep:borsh",
+      "std"
+    ],
+    "bytemuck": [
+      "c-repr",
+      "dep:bytemuck",
+      "dep:bytemuck_derive"
+    ],
+    "c-repr": [],
+    "db-diesel-mysql": [
+      "dep:diesel",
+      "diesel/mysql_backend",
+      "std"
+    ],
+    "db-diesel-postgres": [
+      "dep:diesel",
+      "diesel/postgres_backend",
+      "std"
+    ],
+    "db-diesel2-mysql": [
+      "db-diesel-mysql"
+    ],
+    "db-diesel2-postgres": [
+      "db-diesel-postgres"
+    ],
+    "db-postgres": [
+      "dep:bytes",
+      "dep:postgres-types",
+      "std"
+    ],
+    "db-tokio-postgres": [
+      "dep:bytes",
+      "dep:postgres-types",
+      "std"
+    ],
+    "default": [
+      "serde",
+      "std"
+    ],
+    "diesel": [
+      "dep:diesel"
+    ],
+    "legacy-ops": [],
+    "macros": [
+      "dep:rust_decimal_macros"
+    ],
+    "maths": [],
+    "maths-nopanic": [
+      "maths"
+    ],
+    "ndarray": [
+      "dep:ndarray"
+    ],
+    "proptest": [
+      "dep:proptest"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "rand-0_9": [
+      "dep:rand-0_9"
+    ],
+    "rocket-traits": [
+      "dep:rocket",
+      "std"
+    ],
+    "rust-fuzz": [
+      "dep:arbitrary"
+    ],
+    "serde": [
+      "dep:serde",
+      "wasm-bindgen?/serde"
+    ],
+    "serde-arbitrary-precision": [
+      "serde-with-arbitrary-precision"
+    ],
+    "serde-bincode": [
+      "serde-str"
+    ],
+    "serde-float": [
+      "serde-with-float"
+    ],
+    "serde-str": [
+      "serde-with-str"
+    ],
+    "serde-with-arbitrary-precision": [
+      "serde",
+      "dep:serde_json",
+      "serde_json/arbitrary_precision",
+      "serde_json/std",
+      "zmij"
+    ],
+    "serde-with-float": [
+      "serde"
+    ],
+    "serde-with-str": [
+      "serde"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "std": [
+      "arrayvec/std",
+      "wasm-bindgen?/std",
+      "borsh?/std",
+      "bytes?/std",
+      "rand?/std",
+      "rand-0_9?/std",
+      "serde?/std",
+      "serde_json?/std"
+    ],
+    "tokio-pg": [
+      "db-tokio-postgres"
+    ],
+    "tokio-postgres": [
+      "dep:tokio-postgres"
+    ],
+    "wasm": [
+      "dep:wasm-bindgen"
+    ],
+    "zmij": [
+      "dep:zmij"
+    ]
+  },
+  "id": "sha256:f64de725557baf1774be55307470bc30ede9411c9c573b00aeb16d0027b1b193",
+  "kind": "adopt",
+  "manifest": "sha256:d009d137b3110c9aec615fbb423a8d0a01bbc9c2916afaa413a777fc1eef848d",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "rust_decimal",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rust_decimal",
+    "scope": "crates-io",
+    "version": "1.43.0"
+  }
+}

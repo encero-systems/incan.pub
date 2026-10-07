@@ -1,0 +1,81 @@
+{
+  "about": {
+    "description": "A generic URI/IRI handling library compliant with RFC 3986/3987.",
+    "documentation": "https://docs.rs/fluent-uri",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/yescallop/fluent-uri-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bc74ac4d8359ae70623506d512209619e5cf8f347124910440dbc221714b328e",
+    "package": "fluent-uri",
+    "registry": "crates-io",
+    "version": "0.4.1"
+  },
+  "archive": "sha256:2ca51d83227cbff096e2707cc11d35c873ec7de173115b2f0d9ce9c9b4b5fa2e",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/borrow-or-share",
+      "name": "borrow-or-share",
+      "optional": false,
+      "req": "^0.2.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ref-cast",
+      "name": "ref-cast",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "borrow-or-share/alloc",
+      "serde?/alloc"
+    ],
+    "default": [
+      "std"
+    ],
+    "impl-error": [],
+    "net": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "alloc",
+      "impl-error"
+    ]
+  },
+  "id": "sha256:f924e4e4a3abf048741110555a2884ac640292406ced2768b81a2138d216fb9d",
+  "kind": "adopt",
+  "manifest": "sha256:0b8b01dfb301d63cc38f077ebdc6f5d31708c14daded71af46dadc165a7712da",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "fluent_uri",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fluent-uri",
+    "scope": "crates-io",
+    "version": "0.4.1"
+  }
+}

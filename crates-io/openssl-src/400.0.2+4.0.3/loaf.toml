@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/openssl-src"
+version = "400.0.2+4.0.3"
+
+[project.features]
+camellia = []
+default = []
+force-engine = []
+idea = []
+ktls = []
+legacy = []
+no-dso = []
+seed = []
+ssl3 = []
+weak-crypto = []
+
+[rust]
+name = "openssl_src"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cc = { loaf = "crates-io/cc", version = "^1.0.79" }

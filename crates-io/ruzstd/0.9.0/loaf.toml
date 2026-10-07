@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ruzstd"
+version = "0.9.0"
+
+[project.features]
+default = ["hash", "std"]
+dict_builder = ["std", "dep:fastrand"]
+fuzz_exports = []
+hash = ["dep:twox-hash"]
+rustc-dep-of-std = ["dep:core", "dep:alloc"]
+std = []
+
+[rust]
+name = "ruzstd"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+alloc = { loaf = "crates-io/rustc-std-workspace-alloc", version = "^1.0.0", optional = true }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }
+fastrand = { loaf = "crates-io/fastrand", version = "^2.3.0", optional = true }
+twox-hash = { loaf = "crates-io/twox-hash", version = "^2.0", features = ["xxhash64"], default-features = false, optional = true }

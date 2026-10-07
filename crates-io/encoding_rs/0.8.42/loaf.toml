@@ -1,0 +1,40 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/encoding_rs"
+version = "0.8.42"
+
+[project.features]
+alloc = []
+any_all_workaround = ["dep:any_all_workaround"]
+default = ["alloc"]
+fast-big5-hanzi-encode = []
+fast-gb-hanzi-encode = []
+fast-hangul-encode = []
+fast-hanja-encode = []
+fast-kanji-encode = []
+fast-legacy-encode = ["fast-hangul-encode", "fast-hanja-encode", "fast-kanji-encode", "fast-gb-hanzi-encode", "fast-big5-hanzi-encode"]
+less-slow-big5-hanzi-encode = []
+less-slow-gb-hanzi-encode = []
+less-slow-kanji-encode = []
+rustversion = ["dep:rustversion"]
+serde = ["dep:serde"]
+simd-accel = ["any_all_workaround", "rustversion"]
+std = ["dep:multiversion"]
+
+[rust]
+name = "encoding_rs"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+any_all_workaround = { loaf = "crates-io/any_all_workaround", version = "^0.1.0", optional = true }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+core_detect = { loaf = "crates-io/core_detect", version = "^1", target = "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))" }
+multiversion = { loaf = "crates-io/multiversion", version = ">=0.8.0, <0.10.0", optional = true, target = "cfg(all(any(target_arch = \"x86_64\", target_arch = \"x86\"), not(all(target_feature = \"avx2\", target_feature = \"bmi1\"))))" }
+multiversion_no_op = { loaf = "crates-io/multiversion_no_op", version = "^1.0.0" }
+rustversion = { loaf = "crates-io/rustversion", version = "^1.0.19", optional = true }
+scopeguard = { loaf = "crates-io/scopeguard", version = "^1", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0", optional = true }
+simdutf8 = { loaf = "crates-io/simdutf8", version = "^0.1.5", features = ["aarch64_neon", "public_imp"], default-features = false, target = "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\", target_arch = \"aarch64\", all(target_arch = \"wasm32\", target_feature = \"simd128\")))" }

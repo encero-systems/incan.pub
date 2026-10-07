@@ -1,0 +1,108 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sqlx-core"
+version = "0.9.0"
+
+[project.features]
+_rt-async-global-executor = ["async-global-executor", "_rt-async-io", "_rt-async-task"]
+_rt-async-io = ["async-io", "async-fs"]
+_rt-async-std = ["async-std", "_rt-async-io"]
+_rt-async-task = ["async-task"]
+_rt-smol = ["smol", "_rt-async-io", "_rt-async-task"]
+_rt-tokio = ["tokio", "tokio-stream"]
+_tls-native-tls = ["native-tls"]
+_tls-none = []
+_tls-rustls = ["rustls"]
+_tls-rustls-aws-lc-rs = ["_tls-rustls", "dep:rustls", "rustls/aws-lc-rs", "webpki-roots"]
+_tls-rustls-ring-native-roots = ["_tls-rustls", "dep:rustls", "rustls/ring", "rustls-native-certs"]
+_tls-rustls-ring-webpki = ["_tls-rustls", "dep:rustls", "rustls/ring", "webpki-roots"]
+_unstable-doc = ["sqlx-toml"]
+any = []
+async-fs = ["dep:async-fs"]
+async-global-executor = ["dep:async-global-executor"]
+async-io = ["dep:async-io"]
+async-std = ["dep:async-std"]
+async-task = ["dep:async-task"]
+bigdecimal = ["dep:bigdecimal"]
+bit-vec = ["dep:bit-vec"]
+bstr = ["dep:bstr"]
+chrono = ["dep:chrono"]
+crc = ["dep:crc"]
+default = []
+ipnet = ["dep:ipnet"]
+ipnetwork = ["dep:ipnetwork"]
+json = ["serde", "serde_json"]
+mac_address = ["dep:mac_address"]
+migrate = ["sha2", "crc"]
+native-tls = ["dep:native-tls"]
+offline = ["serde", "either/serde"]
+rust_decimal = ["dep:rust_decimal"]
+rustls = ["dep:rustls"]
+rustls-native-certs = ["dep:rustls-native-certs"]
+serde = ["dep:serde"]
+serde_json = ["dep:serde_json"]
+sha2 = ["dep:sha2"]
+smol = ["dep:smol"]
+sqlx-toml = ["serde", "dep:toml", "toml/parse"]
+time = ["dep:time"]
+tokio = ["dep:tokio"]
+tokio-stream = ["dep:tokio-stream"]
+toml = ["dep:toml"]
+uuid = ["dep:uuid"]
+webpki-roots = ["dep:webpki-roots"]
+
+[rust]
+name = "sqlx_core"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-fs = { loaf = "crates-io/async-fs", version = "^2.1", optional = true }
+async-global-executor = { loaf = "crates-io/async-global-executor", version = "^3.1", features = ["async-io"], default-features = false, optional = true }
+async-io = { loaf = "crates-io/async-io", version = "^2.4.1", optional = true }
+async-std = { loaf = "crates-io/async-std", version = "^1.13", optional = true }
+async-task = { loaf = "crates-io/async-task", version = "^4.7.1", optional = true }
+base64 = { loaf = "crates-io/base64", version = "^0.22.1", features = ["alloc"], default-features = false }
+bigdecimal = { loaf = "crates-io/bigdecimal", version = "^0.4.0", optional = true }
+bit-vec = { loaf = "crates-io/bit-vec", version = "^0.8", optional = true }
+bstr = { loaf = "crates-io/bstr", version = "^1.0.1", features = ["std"], default-features = false, optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.2.0" }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.34", features = ["clock", "std"], default-features = false, optional = true }
+crc = { loaf = "crates-io/crc", version = "^3", optional = true }
+crossbeam-queue = { loaf = "crates-io/crossbeam-queue", version = "^0.3.2" }
+either = { loaf = "crates-io/either", version = "^1.6.1" }
+event-listener = { loaf = "crates-io/event-listener", version = "^5.2.0" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.32", default-features = false }
+futures-intrusive = { loaf = "crates-io/futures-intrusive", version = "^0.5.0" }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.32" }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.32", features = ["alloc", "io", "sink"], default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.16.0" }
+hashlink = { loaf = "crates-io/hashlink", version = "^0.11.0" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.0" }
+ipnet = { loaf = "crates-io/ipnet", version = "^2.3.0", optional = true }
+ipnetwork = { loaf = "crates-io/ipnetwork", version = "^0.21.1", optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.18", default-features = false }
+mac_address = { loaf = "crates-io/mac_address", version = "^1.1.5", optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.5.0", default-features = false }
+native-tls = { loaf = "crates-io/native-tls", version = "^0.2.10", optional = true }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3.0" }
+rust_decimal = { loaf = "crates-io/rust_decimal", version = "^1.36.0", features = ["std"], default-features = false, optional = true }
+rustls = { loaf = "crates-io/rustls", version = "^0.23.24", features = ["std", "tls12"], default-features = false, optional = true }
+rustls-native-certs = { loaf = "crates-io/rustls-native-certs", version = "^0.8.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.219", features = ["derive", "rc"], optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.142", features = ["raw_value"], optional = true }
+sha2 = { loaf = "crates-io/sha2", version = "^0.10.0", default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.13.1" }
+smol = { loaf = "crates-io/smol", version = "^2.0", default-features = false, optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.18", features = ["std"], default-features = false }
+time = { loaf = "crates-io/time", version = "^0.3.47", features = ["formatting", "macros", "parsing"], optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.25.0", features = ["fs", "io-util", "net", "rt", "sync", "time"], default-features = false, optional = true }
+tokio-stream = { loaf = "crates-io/tokio-stream", version = "^0.1.8", features = ["fs"], optional = true }
+toml = { loaf = "crates-io/toml", version = "^0.8.16", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.37", features = ["log"] }
+url = { loaf = "crates-io/url", version = "^2.2.2" }
+uuid = { loaf = "crates-io/uuid", version = "^1.12.1", optional = true }
+webpki-roots = { loaf = "crates-io/webpki-roots", version = "^1", optional = true }

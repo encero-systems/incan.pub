@@ -1,0 +1,86 @@
+{
+  "about": {
+    "description": "Beautiful diagnostic reporting for text-based programming languages",
+    "documentation": "https://docs.rs/codespan-reporting",
+    "homepage": "https://github.com/brendanzab/codespan",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/brendanzab/codespan"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:af491d569909a7e4dee0ad7db7f5341fef5c614d5b8ec8cf765732aba3cff681",
+    "package": "codespan-reporting",
+    "registry": "crates-io",
+    "version": "0.13.1"
+  },
+  "archive": "sha256:516617c3b006c36f322ba3b5d400762bda97ac08f8fb0859f715ef562b534bae",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/termcolor",
+      "name": "termcolor",
+      "optional": true,
+      "req": "^1.0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": false,
+      "req": ">=0.1, <0.3"
+    }
+  ],
+  "features": {
+    "ascii-only": [],
+    "default": [
+      "std",
+      "termcolor"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serialization": [
+      "serde"
+    ],
+    "std": [
+      "serde?/std"
+    ],
+    "termcolor": [
+      "std",
+      "dep:termcolor"
+    ]
+  },
+  "id": "sha256:c71451650f4f9efebf9a088b0c10f25a4cdfd764b3f38139736d4666bfa54752",
+  "kind": "adopt",
+  "manifest": "sha256:9e48211e55351c9a9536fb6468bd3b520156d2bc7b7be243a1cd00265504f41f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "codespan_reporting",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "codespan-reporting",
+    "scope": "crates-io",
+    "version": "0.13.1"
+  }
+}

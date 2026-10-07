@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/derivative"
+version = "2.2.0"
+
+[project.features]
+use_core = []
+
+[rust]
+name = "derivative"
+type = "proc-macro"
+edition = "2015"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^1.0.3", features = ["extra-traits", "visit"] }

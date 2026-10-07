@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/core-text"
+version = "20.1.0"
+
+[project.features]
+default = ["mountainlion"]
+mountainlion = []
+
+[rust]
+name = "core_text"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.9" }
+core-graphics = { loaf = "crates-io/core-graphics", version = "^0.23.0" }
+foreign-types = { loaf = "crates-io/foreign-types", version = "^0.5" }
+libc = { loaf = "crates-io/libc", version = "^0.2" }

@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hostname"
+version = "0.4.2"
+
+[project.features]
+default = []
+set = []
+
+[rust]
+name = "hostname"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+libc = { loaf = "crates-io/libc", version = "^0.2", target = "cfg(any(unix, target_os = \"redox\"))" }
+windows-link = { loaf = "crates-io/windows-link", version = "^0.2", target = "cfg(target_os = \"windows\")" }

@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/yansi"
+version = "1.0.1"
+
+[project.features]
+_nightly = []
+alloc = []
+default = ["std"]
+detect-env = ["std"]
+detect-tty = ["is-terminal", "std"]
+hyperlink = ["std"]
+is-terminal = ["dep:is-terminal"]
+std = ["alloc"]
+
+[rust]
+name = "yansi"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+is-terminal = { loaf = "crates-io/is-terminal", version = "^0.4.11", optional = true }

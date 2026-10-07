@@ -1,0 +1,39 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fraction"
+version = "0.17.0"
+
+[project.features]
+byteorder = ["dep:byteorder"]
+bytes = ["dep:bytes"]
+default = ["with-bigint", "with-decimal", "with-dynaint"]
+juniper = ["dep:juniper"]
+num-bigint = ["dep:num-bigint"]
+postgres-types = ["dep:postgres-types"]
+serde = ["dep:serde"]
+serde_derive = ["dep:serde_derive"]
+with-approx = ["with-bigint"]
+with-bigint = ["num/num-bigint", "num/std", "num-bigint"]
+with-decimal = []
+with-dynaint = []
+with-juniper-support = ["juniper"]
+with-postgres-support = ["postgres-types", "byteorder", "bytes"]
+with-serde-support = ["serde", "serde_derive", "num/serde"]
+with-unicode = []
+
+[rust]
+name = "fraction"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+byteorder = { loaf = "crates-io/byteorder", version = "^1", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1", optional = true }
+juniper = { loaf = "crates-io/juniper", version = "^0.15", optional = true }
+num = { loaf = "crates-io/num", version = "^0.4.3", default-features = false }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4.8", optional = true }
+postgres-types = { loaf = "crates-io/postgres-types", version = "^0.2", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1", optional = true }

@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aws-sdk-sso"
+version = "1.114.0"
+
+[project.features]
+behavior-version-latest = []
+default = ["rustls", "default-https-client", "rt-tokio"]
+default-https-client = ["aws-smithy-runtime/default-https-client"]
+gated-tests = []
+legacy-https-client = ["aws-smithy-runtime/tls-rustls"]
+legacy-test-util = ["test-util", "aws-smithy-runtime/legacy-test-util"]
+rt-tokio = ["aws-smithy-async/rt-tokio", "aws-smithy-types/rt-tokio"]
+rustls = ["aws-smithy-runtime/tls-rustls"]
+test-util = ["aws-credential-types/test-util"]
+
+[rust]
+name = "aws_sdk_sso"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arc-swap = { loaf = "crates-io/arc-swap", version = "^1" }
+aws-credential-types = { loaf = "crates-io/aws-credential-types", version = "^1.3.0" }
+aws-runtime = { loaf = "crates-io/aws-runtime", version = "^1.10.0" }
+aws-smithy-async = { loaf = "crates-io/aws-smithy-async", version = "^1.3.0" }
+aws-smithy-http = { loaf = "crates-io/aws-smithy-http", version = "^0.64.1" }
+aws-smithy-json = { loaf = "crates-io/aws-smithy-json", version = "^0.63.1" }
+aws-smithy-observability = { loaf = "crates-io/aws-smithy-observability", version = "^0.3.0" }
+aws-smithy-runtime = { loaf = "crates-io/aws-smithy-runtime", version = "^1.16.0", features = ["client"] }
+aws-smithy-runtime-api = { loaf = "crates-io/aws-smithy-runtime-api", version = "^1.19.0", features = ["client", "http-1x"] }
+aws-smithy-schema = { loaf = "crates-io/aws-smithy-schema", version = "^0.2.1" }
+aws-smithy-types = { loaf = "crates-io/aws-smithy-types", version = "^1.8.1", features = ["http-body-1-x"] }
+aws-types = { loaf = "crates-io/aws-types", version = "^1.6.0" }
+bytes = { loaf = "crates-io/bytes", version = "^1.4.0" }
+fastrand = { loaf = "crates-io/fastrand", version = "^2.0.0" }
+http-1x = { loaf = "crates-io/http", version = "^1" }
+regex-lite = { loaf = "crates-io/regex-lite", version = "^0.1.5" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1" }

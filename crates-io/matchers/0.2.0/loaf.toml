@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/matchers"
+version = "0.2.0"
+
+[project.features]
+unicode = ["regex-automata/unicode"]
+
+[rust]
+name = "matchers"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+regex-automata = { loaf = "crates-io/regex-automata", version = "^0.4", features = ["dfa-build", "dfa-search", "syntax"], default-features = false }

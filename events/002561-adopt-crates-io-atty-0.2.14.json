@@ -1,0 +1,73 @@
+{
+  "about": {
+    "description": "A simple interface for querying atty",
+    "documentation": "http://softprops.github.io/atty",
+    "homepage": "https://github.com/softprops/atty",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/softprops/atty"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8",
+    "package": "atty",
+    "registry": "crates-io",
+    "version": "0.2.14"
+  },
+  "archive": "sha256:eace308bc54716645ff80e277c38c8dc1347741faa15385d3d2eaf8b20ceb950",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hermit-abi",
+      "name": "hermit-abi",
+      "optional": false,
+      "req": "^0.1.6",
+      "target": "cfg(target_os = \"hermit\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "consoleapi",
+        "minwinbase",
+        "minwindef",
+        "processenv",
+        "winbase"
+      ],
+      "loaf": "crates-io/winapi",
+      "name": "winapi",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:0623730315d8085f90080651a527b33a6ef9148e37465836a1a9a92ee66c1e56",
+  "kind": "adopt",
+  "manifest": "sha256:b24d1f71dd69be8fb8eeee4bc385675dbe13788f1ef2d51a94dbe212236a92b0",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "atty",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "atty",
+    "scope": "crates-io",
+    "version": "0.2.14"
+  }
+}

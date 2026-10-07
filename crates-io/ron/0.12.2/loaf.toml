@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ron"
+version = "0.12.2"
+
+[project.features]
+default = ["std"]
+indexmap = ["std", "dep:indexmap"]
+integer128 = []
+internal-span-substring-test = ["unicode-segmentation"]
+std = ["serde/std"]
+unicode-segmentation = ["dep:unicode-segmentation"]
+
+[rust]
+name = "ron"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.1", features = ["serde"], default-features = false }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.0", features = ["serde"], default-features = false, optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.20", features = ["alloc", "race"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.193", features = ["alloc"], default-features = false }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0.193", default-features = false }
+typeid = { loaf = "crates-io/typeid", version = "^1.0.1", default-features = false }
+unicode-ident = { loaf = "crates-io/unicode-ident", version = "^1.0", default-features = false }
+unicode-segmentation = { loaf = "crates-io/unicode-segmentation", version = "^1.12.0", default-features = false, optional = true }

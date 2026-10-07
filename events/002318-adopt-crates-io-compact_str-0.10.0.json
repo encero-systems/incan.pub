@@ -1,0 +1,324 @@
+{
+  "about": {
+    "description": "A memory efficient string type that transparently stores strings on the stack, when possible",
+    "documentation": "",
+    "homepage": "https://github.com/ParkMyCar/compact_str",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ParkMyCar/compact_str"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:79fcda08c33bb58b97008b2cdada6622500e949e060f5913361763121abd2416",
+    "package": "compact_str",
+    "registry": "crates-io",
+    "version": "0.10.0"
+  },
+  "archive": "sha256:96ad740fac89120c73af85f6e4998e0eade42d0c42f9cf2cf3ad9ea6819eba6b",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bevy_reflect",
+      "name": "bevy_reflect",
+      "optional": true,
+      "req": "^0.19"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/borsh",
+      "name": "borsh",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/castaway",
+      "name": "castaway",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/defmt",
+      "name": "defmt",
+      "optional": true,
+      "req": "^1",
+      "target": "cfg(not(target_os = \"windows\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/diesel",
+      "name": "diesel",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/garde",
+      "name": "garde",
+      "optional": true,
+      "req": "^0.23"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/itoa",
+      "name": "itoa",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/markup",
+      "name": "markup",
+      "optional": true,
+      "req": "^0.16"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/proptest",
+      "name": "proptest",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/pyo3",
+      "name": "pyo3",
+      "optional": true,
+      "req": "^0.29"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/quickcheck",
+      "name": "quickcheck",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/schemars",
+      "name": "schemars",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "union"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sqlx",
+      "name": "sqlx",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/static_assertions",
+      "name": "static_assertions",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/utoipa",
+      "name": "utoipa",
+      "optional": true,
+      "req": "^5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/valuable",
+      "name": "valuable",
+      "optional": true,
+      "req": "^0.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zmij",
+      "name": "zmij",
+      "optional": false,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "bevy-reflect": [
+      "dep:bevy_reflect",
+      "serde"
+    ],
+    "borsh": [
+      "dep:borsh"
+    ],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "default": [
+      "std"
+    ],
+    "defmt": [
+      "dep:defmt"
+    ],
+    "diesel": [
+      "dep:diesel"
+    ],
+    "garde": [
+      "dep:garde"
+    ],
+    "markup": [
+      "dep:markup"
+    ],
+    "proptest": [
+      "dep:proptest"
+    ],
+    "pyo3": [
+      "dep:pyo3"
+    ],
+    "quickcheck": [
+      "dep:quickcheck"
+    ],
+    "rkyv": [
+      "dep:rkyv"
+    ],
+    "schemars": [
+      "dep:schemars"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "smallvec": [
+      "dep:smallvec"
+    ],
+    "sqlx": [
+      "dep:sqlx",
+      "std"
+    ],
+    "sqlx-mysql": [
+      "sqlx",
+      "dep:sqlx",
+      "sqlx/mysql"
+    ],
+    "sqlx-postgres": [
+      "sqlx",
+      "dep:sqlx",
+      "sqlx/postgres"
+    ],
+    "sqlx-sqlite": [
+      "sqlx",
+      "dep:sqlx",
+      "sqlx/sqlite"
+    ],
+    "std": [],
+    "utoipa": [
+      "dep:utoipa",
+      "std"
+    ],
+    "valuable": [
+      "dep:valuable"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:667722a58b8fd3509881a715b5123047afb4887dd5f0bb495fe5fa0797b26bb8",
+  "kind": "adopt",
+  "manifest": "sha256:7e85b29cebaf21f9eee52d47e873faa4c37e03859164b7b4918edff3e89e15b7",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "compact_str",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "compact_str",
+    "scope": "crates-io",
+    "version": "0.10.0"
+  }
+}

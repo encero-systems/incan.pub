@@ -1,0 +1,96 @@
+{
+  "about": {
+    "description": "General matrix multiplication for f32 and f64 matrices. Operates on matrices with general layout (they can use arbitrary row and column stride). Detects and uses SIMD features on x86/x86-64 and AArch64 transparently for higher performance. Uses a microkernel strategy, so that the implementation is easy to parallelize and optimize.\n\nSupports multithreading.",
+    "documentation": "https://docs.rs/matrixmultiply/",
+    "homepage": "",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bluss/matrixmultiply/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3f607c237553f086e7043417a51df26b2eb899d3caff94e6a67592ff992fedc7",
+    "package": "matrixmultiply",
+    "registry": "crates-io",
+    "version": "0.3.11"
+  },
+  "archive": "sha256:7f0ed3edb89cae05046a5e47546588a0c0a6daba428fd2d16f7422bb59d28ed1",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num_cpus",
+      "name": "num_cpus",
+      "optional": true,
+      "req": "^1.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rawpointer",
+      "name": "rawpointer",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thread-tree",
+      "name": "thread-tree",
+      "optional": true,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "avx512": [],
+    "cgemm": [],
+    "constconf": [],
+    "default": [
+      "std",
+      "avx512"
+    ],
+    "num_cpus": [
+      "dep:num_cpus"
+    ],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "std": [],
+    "thread-tree": [
+      "dep:thread-tree"
+    ],
+    "threading": [
+      "thread-tree",
+      "std",
+      "once_cell",
+      "num_cpus"
+    ]
+  },
+  "id": "sha256:8c5e4b80dee150256c4a169a4d34568749f8019970ddfd31619647614a9f76f3",
+  "kind": "adopt",
+  "manifest": "sha256:14f02dbe974804d7b025a3cf9a6f81332b00009aacff6c8dd36900ad98a3787b",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "matrixmultiply",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "matrixmultiply",
+    "scope": "crates-io",
+    "version": "0.3.11"
+  }
+}

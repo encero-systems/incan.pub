@@ -1,0 +1,188 @@
+{
+  "about": {
+    "description": "Array abstractions for Apache Arrow",
+    "documentation": "",
+    "homepage": "https://github.com/apache/arrow-rs",
+    "license": "Apache-2.0 AND MIT",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/apache/arrow-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:51dff6e4b9f158864a0aeb6a131ad53858ecbae7a2fc8989307b9b3c6b2f122e",
+    "package": "arrow-array",
+    "registry": "crates-io",
+    "version": "60.0.0"
+  },
+  "archive": "sha256:197765b1b296a1386f39cfbc261c5d8347140bcbf436756f677453c18d089c03",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "compile-time-rng"
+      ],
+      "loaf": "crates-io/ahash",
+      "name": "ahash",
+      "optional": false,
+      "req": "^0.8",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "runtime-rng"
+      ],
+      "loaf": "crates-io/ahash",
+      "name": "ahash",
+      "optional": false,
+      "req": "^0.8",
+      "target": "cfg(not(target_arch = \"wasm32\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-buffer",
+      "name": "arrow-buffer",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-data",
+      "name": "arrow-data",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-schema",
+      "name": "arrow-schema",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "clock"
+      ],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": false,
+      "req": "^0.4.40"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/chrono-tz",
+      "name": "chrono-tz",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures",
+      "name": "futures",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "num-traits"
+      ],
+      "loaf": "crates-io/half",
+      "name": "half",
+      "optional": false,
+      "req": "^2.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.17.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2",
+      "target": "cfg(not(all(target_family = \"wasm\", target_os = \"unknown\")))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/num-complex",
+      "name": "num-complex",
+      "optional": false,
+      "req": "^0.4.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/num-integer",
+      "name": "num-integer",
+      "optional": false,
+      "req": "^0.1.46"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.19"
+    }
+  ],
+  "features": {
+    "async": [
+      "dep:futures"
+    ],
+    "chrono-tz": [
+      "dep:chrono-tz"
+    ],
+    "ffi": [
+      "arrow-schema/ffi",
+      "arrow-data/ffi",
+      "dep:libc"
+    ],
+    "force_validate": [
+      "arrow-data/force_validate"
+    ],
+    "pool": [
+      "arrow-buffer/pool",
+      "arrow-data/pool"
+    ]
+  },
+  "id": "sha256:a2008eb6aab583dbd911b305451925ca25df8a138a71f37ec40ea3b3774b09ef",
+  "kind": "adopt",
+  "manifest": "sha256:5d8a496a93d4aa06b292bcdc225a6a2c97fe0c856aaa24c4819838a9bfe1b9b7",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "arrow_array",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "arrow-array",
+    "scope": "crates-io",
+    "version": "60.0.0"
+  }
+}

@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/objc2-io-surface"
+version = "0.3.2"
+
+[project.features]
+IOSurface = []
+IOSurfaceAPI = []
+IOSurfaceBase = []
+IOSurfaceRef = ["bitflags"]
+IOSurfaceTypes = ["bitflags"]
+ObjC = ["objc2"]
+alloc = []
+bitflags = ["dep:bitflags"]
+default = ["std", "IOSurface", "IOSurfaceAPI", "IOSurfaceBase", "IOSurfaceRef", "IOSurfaceTypes", "bitflags", "libc", "objc2", "objc2-core-foundation", "objc2-foundation"]
+libc = ["dep:libc"]
+objc2 = ["dep:objc2", "objc2-core-foundation?/objc2"]
+objc2-core-foundation = ["dep:objc2-core-foundation"]
+objc2-foundation = ["dep:objc2-foundation"]
+std = ["alloc"]
+unstable-darwin-objc = []
+
+[rust]
+name = "objc2_io_surface"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.5.0", features = ["std"], default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.80", default-features = false, optional = true }
+objc2 = { loaf = "crates-io/objc2", version = ">=0.6.2, <0.8.0", features = ["std"], default-features = false, optional = true }
+objc2-core-foundation = { loaf = "crates-io/objc2-core-foundation", version = "^0.3.2", features = ["CFDictionary"], default-features = false, optional = true }
+objc2-foundation = { loaf = "crates-io/objc2-foundation", version = "^0.3.2", features = ["NSDictionary", "NSObject", "NSString", "alloc"], default-features = false, optional = true }

@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fancy-regex"
+version = "0.19.2"
+
+[project.features]
+default = ["unicode", "perf", "std", "variable-lookbehinds"]
+leftmost_longest = []
+perf = ["regex-automata/perf"]
+perf-dfa-full = ["regex-automata/dfa-build"]
+std = ["regex-automata/std", "regex-syntax/std", "bit-set/std"]
+track_caller = []
+unicode = ["regex-automata/unicode", "regex-syntax/unicode"]
+variable-lookbehinds = ["regex-automata/dfa-search"]
+
+[rust]
+name = "fancy_regex"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bit-set = { loaf = "crates-io/bit-set", version = "^0.8", default-features = false }
+regex-automata = { loaf = "crates-io/regex-automata", version = "^0.4.16", features = ["alloc", "dfa-onepass", "dfa-search", "hybrid", "meta", "nfa", "syntax"], default-features = false }
+regex-syntax = { loaf = "crates-io/regex-syntax", version = "^0.8", default-features = false }

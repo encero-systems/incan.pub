@@ -1,0 +1,15 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fs2"
+version = "0.4.3"
+
+[rust]
+name = "fs2"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.30", target = "cfg(unix)" }
+winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["fileapi", "handleapi", "processthreadsapi", "std", "winbase", "winerror"], target = "cfg(windows)" }

@@ -1,0 +1,133 @@
+{
+  "about": {
+    "description": "Async I/O and timers",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/async-io"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:456b8a8feb6f42d237746d4b3e9a178494627745c3c56c6ea55d92ba50d026fc",
+    "package": "async-io",
+    "registry": "crates-io",
+    "version": "2.6.0"
+  },
+  "archive": "sha256:30ade810ebb21fb0b2cc876f56f66d671d97a8fef907b8d3de412b441e9e5345",
+  "at": "2026-10-07T07:43:58Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/concurrent-queue",
+      "name": "concurrent-queue",
+      "optional": false,
+      "req": "^2.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": false,
+      "req": "^0.3.28"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-lite",
+      "name": "futures-lite",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking",
+      "name": "parking",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/polling",
+      "name": "polling",
+      "optional": false,
+      "req": "^3.4.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "fs",
+        "net",
+        "std"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/slab",
+      "name": "slab",
+      "optional": false,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.37"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.61",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "tracing": [
+      "dep:tracing"
+    ]
+  },
+  "id": "sha256:1d5b9dbdcc28c98af65035c675533e9d04c85385b06578337e35a21d9358df7f",
+  "kind": "adopt",
+  "manifest": "sha256:8d526dad45b665b75cec1ed29907a6ad4720d9ffca314f6c259a65a3d79ffa76",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "async_io",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "async-io",
+    "scope": "crates-io",
+    "version": "2.6.0"
+  }
+}

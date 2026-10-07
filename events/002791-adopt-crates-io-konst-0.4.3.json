@@ -1,0 +1,106 @@
+{
+  "about": {
+    "description": "Const equivalents of std features: comparison, destructuring, iteration, and parsing",
+    "documentation": "https://docs.rs/konst/",
+    "homepage": "",
+    "license": "Zlib",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rodrimati1992/konst/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f660d5f887e3562f9ab6f4a14988795b694099d66b4f5dedc02d197ba9becb1d",
+    "package": "konst",
+    "registry": "crates-io",
+    "version": "0.4.3"
+  },
+  "archive": "sha256:6cdc1b1ab554891bffa8e926bfe6b405d8cacb487834bf5f62f7a00272581605",
+  "at": "2026-10-07T07:45:36Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "rust_1_88"
+      ],
+      "loaf": "crates-io/const_panic",
+      "name": "const_panic",
+      "optional": false,
+      "req": "^0.2.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/konst_proc_macros",
+      "name": "konst_proc_macros",
+      "optional": true,
+      "req": "=0.4.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/trybuild",
+      "name": "trybuild",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rust_1_83"
+      ],
+      "loaf": "crates-io/typewit",
+      "name": "typewit",
+      "optional": false,
+      "req": "^1.12"
+    }
+  ],
+  "features": {
+    "__ui": [
+      "trybuild",
+      "rust_latest_stable"
+    ],
+    "alloc": [],
+    "cmp": [],
+    "const_panic_derive": [
+      "const_panic/derive"
+    ],
+    "debug": [],
+    "default": [
+      "cmp",
+      "iter",
+      "parsing_proc"
+    ],
+    "docsrs": [],
+    "iter": [],
+    "konst_proc_macros": [
+      "dep:konst_proc_macros"
+    ],
+    "parsing": [],
+    "parsing_proc": [
+      "parsing",
+      "konst_proc_macros"
+    ],
+    "rust_latest_stable": [],
+    "trybuild": [
+      "dep:trybuild"
+    ]
+  },
+  "id": "sha256:3dadbdff5a7ee15c3a951230a84c3be18a2105b9f99fb73e5cf8b5cf7e8e7123",
+  "kind": "adopt",
+  "manifest": "sha256:f5a78b8941085e7568c6830e5465e966522b7bc576d28fdc55737bd5ba4390fb",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "konst",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "konst",
+    "scope": "crates-io",
+    "version": "0.4.3"
+  }
+}

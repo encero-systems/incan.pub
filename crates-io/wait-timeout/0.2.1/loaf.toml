@@ -1,0 +1,14 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wait-timeout"
+version = "0.2.1"
+
+[rust]
+name = "wait_timeout"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.56", target = "cfg(unix)" }

@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ed25519"
+version = "3.0.0"
+
+[project.features]
+alloc = ["pkcs8?/alloc", "signature/alloc"]
+default = ["alloc"]
+pem = ["alloc", "dep:pkcs8", "pkcs8/pem"]
+pkcs8 = ["dep:pkcs8"]
+serde = ["dep:serdect"]
+zerocopy = ["dep:zerocopy"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "ed25519"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+pkcs8 = { loaf = "crates-io/pkcs8", version = "^0.11", optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.4", default-features = false, optional = true }
+signature = { loaf = "crates-io/signature", version = "^3", default-features = false }
+zerocopy = { loaf = "crates-io/zerocopy", version = "^0.8", features = ["derive"], optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

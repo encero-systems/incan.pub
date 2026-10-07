@@ -1,0 +1,87 @@
+{
+  "about": {
+    "description": "A vector of bits",
+    "documentation": "https://docs.rs/bit-vec/",
+    "homepage": "https://github.com/contain-rs/bit-vec",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/contain-rs/bit-vec"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5727b15fa97d4f4fee0a3b7c3d550ed0269f54329207b86388de918604e31269",
+    "package": "bit-vec",
+    "registry": "crates-io",
+    "version": "0.10.1"
+  },
+  "archive": "sha256:58b8287fa3819ff908574efff4b3696d2b6169e9dee935e05464eb560492a8b8",
+  "at": "2026-10-07T07:42:26Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/borsh",
+      "name": "borsh",
+      "optional": true,
+      "req": "^1.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/miniserde",
+      "name": "miniserde",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "allocator_api": [],
+    "borsh": [
+      "dep:borsh"
+    ],
+    "default": [
+      "std"
+    ],
+    "miniserde": [
+      "dep:miniserde"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "serde?/std",
+      "borsh?/std"
+    ]
+  },
+  "id": "sha256:125ac119151ffedb3fd092033d6c98556921a43ee8049e4f45ccf0c6aef64844",
+  "kind": "adopt",
+  "manifest": "sha256:15de1ed57e10dc4617b22378e76d7c2011a32aef4c944bbda4012eae6697d6db",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "bit_vec",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bit-vec",
+    "scope": "crates-io",
+    "version": "0.10.1"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "about": {
+    "description": "SIMD-accelerated base64 encoding and decoding",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Nugine/simd"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:339abbe78e73178762e23bea9dfd08e697eb3f3301cd4be981c0f78ba5859195",
+    "package": "base64-simd",
+    "registry": "crates-io",
+    "version": "0.8.0"
+  },
+  "archive": "sha256:cc4e31c686b5710ee56f67e7a448c14f190d7f9a5d4ded15e631f1afa4575280",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/outref",
+      "name": "outref",
+      "optional": false,
+      "req": "^0.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/vsimd",
+      "name": "vsimd",
+      "optional": false,
+      "req": "^0.8.0"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "vsimd/alloc"
+    ],
+    "default": [
+      "std",
+      "detect"
+    ],
+    "detect": [
+      "vsimd/detect"
+    ],
+    "std": [
+      "alloc",
+      "vsimd/std"
+    ],
+    "unstable": [
+      "vsimd/unstable"
+    ]
+  },
+  "id": "sha256:f7529e78f054de1e3fc22fa631999c1333d1cc1dc2fdaf256d2f98c811cc7b7a",
+  "kind": "adopt",
+  "manifest": "sha256:843b9ff85893a6d8879508a1c99e246e90ccb96116aa642bd3a20e0d5c8b45f0",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "base64_simd",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "base64-simd",
+    "scope": "crates-io",
+    "version": "0.8.0"
+  }
+}

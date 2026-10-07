@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bstr"
+version = "1.13.1"
+
+[project.features]
+alloc = ["memchr/alloc", "serde_core?/alloc"]
+default = ["std", "unicode"]
+serde = ["dep:serde_core"]
+std = ["alloc", "memchr/std", "serde_core?/std"]
+unicode = ["dep:regex-automata"]
+
+[rust]
+name = "bstr"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+memchr = { loaf = "crates-io/memchr", version = "^2.7.1", default-features = false }
+regex-automata = { loaf = "crates-io/regex-automata", version = "^0.4.1", features = ["dfa-search"], default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.85", default-features = false, optional = true }

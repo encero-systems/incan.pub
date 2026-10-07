@@ -1,0 +1,104 @@
+{
+  "about": {
+    "description": "An asynchronous single-consumer single-producer pipe for bytes.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/piper"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c835479a4443ded371d6c535cbfd8d31ad92c5d23ae9770a61bc155e4992a3c1",
+    "package": "piper",
+    "registry": "crates-io",
+    "version": "0.2.5"
+  },
+  "archive": "sha256:77a93761d0bd2217c90d75f7796c3608bd670083c37012aa70190ea78c0f2721",
+  "at": "2026-10-07T07:44:00Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-waker",
+      "name": "atomic-waker",
+      "optional": false,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/fastrand",
+      "name": "fastrand",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": true,
+      "req": "^0.3.28"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/portable-atomic-util",
+      "name": "portable-atomic-util",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable_atomic_crate",
+      "optional": true,
+      "req": "^1.2.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "futures-io": [
+      "dep:futures-io"
+    ],
+    "portable-atomic": [
+      "atomic-waker/portable-atomic",
+      "portable_atomic_crate",
+      "portable-atomic-util"
+    ],
+    "portable-atomic-util": [
+      "dep:portable-atomic-util"
+    ],
+    "portable_atomic_crate": [
+      "dep:portable_atomic_crate"
+    ],
+    "std": [
+      "fastrand/std",
+      "futures-io"
+    ]
+  },
+  "id": "sha256:decb6b60f02a2f6ae60ef5c971438d116a91c4e3adc0b55a5d6d5d2c0aac0f25",
+  "kind": "adopt",
+  "manifest": "sha256:21a2c38551a16c018ab6cfeb33a582601d43ed8c9497075bcd182217316fa4f6",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "piper",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "piper",
+    "scope": "crates-io",
+    "version": "0.2.5"
+  }
+}

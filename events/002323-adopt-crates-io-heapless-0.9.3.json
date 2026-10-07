@@ -1,0 +1,159 @@
+{
+  "about": {
+    "description": "`static` friendly data structures that don't require dynamic memory allocation",
+    "documentation": "https://docs.rs/heapless",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-embedded/heapless"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:25ba4bd83f9415b58b4ed8dc5714c76e626a105be4646c02630ad730ad3b5aa4",
+    "package": "heapless",
+    "registry": "crates-io",
+    "version": "0.9.3"
+  },
+  "archive": "sha256:2461d562bce6e7a62d32d8be712490700a29fd59b19e649c5364239858bd6ac3",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/defmt",
+      "name": "defmt",
+      "optional": true,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/embedded-io",
+      "name": "embedded-io",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hash32",
+      "name": "hash32",
+      "optional": false,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(any(target_arch = \"arm\", target_pointer_width = \"32\", target_pointer_width = \"64\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ufmt",
+      "name": "ufmt",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ufmt-write",
+      "name": "ufmt-write",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.8"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "defmt": [
+      "dep:defmt"
+    ],
+    "embedded-io-v0.7": [
+      "dep:embedded-io"
+    ],
+    "mpmc_large": [],
+    "nightly": [],
+    "portable-atomic": [
+      "dep:portable-atomic"
+    ],
+    "portable-atomic-critical-section": [
+      "dep:portable-atomic",
+      "portable-atomic",
+      "portable-atomic?/critical-section"
+    ],
+    "portable-atomic-unsafe-assume-single-core": [
+      "dep:portable-atomic",
+      "portable-atomic",
+      "portable-atomic?/unsafe-assume-single-core"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "ufmt": [
+      "dep:ufmt",
+      "dep:ufmt-write"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:bf086f7086fa5c7970a738e31b061a2b7341bf2c27eb284000823aed47c47946",
+  "kind": "adopt",
+  "manifest": "sha256:21fd5a4a5a6de5d54e0fc0ca070c6175c5d1f67b452fc16e3d0bf0ce35699e2c",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "heapless",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "heapless",
+    "scope": "crates-io",
+    "version": "0.9.3"
+  }
+}

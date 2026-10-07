@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/unicode-normalization"
+version = "0.1.25"
+
+[project.features]
+default = ["std"]
+std = []
+
+[rust]
+name = "unicode_normalization"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+tinyvec = { loaf = "crates-io/tinyvec", version = "^1", features = ["alloc"] }

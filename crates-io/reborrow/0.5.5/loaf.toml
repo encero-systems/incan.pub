@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/reborrow"
+version = "0.5.5"
+
+[project.features]
+default = []
+derive = ["reborrow-derive"]
+reborrow-derive = ["dep:reborrow-derive"]
+
+[rust]
+name = "reborrow"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+reborrow-derive = { loaf = "crates-io/reborrow-derive", version = "^0.5", optional = true }

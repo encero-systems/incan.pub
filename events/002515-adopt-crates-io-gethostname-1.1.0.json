@@ -1,0 +1,60 @@
+{
+  "about": {
+    "description": "gethostname for all platforms",
+    "documentation": "https://docs.rs/gethostname",
+    "homepage": "https://codeberg.org/swsnr/gethostname.rs",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://codeberg.org/swsnr/gethostname.rs.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1bd49230192a3797a9a4d6abe9b3eed6f7fa4c8a8a4947977c6f80025f92cbd8",
+    "package": "gethostname",
+    "registry": "crates-io",
+    "version": "1.1.0"
+  },
+  "archive": "sha256:7b4dcbdc8aa19fca066e2a1a98ff8cf1738e9b84533d3e2195d5292d9e4ee46e",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "system"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.3",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-link",
+      "name": "windows-link",
+      "optional": false,
+      "req": "^0.2.1",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:c514cf2a7ff758d0316ffbd3360c531bef54b95f747c7525d6dabed6cfb1f440",
+  "kind": "adopt",
+  "manifest": "sha256:aebaf1c9df873d378c20582d215c2204e9505197671dc0d320acded0afe75b9b",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "gethostname",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "gethostname",
+    "scope": "crates-io",
+    "version": "1.1.0"
+  }
+}

@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/event-listener"
+version = "5.4.2"
+
+[project.features]
+critical-section = ["dep:critical-section"]
+default = ["std"]
+loom = ["parking?/loom", "dep:loom"]
+parking = ["dep:parking"]
+portable-atomic = ["portable-atomic-util", "portable_atomic_crate"]
+portable-atomic-util = ["dep:portable-atomic-util"]
+portable_atomic_crate = ["dep:portable_atomic_crate"]
+std = ["parking"]
+
+[rust]
+name = "event_listener"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+critical-section = { loaf = "crates-io/critical-section", version = "^1.2.0", default-features = false, optional = true }
+loom = { loaf = "crates-io/loom", version = "^0.7", optional = true, target = "cfg(loom)" }
+parking = { loaf = "crates-io/parking", version = "^2.0.0", optional = true, target = "cfg(not(target_family = \"wasm\"))" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.12" }
+portable-atomic-util = { loaf = "crates-io/portable-atomic-util", version = "^0.2.0", features = ["alloc"], default-features = false, optional = true }
+portable_atomic_crate = { loaf = "crates-io/portable-atomic", version = "^1.2.0", default-features = false, optional = true }

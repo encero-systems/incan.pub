@@ -1,0 +1,39 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-compression"
+version = "0.4.50"
+
+[project.features]
+all = ["all-implementations", "all-algorithms"]
+all-algorithms = ["brotli", "bzip2", "deflate", "deflate64", "gzip", "lz4", "lzma", "xz", "xz-parallel", "zlib", "zstd"]
+all-implementations = ["futures-io", "tokio"]
+brotli = ["compression-codecs/brotli"]
+brotli-mbrotli = ["compression-codecs/brotli-mbrotli"]
+bzip2 = ["compression-codecs/bzip2"]
+deflate = ["compression-codecs/deflate"]
+deflate64 = ["compression-codecs/deflate64"]
+futures-io = ["dep:futures-io"]
+gzip = ["compression-codecs/gzip"]
+lz4 = ["compression-codecs/lz4"]
+lzma = ["compression-codecs/lzma"]
+tokio = ["dep:tokio"]
+xz = ["compression-codecs/xz", "lzma"]
+xz-parallel = ["compression-codecs/xz-parallel", "xz"]
+xz2 = ["compression-codecs/xz2", "xz"]
+zlib = ["compression-codecs/zlib"]
+zstd = ["compression-codecs/zstd"]
+zstdmt = ["compression-codecs/zstdmt", "zstd"]
+
+[rust]
+name = "async_compression"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+compression-codecs = { loaf = "crates-io/compression-codecs", version = "^0.4.45" }
+compression-core = { loaf = "crates-io/compression-core", version = "^0.4.33" }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3", features = ["std"], default-features = false, optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1.24.2", default-features = false, optional = true }

@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/piper"
+version = "0.2.5"
+
+[project.features]
+default = ["std"]
+futures-io = ["dep:futures-io"]
+portable-atomic = ["atomic-waker/portable-atomic", "portable_atomic_crate", "portable-atomic-util"]
+portable-atomic-util = ["dep:portable-atomic-util"]
+portable_atomic_crate = ["dep:portable_atomic_crate"]
+std = ["fastrand/std", "futures-io"]
+
+[rust]
+name = "piper"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+atomic-waker = { loaf = "crates-io/atomic-waker", version = "^1.1.0" }
+fastrand = { loaf = "crates-io/fastrand", version = "^2.0.0", default-features = false }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.28", optional = true }
+portable-atomic-util = { loaf = "crates-io/portable-atomic-util", version = "^0.2.0", features = ["alloc"], optional = true }
+portable_atomic_crate = { loaf = "crates-io/portable-atomic", version = "^1.2.0", default-features = false, optional = true }

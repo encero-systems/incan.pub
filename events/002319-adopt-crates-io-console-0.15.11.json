@@ -1,0 +1,99 @@
+{
+  "about": {
+    "description": "A terminal and console abstraction for Rust",
+    "documentation": "https://docs.rs/console",
+    "homepage": "https://github.com/console-rs/console",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/console-rs/console"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:054ccb5b10f9f2cbf51eb355ca1d05c2d279ce1804688d0db74b4733a5aeafd8",
+    "package": "console",
+    "registry": "crates-io",
+    "version": "0.15.11"
+  },
+  "archive": "sha256:602139eab6035e9ab7b87546de96e255b4091d2a10280ea00767a8df3b0e51cf",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/encode_unicode",
+      "name": "encode_unicode",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.99"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Console",
+        "Win32_UI_Input_KeyboardAndMouse"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.59",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "ansi-parsing": [],
+    "default": [
+      "unicode-width",
+      "ansi-parsing"
+    ],
+    "unicode-width": [
+      "dep:unicode-width"
+    ],
+    "windows-console-colors": [
+      "ansi-parsing"
+    ]
+  },
+  "id": "sha256:16338217931649b08fcd17325f55e3e0a2f6f87aeb394fc52547769b08155365",
+  "kind": "adopt",
+  "manifest": "sha256:6af3bb8c704ab2d83be245be01a40c9f26c4304f5204f347213888410abf25aa",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "console",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "console",
+    "scope": "crates-io",
+    "version": "0.15.11"
+  }
+}

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/mime_guess"
+version = "2.0.5"
+
+[project.features]
+default = ["rev-mappings"]
+rev-mappings = []
+
+[rust]
+name = "mime_guess"
+type = "lib"
+edition = "2015"
+build-script = true
+
+[dependencies]
+mime = { loaf = "crates-io/mime", version = "^0.3" }
+unicase = { loaf = "crates-io/unicase", version = "^2.4.0" }

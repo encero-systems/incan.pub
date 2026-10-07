@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/k8s-openapi"
+version = "0.28.0"
+
+[project.features]
+default = ["std"]
+earliest = ["v1_32"]
+latest = ["v1_36"]
+schemars = ["dep:schemars"]
+schemars08 = ["dep:schemars08"]
+std = []
+v1_32 = []
+v1_33 = []
+v1_34 = []
+v1_35 = []
+v1_36 = []
+
+[rust]
+name = "k8s_openapi"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22", features = ["alloc"], default-features = false }
+jiff = { loaf = "crates-io/jiff", version = "^0.2", features = ["alloc", "serde"], default-features = false }
+schemars = { loaf = "crates-io/schemars", version = "^1", default-features = false, optional = true }
+schemars08 = { loaf = "crates-io/schemars", version = "^0.8", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false }
+serde_json = { loaf = "crates-io/serde_json", version = "^1", features = ["alloc"], default-features = false }

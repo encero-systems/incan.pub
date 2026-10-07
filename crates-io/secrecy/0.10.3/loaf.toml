@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/secrecy"
+version = "0.10.3"
+
+[project.features]
+serde = ["dep:serde"]
+
+[rust]
+name = "secrecy"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1", features = ["alloc"], default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.6", features = ["alloc"], default-features = false }

@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ndk-sys"
+version = "0.6.0+11769913"
+
+[project.features]
+audio = []
+bitmap = []
+media = []
+nativewindow = []
+sync = []
+test = []
+
+[rust]
+name = "ndk_sys"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+jni-sys = { loaf = "crates-io/jni-sys", version = "^0.3.0" }

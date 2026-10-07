@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pin-project-internal"
+version = "1.1.13"
+
+[rust]
+name = "pin_project_internal"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.60" }
+quote = { loaf = "crates-io/quote", version = "^1.0.25" }
+syn = { loaf = "crates-io/syn", version = "^2.0.1", features = ["clone-impls", "full", "parsing", "printing", "proc-macro", "visit-mut"], default-features = false }

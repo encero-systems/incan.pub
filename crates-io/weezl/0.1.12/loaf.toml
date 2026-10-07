@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/weezl"
+version = "0.1.12"
+
+[project.features]
+alloc = []
+async = ["futures", "std"]
+default = ["std"]
+futures = ["dep:futures"]
+std = ["alloc"]
+
+[rust]
+name = "weezl"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+futures = { loaf = "crates-io/futures", version = "^0.3.12", features = ["std"], default-features = false, optional = true }

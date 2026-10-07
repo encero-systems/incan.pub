@@ -1,0 +1,129 @@
+{
+  "about": {
+    "description": "Parser/encoder for ASN.1 BER/DER data",
+    "documentation": "",
+    "homepage": "https://github.com/rusticata/der-parser",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rusticata/der-parser.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:07da5016415d5a3c4dd39b11ed26f915f52fc4e0dc197d87908bc916e51bc1a6",
+    "package": "der-parser",
+    "registry": "crates-io",
+    "version": "10.0.0"
+  },
+  "archive": "sha256:79969392d28a557585de07df480cd43888d78ecb0f2c30964061cfc8b25e4b74",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/asn1-rs",
+      "name": "asn1-rs",
+      "optional": false,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitvec",
+      "name": "bitvec",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cookie-factory",
+      "name": "cookie-factory",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/nom",
+      "name": "nom",
+      "optional": false,
+      "req": "^7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rusticata-macros",
+      "name": "rusticata-macros",
+      "optional": false,
+      "req": "^4.0"
+    }
+  ],
+  "features": {
+    "as_bitvec": [
+      "bitvec"
+    ],
+    "bigint": [
+      "num-bigint"
+    ],
+    "bitvec": [
+      "dep:bitvec"
+    ],
+    "cookie-factory": [
+      "dep:cookie-factory"
+    ],
+    "default": [
+      "std"
+    ],
+    "num-bigint": [
+      "dep:num-bigint"
+    ],
+    "serialize": [
+      "std",
+      "cookie-factory"
+    ],
+    "std": [],
+    "unstable": []
+  },
+  "id": "sha256:be2e883af41005871df13f72d6460d804bd52a12d84d529c835501bf1eed20d5",
+  "kind": "adopt",
+  "manifest": "sha256:af90782c1dc9817f16ec0d6d514a9fd53166a17f10d8fce26a672ff68062e21d",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "der_parser",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "der-parser",
+    "scope": "crates-io",
+    "version": "10.0.0"
+  }
+}

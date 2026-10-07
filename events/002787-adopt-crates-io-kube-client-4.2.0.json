@@ -1,0 +1,518 @@
+{
+  "about": {
+    "description": "Kubernetes client",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/kube-rs/kube"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:31e940a73033a7c5c7918b5ece7851d84571b58be25e937198da37fa13f116d3",
+    "package": "kube-client",
+    "registry": "crates-io",
+    "version": "4.2.0"
+  },
+  "archive": "sha256:6b3372e70e6c58132a11354980c059d5c47eedeb941997e8dc340d975aeddc23",
+  "at": "2026-10-07T07:45:36Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": true,
+      "req": "^0.22.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1.9.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/either",
+      "name": "either",
+      "optional": true,
+      "req": "^1.6.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/form_urlencoded",
+      "name": "form_urlencoded",
+      "optional": true,
+      "req": "^1.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures",
+      "name": "futures",
+      "optional": true,
+      "req": "^0.3.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^1.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body",
+      "name": "http-body",
+      "optional": true,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body-util",
+      "name": "http-body-util",
+      "optional": true,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "client",
+        "http1"
+      ],
+      "loaf": "crates-io/hyper",
+      "name": "hyper",
+      "optional": true,
+      "req": "^1.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "client-legacy",
+        "tokio"
+      ],
+      "loaf": "crates-io/hyper-openssl",
+      "name": "hyper-openssl",
+      "optional": true,
+      "req": "^0.10.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "http1",
+        "logging",
+        "native-tokio",
+        "tls12"
+      ],
+      "loaf": "crates-io/hyper-rustls",
+      "name": "hyper-rustls",
+      "optional": true,
+      "req": "^0.27.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hyper-timeout",
+      "name": "hyper-timeout",
+      "optional": true,
+      "req": "^0.5.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "client",
+        "client-legacy",
+        "http1",
+        "tokio"
+      ],
+      "loaf": "crates-io/hyper-util",
+      "name": "hyper-util",
+      "optional": true,
+      "req": "^0.1.16"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "serde",
+        "std"
+      ],
+      "loaf": "crates-io/jiff",
+      "name": "jiff",
+      "optional": true,
+      "req": "^0.2.16"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/jsonpath-rust",
+      "name": "jsonpath-rust",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/k8s-openapi",
+      "name": "k8s-openapi",
+      "optional": false,
+      "req": "^0.28.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/kube-core",
+      "name": "kube-core",
+      "optional": false,
+      "req": "=4.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/openssl",
+      "name": "openssl",
+      "optional": true,
+      "req": "^0.10.61"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pem",
+      "name": "pem",
+      "optional": true,
+      "req": "^3.0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rustls",
+      "name": "rustls",
+      "optional": true,
+      "req": "^0.23.27"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustls-platform-verifier",
+      "name": "rustls-platform-verifier",
+      "optional": true,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/secrecy",
+      "name": "secrecy",
+      "optional": false,
+      "req": "^0.10.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": false,
+      "req": "^1.0.221"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde-saphyr",
+      "name": "serde-saphyr",
+      "optional": true,
+      "req": "^0.0.29"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": false,
+      "req": "^1.0.127"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "gcp"
+      ],
+      "loaf": "crates-io/tame-oauth",
+      "name": "tame-oauth",
+      "optional": true,
+      "req": "^0.10.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2.0.15"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "rt",
+        "signal",
+        "sync",
+        "time"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.35"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio-tungstenite",
+      "name": "tokio-tungstenite",
+      "optional": true,
+      "req": "^0.29.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "codec",
+        "io"
+      ],
+      "loaf": "crates-io/tokio-util",
+      "name": "tokio-util",
+      "optional": true,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "buffer",
+        "filter",
+        "retry",
+        "util"
+      ],
+      "loaf": "crates-io/tower",
+      "name": "tower",
+      "optional": true,
+      "req": "^0.5.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "auth",
+        "map-response-body",
+        "trace",
+        "util"
+      ],
+      "loaf": "crates-io/tower-http",
+      "name": "tower-http",
+      "optional": true,
+      "req": "^0.6.4"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "log"
+      ],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.36"
+    }
+  ],
+  "features": {
+    "__non_core": [
+      "tracing",
+      "serde-saphyr",
+      "base64"
+    ],
+    "admission": [
+      "kube-core/admission"
+    ],
+    "aws-lc-rs": [
+      "hyper-rustls?/aws-lc-rs"
+    ],
+    "base64": [
+      "dep:base64"
+    ],
+    "bytes": [
+      "dep:bytes"
+    ],
+    "client": [
+      "config",
+      "__non_core",
+      "hyper",
+      "hyper-util",
+      "http-body",
+      "http-body-util",
+      "tower",
+      "tower-http",
+      "hyper-timeout",
+      "jiff",
+      "jsonpath-rust",
+      "bytes",
+      "futures",
+      "tokio",
+      "tokio-util",
+      "either"
+    ],
+    "config": [
+      "__non_core",
+      "pem"
+    ],
+    "default": [
+      "client",
+      "ring"
+    ],
+    "either": [
+      "dep:either"
+    ],
+    "form_urlencoded": [
+      "dep:form_urlencoded"
+    ],
+    "futures": [
+      "dep:futures"
+    ],
+    "gzip": [
+      "client",
+      "dep:tower-http",
+      "tower-http/decompression-gzip"
+    ],
+    "http-body": [
+      "dep:http-body"
+    ],
+    "http-body-util": [
+      "dep:http-body-util"
+    ],
+    "http-proxy": [
+      "dep:hyper-util",
+      "hyper-util/client-proxy"
+    ],
+    "hyper": [
+      "dep:hyper"
+    ],
+    "hyper-openssl": [
+      "dep:hyper-openssl"
+    ],
+    "hyper-rustls": [
+      "dep:hyper-rustls"
+    ],
+    "hyper-timeout": [
+      "dep:hyper-timeout"
+    ],
+    "hyper-util": [
+      "dep:hyper-util"
+    ],
+    "hyper-util-tracing": [
+      "dep:hyper-util",
+      "hyper-util/tracing"
+    ],
+    "jiff": [
+      "dep:jiff"
+    ],
+    "jsonpatch": [
+      "kube-core/jsonpatch"
+    ],
+    "jsonpath-rust": [
+      "dep:jsonpath-rust"
+    ],
+    "kubelet-debug": [
+      "ws",
+      "kube-core/kubelet-debug"
+    ],
+    "oauth": [
+      "client",
+      "tame-oauth"
+    ],
+    "oidc": [
+      "client",
+      "form_urlencoded"
+    ],
+    "openssl": [
+      "dep:openssl"
+    ],
+    "openssl-tls": [
+      "openssl",
+      "hyper-openssl"
+    ],
+    "pem": [
+      "dep:pem"
+    ],
+    "ring": [
+      "hyper-rustls?/ring"
+    ],
+    "rustls": [
+      "dep:rustls"
+    ],
+    "rustls-tls": [
+      "rustls",
+      "hyper-rustls",
+      "dep:rustls-platform-verifier"
+    ],
+    "serde-saphyr": [
+      "dep:serde-saphyr"
+    ],
+    "socks5": [
+      "dep:hyper-util",
+      "hyper-util/client-proxy"
+    ],
+    "tame-oauth": [
+      "dep:tame-oauth"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "tokio-tungstenite": [
+      "dep:tokio-tungstenite"
+    ],
+    "tokio-util": [
+      "dep:tokio-util"
+    ],
+    "tower": [
+      "dep:tower"
+    ],
+    "tower-http": [
+      "dep:tower-http"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ],
+    "unstable-client": [],
+    "webpki-roots": [
+      "dep:hyper-rustls",
+      "hyper-rustls/webpki-roots"
+    ],
+    "ws": [
+      "client",
+      "tokio-tungstenite",
+      "kube-core/ws",
+      "dep:tokio",
+      "tokio/macros"
+    ]
+  },
+  "id": "sha256:8cefe7165396f84ecdb15945bbba12e53bac3c8aafe006dbe3a9ba8fddfd45bb",
+  "kind": "adopt",
+  "manifest": "sha256:4e90b2e1539bcffad631f152f0fb1d43d6b38e447e27bc2fd7fd92009e6440e5",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "kube_client",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "kube-client",
+    "scope": "crates-io",
+    "version": "4.2.0"
+  }
+}

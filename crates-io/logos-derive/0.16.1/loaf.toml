@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/logos-derive"
+version = "0.16.1"
+
+[project.features]
+debug = ["logos-codegen/debug"]
+forbid_unsafe = ["logos-codegen/forbid_unsafe"]
+state_machine_codegen = ["logos-codegen/state_machine_codegen"]
+
+[rust]
+name = "logos_derive"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+logos-codegen = { loaf = "crates-io/logos-codegen", version = "^0.16.1" }

@@ -1,0 +1,194 @@
+{
+  "about": {
+    "description": "A cross-platform symbolication library written in Rust, using `gimli`",
+    "documentation": "https://docs.rs/addr2line",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/gimli-rs/addr2line"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1b5d307320b3181d6d7954e663bd7c774a838b8220fe0593c86d9fb09f498b4b",
+    "package": "addr2line",
+    "registry": "crates-io",
+    "version": "0.25.1"
+  },
+  "archive": "sha256:7945c41cd673e030a34905cde1cc9d156d52865464dfd4ec69a8100895a4d05e",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "wrap_help"
+      ],
+      "loaf": "crates-io/clap",
+      "name": "clap",
+      "optional": true,
+      "req": "^4.3.21"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/cpp_demangle",
+      "name": "cpp_demangle",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/fallible-iterator",
+      "name": "fallible-iterator",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "read"
+      ],
+      "loaf": "crates-io/gimli",
+      "name": "gimli",
+      "optional": false,
+      "req": "^0.32.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memmap2",
+      "name": "memmap2",
+      "optional": true,
+      "req": "^0.9.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "compression",
+        "read"
+      ],
+      "loaf": "crates-io/object",
+      "name": "object",
+      "optional": true,
+      "req": "^0.37.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-demangle",
+      "name": "rustc-demangle",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/typed-arena",
+      "name": "typed-arena",
+      "optional": true,
+      "req": "^2"
+    }
+  ],
+  "features": {
+    "all": [
+      "bin",
+      "wasm"
+    ],
+    "alloc": [
+      "dep:alloc"
+    ],
+    "bin": [
+      "loader",
+      "rustc-demangle",
+      "cpp_demangle",
+      "fallible-iterator",
+      "smallvec",
+      "dep:clap"
+    ],
+    "cargo-all": [],
+    "core": [
+      "dep:core"
+    ],
+    "cpp_demangle": [
+      "dep:cpp_demangle"
+    ],
+    "default": [
+      "rustc-demangle",
+      "cpp_demangle",
+      "loader",
+      "fallible-iterator",
+      "smallvec"
+    ],
+    "fallible-iterator": [
+      "dep:fallible-iterator"
+    ],
+    "loader": [
+      "std",
+      "dep:object",
+      "dep:memmap2",
+      "dep:typed-arena"
+    ],
+    "rustc-demangle": [
+      "dep:rustc-demangle"
+    ],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc",
+      "gimli/rustc-dep-of-std"
+    ],
+    "smallvec": [
+      "dep:smallvec"
+    ],
+    "std": [
+      "gimli/std"
+    ],
+    "wasm": [
+      "dep:object",
+      "object/wasm"
+    ]
+  },
+  "id": "sha256:493f0427063716b42cf92a3c0d12fb1e85ec653319d042d4c03b2204c71f287f",
+  "kind": "adopt",
+  "manifest": "sha256:b40622c6269d25d16f4dd86dae365de3f07d6057fd77bae85596d7bfd7c255e4",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "addr2line",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "addr2line",
+    "scope": "crates-io",
+    "version": "0.25.1"
+  }
+}

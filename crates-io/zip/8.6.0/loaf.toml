@@ -1,0 +1,67 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zip"
+version = "8.6.0"
+
+[project.features]
+_arbitrary = ["dep:arbitrary"]
+_bzip2_any = []
+_deflate-any = []
+aes-crypto = ["dep:aes", "dep:constant_time_eq", "dep:getrandom", "getrandom/std", "dep:hmac", "dep:pbkdf2", "dep:sha1", "dep:zeroize"]
+bitstream-io = ["dep:bitstream-io"]
+bzip2 = ["dep:bzip2", "bzip2/default", "_bzip2_any"]
+bzip2-rs = ["dep:bzip2", "bzip2/bzip2-sys", "_bzip2_any"]
+chrono = ["dep:chrono"]
+default = ["aes-crypto", "bzip2", "deflate64", "deflate", "lzma", "ppmd", "time", "zstd", "xz"]
+deflate = ["deflate-zopfli", "deflate-flate2-zlib-rs"]
+deflate-flate2 = ["_deflate-any", "dep:flate2"]
+deflate-flate2-zlib = ["deflate-flate2", "dep:flate2", "flate2/zlib"]
+deflate-flate2-zlib-ng = ["deflate-flate2", "dep:flate2", "flate2/zlib-ng"]
+deflate-flate2-zlib-ng-compat = ["deflate-flate2", "dep:flate2", "flate2/zlib-ng-compat"]
+deflate-flate2-zlib-rs = ["deflate-flate2", "dep:flate2", "flate2/zlib-rs"]
+deflate-zopfli = ["dep:zopfli", "_deflate-any"]
+deflate64 = ["dep:deflate64"]
+deprecated-time = []
+getrandom = ["dep:getrandom"]
+jiff-02 = ["dep:jiff"]
+legacy-zip = ["bitstream-io"]
+lzma = ["dep:lzma-rust2"]
+nt-time = ["dep:nt-time"]
+ppmd = ["dep:ppmd-rust"]
+time = ["dep:time"]
+unreserved = []
+xz = ["dep:lzma-rust2"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "zip"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+aes = { loaf = "crates-io/aes", version = "^0.9", optional = true }
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.4", features = ["derive"], optional = true }
+bitstream-io = { loaf = "crates-io/bitstream-io", version = "^4.9", optional = true }
+bzip2 = { loaf = "crates-io/bzip2", version = "^0.6", default-features = false, optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.27", features = ["std"], default-features = false, optional = true }
+constant_time_eq = { loaf = "crates-io/constant_time_eq", version = "^0.4", optional = true }
+crc32fast = { loaf = "crates-io/crc32fast", version = "^1.5" }
+deflate64 = { loaf = "crates-io/deflate64", version = "^0.1.10", optional = true }
+flate2 = { loaf = "crates-io/flate2", version = "^1.1", default-features = false, optional = true }
+getrandom = [{ loaf = "crates-io/getrandom", version = "^0.4", features = ["wasm_js"], default-features = false, optional = true, target = "cfg(target_arch = \"wasm32\")" }, { loaf = "crates-io/getrandom", version = "^0.4", default-features = false, optional = true, target = "cfg(not(target_arch = \"wasm32\"))" }]
+hmac = { loaf = "crates-io/hmac", version = "^0.13", features = ["zeroize"], optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2" }
+jiff = { loaf = "crates-io/jiff", version = "^0.2.4", optional = true }
+lzma-rust2 = { loaf = "crates-io/lzma-rust2", version = "^0.16.1", features = ["encoder", "optimization", "std", "xz"], default-features = false, optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.7" }
+nt-time = { loaf = "crates-io/nt-time", version = "^0.13", default-features = false, optional = true }
+pbkdf2 = { loaf = "crates-io/pbkdf2", version = "^0.13", optional = true }
+ppmd-rust = { loaf = "crates-io/ppmd-rust", version = "^1.4", optional = true }
+sha1 = { loaf = "crates-io/sha1", version = "^0.11", optional = true }
+time = [{ loaf = "crates-io/time", version = "^0.3.47", features = ["std", "wasm-bindgen"], default-features = false, optional = true, target = "cfg(target_arch = \"wasm32\")" }, { loaf = "crates-io/time", version = "^0.3.47", features = ["std"], default-features = false, optional = true, target = "cfg(not(target_arch = \"wasm32\"))" }]
+typed-path = { loaf = "crates-io/typed-path", version = "^0.12" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8", optional = true }
+zopfli = { loaf = "crates-io/zopfli", version = "^0.8.3", optional = true }
+zstd = { loaf = "crates-io/zstd", version = "^0.13.3", default-features = false, optional = true }

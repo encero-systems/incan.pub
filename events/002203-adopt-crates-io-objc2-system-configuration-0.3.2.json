@@ -1,0 +1,191 @@
+{
+  "about": {
+    "description": "Bindings to the SystemConfiguration framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7216bd11cbda54ccabcab84d523dc93b858ec75ecfb3a7d89513fa22464da396",
+    "package": "objc2-system-configuration",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:72b6df9d73db04c17663578fd3201091d4c6a2decd37dacc84c582c773c843ce",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/dispatch2",
+      "name": "dispatch2",
+      "optional": true,
+      "req": ">=0.3.0, <0.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.80"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": true,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "CFError"
+      ],
+      "loaf": "crates-io/objc2-core-foundation",
+      "name": "objc2-core-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "Authorization"
+      ],
+      "loaf": "crates-io/objc2-security",
+      "name": "objc2-security",
+      "optional": true,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "CaptiveNetwork": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "DHCPClientPreferences": [],
+    "SCDynamicStore": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFRunLoop"
+    ],
+    "SCDynamicStoreCopyDHCPInfo": [
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFDate",
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "SCDynamicStoreCopySpecific": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFString"
+    ],
+    "SCDynamicStoreKey": [],
+    "SCNetwork": [],
+    "SCNetworkConfiguration": [
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFNumber"
+    ],
+    "SCNetworkConnection": [
+      "objc2-core-foundation/CFDictionary",
+      "objc2-core-foundation/CFRunLoop"
+    ],
+    "SCNetworkReachability": [
+      "bitflags",
+      "objc2-core-foundation/CFRunLoop"
+    ],
+    "SCPreferences": [
+      "bitflags",
+      "objc2-core-foundation/CFArray",
+      "objc2-core-foundation/CFData",
+      "objc2-core-foundation/CFRunLoop"
+    ],
+    "SCPreferencesPath": [
+      "objc2-core-foundation/CFDictionary"
+    ],
+    "SCPreferencesSetSpecific": [
+      "objc2-core-foundation/CFString"
+    ],
+    "SCSchemaDefinitions": [],
+    "alloc": [],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "default": [
+      "std",
+      "CaptiveNetwork",
+      "DHCPClientPreferences",
+      "SCDynamicStore",
+      "SCDynamicStoreCopyDHCPInfo",
+      "SCDynamicStoreCopySpecific",
+      "SCDynamicStoreKey",
+      "SCNetwork",
+      "SCNetworkConfiguration",
+      "SCNetworkConnection",
+      "SCNetworkReachability",
+      "SCPreferences",
+      "SCPreferencesPath",
+      "SCPreferencesSetSpecific",
+      "SCSchemaDefinitions",
+      "bitflags",
+      "dispatch2",
+      "libc",
+      "objc2",
+      "objc2-security"
+    ],
+    "dispatch2": [
+      "dep:dispatch2"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "objc2": [
+      "dep:objc2",
+      "dispatch2?/objc2",
+      "objc2-core-foundation/objc2",
+      "objc2-security?/objc2"
+    ],
+    "objc2-security": [
+      "dep:objc2-security"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": []
+  },
+  "id": "sha256:d2d16cb92fcb62bb8c631fe0fa01e0bdebd547d0033a0160ffe94940af9a5660",
+  "kind": "adopt",
+  "manifest": "sha256:6aedf68d1f372f58e56376a1754087cb049769f1730fb2a065f802febd54b008",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_system_configuration",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-system-configuration",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

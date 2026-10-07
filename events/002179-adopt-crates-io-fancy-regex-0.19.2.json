@@ -1,0 +1,99 @@
+{
+  "about": {
+    "description": "An implementation of regexes, supporting a relatively rich set of features, including backreferences and look-around. Aims to be compatible with Oniguruma syntax when the relevant flag is set.",
+    "documentation": "https://docs.rs/fancy-regex",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/fancy-regex/fancy-regex"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d301f5bf187b3c295fce6468d3875037a0bccc5f6b151c63cac2f85babf21912",
+    "package": "fancy-regex",
+    "registry": "crates-io",
+    "version": "0.19.2"
+  },
+  "archive": "sha256:5c48b2c866ad941418d86b489efcfa94a153cd7c35db513704948f1a88ff133e",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bit-set",
+      "name": "bit-set",
+      "optional": false,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "dfa-onepass",
+        "dfa-search",
+        "hybrid",
+        "meta",
+        "nfa",
+        "syntax"
+      ],
+      "loaf": "crates-io/regex-automata",
+      "name": "regex-automata",
+      "optional": false,
+      "req": "^0.4.16"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/regex-syntax",
+      "name": "regex-syntax",
+      "optional": false,
+      "req": "^0.8"
+    }
+  ],
+  "features": {
+    "default": [
+      "unicode",
+      "perf",
+      "std",
+      "variable-lookbehinds"
+    ],
+    "leftmost_longest": [],
+    "perf": [
+      "regex-automata/perf"
+    ],
+    "perf-dfa-full": [
+      "regex-automata/dfa-build"
+    ],
+    "std": [
+      "regex-automata/std",
+      "regex-syntax/std",
+      "bit-set/std"
+    ],
+    "track_caller": [],
+    "unicode": [
+      "regex-automata/unicode",
+      "regex-syntax/unicode"
+    ],
+    "variable-lookbehinds": [
+      "regex-automata/dfa-search"
+    ]
+  },
+  "id": "sha256:57048fb4431a192cba26d925276ce01b849bd0794b1299d881462a38b3ad47f9",
+  "kind": "adopt",
+  "manifest": "sha256:8f981a350f7068fccc5b5ceea7f3d30b67c35478380acfe34ef31f2dbe8f512d",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "fancy_regex",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fancy-regex",
+    "scope": "crates-io",
+    "version": "0.19.2"
+  }
+}

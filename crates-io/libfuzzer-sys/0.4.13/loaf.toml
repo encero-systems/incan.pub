@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/libfuzzer-sys"
+version = "0.4.13"
+
+[project.features]
+arbitrary-derive = ["arbitrary/derive"]
+default = ["link_libfuzzer"]
+link_libfuzzer = []
+
+[rust]
+name = "libfuzzer_sys"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1" }

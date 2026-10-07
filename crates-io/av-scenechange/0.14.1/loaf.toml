@@ -1,0 +1,57 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/av-scenechange"
+version = "0.14.1"
+
+[project.features]
+asm = ["nasm-rs", "cc", "libc"]
+binary = ["clap", "serialize"]
+cc = []
+clap = ["dep:clap"]
+console = ["dep:console"]
+default = ["binary", "asm"]
+devel = ["console", "fern"]
+fern = ["dep:fern"]
+ffmpeg = ["ffmpeg-the-third"]
+ffmpeg-the-third = ["dep:ffmpeg-the-third"]
+libc = ["dep:libc"]
+nasm-rs = []
+serde = ["dep:serde"]
+serde_json = ["dep:serde_json"]
+serialize = ["serde", "serde_json"]
+tracing = ["tracing-subscriber", "tracing-chrome", "dep:tracing"]
+tracing-chrome = ["dep:tracing-chrome"]
+tracing-subscriber = ["dep:tracing-subscriber"]
+vapoursynth = ["dep:vapoursynth"]
+
+[rust]
+name = "av_scenechange"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+aligned = { loaf = "crates-io/aligned", version = "^0.4.2" }
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.56" }
+arg_enum_proc_macro = { loaf = "crates-io/arg_enum_proc_macro", version = "^0.3.4" }
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.6" }
+clap = { loaf = "crates-io/clap", version = "^4.0.22", features = ["derive"], optional = true }
+console = { loaf = "crates-io/console", version = "^0.15", optional = true }
+fern = { loaf = "crates-io/fern", version = "^0.7", optional = true }
+ffmpeg-the-third = { loaf = "crates-io/ffmpeg-the-third", version = "^3.0.0", features = ["codec", "format"], default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.172", optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.14" }
+num-rational = { loaf = "crates-io/num-rational", version = "^0.4.2", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19" }
+pastey = { loaf = "crates-io/pastey", version = "^0.1.0" }
+rayon = { loaf = "crates-io/rayon", version = "^1.10.0" }
+serde = { loaf = "crates-io/serde", version = "^1.0.123", features = ["derive"], optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.62", optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.12" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.40", optional = true }
+tracing-chrome = { loaf = "crates-io/tracing-chrome", version = "^0.7.1", optional = true }
+tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3.18", optional = true }
+v_frame = { loaf = "crates-io/v_frame", version = "^0.3.8" }
+vapoursynth = { loaf = "crates-io/vapoursynth", version = "^0.4.0", features = ["vapoursynth-api-32", "vapoursynth-functions", "vsscript-api-31", "vsscript-functions"], optional = true }
+y4m = { loaf = "crates-io/y4m", version = "^0.8.0" }

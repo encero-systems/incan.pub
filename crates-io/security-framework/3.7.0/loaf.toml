@@ -1,0 +1,33 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/security-framework"
+version = "3.7.0"
+
+[project.features]
+OSX_10_12 = []
+OSX_10_13 = []
+OSX_10_14 = []
+OSX_10_15 = ["security-framework-sys/OSX_10_15"]
+alpn = []
+default = ["OSX_10_14", "alpn", "session-tickets"]
+job-bless = []
+log = ["dep:log"]
+macos-12 = ["security-framework-sys/macos-12"]
+nightly = []
+session-tickets = []
+sync-keychain = ["OSX_10_13"]
+
+[rust]
+name = "security_framework"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.11" }
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.10" }
+core-foundation-sys = { loaf = "crates-io/core-foundation-sys", version = "^0.8.6" }
+libc = { loaf = "crates-io/libc", version = "^0.2.139" }
+log = { loaf = "crates-io/log", version = "^0.4.20", optional = true }
+security-framework-sys = { loaf = "crates-io/security-framework-sys", version = "^2.17", default-features = false }

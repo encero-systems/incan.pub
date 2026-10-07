@@ -1,0 +1,69 @@
+{
+  "about": {
+    "description": "A fork of std::sync::Arc with some extra functionality and without weak references",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/servo/stylo"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b4eceb519ec34d8290aaf6e46f435102f2bfa63f22b05a144fb16ab266d3b198",
+    "package": "servo_arc",
+    "registry": "crates-io",
+    "version": "0.5.0"
+  },
+  "archive": "sha256:2900688c21cb8e9f12814eaa717cd4c030b250e057b40b7233746d53cd930ca1",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": false,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "track_alloc_size"
+    ],
+    "gecko_refcount_logging": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "servo": [
+      "serde",
+      "track_alloc_size"
+    ],
+    "track_alloc_size": []
+  },
+  "id": "sha256:5249a88c55339e486cd22ab3dbce3da3746ced14fe85fa28e54e578618a85fc5",
+  "kind": "adopt",
+  "manifest": "sha256:771a6db9b38f7a8d8f3a7c2213a23f614b441edd2bd20542f4a69902e3e34045",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "servo_arc",
+    "root": "lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "servo_arc",
+    "scope": "crates-io",
+    "version": "0.5.0"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "about": {
+    "description": "Rational numbers implementation for Rust",
+    "documentation": "https://docs.rs/num-rational",
+    "homepage": "https://github.com/rust-num/num-rational",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-num/num-rational"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f83d14da390562dca69fc84082e73e548e1ad308d24accdedd2720017cb37824",
+    "package": "num-rational",
+    "registry": "crates-io",
+    "version": "0.4.2"
+  },
+  "archive": "sha256:c96c03aeea250f6ac2c6628508279b75b1534ce3dbf185cc6ebece21213eb9b8",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": true,
+      "req": "^0.4.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-integer",
+      "name": "num-integer",
+      "optional": false,
+      "req": "^0.1.42"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.18"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "num-bigint",
+      "std"
+    ],
+    "num-bigint": [
+      "dep:num-bigint"
+    ],
+    "num-bigint-std": [
+      "dep:num-bigint",
+      "num-bigint/std"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "num-bigint?/std",
+      "num-integer/std",
+      "num-traits/std"
+    ]
+  },
+  "id": "sha256:a2d0e689b537bcddfb2793a27b125249e28ba89b1ab843efffdff85ce062f4ae",
+  "kind": "adopt",
+  "manifest": "sha256:c0c9a0f89b7d52bf4a4e59f638d6b3d6b4975ce86e3bc0b97c222ac70f49762a",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "num_rational",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "num-rational",
+    "scope": "crates-io",
+    "version": "0.4.2"
+  }
+}

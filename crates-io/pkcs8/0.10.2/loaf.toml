@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pkcs8"
+version = "0.10.2"
+
+[project.features]
+3des = ["encryption", "dep:pkcs5", "pkcs5/3des"]
+alloc = ["der/alloc", "der/zeroize", "spki/alloc"]
+des-insecure = ["encryption", "dep:pkcs5", "pkcs5/des-insecure"]
+encryption = ["alloc", "dep:pkcs5", "pkcs5/alloc", "pkcs5/pbes2", "rand_core"]
+getrandom = ["dep:rand_core", "rand_core/getrandom"]
+pem = ["alloc", "der/pem", "spki/pem"]
+pkcs5 = ["dep:pkcs5"]
+rand_core = ["dep:rand_core"]
+sha1-insecure = ["encryption", "dep:pkcs5", "pkcs5/sha1-insecure"]
+std = ["alloc", "der/std", "spki/std"]
+subtle = ["dep:subtle"]
+
+[rust]
+name = "pkcs8"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+der = { loaf = "crates-io/der", version = "^0.7", features = ["oid"] }
+pkcs5 = { loaf = "crates-io/pkcs5", version = "^0.7", optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.6", default-features = false, optional = true }
+spki = { loaf = "crates-io/spki", version = "^0.7.1" }
+subtle = { loaf = "crates-io/subtle", version = "^2", default-features = false, optional = true }

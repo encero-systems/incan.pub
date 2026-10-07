@@ -1,0 +1,132 @@
+{
+  "about": {
+    "description": "Generic implementation of PBKDF2",
+    "documentation": "https://docs.rs/pbkdf2",
+    "homepage": "https://github.com/RustCrypto/password-hashes/tree/master/pbkdf2",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/password-hashes"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:112d82ceb8c5bf524d9af484d4e4970c9fd5a0cc15ba14ad93dccd28873b0629",
+    "package": "pbkdf2",
+    "registry": "crates-io",
+    "version": "0.13.0"
+  },
+  "archive": "sha256:94af1230b38d053f71285fae9b3b0f126ba1508bcebec8b896258dd29782bac5",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "mac"
+      ],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hmac",
+      "name": "hmac",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/kdf",
+      "name": "kdf",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "base64"
+      ],
+      "loaf": "crates-io/mcf",
+      "name": "mcf",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/password-hash",
+      "name": "password-hash",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.11"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "mcf?/alloc",
+      "password-hash?/alloc"
+    ],
+    "default": [
+      "hmac"
+    ],
+    "getrandom": [
+      "dep:password-hash",
+      "password-hash/getrandom"
+    ],
+    "hmac": [
+      "dep:hmac"
+    ],
+    "kdf": [
+      "sha2",
+      "dep:kdf"
+    ],
+    "mcf": [
+      "sha2",
+      "password-hash",
+      "dep:mcf"
+    ],
+    "password-hash": [
+      "dep:password-hash"
+    ],
+    "phc": [
+      "dep:password-hash",
+      "password-hash/phc",
+      "sha2"
+    ],
+    "rand_core": [
+      "dep:password-hash",
+      "password-hash/rand_core"
+    ],
+    "sha2": [
+      "hmac",
+      "dep:sha2"
+    ]
+  },
+  "id": "sha256:fadefbbd1668fdf35608aaf935b76a0252fe8c7ab08489e24d030ec853045050",
+  "kind": "adopt",
+  "manifest": "sha256:37c4ab3cd54a57b15e6a88dc554a5ffaf0fc262a2a0f8fd22c0e33365a0f0c0b",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "pbkdf2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pbkdf2",
+    "scope": "crates-io",
+    "version": "0.13.0"
+  }
+}

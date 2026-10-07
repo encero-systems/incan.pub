@@ -1,0 +1,36 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/num-bigint-dig"
+version = "0.9.1"
+
+[project.features]
+arbitrary = ["dep:arbitrary"]
+default = ["std", "u64_digit"]
+fuzz = ["arbitrary", "smallvec/arbitrary"]
+i128 = []
+nightly = []
+prime = ["dep:rand", "rand/std_rng"]
+rand = ["dep:rand"]
+serde = ["dep:serde"]
+std = ["num-integer/std", "num-traits/std", "smallvec/write", "dep:rand", "rand/std", "dep:serde", "serde/std"]
+u64_digit = []
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "num_bigint_dig"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.1.0", optional = true }
+libm = { loaf = "crates-io/libm", version = "^0.2.1" }
+num-integer = { loaf = "crates-io/num-integer", version = "^0.1.39", features = ["i128"], default-features = false }
+num-iter = { loaf = "crates-io/num-iter", version = "^0.1.37", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.4", features = ["i128"], default-features = false }
+once_cell = { loaf = "crates-io/once_cell", version = "^1" }
+rand = { loaf = "crates-io/rand", version = "^0.9", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["alloc"], default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.10.0", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.5", default-features = false, optional = true }

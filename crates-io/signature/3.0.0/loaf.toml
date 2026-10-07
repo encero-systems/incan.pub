@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/signature"
+version = "3.0.0"
+
+[project.features]
+alloc = []
+digest = ["dep:digest"]
+rand_core = ["dep:rand_core"]
+
+[rust]
+name = "signature"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.11", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false, optional = true }

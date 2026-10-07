@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sha3"
+version = "0.12.0"
+
+[project.features]
+alloc = ["digest/alloc"]
+default = ["alloc", "oid"]
+oid = ["digest/oid"]
+zeroize = ["digest/zeroize", "sponge-cursor/zeroize"]
+
+[rust]
+name = "sha3"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.11", default-features = false }
+keccak = { loaf = "crates-io/keccak", version = "^0.2" }
+sponge-cursor = { loaf = "crates-io/sponge-cursor", version = "^0.1" }

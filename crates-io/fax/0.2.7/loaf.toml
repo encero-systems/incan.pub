@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fax"
+version = "0.2.7"
+
+[project.features]
+debug = []
+generate_bitmaps = ["dep:fax_derive"]
+
+[rust]
+name = "fax"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+fax_derive = { loaf = "crates-io/fax_derive", version = "^0.2.0", optional = true }

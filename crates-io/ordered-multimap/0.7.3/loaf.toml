@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ordered-multimap"
+version = "0.7.3"
+
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+std = ["dlv-list/std"]
+
+[rust]
+name = "ordered_multimap"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+dlv-list = { loaf = "crates-io/dlv-list", version = "^0.5", default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.14.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }

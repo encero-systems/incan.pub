@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cfg-expr"
+version = "0.20.10"
+
+[project.features]
+default = []
+target-lexicon = ["dep:target-lexicon"]
+targets = ["target-lexicon"]
+
+[rust]
+name = "cfg_expr"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15" }
+target-lexicon = { loaf = "crates-io/target-lexicon", version = "=0.13.5", optional = true }

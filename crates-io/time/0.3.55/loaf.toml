@@ -1,0 +1,45 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/time"
+version = "0.3.55"
+
+[project.features]
+alloc = ["serde_core?/alloc"]
+default = ["std"]
+formatting = ["std", "time-macros?/formatting"]
+large-dates = ["time-core/large-dates", "time-macros?/large-dates"]
+local-offset = ["std", "dep:libc", "dep:num_threads"]
+macros = ["dep:time-macros"]
+parsing = ["time-macros?/parsing"]
+quickcheck = ["dep:quickcheck", "alloc", "deranged/quickcheck"]
+rand = ["rand08", "rand09", "rand010"]
+rand010 = ["dep:rand010", "deranged/rand010"]
+rand08 = ["dep:rand08", "deranged/rand08"]
+rand09 = ["dep:rand09", "deranged/rand09"]
+serde = ["dep:serde_core", "time-macros?/serde", "deranged/serde"]
+serde-human-readable = ["serde", "formatting", "parsing"]
+serde-well-known = ["serde", "formatting", "parsing"]
+std = ["alloc"]
+wasm-bindgen = ["dep:js-sys"]
+
+[rust]
+name = "time"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+deranged = { loaf = "crates-io/deranged", version = "^0.5.8" }
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.58", optional = true, target = "cfg(all(target_family = \"wasm\", not(any(target_os = \"emscripten\", target_os = \"wasi\"))))" }
+libc = { loaf = "crates-io/libc", version = "^0.2.98", optional = true, target = "cfg(target_family = \"unix\")" }
+num-conv = { loaf = "crates-io/num-conv", version = "^0.2.2" }
+num_threads = { loaf = "crates-io/num_threads", version = "^0.1.2", optional = true, target = "cfg(target_family = \"unix\")" }
+powerfmt = { loaf = "crates-io/powerfmt", version = "^0.2.0", default-features = false }
+quickcheck = { loaf = "crates-io/quickcheck", version = "^1.0.3", default-features = false, optional = true }
+rand010 = { loaf = "crates-io/rand", version = "^0.10.1", default-features = false, optional = true }
+rand08 = { loaf = "crates-io/rand", version = "^0.8.6", default-features = false, optional = true }
+rand09 = { loaf = "crates-io/rand", version = "^0.9.4", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", default-features = false, optional = true }
+time-core = { loaf = "crates-io/time-core", version = "=0.1.9" }
+time-macros = { loaf = "crates-io/time-macros", version = "=0.2.32", optional = true }

@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/winreg"
+version = "0.56.0"
+
+[project.features]
+chrono = ["dep:chrono"]
+serde = ["dep:serde"]
+serialization-serde = ["transactions", "serde"]
+transactions = []
+
+[rust]
+name = "winreg"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.6", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.59, <=0.61", features = ["Win32_Foundation", "Win32_Security", "Win32_Storage_FileSystem", "Win32_System_Diagnostics_Debug", "Win32_System_Registry", "Win32_System_Time"] }

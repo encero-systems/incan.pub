@@ -1,0 +1,69 @@
+{
+  "about": {
+    "description": "Cross-platform system's host name functions",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/djc/hostname"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:617aaa3557aef3810a6369d0a99fac8a080891b68bd9f9812a1eeda0c0730cbd",
+    "package": "hostname",
+    "registry": "crates-io",
+    "version": "0.4.2"
+  },
+  "archive": "sha256:717d04fc3232ee5e011f38be5801cfb019bfa7135d7dca58d59666a76a4446ca",
+  "at": "2026-10-07T07:43:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(any(unix, target_os = \"redox\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-link",
+      "name": "windows-link",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(target_os = \"windows\")"
+    }
+  ],
+  "features": {
+    "default": [],
+    "set": []
+  },
+  "id": "sha256:fcf8ba4fd26c25c1840e8f35e69ba202dccb03b60160fe7672ed3b4a3ddaee3e",
+  "kind": "adopt",
+  "manifest": "sha256:b435d6723b09ec684f209a1ab790f286638e0384a8e635b793e48359c603893d",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "hostname",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hostname",
+    "scope": "crates-io",
+    "version": "0.4.2"
+  }
+}

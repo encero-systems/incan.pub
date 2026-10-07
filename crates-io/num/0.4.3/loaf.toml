@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/num"
+version = "0.4.3"
+
+[project.features]
+alloc = ["dep:num-bigint", "num-rational/num-bigint"]
+default = ["std"]
+libm = ["num-complex/libm", "num-traits/libm"]
+num-bigint = ["dep:num-bigint"]
+rand = ["dep:num-bigint", "num-bigint/rand", "num-complex/rand"]
+serde = ["dep:num-bigint", "num-bigint/serde", "num-complex/serde", "num-rational/serde"]
+std = ["dep:num-bigint", "num-bigint/std", "num-complex/std", "num-integer/std", "num-iter/std", "num-rational/std", "num-rational/num-bigint-std", "num-traits/std"]
+
+[rust]
+name = "num"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4.5", default-features = false, optional = true }
+num-complex = { loaf = "crates-io/num-complex", version = "^0.4.6", default-features = false }
+num-integer = { loaf = "crates-io/num-integer", version = "^0.1.46", features = ["i128"], default-features = false }
+num-iter = { loaf = "crates-io/num-iter", version = "^0.1.45", features = ["i128"], default-features = false }
+num-rational = { loaf = "crates-io/num-rational", version = "^0.4.2", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19", features = ["i128"], default-features = false }

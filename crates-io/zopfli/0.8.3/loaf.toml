@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zopfli"
+version = "0.8.3"
+
+[project.features]
+default = ["gzip", "std", "zlib"]
+gzip = ["dep:crc32fast"]
+nightly = ["crc32fast?/nightly"]
+std = ["crc32fast?/std", "dep:log", "simd-adler32?/std"]
+zlib = ["dep:simd-adler32"]
+
+[rust]
+name = "zopfli"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bumpalo = { loaf = "crates-io/bumpalo", version = "^3.19.0" }
+crc32fast = { loaf = "crates-io/crc32fast", version = "^1.5.0", default-features = false, optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.28", optional = true }
+simd-adler32 = { loaf = "crates-io/simd-adler32", version = "^0.3.7", default-features = false, optional = true }

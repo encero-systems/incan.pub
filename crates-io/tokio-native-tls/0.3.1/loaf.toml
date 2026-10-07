@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tokio-native-tls"
+version = "0.3.1"
+
+[project.features]
+vendored = ["native-tls/vendored"]
+
+[rust]
+name = "tokio_native_tls"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+native-tls = { loaf = "crates-io/native-tls", version = "^0.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1.0" }

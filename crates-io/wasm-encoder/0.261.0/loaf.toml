@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasm-encoder"
+version = "0.261.0"
+
+[project.features]
+component-model = ["wasmparser?/component-model"]
+default = ["std", "component-model"]
+std = ["wasmparser?/std"]
+wasmparser = ["dep:wasmparser"]
+
+[rust]
+name = "wasm_encoder"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+leb128fmt = { loaf = "crates-io/leb128fmt", version = "^0.1.0", default-features = false }
+wasmparser = { loaf = "crates-io/wasmparser", version = "^0.261.0", features = ["simd"], default-features = false, optional = true }

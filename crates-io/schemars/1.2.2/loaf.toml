@@ -1,0 +1,55 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/schemars"
+version = "1.2.2"
+
+[project.features]
+_ui_test = []
+arrayvec07 = ["dep:arrayvec07"]
+bigdecimal04 = ["dep:bigdecimal04"]
+bytes1 = ["dep:bytes1"]
+chrono04 = ["dep:chrono04"]
+default = ["derive", "std"]
+derive = ["schemars_derive"]
+either1 = ["dep:either1"]
+indexmap2 = ["dep:indexmap2"]
+jiff02 = ["dep:jiff02"]
+preserve_order = ["serde_json/preserve_order"]
+raw_value = ["serde_json/raw_value"]
+rust_decimal1 = ["dep:rust_decimal1"]
+schemars_derive = ["dep:schemars_derive"]
+semver1 = ["dep:semver1"]
+smallvec1 = ["dep:smallvec1"]
+smol_str02 = ["dep:smol_str02"]
+smol_str03 = ["dep:smol_str03"]
+std = []
+url2 = ["dep:url2"]
+uuid1 = ["dep:uuid1"]
+
+[rust]
+name = "schemars"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arrayvec07 = { loaf = "crates-io/arrayvec", version = "^0.7", default-features = false, optional = true }
+bigdecimal04 = { loaf = "crates-io/bigdecimal", version = "^0.4", default-features = false, optional = true }
+bytes1 = { loaf = "crates-io/bytes", version = "^1.0", default-features = false, optional = true }
+chrono04 = { loaf = "crates-io/chrono", version = "^0.4.39", default-features = false, optional = true }
+dyn-clone = { loaf = "crates-io/dyn-clone", version = "^1.0.17" }
+either1 = { loaf = "crates-io/either", version = "^1.3", default-features = false, optional = true }
+indexmap2 = { loaf = "crates-io/indexmap", version = "^2.2.3", default-features = false, optional = true }
+jiff02 = { loaf = "crates-io/jiff", version = "^0.2", default-features = false, optional = true }
+ref-cast = { loaf = "crates-io/ref-cast", version = "^1.0.22" }
+rust_decimal1 = { loaf = "crates-io/rust_decimal", version = "^1.13", default-features = false, optional = true }
+schemars_derive = { loaf = "crates-io/schemars_derive", version = "=1.2.2", optional = true }
+semver1 = { loaf = "crates-io/semver", version = "^1.0.9", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.194", features = ["alloc"], default-features = false }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.127", features = ["alloc"], default-features = false }
+smallvec1 = { loaf = "crates-io/smallvec", version = "^1.0", default-features = false, optional = true }
+smol_str02 = { loaf = "crates-io/smol_str", version = "^0.2.1", default-features = false, optional = true }
+smol_str03 = { loaf = "crates-io/smol_str", version = "^0.3.2", default-features = false, optional = true }
+url2 = { loaf = "crates-io/url", version = "^2.0", default-features = false, optional = true }
+uuid1 = { loaf = "crates-io/uuid", version = "^1.0", default-features = false, optional = true }

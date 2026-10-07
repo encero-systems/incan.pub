@@ -1,0 +1,60 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rkyv"
+version = "0.8.18"
+
+[project.features]
+aligned = []
+alloc = ["dep:hashbrown", "tinyvec-1?/alloc", "rancor/alloc"]
+arrayvec-0_7 = ["dep:arrayvec-0_7"]
+big_endian = []
+bytecheck = ["dep:bytecheck", "rend/bytecheck", "rkyv_derive/bytecheck"]
+bytes-1 = ["dep:bytes-1"]
+default = ["std", "bytecheck"]
+hashbrown-0_14 = ["dep:hashbrown-0_14"]
+hashbrown-0_15 = ["dep:hashbrown-0_15"]
+hashbrown-0_16 = ["dep:hashbrown-0_16"]
+hashbrown-0_17 = ["dep:hashbrown"]
+indexmap-2 = ["dep:indexmap-2", "alloc"]
+little_endian = []
+pointer_width_16 = []
+pointer_width_32 = []
+pointer_width_64 = []
+smallvec-1 = ["dep:smallvec-1"]
+smol_str-0_2 = ["dep:smol_str-0_2"]
+smol_str-0_3 = ["dep:smol_str-0_3"]
+std = ["alloc", "bytes-1?/std", "indexmap-2?/std", "ptr_meta/std", "uuid-1?/std"]
+thin-vec-0_2 = ["dep:thin-vec-0_2"]
+tinyvec-1 = ["dep:tinyvec-1"]
+triomphe-0_1 = ["dep:triomphe-0_1", "alloc"]
+unaligned = []
+uuid-1 = ["dep:uuid-1", "bytecheck?/uuid-1"]
+
+[rust]
+name = "rkyv"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+arrayvec-0_7 = { loaf = "crates-io/arrayvec", version = "^0.7", default-features = false, optional = true }
+bytecheck = { loaf = "crates-io/bytecheck", version = "^0.8", features = ["simdutf8"], default-features = false, optional = true }
+bytes-1 = { loaf = "crates-io/bytes", version = "^1", default-features = false, optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17", default-features = false, optional = true }
+hashbrown-0_14 = { loaf = "crates-io/hashbrown", version = "^0.14", default-features = false, optional = true }
+hashbrown-0_15 = { loaf = "crates-io/hashbrown", version = "^0.15", default-features = false, optional = true }
+hashbrown-0_16 = { loaf = "crates-io/hashbrown", version = "^0.16", default-features = false, optional = true }
+indexmap-2 = { loaf = "crates-io/indexmap", version = "^2", default-features = false, optional = true }
+munge = { loaf = "crates-io/munge", version = "^0.4", default-features = false }
+ptr_meta = { loaf = "crates-io/ptr_meta", version = "^0.3", default-features = false }
+rancor = { loaf = "crates-io/rancor", version = "^0.1", default-features = false }
+rend = { loaf = "crates-io/rend", version = "^0.5", default-features = false }
+rkyv_derive = { loaf = "crates-io/rkyv_derive", version = "=0.8.18", default-features = false }
+smallvec-1 = { loaf = "crates-io/smallvec", version = "^1", default-features = false, optional = true }
+smol_str-0_2 = { loaf = "crates-io/smol_str", version = "^0.2", default-features = false, optional = true }
+smol_str-0_3 = { loaf = "crates-io/smol_str", version = "^0.3", default-features = false, optional = true }
+thin-vec-0_2 = { loaf = "crates-io/thin-vec", version = "^0.2.12", default-features = false, optional = true }
+tinyvec-1 = { loaf = "crates-io/tinyvec", version = "^1", default-features = false, optional = true }
+triomphe-0_1 = { loaf = "crates-io/triomphe", version = "^0.1", default-features = false, optional = true }
+uuid-1 = { loaf = "crates-io/uuid", version = "^1", default-features = false, optional = true }

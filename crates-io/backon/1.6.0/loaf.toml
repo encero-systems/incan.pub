@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/backon"
+version = "1.6.0"
+
+[project.features]
+default = ["std", "std-blocking-sleep", "tokio-sleep", "gloo-timers-sleep"]
+embassy-sleep = ["embassy-time"]
+embassy-time = ["dep:embassy-time"]
+futures-timer = ["dep:futures-timer"]
+futures-timer-sleep = ["futures-timer"]
+gloo-timers = ["dep:gloo-timers"]
+gloo-timers-sleep = ["dep:gloo-timers", "gloo-timers/futures"]
+std = ["fastrand/std"]
+std-blocking-sleep = []
+tokio = ["dep:tokio"]
+tokio-sleep = ["dep:tokio", "tokio/time"]
+
+[rust]
+name = "backon"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+embassy-time = { loaf = "crates-io/embassy-time", version = "^0.5", optional = true }
+fastrand = { loaf = "crates-io/fastrand", version = "^2", default-features = false }
+futures-timer = [{ loaf = "crates-io/futures-timer", version = "^3.0.3", features = ["gloo-timers"], optional = true, target = "cfg(target_arch = \"wasm32\")" }, { loaf = "crates-io/futures-timer", version = "^3.0.3", optional = true, target = "cfg(not(target_arch = \"wasm32\"))" }]
+gloo-timers = { loaf = "crates-io/gloo-timers", version = "^0.3", optional = true, target = "cfg(target_arch = \"wasm32\")" }
+tokio = { loaf = "crates-io/tokio", version = "^1", optional = true, target = "cfg(not(target_arch = \"wasm32\"))" }

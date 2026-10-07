@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hyper-timeout"
+version = "0.5.2"
+
+[rust]
+name = "hyper_timeout"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+hyper = { loaf = "crates-io/hyper", version = "^1.1" }
+hyper-util = { loaf = "crates-io/hyper-util", version = "^0.1.10", features = ["client-legacy", "http1"] }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1.35" }
+tower-service = { loaf = "crates-io/tower-service", version = "^0.3" }

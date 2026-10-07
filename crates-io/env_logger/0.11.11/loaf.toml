@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/env_logger"
+version = "0.11.11"
+
+[project.features]
+auto-color = ["color", "dep:anstream", "anstream/auto"]
+color = ["dep:anstream", "dep:anstyle"]
+default = ["auto-color", "humantime", "regex"]
+humantime = ["dep:jiff"]
+kv = ["log/kv"]
+regex = ["env_filter/regex"]
+unstable-kv = ["kv"]
+
+[rust]
+name = "env_logger"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+anstream = { loaf = "crates-io/anstream", version = "^1.0.0", features = ["wincon"], default-features = false, optional = true }
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.13", optional = true }
+env_filter = { loaf = "crates-io/env_filter", version = "^2.0.0", features = ["std"], default-features = false }
+jiff = { loaf = "crates-io/jiff", version = "^0.2.22", features = ["std"], default-features = false, optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.29", features = ["std"] }

@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rustc-demangle"
+version = "0.1.28"
+
+[project.features]
+compiler_builtins = []
+core = ["dep:core"]
+rustc-dep-of-std = ["core"]
+std = []
+
+[rust]
+name = "rustc_demangle"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }

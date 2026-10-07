@@ -1,0 +1,217 @@
+{
+  "about": {
+    "description": "A unified interface for reading and writing object file formats.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/gimli-rs/object"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ff76201f031d8863c38aa7f905eca4f53abbfa15f609db4277d44cd8938f33fe",
+    "package": "object",
+    "registry": "crates-io",
+    "version": "0.37.3"
+  },
+  "archive": "sha256:c81c238f56ad97dd4306d90c64685c5622b5cfaa8ebce3f2fb470c973bd02d91",
+  "at": "2026-10-07T07:42:50Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crc32fast",
+      "name": "crc32fast",
+      "optional": true,
+      "req": "^1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.15.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": true,
+      "req": "^2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.4.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ruzstd",
+      "name": "ruzstd",
+      "optional": true,
+      "req": "^0.8.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": true,
+      "req": "^0.236.0"
+    }
+  ],
+  "features": {
+    "all": [
+      "read",
+      "write",
+      "build",
+      "std",
+      "compression",
+      "wasm"
+    ],
+    "alloc": [
+      "dep:alloc"
+    ],
+    "archive": [],
+    "build": [
+      "build_core",
+      "write_std",
+      "elf"
+    ],
+    "build_core": [
+      "read_core",
+      "write_core"
+    ],
+    "cargo-all": [],
+    "coff": [],
+    "compression": [
+      "dep:flate2",
+      "dep:ruzstd",
+      "std"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "read",
+      "compression"
+    ],
+    "doc": [
+      "read_core",
+      "write_std",
+      "build_core",
+      "std",
+      "compression",
+      "archive",
+      "coff",
+      "elf",
+      "macho",
+      "pe",
+      "wasm",
+      "xcoff"
+    ],
+    "elf": [],
+    "macho": [],
+    "pe": [
+      "coff"
+    ],
+    "read": [
+      "read_core",
+      "archive",
+      "coff",
+      "elf",
+      "macho",
+      "pe",
+      "xcoff",
+      "unaligned"
+    ],
+    "read_core": [],
+    "rustc-dep-of-std": [
+      "core",
+      "alloc",
+      "memchr/rustc-dep-of-std"
+    ],
+    "std": [
+      "memchr/std"
+    ],
+    "unaligned": [],
+    "unstable": [],
+    "unstable-all": [
+      "all",
+      "unstable"
+    ],
+    "wasm": [
+      "dep:wasmparser"
+    ],
+    "write": [
+      "write_std",
+      "coff",
+      "elf",
+      "macho",
+      "pe",
+      "xcoff"
+    ],
+    "write_core": [
+      "dep:crc32fast",
+      "dep:indexmap",
+      "dep:hashbrown"
+    ],
+    "write_std": [
+      "write_core",
+      "std",
+      "indexmap?/std",
+      "crc32fast?/std"
+    ],
+    "xcoff": []
+  },
+  "id": "sha256:a91f4f023dc146f603737b3c32c3eda5dc07ea26e4e518c76aca61d4666613d9",
+  "kind": "adopt",
+  "manifest": "sha256:f2c026952a984486e46336f73fe973cd0e0397a7c88be635527d299228bbb99f",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "object",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "object",
+    "scope": "crates-io",
+    "version": "0.37.3"
+  }
+}

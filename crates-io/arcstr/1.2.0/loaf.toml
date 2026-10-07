@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/arcstr"
+version = "1.2.0"
+
+[project.features]
+default = ["substr"]
+serde = ["dep:serde"]
+std = []
+substr = []
+substr-usize-indices = ["substr"]
+
+[rust]
+name = "arcstr"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }

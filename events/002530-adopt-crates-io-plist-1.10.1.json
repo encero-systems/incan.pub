@@ -1,0 +1,91 @@
+{
+  "about": {
+    "description": "A rusty plist parser. Supports Serde serialization.",
+    "documentation": "https://docs.rs/plist/",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ebarnard/rust-plist/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2896bade328c13f7042a297ea5ac5b0951f6cf989dea5f32c2fd98da398195cb",
+    "package": "plist",
+    "registry": "crates-io",
+    "version": "1.10.1"
+  },
+  "archive": "sha256:063674c907b99f31155c05e2d2e0c34bf2e8b6d4683b9f41c2d64dbdb08a51f7",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": false,
+      "req": "^0.23.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quick-xml",
+      "name": "quick_xml",
+      "optional": false,
+      "req": "^0.42.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "formatting",
+        "parsing"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": false,
+      "req": "^0.3.47"
+    }
+  ],
+  "features": {
+    "default": [
+      "serde"
+    ],
+    "enable_unstable_features_that_may_break_with_minor_version_bumps": [],
+    "serde": [
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:658ae47367a6583ecb25b64cb62a663840f29418ebb31ca8ecc21ccefac2d4b4",
+  "kind": "adopt",
+  "manifest": "sha256:390cee8d2684e6dc6f6a5ac756bb637797301525b8db071f5833619321b65ece",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "plist",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "plist",
+    "scope": "crates-io",
+    "version": "1.10.1"
+  }
+}

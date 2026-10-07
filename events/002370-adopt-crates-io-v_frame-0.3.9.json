@@ -1,0 +1,108 @@
+{
+  "about": {
+    "description": "Video Frame data structures, originally part of rav1e",
+    "documentation": "",
+    "homepage": "",
+    "license": "BSD-2-Clause",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-av/v_frame"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:666b7727c8875d6ab5db9533418d7c764233ac9c0cff1d469aec8fa127597be2",
+    "package": "v_frame",
+    "registry": "crates-io",
+    "version": "0.3.9"
+  },
+  "archive": "sha256:4f78ba2e7f11888429ec088249acf12d5b9bc1d1491f2e3c1ecf9d90ec89c7d0",
+  "at": "2026-10-07T07:43:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/aligned-vec",
+      "name": "aligned-vec",
+      "optional": false,
+      "req": ">=0.5.0, <0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/profiling",
+      "name": "profiling",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.40"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": false,
+      "req": "^0.2",
+      "target": "wasm32-unknown-unknown"
+    }
+  ],
+  "features": {
+    "profiling": [
+      "dep:profiling"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serialize": [
+      "serde",
+      "aligned-vec/serde"
+    ],
+    "tracing": [
+      "profiling",
+      "dep:tracing",
+      "dep:profiling",
+      "profiling/profile-with-tracing"
+    ]
+  },
+  "id": "sha256:457aab26281d8777b8523efa00003c93ea5f62095eacfd4100f920275aeb2418",
+  "kind": "adopt",
+  "manifest": "sha256:b53fa390787f7533cbd9f35ad807e9d3a80e9c94d72d31ad4f6cd686d69fa1aa",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "v_frame",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "v_frame",
+    "scope": "crates-io",
+    "version": "0.3.9"
+  }
+}

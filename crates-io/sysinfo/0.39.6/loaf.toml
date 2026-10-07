@@ -1,0 +1,39 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sysinfo"
+version = "0.39.6"
+
+[project.features]
+apple-app-store = ["apple-sandbox"]
+apple-sandbox = []
+c-interface = ["default"]
+component = ["dep:windows", "windows/Win32_Foundation", "windows/Win32_Security", "windows/Win32_System_Com", "windows/Win32_System_Ole", "windows/Win32_System_Rpc", "windows/Win32_System_Variant", "windows/Win32_System_Wmi", "dep:objc2-core-foundation", "objc2-core-foundation/CFArray", "objc2-core-foundation/CFBase", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFNumber", "objc2-core-foundation/CFString", "dep:objc2-io-kit", "objc2-io-kit/hidsystem"]
+debug = ["libc/extra_traits"]
+default = ["component", "disk", "network", "system", "user"]
+disk = ["dep:windows", "windows/Win32_Foundation", "windows/Win32_Storage_FileSystem", "windows/Win32_Security", "windows/Win32_System_IO", "windows/Win32_System_Ioctl", "windows/Win32_System_SystemServices", "windows/Win32_System_WindowsProgramming", "dep:objc2-core-foundation", "objc2-core-foundation/CFArray", "objc2-core-foundation/CFBase", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFError", "objc2-core-foundation/CFNumber", "objc2-core-foundation/CFString", "objc2-core-foundation/CFURL", "dep:objc2-io-kit"]
+linux-netdevs = []
+linux-tmpfs = []
+multithread = ["dep:rayon"]
+network = ["dep:windows", "windows/Win32_Foundation", "windows/Win32_NetworkManagement_IpHelper", "windows/Win32_NetworkManagement_Ndis", "windows/Win32_Networking_WinSock"]
+serde = ["dep:serde"]
+system = ["dep:windows", "windows/Win32_Foundation", "windows/Win32_System_Diagnostics_ToolHelp", "windows/Wdk_System_SystemInformation", "windows/Wdk_System_SystemServices", "windows/Wdk_System_Threading", "windows/Win32_Security_Authorization", "windows/Win32_System_Diagnostics_Debug", "windows/Win32_System_Kernel", "windows/Win32_System_Memory", "windows/Win32_System_Performance", "windows/Win32_System_Power", "windows/Win32_System_ProcessStatus", "windows/Win32_System_Registry", "windows/Win32_System_RemoteDesktop", "windows/Win32_System_SystemInformation", "windows/Win32_System_SystemServices", "windows/Win32_System_Threading", "windows/Win32_UI_Shell", "dep:ntapi", "dep:memchr", "dep:objc2-core-foundation", "objc2-core-foundation/CFBase", "objc2-core-foundation/CFData", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFString", "dep:objc2-io-kit"]
+unknown-ci = []
+user = ["dep:windows", "windows/Win32_Foundation", "windows/Win32_NetworkManagement_NetManagement", "windows/Win32_Security", "windows/Win32_Security_Authentication_Identity", "windows/Win32_Security_Authorization", "dep:objc2-core-foundation", "objc2-core-foundation/CFString", "dep:objc2-open-directory"]
+
+[rust]
+name = "sysinfo"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.173", target = "cfg(not(any(target_os = \"unknown\", target_arch = \"wasm32\")))" }
+memchr = { loaf = "crates-io/memchr", version = "^2.5", optional = true }
+ntapi = { loaf = "crates-io/ntapi", version = "^0.4", optional = true, target = "cfg(windows)" }
+objc2-core-foundation = { loaf = "crates-io/objc2-core-foundation", version = "^0.3.2", features = ["std"], default-features = false, optional = true, target = "cfg(any(target_os = \"macos\", target_os = \"ios\"))" }
+objc2-io-kit = { loaf = "crates-io/objc2-io-kit", version = "^0.3.2", features = ["libc", "std"], default-features = false, optional = true, target = "cfg(any(target_os = \"macos\", target_os = \"ios\"))" }
+objc2-open-directory = { loaf = "crates-io/objc2-open-directory", version = "^0.3.2", features = ["CFODNode", "CFODQuery", "CFODRecord", "CFODSession", "CFOpenDirectory", "CFOpenDirectoryConstants", "objc2-core-foundation", "std"], default-features = false, optional = true, target = "cfg(target_os = \"macos\")" }
+rayon = { loaf = "crates-io/rayon", version = "^1.8", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.190", features = ["derive"], optional = true }
+windows = { loaf = "crates-io/windows", version = ">=0.62, <0.63", optional = true, target = "cfg(windows)" }

@@ -1,0 +1,116 @@
+{
+  "about": {
+    "description": "Crossterm backend for the Ratatui Terminal UI library.",
+    "documentation": "https://docs.rs/ratatui-crossterm",
+    "homepage": "https://ratatui.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ratatui/ratatui"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:567584a3b0e6a8203c23de40b4861497266725eb5363dbfd18a1edd603cca9f0",
+    "package": "ratatui-crossterm",
+    "registry": "crates-io",
+    "version": "0.1.2"
+  },
+  "archive": "sha256:cc3c4a9356aa9e7774b9b7d1c91c2fc69a1c623cad445f5928d45b6e5252f4a5",
+  "at": "2026-10-07T07:45:36Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossterm",
+      "name": "crossterm_0_28",
+      "optional": true,
+      "req": "^0.28"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossterm",
+      "name": "crossterm_0_29",
+      "optional": true,
+      "req": "^0.29"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/document-features",
+      "name": "document-features",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/instability",
+      "name": "instability",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ratatui-core",
+      "name": "ratatui-core",
+      "optional": false,
+      "req": "^0.1.2"
+    }
+  ],
+  "features": {
+    "crossterm_0_28": [
+      "dep:crossterm_0_28"
+    ],
+    "crossterm_0_29": [
+      "dep:crossterm_0_29"
+    ],
+    "default": [
+      "crossterm_0_29",
+      "underline-color"
+    ],
+    "document-features": [
+      "dep:document-features"
+    ],
+    "scrolling-regions": [
+      "ratatui-core/scrolling-regions"
+    ],
+    "serde": [
+      "crossterm_0_28?/serde",
+      "crossterm_0_29?/serde"
+    ],
+    "underline-color": [
+      "ratatui-core/underline-color"
+    ],
+    "unstable": [
+      "unstable-backend-writer"
+    ],
+    "unstable-backend-writer": []
+  },
+  "id": "sha256:bba648c2ec9dac02a3cbd7fa8584032ed8b41988880bd6e6fe9b7784e7b4d2ff",
+  "kind": "adopt",
+  "manifest": "sha256:a27c7cbafbb9b691d56558805a40ca072b5cca68a522094d00cfa4400cbd0dee",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ratatui_crossterm",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ratatui-crossterm",
+    "scope": "crates-io",
+    "version": "0.1.2"
+  }
+}

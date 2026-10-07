@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/primefield"
+version = "0.14.0"
+
+[rust]
+name = "primefield"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bigint = { loaf = "crates-io/crypto-bigint", version = "^0.7.5", features = ["hybrid-array", "rand_core", "subtle"], default-features = false }
+common = { loaf = "crates-io/crypto-common", version = "^0.2", features = ["rand_core"] }
+ff = { loaf = "crates-io/ff", version = "^0.14", default-features = false }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false }
+subtle = { loaf = "crates-io/subtle", version = "^2.6", features = ["const-generics"], default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.7", default-features = false }

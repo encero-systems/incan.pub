@@ -1,0 +1,121 @@
+{
+  "about": {
+    "description": "A library to parse the x86 CPUID instruction, written in rust with no external dependencies. The implementation closely resembles the Intel CPUID manual description. The library does only depend on libcore.",
+    "documentation": "https://docs.rs/raw-cpuid/",
+    "homepage": "https://github.com/gz/rust-cpuid",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/gz/rust-cpuid"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:498cd0dc59d73224351ee52a95fee0f1a617a2eae0e7d9d720cc622c73a54186",
+    "package": "raw-cpuid",
+    "registry": "crates-io",
+    "version": "11.6.0"
+  },
+  "archive": "sha256:63e56ef80eb0c19863d9a5046ce250d9390c7d14112f3b8c54809d29240f3c2b",
+  "at": "2026-10-07T07:42:50Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/clap",
+      "name": "clap",
+      "optional": true,
+      "req": "^4.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/termimad",
+      "name": "termimad",
+      "optional": true,
+      "req": "^0.25"
+    }
+  ],
+  "features": {
+    "clap": [
+      "dep:clap"
+    ],
+    "cli": [
+      "display",
+      "clap"
+    ],
+    "display": [
+      "std",
+      "termimad",
+      "serde_json",
+      "serialize"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_derive": [
+      "dep:serde_derive"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "serialize": [
+      "serde",
+      "serde_derive"
+    ],
+    "std": [],
+    "termimad": [
+      "dep:termimad"
+    ]
+  },
+  "id": "sha256:55c9e277482e3b18daee1289627f14a9ec438801c909081f3f76e30197365395",
+  "kind": "adopt",
+  "manifest": "sha256:1177ff46085249a0e17398440582fb5e2e8c62bb2ee83bfe585a1f215053d1fd",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "raw_cpuid",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "raw-cpuid",
+    "scope": "crates-io",
+    "version": "11.6.0"
+  }
+}

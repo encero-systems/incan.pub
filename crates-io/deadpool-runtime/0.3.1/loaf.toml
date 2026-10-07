@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/deadpool-runtime"
+version = "0.3.1"
+
+[project.features]
+async-std_1 = ["dep:async-std_1"]
+smol_2 = ["dep:smol_2_async-io", "dep:smol_2_blocking", "dep:smol_2_futures-lite"]
+tokio_1 = ["dep:tokio_1"]
+
+[rust]
+name = "deadpool_runtime"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+async-std_1 = { loaf = "crates-io/async-std", version = "^1.0", features = ["unstable"], optional = true }
+smol_2_async-io = { loaf = "crates-io/async-io", version = "^2.0", optional = true }
+smol_2_blocking = { loaf = "crates-io/blocking", version = "^1.6", optional = true }
+smol_2_futures-lite = { loaf = "crates-io/futures-lite", version = "^2.6", optional = true }
+tokio_1 = { loaf = "crates-io/tokio", version = "^1.0", features = ["rt", "time"], optional = true }

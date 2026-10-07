@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/libz-sys"
+version = "1.1.29"
+
+[project.features]
+asm = []
+cmake = []
+default = ["libc", "stock-zlib"]
+libc = ["dep:libc"]
+static = []
+stock-zlib = []
+zlib-ng = ["libc", "cmake"]
+zlib-ng-no-cmake-experimental-community-maintained = ["libc"]
+
+[rust]
+name = "libz_sys"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.43", optional = true }

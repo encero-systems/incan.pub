@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/referencing"
+version = "0.58.6"
+
+[project.features]
+default = []
+retrieve-async = ["dep:async-trait", "dep:futures"]
+
+[rust]
+name = "referencing"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", features = ["serde"] }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.86", optional = true }
+fluent-uri = { loaf = "crates-io/fluent-uri", version = "^0.4.1", features = ["serde"] }
+futures = { loaf = "crates-io/futures", version = "^0.3.31", optional = true }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.3.4", features = ["wasm_js"], target = "cfg(target_arch = \"wasm32\")" }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17", features = ["equivalent"] }
+itoa = { loaf = "crates-io/itoa", version = "^1" }
+micromap = { loaf = "crates-io/micromap", version = "^0.3.0" }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12.3" }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3.1" }
+serde_json = { loaf = "crates-io/serde_json", version = "^1" }

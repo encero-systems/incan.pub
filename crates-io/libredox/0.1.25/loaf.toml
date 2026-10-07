@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/libredox"
+version = "0.1.25"
+
+[project.features]
+base = ["libc"]
+bitflags = ["dep:bitflags"]
+call = ["base"]
+default = ["base", "call", "std", "redox_syscall", "protocol", "numa"]
+ioslice = ["dep:ioslice"]
+libc = ["dep:libc"]
+mkns = ["ioslice"]
+numa = ["redox_syscall"]
+plain = ["dep:plain"]
+protocol = ["plain", "bitflags", "redox_syscall"]
+redox_syscall = ["dep:redox_syscall"]
+std = ["base"]
+
+[rust]
+name = "libredox"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2", optional = true }
+ioslice = { loaf = "crates-io/ioslice", version = "^0.6", optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2", optional = true }
+plain = { loaf = "crates-io/plain", version = "^0.2", optional = true }
+redox_syscall = { loaf = "crates-io/redox_syscall", version = "^0.9.2", optional = true }

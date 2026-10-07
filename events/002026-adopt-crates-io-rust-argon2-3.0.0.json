@@ -1,0 +1,92 @@
+{
+  "about": {
+    "description": "Rust implementation of the Argon2 password hashing function.",
+    "documentation": "https://docs.sru-systems.com/rust-argon2/3.0.0/argon2/",
+    "homepage": "https://github.com/sru-systems/rust-argon2",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/sru-systems/rust-argon2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8ae76b7506744d254fd0eb2c0ff5c5d108201ccbb083111ac04a44eeda105680",
+    "package": "rust-argon2",
+    "registry": "crates-io",
+    "version": "3.0.0"
+  },
+  "archive": "sha256:e9ea365587905051b3d51285c3f03a1ade3ee0597fa7c7f39f49c0254044c561",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": false,
+      "req": "^0.22"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/blake2b_simd",
+      "name": "blake2b_simd",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/constant_time_eq",
+      "name": "constant_time_eq",
+      "optional": false,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "crossbeam-utils": [
+      "dep:crossbeam-utils"
+    ],
+    "default": [
+      "crossbeam-utils"
+    ],
+    "serde": [
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:4e4fc1f34d58faefb629ff7e962d82a51097cb6e254453fdb5cc3a0b3a005d12",
+  "kind": "adopt",
+  "manifest": "sha256:8b2c47e3215d1e69d0e58c147d27b2c720af8384bc22149c39421faff355eb3e",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "argon2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rust-argon2",
+    "scope": "crates-io",
+    "version": "3.0.0"
+  }
+}

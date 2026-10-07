@@ -1,0 +1,91 @@
+{
+  "about": {
+    "description": "Bindings to the SecurityFoundation framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ef76382e9cedd18123099f17638715cc3d81dba3637d4c0d39ab69df2ef345a5",
+    "package": "objc2-security-foundation",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:bdef2e18105df235316314eef1f1df99c8cc8f4fe958799d3cc59b2d96507e35",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": false,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/objc2-foundation",
+      "name": "objc2-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "Authorization",
+        "objc2"
+      ],
+      "loaf": "crates-io/objc2-security",
+      "name": "objc2-security",
+      "optional": true,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "SFAuthorization": [
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSObject"
+    ],
+    "SFDefines": [],
+    "alloc": [],
+    "default": [
+      "std",
+      "SFAuthorization",
+      "SFDefines",
+      "objc2-security"
+    ],
+    "objc2-security": [
+      "dep:objc2-security"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": []
+  },
+  "id": "sha256:f070e137756ff6193d896d0ca7897b2d85989751ed076b03ed3355a5650498d9",
+  "kind": "adopt",
+  "manifest": "sha256:bd0a41a57f0cf1820e98b2ded19474a654c8cd0366a702a7099a9505b6ca5ed1",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_security_foundation",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-security-foundation",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

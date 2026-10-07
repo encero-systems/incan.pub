@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/float-cmp"
+version = "0.10.0"
+
+[project.features]
+default = ["ratio"]
+num-traits = ["dep:num-traits"]
+ratio = ["num-traits"]
+std = []
+
+[rust]
+name = "float_cmp"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.1", default-features = false, optional = true }

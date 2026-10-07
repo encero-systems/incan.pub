@@ -1,0 +1,68 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/x11rb"
+version = "0.14.0"
+
+[project.features]
+all-extensions = ["x11rb-protocol/all-extensions", "composite", "damage", "dbe", "dpms", "dri2", "dri3", "glx", "present", "randr", "record", "render", "res", "screensaver", "shape", "shm", "sync", "xevie", "xf86dri", "xf86vidmode", "xfixes", "xinerama", "xinput", "xkb", "xprint", "xselinux", "xtest", "xv", "xvmc"]
+allow-unsafe-code = ["libc", "as-raw-xcb-connection"]
+as-raw-xcb-connection = ["dep:as-raw-xcb-connection"]
+composite = ["x11rb-protocol/composite", "xfixes"]
+cursor = ["render", "resource_manager", "xcursor"]
+damage = ["x11rb-protocol/damage", "xfixes"]
+dbe = ["x11rb-protocol/dbe"]
+dl-libxcb = ["allow-unsafe-code", "libloading", "once_cell"]
+dpms = ["x11rb-protocol/dpms"]
+dri2 = ["x11rb-protocol/dri2"]
+dri3 = ["x11rb-protocol/dri3"]
+extra-traits = ["x11rb-protocol/extra-traits"]
+glx = ["x11rb-protocol/glx"]
+image = []
+libc = ["dep:libc"]
+libloading = ["dep:libloading"]
+once_cell = ["dep:once_cell"]
+present = ["x11rb-protocol/present", "randr", "xfixes", "sync"]
+randr = ["x11rb-protocol/randr", "render"]
+raw-window-handle = ["dep:raw-window-handle"]
+record = ["x11rb-protocol/record"]
+render = ["x11rb-protocol/render"]
+request-parsing = ["x11rb-protocol/request-parsing"]
+res = ["x11rb-protocol/res"]
+resource_manager = ["x11rb-protocol/resource_manager"]
+screensaver = ["x11rb-protocol/screensaver"]
+shape = ["x11rb-protocol/shape"]
+shm = ["x11rb-protocol/shm"]
+sync = ["x11rb-protocol/sync"]
+tracing = ["dep:tracing"]
+xcursor = ["dep:xcursor"]
+xevie = ["x11rb-protocol/xevie"]
+xf86dri = ["x11rb-protocol/xf86dri"]
+xf86vidmode = ["x11rb-protocol/xf86vidmode"]
+xfixes = ["x11rb-protocol/xfixes", "render", "shape"]
+xinerama = ["x11rb-protocol/xinerama"]
+xinput = ["x11rb-protocol/xinput", "xfixes"]
+xkb = ["x11rb-protocol/xkb"]
+xprint = ["x11rb-protocol/xprint"]
+xselinux = ["x11rb-protocol/xselinux"]
+xtest = ["x11rb-protocol/xtest"]
+xv = ["x11rb-protocol/xv", "shm"]
+xvmc = ["x11rb-protocol/xvmc", "xv"]
+
+[rust]
+name = "x11rb"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+as-raw-xcb-connection = { loaf = "crates-io/as-raw-xcb-connection", version = "^1.0", optional = true }
+gethostname = { loaf = "crates-io/gethostname", version = "^1.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2", optional = true }
+libloading = { loaf = "crates-io/libloading", version = ">=0.8.0, <0.10.0", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.19", optional = true }
+raw-window-handle = { loaf = "crates-io/raw-window-handle", version = "^0.6.0", optional = true }
+rustix = { loaf = "crates-io/rustix", version = "^1.0", features = ["event", "fs", "net", "std", "system"], default-features = false }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", default-features = false, optional = true }
+x11rb-protocol = { loaf = "crates-io/x11rb-protocol", version = "^0.14.0", features = ["std"], default-features = false }
+xcursor = { loaf = "crates-io/xcursor", version = "^0.3.7", optional = true }

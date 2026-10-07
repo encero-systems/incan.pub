@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/scrypt"
+version = "0.12.0"
+
+[project.features]
+alloc = ["password-hash?/alloc"]
+getrandom = ["password-hash", "dep:password-hash", "password-hash/getrandom"]
+kdf = ["alloc", "dep:kdf"]
+mcf = ["alloc", "phc", "dep:ctutils", "dep:mcf"]
+parallel = ["dep:rayon"]
+password-hash = ["dep:password-hash"]
+phc = ["dep:password-hash", "password-hash/phc"]
+rand_core = ["dep:password-hash", "password-hash/rand_core"]
+
+[rust]
+name = "scrypt"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4", optional = true }
+kdf = { loaf = "crates-io/kdf", version = "^0.1", optional = true }
+mcf = { loaf = "crates-io/mcf", version = "^0.6", optional = true }
+password-hash = { loaf = "crates-io/password-hash", version = "^0.6", default-features = false, optional = true }
+pbkdf2 = { loaf = "crates-io/pbkdf2", version = "^0.13" }
+rayon = { loaf = "crates-io/rayon", version = "^1.11", optional = true }
+salsa20 = { loaf = "crates-io/salsa20", version = "^0.11", default-features = false }
+sha2 = { loaf = "crates-io/sha2", version = "^0.11", default-features = false }

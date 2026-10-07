@@ -1,0 +1,71 @@
+{
+  "about": {
+    "description": "Provides wrapper types for sending non-send values to other threads.",
+    "documentation": "",
+    "homepage": "https://github.com/mitsuhiko/fragile",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/mitsuhiko/fragile"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8878864ba14bb86e818a412bfd6f18f9eabd4ec0f008a28e8f7eb61db532fcf9",
+    "package": "fragile",
+    "registry": "crates-io",
+    "version": "2.1.0"
+  },
+  "archive": "sha256:d808175f9397731477bf3a6164c8cbd25e66e55336bb106e8827463a31132a9f",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": true,
+      "req": "^0.3.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/slab",
+      "name": "slab",
+      "optional": true,
+      "req": "^0.4.5"
+    }
+  ],
+  "features": {
+    "default": [
+      "stream"
+    ],
+    "future": [],
+    "futures-core": [
+      "dep:futures-core"
+    ],
+    "slab": [
+      "dep:slab"
+    ],
+    "stream": [
+      "future",
+      "futures-core"
+    ]
+  },
+  "id": "sha256:1519bba4d33a04df232823a8410134c70511a3e0e103eefe05e99c844cdac6e4",
+  "kind": "adopt",
+  "manifest": "sha256:7b0ee784f6c8ca64f1daad103ea582a918755f58a75b19c5a519500f6dac1253",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "fragile",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fragile",
+    "scope": "crates-io",
+    "version": "2.1.0"
+  }
+}

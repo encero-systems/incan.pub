@@ -1,0 +1,15 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/metrics"
+version = "0.24.6"
+
+[rust]
+name = "metrics"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", features = ["fallback"], default-features = false, target = "cfg(target_pointer_width = \"32\")" }
+rapidhash = { loaf = "crates-io/rapidhash", version = "^4.4.1", default-features = false }

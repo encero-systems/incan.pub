@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/roxmltree"
+version = "0.21.1"
+
+[project.features]
+default = ["std", "positions"]
+positions = []
+std = ["memchr/std"]
+
+[rust]
+name = "roxmltree"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+memchr = { loaf = "crates-io/memchr", version = "^2", default-features = false }

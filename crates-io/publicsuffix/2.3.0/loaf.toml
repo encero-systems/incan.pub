@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/publicsuffix"
+version = "2.3.0"
+
+[project.features]
+anycase = ["unicase"]
+default = ["punycode"]
+hashbrown = ["dep:hashbrown"]
+idna = ["dep:idna"]
+punycode = ["idna"]
+std = []
+unicase = ["dep:unicase"]
+
+[rust]
+name = "publicsuffix"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.15.1", features = ["inline-more"], optional = true }
+idna = { loaf = "crates-io/idna", version = "^1.0", optional = true }
+psl-types = { loaf = "crates-io/psl-types", version = "^2.0.11" }
+unicase = { loaf = "crates-io/unicase", version = "^2.6.0", default-features = false, optional = true }

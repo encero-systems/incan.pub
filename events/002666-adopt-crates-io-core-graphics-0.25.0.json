@@ -1,0 +1,91 @@
+{
+  "about": {
+    "description": "Bindings to Core Graphics for macOS",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/servo/core-foundation-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:064badf302c3194842cf2c5d61f56cc88e54a759313879cdf03abdd27d0c3b97",
+    "package": "core-graphics",
+    "registry": "crates-io",
+    "version": "0.25.0"
+  },
+  "archive": "sha256:2f078b413feed0f0816afc1960204cd8116870c997037421b5fc050577cd76e6",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/core-foundation",
+      "name": "core-foundation",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/core-graphics-types",
+      "name": "core-graphics-types",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/foreign-types",
+      "name": "foreign-types",
+      "optional": false,
+      "req": "^0.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "catalina": [],
+    "default": [
+      "link"
+    ],
+    "elcapitan": [],
+    "highsierra": [],
+    "link": [
+      "core-foundation/link",
+      "core-graphics-types/link"
+    ]
+  },
+  "id": "sha256:4d2d5ae35fdcf8472ca84e402202eb028faae6e0eebfa0d1448354ae029f3375",
+  "kind": "adopt",
+  "manifest": "sha256:a7f40097155920ec1f4c3d12bd70a545aecb0f70e80b3e83b1c2c50d93909201",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "core_graphics",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "core-graphics",
+    "scope": "crates-io",
+    "version": "0.25.0"
+  }
+}

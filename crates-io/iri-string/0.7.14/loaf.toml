@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/iri-string"
+version = "0.7.14"
+
+[project.features]
+alloc = ["serde?/alloc"]
+default = ["std"]
+memchr = ["dep:memchr"]
+serde = ["dep:serde"]
+std = ["alloc", "memchr?/std", "serde?/std"]
+
+[rust]
+name = "iri_string"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+memchr = { loaf = "crates-io/memchr", version = "^2.4.1", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.103", features = ["derive"], default-features = false, optional = true }

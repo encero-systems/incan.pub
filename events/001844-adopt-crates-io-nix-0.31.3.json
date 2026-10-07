@@ -1,0 +1,151 @@
+{
+  "about": {
+    "description": "Rust friendly bindings to *nix APIs",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/nix-rust/nix"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cf20d2fde8ff38632c426f1165ed7436270b44f199fc55284c38276f9db47c3d",
+    "package": "nix",
+    "registry": "crates-io",
+    "version": "0.31.3"
+  },
+  "archive": "sha256:a9c8744cbd9f5b8378af3109cd261228f1bd1c740d96c6403f9563ffe30f754a",
+  "at": "2026-10-07T07:41:57Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.3.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "extra_traits"
+      ],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.186"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memoffset",
+      "name": "memoffset",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-utils",
+      "name": "pin-utils",
+      "optional": true,
+      "req": "^0.1.0"
+    }
+  ],
+  "features": {
+    "acct": [],
+    "aio": [
+      "pin-utils"
+    ],
+    "default": [],
+    "dir": [
+      "fs"
+    ],
+    "env": [],
+    "event": [
+      "poll"
+    ],
+    "fanotify": [],
+    "feature": [],
+    "fs": [],
+    "hostname": [],
+    "inotify": [],
+    "ioctl": [],
+    "kmod": [],
+    "memoffset": [
+      "dep:memoffset"
+    ],
+    "mman": [],
+    "mount": [
+      "uio"
+    ],
+    "mqueue": [
+      "fs"
+    ],
+    "net": [
+      "socket"
+    ],
+    "personality": [],
+    "pin-utils": [
+      "dep:pin-utils"
+    ],
+    "poll": [],
+    "process": [],
+    "pthread": [],
+    "ptrace": [
+      "process"
+    ],
+    "quota": [],
+    "reboot": [],
+    "resource": [],
+    "sched": [
+      "process"
+    ],
+    "signal": [
+      "process"
+    ],
+    "socket": [
+      "memoffset"
+    ],
+    "syslog": [],
+    "term": [],
+    "time": [],
+    "ucontext": [
+      "signal"
+    ],
+    "uio": [],
+    "user": [
+      "feature"
+    ],
+    "zerocopy": [
+      "fs",
+      "uio"
+    ]
+  },
+  "id": "sha256:3c046255e5b4a9e4980a040bb82205ab43e782486db156f274318529a6ae197c",
+  "kind": "adopt",
+  "manifest": "sha256:77e832fb98b9d184cc950babac6e9302ba4eb2bae14fa953ce70a4281c6de27f",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "nix",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "nix",
+    "scope": "crates-io",
+    "version": "0.31.3"
+  }
+}

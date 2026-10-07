@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aws-types"
+version = "1.6.0"
+
+[project.features]
+aws-smithy-runtime = ["dep:aws-smithy-runtime"]
+examples = ["dep:hyper-rustls", "dep:aws-smithy-runtime", "aws-smithy-runtime/client", "aws-smithy-runtime/connector-hyper-0-14-x", "aws-smithy-runtime/tls-rustls"]
+
+[rust]
+name = "aws_types"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+aws-credential-types = { loaf = "crates-io/aws-credential-types", version = "^1.3.0" }
+aws-smithy-async = { loaf = "crates-io/aws-smithy-async", version = "^1.3.0" }
+aws-smithy-runtime = { loaf = "crates-io/aws-smithy-runtime", version = "^1.14.0", optional = true }
+aws-smithy-runtime-api = { loaf = "crates-io/aws-smithy-runtime-api", version = "^1.16.0", features = ["client"] }
+aws-smithy-schema = { loaf = "crates-io/aws-smithy-schema", version = "^0.2.0" }
+aws-smithy-types = { loaf = "crates-io/aws-smithy-types", version = "^1.6.3" }
+hyper-rustls = { loaf = "crates-io/hyper-rustls", version = "^0.24.2", features = ["http2", "webpki-roots"], default-features = false, optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.44" }

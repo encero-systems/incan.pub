@@ -1,0 +1,253 @@
+{
+  "about": {
+    "description": "Wrappers for total ordering on floats",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/reem/rust-ordered-float"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8c7c9e0d9b23589f26070720bac724174bfec1083e82f7854cdd0267518343c0",
+    "package": "ordered-float",
+    "registry": "crates-io",
+    "version": "5.5.0"
+  },
+  "archive": "sha256:83d9841703da9eee6b349b72be105ec23570ba91ce400c34c707a2267d5d2888",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/borsh",
+      "name": "borsh",
+      "optional": true,
+      "req": "^1.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytemuck",
+      "name": "bytemuck",
+      "optional": true,
+      "req": "^1.12.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/derive-visitor",
+      "name": "derive-visitor",
+      "optional": true,
+      "req": "^0.4.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/facet",
+      "name": "facet",
+      "optional": true,
+      "req": "^0.46.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-cmp",
+      "name": "num-cmp",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proptest",
+      "name": "proptest",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.8.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rend"
+      ],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv",
+      "optional": true,
+      "req": "^0.7.41"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rkyv",
+      "name": "rkyv_08",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/schemars",
+      "name": "schemars",
+      "optional": true,
+      "req": "^0.8.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/schemars",
+      "name": "schemars1",
+      "optional": true,
+      "req": "^1.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/speedy",
+      "name": "speedy",
+      "optional": true,
+      "req": "^0.8.3"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "borsh": [
+      "dep:borsh"
+    ],
+    "bytemuck": [
+      "dep:bytemuck"
+    ],
+    "default": [
+      "std"
+    ],
+    "derive-visitor": [
+      "dep:derive-visitor"
+    ],
+    "facet": [
+      "dep:facet"
+    ],
+    "libm": [
+      "num-traits/libm"
+    ],
+    "num-cmp": [
+      "dep:num-cmp"
+    ],
+    "proptest": [
+      "dep:proptest"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "randtest": [
+      "dep:rand",
+      "rand/std",
+      "rand/std_rng"
+    ],
+    "rkyv": [
+      "rkyv_32"
+    ],
+    "rkyv_08": [
+      "rkyv_08_32"
+    ],
+    "rkyv_08_16": [
+      "dep:rkyv_08",
+      "rkyv_08?/pointer_width_16"
+    ],
+    "rkyv_08_32": [
+      "dep:rkyv_08",
+      "rkyv_08?/pointer_width_32"
+    ],
+    "rkyv_08_64": [
+      "dep:rkyv_08",
+      "rkyv_08?/pointer_width_64"
+    ],
+    "rkyv_08_ck": [
+      "dep:rkyv_08",
+      "rkyv_08?/bytecheck"
+    ],
+    "rkyv_16": [
+      "dep:rkyv",
+      "rkyv?/size_16"
+    ],
+    "rkyv_32": [
+      "dep:rkyv",
+      "rkyv?/size_32"
+    ],
+    "rkyv_64": [
+      "dep:rkyv",
+      "rkyv?/size_64"
+    ],
+    "rkyv_ck": [
+      "rkyv?/validation"
+    ],
+    "schemars": [
+      "dep:schemars"
+    ],
+    "schemars1": [
+      "dep:schemars1"
+    ],
+    "serde": [
+      "dep:serde",
+      "rand?/serde1"
+    ],
+    "speedy": [
+      "dep:speedy"
+    ],
+    "std": [
+      "num-traits/std"
+    ]
+  },
+  "id": "sha256:ed6f1a2faa0da351e95e5610a1631801db3bcbeaadce7a55909e6fddfde10779",
+  "kind": "adopt",
+  "manifest": "sha256:e919f126ea9a87bdef3eebd4629e61e6376eadcf8ae3be2b928d2708731ecb54",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ordered_float",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ordered-float",
+    "scope": "crates-io",
+    "version": "5.5.0"
+  }
+}

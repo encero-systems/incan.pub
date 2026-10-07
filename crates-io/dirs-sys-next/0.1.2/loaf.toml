@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dirs-sys-next"
+version = "0.1.2"
+
+[rust]
+name = "dirs_sys_next"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2", target = "cfg(unix)" }
+redox_users = { loaf = "crates-io/redox_users", version = "^0.4.0", default-features = false, target = "cfg(target_os = \"redox\")" }
+winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["knownfolders", "objbase", "shlobj", "winbase", "winerror"], target = "cfg(windows)" }

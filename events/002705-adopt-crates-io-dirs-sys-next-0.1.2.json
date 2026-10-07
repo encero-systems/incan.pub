@@ -1,0 +1,73 @@
+{
+  "about": {
+    "description": "system-level helper functions for the dirs and directories crates",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/xdg-rs/dirs/tree/master/dirs-sys"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4ebda144c4fe02d1f7ea1a7d9641b6fc6b580adcfa024ae48797ecdeb6825b4d",
+    "package": "dirs-sys-next",
+    "registry": "crates-io",
+    "version": "0.1.2"
+  },
+  "archive": "sha256:329d79013aba06db0d1e5c919db79bedbbab8348a42dae77c9acca0a6ee432aa",
+  "at": "2026-10-07T07:45:05Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/redox_users",
+      "name": "redox_users",
+      "optional": false,
+      "req": "^0.4.0",
+      "target": "cfg(target_os = \"redox\")"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "knownfolders",
+        "objbase",
+        "shlobj",
+        "winbase",
+        "winerror"
+      ],
+      "loaf": "crates-io/winapi",
+      "name": "winapi",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:a8f83283876ec4de71e59ab34d0ac8b3eb73ea621e72ca582a211d049470d892",
+  "kind": "adopt",
+  "manifest": "sha256:ef9c6d061ac3b6ca6df94eacda7f0b162429973d012abcc4737acbe61b8e5bb0",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "dirs_sys_next",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "dirs-sys-next",
+    "scope": "crates-io",
+    "version": "0.1.2"
+  }
+}

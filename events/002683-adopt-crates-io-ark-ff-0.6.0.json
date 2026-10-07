@@ -1,0 +1,150 @@
+{
+  "about": {
+    "description": "A library for finite fields",
+    "documentation": "https://docs.rs/ark-ff/",
+    "homepage": "https://arkworks.rs",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/arkworks-rs/algebra"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f7a806ac6c8307b929df4645776290a50ee2aac754ad09d8bdf73391309e43af",
+    "package": "ark-ff",
+    "registry": "crates-io",
+    "version": "0.6.0"
+  },
+  "archive": "sha256:3a5b352ab211bfd67064683ec57d15cf74c5a56a6f5137c1e3e37ebe34101c79",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ark-ff-asm",
+      "name": "ark-ff-asm",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ark-ff-macros",
+      "name": "ark-ff-macros",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/ark-serialize",
+      "name": "ark-serialize",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ark-std",
+      "name": "ark-std",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "Clone",
+        "Copy",
+        "Debug",
+        "Default",
+        "Eq",
+        "Hash",
+        "Ord",
+        "PartialEq",
+        "PartialOrd"
+      ],
+      "loaf": "crates-io/educe",
+      "name": "educe",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": false,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": false,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "asm": [],
+    "default": [],
+    "parallel": [
+      "std",
+      "rayon",
+      "ark-std/parallel",
+      "ark-serialize/parallel"
+    ],
+    "rayon": [
+      "dep:rayon"
+    ],
+    "std": [
+      "ark-std/std",
+      "ark-serialize/std"
+    ]
+  },
+  "id": "sha256:e4a977629a8292a7af8a40155acca49bd58b37f807c724a73f4d0180cf06de0c",
+  "kind": "adopt",
+  "manifest": "sha256:a5ce8775f8570302f7e248e95ac87e4899cf8100a2af1d2934236b6e6d5c6b9f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ark_ff",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ark-ff",
+    "scope": "crates-io",
+    "version": "0.6.0"
+  }
+}

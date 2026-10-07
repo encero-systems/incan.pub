@@ -1,0 +1,178 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the Elliptic Curve Digital Signature Algorithm (ECDSA) as specified in\nFIPS 186-4 (Digital Signature Standard), implemented generically over elliptic curves, providing\nRFC6979 deterministic signing support as well as randomized signatures and signature verification",
+    "documentation": "",
+    "homepage": "https://github.com/RustCrypto/signatures/tree/master/ecdsa",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/signatures"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c0681a4fc24c767085329728d8dfba959af91228aa4610cca4f8ce317ba46ae0",
+    "package": "ecdsa",
+    "registry": "crates-io",
+    "version": "0.17.0"
+  },
+  "archive": "sha256:1f122700e46725bce2d5283e1c438191f4a8c9f3d8f5c1093d44a69ae816a8e8",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "sec1"
+      ],
+      "loaf": "crates-io/elliptic-curve",
+      "name": "elliptic-curve",
+      "optional": false,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rfc6979",
+      "name": "rfc6979",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rand_core"
+      ],
+      "loaf": "crates-io/signature",
+      "name": "signature",
+      "optional": false,
+      "req": "^3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/spki",
+      "name": "spki",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": false,
+      "req": "^1.5"
+    }
+  ],
+  "features": {
+    "algorithm": [
+      "dep:rfc6979",
+      "digest",
+      "elliptic-curve/arithmetic"
+    ],
+    "alloc": [
+      "elliptic-curve/alloc",
+      "signature/alloc",
+      "dep:spki",
+      "spki/alloc"
+    ],
+    "default": [
+      "digest"
+    ],
+    "der": [
+      "dep:der"
+    ],
+    "dev": [
+      "algorithm",
+      "dep:digest",
+      "digest/dev",
+      "elliptic-curve/dev"
+    ],
+    "digest": [
+      "dep:digest",
+      "elliptic-curve/digest",
+      "signature/digest"
+    ],
+    "getrandom": [
+      "elliptic-curve/getrandom"
+    ],
+    "pem": [
+      "elliptic-curve/pem",
+      "pkcs8"
+    ],
+    "pkcs8": [
+      "der",
+      "digest",
+      "elliptic-curve/pkcs8"
+    ],
+    "serde": [
+      "dep:serdect",
+      "elliptic-curve/serde",
+      "pkcs8"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "spki": [
+      "dep:spki"
+    ],
+    "std": [
+      "alloc",
+      "elliptic-curve/std"
+    ]
+  },
+  "id": "sha256:2828823be2a0175be99a3409a2fc62da06025fa60ccd6959132f2969259efc9b",
+  "kind": "adopt",
+  "manifest": "sha256:f22703f733ee8b18c0a48d18fabf4bbe5ab8977a8ec0c0257fc4411442981a6d",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ecdsa",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ecdsa",
+    "scope": "crates-io",
+    "version": "0.17.0"
+  }
+}

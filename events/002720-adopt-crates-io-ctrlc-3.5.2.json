@@ -1,0 +1,76 @@
+{
+  "about": {
+    "description": "Easy Ctrl-C handler for Rust projects",
+    "documentation": "https://detegr.github.io/doc/ctrlc",
+    "homepage": "https://github.com/Detegr/rust-ctrlc",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Detegr/rust-ctrlc.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e0b1fab2ae45819af2d0731d60f2afe17227ebb1a1538a236da84c93e9a60162",
+    "package": "ctrlc",
+    "registry": "crates-io",
+    "version": "3.5.2"
+  },
+  "archive": "sha256:d56e2553dd17215ed326fe62537f0d2bad2c25f699f82cc977d072aa2e042c8a",
+  "at": "2026-10-07T07:45:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/dispatch2",
+      "name": "dispatch2",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(target_vendor = \"apple\")"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "signal"
+      ],
+      "loaf": "crates-io/nix",
+      "name": "nix",
+      "optional": false,
+      "req": "^0.31",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Security",
+        "Win32_System_Console",
+        "Win32_System_Threading"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.61",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "termination": []
+  },
+  "id": "sha256:c761b5fe1cfb06b683fe7b22b0febc4f286d946e5c3cf7abc0465bcd3c39fa52",
+  "kind": "adopt",
+  "manifest": "sha256:5e49199a2f85d46b98a1b04bd5aa0f43048f6f8b8627397e12498fd6db0575e8",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ctrlc",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ctrlc",
+    "scope": "crates-io",
+    "version": "3.5.2"
+  }
+}

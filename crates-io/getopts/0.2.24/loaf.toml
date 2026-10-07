@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/getopts"
+version = "0.2.24"
+
+[project.features]
+core = ["dep:core"]
+default = ["unicode"]
+rustc-dep-of-std = ["std", "core"]
+std = ["dep:std"]
+unicode = ["dep:unicode-width"]
+
+[rust]
+name = "getopts"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0", optional = true }
+std = { loaf = "crates-io/rustc-std-workspace-std", version = "^1.0", optional = true }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.2.0", optional = true }

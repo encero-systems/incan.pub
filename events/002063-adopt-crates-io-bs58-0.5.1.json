@@ -1,0 +1,92 @@
+{
+  "about": {
+    "description": "Another Base58 codec implementation.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Nullus157/bs58-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bf88ba1141d185c399bee5288d850d63b8369520c1eafc32a0430b5b6c287bf4",
+    "package": "bs58",
+    "registry": "crates-io",
+    "version": "0.5.1"
+  },
+  "archive": "sha256:f3c358f9181db87230f8fbb8185cf3dad6f9dd03269f2f32692fd6554e0cd973",
+  "at": "2026-10-07T07:42:49Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "grab_spare_slice"
+      ],
+      "loaf": "crates-io/tinyvec",
+      "name": "tinyvec",
+      "optional": true,
+      "req": "^1.6.0"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "tinyvec?/alloc"
+    ],
+    "cb58": [
+      "sha2"
+    ],
+    "check": [
+      "sha2"
+    ],
+    "default": [
+      "std"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "smallvec": [
+      "dep:smallvec"
+    ],
+    "std": [
+      "alloc",
+      "tinyvec?/std"
+    ],
+    "tinyvec": [
+      "dep:tinyvec"
+    ]
+  },
+  "id": "sha256:c20ac5cd568db06535a26720ab2422d0b659ff3d4dfa06f087d26a186e1d087a",
+  "kind": "adopt",
+  "manifest": "sha256:00e7449842ade184ad51c27b4948e3b2492fa50ba9a788efdc3e9c6a96066c52",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "bs58",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bs58",
+    "scope": "crates-io",
+    "version": "0.5.1"
+  }
+}

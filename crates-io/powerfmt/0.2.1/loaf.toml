@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/powerfmt"
+version = "0.2.1"
+
+[project.features]
+alloc = []
+default = ["std", "macros"]
+macros = ["dep:powerfmt-macros"]
+std = ["alloc"]
+
+[rust]
+name = "powerfmt"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+powerfmt-macros = { loaf = "crates-io/powerfmt-macros", version = "=0.1.1", optional = true }

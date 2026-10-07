@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dtor"
+version = "1.0.6"
+
+[project.features]
+default = ["std", "proc_macro"]
+proc_macro = ["dep:linktime-proc-macro"]
+std = []
+
+[rust]
+name = "dtor"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+linktime-proc-macro = { loaf = "crates-io/linktime-proc-macro", version = "^0.2.3", features = ["dtor"], optional = true }

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/anes"
+version = "0.2.1"
+
+[project.features]
+bitflags = ["dep:bitflags"]
+default = []
+parser = ["bitflags"]
+
+[rust]
+name = "anes"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.9.1", optional = true }

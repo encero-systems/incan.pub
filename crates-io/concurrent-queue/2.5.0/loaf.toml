@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/concurrent-queue"
+version = "2.5.0"
+
+[project.features]
+default = ["std"]
+loom = ["dep:loom"]
+portable-atomic = ["dep:portable-atomic"]
+std = []
+
+[rust]
+name = "concurrent_queue"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.11", default-features = false }
+loom = { loaf = "crates-io/loom", version = "^0.7", optional = true, target = "cfg(loom)" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", default-features = false, optional = true }

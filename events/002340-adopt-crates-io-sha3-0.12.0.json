@@ -1,0 +1,79 @@
+{
+  "about": {
+    "description": "Implementation of the SHA-3 family of cryptographic hash algorithms",
+    "documentation": "https://docs.rs/sha3",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/hashes"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bc9bad02c26382724b2d2692c6f179285e4b54eeecd7968f52a50059c3c11759",
+    "package": "sha3",
+    "registry": "crates-io",
+    "version": "0.12.0"
+  },
+  "archive": "sha256:bfd663ea234e8b46a945cdef096c40353180ffb57004a1eb0890a46ee4eddec3",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": false,
+      "req": "^0.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/keccak",
+      "name": "keccak",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sponge-cursor",
+      "name": "sponge-cursor",
+      "optional": false,
+      "req": "^0.1"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "digest/alloc"
+    ],
+    "default": [
+      "alloc",
+      "oid"
+    ],
+    "oid": [
+      "digest/oid"
+    ],
+    "zeroize": [
+      "digest/zeroize",
+      "sponge-cursor/zeroize"
+    ]
+  },
+  "id": "sha256:a9b777d49b8d7a02b69fc97902ed4209804e1e737a9c7ba15c5ae1b1405c4c05",
+  "kind": "adopt",
+  "manifest": "sha256:d7c2213404d8fa45f740dfebb87faec2445470646768992492d19e9bb166419c",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "sha3",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "sha3",
+    "scope": "crates-io",
+    "version": "0.12.0"
+  }
+}

@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ravif"
+version = "0.13.0"
+
+[project.features]
+asm = ["rav1e/asm"]
+default = ["asm", "threading"]
+threading = ["dep:rayon", "rav1e/threading"]
+
+[rust]
+name = "ravif"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+avif-serialize = { loaf = "crates-io/avif-serialize", version = "^0.8.6" }
+imgref = { loaf = "crates-io/imgref", version = "^1.12.0" }
+loop9 = { loaf = "crates-io/loop9", version = "^0.1.5" }
+quick-error = { loaf = "crates-io/quick-error", version = "^2.0.1" }
+rav1e = [{ loaf = "crates-io/rav1e", version = "^0.8", features = ["wasm"], default-features = false, target = "cfg(target = \"wasm32-unknown-unknown\")" }, { loaf = "crates-io/rav1e", version = "^0.8.1", default-features = false }]
+rayon = { loaf = "crates-io/rayon", version = "^1.11.0", optional = true }
+rgb = { loaf = "crates-io/rgb", version = "^0.8.52", default-features = false }

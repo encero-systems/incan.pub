@@ -1,0 +1,79 @@
+{
+  "about": {
+    "description": "Traits for cryptographic signature algorithms (e.g. ECDSA, Ed25519)",
+    "documentation": "https://docs.rs/signature",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/traits/tree/master/signature"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:77549399552de45a898a580c1b41d445bf730df867cc44e6c0233bbc4b8329de",
+    "package": "signature",
+    "registry": "crates-io",
+    "version": "2.2.0"
+  },
+  "archive": "sha256:00e7dcb0813664e7ac131fbca741cc5ff03f9bdd26be8ca86cbc8502116d9298",
+  "at": "2026-10-07T07:43:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/signature_derive",
+      "name": "derive",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": true,
+      "req": "^0.10.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.6.4"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "derive": [
+      "dep:derive"
+    ],
+    "digest": [
+      "dep:digest"
+    ],
+    "rand_core": [
+      "dep:rand_core"
+    ],
+    "std": [
+      "alloc",
+      "rand_core?/std"
+    ]
+  },
+  "id": "sha256:486a0323beefb034f6240c347c4363505cdf523caf6e4cf0cade02d8c2af9aca",
+  "kind": "adopt",
+  "manifest": "sha256:b6dd350dee564d0bd6fb8038b1e5c5bb3a3b0ab0983181bea37b4679838e5f4d",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "signature",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "signature",
+    "scope": "crates-io",
+    "version": "2.2.0"
+  }
+}

@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zbus_macros"
+version = "5.19.0"
+
+[project.features]
+blocking-api = []
+default = []
+gvariant = ["zvariant/gvariant", "zvariant_utils/gvariant"]
+
+[rust]
+name = "zbus_macros"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+proc-macro-crate = { loaf = "crates-io/proc-macro-crate", version = "^3.2.0" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.81" }
+quote = { loaf = "crates-io/quote", version = "^1.0.36" }
+syn = { loaf = "crates-io/syn", version = "^3.0", features = ["extra-traits", "fold", "full"] }
+zbus_names = { loaf = "crates-io/zbus_names", version = "^4.3.4" }
+zvariant = { loaf = "crates-io/zvariant", version = "^5.14.0" }
+zvariant_utils = { loaf = "crates-io/zvariant_utils", version = "^4.0.0" }

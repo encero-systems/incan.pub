@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bitstream-io"
+version = "4.10.0"
+
+[project.features]
+alloc = ["no_std_io2/alloc"]
+default = ["std"]
+std = ["no_std_io2/std", "alloc"]
+
+[rust]
+name = "bitstream_io"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+no_std_io2 = { loaf = "crates-io/no_std_io2", version = "^0.9" }

@@ -1,0 +1,43 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/objc2-io-kit"
+version = "0.3.2"
+
+[project.features]
+AppleUSBDefinitions = []
+IOUSBHostFamilyDefinitions = []
+IOUSBLib = ["objc2-core-foundation/CFPlugInCOM", "objc2-core-foundation/CFRunLoop", "objc2-core-foundation/CFUUID"]
+USB = []
+USBSpec = []
+alloc = []
+bitflags = ["dep:bitflags"]
+block2 = ["dep:block2"]
+default = ["std", "AppleUSBDefinitions", "IOUSBHostFamilyDefinitions", "IOUSBLib", "USB", "USBSpec", "bitflags", "block2", "dispatch2", "graphics", "hid", "hidsystem", "libc", "network", "objc2", "ps", "pwr_mgt", "serial", "usb"]
+dispatch2 = ["dep:dispatch2"]
+graphics = ["objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFPlugInCOM", "objc2-core-foundation/CFUUID"]
+hid = ["bitflags", "objc2-core-foundation/CFArray", "objc2-core-foundation/CFDate", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFPlugInCOM", "objc2-core-foundation/CFRunLoop", "objc2-core-foundation/CFSet", "objc2-core-foundation/CFUUID"]
+hidsystem = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFDictionary"]
+libc = ["dep:libc"]
+network = []
+objc2 = ["dep:objc2", "dispatch2?/objc2", "objc2-core-foundation/objc2"]
+ps = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFDate", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFPlugInCOM", "objc2-core-foundation/CFRunLoop", "objc2-core-foundation/CFSet", "objc2-core-foundation/CFUUID"]
+pwr_mgt = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFDate", "objc2-core-foundation/CFDictionary"]
+serial = []
+std = ["alloc"]
+unstable-darwin-objc = []
+usb = []
+
+[rust]
+name = "objc2_io_kit"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.5.0", features = ["std"], default-features = false, optional = true }
+block2 = { loaf = "crates-io/block2", version = ">=0.6.1, <0.8.0", features = ["alloc"], default-features = false, optional = true }
+dispatch2 = { loaf = "crates-io/dispatch2", version = ">=0.3.0, <0.5.0", features = ["alloc", "block2"], default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.80", default-features = false, optional = true }
+objc2 = { loaf = "crates-io/objc2", version = ">=0.6.2, <0.8.0", features = ["std"], default-features = false, optional = true }
+objc2-core-foundation = { loaf = "crates-io/objc2-core-foundation", version = "^0.3.2", features = ["CFArray", "CFData", "CFDictionary", "CFPlugInCOM", "CFRunLoop", "CFURL", "CFUUID"], default-features = false }

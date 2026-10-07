@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/plotters-svg"
+version = "0.3.7"
+
+[project.features]
+bitmap_encoder = ["image"]
+debug = []
+image = ["dep:image"]
+
+[rust]
+name = "plotters_svg"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+image = { loaf = "crates-io/image", version = "^0.24.2", features = ["bmp", "jpeg", "png"], default-features = false, optional = true }
+plotters-backend = { loaf = "crates-io/plotters-backend", version = "^0.3.6" }

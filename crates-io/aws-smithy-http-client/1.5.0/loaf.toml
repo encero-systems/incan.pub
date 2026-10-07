@@ -1,0 +1,61 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aws-smithy-http-client"
+version = "1.5.0"
+
+[project.features]
+__rustls = ["dep:rustls", "dep:hyper-rustls", "dep:tokio-rustls", "default-client"]
+default-client = ["aws-smithy-runtime-api/http-1x", "aws-smithy-types/http-body-1-x", "dep:hyper", "dep:hyper-util", "hyper-util?/client-legacy", "hyper-util?/client-proxy", "dep:http-1x", "dep:tower", "dep:rustls-pki-types", "dep:rustls-native-certs"]
+hyper-014 = ["aws-smithy-runtime-api/http-02x", "aws-smithy-types/http-body-0-4-x", "dep:http-02x", "dep:http-body-04x", "dep:hyper-0-14", "dep:h2-0-3"]
+legacy-rustls-ring = ["dep:legacy-hyper-rustls", "dep:legacy-rustls", "dep:rustls-native-certs", "hyper-014"]
+legacy-test-util = ["test-util", "dep:http-02x", "aws-smithy-runtime-api/http-02x", "aws-smithy-types/http-body-0-4-x"]
+rt-tokio = ["aws-smithy-async/rt-tokio", "tokio/rt"]
+rustls-aws-lc = ["__rustls", "rustls?/aws_lc_rs", "rustls?/prefer-post-quantum"]
+rustls-aws-lc-fips = ["__rustls", "rustls?/fips", "rustls?/prefer-post-quantum"]
+rustls-ring = ["__rustls", "rustls?/ring"]
+s2n-tls = ["dep:s2n-tls", "dep:s2n-tls-hyper", "dep:s2n-tls-tokio", "default-client"]
+test-util = ["dep:aws-smithy-protocol-test", "dep:serde", "dep:serde_json", "dep:indexmap", "dep:bytes", "dep:http-1x", "aws-smithy-runtime-api/http-1x", "dep:http-body-1x", "aws-smithy-types/http-body-1-x", "tokio/rt"]
+wire-mock = ["test-util", "default-client", "hyper-util?/server", "hyper-util?/server-auto", "hyper-util?/service", "hyper-util?/server-graceful", "tokio/macros", "tokio/io-util", "tokio/net", "rt-tokio", "tokio/sync", "tokio/time", "dep:http-body-util", "dep:httparse", "dep:socket2"]
+
+[rust]
+name = "aws_smithy_http_client"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+aws-smithy-async = { loaf = "crates-io/aws-smithy-async", version = "^1.3.0" }
+aws-smithy-protocol-test = { loaf = "crates-io/aws-smithy-protocol-test", version = "^0.64.0", optional = true }
+aws-smithy-runtime-api = { loaf = "crates-io/aws-smithy-runtime-api", version = "^1.19.0", features = ["client"] }
+aws-smithy-types = { loaf = "crates-io/aws-smithy-types", version = "^1.8.1" }
+bytes = { loaf = "crates-io/bytes", version = "^1.11.1", optional = true }
+h2 = { loaf = "crates-io/h2", version = "^0.4.11", default-features = false }
+h2-0-3 = { loaf = "crates-io/h2", version = "^0.3.24", optional = true }
+http-02x = { loaf = "crates-io/http", version = "^0.2.12", optional = true }
+http-1x = { loaf = "crates-io/http", version = "^1.3.1", optional = true }
+http-body-04x = { loaf = "crates-io/http-body", version = "^0.4.6", optional = true }
+http-body-1x = { loaf = "crates-io/http-body", version = "^1.0.1", optional = true }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1.3", optional = true }
+httparse = { loaf = "crates-io/httparse", version = "^1.10.1", optional = true }
+hyper = { loaf = "crates-io/hyper", version = "^1.6.0", features = ["client", "http1", "http2"], optional = true }
+hyper-0-14 = { loaf = "crates-io/hyper", version = "^0.14.26", features = ["client", "http1", "http2", "stream", "tcp"], default-features = false, optional = true }
+hyper-rustls = { loaf = "crates-io/hyper-rustls", version = "^0.27", features = ["http1", "http2", "native-tokio", "tls12"], default-features = false, optional = true }
+hyper-util = { loaf = "crates-io/hyper-util", version = "^0.1.16", features = ["http1", "http2"], optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.10.0", features = ["serde"], optional = true }
+legacy-hyper-rustls = { loaf = "crates-io/hyper-rustls", version = "^0.24.2", features = ["acceptor", "http1", "http2", "logging", "tls12", "tokio-runtime"], default-features = false, optional = true }
+legacy-rustls = { loaf = "crates-io/rustls", version = "^0.21.8", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.14" }
+rustls = { loaf = "crates-io/rustls", version = "^0.23.31", default-features = false, optional = true }
+rustls-native-certs = { loaf = "crates-io/rustls-native-certs", version = "^0.8.1", optional = true }
+rustls-pki-types = { loaf = "crates-io/rustls-pki-types", version = "^1.12.0", features = ["std"], optional = true }
+s2n-tls = { loaf = "crates-io/s2n-tls", version = "^0.3.33", optional = true }
+s2n-tls-hyper = { loaf = "crates-io/s2n-tls-hyper", version = "^0.1.0", optional = true }
+s2n-tls-tokio = { loaf = "crates-io/s2n-tls-tokio", version = "^0.3.33", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.228", features = ["derive"], optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.146", features = ["preserve_order"], optional = true }
+socket2 = { loaf = "crates-io/socket2", version = "^0.6", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.49" }
+tokio-rustls = { loaf = "crates-io/tokio-rustls", version = "^0.26.2", default-features = false, optional = true }
+tower = { loaf = "crates-io/tower", version = "^0.5.2", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.44" }

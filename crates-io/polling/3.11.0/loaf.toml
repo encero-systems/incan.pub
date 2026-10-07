@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/polling"
+version = "3.11.0"
+
+[project.features]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "polling"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+concurrent-queue = { loaf = "crates-io/concurrent-queue", version = "^2.2.0", target = "cfg(windows)" }
+hermit-abi = { loaf = "crates-io/hermit-abi", version = "^0.5.0", target = "cfg(target_os = \"hermit\")" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.9", target = "cfg(windows)" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.5", features = ["event", "fs", "pipe", "process", "std", "time"], default-features = false, target = "cfg(any(unix, target_os = \"fuchsia\", target_os = \"vxworks\"))" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.37", default-features = false, optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Wdk_Foundation", "Wdk_Storage_FileSystem", "Win32_Foundation", "Win32_Networking_WinSock", "Win32_Security", "Win32_Storage_FileSystem", "Win32_System_IO", "Win32_System_LibraryLoader", "Win32_System_Threading", "Win32_System_WindowsProgramming"], target = "cfg(windows)" }

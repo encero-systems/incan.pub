@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/env_filter"
+version = "2.0.0"
+
+[project.features]
+default = ["std", "regex"]
+regex = ["dep:regex"]
+std = ["log/std", "regex?/std"]
+
+[rust]
+name = "env_filter"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+log = { loaf = "crates-io/log", version = "^0.4.29" }
+regex = { loaf = "crates-io/regex", version = "^1.12.3", features = ["perf"], default-features = false, optional = true }

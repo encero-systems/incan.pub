@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pathdiff"
+version = "0.2.3"
+
+[project.features]
+camino = ["dep:camino"]
+
+[rust]
+name = "pathdiff"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+camino = { loaf = "crates-io/camino", version = "^1.0.5", optional = true }

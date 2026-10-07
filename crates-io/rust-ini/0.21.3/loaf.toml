@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rust-ini"
+version = "0.21.3"
+
+[project.features]
+brackets-in-section-names = []
+case-insensitive = ["unicase"]
+default = []
+inline-comment = []
+unicase = ["dep:unicase"]
+
+[rust]
+name = "ini"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+ordered-multimap = { loaf = "crates-io/ordered-multimap", version = "^0.7" }
+unicase = { loaf = "crates-io/unicase", version = "^2.6", optional = true }

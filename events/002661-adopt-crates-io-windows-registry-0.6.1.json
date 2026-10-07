@@ -1,0 +1,72 @@
+{
+  "about": {
+    "description": "Windows registry",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "readme.md",
+    "repository": "https://github.com/microsoft/windows-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:02752bf7fbdcce7f2a27a742f798510f3e5ad88dbe84871e5168e2120c3d5720",
+    "package": "windows-registry",
+    "registry": "crates-io",
+    "version": "0.6.1"
+  },
+  "archive": "sha256:1debb996e2d84df473a77da01538f65dba6b2c117bb3498bb3ae46bc1f1a763e",
+  "at": "2026-10-07T07:45:03Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-link",
+      "name": "windows-link",
+      "optional": false,
+      "req": "^0.2.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-result",
+      "name": "windows-result",
+      "optional": false,
+      "req": "^0.4.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/windows-strings",
+      "name": "windows-strings",
+      "optional": false,
+      "req": "^0.5.1"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "std": [
+      "windows-result/std",
+      "windows-strings/std"
+    ]
+  },
+  "id": "sha256:78e7d4a3fb68c9def216f4a97d1814dd7f927dbe645cb10ac63117534e15670a",
+  "kind": "adopt",
+  "manifest": "sha256:17e02dd5c79c47cfd3333d25dd11d7c7fa40ad2448b7d9a8652ed73af4115fef",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "windows_registry",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "windows-registry",
+    "scope": "crates-io",
+    "version": "0.6.1"
+  }
+}

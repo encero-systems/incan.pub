@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tonic-prost-build"
+version = "0.14.6"
+
+[project.features]
+cleanup-markdown = ["prost-build/cleanup-markdown"]
+default = ["transport", "cleanup-markdown"]
+transport = ["tonic-build/transport"]
+
+[rust]
+name = "tonic_prost_build"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+prettyplease = { loaf = "crates-io/prettyplease", version = "^0.2" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+prost-build = { loaf = "crates-io/prost-build", version = "^0.14" }
+prost-types = { loaf = "crates-io/prost-types", version = "^0.14" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^2.0" }
+tempfile = { loaf = "crates-io/tempfile", version = "^3.0" }
+tonic-build = { loaf = "crates-io/tonic-build", version = "^0.14.6", default-features = false }

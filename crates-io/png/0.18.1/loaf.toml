@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/png"
+version = "0.18.1"
+
+[project.features]
+benchmarks = []
+unstable = ["crc32fast/nightly"]
+zlib-rs = ["flate2/zlib-rs"]
+
+[rust]
+name = "png"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.0" }
+crc32fast = { loaf = "crates-io/crc32fast", version = "^1.2.0" }
+fdeflate = { loaf = "crates-io/fdeflate", version = "^0.3.3" }
+flate2 = { loaf = "crates-io/flate2", version = "^1.0.35" }
+miniz_oxide = { loaf = "crates-io/miniz_oxide", version = "^0.8", features = ["simd"] }

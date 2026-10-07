@@ -1,0 +1,79 @@
+{
+  "about": {
+    "description": "hermit-abi is small interface to call functions from the unikernel RustyHermit.\nIt is used to build the target `x86_64-unknown-hermit`.",
+    "documentation": "https://hermitcore.github.io/rusty-hermit/hermit_abi",
+    "homepage": "",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hermitcore/libhermit-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33",
+    "package": "hermit-abi",
+    "registry": "crates-io",
+    "version": "0.1.19"
+  },
+  "archive": "sha256:e8dfb0efb2e7bcec4fccdf8a0ba5784dcdf231e60f4a53604ceac1cf806b8ef1",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compiler_builtins",
+      "name": "compiler_builtins",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.51"
+    }
+  ],
+  "features": {
+    "compiler_builtins": [
+      "dep:compiler_builtins"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [],
+    "docs": [],
+    "rustc-dep-of-std": [
+      "core",
+      "dep:compiler_builtins",
+      "compiler_builtins/rustc-dep-of-std",
+      "libc/rustc-dep-of-std"
+    ]
+  },
+  "id": "sha256:15baefe96dccbaed49b8eadcfa3dfb8bf0a02ed483fba5583a2a713e244c761c",
+  "kind": "adopt",
+  "manifest": "sha256:65cf184f6a0bc0211bc21ede4e7d2e923e6c794de36fb19dceee1383a8a61647",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "hermit_abi",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hermit-abi",
+    "scope": "crates-io",
+    "version": "0.1.19"
+  }
+}

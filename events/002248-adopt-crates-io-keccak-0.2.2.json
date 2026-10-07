@@ -1,0 +1,69 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the Keccak sponge functions",
+    "documentation": "https://docs.rs/keccak",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/sponges"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d8f198d1db720e4940b5a493201d199d9f24f568f8f746bd13706243a2f71598",
+    "package": "keccak",
+    "registry": "crates-io",
+    "version": "0.2.2"
+  },
+  "archive": "sha256:9016ec87ee6a71697e879a2a31e242a417ed9e3b43fa15e1fdc809156a884d9b",
+  "at": "2026-10-07T07:43:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(target_arch = \"aarch64\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hybrid-array",
+      "name": "hybrid-array",
+      "optional": true,
+      "req": "^0.4"
+    }
+  ],
+  "features": {
+    "parallel": [
+      "dep:hybrid-array"
+    ]
+  },
+  "id": "sha256:101f1ec3a57b5e6a46d73ae6eaa020550c57d1e7c35d38a88683d72de22e3bd3",
+  "kind": "adopt",
+  "manifest": "sha256:29e67a877adf67cb1cb61e262daf1ad900fdc1fafd4a86193e22abf6c5fd34d3",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "keccak",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "keccak",
+    "scope": "crates-io",
+    "version": "0.2.2"
+  }
+}

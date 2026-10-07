@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/micromap"
+version = "0.3.0"
+
+[project.features]
+default = []
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "micromap"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0.228", default-features = false, optional = true }

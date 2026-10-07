@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hyper-tls"
+version = "0.6.0"
+
+[project.features]
+alpn = ["native-tls/alpn"]
+vendored = ["native-tls/vendored"]
+
+[rust]
+name = "hyper_tls"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1.0" }
+hyper = { loaf = "crates-io/hyper", version = "^1" }
+hyper-util = { loaf = "crates-io/hyper-util", version = "^0.1.0", features = ["client-legacy", "tokio"] }
+native-tls = { loaf = "crates-io/native-tls", version = "^0.2.1" }
+tokio = { loaf = "crates-io/tokio", version = "^1" }
+tokio-native-tls = { loaf = "crates-io/tokio-native-tls", version = "^0.3" }
+tower-service = { loaf = "crates-io/tower-service", version = "^0.3" }

@@ -1,0 +1,245 @@
+{
+  "about": {
+    "description": "Bindings to the CoreLocation framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ca347214e24bc973fc025fd0d36ebb179ff30536ed1f80252706db19ee452009",
+    "package": "objc2-core-location",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:e33eb796f12f360a920a4efbc92d836eb0253dc6d5c28811ab55e34dee1e9656",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "objc2"
+      ],
+      "loaf": "crates-io/dispatch2",
+      "name": "dispatch2",
+      "optional": true,
+      "req": ">=0.3.0, <0.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": false,
+      "req": ">=0.6.2, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "CNPostalAddress"
+      ],
+      "loaf": "crates-io/objc2-contacts",
+      "name": "objc2-contacts",
+      "optional": true,
+      "req": "^0.3.2",
+      "target": "cfg(not(target_os = \"tvos\"))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/objc2-foundation",
+      "name": "objc2-foundation",
+      "optional": false,
+      "req": "^0.3.2"
+    }
+  ],
+  "features": {
+    "CLAvailability": [],
+    "CLBackgroundActivitySession": [],
+    "CLBeaconIdentityCondition": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSUUID",
+      "objc2-foundation/NSValue"
+    ],
+    "CLBeaconIdentityConstraint": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSUUID"
+    ],
+    "CLBeaconRegion": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSUUID",
+      "objc2-foundation/NSValue"
+    ],
+    "CLCircularGeographicCondition": [
+      "objc2-foundation/NSObject"
+    ],
+    "CLCircularRegion": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "CLCondition": [
+      "objc2-foundation/NSObject"
+    ],
+    "CLError": [
+      "objc2-foundation/NSString"
+    ],
+    "CLErrorDomain": [
+      "objc2-foundation/NSString"
+    ],
+    "CLGeocoder": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSLocale",
+      "objc2-foundation/NSString"
+    ],
+    "CLHeading": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSObject"
+    ],
+    "CLLocation": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSObject"
+    ],
+    "CLLocationManager": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSData",
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSSet",
+      "objc2-foundation/NSString"
+    ],
+    "CLLocationManagerDelegate": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSError"
+    ],
+    "CLLocationManager_CLVisitExtensions": [],
+    "CLLocationPushServiceError": [
+      "objc2-foundation/NSError",
+      "objc2-foundation/NSString"
+    ],
+    "CLLocationPushServiceExtension": [
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSString"
+    ],
+    "CLLocationUpdater": [],
+    "CLMonitor": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSString"
+    ],
+    "CLMonitorConfiguration": [
+      "objc2-foundation/NSString"
+    ],
+    "CLMonitoringEvent": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "CLMonitoringRecord": [
+      "objc2-foundation/NSObject"
+    ],
+    "CLPlacemark": [
+      "objc2-foundation/NSArray",
+      "objc2-foundation/NSDictionary",
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString",
+      "objc2-foundation/NSTimeZone"
+    ],
+    "CLRegion": [
+      "objc2-foundation/NSObject",
+      "objc2-foundation/NSString"
+    ],
+    "CLServiceSession": [
+      "objc2-foundation/NSString"
+    ],
+    "CLVisit": [
+      "objc2-foundation/NSDate",
+      "objc2-foundation/NSObject"
+    ],
+    "alloc": [],
+    "block2": [
+      "dep:block2"
+    ],
+    "default": [
+      "std",
+      "CLAvailability",
+      "CLBackgroundActivitySession",
+      "CLBeaconIdentityCondition",
+      "CLBeaconIdentityConstraint",
+      "CLBeaconRegion",
+      "CLCircularGeographicCondition",
+      "CLCircularRegion",
+      "CLCondition",
+      "CLError",
+      "CLErrorDomain",
+      "CLGeocoder",
+      "CLHeading",
+      "CLLocation",
+      "CLLocationManager",
+      "CLLocationManagerDelegate",
+      "CLLocationManager_CLVisitExtensions",
+      "CLLocationPushServiceError",
+      "CLLocationPushServiceExtension",
+      "CLLocationUpdater",
+      "CLMonitor",
+      "CLMonitorConfiguration",
+      "CLMonitoringEvent",
+      "CLMonitoringRecord",
+      "CLPlacemark",
+      "CLRegion",
+      "CLServiceSession",
+      "CLVisit",
+      "block2",
+      "dispatch2",
+      "objc2-contacts"
+    ],
+    "dispatch2": [
+      "dep:dispatch2"
+    ],
+    "objc2-contacts": [
+      "dep:objc2-contacts"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-darwin-objc": []
+  },
+  "id": "sha256:ccfc2c4110c870c39e4a1a56a8133a690c101a1f5db599e964a0b26e3693c620",
+  "kind": "adopt",
+  "manifest": "sha256:c6ce0bc36d93a45111b1b6663a358ce0c5299ca9b1d29b87ee506b2fee6fb324",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_core_location",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-core-location",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

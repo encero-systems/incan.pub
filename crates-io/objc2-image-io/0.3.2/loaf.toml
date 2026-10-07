@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/objc2-image-io"
+version = "0.3.2"
+
+[project.features]
+CGImageAnimation = ["objc2-core-foundation/CFData", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFURL"]
+CGImageDestination = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFData", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFError", "objc2-core-foundation/CFURL"]
+CGImageMetadata = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFData", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFError"]
+CGImageProperties = []
+CGImageSource = ["objc2-core-foundation/CFArray", "objc2-core-foundation/CFData", "objc2-core-foundation/CFDictionary", "objc2-core-foundation/CFURL"]
+ImageIOBase = []
+alloc = []
+block2 = ["dep:block2"]
+default = ["std", "CGImageAnimation", "CGImageDestination", "CGImageMetadata", "CGImageProperties", "CGImageSource", "ImageIOBase", "block2", "objc2", "objc2-core-graphics"]
+objc2 = ["dep:objc2", "objc2-core-foundation/objc2", "objc2-core-graphics?/objc2"]
+objc2-core-graphics = ["dep:objc2-core-graphics"]
+std = ["alloc"]
+unstable-darwin-objc = []
+
+[rust]
+name = "objc2_image_io"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+block2 = { loaf = "crates-io/block2", version = ">=0.6.1, <0.8.0", features = ["alloc"], default-features = false, optional = true }
+objc2 = { loaf = "crates-io/objc2", version = ">=0.6.2, <0.8.0", features = ["std"], default-features = false, optional = true }
+objc2-core-foundation = { loaf = "crates-io/objc2-core-foundation", version = "^0.3.2", default-features = false }
+objc2-core-graphics = { loaf = "crates-io/objc2-core-graphics", version = "^0.3.2", features = ["CGDataConsumer", "CGDataProvider", "CGImage"], default-features = false, optional = true }

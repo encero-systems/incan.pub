@@ -1,0 +1,319 @@
+{
+  "about": {
+    "description": "Exporter for the OpenTelemetry Collector",
+    "documentation": "",
+    "homepage": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-otlp",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-otlp"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:699a67345e21962a231955b9059a157e428b219fa5df8efe11f08346fb23a344",
+    "package": "opentelemetry-otlp",
+    "registry": "crates-io",
+    "version": "0.33.0"
+  },
+  "archive": "sha256:d7e177f4d77baa8acb5796fe8b3676a817ebec1bb84bbe65c8f7828f30c77862",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flate2",
+      "name": "flate2",
+      "optional": true,
+      "req": "^1.1.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": true,
+      "req": "^1.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/httpdate",
+      "name": "httpdate",
+      "optional": true,
+      "req": "^1.0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry",
+      "name": "opentelemetry",
+      "optional": false,
+      "req": "^0.33"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry-http",
+      "name": "opentelemetry-http",
+      "optional": true,
+      "req": "^0.33"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry-proto",
+      "name": "opentelemetry-proto",
+      "optional": false,
+      "req": "^0.33"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry_sdk",
+      "name": "opentelemetry_sdk",
+      "optional": false,
+      "req": "^0.33"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prost",
+      "name": "prost",
+      "optional": true,
+      "req": "^0.14"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/reqwest",
+      "name": "reqwest",
+      "optional": true,
+      "req": "^0.13.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rt",
+        "sync",
+        "time"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tonic",
+      "name": "tonic",
+      "optional": true,
+      "req": "^0.14.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tonic-types",
+      "name": "tonic-types",
+      "optional": true,
+      "req": "^0.14.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/zstd",
+      "name": "zstd",
+      "optional": true,
+      "req": "^0.13"
+    }
+  ],
+  "features": {
+    "default": [
+      "http-proto",
+      "reqwest-blocking-client",
+      "trace",
+      "metrics",
+      "logs",
+      "internal-logs"
+    ],
+    "flate2": [
+      "dep:flate2"
+    ],
+    "grpc-tonic": [
+      "tonic",
+      "tonic-types",
+      "prost",
+      "http",
+      "tokio",
+      "opentelemetry-proto/gen-tonic"
+    ],
+    "gzip-http": [
+      "flate2"
+    ],
+    "gzip-tonic": [
+      "dep:tonic",
+      "tonic/gzip"
+    ],
+    "http": [
+      "dep:http"
+    ],
+    "http-json": [
+      "serde_json",
+      "prost",
+      "opentelemetry-http",
+      "opentelemetry-proto/gen-tonic-messages",
+      "opentelemetry-proto/with-serde",
+      "http",
+      "httpdate",
+      "trace",
+      "metrics"
+    ],
+    "http-proto": [
+      "prost",
+      "opentelemetry-http",
+      "opentelemetry-proto/gen-tonic-messages",
+      "http",
+      "httpdate",
+      "trace",
+      "metrics"
+    ],
+    "httpdate": [
+      "dep:httpdate"
+    ],
+    "hyper-client": [
+      "dep:opentelemetry-http",
+      "opentelemetry-http/hyper",
+      "tokio"
+    ],
+    "integration-testing": [
+      "tonic",
+      "prost",
+      "dep:tokio",
+      "tokio/full",
+      "trace",
+      "logs"
+    ],
+    "internal-logs": [
+      "opentelemetry_sdk/internal-logs",
+      "opentelemetry/internal-logs"
+    ],
+    "logs": [
+      "opentelemetry/logs",
+      "opentelemetry_sdk/logs",
+      "opentelemetry-proto/logs"
+    ],
+    "metrics": [
+      "opentelemetry/metrics",
+      "opentelemetry_sdk/metrics",
+      "opentelemetry-proto/metrics"
+    ],
+    "opentelemetry-http": [
+      "dep:opentelemetry-http"
+    ],
+    "prost": [
+      "dep:prost"
+    ],
+    "reqwest": [
+      "dep:reqwest"
+    ],
+    "reqwest-blocking-client": [
+      "dep:reqwest",
+      "reqwest/blocking",
+      "dep:opentelemetry-http",
+      "opentelemetry-http/reqwest-blocking"
+    ],
+    "reqwest-client": [
+      "reqwest",
+      "dep:opentelemetry-http",
+      "opentelemetry-http/reqwest",
+      "tokio"
+    ],
+    "reqwest-rustls": [
+      "reqwest",
+      "dep:opentelemetry-http",
+      "opentelemetry-http/reqwest-rustls"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "tls-aws-lc": [
+      "dep:tonic",
+      "tonic/tls-aws-lc"
+    ],
+    "tls-provider-agnostic": [
+      "dep:tonic",
+      "tonic/_tls-any"
+    ],
+    "tls-ring": [
+      "dep:tonic",
+      "tonic/tls-ring"
+    ],
+    "tls-roots": [
+      "dep:tonic",
+      "tonic/tls-native-roots"
+    ],
+    "tls-webpki-roots": [
+      "dep:tonic",
+      "tonic/tls-webpki-roots"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "tonic": [
+      "dep:tonic"
+    ],
+    "tonic-types": [
+      "dep:tonic-types"
+    ],
+    "trace": [
+      "opentelemetry/trace",
+      "opentelemetry_sdk/trace",
+      "opentelemetry-proto/trace"
+    ],
+    "zstd": [
+      "dep:zstd"
+    ],
+    "zstd-http": [
+      "zstd"
+    ],
+    "zstd-tonic": [
+      "dep:tonic",
+      "tonic/zstd"
+    ]
+  },
+  "id": "sha256:d715e744295f85b6768a6dfd55a619524007f495ee7cc8c91c1791df91490a71",
+  "kind": "adopt",
+  "manifest": "sha256:c251c0ce250c0a48d764be9a0b5d407778e2d6c13cd5fa5c14730252b8ffb7dd",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "opentelemetry_otlp",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "opentelemetry-otlp",
+    "scope": "crates-io",
+    "version": "0.33.0"
+  }
+}

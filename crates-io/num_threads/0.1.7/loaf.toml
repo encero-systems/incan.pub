@@ -1,0 +1,14 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/num_threads"
+version = "0.1.7"
+
+[rust]
+name = "num_threads"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.107", target = "cfg(any(target_os = \"macos\", target_os = \"ios\", target_os = \"freebsd\"))" }

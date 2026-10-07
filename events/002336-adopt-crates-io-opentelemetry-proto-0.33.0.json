@@ -1,0 +1,191 @@
+{
+  "about": {
+    "description": "Protobuf generated files and transformations.",
+    "documentation": "",
+    "homepage": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-proto",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-proto"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:25da1ac11a0aeccf38d7f77ee0348715adaf8340f65ad46c94a02c6b20e2f65d",
+    "package": "opentelemetry-proto",
+    "registry": "crates-io",
+    "version": "0.33.0"
+  },
+  "archive": "sha256:1f03ce8d461bcbe7b7554ea559ce13691524e36670e654ca2453f5ade1bc4bed",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": true,
+      "req": "^0.22.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/const-hex",
+      "name": "const-hex",
+      "optional": true,
+      "req": "^1.14.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry",
+      "name": "opentelemetry",
+      "optional": false,
+      "req": "^0.33"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry_sdk",
+      "name": "opentelemetry_sdk",
+      "optional": false,
+      "req": "^0.33"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prost",
+      "name": "prost",
+      "optional": true,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/schemars",
+      "name": "schemars",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "serde_derive",
+        "std"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "codegen"
+      ],
+      "loaf": "crates-io/tonic",
+      "name": "tonic",
+      "optional": true,
+      "req": "^0.14.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tonic-prost",
+      "name": "tonic-prost",
+      "optional": true,
+      "req": "^0.14.1"
+    }
+  ],
+  "features": {
+    "base64": [
+      "dep:base64"
+    ],
+    "const-hex": [
+      "dep:const-hex"
+    ],
+    "default": [
+      "full"
+    ],
+    "full": [
+      "gen-tonic",
+      "trace",
+      "logs",
+      "metrics",
+      "zpages",
+      "with-serde",
+      "internal-logs"
+    ],
+    "gen-tonic": [
+      "gen-tonic-messages",
+      "tonic",
+      "tonic-prost",
+      "dep:tonic",
+      "tonic/channel"
+    ],
+    "gen-tonic-messages": [
+      "prost"
+    ],
+    "internal-logs": [
+      "opentelemetry/internal-logs"
+    ],
+    "logs": [
+      "opentelemetry/logs",
+      "opentelemetry_sdk/logs"
+    ],
+    "metrics": [
+      "opentelemetry/metrics",
+      "opentelemetry_sdk/metrics"
+    ],
+    "profiles": [],
+    "prost": [
+      "dep:prost"
+    ],
+    "schemars": [
+      "dep:schemars"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "testing": [
+      "opentelemetry/testing"
+    ],
+    "tonic": [
+      "dep:tonic"
+    ],
+    "tonic-prost": [
+      "dep:tonic-prost"
+    ],
+    "trace": [
+      "opentelemetry/trace",
+      "opentelemetry_sdk/trace"
+    ],
+    "with-schemars": [
+      "schemars"
+    ],
+    "with-serde": [
+      "serde",
+      "const-hex",
+      "base64"
+    ],
+    "zpages": [
+      "trace"
+    ]
+  },
+  "id": "sha256:253f4923c5782dc4b278a64ce44e6e260346b27cda472079ab8667adb4a94175",
+  "kind": "adopt",
+  "manifest": "sha256:78e112029e2f89b2b858114b0acf60c9173635aa9fa7a0a456b2d572079f74e8",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "opentelemetry_proto",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "opentelemetry-proto",
+    "scope": "crates-io",
+    "version": "0.33.0"
+  }
+}

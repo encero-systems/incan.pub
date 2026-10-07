@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/html5ever"
+version = "0.40.1"
+
+[project.features]
+serde = ["markup5ever/serde"]
+trace_tokenizer = []
+
+[rust]
+name = "html5ever"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+log = { loaf = "crates-io/log", version = "^0.4" }
+markup5ever = { loaf = "crates-io/markup5ever", version = "^0.40" }
+memchr = { loaf = "crates-io/memchr", version = "^2.8.0" }

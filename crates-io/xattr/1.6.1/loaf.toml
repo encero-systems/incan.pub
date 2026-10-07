@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/xattr"
+version = "1.6.1"
+
+[project.features]
+default = ["unsupported"]
+unsupported = []
+
+[rust]
+name = "xattr"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.150", target = "cfg(any(target_os = \"freebsd\", target_os = \"netbsd\"))" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["fs", "std"], default-features = false, target = "cfg(any(target_os = \"android\", target_os = \"linux\", target_os = \"macos\", target_os = \"hurd\"))" }

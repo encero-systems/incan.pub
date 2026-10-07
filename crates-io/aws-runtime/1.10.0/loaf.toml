@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aws-runtime"
+version = "1.10.0"
+
+[project.features]
+event-stream = ["dep:aws-smithy-eventstream", "aws-sigv4/sign-eventstream"]
+http-02x = ["dep:http-02x", "dep:http-body-04x", "aws-smithy-types/http-body-0-4-x"]
+http-1x = []
+sigv4a = ["aws-sigv4/sigv4a"]
+test-util = ["dep:regex-lite"]
+
+[rust]
+name = "aws_runtime"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+aws-credential-types = { loaf = "crates-io/aws-credential-types", version = "^1.3.0" }
+aws-sigv4 = { loaf = "crates-io/aws-sigv4", version = "^1.6.0" }
+aws-smithy-async = { loaf = "crates-io/aws-smithy-async", version = "^1.3.0" }
+aws-smithy-eventstream = { loaf = "crates-io/aws-smithy-eventstream", version = "^0.61.4", optional = true }
+aws-smithy-http = { loaf = "crates-io/aws-smithy-http", version = "^0.64.0" }
+aws-smithy-runtime = { loaf = "crates-io/aws-smithy-runtime", version = "^1.15.0", features = ["client"] }
+aws-smithy-runtime-api = { loaf = "crates-io/aws-smithy-runtime-api", version = "^1.17.0", features = ["client", "http-1x"] }
+aws-smithy-types = { loaf = "crates-io/aws-smithy-types", version = "^1.8.0", features = ["http-body-1-x"] }
+aws-types = { loaf = "crates-io/aws-types", version = "^1.6.0" }
+bytes = { loaf = "crates-io/bytes", version = "^1.11.1" }
+bytes-utils = { loaf = "crates-io/bytes-utils", version = "^0.1.2" }
+fastrand = { loaf = "crates-io/fastrand", version = "^2.3.0" }
+http-02x = { loaf = "crates-io/http", version = "^0.2.12", optional = true }
+http-1x = { loaf = "crates-io/http", version = "^1.3.1" }
+http-body-04x = { loaf = "crates-io/http-body", version = "^0.4.6", optional = true }
+http-body-1x = { loaf = "crates-io/http-body", version = "^1.0.1" }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3.1" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.14" }
+regex-lite = { loaf = "crates-io/regex-lite", version = "^0.1.5", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.44" }
+uuid = { loaf = "crates-io/uuid", version = "^1" }

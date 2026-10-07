@@ -1,0 +1,130 @@
+{
+  "about": {
+    "description": "A collection of numeric types and traits for Rust, including bigint,\ncomplex, rational, range iterators, generic integers, and more!",
+    "documentation": "https://docs.rs/num",
+    "homepage": "https://github.com/rust-num/num",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-num/num"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:35bd024e8b2ff75562e5f34e7f4905839deb4b22955ef5e73d2fea1b9813cb23",
+    "package": "num",
+    "registry": "crates-io",
+    "version": "0.4.3"
+  },
+  "archive": "sha256:825f699a618be961067593e322518779146aa3bb4e7c66df7a6075f0586070d0",
+  "at": "2026-10-07T07:42:50Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-bigint",
+      "name": "num-bigint",
+      "optional": true,
+      "req": "^0.4.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-complex",
+      "name": "num-complex",
+      "optional": false,
+      "req": "^0.4.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-integer",
+      "name": "num-integer",
+      "optional": false,
+      "req": "^0.1.46"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-iter",
+      "name": "num-iter",
+      "optional": false,
+      "req": "^0.1.45"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-rational",
+      "name": "num-rational",
+      "optional": false,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "i128"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.19"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "dep:num-bigint",
+      "num-rational/num-bigint"
+    ],
+    "default": [
+      "std"
+    ],
+    "libm": [
+      "num-complex/libm",
+      "num-traits/libm"
+    ],
+    "num-bigint": [
+      "dep:num-bigint"
+    ],
+    "rand": [
+      "dep:num-bigint",
+      "num-bigint/rand",
+      "num-complex/rand"
+    ],
+    "serde": [
+      "dep:num-bigint",
+      "num-bigint/serde",
+      "num-complex/serde",
+      "num-rational/serde"
+    ],
+    "std": [
+      "dep:num-bigint",
+      "num-bigint/std",
+      "num-complex/std",
+      "num-integer/std",
+      "num-iter/std",
+      "num-rational/std",
+      "num-rational/num-bigint-std",
+      "num-traits/std"
+    ]
+  },
+  "id": "sha256:bb1aa5879e11517d4746eaf53838feb7c920eed718d8cbc8c7252ed7557b021b",
+  "kind": "adopt",
+  "manifest": "sha256:224e2702f49420f2596f80c5bd1bfbd35084fc59209054190560a5f99c4217e8",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "num",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "num",
+    "scope": "crates-io",
+    "version": "0.4.3"
+  }
+}

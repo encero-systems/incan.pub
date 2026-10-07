@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/time-macros"
+version = "0.2.32"
+
+[project.features]
+formatting = []
+large-dates = []
+parsing = []
+serde = []
+
+[rust]
+name = "time_macros"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+num-conv = { loaf = "crates-io/num-conv", version = "^0.2.2" }
+time-core = { loaf = "crates-io/time-core", version = "=0.1.9" }

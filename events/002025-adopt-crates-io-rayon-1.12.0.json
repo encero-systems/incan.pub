@@ -1,0 +1,69 @@
+{
+  "about": {
+    "description": "Simple work-stealing parallelism for Rust",
+    "documentation": "https://docs.rs/rayon/",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rayon-rs/rayon"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:fb39b166781f92d482534ef4b4b1b2568f42613b53e5b6c160e24cfbfa30926d",
+    "package": "rayon",
+    "registry": "crates-io",
+    "version": "1.12.0"
+  },
+  "archive": "sha256:b1ea499c2f4e13a22d588e3b724b60a48e7f9682373588a9b22005de7b35f4d6",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/either",
+      "name": "either",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon-core",
+      "name": "rayon-core",
+      "optional": false,
+      "req": "^1.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm_sync",
+      "name": "wasm_sync",
+      "optional": true,
+      "req": "^0.1.0"
+    }
+  ],
+  "features": {
+    "web_spin_lock": [
+      "dep:wasm_sync",
+      "rayon-core/web_spin_lock"
+    ]
+  },
+  "id": "sha256:c9a63b2c5f9bece846f82e054a5b5a3d5b5e5ff1965643a13d79c4316ed0abd6",
+  "kind": "adopt",
+  "manifest": "sha256:655ffffe8e3dbd358d79c1de666993c3bc43423c956671029c08ca8bbdb2541a",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "rayon",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rayon",
+    "scope": "crates-io",
+    "version": "1.12.0"
+  }
+}

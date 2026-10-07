@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/const-hex"
+version = "1.19.3"
+
+[project.features]
+__fuzzing = ["dep:proptest", "std"]
+alloc = ["serde_core?/alloc", "proptest?/alloc"]
+core-error = []
+default = ["std"]
+force-generic = []
+hex = []
+nightly = []
+portable-simd = []
+serde = ["dep:serde_core"]
+std = ["serde_core?/std", "proptest?/std", "alloc"]
+
+[rust]
+name = "const_hex"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+cpufeatures = { loaf = "crates-io/cpufeatures", version = "^0.2", target = "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))" }
+proptest = { loaf = "crates-io/proptest", version = "^1.4", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false, optional = true }

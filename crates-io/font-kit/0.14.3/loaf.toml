@@ -1,0 +1,42 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/font-kit"
+version = "0.14.3"
+
+[project.features]
+default = ["source"]
+freetype = ["dep:freetype"]
+loader-freetype = ["freetype"]
+loader-freetype-default = ["loader-freetype"]
+source = []
+source-fontconfig = ["yeslogic-fontconfig-sys"]
+source-fontconfig-default = ["source-fontconfig"]
+source-fontconfig-dlopen = ["dep:yeslogic-fontconfig-sys", "yeslogic-fontconfig-sys/dlopen"]
+yeslogic-fontconfig-sys = ["dep:yeslogic-fontconfig-sys"]
+
+[rust]
+name = "font_kit"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.4" }
+byteorder = { loaf = "crates-io/byteorder", version = "^1.2" }
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.9", target = "cfg(any(target_os = \"macos\", target_os = \"ios\"))" }
+core-graphics = { loaf = "crates-io/core-graphics", version = "^0.23", target = "cfg(any(target_os = \"macos\", target_os = \"ios\"))" }
+core-text = { loaf = "crates-io/core-text", version = "^20.1.0", target = "cfg(any(target_os = \"macos\", target_os = \"ios\"))" }
+dirs = { loaf = "crates-io/dirs", version = "^6.0", target = "cfg(not(any(target_arch = \"wasm32\", target_family = \"windows\", target_os = \"android\", target_env = \"ohos\")))" }
+dwrote = { loaf = "crates-io/dwrote", version = "^0.11.3", default-features = false, target = "cfg(target_family = \"windows\")" }
+float-ord = { loaf = "crates-io/float-ord", version = "^0.3" }
+freetype = { loaf = "crates-io/freetype", version = "^0.7", optional = true }
+freetype-sys = { loaf = "crates-io/freetype-sys", version = "^0.20", target = "cfg(not(any(target_family = \"windows\", target_os = \"macos\", target_os = \"ios\")))" }
+lazy_static = { loaf = "crates-io/lazy_static", version = "^1.1" }
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+log = { loaf = "crates-io/log", version = "^0.4.4" }
+pathfinder_geometry = { loaf = "crates-io/pathfinder_geometry", version = "^0.5" }
+pathfinder_simd = { loaf = "crates-io/pathfinder_simd", version = "^0.5.5" }
+walkdir = { loaf = "crates-io/walkdir", version = "^2.1", target = "cfg(not(target_arch = \"wasm32\"))" }
+winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["dwrite", "minwindef", "sysinfoapi", "winbase", "winnt"], target = "cfg(target_family = \"windows\")" }
+yeslogic-fontconfig-sys = [{ loaf = "crates-io/yeslogic-fontconfig-sys", version = "^6.0", target = "cfg(not(any(target_family = \"windows\", target_os = \"macos\", target_os = \"ios\", target_arch = \"wasm32\", target_env = \"ohos\")))" }, { loaf = "crates-io/yeslogic-fontconfig-sys", version = "^6.0", optional = true }]

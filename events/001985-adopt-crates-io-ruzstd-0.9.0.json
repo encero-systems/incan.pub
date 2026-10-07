@@ -1,0 +1,92 @@
+{
+  "about": {
+    "description": "A decoder for the zstd compression format",
+    "documentation": "",
+    "homepage": "https://github.com/KillingSpark/zstd-rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "Readme.md",
+    "repository": "https://github.com/KillingSpark/zstd-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a252f5e20f038fe7b4ea53e073e65398d652c864cc162fc77c56c2f13717b888",
+    "package": "ruzstd",
+    "registry": "crates-io",
+    "version": "0.9.0"
+  },
+  "archive": "sha256:052969ec2e2575491ac0fab4709556164f24c2b06e3e4d94014e8dd015f82fd0",
+  "at": "2026-10-07T07:42:28Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-alloc",
+      "name": "alloc",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/fastrand",
+      "name": "fastrand",
+      "optional": true,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "xxhash64"
+      ],
+      "loaf": "crates-io/twox-hash",
+      "name": "twox-hash",
+      "optional": true,
+      "req": "^2.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "hash",
+      "std"
+    ],
+    "dict_builder": [
+      "std",
+      "dep:fastrand"
+    ],
+    "fuzz_exports": [],
+    "hash": [
+      "dep:twox-hash"
+    ],
+    "rustc-dep-of-std": [
+      "dep:core",
+      "dep:alloc"
+    ],
+    "std": []
+  },
+  "id": "sha256:65572d5b5417ac9fe0c7b68d698b53189f2fd2861e89323bc1018b4e0bb8a501",
+  "kind": "adopt",
+  "manifest": "sha256:6a4a224af578897b1b3efddbbe572cc09f45044c324b331ec9989f9f8b9dd919",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "ruzstd",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ruzstd",
+    "scope": "crates-io",
+    "version": "0.9.0"
+  }
+}

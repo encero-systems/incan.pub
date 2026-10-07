@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tendril"
+version = "0.5.1"
+
+[project.features]
+encoding_rs = ["dep:encoding_rs"]
+
+[rust]
+name = "tendril"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+encoding_rs = { loaf = "crates-io/encoding_rs", version = "^0.8.12", optional = true }
+new_debug_unreachable = { loaf = "crates-io/new_debug_unreachable", version = "^1.0.2" }

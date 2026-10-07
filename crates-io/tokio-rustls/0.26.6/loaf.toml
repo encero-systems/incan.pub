@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tokio-rustls"
+version = "0.26.6"
+
+[project.features]
+aws-lc-rs = ["aws_lc_rs"]
+aws_lc_rs = ["rustls/aws_lc_rs"]
+brotli = ["rustls/brotli"]
+default = ["logging", "tls12", "aws_lc_rs"]
+early-data = []
+fips = ["rustls/fips"]
+logging = ["rustls/logging"]
+ring = ["rustls/ring"]
+tls12 = ["rustls/tls12"]
+zlib = ["rustls/zlib"]
+
+[rust]
+name = "tokio_rustls"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+rustls = { loaf = "crates-io/rustls", version = "^0.23.27", features = ["std"], default-features = false }
+tokio = { loaf = "crates-io/tokio", version = "^1.0" }

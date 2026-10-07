@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/syn"
+version = "1.0.109"
+
+[project.features]
+clone-impls = []
+default = ["derive", "parsing", "printing", "clone-impls", "proc-macro"]
+derive = []
+extra-traits = []
+fold = []
+full = []
+parsing = []
+printing = ["quote"]
+proc-macro = ["proc-macro2/proc-macro", "dep:quote", "quote/proc-macro"]
+quote = ["dep:quote"]
+test = []
+visit = []
+visit-mut = []
+
+[rust]
+name = "syn"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.46", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1.0", default-features = false, optional = true }
+unicode-ident = { loaf = "crates-io/unicode-ident", version = "^1.0" }

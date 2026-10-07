@@ -1,0 +1,107 @@
+{
+  "about": {
+    "description": "This crate offers procedural macros designed to facilitate the swift implementation of Rust's built-in traits.",
+    "documentation": "",
+    "homepage": "https://magiclen.org/educe",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/magiclen/educe"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1ebdb1f8f8d2815bbe7b369a7da10343c82026a4503b68bd1279ba557611e96d",
+    "package": "educe",
+    "registry": "crates-io",
+    "version": "0.8.1"
+  },
+  "archive": "sha256:99eaca7628b4503a9df827c7ee7fd4e88b3f665687361156ce01bdc01c8df377",
+  "at": "2026-10-07T07:45:02Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/enum-ordinalize",
+      "name": "enum-ordinalize",
+      "optional": false,
+      "req": "^4.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0.91"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1.0.44"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "visit",
+        "visit-mut"
+      ],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": "^3"
+    }
+  ],
+  "features": {
+    "Clone": [],
+    "Copy": [],
+    "Debug": [],
+    "Default": [],
+    "Deref": [],
+    "DerefMut": [],
+    "Eq": [],
+    "Hash": [],
+    "Into": [],
+    "Ord": [],
+    "PartialEq": [],
+    "PartialOrd": [],
+    "default": [
+      "Debug",
+      "Clone",
+      "Copy",
+      "PartialEq",
+      "Eq",
+      "PartialOrd",
+      "Ord",
+      "Hash",
+      "Default",
+      "Deref",
+      "DerefMut",
+      "Into"
+    ],
+    "full": [
+      "syn/full"
+    ]
+  },
+  "id": "sha256:8f5f8191f245837775e5ce71da4f3dfce3fe938b40739b13dbcaaebb76a0d15b",
+  "kind": "adopt",
+  "manifest": "sha256:b9cac23b1539ae2f902d80c1e486d58dfbbfcaaaaee9723ec6eb2b1730e83e39",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "educe",
+    "root": "src/lib.rs",
+    "type": "proc-macro"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "educe",
+    "scope": "crates-io",
+    "version": "0.8.1"
+  }
+}

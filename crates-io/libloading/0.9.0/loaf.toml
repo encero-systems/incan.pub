@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/libloading"
+version = "0.9.0"
+
+[project.features]
+default = ["std"]
+std = []
+
+[rust]
+name = "libloading"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1", target = "cfg(unix)" }
+windows-link = { loaf = "crates-io/windows-link", version = "^0.2", target = "cfg(windows)" }

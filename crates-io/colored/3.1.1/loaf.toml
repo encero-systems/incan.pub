@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/colored"
+version = "3.1.1"
+
+[project.features]
+no-color = []
+
+[rust]
+name = "colored"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.48, <=0.61", features = ["Win32_Foundation", "Win32_System_Console"], target = "cfg(windows)" }

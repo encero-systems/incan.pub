@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dlv-list"
+version = "0.5.2"
+
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "dlv_list"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+const-random = { loaf = "crates-io/const-random", version = "^0.1.15" }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }

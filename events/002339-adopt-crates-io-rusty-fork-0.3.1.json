@@ -1,0 +1,82 @@
+{
+  "about": {
+    "description": "Cross-platform library for running Rust tests in sub-processes using a\nfork-like interface.",
+    "documentation": "https://docs.rs/rusty-fork",
+    "homepage": "",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/altsysrq/rusty-fork"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cc6bf79ff24e648f6da1f8d1f011e9cac26491b619e6b9280f2b47f1774e6ee2",
+    "package": "rusty-fork",
+    "registry": "crates-io",
+    "version": "0.3.1"
+  },
+  "archive": "sha256:0ce140e65b3d3467c7ed00e5cac8071595ed9c22f3583168e0aaf4e995bedc9b",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/fnv",
+      "name": "fnv",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quick-error",
+      "name": "quick-error",
+      "optional": false,
+      "req": "^1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tempfile",
+      "name": "tempfile",
+      "optional": false,
+      "req": "^3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wait-timeout",
+      "name": "wait-timeout",
+      "optional": true,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "default": [
+      "timeout"
+    ],
+    "timeout": [
+      "wait-timeout"
+    ],
+    "wait-timeout": [
+      "dep:wait-timeout"
+    ]
+  },
+  "id": "sha256:fd6cc9f5b4834138452e80abfae3dd335f4514a2a21f64d0d66ef034d8f583eb",
+  "kind": "adopt",
+  "manifest": "sha256:9f0179a6ac94bd43e9b0727706958fb9b988b5ce4ea0fcf3d2dfd00a5a2c197c",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "rusty_fork",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rusty-fork",
+    "scope": "crates-io",
+    "version": "0.3.1"
+  }
+}

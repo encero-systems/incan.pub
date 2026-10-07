@@ -1,0 +1,84 @@
+{
+  "about": {
+    "description": "This is an implementation of the Consistent Overhead Byte Stuffing (COBS) algorithm.\n    COBS is an algorithm for transforming a message into an encoding where a specific value\n    (the \"sentinel\" value) is not used. This value can then be used to mark frame boundaries\n    in a serial communication channel.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/jamesmunns/cobs.rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0fa961b519f0b462e3a3b4a34b64d119eeaca1d59af726fe450bbba07a9fc0a1",
+    "package": "cobs",
+    "registry": "crates-io",
+    "version": "0.3.0"
+  },
+  "archive": "sha256:3f69836724eab96866629d1b482b796012d455b60e5cc82155ac7a3719bab206",
+  "at": "2026-10-07T07:45:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/defmt",
+      "name": "defmt",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "std"
+    ],
+    "defmt": [
+      "dep:defmt"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "alloc",
+      "thiserror/std"
+    ],
+    "use_std": [
+      "std"
+    ]
+  },
+  "id": "sha256:b74dbf7961960a2fd41505acb3b82c4462839e1700099c222e47aed0f4c5e9ef",
+  "kind": "adopt",
+  "manifest": "sha256:21f0c0b84a22b5541e91123146e36ce23cc89acddc38d543aa486b794e4d2235",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "cobs",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cobs",
+    "scope": "crates-io",
+    "version": "0.3.0"
+  }
+}

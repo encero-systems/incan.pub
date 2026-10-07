@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/redox_users"
+version = "0.4.6"
+
+[project.features]
+auth = ["rust-argon2", "zeroize"]
+default = ["auth"]
+rust-argon2 = ["dep:rust-argon2"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "redox_users"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+getrandom = { loaf = "crates-io/getrandom", version = "^0.2", features = ["std"] }
+libredox = { loaf = "crates-io/libredox", version = "^0.1.3", features = ["call", "std"], default-features = false }
+rust-argon2 = { loaf = "crates-io/rust-argon2", version = "^0.8", optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^1.0" }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.4", features = ["zeroize_derive"], optional = true }

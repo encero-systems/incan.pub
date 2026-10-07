@@ -1,0 +1,98 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/redis"
+version = "1.7.1"
+
+[project.features]
+acl = []
+ahash = ["dep:ahash"]
+aio = ["bytes", "dep:pin-project-lite", "dep:futures-util", "dep:tokio", "dep:tokio-util", "dep:async-lock", "tokio-util/codec", "combine/tokio", "dep:cfg-if"]
+bb8 = ["dep:bb8"]
+bigdecimal = ["dep:bigdecimal"]
+bloom = []
+bytes = ["dep:bytes"]
+cache-aio = ["aio", "dep:lru"]
+cluster = ["dep:crc16", "dep:rand"]
+cluster-async = ["aio", "cluster", "dep:log", "dep:futures-channel"]
+connection-manager = ["dep:arc-swap", "dep:futures-channel", "aio", "dep:backon"]
+default = ["acl", "streams", "geospatial", "script", "num-bigint"]
+entra-id = ["dep:azure_identity", "dep:azure_core", "dep:base64", "token-based-authentication", "tokio-comp"]
+geospatial = []
+hashbrown = ["dep:hashbrown"]
+json = ["dep:serde", "serde/derive", "dep:serde_json"]
+num-bigint = ["dep:num-bigint"]
+r2d2 = ["dep:r2d2"]
+rust_decimal = ["dep:rust_decimal"]
+script = ["dep:sha1_smol"]
+search_unfinished = []
+sentinel = ["dep:log", "dep:rand"]
+smol-comp = ["aio", "dep:smol", "dep:smol-timeout", "dep:async-io"]
+smol-native-tls-comp = ["smol-comp", "dep:async-native-tls", "tls-native-tls"]
+smol-rustls-comp = ["smol-comp", "dep:futures-rustls", "tls-rustls"]
+streams = []
+tls-native-tls = ["dep:native-tls"]
+tls-rustls = ["dep:rustls", "rustls/std", "dep:rustls-native-certs"]
+tls-rustls-insecure = ["tls-rustls"]
+tls-rustls-webpki-roots = ["tls-rustls", "dep:webpki-roots"]
+token-based-authentication = ["dep:futures-util", "dep:log", "dep:backon"]
+tokio-comp = ["aio", "dep:tokio", "tokio/net", "tokio/rt", "tokio/time"]
+tokio-native-tls-comp = ["tokio-comp", "tls-native-tls", "dep:tokio-native-tls"]
+tokio-rustls-comp = ["tokio-comp", "tls-rustls", "dep:tokio-rustls"]
+uuid = ["dep:uuid"]
+vector-sets = ["dep:serde", "serde/derive", "dep:serde_json"]
+
+[rust]
+name = "redis"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8.11", optional = true }
+arc-swap = { loaf = "crates-io/arc-swap", version = "^1.9.1", optional = true }
+arcstr = { loaf = "crates-io/arcstr", version = "^1.2.0" }
+async-io = { loaf = "crates-io/async-io", version = "^2", optional = true }
+async-lock = { loaf = "crates-io/async-lock", version = "^3", optional = true }
+async-native-tls = { loaf = "crates-io/async-native-tls", version = "^0.6", optional = true }
+azure_core = { loaf = "crates-io/azure_core", version = "^0.31", optional = true, target = "cfg(not(target_family = \"wasm\"))" }
+azure_identity = { loaf = "crates-io/azure_identity", version = "^0.31", features = ["client_certificate"], optional = true, target = "cfg(not(target_family = \"wasm\"))" }
+backon = { loaf = "crates-io/backon", version = "^1.6.0", default-features = false, optional = true }
+base64 = { loaf = "crates-io/base64", version = "^0.22.1", optional = true, target = "cfg(not(target_family = \"wasm\"))" }
+bb8 = { loaf = "crates-io/bb8", version = "^0.9.1", optional = true }
+bigdecimal = { loaf = "crates-io/bigdecimal", version = "^0.4.10", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1", optional = true }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1", optional = true }
+combine = { loaf = "crates-io/combine", version = "^4.6.8", features = ["std"], default-features = false }
+crc16 = { loaf = "crates-io/crc16", version = "^0.4", optional = true }
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3.31", optional = true }
+futures-rustls = { loaf = "crates-io/futures-rustls", version = "^0.26", default-features = false, optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.31", features = ["sink", "std"], default-features = false, optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17", optional = true }
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+log = { loaf = "crates-io/log", version = "^0.4", optional = true }
+lru = { loaf = "crates-io/lru", version = "^0.18", optional = true }
+native-tls = { loaf = "crates-io/native-tls", version = "^0.2", optional = true }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.5.1", optional = true }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3" }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2", optional = true }
+r2d2 = { loaf = "crates-io/r2d2", version = "^0.8.10", optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.10", optional = true }
+rust_decimal = { loaf = "crates-io/rust_decimal", version = "^1.42.0", optional = true }
+rustls = { loaf = "crates-io/rustls", version = "^0.23", default-features = false, optional = true }
+rustls-native-certs = { loaf = "crates-io/rustls-native-certs", version = "^0.8", optional = true }
+ryu = { loaf = "crates-io/ryu", version = "^1.0" }
+serde = { loaf = "crates-io/serde", version = "^1.0.219", optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.149", optional = true }
+sha1_smol = { loaf = "crates-io/sha1_smol", version = "^1.0", optional = true }
+smol = { loaf = "crates-io/smol", version = "^2", optional = true }
+smol-timeout = { loaf = "crates-io/smol-timeout", version = "^0.6", optional = true }
+socket2 = { loaf = "crates-io/socket2", version = "^0.6", features = ["all"], target = "cfg(not(target_family = \"wasm\"))" }
+tokio = [{ loaf = "crates-io/tokio", version = "^1", features = ["sync"], optional = true }, { loaf = "crates-io/tokio", version = "^1.51", features = ["sync"], optional = true, target = "cfg(all(target_os = \"wasi\", target_env = \"p2\"))" }]
+tokio-native-tls = { loaf = "crates-io/tokio-native-tls", version = "^0.3", optional = true }
+tokio-rustls = { loaf = "crates-io/tokio-rustls", version = "^0.26", default-features = false, optional = true }
+tokio-util = { loaf = "crates-io/tokio-util", version = "^0.7.5", optional = true }
+url = { loaf = "crates-io/url", version = "^2.5" }
+uuid = { loaf = "crates-io/uuid", version = "^1.21.0", optional = true }
+webpki-roots = { loaf = "crates-io/webpki-roots", version = "^1.0", optional = true }
+xxhash-rust = { loaf = "crates-io/xxhash-rust", version = "^0.8", features = ["xxh3"] }

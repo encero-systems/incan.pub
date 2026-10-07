@@ -1,0 +1,90 @@
+{
+  "about": {
+    "description": "Memory validation framework for Rust",
+    "documentation": "https://docs.rs/bytecheck",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rkyv/bytecheck"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:26333eeac754f0ad8a6bcd0eb0ac012156302e4e16b852b72ee399aea4f12c29",
+    "package": "bytecheck",
+    "registry": "crates-io",
+    "version": "0.8.3"
+  },
+  "archive": "sha256:f7f6664a78c7aa321af607facfac9e965ef446ed798f876c6744f34db0597079",
+  "at": "2026-10-07T07:44:02Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytecheck_derive",
+      "name": "bytecheck_derive",
+      "optional": false,
+      "req": "=0.8.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ptr_meta",
+      "name": "ptr_meta",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rancor",
+      "name": "rancor",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/simdutf8",
+      "name": "simdutf8",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/uuid",
+      "name": "uuid-1",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "default": [
+      "simdutf8"
+    ],
+    "simdutf8": [
+      "dep:simdutf8"
+    ],
+    "uuid-1": [
+      "dep:uuid-1"
+    ]
+  },
+  "id": "sha256:c2e482e5a746f8178d3d9e6e5f0f68f6fcb77740f1feac05a33c01ffdf845142",
+  "kind": "adopt",
+  "manifest": "sha256:575866dbda1e88f1483727d419abbf50dba53fc2d77f468c55d7e0aadf3dbd9d",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "bytecheck",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bytecheck",
+    "scope": "crates-io",
+    "version": "0.8.3"
+  }
+}

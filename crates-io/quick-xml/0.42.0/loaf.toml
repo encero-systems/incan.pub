@@ -1,0 +1,33 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/quick-xml"
+version = "0.42.0"
+
+[project.features]
+arbitrary = ["dep:arbitrary"]
+async-tokio = ["tokio"]
+default = []
+document-features = ["dep:document-features"]
+encoding = ["encoding_rs"]
+encoding_rs = ["dep:encoding_rs"]
+escape-html = []
+overlapped-lists = []
+serde = ["dep:serde"]
+serde-types = ["dep:serde", "serde/derive"]
+serialize = ["serde"]
+tokio = ["dep:tokio"]
+
+[rust]
+name = "quick_xml"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", features = ["derive"], optional = true }
+document-features = { loaf = "crates-io/document-features", version = "^0.2", optional = true }
+encoding_rs = { loaf = "crates-io/encoding_rs", version = "^0.8", optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.1" }
+serde = { loaf = "crates-io/serde", version = ">=1.0.180", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.10", features = ["io-util"], default-features = false, optional = true }

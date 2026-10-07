@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/blake2"
+version = "0.11.0"
+
+[project.features]
+alloc = ["digest/alloc"]
+default = ["alloc"]
+reset = []
+size_opt = []
+zeroize = ["digest/zeroize"]
+
+[rust]
+name = "blake2"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.11", features = ["mac"] }

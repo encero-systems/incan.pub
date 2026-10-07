@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-executor"
+version = "1.14.0"
+
+[project.features]
+static = []
+
+[rust]
+name = "async_executor"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-task = { loaf = "crates-io/async-task", version = "^4.4.0" }
+concurrent-queue = { loaf = "crates-io/concurrent-queue", version = "^2.5.0" }
+fastrand = { loaf = "crates-io/fastrand", version = "^2.0.0" }
+futures-lite = [{ loaf = "crates-io/futures-lite", version = "^2.0.0", features = ["std"], default-features = false, target = "cfg(target_family = \"wasm\")" }, { loaf = "crates-io/futures-lite", version = "^2.0.0", default-features = false }]
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2" }
+slab = { loaf = "crates-io/slab", version = "^0.4.7" }

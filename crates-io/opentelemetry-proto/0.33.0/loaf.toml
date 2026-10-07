@@ -1,0 +1,44 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/opentelemetry-proto"
+version = "0.33.0"
+
+[project.features]
+base64 = ["dep:base64"]
+const-hex = ["dep:const-hex"]
+default = ["full"]
+full = ["gen-tonic", "trace", "logs", "metrics", "zpages", "with-serde", "internal-logs"]
+gen-tonic = ["gen-tonic-messages", "tonic", "tonic-prost", "dep:tonic", "tonic/channel"]
+gen-tonic-messages = ["prost"]
+internal-logs = ["opentelemetry/internal-logs"]
+logs = ["opentelemetry/logs", "opentelemetry_sdk/logs"]
+metrics = ["opentelemetry/metrics", "opentelemetry_sdk/metrics"]
+profiles = []
+prost = ["dep:prost"]
+schemars = ["dep:schemars"]
+serde = ["dep:serde"]
+testing = ["opentelemetry/testing"]
+tonic = ["dep:tonic"]
+tonic-prost = ["dep:tonic-prost"]
+trace = ["opentelemetry/trace", "opentelemetry_sdk/trace"]
+with-schemars = ["schemars"]
+with-serde = ["serde", "const-hex", "base64"]
+zpages = ["trace"]
+
+[rust]
+name = "opentelemetry_proto"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22.1", optional = true }
+const-hex = { loaf = "crates-io/const-hex", version = "^1.14.1", optional = true }
+opentelemetry = { loaf = "crates-io/opentelemetry", version = "^0.33", default-features = false }
+opentelemetry_sdk = { loaf = "crates-io/opentelemetry_sdk", version = "^0.33", default-features = false }
+prost = { loaf = "crates-io/prost", version = "^0.14", optional = true }
+schemars = { loaf = "crates-io/schemars", version = "^1.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["serde_derive", "std"], default-features = false, optional = true }
+tonic = { loaf = "crates-io/tonic", version = "^0.14.1", features = ["codegen"], default-features = false, optional = true }
+tonic-prost = { loaf = "crates-io/tonic-prost", version = "^0.14.1", optional = true }

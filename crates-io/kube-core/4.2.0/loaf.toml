@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/kube-core"
+version = "4.2.0"
+
+[project.features]
+admission = ["json-patch"]
+cel = ["dep:kube-cel"]
+json-patch = ["dep:json-patch"]
+jsonpatch = ["json-patch"]
+kubelet-debug = ["ws"]
+schema = ["schemars"]
+schemars = ["dep:schemars"]
+ws = []
+
+[rust]
+name = "kube_core"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+derive_more = { loaf = "crates-io/derive_more", version = "^2.0.1", features = ["from"] }
+form_urlencoded = { loaf = "crates-io/form_urlencoded", version = "^1.2.0" }
+http = { loaf = "crates-io/http", version = "^1.1.0" }
+jiff = { loaf = "crates-io/jiff", version = "^0.2.16", features = ["std"], default-features = false }
+json-patch = { loaf = "crates-io/json-patch", version = "^4", optional = true }
+k8s-openapi = { loaf = "crates-io/k8s-openapi", version = "^0.28.0", default-features = false }
+kube-cel = { loaf = "crates-io/kube-cel", version = "^0.8.0", features = ["validation"], optional = true }
+schemars = { loaf = "crates-io/schemars", version = "^1.0.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.221", features = ["derive"] }
+serde-value = { loaf = "crates-io/serde-value", version = "^0.7.0" }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.127" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.15" }

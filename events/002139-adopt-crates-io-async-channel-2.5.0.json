@@ -1,0 +1,106 @@
+{
+  "about": {
+    "description": "Async multi-producer multi-consumer channel",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/async-channel"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:924ed96dd52d1b75e9c1a3e6275715fd320f5f9439fb5a4a11fa51f4221158d2",
+    "package": "async-channel",
+    "registry": "crates-io",
+    "version": "2.5.0"
+  },
+  "archive": "sha256:95f93b75bc517101d2a78d8456010743ac4f8b48fbb09e8494fd2a830a310978",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/concurrent-queue",
+      "name": "concurrent-queue",
+      "optional": false,
+      "req": "^2.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/event-listener-strategy",
+      "name": "event-listener-strategy",
+      "optional": false,
+      "req": "^0.5.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.11"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "require-cas"
+      ],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/portable-atomic-util",
+      "name": "portable-atomic-util",
+      "optional": true,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "portable-atomic": [
+      "concurrent-queue/portable-atomic",
+      "event-listener-strategy/portable-atomic",
+      "dep:portable-atomic-util",
+      "dep:portable-atomic"
+    ],
+    "std": [
+      "concurrent-queue/std",
+      "event-listener-strategy/std"
+    ]
+  },
+  "id": "sha256:011f5762d876f053cf79621002451405c9d6522316d6bc3dc4a7c7556d4a156a",
+  "kind": "adopt",
+  "manifest": "sha256:76d1e1aa049705e3d15feea2fb460c25694eb251bb8cb9655c6e50628d3c4a32",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "async_channel",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "async-channel",
+    "scope": "crates-io",
+    "version": "2.5.0"
+  }
+}

@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/jpeg-decoder"
+version = "0.3.2"
+
+[project.features]
+default = ["rayon"]
+nightly_aarch64_neon = []
+platform_independent = []
+rayon = ["dep:rayon"]
+
+[rust]
+name = "jpeg_decoder"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+rayon = { loaf = "crates-io/rayon", version = "^1.5.1", optional = true }

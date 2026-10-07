@@ -1,0 +1,78 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the Advanced Encryption Standard (a.k.a. Rijndael)",
+    "documentation": "https://docs.rs/aes",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/block-ciphers"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:35f0f96ce78e38c3dc6d8948aa8163d06385be74000f3c7a95bf1eef35d3ea32",
+    "package": "aes",
+    "registry": "crates-io",
+    "version": "0.9.3"
+  },
+  "archive": "sha256:6e0623a1cfffd9ecc394a3585bef3a410c7509fceaf0d346b8b7a42ab27057ce",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cipher",
+      "name": "cipher",
+      "optional": false,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpubits",
+      "name": "cpubits",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cpufeatures",
+      "name": "cpufeatures",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.9"
+    }
+  ],
+  "features": {
+    "hazmat": [],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:018c00fd09b471fb7b8f3caa02824e6e5be9bea857d68207eff03f743a914df0",
+  "kind": "adopt",
+  "manifest": "sha256:f0eaf093a50ab369e34e39062920adf20462b11867578bcd20ebeff06195c8d0",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "aes",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "aes",
+    "scope": "crates-io",
+    "version": "0.9.3"
+  }
+}

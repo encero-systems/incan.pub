@@ -1,0 +1,240 @@
+{
+  "about": {
+    "description": "Bindings to the CoreFoundation framework",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/madsmtm/objc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2a180dd8642fa45cdb7dd721cd4c11b1cadd4929ce112ebd8b9f5803cc79d536",
+    "package": "objc2-core-foundation",
+    "registry": "crates-io",
+    "version": "0.3.2"
+  },
+  "archive": "sha256:7b11ba2a5b94d8d98c3673d0246f3789674d524b48f22705dd41aa460279dfc3",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/block2",
+      "name": "block2",
+      "optional": true,
+      "req": ">=0.6.1, <0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/dispatch2",
+      "name": "dispatch2",
+      "optional": true,
+      "req": ">=0.3.0, <0.5.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.80"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/objc2",
+      "name": "objc2",
+      "optional": true,
+      "req": ">=0.6.2, <0.8.0"
+    }
+  ],
+  "features": {
+    "CFArray": [],
+    "CFAttributedString": [],
+    "CFAvailability": [],
+    "CFBag": [],
+    "CFBase": [],
+    "CFBinaryHeap": [],
+    "CFBitVector": [],
+    "CFBundle": [],
+    "CFByteOrder": [],
+    "CFCGTypes": [],
+    "CFCalendar": [
+      "bitflags"
+    ],
+    "CFCharacterSet": [],
+    "CFData": [
+      "bitflags"
+    ],
+    "CFDate": [
+      "bitflags"
+    ],
+    "CFDateFormatter": [
+      "bitflags"
+    ],
+    "CFDictionary": [],
+    "CFError": [],
+    "CFFileDescriptor": [],
+    "CFFileSecurity": [
+      "bitflags"
+    ],
+    "CFLocale": [],
+    "CFMachPort": [],
+    "CFMessagePort": [],
+    "CFNotificationCenter": [],
+    "CFNumber": [],
+    "CFNumberFormatter": [
+      "bitflags"
+    ],
+    "CFPlugIn": [],
+    "CFPlugInCOM": [],
+    "CFPreferences": [],
+    "CFPropertyList": [
+      "bitflags"
+    ],
+    "CFRunLoop": [
+      "bitflags"
+    ],
+    "CFSet": [],
+    "CFSocket": [
+      "bitflags"
+    ],
+    "CFStream": [
+      "bitflags"
+    ],
+    "CFString": [
+      "bitflags"
+    ],
+    "CFStringEncodingExt": [],
+    "CFStringTokenizer": [
+      "bitflags"
+    ],
+    "CFTimeZone": [],
+    "CFTree": [],
+    "CFURL": [
+      "bitflags"
+    ],
+    "CFURLAccess": [],
+    "CFURLEnumerator": [
+      "bitflags"
+    ],
+    "CFUUID": [],
+    "CFUserNotification": [],
+    "CFUtilities": [],
+    "CFXMLNode": [],
+    "CFXMLParser": [
+      "bitflags"
+    ],
+    "alloc": [],
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "block2": [
+      "dep:block2"
+    ],
+    "default": [
+      "std",
+      "CFArray",
+      "CFAttributedString",
+      "CFAvailability",
+      "CFBag",
+      "CFBinaryHeap",
+      "CFBitVector",
+      "CFBundle",
+      "CFByteOrder",
+      "CFCGTypes",
+      "CFCalendar",
+      "CFCharacterSet",
+      "CFData",
+      "CFDate",
+      "CFDateFormatter",
+      "CFDictionary",
+      "CFError",
+      "CFFileDescriptor",
+      "CFFileSecurity",
+      "CFLocale",
+      "CFMachPort",
+      "CFMessagePort",
+      "CFNotificationCenter",
+      "CFNumber",
+      "CFNumberFormatter",
+      "CFPlugIn",
+      "CFPlugInCOM",
+      "CFPreferences",
+      "CFPropertyList",
+      "CFRunLoop",
+      "CFSet",
+      "CFSocket",
+      "CFStream",
+      "CFString",
+      "CFStringEncodingExt",
+      "CFStringTokenizer",
+      "CFTimeZone",
+      "CFTree",
+      "CFURL",
+      "CFURLAccess",
+      "CFURLEnumerator",
+      "CFUUID",
+      "CFUserNotification",
+      "CFUtilities",
+      "CFXMLNode",
+      "CFXMLParser",
+      "bitflags",
+      "block2",
+      "dispatch2",
+      "libc",
+      "objc2"
+    ],
+    "dispatch2": [
+      "dep:dispatch2"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "objc2": [
+      "dep:objc2",
+      "dispatch2?/objc2"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "unstable-coerce-pointee": [],
+    "unstable-darwin-objc": []
+  },
+  "id": "sha256:be0cf3885516cd6fdf16fefc42985b6980241d146b0532e6852cac5ed639429e",
+  "kind": "adopt",
+  "manifest": "sha256:db3c3f4bc85752859cecff50b2f7471f1f1324168da8b06d1f5a0300006b16a8",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "objc2_core_foundation",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "objc2-core-foundation",
+    "scope": "crates-io",
+    "version": "0.3.2"
+  }
+}

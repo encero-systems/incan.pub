@@ -1,0 +1,43 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tinyvec"
+version = "1.13.3"
+
+[project.features]
+alloc = []
+arbitrary = ["dep:arbitrary"]
+bin-proto = ["dep:bin-proto"]
+borsh = ["dep:borsh"]
+debugger_visualizer = []
+default = []
+defmt = ["dep:defmt"]
+experimental_write_impl = []
+generic-array = ["dep:generic-array"]
+grab_spare_slice = []
+latest_stable_rust = ["rustc_1_61"]
+nightly_slice_partition_dedup = []
+real_blackbox = []
+rustc_1_40 = []
+rustc_1_55 = []
+rustc_1_57 = []
+rustc_1_61 = ["rustc_1_57"]
+schemars = ["dep:schemars", "alloc"]
+serde = ["dep:serde_core"]
+std = ["alloc"]
+tinyvec_macros = []
+
+[rust]
+name = "tinyvec"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", optional = true }
+bin-proto = { loaf = "crates-io/bin-proto", version = "^0.12.5", default-features = false, optional = true }
+borsh = { loaf = "crates-io/borsh", version = "^1.2.0", default-features = false, optional = true }
+defmt = { loaf = "crates-io/defmt", version = "^1.0", optional = true }
+generic-array = { loaf = "crates-io/generic-array", version = "^1.1.1", default-features = false, optional = true }
+schemars = { loaf = "crates-io/schemars", version = "^1.0", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false, optional = true }

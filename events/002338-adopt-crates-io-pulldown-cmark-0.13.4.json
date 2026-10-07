@@ -1,0 +1,111 @@
+{
+  "about": {
+    "description": "A pull parser for CommonMark",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/raphlinus/pulldown-cmark"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+    "package": "pulldown-cmark",
+    "registry": "crates-io",
+    "version": "0.13.4"
+  },
+  "archive": "sha256:fe0e7b0940765ecd37e0263ece54a1847fe4cd1d10b3790b8de68e3eb2f6528b",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/getopts",
+      "name": "getopts",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pulldown-cmark-escape",
+      "name": "pulldown-cmark-escape",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicase",
+      "name": "unicase",
+      "optional": false,
+      "req": "^2.6"
+    }
+  ],
+  "features": {
+    "default": [
+      "getopts",
+      "html"
+    ],
+    "gen-tests": [],
+    "getopts": [
+      "dep:getopts"
+    ],
+    "html": [
+      "pulldown-cmark-escape"
+    ],
+    "pulldown-cmark-escape": [
+      "dep:pulldown-cmark-escape"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "simd": [
+      "pulldown-cmark-escape?/simd"
+    ]
+  },
+  "id": "sha256:7febb92ce0b4fc879a87e39616b66e50ba7a79ad7c6123104bcd4be271f70754",
+  "kind": "adopt",
+  "manifest": "sha256:8f6a9277ae2407003e21571cc386335c5328073f358596cc81716e734eed59be",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "pulldown_cmark",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pulldown-cmark",
+    "scope": "crates-io",
+    "version": "0.13.4"
+  }
+}

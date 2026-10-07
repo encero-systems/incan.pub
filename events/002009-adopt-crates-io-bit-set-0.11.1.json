@@ -1,0 +1,96 @@
+{
+  "about": {
+    "description": "A set of bits",
+    "documentation": "https://docs.rs/bit-set/latest/bit-set/",
+    "homepage": "https://github.com/contain-rs/bit-vec",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/contain-rs/bit-vec"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:56d87354e4229f54a44f7bf2435906a4656dba36026ab6eaca629a2c436a691c",
+    "package": "bit-set",
+    "registry": "crates-io",
+    "version": "0.11.1"
+  },
+  "archive": "sha256:70aead51dd7b24d057779bcb427bb2c90122fca72ee8610aa03e685b597c5f1e",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bit-vec",
+      "name": "bit-vec",
+      "optional": false,
+      "req": "^0.10.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/borsh",
+      "name": "borsh",
+      "optional": true,
+      "req": "^1.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/miniserde",
+      "name": "miniserde",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "borsh": [
+      "dep:borsh",
+      "bit-vec/borsh"
+    ],
+    "default": [
+      "std"
+    ],
+    "miniserde": [
+      "dep:miniserde",
+      "bit-vec/miniserde"
+    ],
+    "serde": [
+      "dep:serde",
+      "bit-vec/serde"
+    ],
+    "std": [
+      "bit-vec/std"
+    ]
+  },
+  "id": "sha256:4f057c544e3a5e3c10913ef55e060e55aef8eb74a800c5a8ed534ff608131173",
+  "kind": "adopt",
+  "manifest": "sha256:f2d2754760e0a6be64253eeee63b6be43b87ffd05edecf98b0ba2c9248cf0c8f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "bit_set",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bit-set",
+    "scope": "crates-io",
+    "version": "0.11.1"
+  }
+}

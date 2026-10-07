@@ -1,0 +1,154 @@
+{
+  "about": {
+    "description": "A Gecko-oriented implementation of the Encoding Standard",
+    "documentation": "https://docs.rs/encoding_rs/",
+    "homepage": "https://docs.rs/encoding_rs/",
+    "license": "(Apache-2.0 OR MIT) AND BSD-3-Clause",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hsivonen/encoding_rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8e985e0451871ad22fb8d2b6b076e2028a502a0d3950998c2c5c0a4f9b5d9679",
+    "package": "encoding_rs",
+    "registry": "crates-io",
+    "version": "0.8.42"
+  },
+  "archive": "sha256:e1e923d0077d2edf75beee5c9e33c3d02f44288c9cd7e15cd825264a9c9f0ded",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/any_all_workaround",
+      "name": "any_all_workaround",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/core_detect",
+      "name": "core_detect",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/multiversion",
+      "name": "multiversion",
+      "optional": true,
+      "req": ">=0.8.0, <0.10.0",
+      "target": "cfg(all(any(target_arch = \"x86_64\", target_arch = \"x86\"), not(all(target_feature = \"avx2\", target_feature = \"bmi1\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/multiversion_no_op",
+      "name": "multiversion_no_op",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustversion",
+      "name": "rustversion",
+      "optional": true,
+      "req": "^1.0.19"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/scopeguard",
+      "name": "scopeguard",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "aarch64_neon",
+        "public_imp"
+      ],
+      "loaf": "crates-io/simdutf8",
+      "name": "simdutf8",
+      "optional": false,
+      "req": "^0.1.5",
+      "target": "cfg(any(target_arch = \"x86_64\", target_arch = \"x86\", target_arch = \"aarch64\", all(target_arch = \"wasm32\", target_feature = \"simd128\")))"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "any_all_workaround": [
+      "dep:any_all_workaround"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "fast-big5-hanzi-encode": [],
+    "fast-gb-hanzi-encode": [],
+    "fast-hangul-encode": [],
+    "fast-hanja-encode": [],
+    "fast-kanji-encode": [],
+    "fast-legacy-encode": [
+      "fast-hangul-encode",
+      "fast-hanja-encode",
+      "fast-kanji-encode",
+      "fast-gb-hanzi-encode",
+      "fast-big5-hanzi-encode"
+    ],
+    "less-slow-big5-hanzi-encode": [],
+    "less-slow-gb-hanzi-encode": [],
+    "less-slow-kanji-encode": [],
+    "rustversion": [
+      "dep:rustversion"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "simd-accel": [
+      "any_all_workaround",
+      "rustversion"
+    ],
+    "std": [
+      "dep:multiversion"
+    ]
+  },
+  "id": "sha256:debc13b38964ab6c9e2b539a5395041c2f44d51d102b2252354b50aeece594b9",
+  "kind": "adopt",
+  "manifest": "sha256:9c23de83b74e7556badcdb753c4ed3a763b477d8b518a221d3d3f8381c674f29",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "encoding_rs",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "encoding_rs",
+    "scope": "crates-io",
+    "version": "0.8.42"
+  }
+}

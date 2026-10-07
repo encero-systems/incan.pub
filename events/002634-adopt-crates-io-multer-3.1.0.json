@@ -1,0 +1,176 @@
+{
+  "about": {
+    "description": "An async parser for `multipart/form-data` content-type in Rust.",
+    "documentation": "",
+    "homepage": "https://github.com/rwf2/multer",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rwf2/multer"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:83e87776546dc87511aa5ee218730c92b666d7264ab6ed41f9d215af9cd5224b",
+    "package": "multer",
+    "registry": "crates-io",
+    "version": "3.1.0"
+  },
+  "archive": "sha256:2da52cf0c966865448889ea5be8ad0d0224e5e25bdf55bdbb0ee7988b5cae13f",
+  "at": "2026-10-07T07:45:02Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/encoding_rs",
+      "name": "encoding_rs",
+      "optional": false,
+      "req": "^0.8.20"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/httparse",
+      "name": "httparse",
+      "optional": false,
+      "req": "^1.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/mime",
+      "name": "mime",
+      "optional": false,
+      "req": "^0.3.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "spin_mutex"
+      ],
+      "loaf": "crates-io/spin",
+      "name": "spin",
+      "optional": false,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "io"
+      ],
+      "loaf": "crates-io/tokio-util",
+      "name": "tokio-util",
+      "optional": true,
+      "req": "^0.7"
+    }
+  ],
+  "features": {
+    "all": [
+      "json"
+    ],
+    "default": [],
+    "json": [
+      "serde",
+      "serde_json"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "tokio-io": [
+      "tokio",
+      "tokio-util"
+    ],
+    "tokio-util": [
+      "dep:tokio-util"
+    ]
+  },
+  "id": "sha256:27d5110bbd0330d7514821091a2f0b2dfdb982bde7f2a894860dbc4968b80e1e",
+  "kind": "adopt",
+  "manifest": "sha256:399900da4b34753a22187f02d6ba83b58f2b1de5b957811c734cf5731c2cb17e",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "multer",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "multer",
+    "scope": "crates-io",
+    "version": "3.1.0"
+  }
+}

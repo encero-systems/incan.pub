@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cobs"
+version = "0.3.0"
+
+[project.features]
+alloc = []
+default = ["std"]
+defmt = ["dep:defmt"]
+serde = ["dep:serde"]
+std = ["alloc", "thiserror/std"]
+use_std = ["std"]
+
+[rust]
+name = "cobs"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+defmt = { loaf = "crates-io/defmt", version = "^0.3", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2", default-features = false }

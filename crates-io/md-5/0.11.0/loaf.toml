@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/md-5"
+version = "0.11.0"
+
+[project.features]
+alloc = ["digest/alloc"]
+default = ["alloc", "oid"]
+oid = ["digest/oid"]
+zeroize = ["digest/zeroize"]
+
+[rust]
+name = "md5"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1" }
+digest = { loaf = "crates-io/digest", version = "^0.11" }

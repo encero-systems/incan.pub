@@ -1,0 +1,97 @@
+{
+  "about": {
+    "description": "Get network adapters information and network configuration for windows.",
+    "documentation": "https://docs.rs/ipconfig/0.3.2/x86_64-pc-windows-msvc/ipconfig/",
+    "homepage": "https://github.com/liranringel/ipconfig",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/liranringel/ipconfig"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4d40460c0ce33d6ce4b0630ad68ff63d6661961c48b6dba35e5a4d81cfb48222",
+    "package": "ipconfig",
+    "registry": "crates-io",
+    "version": "0.3.4"
+  },
+  "archive": "sha256:aa2aca5c9b44cce5e977d5e8240198d7a3ef4d8fbe3057cc046b36a3f1b33ea5",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/socket2",
+      "name": "socket2",
+      "optional": false,
+      "req": "^0.6.0",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/widestring",
+      "name": "widestring",
+      "optional": false,
+      "req": "^1.0.2",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-registry",
+      "name": "windows-registry",
+      "optional": true,
+      "req": "^0.6.1",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/windows-result",
+      "name": "windows-result",
+      "optional": true,
+      "req": "^0.4.1",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_System_Registry"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.61",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "computer": [
+      "dep:windows-registry",
+      "dep:windows-result"
+    ],
+    "default": [
+      "computer"
+    ]
+  },
+  "id": "sha256:e95e8a21b404f0d83b217ce16816f10b55e56c558d1fd4793f61856de78752fa",
+  "kind": "adopt",
+  "manifest": "sha256:b7f8c827a57c75f19235761065a5e2cfc8760a4c11332484c91c1fe8afc41b3d",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "ipconfig",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ipconfig",
+    "scope": "crates-io",
+    "version": "0.3.4"
+  }
+}

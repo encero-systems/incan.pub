@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rayon-core"
+version = "1.13.0"
+
+[project.features]
+web_spin_lock = ["dep:wasm_sync"]
+
+[rust]
+name = "rayon_core"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+crossbeam-deque = { loaf = "crates-io/crossbeam-deque", version = "^0.8.1" }
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.0" }
+wasm_sync = { loaf = "crates-io/wasm_sync", version = "^0.1.0", optional = true }

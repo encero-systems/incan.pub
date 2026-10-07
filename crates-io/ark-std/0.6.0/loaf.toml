@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ark-std"
+version = "0.6.0"
+
+[project.features]
+colored = ["dep:colored"]
+default = ["std"]
+getrandom = ["rand/std"]
+parallel = ["rayon", "std"]
+print-trace = ["std", "colored"]
+rayon = ["dep:rayon"]
+std = []
+
+[rust]
+name = "ark_std"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+colored = { loaf = "crates-io/colored", version = "^2", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", default-features = false }
+rand = { loaf = "crates-io/rand", version = "^0.8", features = ["std_rng"], default-features = false }
+rayon = { loaf = "crates-io/rayon", version = "^1", optional = true }

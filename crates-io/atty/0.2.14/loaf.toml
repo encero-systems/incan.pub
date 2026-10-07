@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/atty"
+version = "0.2.14"
+
+[rust]
+name = "atty"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+hermit-abi = { loaf = "crates-io/hermit-abi", version = "^0.1.6", target = "cfg(target_os = \"hermit\")" }
+libc = { loaf = "crates-io/libc", version = "^0.2", default-features = false, target = "cfg(unix)" }
+winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["consoleapi", "minwinbase", "minwindef", "processenv", "winbase"], target = "cfg(windows)" }

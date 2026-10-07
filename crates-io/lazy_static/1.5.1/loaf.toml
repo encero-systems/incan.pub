@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/lazy_static"
+version = "1.5.1"
+
+[project.features]
+spin = ["dep:spin"]
+spin_no_std = ["spin"]
+
+[rust]
+name = "lazy_static"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+spin = { loaf = "crates-io/spin", version = "^0.9.8", features = ["once"], default-features = false, optional = true }

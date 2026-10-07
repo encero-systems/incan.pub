@@ -1,0 +1,172 @@
+{
+  "about": {
+    "description": "Unicode line breaking and text segmentation algorithms for text boundaries analysis",
+    "documentation": "",
+    "homepage": "https://icu4x.unicode.org",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:82d07aafccd67af15d02512a6adf5896fbc5ed00f2e99b471d2efa14016db3db",
+    "package": "icu_segmenter",
+    "registry": "crates-io",
+    "version": "2.3.0"
+  },
+  "archive": "sha256:0a1ea9386ed27aa29da3315c4db17c258b27bdc52f4f309d4244c63bbe113640",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/core_maths",
+      "name": "core_maths",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_collections",
+      "name": "icu_collections",
+      "optional": false,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_locale_fallback",
+      "name": "icu_locale_fallback",
+      "optional": true,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_provider",
+      "name": "icu_provider",
+      "optional": false,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_segmenter_data",
+      "name": "icu_segmenter_data",
+      "optional": true,
+      "req": "~2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "zerovec"
+      ],
+      "loaf": "crates-io/potential_utf",
+      "name": "potential_utf",
+      "optional": false,
+      "req": "^0.1.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.10.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/utf8_iter",
+      "name": "utf8_iter",
+      "optional": false,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "yoke"
+      ],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": false,
+      "req": "^0.11.7"
+    }
+  ],
+  "features": {
+    "auto": [
+      "lstm"
+    ],
+    "compiled_data": [
+      "dep:icu_segmenter_data",
+      "dep:icu_locale_fallback",
+      "icu_locale_fallback?/compiled_data",
+      "icu_provider/baked"
+    ],
+    "datagen": [
+      "serde",
+      "dep:databake",
+      "potential_utf/databake",
+      "zerovec/databake",
+      "icu_collections/databake",
+      "icu_provider/export"
+    ],
+    "default": [
+      "compiled_data",
+      "auto"
+    ],
+    "lstm": [
+      "dep:core_maths"
+    ],
+    "serde": [
+      "dep:serde",
+      "potential_utf/serde",
+      "zerovec/serde",
+      "icu_collections/serde",
+      "icu_provider/serde"
+    ],
+    "unstable": []
+  },
+  "id": "sha256:15febd0c940e21efc4210cb84612442fc7d8e5b89a49e95806a4fe8ca259e44b",
+  "kind": "adopt",
+  "manifest": "sha256:7fda8a8dcd3ba6b36b1cd05a57663aa6727ddee0c25b585100e7ad5da538ecea",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "icu_segmenter",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_segmenter",
+    "scope": "crates-io",
+    "version": "2.3.0"
+  }
+}

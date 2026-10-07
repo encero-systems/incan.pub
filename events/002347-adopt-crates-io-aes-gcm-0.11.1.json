@@ -1,0 +1,126 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the AES-GCM (Galois/Counter Mode)\nAuthenticated Encryption with Associated Data (AEAD) Cipher\nwith optional architecture-specific hardware acceleration",
+    "documentation": "https://docs.rs/aes-gcm",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/AEADs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7f2b8006a0c83f52b62ba44a97b58bf76fe2f70a329e588f67f89691d93d498f",
+    "package": "aes-gcm",
+    "registry": "crates-io",
+    "version": "0.11.1"
+  },
+  "archive": "sha256:1c9f53c553d21578344e61f8ec5eca71afb27901c5c4129a8d7f952f9146c93f",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/aead",
+      "name": "aead",
+      "optional": false,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/aes",
+      "name": "aes",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cipher",
+      "name": "cipher",
+      "optional": false,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ctr",
+      "name": "ctr",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ctutils",
+      "name": "ctutils",
+      "optional": false,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ghash",
+      "name": "ghash",
+      "optional": false,
+      "req": "^0.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "aes": [
+      "dep:aes"
+    ],
+    "alloc": [
+      "aead/alloc"
+    ],
+    "arrayvec": [
+      "aead/arrayvec"
+    ],
+    "bytes": [
+      "aead/bytes"
+    ],
+    "default": [
+      "aes",
+      "alloc",
+      "getrandom"
+    ],
+    "getrandom": [
+      "aead/getrandom"
+    ],
+    "hazmat": [],
+    "rand_core": [
+      "aead/rand_core"
+    ],
+    "zeroize": [
+      "dep:zeroize",
+      "aes?/zeroize",
+      "ghash/zeroize"
+    ]
+  },
+  "id": "sha256:499c1ac35eb2fbdc1de9d30634b84af99fe3722b26a1ab78a5c3d9b39480860c",
+  "kind": "adopt",
+  "manifest": "sha256:cdda9cd5d8b40791ed9bad62c0ee2dc7ad935a44c2e52d2b67a224375244335a",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "aes_gcm",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "aes-gcm",
+    "scope": "crates-io",
+    "version": "0.11.1"
+  }
+}

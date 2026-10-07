@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/foreign-types"
+version = "0.5.0"
+
+[project.features]
+default = ["std"]
+std = ["foreign-types-macros/std"]
+
+[rust]
+name = "foreign_types"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+foreign-types-macros = { loaf = "crates-io/foreign-types-macros", version = "^0.2" }
+foreign-types-shared = { loaf = "crates-io/foreign-types-shared", version = "^0.3" }

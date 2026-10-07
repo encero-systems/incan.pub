@@ -1,0 +1,96 @@
+{
+  "about": {
+    "description": "A library for no_std compatibility",
+    "documentation": "https://docs.rs/ark-std/",
+    "homepage": "https://arkworks.rs",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/arkworks-rs/std"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:367c9c827ed431bff6868b7aa926e05b16eb46603cc8b6e768e4a5553fa1d155",
+    "package": "ark-std",
+    "registry": "crates-io",
+    "version": "0.6.0"
+  },
+  "archive": "sha256:ac62f8266dcd3bece0209a263bc25c54489352b9280e9353c44f87d05a658ac2",
+  "at": "2026-10-07T07:45:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/colored",
+      "name": "colored",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std_rng"
+      ],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": false,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "colored": [
+      "dep:colored"
+    ],
+    "default": [
+      "std"
+    ],
+    "getrandom": [
+      "rand/std"
+    ],
+    "parallel": [
+      "rayon",
+      "std"
+    ],
+    "print-trace": [
+      "std",
+      "colored"
+    ],
+    "rayon": [
+      "dep:rayon"
+    ],
+    "std": []
+  },
+  "id": "sha256:a919d068e856d5c53a14e7e5b554794fd731183ac2e41275162f7772eb800a82",
+  "kind": "adopt",
+  "manifest": "sha256:f1601c0fc1c90bf4e51d540741283e620780cddedcbfd5a7db61ab1b75c9446c",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ark_std",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ark-std",
+    "scope": "crates-io",
+    "version": "0.6.0"
+  }
+}

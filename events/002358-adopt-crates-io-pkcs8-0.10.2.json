@@ -1,0 +1,133 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of Public-Key Cryptography Standards (PKCS) #8:\nPrivate-Key Information Syntax Specification (RFC 5208), with additional\nsupport for PKCS#8v2 asymmetric key packages (RFC 5958)",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/formats/tree/master/pkcs8"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f950b2377845cebe5cf8b5165cb3cc1a5e0fa5cfa3e1f7f55707d8fd82e0a7b7",
+    "package": "pkcs8",
+    "registry": "crates-io",
+    "version": "0.10.2"
+  },
+  "archive": "sha256:966ee1a4a34561ba5f83cef7d2d0f5b6fc43a678935b918f0be5420962e66240",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": false,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pkcs5",
+      "name": "pkcs5",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/spki",
+      "name": "spki",
+      "optional": false,
+      "req": "^0.7.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": true,
+      "req": "^2"
+    }
+  ],
+  "features": {
+    "3des": [
+      "encryption",
+      "dep:pkcs5",
+      "pkcs5/3des"
+    ],
+    "alloc": [
+      "der/alloc",
+      "der/zeroize",
+      "spki/alloc"
+    ],
+    "des-insecure": [
+      "encryption",
+      "dep:pkcs5",
+      "pkcs5/des-insecure"
+    ],
+    "encryption": [
+      "alloc",
+      "dep:pkcs5",
+      "pkcs5/alloc",
+      "pkcs5/pbes2",
+      "rand_core"
+    ],
+    "getrandom": [
+      "dep:rand_core",
+      "rand_core/getrandom"
+    ],
+    "pem": [
+      "alloc",
+      "der/pem",
+      "spki/pem"
+    ],
+    "pkcs5": [
+      "dep:pkcs5"
+    ],
+    "rand_core": [
+      "dep:rand_core"
+    ],
+    "sha1-insecure": [
+      "encryption",
+      "dep:pkcs5",
+      "pkcs5/sha1-insecure"
+    ],
+    "std": [
+      "alloc",
+      "der/std",
+      "spki/std"
+    ],
+    "subtle": [
+      "dep:subtle"
+    ]
+  },
+  "id": "sha256:aa8f5a3bd34fc81b5dec840bd4489e3f4828dc4b8625e178b119ee8575d19969",
+  "kind": "adopt",
+  "manifest": "sha256:12e2f5ce58f96a527a55760bae8f308a4ef70db10422269f566ec92ae95ee4bf",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "pkcs8",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pkcs8",
+    "scope": "crates-io",
+    "version": "0.10.2"
+  }
+}

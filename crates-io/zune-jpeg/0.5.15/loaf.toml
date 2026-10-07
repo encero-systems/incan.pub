@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zune-jpeg"
+version = "0.5.15"
+
+[project.features]
+default = ["x86", "neon", "std"]
+log = ["zune-core/log"]
+neon = []
+portable_simd = []
+std = ["zune-core/std"]
+x86 = []
+
+[rust]
+name = "zune_jpeg"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+zune-core = { loaf = "crates-io/zune-core", version = "^0.5.1" }

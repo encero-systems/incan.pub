@@ -1,0 +1,200 @@
+{
+  "about": {
+    "description": "Tokio binding for Tungstenite, the Lightweight stream-based WebSocket implementation",
+    "documentation": "https://docs.rs/tokio-tungstenite/0.30.0",
+    "homepage": "https://github.com/snapview/tokio-tungstenite",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/snapview/tokio-tungstenite"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:17a073bfed563fa236697a068031408a93cd9522e08abf9933ead3e73411bd71",
+    "package": "tokio-tungstenite",
+    "registry": "crates-io",
+    "version": "0.30.0"
+  },
+  "archive": "sha256:97fe73f75052c42dd04a46181c509f40c18820392e15fe9506e26bb702033d6b",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "sink",
+        "std"
+      ],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": false,
+      "req": "^0.3.28"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/native-tls",
+      "name": "native-tls-crate",
+      "optional": true,
+      "req": "^0.2.11"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rustls",
+      "name": "rustls",
+      "optional": true,
+      "req": "^0.23.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustls-native-certs",
+      "name": "rustls-native-certs",
+      "optional": true,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustls-pki-types",
+      "name": "rustls-pki-types",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "io-util"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio-native-tls",
+      "name": "tokio-native-tls",
+      "optional": true,
+      "req": "^0.3.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio-rustls",
+      "name": "tokio-rustls",
+      "optional": true,
+      "req": "^0.26.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tungstenite",
+      "name": "tungstenite",
+      "optional": false,
+      "req": "^0.30.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/webpki-roots",
+      "name": "webpki-roots",
+      "optional": true,
+      "req": "^0.26.0"
+    }
+  ],
+  "features": {
+    "__rustls-tls": [
+      "rustls",
+      "rustls-pki-types",
+      "tokio-rustls",
+      "stream",
+      "tungstenite/__rustls-tls",
+      "handshake"
+    ],
+    "connect": [
+      "stream",
+      "tokio/net",
+      "handshake"
+    ],
+    "default": [
+      "connect",
+      "handshake"
+    ],
+    "handshake": [
+      "tungstenite/handshake"
+    ],
+    "native-tls": [
+      "native-tls-crate",
+      "tokio-native-tls",
+      "stream",
+      "tungstenite/native-tls",
+      "handshake"
+    ],
+    "native-tls-crate": [
+      "dep:native-tls-crate"
+    ],
+    "native-tls-vendored": [
+      "native-tls",
+      "dep:native-tls-crate",
+      "native-tls-crate/vendored",
+      "tungstenite/native-tls-vendored"
+    ],
+    "rustls": [
+      "dep:rustls"
+    ],
+    "rustls-native-certs": [
+      "dep:rustls-native-certs"
+    ],
+    "rustls-pki-types": [
+      "dep:rustls-pki-types"
+    ],
+    "rustls-tls-native-roots": [
+      "__rustls-tls",
+      "rustls-native-certs"
+    ],
+    "rustls-tls-webpki-roots": [
+      "__rustls-tls",
+      "webpki-roots"
+    ],
+    "stream": [],
+    "tokio-native-tls": [
+      "dep:tokio-native-tls"
+    ],
+    "tokio-rustls": [
+      "dep:tokio-rustls"
+    ],
+    "url": [
+      "tungstenite/url"
+    ],
+    "webpki-roots": [
+      "dep:webpki-roots"
+    ]
+  },
+  "id": "sha256:8b401fa35eee878f2adad5c680db68849b8e0875cb8c8a59d9021a23ac56a32a",
+  "kind": "adopt",
+  "manifest": "sha256:a159794c2f15d2940b3074a4ec1e359fe42cffe595817dc947958fe5dceb8998",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "tokio_tungstenite",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tokio-tungstenite",
+    "scope": "crates-io",
+    "version": "0.30.0"
+  }
+}

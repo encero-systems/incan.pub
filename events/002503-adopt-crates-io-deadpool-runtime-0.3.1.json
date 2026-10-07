@@ -1,0 +1,97 @@
+{
+  "about": {
+    "description": "Dead simple async pool utilities for async runtimes",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/deadpool-rs/deadpool"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2657f61fb1dd8bf37a8d51093cc7cee4e77125b22f7753f49b289f831bec2bae",
+    "package": "deadpool-runtime",
+    "registry": "crates-io",
+    "version": "0.3.1"
+  },
+  "archive": "sha256:4969f2fe56b6548d7568f00b8165818e6fd88617b5b55dcc033602efe90f22dd",
+  "at": "2026-10-07T07:44:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "unstable"
+      ],
+      "loaf": "crates-io/async-std",
+      "name": "async-std_1",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-io",
+      "name": "smol_2_async-io",
+      "optional": true,
+      "req": "^2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/blocking",
+      "name": "smol_2_blocking",
+      "optional": true,
+      "req": "^1.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-lite",
+      "name": "smol_2_futures-lite",
+      "optional": true,
+      "req": "^2.6"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "rt",
+        "time"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio_1",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "async-std_1": [
+      "dep:async-std_1"
+    ],
+    "smol_2": [
+      "dep:smol_2_async-io",
+      "dep:smol_2_blocking",
+      "dep:smol_2_futures-lite"
+    ],
+    "tokio_1": [
+      "dep:tokio_1"
+    ]
+  },
+  "id": "sha256:873b77d8da3801de1aafd0ebed604bce883bfc9a571d1b33cc1d3cfdc73db7e3",
+  "kind": "adopt",
+  "manifest": "sha256:d61c2af70e421ba01292b85f06ad28356ece55ebdf09beb16f24fe856c24eb22",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "deadpool_runtime",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "deadpool-runtime",
+    "scope": "crates-io",
+    "version": "0.3.1"
+  }
+}

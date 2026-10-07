@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/flume"
+version = "0.12.0"
+
+[project.features]
+async = ["futures-sink", "futures-core"]
+default = ["async", "select", "eventual-fairness"]
+eventual-fairness = ["select", "fastrand"]
+fastrand = ["dep:fastrand"]
+futures-core = ["dep:futures-core"]
+futures-sink = ["dep:futures-sink"]
+select = []
+spin = []
+
+[rust]
+name = "flume"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+fastrand = { loaf = "crates-io/fastrand", version = "^2.3", features = ["js", "std"], optional = true }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", default-features = false, optional = true }
+futures-sink = { loaf = "crates-io/futures-sink", version = "^0.3", default-features = false, optional = true }
+spin1 = { loaf = "crates-io/spin", version = "^0.9.8", features = ["mutex"] }

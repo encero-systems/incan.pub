@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rancor"
+version = "0.1.3"
+
+[project.features]
+alloc = []
+default = ["alloc"]
+
+[rust]
+name = "rancor"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ptr_meta = { loaf = "crates-io/ptr_meta", version = "^0.3", features = ["derive"], default-features = false }

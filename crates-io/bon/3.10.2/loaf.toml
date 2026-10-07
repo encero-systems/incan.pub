@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bon"
+version = "3.10.2"
+
+[project.features]
+alloc = ["bon-macros/alloc"]
+default = ["std"]
+experimental-generics-setters = ["bon-macros/experimental-generics-setters"]
+experimental-getter = []
+experimental-overwritable = ["bon-macros/experimental-overwritable"]
+implied-bounds = ["bon-macros/implied-bounds"]
+std = ["bon-macros/std", "alloc"]
+
+[rust]
+name = "bon"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bon-macros = { loaf = "crates-io/bon-macros", version = "=3.10.2" }

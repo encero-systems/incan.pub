@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fs-err"
+version = "3.3.2"
+
+[project.features]
+debug = ["path_facts"]
+debug_tokio = ["debug", "dep:tokio", "tokio/rt-multi-thread"]
+expose_original_error = []
+path_facts = ["dep:path_facts"]
+tokio = ["dep:tokio"]
+
+[rust]
+name = "fs_err"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+path_facts = { loaf = "crates-io/path_facts", version = "^0.2.0", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.21", features = ["fs"], default-features = false, optional = true }

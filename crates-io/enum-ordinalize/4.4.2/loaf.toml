@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/enum-ordinalize"
+version = "4.4.2"
+
+[project.features]
+default = ["derive", "traits"]
+derive = ["dep:enum-ordinalize-derive"]
+traits = ["enum-ordinalize-derive?/traits"]
+
+[rust]
+name = "enum_ordinalize"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+enum-ordinalize-derive = { loaf = "crates-io/enum-ordinalize-derive", version = "^4.4.1", default-features = false, optional = true }

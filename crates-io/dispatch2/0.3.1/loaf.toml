@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dispatch2"
+version = "0.3.1"
+
+[project.features]
+alloc = []
+block2 = ["dep:block2"]
+default = ["std", "block2", "libc", "objc2"]
+libc = ["dep:libc"]
+objc2 = ["dep:objc2"]
+std = ["alloc"]
+
+[rust]
+name = "dispatch2"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.5.0", features = ["std"], default-features = false }
+block2 = { loaf = "crates-io/block2", version = ">=0.6.1, <0.8.0", features = ["alloc"], default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.80", default-features = false, optional = true }
+objc2 = { loaf = "crates-io/objc2", version = ">=0.6.2, <0.8.0", features = ["std"], default-features = false, optional = true }

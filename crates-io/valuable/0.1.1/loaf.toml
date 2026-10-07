@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/valuable"
+version = "0.1.1"
+
+[project.features]
+alloc = []
+default = ["std"]
+derive = ["valuable-derive"]
+std = ["alloc"]
+valuable-derive = ["dep:valuable-derive"]
+
+[rust]
+name = "valuable"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+valuable-derive = { loaf = "crates-io/valuable-derive", version = "=0.1.1", optional = true }

@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zbus_names"
+version = "4.3.4"
+
+[rust]
+name = "zbus_names"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0.200", features = ["derive"] }
+winnow = { loaf = "crates-io/winnow", version = "^1.0" }
+zvariant = { loaf = "crates-io/zvariant", version = "^5.13.1", features = ["enumflags2"] }

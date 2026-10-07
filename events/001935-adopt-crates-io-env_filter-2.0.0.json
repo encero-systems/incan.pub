@@ -1,0 +1,70 @@
+{
+  "about": {
+    "description": "Filter log events using environment variables",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-cli/env_logger"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:900d271a03799a1ee8d1ca9b19893b48ca674a9284fefcfb85f05e74ed314217",
+    "package": "env_filter",
+    "registry": "crates-io",
+    "version": "2.0.0"
+  },
+  "archive": "sha256:85ff54b4b6b5ee943d38ae9f8a4de9298970dfb7b92f29c1e602bb30d0c76559",
+  "at": "2026-10-07T07:42:26Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.29"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "perf"
+      ],
+      "loaf": "crates-io/regex",
+      "name": "regex",
+      "optional": true,
+      "req": "^1.12.3"
+    }
+  ],
+  "features": {
+    "default": [
+      "std",
+      "regex"
+    ],
+    "regex": [
+      "dep:regex"
+    ],
+    "std": [
+      "log/std",
+      "regex?/std"
+    ]
+  },
+  "id": "sha256:d07dab801e5d9026a58442bc4cb65495bda79178f7c7157331695183853c364c",
+  "kind": "adopt",
+  "manifest": "sha256:a86bf09c39e4d1847cc3e51d072b8679d1f0f464021513441194139fd12e0b12",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "env_filter",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "env_filter",
+    "scope": "crates-io",
+    "version": "2.0.0"
+  }
+}

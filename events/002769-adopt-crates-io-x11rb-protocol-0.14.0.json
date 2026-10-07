@@ -1,0 +1,141 @@
+{
+  "about": {
+    "description": "Rust bindings to X11",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/psychon/x11rb"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:acf4d1bc32aa46eec18caa634ec3cf4c05bfa151f12b93b510b15190f69a1ca8",
+    "package": "x11rb-protocol",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:3169cb34444b1859a5cc9440bb6d840914b72a367aec9d1aa7071fd463750bb7",
+  "at": "2026-10-07T07:45:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "all-extensions": [
+      "composite",
+      "damage",
+      "dbe",
+      "dpms",
+      "dri2",
+      "dri3",
+      "glx",
+      "present",
+      "randr",
+      "record",
+      "render",
+      "res",
+      "screensaver",
+      "shape",
+      "shm",
+      "sync",
+      "xevie",
+      "xf86dri",
+      "xf86vidmode",
+      "xfixes",
+      "xinerama",
+      "xinput",
+      "xkb",
+      "xprint",
+      "xselinux",
+      "xtest",
+      "xv",
+      "xvmc"
+    ],
+    "composite": [
+      "xfixes"
+    ],
+    "damage": [
+      "xfixes"
+    ],
+    "dbe": [],
+    "default": [
+      "std"
+    ],
+    "dpms": [],
+    "dri2": [],
+    "dri3": [],
+    "extra-traits": [],
+    "glx": [],
+    "present": [
+      "randr",
+      "xfixes",
+      "sync",
+      "dri3"
+    ],
+    "randr": [
+      "render"
+    ],
+    "record": [],
+    "render": [],
+    "request-parsing": [],
+    "res": [],
+    "resource_manager": [
+      "std"
+    ],
+    "screensaver": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "shape": [],
+    "shm": [],
+    "std": [],
+    "sync": [],
+    "xevie": [],
+    "xf86dri": [],
+    "xf86vidmode": [],
+    "xfixes": [
+      "render",
+      "shape"
+    ],
+    "xinerama": [],
+    "xinput": [
+      "xfixes"
+    ],
+    "xkb": [],
+    "xprint": [],
+    "xselinux": [],
+    "xtest": [],
+    "xv": [
+      "shm"
+    ],
+    "xvmc": [
+      "xv"
+    ]
+  },
+  "id": "sha256:59fdafbe2fabe7a6404c14c6469b4331f70ad053c371d8c4f7c162ce406e0b6c",
+  "kind": "adopt",
+  "manifest": "sha256:88c81dbd58d4af855d5fa53b28d8ff0bb18302d7b09aff63451ed68cd03149c1",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "x11rb_protocol",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "x11rb-protocol",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

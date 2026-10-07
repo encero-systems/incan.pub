@@ -1,0 +1,43 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zvariant"
+version = "5.15.0"
+
+[project.features]
+arrayvec = ["dep:arrayvec"]
+camino = ["dep:camino"]
+chrono = ["dep:chrono"]
+default = []
+enumflags2 = ["dep:enumflags2"]
+gvariant = ["zvariant_derive/gvariant", "zvariant_utils/gvariant"]
+heapless = ["dep:heapless"]
+option-as-array = []
+ostree-tests = ["gvariant"]
+serde_bytes = ["dep:serde_bytes"]
+time = ["dep:time"]
+url = ["dep:url"]
+uuid = ["dep:uuid"]
+
+[rust]
+name = "zvariant"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.4", features = ["serde"], optional = true }
+camino = { loaf = "crates-io/camino", version = "^1.1.9", optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.38", features = ["serde"], default-features = false, optional = true }
+endi = { loaf = "crates-io/endi", version = "^1.1.0" }
+enumflags2 = { loaf = "crates-io/enumflags2", version = "^0.7.9", features = ["serde"], optional = true }
+heapless = { loaf = "crates-io/heapless", version = "^0.9.0", features = ["serde"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.200", features = ["derive"] }
+serde_bytes = { loaf = "crates-io/serde_bytes", version = "^0.11.14", optional = true }
+time = { loaf = "crates-io/time", version = "^0.3.36", features = ["serde"], optional = true }
+url = { loaf = "crates-io/url", version = "^2.5.0", features = ["serde"], optional = true }
+uuid = { loaf = "crates-io/uuid", version = "^1.8.0", features = ["serde"], optional = true }
+winnow = { loaf = "crates-io/winnow", version = "^1.0" }
+zcheapstr = { loaf = "crates-io/zcheapstr", version = "^1.0.0", features = ["serde"] }
+zvariant_derive = { loaf = "crates-io/zvariant_derive", version = "^5.15.0" }
+zvariant_utils = { loaf = "crates-io/zvariant_utils", version = "^4.2.0" }

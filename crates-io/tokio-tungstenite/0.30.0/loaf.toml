@@ -1,0 +1,43 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tokio-tungstenite"
+version = "0.30.0"
+
+[project.features]
+__rustls-tls = ["rustls", "rustls-pki-types", "tokio-rustls", "stream", "tungstenite/__rustls-tls", "handshake"]
+connect = ["stream", "tokio/net", "handshake"]
+default = ["connect", "handshake"]
+handshake = ["tungstenite/handshake"]
+native-tls = ["native-tls-crate", "tokio-native-tls", "stream", "tungstenite/native-tls", "handshake"]
+native-tls-crate = ["dep:native-tls-crate"]
+native-tls-vendored = ["native-tls", "dep:native-tls-crate", "native-tls-crate/vendored", "tungstenite/native-tls-vendored"]
+rustls = ["dep:rustls"]
+rustls-native-certs = ["dep:rustls-native-certs"]
+rustls-pki-types = ["dep:rustls-pki-types"]
+rustls-tls-native-roots = ["__rustls-tls", "rustls-native-certs"]
+rustls-tls-webpki-roots = ["__rustls-tls", "webpki-roots"]
+stream = []
+tokio-native-tls = ["dep:tokio-native-tls"]
+tokio-rustls = ["dep:tokio-rustls"]
+url = ["tungstenite/url"]
+webpki-roots = ["dep:webpki-roots"]
+
+[rust]
+name = "tokio_tungstenite"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.28", features = ["sink", "std"], default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.17" }
+native-tls-crate = { loaf = "crates-io/native-tls", version = "^0.2.11", optional = true }
+rustls = { loaf = "crates-io/rustls", version = "^0.23.0", default-features = false, optional = true }
+rustls-native-certs = { loaf = "crates-io/rustls-native-certs", version = "^0.8.0", optional = true }
+rustls-pki-types = { loaf = "crates-io/rustls-pki-types", version = "^1.0", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.0.0", features = ["io-util"], default-features = false }
+tokio-native-tls = { loaf = "crates-io/tokio-native-tls", version = "^0.3.1", optional = true }
+tokio-rustls = { loaf = "crates-io/tokio-rustls", version = "^0.26.0", default-features = false, optional = true }
+tungstenite = { loaf = "crates-io/tungstenite", version = "^0.30.0", default-features = false }
+webpki-roots = { loaf = "crates-io/webpki-roots", version = "^0.26.0", optional = true }

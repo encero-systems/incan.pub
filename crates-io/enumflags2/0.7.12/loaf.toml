@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/enumflags2"
+version = "0.7.12"
+
+[project.features]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "enumflags2"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+enumflags2_derive = { loaf = "crates-io/enumflags2_derive", version = "=0.7.12" }
+serde = { loaf = "crates-io/serde", version = "^1.0.0", default-features = false, optional = true }

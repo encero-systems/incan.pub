@@ -1,0 +1,239 @@
+{
+  "about": {
+    "description": "Rust implementation of Apache Arrow",
+    "documentation": "",
+    "homepage": "https://github.com/apache/arrow-rs",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/apache/arrow-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:234ce58e76c04e8162c2e4bc3fe53fa7c2418ef5fba7bb2838b8531b7d4fbf14",
+    "package": "arrow",
+    "registry": "crates-io",
+    "version": "60.0.0"
+  },
+  "archive": "sha256:7068192d9890eaca82aaff7bf571ebdc1303f2bc5d06cba81b546209e7b4c205",
+  "at": "2026-10-07T07:45:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-arith",
+      "name": "arrow-arith",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-array",
+      "name": "arrow-array",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-buffer",
+      "name": "arrow-buffer",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-cast",
+      "name": "arrow-cast",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-csv",
+      "name": "arrow-csv",
+      "optional": true,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-data",
+      "name": "arrow-data",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-ipc",
+      "name": "arrow-ipc",
+      "optional": true,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-json",
+      "name": "arrow-json",
+      "optional": true,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-ord",
+      "name": "arrow-ord",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-pyarrow",
+      "name": "arrow-pyarrow",
+      "optional": true,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-row",
+      "name": "arrow-row",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-schema",
+      "name": "arrow-schema",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-select",
+      "name": "arrow-select",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arrow-string",
+      "name": "arrow-string",
+      "optional": false,
+      "req": "^60.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/half",
+      "name": "half",
+      "optional": true,
+      "req": "^2.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "std_rng",
+        "thread_rng"
+      ],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.10"
+    }
+  ],
+  "features": {
+    "arrow-csv": [
+      "dep:arrow-csv"
+    ],
+    "arrow-ipc": [
+      "dep:arrow-ipc"
+    ],
+    "arrow-json": [
+      "dep:arrow-json"
+    ],
+    "async": [
+      "arrow-array/async"
+    ],
+    "canonical_extension_types": [
+      "arrow-schema/canonical_extension_types"
+    ],
+    "chrono-tz": [
+      "arrow-array/chrono-tz"
+    ],
+    "csv": [
+      "arrow-csv"
+    ],
+    "default": [
+      "csv",
+      "ipc",
+      "json"
+    ],
+    "ffi": [
+      "arrow-schema/ffi",
+      "arrow-data/ffi",
+      "arrow-array/ffi"
+    ],
+    "force_validate": [
+      "arrow-array/force_validate",
+      "arrow-data/force_validate"
+    ],
+    "ipc": [
+      "arrow-ipc"
+    ],
+    "ipc_compression": [
+      "ipc",
+      "dep:arrow-ipc",
+      "arrow-ipc/lz4",
+      "arrow-ipc/zstd"
+    ],
+    "json": [
+      "arrow-json"
+    ],
+    "pool": [
+      "arrow-array/pool"
+    ],
+    "prettyprint": [
+      "arrow-cast/prettyprint"
+    ],
+    "pyarrow": [
+      "ffi",
+      "dep:arrow-pyarrow"
+    ],
+    "pyarrow-experimental-inspect": [
+      "pyarrow",
+      "dep:arrow-pyarrow",
+      "arrow-pyarrow/experimental-inspect"
+    ],
+    "test_utils": [
+      "dep:rand",
+      "dep:half"
+    ]
+  },
+  "id": "sha256:160f7b8d423ca0a9a0810d76d3a22ce98f78dc7be6b7f9e9a37abdc74e051fec",
+  "kind": "adopt",
+  "manifest": "sha256:c43daf2282101463effab0881bf2d5487ef9f86ccd76c0011a46625b2a47ff50",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "arrow",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "arrow",
+    "scope": "crates-io",
+    "version": "60.0.0"
+  }
+}

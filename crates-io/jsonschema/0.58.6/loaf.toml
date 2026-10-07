@@ -1,0 +1,58 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/jsonschema"
+version = "0.58.6"
+
+[project.features]
+arbitrary-precision = ["serde_json/arbitrary_precision", "dep:num-bigint", "jsonschema-macros?/arbitrary-precision", "jsonschema-value/arbitrary-precision"]
+conformance = ["jsonschema-value/conformance"]
+default = ["resolve-http", "resolve-file", "tls-aws-lc-rs", "idna"]
+idna = ["dep:idna"]
+jsonb = ["jsonschema-value/jsonb"]
+macros = ["dep:jsonschema-macros", "jsonschema-macros/float-roundtrip", "jsonschema-value/macros"]
+magnus = ["jsonschema-value/magnus", "dep:magnus"]
+pyo3 = ["jsonschema-value/pyo3", "dep:pyo3"]
+reqwest = ["dep:reqwest"]
+resolve-async = ["referencing/retrieve-async", "reqwest", "dep:async-trait", "dep:tokio"]
+resolve-file = []
+resolve-http = ["reqwest", "dep:rustls"]
+tls-aws-lc-rs = ["dep:rustls", "rustls/aws-lc-rs"]
+tls-ring = ["dep:rustls", "rustls/ring"]
+
+[rust]
+name = "jsonschema"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", features = ["serde"] }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.86", optional = true }
+bytecount = { loaf = "crates-io/bytecount", version = "^0.6", features = ["runtime-dispatch-simd"] }
+data-encoding = { loaf = "crates-io/data-encoding", version = "^2.9" }
+email_address = { loaf = "crates-io/email_address", version = "^0.2.9" }
+fancy-regex = { loaf = "crates-io/fancy-regex", version = "^0.19" }
+fraction = { loaf = "crates-io/fraction", version = "^0.17", features = ["with-bigint"], default-features = false }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.3.4", features = ["wasm_js"], target = "cfg(target_arch = \"wasm32\")" }
+idna = { loaf = "crates-io/idna", version = "^1.0.2", optional = true }
+itoa = { loaf = "crates-io/itoa", version = "^1" }
+jsonschema-macros = { loaf = "crates-io/jsonschema-macros", version = "^0.58.6", optional = true }
+jsonschema-regex = { loaf = "crates-io/jsonschema-regex", version = "^0.58.6" }
+jsonschema-value = { loaf = "crates-io/jsonschema-value", version = "^0.58.6" }
+magnus = { loaf = "crates-io/magnus", version = "^0.9", features = ["rb-sys"], optional = true }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", optional = true }
+num-cmp = { loaf = "crates-io/num-cmp", version = "^0.1" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19" }
+percent-encoding = { loaf = "crates-io/percent-encoding", version = "^2.3" }
+pyo3 = { loaf = "crates-io/pyo3", version = "^0.29", optional = true }
+referencing = { loaf = "crates-io/referencing", version = "^0.58.6" }
+regex = { loaf = "crates-io/regex", version = "^1.11.1" }
+reqwest = [{ loaf = "crates-io/reqwest", version = "^0.13", features = ["blocking", "http2", "json", "rustls-no-provider"], default-features = false, optional = true, target = "cfg(not(target_arch = \"wasm32\"))" }, { loaf = "crates-io/reqwest", version = "^0.13", features = ["json"], default-features = false, optional = true, target = "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\")))" }]
+rustls = { loaf = "crates-io/rustls", version = "^0.23", features = ["std", "tls12"], default-features = false, optional = true, target = "cfg(not(target_arch = \"wasm32\"))" }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1", features = ["float_roundtrip"] }
+strum = { loaf = "crates-io/strum", version = "^0.28.0", features = ["derive"] }
+tokio = { loaf = "crates-io/tokio", version = "^1", features = ["rt"], default-features = false, optional = true }
+unicode-general-category = { loaf = "crates-io/unicode-general-category", version = "^1.1" }
+uuid-simd = { loaf = "crates-io/uuid-simd", version = "^0.8", features = ["detect", "std"], default-features = false }

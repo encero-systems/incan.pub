@@ -1,0 +1,62 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/plotters"
+version = "0.3.7"
+
+[project.features]
+ab_glyph = ["dep:ab_glyph", "once_cell"]
+all_elements = ["errorbar", "candlestick", "boxplot", "histogram"]
+all_series = ["area_series", "line_series", "point_series", "surface_series"]
+area_series = []
+bitmap_backend = ["plotters-bitmap"]
+bitmap_encoder = ["dep:plotters-bitmap", "plotters-bitmap/image_encoder"]
+bitmap_gif = ["dep:plotters-bitmap", "plotters-bitmap/gif_backend"]
+boxplot = []
+candlestick = []
+chrono = ["dep:chrono"]
+colormaps = []
+datetime = ["chrono"]
+default = ["bitmap_backend", "bitmap_encoder", "bitmap_gif", "svg_backend", "chrono", "ttf", "image", "deprecated_items", "all_series", "all_elements", "full_palette", "colormaps"]
+deprecated_items = []
+errorbar = []
+evcxr = ["svg_backend"]
+evcxr_bitmap = ["evcxr", "bitmap_backend", "dep:plotters-svg", "plotters-svg/bitmap_encoder"]
+font-kit = ["dep:font-kit"]
+fontconfig-dlopen = ["dep:font-kit", "font-kit/source-fontconfig-dlopen"]
+full_palette = []
+histogram = []
+image = ["dep:image"]
+lazy_static = ["dep:lazy_static"]
+line_series = []
+once_cell = ["dep:once_cell"]
+pathfinder_geometry = ["dep:pathfinder_geometry"]
+plotters-bitmap = ["dep:plotters-bitmap"]
+plotters-svg = ["dep:plotters-svg"]
+point_series = []
+surface_series = []
+svg_backend = ["plotters-svg"]
+ttf = ["font-kit", "ttf-parser", "lazy_static", "pathfinder_geometry"]
+ttf-parser = ["dep:ttf-parser"]
+
+[rust]
+name = "plotters"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+ab_glyph = { loaf = "crates-io/ab_glyph", version = "^0.2.12", optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.32", optional = true }
+font-kit = { loaf = "crates-io/font-kit", version = "^0.14.2", optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+image = { loaf = "crates-io/image", version = "^0.24.3", features = ["bmp", "jpeg", "png"], default-features = false, optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+lazy_static = { loaf = "crates-io/lazy_static", version = "^1.4.0", optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.14" }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.8.0", optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+pathfinder_geometry = { loaf = "crates-io/pathfinder_geometry", version = "^0.5.1", optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+plotters-backend = { loaf = "crates-io/plotters-backend", version = "^0.3.6" }
+plotters-bitmap = { loaf = "crates-io/plotters-bitmap", version = "^0.3.6", default-features = false, optional = true }
+plotters-svg = { loaf = "crates-io/plotters-svg", version = "^0.3.6", optional = true }
+ttf-parser = { loaf = "crates-io/ttf-parser", version = "^0.20.0", optional = true, target = "cfg(not(all(target_arch = \"wasm32\", not(target_os = \"wasi\"))))" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.89", target = "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))" }
+web-sys = { loaf = "crates-io/web-sys", version = "^0.3.66", features = ["CanvasRenderingContext2d", "Document", "DomRect", "Element", "HtmlCanvasElement", "HtmlElement", "Node", "Window"], target = "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))" }

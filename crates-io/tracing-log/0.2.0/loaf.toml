@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tracing-log"
+version = "0.2.0"
+
+[project.features]
+ahash = ["dep:ahash"]
+default = ["log-tracer", "std"]
+interest-cache = ["lru", "ahash"]
+log-tracer = []
+lru = ["dep:lru"]
+std = ["log/std"]
+
+[rust]
+name = "tracing_log"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.7.6", optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.17" }
+lru = { loaf = "crates-io/lru", version = "^0.7.7", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.13.0" }
+tracing-core = { loaf = "crates-io/tracing-core", version = "^0.1.28" }

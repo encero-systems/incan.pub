@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bytecheck"
+version = "0.8.3"
+
+[project.features]
+default = ["simdutf8"]
+simdutf8 = ["dep:simdutf8"]
+uuid-1 = ["dep:uuid-1"]
+
+[rust]
+name = "bytecheck"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bytecheck_derive = { loaf = "crates-io/bytecheck_derive", version = "=0.8.3", default-features = false }
+ptr_meta = { loaf = "crates-io/ptr_meta", version = "^0.3", default-features = false }
+rancor = { loaf = "crates-io/rancor", version = "^0.1", default-features = false }
+simdutf8 = { loaf = "crates-io/simdutf8", version = "^0.1", default-features = false, optional = true }
+uuid-1 = { loaf = "crates-io/uuid", version = "^1", default-features = false, optional = true }

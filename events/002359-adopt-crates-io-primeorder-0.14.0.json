@@ -1,0 +1,111 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of complete addition formulas for prime order elliptic\ncurves (Renes-Costello-Batina 2015). Generic over field elements and curve\nequation coefficients",
+    "documentation": "https://docs.rs/primeorder",
+    "homepage": "https://github.com/RustCrypto/elliptic-curves/tree/master/primeorder",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/elliptic-curves"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5c9f42978c78a00e3d68f69fc03e57a234debae69da4020a4fb588fcdcd07b06",
+    "package": "primeorder",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:82aae849b6f47e1eec621a7373e6c87e491393b0231eeea833688b40527212ab",
+  "at": "2026-10-07T07:43:34Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "arithmetic",
+        "sec1"
+      ],
+      "loaf": "crates-io/elliptic-curve",
+      "name": "elliptic-curve",
+      "optional": false,
+      "req": "^0.14.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.21"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/primefield",
+      "name": "primefield",
+      "optional": false,
+      "req": "^0.14"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wnaf",
+      "name": "wnaf",
+      "optional": false,
+      "req": "^0.14"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "elliptic-curve/alloc",
+      "serdect?/alloc"
+    ],
+    "basepoint-table": [],
+    "critical-section": [
+      "basepoint-table",
+      "dep:once_cell",
+      "once_cell/critical-section"
+    ],
+    "dev": [],
+    "hash2curve": [],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "serde": [
+      "elliptic-curve/serde",
+      "serdect"
+    ],
+    "serdect": [
+      "dep:serdect"
+    ],
+    "std": [
+      "alloc",
+      "elliptic-curve/std",
+      "once_cell?/std"
+    ]
+  },
+  "id": "sha256:07253e6cd35dae74dcb5372dfa3c6d2e5fece0e39fcc36546b970e865f995b5b",
+  "kind": "adopt",
+  "manifest": "sha256:ed4c1f5018da58b29615d8e27009e54d754be30b06fd4cf071724e46d0008838",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "primeorder",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "primeorder",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

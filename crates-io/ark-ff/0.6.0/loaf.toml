@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ark-ff"
+version = "0.6.0"
+
+[project.features]
+asm = []
+default = []
+parallel = ["std", "rayon", "ark-std/parallel", "ark-serialize/parallel"]
+rayon = ["dep:rayon"]
+std = ["ark-std/std", "ark-serialize/std"]
+
+[rust]
+name = "ark_ff"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ark-ff-asm = { loaf = "crates-io/ark-ff-asm", version = "^0.6.0" }
+ark-ff-macros = { loaf = "crates-io/ark-ff-macros", version = "^0.6.0" }
+ark-serialize = { loaf = "crates-io/ark-serialize", version = "^0.6.0", features = ["derive"], default-features = false }
+ark-std = { loaf = "crates-io/ark-std", version = "^0.6.0", default-features = false }
+digest = { loaf = "crates-io/digest", version = "^0.10", features = ["alloc"], default-features = false }
+educe = { loaf = "crates-io/educe", version = "^0.6.0", features = ["Clone", "Copy", "Debug", "Default", "Eq", "Hash", "Ord", "PartialEq", "PartialOrd"], default-features = false }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", default-features = false }
+rayon = { loaf = "crates-io/rayon", version = "^1", optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false }

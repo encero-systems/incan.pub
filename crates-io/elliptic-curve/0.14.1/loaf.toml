@@ -1,0 +1,45 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/elliptic-curve"
+version = "0.14.1"
+
+[project.features]
+alloc = ["base16ct/alloc", "ff?/alloc", "group?/alloc", "array/alloc", "pkcs8?/alloc", "sec1?/alloc", "zeroize/alloc"]
+arithmetic = ["group"]
+default = ["arithmetic"]
+dev = ["arithmetic", "dep:hex-literal", "pem", "pkcs8"]
+digest = ["dep:digest"]
+ecdh = ["arithmetic", "digest", "dep:hkdf"]
+ff = ["dep:ff"]
+getrandom = ["arithmetic", "bigint/getrandom", "common/getrandom"]
+group = ["dep:group", "ff"]
+pem = ["dep:pem-rfc7468", "alloc", "arithmetic", "dep:pkcs8", "pkcs8/pem", "dep:sec1", "sec1/pem"]
+pkcs8 = ["dep:pkcs8", "sec1"]
+sec1 = ["dep:sec1"]
+serde = ["dep:serdect", "alloc", "pkcs8", "dep:sec1", "sec1/serde"]
+std = ["alloc", "pkcs8?/std", "sec1?/std"]
+
+[rust]
+name = "elliptic_curve"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+array = { loaf = "crates-io/hybrid-array", version = "^0.4.13", features = ["zeroize"], default-features = false }
+base16ct = { loaf = "crates-io/base16ct", version = "^1" }
+bigint = { loaf = "crates-io/crypto-bigint", version = "^0.7.5", features = ["hybrid-array", "rand_core", "subtle", "zeroize"], default-features = false }
+common = { loaf = "crates-io/crypto-common", version = "^0.2", features = ["rand_core"] }
+digest = { loaf = "crates-io/digest", version = "^0.11", optional = true }
+ff = { loaf = "crates-io/ff", version = "^0.14", default-features = false, optional = true }
+group = { loaf = "crates-io/group", version = "^0.14", default-features = false, optional = true }
+hex-literal = { loaf = "crates-io/hex-literal", version = "^1", optional = true }
+hkdf = { loaf = "crates-io/hkdf", version = "^0.13", default-features = false, optional = true }
+pem-rfc7468 = { loaf = "crates-io/pem-rfc7468", version = "^1", features = ["alloc"], optional = true }
+pkcs8 = { loaf = "crates-io/pkcs8", version = "^0.11", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false }
+sec1 = { loaf = "crates-io/sec1", version = "^0.8", features = ["ctutils", "subtle", "zeroize"], optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.4", features = ["alloc"], default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2.6", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.7", default-features = false }

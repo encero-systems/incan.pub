@@ -1,0 +1,89 @@
+{
+  "about": {
+    "description": "Low level datetime primitives for the Jiff library.",
+    "documentation": "https://docs.rs/jiff-core",
+    "homepage": "https://github.com/BurntSushi/jiff/tree/master/crates/jiff-core",
+    "license": "Unlicense OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/BurntSushi/jiff"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5e52fe76043ccecc9005d2305ebaadf7d7fc0cc89ca6baa10a94d6bc68c7128c",
+    "package": "jiff-core",
+    "registry": "crates-io",
+    "version": "0.1.1"
+  },
+  "archive": "sha256:6359761b2b09a7be4cffbccb9ae4462698723b55ccbe5e1a89ade4b2b9e7b780",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.4.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/defmt",
+      "name": "defmt",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.21"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "defmt?/alloc"
+    ],
+    "arbitrary": [
+      "dep:arbitrary",
+      "std"
+    ],
+    "default": [
+      "std",
+      "tz-fat"
+    ],
+    "defmt": [
+      "dep:defmt"
+    ],
+    "logging": [
+      "dep:log"
+    ],
+    "std": [
+      "alloc",
+      "log?/std"
+    ],
+    "tz-fat": []
+  },
+  "id": "sha256:37a59e4be2fb1efec6dae92f29cf42a1fbf97d803ed9a8468f85435799d0bf66",
+  "kind": "adopt",
+  "manifest": "sha256:68244feba3aded797d0672c146e39aee0918ac49945f07772c1ce393aab2cf47",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "jiff_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "jiff-core",
+    "scope": "crates-io",
+    "version": "0.1.1"
+  }
+}

@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dtoa"
+version = "1.0.11"
+
+[project.features]
+no-panic = ["dep:no-panic"]
+
+[rust]
+name = "dtoa"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+no-panic = { loaf = "crates-io/no-panic", version = "^0.1", optional = true }

@@ -1,0 +1,216 @@
+{
+  "about": {
+    "description": "Date and time library. Fully interoperable with the standard library. Mostly compatible with #![no_std].",
+    "documentation": "",
+    "homepage": "https://time-rs.github.io",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/time-rs/time"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cdb87b95ec50ddfa440816d227a17b2ccbdda963a316a727fda0fc4334f7d134",
+    "package": "time",
+    "registry": "crates-io",
+    "version": "0.3.55"
+  },
+  "archive": "sha256:e7e93117f085504a0f42947045a08da7b641f03b1fd0cb2a1b3ddbc1ef9ef27f",
+  "at": "2026-10-07T07:41:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/deranged",
+      "name": "deranged",
+      "optional": false,
+      "req": "^0.5.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/js-sys",
+      "name": "js-sys",
+      "optional": true,
+      "req": "^0.3.58",
+      "target": "cfg(all(target_family = \"wasm\", not(any(target_os = \"emscripten\", target_os = \"wasi\"))))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.98",
+      "target": "cfg(target_family = \"unix\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num-conv",
+      "name": "num-conv",
+      "optional": false,
+      "req": "^0.2.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/num_threads",
+      "name": "num_threads",
+      "optional": true,
+      "req": "^0.1.2",
+      "target": "cfg(target_family = \"unix\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/powerfmt",
+      "name": "powerfmt",
+      "optional": false,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/quickcheck",
+      "name": "quickcheck",
+      "optional": true,
+      "req": "^1.0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand010",
+      "optional": true,
+      "req": "^0.10.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand08",
+      "optional": true,
+      "req": "^0.8.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand09",
+      "optional": true,
+      "req": "^0.9.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/time-core",
+      "name": "time-core",
+      "optional": false,
+      "req": "=0.1.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/time-macros",
+      "name": "time-macros",
+      "optional": true,
+      "req": "=0.2.32"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde_core?/alloc"
+    ],
+    "default": [
+      "std"
+    ],
+    "formatting": [
+      "std",
+      "time-macros?/formatting"
+    ],
+    "large-dates": [
+      "time-core/large-dates",
+      "time-macros?/large-dates"
+    ],
+    "local-offset": [
+      "std",
+      "dep:libc",
+      "dep:num_threads"
+    ],
+    "macros": [
+      "dep:time-macros"
+    ],
+    "parsing": [
+      "time-macros?/parsing"
+    ],
+    "quickcheck": [
+      "dep:quickcheck",
+      "alloc",
+      "deranged/quickcheck"
+    ],
+    "rand": [
+      "rand08",
+      "rand09",
+      "rand010"
+    ],
+    "rand010": [
+      "dep:rand010",
+      "deranged/rand010"
+    ],
+    "rand08": [
+      "dep:rand08",
+      "deranged/rand08"
+    ],
+    "rand09": [
+      "dep:rand09",
+      "deranged/rand09"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "time-macros?/serde",
+      "deranged/serde"
+    ],
+    "serde-human-readable": [
+      "serde",
+      "formatting",
+      "parsing"
+    ],
+    "serde-well-known": [
+      "serde",
+      "formatting",
+      "parsing"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "wasm-bindgen": [
+      "dep:js-sys"
+    ]
+  },
+  "id": "sha256:6fd8e322f360b16dfc78b1b0f20a98986b75c1246511fbcc41994a5dc4cbe615",
+  "kind": "adopt",
+  "manifest": "sha256:c0a648ca9e5fae19d519dcb7d96b3c883b4453770824039f4d3f665653e5d770",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "time",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "time",
+    "scope": "crates-io",
+    "version": "0.3.55"
+  }
+}

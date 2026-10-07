@@ -1,0 +1,144 @@
+{
+  "about": {
+    "description": "Allows for the creation of serialised Rust tests",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/palfrey/serial_test/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a6df5ed973ad8d834e09f824f9e9f449af6b9a3745f78dec7cc752770bd3bf11",
+    "package": "serial_test",
+    "registry": "crates-io",
+    "version": "4.0.1"
+  },
+  "archive": "sha256:bcb8f41bdbca19f5d88ed1871f9ab443c4d5cb2bb09d2f7cf39eb494bb410164",
+  "at": "2026-10-07T07:44:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/document-features",
+      "name": "document-features",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/env_logger",
+      "name": "env_logger",
+      "optional": true,
+      "req": ">=0.6.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/fslock",
+      "name": "fslock",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-executor",
+      "name": "futures-executor",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": ">=0.4.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.19"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/parking_lot",
+      "name": "parking_lot",
+      "optional": false,
+      "req": "^0.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serial_test_derive",
+      "name": "serial_test_derive",
+      "optional": false,
+      "req": "~4.0.1"
+    }
+  ],
+  "features": {
+    "async": [
+      "dep:futures-executor",
+      "dep:futures-util",
+      "serial_test_derive/async"
+    ],
+    "default": [
+      "logging",
+      "async"
+    ],
+    "docsrs": [
+      "dep:document-features"
+    ],
+    "file_locks": [
+      "dep:fslock"
+    ],
+    "logging": [
+      "dep:log"
+    ],
+    "test_logging": [
+      "logging",
+      "dep:env_logger",
+      "serial_test_derive/test_logging"
+    ]
+  },
+  "id": "sha256:73d71505ff22ab708e0418e0aaae1153f12c2beb0d27438b7925e1ecc4e704a7",
+  "kind": "adopt",
+  "manifest": "sha256:f31c8f6dac14079239ba52b86c442c99e7ec61597d0879e33b6c0365b6fcfe62",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "serial_test",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "serial_test",
+    "scope": "crates-io",
+    "version": "4.0.1"
+  }
+}

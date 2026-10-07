@@ -1,0 +1,38 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rustls-platform-verifier"
+version = "0.7.1"
+
+[project.features]
+android_logger = ["dep:android_logger"]
+base64 = ["dep:base64"]
+cert-logging = ["base64"]
+dbg = []
+docsrs = ["jni", "once_cell"]
+ffi-testing = ["android_logger", "rustls/aws-lc-rs"]
+jni = ["dep:jni"]
+once_cell = ["dep:once_cell"]
+
+[rust]
+name = "rustls_platform_verifier"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+android_logger = { loaf = "crates-io/android_logger", version = "^0.15", optional = true, target = "cfg(target_os = \"android\")" }
+base64 = { loaf = "crates-io/base64", version = "^0.22", optional = true }
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.10", target = "cfg(any(target_vendor = \"apple\"))" }
+core-foundation-sys = { loaf = "crates-io/core-foundation-sys", version = "^0.8", target = "cfg(any(target_vendor = \"apple\"))" }
+jni = [{ loaf = "crates-io/jni", version = "^0.22", default-features = false, target = "cfg(target_os = \"android\")" }, { loaf = "crates-io/jni", version = "^0.22.4", default-features = false, optional = true }]
+log = { loaf = "crates-io/log", version = "^0.4" }
+once_cell = [{ loaf = "crates-io/once_cell", version = "^1.9", target = "cfg(target_os = \"android\")" }, { loaf = "crates-io/once_cell", version = "^1.9", optional = true }]
+rustls = { loaf = "crates-io/rustls", version = "^0.23.27", features = ["std"], default-features = false }
+rustls-native-certs = { loaf = "crates-io/rustls-native-certs", version = "^0.8", target = "cfg(all(unix, not(target_os = \"android\"), not(target_vendor = \"apple\"), not(target_arch = \"wasm32\")))" }
+rustls-platform-verifier-android = { loaf = "crates-io/rustls-platform-verifier-android", version = "^0.2.0", target = "cfg(target_os = \"android\")" }
+security-framework = { loaf = "crates-io/security-framework", version = "^3.5.0", target = "cfg(any(target_vendor = \"apple\"))" }
+security-framework-sys = { loaf = "crates-io/security-framework-sys", version = "^2.15", target = "cfg(any(target_vendor = \"apple\"))" }
+webpki = [{ loaf = "crates-io/rustls-webpki", version = "^0.103", default-features = false, target = "cfg(all(unix, not(target_os = \"android\"), not(target_vendor = \"apple\"), not(target_arch = \"wasm32\")))" }, { loaf = "crates-io/rustls-webpki", version = "^0.103", default-features = false, target = "cfg(target_arch = \"wasm32\")" }, { loaf = "crates-io/rustls-webpki", version = "^0.103", default-features = false, target = "cfg(target_os = \"android\")" }]
+webpki-root-certs = { loaf = "crates-io/webpki-root-certs", version = "^1", target = "cfg(target_arch = \"wasm32\")" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52.0, <0.62.0", features = ["Win32_Foundation", "Win32_Security_Cryptography"], default-features = false, target = "cfg(windows)" }

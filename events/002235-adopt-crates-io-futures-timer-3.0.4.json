@@ -1,0 +1,71 @@
+{
+  "about": {
+    "description": "Timeouts for futures.",
+    "documentation": "https://docs.rs/futures-timer",
+    "homepage": "https://github.com/async-rs/futures-timer",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/async-rs/futures-timer"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:af43fadb8a98512d547e37b4e92e0ced13e205c061b87b4623eff01d918d6968",
+    "package": "futures-timer",
+    "registry": "crates-io",
+    "version": "3.0.4"
+  },
+  "archive": "sha256:28003d294689d8c76c3955f2e379a54eec8bf845b48df3e86a952c769be532f3",
+  "at": "2026-10-07T07:43:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "futures"
+      ],
+      "loaf": "crates-io/gloo-timers",
+      "name": "gloo-timers",
+      "optional": true,
+      "req": "^0.4.0",
+      "target": "cfg(target_arch = \"wasm32\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/send_wrapper",
+      "name": "send_wrapper",
+      "optional": true,
+      "req": "^0.6.0",
+      "target": "cfg(target_arch = \"wasm32\")"
+    }
+  ],
+  "features": {
+    "gloo-timers": [
+      "dep:gloo-timers"
+    ],
+    "send_wrapper": [
+      "dep:send_wrapper"
+    ],
+    "wasm-bindgen": [
+      "gloo-timers",
+      "send_wrapper"
+    ]
+  },
+  "id": "sha256:8df69ce97e5f6333d3a38e38819d75683002782ed86b44b6b8da7b62797a2984",
+  "kind": "adopt",
+  "manifest": "sha256:a8484660013eca33180a2026e91bf131ded461dc05b13fdfa11268ce950366ff",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "futures_timer",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "futures-timer",
+    "scope": "crates-io",
+    "version": "3.0.4"
+  }
+}

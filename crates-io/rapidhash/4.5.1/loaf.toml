@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rapidhash"
+version = "4.5.1"
+
+[project.features]
+default = ["std"]
+getrandom_03 = ["dep:getrandom_03"]
+getrandom_04 = ["dep:getrandom_04"]
+nightly = []
+rand = ["std", "getrandom_03"]
+rng = ["dep:rand_core"]
+std = []
+unsafe = []
+
+[rust]
+name = "rapidhash"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+getrandom_03 = { loaf = "crates-io/getrandom", version = "^0.3", default-features = false, optional = true }
+getrandom_04 = { loaf = "crates-io/getrandom", version = "^0.4", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.9", default-features = false, optional = true }
+rustversion = { loaf = "crates-io/rustversion", version = "^1.0" }

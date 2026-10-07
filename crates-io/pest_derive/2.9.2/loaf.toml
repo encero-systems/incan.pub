@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pest_derive"
+version = "2.9.2"
+
+[project.features]
+default = ["std"]
+grammar-extras = ["pest_generator/grammar-extras"]
+std = ["pest/std", "pest_generator/std"]
+
+[rust]
+name = "pest_derive"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+pest = { loaf = "crates-io/pest", version = "^2.9.2", default-features = false }
+pest_generator = { loaf = "crates-io/pest_generator", version = "^2.9.2", default-features = false }

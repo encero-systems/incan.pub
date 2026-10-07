@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rand_xoshiro"
+version = "0.8.1"
+
+[project.features]
+serde = ["dep:serde"]
+
+[rust]
+name = "rand_xoshiro"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10.0" }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], optional = true }

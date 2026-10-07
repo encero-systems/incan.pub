@@ -1,0 +1,39 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ed25519-dalek"
+version = "3.0.0"
+
+[project.features]
+alloc = ["curve25519-dalek/alloc", "ed25519/alloc", "dep:signature", "signature/alloc", "serde?/alloc", "zeroize?/alloc"]
+batch = ["alloc", "dep:keccak", "rand_core", "strobe-rs"]
+default = ["fast", "zeroize"]
+digest = ["dep:signature", "signature/digest"]
+fast = ["curve25519-dalek/precomputed-tables"]
+hazmat = []
+legacy_compatibility = ["curve25519-dalek/legacy_compatibility"]
+pem = ["alloc", "ed25519/pem", "pkcs8"]
+pkcs8 = ["ed25519/pkcs8"]
+rand_core = ["dep:rand_core", "curve25519-dalek/rand_core", "dep:signature", "signature/rand_core"]
+serde = ["dep:serde", "ed25519/serde"]
+signature = ["dep:signature"]
+strobe-rs = ["dep:strobe-rs"]
+zeroize = ["dep:zeroize", "curve25519-dalek/zeroize"]
+
+[rust]
+name = "ed25519_dalek"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+curve25519-dalek = { loaf = "crates-io/curve25519-dalek", version = "^5.0.0", features = ["digest"], default-features = false }
+ed25519 = { loaf = "crates-io/ed25519", version = "^3", default-features = false }
+keccak = { loaf = "crates-io/keccak", version = "^0.2", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+sha2 = { loaf = "crates-io/sha2", version = "^0.11", default-features = false }
+signature = { loaf = "crates-io/signature", version = "^3", default-features = false, optional = true }
+strobe-rs = { loaf = "crates-io/strobe-rs", version = "^0.13", optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2.3.0", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.5", default-features = false, optional = true }

@@ -1,0 +1,302 @@
+{
+  "about": {
+    "description": "The SDK for the OpenTelemetry metrics collection and distributed tracing framework",
+    "documentation": "",
+    "homepage": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-sdk",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/open-telemetry/opentelemetry-rust/tree/main/opentelemetry-sdk"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cb39533d9d1c912123efd7d41d7e0c29d16917b60ce15b4c8d87cb1af7f67520",
+    "package": "opentelemetry_sdk",
+    "registry": "crates-io",
+    "version": "0.33.0"
+  },
+  "archive": "sha256:3356206d60805a67d09f3eb484c6dd47793bfa9818e6f0383f3d17b7ae8efadb",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-channel",
+      "name": "futures-channel",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-executor",
+      "name": "futures-executor",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "async-await-macro",
+        "sink",
+        "std"
+      ],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": true,
+      "req": "^1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry",
+      "name": "opentelemetry",
+      "optional": false,
+      "req": "^0.33"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/opentelemetry-http",
+      "name": "opentelemetry-http",
+      "optional": true,
+      "req": "^0.33"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/percent-encoding",
+      "name": "percent-encoding",
+      "optional": true,
+      "req": "^2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "fallback"
+      ],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(not(target_has_atomic = \"64\"))"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "os_rng",
+        "small_rng",
+        "std",
+        "std_rng",
+        "thread_rng"
+      ],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive",
+        "rc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio-stream",
+      "name": "tokio-stream",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/url",
+      "name": "url",
+      "optional": true,
+      "req": "^2.5"
+    }
+  ],
+  "features": {
+    "bench_profiling": [],
+    "default": [
+      "trace",
+      "metrics",
+      "logs",
+      "internal-logs"
+    ],
+    "experimental_async_runtime": [
+      "dep:futures-channel",
+      "dep:futures-executor",
+      "dep:futures-util",
+      "dep:thiserror"
+    ],
+    "experimental_logs_batch_log_processor_with_async_runtime": [
+      "logs",
+      "experimental_async_runtime"
+    ],
+    "experimental_metrics_bound_instruments": [
+      "metrics",
+      "opentelemetry/experimental_metrics_bound_instruments"
+    ],
+    "experimental_metrics_custom_reader": [
+      "metrics"
+    ],
+    "experimental_metrics_disable_name_validation": [
+      "metrics"
+    ],
+    "experimental_metrics_periodicreader_with_async_runtime": [
+      "metrics",
+      "experimental_async_runtime"
+    ],
+    "experimental_trace_batch_span_processor_with_async_runtime": [
+      "dep:tokio",
+      "tokio/sync",
+      "trace",
+      "experimental_async_runtime"
+    ],
+    "http": [
+      "dep:http"
+    ],
+    "internal-logs": [
+      "opentelemetry/internal-logs"
+    ],
+    "jaeger_remote_sampler": [
+      "trace",
+      "opentelemetry-http",
+      "http",
+      "serde",
+      "serde_json",
+      "url",
+      "experimental_async_runtime"
+    ],
+    "logs": [
+      "opentelemetry/logs",
+      "dep:futures-channel",
+      "dep:futures-executor",
+      "dep:futures-util"
+    ],
+    "metrics": [
+      "opentelemetry/metrics",
+      "dep:futures-channel",
+      "dep:futures-executor",
+      "dep:futures-util",
+      "dep:thiserror"
+    ],
+    "opentelemetry-http": [
+      "dep:opentelemetry-http"
+    ],
+    "percent-encoding": [
+      "dep:percent-encoding"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "rt-tokio": [
+      "dep:tokio",
+      "tokio/rt",
+      "tokio/time",
+      "tokio-stream",
+      "experimental_async_runtime"
+    ],
+    "rt-tokio-current-thread": [
+      "dep:tokio",
+      "tokio/rt",
+      "tokio/time",
+      "tokio-stream",
+      "experimental_async_runtime"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "spec_unstable_metrics_views": [
+      "metrics"
+    ],
+    "testing": [
+      "opentelemetry/testing",
+      "trace",
+      "metrics",
+      "logs",
+      "dep:tokio",
+      "tokio/sync"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "tokio-stream": [
+      "dep:tokio-stream"
+    ],
+    "trace": [
+      "opentelemetry/trace",
+      "rand",
+      "percent-encoding",
+      "dep:futures-channel",
+      "dep:futures-executor",
+      "dep:futures-util",
+      "dep:thiserror"
+    ],
+    "url": [
+      "dep:url"
+    ]
+  },
+  "id": "sha256:afc482708274b369585bda05d60fa88fe62ba2b697109c44cbaf98d8017e42ea",
+  "kind": "adopt",
+  "manifest": "sha256:23532b52b4fab1297264c642224dbc92ca10447797e538ac028a7983228e02b0",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "opentelemetry_sdk",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "opentelemetry_sdk",
+    "scope": "crates-io",
+    "version": "0.33.0"
+  }
+}

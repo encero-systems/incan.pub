@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ark-serialize"
+version = "0.6.0"
+
+[project.features]
+ark-serialize-derive = ["dep:ark-serialize-derive"]
+default = []
+derive = ["ark-serialize-derive"]
+parallel = ["rayon"]
+rayon = ["dep:rayon"]
+serde = ["dep:serde", "dep:serde-encoded-bytes", "dep:serde_with"]
+serde_with = ["serde", "dep:serde_with"]
+std = ["ark-std/std", "serde_with?/std"]
+
+[rust]
+name = "ark_serialize"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ark-serialize-derive = { loaf = "crates-io/ark-serialize-derive", version = "^0.6.0", optional = true }
+ark-std = { loaf = "crates-io/ark-std", version = "^0.6.0", default-features = false }
+digest = { loaf = "crates-io/digest", version = "^0.10", default-features = false }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", default-features = false }
+rayon = { loaf = "crates-io/rayon", version = "^1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", optional = true }
+serde-encoded-bytes = { loaf = "crates-io/serde-encoded-bytes", version = "^0.2", features = ["base64"], optional = true }
+serde_with = { loaf = "crates-io/serde_with", version = "^3.12", default-features = false, optional = true }

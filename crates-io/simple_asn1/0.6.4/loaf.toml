@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/simple_asn1"
+version = "0.6.4"
+
+[rust]
+name = "simple_asn1"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", default-features = false }
+thiserror = { loaf = "crates-io/thiserror", version = "^2", default-features = false }
+time = { loaf = "crates-io/time", version = "^0.3.47", features = ["formatting", "macros", "parsing"], default-features = false }

@@ -1,0 +1,92 @@
+{
+  "about": {
+    "description": "Defines the logical types for arrow arrays",
+    "documentation": "",
+    "homepage": "https://github.com/apache/arrow-rs",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/apache/arrow-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f85a9a58cd03560526b0066487574aacb9008e413504fa0ee23d61141e96c338",
+    "package": "arrow-schema",
+    "registry": "crates-io",
+    "version": "60.0.0"
+  },
+  "archive": "sha256:76dffc3492f93c62f08b54725a7bb9e7a1a158a970c1a6a9050eaac7acc8acdb",
+  "at": "2026-10-07T07:45:01Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rc",
+        "std"
+      ],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "bitflags": [
+      "dep:bitflags"
+    ],
+    "canonical_extension_types": [
+      "dep:serde_core",
+      "dep:serde_json"
+    ],
+    "ffi": [
+      "bitflags"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "dep:serde"
+    ]
+  },
+  "id": "sha256:f63eab1c3a981f646ce4c1857e666a216ef6d40b7aebac3703efc1df1b35891d",
+  "kind": "adopt",
+  "manifest": "sha256:dfd88dea6df492e56c5b864dcdafaf14d859a3791e933cbad19737ea09930801",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "arrow_schema",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "arrow-schema",
+    "scope": "crates-io",
+    "version": "60.0.0"
+  }
+}

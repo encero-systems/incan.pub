@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ratatui-core"
+version = "0.1.2"
+
+[project.features]
+anstyle = ["dep:anstyle"]
+default = []
+document-features = ["dep:document-features"]
+layout-cache = ["dep:critical-section"]
+palette = ["dep:palette"]
+portable-atomic = ["kasuari/portable-atomic"]
+scrolling-regions = []
+serde = ["bitflags/serde", "compact_str/serde", "dep:serde"]
+std = ["bitflags/std", "compact_str/std", "itertools/use_std", "kasuari/std", "palette?/std", "serde?/std", "strum/std", "thiserror/std", "unicode-truncate/std"]
+underline-color = []
+
+[rust]
+name = "ratatui_core"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anstyle = { loaf = "crates-io/anstyle", version = "^1", optional = true }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.12" }
+compact_str = { loaf = "crates-io/compact_str", version = "^0.9", default-features = false }
+critical-section = { loaf = "crates-io/critical-section", version = "^1.2", optional = true }
+document-features = { loaf = "crates-io/document-features", version = "^0.2", optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14", features = ["use_alloc"], default-features = false }
+kasuari = { loaf = "crates-io/kasuari", version = "^0.4", default-features = false }
+lru = { loaf = "crates-io/lru", version = "^0.18" }
+palette = { loaf = "crates-io/palette", version = "^0.7.6", features = ["libm"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], default-features = false, optional = true }
+strum = { loaf = "crates-io/strum", version = "^0.28", features = ["derive"], default-features = false }
+thiserror = { loaf = "crates-io/thiserror", version = "^2", default-features = false }
+unicode-segmentation = { loaf = "crates-io/unicode-segmentation", version = "^1" }
+unicode-truncate = { loaf = "crates-io/unicode-truncate", version = "^2", default-features = false }
+unicode-width = { loaf = "crates-io/unicode-width", version = ">=0.2.0" }

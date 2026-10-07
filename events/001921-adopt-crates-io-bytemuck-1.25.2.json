@@ -1,0 +1,114 @@
+{
+  "about": {
+    "description": "A crate for mucking around with piles of bytes.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Lokathor/bytemuck"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:95832e849adfb21180ccb6826a99da14e5d266ae5c2e668e1602cf234f153797",
+    "package": "bytemuck",
+    "registry": "crates-io",
+    "version": "1.25.2"
+  },
+  "archive": "sha256:fd0c3c9d63090e3bb68b87502c59e74f69d5df910ffbf55447322cdbef738782",
+  "at": "2026-10-07T07:42:26Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytemuck_derive",
+      "name": "bytemuck_derive",
+      "optional": true,
+      "req": "^1.10.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustversion",
+      "name": "rustversion",
+      "optional": true,
+      "req": "^1.0.22"
+    }
+  ],
+  "features": {
+    "aarch64_simd": [],
+    "align_offset": [],
+    "alloc_uninit": [],
+    "avx512_simd": [],
+    "bytemuck_derive": [
+      "dep:bytemuck_derive"
+    ],
+    "const_zeroed": [],
+    "derive": [
+      "bytemuck_derive"
+    ],
+    "extern_crate_alloc": [],
+    "extern_crate_std": [
+      "extern_crate_alloc"
+    ],
+    "impl_core_error": [],
+    "latest_stable_rust": [
+      "aarch64_simd",
+      "avx512_simd",
+      "align_offset",
+      "alloc_uninit",
+      "const_zeroed",
+      "derive",
+      "impl_core_error",
+      "min_const_generics",
+      "must_cast",
+      "must_cast_extra",
+      "pod_saturating",
+      "track_caller",
+      "transparentwrapper_extra",
+      "wasm_simd",
+      "zeroable_atomics",
+      "zeroable_maybe_uninit",
+      "zeroable_unwind_fn"
+    ],
+    "min_const_generics": [],
+    "must_cast": [],
+    "must_cast_extra": [
+      "must_cast"
+    ],
+    "nightly_docs": [],
+    "nightly_float": [],
+    "nightly_portable_simd": [
+      "rustversion"
+    ],
+    "nightly_stdsimd": [],
+    "pod_saturating": [],
+    "rustversion": [
+      "dep:rustversion"
+    ],
+    "track_caller": [],
+    "transparentwrapper_extra": [],
+    "unsound_ptr_pod_impl": [],
+    "wasm_simd": [],
+    "zeroable_atomics": [],
+    "zeroable_maybe_uninit": [],
+    "zeroable_unwind_fn": []
+  },
+  "id": "sha256:ad77d365d8b4c525ae9834e5f2a4bf3dc5d3834c73db97f87e693c524ddcc4dd",
+  "kind": "adopt",
+  "manifest": "sha256:15060663bf04e83f25312fe46526849ef0a04cf856c67478fcac7b353cc7a5ef",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "bytemuck",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bytemuck",
+    "scope": "crates-io",
+    "version": "1.25.2"
+  }
+}

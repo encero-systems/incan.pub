@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rand_distr"
+version = "0.6.0"
+
+[project.features]
+alloc = ["rand/alloc"]
+default = ["std"]
+serde = ["dep:serde", "dep:serde_with", "rand/serde"]
+std = ["alloc", "rand/std"]
+std_math = ["num-traits/std"]
+
+[rust]
+name = "rand_distr"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.9", features = ["libm"], default-features = false }
+rand = { loaf = "crates-io/rand", version = "^0.10.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.166", features = ["derive"], optional = true }
+serde_with = { loaf = "crates-io/serde_with", version = "^3", optional = true }

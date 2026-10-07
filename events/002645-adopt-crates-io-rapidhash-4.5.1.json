@@ -1,0 +1,92 @@
+{
+  "about": {
+    "description": "An extremely fast, high quality, platform-independent hashing algorithm.",
+    "documentation": "https://docs.rs/rapidhash",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hoxxep/rapidhash"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5da7e78a036ce858e8d55b7e7dc8ba3a88b78350fd2155d3591bbd966b58589e",
+    "package": "rapidhash",
+    "registry": "crates-io",
+    "version": "4.5.1"
+  },
+  "archive": "sha256:3755737ff817f78958b37acfcc0bfd4ca154c9c73a508bf249060efd359553d8",
+  "at": "2026-10-07T07:45:03Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom_03",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom_04",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustversion",
+      "name": "rustversion",
+      "optional": false,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "getrandom_03": [
+      "dep:getrandom_03"
+    ],
+    "getrandom_04": [
+      "dep:getrandom_04"
+    ],
+    "nightly": [],
+    "rand": [
+      "std",
+      "getrandom_03"
+    ],
+    "rng": [
+      "dep:rand_core"
+    ],
+    "std": [],
+    "unsafe": []
+  },
+  "id": "sha256:4edfa77e8323b7e93f8a59ddd1fa1a137035b98499be5ba79b5f0490a6ba8985",
+  "kind": "adopt",
+  "manifest": "sha256:2a25daf3b4bdcbd5b56c437299935c5570285d670fafbb1bf770a73a84610964",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "rapidhash",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rapidhash",
+    "scope": "crates-io",
+    "version": "4.5.1"
+  }
+}

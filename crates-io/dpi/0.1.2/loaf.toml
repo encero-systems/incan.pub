@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dpi"
+version = "0.1.2"
+
+[project.features]
+default = ["std"]
+mint = ["dep:mint"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "dpi"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+mint = { loaf = "crates-io/mint", version = "^0.5.6", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["serde_derive"], optional = true }

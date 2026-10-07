@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aead"
+version = "0.6.1"
+
+[project.features]
+alloc = []
+arrayvec = ["dep:arrayvec"]
+blobby = ["dep:blobby"]
+bytes = ["dep:bytes"]
+default = ["rand_core"]
+dev = ["blobby", "alloc"]
+getrandom = ["common/getrandom", "rand_core"]
+rand_core = ["common/rand_core"]
+
+[rust]
+name = "aead"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7", default-features = false, optional = true }
+blobby = { loaf = "crates-io/blobby", version = "^0.4", optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.11.1", default-features = false, optional = true }
+common = { loaf = "crates-io/crypto-common", version = "^0.2" }
+inout = { loaf = "crates-io/inout", version = "^0.2.2" }

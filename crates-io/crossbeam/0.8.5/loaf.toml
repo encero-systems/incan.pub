@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crossbeam"
+version = "0.8.5"
+
+[project.features]
+alloc = ["dep:crossbeam-epoch", "crossbeam-epoch/alloc", "dep:crossbeam-queue", "crossbeam-queue/alloc"]
+crossbeam-channel = ["dep:crossbeam-channel"]
+crossbeam-deque = ["dep:crossbeam-deque"]
+crossbeam-epoch = ["dep:crossbeam-epoch"]
+crossbeam-queue = ["dep:crossbeam-queue"]
+default = ["std"]
+nightly = ["dep:crossbeam-epoch", "crossbeam-epoch/nightly", "crossbeam-utils/nightly", "dep:crossbeam-queue", "crossbeam-queue/nightly"]
+std = ["alloc", "dep:crossbeam-channel", "crossbeam-channel/std", "dep:crossbeam-deque", "crossbeam-deque/std", "dep:crossbeam-epoch", "crossbeam-epoch/std", "dep:crossbeam-queue", "crossbeam-queue/std", "crossbeam-utils/std"]
+
+[rust]
+name = "crossbeam"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+crossbeam-channel = { loaf = "crates-io/crossbeam-channel", version = "^0.5.10", default-features = false, optional = true }
+crossbeam-deque = { loaf = "crates-io/crossbeam-deque", version = "^0.8.4", default-features = false, optional = true }
+crossbeam-epoch = { loaf = "crates-io/crossbeam-epoch", version = "^0.9.17", default-features = false, optional = true }
+crossbeam-queue = { loaf = "crates-io/crossbeam-queue", version = "^0.3.10", default-features = false, optional = true }
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.18", default-features = false }

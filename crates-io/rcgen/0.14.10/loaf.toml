@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rcgen"
+version = "0.14.10"
+
+[project.features]
+aws_lc_rs = ["crypto", "dep:aws-lc-rs", "aws-lc-rs/aws-lc-sys", "x509-parser?/verify-aws"]
+aws_lc_rs_unstable = ["aws_lc_rs"]
+crypto = []
+default = ["crypto", "pem", "ring"]
+fips = ["crypto", "dep:aws-lc-rs", "aws-lc-rs/fips"]
+pem = ["dep:pem"]
+ring = ["crypto", "dep:ring", "x509-parser?/verify"]
+x509-parser = ["dep:x509-parser"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "rcgen"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+aws-lc-rs = { loaf = "crates-io/aws-lc-rs", version = "^1.18", default-features = false, optional = true }
+pem = { loaf = "crates-io/pem", version = "^4", optional = true }
+pki-types = { loaf = "crates-io/rustls-pki-types", version = "^1.4.1" }
+ring = { loaf = "crates-io/ring", version = "^0.17", optional = true }
+time = { loaf = "crates-io/time", version = "^0.3.6", default-features = false }
+x509-parser = { loaf = "crates-io/x509-parser", version = "^0.18", optional = true }
+yasna = { loaf = "crates-io/yasna", version = "^0.6", features = ["std", "time"] }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.2", optional = true }

@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/instant"
+version = "0.1.13"
+
+[project.features]
+inaccurate = []
+js-sys = ["dep:js-sys"]
+now = []
+stdweb = ["dep:stdweb"]
+wasm-bindgen = ["js-sys", "wasm-bindgen_rs", "web-sys"]
+wasm-bindgen_rs = ["dep:wasm-bindgen_rs"]
+web-sys = ["dep:web-sys"]
+
+[rust]
+name = "instant"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+js-sys = [{ loaf = "crates-io/js-sys", version = "^0.3", optional = true, target = "asmjs-unknown-emscripten" }, { loaf = "crates-io/js-sys", version = "^0.3", optional = true, target = "wasm32-unknown-emscripten" }, { loaf = "crates-io/js-sys", version = "^0.3", optional = true, target = "wasm32-unknown-unknown" }]
+stdweb = [{ loaf = "crates-io/stdweb", version = "^0.4", optional = true, target = "asmjs-unknown-emscripten" }, { loaf = "crates-io/stdweb", version = "^0.4", optional = true, target = "wasm32-unknown-emscripten" }, { loaf = "crates-io/stdweb", version = "^0.4", optional = true, target = "wasm32-unknown-unknown" }]
+wasm-bindgen_rs = [{ loaf = "crates-io/wasm-bindgen", version = "^0.2", optional = true, target = "asmjs-unknown-emscripten" }, { loaf = "crates-io/wasm-bindgen", version = "^0.2", optional = true, target = "wasm32-unknown-emscripten" }, { loaf = "crates-io/wasm-bindgen", version = "^0.2", optional = true, target = "wasm32-unknown-unknown" }]
+web-sys = [{ loaf = "crates-io/web-sys", version = "^0.3", features = ["Performance", "PerformanceTiming", "Window"], optional = true, target = "asmjs-unknown-emscripten" }, { loaf = "crates-io/web-sys", version = "^0.3", features = ["Performance", "PerformanceTiming", "Window"], optional = true, target = "wasm32-unknown-emscripten" }, { loaf = "crates-io/web-sys", version = "^0.3", features = ["Performance", "PerformanceTiming", "Window"], optional = true, target = "wasm32-unknown-unknown" }]

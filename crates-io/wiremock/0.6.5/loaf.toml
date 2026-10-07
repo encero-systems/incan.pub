@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wiremock"
+version = "0.6.5"
+
+[rust]
+name = "wiremock"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+assert-json-diff = { loaf = "crates-io/assert-json-diff", version = "^2.0.2" }
+base64 = { loaf = "crates-io/base64", version = "^0.22" }
+deadpool = { loaf = "crates-io/deadpool", version = "^0.12.2" }
+futures = { loaf = "crates-io/futures", version = "^0.3.31" }
+http = { loaf = "crates-io/http", version = "^1.3" }
+http-body-util = { loaf = "crates-io/http-body-util", version = "^0.1" }
+hyper = { loaf = "crates-io/hyper", version = "^1.7", features = ["full"] }
+hyper-util = { loaf = "crates-io/hyper-util", version = "^0.1", features = ["http1", "http2", "server", "tokio"] }
+log = { loaf = "crates-io/log", version = "^0.4" }
+once_cell = { loaf = "crates-io/once_cell", version = "^1" }
+regex = { loaf = "crates-io/regex", version = "^1" }
+serde = { loaf = "crates-io/serde", version = "^1" }
+serde_json = { loaf = "crates-io/serde_json", version = "^1" }
+tokio = { loaf = "crates-io/tokio", version = "^1.47.1", features = ["macros", "net", "rt"] }
+url = { loaf = "crates-io/url", version = "^2.5" }

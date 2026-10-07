@@ -1,0 +1,71 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rust_decimal"
+version = "1.43.0"
+
+[project.features]
+align16 = []
+borsh = ["dep:borsh", "std"]
+bytemuck = ["c-repr", "dep:bytemuck", "dep:bytemuck_derive"]
+c-repr = []
+db-diesel-mysql = ["dep:diesel", "diesel/mysql_backend", "std"]
+db-diesel-postgres = ["dep:diesel", "diesel/postgres_backend", "std"]
+db-diesel2-mysql = ["db-diesel-mysql"]
+db-diesel2-postgres = ["db-diesel-postgres"]
+db-postgres = ["dep:bytes", "dep:postgres-types", "std"]
+db-tokio-postgres = ["dep:bytes", "dep:postgres-types", "std"]
+default = ["serde", "std"]
+diesel = ["dep:diesel"]
+legacy-ops = []
+macros = ["dep:rust_decimal_macros"]
+maths = []
+maths-nopanic = ["maths"]
+ndarray = ["dep:ndarray"]
+proptest = ["dep:proptest"]
+rand = ["dep:rand"]
+rand-0_9 = ["dep:rand-0_9"]
+rocket-traits = ["dep:rocket", "std"]
+rust-fuzz = ["dep:arbitrary"]
+serde = ["dep:serde", "wasm-bindgen?/serde"]
+serde-arbitrary-precision = ["serde-with-arbitrary-precision"]
+serde-bincode = ["serde-str"]
+serde-float = ["serde-with-float"]
+serde-str = ["serde-with-str"]
+serde-with-arbitrary-precision = ["serde", "dep:serde_json", "serde_json/arbitrary_precision", "serde_json/std", "zmij"]
+serde-with-float = ["serde"]
+serde-with-str = ["serde"]
+serde_json = ["dep:serde_json"]
+std = ["arrayvec/std", "wasm-bindgen?/std", "borsh?/std", "bytes?/std", "rand?/std", "rand-0_9?/std", "serde?/std", "serde_json?/std"]
+tokio-pg = ["db-tokio-postgres"]
+tokio-postgres = ["dep:tokio-postgres"]
+wasm = ["dep:wasm-bindgen"]
+zmij = ["dep:zmij"]
+
+[rust]
+name = "rust_decimal"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0", default-features = false, optional = true }
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7", default-features = false }
+borsh = { loaf = "crates-io/borsh", version = "^1.1.1", features = ["derive", "unstable__schema"], default-features = false, optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.17.1", default-features = false, optional = true }
+bytemuck_derive = { loaf = "crates-io/bytemuck_derive", version = "^1.7.1", default-features = false, optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1.0", default-features = false, optional = true }
+diesel = { loaf = "crates-io/diesel", version = "^2.2.3", default-features = false, optional = true }
+ndarray = { loaf = "crates-io/ndarray", version = "^0.15.6", default-features = false, optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", features = ["i128"], default-features = false }
+postgres-types = { loaf = "crates-io/postgres-types", version = "^0.2", default-features = false, optional = true }
+proptest = { loaf = "crates-io/proptest", version = "^1.0", features = ["std"], default-features = false, optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.8.6", default-features = false, optional = true }
+rand-0_9 = { loaf = "crates-io/rand", version = "^0.9", default-features = false, optional = true }
+rocket = { loaf = "crates-io/rocket", version = "^0.5.0-rc.3", default-features = false, optional = true }
+rust_decimal_macros = { loaf = "crates-io/rust_decimal_macros", version = "^1.37.0", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", default-features = false, optional = true }
+tokio-postgres = { loaf = "crates-io/tokio-postgres", version = "^0.7", default-features = false, optional = true }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2", default-features = false, optional = true, target = "cfg(target_arch = \"wasm32\")" }
+zmij = { loaf = "crates-io/zmij", version = "^1.0", default-features = false, optional = true }

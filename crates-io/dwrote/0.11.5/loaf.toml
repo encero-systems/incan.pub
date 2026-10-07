@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dwrote"
+version = "0.11.5"
+
+[project.features]
+default = ["serde_serialization"]
+serde = ["dep:serde"]
+serde_derive = ["dep:serde_derive"]
+serde_serialization = ["serde", "serde_derive"]
+
+[rust]
+name = "dwrote"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+lazy_static = { loaf = "crates-io/lazy_static", version = "^1" }
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+serde = { loaf = "crates-io/serde", version = "^1.0", optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0", optional = true }
+winapi = { loaf = "crates-io/winapi", version = "^0.3.6", features = ["dwrite", "dwrite_1", "dwrite_3", "libloaderapi", "unknwnbase", "winnls", "winnt"] }
+wio = { loaf = "crates-io/wio", version = "^0.2" }

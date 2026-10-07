@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/arrow-csv"
+version = "60.0.0"
+
+[rust]
+name = "arrow_csv"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrow-array = { loaf = "crates-io/arrow-array", version = "^60.0.0" }
+arrow-cast = { loaf = "crates-io/arrow-cast", version = "^60.0.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^60.0.0" }
+chrono = { loaf = "crates-io/chrono", version = "^0.4.40", features = ["clock"], default-features = false }
+csv = { loaf = "crates-io/csv", version = "^1.1", default-features = false }
+csv-core = { loaf = "crates-io/csv-core", version = "^0.1" }
+regex = { loaf = "crates-io/regex", version = "^1.7.0", features = ["perf", "std", "unicode"], default-features = false }

@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pretty_assertions"
+version = "1.4.1"
+
+[project.features]
+alloc = []
+default = ["std"]
+std = []
+unstable = []
+
+[rust]
+name = "pretty_assertions"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+diff = { loaf = "crates-io/diff", version = "^0.1.12" }
+yansi = { loaf = "crates-io/yansi", version = "^1.0.1" }

@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pem"
+version = "4.0.0"
+
+[project.features]
+default = ["std"]
+serde = ["dep:serde_core"]
+std = ["base64/std", "serde_core?/std"]
+
+[rust]
+name = "pem"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.23.0", features = ["alloc"], default-features = false }
+serde_core = { loaf = "crates-io/serde_core", version = "^1", default-features = false, optional = true }

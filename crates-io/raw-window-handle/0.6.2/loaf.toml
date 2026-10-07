@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/raw-window-handle"
+version = "0.6.2"
+
+[project.features]
+alloc = []
+std = ["alloc"]
+wasm-bindgen = ["dep:wasm-bindgen"]
+wasm-bindgen-0-2 = ["wasm-bindgen", "std"]
+
+[rust]
+name = "raw_window_handle"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.87", features = ["std"], default-features = false, optional = true, target = "cfg(target_family = \"wasm\")" }

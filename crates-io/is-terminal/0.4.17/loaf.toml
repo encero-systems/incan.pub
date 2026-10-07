@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/is-terminal"
+version = "0.4.17"
+
+[rust]
+name = "is_terminal"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+hermit-abi = { loaf = "crates-io/hermit-abi", version = "^0.5.0", target = "cfg(target_os = \"hermit\")" }
+libc = { loaf = "crates-io/libc", version = "^0.2", target = "cfg(any(unix, target_os = \"wasi\"))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <0.62", features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_System_Console"], target = "cfg(windows)" }

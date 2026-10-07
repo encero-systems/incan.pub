@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/gif"
+version = "0.12.0"
+
+[project.features]
+color_quant = ["dep:color_quant"]
+default = ["raii_no_panic", "std", "color_quant"]
+raii_no_panic = []
+std = []
+
+[rust]
+name = "gif"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+color_quant = { loaf = "crates-io/color_quant", version = "^1.0", optional = true }
+weezl = { loaf = "crates-io/weezl", version = "^0.1.5" }

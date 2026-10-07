@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/alloc-stdlib"
+version = "0.3.0"
+
+[project.features]
+unsafe = ["alloc-no-stdlib/unsafe"]
+
+[rust]
+name = "alloc_stdlib"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+alloc-no-stdlib = { loaf = "crates-io/alloc-no-stdlib", version = ">=3.0.0, <4.0.0" }

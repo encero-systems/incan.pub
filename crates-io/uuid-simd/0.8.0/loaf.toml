@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/uuid-simd"
+version = "0.8.0"
+
+[project.features]
+alloc = ["vsimd/alloc"]
+default = ["std", "detect", "uuid"]
+detect = ["vsimd/detect"]
+std = ["alloc", "vsimd/std"]
+unstable = ["vsimd/unstable"]
+uuid = ["dep:uuid"]
+
+[rust]
+name = "uuid_simd"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+outref = { loaf = "crates-io/outref", version = "^0.5.0" }
+uuid = { loaf = "crates-io/uuid", version = "^1.2.2", optional = true }
+vsimd = { loaf = "crates-io/vsimd", version = "^0.8.0" }

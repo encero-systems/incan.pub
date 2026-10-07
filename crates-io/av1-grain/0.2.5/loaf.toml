@@ -1,0 +1,33 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/av1-grain"
+version = "0.2.5"
+
+[project.features]
+create = []
+default = ["create", "parse", "diff", "estimate"]
+diff = ["num-rational", "v_frame"]
+estimate = ["v_frame"]
+nom = ["dep:nom"]
+num-rational = ["dep:num-rational"]
+parse = ["nom"]
+serde = ["dep:serde"]
+serialize = ["serde", "arrayvec/serde"]
+unstable = []
+v_frame = ["dep:v_frame"]
+
+[rust]
+name = "av1_grain"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.58" }
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.2" }
+log = { loaf = "crates-io/log", version = "^0.4.17" }
+nom = { loaf = "crates-io/nom", version = "^8.0.0", optional = true }
+num-rational = { loaf = "crates-io/num-rational", version = "^0.4.1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.140", features = ["derive"], optional = true }
+v_frame = { loaf = "crates-io/v_frame", version = "^0.3.0", optional = true }

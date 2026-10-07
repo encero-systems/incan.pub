@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ctutils"
+version = "0.4.3"
+
+[project.features]
+alloc = []
+subtle = ["dep:subtle"]
+
+[rust]
+name = "ctutils"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cmov = { loaf = "crates-io/cmov", version = "^0.5.3" }
+subtle = { loaf = "crates-io/subtle", version = "^2.6", default-features = false, optional = true }

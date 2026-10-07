@@ -1,0 +1,76 @@
+{
+  "about": {
+    "description": "Concurrent multi-producer multi-consumer queue",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/smol-rs/concurrent-queue"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4ca0197aee26d1ae37445ee532fefce43251d24cc7c166799f4d46817f1d3973",
+    "package": "concurrent-queue",
+    "registry": "crates-io",
+    "version": "2.5.0"
+  },
+  "archive": "sha256:52961cbed70ee66449a39130b60852a7906a3e1aaaf07e1e001b2a53b8da5824",
+  "at": "2026-10-07T07:42:26Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": false,
+      "req": "^0.8.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loom",
+      "name": "loom",
+      "optional": true,
+      "req": "^0.7",
+      "target": "cfg(loom)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "loom": [
+      "dep:loom"
+    ],
+    "portable-atomic": [
+      "dep:portable-atomic"
+    ],
+    "std": []
+  },
+  "id": "sha256:aa5c0266a50f98a938969da3a0fd40b2dcc877378a569f7f8f8d51b5cf324670",
+  "kind": "adopt",
+  "manifest": "sha256:00fa0f4ea9f094fbc525c1e9926939b1c092d9261904b9258949ce5852e53d34",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "concurrent_queue",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "concurrent-queue",
+    "scope": "crates-io",
+    "version": "2.5.0"
+  }
+}

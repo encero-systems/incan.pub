@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/konst"
+version = "0.4.3"
+
+[project.features]
+__ui = ["trybuild", "rust_latest_stable"]
+alloc = []
+cmp = []
+const_panic_derive = ["const_panic/derive"]
+debug = []
+default = ["cmp", "iter", "parsing_proc"]
+docsrs = []
+iter = []
+konst_proc_macros = ["dep:konst_proc_macros"]
+parsing = []
+parsing_proc = ["parsing", "konst_proc_macros"]
+rust_latest_stable = []
+trybuild = ["dep:trybuild"]
+
+[rust]
+name = "konst"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+const_panic = { loaf = "crates-io/const_panic", version = "^0.2.13", features = ["rust_1_88"] }
+konst_proc_macros = { loaf = "crates-io/konst_proc_macros", version = "=0.4.1", optional = true }
+trybuild = { loaf = "crates-io/trybuild", version = "^1.0", optional = true }
+typewit = { loaf = "crates-io/typewit", version = "^1.12", features = ["rust_1_83"], default-features = false }

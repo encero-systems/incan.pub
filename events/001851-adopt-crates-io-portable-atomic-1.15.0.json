@@ -1,0 +1,75 @@
+{
+  "about": {
+    "description": "Portable atomic types including support for 128-bit atomics, atomic float, etc.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/taiki-e/portable-atomic"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:05c8b63e8d9609db387f0324918f81d68fe27748f084ef092fb35954d0539a85",
+    "package": "portable-atomic",
+    "registry": "crates-io",
+    "version": "1.15.0"
+  },
+  "archive": "sha256:9108fe091feb0ac2f2516e282283e1fa3c86426c51ec133e4debe9b7c78dc52c",
+  "at": "2026-10-07T07:41:57Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/critical-section",
+      "name": "critical-section",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.60"
+    }
+  ],
+  "features": {
+    "critical-section": [
+      "dep:critical-section"
+    ],
+    "default": [
+      "fallback"
+    ],
+    "disable-fiq": [],
+    "fallback": [],
+    "float": [],
+    "force-amo": [],
+    "require-cas": [],
+    "s-mode": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [],
+    "unsafe-assume-privileged": [],
+    "unsafe-assume-single-core": []
+  },
+  "id": "sha256:1fbe6e6b1b4d8cb5e801b79b2e6443d1073ffb7ddc97b6775971743e4e4fb615",
+  "kind": "adopt",
+  "manifest": "sha256:6409979e127a32e45c1d9740c88f314f1fc4089458087fb32fc655ca55c94c4a",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "portable_atomic",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "portable-atomic",
+    "scope": "crates-io",
+    "version": "1.15.0"
+  }
+}

@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/kasuari"
+version = "0.4.12"
+
+[project.features]
+default = ["std"]
+document-features = ["dep:document-features"]
+portable-atomic = ["dep:portable-atomic", "dep:portable-atomic-util"]
+std = ["thiserror/std", "portable-atomic?/std"]
+
+[rust]
+name = "kasuari"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+document-features = { loaf = "crates-io/document-features", version = "^0.2", optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.16" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.13", features = ["require-cas"], default-features = false, optional = true }
+portable-atomic-util = { loaf = "crates-io/portable-atomic-util", version = "^0.2.5", features = ["alloc"], optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0", default-features = false }

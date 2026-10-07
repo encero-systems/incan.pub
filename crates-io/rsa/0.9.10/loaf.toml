@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rsa"
+version = "0.9.10"
+
+[project.features]
+default = ["std", "pem", "u64_digit"]
+getrandom = ["rand_core/getrandom"]
+hazmat = []
+nightly = ["num-bigint/nightly"]
+pem = ["pkcs1/pem", "pkcs8/pem"]
+pkcs5 = ["pkcs8/encryption"]
+serde = ["dep:serde", "num-bigint/serde"]
+sha1 = ["dep:sha1"]
+sha2 = ["dep:sha2"]
+std = ["digest/std", "pkcs1/std", "pkcs8/std", "rand_core/std", "signature/std"]
+u64_digit = ["num-bigint/u64_digit"]
+
+[rust]
+name = "rsa"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+const-oid = { loaf = "crates-io/const-oid", version = "^0.9", default-features = false }
+digest = { loaf = "crates-io/digest", version = "^0.10.5", features = ["alloc", "oid"], default-features = false }
+num-bigint = { loaf = "crates-io/num-bigint-dig", version = "^0.8.6", features = ["i128", "prime", "zeroize"], default-features = false }
+num-integer = { loaf = "crates-io/num-integer", version = "^0.1.39", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.9", features = ["libm"], default-features = false }
+pkcs1 = { loaf = "crates-io/pkcs1", version = "^0.7.5", features = ["alloc", "pkcs8"], default-features = false }
+pkcs8 = { loaf = "crates-io/pkcs8", version = "^0.10.2", features = ["alloc"], default-features = false }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.6.4", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.184", features = ["derive"], default-features = false, optional = true }
+sha1 = { loaf = "crates-io/sha1", version = "^0.10.5", features = ["oid"], default-features = false, optional = true }
+sha2 = { loaf = "crates-io/sha2", version = "^0.10.6", features = ["oid"], default-features = false, optional = true }
+signature = { loaf = "crates-io/signature", version = ">2.0, <2.3", features = ["alloc", "digest", "rand_core"], default-features = false }
+spki = { loaf = "crates-io/spki", version = "^0.7.3", features = ["alloc"], default-features = false }
+subtle = { loaf = "crates-io/subtle", version = "^2.1.1", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.5", features = ["alloc"] }

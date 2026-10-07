@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/embedded-io"
+version = "0.7.1"
+
+[project.features]
+alloc = []
+defmt = ["dep:defmt"]
+std = ["alloc"]
+
+[rust]
+name = "embedded_io"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+defmt = { loaf = "crates-io/defmt", version = "^1", optional = true }

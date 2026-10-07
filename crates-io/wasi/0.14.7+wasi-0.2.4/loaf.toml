@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasi"
+version = "0.14.7+wasi-0.2.4"
+
+[project.features]
+bitflags = ["wasip2/bitflags"]
+default = ["wasip2/default"]
+std = ["wasip2/std"]
+
+[rust]
+name = "wasi"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+wasip2 = { loaf = "crates-io/wasip2", version = "^1.0.1", default-features = false }

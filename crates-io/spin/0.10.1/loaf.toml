@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/spin"
+version = "0.10.1"
+
+[project.features]
+barrier = ["mutex"]
+default = ["lock_api", "mutex", "spin_mutex", "rwlock", "once", "lazy", "barrier"]
+fair_mutex = ["mutex"]
+lazy = ["once"]
+lock_api = ["dep:lock_api_crate"]
+mutex = []
+once = []
+portable-atomic = ["dep:portable-atomic"]
+portable_atomic = ["portable-atomic"]
+rwlock = []
+spin_mutex = ["mutex"]
+std = []
+ticket_mutex = ["mutex"]
+use_ticket_mutex = ["mutex", "ticket_mutex"]
+
+[rust]
+name = "spin"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+lock_api_crate = { loaf = "crates-io/lock_api", version = "^0.4", optional = true }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.3", features = ["require-cas"], default-features = false, optional = true }

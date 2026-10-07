@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/postgres-protocol"
+version = "0.6.12"
+
+[project.features]
+default = []
+getrandom = ["dep:getrandom"]
+js = ["dep:getrandom", "getrandom/wasm_js"]
+
+[rust]
+name = "postgres_protocol"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22" }
+byteorder = { loaf = "crates-io/byteorder", version = "^1.0" }
+bytes = { loaf = "crates-io/bytes", version = "^1.11" }
+fallible-iterator = { loaf = "crates-io/fallible-iterator", version = "^0.2" }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", optional = true }
+hmac = { loaf = "crates-io/hmac", version = "^0.13" }
+md-5 = { loaf = "crates-io/md-5", version = "^0.11" }
+memchr = { loaf = "crates-io/memchr", version = "^2.0" }
+rand = { loaf = "crates-io/rand", version = "^0.10" }
+sha2 = { loaf = "crates-io/sha2", version = "^0.11" }
+stringprep = { loaf = "crates-io/stringprep", version = "^0.1" }

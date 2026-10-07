@@ -1,0 +1,96 @@
+{
+  "about": {
+    "description": "Idiomatic wrapper for inotify",
+    "documentation": "https://docs.rs/inotify",
+    "homepage": "",
+    "license": "ISC",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hannobraun/inotify-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4cc00ea907cab49550b7da656f80ebb97be1b997d931fbcd28d39734e17ce592",
+    "package": "inotify",
+    "registry": "crates-io",
+    "version": "0.11.5"
+  },
+  "archive": "sha256:e12fee99470e8cccbbf5bf03587544ff913d17b51f24084f6a3c7ba793d1172a",
+  "at": "2026-10-07T07:44:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.30"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/inotify-sys",
+      "name": "inotify-sys",
+      "optional": false,
+      "req": "^0.1.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "net"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.40.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "stream"
+    ],
+    "futures-util": [
+      "dep:futures-util"
+    ],
+    "stream": [
+      "futures-util",
+      "tokio"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ]
+  },
+  "id": "sha256:3117ab907cdfa96f039b789c7a5ff3e29e2a886762201a958cdc14415ae90153",
+  "kind": "adopt",
+  "manifest": "sha256:4cd1adb116a823fda9b3eada9d31f87f3302c906f210aa59f3e875cc7d56650a",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "inotify",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "inotify",
+    "scope": "crates-io",
+    "version": "0.11.5"
+  }
+}

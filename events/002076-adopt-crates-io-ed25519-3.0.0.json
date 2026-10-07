@@ -1,0 +1,107 @@
+{
+  "about": {
+    "description": "Edwards Digital Signature Algorithm (EdDSA) over Curve25519 (as specified in RFC 8032)\nsupport library providing signature type definitions and PKCS#8 private key\ndecoding/encoding support",
+    "documentation": "https://docs.rs/ed25519",
+    "homepage": "https://github.com/RustCrypto/signatures/tree/master/ed25519",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/signatures"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:29fcf32e6c73d1079f83ab4d782de2d81620346a5f38c6237a86a22f8368980a",
+    "package": "ed25519",
+    "registry": "crates-io",
+    "version": "3.0.0"
+  },
+  "archive": "sha256:5ae285867741ad63388a4b4db276ad5e9c4d9fe3733b47e4ed741d7b182eb495",
+  "at": "2026-10-07T07:42:49Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pkcs8",
+      "name": "pkcs8",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/signature",
+      "name": "signature",
+      "optional": false,
+      "req": "^3"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/zerocopy",
+      "name": "zerocopy",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "pkcs8?/alloc",
+      "signature/alloc"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "pem": [
+      "alloc",
+      "dep:pkcs8",
+      "pkcs8/pem"
+    ],
+    "pkcs8": [
+      "dep:pkcs8"
+    ],
+    "serde": [
+      "dep:serdect"
+    ],
+    "zerocopy": [
+      "dep:zerocopy"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:178b1499219294e3c09268b7b0bc4ab05ff185ad5fe0e17eb03fd6fd7af1aaec",
+  "kind": "adopt",
+  "manifest": "sha256:a6eb140f0cad801a9133b62b986bc0abb2032d950e6ca4dc8786a9a30210fb4e",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ed25519",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ed25519",
+    "scope": "crates-io",
+    "version": "3.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tracing-appender"
+version = "0.2.5"
+
+[project.features]
+parking_lot = ["dep:parking_lot"]
+
+[rust]
+name = "tracing_appender"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+crossbeam-channel = { loaf = "crates-io/crossbeam-channel", version = "^0.5.6" }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12.1", optional = true }
+symlink = { loaf = "crates-io/symlink", version = "^0.1.0" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2" }
+time = { loaf = "crates-io/time", version = "^0.3.2", features = ["formatting", "parsing"], default-features = false }
+tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3.18", features = ["fmt", "std"], default-features = false }

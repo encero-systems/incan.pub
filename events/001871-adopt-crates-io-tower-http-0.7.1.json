@@ -1,0 +1,446 @@
+{
+  "about": {
+    "description": "Tower middleware and utilities for HTTP clients and servers",
+    "documentation": "",
+    "homepage": "https://github.com/tower-rs/tower-http",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tower-rs/tower-http"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:08a05a66a4fdd61cbbe0a1d755ffe0ca6aba159dd4820936a0ff8a8278245b9c",
+    "package": "tower-http",
+    "registry": "crates-io",
+    "version": "0.7.1"
+  },
+  "archive": "sha256:29ca7c4dc7d922f9eb8e332810150539477d4379a5f873d5828aba0c7051f56d",
+  "at": "2026-10-07T07:41:58Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "tokio"
+      ],
+      "loaf": "crates-io/async-compression",
+      "name": "async-compression",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64",
+      "name": "base64",
+      "optional": true,
+      "req": "^0.22"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": true,
+      "req": "^0.3.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body",
+      "name": "http-body",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-body-util",
+      "name": "http-body-util",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http-range-header",
+      "name": "http-range-header",
+      "optional": true,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/httpdate",
+      "name": "httpdate",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/mime",
+      "name": "mime",
+      "optional": true,
+      "req": "^0.3.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/mime_guess",
+      "name": "mime_guess",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/percent-encoding",
+      "name": "percent-encoding",
+      "optional": false,
+      "req": "^2.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pin-project-lite",
+      "name": "pin-project-lite",
+      "optional": false,
+      "req": "^0.2.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.6"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "io"
+      ],
+      "loaf": "crates-io/tokio-util",
+      "name": "tokio-util",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower",
+      "name": "tower",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower-layer",
+      "name": "tower-layer",
+      "optional": false,
+      "req": "^0.3.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tower-service",
+      "name": "tower-service",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/url",
+      "name": "url",
+      "optional": true,
+      "req": "^2.5"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "v4"
+      ],
+      "loaf": "crates-io/uuid",
+      "name": "uuid",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "add-extension": [],
+    "auth": [
+      "base64",
+      "validate-request"
+    ],
+    "base64": [
+      "dep:base64"
+    ],
+    "catch-panic": [
+      "tracing",
+      "dep:futures-util",
+      "futures-util/std",
+      "dep:http-body",
+      "dep:http-body-util"
+    ],
+    "compression-br": [
+      "dep:async-compression",
+      "async-compression?/brotli",
+      "futures-core",
+      "dep:http-body",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "compression-deflate": [
+      "dep:async-compression",
+      "async-compression?/zlib",
+      "futures-core",
+      "dep:http-body",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "compression-full": [
+      "compression-br",
+      "compression-deflate",
+      "compression-gzip",
+      "compression-zstd"
+    ],
+    "compression-gzip": [
+      "dep:async-compression",
+      "async-compression?/gzip",
+      "futures-core",
+      "dep:http-body",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "compression-zstd": [
+      "dep:async-compression",
+      "async-compression?/zstd",
+      "futures-core",
+      "dep:http-body",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "cors": [],
+    "csrf": [],
+    "decompression-br": [
+      "dep:async-compression",
+      "async-compression?/brotli",
+      "futures-core",
+      "dep:http-body",
+      "dep:http-body-util",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "decompression-deflate": [
+      "dep:async-compression",
+      "async-compression?/zlib",
+      "futures-core",
+      "dep:http-body",
+      "dep:http-body-util",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "decompression-full": [
+      "decompression-br",
+      "decompression-deflate",
+      "decompression-gzip",
+      "decompression-zstd"
+    ],
+    "decompression-gzip": [
+      "dep:async-compression",
+      "async-compression?/gzip",
+      "futures-core",
+      "dep:http-body",
+      "dep:http-body-util",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "decompression-zstd": [
+      "dep:async-compression",
+      "async-compression?/zstd",
+      "futures-core",
+      "dep:http-body",
+      "dep:http-body-util",
+      "tokio-util",
+      "dep:tokio"
+    ],
+    "default": [],
+    "follow-redirect": [
+      "futures-util",
+      "dep:http-body",
+      "dep:url",
+      "dep:tower",
+      "tower/util"
+    ],
+    "fs": [
+      "dep:tokio",
+      "tokio?/fs",
+      "tokio?/io-util",
+      "futures-core",
+      "futures-util",
+      "dep:http-body",
+      "dep:http-body-util",
+      "dep:tokio-util",
+      "tokio-util/io",
+      "dep:http-range-header",
+      "mime_guess",
+      "mime",
+      "httpdate",
+      "set-status",
+      "dep:futures-util",
+      "futures-util/alloc"
+    ],
+    "full": [
+      "add-extension",
+      "auth",
+      "catch-panic",
+      "compression-full",
+      "cors",
+      "csrf",
+      "decompression-full",
+      "follow-redirect",
+      "fs",
+      "limit",
+      "map-request-body",
+      "map-response-body",
+      "metrics",
+      "normalize-path",
+      "on-early-drop",
+      "propagate-header",
+      "redirect",
+      "request-id",
+      "sensitive-headers",
+      "set-header",
+      "set-status",
+      "timeout",
+      "trace",
+      "util",
+      "validate-request"
+    ],
+    "futures-core": [
+      "dep:futures-core"
+    ],
+    "futures-util": [
+      "dep:futures-util"
+    ],
+    "httpdate": [
+      "dep:httpdate"
+    ],
+    "limit": [
+      "dep:http-body",
+      "dep:http-body-util"
+    ],
+    "map-request-body": [],
+    "map-response-body": [],
+    "metrics": [
+      "dep:http-body",
+      "dep:tokio",
+      "tokio?/time"
+    ],
+    "mime": [
+      "dep:mime"
+    ],
+    "mime_guess": [
+      "dep:mime_guess"
+    ],
+    "normalize-path": [],
+    "on-early-drop": [
+      "dep:http-body"
+    ],
+    "propagate-header": [],
+    "redirect": [],
+    "request-id": [
+      "uuid"
+    ],
+    "sensitive-headers": [],
+    "set-header": [],
+    "set-status": [],
+    "timeout": [
+      "dep:http-body",
+      "dep:tokio",
+      "tokio?/time"
+    ],
+    "tokio-util": [
+      "dep:tokio-util"
+    ],
+    "tower": [
+      "dep:tower"
+    ],
+    "trace": [
+      "dep:http-body",
+      "tracing"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ],
+    "util": [
+      "tower"
+    ],
+    "uuid": [
+      "dep:uuid"
+    ],
+    "validate-request": [
+      "mime"
+    ]
+  },
+  "id": "sha256:1f46703c9d5b0055c7fee871abf2d11af36bef7987d44d09914f1ccb0d625967",
+  "kind": "adopt",
+  "manifest": "sha256:b23f77bd49c345c650ab4198c1a9c2d8fa6df4030e49bc13c92bf5a37d42b926",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "tower_http",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tower-http",
+    "scope": "crates-io",
+    "version": "0.7.1"
+  }
+}

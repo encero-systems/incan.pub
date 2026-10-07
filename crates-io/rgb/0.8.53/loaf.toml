@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rgb"
+version = "0.8.53"
+
+[project.features]
+argb = []
+as-bytes = ["bytemuck"]
+bytemuck = ["dep:bytemuck"]
+checked_fns = []
+default = ["as-bytes", "argb", "grb"]
+defmt-03 = ["dep:defmt"]
+grb = []
+serde = ["dep:serde"]
+unstable-experimental = []
+
+[rust]
+name = "rgb"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.16", optional = true }
+defmt = { loaf = "crates-io/defmt", version = "^0.3.8", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.200", features = ["derive"], default-features = false, optional = true }

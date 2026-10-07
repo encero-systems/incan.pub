@@ -1,0 +1,73 @@
+{
+  "about": {
+    "description": "More ergonomic wrappers around RawFd and RawHandle",
+    "documentation": "https://docs.rs/filedescriptor",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/wezterm/wezterm"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e40758ed24c9b2eeb76c35fb0aebc66c626084edd827e07e1552279814c6682d",
+    "package": "filedescriptor",
+    "registry": "crates-io",
+    "version": "0.8.3"
+  },
+  "archive": "sha256:14e999a29cfabc6256efc7d42e37c94aeb1df374044cee532d006a59e880a045",
+  "at": "2026-10-07T07:45:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fileapi",
+        "handleapi",
+        "namedpipeapi",
+        "processenv",
+        "processthreadsapi",
+        "winsock2",
+        "winuser"
+      ],
+      "loaf": "crates-io/winapi",
+      "name": "winapi",
+      "optional": false,
+      "req": "^0.3",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:637810ee78cb645aef251cfa41865147bab2c4952efe9b472439a2fc72095c24",
+  "kind": "adopt",
+  "manifest": "sha256:3507969cc54978c3d49236236f890d440457d4bfa7bd25eb381dd24685931eeb",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "filedescriptor",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "filedescriptor",
+    "scope": "crates-io",
+    "version": "0.8.3"
+  }
+}

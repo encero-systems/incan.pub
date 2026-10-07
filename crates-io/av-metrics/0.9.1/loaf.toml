@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/av-metrics"
+version = "0.9.1"
+
+[project.features]
+serde = ["dep:serde"]
+
+[rust]
+name = "av_metrics"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+crossbeam = { loaf = "crates-io/crossbeam", version = "^0.8" }
+itertools = { loaf = "crates-io/itertools", version = "^0.10.0" }
+lab = { loaf = "crates-io/lab", version = "^0.11.0" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2" }
+rayon = { loaf = "crates-io/rayon", version = "^1.5" }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"], optional = true }
+thiserror = { loaf = "crates-io/thiserror", version = "^1" }
+v_frame = { loaf = "crates-io/v_frame", version = "^0.3.1" }

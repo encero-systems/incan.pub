@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/string_cache"
+version = "0.11.0"
+
+[project.features]
+default = ["serde_support"]
+malloc_size_of = ["dep:malloc_size_of"]
+serde = ["dep:serde"]
+serde_support = ["serde"]
+
+[rust]
+name = "string_cache"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+malloc_size_of = { loaf = "crates-io/malloc_size_of", version = "^0.1", default-features = false, optional = true }
+new_debug_unreachable = { loaf = "crates-io/new_debug_unreachable", version = "^1.0.2" }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+phf_shared = { loaf = "crates-io/phf_shared", version = "^0.14" }
+precomputed-hash = { loaf = "crates-io/precomputed-hash", version = "^0.1" }
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }

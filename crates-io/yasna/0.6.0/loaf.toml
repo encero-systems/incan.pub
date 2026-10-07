@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/yasna"
+version = "0.6.0"
+
+[project.features]
+bit-vec = ["dep:bit-vec"]
+default = []
+num-bigint = ["dep:num-bigint"]
+std = ["bit-vec?/std", "time?/std"]
+time = ["dep:time"]
+
+[rust]
+name = "yasna"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bit-vec = { loaf = "crates-io/bit-vec", version = "^0.9.1", default-features = false, optional = true }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", default-features = false, optional = true }
+time = { loaf = "crates-io/time", version = "^0.3.1", default-features = false, optional = true }

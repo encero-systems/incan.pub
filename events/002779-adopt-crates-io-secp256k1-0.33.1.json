@@ -1,0 +1,108 @@
+{
+  "about": {
+    "description": "Rust wrapper library for Pieter Wuille's `libsecp256k1`. Implements ECDSA and BIP 340 signatures for the SECG elliptic curve group secp256k1 and related utilities.",
+    "documentation": "https://docs.rs/secp256k1/",
+    "homepage": "",
+    "license": "CC0-1.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://git.rust-bitcoin.org/rust-bitcoin/rust-secp256k1"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d7f404a8dab7a7a5a631e741d8699aa9c8e1d689fc26ccf897c7187565490b69",
+    "package": "secp256k1",
+    "registry": "crates-io",
+    "version": "0.33.1"
+  },
+  "archive": "sha256:a05c035039ac859060810aa051c1273b0fc1f18ef7ca4d3d83ee55fe17b88b0f",
+  "at": "2026-10-07T07:45:35Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.4.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/secp256k1-sys",
+      "name": "secp256k1-sys",
+      "optional": false,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.103"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "secp256k1-sys/alloc"
+    ],
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "default": [
+      "std"
+    ],
+    "global-context": [
+      "std"
+    ],
+    "global-context-less-secure": [
+      "global-context"
+    ],
+    "lowmemory": [
+      "secp256k1-sys/lowmemory"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "recovery": [
+      "secp256k1-sys/recovery"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "alloc",
+      "secp256k1-sys/std",
+      "rand?/std",
+      "rand?/std_rng",
+      "rand?/thread_rng",
+      "rand?/small_rng"
+    ]
+  },
+  "id": "sha256:5b351cd85db55e56eb8dd2ed9f9367eb17ee0754beb9ef50928ca79275645208",
+  "kind": "adopt",
+  "manifest": "sha256:9361c39c490c1227b73de257e55824adcfecc0d47c90de9ccafd11b46861102a",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "secp256k1",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "secp256k1",
+    "scope": "crates-io",
+    "version": "0.33.1"
+  }
+}

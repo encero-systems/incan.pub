@@ -1,0 +1,76 @@
+{
+  "about": {
+    "description": "Epoch-based garbage collection",
+    "documentation": "",
+    "homepage": "https://github.com/crossbeam-rs/crossbeam/tree/master/crossbeam-epoch",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/crossbeam-rs/crossbeam"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:dc74980687109a3b14c72fd458107bf0baa1da1a1a805e178d15501ba9b86d9d",
+    "package": "crossbeam-epoch",
+    "registry": "crates-io",
+    "version": "0.9.21"
+  },
+  "archive": "sha256:3b27e653095bddf5557b1a3d8a1dfdee9116056667578d0f9ae8935265fb1e39",
+  "at": "2026-10-07T07:41:57Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": false,
+      "req": "^0.8.18"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loom",
+      "name": "loom-crate",
+      "optional": true,
+      "req": "^0.7.1",
+      "target": "cfg(crossbeam_loom)"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "std"
+    ],
+    "loom": [
+      "loom-crate",
+      "crossbeam-utils/loom"
+    ],
+    "loom-crate": [
+      "dep:loom-crate"
+    ],
+    "nightly": [
+      "crossbeam-utils/nightly"
+    ],
+    "std": [
+      "alloc",
+      "crossbeam-utils/std"
+    ]
+  },
+  "id": "sha256:6b7e6d451fc959e0cc765dc5257e780cc0d1dbf38285c5610980a98401d658af",
+  "kind": "adopt",
+  "manifest": "sha256:da4fbc18353ee7f37acef1be75219c60f4835194dd9e0a0d47d17823cd3209a0",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "crossbeam_epoch",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "crossbeam-epoch",
+    "scope": "crates-io",
+    "version": "0.9.21"
+  }
+}

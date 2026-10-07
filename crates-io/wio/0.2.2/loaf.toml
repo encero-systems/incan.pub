@@ -1,0 +1,14 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wio"
+version = "0.2.2"
+
+[rust]
+name = "wio"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["consoleapi", "errhandlingapi", "fileapi", "handleapi", "minwindef", "processthreadsapi", "std", "unknwnbase", "wincon", "winnt"] }

@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/aligned-vec"
+version = "0.6.4"
+
+[project.features]
+default = ["std"]
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "aligned_vec"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+equator = { loaf = "crates-io/equator", version = "^0.4.1" }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }

@@ -1,0 +1,75 @@
+{
+  "about": {
+    "description": "Provides an easy, fast, cross-platform way to retrieve the memory page size",
+    "documentation": "https://docs.rs/page_size/",
+    "homepage": "https://github.com/Elzair/page_size_rs",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Elzair/page_size_rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:30d5b2194ed13191c1999ae0704b7839fb18384fa22e49b57eeaa97d79ce40da",
+    "package": "page_size",
+    "registry": "crates-io",
+    "version": "0.6.0"
+  },
+  "archive": "sha256:d148d14801b42254b13b372ba29b17aaa9e23e450349ab0a3fda5bfee3ea92a7",
+  "at": "2026-10-07T07:42:50Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/spin",
+      "name": "spin",
+      "optional": true,
+      "req": "^0.9.8"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "sysinfoapi"
+      ],
+      "loaf": "crates-io/winapi",
+      "name": "winapi",
+      "optional": false,
+      "req": "^0.3.9",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "no_std": [
+      "spin"
+    ],
+    "spin": [
+      "dep:spin"
+    ]
+  },
+  "id": "sha256:630044931ce97273a1cde5ce178d27975b554abaa7db277f7333a6044b5fa0a4",
+  "kind": "adopt",
+  "manifest": "sha256:9f74b8370b500a60395515dc3a0cc1cfd417ebd679a41f9774b0be548353cdc6",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "page_size",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "page_size",
+    "scope": "crates-io",
+    "version": "0.6.0"
+  }
+}

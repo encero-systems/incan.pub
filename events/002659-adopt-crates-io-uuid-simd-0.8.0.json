@@ -1,0 +1,86 @@
+{
+  "about": {
+    "description": "SIMD-accelerated UUID operations",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Nugine/simd"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:23b082222b4f6619906941c17eb2297fff4c2fb96cb60164170522942a200bd8",
+    "package": "uuid-simd",
+    "registry": "crates-io",
+    "version": "0.8.0"
+  },
+  "archive": "sha256:d4ebe52076d3f83f93fd87b8fc30b79b0a92eed392fa1e6ded789b1c0dc9b8c9",
+  "at": "2026-10-07T07:45:03Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/outref",
+      "name": "outref",
+      "optional": false,
+      "req": "^0.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/uuid",
+      "name": "uuid",
+      "optional": true,
+      "req": "^1.2.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/vsimd",
+      "name": "vsimd",
+      "optional": false,
+      "req": "^0.8.0"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "vsimd/alloc"
+    ],
+    "default": [
+      "std",
+      "detect",
+      "uuid"
+    ],
+    "detect": [
+      "vsimd/detect"
+    ],
+    "std": [
+      "alloc",
+      "vsimd/std"
+    ],
+    "unstable": [
+      "vsimd/unstable"
+    ],
+    "uuid": [
+      "dep:uuid"
+    ]
+  },
+  "id": "sha256:1a8c1d814ed31ee6175b2cf280e6e249de074920095c43504182ec8ee9aece47",
+  "kind": "adopt",
+  "manifest": "sha256:ce7bf5c5d98a56247487c1efe8823fd47b37c57a998b0b8c98647026a1d05af3",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "uuid_simd",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "uuid-simd",
+    "scope": "crates-io",
+    "version": "0.8.0"
+  }
+}

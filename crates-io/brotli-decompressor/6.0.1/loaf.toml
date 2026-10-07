@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/brotli-decompressor"
+version = "6.0.1"
+
+[project.features]
+alloc-stdlib = ["dep:alloc-stdlib"]
+benchmark = []
+default = ["std"]
+disable-timer = []
+ffi-api = []
+no-stdlib-ffi-binding = ["ffi-api"]
+pass-through-ffi-panics = []
+seccomp = ["alloc-no-stdlib/unsafe"]
+std = ["alloc-stdlib"]
+unsafe = ["alloc-no-stdlib/unsafe", "dep:alloc-stdlib", "alloc-stdlib/unsafe"]
+
+[rust]
+name = "brotli_decompressor"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+alloc-no-stdlib = { loaf = "crates-io/alloc-no-stdlib", version = ">=3.0.0, <4.0.0" }
+alloc-stdlib = { loaf = "crates-io/alloc-stdlib", version = ">=0.3.0, <0.4", optional = true }

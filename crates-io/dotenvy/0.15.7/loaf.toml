@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/dotenvy"
+version = "0.15.7"
+
+[project.features]
+clap = ["dep:clap"]
+cli = ["clap"]
+
+[rust]
+name = "dotenvy"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+clap = { loaf = "crates-io/clap", version = "^3.2", optional = true }

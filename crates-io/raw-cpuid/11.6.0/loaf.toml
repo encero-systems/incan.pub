@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/raw-cpuid"
+version = "11.6.0"
+
+[project.features]
+clap = ["dep:clap"]
+cli = ["display", "clap"]
+display = ["std", "termimad", "serde_json", "serialize"]
+serde = ["dep:serde"]
+serde_derive = ["dep:serde_derive"]
+serde_json = ["dep:serde_json"]
+serialize = ["serde", "serde_derive"]
+std = []
+termimad = ["dep:termimad"]
+
+[rust]
+name = "raw_cpuid"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.0" }
+clap = { loaf = "crates-io/clap", version = "^4.2", features = ["derive"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0", optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", optional = true }
+termimad = { loaf = "crates-io/termimad", version = "^0.25", optional = true }

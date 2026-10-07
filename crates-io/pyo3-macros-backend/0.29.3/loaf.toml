@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pyo3-macros-backend"
+version = "0.29.3"
+
+[project.features]
+experimental-async = []
+experimental-inspect = []
+
+[rust]
+name = "pyo3_macros_backend"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+heck = { loaf = "crates-io/heck", version = "^0.5" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.60", default-features = false }
+quote = { loaf = "crates-io/quote", version = "^1.0.37", default-features = false }
+syn = { loaf = "crates-io/syn", version = "^2.0.59", features = ["clone-impls", "derive", "extra-traits", "full", "parsing", "printing", "visit-mut"], default-features = false }

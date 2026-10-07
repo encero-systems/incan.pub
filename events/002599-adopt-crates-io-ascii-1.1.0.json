@@ -1,0 +1,70 @@
+{
+  "about": {
+    "description": "ASCII-only equivalents to `char`, `str` and `String`.",
+    "documentation": "https://docs.rs/ascii",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tomprogrammer/rust-ascii"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d92bec98840b8f03a5ff5413de5293bfcd8bf96467cf5452609f939ec6f5de16",
+    "package": "ascii",
+    "registry": "crates-io",
+    "version": "1.1.0"
+  },
+  "archive": "sha256:c2114736e574eff8db7af1dee56030ef963a02b2bee9e9b926179af257320ae2",
+  "at": "2026-10-07T07:45:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.25"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_test",
+      "name": "serde_test",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "std"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_test": [
+      "dep:serde_test"
+    ],
+    "std": [
+      "alloc"
+    ]
+  },
+  "id": "sha256:e6632e7546d86c540cdeda7671be6009d29bc7c36f9ab624fbe867eb28af84af",
+  "kind": "adopt",
+  "manifest": "sha256:2e6ebe392d52c45b7d595bf320c081184ded08b5a4c7050c986896ccdda48caf",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "ascii",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ascii",
+    "scope": "crates-io",
+    "version": "1.1.0"
+  }
+}

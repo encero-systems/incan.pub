@@ -1,0 +1,63 @@
+{
+  "about": {
+    "description": "Interoperability library for Rust Windowing applications.",
+    "documentation": "https://docs.rs/raw-window-handle",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0 OR Zlib",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-windowing/raw-window-handle"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:20675572f6f24e9e76ef639bc5552774ed45f1c30e2951e1e99c59888861c539",
+    "package": "raw-window-handle",
+    "registry": "crates-io",
+    "version": "0.6.2"
+  },
+  "archive": "sha256:7710325deee05fe27f39f025619a9b4277a43099ad8cf0ebb04939f46ba2febf",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "optional": true,
+      "req": "^0.2.87",
+      "target": "cfg(target_family = \"wasm\")"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "std": [
+      "alloc"
+    ],
+    "wasm-bindgen": [
+      "dep:wasm-bindgen"
+    ],
+    "wasm-bindgen-0-2": [
+      "wasm-bindgen",
+      "std"
+    ]
+  },
+  "id": "sha256:fac80f23e2daecd634fef3318df54638865b2ae29bb2e3e5ef659dc07a07081c",
+  "kind": "adopt",
+  "manifest": "sha256:f7dbc12c4df7b92ca0b61ca2a1cbb101601653404089520d0653b84134909132",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "raw_window_handle",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "raw-window-handle",
+    "scope": "crates-io",
+    "version": "0.6.2"
+  }
+}

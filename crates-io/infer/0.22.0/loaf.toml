@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/infer"
+version = "0.22.0"
+
+[project.features]
+alloc = []
+cfb = ["dep:cfb"]
+default = ["std"]
+std = ["alloc", "cfb"]
+
+[rust]
+name = "infer"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfb = { loaf = "crates-io/cfb", version = "^0.14", optional = true }

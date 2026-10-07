@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zune-inflate"
+version = "0.2.54"
+
+[project.features]
+default = ["zlib", "gzip", "std"]
+gzip = []
+simd-adler32 = ["dep:simd-adler32"]
+std = ["dep:simd-adler32", "simd-adler32/std"]
+zlib = ["simd-adler32"]
+
+[rust]
+name = "zune_inflate"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+simd-adler32 = { loaf = "crates-io/simd-adler32", version = "^0.3.4", default-features = false, optional = true }

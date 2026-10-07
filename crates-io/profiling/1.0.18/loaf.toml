@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/profiling"
+version = "1.0.18"
+
+[project.features]
+default = ["procmacros"]
+optick = ["dep:optick"]
+procmacros = ["profiling-procmacros"]
+profile-with-optick = ["optick", "profiling-procmacros?/profile-with-optick"]
+profile-with-puffin = ["puffin", "profiling-procmacros?/profile-with-puffin"]
+profile-with-superluminal = ["superluminal-perf", "profiling-procmacros?/profile-with-superluminal"]
+profile-with-tracing = ["tracing", "profiling-procmacros?/profile-with-tracing"]
+profile-with-tracy = ["tracy-client", "profiling-procmacros?/profile-with-tracy"]
+profiling-procmacros = ["dep:profiling-procmacros"]
+puffin = ["dep:puffin"]
+superluminal-perf = ["dep:superluminal-perf"]
+tracing = ["dep:tracing"]
+tracy-client = ["dep:tracy-client"]
+type-check = []
+
+[rust]
+name = "profiling"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+optick = { loaf = "crates-io/optick", version = "^1.3", optional = true }
+profiling-procmacros = { loaf = "crates-io/profiling-procmacros", version = "^1.0.18", optional = true }
+puffin = { loaf = "crates-io/puffin", version = "^0.20", optional = true }
+superluminal-perf = { loaf = "crates-io/superluminal-perf", version = "^0.4", optional = true }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", optional = true }
+tracy-client = { loaf = "crates-io/tracy-client", version = "^0.18", optional = true }

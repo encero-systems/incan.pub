@@ -1,0 +1,61 @@
+{
+  "about": {
+    "description": "Constant-time utility library with selection and equality testing support targeting cryptographic\napplications. Supports `const fn` where appropriate. Built on the `cmov` crate which provides\narchitecture-specific predication intrinsics. Heavily inspired by the `subtle` crate.",
+    "documentation": "",
+    "homepage": "https://github.com/RustCrypto/utils/tree/master/ctutils",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/utils"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:03bb0e1cc970d482d121d9a1744999169b69a07470b3d644a7894e53fcaf4574",
+    "package": "ctutils",
+    "registry": "crates-io",
+    "version": "0.4.3"
+  },
+  "archive": "sha256:14ef7291a100dae540791a05e1b26c3190b0f4cddf029ead82906344fc882c4c",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cmov",
+      "name": "cmov",
+      "optional": false,
+      "req": "^0.5.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": true,
+      "req": "^2.6"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "subtle": [
+      "dep:subtle"
+    ]
+  },
+  "id": "sha256:16d8c84367eeec0b1c64b3e8962e6c0ab49052af35d038ac8156a31fd6d30d68",
+  "kind": "adopt",
+  "manifest": "sha256:1f010db5fcd955fcc949768f664a653050c6676aeedd2d083713d210af1c92c9",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ctutils",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ctutils",
+    "scope": "crates-io",
+    "version": "0.4.3"
+  }
+}

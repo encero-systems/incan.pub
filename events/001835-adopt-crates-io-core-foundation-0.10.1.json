@@ -1,0 +1,80 @@
+{
+  "about": {
+    "description": "Bindings to Core Foundation for macOS",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/servo/core-foundation-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b2a6cd9ae233e7f62ba4e9353e81a88df7fc8a5987b8d445b4d90c879bd156f6",
+    "package": "core-foundation",
+    "registry": "crates-io",
+    "version": "0.10.1"
+  },
+  "archive": "sha256:dd412279dcc58ffa35c9f98bf656c4ce1d2b1ee05f5cd5677686452ade34ad7b",
+  "at": "2026-10-07T07:41:57Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/core-foundation-sys",
+      "name": "core-foundation-sys",
+      "optional": false,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/uuid",
+      "name": "uuid",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "default": [
+      "link"
+    ],
+    "link": [
+      "core-foundation-sys/link"
+    ],
+    "mac_os_10_7_support": [
+      "core-foundation-sys/mac_os_10_7_support"
+    ],
+    "mac_os_10_8_features": [
+      "core-foundation-sys/mac_os_10_8_features"
+    ],
+    "with-uuid": [
+      "dep:uuid"
+    ]
+  },
+  "id": "sha256:8657d6ae809a651bbec372488e23756cfc63691e4ad1d452d1e8901a4c3e0b7d",
+  "kind": "adopt",
+  "manifest": "sha256:c22c0c662da80f8b3e6d550767d72f780c169a9f8e1e12578048eecd67d31806",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "core_foundation",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "core-foundation",
+    "scope": "crates-io",
+    "version": "0.10.1"
+  }
+}

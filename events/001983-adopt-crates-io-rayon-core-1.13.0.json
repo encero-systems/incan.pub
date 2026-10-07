@@ -1,0 +1,68 @@
+{
+  "about": {
+    "description": "Core APIs for Rayon",
+    "documentation": "https://docs.rs/rayon-core/",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rayon-rs/rayon"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:22e18b0f0062d30d4230b2e85ff77fdfe4326feb054b9783a3460d8435c8ab91",
+    "package": "rayon-core",
+    "registry": "crates-io",
+    "version": "1.13.0"
+  },
+  "archive": "sha256:ec4a0ccae1b8033e2ee2e7e567a9e98f48e7faadd92656e4b8df23c6215ecbcf",
+  "at": "2026-10-07T07:42:28Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-deque",
+      "name": "crossbeam-deque",
+      "optional": false,
+      "req": "^0.8.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": false,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasm_sync",
+      "name": "wasm_sync",
+      "optional": true,
+      "req": "^0.1.0"
+    }
+  ],
+  "features": {
+    "web_spin_lock": [
+      "dep:wasm_sync"
+    ]
+  },
+  "id": "sha256:63a3782b865688fe7c805358e8729e2811fcbfb7f3e5285f3df4a19a258b0468",
+  "kind": "adopt",
+  "manifest": "sha256:b304d1870116af093102eb07064ed333c80a3d4457f4dd796a1ea2e6adcd75cb",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "rayon_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rayon-core",
+    "scope": "crates-io",
+    "version": "1.13.0"
+  }
+}

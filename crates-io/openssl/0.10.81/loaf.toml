@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/openssl"
+version = "0.10.81"
+
+[project.features]
+aws-lc = ["ffi/aws-lc"]
+aws-lc-fips = ["ffi/aws-lc-fips"]
+bindgen = ["ffi/bindgen"]
+default = []
+unstable_boringssl = ["ffi/unstable_boringssl"]
+v101 = []
+v102 = []
+v110 = []
+v111 = []
+vendored = ["ffi/vendored"]
+
+[rust]
+name = "openssl"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.2.1" }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+ffi = { loaf = "crates-io/openssl-sys", version = "^0.9.117" }
+foreign-types = { loaf = "crates-io/foreign-types", version = "^0.3.1" }
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+openssl-macros = { loaf = "crates-io/openssl-macros", version = "^0.1.1" }

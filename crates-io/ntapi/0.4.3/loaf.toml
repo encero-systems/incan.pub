@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ntapi"
+version = "0.4.3"
+
+[project.features]
+default = ["user"]
+func-types = []
+impl-default = ["winapi/impl-default"]
+kernel = []
+user = []
+
+[rust]
+name = "ntapi"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+winapi = { loaf = "crates-io/winapi", version = "^0.3.9", features = ["cfg", "evntrace", "in6addr", "inaddr", "minwinbase", "ntsecapi", "windef", "winioctl"] }

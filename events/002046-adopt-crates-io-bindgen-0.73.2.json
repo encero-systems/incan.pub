@@ -1,0 +1,197 @@
+{
+  "about": {
+    "description": "Automatically generates Rust FFI bindings to C and C++ libraries.",
+    "documentation": "https://docs.rs/bindgen",
+    "homepage": "https://rust-lang.github.io/rust-bindgen/",
+    "license": "BSD-3-Clause",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-lang/rust-bindgen"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:787ef8ef523575546b106a58213d6e6b06198a05c2f757258c68a74273670cfa",
+    "package": "bindgen",
+    "registry": "crates-io",
+    "version": "0.73.2"
+  },
+  "archive": "sha256:b962b805ae48a1e28f0b4e380759ed95f44a9485c3de896bc0b860198220302a",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/annotate-snippets",
+      "name": "annotate-snippets",
+      "optional": true,
+      "req": "^0.11.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.2.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cexpr",
+      "name": "cexpr",
+      "optional": false,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "clang_11_0"
+      ],
+      "loaf": "crates-io/clang-sys",
+      "name": "clang-sys",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/clap",
+      "name": "clap",
+      "optional": true,
+      "req": "^4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/clap_complete",
+      "name": "clap_complete",
+      "optional": true,
+      "req": "^4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "verbatim"
+      ],
+      "loaf": "crates-io/prettyplease",
+      "name": "prettyplease",
+      "optional": true,
+      "req": ">=0.2.7, <0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0.80"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "unicode-perl"
+      ],
+      "loaf": "crates-io/regex",
+      "name": "regex",
+      "optional": false,
+      "req": "^1.5.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": false,
+      "req": "^2.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/shlex",
+      "name": "shlex",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "extra-traits",
+        "full",
+        "visit-mut"
+      ],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": ">=2, <4"
+    }
+  ],
+  "features": {
+    "__cli": [
+      "dep:clap",
+      "dep:clap_complete"
+    ],
+    "__testing_only_extra_assertions": [],
+    "__testing_only_libclang_16": [],
+    "__testing_only_libclang_20": [],
+    "__testing_only_libclang_22": [],
+    "default": [
+      "logging",
+      "prettyplease",
+      "runtime"
+    ],
+    "experimental": [
+      "dep:annotate-snippets"
+    ],
+    "libcpp": [
+      "clang-sys/libcpp"
+    ],
+    "logging": [
+      "dep:log"
+    ],
+    "prettyplease": [
+      "dep:prettyplease"
+    ],
+    "runtime": [
+      "clang-sys/runtime"
+    ],
+    "static": [
+      "clang-sys/static"
+    ]
+  },
+  "id": "sha256:70728b0b1f093e49c0d689f9d1ce870e7a09aecf923ffff1552e48b5ef3e80fe",
+  "kind": "adopt",
+  "manifest": "sha256:098689208f27395c8ceebdaf1fcf765c89179abbbd8b8381003b48bb4691c62b",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "bindgen",
+    "root": "lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bindgen",
+    "scope": "crates-io",
+    "version": "0.73.2"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "about": {
+    "description": "Implementation of the Unicode Bidirectional Algorithm",
+    "documentation": "https://docs.rs/unicode-bidi/",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/servo/unicode-bidi"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5c1cb5db39152898a79168971543b1cb5020dff7fe43c8dc468b0885f5e29df5",
+    "package": "unicode-bidi",
+    "registry": "crates-io",
+    "version": "0.3.18"
+  },
+  "archive": "sha256:8cad07cad1f46bd2de510ee239b2e76421859254c67d6ddf47c55c89c7111eca",
+  "at": "2026-10-07T07:42:28Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flame",
+      "name": "flame",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flamer",
+      "name": "flamer",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": ">=0.8, <2.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "union"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": ">=1.13"
+    }
+  ],
+  "features": {
+    "bench_it": [],
+    "default": [
+      "std",
+      "hardcoded-data"
+    ],
+    "flame": [
+      "dep:flame"
+    ],
+    "flame_it": [
+      "flame",
+      "flamer"
+    ],
+    "flamer": [
+      "dep:flamer"
+    ],
+    "hardcoded-data": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "smallvec": [
+      "dep:smallvec"
+    ],
+    "std": [],
+    "unstable": [],
+    "with_serde": [
+      "serde"
+    ]
+  },
+  "id": "sha256:51d072c352bf04e0ba3e0987e8446276b0fe7064561bb39ff8647ef84dc60522",
+  "kind": "adopt",
+  "manifest": "sha256:ef5b3a43e792fb79320501610a4d30333d4d903728d258f709cf918f5d3cc8e4",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "unicode_bidi",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "unicode-bidi",
+    "scope": "crates-io",
+    "version": "0.3.18"
+  }
+}

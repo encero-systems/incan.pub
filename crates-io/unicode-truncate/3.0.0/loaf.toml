@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/unicode-truncate"
+version = "3.0.0"
+
+[project.features]
+default = ["std"]
+std = []
+
+[rust]
+name = "unicode_truncate"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+itertools = { loaf = "crates-io/itertools", version = "^0.15", default-features = false }
+unicode-segmentation = { loaf = "crates-io/unicode-segmentation", version = "^1", default-features = false }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.2" }

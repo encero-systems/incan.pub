@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/gloo-timers"
+version = "0.4.0"
+
+[project.features]
+default = []
+futures = ["futures-core", "futures-channel"]
+futures-channel = ["dep:futures-channel"]
+futures-core = ["dep:futures-core"]
+
+[rust]
+name = "gloo_timers"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3", optional = true }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", optional = true }
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.91" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2" }

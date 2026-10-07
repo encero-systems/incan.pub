@@ -1,0 +1,37 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crypto-bigint"
+version = "0.7.5"
+
+[project.features]
+alloc = ["serdect?/alloc"]
+default = ["rand_core"]
+der = ["dep:der", "hybrid-array"]
+extra-sizes = []
+getrandom = ["dep:getrandom", "rand_core"]
+hybrid-array = ["dep:hybrid-array"]
+rand_core = ["dep:rand_core"]
+rlp = ["dep:rlp"]
+serde = ["dep:serdect"]
+subtle = ["dep:subtle", "ctutils/subtle", "hybrid-array?/subtle"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "crypto_bigint"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cpubits = { loaf = "crates-io/cpubits", version = "^0.1" }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4" }
+der = { loaf = "crates-io/der", version = "^0.8", default-features = false, optional = true }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", features = ["sys_rng"], optional = true }
+hybrid-array = { loaf = "crates-io/hybrid-array", version = "^0.4.12", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19", default-features = false }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false, optional = true }
+rlp = { loaf = "crates-io/rlp", version = "^0.6", default-features = false, optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.4", default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2.6", default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

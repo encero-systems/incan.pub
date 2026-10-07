@@ -1,0 +1,295 @@
+{
+  "about": {
+    "description": "Utilities for implementing and composing `tracing` subscribers.",
+    "documentation": "",
+    "homepage": "https://tokio.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tokio-rs/tracing"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cb7f578e5945fb242538965c2d0b04418d38ec25c79d160cd279bf0731c8d319",
+    "package": "tracing-subscriber",
+    "registry": "crates-io",
+    "version": "0.3.23"
+  },
+  "archive": "sha256:7582770d7a09a044ef8cc1ec46ee37829f49358ab51d570be91ce1c890a3387b",
+  "at": "2026-10-07T07:41:59Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "clock",
+        "std"
+      ],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": true,
+      "req": "^0.4.26"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/matchers",
+      "name": "matchers",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/nu-ansi-term",
+      "name": "nu-ansi-term",
+      "optional": true,
+      "req": "^0.50.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking_lot",
+      "name": "parking_lot",
+      "optional": true,
+      "req": "^0.12.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/regex-automata",
+      "name": "regex-automata",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.140"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1.0.82"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sharded-slab",
+      "name": "sharded-slab",
+      "optional": true,
+      "req": "^0.1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": true,
+      "req": "^1.9.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thread_local",
+      "name": "thread_local",
+      "optional": true,
+      "req": "^1.1.4"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "formatting"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.43"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tracing-core",
+      "name": "tracing-core",
+      "optional": false,
+      "req": "^0.1.35"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "log-tracer",
+        "std"
+      ],
+      "loaf": "crates-io/tracing-log",
+      "name": "tracing-log",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tracing-serde",
+      "name": "tracing-serde",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/valuable-serde",
+      "name": "valuable-serde",
+      "optional": true,
+      "req": "^0.1.0",
+      "target": "cfg(tracing_unstable)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/valuable",
+      "name": "valuable_crate",
+      "optional": true,
+      "req": "^0.1.0",
+      "target": "cfg(tracing_unstable)"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "ansi": [
+      "fmt",
+      "nu-ansi-term"
+    ],
+    "chrono": [
+      "dep:chrono"
+    ],
+    "default": [
+      "smallvec",
+      "fmt",
+      "ansi",
+      "tracing-log",
+      "std"
+    ],
+    "env-filter": [
+      "matchers",
+      "once_cell",
+      "tracing",
+      "std",
+      "thread_local",
+      "dep:regex-automata"
+    ],
+    "fmt": [
+      "registry",
+      "std"
+    ],
+    "json": [
+      "tracing-serde",
+      "serde",
+      "serde_json"
+    ],
+    "local-time": [
+      "dep:time",
+      "time/local-offset"
+    ],
+    "matchers": [
+      "dep:matchers"
+    ],
+    "nu-ansi-term": [
+      "dep:nu-ansi-term"
+    ],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "parking_lot": [
+      "dep:parking_lot"
+    ],
+    "regex": [],
+    "registry": [
+      "sharded-slab",
+      "thread_local",
+      "std"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "sharded-slab": [
+      "dep:sharded-slab"
+    ],
+    "smallvec": [
+      "dep:smallvec"
+    ],
+    "std": [
+      "alloc",
+      "tracing-core/std"
+    ],
+    "thread_local": [
+      "dep:thread_local"
+    ],
+    "time": [
+      "dep:time"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ],
+    "tracing-log": [
+      "dep:tracing-log"
+    ],
+    "tracing-serde": [
+      "dep:tracing-serde"
+    ],
+    "valuable": [
+      "tracing-core/valuable",
+      "valuable_crate",
+      "valuable-serde",
+      "dep:tracing-serde",
+      "tracing-serde/valuable"
+    ],
+    "valuable-serde": [
+      "dep:valuable-serde"
+    ],
+    "valuable_crate": [
+      "dep:valuable_crate"
+    ]
+  },
+  "id": "sha256:53f62baa7f976efc3857fd228a4961e487e6c486b7ec4930e9341b81e3e51666",
+  "kind": "adopt",
+  "manifest": "sha256:2279c0055b5ee12559b94d84bfbe2874b48896ba01e9ceb03aa04772d3e2f686",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "tracing_subscriber",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tracing-subscriber",
+    "scope": "crates-io",
+    "version": "0.3.23"
+  }
+}

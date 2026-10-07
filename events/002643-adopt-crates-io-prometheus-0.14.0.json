@@ -1,0 +1,155 @@
+{
+  "about": {
+    "description": "Prometheus instrumentation library for Rust applications.",
+    "documentation": "https://docs.rs/prometheus",
+    "homepage": "https://github.com/tikv/rust-prometheus",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tikv/rust-prometheus"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3ca5326d8d0b950a9acd87e6a3f94745394f62e4dae1b1ee22b2bc0c394af43a",
+    "package": "prometheus",
+    "registry": "crates-io",
+    "version": "0.14.0"
+  },
+  "archive": "sha256:53d6f479a7a29469a0c1c3e6a1fab9c1900b96308eca5bf1df29cf66010faad4",
+  "at": "2026-10-07T07:45:03Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/fnv",
+      "name": "fnv",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/lazy_static",
+      "name": "lazy_static",
+      "optional": false,
+      "req": "^1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking_lot",
+      "name": "parking_lot",
+      "optional": false,
+      "req": "^0.12"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/procfs",
+      "name": "procfs",
+      "optional": true,
+      "req": "^0.17",
+      "target": "cfg(target_os = \"linux\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/protobuf",
+      "name": "protobuf",
+      "optional": true,
+      "req": "^3.7.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "blocking"
+      ],
+      "loaf": "crates-io/reqwest",
+      "name": "reqwest",
+      "optional": true,
+      "req": "^0.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "protobuf"
+    ],
+    "gen": [
+      "protobuf-codegen"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "nightly": [
+      "libc"
+    ],
+    "process": [
+      "libc",
+      "procfs"
+    ],
+    "procfs": [
+      "dep:procfs"
+    ],
+    "protobuf": [
+      "dep:protobuf"
+    ],
+    "protobuf-codegen": [],
+    "push": [
+      "reqwest",
+      "libc",
+      "protobuf"
+    ],
+    "reqwest": [
+      "dep:reqwest"
+    ]
+  },
+  "id": "sha256:f184a4a975d6701a251a91ac9115667b8cb28b4a4d208c7a4f0b56e28c5b3338",
+  "kind": "adopt",
+  "manifest": "sha256:920a9a707a2bb96d5310955a4aaf478f0698515692534bac10d4748bdf26e6b7",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "prometheus",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "prometheus",
+    "scope": "crates-io",
+    "version": "0.14.0"
+  }
+}

@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/filedescriptor"
+version = "0.8.3"
+
+[rust]
+name = "filedescriptor"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+thiserror = { loaf = "crates-io/thiserror", version = "^1.0" }
+winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["fileapi", "handleapi", "namedpipeapi", "processenv", "processthreadsapi", "winsock2", "winuser"], target = "cfg(windows)" }

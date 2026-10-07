@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/plist"
+version = "1.10.1"
+
+[project.features]
+default = ["serde"]
+enable_unstable_features_that_may_break_with_minor_version_bumps = []
+serde = ["dep:serde"]
+
+[rust]
+name = "plist"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.23.1" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.14.0" }
+quick_xml = { loaf = "crates-io/quick-xml", version = "^0.42.0" }
+serde = { loaf = "crates-io/serde", version = "^1.0.2", optional = true }
+time = { loaf = "crates-io/time", version = "^0.3.47", features = ["formatting", "parsing"] }

@@ -1,0 +1,101 @@
+{
+  "about": {
+    "description": "A Rust library to access Redox users and groups functionality",
+    "documentation": "https://docs.rs/redox_users",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://gitlab.redox-os.org/redox-os/users"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ba009ff324d1fc1b900bd1fdb31564febe58a8ccc8a6fdbb93b543d33b13ca43",
+    "package": "redox_users",
+    "registry": "crates-io",
+    "version": "0.4.6"
+  },
+  "archive": "sha256:50f871e9a847d1a997679b9afbe0a326cb1eeb165d3fdd9e7b8a1f430c21894a",
+  "at": "2026-10-07T07:45:05Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "call",
+        "std"
+      ],
+      "loaf": "crates-io/libredox",
+      "name": "libredox",
+      "optional": false,
+      "req": "^0.1.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rust-argon2",
+      "name": "rust-argon2",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "zeroize_derive"
+      ],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.4"
+    }
+  ],
+  "features": {
+    "auth": [
+      "rust-argon2",
+      "zeroize"
+    ],
+    "default": [
+      "auth"
+    ],
+    "rust-argon2": [
+      "dep:rust-argon2"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:cf51da824c0a68ee300f56a8f06dc6110b0f305dd25589fc470eb83286e21c78",
+  "kind": "adopt",
+  "manifest": "sha256:89041d005d987fe62e2f2a7afa415d1eefa46b7f328f1ce0e5659f0753af2c2a",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "redox_users",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "redox_users",
+    "scope": "crates-io",
+    "version": "0.4.6"
+  }
+}

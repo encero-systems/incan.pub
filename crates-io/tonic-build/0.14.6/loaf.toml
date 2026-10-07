@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tonic-build"
+version = "0.14.6"
+
+[project.features]
+default = ["transport"]
+transport = []
+
+[rust]
+name = "tonic_build"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+prettyplease = { loaf = "crates-io/prettyplease", version = "^0.2" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^2.0" }

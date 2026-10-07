@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/castaway"
+version = "0.2.4"
+
+[project.features]
+alloc = []
+default = ["std"]
+std = ["alloc"]
+
+[rust]
+name = "castaway"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+rustversion = { loaf = "crates-io/rustversion", version = "^1" }

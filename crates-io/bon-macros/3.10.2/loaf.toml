@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bon-macros"
+version = "3.10.2"
+
+[project.features]
+alloc = []
+default = []
+experimental-generics-setters = []
+experimental-overwritable = []
+implied-bounds = []
+std = []
+
+[rust]
+name = "bon_macros"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+darling = { loaf = "crates-io/darling", version = ">=0.24.1, <0.25.0" }
+ident_case = { loaf = "crates-io/ident_case", version = "^1" }
+prettyplease = { loaf = "crates-io/prettyplease", version = "^0.3" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.88" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^3.0.3", features = ["full", "visit", "visit-mut"] }

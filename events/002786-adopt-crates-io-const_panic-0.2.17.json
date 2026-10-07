@@ -1,0 +1,95 @@
+{
+  "about": {
+    "description": "const panic with formatting",
+    "documentation": "",
+    "homepage": "",
+    "license": "Zlib",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rodrimati1992/const_panic/"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9603f79528ece8163c496f8932121cb36cfe46259e9c907bb3d8205139d7caa3",
+    "package": "const_panic",
+    "registry": "crates-io",
+    "version": "0.2.17"
+  },
+  "archive": "sha256:2faa9d8b899522810dab4500f25e67bfecbde6a694c90cae1b7e8d9f81afb427",
+  "at": "2026-10-07T07:45:36Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/const_panic_proc_macros",
+      "name": "const_panic_proc_macros",
+      "optional": true,
+      "req": "=0.2.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/trybuild",
+      "name": "trybuild",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/typewit",
+      "name": "typewit",
+      "optional": false,
+      "req": "^1.9.0"
+    }
+  ],
+  "features": {
+    "__ui_tests": [
+      "trybuild",
+      "test"
+    ],
+    "const_panic_proc_macros": [
+      "dep:const_panic_proc_macros"
+    ],
+    "default": [
+      "non_basic"
+    ],
+    "derive": [
+      "const_panic_proc_macros",
+      "non_basic"
+    ],
+    "docsrs": [],
+    "non_basic": [],
+    "rust_1_64": [],
+    "rust_1_82": [
+      "rust_1_64"
+    ],
+    "rust_1_88": [
+      "rust_1_82"
+    ],
+    "rust_latest_stable": [
+      "rust_1_88"
+    ],
+    "test": [],
+    "trybuild": [
+      "dep:trybuild"
+    ]
+  },
+  "id": "sha256:940eb3ea956e52a21c582bd1f0c899d6e8b1be9f6a742648fa8a92eb99f651bc",
+  "kind": "adopt",
+  "manifest": "sha256:aa82644406bca93fad0070ff5c1896c3a1bb59c605a2ee2e8fc7eec18158b90f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "const_panic",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "const_panic",
+    "scope": "crates-io",
+    "version": "0.2.17"
+  }
+}

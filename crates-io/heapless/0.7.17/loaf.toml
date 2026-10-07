@@ -1,0 +1,33 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/heapless"
+version = "0.7.17"
+
+[project.features]
+__trybuild = []
+atomic-polyfill = ["dep:atomic-polyfill"]
+cas = ["atomic-polyfill"]
+default = ["cas"]
+defmt = ["dep:defmt"]
+defmt-impl = ["defmt"]
+mpmc_large = []
+serde = ["dep:serde"]
+ufmt-impl = ["ufmt-write"]
+ufmt-write = ["dep:ufmt-write"]
+x86-sync-pool = []
+
+[rust]
+name = "heapless"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+atomic-polyfill = [{ loaf = "crates-io/atomic-polyfill", version = "^1", target = "riscv32i-unknown-none-elf" }, { loaf = "crates-io/atomic-polyfill", version = "^1", target = "riscv32imc-unknown-none-elf" }, { loaf = "crates-io/atomic-polyfill", version = "^1", target = "xtensa-esp32s2-none-elf" }, { loaf = "crates-io/atomic-polyfill", version = "^1", optional = true, target = "cfg(target_arch = \"avr\")" }, { loaf = "crates-io/atomic-polyfill", version = "^1", optional = true, target = "thumbv6m-none-eabi" }]
+defmt = { loaf = "crates-io/defmt", version = ">=0.2.0, <0.4", optional = true }
+hash32 = { loaf = "crates-io/hash32", version = "^0.2.1" }
+serde = { loaf = "crates-io/serde", version = "^1", default-features = false, optional = true }
+spin = { loaf = "crates-io/spin", version = "^0.9.2", target = "cfg(target_arch = \"x86_64\")" }
+stable_deref_trait = { loaf = "crates-io/stable_deref_trait", version = "^1", default-features = false }
+ufmt-write = { loaf = "crates-io/ufmt-write", version = "^0.1", optional = true }

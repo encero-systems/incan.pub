@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/headers"
+version = "0.4.2"
+
+[project.features]
+nightly = []
+
+[rust]
+name = "headers"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.22" }
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+headers-core = { loaf = "crates-io/headers-core", version = "^0.3" }
+http = { loaf = "crates-io/http", version = "^1.0.0" }
+httpdate = { loaf = "crates-io/httpdate", version = "^1" }
+mime = { loaf = "crates-io/mime", version = "^0.3.14" }
+sha1 = { loaf = "crates-io/sha1", version = "^0.10" }

@@ -1,0 +1,15 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/terminal_size"
+version = "0.4.4"
+
+[rust]
+name = "terminal_size"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+rustix = { loaf = "crates-io/rustix", version = "^1.0.1", features = ["termios"], target = "cfg(unix)" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.59, <=0.61", features = ["Win32_Foundation", "Win32_System_Console"], target = "cfg(windows)" }

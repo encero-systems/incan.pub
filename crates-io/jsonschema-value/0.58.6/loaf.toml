@@ -1,0 +1,38 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/jsonschema-value"
+version = "0.58.6"
+
+[project.features]
+arbitrary-precision = ["serde_json/arbitrary_precision", "dep:num-bigint"]
+conformance = []
+default = ["serde_json"]
+jsonb = ["serde_json"]
+jsonb-testkit = ["jsonb"]
+macros = []
+magnus = ["dep:magnus", "dep:rb-sys"]
+magnus-tests = ["magnus", "dep:magnus", "magnus/embed"]
+pyo3 = ["dep:pyo3"]
+pyo3-tests = ["pyo3", "dep:pyo3", "pyo3/auto-initialize"]
+serde_json = ["dep:bytecount"]
+
+[rust]
+name = "jsonschema_value"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+ahash = { loaf = "crates-io/ahash", version = "^0.8", features = ["serde"] }
+bytecount = { loaf = "crates-io/bytecount", version = "^0.6", features = ["runtime-dispatch-simd"], optional = true }
+fraction = { loaf = "crates-io/fraction", version = "^0.17", features = ["with-bigint"], default-features = false }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.3.4", features = ["wasm_js"], target = "cfg(target_arch = \"wasm32\")" }
+magnus = { loaf = "crates-io/magnus", version = "^0.9", features = ["rb-sys"], optional = true }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4", optional = true }
+num-cmp = { loaf = "crates-io/num-cmp", version = "^0.1" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19" }
+pyo3 = { loaf = "crates-io/pyo3", version = "^0.29", optional = true }
+rb-sys = { loaf = "crates-io/rb-sys", version = "^0.9", optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1", features = ["float_roundtrip"] }
+zmij = { loaf = "crates-io/zmij", version = "^1.0.23" }

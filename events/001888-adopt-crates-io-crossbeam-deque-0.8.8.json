@@ -1,0 +1,64 @@
+{
+  "about": {
+    "description": "Concurrent work-stealing deque",
+    "documentation": "",
+    "homepage": "https://github.com/crossbeam-rs/crossbeam/tree/master/crossbeam-deque",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/crossbeam-rs/crossbeam"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:622f3fc73690be383c7214310406f28a90e6edeadc3cea882f9d71e495b9711a",
+    "package": "crossbeam-deque",
+    "registry": "crates-io",
+    "version": "0.8.8"
+  },
+  "archive": "sha256:4275824aa211ccd4d731511719a77d4058edfe0b11a27125d9082c54c56f83e8",
+  "at": "2026-10-07T07:41:59Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-epoch",
+      "name": "crossbeam-epoch",
+      "optional": false,
+      "req": "^0.9.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "optional": false,
+      "req": "^0.8.18"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "std": [
+      "crossbeam-epoch/std",
+      "crossbeam-utils/std"
+    ]
+  },
+  "id": "sha256:3a0674683e336bbb5e8de572b7ff353f438f5b4802452377e05435546267b036",
+  "kind": "adopt",
+  "manifest": "sha256:77656aa518385417ab6a0542dd054c1cacdd99ea610674f71701504d732aaff3",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "crossbeam_deque",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "crossbeam-deque",
+    "scope": "crates-io",
+    "version": "0.8.8"
+  }
+}

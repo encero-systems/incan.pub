@@ -1,0 +1,110 @@
+{
+  "about": {
+    "description": "An implementation of boolean-valued predicate functions.",
+    "documentation": "https://docs.rs/predicates",
+    "homepage": "https://github.com/assert-rs/predicates-rs",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/assert-rs/predicates-rs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ada8f2932f28a27ee7b70dd6c1c39ea0675c55a36879ab92f3a715eaa1e63cfe",
+    "package": "predicates",
+    "registry": "crates-io",
+    "version": "3.1.4"
+  },
+  "archive": "sha256:e7a43492a198e64c39a27b19b87d09f02dcf0816d6328aa7b087c8db198672da",
+  "at": "2026-10-07T07:44:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anstyle",
+      "name": "anstyle",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/difflib",
+      "name": "difflib",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/float-cmp",
+      "name": "float-cmp",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/normalize-line-endings",
+      "name": "normalize-line-endings",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/predicates-core",
+      "name": "predicates-core",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/regex",
+      "name": "regex",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "color": [],
+    "default": [
+      "diff",
+      "regex",
+      "float-cmp",
+      "normalize-line-endings",
+      "color"
+    ],
+    "diff": [
+      "dep:difflib"
+    ],
+    "float-cmp": [
+      "dep:float-cmp"
+    ],
+    "normalize-line-endings": [
+      "dep:normalize-line-endings"
+    ],
+    "regex": [
+      "dep:regex"
+    ],
+    "unstable": []
+  },
+  "id": "sha256:b6a24af33d123fde7816285a69e298ecc503c2134c00c7735fd630bd114b4192",
+  "kind": "adopt",
+  "manifest": "sha256:4f150d273395ba6fd9251b01f8a6ab21c3e40fa1696d8da2b0bacd534a3de36f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "predicates",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "predicates",
+    "scope": "crates-io",
+    "version": "3.1.4"
+  }
+}

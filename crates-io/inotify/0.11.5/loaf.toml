@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/inotify"
+version = "0.11.5"
+
+[project.features]
+default = ["stream"]
+futures-util = ["dep:futures-util"]
+stream = ["futures-util", "tokio"]
+tokio = ["dep:tokio"]
+
+[rust]
+name = "inotify"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2" }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.30", optional = true }
+inotify-sys = { loaf = "crates-io/inotify-sys", version = "^0.1.8" }
+libc = { loaf = "crates-io/libc", version = "^0.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1.40.0", features = ["net"], optional = true }

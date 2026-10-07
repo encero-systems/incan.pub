@@ -1,0 +1,97 @@
+{
+  "about": {
+    "description": "A terminal and console abstraction for Rust",
+    "documentation": "https://docs.rs/console",
+    "homepage": "https://github.com/console-rs/console",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/console-rs/console"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e96a4956774c13c126a8b5af4daa79384f4d826534c95a02d76afb39e2ab64e3",
+    "package": "console",
+    "registry": "crates-io",
+    "version": "0.16.6"
+  },
+  "archive": "sha256:b93a1ff27e270270e2d45ced63684f2740cfdf5a9b0fbee087ae05c1c1a74310",
+  "at": "2026-10-07T07:42:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/encode_unicode",
+      "name": "encode_unicode",
+      "optional": false,
+      "req": "^1",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.99"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Console",
+        "Win32_UI_Input_KeyboardAndMouse"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.61",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "ansi-parsing": [],
+    "default": [
+      "unicode-width",
+      "ansi-parsing",
+      "std"
+    ],
+    "std": [
+      "dep:libc",
+      "alloc"
+    ],
+    "unicode-width": [
+      "dep:unicode-width"
+    ],
+    "windows-console-colors": [
+      "ansi-parsing"
+    ]
+  },
+  "id": "sha256:b2eefb93394197f85a275c8b77f594983a6baf7fe7194662776299732d76cc4d",
+  "kind": "adopt",
+  "manifest": "sha256:ba364a2b0aa29252316a0723fdec52c5e804c25fd432f4370ea5fcbf861f61d4",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "console",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "console",
+    "scope": "crates-io",
+    "version": "0.16.6"
+  }
+}

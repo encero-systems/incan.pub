@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/blocking"
+version = "1.7.0"
+
+[project.features]
+tracing = ["dep:tracing"]
+
+[rust]
+name = "blocking"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-channel = { loaf = "crates-io/async-channel", version = "^2.0.0" }
+async-task = { loaf = "crates-io/async-task", version = "^4.4.0" }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.28", features = ["std"], default-features = false }
+futures-lite = { loaf = "crates-io/futures-lite", version = "^2.0.0", default-features = false }
+piper = { loaf = "crates-io/piper", version = "^0.2.0" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.37", default-features = false, optional = true }

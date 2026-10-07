@@ -1,0 +1,115 @@
+{
+  "about": {
+    "description": "Prost build integration for tonic",
+    "documentation": "",
+    "homepage": "https://github.com/hyperium/tonic",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/hyperium/tonic"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:654e5643eff75d7f8c99197ce1440ed19a3474eada74c12bbac488b2cafdae27",
+    "package": "tonic-prost-build",
+    "registry": "crates-io",
+    "version": "0.14.6"
+  },
+  "archive": "sha256:abded4b7a2f9ec5ca6e1d277132e022aa2177140f06b979cc24ae001663c2bcf",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prettyplease",
+      "name": "prettyplease",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prost-build",
+      "name": "prost-build",
+      "optional": false,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prost-types",
+      "name": "prost-types",
+      "optional": false,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": "^2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tempfile",
+      "name": "tempfile",
+      "optional": false,
+      "req": "^3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tonic-build",
+      "name": "tonic-build",
+      "optional": false,
+      "req": "^0.14.6"
+    }
+  ],
+  "features": {
+    "cleanup-markdown": [
+      "prost-build/cleanup-markdown"
+    ],
+    "default": [
+      "transport",
+      "cleanup-markdown"
+    ],
+    "transport": [
+      "tonic-build/transport"
+    ]
+  },
+  "id": "sha256:4d431b319d7ea56f529a37d8b097413a1304006360c77346a0e4e5f22bbbc064",
+  "kind": "adopt",
+  "manifest": "sha256:044582502656fb16265eff75d267b8d29fb2eca390f355b1e619565be100d2a9",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "tonic_prost_build",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tonic-prost-build",
+    "scope": "crates-io",
+    "version": "0.14.6"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "about": {
+    "description": "Plotters Bitmap Backend",
+    "documentation": "",
+    "homepage": "https://plotters-rs.github.io",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/plotters-rs/plotters"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:72ce181e3f6bf82d6c1dc569103ca7b1bd964c60ba03d7e6cdfbb3e3eb7f7405",
+    "package": "plotters-bitmap",
+    "registry": "crates-io",
+    "version": "0.3.7"
+  },
+  "archive": "sha256:2d3afa61abf789d3a6db0de74ae2ed1e9a2186f69ed0eba71c65e55e4acfe68a",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/gif",
+      "name": "gif",
+      "optional": true,
+      "req": "^0.12.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "bmp",
+        "jpeg",
+        "png"
+      ],
+      "loaf": "crates-io/image",
+      "name": "image",
+      "optional": true,
+      "req": "^0.24.3",
+      "target": "cfg(not(target_arch = \"wasm32\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/plotters-backend",
+      "name": "plotters-backend",
+      "optional": false,
+      "req": "^0.3.6"
+    }
+  ],
+  "features": {
+    "default": [
+      "image_encoder",
+      "gif_backend"
+    ],
+    "gif": [
+      "dep:gif"
+    ],
+    "gif_backend": [
+      "gif",
+      "image_encoder"
+    ],
+    "image": [
+      "dep:image"
+    ],
+    "image_encoder": [
+      "image"
+    ]
+  },
+  "id": "sha256:d96a5e90fadea2ee0f0e27bade3ff83da868d11275305331f5b8ceac7875a985",
+  "kind": "adopt",
+  "manifest": "sha256:4d8ad13457f8abba8bcc6e9d438ec909951233c19ae2f46bef694b7899fc38c5",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "plotters_bitmap",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "plotters-bitmap",
+    "scope": "crates-io",
+    "version": "0.3.7"
+  }
+}

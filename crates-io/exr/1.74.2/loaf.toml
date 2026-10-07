@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/exr"
+version = "1.74.2"
+
+[project.features]
+avx2-tests = []
+default = ["rayon"]
+rayon = ["dep:rayon-core"]
+simd-benches = []
+sse2-tests = []
+
+[rust]
+name = "exr"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bit_field = { loaf = "crates-io/bit_field", version = "^0.10.1" }
+half = { loaf = "crates-io/half", version = "^2.1.0" }
+lebe = { loaf = "crates-io/lebe", version = "^0.5.2" }
+miniz_oxide = { loaf = "crates-io/miniz_oxide", version = "^0.8.0" }
+num-complex = { loaf = "crates-io/num-complex", version = "^0.4.6" }
+pulp = { loaf = "crates-io/pulp", version = "^0.22.3" }
+rayon-core = { loaf = "crates-io/rayon-core", version = "^1.11.0", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.7.0" }
+zune-inflate = { loaf = "crates-io/zune-inflate", version = "^0.2.3", features = ["zlib"], default-features = false }

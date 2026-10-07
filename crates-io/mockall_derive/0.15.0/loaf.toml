@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/mockall_derive"
+version = "0.15.0"
+
+[project.features]
+nightly_derive = ["proc-macro2/nightly"]
+
+[rust]
+name = "mockall_derive"
+type = "proc-macro"
+edition = "2021"
+build-script = true
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.75" }
+quote = { loaf = "crates-io/quote", version = "^1.0.35" }
+syn = { loaf = "crates-io/syn", version = "^2.0.52", features = ["extra-traits", "full"] }

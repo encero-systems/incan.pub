@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/console"
+version = "0.16.6"
+
+[project.features]
+alloc = []
+ansi-parsing = []
+default = ["unicode-width", "ansi-parsing", "std"]
+std = ["dep:libc", "alloc"]
+unicode-width = ["dep:unicode-width"]
+windows-console-colors = ["ansi-parsing"]
+
+[rust]
+name = "console"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+encode_unicode = { loaf = "crates-io/encode_unicode", version = "^1", target = "cfg(windows)" }
+libc = { loaf = "crates-io/libc", version = "^0.2.99", optional = true }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.2", optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_System_Console", "Win32_UI_Input_KeyboardAndMouse"], target = "cfg(windows)" }

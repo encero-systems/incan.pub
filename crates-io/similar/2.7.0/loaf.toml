@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/similar"
+version = "2.7.0"
+
+[project.features]
+bstr = ["dep:bstr"]
+bytes = ["bstr", "text"]
+default = ["text"]
+inline = ["text"]
+serde = ["dep:serde"]
+text = []
+unicode = ["text", "unicode-segmentation", "bstr?/unicode", "bstr?/std"]
+unicode-segmentation = ["dep:unicode-segmentation"]
+wasm32_web_time = ["web-time"]
+web-time = ["dep:web-time"]
+
+[rust]
+name = "similar"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bstr = { loaf = "crates-io/bstr", version = "^1.5.0", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.130", features = ["derive"], optional = true }
+unicode-segmentation = { loaf = "crates-io/unicode-segmentation", version = "^1.7.1", optional = true }
+web-time = { loaf = "crates-io/web-time", version = "^1.1", optional = true }

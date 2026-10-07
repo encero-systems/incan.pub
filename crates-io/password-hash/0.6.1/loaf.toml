@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/password-hash"
+version = "0.6.1"
+
+[project.features]
+alloc = ["phc?/alloc"]
+getrandom = ["dep:getrandom", "phc?/getrandom"]
+phc = ["dep:phc"]
+rand_core = ["dep:rand_core", "phc?/rand_core"]
+
+[rust]
+name = "password_hash"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", default-features = false, optional = true }
+phc = { loaf = "crates-io/phc", version = "^0.6", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false, optional = true }

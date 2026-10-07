@@ -1,0 +1,95 @@
+{
+  "about": {
+    "description": "Sampling from random number distributions",
+    "documentation": "https://docs.rs/rand_distr",
+    "homepage": "https://rust-random.github.io/book",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-random/rand_distr"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4d431c2703ccf129de4d45253c03f49ebb22b97d6ad79ee3ecfc7e3f4862c1d8",
+    "package": "rand_distr",
+    "registry": "crates-io",
+    "version": "0.6.0"
+  },
+  "archive": "sha256:e2c4f65075aed7977426755d1df52e9ab2be97a6df298eab97085cdaa5b28ed2",
+  "at": "2026-10-07T07:44:31Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "libm"
+      ],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2.9"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": false,
+      "req": "^0.10.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_with",
+      "name": "serde_with",
+      "optional": true,
+      "req": "^3"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "rand/alloc"
+    ],
+    "default": [
+      "std"
+    ],
+    "serde": [
+      "dep:serde",
+      "dep:serde_with",
+      "rand/serde"
+    ],
+    "std": [
+      "alloc",
+      "rand/std"
+    ],
+    "std_math": [
+      "num-traits/std"
+    ]
+  },
+  "id": "sha256:3d56b340d0de8dcb3ba2c92d990cbe048ec85d914dd58f23963e293e8db7b0af",
+  "kind": "adopt",
+  "manifest": "sha256:6238ef5c07a95ed336ba2097326eb886821781a4b4d4f849368f32f9892c480d",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "rand_distr",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rand_distr",
+    "scope": "crates-io",
+    "version": "0.6.0"
+  }
+}

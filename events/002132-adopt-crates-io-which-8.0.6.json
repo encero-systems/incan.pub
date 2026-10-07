@@ -1,0 +1,78 @@
+{
+  "about": {
+    "description": "A Rust equivalent of Unix command \"which\". Locate installed executable in cross platforms.",
+    "documentation": "https://docs.rs/which/",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/harryfei/which-rs.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:bae2f2b2b816647a1cab1acc91f5bd20812d53cb344382635ec2181940c8034f",
+    "package": "which",
+    "registry": "crates-io",
+    "version": "8.0.6"
+  },
+  "archive": "sha256:d0355f5c28babb417622f3b71eeee3d338fcae9cf7c293f7af81719dbc7a01ab",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2",
+      "target": "cfg(any(unix, target_os = \"wasi\", target_os = \"redox\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/regex",
+      "name": "regex",
+      "optional": true,
+      "req": "^1.10.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": true,
+      "req": "^0.1.40"
+    }
+  ],
+  "features": {
+    "default": [
+      "real-sys"
+    ],
+    "real-sys": [
+      "dep:libc"
+    ],
+    "regex": [
+      "dep:regex"
+    ],
+    "tracing": [
+      "dep:tracing"
+    ]
+  },
+  "id": "sha256:69e8f4871d6cc5f48193275e3025758059f4259dfb6214def84501b3b4b2918e",
+  "kind": "adopt",
+  "manifest": "sha256:18c5d52a714072031a306e77b2028818853c38ee5e1083ceb23876f538b69256",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "which",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "which",
+    "scope": "crates-io",
+    "version": "8.0.6"
+  }
+}

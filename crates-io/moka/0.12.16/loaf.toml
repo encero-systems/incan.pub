@@ -1,0 +1,36 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/moka"
+version = "0.12.16"
+
+[project.features]
+atomic64 = []
+default = []
+future = ["dep:async-lock", "dep:event-listener", "dep:futures-util"]
+logging = ["dep:log"]
+quanta = ["dep:quanta"]
+sync = []
+unstable-debug-counters = ["future"]
+
+[rust]
+name = "moka"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-lock = { loaf = "crates-io/async-lock", version = "^3.3", optional = true }
+crossbeam-channel = { loaf = "crates-io/crossbeam-channel", version = "^0.5.15" }
+crossbeam-epoch = { loaf = "crates-io/crossbeam-epoch", version = "^0.9.20" }
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.21" }
+equivalent = { loaf = "crates-io/equivalent", version = "^1.0" }
+event-listener = { loaf = "crates-io/event-listener", version = "^5.3", optional = true }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.17", optional = true }
+log = { loaf = "crates-io/log", version = "^0.4", optional = true }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.6" }
+quanta = { loaf = "crates-io/quanta", version = "^0.12.2", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.8" }
+tagptr = { loaf = "crates-io/tagptr", version = "^0.2" }
+uuid = { loaf = "crates-io/uuid", version = "^1.1", features = ["v4"] }

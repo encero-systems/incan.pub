@@ -1,0 +1,49 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/arrow"
+version = "60.0.0"
+
+[project.features]
+arrow-csv = ["dep:arrow-csv"]
+arrow-ipc = ["dep:arrow-ipc"]
+arrow-json = ["dep:arrow-json"]
+async = ["arrow-array/async"]
+canonical_extension_types = ["arrow-schema/canonical_extension_types"]
+chrono-tz = ["arrow-array/chrono-tz"]
+csv = ["arrow-csv"]
+default = ["csv", "ipc", "json"]
+ffi = ["arrow-schema/ffi", "arrow-data/ffi", "arrow-array/ffi"]
+force_validate = ["arrow-array/force_validate", "arrow-data/force_validate"]
+ipc = ["arrow-ipc"]
+ipc_compression = ["ipc", "dep:arrow-ipc", "arrow-ipc/lz4", "arrow-ipc/zstd"]
+json = ["arrow-json"]
+pool = ["arrow-array/pool"]
+prettyprint = ["arrow-cast/prettyprint"]
+pyarrow = ["ffi", "dep:arrow-pyarrow"]
+pyarrow-experimental-inspect = ["pyarrow", "dep:arrow-pyarrow", "arrow-pyarrow/experimental-inspect"]
+test_utils = ["dep:rand", "dep:half"]
+
+[rust]
+name = "arrow"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrow-arith = { loaf = "crates-io/arrow-arith", version = "^60.0.0" }
+arrow-array = { loaf = "crates-io/arrow-array", version = "^60.0.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^60.0.0" }
+arrow-cast = { loaf = "crates-io/arrow-cast", version = "^60.0.0" }
+arrow-csv = { loaf = "crates-io/arrow-csv", version = "^60.0.0", optional = true }
+arrow-data = { loaf = "crates-io/arrow-data", version = "^60.0.0" }
+arrow-ipc = { loaf = "crates-io/arrow-ipc", version = "^60.0.0", optional = true }
+arrow-json = { loaf = "crates-io/arrow-json", version = "^60.0.0", optional = true }
+arrow-ord = { loaf = "crates-io/arrow-ord", version = "^60.0.0" }
+arrow-pyarrow = { loaf = "crates-io/arrow-pyarrow", version = "^60.0.0", optional = true }
+arrow-row = { loaf = "crates-io/arrow-row", version = "^60.0.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^60.0.0" }
+arrow-select = { loaf = "crates-io/arrow-select", version = "^60.0.0" }
+arrow-string = { loaf = "crates-io/arrow-string", version = "^60.0.0" }
+half = { loaf = "crates-io/half", version = "^2.1", default-features = false, optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.10", features = ["std", "std_rng", "thread_rng"], default-features = false, optional = true }

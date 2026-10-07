@@ -1,0 +1,98 @@
+{
+  "about": {
+    "description": "Provides utilities for file appenders and making non-blocking writers.",
+    "documentation": "",
+    "homepage": "https://tokio.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/tokio-rs/tracing"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:050686193eb999b4bb3bc2acfa891a13da00f79734704c4b8b4ef1a10b368a3c",
+    "package": "tracing-appender",
+    "registry": "crates-io",
+    "version": "0.2.5"
+  },
+  "archive": "sha256:c30e1476e19a2c02553dd920868f96575c3816a64169e0fa2ebbe349550fecc4",
+  "at": "2026-10-07T07:44:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/crossbeam-channel",
+      "name": "crossbeam-channel",
+      "optional": false,
+      "req": "^0.5.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/parking_lot",
+      "name": "parking_lot",
+      "optional": true,
+      "req": "^0.12.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/symlink",
+      "name": "symlink",
+      "optional": false,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "formatting",
+        "parsing"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": false,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "fmt",
+        "std"
+      ],
+      "loaf": "crates-io/tracing-subscriber",
+      "name": "tracing-subscriber",
+      "optional": false,
+      "req": "^0.3.18"
+    }
+  ],
+  "features": {
+    "parking_lot": [
+      "dep:parking_lot"
+    ]
+  },
+  "id": "sha256:e726b262dec70638cb9e49fa8aca781b376d89915f6ebff1fe5e6a0d7c37fe90",
+  "kind": "adopt",
+  "manifest": "sha256:0655ed9d576e478f02c4997ec571befbeac36e5c1cea38ffa4d2f7b2eecba23e",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "tracing_appender",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tracing-appender",
+    "scope": "crates-io",
+    "version": "0.2.5"
+  }
+}

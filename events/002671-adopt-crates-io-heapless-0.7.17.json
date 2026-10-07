@@ -1,0 +1,162 @@
+{
+  "about": {
+    "description": "`static` friendly data structures that don't require dynamic memory allocation",
+    "documentation": "https://docs.rs/heapless",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/japaric/heapless"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cdc6457c0eb62c71aac4bc17216026d8410337c4126773b9c5daba343f17964f",
+    "package": "heapless",
+    "registry": "crates-io",
+    "version": "0.7.17"
+  },
+  "archive": "sha256:6599873d949a323138beba99e61283cedbb539d181e741fcdb8953d042c05560",
+  "at": "2026-10-07T07:45:04Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-polyfill",
+      "name": "atomic-polyfill",
+      "optional": false,
+      "req": "^1",
+      "target": "riscv32i-unknown-none-elf"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-polyfill",
+      "name": "atomic-polyfill",
+      "optional": false,
+      "req": "^1",
+      "target": "riscv32imc-unknown-none-elf"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-polyfill",
+      "name": "atomic-polyfill",
+      "optional": false,
+      "req": "^1",
+      "target": "xtensa-esp32s2-none-elf"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-polyfill",
+      "name": "atomic-polyfill",
+      "optional": true,
+      "req": "^1",
+      "target": "cfg(target_arch = \"avr\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/atomic-polyfill",
+      "name": "atomic-polyfill",
+      "optional": true,
+      "req": "^1",
+      "target": "thumbv6m-none-eabi"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/defmt",
+      "name": "defmt",
+      "optional": true,
+      "req": ">=0.2.0, <0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hash32",
+      "name": "hash32",
+      "optional": false,
+      "req": "^0.2.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/spin",
+      "name": "spin",
+      "optional": false,
+      "req": "^0.9.2",
+      "target": "cfg(target_arch = \"x86_64\")"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ufmt-write",
+      "name": "ufmt-write",
+      "optional": true,
+      "req": "^0.1"
+    }
+  ],
+  "features": {
+    "__trybuild": [],
+    "atomic-polyfill": [
+      "dep:atomic-polyfill"
+    ],
+    "cas": [
+      "atomic-polyfill"
+    ],
+    "default": [
+      "cas"
+    ],
+    "defmt": [
+      "dep:defmt"
+    ],
+    "defmt-impl": [
+      "defmt"
+    ],
+    "mpmc_large": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "ufmt-impl": [
+      "ufmt-write"
+    ],
+    "ufmt-write": [
+      "dep:ufmt-write"
+    ],
+    "x86-sync-pool": []
+  },
+  "id": "sha256:00dcd2ebedb9305ffdbd6ad0386020e0b63e880f3e217b11202f93156c716c62",
+  "kind": "adopt",
+  "manifest": "sha256:3f39e3ef00d81097a499cd5c30061ac45a4b6d73c85e85bcb13644fc30b43a9d",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "heapless",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "heapless",
+    "scope": "crates-io",
+    "version": "0.7.17"
+  }
+}

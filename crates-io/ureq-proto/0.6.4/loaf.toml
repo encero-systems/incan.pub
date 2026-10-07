@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ureq-proto"
+version = "0.6.4"
+
+[project.features]
+client = []
+default = ["client", "server"]
+server = []
+
+[rust]
+name = "ureq_proto"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64 = { loaf = "crates-io/base64", version = "^0.23.1", features = ["std"], default-features = false }
+http = { loaf = "crates-io/http", version = "^1.1.0", features = ["std"], default-features = false }
+httparse = { loaf = "crates-io/httparse", version = "^1.8.0", default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.22" }

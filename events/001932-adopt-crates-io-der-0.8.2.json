@@ -1,0 +1,166 @@
+{
+  "about": {
+    "description": "Pure Rust embedded-friendly implementation of the Distinguished Encoding Rules\n(DER) for Abstract Syntax Notation One (ASN.1) as described in ITU X.690 with\nfull support for heapless `no_std`/`no_alloc` targets",
+    "documentation": "",
+    "homepage": "https://github.com/RustCrypto/formats/tree/master/der",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/formats"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a878c850e9e421b20262e9b41f9c860e4785fa07541c266b62ff9d1ef998a80a",
+    "package": "der",
+    "registry": "crates-io",
+    "version": "0.8.2"
+  },
+  "archive": "sha256:3e4427215122935e46c3a502780af432fe8639384aa4f9fed9fc1e7a78d89ac4",
+  "at": "2026-10-07T07:42:26Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.4.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/const-oid",
+      "name": "const-oid",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/der_derive",
+      "name": "der_derive",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/derive_arbitrary",
+      "name": "derive_arbitrary",
+      "optional": true,
+      "req": "^1.4.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/flagset",
+      "name": "flagset",
+      "optional": true,
+      "req": "^0.4.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/heapless",
+      "name": "heapless",
+      "optional": true,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/pem-rfc7468",
+      "name": "pem-rfc7468",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1.8"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "zeroize?/alloc"
+    ],
+    "arbitrary": [
+      "dep:arbitrary",
+      "dep:derive_arbitrary",
+      "const-oid?/arbitrary",
+      "std"
+    ],
+    "ber": [],
+    "bytes": [
+      "dep:bytes",
+      "alloc"
+    ],
+    "derive": [
+      "dep:der_derive"
+    ],
+    "flagset": [
+      "dep:flagset"
+    ],
+    "heapless": [
+      "dep:heapless"
+    ],
+    "oid": [
+      "dep:const-oid"
+    ],
+    "pem": [
+      "dep:pem-rfc7468",
+      "alloc",
+      "zeroize"
+    ],
+    "real": [],
+    "std": [
+      "alloc"
+    ],
+    "time": [
+      "dep:time"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:7f7fff21da8c6e95c465a442569ae82aeded164c2b90aa9fba7321a4e8a831d0",
+  "kind": "adopt",
+  "manifest": "sha256:b3e3682b09f8144e2afd060a2ef0175e49b44adc29a488ca836c36539d1a7bfb",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "der",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "der",
+    "scope": "crates-io",
+    "version": "0.8.2"
+  }
+}

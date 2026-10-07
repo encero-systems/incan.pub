@@ -1,0 +1,63 @@
+{
+  "about": {
+    "description": "Universal hash over GF(2^128) useful for constructing a Message Authentication Code (MAC),\nas in the AES-GCM authenticated encryption cipher.",
+    "documentation": "https://docs.rs/ghash",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/universal-hashes"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2eecf2d5dc9b66b732b97707a0210906b1d30523eb773193ab777c0c84b3e8d5",
+    "package": "ghash",
+    "registry": "crates-io",
+    "version": "0.6.0"
+  },
+  "archive": "sha256:7c98a82ebf54f9edc3c616a0995119c4bcc67d85d23ca3e6b116a7ff1ae663e6",
+  "at": "2026-10-07T07:43:33Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "hazmat"
+      ],
+      "loaf": "crates-io/polyval",
+      "name": "polyval",
+      "optional": false,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "zeroize": [
+      "polyval/zeroize",
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:8daa0484d46a7d65da9669fa313e539dbe140a6533583da6406e74913af1c16a",
+  "kind": "adopt",
+  "manifest": "sha256:e7aa787f1e9c535f10b6259a60e1060bdac2c1759c274810463fb09af613a22a",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ghash",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ghash",
+    "scope": "crates-io",
+    "version": "0.6.0"
+  }
+}

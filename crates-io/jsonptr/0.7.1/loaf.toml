@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/jsonptr"
+version = "0.7.1"
+
+[project.features]
+assign = []
+default = ["std", "serde", "json", "resolve", "assign", "delete"]
+delete = ["resolve"]
+json = ["dep:serde_json", "serde"]
+miette = ["dep:miette", "std"]
+resolve = []
+serde = ["dep:serde"]
+std = ["dep:serde", "serde/std", "serde_json?/std"]
+syn = ["dep:syn"]
+toml = ["dep:toml", "serde", "std"]
+
+[rust]
+name = "jsonptr"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+miette = { loaf = "crates-io/miette", version = "^7.4.0", features = ["fancy"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.203", features = ["alloc"], optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.119", features = ["alloc"], optional = true }
+syn = { loaf = "crates-io/syn", version = "^1.0.109", optional = true, target = "cfg(any())" }
+toml = { loaf = "crates-io/toml", version = "^0.8", optional = true }

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/lru"
+version = "0.18.5"
+
+[project.features]
+default = ["hashbrown"]
+hashbrown = ["dep:hashbrown"]
+nightly = ["hashbrown", "dep:hashbrown", "hashbrown/nightly"]
+
+[rust]
+name = "lru"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17.0", features = ["default-hasher", "inline-more"], default-features = false, optional = true }

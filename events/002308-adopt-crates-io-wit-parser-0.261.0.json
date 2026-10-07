@@ -1,0 +1,173 @@
+{
+  "about": {
+    "description": "Tooling for parsing `*.wit` files and working with their contents.",
+    "documentation": "https://docs.rs/wit-parser",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasm-tools/tree/main/crates/wit-parser"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:962e43c4db2da607b50839a531e5b63473268b40efdf8028d5c54b572ca4f6f6",
+    "package": "wit-parser",
+    "registry": "crates-io",
+    "version": "0.261.0"
+  },
+  "archive": "sha256:f0114d8e5d46cabf2b432016b3352c79582570fff68af5992c849d027f6f289a",
+  "at": "2026-10-07T07:43:32Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.58"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.17.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/id-arena",
+      "name": "id-arena",
+      "optional": false,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/semver",
+      "name": "semver",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0.166"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_json",
+      "name": "serde_json",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-ident",
+      "name": "unicode-ident",
+      "optional": false,
+      "req": "^1.0.24"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model",
+        "features",
+        "simd",
+        "validate"
+      ],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": false,
+      "req": "^0.261.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "component-model"
+      ],
+      "loaf": "crates-io/wat",
+      "name": "wat",
+      "optional": true,
+      "req": "^1.261.0"
+    }
+  ],
+  "features": {
+    "decoding": [
+      "std",
+      "wasmparser/std"
+    ],
+    "default": [
+      "std",
+      "serde",
+      "decoding"
+    ],
+    "serde": [
+      "dep:serde",
+      "dep:serde_derive",
+      "indexmap/serde",
+      "serde_json"
+    ],
+    "serde_json": [
+      "dep:serde_json"
+    ],
+    "std": [
+      "semver/std"
+    ],
+    "wat": [
+      "decoding",
+      "dep:wat"
+    ]
+  },
+  "id": "sha256:673b1cb9b51c7c3a367f1664d0df5d6980e85f0c8d6e2e6fe2cd72ae18701100",
+  "kind": "adopt",
+  "manifest": "sha256:bd9c02b7add7e8d16547b782dc7f1718d5b85cc455f9069118f3e2fcc9db13cf",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wit_parser",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-parser",
+    "scope": "crates-io",
+    "version": "0.261.0"
+  }
+}

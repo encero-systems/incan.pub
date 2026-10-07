@@ -1,0 +1,57 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/image"
+version = "0.25.10"
+
+[project.features]
+avif = ["dep:ravif", "dep:rgb"]
+avif-native = ["dep:mp4parse", "dep:dav1d"]
+benchmarks = []
+bmp = []
+color_quant = ["dep:color_quant"]
+dds = []
+default = ["rayon", "default-formats"]
+default-formats = ["avif", "bmp", "dds", "exr", "ff", "gif", "hdr", "ico", "jpeg", "png", "pnm", "qoi", "tga", "tiff", "webp"]
+exr = ["dep:exr"]
+ff = []
+gif = ["dep:gif", "dep:color_quant"]
+hdr = []
+ico = ["bmp", "png"]
+jpeg = ["dep:zune-core", "dep:zune-jpeg"]
+nasm = ["ravif?/asm"]
+png = ["dep:png"]
+pnm = []
+qoi = ["dep:qoi"]
+rayon = ["dep:rayon", "ravif?/threading", "exr?/rayon"]
+serde = ["dep:serde"]
+tga = []
+tiff = ["dep:tiff"]
+webp = ["dep:image-webp"]
+
+[rust]
+name = "image"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.8.0", features = ["extern_crate_alloc"] }
+byteorder-lite = { loaf = "crates-io/byteorder-lite", version = "^0.1.0" }
+color_quant = { loaf = "crates-io/color_quant", version = "^1.1", optional = true }
+dav1d = { loaf = "crates-io/dav1d", version = "^0.11.0", optional = true }
+exr = { loaf = "crates-io/exr", version = "^1.74.0", default-features = false, optional = true }
+gif = { loaf = "crates-io/gif", version = "^0.14.0", optional = true }
+image-webp = { loaf = "crates-io/image-webp", version = "^0.2.0", optional = true }
+moxcms = { loaf = "crates-io/moxcms", version = "^0.8.0" }
+mp4parse = { loaf = "crates-io/mp4parse", version = "^0.17.0", optional = true }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.0" }
+png = { loaf = "crates-io/png", version = "^0.18.0", optional = true }
+qoi = { loaf = "crates-io/qoi", version = "^0.4", optional = true }
+ravif = { loaf = "crates-io/ravif", version = "^0.13", default-features = false, optional = true }
+rayon = { loaf = "crates-io/rayon", version = "^1.7.0", optional = true }
+rgb = { loaf = "crates-io/rgb", version = "^0.8.48", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.214", features = ["derive"], optional = true }
+tiff = { loaf = "crates-io/tiff", version = "^0.11.2", optional = true }
+zune-core = { loaf = "crates-io/zune-core", version = "^0.5.0", default-features = false, optional = true }
+zune-jpeg = { loaf = "crates-io/zune-jpeg", version = "^0.5.5", optional = true }

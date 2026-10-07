@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/quanta"
+version = "0.13.0"
+
+[project.features]
+default = ["flaky_tests", "mock"]
+flaky_tests = []
+mock = []
+prost = ["prost-types"]
+prost-types = ["dep:prost-types"]
+
+[rust]
+name = "quanta"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.183", target = "cfg(any(target_os = \"emscripten\", not(any(target_os = \"windows\", target_arch = \"wasm32\"))))" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", features = ["fallback"], default-features = false }
+prost-types = { loaf = "crates-io/prost-types", version = "^0.11", default-features = false, optional = true }
+raw-cpuid = [{ loaf = "crates-io/raw-cpuid", version = "^11.0", target = "cfg(target_arch = \"x86\")" }, { loaf = "crates-io/raw-cpuid", version = "^11.0", target = "cfg(target_arch = \"x86_64\")" }]
+wasip1 = { loaf = "crates-io/wasip1", version = "^1", target = "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p1\"))" }
+wasip2 = { loaf = "crates-io/wasip2", version = "^1", target = "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p2\"))" }
+web-sys = { loaf = "crates-io/web-sys", version = "^0.3", features = ["Performance", "Window"], target = "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_System_Performance"], target = "cfg(target_os = \"windows\")" }

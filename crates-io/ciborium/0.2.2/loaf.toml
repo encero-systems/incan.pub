@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ciborium"
+version = "0.2.2"
+
+[project.features]
+default = ["std"]
+std = ["ciborium-io/std", "serde/std"]
+
+[rust]
+name = "ciborium"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ciborium-io = { loaf = "crates-io/ciborium-io", version = "^0.2.2", features = ["alloc"] }
+ciborium-ll = { loaf = "crates-io/ciborium-ll", version = "^0.2.2" }
+serde = { loaf = "crates-io/serde", version = "^1.0.100", features = ["alloc", "derive"], default-features = false }

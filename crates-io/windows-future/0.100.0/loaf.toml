@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/windows-future"
+version = "0.100.0"
+
+[project.features]
+default = ["std"]
+std = ["windows-core/std"]
+
+[rust]
+name = "windows_future"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+windows-core = { loaf = "crates-io/windows-core", version = "^0.100.0", default-features = false }
+windows-link = { loaf = "crates-io/windows-link", version = "^0.100.0", default-features = false }
+windows-threading = { loaf = "crates-io/windows-threading", version = "^0.100.0", default-features = false }

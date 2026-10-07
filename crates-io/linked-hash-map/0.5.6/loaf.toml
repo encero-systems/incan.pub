@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/linked-hash-map"
+version = "0.5.6"
+
+[project.features]
+heapsize = ["dep:heapsize"]
+heapsize_impl = ["heapsize"]
+nightly = []
+serde = ["dep:serde"]
+serde_impl = ["serde"]
+
+[rust]
+name = "linked_hash_map"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+heapsize = { loaf = "crates-io/heapsize", version = "^0.4", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", optional = true }

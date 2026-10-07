@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/group"
+version = "0.14.0"
+
+[project.features]
+alloc = []
+default = ["alloc"]
+memuse = ["dep:memuse"]
+rand = ["dep:rand"]
+rand_xorshift = ["dep:rand_xorshift"]
+tests = ["alloc", "rand", "rand_xorshift"]
+wnaf-memuse = ["alloc", "memuse"]
+
+[rust]
+name = "group"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ff = { loaf = "crates-io/ff", version = "^0.14", default-features = false }
+memuse = { loaf = "crates-io/memuse", version = "^0.2", optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.10", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false }
+rand_xorshift = { loaf = "crates-io/rand_xorshift", version = "^0.5", optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2.2.1", default-features = false }

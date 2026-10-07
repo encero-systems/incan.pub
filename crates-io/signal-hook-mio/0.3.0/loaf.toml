@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/signal-hook-mio"
+version = "0.3.0"
+
+[project.features]
+mio-0_6 = ["dep:mio-0_6"]
+mio-0_7 = ["dep:mio-0_7"]
+mio-0_8 = ["dep:mio-0_8"]
+mio-1_0 = ["dep:mio-1_0"]
+mio-uds = ["dep:mio-uds"]
+support-v0_6 = ["mio-0_6", "mio-uds"]
+support-v0_7 = ["mio-0_7"]
+support-v0_8 = ["mio-0_8"]
+support-v1_0 = ["mio-1_0"]
+
+[rust]
+name = "signal_hook_mio"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "~0.2" }
+mio-0_6 = { loaf = "crates-io/mio", version = "~0.6", optional = true }
+mio-0_7 = { loaf = "crates-io/mio", version = "~0.7", features = ["os-util", "uds"], optional = true }
+mio-0_8 = { loaf = "crates-io/mio", version = "~0.8", features = ["net", "os-ext"], optional = true }
+mio-1_0 = { loaf = "crates-io/mio", version = "^1.0", features = ["net", "os-ext"], optional = true }
+mio-uds = { loaf = "crates-io/mio-uds", version = "~0.6", optional = true }
+signal-hook = { loaf = "crates-io/signal-hook", version = "~0.4" }

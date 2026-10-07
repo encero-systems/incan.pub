@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hmac"
+version = "0.13.0"
+
+[project.features]
+zeroize = ["digest/zeroize"]
+
+[rust]
+name = "hmac"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+digest = { loaf = "crates-io/digest", version = "^0.11.2", features = ["mac"] }

@@ -1,0 +1,172 @@
+{
+  "about": {
+    "description": "An n-dimensional array for general elements and for numerics. Lightweight array views and slicing; views support chunking and splitting.",
+    "documentation": "https://docs.rs/ndarray/",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README-crates.io.md",
+    "repository": "https://github.com/rust-ndarray/ndarray"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:520080814a7a6b4a6e9070823bb24b4531daac8c4627e08ba5de8c5ef2f2752d",
+    "package": "ndarray",
+    "registry": "crates-io",
+    "version": "0.17.2"
+  },
+  "archive": "sha256:3fd80712dd8e1290248f6ab17f50329e25feb86765a9658659315093cc2960ab",
+  "at": "2026-10-07T07:44:33Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/approx",
+      "name": "approx",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/cblas-sys",
+      "name": "cblas-sys",
+      "optional": true,
+      "req": "^0.1.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.82"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "cgemm"
+      ],
+      "loaf": "crates-io/matrixmultiply",
+      "name": "matrixmultiply",
+      "optional": false,
+      "req": "^0.3.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-complex",
+      "name": "num-complex",
+      "optional": false,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-integer",
+      "name": "num-integer",
+      "optional": false,
+      "req": "^0.1.39"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/num-traits",
+      "name": "num-traits",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/portable-atomic",
+      "name": "portable-atomic",
+      "optional": false,
+      "req": "^1.6.0",
+      "target": "cfg(not(target_has_atomic = \"ptr\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/portable-atomic-util",
+      "name": "portable-atomic-util",
+      "optional": false,
+      "req": "^0.2.0",
+      "target": "cfg(not(target_has_atomic = \"ptr\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rawpointer",
+      "name": "rawpointer",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.10.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "approx": [
+      "dep:approx"
+    ],
+    "blas": [
+      "dep:cblas-sys",
+      "dep:libc"
+    ],
+    "default": [
+      "std"
+    ],
+    "matrixmultiply-threading": [
+      "matrixmultiply/threading"
+    ],
+    "portable-atomic-critical-section": [
+      "portable-atomic/critical-section"
+    ],
+    "rayon": [
+      "dep:rayon",
+      "std"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "num-traits/std",
+      "matrixmultiply/std"
+    ]
+  },
+  "id": "sha256:3f4a48d91348a6a90f8ee69cab78632d6044d099541e953ee10518b5ffbc901d",
+  "kind": "adopt",
+  "manifest": "sha256:2742a0f24e4a90791f058fc21e437f2153f380db91e8964a14c5034623359266",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ndarray",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ndarray",
+    "scope": "crates-io",
+    "version": "0.17.2"
+  }
+}

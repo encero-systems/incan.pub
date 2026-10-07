@@ -1,0 +1,63 @@
+{
+  "about": {
+    "description": "A LRU cache implementation",
+    "documentation": "https://docs.rs/lru/",
+    "homepage": "https://github.com/jeromefroe/lru-rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/jeromefroe/lru-rs.git"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ef9ac18847474e638e3702b76c65d4eb93428471a74778ef0f1be711717f89b5",
+    "package": "lru",
+    "registry": "crates-io",
+    "version": "0.18.5"
+  },
+  "archive": "sha256:cadcc79e331fc392d93b5d5fc239ade9b356bbbef666f2f02543b4b85be04654",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "default-hasher",
+        "inline-more"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.17.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "hashbrown"
+    ],
+    "hashbrown": [
+      "dep:hashbrown"
+    ],
+    "nightly": [
+      "hashbrown",
+      "dep:hashbrown",
+      "hashbrown/nightly"
+    ]
+  },
+  "id": "sha256:c7be61deae1c6f78c71142c5985fb05ae5d3221ea585726a9dc0eead9d55c351",
+  "kind": "adopt",
+  "manifest": "sha256:be53c4a7e836e2d0936ce46176a7ce4baed322294a6ed99648a3718862d7d3f3",
+  "rust": {
+    "build-script": false,
+    "edition": "2015",
+    "name": "lru",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "lru",
+    "scope": "crates-io",
+    "version": "0.18.5"
+  }
+}

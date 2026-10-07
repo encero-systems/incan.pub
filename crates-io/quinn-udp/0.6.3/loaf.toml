@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/quinn-udp"
+version = "0.6.3"
+
+[project.features]
+default = ["tracing", "tracing-log"]
+fast-apple-datapath = []
+log = ["dep:log"]
+tracing = ["dep:tracing"]
+tracing-log = ["dep:tracing", "tracing/log"]
+
+[rust]
+name = "quinn_udp"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2.175" }
+log = { loaf = "crates-io/log", version = "^0.4", optional = true }
+socket2 = { loaf = "crates-io/socket2", version = ">=0.5, <0.7", target = "cfg(not(all(target_family = \"wasm\", target_os = \"unknown\")))" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.10", features = ["std"], default-features = false, optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <=0.61", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_System_IO"], target = "cfg(windows)" }

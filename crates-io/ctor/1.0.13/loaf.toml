@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ctor"
+version = "1.0.13"
+
+[project.features]
+default = ["std", "proc_macro", "priority"]
+priority = ["dep:link-section"]
+proc_macro = ["dep:linktime-proc-macro"]
+std = []
+
+[rust]
+name = "ctor"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+link-section = { loaf = "crates-io/link-section", version = "^0.19.3", default-features = false, optional = true }
+linktime-proc-macro = { loaf = "crates-io/linktime-proc-macro", version = "^0.2.3", features = ["ctor"], optional = true }

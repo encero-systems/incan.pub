@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-stream-impl"
+version = "0.3.6"
+
+[rust]
+name = "async_stream_impl"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.60" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^2.0.2", features = ["full", "visit-mut"] }

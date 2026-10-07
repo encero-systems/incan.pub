@@ -1,0 +1,38 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/backtrace"
+version = "0.3.76"
+
+[project.features]
+coresymbolication = []
+cpp_demangle = ["dep:cpp_demangle"]
+dbghelp = []
+default = ["std"]
+dl_iterate_phdr = []
+dladdr = []
+kernel32 = []
+libunwind = []
+ruzstd = ["dep:ruzstd"]
+serde = ["dep:serde"]
+serialize-serde = ["serde"]
+std = []
+unix-backtrace = []
+
+[rust]
+name = "backtrace"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+addr2line = { loaf = "crates-io/addr2line", version = "^0.25.0", default-features = false, target = "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))" }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+cpp_demangle = { loaf = "crates-io/cpp_demangle", version = "^0.5.0", features = ["alloc"], default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.156", default-features = false, target = "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))" }
+miniz_oxide = { loaf = "crates-io/miniz_oxide", version = "^0.8", default-features = false, target = "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))" }
+object = { loaf = "crates-io/object", version = "^0.37.0", features = ["archive", "elf", "macho", "pe", "read_core", "unaligned", "xcoff"], default-features = false, target = "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))" }
+rustc-demangle = { loaf = "crates-io/rustc-demangle", version = "^0.1.24" }
+ruzstd = { loaf = "crates-io/ruzstd", version = "^0.8.1", default-features = false, optional = true, target = "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))" }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+windows-link = { loaf = "crates-io/windows-link", version = "^0.2", target = "cfg(any(windows, target_os = \"cygwin\"))" }

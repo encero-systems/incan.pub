@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/arrow-ipc"
+version = "60.0.0"
+
+[project.features]
+default = []
+lz4 = ["lz4_flex"]
+lz4_flex = ["dep:lz4_flex"]
+zstd = ["dep:zstd"]
+
+[rust]
+name = "arrow_ipc"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrow-array = { loaf = "crates-io/arrow-array", version = "^60.0.0" }
+arrow-buffer = { loaf = "crates-io/arrow-buffer", version = "^60.0.0" }
+arrow-data = { loaf = "crates-io/arrow-data", version = "^60.0.0" }
+arrow-schema = { loaf = "crates-io/arrow-schema", version = "^60.0.0" }
+arrow-select = { loaf = "crates-io/arrow-select", version = "^60.0.0" }
+flatbuffers = { loaf = "crates-io/flatbuffers", version = "^25.2.10", default-features = false }
+lz4_flex = { loaf = "crates-io/lz4_flex", version = "^0.14", features = ["frame", "std"], default-features = false, optional = true }
+zstd = { loaf = "crates-io/zstd", version = "^0.14.0", default-features = false, optional = true }

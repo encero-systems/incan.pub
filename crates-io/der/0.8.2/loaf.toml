@@ -1,0 +1,38 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/der"
+version = "0.8.2"
+
+[project.features]
+alloc = ["zeroize?/alloc"]
+arbitrary = ["dep:arbitrary", "dep:derive_arbitrary", "const-oid?/arbitrary", "std"]
+ber = []
+bytes = ["dep:bytes", "alloc"]
+derive = ["dep:der_derive"]
+flagset = ["dep:flagset"]
+heapless = ["dep:heapless"]
+oid = ["dep:const-oid"]
+pem = ["dep:pem-rfc7468", "alloc", "zeroize"]
+real = []
+std = ["alloc"]
+time = ["dep:time"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "der"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.4.2", features = ["derive"], optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1", default-features = false, optional = true }
+const-oid = { loaf = "crates-io/const-oid", version = "^0.10", optional = true }
+der_derive = { loaf = "crates-io/der_derive", version = "^0.8", optional = true }
+derive_arbitrary = { loaf = "crates-io/derive_arbitrary", version = "^1.4.2", optional = true }
+flagset = { loaf = "crates-io/flagset", version = "^0.4.7", optional = true }
+heapless = { loaf = "crates-io/heapless", version = "^0.9", default-features = false, optional = true }
+pem-rfc7468 = { loaf = "crates-io/pem-rfc7468", version = "^1", features = ["alloc"], optional = true }
+time = { loaf = "crates-io/time", version = "^0.3.4", default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1.8", default-features = false, optional = true }

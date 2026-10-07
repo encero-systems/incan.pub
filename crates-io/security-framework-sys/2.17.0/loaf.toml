@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/security-framework-sys"
+version = "2.17.0"
+
+[project.features]
+OSX_10_10 = []
+OSX_10_11 = []
+OSX_10_12 = []
+OSX_10_13 = []
+OSX_10_14 = []
+OSX_10_15 = []
+OSX_10_9 = []
+default = ["OSX_10_13"]
+macos-12 = []
+
+[rust]
+name = "security_framework_sys"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+core-foundation-sys = { loaf = "crates-io/core-foundation-sys", version = "^0.8.7" }
+libc = { loaf = "crates-io/libc", version = "^0.2.150" }

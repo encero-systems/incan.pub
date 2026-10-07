@@ -1,0 +1,95 @@
+{
+  "about": {
+    "description": "FFI bindings to OpenSSL",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-openssl/rust-openssl"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b47e7e6bb2c38cd930d25a23b40fa52e068c10e85f3e03a7f5ba5aaca5713695",
+    "package": "openssl-sys",
+    "registry": "crates-io",
+    "version": "0.9.117"
+  },
+  "archive": "sha256:740a8336403bbf716f144830e9ecfec1910906258e6afe1309cea3b1b0e8ddc4",
+  "at": "2026-10-07T07:42:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "bindgen",
+        "ssl"
+      ],
+      "loaf": "crates-io/aws-lc-fips-sys",
+      "name": "aws-lc-fips-sys",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "ssl"
+      ],
+      "loaf": "crates-io/aws-lc-sys",
+      "name": "aws-lc-sys",
+      "optional": true,
+      "req": "^0.41"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bssl-sys",
+      "name": "bssl-sys",
+      "optional": true,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "aws-lc": [
+      "dep:aws-lc-sys"
+    ],
+    "aws-lc-fips": [
+      "dep:aws-lc-fips-sys"
+    ],
+    "bindgen": [],
+    "bssl-sys": [
+      "dep:bssl-sys"
+    ],
+    "openssl-src": [],
+    "unstable_boringssl": [
+      "bssl-sys"
+    ],
+    "vendored": [
+      "openssl-src"
+    ]
+  },
+  "id": "sha256:ea95105a19874d0003dd4d194eeac426efe52befb65bd8b38e3f04f63a8e5e00",
+  "kind": "adopt",
+  "manifest": "sha256:252769fa612784e03dedd2247f45ca410a165208ce432c93c076ee73e56f863d",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "openssl_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "openssl-sys",
+    "scope": "crates-io",
+    "version": "0.9.117"
+  }
+}

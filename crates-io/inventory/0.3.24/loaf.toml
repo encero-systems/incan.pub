@@ -1,0 +1,14 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/inventory"
+version = "0.3.24"
+
+[rust]
+name = "inventory"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+rustversion = { loaf = "crates-io/rustversion", version = "^1.0", target = "cfg(target_family = \"wasm\")" }

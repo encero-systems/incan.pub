@@ -1,0 +1,66 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/glam"
+version = "0.34.1"
+
+[project.features]
+all-types = ["float-types", "integer-types", "size-types"]
+approx-05 = ["dep:approx-05"]
+arbitrary = ["dep:arbitrary"]
+bytecheck = ["rkyv-08?/bytecheck"]
+bytemuck = ["dep:bytemuck"]
+core-simd = ["bytemuck?/nightly_portable_simd"]
+cuda = []
+debug-glam-assert = []
+default = ["std", "all-types"]
+encase-012 = ["dep:encase-012"]
+encase-013 = ["dep:encase-013"]
+f64 = []
+float-types = ["f64"]
+float_eq = ["dep:float_eq"]
+glam-assert = []
+i16 = []
+i32 = []
+i64 = []
+i8 = []
+integer-types = ["i8", "u8", "i16", "u16", "i32", "u32", "i64", "u64"]
+isize = []
+libm = ["dep:libm"]
+mint-05 = ["dep:mint-05"]
+nostd-libm = ["dep:libm"]
+rand-010 = ["dep:rand-010"]
+rkyv-08 = ["dep:rkyv-08"]
+scalar-math = []
+serde = ["dep:serde_core"]
+size-types = ["isize", "usize"]
+speedy-08 = ["dep:speedy-08"]
+std = []
+u16 = []
+u32 = []
+u64 = []
+u8 = []
+usize = []
+zerocopy-08 = ["dep:zerocopy-08", "dep:zerocopy-derive-08"]
+
+[rust]
+name = "glam"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+approx-05 = { loaf = "crates-io/approx", version = "^0.5", default-features = false, optional = true }
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", default-features = false, optional = true }
+bytemuck = { loaf = "crates-io/bytemuck", version = "^1.9", features = ["aarch64_simd", "derive", "wasm_simd"], default-features = false, optional = true }
+encase-012 = { loaf = "crates-io/encase", version = "^0.12", default-features = false, optional = true }
+encase-013 = { loaf = "crates-io/encase", version = "^0.13", default-features = false, optional = true }
+float_eq = { loaf = "crates-io/float_eq", version = "^1", default-features = false, optional = true }
+libm = { loaf = "crates-io/libm", version = "^0.2", default-features = false, optional = true }
+mint-05 = { loaf = "crates-io/mint", version = "^0.5", default-features = false, optional = true }
+rand-010 = { loaf = "crates-io/rand", version = "^0.10", default-features = false, optional = true }
+rkyv-08 = { loaf = "crates-io/rkyv", version = "^0.8", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1", default-features = false, optional = true }
+speedy-08 = { loaf = "crates-io/speedy", version = "^0.8", default-features = false, optional = true }
+zerocopy-08 = { loaf = "crates-io/zerocopy", version = "^0.8", features = ["simd"], default-features = false, optional = true }
+zerocopy-derive-08 = { loaf = "crates-io/zerocopy-derive", version = "^0.8", default-features = false, optional = true }

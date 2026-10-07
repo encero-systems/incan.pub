@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/critical-section"
+version = "1.2.0"
+
+[project.features]
+restore-state-bool = []
+restore-state-none = []
+restore-state-u16 = []
+restore-state-u32 = []
+restore-state-u64 = []
+restore-state-u8 = []
+restore-state-usize = []
+std = ["restore-state-bool"]
+
+[rust]
+name = "critical_section"
+type = "lib"
+edition = "2018"
+build-script = false

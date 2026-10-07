@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/instability"
+version = "0.3.14"
+
+[rust]
+name = "instability"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+darling = { loaf = "crates-io/darling", version = "^0.24" }
+indoc = { loaf = "crates-io/indoc", version = "^2" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.91" }
+quote = { loaf = "crates-io/quote", version = "^1.0.35" }
+syn = { loaf = "crates-io/syn", version = "^3.0", features = ["derive", "full"] }

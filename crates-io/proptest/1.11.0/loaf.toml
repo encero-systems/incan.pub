@@ -1,0 +1,47 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/proptest"
+version = "1.11.0"
+
+[project.features]
+alloc = []
+atomic64bit = []
+attr-macro = ["proptest-macro"]
+bit-set = ["dep:bit-set", "dep:bit-vec"]
+default = ["std", "fork", "timeout", "bit-set"]
+default-code-coverage = ["std", "fork", "timeout", "bit-set"]
+f16 = []
+fork = ["std", "rusty-fork", "tempfile"]
+handle-panics = ["std"]
+hardware-rng = ["x86"]
+no_std = ["num-traits/libm"]
+proptest-macro = ["dep:proptest-macro"]
+regex-syntax = ["dep:regex-syntax"]
+rusty-fork = ["dep:rusty-fork"]
+std = ["rand/std", "rand/os_rng", "regex-syntax", "num-traits/std"]
+tempfile = ["dep:tempfile"]
+timeout = ["fork", "dep:rusty-fork", "rusty-fork/timeout"]
+unstable = ["f16"]
+x86 = ["dep:x86"]
+
+[rust]
+name = "proptest"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bit-set = { loaf = "crates-io/bit-set", version = "^0.8.0", optional = true }
+bit-vec = { loaf = "crates-io/bit-vec", version = "^0.8.0", optional = true }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.10" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.15", default-features = false }
+proptest-macro = { loaf = "crates-io/proptest-macro", version = "^0.5.0", optional = true }
+rand = { loaf = "crates-io/rand", version = "^0.9", features = ["alloc"], default-features = false }
+rand_chacha = { loaf = "crates-io/rand_chacha", version = "^0.9", default-features = false }
+rand_xorshift = { loaf = "crates-io/rand_xorshift", version = "^0.4" }
+regex-syntax = { loaf = "crates-io/regex-syntax", version = "^0.8", optional = true }
+rusty-fork = { loaf = "crates-io/rusty-fork", version = "^0.3.0", default-features = false, optional = true }
+tempfile = { loaf = "crates-io/tempfile", version = "^3.0", optional = true }
+unarray = { loaf = "crates-io/unarray", version = "^0.1.4" }
+x86 = { loaf = "crates-io/x86", version = "^0.52.0", optional = true }

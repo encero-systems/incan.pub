@@ -1,0 +1,15 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fsevent-sys"
+version = "5.2.0"
+
+[rust]
+name = "fsevent_sys"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.10.1" }
+dispatch2 = { loaf = "crates-io/dispatch2", version = "^0.3.0", features = ["alloc"], default-features = false }

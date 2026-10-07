@@ -1,0 +1,84 @@
+{
+  "about": {
+    "description": "Cross-platform, endian-aware primitives for Rust",
+    "documentation": "https://docs.rs/rend",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/djkoloski/rend"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:663ba70707f96e871406fe10d68128412e619b06d1d47cb91c3a4c6501176240",
+    "package": "rend",
+    "registry": "crates-io",
+    "version": "0.5.4"
+  },
+  "archive": "sha256:db368686de9d5b9037b8257f868e5fd2c1c77eb4748d70d94398920e6078488c",
+  "at": "2026-10-07T07:44:00Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytecheck",
+      "name": "bytecheck",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytemuck",
+      "name": "bytemuck-1",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerocopy",
+      "name": "zerocopy",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerocopy-derive",
+      "name": "zerocopy-derive",
+      "optional": true,
+      "req": "^0.8"
+    }
+  ],
+  "features": {
+    "bytecheck": [
+      "dep:bytecheck"
+    ],
+    "bytemuck-1": [
+      "dep:bytemuck-1"
+    ],
+    "default": [],
+    "zerocopy-0_8": [
+      "dep:zerocopy",
+      "dep:zerocopy-derive"
+    ]
+  },
+  "id": "sha256:d6ae96dab50d18bc9a4715b9dbd8808d69c37c133f31fc3700adb457a1bb4f36",
+  "kind": "adopt",
+  "manifest": "sha256:442160977035db827d3a3d2339761efec87eb36bba257c5e458bee2e0b89a336",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "rend",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rend",
+    "scope": "crates-io",
+    "version": "0.5.4"
+  }
+}

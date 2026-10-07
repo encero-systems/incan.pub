@@ -1,0 +1,131 @@
+{
+  "about": {
+    "description": "Rusty Object Notation",
+    "documentation": "https://docs.rs/ron/",
+    "homepage": "https://github.com/ron-rs/ron",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ron-rs/ron"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:81116b9531d61eabc41aeb228e4b6b2435bcca3233b98cf3b3077d4e6e9debb3",
+    "package": "ron",
+    "registry": "crates-io",
+    "version": "0.12.2"
+  },
+  "archive": "sha256:f08e3208ed2d94447d0d93a3b4fe837bee577d8c666d9aa10e5d5cdb3db0bafc",
+  "at": "2026-10-07T07:45:34Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "serde"
+      ],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "serde"
+      ],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": true,
+      "req": "^2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "race"
+      ],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.20"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": false,
+      "req": "^1.0.193"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": false,
+      "req": "^1.0.193"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/typeid",
+      "name": "typeid",
+      "optional": false,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/unicode-ident",
+      "name": "unicode-ident",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/unicode-segmentation",
+      "name": "unicode-segmentation",
+      "optional": true,
+      "req": "^1.12.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "indexmap": [
+      "std",
+      "dep:indexmap"
+    ],
+    "integer128": [],
+    "internal-span-substring-test": [
+      "unicode-segmentation"
+    ],
+    "std": [
+      "serde/std"
+    ],
+    "unicode-segmentation": [
+      "dep:unicode-segmentation"
+    ]
+  },
+  "id": "sha256:7344fc02fcc136143fca6139d7f9c00e252b55ed5929ad91616988838890ad9e",
+  "kind": "adopt",
+  "manifest": "sha256:428eb2240dba18610ac3ae5127ddeab8b9e846b86317e43fc681b076a8f0283f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ron",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ron",
+    "scope": "crates-io",
+    "version": "0.12.2"
+  }
+}

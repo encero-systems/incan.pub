@@ -1,0 +1,82 @@
+{
+  "about": {
+    "description": "myrrlyn’s utility collection",
+    "documentation": "https://docs.rs/wyz",
+    "homepage": "https://myrrlyn.net/crates/wyz",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/myrrlyn/wyz"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed",
+    "package": "wyz",
+    "registry": "crates-io",
+    "version": "0.5.1"
+  },
+  "archive": "sha256:caa03b059fc7078c7ed74f3811af7efff6a4635ce0c010b129de346f96359eef",
+  "at": "2026-10-07T07:42:52Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tap",
+      "name": "tap",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/typemap",
+      "name": "typemap",
+      "optional": true,
+      "req": "^0.3"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "std"
+    ],
+    "garbage": [
+      "once_cell",
+      "typemap"
+    ],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "std": [
+      "alloc"
+    ],
+    "typemap": [
+      "dep:typemap"
+    ]
+  },
+  "id": "sha256:979331b95228b2559d3d051171918971810a189a073ca63d1605f1467bd7f152",
+  "kind": "adopt",
+  "manifest": "sha256:9bc5f56bed01c77ca07245472d4ec72f5469edc235660a66e85a095428406573",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "wyz",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wyz",
+    "scope": "crates-io",
+    "version": "0.5.1"
+  }
+}

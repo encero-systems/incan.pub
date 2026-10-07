@@ -1,0 +1,74 @@
+{
+  "about": {
+    "description": "A crate for demangling C++ symbols",
+    "documentation": "https://docs.rs/cpp_demangle",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/gimli-rs/cpp_demangle"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0667304c32ea56cb4cd6d2d7c0cfe9a2f8041229db8c033af7f8d69492429def",
+    "package": "cpp_demangle",
+    "registry": "crates-io",
+    "version": "0.5.1"
+  },
+  "archive": "sha256:ffc030f6db8640b854603a4bc69472339299f3e1f4308015fbe2fc9b80b3b928",
+  "at": "2026-10-07T07:42:26Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/afl",
+      "name": "afl",
+      "optional": true,
+      "req": "^0.16"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "afl": [
+      "dep:afl"
+    ],
+    "alloc": [],
+    "default": [
+      "std"
+    ],
+    "fuzz": [
+      "afl"
+    ],
+    "logging": [
+      "std"
+    ],
+    "run_libiberty_tests": [],
+    "std": [
+      "alloc"
+    ]
+  },
+  "id": "sha256:08dda24c278f34ec3460cb5114b71195301947476b19c0b0f60b6d7d08a1ed76",
+  "kind": "adopt",
+  "manifest": "sha256:79210c3f0e31aea97e7e023af8c18fa3c8048408bf231638fa0b8c7abf0a5113",
+  "rust": {
+    "build-script": true,
+    "edition": "2018",
+    "name": "cpp_demangle",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cpp_demangle",
+    "scope": "crates-io",
+    "version": "0.5.1"
+  }
+}

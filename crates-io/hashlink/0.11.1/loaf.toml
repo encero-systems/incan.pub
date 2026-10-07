@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hashlink"
+version = "0.11.1"
+
+[project.features]
+serde = ["dep:serde"]
+serde_impl = ["serde"]
+
+[rust]
+name = "hashlink"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.16", features = ["default-hasher"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }

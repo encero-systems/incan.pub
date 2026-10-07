@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/async-signal"
+version = "0.2.14"
+
+[rust]
+name = "async_signal"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+async-io = { loaf = "crates-io/async-io", version = "^2.0.0", target = "cfg(unix)" }
+async-lock = { loaf = "crates-io/async-lock", version = "^3.3.0", target = "cfg(windows)" }
+atomic-waker = { loaf = "crates-io/atomic-waker", version = "^1.1.1", target = "cfg(windows)" }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.26" }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.26", target = "cfg(unix)" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.7", features = ["process", "std"], default-features = false, target = "cfg(unix)" }
+signal-hook-registry = { loaf = "crates-io/signal-hook-registry", version = "^1.4.0", target = "cfg(unix)" }
+slab = { loaf = "crates-io/slab", version = "^0.4.8", target = "cfg(windows)" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61", features = ["Win32_Foundation", "Win32_System_Console"], default-features = false, target = "cfg(windows)" }

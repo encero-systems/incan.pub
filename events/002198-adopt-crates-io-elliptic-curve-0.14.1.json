@@ -1,0 +1,255 @@
+{
+  "about": {
+    "description": "General purpose Elliptic Curve Cryptography (ECC) support, including traits and generic types for\nrepresenting various elliptic curve forms, scalars, points, and public/secret keys composed thereof.",
+    "documentation": "https://docs.rs/elliptic-curve",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/traits"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:9d65aa39b3a5c1c9c1b745c9a019234bb7a21b77abcb4f4d266d706e2d577d65",
+    "package": "elliptic-curve",
+    "registry": "crates-io",
+    "version": "0.14.1"
+  },
+  "archive": "sha256:af8b16cf1cf04ef3af452653159803c5fff66e3713f0ca371ca8e90912a91608",
+  "at": "2026-10-07T07:42:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "zeroize"
+      ],
+      "loaf": "crates-io/hybrid-array",
+      "name": "array",
+      "optional": false,
+      "req": "^0.4.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base16ct",
+      "name": "base16ct",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "hybrid-array",
+        "rand_core",
+        "subtle",
+        "zeroize"
+      ],
+      "loaf": "crates-io/crypto-bigint",
+      "name": "bigint",
+      "optional": false,
+      "req": "^0.7.5"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "rand_core"
+      ],
+      "loaf": "crates-io/crypto-common",
+      "name": "common",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ff",
+      "name": "ff",
+      "optional": true,
+      "req": "^0.14"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/group",
+      "name": "group",
+      "optional": true,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hex-literal",
+      "name": "hex-literal",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hkdf",
+      "name": "hkdf",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/pem-rfc7468",
+      "name": "pem-rfc7468",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/pkcs8",
+      "name": "pkcs8",
+      "optional": true,
+      "req": "^0.11"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": false,
+      "req": "^0.10"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "ctutils",
+        "subtle",
+        "zeroize"
+      ],
+      "loaf": "crates-io/sec1",
+      "name": "sec1",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": false,
+      "req": "^2.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": false,
+      "req": "^1.7"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "base16ct/alloc",
+      "ff?/alloc",
+      "group?/alloc",
+      "array/alloc",
+      "pkcs8?/alloc",
+      "sec1?/alloc",
+      "zeroize/alloc"
+    ],
+    "arithmetic": [
+      "group"
+    ],
+    "default": [
+      "arithmetic"
+    ],
+    "dev": [
+      "arithmetic",
+      "dep:hex-literal",
+      "pem",
+      "pkcs8"
+    ],
+    "digest": [
+      "dep:digest"
+    ],
+    "ecdh": [
+      "arithmetic",
+      "digest",
+      "dep:hkdf"
+    ],
+    "ff": [
+      "dep:ff"
+    ],
+    "getrandom": [
+      "arithmetic",
+      "bigint/getrandom",
+      "common/getrandom"
+    ],
+    "group": [
+      "dep:group",
+      "ff"
+    ],
+    "pem": [
+      "dep:pem-rfc7468",
+      "alloc",
+      "arithmetic",
+      "dep:pkcs8",
+      "pkcs8/pem",
+      "dep:sec1",
+      "sec1/pem"
+    ],
+    "pkcs8": [
+      "dep:pkcs8",
+      "sec1"
+    ],
+    "sec1": [
+      "dep:sec1"
+    ],
+    "serde": [
+      "dep:serdect",
+      "alloc",
+      "pkcs8",
+      "dep:sec1",
+      "sec1/serde"
+    ],
+    "std": [
+      "alloc",
+      "pkcs8?/std",
+      "sec1?/std"
+    ]
+  },
+  "id": "sha256:90033fd912df4d9c302330c70bd1af188ebcd20323a304bb5065c4a7d5a5242b",
+  "kind": "adopt",
+  "manifest": "sha256:d8e467429959de38fa4e49b1765f97093ae2b4940aa2abe5a9c47426b92a651c",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "elliptic_curve",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "elliptic-curve",
+    "scope": "crates-io",
+    "version": "0.14.1"
+  }
+}

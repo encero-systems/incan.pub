@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/jni-macros"
+version = "0.22.4"
+
+[rust]
+name = "jni_macros"
+type = "proc-macro"
+edition = "2024"
+build-script = true
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+simd_cesu8 = { loaf = "crates-io/simd_cesu8", version = "^1.0.1" }
+syn = { loaf = "crates-io/syn", version = "^2.0", features = ["full"] }

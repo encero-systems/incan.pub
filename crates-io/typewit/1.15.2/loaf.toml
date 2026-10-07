@@ -1,0 +1,43 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/typewit"
+version = "1.15.2"
+
+[project.features]
+__test_doc_lints = []
+__test_serde = ["serde", "serde_json", "postcard"]
+__ui_tests = ["trybuild"]
+adt_const_marker = ["rust_stable"]
+alloc = []
+const_marker = []
+const_marker_extra_impls = []
+default = ["proc_macros", "const_marker_extra_impls"]
+docsrs = []
+generic_const_exprs = ["rust_stable"]
+mut_refs = ["rust_stable"]
+nightly_mut_refs = ["mut_refs"]
+postcard = ["dep:postcard"]
+proc_macros = ["typewit_proc_macros"]
+rust_1_61 = []
+rust_1_65 = ["rust_1_61"]
+rust_1_83 = ["rust_1_65"]
+rust_stable = ["rust_1_83"]
+serde = ["serde_"]
+serde_ = ["dep:serde_"]
+serde_json = ["dep:serde_json"]
+trybuild = ["dep:trybuild"]
+typewit_proc_macros = ["dep:typewit_proc_macros"]
+
+[rust]
+name = "typewit"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+postcard = { loaf = "crates-io/postcard", version = "^1.0", default-features = false, optional = true }
+serde_ = { loaf = "crates-io/serde", version = "^1.0.200", default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0", features = ["alloc"], default-features = false, optional = true }
+trybuild = { loaf = "crates-io/trybuild", version = "^1.0", optional = true }
+typewit_proc_macros = { loaf = "crates-io/typewit_proc_macros", version = "=1.8.1", optional = true }

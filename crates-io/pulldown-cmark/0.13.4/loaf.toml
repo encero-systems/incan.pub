@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pulldown-cmark"
+version = "0.13.4"
+
+[project.features]
+default = ["getopts", "html"]
+gen-tests = []
+getopts = ["dep:getopts"]
+html = ["pulldown-cmark-escape"]
+pulldown-cmark-escape = ["dep:pulldown-cmark-escape"]
+serde = ["dep:serde"]
+simd = ["pulldown-cmark-escape?/simd"]
+
+[rust]
+name = "pulldown_cmark"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2" }
+getopts = { loaf = "crates-io/getopts", version = "^0.2", optional = true }
+memchr = { loaf = "crates-io/memchr", version = "^2.5" }
+pulldown-cmark-escape = { loaf = "crates-io/pulldown-cmark-escape", version = "^0.11", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["derive"], optional = true }
+unicase = { loaf = "crates-io/unicase", version = "^2.6" }

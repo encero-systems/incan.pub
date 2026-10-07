@@ -1,0 +1,48 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/criterion"
+version = "0.8.2"
+
+[project.features]
+async = []
+async_futures = ["dep:futures", "async"]
+async_smol = ["dep:smol", "async"]
+async_tokio = ["dep:tokio", "async"]
+cargo_bench_support = []
+csv_output = ["dep:csv"]
+default = ["rayon", "plotters", "cargo_bench_support"]
+html_reports = []
+plotters = ["dep:plotters"]
+rayon = ["dep:rayon"]
+real_blackbox = []
+stable = ["csv_output", "html_reports", "async_futures", "async_smol", "async_tokio"]
+
+[rust]
+name = "criterion"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+alloca = { loaf = "crates-io/alloca", version = "^0.4", target = "cfg(any(windows, unix))" }
+anes = { loaf = "crates-io/anes", version = "^0.1.4" }
+cast = { loaf = "crates-io/cast", version = "^0.3" }
+ciborium = { loaf = "crates-io/ciborium", version = "^0.2.0" }
+clap = { loaf = "crates-io/clap", version = "^4.5", features = ["help", "std"], default-features = false }
+criterion-plot = { loaf = "crates-io/criterion-plot", version = "^0.8.2" }
+csv = { loaf = "crates-io/csv", version = "^1.1", optional = true }
+futures = { loaf = "crates-io/futures", version = "^0.3", features = ["executor"], default-features = false, optional = true }
+itertools = { loaf = "crates-io/itertools", version = "^0.13" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", features = ["std"], default-features = false }
+oorandom = { loaf = "crates-io/oorandom", version = "^11.1" }
+page_size = { loaf = "crates-io/page_size", version = "^0.6" }
+plotters = { loaf = "crates-io/plotters", version = "^0.3.2", features = ["area_series", "line_series", "svg_backend"], default-features = false, optional = true }
+rayon = { loaf = "crates-io/rayon", version = "^1.3", optional = true }
+regex = { loaf = "crates-io/regex", version = "^1.5.1", features = ["std"], default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.100", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.100" }
+smol = { loaf = "crates-io/smol", version = "^2.0", default-features = false, optional = true }
+tinytemplate = { loaf = "crates-io/tinytemplate", version = "^1.1" }
+tokio = { loaf = "crates-io/tokio", version = "^1.0", features = ["rt"], default-features = false, optional = true }
+walkdir = { loaf = "crates-io/walkdir", version = "^2.3" }

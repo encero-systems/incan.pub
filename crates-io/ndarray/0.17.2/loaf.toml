@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ndarray"
+version = "0.17.2"
+
+[project.features]
+approx = ["dep:approx"]
+blas = ["dep:cblas-sys", "dep:libc"]
+default = ["std"]
+matrixmultiply-threading = ["matrixmultiply/threading"]
+portable-atomic-critical-section = ["portable-atomic/critical-section"]
+rayon = ["dep:rayon", "std"]
+serde = ["dep:serde"]
+std = ["num-traits/std", "matrixmultiply/std"]
+
+[rust]
+name = "ndarray"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+approx = { loaf = "crates-io/approx", version = "^0.5", default-features = false, optional = true }
+cblas-sys = { loaf = "crates-io/cblas-sys", version = "^0.1.4", default-features = false, optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.82", optional = true }
+matrixmultiply = { loaf = "crates-io/matrixmultiply", version = "^0.3.2", features = ["cgemm"], default-features = false }
+num-complex = { loaf = "crates-io/num-complex", version = "^0.4", default-features = false }
+num-integer = { loaf = "crates-io/num-integer", version = "^0.1.39", default-features = false }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2", default-features = false }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1.6.0", target = "cfg(not(target_has_atomic = \"ptr\"))" }
+portable-atomic-util = { loaf = "crates-io/portable-atomic-util", version = "^0.2.0", features = ["alloc"], target = "cfg(not(target_has_atomic = \"ptr\"))" }
+rawpointer = { loaf = "crates-io/rawpointer", version = "^0.2" }
+rayon = { loaf = "crates-io/rayon", version = "^1.10.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0", features = ["alloc"], default-features = false, optional = true }

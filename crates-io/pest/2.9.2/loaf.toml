@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pest"
+version = "2.9.2"
+
+[project.features]
+const_prec_climber = []
+default = ["std", "memchr"]
+memchr = ["dep:memchr"]
+miette-error = ["std", "pretty-print", "dep:miette"]
+pretty-print = ["dep:serde", "dep:serde_json"]
+std = ["ucd-trie/std"]
+
+[rust]
+name = "pest"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+memchr = { loaf = "crates-io/memchr", version = "^2.4.0", optional = true }
+miette = { loaf = "crates-io/miette", version = "^7.2.0", features = ["fancy"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.145", optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.85", optional = true }
+ucd-trie = { loaf = "crates-io/ucd-trie", version = "^0.1.5", default-features = false }

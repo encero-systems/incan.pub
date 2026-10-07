@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/libsqlite3-sys"
+version = "0.37.0"
+
+[project.features]
+bindgen = []
+buildtime_bindgen = ["bindgen", "pkg-config", "vcpkg"]
+bundled = ["cc", "bundled_bindings"]
+bundled-sqlcipher = ["bundled"]
+bundled-sqlcipher-vendored-openssl = ["bundled-sqlcipher", "dep:openssl-sys", "openssl-sys/vendored"]
+bundled-windows = ["cc", "bundled_bindings"]
+bundled_bindings = []
+cc = []
+column_metadata = []
+default = ["min_sqlite_version_3_34_1"]
+in_gecko = []
+loadable_extension = ["prettyplease", "quote", "syn"]
+min_sqlite_version_3_34_1 = ["pkg-config", "vcpkg"]
+openssl-sys = ["dep:openssl-sys"]
+pkg-config = []
+prettyplease = []
+preupdate_hook = ["buildtime_bindgen"]
+quote = []
+session = ["preupdate_hook", "buildtime_bindgen"]
+sqlcipher = []
+syn = []
+unlock_notify = []
+vcpkg = []
+wasm32-wasi-vfs = []
+with-asan = []
+
+[rust]
+name = "libsqlite3_sys"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+openssl-sys = { loaf = "crates-io/openssl-sys", version = "^0.9.103", optional = true }

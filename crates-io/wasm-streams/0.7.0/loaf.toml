@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasm-streams"
+version = "0.7.0"
+
+[rust]
+name = "wasm_streams"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.31", features = ["io", "sink"] }
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.85" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.108" }
+wasm-bindgen-futures = { loaf = "crates-io/wasm-bindgen-futures", version = "^0.4.58" }
+web-sys = { loaf = "crates-io/web-sys", version = "^0.3.85", features = ["AbortSignal", "QueuingStrategy", "ReadableByteStreamController", "ReadableStream", "ReadableStreamByobReader", "ReadableStreamByobRequest", "ReadableStreamDefaultController", "ReadableStreamDefaultReader", "ReadableStreamGetReaderOptions", "ReadableStreamReadResult", "ReadableStreamReaderMode", "ReadableStreamType", "ReadableWritablePair", "StreamPipeOptions", "TransformStream", "TransformStreamDefaultController", "Transformer", "UnderlyingSink", "UnderlyingSource", "WritableStream", "WritableStreamDefaultController", "WritableStreamDefaultWriter"] }

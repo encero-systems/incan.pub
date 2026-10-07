@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/json-patch"
+version = "4.2.0"
+
+[project.features]
+default = ["diff"]
+diff = []
+schemars = ["dep:schemars"]
+utoipa = ["dep:utoipa"]
+
+[rust]
+name = "json_patch"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+jsonptr = { loaf = "crates-io/jsonptr", version = "^0.7.1" }
+schemars = { loaf = "crates-io/schemars", version = "^1.0.4", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.159", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.95" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2" }
+utoipa = { loaf = "crates-io/utoipa", version = "^5", optional = true }

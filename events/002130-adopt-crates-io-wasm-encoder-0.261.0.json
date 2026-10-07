@@ -1,0 +1,72 @@
+{
+  "about": {
+    "description": "A low-level WebAssembly encoder.",
+    "documentation": "https://docs.rs/wasm-encoder",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasm-tools/tree/main/crates/wasm-encoder"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2608e8bb6d67fd68f5a8d0eb1363d6e7bcbc1f8ded5a0bd3a1e382462b876b22",
+    "package": "wasm-encoder",
+    "registry": "crates-io",
+    "version": "0.261.0"
+  },
+  "archive": "sha256:db68451837b3eb460196a2ac248dd743e403cb1a86e5848004b5e27faa0b6626",
+  "at": "2026-10-07T07:42:51Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/leb128fmt",
+      "name": "leb128fmt",
+      "optional": false,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "simd"
+      ],
+      "loaf": "crates-io/wasmparser",
+      "name": "wasmparser",
+      "optional": true,
+      "req": "^0.261.0"
+    }
+  ],
+  "features": {
+    "component-model": [
+      "wasmparser?/component-model"
+    ],
+    "default": [
+      "std",
+      "component-model"
+    ],
+    "std": [
+      "wasmparser?/std"
+    ],
+    "wasmparser": [
+      "dep:wasmparser"
+    ]
+  },
+  "id": "sha256:0c958a409cac4da5d629af36f753b4048325b5cf89afc03b2edc6a81986019df",
+  "kind": "adopt",
+  "manifest": "sha256:135313051f09ecb3bdc48760b8131fd0bc17dfa6255c33e3fb9f8f4823ba13a1",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wasm_encoder",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasm-encoder",
+    "scope": "crates-io",
+    "version": "0.261.0"
+  }
+}

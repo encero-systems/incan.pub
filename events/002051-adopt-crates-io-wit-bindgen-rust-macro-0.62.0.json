@@ -1,0 +1,113 @@
+{
+  "about": {
+    "description": "Procedural macro paired with the `wit-bindgen` crate.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bytecodealliance/wit-bindgen"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8f19d63da8e478a370ef8192d90ccb517965b7747d6b46cd2d831dd0ef4d2541",
+    "package": "wit-bindgen-rust-macro",
+    "registry": "crates-io",
+    "version": "0.62.0"
+  },
+  "archive": "sha256:a1d328f97ddbd350f6187d85b7e85f1380ff57fd0b26f86419549cc16b571a87",
+  "at": "2026-10-07T07:42:30Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.102"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/macro-string",
+      "name": "macro-string",
+      "optional": true,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/prettyplease",
+      "name": "prettyplease",
+      "optional": false,
+      "req": "^0.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "printing"
+      ],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": "^3.0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen-core",
+      "name": "wit-bindgen-core",
+      "optional": false,
+      "req": "^0.62.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wit-bindgen-rust",
+      "name": "wit-bindgen-rust",
+      "optional": false,
+      "req": "^0.62.0"
+    }
+  ],
+  "features": {
+    "default": [
+      "macro-string"
+    ],
+    "macro-string": [
+      "dep:macro-string"
+    ]
+  },
+  "id": "sha256:9e254fbb6b250afefabeb53bbe205e045bc1769b1a20f81713ba9c02eafdc831",
+  "kind": "adopt",
+  "manifest": "sha256:351edb1182bd0950b62fb2d8ca1c84b8a22875973e0bf1a85f1f44f4aade9e7b",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wit_bindgen_rust_macro",
+    "root": "src/lib.rs",
+    "type": "proc-macro"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wit-bindgen-rust-macro",
+    "scope": "crates-io",
+    "version": "0.62.0"
+  }
+}

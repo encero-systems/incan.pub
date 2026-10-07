@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sqlite-wasm-rs"
+version = "0.5.5"
+
+[project.features]
+bindgen = []
+sqlite3mc = []
+
+[rust]
+name = "sqlite_wasm_rs"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+js-sys = { loaf = "crates-io/js-sys", version = "^0.3.81", default-features = false }
+rsqlite-vfs = { loaf = "crates-io/rsqlite-vfs", version = "^0.1.0" }
+wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2.104", default-features = false }

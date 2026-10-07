@@ -1,0 +1,119 @@
+{
+  "about": {
+    "description": "Rust implementation of CSS Syntax Level 3",
+    "documentation": "https://docs.rs/cssparser/",
+    "homepage": "",
+    "license": "MPL-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/servo/rust-cssparser"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:11119743ad110e8c1bdccd930d7f5c30c99e5fc76a7b63ec9807e84eef0c5f59",
+    "package": "cssparser",
+    "registry": "crates-io",
+    "version": "0.38.0"
+  },
+  "archive": "sha256:f6475215f96467a790ecbd7971becc7ba66c58d27eed62ac450259433ac815f6",
+  "at": "2026-10-07T07:44:32Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cssparser-macros",
+      "name": "cssparser-macros",
+      "optional": true,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/dtoa-short",
+      "name": "dtoa-short",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/itoa",
+      "name": "itoa",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/malloc_size_of",
+      "name": "malloc_size_of",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "macros"
+      ],
+      "loaf": "crates-io/phf",
+      "name": "phf",
+      "optional": true,
+      "req": "^0.14.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "bench": [],
+    "default": [
+      "fast_match_byte",
+      "fast_match_color"
+    ],
+    "fast_match_byte": [
+      "dep:cssparser-macros"
+    ],
+    "fast_match_color": [
+      "dep:phf"
+    ],
+    "malloc_size_of": [
+      "dep:malloc_size_of"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "skip_long_tests": []
+  },
+  "id": "sha256:62928dc66353f36890acdc547e9aa346dae90ca342cdb497199bdfb253ce6129",
+  "kind": "adopt",
+  "manifest": "sha256:847febc1a2f90f2308ee69a4fac0204c7ec65e66a51ad52e4f00d73506e0b630",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "cssparser",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cssparser",
+    "scope": "crates-io",
+    "version": "0.38.0"
+  }
+}
