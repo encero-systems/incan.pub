@@ -4,7 +4,7 @@ The crates.io package [rand](https://crates.io/crates/rand), adopted by [incan.p
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.10.3](0.10.3/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 1 | [units](0.10.3/assets.json) |
+| [0.10.3](0.10.3/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 2 | [units](0.10.3/assets.json) |
 | [0.9.5](0.9.5/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 0 |  |
 | [0.8.6](0.8.6/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 

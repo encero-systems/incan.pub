@@ -414,3 +414,17 @@ build-script = true
 [dependencies]
 winapi-i686-pc-windows-gnu = { loaf = "crates-io/winapi-i686-pc-windows-gnu", version = "^0.4", target = "i686-pc-windows-gnu" }
 winapi-x86_64-pc-windows-gnu = { loaf = "crates-io/winapi-x86_64-pc-windows-gnu", version = "^0.4", target = "x86_64-pc-windows-gnu" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = []
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["cfg", "evntrace", "in6addr", "inaddr", "minwinbase", "ntsecapi", "windef", "winioctl"]
+cfg = []

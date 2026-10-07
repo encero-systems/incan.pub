@@ -22,3 +22,17 @@ build-script = true
 [dependencies]
 afl = { loaf = "crates-io/afl", version = "^0.16", optional = true }
 cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["alloc"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["alloc", "default", "std"]
+cfg = []

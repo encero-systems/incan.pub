@@ -4,7 +4,7 @@ The crates.io package [rand_chacha](https://crates.io/crates/rand_chacha), adopt
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.10.0](0.10.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 1 | [units](0.10.0/assets.json) |
+| [0.10.0](0.10.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 3 | [units](0.10.0/assets.json) |
 | [0.9.0](0.9.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 0 |  |
 | [0.3.1](0.3.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 

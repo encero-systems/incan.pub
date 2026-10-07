@@ -40,3 +40,10 @@ pathfinder_simd = { loaf = "crates-io/pathfinder_simd", version = "^0.5.5" }
 walkdir = { loaf = "crates-io/walkdir", version = "^2.1", target = "cfg(not(target_arch = \"wasm32\"))" }
 winapi = { loaf = "crates-io/winapi", version = "^0.3", features = ["dwrite", "minwindef", "sysinfoapi", "winbase", "winnt"], target = "cfg(target_family = \"windows\")" }
 yeslogic-fontconfig-sys = [{ loaf = "crates-io/yeslogic-fontconfig-sys", version = "^6.0", target = "cfg(not(any(target_family = \"windows\", target_os = \"macos\", target_os = \"ios\", target_arch = \"wasm32\", target_env = \"ohos\")))" }, { loaf = "crates-io/yeslogic-fontconfig-sys", version = "^6.0", optional = true }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "source"]
+cfg = []

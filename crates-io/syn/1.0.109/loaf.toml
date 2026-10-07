@@ -29,3 +29,17 @@ build-script = true
 proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.46", default-features = false }
 quote = { loaf = "crates-io/quote", version = "^1.0", default-features = false, optional = true }
 unicode-ident = { loaf = "crates-io/unicode-ident", version = "^1.0" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = []
+cfg = ["syn_disable_nightly_tests"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["clone-impls", "default", "derive", "extra-traits", "parsing", "printing", "proc-macro", "quote", "visit"]
+cfg = ["syn_disable_nightly_tests"]

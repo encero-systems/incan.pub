@@ -21,3 +21,10 @@ build-script = true
 [dependencies]
 libc = { loaf = "crates-io/libc", version = "^0.2" }
 signal-hook-registry = { loaf = "crates-io/signal-hook-registry", version = "^1.4" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["channel", "default", "iterator"]
+cfg = []

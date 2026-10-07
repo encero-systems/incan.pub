@@ -4,7 +4,7 @@ The crates.io package [tokio-macros](https://crates.io/crates/tokio-macros), ado
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [2.7.2](2.7.2/loaf.toml) | 2026-10-06 | MIT | 1 | 0 |  |
+| [2.7.2](2.7.2/loaf.toml) | 2026-10-06 | MIT | 1 | 1 | [units](2.7.2/assets.json) |
 | [2.7.0](2.7.0/loaf.toml) | 2026-10-06 | MIT | 2 | 0 |  |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/tokio-macros`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/tokio-macros](../../index/crates-io/tokio-macros), the units by each version's `assets.json`.

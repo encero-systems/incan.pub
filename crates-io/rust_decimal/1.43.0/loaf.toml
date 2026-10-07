@@ -69,3 +69,11 @@ serde_json = { loaf = "crates-io/serde_json", version = "^1.0", default-features
 tokio-postgres = { loaf = "crates-io/tokio-postgres", version = "^0.7", default-features = false, optional = true }
 wasm-bindgen = { loaf = "crates-io/wasm-bindgen", version = "^0.2", default-features = false, optional = true, target = "cfg(target_arch = \"wasm32\")" }
 zmij = { loaf = "crates-io/zmij", version = "^1.0", default-features = false, optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "serde", "std"]
+cfg = []
+out = [{ name = "README-lib.md", path = "out/README-lib.md", digest = "sha256:cc1a64a6250d5c4bed130b453930ac64b7bd01f435e3fbe1b7135c7738c0f8f4" }]

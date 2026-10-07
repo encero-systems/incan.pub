@@ -48,3 +48,10 @@ indexmap = { loaf = "crates-io/indexmap", version = "^2.0", default-features = f
 memchr = { loaf = "crates-io/memchr", version = "^2.4.1", default-features = false }
 ruzstd = { loaf = "crates-io/ruzstd", version = "^0.8.1", optional = true }
 wasmparser = { loaf = "crates-io/wasmparser", version = "^0.236.0", default-features = false, optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["archive", "coff", "elf", "macho", "pe", "read_core", "unaligned", "xcoff"]
+cfg = ["core_error"]

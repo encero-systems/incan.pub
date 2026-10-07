@@ -20,3 +20,17 @@ build-script = true
 serde = { loaf = "crates-io/serde", version = "^1.0.220", default-features = false, target = "cfg(any())" }
 serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", default-features = false }
 typeid = { loaf = "crates-io/typeid", version = "^1" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["alloc"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["alloc", "default", "std"]
+cfg = []
