@@ -1,0 +1,167 @@
+{
+  "about": {
+    "authors": [],
+    "description": "An implementation of futures and streams featuring zero allocations,\ncomposability, and iterator-like interfaces.\n",
+    "documentation": "",
+    "homepage": "https://rust-lang.github.io/futures-rs",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-lang/futures-rs",
+    "rust-version": "1.71"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8b147ee9d1f6d097cef9ce628cd2ee62288d963e16fb287bd9286455b241382d",
+    "package": "futures",
+    "registry": "crates-io",
+    "version": "0.3.32"
+  },
+  "archive": "sha256:556bb6650bf01040c69f6c2cbe30b58098311e0516b76e0c0cbdc8bbf7652f6b",
+  "at": "2026-10-07T15:47:55Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "sink"
+      ],
+      "loaf": "crates-io/futures-channel",
+      "name": "futures-channel",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-core",
+      "name": "futures-core",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-executor",
+      "name": "futures-executor",
+      "optional": true,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-io",
+      "name": "futures-io",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-sink",
+      "name": "futures-sink",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-task",
+      "name": "futures-task",
+      "optional": false,
+      "req": "^0.3.32"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "sink"
+      ],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": false,
+      "req": "^0.3.32"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "futures-core/alloc",
+      "futures-task/alloc",
+      "futures-sink/alloc",
+      "futures-channel/alloc",
+      "futures-util/alloc"
+    ],
+    "async-await": [
+      "futures-util/async-await",
+      "futures-util/async-await-macro"
+    ],
+    "bilock": [
+      "futures-util/bilock"
+    ],
+    "cfg-target-has-atomic": [],
+    "compat": [
+      "std",
+      "futures-util/compat"
+    ],
+    "default": [
+      "std",
+      "async-await",
+      "executor"
+    ],
+    "executor": [
+      "std",
+      "dep:futures-executor",
+      "futures-executor/std"
+    ],
+    "futures-executor": [
+      "dep:futures-executor"
+    ],
+    "io-compat": [
+      "compat",
+      "futures-util/io-compat"
+    ],
+    "spin": [
+      "futures-util/spin"
+    ],
+    "std": [
+      "alloc",
+      "futures-core/std",
+      "futures-task/std",
+      "futures-io/std",
+      "futures-sink/std",
+      "futures-util/std",
+      "futures-util/io",
+      "futures-util/channel"
+    ],
+    "thread-pool": [
+      "executor",
+      "dep:futures-executor",
+      "futures-executor/thread-pool"
+    ],
+    "unstable": [
+      "futures-core/unstable",
+      "futures-task/unstable",
+      "futures-channel/unstable",
+      "futures-io/unstable",
+      "futures-util/unstable"
+    ],
+    "write-all-vectored": [
+      "futures-util/write-all-vectored"
+    ]
+  },
+  "id": "sha256:ca630307dc17246fedcb303886e0772f51fa37f098e8071cb5cc3786951989bb",
+  "kind": "adopt",
+  "manifest": "sha256:7884c93166890ad319f71c705568ed2cba7e016ea8090e8ab767fcae1eab5910",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "futures",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "futures",
+    "scope": "crates-io",
+    "version": "0.3.32"
+  }
+}

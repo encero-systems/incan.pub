@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/clap_builder"
+version = "4.6.0"
+
+[project.features]
+cargo = []
+color = ["dep:anstream"]
+debug = ["dep:backtrace"]
+default = ["std", "color", "help", "usage", "error-context", "suggestions"]
+deprecated = []
+env = []
+error-context = []
+help = []
+std = ["anstyle/std"]
+string = []
+suggestions = ["dep:strsim", "error-context"]
+unicode = ["dep:unicode-width", "dep:unicase"]
+unstable-doc = ["cargo", "wrap_help", "env", "unicode", "string", "unstable-ext"]
+unstable-ext = []
+unstable-styles = ["color"]
+unstable-v5 = ["deprecated"]
+usage = []
+wrap_help = ["help", "dep:terminal_size"]
+
+[rust]
+name = "clap_builder"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anstream = { loaf = "crates-io/anstream", version = "^1.0.0", optional = true }
+anstyle = { loaf = "crates-io/anstyle", version = "^1.0.13" }
+backtrace = { loaf = "crates-io/backtrace", version = "^0.3.76", optional = true }
+clap_lex = { loaf = "crates-io/clap_lex", version = "^1.0.0" }
+strsim = { loaf = "crates-io/strsim", version = "^0.11.1", optional = true }
+terminal_size = { loaf = "crates-io/terminal_size", version = "^0.4.3", optional = true }
+unicase = { loaf = "crates-io/unicase", version = "^2.9.0", optional = true }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.2.2", optional = true }

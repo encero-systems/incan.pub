@@ -1,0 +1,86 @@
+{
+  "about": {
+    "authors": [
+      "Aleksey Kladov <aleksey.kladov@gmail.com>"
+    ],
+    "description": "Counts the number of live instances of types",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/matklad/countme",
+    "rust-version": ""
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7704b5fdd17b18ae31c4c1da5a2e0305a2bf17b5249300a9ee9ed7b72114c636",
+    "package": "countme",
+    "registry": "crates-io",
+    "version": "3.0.1"
+  },
+  "archive": "sha256:5a955c39fb9b6e37044a93f783b4f1dd88cbbe5c7f4893f18d42762ca76e9bfc",
+  "at": "2026-10-07T15:47:54Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/dashmap",
+      "name": "dashmap",
+      "optional": true,
+      "req": "^5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": true,
+      "req": "^1.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": true,
+      "req": "^1.1"
+    }
+  ],
+  "features": {
+    "dashmap": [
+      "dep:dashmap"
+    ],
+    "enable": [
+      "dashmap",
+      "once_cell",
+      "rustc-hash"
+    ],
+    "once_cell": [
+      "dep:once_cell"
+    ],
+    "print_at_exit": [
+      "enable"
+    ],
+    "rustc-hash": [
+      "dep:rustc-hash"
+    ]
+  },
+  "id": "sha256:b3eda74d304a8d274d25378d6ee438a5fed107f3c9ca4a94a7fd55603302b69d",
+  "kind": "adopt",
+  "manifest": "sha256:e674f2f05046ddd2468867867a83549252233668e4c85f190ccd0bfd45c8596b",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "countme",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "countme",
+    "scope": "crates-io",
+    "version": "3.0.1"
+  }
+}

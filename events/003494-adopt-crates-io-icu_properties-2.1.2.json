@@ -1,0 +1,161 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "Definitions for Unicode properties",
+    "documentation": "",
+    "homepage": "https://icu4x.unicode.org",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.83"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:020bfc02fe870ec3a66d93e677ccca0562506e5872c650f893269e08615d74ec",
+    "package": "icu_properties",
+    "registry": "crates-io",
+    "version": "2.1.2"
+  },
+  "archive": "sha256:691c55b3f2fcc7d17cd6846d5593b13c6379e98ec0a4c9b9b71e3cafcf398894",
+  "at": "2026-10-07T15:48:00Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_collections",
+      "name": "icu_collections",
+      "optional": false,
+      "req": "~2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "zerovec"
+      ],
+      "loaf": "crates-io/icu_locale_core",
+      "name": "icu_locale_core",
+      "optional": false,
+      "req": "^2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_properties_data",
+      "name": "icu_properties_data",
+      "optional": true,
+      "req": "~2.1.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_provider",
+      "name": "icu_provider",
+      "optional": false,
+      "req": "^2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/unicode-bidi",
+      "name": "unicode-bidi",
+      "optional": true,
+      "req": "^0.3.11"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "yoke",
+        "zerofrom"
+      ],
+      "loaf": "crates-io/zerotrie",
+      "name": "zerotrie",
+      "optional": false,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive",
+        "yoke"
+      ],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": false,
+      "req": "^0.11.3"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "zerovec/alloc",
+      "icu_collections/alloc",
+      "serde?/alloc"
+    ],
+    "compiled_data": [
+      "dep:icu_properties_data",
+      "icu_provider/baked"
+    ],
+    "datagen": [
+      "serde",
+      "dep:databake",
+      "zerovec/databake",
+      "icu_collections/databake",
+      "icu_locale_core/databake",
+      "zerotrie/databake",
+      "icu_provider/export"
+    ],
+    "default": [
+      "compiled_data"
+    ],
+    "serde": [
+      "dep:serde",
+      "icu_locale_core/serde",
+      "zerovec/serde",
+      "icu_collections/serde",
+      "icu_provider/serde",
+      "zerotrie/serde"
+    ],
+    "unicode_bidi": [
+      "dep:unicode-bidi"
+    ]
+  },
+  "id": "sha256:754de04e4b00e331ab155578710e7c9fba39b940bcd6d3cca96e5835c6c27cb2",
+  "kind": "adopt",
+  "manifest": "sha256:dc4476ec0b7c04ff7f5cb0fd770fe69cbe2087de5af970ad917cc4d79743b0b6",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "icu_properties",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_properties",
+    "scope": "crates-io",
+    "version": "2.1.2"
+  }
+}

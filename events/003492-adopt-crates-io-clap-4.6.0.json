@@ -1,0 +1,131 @@
+{
+  "about": {
+    "authors": [],
+    "description": "A simple to use, efficient, and full-featured Command Line Argument Parser",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/clap-rs/clap",
+    "rust-version": "1.85"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b193af5b67834b676abd72466a96c1024e6a6ad978a1f484bd90b85c94041351",
+    "package": "clap",
+    "registry": "crates-io",
+    "version": "4.6.0"
+  },
+  "archive": "sha256:45dae03333d919fc3ef0b4c424800adb48ce0c3d907acae294e99c7d424afb96",
+  "at": "2026-10-07T15:47:59Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/clap_builder",
+      "name": "clap_builder",
+      "optional": false,
+      "req": "=4.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/clap_derive",
+      "name": "clap_derive",
+      "optional": true,
+      "req": "=4.6.0"
+    }
+  ],
+  "features": {
+    "cargo": [
+      "clap_builder/cargo"
+    ],
+    "color": [
+      "clap_builder/color"
+    ],
+    "debug": [
+      "clap_builder/debug",
+      "clap_derive?/debug"
+    ],
+    "default": [
+      "std",
+      "color",
+      "help",
+      "usage",
+      "error-context",
+      "suggestions"
+    ],
+    "deprecated": [
+      "clap_builder/deprecated",
+      "clap_derive?/deprecated"
+    ],
+    "derive": [
+      "dep:clap_derive"
+    ],
+    "env": [
+      "clap_builder/env"
+    ],
+    "error-context": [
+      "clap_builder/error-context"
+    ],
+    "help": [
+      "clap_builder/help"
+    ],
+    "std": [
+      "clap_builder/std"
+    ],
+    "string": [
+      "clap_builder/string"
+    ],
+    "suggestions": [
+      "clap_builder/suggestions"
+    ],
+    "unicode": [
+      "clap_builder/unicode"
+    ],
+    "unstable-derive-ui-tests": [],
+    "unstable-doc": [
+      "clap_builder/unstable-doc",
+      "derive"
+    ],
+    "unstable-ext": [
+      "clap_builder/unstable-ext"
+    ],
+    "unstable-markdown": [
+      "dep:clap_derive",
+      "clap_derive/unstable-markdown"
+    ],
+    "unstable-styles": [
+      "clap_builder/unstable-styles"
+    ],
+    "unstable-v5": [
+      "clap_builder/unstable-v5",
+      "clap_derive?/unstable-v5",
+      "deprecated"
+    ],
+    "usage": [
+      "clap_builder/usage"
+    ],
+    "wrap_help": [
+      "clap_builder/wrap_help"
+    ]
+  },
+  "id": "sha256:056d3326d0138ba41af8fcf46dcb871c0b10b1b6a8fbff16d2bffa35c53c7d98",
+  "kind": "adopt",
+  "manifest": "sha256:5e3bddd58fa7bb093c89ca88de51ba3febc7b549f55710d44990a0eb5eae599b",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "clap",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "clap",
+    "scope": "crates-io",
+    "version": "4.6.0"
+  }
+}

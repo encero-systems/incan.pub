@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/yoke"
+version = "0.8.1"
+
+[project.features]
+alloc = ["stable_deref_trait/alloc", "dep:zerofrom", "zerofrom/alloc"]
+default = ["alloc", "zerofrom"]
+derive = ["dep:yoke-derive", "dep:zerofrom", "zerofrom/derive"]
+serde = []
+zerofrom = ["dep:zerofrom"]
+
+[rust]
+name = "yoke"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+stable_deref_trait = { loaf = "crates-io/stable_deref_trait", version = "^1.2.0", default-features = false }
+yoke-derive = { loaf = "crates-io/yoke-derive", version = "^0.8.0", default-features = false, optional = true }
+zerofrom = { loaf = "crates-io/zerofrom", version = "^0.1.3", default-features = false, optional = true }

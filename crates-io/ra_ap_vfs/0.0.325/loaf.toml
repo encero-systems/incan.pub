@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_vfs"
+version = "0.0.325"
+
+[rust]
+name = "ra_ap_vfs"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+crossbeam-channel = { loaf = "crates-io/crossbeam-channel", version = "^0.5.15" }
+fst = { loaf = "crates-io/fst", version = "^0.4.7" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.9.0", features = ["serde"] }
+nohash-hasher = { loaf = "crates-io/nohash-hasher", version = "^0.2.0" }
+paths = { loaf = "crates-io/ra_ap_paths", version = "=0.0.325" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.41", features = ["std"], default-features = false }

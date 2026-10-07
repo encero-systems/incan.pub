@@ -1,0 +1,41 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/icu_provider"
+version = "2.1.1"
+
+[project.features]
+alloc = ["icu_locale_core/alloc", "serde?/alloc", "yoke/alloc", "zerofrom/alloc", "zerovec/alloc", "zerotrie?/alloc", "dep:stable_deref_trait", "dep:writeable"]
+baked = ["dep:zerotrie", "dep:writeable"]
+deserialize_bincode_1 = ["serde", "dep:bincode", "std"]
+deserialize_json = ["serde", "dep:serde_json"]
+deserialize_postcard_1 = ["serde", "dep:postcard"]
+export = ["serde", "dep:erased-serde", "dep:databake", "std", "sync", "dep:postcard", "zerovec/databake"]
+logging = ["dep:log"]
+serde = ["dep:serde", "yoke/serde"]
+std = ["alloc"]
+sync = []
+zerotrie = []
+
+[rust]
+name = "icu_provider"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bincode = { loaf = "crates-io/bincode", version = "^1.3.1", optional = true }
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.3", default-features = false }
+erased-serde = { loaf = "crates-io/erased-serde", version = "^0.4.0", optional = true }
+icu_locale_core = { loaf = "crates-io/icu_locale_core", version = "^2.1.1", default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.17", default-features = false, optional = true }
+postcard = { loaf = "crates-io/postcard", version = "^1.0.3", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["derive"], default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.45", optional = true }
+stable_deref_trait = { loaf = "crates-io/stable_deref_trait", version = "^1.2.0", default-features = false, optional = true }
+writeable = { loaf = "crates-io/writeable", version = "^0.6.0", default-features = false, optional = true }
+yoke = { loaf = "crates-io/yoke", version = "^0.8.0", features = ["derive"], default-features = false }
+zerofrom = { loaf = "crates-io/zerofrom", version = "^0.1.3", features = ["derive"], default-features = false }
+zerotrie = { loaf = "crates-io/zerotrie", version = "^0.2.0", default-features = false, optional = true }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.3", features = ["derive"], default-features = false }

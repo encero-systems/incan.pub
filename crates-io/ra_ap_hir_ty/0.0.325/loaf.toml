@@ -1,0 +1,53 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_hir_ty"
+version = "0.0.325"
+
+[project.features]
+in-rust-tree = ["hir-expand/in-rust-tree"]
+
+[rust]
+name = "ra_ap_hir_ty"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.6" }
+base-db = { loaf = "crates-io/ra_ap_base_db", version = "=0.0.325" }
+cov-mark = { loaf = "crates-io/cov-mark", version = "^2.0.0" }
+either = { loaf = "crates-io/either", version = "^1.15.0" }
+ena = { loaf = "crates-io/ena", version = "^0.14.3" }
+hir-def = { loaf = "crates-io/ra_ap_hir_def", version = "=0.0.325" }
+hir-expand = { loaf = "crates-io/ra_ap_hir_expand", version = "=0.0.325" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.9.0", features = ["serde"] }
+intern = { loaf = "crates-io/ra_ap_intern", version = "=0.0.325" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+la-arena = { loaf = "crates-io/la-arena", version = "^0.3.1" }
+macros = { loaf = "crates-io/ra_ap_macros", version = "=0.0.325" }
+oorandom = { loaf = "crates-io/oorandom", version = "^11.1.5" }
+petgraph = { loaf = "crates-io/petgraph", version = "^0.8.2", default-features = false }
+query-group = { loaf = "crates-io/ra_ap_query-group-macro", version = "=0.0.325" }
+ra-ap-rustc_abi = { loaf = "crates-io/ra-ap-rustc_abi", version = "^0.143", default-features = false }
+ra-ap-rustc_ast_ir = { loaf = "crates-io/ra-ap-rustc_ast_ir", version = "^0.143", default-features = false }
+ra-ap-rustc_index = { loaf = "crates-io/ra-ap-rustc_index", version = "^0.143", default-features = false }
+ra-ap-rustc_next_trait_solver = { loaf = "crates-io/ra-ap-rustc_next_trait_solver", version = "^0.143", default-features = false }
+ra-ap-rustc_pattern_analysis = { loaf = "crates-io/ra-ap-rustc_pattern_analysis", version = "^0.143", default-features = false }
+ra-ap-rustc_type_ir = { loaf = "crates-io/ra-ap-rustc_type_ir", version = "^0.143", default-features = false }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+rustc_apfloat = { loaf = "crates-io/rustc_apfloat", version = "^0.2.3" }
+salsa = { loaf = "crates-io/salsa", version = "^0.25.2", features = ["inventory", "macros", "rayon", "salsa_unstable"], default-features = false }
+salsa-macros = { loaf = "crates-io/salsa-macros", version = "^0.25.2" }
+serde = { loaf = "crates-io/serde", version = "^1.0.219" }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0.219" }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15.1", features = ["const_generics", "const_new", "union"] }
+span = { loaf = "crates-io/ra_ap_span", version = "=0.0.325" }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+syntax = { loaf = "crates-io/ra_ap_syntax", version = "=0.0.325" }
+thin-vec = { loaf = "crates-io/thin-vec", version = "^0.2.14" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.41", features = ["attributes", "std"], default-features = false }
+tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3.20", features = ["fmt", "local-time", "registry", "std", "time", "tracing-log"], default-features = false }
+tracing-tree = { loaf = "crates-io/tracing-tree", version = "^0.4.0" }
+triomphe = { loaf = "crates-io/triomphe", version = "^0.1.14", features = ["std"], default-features = false }
+typed-arena = { loaf = "crates-io/typed-arena", version = "^2.0.2" }

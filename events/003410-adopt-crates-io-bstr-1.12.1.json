@@ -1,0 +1,90 @@
+{
+  "about": {
+    "authors": [
+      "Andrew Gallant <jamslam@gmail.com>"
+    ],
+    "description": "A string type that is not required to be valid UTF-8.",
+    "documentation": "https://docs.rs/bstr",
+    "homepage": "https://github.com/BurntSushi/bstr",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/BurntSushi/bstr",
+    "rust-version": "1.73"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:63044e1ae8e69f3b5a92c736ca6269b8d12fa7efe39bf34ddb06d102cf0e2cab",
+    "package": "bstr",
+    "registry": "crates-io",
+    "version": "1.12.1"
+  },
+  "archive": "sha256:6a52b349c20358d082e9858dffea8187a69da47bb256b521f354f407b2a6bcbb",
+  "at": "2026-10-07T15:47:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.7.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "dfa-search"
+      ],
+      "loaf": "crates-io/regex-automata",
+      "name": "regex-automata",
+      "optional": true,
+      "req": "^0.4.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.85"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "memchr/alloc",
+      "serde?/alloc"
+    ],
+    "default": [
+      "std",
+      "unicode"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [
+      "alloc",
+      "memchr/std",
+      "serde?/std"
+    ],
+    "unicode": [
+      "dep:regex-automata"
+    ]
+  },
+  "id": "sha256:20da47be7228e7be284f3c4bb9eb430bb4e54c443b4502785011e706fd849e9d",
+  "kind": "adopt",
+  "manifest": "sha256:f5915e42b18b12aabfb774117136e7f928427f1dd6e6f87f7a921ae24d38542a",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "bstr",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bstr",
+    "scope": "crates-io",
+    "version": "1.12.1"
+  }
+}

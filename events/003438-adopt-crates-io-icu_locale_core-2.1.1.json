@@ -1,0 +1,121 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "API for managing Unicode Language and Locale Identifiers",
+    "documentation": "",
+    "homepage": "https://icu4x.unicode.org",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.83"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:edba7861004dd3714265b4db54a3c390e880ab658fec5f7db895fae2046b5bb6",
+    "package": "icu_locale_core",
+    "registry": "crates-io",
+    "version": "2.1.1"
+  },
+  "archive": "sha256:445e55a41bd90841cc4784e78b5e233f5f8964b0374eaffbc5efec2f899e3051",
+  "at": "2026-10-07T15:47:56Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/litemap",
+      "name": "litemap",
+      "optional": false,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tinystr",
+      "name": "tinystr",
+      "optional": false,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/writeable",
+      "name": "writeable",
+      "optional": false,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": true,
+      "req": "^0.11.3"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "litemap/alloc",
+      "tinystr/alloc",
+      "writeable/alloc",
+      "serde?/alloc"
+    ],
+    "databake": [
+      "dep:databake",
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde",
+      "tinystr/serde"
+    ],
+    "zerovec": [
+      "dep:zerovec",
+      "tinystr/zerovec"
+    ]
+  },
+  "id": "sha256:88d131d537c7f67bf1bcc03f83d51217a5862f8f88db973598bba52b6f860400",
+  "kind": "adopt",
+  "manifest": "sha256:bb836e218ee23d5ec7b99241ca189e8e3209f7eaf4fe5096948c66f6184ae2cf",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "icu_locale_core",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_locale_core",
+    "scope": "crates-io",
+    "version": "2.1.1"
+  }
+}

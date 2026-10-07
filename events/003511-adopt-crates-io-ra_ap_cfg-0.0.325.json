@@ -1,0 +1,104 @@
+{
+  "about": {
+    "authors": [
+      "rust-analyzer team"
+    ],
+    "description": "Conditional compiling options, `cfg` attribute parser and evaluator for rust-analyzer.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/rust-lang/rust-analyzer",
+    "rust-version": "1.91"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:1827ceaa481ad5774d7c9a2607852cd680ca1e6fe74ae09b05d994dedc3b6c1c",
+    "package": "ra_ap_cfg",
+    "registry": "crates-io",
+    "version": "0.0.325"
+  },
+  "archive": "sha256:5b551c45970800e06b47308856d47a2917275d6bcee0f55bac931bc97c89cb3a",
+  "at": "2026-10-07T15:48:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ra_ap_intern",
+      "name": "intern",
+      "optional": false,
+      "req": "=0.0.325"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": false,
+      "req": "^2.1.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ra_ap_span",
+      "name": "span",
+      "optional": true,
+      "req": "=0.0.325"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ra_ap_syntax",
+      "name": "syntax",
+      "optional": true,
+      "req": "=0.0.325"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": false,
+      "req": "^0.1.41"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ra_ap_tt",
+      "name": "tt",
+      "optional": true,
+      "req": "=0.0.325"
+    }
+  ],
+  "features": {
+    "default": [],
+    "in-rust-tree": [],
+    "syntax": [
+      "dep:syntax",
+      "dep:span"
+    ],
+    "tt": [
+      "dep:tt"
+    ]
+  },
+  "id": "sha256:436373bdc0a90a1960159bf702b2deb0ffd6d06a5c062a5b3767e7573c9a0e41",
+  "kind": "adopt",
+  "manifest": "sha256:b4223dd623762c74787b9f7ccc98d9705bbc39957132bd0f714c6c2064b31958",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ra_ap_cfg",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ra_ap_cfg",
+    "scope": "crates-io",
+    "version": "0.0.325"
+  }
+}

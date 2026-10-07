@@ -1,0 +1,74 @@
+{
+  "about": {
+    "authors": [
+      "Aria Beingessner <a.beingessner@gmail.com>"
+    ],
+    "description": "A Vec that takes up less space on the stack.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/mozilla/thin-vec",
+    "rust-version": "1.85"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4568d7e143ec86d2021c338bae2afa88699e84b8e0af523626654fe6f03a1748",
+    "package": "thin-vec",
+    "registry": "crates-io",
+    "version": "0.2.20"
+  },
+  "archive": "sha256:bd3d997d861606bb336e7ffab4eff2206b9b341bbf7dc56efb47e4f14c37a322",
+  "at": "2026-10-07T15:47:58Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/malloc_size_of",
+      "name": "malloc_size_of",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "const_new": [],
+    "default": [
+      "std"
+    ],
+    "gecko-ffi": [],
+    "malloc_size_of": [
+      "dep:malloc_size_of"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [],
+    "unstable": []
+  },
+  "id": "sha256:793e9016bf57c54f2e26f2e514e65a63fcc6609505f385de3f5f121034c37611",
+  "kind": "adopt",
+  "manifest": "sha256:3e0244b5aed506d8c18bf01d3dd6c9f24ae6ae87979261c006b79e3b85b6d489",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "thin_vec",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "thin-vec",
+    "scope": "crates-io",
+    "version": "0.2.20"
+  }
+}

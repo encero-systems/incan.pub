@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/bumpalo"
+version = "3.20.2"
+
+[project.features]
+allocator-api2 = ["dep:allocator-api2"]
+allocator_api = []
+bench_allocator_api = ["allocator_api"]
+boxed = []
+collections = []
+default = []
+serde = ["dep:serde"]
+std = []
+
+[rust]
+name = "bumpalo"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+allocator-api2 = { loaf = "crates-io/allocator-api2", version = "^0.2.8", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.171", optional = true }

@@ -1,0 +1,90 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "A key-value Map implementation based on a flat, sorted Vec.",
+    "documentation": "https://docs.rs/litemap",
+    "homepage": "",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.82"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:6373607a59f0be73a39b6fe456b8192fcc3585f602af20751600e974dd455e77",
+    "package": "litemap",
+    "registry": "crates-io",
+    "version": "0.8.1"
+  },
+  "archive": "sha256:52e708318b94207e92d338fba5b433096ad6a6390841d16fef50894aeda1ca28",
+  "at": "2026-10-07T15:47:56Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/yoke",
+      "name": "yoke",
+      "optional": true,
+      "req": "^0.8.0"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "databake": [
+      "dep:databake"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "alloc"
+    ],
+    "testing": [
+      "alloc"
+    ],
+    "yoke": [
+      "dep:yoke"
+    ]
+  },
+  "id": "sha256:8902c061ef16f0e986084cb38d5a257deb96f3ea78aed9bd0f4fdec3a0c886bb",
+  "kind": "adopt",
+  "manifest": "sha256:fd2518f47246230d06ba7cf43a0b8ab813f5da020cef139b1db1a640a25faa63",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "litemap",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "litemap",
+    "scope": "crates-io",
+    "version": "0.8.1"
+  }
+}

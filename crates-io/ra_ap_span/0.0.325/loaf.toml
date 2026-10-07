@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_span"
+version = "0.0.325"
+
+[project.features]
+default = ["salsa"]
+in-rust-tree = []
+salsa = ["dep:salsa"]
+
+[rust]
+name = "ra_ap_span"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+hashbrown = { loaf = "crates-io/hashbrown", version = "0.14.*", features = ["inline-more"], default-features = false }
+la-arena = { loaf = "crates-io/la-arena", version = "^0.3.1" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+salsa = { loaf = "crates-io/salsa", version = "^0.25.2", features = ["inventory", "macros", "rayon", "salsa_unstable"], default-features = false, optional = true }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+syntax = { loaf = "crates-io/ra_ap_syntax", version = "=0.0.325" }
+text-size = { loaf = "crates-io/text-size", version = "^1.1.1" }
+vfs = { loaf = "crates-io/ra_ap_vfs", version = "=0.0.325" }

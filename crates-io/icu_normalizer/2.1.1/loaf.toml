@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/icu_normalizer"
+version = "2.1.1"
+
+[project.features]
+compiled_data = ["dep:icu_normalizer_data", "icu_properties?/compiled_data", "icu_provider/baked"]
+datagen = ["serde", "dep:databake", "icu_properties", "icu_collections/databake", "zerovec/databake", "icu_properties?/datagen", "icu_provider/export"]
+default = ["compiled_data", "utf8_iter", "utf16_iter"]
+experimental = []
+icu_properties = ["dep:icu_properties"]
+serde = ["dep:serde", "icu_collections/serde", "zerovec/serde", "icu_properties?/serde", "icu_provider/serde"]
+utf16_iter = ["dep:utf16_iter", "dep:write16"]
+utf8_iter = ["dep:utf8_iter"]
+write16 = []
+
+[rust]
+name = "icu_normalizer"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+icu_collections = { loaf = "crates-io/icu_collections", version = "~2.1.1", default-features = false }
+icu_normalizer_data = { loaf = "crates-io/icu_normalizer_data", version = "~2.1.1", default-features = false, optional = true }
+icu_properties = { loaf = "crates-io/icu_properties", version = "~2.1.1", default-features = false, optional = true }
+icu_provider = { loaf = "crates-io/icu_provider", version = "^2.1.1", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["alloc", "derive"], default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.10.0", default-features = false }
+utf16_iter = { loaf = "crates-io/utf16_iter", version = "^1.0.2", default-features = false, optional = true }
+utf8_iter = { loaf = "crates-io/utf8_iter", version = "^1.0.2", default-features = false, optional = true }
+write16 = { loaf = "crates-io/write16", version = "^1.0.0", features = ["alloc"], default-features = false, optional = true }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.3", default-features = false }

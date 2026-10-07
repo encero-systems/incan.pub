@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra-ap-rustc_index_macros"
+version = "0.143.0"
+
+[project.features]
+nightly = []
+
+[rust]
+name = "ra_ap_rustc_index_macros"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^2.0.9", features = ["extra-traits", "full"] }

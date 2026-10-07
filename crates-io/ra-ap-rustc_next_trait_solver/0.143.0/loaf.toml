@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra-ap-rustc_next_trait_solver"
+version = "0.143.0"
+
+[project.features]
+nightly = []
+
+[rust]
+name = "ra_ap_rustc_next_trait_solver"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+derive-where = { loaf = "crates-io/derive-where", version = "^1.2.7" }
+rustc_index = { loaf = "crates-io/ra-ap-rustc_index", version = "^0.143.0", default-features = false }
+rustc_type_ir = { loaf = "crates-io/ra-ap-rustc_type_ir", version = "^0.143.0", default-features = false }
+rustc_type_ir_macros = { loaf = "crates-io/ra-ap-rustc_type_ir_macros", version = "^0.143.0" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1" }

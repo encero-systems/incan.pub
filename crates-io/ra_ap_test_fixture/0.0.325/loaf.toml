@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_test_fixture"
+version = "0.0.325"
+
+[project.features]
+default = []
+in-rust-tree = []
+
+[rust]
+name = "ra_ap_test_fixture"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base-db = { loaf = "crates-io/ra_ap_base_db", version = "=0.0.325" }
+cfg = { loaf = "crates-io/ra_ap_cfg", version = "=0.0.325", features = ["syntax", "tt"] }
+hir-expand = { loaf = "crates-io/ra_ap_hir_expand", version = "=0.0.325" }
+intern = { loaf = "crates-io/ra_ap_intern", version = "=0.0.325" }
+paths = { loaf = "crates-io/ra_ap_paths", version = "=0.0.325" }
+span = { loaf = "crates-io/ra_ap_span", version = "=0.0.325" }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+test-utils = { loaf = "crates-io/ra_ap_test_utils", version = "=0.0.325" }
+triomphe = { loaf = "crates-io/triomphe", version = "^0.1.14", features = ["std"], default-features = false }
+tt = { loaf = "crates-io/ra_ap_tt", version = "=0.0.325" }

@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/boxcar"
+version = "0.2.14"
+
+[project.features]
+loom = ["dep:loom"]
+
+[rust]
+name = "boxcar"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+loom = { loaf = "crates-io/loom", version = "^0.7", optional = true, target = "cfg(loom)" }

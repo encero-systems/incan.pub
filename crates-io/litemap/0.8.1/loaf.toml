@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/litemap"
+version = "0.8.1"
+
+[project.features]
+alloc = []
+databake = ["dep:databake"]
+default = ["alloc"]
+serde = ["dep:serde_core", "alloc"]
+testing = ["alloc"]
+yoke = ["dep:yoke"]
+
+[rust]
+name = "litemap"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", features = ["alloc"], default-features = false, optional = true }
+yoke = { loaf = "crates-io/yoke", version = "^0.8.0", features = ["derive"], default-features = false, optional = true }

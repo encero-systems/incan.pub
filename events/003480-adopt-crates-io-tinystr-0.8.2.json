@@ -1,0 +1,94 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "A small ASCII-only bounded length string representation.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.82"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:42d3e9c45c09de15d06dd8acf5f4e0e399e85927b7f00711024eb7ae10fa4869",
+    "package": "tinystr",
+    "registry": "crates-io",
+    "version": "0.8.2"
+  },
+  "archive": "sha256:9a643c05f98e3ca6dd39bf2a41c100afb881e6da63f0007609dad666289bd6ce",
+  "at": "2026-10-07T15:47:59Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": true,
+      "req": "^0.11.3"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde_core?/alloc",
+      "zerovec?/alloc"
+    ],
+    "databake": [
+      "dep:databake"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "std": [],
+    "zerovec": [
+      "dep:zerovec"
+    ]
+  },
+  "id": "sha256:c9a79f27cb95118aea208c20fd62df25a717accd7a3d51cea5551e5c6a7c4aa9",
+  "kind": "adopt",
+  "manifest": "sha256:515358ed1c8bc72977977f86c2b832ac9408ad2c85b1f291dc0d4af4ed482464",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "tinystr",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tinystr",
+    "scope": "crates-io",
+    "version": "0.8.2"
+  }
+}

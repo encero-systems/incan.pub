@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/countme"
+version = "3.0.1"
+
+[project.features]
+dashmap = ["dep:dashmap"]
+enable = ["dashmap", "once_cell", "rustc-hash"]
+once_cell = ["dep:once_cell"]
+print_at_exit = ["enable"]
+rustc-hash = ["dep:rustc-hash"]
+
+[rust]
+name = "countme"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+dashmap = { loaf = "crates-io/dashmap", version = "^5.0", optional = true }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.5", optional = true }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^1.1", optional = true }

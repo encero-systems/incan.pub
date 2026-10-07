@@ -1,0 +1,128 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "Collection of API for use in ICU libraries.",
+    "documentation": "",
+    "homepage": "https://icu4x.unicode.org",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.83"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4c6b649701667bbe825c3b7e6388cb521c23d88644678e83c0c4d0a621a34b43",
+    "package": "icu_collections",
+    "registry": "crates-io",
+    "version": "2.1.1"
+  },
+  "archive": "sha256:0351923f38c1eccdaff30505a65b3d45bca37555ad873e424e8194fa6d9d239c",
+  "at": "2026-10-07T15:47:55Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/displaydoc",
+      "name": "displaydoc",
+      "optional": false,
+      "req": "^0.2.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "zerovec"
+      ],
+      "loaf": "crates-io/potential_utf",
+      "name": "potential_utf",
+      "optional": false,
+      "req": "^0.1.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/yoke",
+      "name": "yoke",
+      "optional": false,
+      "req": "^0.8.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/zerofrom",
+      "name": "zerofrom",
+      "optional": false,
+      "req": "^0.1.3"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "derive",
+        "yoke"
+      ],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": false,
+      "req": "^0.11.3"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde?/alloc",
+      "zerovec/alloc"
+    ],
+    "databake": [
+      "dep:databake",
+      "zerovec/databake"
+    ],
+    "serde": [
+      "dep:serde",
+      "zerovec/serde",
+      "potential_utf/serde",
+      "alloc"
+    ]
+  },
+  "id": "sha256:fdea31b511b301b6b293b65330bd252380229cfef251ef91ba7d174ae3374f0f",
+  "kind": "adopt",
+  "manifest": "sha256:5ca310f2861ac4fa50422a12ece5d07381e56a2a00219f231e7a60fd8bb4d20e",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "icu_collections",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_collections",
+    "scope": "crates-io",
+    "version": "2.1.1"
+  }
+}

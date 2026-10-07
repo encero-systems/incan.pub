@@ -1,0 +1,45 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_hir_def"
+version = "0.0.325"
+
+[project.features]
+in-rust-tree = ["hir-expand/in-rust-tree"]
+
+[rust]
+name = "ra_ap_hir_def"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.6" }
+base-db = { loaf = "crates-io/ra_ap_base_db", version = "=0.0.325" }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.9.1" }
+cfg = { loaf = "crates-io/ra_ap_cfg", version = "=0.0.325", features = ["syntax", "tt"] }
+cov-mark = { loaf = "crates-io/cov-mark", version = "^2.0.0" }
+drop_bomb = { loaf = "crates-io/drop_bomb", version = "^0.1.5" }
+either = { loaf = "crates-io/either", version = "^1.15.0" }
+fst = { loaf = "crates-io/fst", version = "^0.4.7", default-features = false }
+hir-expand = { loaf = "crates-io/ra_ap_hir_expand", version = "=0.0.325" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.9.0", features = ["serde"] }
+intern = { loaf = "crates-io/ra_ap_intern", version = "=0.0.325" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+la-arena = { loaf = "crates-io/la-arena", version = "^0.3.1" }
+query-group = { loaf = "crates-io/ra_ap_query-group-macro", version = "=0.0.325" }
+ra-ap-rustc_abi = { loaf = "crates-io/ra-ap-rustc_abi", version = "^0.143", default-features = false }
+ra-ap-rustc_parse_format = { loaf = "crates-io/ra-ap-rustc_parse_format", version = "^0.143", default-features = false }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+rustc_apfloat = { loaf = "crates-io/rustc_apfloat", version = "^0.2.3" }
+salsa = { loaf = "crates-io/salsa", version = "^0.25.2", features = ["inventory", "macros", "rayon", "salsa_unstable"], default-features = false }
+salsa-macros = { loaf = "crates-io/salsa-macros", version = "^0.25.2" }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15.1", features = ["const_generics", "const_new", "union"] }
+span = { loaf = "crates-io/ra_ap_span", version = "=0.0.325" }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+syntax = { loaf = "crates-io/ra_ap_syntax", version = "=0.0.325" }
+syntax-bridge = { loaf = "crates-io/ra_ap_syntax-bridge", version = "=0.0.325" }
+thin-vec = { loaf = "crates-io/thin-vec", version = "^0.2.14" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.41", features = ["attributes", "std"], default-features = false }
+triomphe = { loaf = "crates-io/triomphe", version = "^0.1.14", features = ["std"], default-features = false }
+tt = { loaf = "crates-io/ra_ap_tt", version = "=0.0.325" }

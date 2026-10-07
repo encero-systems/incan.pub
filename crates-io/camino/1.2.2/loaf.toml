@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/camino"
+version = "1.2.2"
+
+[project.features]
+proptest1 = ["dep:proptest"]
+serde1 = ["dep:serde_core"]
+
+[rust]
+name = "camino"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+proptest = { loaf = "crates-io/proptest", version = "^1.0.0", optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1", optional = true }

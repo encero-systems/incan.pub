@@ -1,0 +1,75 @@
+{
+  "about": {
+    "authors": [
+      "Nick Fitzgerald <fitzgen@gmail.com>"
+    ],
+    "description": "A fast bump allocation arena for Rust.",
+    "documentation": "https://docs.rs/bumpalo",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/fitzgen/bumpalo",
+    "rust-version": "1.71.1"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5d20789868f4b01b2f2caec9f5c4e0213b41e3e5702a50157d699ae31ced2fcb",
+    "package": "bumpalo",
+    "registry": "crates-io",
+    "version": "3.20.2"
+  },
+  "archive": "sha256:3b8b68a16a0fc4c35814903b1f0c0296bb6ee8cba9f5fedb9ede570fe2992a75",
+  "at": "2026-10-07T15:47:53Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/allocator-api2",
+      "name": "allocator-api2",
+      "optional": true,
+      "req": "^0.2.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.171"
+    }
+  ],
+  "features": {
+    "allocator-api2": [
+      "dep:allocator-api2"
+    ],
+    "allocator_api": [],
+    "bench_allocator_api": [
+      "allocator_api"
+    ],
+    "boxed": [],
+    "collections": [],
+    "default": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": []
+  },
+  "id": "sha256:f8c453b1fb4f3be57af73c91853d70fa6cf56603b01087a1ccd4166957da29ac",
+  "kind": "adopt",
+  "manifest": "sha256:7787e9056ac924408a13c4abe8ff06f1c268c265539d427e6badf278b4867342",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "bumpalo",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bumpalo",
+    "scope": "crates-io",
+    "version": "3.20.2"
+  }
+}

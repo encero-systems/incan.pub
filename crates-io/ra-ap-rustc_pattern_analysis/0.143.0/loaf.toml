@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra-ap-rustc_pattern_analysis"
+version = "0.143.0"
+
+[project.features]
+rustc = []
+
+[rust]
+name = "ra_ap_rustc_pattern_analysis"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.0.0" }
+rustc_apfloat = { loaf = "crates-io/rustc_apfloat", version = "^0.2.0" }
+rustc_index = { loaf = "crates-io/ra-ap-rustc_index", version = "^0.143.0", default-features = false }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.8.1", features = ["union"] }
+tracing = { loaf = "crates-io/tracing", version = "^0.1" }

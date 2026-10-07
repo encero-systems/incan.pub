@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_stdx"
+version = "0.0.325"
+
+[project.features]
+backtrace = ["dep:backtrace"]
+force-always-assert = []
+
+[rust]
+name = "ra_ap_stdx"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+backtrace = { loaf = "crates-io/backtrace", version = "^0.3.75", optional = true }
+crossbeam-channel = { loaf = "crates-io/crossbeam-channel", version = "^0.5.15" }
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.21" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+jod-thread = { loaf = "crates-io/jod-thread", version = "^1.0.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2.172", target = "cfg(unix)" }
+miow = { loaf = "crates-io/miow", version = "^0.6.0", target = "cfg(windows)" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.41", features = ["std"], default-features = false }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.60", features = ["Win32_Foundation"], target = "cfg(windows)" }

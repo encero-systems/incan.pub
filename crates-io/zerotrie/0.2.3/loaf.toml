@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zerotrie"
+version = "0.2.3"
+
+[project.features]
+alloc = []
+databake = ["dep:databake", "zerovec?/databake"]
+default = []
+litemap = ["dep:litemap", "alloc"]
+serde = ["dep:serde_core", "dep:litemap", "alloc", "litemap/serde", "zerovec?/serde"]
+yoke = ["dep:yoke"]
+zerofrom = ["dep:zerofrom"]
+zerovec = ["dep:zerovec"]
+
+[rust]
+name = "zerotrie"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.3", default-features = false }
+litemap = { loaf = "crates-io/litemap", version = "^0.8.0", features = ["alloc"], default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.220", default-features = false, optional = true }
+yoke = { loaf = "crates-io/yoke", version = "^0.8.0", features = ["derive"], default-features = false, optional = true }
+zerofrom = { loaf = "crates-io/zerofrom", version = "^0.1.3", default-features = false, optional = true }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.3", default-features = false, optional = true }

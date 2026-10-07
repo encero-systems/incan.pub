@@ -1,0 +1,98 @@
+{
+  "about": {
+    "authors": [
+      "rust-analyzer team"
+    ],
+    "description": "A collection of tools for profiling rust-analyzer.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/rust-lang/rust-analyzer",
+    "rust-version": "1.91"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a9298b8d1bb31def05b1f396df44ed8d608a7826ea2f9f5e3ff5244eef20fb71",
+    "package": "ra_ap_profile",
+    "registry": "crates-io",
+    "version": "0.0.325"
+  },
+  "archive": "sha256:af864526b3b0b5dfead55b5e1b0511586b9aa8588ca9544db00f8205a5a1e525",
+  "at": "2026-10-07T15:48:01Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tikv-jemalloc-ctl",
+      "name": "jemalloc-ctl",
+      "optional": true,
+      "req": "^0.5.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.172",
+      "target": "cfg(all(target_os = \"linux\", target_env = \"gnu\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/perf-event",
+      "name": "perf-event",
+      "optional": false,
+      "req": "=0.4.7",
+      "target": "cfg(all(target_os = \"linux\", not(target_env = \"ohos\")))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_System_ProcessStatus",
+        "Win32_System_Threading"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.60",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "cpu_profiler": [],
+    "jemalloc": [
+      "jemalloc-ctl"
+    ],
+    "jemalloc-ctl": [
+      "dep:jemalloc-ctl"
+    ]
+  },
+  "id": "sha256:dabc5f8e3ed168eaec5377202a75fd177cdca962e20d740e9a4f2c56b3796e9b",
+  "kind": "adopt",
+  "manifest": "sha256:f9b37c59a66de4d4e21ee04353004d93db61b1253fcc150e8030c84ee45b12e2",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ra_ap_profile",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ra_ap_profile",
+    "scope": "crates-io",
+    "version": "0.0.325"
+  }
+}

@@ -1,0 +1,35 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_hir"
+version = "0.0.325"
+
+[project.features]
+in-rust-tree = ["hir-expand/in-rust-tree"]
+
+[rust]
+name = "ra_ap_hir"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.6" }
+base-db = { loaf = "crates-io/ra_ap_base_db", version = "=0.0.325" }
+cfg = { loaf = "crates-io/ra_ap_cfg", version = "=0.0.325", features = ["syntax", "tt"] }
+either = { loaf = "crates-io/either", version = "^1.15.0" }
+hir-def = { loaf = "crates-io/ra_ap_hir_def", version = "=0.0.325" }
+hir-expand = { loaf = "crates-io/ra_ap_hir_expand", version = "=0.0.325" }
+hir-ty = { loaf = "crates-io/ra_ap_hir_ty", version = "=0.0.325" }
+intern = { loaf = "crates-io/ra_ap_intern", version = "=0.0.325" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+ra-ap-rustc_type_ir = { loaf = "crates-io/ra-ap-rustc_type_ir", version = "^0.143", default-features = false }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.140" }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15.1", features = ["const_generics", "const_new", "union"] }
+span = { loaf = "crates-io/ra_ap_span", version = "=0.0.325" }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+syntax = { loaf = "crates-io/ra_ap_syntax", version = "=0.0.325" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.41", features = ["attributes", "std"], default-features = false }
+triomphe = { loaf = "crates-io/triomphe", version = "^0.1.14", features = ["std"], default-features = false }
+tt = { loaf = "crates-io/ra_ap_tt", version = "=0.0.325" }

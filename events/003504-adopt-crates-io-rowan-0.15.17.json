@@ -1,0 +1,102 @@
+{
+  "about": {
+    "authors": [
+      "Aleksey Kladov <aleksey.kladov@gmail.com>"
+    ],
+    "description": "Library for generic lossless syntax trees",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-analyzer/rowan",
+    "rust-version": ""
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d4f1e4a001f863f41ea8d0e6a0c34b356d5b733db50dadab3efef640bafb779b",
+    "package": "rowan",
+    "registry": "crates-io",
+    "version": "0.15.17"
+  },
+  "archive": "sha256:6ddae7cafa12dfb1e615d2ee4b18f825989f035f08a72bd3fba29fcefe66a5f0",
+  "at": "2026-10-07T15:48:00Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/countme",
+      "name": "countme",
+      "optional": false,
+      "req": "^3.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "inline-more"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.14.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memoffset",
+      "name": "memoffset",
+      "optional": false,
+      "req": "^0.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": false,
+      "req": "^1.0.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.89"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/text-size",
+      "name": "text-size",
+      "optional": false,
+      "req": "^1.1.0"
+    }
+  ],
+  "features": {
+    "serde": [
+      "dep:serde"
+    ],
+    "serde1": [
+      "serde",
+      "text-size/serde"
+    ]
+  },
+  "id": "sha256:9a20cf149c4cf41f30e6b075aa7d3bd48755384c6a8703bef3b78974b38b8eec",
+  "kind": "adopt",
+  "manifest": "sha256:c786bf6b72a2df7cf35c5379ff5856ebfbfa54df2eb8a11f745993ff38571656",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "rowan",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rowan",
+    "scope": "crates-io",
+    "version": "0.15.17"
+  }
+}

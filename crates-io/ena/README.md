@@ -1,0 +1,11 @@
+# crates-io/ena
+
+The crates.io package [ena](https://crates.io/crates/ena), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves. Union-find, congruence closure, and other unification code. Based on code from rustc.
+
+| Version | Adopted | License | Build facts | Compiled units | |
+|---|---|---|---|---|---|
+| [0.14.4](0.14.4/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
+
+Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/ena`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/ena](../../index/crates-io/ena), the units by each version's `assets.json`.
+
+<!-- Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit. -->

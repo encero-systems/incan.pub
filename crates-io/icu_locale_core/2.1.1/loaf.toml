@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/icu_locale_core"
+version = "2.1.1"
+
+[project.features]
+alloc = ["litemap/alloc", "tinystr/alloc", "writeable/alloc", "serde?/alloc"]
+databake = ["dep:databake", "alloc"]
+serde = ["dep:serde", "tinystr/serde"]
+zerovec = ["dep:zerovec", "tinystr/zerovec"]
+
+[rust]
+name = "icu_locale_core"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+displaydoc = { loaf = "crates-io/displaydoc", version = "^0.2.3", default-features = false }
+litemap = { loaf = "crates-io/litemap", version = "^0.8.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", default-features = false, optional = true }
+tinystr = { loaf = "crates-io/tinystr", version = "^0.8.0", default-features = false }
+writeable = { loaf = "crates-io/writeable", version = "^0.6.0", default-features = false }
+zerovec = { loaf = "crates-io/zerovec", version = "^0.11.3", default-features = false, optional = true }

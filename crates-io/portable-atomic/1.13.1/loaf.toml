@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/portable-atomic"
+version = "1.13.1"
+
+[project.features]
+critical-section = ["dep:critical-section"]
+default = ["fallback"]
+disable-fiq = []
+fallback = []
+float = []
+force-amo = []
+require-cas = []
+s-mode = []
+serde = ["dep:serde"]
+std = []
+unsafe-assume-privileged = []
+unsafe-assume-single-core = []
+
+[rust]
+name = "portable_atomic"
+type = "lib"
+edition = "2018"
+build-script = true
+
+[dependencies]
+critical-section = { loaf = "crates-io/critical-section", version = "^1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.60", default-features = false, optional = true }

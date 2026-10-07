@@ -1,0 +1,15 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cargo-platform"
+version = "0.3.2"
+
+[rust]
+name = "cargo_platform"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1.0.228", target = "cfg(any())" }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0.228" }

@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_syntax"
+version = "0.0.325"
+
+[project.features]
+default = []
+in-rust-tree = []
+
+[rust]
+name = "ra_ap_syntax"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+either = { loaf = "crates-io/either", version = "^1.15.0" }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+parser = { loaf = "crates-io/ra_ap_parser", version = "=0.0.325" }
+rowan = { loaf = "crates-io/rowan", version = "=0.15.17" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+rustc-literal-escaper = { loaf = "crates-io/rustc-literal-escaper", version = "^0.0.4" }
+smol_str = { loaf = "crates-io/smol_str", version = "^0.3.2" }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.41", features = ["std"], default-features = false }
+triomphe = { loaf = "crates-io/triomphe", version = "^0.1.14", features = ["std"], default-features = false }

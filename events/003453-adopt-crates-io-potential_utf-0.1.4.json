@@ -1,0 +1,98 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "Unvalidated string and character types",
+    "documentation": "",
+    "homepage": "https://icu4x.unicode.org",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.82"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b73949432f5e2a09657003c25bca5e19a0e9c84f8058ca374f49e0ebe605af77",
+    "package": "potential_utf",
+    "registry": "crates-io",
+    "version": "0.1.4"
+  },
+  "archive": "sha256:0bf93595e969e81358b1327c57bf2700dc4d6288913f5fbed16e6d6272f460b8",
+  "at": "2026-10-07T15:47:57Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/writeable",
+      "name": "writeable",
+      "optional": true,
+      "req": "^0.6.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": true,
+      "req": "^0.11.3"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serde_core?/alloc",
+      "dep:writeable",
+      "writeable/alloc",
+      "zerovec?/alloc"
+    ],
+    "databake": [
+      "dep:databake"
+    ],
+    "default": [
+      "alloc"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "writeable": [
+      "dep:writeable"
+    ],
+    "zerovec": [
+      "dep:zerovec"
+    ]
+  },
+  "id": "sha256:1d6dd7fcdcc9b2daa7a9eccf43600c848e589273bc4415869628a8990db9aaa3",
+  "kind": "adopt",
+  "manifest": "sha256:962acdf5804d66e54ebe88b1a6e6199359d9f253a906734d641e7fc9206ffccd",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "potential_utf",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "potential_utf",
+    "scope": "crates-io",
+    "version": "0.1.4"
+  }
+}

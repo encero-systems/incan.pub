@@ -1,0 +1,97 @@
+{
+  "about": {
+    "authors": [
+      "Manish Goregaokar <manishsmail@gmail.com>",
+      "The Servo Project Developers"
+    ],
+    "description": "A fork of std::sync::Arc with some extra functionality and without weak references (originally servo_arc)",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/Manishearth/triomphe",
+    "rust-version": "1.76"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:dd69c5aa8f924c7519d6372789a74eac5b94fb0f8fcf0d4a97eb0bfc3e785f39",
+    "package": "triomphe",
+    "registry": "crates-io",
+    "version": "0.1.15"
+  },
+  "archive": "sha256:60fd7123b0925c66fbe64fd84d8a08bbcf9a30fe4b960ce5b6038183ffb58688",
+  "at": "2026-10-07T15:47:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arc-swap",
+      "name": "arc-swap",
+      "optional": true,
+      "req": "^1.3.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/stable_deref_trait",
+      "name": "stable_deref_trait",
+      "optional": true,
+      "req": "^1.1.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unsize",
+      "name": "unsize",
+      "optional": true,
+      "req": "^1.1"
+    }
+  ],
+  "features": {
+    "arc-swap": [
+      "dep:arc-swap"
+    ],
+    "default": [
+      "serde",
+      "stable_deref_trait",
+      "std"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "stable_deref_trait": [
+      "dep:stable_deref_trait"
+    ],
+    "std": [],
+    "unsize": [
+      "dep:unsize"
+    ],
+    "unstable_dropck_eyepatch": []
+  },
+  "id": "sha256:588f93a44dd24f344d304b2482242001528db2c5ed6939573672c65d39fd6c32",
+  "kind": "adopt",
+  "manifest": "sha256:1fd512df1dd744f8ed94904e5e2fcd0cf76be6257a5dfccbea310db105380d1f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "triomphe",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "triomphe",
+    "scope": "crates-io",
+    "version": "0.1.15"
+  }
+}

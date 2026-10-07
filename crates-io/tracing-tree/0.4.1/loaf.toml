@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tracing-tree"
+version = "0.4.1"
+
+[project.features]
+default = ["tracing-log"]
+time = ["dep:time"]
+tracing-log = ["dep:tracing-log"]
+
+[rust]
+name = "tracing_tree"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+nu-ansi-term = { loaf = "crates-io/nu-ansi-term", version = "^0.50.0" }
+time = { loaf = "crates-io/time", version = "^0.3.20", features = ["formatting", "local-offset"], optional = true }
+tracing-core = { loaf = "crates-io/tracing-core", version = "^0.1" }
+tracing-log = { loaf = "crates-io/tracing-log", version = "^0.2", features = ["log-tracer", "std"], default-features = false, optional = true }
+tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3", features = ["fmt", "registry", "std"], default-features = false }

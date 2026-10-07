@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_syntax-bridge"
+version = "0.0.325"
+
+[project.features]
+in-rust-tree = ["parser/in-rust-tree", "tt/in-rust-tree", "syntax/in-rust-tree"]
+
+[rust]
+name = "ra_ap_syntax_bridge"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+intern = { loaf = "crates-io/ra_ap_intern", version = "=0.0.325" }
+parser = { loaf = "crates-io/ra_ap_parser", version = "=0.0.325" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+span = { loaf = "crates-io/ra_ap_span", version = "=0.0.325", default-features = false }
+stdx = { loaf = "crates-io/ra_ap_stdx", version = "=0.0.325" }
+syntax = { loaf = "crates-io/ra_ap_syntax", version = "=0.0.325" }
+tt = { loaf = "crates-io/ra_ap_tt", version = "=0.0.325" }

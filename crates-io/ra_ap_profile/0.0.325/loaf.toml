@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_profile"
+version = "0.0.325"
+
+[project.features]
+cpu_profiler = []
+jemalloc = ["jemalloc-ctl"]
+jemalloc-ctl = ["dep:jemalloc-ctl"]
+
+[rust]
+name = "ra_ap_profile"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.1" }
+jemalloc-ctl = { loaf = "crates-io/tikv-jemalloc-ctl", version = "^0.5.4", optional = true }
+libc = { loaf = "crates-io/libc", version = "^0.2.172", target = "cfg(all(target_os = \"linux\", target_env = \"gnu\"))" }
+perf-event = { loaf = "crates-io/perf-event", version = "=0.4.7", target = "cfg(all(target_os = \"linux\", not(target_env = \"ohos\")))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.60", features = ["Win32_System_ProcessStatus", "Win32_System_Threading"], target = "cfg(windows)" }

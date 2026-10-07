@@ -1,0 +1,106 @@
+{
+  "about": {
+    "authors": [
+      "David Barsky <me@davidbarsky.com>",
+      "Nathan Whitaker",
+      "Oli Scherer <tracing-tree@oli-obk.de>"
+    ],
+    "description": "A Tracing Layer which prints a tree of spans and events.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/davidbarsky/tracing-tree",
+    "rust-version": "1.70"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ac87aa03b6a4d5a7e4810d1a80c19601dbe0f8a837e9177f23af721c7ba7beec",
+    "package": "tracing-tree",
+    "registry": "crates-io",
+    "version": "0.4.1"
+  },
+  "archive": "sha256:7683793f183b6cd92749e42b27de20bab5a5f3fa5c337762d93d9eb57421a937",
+  "at": "2026-10-07T15:47:59Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/nu-ansi-term",
+      "name": "nu-ansi-term",
+      "optional": false,
+      "req": "^0.50.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "formatting",
+        "local-offset"
+      ],
+      "loaf": "crates-io/time",
+      "name": "time",
+      "optional": true,
+      "req": "^0.3.20"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tracing-core",
+      "name": "tracing-core",
+      "optional": false,
+      "req": "^0.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "log-tracer",
+        "std"
+      ],
+      "loaf": "crates-io/tracing-log",
+      "name": "tracing-log",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "fmt",
+        "registry",
+        "std"
+      ],
+      "loaf": "crates-io/tracing-subscriber",
+      "name": "tracing-subscriber",
+      "optional": false,
+      "req": "^0.3"
+    }
+  ],
+  "features": {
+    "default": [
+      "tracing-log"
+    ],
+    "time": [
+      "dep:time"
+    ],
+    "tracing-log": [
+      "dep:tracing-log"
+    ]
+  },
+  "id": "sha256:82669ab7eac16d56a169a46eb635c6ea3535438863d24aed17eadc63d878988d",
+  "kind": "adopt",
+  "manifest": "sha256:5e91bac67c4c2d98f8983db9c2d5c05ec3550aee9d1f388ba5d68577055f1945",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "tracing_tree",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "tracing-tree",
+    "scope": "crates-io",
+    "version": "0.4.1"
+  }
+}

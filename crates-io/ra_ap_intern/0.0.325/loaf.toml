@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ra_ap_intern"
+version = "0.0.325"
+
+[rust]
+name = "ra_ap_intern"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+dashmap = { loaf = "crates-io/dashmap", version = "=6.1.0", features = ["inline", "raw-api"] }
+hashbrown = { loaf = "crates-io/hashbrown", version = "0.14.*", features = ["inline-more"], default-features = false }
+rayon = { loaf = "crates-io/rayon", version = "^1.10.0" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.1.1" }
+triomphe = { loaf = "crates-io/triomphe", version = "^0.1.14", features = ["std"], default-features = false }

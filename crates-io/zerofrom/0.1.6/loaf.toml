@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zerofrom"
+version = "0.1.6"
+
+[project.features]
+alloc = []
+default = ["alloc"]
+derive = ["dep:zerofrom-derive"]
+
+[rust]
+name = "zerofrom"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+zerofrom-derive = { loaf = "crates-io/zerofrom-derive", version = "^0.1.3", default-features = false, optional = true }

@@ -1,0 +1,178 @@
+{
+  "about": {
+    "authors": [
+      "The ICU4X Project Developers"
+    ],
+    "description": "API for normalizing text into Unicode Normalization Forms",
+    "documentation": "",
+    "homepage": "https://icu4x.unicode.org",
+    "license": "Unicode-3.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-org/icu4x",
+    "rust-version": "1.83"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5f6c8828b67bf8908d82127b2054ea1b4427ff0230ee9141c54251934ab1b599",
+    "package": "icu_normalizer",
+    "registry": "crates-io",
+    "version": "2.1.1"
+  },
+  "archive": "sha256:6638aabb1b06f39166007643b158e6a0babd50c3f41e496e43f31cb1bac08a2f",
+  "at": "2026-10-07T15:47:59Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/databake",
+      "name": "databake",
+      "optional": true,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_collections",
+      "name": "icu_collections",
+      "optional": false,
+      "req": "~2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_normalizer_data",
+      "name": "icu_normalizer_data",
+      "optional": true,
+      "req": "~2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_properties",
+      "name": "icu_properties",
+      "optional": true,
+      "req": "~2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/icu_provider",
+      "name": "icu_provider",
+      "optional": false,
+      "req": "^2.1.1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.10.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/utf16_iter",
+      "name": "utf16_iter",
+      "optional": true,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/utf8_iter",
+      "name": "utf8_iter",
+      "optional": true,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/write16",
+      "name": "write16",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zerovec",
+      "name": "zerovec",
+      "optional": false,
+      "req": "^0.11.3"
+    }
+  ],
+  "features": {
+    "compiled_data": [
+      "dep:icu_normalizer_data",
+      "icu_properties?/compiled_data",
+      "icu_provider/baked"
+    ],
+    "datagen": [
+      "serde",
+      "dep:databake",
+      "icu_properties",
+      "icu_collections/databake",
+      "zerovec/databake",
+      "icu_properties?/datagen",
+      "icu_provider/export"
+    ],
+    "default": [
+      "compiled_data",
+      "utf8_iter",
+      "utf16_iter"
+    ],
+    "experimental": [],
+    "icu_properties": [
+      "dep:icu_properties"
+    ],
+    "serde": [
+      "dep:serde",
+      "icu_collections/serde",
+      "zerovec/serde",
+      "icu_properties?/serde",
+      "icu_provider/serde"
+    ],
+    "utf16_iter": [
+      "dep:utf16_iter",
+      "dep:write16"
+    ],
+    "utf8_iter": [
+      "dep:utf8_iter"
+    ],
+    "write16": []
+  },
+  "id": "sha256:a324d84ff7309eca3509640443e5f57271a9d003297a554390f78a55bcbf006d",
+  "kind": "adopt",
+  "manifest": "sha256:6f400005c98f7e866c621f9ec4196355ecb6917e2b8005518cf448193af0c6f9",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "icu_normalizer",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "icu_normalizer",
+    "scope": "crates-io",
+    "version": "2.1.1"
+  }
+}

@@ -1,0 +1,47 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/salsa"
+version = "0.25.2"
+
+[project.features]
+accumulator = ["salsa-macro-rules/accumulator"]
+compact_str = ["dep:compact_str"]
+default = ["salsa_unstable", "rayon", "macros", "inventory", "accumulator"]
+inventory = ["dep:inventory"]
+macros = ["dep:salsa-macros"]
+ordermap = ["dep:ordermap"]
+persistence = ["dep:serde", "dep:erased-serde", "dep:salsa-macros", "salsa-macros/persistence", "thin-vec/serde"]
+rayon = ["dep:rayon"]
+salsa_unstable = []
+shuttle = ["dep:shuttle"]
+
+[rust]
+name = "salsa"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+boxcar = { loaf = "crates-io/boxcar", version = "^0.2.13" }
+compact_str = { loaf = "crates-io/compact_str", version = "^0.9", optional = true }
+crossbeam-queue = { loaf = "crates-io/crossbeam-queue", version = "^0.3.12" }
+crossbeam-utils = { loaf = "crates-io/crossbeam-utils", version = "^0.8.21" }
+erased-serde = { loaf = "crates-io/erased-serde", version = "^0.4.6", optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.15" }
+hashlink = { loaf = "crates-io/hashlink", version = "^0.10" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2" }
+intrusive-collections = { loaf = "crates-io/intrusive-collections", version = "^0.9.7" }
+inventory = { loaf = "crates-io/inventory", version = "^0.3.20", optional = true }
+ordermap = { loaf = "crates-io/ordermap", version = "^1.0.0", optional = true }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12" }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1" }
+rayon = { loaf = "crates-io/rayon", version = "^1.10.0", optional = true }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2" }
+salsa-macro-rules = { loaf = "crates-io/salsa-macro-rules", version = "^0.25.2" }
+salsa-macros = [{ loaf = "crates-io/salsa-macros", version = "=0.25.2", target = "cfg(any())" }, { loaf = "crates-io/salsa-macros", version = "^0.25.2", optional = true }]
+serde = { loaf = "crates-io/serde", version = "^1.0.219", features = ["derive"], optional = true }
+shuttle = { loaf = "crates-io/shuttle", version = "^0.8.1", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1", features = ["const_new"] }
+thin-vec = { loaf = "crates-io/thin-vec", version = "^0.2.14" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", features = ["std"], default-features = false }

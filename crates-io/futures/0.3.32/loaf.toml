@@ -1,0 +1,36 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/futures"
+version = "0.3.32"
+
+[project.features]
+alloc = ["futures-core/alloc", "futures-task/alloc", "futures-sink/alloc", "futures-channel/alloc", "futures-util/alloc"]
+async-await = ["futures-util/async-await", "futures-util/async-await-macro"]
+bilock = ["futures-util/bilock"]
+cfg-target-has-atomic = []
+compat = ["std", "futures-util/compat"]
+default = ["std", "async-await", "executor"]
+executor = ["std", "dep:futures-executor", "futures-executor/std"]
+futures-executor = ["dep:futures-executor"]
+io-compat = ["compat", "futures-util/io-compat"]
+spin = ["futures-util/spin"]
+std = ["alloc", "futures-core/std", "futures-task/std", "futures-io/std", "futures-sink/std", "futures-util/std", "futures-util/io", "futures-util/channel"]
+thread-pool = ["executor", "dep:futures-executor", "futures-executor/thread-pool"]
+unstable = ["futures-core/unstable", "futures-task/unstable", "futures-channel/unstable", "futures-io/unstable", "futures-util/unstable"]
+write-all-vectored = ["futures-util/write-all-vectored"]
+
+[rust]
+name = "futures"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3.32", features = ["sink"], default-features = false }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3.32", default-features = false }
+futures-executor = { loaf = "crates-io/futures-executor", version = "^0.3.32", default-features = false, optional = true }
+futures-io = { loaf = "crates-io/futures-io", version = "^0.3.32", default-features = false }
+futures-sink = { loaf = "crates-io/futures-sink", version = "^0.3.32", default-features = false }
+futures-task = { loaf = "crates-io/futures-task", version = "^0.3.32", default-features = false }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3.32", features = ["sink"], default-features = false }

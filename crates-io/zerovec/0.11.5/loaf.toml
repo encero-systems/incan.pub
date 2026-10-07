@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/zerovec"
+version = "0.11.5"
+
+[project.features]
+alloc = ["serde?/alloc"]
+databake = ["dep:databake"]
+derive = ["dep:zerovec-derive"]
+hashmap = ["dep:twox-hash", "alloc"]
+serde = ["dep:serde"]
+std = []
+yoke = ["dep:yoke"]
+
+[rust]
+name = "zerovec"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.220", features = ["derive"], default-features = false, optional = true }
+twox-hash = { loaf = "crates-io/twox-hash", version = "^2.0.0", features = ["xxhash64"], default-features = false, optional = true }
+yoke = { loaf = "crates-io/yoke", version = "^0.8.0", default-features = false, optional = true }
+zerofrom = { loaf = "crates-io/zerofrom", version = "^0.1.3", default-features = false }
+zerovec-derive = { loaf = "crates-io/zerovec-derive", version = "^0.11.1", default-features = false, optional = true }
