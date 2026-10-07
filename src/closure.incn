@@ -12,7 +12,7 @@ store. Nothing is appended to the log until the plan is complete and ordered.
 from std.fs import Path
 from std.json import JsonValue, parse_jsonl
 
-from adoption import Adoption, render_adopted_manifest, required_dependencies, source_archive, translate, unpack_crate
+from adoption import Adoption, adoption_from_payload, render_adopted_manifest, required_dependencies, source_archive, translate, unpack_crate
 from canonical import digest_bytes, digest_text
 from events import read_text, string_member
 from host import download
@@ -76,6 +76,29 @@ pub def prepare(cache: str, blobs: str, line: JsonValue) -> Result[Planned, str]
             Ok(_) => pass
             Err(error) => return Err(f"{location}: {error.message()}")
     return Ok(Planned(adoption=adoption, manifest=digest_text(manifest), archive=digest))
+
+
+pub def reproduce(cache: str, blobs: str, line: JsonValue, payload: JsonValue) -> Result[str, str]:
+    """
+    Rebuild the source Loaf archive an `adopt` event recorded and store it; return its digest.
+
+    The manifest is rendered from the event's own payload, not from translating the package again, so the archive is
+    the one adopted whatever the translation has learned since (a rule added, an equivalent spelling changed).
+    """
+    package = string_member(line, "name")
+    version = string_member(line, "vers")
+    files = unpack_crate(package, version, crate_archive(cache, package, version, string_member(line, "cksum"))?)?
+    manifest = render_adopted_manifest(adoption_from_payload(payload, f"{package} {version}")?)
+    archive = source_archive(manifest, files)?
+    digest = digest_bytes(archive)
+    location = blobs + "/sha256/" + digest[7:] + ".tar"
+    path = Path(location)
+    if not path.is_file():
+        make_parent(path, location)?
+        match path.write_bytes(archive):
+            Ok(_) => pass
+            Err(error) => return Err(f"{location}: {error.message()}")
+    return Ok(digest)
 
 
 pub def blob_path(blobs: Path, digest: str) -> Path:

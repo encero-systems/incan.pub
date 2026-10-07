@@ -46,7 +46,7 @@ from admission import (
 )
 from adoption import adoption_payload, loaf_name
 from canonical import canonical, digest_bytes, is_sha256_identity, pretty
-from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare
+from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare, reproduce
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from buildscript import Selection, record_proposal
@@ -772,8 +772,9 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     """
     Push an adopted version's source Loaf archive to the registry as `<namespace>/crates-io/<name>:<version>`.
 
-    The archive comes from the blob store; on a machine whose store does not hold it, adoption is run again and its
-    archive must have exactly the digest the index names, so a push can never carry other bytes than the adoption.
+    The archive comes from the blob store; on a machine whose store does not hold it, it is rebuilt from the crate and
+    the manifest the adoption's own payload renders, and must have exactly the digest the index names, so a push can
+    never carry other bytes than the adoption.
     """
     if len(invocation.positional) != 2:
         return Err("usage: incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
@@ -784,17 +785,18 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     key = record_key(name, version)
     if key not in state:
         return Err(f"{name} {version} is not adopted")
-    mut digest = ""
+    mut payload = JsonValue.null()
     match state[key].adopt:
-        Some(payload) => digest = string_member(payload, "archive")
+        Some(found) => payload = found
         None => return Err(f"{name} {version} is not adopted")
+    digest = string_member(payload, "archive")
     blobs = invocation.require("blobs")?
     archive = blobs + "/sha256/" + digest[7:] + ".tar"
     if not Path(archive).is_file():
         cache = invocation.require("cache")?
-        made = prepare(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?)?
-        if made.archive != digest:
-            return Err(f"{name} {version}: adoption no longer reproduces archive {digest}; push it from a blob store that holds it")
+        made = reproduce(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?, payload)?
+        if made != digest:
+            return Err(f"{name} {version}: the crate and the adoption's own manifest give {made}, not the archive {digest} the index names")
     registry = registry_of(invocation)?
     repository_name = repository(registry, "crates-io", name)
     tag = version_tag(version)?
