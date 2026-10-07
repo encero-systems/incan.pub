@@ -125,7 +125,9 @@ jobs:
           done
           # One copy of each archive to attest: shards that share a unit pack the same bytes under the same name.
           mkdir -p "$RUNNER_TEMP/attest"
-          cp "$RUNNER_TEMP"/units/*/*.tar "$RUNNER_TEMP/attest/"
+          for archive in "$RUNNER_TEMP"/units/*/*.tar; do
+            [ -e "$RUNNER_TEMP/attest/$(basename "$archive")" ] || cp "$archive" "$RUNNER_TEMP/attest/"
+          done
       - name: Attest the unit archives
         id: attest
         uses: actions/attest-build-provenance@v2
