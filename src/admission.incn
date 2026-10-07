@@ -9,7 +9,7 @@ cannot establish that a `cfg` answer is true; that is what harvest evidence and 
 from std.fs import Path
 from std.json import JsonValue
 
-from adoption import adoption_from_payload, loaf_name, render_adopted_manifest, required_dependencies
+from adoption import Adoption, adoption_from_payload, loaf_name, render_adopted_manifest, required_dependencies
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity
 from events import Event, member, string_list_member, string_member
 from graph import validate_evidence
@@ -92,6 +92,18 @@ def fold_publish(event: Event) -> Result[Record, str]:
         publisher="",
         adopted_at="",
     ))
+
+
+pub def adopted_adoptions(state: Dict[str, Record]) -> Result[Dict[str, Adoption], str]:
+    """What the log adopted for every adopted version, keyed `<package>\t<version>`; adoption plans across it."""
+    mut out: Dict[str, Adoption] = {}
+    for key in state.keys():
+        record = state[key]
+        match record.adopt:
+            Some(payload) =>
+                out[record.name + "\t" + record.version] = adoption_from_payload(payload, f"{record.name} {record.version}")?
+            None => pass
+    return Ok(out)
 
 
 pub def adopted_versions(state: Dict[str, Record]) -> Dict[str, list[str]]:

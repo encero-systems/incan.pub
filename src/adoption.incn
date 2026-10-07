@@ -65,18 +65,41 @@ pub model Adoption:
         return loaf_name(self.package)
 
 
+pub model Activation:
+    """One declaration active under some enabled features, with the features those enable on the dependency."""
+
+    pub dependency: Dependency
+    pub features: list[str]
+
+
 pub def required_dependencies(adoption: Adoption) -> list[Dependency]:
     """
     The declarations a pin must already hold adopted: every one active under the version's default features, on any
-    target. That is each non-optional declaration, and each optional one the default feature set enables through
-    `dep:x`, a non-weak `x/f`, or a feature that does. A feature beyond the defaults may name a dependency the pin
-    does not hold; a remote provider answers it "not published" and the local store adopts it on demand.
+    target. A feature beyond the defaults may name a dependency the pin does not hold; a remote provider answers it
+    "not published" and the local store adopts it on demand.
+    """
+    mut out: list[Dependency] = []
+    for activation in activations(adoption, ["default"]):
+        out.append(activation.dependency)
+    return out
+
+
+pub def activations(adoption: Adoption, enabled: list[str]) -> list[Activation]:
+    """
+    The declarations active when `enabled` features are on, on any target, each with the features enabled on its
+    dependency, sorted.
+
+    A declaration is active when it is not optional, or when an enabled feature reaches it through `dep:x` or a
+    non-weak `x/f`. Its dependency gets the features the declaration names, `default` unless the declaration opts out,
+    and the `f` of every `x/f` and weak `x?/f` an enabled feature names; a weak one never activates `x` itself.
     """
     mut active: list[str] = []
+    # Each requested dependency feature, as [key, feature].
+    mut asked: list[list[str]] = []
     mut pending: list[str] = []
+    for feature in enabled:
+        pending.append(feature)
     mut seen: list[str] = []
-    if "default" in adoption.features:
-        pending.append("default")
     while len(pending) > 0:
         feature = pending.pop()
         if seen.contains(feature) or feature not in adoption.features:
@@ -86,15 +109,28 @@ pub def required_dependencies(adoption: Adoption) -> list[Dependency]:
             if item.startswith("dep:"):
                 active.append(item[4:])
             elif item.contains("?/"):
-                pass
+                parts = item.split("?/")
+                asked.append([parts[0], parts[1]])
             elif item.contains("/"):
-                active.append(item.split("/")[0])
+                parts = item.split("/")
+                active.append(parts[0])
+                asked.append([parts[0], parts[1]])
             else:
                 pending.append(item)
-    mut out: list[Dependency] = []
+    mut out: list[Activation] = []
     for dependency in adoption.dependencies:
-        if not dependency.optional or active.contains(dependency.key):
-            out.append(dependency)
+        if dependency.optional and not active.contains(dependency.key):
+            continue
+        mut features: list[str] = []
+        for feature in dependency.features:
+            if not features.contains(feature):
+                features.append(feature)
+        if dependency.default_features and not features.contains("default"):
+            features.append("default")
+        for ask in asked:
+            if ask[0] == dependency.key and not features.contains(ask[1]):
+                features.append(ask[1])
+        out.append(Activation(dependency=dependency, features=sorted(features)))
     return out
 
 

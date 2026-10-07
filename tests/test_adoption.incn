@@ -16,6 +16,7 @@ from admission import replay
 from adoption import (
     Adoption,
     Dependency,
+    activations,
     adoption_from_payload,
     adoption_payload,
     loaf_files,
@@ -247,6 +248,25 @@ def test_a_pin_must_hold_what_the_default_features_activate_and_nothing_beyond()
     for dependency in required_dependencies(translate(line, demo_files(manifest)).unwrap()):
         active.append(dependency.key)
     assert_eq(active, ["a", "b"])
+
+
+def test_a_dependent_s_features_reach_the_dependencies_they_enable() -> None:
+    # `extra` activates `a` and asks `x` of `b`, which activates it; `c` is always active and opts out of its
+    # defaults; `weak` asks `y` of `a` and `z` of `b` without activating either.
+    line = parse("""{"name":"d","vers":"1.0.0","cksum":"3333333333333333333333333333333333333333333333333333333333333333","deps":[
+{"name":"a","req":"1","features":[],"optional":true,"default_features":true,"target":null,"kind":"normal"},
+{"name":"b","req":"1","features":[],"optional":true,"default_features":true,"target":null,"kind":"normal"},
+{"name":"c","req":"1","features":["k"],"optional":false,"default_features":false,"target":null,"kind":"normal"}],
+"features":{"default":["extra"],"extra":["dep:a","b/x","c/m"],"weak":["a?/y","b?/z"]}}""").unwrap()
+    adoption = translate(line, demo_files("[package]\nname = \"d\"\nversion = \"1.0.0\"\n")).unwrap()
+    mut both: list[str] = []
+    for activation in activations(adoption, ["default", "weak"]):
+        both.append(activation.dependency.key + ":" + ",".join(activation.features))
+    assert_eq(both, ["a:default,y", "b:default,x,z", "c:k,m"])
+    mut weak_only: list[str] = []
+    for activation in activations(adoption, ["weak"]):
+        weak_only.append(activation.dependency.key + ":" + ",".join(activation.features))
+    assert_eq(weak_only, ["c:k"])
 
 
 def leaf(version: str) -> Adoption:

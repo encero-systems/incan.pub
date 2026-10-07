@@ -37,7 +37,7 @@ from std.json import JsonValue
 from admission import (
     admit_asset,
     adopt_payload,
-    adopted_versions,
+    adopted_adoptions,
     describe_binding,
     describe_owners,
     fact_owners,
@@ -632,7 +632,7 @@ def adopt(invocation: Invocation) -> Result[None, str]:
                 None => targets.append([record.name, record.version])
     if len(targets) == 0:
         return Err("name at least one version, or pass --records")
-    plan = plan_closure(adopted_versions(state), targets, cache, blobs)?
+    plan = plan_closure(adopted_adoptions(state)?, targets, cache, blobs)?
     mut folded = len(event_files(root)?)
     for item in plan:
         payload = adoption_payload(item.adoption, item.manifest, item.archive)

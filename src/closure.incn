@@ -2,9 +2,10 @@
 Adopting package versions together with everything they depend on.
 
 Admission refuses an `adopt` event whose dependencies are not adopted yet, so versions are adopted in dependency
-order, after the whole closure is planned. A requirement active under a version's default features, on any target,
-is met by a version already adopted or planned; otherwise by the newest crates.io version satisfying it, preferring
-one that is not yanked. Each planned version is downloaded once into the cache and verified against the crates.io
+order, after the whole closure is planned. The closure is what a consumer of each named version builds with its
+default features, on any target: the walk follows the features every dependent enables on a dependency. A
+requirement is met by a version already adopted or planned; otherwise by the newest crates.io version satisfying it,
+preferring one that is not yanked. Each planned version is downloaded once into the cache and verified against the crates.io
 checksum before it is read, then translated, and its source Loaf archive is stored under its digest in the blob
 store. Nothing is appended to the log until the plan is complete and ordered.
 """
@@ -14,6 +15,7 @@ from std.json import JsonValue, parse_jsonl
 
 from adoption import (
     Adoption,
+    activations,
     adoption_from_payload,
     loaf_files,
     render_adopted_manifest,
@@ -117,36 +119,79 @@ pub def blob_path(blobs: Path, digest: str) -> Path:
 
 
 pub def plan_closure(
-    adopted: Dict[str, list[str]],
+    adopted: Dict[str, Adoption],
     targets: list[list[str]],
     cache: str,
     blobs: str,
 ) -> Result[list[Planned], str]:
-    """Every version to adopt for `targets`, dependencies first."""
+    """
+    Every version to adopt for `targets`, dependencies first.
+
+    `adopted` holds what the log adopted, keyed `<package>\t<version>`. Each target is built with its default
+    features, and the walk follows the features every dependent enables on a dependency, through adopted versions as
+    well: an optional dependency that only a dependent's feature switches on is in the closure a consumer of the
+    target builds, though no version's own defaults name it. A version planned for the first time also gets its own
+    default features, since admission holds it to its default closure. A requirement is met by the newest version
+    adopted or planned that satisfies it.
+    """
+    mut versions: Dict[str, list[str]] = {}
+    for key in adopted.keys():
+        remember(versions, adopted[key].package, adopted[key].version)
     mut known: Dict[str, list[str]] = {}
-    for package in adopted.keys():
-        known[package] = adopted[package]
+    for package in versions.keys():
+        known[package] = versions[package]
     mut planned: Dict[str, Planned] = {}
-    mut queue = targets
+    # The features enabled so far on each version reached; a version is walked again whenever they grow.
+    mut enabled: Dict[str, list[str]] = {}
+    # Each entry is [package, version, feature...].
+    mut queue: list[list[str]] = []
+    for target in targets:
+        queue.append([target[0], target[1], "default"])
     mut position = 0
     while position < len(queue):
-        package = queue[position][0]
-        version = queue[position][1]
+        entry = queue[position]
         position += 1
+        package = entry[0]
+        version = entry[1]
         key = package + "\t" + version
-        if key in planned or (package in adopted and adopted[package].contains(version)):
+        mut grew = key not in enabled
+        mut features: list[str] = []
+        if key in enabled:
+            features = enabled[key]
+        mut index = 2
+        while index < len(entry):
+            if not features.contains(entry[index]):
+                features.append(entry[index])
+                grew = true
+            index += 1
+        if not grew:
             continue
-        item = prepare(cache, blobs, find_line(crates_io_lines(cache, package)?, package, version)?)?
-        planned[key] = item
-        remember(known, package, version)
-        println(f"planned: {package} {version}")
-        for dependency in required_dependencies(item.adoption):
-            if met(known, dependency.package, dependency.req)?:
-                continue
-            choice = choose(crates_io_lines(cache, dependency.package)?, dependency.package, dependency.req)?
-            remember(known, dependency.package, choice)
-            queue.append([dependency.package, choice])
-    return dependency_order(planned, adopted)
+        if key not in adopted and key not in planned:
+            item = prepare(cache, blobs, find_line(crates_io_lines(cache, package)?, package, version)?)?
+            planned[key] = item
+            remember(known, package, version)
+            println(f"planned: {package} {version}")
+            # Admission holds every adopted version to its own default closure, whatever its dependents enable.
+            if not features.contains("default"):
+                features.append("default")
+        enabled[key] = features
+        for activation in activations(adoption_of(adopted, planned, key), features):
+            dependency = activation.dependency
+            mut choice = newest_meeting(known, dependency.package, dependency.req)?
+            if len(choice) == 0:
+                choice = choose(crates_io_lines(cache, dependency.package)?, dependency.package, dependency.req)?
+                remember(known, dependency.package, choice)
+            mut next = [dependency.package, choice]
+            for feature in activation.features:
+                next.append(feature)
+            queue.append(next)
+    return dependency_order(planned, versions)
+
+
+def adoption_of(adopted: Dict[str, Adoption], planned: Dict[str, Planned], key: str) -> Adoption:
+    if key in adopted:
+        return adopted[key]
+    return planned[key].adoption
 
 
 def dependency_order(planned: Dict[str, Planned], adopted: Dict[str, list[str]]) -> Result[list[Planned], str]:
@@ -227,6 +272,28 @@ def met(known: Dict[str, list[str]], package: str, requirement: str) -> Result[b
         if satisfies(version, comparators):
             return Ok(true)
     return Ok(false)
+
+
+def newest_meeting(known: Dict[str, list[str]], package: str, requirement: str) -> Result[str, str]:
+    """The newest known version of `package` satisfying `requirement`, or empty when none does."""
+    comparators = parse_requirement(requirement)?
+    if package not in known:
+        return Ok("")
+    mut best: Option[Version] = None
+    mut best_text = ""
+    for text in known[package]:
+        version = parse_version(text)?
+        if not satisfies(version, comparators):
+            continue
+        match best:
+            Some(current) =>
+                if compare(version, current) > 0:
+                    best = Some(version)
+                    best_text = text
+            None =>
+                best = Some(version)
+                best_text = text
+    return Ok(best_text)
 
 
 def remember(mut known: Dict[str, list[str]], package: str, version: str) -> None:
