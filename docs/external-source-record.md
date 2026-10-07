@@ -36,6 +36,7 @@ For an adopted version, the rendered `loaf.toml` is the manifest the source Loaf
 | `features` | complete enabled Cargo feature set, sorted |
 | `cfg` | `--cfg` answers, sorted; an empty list is a stated fact |
 | `out` | committed generated inputs: `name`, `path` (relative to the manifest), `digest` |
+| `environment` | variables the crate's compile sees because its build script printed `rustc-env`, sorted by unique `name`; each states exactly one of `literal` (the value) and `out` (a portable path relative to the compile's own `OUT_DIR`, `.` for `OUT_DIR` itself) |
 | `link` | publisher-side native compilation: a named producer, its target predicate, the exact `executable` it runs, explicit `environment`, the complete `sources` closure, the `objects` it compiles them into, and the `library` those objects produce |
 | `tool` | publisher-side generation: a named producer, its target predicate, the exact `executable`, ordered `arguments`, explicit `environment`, the complete `inputs` closure, and the `outputs` contract |
 | `harvested-from` | the compatibility receipt whose capture proposed the record, when the harvest recorded one |
@@ -46,7 +47,7 @@ Each entry of `objects` is one compile: `name`, `language` (`c`, `cpp` or `assem
 
 `link` and `tool` are rendered as `[[rust.facts.link]]` and `[[rust.facts.tool]]` sub-tables of the record they belong to. A producer name is claimed once across both lists; an argument or environment entry names a literal or one of that producer's own declared artifacts, never a path; an `outputs` entry carries no digest, because the product bytes are an asset rather than a fact.
 
-A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment has no key: a value no compilation observes is not a fact; a value one does observe is a typed constant this record does not yet model ([encero-systems/incan#1666](https://github.com/encero-systems/incan/issues/1666)).
+A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment is stated by `environment`: a value below the script's `OUT_DIR` as an `out` path the consumer resolves against its own `OUT_DIR`, any other value as a `literal`; a value that names another host path cannot be stated and the binding has no record.
 
 ### The vocabulary is closed
 

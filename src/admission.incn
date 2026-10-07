@@ -17,6 +17,7 @@ from registry import (
     Asset,
     Attestation,
     Binding,
+    EnvironmentEntry,
     Fact,
     OutEntry,
     Record,
@@ -339,7 +340,7 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
             unknown.append(key)
     if len(unknown) > 0:
         listed = ", ".join(unknown)
-        return Err(f"{label}: unknown fact keys [{listed}]; script-emitted environment has no key here")
+        return Err(f"{label}: unknown fact keys [{listed}]")
     mut cfg: list[str] = []
     match string_list_member(fact, "cfg"):
         Some(values) =>
@@ -378,6 +379,7 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
             return Err(f"{label}: out `{entry_name}` is declared twice")
         names.append(entry_name)
         out.append(OutEntry(name=entry_name, path=entry_path, digest=entry_digest))
+    environment = validate_environment(fact, label)?
     validate_producers(fact, label)?
     validate_one_producer_per_generated_file(fact, names, label)?
     mut harvested_from: Option[str] = None
@@ -394,6 +396,7 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
         binding=binding,
         cfg=cfg,
         out=out,
+        environment=environment,
         link=link,
         tool=tool,
         harvested_from=harvested_from,
@@ -402,6 +405,58 @@ pub def validate_fact(fact: JsonValue, name: str, version: str, label: str, root
         attestations=[],
         owners=executable_owners(link + tool),
     ))
+
+
+def validate_environment(fact: JsonValue, label: str) -> Result[list[EnvironmentEntry], str]:
+    """
+    The variables a fact sets for the crate's compile, as the compiler's RustFactRecord states them: sorted by unique
+    name, each with exactly one of `literal` and `out`, an `out` a portable path below `OUT_DIR` (`.` for itself).
+    """
+    mut items: list[JsonValue] = []
+    match fact.get("environment"):
+        Some(value) =>
+            match value.as_array():
+                Some(found) => items = found
+                None => return Err(f"{label}: environment must be a list of entries")
+        None => return Ok([])
+    mut entries: list[EnvironmentEntry] = []
+    mut names: list[str] = []
+    for item in items:
+        name = string_member(item, "name")
+        if len(name) == 0 or name.contains("="):
+            return Err(f"{label}: an environment entry needs a name without `=`")
+        for key in item.keys():
+            if key != "name" and key != "literal" and key != "out":
+                return Err(f"{label}: environment `{name}` has an unknown key `{key}`")
+        has_literal = item.contains_key("literal")
+        has_out = item.contains_key("out")
+        if has_literal == has_out:
+            return Err(f"{label}: environment `{name}` must state exactly one of `literal` and `out`")
+        if names.contains(name):
+            return Err(f"{label}: environment `{name}` is declared twice")
+        if len(names) > 0 and name < names[len(names) - 1]:
+            return Err(f"{label}: environment entries must be sorted by name")
+        names.append(name)
+        if has_out:
+            path = string_member(item, "out")
+            if not portable_out_path(path):
+                return Err(f"{label}: environment `{name}` out `{path}` is not a portable path below OUT_DIR")
+            entries.append(EnvironmentEntry(name=name, literal=None, out=Some(path)))
+        else:
+            entries.append(EnvironmentEntry(name=name, literal=Some(string_member(item, "literal")), out=None))
+    return Ok(entries)
+
+
+def portable_out_path(path: str) -> bool:
+    """`.`, or relative segments without `.`, `..` or empty ones."""
+    if path == ".":
+        return true
+    if len(path) == 0 or path.startswith("/") or path.endswith("/"):
+        return false
+    for segment in path.split("/"):
+        if len(segment) == 0 or segment == "." or segment == "..":
+            return false
+    return true
 
 
 pub def executable_owners(records: list[JsonValue]) -> list[str]:

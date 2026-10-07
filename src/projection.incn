@@ -87,6 +87,15 @@ def render_facts(record: Record) -> list[list[str]]:
                     + ", digest = " + json_string(entry.digest) + " }"
                 )
             lines.append("out = [" + ", ".join(entries) + "]")
+        if len(fact.environment) > 0:
+            mut variables: list[str] = []
+            for variable in fact.environment:
+                match variable.out:
+                    Some(path) => variables.append("{ name = " + json_string(variable.name) + ", out = " + json_string(path) + " }")
+                    None => variables.append(
+                        "{ name = " + json_string(variable.name) + ", literal = " + json_string(variable.literal.unwrap_or("")) + " }"
+                    )
+            lines.append("environment = [" + ", ".join(variables) + "]")
         match fact.harvested_from:
             Some(receipt) => lines.append("harvested-from = " + json_string(receipt))
             None => pass

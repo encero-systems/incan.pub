@@ -9,10 +9,11 @@ recorder's own environment reaches it; it runs under `sandbox-exec` (macOS) or b
 closed and writes confined to its work directory.
 
 What the script prints becomes the fact: each `rustc-cfg` a `cfg` answer, each file written to `OUT_DIR` a committed
-`out` input. `rerun-if-*`, `rustc-check-cfg` and `warning` carry no Oven authority and are ignored. Anything this
-recorder cannot state yet is refused with the directive named: link and environment directives, metadata for
-dependents, and a script with build dependencies each wait for a recorder of their own. The result is written as a
-harvest proposal, so admission is the same path every other fact takes.
+`out` input, each `rustc-env` an `environment` entry (a literal, or a path below `OUT_DIR`). `rerun-if-*`,
+`rustc-check-cfg` and `warning` carry no Oven authority and are ignored. Anything this recorder cannot state yet is
+refused with the directive named: link directives other than a static library it builds, an environment value that
+names a host path, and metadata for dependents. The result is written as a harvest proposal, so admission is the same
+path every other fact takes.
 """
 
 from std.fs import Path
@@ -86,8 +87,17 @@ pub def record_proposal(
             ran = run_script(executable, package, version, manifest, package_dir, base, selection, label)?
             observed = directives(ran, label, manifest_string(manifest, "package.links") != "", base + "/out")?
             native = native_work(observed, base, selection, label)?
-            included = out_dir_includes(files, script)
-            return Ok(Some(write_proposal(package, version, checksum, base, observed.cfg, native, included, selection)?))
+            mut included = out_dir_includes(files, script, observed.environment)
+            # A variable naming a directory below OUT_DIR is how the crate reaches the files in it (cranelift's
+            # ISLE_DIR), so they are inputs of its compile as surely as an `include!` of OUT_DIR.
+            for variable in observed.environment:
+                if variable[1] == "out" and variable[2] != ".":
+                    for relative in files_below(Path(base + "/out/" + variable[2]), variable[2] + "/")?:
+                        if not included.contains(relative):
+                            included.append(relative)
+            return Ok(Some(write_proposal(
+                package, version, checksum, base, observed.cfg, observed.environment, native, included, selection,
+            )?))
         None => return Ok(None)
 
 
@@ -431,10 +441,12 @@ def target_cfg(selection: Selection, base: str, label: str) -> Result[Dict[str, 
 
 @derive(Clone)
 model Directives:
-    """What a build script said that becomes a fact: `cfg` answers and the static libraries it links."""
+    """What a build script said that becomes a fact: `cfg` answers, the static libraries it links and its `rustc-env`."""
 
     pub cfg: list[str]
     pub libraries: list[str]
+    # Each `rustc-env` as [name, "out" or "literal", value].
+    pub environment: list[list[str]]
 
 
 def directives(ran: Ran, label: str, links: bool, out_dir: str) -> Result[Directives, str]:
@@ -445,6 +457,7 @@ def directives(ran: Ran, label: str, links: bool, out_dir: str) -> Result[Direct
     """
     mut cfg: list[str] = []
     mut libraries: list[str] = []
+    mut environment: list[list[str]] = []
     for line in text_of(ran.stdout).split("\n"):
         mut rest = ""
         if line.startswith("cargo::"):
@@ -466,11 +479,50 @@ def directives(ran: Ran, label: str, links: bool, out_dir: str) -> Result[Direct
         elif key == "rustc-link-search":
             if value != "native=" + out_dir:
                 return Err(f"{label}: the build script searches `{value}` for libraries, outside its OUT_DIR")
+        elif key == "rustc-env":
+            environment.append(environment_entry(value, out_dir, label)?)
         elif key == "rustc-check-cfg" or key == "rerun-if-changed" or key == "rerun-if-env-changed" or key == "warning":
             pass
         elif not links or key.startswith("rustc-") or key == "error":
             return Err(f"{label}: the build script prints `{key}`, which this recorder cannot state yet")
-    return Ok(Directives(cfg=sorted(cfg), libraries=libraries))
+    return Ok(Directives(cfg=sorted(cfg), libraries=libraries, environment=sorted_environment(environment, label)?))
+
+
+def environment_entry(value: str, out_dir: str, label: str) -> Result[list[str], str]:
+    """
+    One `rustc-env=NAME=VALUE` as the fact states it: a path at or below the script's `OUT_DIR` becomes `out` (relative
+    to it, `.` for itself), so the consumer's own `OUT_DIR` stands in; any other absolute path names this host and is
+    refused; everything else is a literal.
+    """
+    pieces = value.split("=")
+    name = pieces[0]
+    text = "=".join(pieces[1:])
+    if len(name) == 0 or len(pieces) < 2:
+        return Err(f"{label}: the build script prints `rustc-env={value}`, which names no variable")
+    mut trimmed = text
+    while len(trimmed) > 1 and trimmed.endswith("/"):
+        trimmed = trimmed[0:len(trimmed) - 1]
+    if trimmed == out_dir:
+        return Ok([name, "out", "."])
+    if trimmed.startswith(out_dir + "/"):
+        return Ok([name, "out", trimmed[len(out_dir) + 1:]])
+    if text.startswith("/"):
+        return Err(f"{label}: the build script sets `{name}` to the host path `{text}`, outside its OUT_DIR")
+    return Ok([name, "literal", text])
+
+
+def sorted_environment(entries: list[list[str]], label: str) -> Result[list[list[str]], str]:
+    """Sorted by name; a variable printed twice must say the same both times."""
+    mut by_name: Dict[str, list[str]] = {}
+    for entry in entries:
+        # Compared as text: comparing two `list[str]` here does not compile on the pinned 7bfe19aec line.
+        if entry[0] in by_name and "\t".join(by_name[entry[0]]) != "\t".join(entry):
+            return Err(f"{label}: the build script sets `{entry[0]}` twice to different values")
+        by_name[entry[0]] = entry
+    mut out: list[list[str]] = []
+    for name in sorted(list(by_name.keys())):
+        out.append(by_name[name])
+    return Ok(out)
 
 
 def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selection) -> Result[None, str]:
@@ -548,6 +600,7 @@ def write_proposal(
     checksum: str,
     base: str,
     cfg: list[str],
+    environment: list[list[str]],
     native: Conversion,
     included: list[str],
     selection: Selection,
@@ -592,6 +645,11 @@ def write_proposal(
     }
     if len(out) > 0:
         fact["out"] = JsonValue.array(out)
+    if len(environment) > 0:
+        mut variables: list[JsonValue] = []
+        for variable in environment:
+            variables.append(JsonValue.object({"name": JsonValue.string(variable[0]), variable[1]: JsonValue.string(variable[2])}))
+        fact["environment"] = JsonValue.array(variables)
     if len(native.records) > 0:
         fact["link"] = JsonValue.array(native.records)
     graph_line = graph_text(selection.graph)?
@@ -614,13 +672,21 @@ def write_proposal(
     return Ok(proposal_dir + "/proposal.json")
 
 
-def out_dir_includes(files: list[TarEntry], script: str) -> list[str]:
+def out_dir_includes(files: list[TarEntry], script: str, environment: list[list[str]]) -> list[str]:
     """
-    The `OUT_DIR` paths the crate's Rust sources name in `concat!(env!("OUT_DIR"), ...)`: the generated inputs its
-    compile reads through `include!`, `include_str!` or `include_bytes!`. The build script, tests, benches and examples
-    are not the crate's compile.
+    The `OUT_DIR` paths the crate's Rust sources name in `concat!(env!("OUT_DIR"), ...)`, or through a variable its
+    build script set to a path below `OUT_DIR` (`concat!(env!("ISLE_DIR"), ...)`): the generated inputs its compile
+    reads through `include!`, `include_str!` or `include_bytes!`. The build script, tests, benches and examples are
+    not the crate's compile.
     """
-    marker = "env!(\"OUT_DIR\")"
+    # Each variable that names OUT_DIR or a directory below it, as [marker, the path it adds before the name].
+    mut markers: list[list[str]] = [["env!(\"OUT_DIR\")", ""]]
+    for variable in environment:
+        if variable[1] == "out":
+            mut prefix = ""
+            if variable[2] != ".":
+                prefix = variable[2] + "/"
+            markers.append(["env!(\"" + variable[0] + "\")", prefix])
     mut out: list[str] = []
     for file in files:
         if not file.path.endswith(".rs") or file.path == script:
@@ -629,12 +695,13 @@ def out_dir_includes(files: list[TarEntry], script: str) -> list[str]:
             continue
         match file.data.decode():
             Ok(text) =>
-                for piece in text.split(marker)[1:]:
-                    name = joined_literals(piece.split(")")[0])
-                    if name.startswith("/"):
-                        relative = name[1:]
-                        if len(relative) > 0 and not out.contains(relative):
-                            out.append(relative)
+                for marker in markers:
+                    for piece in text.split(marker[0])[1:]:
+                        name = joined_literals(piece.split(")")[0])
+                        if name.startswith("/"):
+                            relative = marker[1] + name[1:]
+                            if len(name) > 1 and not out.contains(relative):
+                                out.append(relative)
             Err(_) => pass
     return out
 

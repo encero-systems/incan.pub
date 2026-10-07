@@ -51,7 +51,7 @@ pub def fact_keys() -> list[str]:
     Closed by design: a value a compilation never observes is not a fact, and a value it does observe needs a key
     the compiler reads, so the vocabulary grows only when `RustFactRecord` does.
     """
-    return binding_keys() + ["cfg", "out", "link", "tool", "harvested-from"]
+    return binding_keys() + ["cfg", "out", "environment", "link", "tool", "harvested-from"]
 
 
 pub def profiles() -> list[str]:
@@ -99,6 +99,18 @@ pub class OutEntry:
 
 
 @derive(Clone)
+pub class EnvironmentEntry:
+    """
+    A variable the crate's compile sees because its build script printed `rustc-env`: a `literal`, or `out`, a portable
+    path relative to the compile's own `OUT_DIR` (`.` names `OUT_DIR` itself). Exactly one is set.
+    """
+
+    pub name: str
+    pub literal: Option[str]
+    pub out: Option[str]
+
+
+@derive(Clone)
 pub class Attestation:
     """An Oven-baked unit proven equivalent to the Cargo-built one, for one binding."""
 
@@ -114,6 +126,7 @@ pub class Fact:
     pub binding: Binding
     pub cfg: list[str]
     pub out: list[OutEntry]
+    pub environment: list[EnvironmentEntry]
     pub link: list[JsonValue]
     pub tool: list[JsonValue]
     pub harvested_from: Option[str]
