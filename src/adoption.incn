@@ -703,8 +703,9 @@ def toml_strings(values: list[str]) -> str:
 @derive(Clone)
 pub model About:
     """
-    What the published manifest says about the package for its readers, not its build: none of it reaches a unit.
-    Adoption records it so the registry can name each version's license and link the package's pages.
+    What the published manifest says about the package rather than how to build it. Adoption records it so the
+    registry can name each version's license and link the package's pages, and Oven hands it to a compiling crate as
+    Cargo's `CARGO_PKG_*` package environment.
     """
 
     pub license: str
@@ -714,13 +715,17 @@ pub model About:
     pub repository: str
     pub homepage: str
     pub documentation: str
+    pub rust_version: str
+    pub authors: list[str]
 
 
-const ABOUT_KEYS: FrozenList[str] = ["license", "license-file", "readme", "description", "repository", "homepage", "documentation"]
+const ABOUT_KEYS: FrozenList[str] = [
+    "license", "license-file", "readme", "description", "repository", "homepage", "documentation", "rust-version",
+]
 
 
 pub def about_of(manifest: TomlValue, label: str) -> Result[About, str]:
-    """The `package` table's reader-facing strings; a key that is absent, or not a string, is empty."""
+    """The `package` table's descriptive strings and `authors`; a key that is absent, or not of its type, is empty."""
     mut values: Dict[str, str] = {}
     for key in ABOUT_KEYS:
         values[key] = ""
@@ -730,6 +735,10 @@ pub def about_of(manifest: TomlValue, label: str) -> Result[About, str]:
                     Some(text) => values[key] = text.strip()
                     None => pass
             Err(_) => pass
+    mut authors: list[str] = []
+    match manifest.get_optional[list[str]]("package.authors"):
+        Ok(found) => authors = found.unwrap_or([])
+        Err(_) => pass
     return Ok(About(
         license=values["license"],
         license_file=values["license-file"],
@@ -738,6 +747,8 @@ pub def about_of(manifest: TomlValue, label: str) -> Result[About, str]:
         repository=values["repository"],
         homepage=values["homepage"],
         documentation=values["documentation"],
+        rust_version=values["rust-version"],
+        authors=authors,
     ))
 
 
@@ -751,7 +762,7 @@ pub def about_of_files(files: list[TarEntry], label: str) -> Result[About, str]:
     return Err(f"{label}: the archive has no Cargo.toml")
 
 
-def about_json(about: About) -> JsonValue:
+pub def about_json(about: About) -> JsonValue:
     return JsonValue.object({
         "license": JsonValue.string(about.license),
         "license-file": JsonValue.string(about.license_file),
@@ -760,6 +771,8 @@ def about_json(about: About) -> JsonValue:
         "repository": JsonValue.string(about.repository),
         "homepage": JsonValue.string(about.homepage),
         "documentation": JsonValue.string(about.documentation),
+        "rust-version": JsonValue.string(about.rust_version),
+        "authors": JsonValue.array([JsonValue.string(author) for author in about.authors]),
     })
 
 
@@ -775,6 +788,8 @@ pub def about_from_json(body: JsonValue) -> Option[About]:
                 repository=string_member(value, "repository"),
                 homepage=string_member(value, "homepage"),
                 documentation=string_member(value, "documentation"),
+                rust_version=string_member(value, "rust-version"),
+                authors=string_list_member(value, "authors").unwrap_or([]),
             ))
         None => return None
 

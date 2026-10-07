@@ -16,6 +16,7 @@ from admission import replay
 from adoption import (
     Adoption,
     Dependency,
+    about_from_json,
     activations,
     adoption_from_payload,
     adoption_payload,
@@ -480,6 +481,32 @@ def test_every_loaf_carries_a_license_and_a_readme() -> None:
     for file in loaf_files(only_license, demo_files(licensed_manifest)):
         if file.path == "LICENSE":
             assert_true(file.data.decode().unwrap().contains("declares the license `MIT OR Apache-2.0`"))
+
+
+def test_about_records_authors_and_rust_version_for_the_package_environment() -> None:
+    manifest = demo_manifest().replace(
+        "name = \"demo\"\nversion",
+        "authors = [\"Ada <ada@example.org>\", \"Grace\"]\nrust-version = \"1.70\"\nname = \"demo\"\nversion",
+    )
+    adoption = translate(demo_line(), demo_files(manifest)).unwrap()
+    match adoption.about:
+        Some(about) =>
+            assert_eq(about.authors, ["Ada <ada@example.org>", "Grace"])
+            assert_eq(about.rust_version, "1.70")
+            payload = JsonValue.object(adoption_payload(adoption, "sha256:m", "sha256:a"))
+            match about_from_json(payload):
+                Some(read_back) =>
+                    assert_eq(read_back.authors, about.authors)
+                    assert_eq(read_back.rust_version, "1.70")
+                None => assert_true(false, "the payload carries about")
+        None => assert_true(false, "a new adoption records what its manifest says about the package")
+    # A plain manifest says neither, and an `about` recorded before either was read reads back empty.
+    plain = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    match plain.about:
+        Some(about) =>
+            assert_eq(about.authors, [])
+            assert_eq(about.rust_version, "")
+        None => assert_true(false, "a new adoption records about")
 
 
 def test_an_adoption_without_about_keeps_its_files_exactly() -> None:

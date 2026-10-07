@@ -47,6 +47,7 @@ from admission import (
     validate_fact,
 )
 from adoption import (
+    about_json,
     about_of_files,
     adoption_from_payload,
     adoption_payload,
@@ -682,12 +683,14 @@ def readopt(invocation: Invocation) -> Result[None, str]:
 
 def record_about(invocation: Invocation) -> Result[None, str]:
     """
-    Record what each adopted package's manifest says about it (`about`: license, README, description, links) on the
-    `adopt` events that predate it, so every Loaf carries a license and a README and its package page can name them.
+    Record what each adopted package's manifest says about it (`about`: license, README, description, links,
+    authors, rust-version) on the `adopt` events whose `about` is missing or no longer says all of it, so every Loaf
+    carries a license and a README, its package page can name them, and Oven can set Cargo's package environment.
 
-    The recorded payload is kept as it is and only gains `about`, so the manifest is unchanged; the archive gains a
-    LICENSE or README.md only where the package ships none. Each event keeps its place, time and actor. With no
-    versions named, every adoption without `about` is recorded.
+    The recorded payload is kept as it is and only gains or completes `about`, so the manifest is unchanged. An event
+    without `about` may gain a LICENSE or README.md where the package ships none; completing a recorded `about` must
+    leave the archive as it is. An `about` that already says what the manifest says is not rewritten. Each event keeps
+    its place, time and actor. With no versions named, every adoption is considered.
     """
     if len(invocation.positional) % 2 != 0:
         return Err("usage: incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]")
@@ -702,7 +705,7 @@ def record_about(invocation: Invocation) -> Result[None, str]:
     mut rewritten = 0
     mut archives = 0
     for event in load_events(root)?:
-        if event.kind != "adopt" or event.body.contains_key("about"):
+        if event.kind != "adopt":
             continue
         if len(named) > 0 and not named.contains(event.name + "\t" + event.version):
             continue
@@ -710,7 +713,16 @@ def record_about(invocation: Invocation) -> Result[None, str]:
         mut adoption = adoption_from_payload(event.body, label)?
         line = find_line(crates_io_lines(cache, event.name)?, event.name, event.version)?
         files = unpack_crate(event.name, event.version, crate_archive(cache, event.name, event.version, string_member(line, "cksum"))?)?
-        adoption.about = Some(about_of_files(files, label)?)
+        about = about_of_files(files, label)?
+        # An `about` that says what the manifest says is right and is never rewritten; one recorded before a field
+        # was read is incomplete, and is completed without changing the archive.
+        recorded = event.body.contains_key("about")
+        match event.body.get("about"):
+            Some(previous) =>
+                if canonical(previous)? == canonical(about_json(about))?:
+                    continue
+            None => pass
+        adoption.about = Some(about)
         manifest = render_adopted_manifest(adoption)
         if digest_text(manifest) != string_member(event.body, "manifest"):
             return Err(f"{label}: recording `about` would change the manifest; it must only add files")
@@ -725,6 +737,8 @@ def record_about(invocation: Invocation) -> Result[None, str]:
                 Ok(_) => pass
                 Err(error) => return Err(f"{blobs}: {error.message()}")
         if digest != string_member(event.body, "archive"):
+            if recorded:
+                return Err(f"{label}: completing its recorded `about` would change its archive; only the record may change")
             archives += 1
         rewrite_event(root, event.label, event.body, adoption_payload(adoption, string_member(event.body, "manifest"), digest))?
         rewritten += 1
