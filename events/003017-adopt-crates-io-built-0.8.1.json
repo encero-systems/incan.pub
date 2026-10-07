@@ -1,0 +1,107 @@
+{
+  "about": {
+    "description": "Provides a crate with information from the time it was built.",
+    "documentation": "https://docs.rs/built",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/lukaslueg/built"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5c0e531d93d39c34eef561e929e8a7f86d77a5af08aac4f6d6e39976c51858e9",
+    "package": "built",
+    "registry": "crates-io",
+    "version": "0.8.1"
+  },
+  "archive": "sha256:6f18839926dd77e8dfa082a7c4d03275ce73aabba6fa7ea11917a0612c2edb4e",
+  "at": "2026-10-07T09:50:27Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/cargo-lock",
+      "name": "cargo-lock",
+      "optional": true,
+      "req": "^11.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "clock"
+      ],
+      "loaf": "crates-io/chrono",
+      "name": "chrono",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/git2",
+      "name": "git2",
+      "optional": true,
+      "req": "^0.21"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "max-performance-safe",
+        "revision",
+        "sha1",
+        "status"
+      ],
+      "loaf": "crates-io/gix",
+      "name": "gix",
+      "optional": true,
+      "req": "^0.83"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/semver",
+      "name": "semver",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "cargo-lock": [
+      "dep:cargo-lock"
+    ],
+    "chrono": [
+      "dep:chrono"
+    ],
+    "dependency-tree": [
+      "dep:cargo-lock",
+      "cargo-lock/dependency-tree"
+    ],
+    "git2": [
+      "dep:git2"
+    ],
+    "gix": [
+      "dep:gix"
+    ],
+    "semver": [
+      "dep:semver"
+    ]
+  },
+  "id": "sha256:a5bb40a4eceee5377d7898c881629a86f9f7943723baff47ac4f73ae83192997",
+  "kind": "adopt",
+  "manifest": "sha256:d4b0591404e3a35a1e29f7e74ea488d2f471ce2dc5376b1bc3d09b24b89419a3",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "built",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "built",
+    "scope": "crates-io",
+    "version": "0.8.1"
+  }
+}

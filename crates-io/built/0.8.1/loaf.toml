@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/built"
+version = "0.8.1"
+
+[project.features]
+cargo-lock = ["dep:cargo-lock"]
+chrono = ["dep:chrono"]
+dependency-tree = ["dep:cargo-lock", "cargo-lock/dependency-tree"]
+git2 = ["dep:git2"]
+gix = ["dep:gix"]
+semver = ["dep:semver"]
+
+[rust]
+name = "built"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cargo-lock = { loaf = "crates-io/cargo-lock", version = "^11.0", default-features = false, optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4", features = ["clock"], default-features = false, optional = true }
+git2 = { loaf = "crates-io/git2", version = "^0.21", default-features = false, optional = true }
+gix = { loaf = "crates-io/gix", version = "^0.83", features = ["max-performance-safe", "revision", "sha1", "status"], default-features = false, optional = true }
+semver = { loaf = "crates-io/semver", version = "^1.0", optional = true }
