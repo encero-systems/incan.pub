@@ -22,3 +22,11 @@ syn = { loaf = "crates-io/syn", version = "^2.0.25", features = ["extra-traits"]
 wasmtime-component-util = { loaf = "crates-io/wasmtime-internal-component-util", version = "=36.0.17" }
 wasmtime-wit-bindgen = { loaf = "crates-io/wasmtime-internal-wit-bindgen", version = "=36.0.17" }
 wit-parser = { loaf = "crates-io/wit-parser", version = "^0.236.0" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["async"]
+cfg = []
+environment = [{ name = "DEBUG_OUTPUT_DIR", out = "." }]
