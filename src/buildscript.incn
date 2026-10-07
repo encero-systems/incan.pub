@@ -373,6 +373,10 @@ def script_environment(
 ) -> Result[Dict[str, str], str]:
     """The environment a build script reads, built from the binding and the package alone."""
     mut environment = package_variables(package, version, manifest, package_dir, base)?
+    # Cargo names a package's `links` key to its build script, and only when the package declares one.
+    links = manifest_string(manifest, "package.links")
+    if len(links) > 0:
+        environment["CARGO_MANIFEST_LINKS"] = links
     for feature in selection.features:
         environment["CARGO_FEATURE_" + feature.upper().replace("-", "_")] = "1"
     environment["CARGO_CFG_FEATURE"] = ",".join(selection.features)
