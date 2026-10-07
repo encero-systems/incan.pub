@@ -425,6 +425,43 @@ def admit_proposal(
     return Ok("admitted")
 
 
+def remove_superseded_inputs(
+    root: Path,
+    record: Record,
+    binding_key: str,
+    replaced: JsonValue,
+    replacement: JsonValue,
+) -> Result[None, str]:
+    """
+    Delete the generated inputs only the replaced record named, so a rewrite leaves no committed bytes that no record
+    names; a path the replacement or another fact of the version also names stays.
+    """
+    mut kept = out_paths(replacement)
+    for other in record.facts.keys():
+        if other != binding_key:
+            for entry in record.facts[other].out:
+                kept.append(entry.path)
+    for path in out_paths(replaced):
+        if kept.contains(path):
+            continue
+        committed = root / "crates-io" / record.name / record.version / path
+        if committed.is_file():
+            match committed.unlink():
+                Ok(_) => println(f"removed superseded input: crates-io/{record.name}/{record.version}/{path}")
+                Err(error) => return Err(f"{path}: {error.message()}")
+    return Ok(None)
+
+
+def out_paths(fact: JsonValue) -> list[str]:
+    mut paths: list[str] = []
+    match fact.get("out"):
+        Some(value) =>
+            for entry in value.as_array().unwrap_or([]):
+                paths.append(string_member(entry, "path"))
+        None => pass
+    return paths
+
+
 def settle_binding(
     root: Path,
     state: Dict[str, Record],
@@ -458,6 +495,7 @@ def settle_binding(
             if fact_key(validate_binding(recorded, event.label)?, fact_owners(recorded)) == binding_key:
                 stage_graph(evidence, proposal_path.parent(), root)?
                 rewrite_event(root, event.label, event.body, {"fact": fact, "evidence": evidence})?
+                remove_superseded_inputs(root, state[key], binding_key, recorded, fact)?
                 println(f"rewritten: {event.label}")
                 return Ok("rewritten")
     return Err(f"{name} {version} {describe_binding(typed.binding)} has no fact event to rewrite")
