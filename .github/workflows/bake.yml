@@ -16,6 +16,8 @@ name: bake
 # Only GitHub-hosted runners run this. A self-hosted runner never attaches to this public repository, where pull
 # requests from forks could reach it.
 
+run-name: bake ${{ inputs.target }} ${{ inputs.profile }} ${{ inputs.label }}
+
 on:
   workflow_dispatch:
     inputs:
@@ -36,6 +38,10 @@ on:
         options: [debug, release]
       only:
         description: "Comma-separated NAME@VERSION units to publish; every unit the shards compiled when empty"
+        required: false
+        default: ""
+      label:
+        description: "A name for this run, shown in its title, so a caller that dispatches several can find its own"
         required: false
         default: ""
 
