@@ -93,6 +93,39 @@ pub def activations(adoption: Adoption, enabled: list[str]) -> list[Activation]:
     non-weak `x/f`. Its dependency gets the features the declaration names, `default` unless the declaration opts out,
     and the `f` of every `x/f` and weak `x?/f` an enabled feature names; a weak one never activates `x` itself.
     """
+    return active_declarations(adoption.features, adoption.dependencies, enabled)
+
+
+pub def build_activations(line: JsonValue, enabled: list[str], label: str) -> Result[list[Activation], str]:
+    """
+    The build dependencies of a crates.io index line active when `enabled` features are on, on any target, each with
+    the features enabled on it, as `activations` decides them for normal dependencies.
+
+    Adoption keeps build dependencies out of the Loaf, because a fact stands in for the build script; the registry
+    adopts them all the same, since recording that fact compiles the script against them.
+    """
+    declarations = declarations_of(line, "build", label)?
+    raw = raw_features(line, label)?
+    mut named_with_dep: list[str] = []
+    for name in raw.keys():
+        for item in raw[name]:
+            if item.startswith("dep:"):
+                named_with_dep.append(item[4:])
+    mut table: Dict[str, list[str]] = {}
+    for name in raw.keys():
+        table[name] = raw[name]
+    # Implicit features: an optional dependency no member names with `dep:` gets a feature of its own name.
+    for declaration in declarations:
+        if declaration.optional and not named_with_dep.contains(declaration.key) and declaration.key not in table:
+            table[declaration.key] = ["dep:" + declaration.key]
+    return Ok(active_declarations(table, declarations, enabled))
+
+
+def active_declarations(
+    table: Dict[str, list[str]],
+    declarations: list[Dependency],
+    enabled: list[str],
+) -> list[Activation]:
     mut active: list[str] = []
     # Each requested dependency feature, as [key, feature].
     mut asked: list[list[str]] = []
@@ -102,10 +135,10 @@ pub def activations(adoption: Adoption, enabled: list[str]) -> list[Activation]:
     mut seen: list[str] = []
     while len(pending) > 0:
         feature = pending.pop()
-        if seen.contains(feature) or feature not in adoption.features:
+        if seen.contains(feature) or feature not in table:
             continue
         seen.append(feature)
-        for item in adoption.features[feature]:
+        for item in table[feature]:
             if item.startswith("dep:"):
                 active.append(item[4:])
             elif item.contains("?/"):
@@ -118,7 +151,7 @@ pub def activations(adoption: Adoption, enabled: list[str]) -> list[Activation]:
             else:
                 pending.append(item)
     mut out: list[Activation] = []
-    for dependency in adoption.dependencies:
+    for dependency in declarations:
         if dependency.optional and not active.contains(dependency.key):
             continue
         mut features: list[str] = []
@@ -282,6 +315,11 @@ pub def declared_build_script(manifest: TomlValue, paths: list[str], label: str)
 
 def dependencies(line: JsonValue, label: str) -> Result[list[Dependency], str]:
     """Normal dependencies only, one per declaration, ordered by key and then by their canonical spelling."""
+    return declarations_of(line, "normal", label)
+
+
+def declarations_of(line: JsonValue, wanted: str, label: str) -> Result[list[Dependency], str]:
+    """The declarations of one kind (`normal` or `build`), one per declaration, ordered by key, then spelling."""
     mut by_order: Dict[str, Dependency] = {}
     mut declarations: list[JsonValue] = []
     match line.get("deps"):
@@ -291,11 +329,13 @@ def dependencies(line: JsonValue, label: str) -> Result[list[Dependency], str]:
                 None => return Err(f"{label}: `deps` is not a list")
         None => pass
     for declaration in declarations:
-        kind = string_member(declaration, "kind")
-        if kind == "dev" or kind == "build":
-            continue
-        if len(kind) > 0 and kind != "normal":
+        mut kind = string_member(declaration, "kind")
+        if len(kind) == 0:
+            kind = "normal"
+        if kind != "normal" and kind != "dev" and kind != "build":
             return Err(f"{label}: dependency kind `{kind}` is not normal, dev or build")
+        if kind != wanted:
+            continue
         key = string_member(declaration, "name")
         mut package = string_member(declaration, "package")
         if len(package) == 0:
@@ -332,18 +372,7 @@ def dependencies(line: JsonValue, label: str) -> Result[list[Dependency], str]:
 
 def features(line: JsonValue, kept: list[Dependency], label: str) -> Result[Dict[str, list[str]], str]:
     """The feature table with implicit features explicit and members rewritten for the kept dependencies."""
-    mut raw: Dict[str, list[str]] = {}
-    for table in ["features", "features2"]:
-        match line.get(table):
-            Some(value) =>
-                match value.as_object():
-                    Some(entries) =>
-                        for name in entries.keys():
-                            match string_list_member(value, name):
-                                Some(members) => raw[name] = members
-                                None => return Err(f"{label}: feature `{name}` is not a list of members")
-                    None => return Err(f"{label}: `{table}` is not a table")
-            None => pass
+    raw = raw_features(line, label)?
     mut normal_keys: list[str] = []
     mut optional_keys: list[str] = []
     for dependency in kept:
@@ -380,6 +409,23 @@ def features(line: JsonValue, kept: list[Dependency], label: str) -> Result[Dict
                     members.append(rewritten)
         out[name] = members
     return Ok(out)
+
+
+def raw_features(line: JsonValue, label: str) -> Result[Dict[str, list[str]], str]:
+    """The feature table as crates.io publishes it, `features` and `features2` together."""
+    mut raw: Dict[str, list[str]] = {}
+    for table in ["features", "features2"]:
+        match line.get(table):
+            Some(value) =>
+                match value.as_object():
+                    Some(entries) =>
+                        for name in entries.keys():
+                            match string_list_member(value, name):
+                                Some(members) => raw[name] = members
+                                None => return Err(f"{label}: feature `{name}` is not a list of members")
+                    None => return Err(f"{label}: `{table}` is not a table")
+            None => pass
+    return Ok(raw)
 
 
 def rewrite_member(

@@ -19,6 +19,7 @@ from adoption import (
     activations,
     adoption_from_payload,
     adoption_payload,
+    build_activations,
     loaf_files,
     render_adopted_manifest,
     required_dependencies,
@@ -267,6 +268,24 @@ def test_a_dependent_s_features_reach_the_dependencies_they_enable() -> None:
     for activation in activations(adoption, ["weak"]):
         weak_only.append(activation.dependency.key + ":" + ",".join(activation.features))
     assert_eq(weak_only, ["c:k"])
+
+
+def test_a_build_script_s_dependencies_follow_the_same_features() -> None:
+    # `cc` always builds the script; `built` only when `stamp` is on, through its implicit feature; `pkg` never here.
+    line = parse("""{"name":"d","vers":"1.0.0","cksum":"3333333333333333333333333333333333333333333333333333333333333333","deps":[
+{"name":"cc","req":"1","features":["parallel"],"optional":false,"default_features":false,"target":null,"kind":"build"},
+{"name":"built","req":"0.8","features":[],"optional":true,"default_features":true,"target":null,"kind":"build"},
+{"name":"pkg","req":"0.3","features":[],"optional":true,"default_features":true,"target":null,"kind":"build"},
+{"name":"log","req":"0.4","features":[],"optional":false,"default_features":true,"target":null,"kind":"normal"}],
+"features":{"default":["stamp"],"stamp":["built"]}}""").unwrap()
+    mut reached: list[str] = []
+    for activation in build_activations(line, ["default"], "d 1.0.0").unwrap():
+        reached.append(activation.dependency.key + ":" + ",".join(activation.features))
+    assert_eq(reached, ["built:default", "cc:parallel"])
+    mut bare: list[str] = []
+    for activation in build_activations(line, [], "d 1.0.0").unwrap():
+        bare.append(activation.dependency.key)
+    assert_eq(bare, ["cc"])
 
 
 def leaf(version: str) -> Adoption:
