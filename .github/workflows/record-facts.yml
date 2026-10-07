@@ -76,7 +76,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/proposals"
           : > "$RUNNER_TEMP/proposals/refused.tsv"
           index=0
-          while IFS="$(printf '\t')" read -r name version features profile domain graph; do
+          # Fields are split on `|`, not tab: a shell `read` collapses adjacent tabs, and an empty feature set is a field.
+          tr "\t" "|" < "tool/$BINDINGS" | while IFS="|" read -r name version features profile domain graph; do
             index=$((index + 1))
             work="$RUNNER_TEMP/work/$index"
             if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
@@ -85,12 +86,13 @@ jobs:
               echo "$output"
               proposal="$(printf '%s\n' "$output" | sed -n 's/^proposed: //p')"
               if [ -n "$proposal" ]; then
-                cp -R "$proposal" "$RUNNER_TEMP/proposals/$index-$name-$version"
+                # The proposal directory holds the out files and graph the fact names, beside proposal.json.
+                cp -R "$(dirname "$proposal")" "$RUNNER_TEMP/proposals/$index-$name-$version"
               fi
             else
-              printf '%s\t%s\t%s\t%s\n' "$name" "$version" "$features" "$(printf '%s' "$output" | tail -1)" >> "$RUNNER_TEMP/proposals/refused.tsv"
+              printf '%s\t%s\t%s\t%s\n' "$name" "$version" "$features" "$(printf '%s\n' "$output" | grep -m1 '^refused:')" >> "$RUNNER_TEMP/proposals/refused.tsv"
             fi
-          done < "tool/$BINDINGS"
+          done
           echo "proposals: $(find "$RUNNER_TEMP/proposals" -name proposal.json | wc -l), refused: $(wc -l < "$RUNNER_TEMP/proposals/refused.tsv")"
       - name: Upload the fact proposals
         uses: actions/upload-artifact@v4
