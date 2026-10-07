@@ -121,6 +121,34 @@ cfg = ["fast_arithmetic=\"64\""]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "x86_64-unknown-linux-gnu"
 profile = "debug"
+features = ["alloc"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["alloc", "default", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["alloc", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["default", "float_roundtrip", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
 features = ["default", "raw_value", "std"]
 cfg = ["fast_arithmetic=\"64\""]
 
