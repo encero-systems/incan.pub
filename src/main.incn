@@ -13,6 +13,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
+    incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
                           [--incan PATH --build-lock LOCK.json]
@@ -61,7 +62,7 @@ from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, 
 from closure import blob_path, crate_archive, crates_io_lines, find_line, plan_closure, prepare, reproduce
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
-from buildscript import Selection, record_proposal
+from buildscript import Selection, build_roots, record_proposal
 from graph import stage_graph, unclaimed_graphs, validate_graph
 from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
 from oci import (
@@ -229,6 +230,8 @@ def run(arguments: list[str]) -> Result[None, str]:
         return describe_packages(invocation)
     if invocation.command == "record-about":
         return record_about(invocation)
+    if invocation.command == "build-roots":
+        return print_build_roots(invocation)
     return Err(f"unknown command `{invocation.command}`; see the usage at the top of src/main.incn")
 
 
@@ -745,6 +748,24 @@ def record_about(invocation: Invocation) -> Result[None, str]:
     println(f"recorded about: {rewritten} adoption(s), {archives} archive(s) gained a LICENSE or README")
     replay(load_events(root)?, root)?
     return build(invocation)
+
+
+def print_build_roots(invocation: Invocation) -> Result[None, str]:
+    """
+    The root requests a build script's build dependencies are resolved from, for one binding's features, as
+    `{"deps": [...]}`: what `record-fact --build-lock` expects a lock of.
+    """
+    if len(invocation.positional) != 2:
+        return Err("usage: incan-pub build-roots NAME VERSION [--features a,b] --cache DIR")
+    name = invocation.positional[0]
+    version = invocation.positional[1]
+    mut features: list[str] = []
+    for feature in invocation.option("features").unwrap_or("").split(","):
+        if len(feature) > 0:
+            features.append(feature)
+    roots = build_roots(invocation.require("cache")?, name, version, features, f"{name} {version}")?
+    println(canonical(JsonValue.object({"deps": JsonValue.array(roots)}))?)
+    return Ok(None)
 
 
 def record_fact(invocation: Invocation) -> Result[None, str]:

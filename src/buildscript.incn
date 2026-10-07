@@ -21,7 +21,7 @@ from std.json import JsonValue
 from std.toml import TomlValue
 
 from canonical import canonical, digest_bytes, digest_text, pretty
-from adoption import declared_build_script
+from adoption import build_activations, declared_build_script
 from closure import crates_io_lines, find_line
 from events import member, string_list_member, string_member, write_text
 from graph import graph_text
@@ -146,7 +146,7 @@ def build_dependencies(
     their adopted archives (`incan oven compile-closure`), and this recorder links against what it returns. None when
     the script has none.
     """
-    roots = build_roots(cache, package, version, selection, label)?
+    roots = build_roots(cache, package, version, selection.features, label)?
     if len(roots) == 0:
         return Ok([])
     if len(selection.incan) == 0 or len(selection.build_lock) == 0:
@@ -203,47 +203,31 @@ def closure_links(directory: str, label: str) -> Result[list[list[str]], str]:
     return Ok(out)
 
 
-def build_roots(cache: str, package: str, version: str, selection: Selection, label: str) -> Result[list[JsonValue], str]:
-    """The build dependencies active for the binding's features, as Loaf root requests for the host."""
+pub def build_roots(cache: str, package: str, version: str, features: list[str], label: str) -> Result[list[JsonValue], str]:
+    """
+    The build dependencies active for the binding's features, as Loaf root requests for the host, each with the
+    features the binding enables on it: a feature's `dep/f` reaches a build dependency too (cranelift-codegen's `pulley`
+    asks cranelift-codegen-meta for its own `pulley`), decided by the rule adoption plans with.
+    """
     line = find_line(crates_io_lines(cache, package)?, package, version)?
-    mut raw: Dict[str, list[str]] = {}
-    for table in ["features", "features2"]:
-        match line.get(table):
-            Some(value) =>
-                for name in value.keys():
-                    raw[name] = string_list_member(value, name).unwrap_or([])
-            None => pass
-    mut enabled_keys: list[str] = []
-    for feature in selection.features:
-        enabled_keys.append(feature)
-        for item in raw.get(feature).unwrap_or([]):
-            if item.startswith("dep:"):
-                enabled_keys.append(item[4:])
-            elif item.contains("/") and not item.contains("?/"):
-                enabled_keys.append(item.split("/")[0])
     mut roots: list[JsonValue] = []
-    match line.get("deps"):
-        Some(value) =>
-            for declaration in value.as_array().unwrap_or([]):
-                if string_member(declaration, "kind") != "build":
-                    continue
-                key = string_member(declaration, "name")
-                if flag_value(declaration, "optional", false) and not enabled_keys.contains(key):
-                    continue
-                if len(string_member(declaration, "target")) > 0:
-                    return Err(f"{label}: build dependency `{key}` is target-conditional, which this recorder cannot select yet")
-                mut package_name = string_member(declaration, "package")
-                if len(package_name) == 0:
-                    package_name = key
-                roots.append(JsonValue.object({
-                    "name": JsonValue.string(key),
-                    "loaf": JsonValue.string("crates-io/" + package_name),
-                    "req": JsonValue.string(string_member(declaration, "req")),
-                    "features": JsonValue.array([JsonValue.string(item) for item in string_list_member(declaration, "features").unwrap_or([])]),
-                    "default-features": JsonValue.bool(flag_value(declaration, "default_features", true)),
-                    "optional": JsonValue.bool(false),
-                }))
-        None => pass
+    for activation in build_activations(line, features, label)?:
+        dependency = activation.dependency
+        match dependency.target:
+            Some(_) => return Err(f"{label}: build dependency `{dependency.key}` is target-conditional, which this recorder cannot select yet")
+            None => pass
+        mut requested: list[str] = []
+        for feature in activation.features:
+            if feature != "default":
+                requested.append(feature)
+        roots.append(JsonValue.object({
+            "name": JsonValue.string(dependency.key),
+            "loaf": JsonValue.string("crates-io/" + dependency.package),
+            "req": JsonValue.string(dependency.req),
+            "features": JsonValue.array([JsonValue.string(item) for item in requested]),
+            "default-features": JsonValue.bool(activation.features.contains("default")),
+            "optional": JsonValue.bool(false),
+        }))
     return Ok(roots)
 
 
