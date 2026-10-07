@@ -125,10 +125,23 @@ jobs:
                 --roots "tool/bake/$shard/roots.json" --lock "tool/bake/$shard/lock.json" --profile "$PROFILE" \
                 --out "$RUNNER_TEMP/$root/closure/closure.json" --blobs "$RUNNER_TEMP/blobs/sha256" --rustc "$rustc"
             done
+            # A shard whose closure refuses a unit (one that does not compile, or misses a fact) publishes nothing and
+            # is listed at the end; the other shards still bake. Units that compiled but differ between the roots
+            # fail the run below.
+            if ! jq -e '.refused | length == 0' "$RUNNER_TEMP/first/closure/closure.json" > /dev/null; then
+              mkdir -p "$RUNNER_TEMP/proposals"
+              jq -r --arg shard "$shard" '.refused[] | "\($shard)\t\(.loaf) \(.version)\t\(.reason | split("\n")[0] | .[0:300])"' \
+                "$RUNNER_TEMP/first/closure/closure.json" >> "$RUNNER_TEMP/proposals/refused-shards.tsv"
+              continue
+            fi
             out="$RUNNER_TEMP/units/$(echo "$shard" | tr '/' '-')"
             "$RUNNER_TEMP/tool/incan-pub" pack-units "$RUNNER_TEMP/first/closure" --out "$out" --only "$ONLY" \
               --reproduces "$RUNNER_TEMP/second/closure"
           done
+          if [ -s "$RUNNER_TEMP/proposals/refused-shards.tsv" ]; then
+            echo "::warning::$(cut -f1 "$RUNNER_TEMP/proposals/refused-shards.tsv" | sort -u | wc -l) shard(s) refused; see refused-shards.tsv in the asset-proposals artifact"
+            cat "$RUNNER_TEMP/proposals/refused-shards.tsv"
+          fi
           # One copy of each archive to attest: shards that share a unit pack the same bytes under the same name.
           mkdir -p "$RUNNER_TEMP/attest"
           for archive in "$RUNNER_TEMP"/units/*/*.tar; do
