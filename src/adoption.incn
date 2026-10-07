@@ -437,7 +437,9 @@ def rewrite_member(
 ) -> Result[list[str], str]:
     """One feature member as the Loaf states it; empty when it named a dependency that adoption dropped."""
     if item.startswith("dep:"):
-        if normal_keys.contains(item[4:]):
+        # `dep:x` switches on an optional declaration. When the optional one is a dropped build dependency and `x`
+        # is also a required normal dependency (wasmtime's versioned-export macros), nothing kept is left to switch on.
+        if optional_keys.contains(item[4:]):
             return Ok([item])
         return Ok([])
     if item.contains("?/"):

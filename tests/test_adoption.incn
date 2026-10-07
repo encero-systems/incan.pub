@@ -205,6 +205,18 @@ def test_translation_rewrites_features_for_the_loaf_grammar() -> None:
     assert_eq(features["cc"], [])
 
 
+def test_dep_on_a_required_dependency_that_is_also_an_optional_build_dependency_is_dropped() -> None:
+    # wasmtime 36: `macros` is a required normal dependency and an optional build dependency; `dep:macros` can only
+    # switch on the build dependency, which the Loaf leaves out.
+    line = parse("""{"name":"d","vers":"1.0.0","cksum":"3333333333333333333333333333333333333333333333333333333333333333","deps":[
+{"name":"macros","req":"=1.0.0","features":[],"optional":false,"default_features":true,"target":null,"kind":"normal"},
+{"name":"macros","req":"=1.0.0","features":[],"optional":true,"default_features":true,"target":null,"kind":"build"},
+{"name":"slab","req":"1","features":[],"optional":true,"default_features":true,"target":null,"kind":"normal"}],
+"features":{"runtime":["dep:slab","dep:macros"]}}""").unwrap()
+    adoption = translate(line, demo_files("[package]\nname = \"d\"\nversion = \"1.0.0\"\n")).unwrap()
+    assert_eq(adoption.features["runtime"], ["dep:slab"])
+
+
 def test_a_proc_macro_and_its_default_name_come_from_the_manifest() -> None:
     line = parse("""{"name":"demo-macros","vers":"0.1.0","cksum":"2222222222222222222222222222222222222222222222222222222222222222","deps":[],"features":{}}""").unwrap()
     manifest = "[package]\nname = \"demo-macros\"\nversion = \"0.1.0\"\n\n[lib]\nproc-macro = true\n"
