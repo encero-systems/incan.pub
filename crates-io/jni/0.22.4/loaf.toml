@@ -26,3 +26,10 @@ log = { loaf = "crates-io/log", version = "^0.4.4" }
 simd_cesu8 = { loaf = "crates-io/simd_cesu8", version = "^1.1.1" }
 thiserror = { loaf = "crates-io/thiserror", version = "^2" }
 windows-link = { loaf = "crates-io/windows-link", version = "^0.2", target = "cfg(windows)" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default"]
+cfg = ["use_tls_attach_guard"]

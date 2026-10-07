@@ -23,3 +23,10 @@ log = { loaf = "crates-io/log", version = "^0.4", optional = true }
 socket2 = { loaf = "crates-io/socket2", version = ">=0.5, <0.7", target = "cfg(not(all(target_family = \"wasm\", target_os = \"unknown\")))" }
 tracing = { loaf = "crates-io/tracing", version = "^0.1.10", features = ["std"], default-features = false, optional = true }
 windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <=0.61", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_System_IO"], target = "cfg(windows)" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "tracing", "tracing-log"]
+cfg = ["apple", "apple_slow"]

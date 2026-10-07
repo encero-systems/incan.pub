@@ -31,3 +31,10 @@ serde = { loaf = "crates-io/serde", version = "^1", default-features = false, op
 spin = { loaf = "crates-io/spin", version = "^0.9.2", target = "cfg(target_arch = \"x86_64\")" }
 stable_deref_trait = { loaf = "crates-io/stable_deref_trait", version = "^1", default-features = false }
 ufmt-write = { loaf = "crates-io/ufmt-write", version = "^0.1", optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["atomic-polyfill", "cas", "serde"]
+cfg = ["has_atomics", "has_cas"]

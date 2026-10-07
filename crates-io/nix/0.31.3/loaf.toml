@@ -55,3 +55,24 @@ cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
 libc = { loaf = "crates-io/libc", version = "^0.2.186", features = ["extra_traits"] }
 memoffset = { loaf = "crates-io/memoffset", version = "^0.9", optional = true }
 pin-utils = { loaf = "crates-io/pin-utils", version = "^0.1.0", optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = []
+cfg = ["apple_targets", "bsd", "macos"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default"]
+cfg = ["apple_targets", "bsd", "macos"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["process", "signal"]
+cfg = ["apple_targets", "bsd", "macos"]

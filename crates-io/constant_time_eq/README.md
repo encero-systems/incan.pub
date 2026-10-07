@@ -4,7 +4,7 @@ The crates.io package [constant_time_eq](https://crates.io/crates/constant_time_
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.6.1](0.6.1/loaf.toml) | 2026-10-07 | CC0-1.0 OR MIT-0 OR Apache-2.0 | 0 | 0 |  |
+| [0.6.1](0.6.1/loaf.toml) | 2026-10-07 | CC0-1.0 OR MIT-0 OR Apache-2.0 | 1 | 0 |  |
 | [0.4.2](0.4.2/loaf.toml) | 2026-10-06 | CC0-1.0 OR MIT-0 OR Apache-2.0 | 2 | 0 |  |
 | [0.1.5](0.1.5/loaf.toml) | 2026-10-07 | CC0-1.0 | 0 | 0 |  |
 

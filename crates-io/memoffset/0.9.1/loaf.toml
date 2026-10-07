@@ -14,3 +14,10 @@ name = "memoffset"
 type = "lib"
 edition = "2015"
 build-script = true
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default"]
+cfg = ["allow_clippy", "doctests", "maybe_uninit", "raw_ref_macros", "stable_const", "stable_offset_of", "tuple_ty"]

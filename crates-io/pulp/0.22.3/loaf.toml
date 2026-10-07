@@ -29,3 +29,10 @@ pulp-macro = { loaf = "crates-io/pulp-macro", version = "^0.1.1", optional = tru
 pulp-wasm-simd-flag = { loaf = "crates-io/pulp-wasm-simd-flag", version = "^0.1.1", default-features = false }
 raw-cpuid = { loaf = "crates-io/raw-cpuid", version = "^11.5.0", default-features = false, target = "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))" }
 reborrow = { loaf = "crates-io/reborrow", version = "^0.5" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "relaxed-simd", "std", "x86-v3"]
+cfg = ["libpulp_const"]

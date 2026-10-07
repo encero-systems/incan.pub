@@ -26,3 +26,17 @@ num_cpus = { loaf = "crates-io/num_cpus", version = "^1.13", optional = true }
 once_cell = { loaf = "crates-io/once_cell", version = "^1.7", optional = true }
 rawpointer = { loaf = "crates-io/rawpointer", version = "^0.2" }
 thread-tree = { loaf = "crates-io/thread-tree", version = "^0.3.2", optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["avx512", "default", "std"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["cgemm", "std"]
+cfg = []

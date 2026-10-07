@@ -19,3 +19,10 @@ build-script = true
 serde = { loaf = "crates-io/serde", version = "^1.0", default-features = false, optional = true }
 typenum = { loaf = "crates-io/typenum", version = "^1.12" }
 zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = []
+cfg = ["ga_is_deprecated", "relaxed_coherence"]

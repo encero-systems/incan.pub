@@ -31,6 +31,14 @@ serde_json = { loaf = "crates-io/serde_json", version = "^1.0", features = ["all
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "std"]
+cfg = ["has_unsigned_abs", "rustc_1_46", "rustc_1_50", "rustc_1_60", "rustc_1_75"]
+out = [{ name = "default_precision.rs", path = "out/default_precision.rs", digest = "sha256:10104eb7579f46d237b3c97a8c85a885f06f78f4f028d15a10efe95ea7b303ac" }, { name = "default_rounding_mode.rs", path = "out/default_rounding_mode.rs", digest = "sha256:80b106f47ba65f5af4c85ad17fabcef53055c9ca3fb5cd7ea2f727cb7bb61159" }, { name = "exponential_format_threshold.rs", path = "out/exponential_format_threshold.rs", digest = "sha256:5ddeb60c5a065021fb6a27d6bc173d304da99be02a86ae8fc04c79aa2f56c736" }, { name = "serde_scale_limit.rs", path = "out/serde_scale_limit.rs", digest = "sha256:951d1777ff40ad8691eb3a4f6a80608c28793ea39d84e62646dfa9409494604b" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "std"]
 cfg = ["has_unsigned_abs", "rustc_1_46", "rustc_1_50", "rustc_1_60", "rustc_1_75"]
