@@ -1,0 +1,43 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-10-07T14:09:37Z",
+  "evidence": {
+    "compiler_probes": [],
+    "domain": "host",
+    "graph": "sha256:45ad233b0d3e761bc043ca4dd1372dd7389cc05eb2cde849fd08d04e9971f053",
+    "hazards": [],
+    "host": "x86_64-unknown-linux-gnu",
+    "method": "registry build-script run",
+    "sandbox": "bubblewrap: network namespace unshared, root read-only, writes confined to the work directory"
+  },
+  "fact": {
+    "cfg": [
+      "if_docsrs_then_no_serde_core"
+    ],
+    "features": [
+      "default",
+      "derive",
+      "serde_derive",
+      "std"
+    ],
+    "out": [
+      {
+        "digest": "sha256:edaefc31eb178d1c82d9ab94c18a374316f8ff13ad55147cc631698dc9498162",
+        "name": "private.rs",
+        "path": "out/private.rs"
+      }
+    ],
+    "profile": "debug",
+    "target": "x86_64-unknown-linux-gnu",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:70a696b5a4caec961d24ddfc07b51536d05657dd8f2555fd1c7fe871d9047e1d",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "serde",
+    "scope": "crates-io",
+    "version": "1.0.229"
+  }
+}
