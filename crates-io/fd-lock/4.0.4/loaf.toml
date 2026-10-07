@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fd-lock"
+version = "4.0.4"
+
+[rust]
+name = "fd_lock"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["fs"], target = "cfg(unix)" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52.0, <0.60.0", features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_System_IO"], target = "cfg(windows)" }

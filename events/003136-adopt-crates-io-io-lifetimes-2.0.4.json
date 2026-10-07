@@ -1,0 +1,161 @@
+{
+  "about": {
+    "description": "A low-level I/O ownership and borrowing library",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/sunfishcode/io-lifetimes"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:06432fb54d3be7964ecd3649233cddf80db2832f47fec34c01f65b3d9d774983",
+    "package": "io-lifetimes",
+    "registry": "crates-io",
+    "version": "2.0.4"
+  },
+  "archive": "sha256:7ccd0659455d15067f50c7a3b8607ca4894948299d1f226b16aa289047accc26",
+  "at": "2026-10-07T13:18:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "io_safety"
+      ],
+      "loaf": "crates-io/async-std",
+      "name": "async-std",
+      "optional": true,
+      "req": "^1.13.0",
+      "target": "cfg(not(target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hermit-abi",
+      "name": "hermit-abi",
+      "optional": true,
+      "req": ">=0.3, <=0.4",
+      "target": "cfg(target_os = \"hermit\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": true,
+      "req": "^0.2.96",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "net",
+        "os-ext"
+      ],
+      "loaf": "crates-io/mio",
+      "name": "mio",
+      "optional": true,
+      "req": "^0.8.0",
+      "target": "cfg(not(target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "io_safety"
+      ],
+      "loaf": "crates-io/os_pipe",
+      "name": "os_pipe",
+      "optional": true,
+      "req": "^1.0.0",
+      "target": "cfg(not(target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/socket2",
+      "name": "socket2",
+      "optional": true,
+      "req": "^0.5.0",
+      "target": "cfg(not(target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fs",
+        "io-std",
+        "net",
+        "process"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.6.0",
+      "target": "cfg(not(target_os = \"wasi\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_Security",
+        "Win32_Storage_FileSystem",
+        "Win32_System_IO"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": true,
+      "req": ">=0.52, <=0.59",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "async-std": [
+      "dep:async-std"
+    ],
+    "close": [
+      "libc",
+      "hermit-abi",
+      "windows-sys"
+    ],
+    "default": [],
+    "hermit-abi": [
+      "dep:hermit-abi"
+    ],
+    "libc": [
+      "dep:libc"
+    ],
+    "mio": [
+      "dep:mio"
+    ],
+    "os_pipe": [
+      "dep:os_pipe"
+    ],
+    "socket2": [
+      "dep:socket2"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "windows-sys": [
+      "dep:windows-sys"
+    ]
+  },
+  "id": "sha256:fadff97e7e2d4ba8a73b4ca0cd8116ced759a1d5f8ed06699b01569059d6b584",
+  "kind": "adopt",
+  "manifest": "sha256:7cb394d79eebec334e72b4c829bbac50458bea24f8827a0d2fd7786ebc073959",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "io_lifetimes",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "io-lifetimes",
+    "scope": "crates-io",
+    "version": "2.0.4"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "about": {
+    "description": "Customizable Rust parsers for the WebAssembly Text formats WAT and WAST",
+    "documentation": "https://docs.rs/wast",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasm-tools/tree/main/crates/wast"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:776443145731a4062e5b0d392892a2005909b6ab72d9fdc3cad53dd1a714e44a",
+    "package": "wast",
+    "registry": "crates-io",
+    "version": "261.0.0"
+  },
+  "archive": "sha256:e6a314c9f2f4d3f21db40b1dbb0a97827f7cbb552a1e4b1480e8fe8e899fbba3",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bumpalo",
+      "name": "bumpalo",
+      "optional": false,
+      "req": "^3.20"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/gimli",
+      "name": "gimli",
+      "optional": true,
+      "req": "^0.34.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/leb128fmt",
+      "name": "leb128fmt",
+      "optional": false,
+      "req": "^0.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.4.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": false,
+      "req": "^0.2.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/wasm-encoder",
+      "name": "wasm-encoder",
+      "optional": false,
+      "req": "^0.261.0"
+    }
+  ],
+  "features": {
+    "component-model": [
+      "wasm-module",
+      "wasm-encoder/component-model"
+    ],
+    "default": [
+      "wasm-module",
+      "component-model"
+    ],
+    "dwarf": [
+      "dep:gimli"
+    ],
+    "wasm-module": []
+  },
+  "id": "sha256:0c8875eed43756ccc42c8b0b0af3bf4c7252178e45241e8283ea43ce6ed573a4",
+  "kind": "adopt",
+  "manifest": "sha256:971b297ce9acea4cde105957b1d478955c558374302d6d3f48e8a95a57615afe",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wast",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wast",
+    "scope": "crates-io",
+    "version": "261.0.0"
+  }
+}

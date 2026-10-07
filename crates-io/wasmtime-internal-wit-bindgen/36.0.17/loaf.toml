@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-wit-bindgen"
+version = "36.0.17"
+
+[project.features]
+async = []
+component-model-async = []
+
+[rust]
+name = "wasmtime_internal_wit_bindgen"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.0" }
+heck = { loaf = "crates-io/heck", version = "^0.5" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.0.0", default-features = false }
+wit-parser = { loaf = "crates-io/wit-parser", version = "^0.236.0" }

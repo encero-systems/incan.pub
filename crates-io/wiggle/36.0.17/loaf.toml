@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wiggle"
+version = "36.0.17"
+
+[project.features]
+default = ["wiggle_metadata", "wasmtime", "wasmtime_async"]
+tracing_log = ["tracing/log"]
+wasmtime = ["dep:wasmtime"]
+wasmtime_async = ["dep:wasmtime", "wasmtime/async"]
+wiggle_metadata = ["witx", "wiggle-macro/wiggle_metadata"]
+witx = ["dep:witx"]
+
+[rust]
+name = "wiggle"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.71" }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.0" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.12" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.26" }
+wasmtime = { loaf = "crates-io/wasmtime", version = "^36.0.17", default-features = false, optional = true }
+wiggle-macro = { loaf = "crates-io/wiggle-macro", version = "=36.0.17" }
+witx = { loaf = "crates-io/witx", version = "^0.9.1", optional = true }

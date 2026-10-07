@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/maybe-owned"
+version = "0.3.4"
+
+[project.features]
+serde = ["dep:serde"]
+
+[rust]
+name = "maybe_owned"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }

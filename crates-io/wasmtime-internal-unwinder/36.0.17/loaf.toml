@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-unwinder"
+version = "36.0.17"
+
+[project.features]
+cranelift = ["dep:cranelift-codegen"]
+default = []
+
+[rust]
+name = "wasmtime_internal_unwinder"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+cranelift-codegen = { loaf = "crates-io/cranelift-codegen", version = "^0.123.17", features = ["std", "unwind"], default-features = false, optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.27", default-features = false }
+object = { loaf = "crates-io/object", version = "^0.37.0", features = ["elf", "read_core"], default-features = false }

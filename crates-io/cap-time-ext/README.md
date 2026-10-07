@@ -1,0 +1,11 @@
+# crates-io/cap-time-ext
+
+The crates.io package [cap-time-ext](https://crates.io/crates/cap-time-ext), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves. Extension traits for `SystemClock` and `MonotonicClock`
+
+| Version | Adopted | License | Build facts | Compiled units | |
+|---|---|---|---|---|---|
+| [3.4.6](3.4.6/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
+
+Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/cap-time-ext`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/cap-time-ext](../../index/crates-io/cap-time-ext), the units by each version's `assets.json`.
+
+<!-- Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit. -->

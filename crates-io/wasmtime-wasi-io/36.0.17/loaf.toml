@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-wasi-io"
+version = "36.0.17"
+
+[project.features]
+default = ["std"]
+std = ["bytes/std", "anyhow/std", "wasmtime/std"]
+
+[rust]
+name = "wasmtime_wasi_io"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+async-trait = { loaf = "crates-io/async-trait", version = "^0.1.71" }
+bytes = { loaf = "crates-io/bytes", version = "^1.4", default-features = false }
+futures = { loaf = "crates-io/futures", version = "^0.3.27", default-features = false }
+wasmtime = { loaf = "crates-io/wasmtime", version = "^36.0.17", features = ["async", "component-model", "runtime"], default-features = false }

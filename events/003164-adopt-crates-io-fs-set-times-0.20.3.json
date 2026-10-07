@@ -1,0 +1,72 @@
+{
+  "about": {
+    "description": "Set filesystem timestamps",
+    "documentation": "https://docs.rs/fs-set-times",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/fs-set-times"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:94e7099f6313ecacbe1256e8ff9d617b75d1bcb16a6fddef94866d225a01a14a",
+    "package": "fs-set-times",
+    "registry": "crates-io",
+    "version": "0.20.3"
+  },
+  "archive": "sha256:515904eb4a2dd0ec0ab184ddbb09b0f7aeb2db432c829dc9b4b071f7e75996e6",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/io-lifetimes",
+      "name": "io-lifetimes",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fs",
+        "time"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.0",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Storage_FileSystem"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.52, <0.60",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:38d1d981c034ebb414dcc2bb43d51fa78d877ff667301f529ec0716c60b759a8",
+  "kind": "adopt",
+  "manifest": "sha256:21a512c63b48976ae92194dd596eafceafd0a1009ee04d31df05245f653738fb",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "fs_set_times",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fs-set-times",
+    "scope": "crates-io",
+    "version": "0.20.3"
+  }
+}

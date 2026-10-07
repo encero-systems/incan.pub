@@ -1,0 +1,33 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/io-lifetimes"
+version = "2.0.4"
+
+[project.features]
+async-std = ["dep:async-std"]
+close = ["libc", "hermit-abi", "windows-sys"]
+default = []
+hermit-abi = ["dep:hermit-abi"]
+libc = ["dep:libc"]
+mio = ["dep:mio"]
+os_pipe = ["dep:os_pipe"]
+socket2 = ["dep:socket2"]
+tokio = ["dep:tokio"]
+windows-sys = ["dep:windows-sys"]
+
+[rust]
+name = "io_lifetimes"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+async-std = { loaf = "crates-io/async-std", version = "^1.13.0", features = ["io_safety"], optional = true, target = "cfg(not(target_os = \"wasi\"))" }
+hermit-abi = { loaf = "crates-io/hermit-abi", version = ">=0.3, <=0.4", optional = true, target = "cfg(target_os = \"hermit\")" }
+libc = { loaf = "crates-io/libc", version = "^0.2.96", optional = true, target = "cfg(not(windows))" }
+mio = { loaf = "crates-io/mio", version = "^0.8.0", features = ["net", "os-ext"], optional = true, target = "cfg(not(target_os = \"wasi\"))" }
+os_pipe = { loaf = "crates-io/os_pipe", version = "^1.0.0", features = ["io_safety"], optional = true, target = "cfg(not(target_os = \"wasi\"))" }
+socket2 = { loaf = "crates-io/socket2", version = "^0.5.0", optional = true, target = "cfg(not(target_os = \"wasi\"))" }
+tokio = { loaf = "crates-io/tokio", version = "^1.6.0", features = ["fs", "io-std", "net", "process"], optional = true, target = "cfg(not(target_os = \"wasi\"))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <=0.59", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_Security", "Win32_Storage_FileSystem", "Win32_System_IO"], optional = true, target = "cfg(windows)" }

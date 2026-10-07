@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/regalloc2"
+version = "0.12.2"
+
+[project.features]
+checker = []
+default = ["std"]
+enable-serde = ["serde"]
+fuzzing = ["libfuzzer-sys", "checker", "trace-log"]
+libfuzzer-sys = ["dep:libfuzzer-sys"]
+serde = ["dep:serde"]
+std = []
+trace-log = []
+
+[rust]
+name = "regalloc2"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+allocator-api2 = { loaf = "crates-io/allocator-api2", version = "^0.2.18", features = ["alloc"], default-features = false }
+bumpalo = { loaf = "crates-io/bumpalo", version = "^3.16.0", features = ["allocator-api2"] }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.15", default-features = false }
+libfuzzer-sys = { loaf = "crates-io/libfuzzer-sys", version = "^0.4.2", optional = true }
+log = { loaf = "crates-io/log", version = "^0.4.8", default-features = false }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.0.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.136", features = ["alloc", "derive"], default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.6.1", features = ["union"] }

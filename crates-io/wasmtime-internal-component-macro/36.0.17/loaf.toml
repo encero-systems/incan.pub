@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-component-macro"
+version = "36.0.17"
+
+[project.features]
+async = ["wasmtime-wit-bindgen/async"]
+component-model-async = ["async", "wasmtime-wit-bindgen/component-model-async"]
+
+[rust]
+name = "wasmtime_internal_component_macro"
+type = "proc-macro"
+edition = "2024"
+build-script = true
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^2.0.25", features = ["extra-traits"] }
+wasmtime-component-util = { loaf = "crates-io/wasmtime-internal-component-util", version = "=36.0.17" }
+wasmtime-wit-bindgen = { loaf = "crates-io/wasmtime-internal-wit-bindgen", version = "=36.0.17" }
+wit-parser = { loaf = "crates-io/wit-parser", version = "^0.236.0" }

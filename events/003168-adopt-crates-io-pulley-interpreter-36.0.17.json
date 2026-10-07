@@ -1,0 +1,112 @@
+{
+  "about": {
+    "description": "The Pulley interpreter, its bytecode definition, encoder, decoder, and etc...",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime/tree/main/pulley"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:818d286c25f82cd1e459d3c5e4481751e2b1ca54beb8fc021271845744a5828a",
+    "package": "pulley-interpreter",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:0d607fb9aa622cce9370226b99efb2a467469402950e558e91294093db174033",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": true,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.4.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-bitset",
+      "name": "cranelift-bitset",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.27"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pulley-macros",
+      "name": "pulley-macros",
+      "optional": false,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-math",
+      "name": "wasmtime-math",
+      "optional": true,
+      "req": "=36.0.17"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary",
+      "arbitrary/derive",
+      "std",
+      "cranelift-bitset/arbitrary"
+    ],
+    "decode": [],
+    "disas": [
+      "decode"
+    ],
+    "encode": [],
+    "interp": [
+      "decode",
+      "encode",
+      "dep:wasmtime-math"
+    ],
+    "profile": [
+      "std",
+      "dep:anyhow"
+    ],
+    "std": [
+      "wasmtime-math?/std"
+    ]
+  },
+  "id": "sha256:1ea7aebbe761b1931d0afd0d0aae55d5cce8914904cc5a6159f2babd47d25cd1",
+  "kind": "adopt",
+  "manifest": "sha256:06e248bc5f898c483f9fd77ffb53afc8e1f684afd3daa91f2effadc0255fc995",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "pulley_interpreter",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "pulley-interpreter",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

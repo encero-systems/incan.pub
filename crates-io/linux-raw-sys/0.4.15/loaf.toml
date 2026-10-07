@@ -1,0 +1,43 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/linux-raw-sys"
+version = "0.4.15"
+
+[project.features]
+bootparam = []
+btrfs = []
+compiler_builtins = ["dep:compiler_builtins"]
+core = ["dep:core"]
+default = ["std", "general", "errno"]
+elf = []
+elf_uapi = []
+errno = []
+general = []
+if_arp = []
+if_ether = []
+if_packet = []
+io_uring = []
+ioctl = []
+landlock = []
+loop_device = []
+mempolicy = []
+net = []
+netlink = []
+no_std = []
+prctl = []
+ptrace = []
+rustc-dep-of-std = ["core", "compiler_builtins", "no_std"]
+std = []
+system = []
+xdp = []
+
+[rust]
+name = "linux_raw_sys"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+compiler_builtins = { loaf = "crates-io/compiler_builtins", version = "^0.1.49", optional = true }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0.0", optional = true }

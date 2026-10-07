@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-cache"
+version = "36.0.17"
+
+[rust]
+name = "wasmtime_internal_cache"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", features = ["std"], default-features = false }
+base64 = { loaf = "crates-io/base64", version = "^0.22.1" }
+directories-next = { loaf = "crates-io/directories-next", version = "^2.0" }
+log = { loaf = "crates-io/log", version = "^0.4.27", default-features = false }
+postcard = { loaf = "crates-io/postcard", version = "^1.0.8", features = ["alloc"], default-features = false }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.3", features = ["process"], target = "cfg(not(target_os = \"windows\"))" }
+serde = { loaf = "crates-io/serde", version = "^1.0.215", features = ["alloc"], default-features = false }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0.188" }
+sha2 = { loaf = "crates-io/sha2", version = "^0.10.2" }
+toml = { loaf = "crates-io/toml", version = "^0.8.10" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.60.0", features = ["Win32_System_Threading"], target = "cfg(target_os = \"windows\")" }
+zstd = { loaf = "crates-io/zstd", version = "^0.13.0", default-features = false }

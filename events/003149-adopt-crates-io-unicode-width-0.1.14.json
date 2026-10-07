@@ -1,0 +1,84 @@
+{
+  "about": {
+    "description": "Determine displayed width of `char` and `str` types\naccording to Unicode Standard Annex #11 rules.",
+    "documentation": "",
+    "homepage": "https://github.com/unicode-rs/unicode-width",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/unicode-rs/unicode-width"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:7dd6e30e90baa6f72411720665d41d89b9a3d039dc45b8faea1ddd07f617f6af",
+    "package": "unicode-width",
+    "registry": "crates-io",
+    "version": "0.1.14"
+  },
+  "archive": "sha256:7ec491ab06f8bc4c08d6f41f3019a0264cb82f089a8c6773acd091d22752870a",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compiler_builtins",
+      "name": "compiler_builtins",
+      "optional": true,
+      "req": "^0.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-std",
+      "name": "std",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "features": {
+    "cjk": [],
+    "compiler_builtins": [
+      "dep:compiler_builtins"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "cjk"
+    ],
+    "no_std": [],
+    "rustc-dep-of-std": [
+      "std",
+      "core",
+      "compiler_builtins"
+    ],
+    "std": [
+      "dep:std"
+    ]
+  },
+  "id": "sha256:93e1c299f24fc746ca970fc3aef42d994feb18ecde462de0b1d237986109ed82",
+  "kind": "adopt",
+  "manifest": "sha256:8fdd1985ae2b96cb282a5985a44ed56b697691a6cfe75e83d8e470dc2cb4aa4b",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "unicode_width",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "unicode-width",
+    "scope": "crates-io",
+    "version": "0.1.14"
+  }
+}

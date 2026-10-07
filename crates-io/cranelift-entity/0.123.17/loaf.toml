@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cranelift-entity"
+version = "0.123.17"
+
+[project.features]
+enable-serde = ["serde", "serde_derive", "cranelift-bitset/enable-serde"]
+serde = ["dep:serde"]
+serde_derive = ["dep:serde_derive"]
+
+[rust]
+name = "cranelift_entity"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cranelift-bitset = { loaf = "crates-io/cranelift-bitset", version = "^0.123.17" }
+serde = { loaf = "crates-io/serde", version = "^1.0.215", features = ["alloc"], default-features = false, optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0.188", optional = true }

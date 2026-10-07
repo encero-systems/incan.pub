@@ -1,0 +1,93 @@
+{
+  "about": {
+    "description": "wasi-io common traits to be shared among other wasi implementations",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:8680fbbdaee331ae1fbbe290f067419c487dc7769b755b165e1a94c4fe70b690",
+    "package": "wasmtime-wasi-io",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:7e714449d6e2eb9e5261ce58a1a554085fd7f73c2073be14c7b5321e0eb3a94b",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-trait",
+      "name": "async-trait",
+      "optional": false,
+      "req": "^0.1.71"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/bytes",
+      "name": "bytes",
+      "optional": false,
+      "req": "^1.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures",
+      "name": "futures",
+      "optional": false,
+      "req": "^0.3.27"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "async",
+        "component-model",
+        "runtime"
+      ],
+      "loaf": "crates-io/wasmtime",
+      "name": "wasmtime",
+      "optional": false,
+      "req": "^36.0.17"
+    }
+  ],
+  "features": {
+    "default": [
+      "std"
+    ],
+    "std": [
+      "bytes/std",
+      "anyhow/std",
+      "wasmtime/std"
+    ]
+  },
+  "id": "sha256:f7940754cd55a03e83f5e686017ad48f7b1af27488f954d18af6112db3c2d45f",
+  "kind": "adopt",
+  "manifest": "sha256:742f65ef084be12b4c982b86a45a02e674fd491f7ceaee2f1d8c4e69b4299109",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wasmtime_wasi_io",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmtime-wasi-io",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

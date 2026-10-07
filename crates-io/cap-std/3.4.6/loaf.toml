@@ -1,0 +1,26 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cap-std"
+version = "3.4.6"
+
+[project.features]
+arf-strings = ["dep:arf-strings"]
+arf_strings = ["fs_utf8", "arf-strings"]
+camino = ["dep:camino"]
+default = []
+fs_utf8 = ["camino"]
+
+[rust]
+name = "cap_std"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+arf-strings = { loaf = "crates-io/arf-strings", version = "^0.7.0", optional = true }
+camino = { loaf = "crates-io/camino", version = "^1.0.5", optional = true }
+cap-primitives = { loaf = "crates-io/cap-primitives", version = "^3.4.6" }
+io-extras = { loaf = "crates-io/io-extras", version = "^0.18.3" }
+io-lifetimes = { loaf = "crates-io/io-lifetimes", version = "^2.0.0", default-features = false }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["fs"], target = "cfg(not(windows))" }

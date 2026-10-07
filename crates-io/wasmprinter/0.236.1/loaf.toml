@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmprinter"
+version = "0.236.1"
+
+[project.features]
+component-model = ["wasmparser/component-model"]
+default = ["component-model", "validate"]
+validate = ["wasmparser/validate", "wasmparser/features"]
+
+[rust]
+name = "wasmprinter"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.58" }
+termcolor = { loaf = "crates-io/termcolor", version = "^1.2.0" }
+wasmparser = { loaf = "crates-io/wasmparser", version = "^0.236.1", features = ["simd", "std"], default-features = false }

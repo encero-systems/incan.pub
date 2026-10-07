@@ -1,0 +1,95 @@
+{
+  "about": {
+    "description": "Generated bindings for Linux's userspace API",
+    "documentation": "https://docs.rs/linux-raw-sys",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/sunfishcode/linux-raw-sys"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d26c52dbd32dccf2d10cac7725f8eae5296885fb5703b261f7d0a0739ec807ab",
+    "package": "linux-raw-sys",
+    "registry": "crates-io",
+    "version": "0.4.15"
+  },
+  "archive": "sha256:2651d8ab089f396d152d7190e6176eab56c0284a1342649cce5ed951045df728",
+  "at": "2026-10-07T13:18:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compiler_builtins",
+      "name": "compiler_builtins",
+      "optional": true,
+      "req": "^0.1.49"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-std-workspace-core",
+      "name": "core",
+      "optional": true,
+      "req": "^1.0.0"
+    }
+  ],
+  "features": {
+    "bootparam": [],
+    "btrfs": [],
+    "compiler_builtins": [
+      "dep:compiler_builtins"
+    ],
+    "core": [
+      "dep:core"
+    ],
+    "default": [
+      "std",
+      "general",
+      "errno"
+    ],
+    "elf": [],
+    "elf_uapi": [],
+    "errno": [],
+    "general": [],
+    "if_arp": [],
+    "if_ether": [],
+    "if_packet": [],
+    "io_uring": [],
+    "ioctl": [],
+    "landlock": [],
+    "loop_device": [],
+    "mempolicy": [],
+    "net": [],
+    "netlink": [],
+    "no_std": [],
+    "prctl": [],
+    "ptrace": [],
+    "rustc-dep-of-std": [
+      "core",
+      "compiler_builtins",
+      "no_std"
+    ],
+    "std": [],
+    "system": [],
+    "xdp": []
+  },
+  "id": "sha256:09f62efd2b849cd52348fec6f544df12cc2453003613080c69d7b22cc82e9193",
+  "kind": "adopt",
+  "manifest": "sha256:3bf688369f49f6511fe4ca03e9bb8d988208f3bd08c4dd54c7a0bff60036d4a3",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "linux_raw_sys",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "linux-raw-sys",
+    "scope": "crates-io",
+    "version": "0.4.15"
+  }
+}

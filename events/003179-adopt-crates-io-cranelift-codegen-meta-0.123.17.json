@@ -1,0 +1,84 @@
+{
+  "about": {
+    "description": "Metaprogram for cranelift-codegen code generator library",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:85fad432ca0daf333f78b0947f8ccfcf64ad197acec6eccd5cfacb27e519a2b2",
+    "package": "cranelift-codegen-meta",
+    "registry": "crates-io",
+    "version": "0.123.17"
+  },
+  "archive": "sha256:49e3940f3101b1f83f847bc68779004234fd096c4e976890dbc666b2b9ff0442",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-assembler-x64-meta",
+      "name": "cranelift-assembler-x64-meta",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-codegen-shared",
+      "name": "cranelift-codegen-shared",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-srcgen",
+      "name": "cranelift-srcgen",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/heck",
+      "name": "heck",
+      "optional": false,
+      "req": "^0.5.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pulley-interpreter",
+      "name": "pulley-interpreter",
+      "optional": true,
+      "req": "=36.0.17"
+    }
+  ],
+  "features": {
+    "pulley": [
+      "dep:pulley-interpreter"
+    ]
+  },
+  "id": "sha256:9ea6c82d047d17b557a417729c00756309d919a84720297410d175e3405dba66",
+  "kind": "adopt",
+  "manifest": "sha256:753bf32c47c419923c6aa91c279f66dc6982744a818a0eddc691dc718cd3f7a9",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "cranelift_codegen_meta",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cranelift-codegen-meta",
+    "scope": "crates-io",
+    "version": "0.123.17"
+  }
+}

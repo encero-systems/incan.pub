@@ -1,0 +1,85 @@
+{
+  "about": {
+    "description": "INTERNAL: JIT debug interfaces support for Wasmtime",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b254d438db151a17ead4af0bfce573d7e5d914e6a09a9aad5656118069962f1e",
+    "package": "wasmtime-internal-jit-debug",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:5fff6b9a82b45a838e3133aa772fe14e5134227285a61fa5e8fe2f80675763ef",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "elf",
+        "read_core"
+      ],
+      "loaf": "crates-io/object",
+      "name": "object",
+      "optional": true,
+      "req": "^0.37.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "mm",
+        "time"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": true,
+      "req": "^1.0.3",
+      "target": "cfg(target_os = \"linux\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-versioned-export-macros",
+      "name": "wasmtime-versioned-export-macros",
+      "optional": false,
+      "req": "=36.0.17"
+    }
+  ],
+  "features": {
+    "gdb_jit_int": [],
+    "object": [
+      "dep:object"
+    ],
+    "perf_jitdump": [
+      "rustix",
+      "object",
+      "std"
+    ],
+    "rustix": [
+      "dep:rustix"
+    ],
+    "std": []
+  },
+  "id": "sha256:09e67a53d9186752632c209f18cd75a2d72667f0725f53eb980725d86aed81a6",
+  "kind": "adopt",
+  "manifest": "sha256:8887f7486234a54c0a1a3bc56d35b4f7215cee1c217721053f68c0c53ac0a9de",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wasmtime_internal_jit_debug",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmtime-internal-jit-debug",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

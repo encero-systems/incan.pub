@@ -1,0 +1,323 @@
+{
+  "about": {
+    "description": "Low-level code generator library",
+    "documentation": "https://docs.rs/cranelift-codegen",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4fed4597494992a209a699c80bb7627f99b80bfc9d9ad7a4ab60c7f22dac9fb6",
+    "package": "cranelift-codegen",
+    "registry": "crates-io",
+    "version": "0.123.17"
+  },
+  "archive": "sha256:6bc0a03eb79e9e70598f35d8bbc6e5ef537e80b99a654cdfe8c1a61aa507db3f",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": true,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bumpalo",
+      "name": "bumpalo",
+      "optional": false,
+      "req": "^3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/capstone",
+      "name": "capstone",
+      "optional": true,
+      "req": "^0.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-assembler-x64",
+      "name": "cranelift-assembler-x64",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-bforest",
+      "name": "cranelift-bforest",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-bitset",
+      "name": "cranelift-bitset",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-codegen-shared",
+      "name": "cranelift-codegen-shared",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-control",
+      "name": "cranelift-control",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-entity",
+      "name": "cranelift-entity",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "read",
+        "std",
+        "write"
+      ],
+      "loaf": "crates-io/gimli",
+      "name": "gimli",
+      "optional": true,
+      "req": "^0.32.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.15"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.27"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/postcard",
+      "name": "postcard",
+      "optional": true,
+      "req": "^1.0.8"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/pulley-interpreter",
+      "name": "pulley-interpreter",
+      "optional": true,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "checker"
+      ],
+      "loaf": "crates-io/regalloc2",
+      "name": "regalloc2",
+      "optional": false,
+      "req": "^0.12.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.215"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0.188"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.10.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "union"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.6.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/souper-ir",
+      "name": "souper-ir",
+      "optional": true,
+      "req": "^2.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/target-lexicon",
+      "name": "target-lexicon",
+      "optional": false,
+      "req": "^0.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-math",
+      "name": "wasmtime-math",
+      "optional": false,
+      "req": "=36.0.17"
+    }
+  ],
+  "features": {
+    "all-arch": [
+      "all-native-arch",
+      "pulley"
+    ],
+    "all-native-arch": [
+      "x86",
+      "arm64",
+      "s390x",
+      "riscv64"
+    ],
+    "anyhow": [
+      "dep:anyhow"
+    ],
+    "arm64": [],
+    "capstone": [
+      "dep:capstone"
+    ],
+    "core": [],
+    "default": [
+      "std",
+      "unwind",
+      "host-arch",
+      "timing"
+    ],
+    "disas": [
+      "anyhow",
+      "capstone"
+    ],
+    "enable-serde": [
+      "serde",
+      "serde_derive",
+      "cranelift-entity/enable-serde",
+      "cranelift-bitset/enable-serde",
+      "regalloc2/enable-serde",
+      "smallvec/serde"
+    ],
+    "gimli": [
+      "dep:gimli"
+    ],
+    "host-arch": [],
+    "incremental-cache": [
+      "enable-serde",
+      "postcard",
+      "sha2"
+    ],
+    "isle-errors": [],
+    "postcard": [
+      "dep:postcard"
+    ],
+    "pulley": [
+      "dep:pulley-interpreter",
+      "pulley-interpreter/encode",
+      "pulley-interpreter/disas"
+    ],
+    "riscv64": [],
+    "s390x": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_derive": [
+      "dep:serde_derive"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "souper-harvest": [
+      "souper-ir",
+      "dep:souper-ir",
+      "souper-ir/stringify"
+    ],
+    "souper-ir": [
+      "dep:souper-ir"
+    ],
+    "std": [
+      "serde?/std"
+    ],
+    "timing": [],
+    "trace-log": [
+      "regalloc2/trace-log"
+    ],
+    "unwind": [
+      "gimli"
+    ],
+    "x86": []
+  },
+  "id": "sha256:f3c28e7e93762ba03bdb280c11311c2d7ebfaaf8d25458819a4def01d1cc4115",
+  "kind": "adopt",
+  "manifest": "sha256:a46d1f3ea3c132ca299d3b7e600f5408ee3f7ffc43d41b7708b4ec4b74abf177",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "cranelift_codegen",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cranelift-codegen",
+    "scope": "crates-io",
+    "version": "0.123.17"
+  }
+}

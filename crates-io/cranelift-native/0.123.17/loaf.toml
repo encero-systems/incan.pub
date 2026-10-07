@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cranelift-native"
+version = "0.123.17"
+
+[project.features]
+core = ["cranelift-codegen/core"]
+default = ["std"]
+std = ["cranelift-codegen/std"]
+
+[rust]
+name = "cranelift_native"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cranelift-codegen = { loaf = "crates-io/cranelift-codegen", version = "^0.123.17", features = ["std", "unwind"], default-features = false }
+libc = { loaf = "crates-io/libc", version = "^0.2.112", target = "cfg(target_arch = \"riscv64\")" }
+target-lexicon = { loaf = "crates-io/target-lexicon", version = "^0.13.0" }

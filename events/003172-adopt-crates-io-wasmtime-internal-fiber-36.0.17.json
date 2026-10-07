@@ -1,0 +1,106 @@
+{
+  "about": {
+    "description": "INTERNAL: Fiber support for Wasmtime",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:821e764d43c160cf0989c55d63245856164bac8a09d345d2a0e9402fba68a3e5",
+    "package": "wasmtime-internal-fiber",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:a71f9cb95cc7bebf3cd75d6b8fc0896fb1285c3a8564435b25b8ed58b0b5d0fd",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.112",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "mm"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.3",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-asm-macros",
+      "name": "wasmtime-asm-macros",
+      "optional": false,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-versioned-export-macros",
+      "name": "wasmtime-versioned-export-macros",
+      "optional": false,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_System_Threading"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.60.0",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "std": []
+  },
+  "id": "sha256:1c49030900b47380ab446b8c917f30065f81fcfed5c3a3e26c1c29efb06cdedd",
+  "kind": "adopt",
+  "manifest": "sha256:bc9e21bb68845d6eca4f4746cd5c2fc6203d4172f12486c8edfa08fcf1f293a6",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wasmtime_internal_fiber",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmtime-internal-fiber",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

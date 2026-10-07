@@ -1,0 +1,171 @@
+{
+  "about": {
+    "description": "Extension traits for `Dir`, `File`, etc.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/cap-std"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:476f0d0003a760918ed4b1e039a59e11769030416f79c8222551d22785f7f70d",
+    "package": "cap-fs-ext",
+    "registry": "crates-io",
+    "version": "3.4.6"
+  },
+  "archive": "sha256:1efb2f23165a5c8d8e42adf19fff705c34ffcda50e12d40cfa512e05d460dd75",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arf-strings",
+      "name": "arf-strings",
+      "optional": true,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "attributes",
+        "io_safety"
+      ],
+      "loaf": "crates-io/async-std",
+      "name": "async-std",
+      "optional": true,
+      "req": "^1.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-trait",
+      "name": "async-trait",
+      "optional": true,
+      "req": "^0.1.42"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/camino",
+      "name": "camino",
+      "optional": true,
+      "req": "^1.0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-async-std",
+      "name": "cap-async-std",
+      "optional": true,
+      "req": "^3.4.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-primitives",
+      "name": "cap-primitives",
+      "optional": false,
+      "req": "^3.4.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-std",
+      "name": "cap-std",
+      "optional": true,
+      "req": "^3.4.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/io-lifetimes",
+      "name": "io-lifetimes",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Storage_FileSystem"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.52, <=0.59",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "arf-strings": [
+      "dep:arf-strings"
+    ],
+    "arf_strings": [
+      "dep:cap-std",
+      "cap-std/arf_strings",
+      "fs_utf8",
+      "arf-strings"
+    ],
+    "async-std": [
+      "dep:async-std"
+    ],
+    "async-trait": [
+      "dep:async-trait"
+    ],
+    "async_std": [
+      "cap-async-std",
+      "async-std",
+      "io-lifetimes/async-std",
+      "async-trait"
+    ],
+    "async_std_arf_strings": [
+      "dep:cap-async-std",
+      "cap-async-std/arf_strings",
+      "async_std_fs_utf8",
+      "arf-strings"
+    ],
+    "async_std_fs_utf8": [
+      "dep:cap-async-std",
+      "cap-async-std/fs_utf8",
+      "camino"
+    ],
+    "camino": [
+      "dep:camino"
+    ],
+    "cap-async-std": [
+      "dep:cap-async-std"
+    ],
+    "cap-std": [
+      "dep:cap-std"
+    ],
+    "default": [
+      "std"
+    ],
+    "fs_utf8": [
+      "dep:cap-std",
+      "cap-std/fs_utf8",
+      "camino"
+    ],
+    "std": [
+      "cap-std"
+    ]
+  },
+  "id": "sha256:10cf66646a904224fbf58669d6de23d04257e52e9ed1d9f975dc725ea1cc44f6",
+  "kind": "adopt",
+  "manifest": "sha256:5de4337b909662e6511581978aba82476a671044718c73839ca8190c67a74e87",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "cap_fs_ext",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cap-fs-ext",
+    "scope": "crates-io",
+    "version": "3.4.6"
+  }
+}

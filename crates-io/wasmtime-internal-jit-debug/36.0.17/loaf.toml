@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-jit-debug"
+version = "36.0.17"
+
+[project.features]
+gdb_jit_int = []
+object = ["dep:object"]
+perf_jitdump = ["rustix", "object", "std"]
+rustix = ["dep:rustix"]
+std = []
+
+[rust]
+name = "wasmtime_internal_jit_debug"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+object = { loaf = "crates-io/object", version = "^0.37.0", features = ["elf", "read_core"], default-features = false, optional = true }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.3", features = ["mm", "time"], optional = true, target = "cfg(target_os = \"linux\")" }
+wasmtime-versioned-export-macros = { loaf = "crates-io/wasmtime-internal-versioned-export-macros", version = "=36.0.17" }

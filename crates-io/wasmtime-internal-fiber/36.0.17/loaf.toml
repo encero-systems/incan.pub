@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-fiber"
+version = "36.0.17"
+
+[project.features]
+std = []
+
+[rust]
+name = "wasmtime_internal_fiber"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2.112", target = "cfg(unix)" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.3", features = ["mm"], target = "cfg(unix)" }
+wasmtime-asm-macros = { loaf = "crates-io/wasmtime-internal-asm-macros", version = "=36.0.17" }
+wasmtime-versioned-export-macros = { loaf = "crates-io/wasmtime-internal-versioned-export-macros", version = "=36.0.17" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.60.0", features = ["Win32_Foundation", "Win32_System_Threading"], target = "cfg(windows)" }

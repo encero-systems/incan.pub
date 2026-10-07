@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/pulley-interpreter"
+version = "36.0.17"
+
+[project.features]
+arbitrary = ["dep:arbitrary", "arbitrary/derive", "std", "cranelift-bitset/arbitrary"]
+decode = []
+disas = ["decode"]
+encode = []
+interp = ["decode", "encode", "dep:wasmtime-math"]
+profile = ["std", "dep:anyhow"]
+std = ["wasmtime-math?/std"]
+
+[rust]
+name = "pulley_interpreter"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false, optional = true }
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.4.0", optional = true }
+cranelift-bitset = { loaf = "crates-io/cranelift-bitset", version = "^0.123.17" }
+log = { loaf = "crates-io/log", version = "^0.4.27", default-features = false }
+pulley-macros = { loaf = "crates-io/pulley-macros", version = "=36.0.17" }
+wasmtime-math = { loaf = "crates-io/wasmtime-internal-math", version = "=36.0.17", optional = true }

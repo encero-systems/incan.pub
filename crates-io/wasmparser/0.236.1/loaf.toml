@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmparser"
+version = "0.236.1"
+
+[project.features]
+component-model = ["dep:semver"]
+default = ["std", "validate", "serde", "features", "component-model", "hash-collections", "simd"]
+features = []
+hash-collections = ["dep:hashbrown", "dep:indexmap"]
+prefer-btree-collections = []
+serde = ["dep:serde", "indexmap?/serde", "hashbrown?/serde"]
+simd = []
+std = ["indexmap?/std"]
+validate = []
+
+[rust]
+name = "wasmparser"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.4.1" }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.15.2", features = ["default-hasher"], default-features = false, optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.7.0", default-features = false, optional = true }
+semver = { loaf = "crates-io/semver", version = "^1.0.0", default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.166", features = ["alloc"], default-features = false, optional = true }

@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wat"
+version = "1.261.0"
+
+[project.features]
+component-model = ["wast/component-model"]
+default = ["component-model"]
+dwarf = ["wast/dwarf"]
+
+[rust]
+name = "wat"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+wast = { loaf = "crates-io/wast", version = "^261.0.0", features = ["wasm-module"], default-features = false }

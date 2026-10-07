@@ -1,0 +1,37 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/miette"
+version = "7.6.0"
+
+[project.features]
+default = ["derive"]
+derive = ["dep:miette-derive"]
+fancy = ["fancy-no-backtrace", "dep:backtrace", "dep:backtrace-ext"]
+fancy-base = ["dep:owo-colors", "dep:textwrap"]
+fancy-no-backtrace = ["fancy-base", "dep:terminal_size", "dep:supports-hyperlinks", "dep:supports-color", "dep:supports-unicode"]
+fancy-no-syscall = ["fancy-base"]
+no-format-args-capture = []
+serde = ["dep:serde"]
+syntect-highlighter = ["fancy-no-backtrace", "dep:syntect"]
+
+[rust]
+name = "miette"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+backtrace = { loaf = "crates-io/backtrace", version = "^0.3.69", optional = true }
+backtrace-ext = { loaf = "crates-io/backtrace-ext", version = "^0.2.1", optional = true }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0.0" }
+miette-derive = { loaf = "crates-io/miette-derive", version = "=7.6.0", optional = true }
+owo-colors = { loaf = "crates-io/owo-colors", version = "^4.0.0", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.196", features = ["derive"], optional = true }
+supports-color = { loaf = "crates-io/supports-color", version = "^3.0.0", optional = true }
+supports-hyperlinks = { loaf = "crates-io/supports-hyperlinks", version = "^3.0.0", optional = true }
+supports-unicode = { loaf = "crates-io/supports-unicode", version = "^3.0.0", optional = true }
+syntect = { loaf = "crates-io/syntect", version = "^5.1.0", optional = true }
+terminal_size = { loaf = "crates-io/terminal_size", version = "^0.4.0", optional = true }
+textwrap = { loaf = "crates-io/textwrap", version = "^0.16.0", features = ["unicode-linebreak", "unicode-width"], default-features = false, optional = true }
+unicode-width = { loaf = "crates-io/unicode-width", version = "^0.1.11" }

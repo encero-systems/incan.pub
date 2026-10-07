@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/toml_edit"
+version = "0.22.27"
+
+[project.features]
+default = ["parse", "display"]
+display = ["dep:toml_write"]
+parse = ["dep:winnow"]
+perf = ["dep:kstring"]
+serde = ["dep:serde", "toml_datetime/serde", "dep:serde_spanned"]
+unbounded = []
+unstable-debug = ["winnow?/debug"]
+
+[rust]
+name = "toml_edit"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+indexmap = { loaf = "crates-io/indexmap", version = "^2.3.0", features = ["std"] }
+kstring = { loaf = "crates-io/kstring", version = "^2.0.0", features = ["max_inline"], optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.145", optional = true }
+serde_spanned = { loaf = "crates-io/serde_spanned", version = "^0.6.9", features = ["serde"], optional = true }
+toml_datetime = { loaf = "crates-io/toml_datetime", version = "^0.6.11" }
+toml_write = { loaf = "crates-io/toml_write", version = "^0.1.2", optional = true }
+winnow = { loaf = "crates-io/winnow", version = "^0.7.10", optional = true }

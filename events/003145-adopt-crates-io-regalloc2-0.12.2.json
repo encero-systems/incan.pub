@@ -1,0 +1,134 @@
+{
+  "about": {
+    "description": "Backtracking register allocator inspired from IonMonkey",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/regalloc2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5216b1837de2149f8bc8e6d5f88a9326b63b8c836ed58ce4a0a29ec736a59734",
+    "package": "regalloc2",
+    "registry": "crates-io",
+    "version": "0.12.2"
+  },
+  "archive": "sha256:a9d6d73f0534f1da29e9c3419a6a173c952645421bc0736ff4464975c32f9560",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/allocator-api2",
+      "name": "allocator-api2",
+      "optional": false,
+      "req": "^0.2.18"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "allocator-api2"
+      ],
+      "loaf": "crates-io/bumpalo",
+      "name": "bumpalo",
+      "optional": false,
+      "req": "^3.16.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.15"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libfuzzer-sys",
+      "name": "libfuzzer-sys",
+      "optional": true,
+      "req": "^0.4.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc",
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.136"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "union"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.6.1"
+    }
+  ],
+  "features": {
+    "checker": [],
+    "default": [
+      "std"
+    ],
+    "enable-serde": [
+      "serde"
+    ],
+    "fuzzing": [
+      "libfuzzer-sys",
+      "checker",
+      "trace-log"
+    ],
+    "libfuzzer-sys": [
+      "dep:libfuzzer-sys"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "std": [],
+    "trace-log": []
+  },
+  "id": "sha256:3a6bae14a6cfa533393e110921a760a4b3a6ddd40908b4e8ee04e241f3d7c89d",
+  "kind": "adopt",
+  "manifest": "sha256:e9eb7c880102cab122d336b0cb710a37d115fb5d0e9850fc62b6bfb6664ad6b0",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "regalloc2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "regalloc2",
+    "scope": "crates-io",
+    "version": "0.12.2"
+  }
+}

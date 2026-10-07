@@ -1,0 +1,72 @@
+{
+  "about": {
+    "description": "Advisory cross-platform lock on a file using a file descriptor to it.",
+    "documentation": "https://docs.rs/fd-lock",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/yoshuawuyts/fd-lock"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0ce92ff622d6dadf7349484f42c93271a0d49b7cc4d466a936405bacbe10aa78",
+    "package": "fd-lock",
+    "registry": "crates-io",
+    "version": "4.0.4"
+  },
+  "archive": "sha256:816d9b82e21437234f10a9fafaf5061db4aff7ce1675f550ab0faccad0de3f38",
+  "at": "2026-10-07T13:18:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fs"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.0",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Storage_FileSystem",
+        "Win32_System_IO"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.52.0, <0.60.0",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {},
+  "id": "sha256:0e136a3112565c29903bd381b7f9caa2b0019af104ba24e4e9c83219536136b8",
+  "kind": "adopt",
+  "manifest": "sha256:d24edef60edf8a3a04eed8d3cf1b7fded97ea90aef67180c20a331047a594318",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "fd_lock",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "fd-lock",
+    "scope": "crates-io",
+    "version": "4.0.4"
+  }
+}

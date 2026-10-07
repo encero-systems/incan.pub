@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cap-rand"
+version = "3.4.6"
+
+[project.features]
+default = []
+small_rng = ["rand/small_rng"]
+
+[rust]
+name = "cap_rand"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ambient-authority = { loaf = "crates-io/ambient-authority", version = "^0.0.2" }
+rand = { loaf = "crates-io/rand", version = "^0.8.1" }

@@ -1,0 +1,27 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cap-primitives"
+version = "3.4.6"
+
+[project.features]
+arbitrary = ["dep:arbitrary"]
+
+[rust]
+name = "cap_primitives"
+type = "lib"
+edition = "2021"
+build-script = true
+
+[dependencies]
+ambient-authority = { loaf = "crates-io/ambient-authority", version = "^0.0.2" }
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0.0", features = ["derive"], optional = true }
+fs-set-times = { loaf = "crates-io/fs-set-times", version = "^0.20.0" }
+io-extras = { loaf = "crates-io/io-extras", version = "^0.18.3" }
+io-lifetimes = { loaf = "crates-io/io-lifetimes", version = "^2.0.0", default-features = false }
+ipnet = { loaf = "crates-io/ipnet", version = "^2.5.0" }
+maybe-owned = { loaf = "crates-io/maybe-owned", version = "^0.3.4" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["fs", "process", "termios", "time"], target = "cfg(not(windows))" }
+rustix-linux-procfs = { loaf = "crates-io/rustix-linux-procfs", version = "^0.1.1", target = "cfg(any(target_os = \"android\", target_os = \"linux\"))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <=0.59", features = ["Wdk_Foundation", "Wdk_Storage_FileSystem", "Win32_Foundation", "Win32_Security", "Win32_Storage_FileSystem", "Win32_System_IO", "Win32_System_Kernel", "Win32_System_WindowsProgramming"], target = "cfg(windows)" }
+winx = { loaf = "crates-io/winx", version = "^0.36.0", target = "cfg(windows)" }

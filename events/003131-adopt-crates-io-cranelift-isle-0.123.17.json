@@ -1,0 +1,70 @@
+{
+  "about": {
+    "description": "ISLE: Instruction Selection and Lowering Expressions. A domain-specific language for instruction selection in Cranelift.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/isle"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2319cb332b35da0fd1d39b27e746bd60b5224ecae260e393c9ef168f78d10053",
+    "package": "cranelift-isle",
+    "registry": "crates-io",
+    "version": "0.123.17"
+  },
+  "archive": "sha256:1127c5486dc2a3789686ee402848b99f85ee865524dcae2c91eb984538491b26",
+  "at": "2026-10-07T13:18:11Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/codespan-reporting",
+      "name": "codespan-reporting",
+      "optional": true,
+      "req": "^0.11.1"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.27"
+    }
+  ],
+  "features": {
+    "codespan-reporting": [
+      "dep:codespan-reporting"
+    ],
+    "default": [],
+    "fancy-errors": [
+      "codespan-reporting"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "logging": [
+      "log"
+    ]
+  },
+  "id": "sha256:1d51077c9b3a6db1f69b1428275c0e0a9e9cc08665286d47d9f7d041f715587d",
+  "kind": "adopt",
+  "manifest": "sha256:8ba4147aeffc2fb553ce18025059150f806709fc97452bb9acaa0aead845580c",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "cranelift_isle",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cranelift-isle",
+    "scope": "crates-io",
+    "version": "0.123.17"
+  }
+}

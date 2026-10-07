@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/unicode-width"
+version = "0.1.14"
+
+[project.features]
+cjk = []
+compiler_builtins = ["dep:compiler_builtins"]
+core = ["dep:core"]
+default = ["cjk"]
+no_std = []
+rustc-dep-of-std = ["std", "core", "compiler_builtins"]
+std = ["dep:std"]
+
+[rust]
+name = "unicode_width"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+compiler_builtins = { loaf = "crates-io/compiler_builtins", version = "^0.1", optional = true }
+core = { loaf = "crates-io/rustc-std-workspace-core", version = "^1.0", optional = true }
+std = { loaf = "crates-io/rustc-std-workspace-std", version = "^1.0", optional = true }

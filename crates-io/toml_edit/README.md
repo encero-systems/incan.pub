@@ -6,6 +6,7 @@ The crates.io package [toml_edit](https://crates.io/crates/toml_edit), adopted b
 |---|---|---|---|---|---|
 | [0.25.15+spec-1.1.0](0.25.15+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 3 | [units](0.25.15+spec-1.1.0/assets.json) |
 | [0.25.5+spec-1.1.0](0.25.5+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
+| [0.22.27](0.22.27/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/toml_edit`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/toml_edit](../../index/crates-io/toml_edit), the units by each version's `assets.json`.
 

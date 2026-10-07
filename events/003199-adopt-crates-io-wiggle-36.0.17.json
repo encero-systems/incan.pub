@@ -1,0 +1,127 @@
+{
+  "about": {
+    "description": "Runtime components of wiggle code generator",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f7dfd80af8f40b70e9dda694f911f7303cec22c140ca58c5f7dab7fb34be812f",
+    "package": "wiggle",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:d5f72bd044ede82e55a090b9f7e7536271db34e0d46ee42385e1b8997d6920bf",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/async-trait",
+      "name": "async-trait",
+      "optional": false,
+      "req": "^0.1.71"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/thiserror",
+      "name": "thiserror",
+      "optional": false,
+      "req": "^2.0.12"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tracing",
+      "name": "tracing",
+      "optional": false,
+      "req": "^0.1.26"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/wasmtime",
+      "name": "wasmtime",
+      "optional": true,
+      "req": "^36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wiggle-macro",
+      "name": "wiggle-macro",
+      "optional": false,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/witx",
+      "name": "witx",
+      "optional": true,
+      "req": "^0.9.1"
+    }
+  ],
+  "features": {
+    "default": [
+      "wiggle_metadata",
+      "wasmtime",
+      "wasmtime_async"
+    ],
+    "tracing_log": [
+      "tracing/log"
+    ],
+    "wasmtime": [
+      "dep:wasmtime"
+    ],
+    "wasmtime_async": [
+      "dep:wasmtime",
+      "wasmtime/async"
+    ],
+    "wiggle_metadata": [
+      "witx",
+      "wiggle-macro/wiggle_metadata"
+    ],
+    "witx": [
+      "dep:witx"
+    ]
+  },
+  "id": "sha256:5e9645d6b90dcc9d559305c800b5be59eddd0c4c95dfd533e2ae1694b624035e",
+  "kind": "adopt",
+  "manifest": "sha256:6de27795ee1ae28432d438ee20a2eaf029dfa70d2a348d44fe4d7be35a75a75b",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wiggle",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wiggle",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

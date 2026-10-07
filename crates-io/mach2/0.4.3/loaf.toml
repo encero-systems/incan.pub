@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/mach2"
+version = "0.4.3"
+
+[project.features]
+default = []
+unstable = []
+
+[rust]
+name = "mach2"
+type = "lib"
+edition = "2015"
+build-script = false
+
+[dependencies]
+libc = { loaf = "crates-io/libc", version = "^0.2", default-features = false, target = "cfg(any(target_os = \"macos\", target_os = \"ios\"))" }

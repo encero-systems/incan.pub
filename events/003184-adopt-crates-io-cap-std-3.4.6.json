@@ -1,0 +1,106 @@
+{
+  "about": {
+    "description": "Capability-based version of the Rust standard library",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/cap-std"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a59e59fa26472d29680ece6a9f8ee8b0551a719a33df2f5240bde065ecbddfd7",
+    "package": "cap-std",
+    "registry": "crates-io",
+    "version": "3.4.6"
+  },
+  "archive": "sha256:3146deea6659ba99171b72f9ea67cc756f2d3149614d8e11e2bea51658bbdd41",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/arf-strings",
+      "name": "arf-strings",
+      "optional": true,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/camino",
+      "name": "camino",
+      "optional": true,
+      "req": "^1.0.5"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-primitives",
+      "name": "cap-primitives",
+      "optional": false,
+      "req": "^3.4.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/io-extras",
+      "name": "io-extras",
+      "optional": false,
+      "req": "^0.18.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/io-lifetimes",
+      "name": "io-lifetimes",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fs"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.0",
+      "target": "cfg(not(windows))"
+    }
+  ],
+  "features": {
+    "arf-strings": [
+      "dep:arf-strings"
+    ],
+    "arf_strings": [
+      "fs_utf8",
+      "arf-strings"
+    ],
+    "camino": [
+      "dep:camino"
+    ],
+    "default": [],
+    "fs_utf8": [
+      "camino"
+    ]
+  },
+  "id": "sha256:ce6c3001b391ebcf2166cadf92bff1864a591fbf352fe5eb3fb3f3bb11edab10",
+  "kind": "adopt",
+  "manifest": "sha256:6fef6e2a4b1d3ed422299c4f0b0780c7a325c4d1e2aa88dfb7d2b48cf651e131",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "cap_std",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cap-std",
+    "scope": "crates-io",
+    "version": "3.4.6"
+  }
+}

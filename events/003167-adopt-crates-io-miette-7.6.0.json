@@ -1,0 +1,183 @@
+{
+  "about": {
+    "description": "Fancy diagnostic reporting library and protocol for us mere mortals who aren't compiler hackers.",
+    "documentation": "https://docs.rs/miette",
+    "homepage": "",
+    "license": "Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/zkat/miette"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:5f98efec8807c63c752b5bd61f862c165c115b0a35685bdcfd9238c7aeb592b7",
+    "package": "miette",
+    "registry": "crates-io",
+    "version": "7.6.0"
+  },
+  "archive": "sha256:ee8953c0d80fcff622d6f16a73dc780a9f49fbf5d91d14f93f3754a5d1eaac16",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/backtrace",
+      "name": "backtrace",
+      "optional": true,
+      "req": "^0.3.69"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/backtrace-ext",
+      "name": "backtrace-ext",
+      "optional": true,
+      "req": "^0.2.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/miette-derive",
+      "name": "miette-derive",
+      "optional": true,
+      "req": "=7.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/owo-colors",
+      "name": "owo-colors",
+      "optional": true,
+      "req": "^4.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "derive"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.196"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/supports-color",
+      "name": "supports-color",
+      "optional": true,
+      "req": "^3.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/supports-hyperlinks",
+      "name": "supports-hyperlinks",
+      "optional": true,
+      "req": "^3.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/supports-unicode",
+      "name": "supports-unicode",
+      "optional": true,
+      "req": "^3.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/syntect",
+      "name": "syntect",
+      "optional": true,
+      "req": "^5.1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/terminal_size",
+      "name": "terminal_size",
+      "optional": true,
+      "req": "^0.4.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "unicode-linebreak",
+        "unicode-width"
+      ],
+      "loaf": "crates-io/textwrap",
+      "name": "textwrap",
+      "optional": true,
+      "req": "^0.16.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/unicode-width",
+      "name": "unicode-width",
+      "optional": false,
+      "req": "^0.1.11"
+    }
+  ],
+  "features": {
+    "default": [
+      "derive"
+    ],
+    "derive": [
+      "dep:miette-derive"
+    ],
+    "fancy": [
+      "fancy-no-backtrace",
+      "dep:backtrace",
+      "dep:backtrace-ext"
+    ],
+    "fancy-base": [
+      "dep:owo-colors",
+      "dep:textwrap"
+    ],
+    "fancy-no-backtrace": [
+      "fancy-base",
+      "dep:terminal_size",
+      "dep:supports-hyperlinks",
+      "dep:supports-color",
+      "dep:supports-unicode"
+    ],
+    "fancy-no-syscall": [
+      "fancy-base"
+    ],
+    "no-format-args-capture": [],
+    "serde": [
+      "dep:serde"
+    ],
+    "syntect-highlighter": [
+      "fancy-no-backtrace",
+      "dep:syntect"
+    ]
+  },
+  "id": "sha256:f2e5cda4421dadfbefaff48ea067a497682860474bf007bb14c8d6ab31ce039b",
+  "kind": "adopt",
+  "manifest": "sha256:d8470fb2cb89d5d7962d46820efc5ac6add71af15c4d3cb61aac38955a8fd2b6",
+  "rust": {
+    "build-script": false,
+    "edition": "2018",
+    "name": "miette",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "miette",
+    "scope": "crates-io",
+    "version": "7.6.0"
+  }
+}

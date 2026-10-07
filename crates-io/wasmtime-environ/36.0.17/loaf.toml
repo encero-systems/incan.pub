@@ -1,0 +1,44 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-environ"
+version = "36.0.17"
+
+[project.features]
+compile = ["gimli/write", "object/write_core", "std", "dep:wasm-encoder", "dep:wasmprinter"]
+component-model = ["dep:wasmtime-component-util", "dep:semver", "wasmparser/component-model"]
+demangle = ["std", "dep:rustc-demangle", "dep:cpp_demangle"]
+gc = []
+gc-drc = ["gc"]
+gc-null = ["gc"]
+stack-switching = []
+std = ["anyhow/std", "object/std", "wasmparser/std", "indexmap/std"]
+threads = ["std"]
+wmemcheck = ["std"]
+
+[rust]
+name = "wasmtime_environ"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+cpp_demangle = { loaf = "crates-io/cpp_demangle", version = "^0.4.3", optional = true }
+cranelift-bitset = { loaf = "crates-io/cranelift-bitset", version = "^0.123.17", features = ["enable-serde"] }
+cranelift-entity = { loaf = "crates-io/cranelift-entity", version = "^0.123.17", features = ["enable-serde"] }
+gimli = { loaf = "crates-io/gimli", version = "^0.32.0", features = ["read"], default-features = false }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.0.0", features = ["serde"], default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.27", default-features = false }
+object = { loaf = "crates-io/object", version = "^0.37.0", features = ["elf", "read_core"], default-features = false }
+postcard = { loaf = "crates-io/postcard", version = "^1.0.8", features = ["alloc"], default-features = false }
+rustc-demangle = { loaf = "crates-io/rustc-demangle", version = "^0.1.16", optional = true }
+semver = { loaf = "crates-io/semver", version = "^1.0.17", features = ["serde"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.215", features = ["alloc"], default-features = false }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0.188" }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.6.1", features = ["serde", "union"] }
+target-lexicon = { loaf = "crates-io/target-lexicon", version = "^0.13.0" }
+wasm-encoder = { loaf = "crates-io/wasm-encoder", version = "^0.236.0", optional = true }
+wasmparser = { loaf = "crates-io/wasmparser", version = "^0.236.0", features = ["features", "serde", "simd", "validate"], default-features = false }
+wasmprinter = { loaf = "crates-io/wasmprinter", version = "^0.236.0", optional = true }
+wasmtime-component-util = { loaf = "crates-io/wasmtime-internal-component-util", version = "=36.0.17", optional = true }

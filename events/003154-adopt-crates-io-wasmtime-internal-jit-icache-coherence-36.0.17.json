@@ -1,0 +1,80 @@
+{
+  "about": {
+    "description": "INTERNAL: Utilities for JIT icache maintenance",
+    "documentation": "https://docs.rs/jit-icache-coherence",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:4dfd0235391231863be126ac8c5ba090f40edd0a180b1efdf2726db779b73b47",
+    "package": "wasmtime-internal-jit-icache-coherence",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:42b88f8a8874b0bec2673b19e4d42e6686706bf28c4f99c95bb0b65b2873a822",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.112",
+      "target": "cfg(any(target_os = \"linux\", target_vendor = \"apple\", target_os = \"freebsd\", target_os = \"android\"))"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_System_Diagnostics_Debug",
+        "Win32_System_Threading"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.60.0",
+      "target": "cfg(target_os = \"windows\")"
+    }
+  ],
+  "features": {
+    "one-core": []
+  },
+  "id": "sha256:bab7df3cbaa6b6d5727591d475572502b83cb6d98bee98f6e79ef1d39b68d22c",
+  "kind": "adopt",
+  "manifest": "sha256:359d7b832642a9c40c8eacde6abab5d2017a06a7d092e9d2fe1f437efef39124",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "wasmtime_internal_jit_icache_coherence",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmtime-internal-jit-icache-coherence",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "about": {
+    "description": "INTERNAL: Wasmtime's unwind format and unwinder",
+    "documentation": "https://docs.rs/wasmtime-unwinder",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:73f2bd3b57e612324beb282419fb7acc6eecab344aacb3008df02d5b95563e70",
+    "package": "wasmtime-internal-unwinder",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:c6ac603a0d1271128e98e31d07477969c7e116dc140087aff1b325a878a3e1e4",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cfg-if",
+      "name": "cfg-if",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "unwind"
+      ],
+      "loaf": "crates-io/cranelift-codegen",
+      "name": "cranelift-codegen",
+      "optional": true,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.27"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "elf",
+        "read_core"
+      ],
+      "loaf": "crates-io/object",
+      "name": "object",
+      "optional": false,
+      "req": "^0.37.0"
+    }
+  ],
+  "features": {
+    "cranelift": [
+      "dep:cranelift-codegen"
+    ],
+    "default": []
+  },
+  "id": "sha256:fe44866ecad86038d050846d44976fd9a3476076f0d985bb5a7c6f0570884512",
+  "kind": "adopt",
+  "manifest": "sha256:d3e22fec3091caa4ab7a0bdcfde0598f506a295015b25ebe735a5488f7000fe8",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wasmtime_internal_unwinder",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmtime-internal-unwinder",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}

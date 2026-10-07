@@ -1,0 +1,222 @@
+{
+  "about": {
+    "description": "Extensions to the Rust standard library",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/system-interface"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:cc4592f674ce18521c2a81483873a49596655b179f71c5e05d10c1fe66c78745",
+    "package": "system-interface",
+    "registry": "crates-io",
+    "version": "0.27.3"
+  },
+  "archive": "sha256:34d2a21dd2aa480325777e5f9838a0d61991a03b7ded4271b9c30038891228ff",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "io_safety"
+      ],
+      "loaf": "crates-io/async-std",
+      "name": "async-std",
+      "optional": true,
+      "req": "^1.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/bitflags",
+      "name": "bitflags",
+      "optional": false,
+      "req": "^2.2.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-async-std",
+      "name": "cap-async-std",
+      "optional": true,
+      "req": "^3.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-fs-ext",
+      "name": "cap-fs-ext",
+      "optional": false,
+      "req": "^3.0.0",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-std",
+      "name": "cap-std",
+      "optional": false,
+      "req": "^3.0.0",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-std",
+      "name": "cap-std",
+      "optional": true,
+      "req": "^3.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/char-device",
+      "name": "char-device",
+      "optional": true,
+      "req": "^0.16.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/fd-lock",
+      "name": "fd-lock",
+      "optional": false,
+      "req": "^4.0.0",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/io-lifetimes",
+      "name": "io-lifetimes",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "io_safety"
+      ],
+      "loaf": "crates-io/os_pipe",
+      "name": "os_pipe",
+      "optional": true,
+      "req": "^1.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fs",
+        "net"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^0.38.0",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/socketpair",
+      "name": "socketpair",
+      "optional": true,
+      "req": "^0.19.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ssh2",
+      "name": "ssh2",
+      "optional": true,
+      "req": "^0.9.1"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_Storage_FileSystem",
+        "Win32_System_Pipes"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.52, <=0.59",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/winx",
+      "name": "winx",
+      "optional": false,
+      "req": "^0.36.0",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "async-std": [
+      "dep:async-std"
+    ],
+    "cap-async-std": [
+      "dep:cap-async-std"
+    ],
+    "cap-std": [
+      "dep:cap-std"
+    ],
+    "cap_async_std_impls": [
+      "async-std",
+      "cap-async-std",
+      "io-lifetimes/async-std"
+    ],
+    "cap_async_std_impls_fs_utf8": [
+      "async-std",
+      "dep:cap-async-std",
+      "cap-async-std/fs_utf8"
+    ],
+    "cap_std_impls": [
+      "cap-std"
+    ],
+    "cap_std_impls_fs_utf8": [
+      "dep:cap-std",
+      "cap-std/fs_utf8"
+    ],
+    "char-device": [
+      "dep:char-device"
+    ],
+    "default": [],
+    "os_pipe": [
+      "dep:os_pipe"
+    ],
+    "socketpair": [
+      "dep:socketpair"
+    ],
+    "ssh2": [
+      "dep:ssh2"
+    ],
+    "use_os_pipe": [
+      "os_pipe",
+      "io-lifetimes/os_pipe"
+    ]
+  },
+  "id": "sha256:be788295b75715f2475e15833b4e916449aa5d9d42ef748a96371491d3fd8b3b",
+  "kind": "adopt",
+  "manifest": "sha256:ed9468eae7ce2d6196229851e5ff3053bab75cb8bbbad5e880616cee9c309a61",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "system_interface",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "system-interface",
+    "scope": "crates-io",
+    "version": "0.27.3"
+  }
+}

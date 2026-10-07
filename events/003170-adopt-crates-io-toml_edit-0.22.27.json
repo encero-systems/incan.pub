@@ -1,0 +1,125 @@
+{
+  "about": {
+    "description": "Yet another format-preserving TOML parser.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/toml-rs/toml"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:41fe8c660ae4257887cf66394862d21dbca4a6ddd26f04a3560410406a2f819a",
+    "package": "toml_edit",
+    "registry": "crates-io",
+    "version": "0.22.27"
+  },
+  "archive": "sha256:2996a420481e6337c9ff1e0662d8e07dc904a367a428ea81a6c23d2e28dec867",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "std"
+      ],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.3.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "max_inline"
+      ],
+      "loaf": "crates-io/kstring",
+      "name": "kstring",
+      "optional": true,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.145"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "serde"
+      ],
+      "loaf": "crates-io/serde_spanned",
+      "name": "serde_spanned",
+      "optional": true,
+      "req": "^0.6.9"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/toml_datetime",
+      "name": "toml_datetime",
+      "optional": false,
+      "req": "^0.6.11"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/toml_write",
+      "name": "toml_write",
+      "optional": true,
+      "req": "^0.1.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/winnow",
+      "name": "winnow",
+      "optional": true,
+      "req": "^0.7.10"
+    }
+  ],
+  "features": {
+    "default": [
+      "parse",
+      "display"
+    ],
+    "display": [
+      "dep:toml_write"
+    ],
+    "parse": [
+      "dep:winnow"
+    ],
+    "perf": [
+      "dep:kstring"
+    ],
+    "serde": [
+      "dep:serde",
+      "toml_datetime/serde",
+      "dep:serde_spanned"
+    ],
+    "unbounded": [],
+    "unstable-debug": [
+      "winnow?/debug"
+    ]
+  },
+  "id": "sha256:1d0608b661ee4164605418b56894e7b3fdc72ae2ed73c872136983968e021724",
+  "kind": "adopt",
+  "manifest": "sha256:27f7705c840f461c4cf9633ca1474287da31ae113cd2d399ef7b7050ec1a2ca1",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "toml_edit",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "toml_edit",
+    "scope": "crates-io",
+    "version": "0.22.27"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "about": {
+    "description": "Support for targeting the host with Cranelift",
+    "documentation": "https://docs.rs/cranelift-native",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:32569f4b85d0e1ba9e57cd4b7d91a739f6f960b43d041ec9a8aff949edda77bf",
+    "package": "cranelift-native",
+    "registry": "crates-io",
+    "version": "0.123.17"
+  },
+  "archive": "sha256:de7abda46225b92f0ac65c0850ca1a00e026915bcfb244fee15564c841826289",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "unwind"
+      ],
+      "loaf": "crates-io/cranelift-codegen",
+      "name": "cranelift-codegen",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.112",
+      "target": "cfg(target_arch = \"riscv64\")"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/target-lexicon",
+      "name": "target-lexicon",
+      "optional": false,
+      "req": "^0.13.0"
+    }
+  ],
+  "features": {
+    "core": [
+      "cranelift-codegen/core"
+    ],
+    "default": [
+      "std"
+    ],
+    "std": [
+      "cranelift-codegen/std"
+    ]
+  },
+  "id": "sha256:a7cea5bce1cb7f5689a7627b7e5ee7b21a627ca3c2bc524301dec4f8ff28e626",
+  "kind": "adopt",
+  "manifest": "sha256:a9b575f332e48a532115d9b28305e080efde2a1b29326ee29f661e6a0657ae61",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "cranelift_native",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cranelift-native",
+    "scope": "crates-io",
+    "version": "0.123.17"
+  }
+}

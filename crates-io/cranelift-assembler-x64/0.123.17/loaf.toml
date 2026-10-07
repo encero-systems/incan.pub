@@ -1,0 +1,18 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cranelift-assembler-x64"
+version = "0.123.17"
+
+[project.features]
+fuzz = ["dep:arbitrary", "dep:capstone"]
+
+[rust]
+name = "cranelift_assembler_x64"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1.4.0", features = ["derive"], optional = true }
+capstone = { loaf = "crates-io/capstone", version = "^0.13.0", optional = true }

@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wit-parser"
+version = "0.236.1"
+
+[project.features]
+decoding = ["dep:wasmparser"]
+default = ["serde", "decoding"]
+serde = ["dep:serde", "dep:serde_derive", "indexmap/serde", "serde_json"]
+serde_json = ["dep:serde_json"]
+wat = ["decoding", "dep:wat"]
+
+[rust]
+name = "wit_parser"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.58" }
+id-arena = { loaf = "crates-io/id-arena", version = "^2" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.7.0", features = ["std"], default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.17" }
+semver = { loaf = "crates-io/semver", version = "^1.0.0", default-features = false }
+serde = { loaf = "crates-io/serde", version = "^1.0.166", features = ["alloc"], default-features = false, optional = true }
+serde_derive = { loaf = "crates-io/serde_derive", version = "^1.0.166", optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1", optional = true }
+unicode-xid = { loaf = "crates-io/unicode-xid", version = "^0.2.2" }
+wasmparser = { loaf = "crates-io/wasmparser", version = "^0.236.1", features = ["component-model", "features", "simd", "std", "validate"], default-features = false, optional = true }
+wat = { loaf = "crates-io/wat", version = "^1.236.1", features = ["component-model"], default-features = false, optional = true }

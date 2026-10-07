@@ -1,0 +1,46 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-cranelift"
+version = "36.0.17"
+
+[project.features]
+all-arch = ["cranelift-codegen/all-arch"]
+component-model = ["wasmtime-environ/component-model"]
+gc = ["wasmtime-environ/gc"]
+gc-drc = ["gc", "wasmtime-environ/gc-drc"]
+gc-null = ["gc", "wasmtime-environ/gc-null"]
+host-arch = ["cranelift-codegen/host-arch"]
+incremental-cache = ["cranelift-codegen/incremental-cache"]
+pulley = ["cranelift-codegen/pulley", "dep:pulley-interpreter"]
+stack-switching = []
+threads = ["wasmtime-environ/threads"]
+trace-log = ["cranelift-codegen/trace-log"]
+wmemcheck = ["wasmtime-environ/wmemcheck"]
+
+[rust]
+name = "wasmtime_internal_cranelift"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+cranelift-codegen = { loaf = "crates-io/cranelift-codegen", version = "^0.123.17", features = ["host-arch", "std", "timing", "unwind"], default-features = false }
+cranelift-control = { loaf = "crates-io/cranelift-control", version = "^0.123.17" }
+cranelift-entity = { loaf = "crates-io/cranelift-entity", version = "^0.123.17" }
+cranelift-frontend = { loaf = "crates-io/cranelift-frontend", version = "^0.123.17" }
+cranelift-native = { loaf = "crates-io/cranelift-native", version = "^0.123.17" }
+gimli = { loaf = "crates-io/gimli", version = "^0.32.0", features = ["read", "std"], default-features = false }
+itertools = { loaf = "crates-io/itertools", version = "^0.14.0" }
+log = { loaf = "crates-io/log", version = "^0.4.27", default-features = false }
+object = { loaf = "crates-io/object", version = "^0.37.0", features = ["elf", "read_core", "std", "write"], default-features = false }
+pulley-interpreter = { loaf = "crates-io/pulley-interpreter", version = "=36.0.17", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.6.1", features = ["union"] }
+target-lexicon = { loaf = "crates-io/target-lexicon", version = "^0.13.0" }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.12" }
+wasmparser = { loaf = "crates-io/wasmparser", version = "^0.236.0", features = ["simd"], default-features = false }
+wasmtime-environ = { loaf = "crates-io/wasmtime-environ", version = "=36.0.17", features = ["compile"] }
+wasmtime-math = { loaf = "crates-io/wasmtime-internal-math", version = "=36.0.17" }
+wasmtime-versioned-export-macros = { loaf = "crates-io/wasmtime-internal-versioned-export-macros", version = "=36.0.17" }

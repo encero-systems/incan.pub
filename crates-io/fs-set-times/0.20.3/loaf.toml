@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/fs-set-times"
+version = "0.20.3"
+
+[rust]
+name = "fs_set_times"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+io-lifetimes = { loaf = "crates-io/io-lifetimes", version = "^2.0.0", default-features = false }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["fs", "time"], target = "cfg(not(windows))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <0.60", features = ["Win32_Foundation", "Win32_Storage_FileSystem"], target = "cfg(windows)" }

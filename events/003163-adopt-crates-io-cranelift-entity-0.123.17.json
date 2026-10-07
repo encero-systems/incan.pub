@@ -1,0 +1,78 @@
+{
+  "about": {
+    "description": "Data structures using entity references as mapping keys",
+    "documentation": "https://docs.rs/cranelift-entity",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3899c92d0aca3922df21dea6d4b7e112c900a83b7e78ff56931541c92b640946",
+    "package": "cranelift-entity",
+    "registry": "crates-io",
+    "version": "0.123.17"
+  },
+  "archive": "sha256:5ce53eff1743e5a5511e49ed880f9a10671a9defb610ab4edf1128dc453a8340",
+  "at": "2026-10-07T13:18:12Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cranelift-bitset",
+      "name": "cranelift-bitset",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.215"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde_derive",
+      "name": "serde_derive",
+      "optional": true,
+      "req": "^1.0.188"
+    }
+  ],
+  "features": {
+    "enable-serde": [
+      "serde",
+      "serde_derive",
+      "cranelift-bitset/enable-serde"
+    ],
+    "serde": [
+      "dep:serde"
+    ],
+    "serde_derive": [
+      "dep:serde_derive"
+    ]
+  },
+  "id": "sha256:04172ad3a25d4dfd60eed8966bf1ef684cb2ae964b718a2a2d426a12e7f21a38",
+  "kind": "adopt",
+  "manifest": "sha256:3cb18a73f74c9c1deb37e002493d583f3afcc6df565b27c21f0f3b60a634b439",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "cranelift_entity",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cranelift-entity",
+    "scope": "crates-io",
+    "version": "0.123.17"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "about": {
+    "description": "Extension traits for `SystemClock` and `MonotonicClock`",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/cap-std"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b54c289326c70f1c697ebf0a31842a480932e5942b5fac92fcc46e87286b48e2",
+    "package": "cap-time-ext",
+    "registry": "crates-io",
+    "version": "3.4.6"
+  },
+  "archive": "sha256:89379da159035afb380c03748a5bcb24bf79c224ee359861b264f1fa246139cf",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ambient-authority",
+      "name": "ambient-authority",
+      "optional": false,
+      "req": "^0.0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-primitives",
+      "name": "cap-primitives",
+      "optional": false,
+      "req": "^3.4.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/cap-std",
+      "name": "cap-std",
+      "optional": true,
+      "req": "^3.4.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/iana-time-zone",
+      "name": "iana-time-zone",
+      "optional": false,
+      "req": "^0.1.57"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/once_cell",
+      "name": "once_cell",
+      "optional": false,
+      "req": "^1.5.2",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "time"
+      ],
+      "loaf": "crates-io/rustix",
+      "name": "rustix",
+      "optional": false,
+      "req": "^1.0.0",
+      "target": "cfg(not(windows))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/winx",
+      "name": "winx",
+      "optional": false,
+      "req": "^0.36.0",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "cap-std": [
+      "dep:cap-std"
+    ]
+  },
+  "id": "sha256:066d08406e2597b5d892d29a5cd96672d41baaa6a4e898dea8a41c0e7694ff8b",
+  "kind": "adopt",
+  "manifest": "sha256:b0bfe185e501bc84b455343a21109ac51db9248c79cb6f74cdb28b714239ba09",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "cap_time_ext",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cap-time-ext",
+    "scope": "crates-io",
+    "version": "3.4.6"
+  }
+}

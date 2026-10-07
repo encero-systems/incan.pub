@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cap-time-ext"
+version = "3.4.6"
+
+[project.features]
+cap-std = ["dep:cap-std"]
+
+[rust]
+name = "cap_time_ext"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+ambient-authority = { loaf = "crates-io/ambient-authority", version = "^0.0.2" }
+cap-primitives = { loaf = "crates-io/cap-primitives", version = "^3.4.6" }
+cap-std = { loaf = "crates-io/cap-std", version = "^3.4.6", optional = true }
+iana-time-zone = { loaf = "crates-io/iana-time-zone", version = "^0.1.57" }
+once_cell = { loaf = "crates-io/once_cell", version = "^1.5.2", target = "cfg(windows)" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["time"], target = "cfg(not(windows))" }
+winx = { loaf = "crates-io/winx", version = "^0.36.0", target = "cfg(windows)" }

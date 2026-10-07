@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/witx"
+version = "0.9.1"
+
+[rust]
+name = "witx"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1" }
+log = { loaf = "crates-io/log", version = "^0.4" }
+thiserror = { loaf = "crates-io/thiserror", version = "^1.0" }
+wast = { loaf = "crates-io/wast", version = "^35.0.2", default-features = false }

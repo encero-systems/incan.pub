@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/rustix-linux-procfs"
+version = "0.1.1"
+
+[project.features]
+default = ["std"]
+std = ["rustix/std"]
+
+[rust]
+name = "rustix_linux_procfs"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+once_cell = { loaf = "crates-io/once_cell", version = "^1.5.2" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["alloc", "fs"], default-features = false }

@@ -1,0 +1,147 @@
+{
+  "about": {
+    "description": "File/socket handle/descriptor utilities",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/sunfishcode/io-extras"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:2285ddfe3054097ef4b2fe909ef8c3bcd1ea52a8f0d274416caebeef39f04a65",
+    "package": "io-extras",
+    "registry": "crates-io",
+    "version": "0.18.4"
+  },
+  "archive": "sha256:0339a94814e5ef61f67a51334df73b63c1b1f78ac5c457c29e3c6f65bf16cc1f",
+  "at": "2026-10-07T13:18:13Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [
+        "io_safety"
+      ],
+      "loaf": "crates-io/async-std",
+      "name": "async-std",
+      "optional": true,
+      "req": "^1.13.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/io-lifetimes",
+      "name": "io-lifetimes",
+      "optional": false,
+      "req": "^2.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/mio",
+      "name": "mio",
+      "optional": true,
+      "req": "^1.0.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/os_pipe",
+      "name": "os_pipe",
+      "optional": true,
+      "req": "^1.2.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/socket2",
+      "name": "socket2",
+      "optional": true,
+      "req": "^0.5.7"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "fs",
+        "io-std",
+        "net",
+        "process"
+      ],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": true,
+      "req": "^1.6.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_System_Console"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": ">=0.52, <=0.59",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "async-std": [
+      "dep:async-std"
+    ],
+    "default": [],
+    "mio": [
+      "dep:mio"
+    ],
+    "os_pipe": [
+      "dep:os_pipe"
+    ],
+    "socket2": [
+      "dep:socket2"
+    ],
+    "tokio": [
+      "dep:tokio"
+    ],
+    "use_async_std": [
+      "async-std"
+    ],
+    "use_mio_net": [
+      "mio",
+      "dep:mio",
+      "mio/net"
+    ],
+    "use_mio_os_ext": [
+      "mio",
+      "dep:mio",
+      "mio/os-ext"
+    ],
+    "use_os_pipe": [
+      "os_pipe"
+    ],
+    "use_socket2": [
+      "socket2"
+    ],
+    "use_tokio": [
+      "tokio"
+    ]
+  },
+  "id": "sha256:42008aa6ac7064ac34c5128a3b6105f6a6305cf06ac5edf74879a4fcd59717e4",
+  "kind": "adopt",
+  "manifest": "sha256:6925b40ea402ddc24312dc5cb2c99ee24e0b29cfb5d6086ea9be9bdaea091319",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "io_extras",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "io-extras",
+    "scope": "crates-io",
+    "version": "0.18.4"
+  }
+}

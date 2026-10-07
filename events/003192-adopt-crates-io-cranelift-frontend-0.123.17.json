@@ -1,0 +1,99 @@
+{
+  "about": {
+    "description": "Cranelift IR builder helper",
+    "documentation": "https://docs.rs/cranelift-frontend",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d4bda41bb65ba9c05f4782cd9878df5d3bb0901c040716a6f09258acbed375c5",
+    "package": "cranelift-frontend",
+    "registry": "crates-io",
+    "version": "0.123.17"
+  },
+  "archive": "sha256:8b39836dc86e75f1dec2d97fc0fc1a9c76fe53308ecac592288e46223bb58777",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "std",
+        "unwind"
+      ],
+      "loaf": "crates-io/cranelift-codegen",
+      "name": "cranelift-codegen",
+      "optional": false,
+      "req": "^0.123.17"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": true,
+      "req": "^0.15"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": false,
+      "req": "^0.4.27"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "union"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.6.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/target-lexicon",
+      "name": "target-lexicon",
+      "optional": false,
+      "req": "^0.13.0"
+    }
+  ],
+  "features": {
+    "core": [
+      "hashbrown",
+      "cranelift-codegen/core"
+    ],
+    "default": [
+      "std"
+    ],
+    "hashbrown": [
+      "dep:hashbrown"
+    ],
+    "std": [
+      "cranelift-codegen/std"
+    ]
+  },
+  "id": "sha256:4f900302237fc93b14422a0e8025296bc1af53763802566a7c1b85fcc67484c2",
+  "kind": "adopt",
+  "manifest": "sha256:776bf380d5f6baeb29bf1ca49d7f158dacc8760b0ff07fe49961a49ca4672fc4",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "cranelift_frontend",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "cranelift-frontend",
+    "scope": "crates-io",
+    "version": "0.123.17"
+  }
+}

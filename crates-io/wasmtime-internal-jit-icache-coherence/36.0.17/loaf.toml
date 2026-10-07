@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wasmtime-internal-jit-icache-coherence"
+version = "36.0.17"
+
+[project.features]
+one-core = []
+
+[rust]
+name = "wasmtime_internal_jit_icache_coherence"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+anyhow = { loaf = "crates-io/anyhow", version = "^1.0.93", default-features = false }
+cfg-if = { loaf = "crates-io/cfg-if", version = "^1.0" }
+libc = { loaf = "crates-io/libc", version = "^0.2.112", target = "cfg(any(target_os = \"linux\", target_vendor = \"apple\", target_os = \"freebsd\", target_os = \"android\"))" }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.60.0", features = ["Win32_Foundation", "Win32_System_Diagnostics_Debug", "Win32_System_Threading"], target = "cfg(target_os = \"windows\")" }

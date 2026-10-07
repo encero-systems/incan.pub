@@ -1,0 +1,17 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/cap-net-ext"
+version = "3.4.6"
+
+[rust]
+name = "cap_net_ext"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+cap-primitives = { loaf = "crates-io/cap-primitives", version = "^3.4.6" }
+cap-std = { loaf = "crates-io/cap-std", version = "^3.4.6" }
+rustix = { loaf = "crates-io/rustix", version = "^1.0.0", features = ["net"] }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.10" }

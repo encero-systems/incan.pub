@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/wiggle-macro"
+version = "36.0.17"
+
+[project.features]
+wiggle_metadata = []
+
+[rust]
+name = "wiggle_macro"
+type = "proc-macro"
+edition = "2024"
+build-script = true
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0" }
+quote = { loaf = "crates-io/quote", version = "^1.0" }
+syn = { loaf = "crates-io/syn", version = "^2.0.25", features = ["full"] }
+wiggle-generate = { loaf = "crates-io/wiggle-generate", version = "=36.0.17" }

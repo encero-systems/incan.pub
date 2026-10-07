@@ -1,0 +1,106 @@
+{
+  "about": {
+    "description": "INTERNAL: Macros for deriving component interface types from Rust types",
+    "documentation": "https://docs.rs/wasmtime-component-macro/",
+    "homepage": "",
+    "license": "Apache-2.0 WITH LLVM-exception",
+    "license-file": "",
+    "readme": "",
+    "repository": "https://github.com/bytecodealliance/wasmtime"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:58a583042faa9a8eff244df16b0aaefe536a667aa7b77a0b335fb2cd7811945b",
+    "package": "wasmtime-internal-component-macro",
+    "registry": "crates-io",
+    "version": "36.0.17"
+  },
+  "archive": "sha256:fca33b2c417f3bef3525c6c9794bacdc6e7a3520805d3a58f1dd5e2bcb7f6a42",
+  "at": "2026-10-07T13:18:14Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/anyhow",
+      "name": "anyhow",
+      "optional": false,
+      "req": "^1.0.93"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/proc-macro2",
+      "name": "proc-macro2",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/quote",
+      "name": "quote",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "extra-traits"
+      ],
+      "loaf": "crates-io/syn",
+      "name": "syn",
+      "optional": false,
+      "req": "^2.0.25"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-component-util",
+      "name": "wasmtime-component-util",
+      "optional": false,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wasmtime-internal-wit-bindgen",
+      "name": "wasmtime-wit-bindgen",
+      "optional": false,
+      "req": "=36.0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/wit-parser",
+      "name": "wit-parser",
+      "optional": false,
+      "req": "^0.236.0"
+    }
+  ],
+  "features": {
+    "async": [
+      "wasmtime-wit-bindgen/async"
+    ],
+    "component-model-async": [
+      "async",
+      "wasmtime-wit-bindgen/component-model-async"
+    ]
+  },
+  "id": "sha256:6278de7363bb3569da1cd28488b66a4a53bd1e45c1172e1a68768fb7ee806c13",
+  "kind": "adopt",
+  "manifest": "sha256:520aa48d65ec43ad4b632ca29d16304c90bbe0006584f6046d018a03778802a6",
+  "rust": {
+    "build-script": true,
+    "edition": "2024",
+    "name": "wasmtime_internal_component_macro",
+    "root": "src/lib.rs",
+    "type": "proc-macro"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "wasmtime-internal-component-macro",
+    "scope": "crates-io",
+    "version": "36.0.17"
+  }
+}
