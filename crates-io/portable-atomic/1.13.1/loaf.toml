@@ -27,3 +27,10 @@ build-script = true
 [dependencies]
 critical-section = { loaf = "crates-io/critical-section", version = "^1", optional = true }
 serde = { loaf = "crates-io/serde", version = "^1.0.60", default-features = false, optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "fallback"]
+cfg = ["portable_atomic_ll_sc_rmw", "portable_atomic_target_feature=\"lse2\""]

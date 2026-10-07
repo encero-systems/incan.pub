@@ -35,6 +35,22 @@ serde_derive = { loaf = "crates-io/serde_derive", version = "^1", optional = tru
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
 profile = "debug"
+features = ["alloc"]
+cfg = ["if_docsrs_then_no_serde_core"]
+out = [{ name = "private.rs", path = "out/f8e947077281/private.rs", digest = "sha256:f8e9470772811a1bdcd201fb21e14cbf37a57d192b38cd98f66bd4a83442c26b" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["alloc", "default", "derive", "serde_derive", "std"]
+cfg = ["if_docsrs_then_no_serde_core"]
+out = [{ name = "private.rs", path = "out/f8e947077281/private.rs", digest = "sha256:f8e9470772811a1bdcd201fb21e14cbf37a57d192b38cd98f66bd4a83442c26b" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
 features = ["default", "derive", "serde_derive", "std"]
 cfg = ["if_docsrs_then_no_serde_core"]
 out = [{ name = "private.rs", path = "out/private.rs", digest = "sha256:f8e9470772811a1bdcd201fb21e14cbf37a57d192b38cd98f66bd4a83442c26b" }]

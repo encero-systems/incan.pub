@@ -40,3 +40,10 @@ socketpair = { loaf = "crates-io/socketpair", version = "^0.19.0", optional = tr
 ssh2 = { loaf = "crates-io/ssh2", version = "^0.9.1", optional = true }
 windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <=0.59", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_Storage_FileSystem", "Win32_System_Pipes"], target = "cfg(windows)" }
 winx = { loaf = "crates-io/winx", version = "^0.36.0", target = "cfg(windows)" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["cap-std", "cap_std_impls", "default"]
+cfg = []

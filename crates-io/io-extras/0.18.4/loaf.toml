@@ -32,3 +32,10 @@ os_pipe = { loaf = "crates-io/os_pipe", version = "^1.2.1", optional = true }
 socket2 = { loaf = "crates-io/socket2", version = "^0.5.7", optional = true }
 tokio = { loaf = "crates-io/tokio", version = "^1.6.0", features = ["fs", "io-std", "net", "process"], optional = true }
 windows-sys = { loaf = "crates-io/windows-sys", version = ">=0.52, <=0.59", features = ["Win32_Foundation", "Win32_Networking_WinSock", "Win32_System_Console"], target = "cfg(windows)" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default"]
+cfg = ["io_lifetimes_use_std"]
