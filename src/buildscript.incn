@@ -567,11 +567,15 @@ def write_proposal(
         match Path(base + "/out/" + relative).read_bytes():
             Ok(read) => data = read
             Err(error) => return Err(f"OUT_DIR/{relative}: {error.message()}")
-        write_file(proposal_dir + "/out/" + relative, data)?
+        digest = digest_bytes(data)
+        # Committed under its digest: a script that writes its host into a file (target-lexicon's host.rs) gives
+        # each target's fact other bytes under one name, and each fact keeps its own.
+        path = "out/" + digest[7:19] + "/" + relative
+        write_file(proposal_dir + "/" + path, data)?
         out.append(JsonValue.object({
             "name": JsonValue.string(relative),
-            "path": JsonValue.string("out/" + relative),
-            "digest": JsonValue.string(digest_bytes(data)),
+            "path": JsonValue.string(path),
+            "digest": JsonValue.string(digest),
         }))
     mut features: list[JsonValue] = []
     for feature in sorted(selection.features):
