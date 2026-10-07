@@ -1,12 +1,17 @@
 {
   "about": {
+    "authors": [
+      "Daniel Reiter Horn <danielrh@dropbox.com>",
+      "The Brotli Authors"
+    ],
     "description": "A brotli decompressor that with an interface avoiding the rust stdlib. This makes it suitable for embedded devices and kernels. It is designed with a pluggable allocator so that the standard lib's allocator may be employed. The default build also includes a stdlib allocator and stream interface. Disable this with --features=no-stdlib. Alternatively, --features=unsafe turns off array bounds checks and memory initialization but provides a safe interface for the caller.  Without adding the --features=unsafe argument, all included code is safe. For compression in addition to this library, download https://github.com/dropbox/rust-brotli",
     "documentation": "https://github.com/dropbox/rust-brotli-decompressor/blob/master/README.md",
     "homepage": "https://github.com/dropbox/rust-brotli-decompressor",
     "license": "BSD-3-Clause/MIT",
     "license-file": "",
     "readme": "README.md",
-    "repository": "https://github.com/dropbox/rust-brotli-decompressor"
+    "repository": "https://github.com/dropbox/rust-brotli-decompressor",
+    "rust-version": ""
   },
   "actor": "encero-systems/incan.pub maintainers",
   "adopted": {
@@ -61,7 +66,7 @@
       "alloc-stdlib/unsafe"
     ]
   },
-  "id": "sha256:7d9e8dee460ae787009a7f0f43aab5deeffb34505162d8754bc37e439e911e54",
+  "id": "sha256:8c8dbef9720c89d87715e3394c3b4b1e8830c05732407c9fcda901efc1f30fd8",
   "kind": "adopt",
   "manifest": "sha256:e1f57d5a312ef2a814d70d4d367e5d4dfc62769ef56f262a6f7b3c554a5478ad",
   "rust": {
