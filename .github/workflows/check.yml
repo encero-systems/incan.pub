@@ -5,7 +5,9 @@ name: check
 # publish-sources workflows pull that binary instead of building the tool, which from an empty Oven home spends most
 # of a run compiling the standard library. The tool key is the git hash of the listing of everything the binary is
 # built from: build.sh, loaf.toml, oven.lock, src, tests, and this file, which pins the compiler. A commit that changes
-# none of them, a workflow edit say, keeps the key and so the binary.
+# none of them, a workflow edit say, keeps the key and so the binary. The binary is published once its own tests pass,
+# before the log is admitted with it: a change to what the tool renders lands on `index` only after the tool that
+# renders it, so the `index` this run checks out can lag behind it, and that lag must not withhold the binary.
 
 on:
   push:
@@ -64,14 +66,6 @@ jobs:
       - name: Test and build incan-pub
         working-directory: tool
         run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
-      - name: Snapshot the crates.io index lines the log names
-        if: matrix.triple == 'x86_64-unknown-linux-gnu'
-        working-directory: index
-        run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/incan-pub .crates-io-snapshot
-      - name: Admit the published log with this tool
-        if: matrix.triple == 'x86_64-unknown-linux-gnu'
-        working-directory: index
-        run: ../tool/target/incan-pub check --crates-io-index .crates-io-snapshot
       - name: Publish the tool binary
         if: github.event_name == 'push'
         env:
@@ -88,3 +82,11 @@ jobs:
             --annotation "dev.incan.tool.key=$key" \
             --annotation "dev.incan.toolchain.target=$TRIPLE" \
             incan-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip
+      - name: Snapshot the crates.io index lines the log names
+        if: matrix.triple == 'x86_64-unknown-linux-gnu'
+        working-directory: index
+        run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/incan-pub .crates-io-snapshot
+      - name: Admit the published log with this tool
+        if: matrix.triple == 'x86_64-unknown-linux-gnu'
+        working-directory: index
+        run: ../tool/target/incan-pub check --crates-io-index .crates-io-snapshot
