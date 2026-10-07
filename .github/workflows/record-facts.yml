@@ -3,7 +3,8 @@ name: record-facts
 # Record build facts on a GitHub-hosted runner of the target's platform, for bindings a shard selects that have no fact
 # on the index yet. A build script runs where its target runs: Linux facts are recorded on Linux. Each binding is one
 # line of a tab-separated file under bake/facts/: name, version, features (comma-separated, possibly empty), profile,
-# domain (target or host), and the graph file the binding's feature set came from.
+# domain (target or host), the graph file the binding's feature set came from, and, for a script with build
+# dependencies, the build lock that resolves them for this host.
 #
 # `incan-pub record-fact --propose` compiles and runs each build script in the platform's sandbox (bubblewrap on Linux,
 # sandbox-exec on macOS) and leaves a proposal; the run uploads them as the `fact-proposals` artifact, and `incan-pub
@@ -56,6 +57,21 @@ jobs:
           oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" --output "$RUNNER_TEMP/tool" \
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+      # A build script with build dependencies links against them, compiled by Oven from their adopted archives: the
+      # compiler is the one the bake workflow pins, so both read their commit from bake.yml.
+      - name: Download the compiler that compiles build dependencies
+        id: closure
+        run: |
+          commit="$(sed -n 's/^  CLOSURE_INCAN: //p' tool/.github/workflows/bake.yml)"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$commit-$TARGET" --output "$RUNNER_TEMP/incan"
+          tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
+      - name: Check out that compiler's sources
+        uses: actions/checkout@v4
+        with:
+          repository: encero-systems/incan
+          ref: ${{ steps.closure.outputs.commit }}
+          path: incan
       - name: Install the Rust toolchain the build scripts are compiled with
         run: rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
       - name: Install the build-script sandbox
@@ -71,19 +87,29 @@ jobs:
             "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/$(dirname "$graph")/lock.json" \
               --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
           done
+          # The build locks a binding names in its seventh field resolve its build dependencies for this host.
+          cut -f7 "tool/$BINDINGS" | grep . | sort -u | while read -r lock; do
+            "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/$lock" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
+          done
       - name: Record each binding's fact as a proposal
+        env:
+          INCAN_HOME: ${{ runner.temp }}/incan-home
+          INCAN_NO_BANNER: "1"
         run: |
           rustc="$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
           mkdir -p "$RUNNER_TEMP/proposals"
           : > "$RUNNER_TEMP/proposals/refused.tsv"
           index=0
           # Fields are split on `|`, not tab: a shell `read` collapses adjacent tabs, and an empty feature set is a field.
-          tr "\t" "|" < "tool/$BINDINGS" | while IFS="|" read -r name version features profile domain graph; do
+          tr "\t" "|" < "tool/$BINDINGS" | while IFS="|" read -r name version features profile domain graph lock; do
             index=$((index + 1))
             work="$RUNNER_TEMP/work/$index"
+            build=()
+            if [ -n "$lock" ]; then build=(--incan "$RUNNER_TEMP/incan/incan" --build-lock "tool/$lock"); fi
             if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
                 --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
-                --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose 2>&1)"; then
+                --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose \
+                "${build[@]}" 2>&1)"; then
               echo "$output"
               proposal="$(printf '%s\n' "$output" | sed -n 's/^proposed: //p')"
               if [ -n "$proposal" ]; then
