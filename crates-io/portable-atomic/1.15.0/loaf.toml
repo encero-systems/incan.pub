@@ -55,3 +55,10 @@ target = "aarch64-apple-darwin"
 profile = "debug"
 features = ["require-cas"]
 cfg = ["portable_atomic_ll_sc_rmw", "portable_atomic_target_feature=\"lse2\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = []
+cfg = ["portable_atomic_ll_sc_rmw", "portable_atomic_target_feature=\"lse2\""]

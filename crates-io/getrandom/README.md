@@ -4,7 +4,7 @@ The crates.io package [getrandom](https://crates.io/crates/getrandom), adopted b
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.4.3](0.4.3/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 7 | 4 | [units](0.4.3/assets.json) |
+| [0.4.3](0.4.3/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 10 | 4 | [units](0.4.3/assets.json) |
 | [0.4.2](0.4.2/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.3.4](0.3.4/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 4 | 0 |  |
 | [0.2.17](0.2.17/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |

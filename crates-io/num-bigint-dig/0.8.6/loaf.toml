@@ -34,3 +34,10 @@ rand = { loaf = "crates-io/rand", version = "^0.8.3", default-features = false, 
 serde = { loaf = "crates-io/serde", version = "^1.0", features = ["alloc"], default-features = false, optional = true }
 smallvec = { loaf = "crates-io/smallvec", version = "^1.10.0", default-features = false }
 zeroize = { loaf = "crates-io/zeroize", version = "^1.5", default-features = false, optional = true }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["i128", "prime", "rand", "u64_digit", "zeroize"]
+cfg = ["has_i128"]
