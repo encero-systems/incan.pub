@@ -22,6 +22,12 @@ on:
       shards:
         description: "Space-separated directories under bake/, each with roots.json and lock.json"
         required: true
+      target:
+        description: "The target every shard is compiled for, on a runner of that platform"
+        required: true
+        default: aarch64-apple-darwin
+        type: choice
+        options: [aarch64-apple-darwin, x86_64-unknown-linux-gnu]
       profile:
         description: "The profile every shard is compiled in"
         required: true
@@ -48,10 +54,11 @@ env:
 
 jobs:
   bake:
-    runs-on: macos-latest
+    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-latest' || 'macos-latest' }}
     env:
       SHARDS: ${{ inputs.shards }}
       PROFILE: ${{ inputs.profile }}
+      TARGET: ${{ inputs.target }}
     steps:
       - name: Check out the tool
         uses: actions/checkout@v4
@@ -67,11 +74,11 @@ jobs:
       - name: Download the tool and the closure compiler
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-aarch64-apple-darwin" \
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" \
             --output "$RUNNER_TEMP/tool" \
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$CLOSURE_INCAN-aarch64-apple-darwin" --output "$RUNNER_TEMP/incan"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$CLOSURE_INCAN-$TARGET" --output "$RUNNER_TEMP/incan"
           tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
       - name: Install the Rust toolchain the units are compiled with, twice
         # The second root compiles with a second copy at another path that also carries rust-src, so the gate below
@@ -96,10 +103,10 @@ jobs:
         env:
           ONLY: ${{ inputs.only }}
           INCAN_NO_BANNER: "1"
-          # Where a C-compiling unit's fact may find its executable's owner (RFC 119 rule 6): the runner's own
-          # Command Line Tools. A fact recorded under another owner does not apply here.
-          INCAN_OVEN_LINK_OWNERS: /Library/Developer/CommandLineTools
         run: |
+          # Where a C-compiling unit's fact may find its executable's owner (RFC 119 rule 6): on macOS the runner's own
+          # Command Line Tools. A fact recorded under another owner does not apply here.
+          if [ "$RUNNER_OS" = macOS ]; then export INCAN_OVEN_LINK_OWNERS=/Library/Developer/CommandLineTools; fi
           commit="$(git -C index rev-parse HEAD)"
           first_rustc="$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
           second_rustc="$(RUSTUP_HOME="$RUNNER_TEMP/rustup-src" CARGO_HOME="$RUNNER_TEMP/cargo-src" rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
