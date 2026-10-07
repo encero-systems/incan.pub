@@ -4,7 +4,7 @@ The crates.io package [hyper](https://crates.io/crates/hyper), adopted by [incan
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.11.1](1.11.1/loaf.toml) | 2026-10-06 | MIT | 0 | 11 | [units](1.11.1/assets.json) |
+| [1.11.1](1.11.1/loaf.toml) | 2026-10-06 | MIT | 0 | 19 | [units](1.11.1/assets.json) |
 | [1.8.1](1.8.1/loaf.toml) | 2026-10-06 | MIT | 2 | 0 |  |
 | [0.14.32](0.14.32/loaf.toml) | 2026-10-07 | MIT | 0 | 0 |  |
 

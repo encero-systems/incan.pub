@@ -4,7 +4,7 @@ The crates.io package [serde_spanned](https://crates.io/crates/serde_spanned), a
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.1.1](1.1.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 4 | [units](1.1.1/assets.json) |
+| [1.1.1](1.1.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 6 | [units](1.1.1/assets.json) |
 | [1.0.4](1.0.4/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.6.9](0.6.9/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 

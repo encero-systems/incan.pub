@@ -4,7 +4,7 @@ The crates.io package [http](https://crates.io/crates/http), adopted by [incan.p
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.5.0](1.5.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 6 | [units](1.5.0/assets.json) |
+| [1.5.0](1.5.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 9 | [units](1.5.0/assets.json) |
 | [1.4.0](1.4.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.2.12](0.2.12/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 

@@ -4,7 +4,7 @@ The crates.io package [windows-sys](https://crates.io/crates/windows-sys), adopt
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.61.2](0.61.2/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 5 | [units](0.61.2/assets.json) |
+| [0.61.2](0.61.2/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 7 | [units](0.61.2/assets.json) |
 | [0.60.2](0.60.2/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 | [0.59.0](0.59.0/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 | [0.52.0](0.52.0/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |

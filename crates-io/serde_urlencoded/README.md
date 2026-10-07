@@ -4,7 +4,7 @@ The crates.io package [serde_urlencoded](https://crates.io/crates/serde_urlencod
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.7.1](0.7.1/loaf.toml) | 2026-10-06 | MIT/Apache-2.0 | 2 | 2 | [units](0.7.1/assets.json) |
+| [0.7.1](0.7.1/loaf.toml) | 2026-10-06 | MIT/Apache-2.0 | 2 | 4 | [units](0.7.1/assets.json) |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/serde_urlencoded`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/serde_urlencoded](../../index/crates-io/serde_urlencoded), the units by each version's `assets.json`.
 

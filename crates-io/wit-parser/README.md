@@ -4,8 +4,8 @@ The crates.io package [wit-parser](https://crates.io/crates/wit-parser), adopted
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.261.0](0.261.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
-| [0.259.0](0.259.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
+| [0.261.0](0.261.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 2 | [units](0.261.0/assets.json) |
+| [0.259.0](0.259.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 2 | [units](0.259.0/assets.json) |
 | [0.247.0](0.247.0/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
 | [0.244.0](0.244.0/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
 | [0.236.1](0.236.1/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |

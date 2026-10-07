@@ -4,7 +4,7 @@ The crates.io package [bitflags](https://crates.io/crates/bitflags), adopted by 
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [2.13.2](2.13.2/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 9 | [units](2.13.2/assets.json) |
+| [2.13.2](2.13.2/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 13 | [units](2.13.2/assets.json) |
 | [2.11.0](2.11.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [1.3.2](1.3.2/loaf.toml) | 2026-10-06 | MIT/Apache-2.0 | 2 | 1 | [units](1.3.2/assets.json) |
 
