@@ -56,6 +56,7 @@ pub model Adoption:
     pub rust_type: str
     pub edition: str
     pub build_script: Option[bool]
+    pub about: Option[About]
     pub root: str
     pub features: Dict[str, list[str]]
     pub dependencies: list[Dependency]
@@ -139,7 +140,9 @@ pub def translate(line: JsonValue, files: list[TarEntry]) -> Result[Adoption, st
         return Err(f"{label}: the archive has no Cargo.toml")
     mut adoption = library_target(package, version, manifest_text, paths)?
     adoption.checksum = "sha256:" + checksum
-    match declared_build_script(parse_manifest(manifest_text, label)?, paths, label)?:
+    document = parse_manifest(manifest_text, label)?
+    adoption.about = Some(about_of(document, label)?)
+    match declared_build_script(document, paths, label)?:
         Some(_) => adoption.build_script = Some(true)
         None => adoption.build_script = Some(false)
     adoption.dependencies = dependencies(line, label)?
@@ -201,6 +204,7 @@ def library_target(package: str, version: str, manifest_text: str, paths: list[s
         rust_type=kind,
         edition=edition,
         build_script=None,
+        about=None,
         root=root,
         features={},
         dependencies=[],
@@ -440,7 +444,7 @@ pub def adoption_payload(adoption: Adoption, manifest: str, archive: str) -> Dic
         deps.append(dependency_json(dependency))
     mut facet = rust_json(adoption)
     facet.set("root", JsonValue.string(adoption.root)).unwrap()
-    return {
+    mut payload: Dict[str, JsonValue] = {
         "adopted": provenance_json(adoption),
         "rust": facet,
         "features": features_json(adoption.features),
@@ -448,6 +452,10 @@ pub def adoption_payload(adoption: Adoption, manifest: str, archive: str) -> Dic
         "manifest": JsonValue.string(manifest),
         "archive": JsonValue.string(archive),
     }
+    match adoption.about:
+        Some(about) => payload["about"] = about_json(about)
+        None => pass
+    return payload
 
 
 pub def adoption_from_payload(body: JsonValue, label: str) -> Result[Adoption, str]:
@@ -498,6 +506,7 @@ pub def adoption_from_payload(body: JsonValue, label: str) -> Result[Adoption, s
         rust_type=kind,
         edition=string_member(facet, "edition"),
         build_script=build_script,
+        about=about_from_json(body),
         root=string_member(facet, "root"),
         features=table,
         dependencies=deps,
@@ -605,6 +614,166 @@ def toml_strings(values: list[str]) -> str:
     for value in values:
         items.append(json_string(value))
     return "[" + ", ".join(items) + "]"
+
+
+@derive(Clone)
+pub model About:
+    """
+    What the published manifest says about the package for its readers, not its build: none of it reaches a unit.
+    Adoption records it so the registry can name each version's license and link the package's pages.
+    """
+
+    pub license: str
+    pub license_file: str
+    pub readme: str
+    pub description: str
+    pub repository: str
+    pub homepage: str
+    pub documentation: str
+
+
+const ABOUT_KEYS: FrozenList[str] = ["license", "license-file", "readme", "description", "repository", "homepage", "documentation"]
+
+
+pub def about_of(manifest: TomlValue, label: str) -> Result[About, str]:
+    """The `package` table's reader-facing strings; a key that is absent, or not a string, is empty."""
+    mut values: Dict[str, str] = {}
+    for key in ABOUT_KEYS:
+        values[key] = ""
+        match manifest.get_optional[str]("package." + key):
+            Ok(found) =>
+                match found:
+                    Some(text) => values[key] = text.strip()
+                    None => pass
+            Err(_) => pass
+    return Ok(About(
+        license=values["license"],
+        license_file=values["license-file"],
+        readme=values["readme"],
+        description=values["description"],
+        repository=values["repository"],
+        homepage=values["homepage"],
+        documentation=values["documentation"],
+    ))
+
+
+pub def about_of_files(files: list[TarEntry], label: str) -> Result[About, str]:
+    """`about_of` the `Cargo.toml` among a package's files."""
+    for file in files:
+        if file.path == "Cargo.toml":
+            match file.data.decode():
+                Ok(text) => return about_of(parse_manifest(text, label)?, label)
+                Err(error) => return Err(f"{label}: Cargo.toml is not UTF-8: {error}")
+    return Err(f"{label}: the archive has no Cargo.toml")
+
+
+def about_json(about: About) -> JsonValue:
+    return JsonValue.object({
+        "license": JsonValue.string(about.license),
+        "license-file": JsonValue.string(about.license_file),
+        "readme": JsonValue.string(about.readme),
+        "description": JsonValue.string(about.description),
+        "repository": JsonValue.string(about.repository),
+        "homepage": JsonValue.string(about.homepage),
+        "documentation": JsonValue.string(about.documentation),
+    })
+
+
+pub def about_from_json(body: JsonValue) -> Option[About]:
+    """The `about` an adoption recorded; adoptions made before it was recorded have none."""
+    match body.get("about"):
+        Some(value) =>
+            return Some(About(
+                license=string_member(value, "license"),
+                license_file=string_member(value, "license-file"),
+                readme=string_member(value, "readme"),
+                description=string_member(value, "description"),
+                repository=string_member(value, "repository"),
+                homepage=string_member(value, "homepage"),
+                documentation=string_member(value, "documentation"),
+            ))
+        None => return None
+
+
+pub def loaf_files(adoption: Adoption, files: list[TarEntry]) -> list[TarEntry]:
+    """
+    The files a source Loaf carries besides its manifest: the package's own, unchanged, and, for an adoption that
+    recorded what its manifest says about the package, a `LICENSE` and a `README.md` where the package ships none.
+    Every Loaf then carries a license and a README; an adoption recorded before that rule renders as it always did.
+    """
+    mut out = files.clone()
+    match adoption.about:
+        Some(about) =>
+            mut paths: list[str] = []
+            for file in files:
+                paths.append(file.path)
+            if not has_license_file(paths, about):
+                out.append(TarEntry(path="LICENSE", executable=false, data=generated_license(adoption, about).encode()))
+            if not has_readme(paths, about):
+                out.append(TarEntry(path="README.md", executable=false, data=generated_readme(adoption, about).encode()))
+        None => pass
+    return out
+
+
+def root_file_named(paths: list[str], prefixes: list[str]) -> bool:
+    """Whether a file at the package root starts, ignoring case, with one of `prefixes`."""
+    for path in paths:
+        if path.contains("/"):
+            continue
+        lowered = path.lower()
+        for prefix in prefixes:
+            if lowered.startswith(prefix):
+                return true
+    return false
+
+
+def has_license_file(paths: list[str], about: About) -> bool:
+    if len(about.license_file) > 0 and paths.contains(about.license_file):
+        return true
+    return root_file_named(paths, ["license", "licence", "copying", "unlicense"])
+
+
+def has_readme(paths: list[str], about: About) -> bool:
+    if len(about.readme) > 0 and paths.contains(about.readme):
+        return true
+    return root_file_named(paths, ["readme"])
+
+
+def generated_license(adoption: Adoption, about: About) -> str:
+    """A LICENSE for a package that ships no license file: what its manifest declares, said plainly."""
+    mut declared = "declares no license"
+    if len(about.license) > 0:
+        declared = f"declares the license `{about.license}` (an SPDX expression; each identifier's text is at https://spdx.org/licenses/)"
+    elif len(about.license_file) > 0:
+        declared = f"names the license file `{about.license_file}`, which the published package does not contain"
+    return (
+        f"{adoption.package} {adoption.version}, as published on crates.io, carries no license file. Its manifest "
+        + declared
+        + f". See https://crates.io/crates/{adoption.package}/{adoption.version}.\n\n"
+        + f"incan.pub wrote this file when it adopted the package as the Loaf `{loaf_name(adoption.package)}`.\n"
+    )
+
+
+def generated_readme(adoption: Adoption, about: About) -> str:
+    """A README.md for a package that ships none, from what its manifest says about it."""
+    mut lines: list[str] = [f"# {adoption.package} {adoption.version}", ""]
+    if len(about.description) > 0:
+        lines.append(about.description)
+        lines.append("")
+    lines.append(f"- crates.io: https://crates.io/crates/{adoption.package}/{adoption.version}")
+    if len(about.repository) > 0:
+        lines.append(f"- Repository: {about.repository}")
+    if len(about.homepage) > 0:
+        lines.append(f"- Homepage: {about.homepage}")
+    mut documentation = about.documentation
+    if len(documentation) == 0:
+        documentation = f"https://docs.rs/{adoption.package}/{adoption.version}"
+    lines.append(f"- Documentation: {documentation}")
+    if len(about.license) > 0:
+        lines.append(f"- License: {about.license}")
+    lines.append("")
+    lines.append(f"The package as published on crates.io carries no README. incan.pub wrote this one when it adopted the package as the Loaf `{loaf_name(adoption.package)}`.")
+    return "\n".join(lines) + "\n"
 
 
 pub def source_archive(manifest: str, files: list[TarEntry]) -> Result[bytes, str]:

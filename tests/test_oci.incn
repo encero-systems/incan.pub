@@ -6,7 +6,7 @@ from std.json import JsonValue
 from std.testing import assert_eq, assert_is_err, assert_true
 
 from canonical import canonical
-from oci import Registry, SOURCE_ARTIFACT, descriptor, manifest, repository, version_tag
+from oci import Registry, SOURCE_ARTIFACT, descriptor, manifest, package_description, repository, version_tag
 
 
 def test_a_version_becomes_a_tag_with_plus_mapped_to_underscore() -> None:
@@ -28,3 +28,10 @@ def test_a_manifest_names_the_empty_config_its_layers_and_its_source_repository(
     assert_true(text.contains("\"artifactType\":\"application/vnd.incan.loaf.source.v1\""))
     assert_true(text.contains("\"schemaVersion\":2"))
     assert_true(text.contains("\"org.opencontainers.image.source\":\"https://github.com/encero-systems/incan.pub\""))
+
+
+def test_a_package_describes_itself_within_the_registry_limit() -> None:
+    text = package_description("crates-io", "regex-automata")
+    assert_true(text.startswith("crates-io/regex-automata on incan.pub: the crates.io package regex-automata adopted as a Loaf."))
+    assert_true(text.contains("https://github.com/encero-systems/incan.pub/blob/index/crates-io/regex-automata/README.md"))
+    assert_true(len(text) <= 512)

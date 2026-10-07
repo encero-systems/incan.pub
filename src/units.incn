@@ -16,7 +16,7 @@ from admission import validate_binding
 from adoption import loaf_name
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, pretty
 from events import member, string_member, write_text
-from oci import Layer, Registry, SOURCE_REPOSITORY, push, repository, version_tag
+from oci import Layer, Registry, SOURCE_REPOSITORY, package_description, push, repository, version_tag
 from registry import Binding
 from tar import TarEntry, write_archive
 
@@ -227,6 +227,7 @@ pub def push_units(registry: Registry, packed: list[Packed], builder: str, attes
             }))
         annotations: Dict[str, str] = {
             "org.opencontainers.image.source": SOURCE_REPOSITORY,
+            "org.opencontainers.image.description": package_description("crates-io", first.name),
             "dev.incan.loaf.name": loaf_name(first.name),
             "dev.incan.loaf.version": first.version,
             "dev.incan.binding": binding_text,

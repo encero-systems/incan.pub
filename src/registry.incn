@@ -185,6 +185,7 @@ pub class Record:
     pub advisories: list[JsonValue]
     pub adopt: Option[JsonValue]
     pub publisher: str
+    pub adopted_at: str
 
     def sorted_facts(self) -> list[Fact]:
         """The bound facts in binding order."""

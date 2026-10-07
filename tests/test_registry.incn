@@ -578,7 +578,10 @@ def test_projections_are_rendered_from_the_fold_and_compared_byte_for_byte() -> 
     add_fact(root, fact_with("debug", ["arch_enabled"]))
     state = replay(load_events(root).unwrap(), root).unwrap()
     wanted = render_projections(state).unwrap()
-    assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 2)
+    assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 3)
+    page = wanted["crates-io/libm/README.md"]
+    assert_true(page.startswith("# crates-io/libm\n\nThe crates.io package [libm](https://crates.io/crates/libm)"))
+    assert_true(page.contains("\n| [0.2.16](0.2.16/loaf.toml) | not adopted |  | 2 | 0 |  |\n"))
     write_projections(root, committed_projections(root).unwrap(), wanted).unwrap()
     assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 0)
     manifest = wanted["crates-io/libm/0.2.16/loaf.toml"]
@@ -601,7 +604,8 @@ def test_a_yank_shows_on_the_index_line_and_a_stale_projection_is_named() -> Non
     yanked = replay(load_events(root).unwrap(), root).unwrap()
     wanted = render_projections(yanked).unwrap()
     assert_true(wanted["index/crates-io/libm"].contains("\"yanked\":true"))
-    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["index/crates-io/libm"])
+    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["crates-io/libm/README.md", "index/crates-io/libm"])
+    assert_true(wanted["crates-io/libm/README.md"].contains("[0.2.16](0.2.16/loaf.toml) (yanked)"))
 
 
 # ---------------------------------------------------------------- proposals --------------------------------------

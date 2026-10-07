@@ -18,6 +18,7 @@ from adoption import (
     Dependency,
     adoption_from_payload,
     adoption_payload,
+    loaf_files,
     render_adopted_manifest,
     required_dependencies,
     source_archive,
@@ -257,6 +258,7 @@ def leaf(version: str) -> Adoption:
         rust_type="lib",
         edition="2021",
         build_script=None,
+        about=None,
         root="src/lib.rs",
         features={"default": []},
         dependencies=[],
@@ -272,6 +274,7 @@ def top() -> Adoption:
         rust_type="lib",
         edition="2021",
         build_script=None,
+        about=None,
         root="src/lib.rs",
         features={},
         dependencies=[Dependency(key="leaf", package="leaf", req="^1.2", features=[], default_features=true, optional=false, target=None)],
@@ -329,6 +332,7 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
         rust_type=original.rust_type,
         edition="2018",
         build_script=None,
+        about=None,
         root=original.root,
         features=original.features,
         dependencies=original.dependencies,
@@ -355,6 +359,7 @@ def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -
         rust_type="lib",
         edition="2018",
         build_script=None,
+        about=None,
         root="src/lib.rs",
         features={"default": []},
         dependencies=[],
@@ -401,3 +406,32 @@ def test_an_adoption_made_before_build_script_was_stated_reads_back_unstated() -
     stated = translate(demo_line(), demo_files(demo_manifest())).unwrap()
     stated_body = JsonValue.object(adoption_payload(stated, digest_text(render_adopted_manifest(stated)), digest_text("archive")))
     assert_eq(adoption_from_payload(stated_body, "demo 1.0.0").unwrap().build_script, Some(false))
+
+
+def test_every_loaf_carries_a_license_and_a_readme() -> None:
+    """The package's own files count; adoption writes a LICENSE or README.md only where the package ships none."""
+    plain = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    mut written: list[str] = []
+    for file in loaf_files(plain, demo_files(demo_manifest())):
+        written.append(file.path)
+    assert_true(written.contains("LICENSE"))
+    assert_true(written.contains("README.md"))
+    licensed_manifest = demo_manifest().replace("name = \"demo\"\nversion", "license = \"MIT OR Apache-2.0\"\nname = \"demo\"\nversion")
+    mut shipped = demo_files(licensed_manifest)
+    shipped.append(TarEntry(path="LICENSE-MIT", executable=false, data=b"MIT\n"))
+    shipped.append(TarEntry(path="README.md", executable=false, data=b"# demo\n"))
+    licensed = translate(demo_line(), shipped).unwrap()
+    assert_eq(len(loaf_files(licensed, shipped)), len(shipped))
+    match licensed.about:
+        Some(about) => assert_eq(about.license, "MIT OR Apache-2.0")
+        None => assert_true(false, "a new adoption records what its manifest says about the package")
+    only_license = translate(demo_line(), demo_files(licensed_manifest)).unwrap()
+    for file in loaf_files(only_license, demo_files(licensed_manifest)):
+        if file.path == "LICENSE":
+            assert_true(file.data.decode().unwrap().contains("declares the license `MIT OR Apache-2.0`"))
+
+
+def test_an_adoption_without_about_keeps_its_files_exactly() -> None:
+    mut older = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    older.about = None
+    assert_eq(len(loaf_files(older, demo_files(demo_manifest()))), len(demo_files(demo_manifest())))

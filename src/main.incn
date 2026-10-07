@@ -12,6 +12,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
     incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
+    incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
                           [--incan PATH --build-lock LOCK.json]
@@ -22,6 +23,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
     incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
+    incan-pub describe-packages --work DIR [--registry HOST] [--namespace NS] [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
@@ -44,15 +46,36 @@ from admission import (
     validate_binding,
     validate_fact,
 )
-from adoption import adoption_payload, loaf_name
-from canonical import canonical, digest_bytes, is_sha256_identity, pretty
-from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare, reproduce
+from adoption import (
+    about_of_files,
+    adoption_from_payload,
+    adoption_payload,
+    loaf_files,
+    loaf_name,
+    render_adopted_manifest,
+    source_archive,
+    unpack_crate,
+)
+from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, pretty
+from closure import blob_path, crate_archive, crates_io_lines, find_line, plan_closure, prepare, reproduce
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from buildscript import Selection, record_proposal
 from graph import stage_graph, unclaimed_graphs, validate_graph
 from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
-from oci import Layer, Registry, SOURCE_ARTIFACT, SOURCE_LAYER, SOURCE_REPOSITORY, anonymous_fetch, push, repository, version_tag
+from oci import (
+    Layer,
+    Registry,
+    SOURCE_ARTIFACT,
+    SOURCE_LAYER,
+    SOURCE_REPOSITORY,
+    annotate,
+    anonymous_fetch,
+    package_description,
+    push,
+    repository,
+    version_tag,
+)
 from units import Packed, pack_closure, push_units, read_units, reproduction_differences, write_units
 from events import (
     append_event,
@@ -201,6 +224,10 @@ def run(arguments: list[str]) -> Result[None, str]:
         return admit_assets(invocation)
     if invocation.command == "fetch-sources":
         return fetch_sources(invocation)
+    if invocation.command == "describe-packages":
+        return describe_packages(invocation)
+    if invocation.command == "record-about":
+        return record_about(invocation)
     return Err(f"unknown command `{invocation.command}`; see the usage at the top of src/main.incn")
 
 
@@ -653,6 +680,59 @@ def readopt(invocation: Invocation) -> Result[None, str]:
     return build(invocation)
 
 
+def record_about(invocation: Invocation) -> Result[None, str]:
+    """
+    Record what each adopted package's manifest says about it (`about`: license, README, description, links) on the
+    `adopt` events that predate it, so every Loaf carries a license and a README and its package page can name them.
+
+    The recorded payload is kept as it is and only gains `about`, so the manifest is unchanged; the archive gains a
+    LICENSE or README.md only where the package ships none. Each event keeps its place, time and actor. With no
+    versions named, every adoption without `about` is recorded.
+    """
+    if len(invocation.positional) % 2 != 0:
+        return Err("usage: incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]")
+    cache = invocation.require("cache")?
+    blobs = invocation.require("blobs")?
+    root = invocation.root()
+    mut named: list[str] = []
+    mut index = 0
+    while index < len(invocation.positional):
+        named.append(invocation.positional[index] + "\t" + invocation.positional[index + 1])
+        index += 2
+    mut rewritten = 0
+    mut archives = 0
+    for event in load_events(root)?:
+        if event.kind != "adopt" or event.body.contains_key("about"):
+            continue
+        if len(named) > 0 and not named.contains(event.name + "\t" + event.version):
+            continue
+        label = f"{event.name} {event.version}"
+        mut adoption = adoption_from_payload(event.body, label)?
+        line = find_line(crates_io_lines(cache, event.name)?, event.name, event.version)?
+        files = unpack_crate(event.name, event.version, crate_archive(cache, event.name, event.version, string_member(line, "cksum"))?)?
+        adoption.about = Some(about_of_files(files, label)?)
+        manifest = render_adopted_manifest(adoption)
+        if digest_text(manifest) != string_member(event.body, "manifest"):
+            return Err(f"{label}: recording `about` would change the manifest; it must only add files")
+        archive = source_archive(manifest, loaf_files(adoption, files))?
+        digest = digest_bytes(archive)
+        path = blob_path(Path(blobs), digest)
+        if not path.is_file():
+            match Path(blobs + "/sha256").mkdir(parents=true, exist_ok=true):
+                Ok(_) => pass
+                Err(error) => return Err(f"{blobs}: {error.message()}")
+            match path.write_bytes(archive):
+                Ok(_) => pass
+                Err(error) => return Err(f"{blobs}: {error.message()}")
+        if digest != string_member(event.body, "archive"):
+            archives += 1
+        rewrite_event(root, event.label, event.body, adoption_payload(adoption, string_member(event.body, "manifest"), digest))?
+        rewritten += 1
+    println(f"recorded about: {rewritten} adoption(s), {archives} archive(s) gained a LICENSE or README")
+    replay(load_events(root)?, root)?
+    return build(invocation)
+
+
 def record_fact(invocation: Invocation) -> Result[None, str]:
     """
     Record the build fact of one adopted version for one binding by running its build script, then admit it; with
@@ -811,6 +891,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     )
     annotations: Dict[str, str] = {
         "org.opencontainers.image.source": SOURCE_REPOSITORY,
+        "org.opencontainers.image.description": package_description("crates-io", name),
         "dev.incan.loaf.name": loaf_name(name),
         "dev.incan.loaf.version": version,
     }
@@ -908,6 +989,40 @@ def admit_assets(invocation: Invocation) -> Result[None, str]:
         state[key] = record
         println(f"admitted asset: {written}")
     return build(invocation)
+
+
+def describe_packages(invocation: Invocation) -> Result[None, str]:
+    """
+    Set the package description on every tag the index knows of: each adopted version's source tag and each asset's
+    binding tag. A tag that was never pushed is skipped; only manifests are written, never blobs.
+    """
+    root = invocation.root()
+    state = replay(load_events(root)?, root)?
+    registry = registry_of(invocation)?
+    mut described = 0
+    mut absent = 0
+    for key in sorted(list(state.keys())):
+        record = state[key]
+        mut adopted = false
+        match record.adopt:
+            Some(_) => adopted = true
+            None => pass
+        if not adopted:
+            continue
+        repository_name = repository(registry, "crates-io", record.name)
+        annotations: Dict[str, str] = {"org.opencontainers.image.description": package_description("crates-io", record.name)}
+        mut tags: list[str] = [version_tag(record.version)?]
+        for asset in record.assets:
+            tag = string_member(asset.location, "tag")
+            if not tags.contains(tag):
+                tags.append(tag)
+        for tag in tags:
+            if annotate(registry, repository_name, tag, annotations)?:
+                described += 1
+            else:
+                absent += 1
+    println(f"described: {described} tag(s); {absent} not pushed")
+    return Ok(None)
 
 
 def fetch_sources(invocation: Invocation) -> Result[None, str]:

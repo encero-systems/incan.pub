@@ -8,7 +8,7 @@ from them by a byte.
 from std.fs import Path
 from std.json import JsonValue
 
-from adoption import adoption_from_payload, loaf_name, render_adopted_manifest
+from adoption import about_from_json, adoption_from_payload, loaf_name, render_adopted_manifest
 from canonical import canonical, json_string, pretty
 from events import member, read_text, string_member, write_text
 from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
@@ -245,12 +245,77 @@ pub def render_asset_manifest(record: Record) -> Result[str, str]:
     }))? + "\n")
 
 
+pub def render_package_page(name: str, records: list[Record]) -> str:
+    """
+    The page of one crates.io package (`crates-io/<name>/README.md`): where it comes from and every version incan.pub
+    holds, newest first, with its adoption date, license, facts and compiled units. It changes as versions are adopted,
+    which is why it is a projection and not part of any Loaf.
+    """
+    mut lines: list[str] = [f"# {loaf_name(name)}", ""]
+    mut description = ""
+    for record in records:
+        if len(description) == 0:
+            match record.adopt:
+                Some(payload) =>
+                    match about_from_json(payload):
+                        Some(about) => description = about.description
+                        None => pass
+                None => pass
+    mut intro = f"The crates.io package [{name}](https://crates.io/crates/{name}), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves."
+    if len(description) > 0:
+        intro = intro + " " + description
+    lines.append(intro)
+    lines.append("")
+    lines.append("| Version | Adopted | License | Build facts | Compiled units | |")
+    lines.append("|---|---|---|---|---|---|")
+    for record in records:
+        lines.append(package_page_row(record))
+    lines.append("")
+    lines.append(
+        "Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package "
+        + f"shipped none. Source archives and compiled units are on the GitHub Container Registry as "
+        + f"`ghcr.io/encero-systems/incan.pub/{loaf_name(name)}`; a client verifies them against this index: the archive "
+        + f"by the `cksum` on its version's line in [index/{loaf_name(name)}](../../{index_path(name)}), the units by "
+        + "each version's `assets.json`."
+    )
+    lines.append("")
+    lines.append(manifest_notice().replace("# ", "<!-- ") + " -->")
+    return "\n".join(lines) + "\n"
+
+
+def package_page_row(record: Record) -> str:
+    mut adopted = "not adopted"
+    mut license = ""
+    match record.adopt:
+        Some(payload) =>
+            adopted = record.adopted_at[0:10]
+            match about_from_json(payload):
+                Some(about) =>
+                    license = about.license
+                    if len(license) == 0 and len(about.license_file) > 0:
+                        license = "see its LICENSE"
+                    if len(license) == 0:
+                        license = "none declared"
+                None => license = f"[crates.io](https://crates.io/crates/{record.name}/{record.version})"
+        None => pass
+    mut version = f"[{record.version}]({record.version}/loaf.toml)"
+    if record.yanked:
+        version = version + " (yanked)"
+    mut units = str(len(record.assets))
+    mut links = ""
+    if len(record.assets) > 0:
+        links = f"[units]({record.version}/assets.json)"
+    return f"| {version} | {adopted} | {license.replace('|', '\\|')} | {len(record.facts)} | {units} | {links} |"
+
+
 def is_projection_file(path: str) -> bool:
     """
-    `crates-io/<name>/<version>/loaf.toml` and the `assets.json` beside it are rendered; everything else under a version
-    is a generated input, `out/assets.json` included.
+    `crates-io/<name>/README.md`, and `crates-io/<name>/<version>/loaf.toml` with the `assets.json` beside it, are
+    rendered; everything else under a version is a generated input, `out/assets.json` included.
     """
     parts = path.split("/")
+    if len(parts) == 3:
+        return parts[2] == "README.md"
     return len(parts) == 4 and (parts[3] == "loaf.toml" or parts[3] == "assets.json")
 
 
@@ -278,6 +343,13 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
         for version in sort_versions(versions_by_name[name]):
             text = text + canonical(index_line(state[record_key(name, version)]))? + "\n"
         files[index_path(name)] = text
+        ascending = sort_versions(versions_by_name[name])
+        mut newest_first: list[Record] = []
+        mut position = len(ascending) - 1
+        while position >= 0:
+            newest_first.append(state[record_key(name, ascending[position])])
+            position -= 1
+        files[f"crates-io/{name}/README.md"] = render_package_page(name, newest_first)
     return Ok(files)
 
 

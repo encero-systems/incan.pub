@@ -90,6 +90,7 @@ def fold_publish(event: Event) -> Result[Record, str]:
         advisories=[],
         adopt=None,
         publisher="",
+        adopted_at="",
     ))
 
 
@@ -148,6 +149,7 @@ def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: E
             advisories=[],
             adopt=Some(payload),
             publisher=event.actor,
+            adopted_at=event.at,
         ))
     mut record = state[key]
     match record.adopt:
@@ -160,13 +162,14 @@ def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: E
         return Err(f"{label}: the adopted checksum differs from the published record's")
     record.adopt = Some(payload)
     record.publisher = event.actor
+    record.adopted_at = event.at
     return Ok(record)
 
 
 pub def adopt_payload(body: JsonValue) -> JsonValue:
     """The members of an `adopt` event that state the adoption, without the event envelope."""
     mut payload: Dict[str, JsonValue] = {}
-    for key in ["adopted", "rust", "features", "deps", "manifest", "archive"]:
+    for key in ["about", "adopted", "rust", "features", "deps", "manifest", "archive"]:
         match body.get(key):
             Some(value) => payload[key] = value
             None => pass

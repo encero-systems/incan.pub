@@ -12,7 +12,16 @@ store. Nothing is appended to the log until the plan is complete and ordered.
 from std.fs import Path
 from std.json import JsonValue, parse_jsonl
 
-from adoption import Adoption, adoption_from_payload, render_adopted_manifest, required_dependencies, source_archive, translate, unpack_crate
+from adoption import (
+    Adoption,
+    adoption_from_payload,
+    loaf_files,
+    render_adopted_manifest,
+    required_dependencies,
+    source_archive,
+    translate,
+    unpack_crate,
+)
 from canonical import digest_bytes, digest_text
 from events import read_text, string_member
 from host import download
@@ -66,7 +75,7 @@ pub def prepare(cache: str, blobs: str, line: JsonValue) -> Result[Planned, str]
     files = unpack_crate(package, version, crate_archive(cache, package, version, string_member(line, "cksum"))?)?
     adoption = translate(line, files)?
     manifest = render_adopted_manifest(adoption)
-    archive = source_archive(manifest, files)?
+    archive = source_archive(manifest, loaf_files(adoption, files))?
     digest = digest_bytes(archive)
     location = blobs + "/sha256/" + digest[7:] + ".tar"
     path = Path(location)
@@ -88,8 +97,9 @@ pub def reproduce(cache: str, blobs: str, line: JsonValue, payload: JsonValue) -
     package = string_member(line, "name")
     version = string_member(line, "vers")
     files = unpack_crate(package, version, crate_archive(cache, package, version, string_member(line, "cksum"))?)?
-    manifest = render_adopted_manifest(adoption_from_payload(payload, f"{package} {version}")?)
-    archive = source_archive(manifest, files)?
+    adoption = adoption_from_payload(payload, f"{package} {version}")?
+    manifest = render_adopted_manifest(adoption)
+    archive = source_archive(manifest, loaf_files(adoption, files))?
     digest = digest_bytes(archive)
     location = blobs + "/sha256/" + digest[7:] + ".tar"
     path = Path(location)

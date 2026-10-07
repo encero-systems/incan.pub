@@ -60,6 +60,57 @@ pub def version_tag(version: str) -> Result[str, str]:
     return Ok(tag)
 
 
+pub def package_description(scope: str, name: str) -> str:
+    """
+    What a package page says about itself (`org.opencontainers.image.description`, at most 512 characters): which
+    package it is, what its tags hold, and that the index, not the registry, is the authority.
+    """
+    return (
+        f"{scope}/{name} on incan.pub: the crates.io package {name} adopted as a Loaf. A <version> tag holds its source "
+        + "Loaf archive; a <version>-<12 hex> tag holds the units Oven compiled for one binding. The incan.pub index "
+        + "names every digest; verify what you pull against it. Versions, licenses and units: "
+        + f"{SOURCE_REPOSITORY}/blob/index/{scope}/{name}/README.md"
+    )
+
+
+pub def annotate(registry: Registry, repository_name: str, tag: str, annotations: Dict[str, str]) -> Result[bool, str]:
+    """
+    Set annotations on the manifest a tag names, keeping its layers and every other annotation; false when the tag
+    does not exist. Only the manifest is written again, so the tag moves to a manifest over the same blobs.
+    """
+    token = bearer(registry, repository_name)?
+    auth = registry.work + "/auth.curl"
+    write_text(Path(auth), "header = \"Authorization: Bearer " + token + "\"\n", "auth.curl")?
+    url = "https://" + registry.host + "/v2/" + repository_name + "/manifests/" + tag
+    status = curl(registry, ["-H", f"Accept: {MANIFEST_TYPE}", url], auth)?
+    if status == "404":
+        remove(auth)
+        return Ok(false)
+    if status != "200":
+        return Err(f"{repository_name}:{tag}: reading the manifest was refused with HTTP {status}: {response_text(registry)}")
+    mut present = JsonValue.null()
+    match JsonValue.parse(response_text(registry)):
+        Ok(value) => present = value
+        Err(error) => return Err(f"{repository_name}:{tag}: the manifest is not JSON: {error.message()}")
+    mut merged: Dict[str, JsonValue] = {}
+    match present.get("annotations"):
+        Some(existing) =>
+            for key in existing.keys():
+                merged[key] = existing.get(key).unwrap()
+        None => pass
+    for key in annotations.keys():
+        merged[key] = JsonValue.string(annotations[key])
+    present.set("annotations", JsonValue.object(merged)).unwrap()
+    body = canonical(present)?
+    manifest_path = registry.work + "/manifest.json"
+    write_text(Path(manifest_path), body, "manifest.json")?
+    written = curl(registry, ["-X", "PUT", "-H", f"Content-Type: {MANIFEST_TYPE}", "--data-binary", "@" + manifest_path, url], auth)?
+    remove(auth)
+    if written != "201":
+        return Err(f"{repository_name}:{tag}: the manifest was refused with HTTP {written}: {response_text(registry)}")
+    return Ok(true)
+
+
 pub def manifest(artifact_type: str, layers: list[JsonValue], annotations: Dict[str, str]) -> JsonValue:
     """An OCI 1.1 artifact manifest with the empty config, the given layer descriptors and annotations."""
     return JsonValue.object({
