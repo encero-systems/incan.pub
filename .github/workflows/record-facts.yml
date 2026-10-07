@@ -23,7 +23,7 @@ on:
         type: choice
         options: [x86_64-unknown-linux-gnu, aarch64-apple-darwin]
       bindings:
-        description: "The bindings file under bake/facts/"
+        description: "The bindings file, by its path in this repository (bake/facts/...)"
         required: true
 
 permissions:
@@ -66,6 +66,7 @@ jobs:
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Fetch the source Loaf archives of the bindings' shards
         run: |
+          [ -s "tool/$BINDINGS" ] || { echo "::error::no bindings at $BINDINGS; name the file by its path in this repository"; exit 1; }
           cut -f6 "tool/$BINDINGS" | sort -u | while read -r graph; do
             "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/$(dirname "$graph")/lock.json" \
               --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
