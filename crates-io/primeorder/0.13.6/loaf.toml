@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/primeorder"
+version = "0.13.6"
+
+[project.features]
+alloc = ["elliptic-curve/alloc"]
+dev = []
+serde = ["elliptic-curve/serde", "serdect"]
+serdect = ["dep:serdect"]
+std = ["alloc", "elliptic-curve/std"]
+
+[rust]
+name = "primeorder"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+elliptic-curve = { loaf = "crates-io/elliptic-curve", version = "^0.13.7", features = ["arithmetic", "sec1"], default-features = false }
+serdect = { loaf = "crates-io/serdect", version = "^0.2", default-features = false, optional = true }

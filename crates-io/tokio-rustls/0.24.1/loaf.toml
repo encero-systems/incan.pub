@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/tokio-rustls"
+version = "0.24.1"
+
+[project.features]
+dangerous_configuration = ["rustls/dangerous_configuration"]
+default = ["logging", "tls12"]
+early-data = []
+logging = ["rustls/logging"]
+secret_extraction = ["rustls/secret_extraction"]
+tls12 = ["rustls/tls12"]
+
+[rust]
+name = "tokio_rustls"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+rustls = { loaf = "crates-io/rustls", version = "^0.21.0", default-features = false }
+tokio = { loaf = "crates-io/tokio", version = "^1.0" }

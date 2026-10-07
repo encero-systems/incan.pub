@@ -1,0 +1,49 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hyper"
+version = "0.14.32"
+
+[project.features]
+__internal_happy_eyeballs_tests = []
+backports = []
+client = []
+default = []
+deprecated = []
+ffi = ["libc"]
+full = ["client", "http1", "http2", "server", "stream", "runtime"]
+h2 = ["dep:h2"]
+http1 = []
+http2 = ["h2"]
+libc = ["dep:libc"]
+nightly = []
+runtime = ["tcp", "tokio/rt", "tokio/time"]
+server = []
+socket2 = ["dep:socket2"]
+stream = []
+tcp = ["socket2", "tokio/net", "tokio/rt", "tokio/time"]
+
+[rust]
+name = "hyper"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", default-features = false }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3", default-features = false }
+h2 = { loaf = "crates-io/h2", version = "^0.3.24", optional = true }
+http = { loaf = "crates-io/http", version = "^0.2" }
+http-body = { loaf = "crates-io/http-body", version = "^0.4" }
+httparse = { loaf = "crates-io/httparse", version = "^1.8" }
+httpdate = { loaf = "crates-io/httpdate", version = "^1.0" }
+itoa = { loaf = "crates-io/itoa", version = "^1" }
+libc = { loaf = "crates-io/libc", version = "^0.2", optional = true }
+pin-project-lite = { loaf = "crates-io/pin-project-lite", version = "^0.2.4" }
+socket2 = { loaf = "crates-io/socket2", version = ">=0.4.7, <0.6.0", features = ["all"], optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.27", features = ["sync"] }
+tower-service = { loaf = "crates-io/tower-service", version = "^0.3" }
+tracing = { loaf = "crates-io/tracing", version = "^0.1", features = ["std"], default-features = false }
+want = { loaf = "crates-io/want", version = "^0.3" }

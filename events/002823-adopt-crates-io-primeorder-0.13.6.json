@@ -1,0 +1,75 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of complete addition formulas for prime order elliptic\ncurves (Renes-Costello-Batina 2015). Generic over field elements and curve\nequation coefficients",
+    "documentation": "https://docs.rs/primeorder",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/elliptic-curves/tree/master/primeorder"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:353e1ca18966c16d9deb1c69278edbc5f194139612772bd9537af60ac231e1e6",
+    "package": "primeorder",
+    "registry": "crates-io",
+    "version": "0.13.6"
+  },
+  "archive": "sha256:e09382a34de5155722a65d37476f8b097fa51a8dac9e4ed0958c6ce9c79043bc",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "arithmetic",
+        "sec1"
+      ],
+      "loaf": "crates-io/elliptic-curve",
+      "name": "elliptic-curve",
+      "optional": false,
+      "req": "^0.13.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.2"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "elliptic-curve/alloc"
+    ],
+    "dev": [],
+    "serde": [
+      "elliptic-curve/serde",
+      "serdect"
+    ],
+    "serdect": [
+      "dep:serdect"
+    ],
+    "std": [
+      "alloc",
+      "elliptic-curve/std"
+    ]
+  },
+  "id": "sha256:8e2f645381ef24008998ea8febe14ced8922d99af244aeafceb93ee6d4e80cff",
+  "kind": "adopt",
+  "manifest": "sha256:616800c16699cda868118e382ac7e59d474605e83f906153677a517eafa5145d",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "primeorder",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "primeorder",
+    "scope": "crates-io",
+    "version": "0.13.6"
+  }
+}

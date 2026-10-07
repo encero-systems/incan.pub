@@ -1,0 +1,75 @@
+{
+  "about": {
+    "description": "rustls-native-certs allows rustls to use the platform native certificate store",
+    "documentation": "",
+    "homepage": "https://github.com/ctz/rustls-native-certs",
+    "license": "Apache-2.0 OR ISC OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/ctz/rustls-native-certs"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:a9aace74cb666635c918e9c12bc0d348266037aa8eb599b5cba565709a8dff00",
+    "package": "rustls-native-certs",
+    "registry": "crates-io",
+    "version": "0.6.3"
+  },
+  "archive": "sha256:28c0648a1addd2d910cf9bc8c0559515bc0c987ae592ce9ba900400ba825e55c",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/openssl-probe",
+      "name": "openssl-probe",
+      "optional": false,
+      "req": "^0.1.2",
+      "target": "cfg(all(unix, not(target_os = \"macos\")))"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustls-pemfile",
+      "name": "rustls-pemfile",
+      "optional": false,
+      "req": "^1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/schannel",
+      "name": "schannel",
+      "optional": false,
+      "req": "^0.1.15",
+      "target": "cfg(windows)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/security-framework",
+      "name": "security-framework",
+      "optional": false,
+      "req": "^2.0.0",
+      "target": "cfg(target_os = \"macos\")"
+    }
+  ],
+  "features": {},
+  "id": "sha256:afe06c05afd7e538f9dec906c93f6e786d4b26bd30463b9e938f4ffb3fcdf335",
+  "kind": "adopt",
+  "manifest": "sha256:2edc9e23a0d5d51991d549789a7be8e236b4bad30cdd80ae9b0abe14ad98125f",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "rustls_native_certs",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rustls-native-certs",
+    "scope": "crates-io",
+    "version": "0.6.3"
+  }
+}

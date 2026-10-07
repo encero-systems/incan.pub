@@ -1,0 +1,36 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/hyper-rustls"
+version = "0.24.2"
+
+[project.features]
+acceptor = ["hyper/server", "tokio-runtime"]
+default = ["native-tokio", "http1", "tls12", "logging", "acceptor"]
+http1 = ["hyper/http1"]
+http2 = ["hyper/http2"]
+log = ["dep:log"]
+logging = ["log", "tokio-rustls/logging", "rustls/logging"]
+native-tokio = ["tokio-runtime", "rustls-native-certs"]
+rustls-native-certs = ["dep:rustls-native-certs"]
+tls12 = ["tokio-rustls/tls12", "rustls/tls12"]
+tokio-runtime = ["hyper/runtime"]
+webpki-roots = ["dep:webpki-roots"]
+webpki-tokio = ["tokio-runtime", "webpki-roots"]
+
+[rust]
+name = "hyper_rustls"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3", default-features = false }
+http = { loaf = "crates-io/http", version = "^0.2" }
+hyper = { loaf = "crates-io/hyper", version = "^0.14", features = ["client"], default-features = false }
+log = { loaf = "crates-io/log", version = "^0.4.4", optional = true }
+rustls = { loaf = "crates-io/rustls", version = "^0.21.6", default-features = false }
+rustls-native-certs = { loaf = "crates-io/rustls-native-certs", version = "^0.6", optional = true }
+tokio = { loaf = "crates-io/tokio", version = "^1.0" }
+tokio-rustls = { loaf = "crates-io/tokio-rustls", version = "^0.24.0", default-features = false }
+webpki-roots = { loaf = "crates-io/webpki-roots", version = "^0.25", optional = true }

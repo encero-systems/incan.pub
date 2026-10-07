@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/sec1"
+version = "0.7.3"
+
+[project.features]
+alloc = ["der?/alloc", "pkcs8?/alloc", "zeroize?/alloc"]
+default = ["der", "point"]
+der = ["dep:der", "zeroize"]
+pem = ["alloc", "dep:der", "der/pem", "dep:pkcs8", "pkcs8/pem"]
+pkcs8 = ["dep:pkcs8"]
+point = ["dep:base16ct", "dep:generic-array"]
+serde = ["dep:serdect"]
+std = ["alloc", "der?/std"]
+subtle = ["dep:subtle"]
+zeroize = ["dep:zeroize", "der?/zeroize"]
+
+[rust]
+name = "sec1"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+base16ct = { loaf = "crates-io/base16ct", version = "^0.2", default-features = false, optional = true }
+der = { loaf = "crates-io/der", version = "^0.7", features = ["oid"], optional = true }
+generic-array = { loaf = "crates-io/generic-array", version = "^0.14.7", default-features = false, optional = true }
+pkcs8 = { loaf = "crates-io/pkcs8", version = "^0.10", default-features = false, optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.2", features = ["alloc"], default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2", default-features = false, optional = true }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

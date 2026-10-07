@@ -1,0 +1,183 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the Elliptic Curve Digital Signature Algorithm\n(ECDSA) as specified in FIPS 186-4 (Digital Signature Standard), providing\nRFC6979 deterministic signatures as well as support for added entropy",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/signatures/tree/master/ecdsa"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ee27f32b5c5292967d2d4a9d7f1e0b0aed2c15daded5a60300e4abb9d8020bca",
+    "package": "ecdsa",
+    "registry": "crates-io",
+    "version": "0.16.9"
+  },
+  "archive": "sha256:f2e45c2069f578986e4d3e47548555d9361a830eeea49d286c6875a9027f8079",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/digest",
+      "name": "digest",
+      "optional": true,
+      "req": "^0.10.7"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "digest",
+        "sec1"
+      ],
+      "loaf": "crates-io/elliptic-curve",
+      "name": "elliptic-curve",
+      "optional": false,
+      "req": "^0.13.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rfc6979",
+      "name": "rfc6979",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "rand_core"
+      ],
+      "loaf": "crates-io/signature",
+      "name": "signature",
+      "optional": false,
+      "req": "^2.0, <2.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/spki",
+      "name": "spki",
+      "optional": true,
+      "req": "^0.7.2"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "elliptic-curve/alloc",
+      "signature/alloc",
+      "dep:spki",
+      "spki/alloc"
+    ],
+    "arithmetic": [
+      "elliptic-curve/arithmetic"
+    ],
+    "default": [
+      "digest"
+    ],
+    "der": [
+      "dep:der"
+    ],
+    "dev": [
+      "arithmetic",
+      "digest",
+      "elliptic-curve/dev",
+      "hazmat"
+    ],
+    "digest": [
+      "dep:digest",
+      "signature/digest"
+    ],
+    "hazmat": [],
+    "pem": [
+      "elliptic-curve/pem",
+      "pkcs8"
+    ],
+    "pkcs8": [
+      "digest",
+      "elliptic-curve/pkcs8",
+      "der"
+    ],
+    "rfc6979": [
+      "dep:rfc6979"
+    ],
+    "serde": [
+      "elliptic-curve/serde",
+      "serdect"
+    ],
+    "serdect": [
+      "dep:serdect"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "signing": [
+      "arithmetic",
+      "digest",
+      "hazmat",
+      "rfc6979"
+    ],
+    "spki": [
+      "dep:spki"
+    ],
+    "std": [
+      "alloc",
+      "elliptic-curve/std",
+      "signature/std"
+    ],
+    "verifying": [
+      "arithmetic",
+      "digest",
+      "hazmat"
+    ]
+  },
+  "id": "sha256:a0befcc3f78cb29c0b208216c5d9e6dcb177aacd95cd61f94db7ada3475d5ee2",
+  "kind": "adopt",
+  "manifest": "sha256:0041e3036d7e2e389bd549ce5c4cf241aa00aa320f3015a7cc04527a998ba3fb",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "ecdsa",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ecdsa",
+    "scope": "crates-io",
+    "version": "0.16.9"
+  }
+}

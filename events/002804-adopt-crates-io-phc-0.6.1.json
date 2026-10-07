@@ -1,0 +1,85 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the Password Hashing Competition (PHC) string format which is used for\nstoring password hashes",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/formats"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:44dc769b75f93afdddd8c7fa12d685292ddeff1e66f7f0f3a234cf1818afe892",
+    "package": "phc",
+    "registry": "crates-io",
+    "version": "0.6.1"
+  },
+  "archive": "sha256:808508dabc8d3400b09c56e93ca0a0a9f4b1b5fe440c846f5ff7f610bed73e7a",
+  "at": "2026-10-07T08:35:28Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/base64ct",
+      "name": "base64ct",
+      "optional": false,
+      "req": "^1.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ctutils",
+      "name": "ctutils",
+      "optional": false,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/getrandom",
+      "name": "getrandom",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.10"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "base64ct/alloc"
+    ],
+    "default": [
+      "rand_core"
+    ],
+    "getrandom": [
+      "dep:getrandom"
+    ],
+    "rand_core": [
+      "dep:rand_core"
+    ]
+  },
+  "id": "sha256:8382dac197b7e3ca55a6a3e59b3143c9ee10b9aad62d04cec0ac6ee5e497899d",
+  "kind": "adopt",
+  "manifest": "sha256:ddc64658c8fa54e20d3badef345bf5539e603ccbd9e3b1cd0e41443065080c3f",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "phc",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "phc",
+    "scope": "crates-io",
+    "version": "0.6.1"
+  }
+}

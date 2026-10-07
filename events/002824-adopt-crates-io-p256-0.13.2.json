@@ -1,0 +1,179 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of the NIST P-256 (a.k.a. secp256r1, prime256v1)\nelliptic curve as defined in SP 800-186, with support for ECDH, ECDSA\nsigning/verification, and general purpose curve arithmetic",
+    "documentation": "https://docs.rs/p256",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/elliptic-curves/tree/master/p256"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c9863ad85fa8f4460f9c48cb909d38a0d689dba1f6f6988a5e3e0d31071bcd4b",
+    "package": "p256",
+    "registry": "crates-io",
+    "version": "0.13.2"
+  },
+  "archive": "sha256:68fc7afc14d291edf29fb937c03ce1a641a58c474cec73ab810cd2972711d106",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [
+        "der"
+      ],
+      "loaf": "crates-io/ecdsa",
+      "name": "ecdsa-core",
+      "optional": true,
+      "req": "^0.16"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "hazmat",
+        "sec1"
+      ],
+      "loaf": "crates-io/elliptic-curve",
+      "name": "elliptic-curve",
+      "optional": false,
+      "req": "^0.13.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/hex-literal",
+      "name": "hex-literal",
+      "optional": true,
+      "req": "^0.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/primeorder",
+      "name": "primeorder",
+      "optional": true,
+      "req": "^0.13"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sha2",
+      "name": "sha2",
+      "optional": true,
+      "req": "^0.10"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "ecdsa-core?/alloc",
+      "elliptic-curve/alloc"
+    ],
+    "arithmetic": [
+      "dep:primeorder",
+      "elliptic-curve/arithmetic"
+    ],
+    "bits": [
+      "arithmetic",
+      "elliptic-curve/bits"
+    ],
+    "default": [
+      "arithmetic",
+      "ecdsa",
+      "pem",
+      "std"
+    ],
+    "digest": [
+      "dep:ecdsa-core",
+      "ecdsa-core/digest",
+      "ecdsa-core/hazmat"
+    ],
+    "ecdh": [
+      "arithmetic",
+      "elliptic-curve/ecdh"
+    ],
+    "ecdsa": [
+      "arithmetic",
+      "dep:ecdsa-core",
+      "ecdsa-core/signing",
+      "ecdsa-core/verifying",
+      "sha256"
+    ],
+    "ecdsa-core": [
+      "dep:ecdsa-core"
+    ],
+    "expose-field": [
+      "arithmetic"
+    ],
+    "hash2curve": [
+      "arithmetic",
+      "elliptic-curve/hash2curve"
+    ],
+    "jwk": [
+      "elliptic-curve/jwk"
+    ],
+    "pem": [
+      "elliptic-curve/pem",
+      "dep:ecdsa-core",
+      "ecdsa-core/pem",
+      "pkcs8"
+    ],
+    "pkcs8": [
+      "ecdsa-core?/pkcs8",
+      "elliptic-curve/pkcs8"
+    ],
+    "serde": [
+      "ecdsa-core?/serde",
+      "elliptic-curve/serde",
+      "primeorder?/serde",
+      "serdect"
+    ],
+    "serdect": [
+      "dep:serdect"
+    ],
+    "sha2": [
+      "dep:sha2"
+    ],
+    "sha256": [
+      "digest",
+      "sha2"
+    ],
+    "std": [
+      "alloc",
+      "ecdsa-core?/std",
+      "elliptic-curve/std"
+    ],
+    "test-vectors": [
+      "dep:hex-literal"
+    ],
+    "voprf": [
+      "elliptic-curve/voprf",
+      "sha2"
+    ]
+  },
+  "id": "sha256:b6341881aa2430b4ac1f5fe546e8c47eec96c2fe8dfc0af2abafdfb77bcad1e8",
+  "kind": "adopt",
+  "manifest": "sha256:0e94f860428faa2db42b14361763c85b6bdfee0d20171c3146c3857e0c2fe218",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "p256",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "p256",
+    "scope": "crates-io",
+    "version": "0.13.2"
+  }
+}

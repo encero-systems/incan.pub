@@ -1,0 +1,142 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of SEC1: Elliptic Curve Cryptography encoding formats\nincluding ASN.1 DER-serialized private keys as well as the\nElliptic-Curve-Point-to-Octet-String encoding",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/formats/tree/master/sec1"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:d3e97a565f76233a6003f9f5c54be1d9c5bdfa3eccfb189469f11ec4901c47dc",
+    "package": "sec1",
+    "registry": "crates-io",
+    "version": "0.7.3"
+  },
+  "archive": "sha256:727661cb721d17898dd171fa1a04917e4cb4480d39fa12ccb07407ec218c171f",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/base16ct",
+      "name": "base16ct",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "oid"
+      ],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/generic-array",
+      "name": "generic-array",
+      "optional": true,
+      "req": "^0.14.7"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/pkcs8",
+      "name": "pkcs8",
+      "optional": true,
+      "req": "^0.10"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": true,
+      "req": "^2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "der?/alloc",
+      "pkcs8?/alloc",
+      "zeroize?/alloc"
+    ],
+    "default": [
+      "der",
+      "point"
+    ],
+    "der": [
+      "dep:der",
+      "zeroize"
+    ],
+    "pem": [
+      "alloc",
+      "dep:der",
+      "der/pem",
+      "dep:pkcs8",
+      "pkcs8/pem"
+    ],
+    "pkcs8": [
+      "dep:pkcs8"
+    ],
+    "point": [
+      "dep:base16ct",
+      "dep:generic-array"
+    ],
+    "serde": [
+      "dep:serdect"
+    ],
+    "std": [
+      "alloc",
+      "der?/std"
+    ],
+    "subtle": [
+      "dep:subtle"
+    ],
+    "zeroize": [
+      "dep:zeroize",
+      "der?/zeroize"
+    ]
+  },
+  "id": "sha256:5b6b37aef1acde1df398873ff7e2105860819f67909942c14364817cc09a16d0",
+  "kind": "adopt",
+  "manifest": "sha256:6573e327c0db25e7601c8f3aea706676975bd780e276a8f3c51500aaae47d512",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "sec1",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "sec1",
+    "scope": "crates-io",
+    "version": "0.7.3"
+  }
+}

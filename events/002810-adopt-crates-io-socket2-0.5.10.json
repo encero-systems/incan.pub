@@ -1,0 +1,66 @@
+{
+  "about": {
+    "description": "Utilities for handling networking sockets with a maximal amount of configuration\npossible intended.",
+    "documentation": "https://docs.rs/socket2",
+    "homepage": "https://github.com/rust-lang/socket2",
+    "license": "MIT OR Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rust-lang/socket2"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:e22376abed350d73dd1cd119b57ffccad95b4e585a7cda43e286245ce23c0678",
+    "package": "socket2",
+    "registry": "crates-io",
+    "version": "0.5.10"
+  },
+  "archive": "sha256:48821bb7bf7fab0b4a415dd72fb94e1608b720a5b85718a21e1cb36881d588ed",
+  "at": "2026-10-07T08:35:28Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/libc",
+      "name": "libc",
+      "optional": false,
+      "req": "^0.2.171",
+      "target": "cfg(unix)"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "Win32_Foundation",
+        "Win32_Networking_WinSock",
+        "Win32_System_IO",
+        "Win32_System_Threading",
+        "Win32_System_WindowsProgramming"
+      ],
+      "loaf": "crates-io/windows-sys",
+      "name": "windows-sys",
+      "optional": false,
+      "req": "^0.52",
+      "target": "cfg(windows)"
+    }
+  ],
+  "features": {
+    "all": []
+  },
+  "id": "sha256:3f5c4bb9008800d2d37bcc58ccc349d4733a8186bf2152bb89f5909cd3877e64",
+  "kind": "adopt",
+  "manifest": "sha256:9c7e59a120bb92d64dc28980b08a7eaca46131e9715482a0c017180f206678b7",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "socket2",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "socket2",
+    "scope": "crates-io",
+    "version": "0.5.10"
+  }
+}

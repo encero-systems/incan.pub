@@ -1,0 +1,111 @@
+{
+  "about": {
+    "description": "Elliptic curve group traits and utilities",
+    "documentation": "https://docs.rs/group/",
+    "homepage": "https://github.com/zkcrypto/group",
+    "license": "MIT/Apache-2.0",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/zkcrypto/group"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:f0f9ef7462f7c099f518d754361858f86d8a07af53ba9af0fe635bbccb151a63",
+    "package": "group",
+    "registry": "crates-io",
+    "version": "0.13.0"
+  },
+  "archive": "sha256:40904e1483c1deb1b45c92490d16045685d42a1ef9546a8cc1c26ae0611b8464",
+  "at": "2026-10-07T08:35:28Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/ff",
+      "name": "ff",
+      "optional": false,
+      "req": "^0.13"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memuse",
+      "name": "memuse",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand",
+      "name": "rand",
+      "optional": true,
+      "req": "^0.8"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": false,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rand_xorshift",
+      "name": "rand_xorshift",
+      "optional": true,
+      "req": "^0.3"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": false,
+      "req": "^2.2.1"
+    }
+  ],
+  "features": {
+    "alloc": [],
+    "default": [
+      "alloc"
+    ],
+    "memuse": [
+      "dep:memuse"
+    ],
+    "rand": [
+      "dep:rand"
+    ],
+    "rand_xorshift": [
+      "dep:rand_xorshift"
+    ],
+    "tests": [
+      "alloc",
+      "rand",
+      "rand_xorshift"
+    ],
+    "wnaf-memuse": [
+      "alloc",
+      "memuse"
+    ]
+  },
+  "id": "sha256:6cbea8fd93dc55524ca4e2c63e38d95df3de752f2cce6d826afab41969ddcf72",
+  "kind": "adopt",
+  "manifest": "sha256:f0dcd25a4f45601391a29f810c81cf26378ea6fcc0f083a72205020cba6602c9",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "group",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "group",
+    "scope": "crates-io",
+    "version": "0.13.0"
+  }
+}

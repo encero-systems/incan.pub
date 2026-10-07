@@ -1,0 +1,23 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/phc"
+version = "0.6.1"
+
+[project.features]
+alloc = ["base64ct/alloc"]
+default = ["rand_core"]
+getrandom = ["dep:getrandom"]
+rand_core = ["dep:rand_core"]
+
+[rust]
+name = "phc"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+base64ct = { loaf = "crates-io/base64ct", version = "^1.7" }
+ctutils = { loaf = "crates-io/ctutils", version = "^0.4" }
+getrandom = { loaf = "crates-io/getrandom", version = "^0.4", default-features = false, optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.10", default-features = false, optional = true }

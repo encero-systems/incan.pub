@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/crypto-bigint"
+version = "0.5.5"
+
+[project.features]
+alloc = ["serdect?/alloc"]
+default = ["rand"]
+der = ["dep:der"]
+extra-sizes = []
+generic-array = ["dep:generic-array"]
+rand = ["dep:rand_core", "rand_core/std"]
+rand_core = ["dep:rand_core"]
+rlp = ["dep:rlp"]
+serde = ["dep:serdect"]
+zeroize = ["dep:zeroize"]
+
+[rust]
+name = "crypto_bigint"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+der = { loaf = "crates-io/der", version = "^0.7", default-features = false, optional = true }
+generic-array = { loaf = "crates-io/generic-array", version = "^0.14", optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.6.4", optional = true }
+rlp = { loaf = "crates-io/rlp", version = "^0.5", default-features = false, optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.2", default-features = false, optional = true }
+subtle = { loaf = "crates-io/subtle", version = "^2.4", default-features = false }
+zeroize = { loaf = "crates-io/zeroize", version = "^1", default-features = false, optional = true }

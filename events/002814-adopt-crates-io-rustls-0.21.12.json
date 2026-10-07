@@ -1,0 +1,94 @@
+{
+  "about": {
+    "description": "Rustls is a modern TLS library written in Rust.",
+    "documentation": "",
+    "homepage": "https://github.com/rustls/rustls",
+    "license": "Apache-2.0 OR ISC OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rustls/rustls"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:3f56a14d1f48b391359b22f731fd4bd7e43c97f3c50eee276f3aa09c94784d3e",
+    "package": "rustls",
+    "registry": "crates-io",
+    "version": "0.21.12"
+  },
+  "archive": "sha256:3db6913a3d007d0d0b31adf74fabaceb235e7e8c023d77829fa7f045e984fc78",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ring",
+      "name": "ring",
+      "optional": false,
+      "req": "^0.17"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/sct",
+      "name": "sct",
+      "optional": false,
+      "req": "^0.7.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "alloc",
+        "std"
+      ],
+      "loaf": "crates-io/rustls-webpki",
+      "name": "webpki",
+      "optional": false,
+      "req": "^0.101.7"
+    }
+  ],
+  "features": {
+    "dangerous_configuration": [],
+    "default": [
+      "logging",
+      "tls12"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "logging": [
+      "log"
+    ],
+    "quic": [],
+    "read_buf": [
+      "rustversion"
+    ],
+    "rustversion": [],
+    "secret_extraction": [],
+    "tls12": []
+  },
+  "id": "sha256:789d6426c9145efa4b7048612d0a3948f26693215e7a34b7517a461dc4c24f4b",
+  "kind": "adopt",
+  "manifest": "sha256:0e52156579c11b5b284340836c0cbd0ace0c344784af1efc5435af5b9f8d131e",
+  "rust": {
+    "build-script": true,
+    "edition": "2021",
+    "name": "rustls",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rustls",
+    "scope": "crates-io",
+    "version": "0.21.12"
+  }
+}

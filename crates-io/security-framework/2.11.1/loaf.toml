@@ -1,0 +1,36 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/security-framework"
+version = "2.11.1"
+
+[project.features]
+OSX_10_10 = ["OSX_10_9", "security-framework-sys/OSX_10_10"]
+OSX_10_11 = ["OSX_10_10", "security-framework-sys/OSX_10_11"]
+OSX_10_12 = ["OSX_10_11", "security-framework-sys/OSX_10_12"]
+OSX_10_13 = ["OSX_10_12", "security-framework-sys/OSX_10_13", "alpn", "session-tickets", "serial-number-bigint"]
+OSX_10_14 = ["OSX_10_13", "security-framework-sys/OSX_10_14"]
+OSX_10_15 = ["OSX_10_14", "security-framework-sys/OSX_10_15"]
+OSX_10_9 = ["security-framework-sys/OSX_10_9"]
+alpn = []
+default = ["OSX_10_12"]
+job-bless = []
+log = ["dep:log"]
+nightly = []
+serial-number-bigint = ["dep:num-bigint"]
+session-tickets = []
+
+[rust]
+name = "security_framework"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.6" }
+core-foundation = { loaf = "crates-io/core-foundation", version = "^0.9.4" }
+core-foundation-sys = { loaf = "crates-io/core-foundation-sys", version = "^0.8.6" }
+libc = { loaf = "crates-io/libc", version = "^0.2.139" }
+log = { loaf = "crates-io/log", version = "^0.4.20", optional = true }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.4.6", optional = true }
+security-framework-sys = { loaf = "crates-io/security-framework-sys", version = "^2.11.1", default-features = false }

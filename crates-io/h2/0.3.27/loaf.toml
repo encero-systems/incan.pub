@@ -1,0 +1,28 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/h2"
+version = "0.3.27"
+
+[project.features]
+stream = []
+unstable = []
+
+[rust]
+name = "h2"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bytes = { loaf = "crates-io/bytes", version = "^1" }
+fnv = { loaf = "crates-io/fnv", version = "^1.0.5" }
+futures-core = { loaf = "crates-io/futures-core", version = "^0.3", default-features = false }
+futures-sink = { loaf = "crates-io/futures-sink", version = "^0.3", default-features = false }
+futures-util = { loaf = "crates-io/futures-util", version = "^0.3", default-features = false }
+http = { loaf = "crates-io/http", version = "^0.2" }
+indexmap = { loaf = "crates-io/indexmap", version = "^2", features = ["std"] }
+slab = { loaf = "crates-io/slab", version = "^0.4.2" }
+tokio = { loaf = "crates-io/tokio", version = "^1", features = ["io-util"] }
+tokio-util = { loaf = "crates-io/tokio-util", version = "^0.7.1", features = ["codec", "io"] }
+tracing = { loaf = "crates-io/tracing", version = "^0.1.35", features = ["std"], default-features = false }

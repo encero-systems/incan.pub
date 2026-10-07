@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ff"
+version = "0.13.1"
+
+[project.features]
+alloc = []
+bits = ["bitvec"]
+bitvec = ["dep:bitvec"]
+byteorder = ["dep:byteorder"]
+default = ["bits", "std"]
+derive = ["byteorder", "ff_derive"]
+derive_bits = ["bits", "dep:ff_derive", "ff_derive/bits"]
+ff_derive = ["dep:ff_derive"]
+std = ["alloc"]
+
+[rust]
+name = "ff"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+bitvec = { loaf = "crates-io/bitvec", version = "^1", default-features = false, optional = true }
+byteorder = { loaf = "crates-io/byteorder", version = "^1", default-features = false, optional = true }
+ff_derive = { loaf = "crates-io/ff_derive", version = "^0.13.1", optional = true }
+rand_core = { loaf = "crates-io/rand_core", version = "^0.6", default-features = false }
+subtle = { loaf = "crates-io/subtle", version = "^2.2.1", features = ["i128"], default-features = false }

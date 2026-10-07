@@ -1,0 +1,126 @@
+{
+  "about": {
+    "description": "Pure Rust implementation of a big integer library which has been designed from\nthe ground-up for use in cryptographic applications. Provides constant-time,\nno_std-friendly implementations of modern formulas using const generics.",
+    "documentation": "",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/RustCrypto/crypto-bigint"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:0dc92fb57ca44df6db8059111ab3af99a63d5d0f8375d9972e319a379c6bab76",
+    "package": "crypto-bigint",
+    "registry": "crates-io",
+    "version": "0.5.5"
+  },
+  "archive": "sha256:85e9edff50f3a10b3615ed17f0fc492bd4653c372047501cea12229970c00c08",
+  "at": "2026-10-07T08:35:28Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/der",
+      "name": "der",
+      "optional": true,
+      "req": "^0.7"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/generic-array",
+      "name": "generic-array",
+      "optional": true,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rand_core",
+      "name": "rand_core",
+      "optional": true,
+      "req": "^0.6.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rlp",
+      "name": "rlp",
+      "optional": true,
+      "req": "^0.5"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serdect",
+      "name": "serdect",
+      "optional": true,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/subtle",
+      "name": "subtle",
+      "optional": false,
+      "req": "^2.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/zeroize",
+      "name": "zeroize",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "features": {
+    "alloc": [
+      "serdect?/alloc"
+    ],
+    "default": [
+      "rand"
+    ],
+    "der": [
+      "dep:der"
+    ],
+    "extra-sizes": [],
+    "generic-array": [
+      "dep:generic-array"
+    ],
+    "rand": [
+      "dep:rand_core",
+      "rand_core/std"
+    ],
+    "rand_core": [
+      "dep:rand_core"
+    ],
+    "rlp": [
+      "dep:rlp"
+    ],
+    "serde": [
+      "dep:serdect"
+    ],
+    "zeroize": [
+      "dep:zeroize"
+    ]
+  },
+  "id": "sha256:0f9eb43469342a4fa36c1344279c7c9fe10e13541789e06e461c86eef6f66910",
+  "kind": "adopt",
+  "manifest": "sha256:b5eaa0781804799037f5da9d6725035e260bffe39ace5bfa7a34cc12e6483a18",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "crypto_bigint",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "crypto-bigint",
+    "scope": "crates-io",
+    "version": "0.5.5"
+  }
+}

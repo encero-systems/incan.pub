@@ -1,0 +1,40 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ecdsa"
+version = "0.16.9"
+
+[project.features]
+alloc = ["elliptic-curve/alloc", "signature/alloc", "dep:spki", "spki/alloc"]
+arithmetic = ["elliptic-curve/arithmetic"]
+default = ["digest"]
+der = ["dep:der"]
+dev = ["arithmetic", "digest", "elliptic-curve/dev", "hazmat"]
+digest = ["dep:digest", "signature/digest"]
+hazmat = []
+pem = ["elliptic-curve/pem", "pkcs8"]
+pkcs8 = ["digest", "elliptic-curve/pkcs8", "der"]
+rfc6979 = ["dep:rfc6979"]
+serde = ["elliptic-curve/serde", "serdect"]
+serdect = ["dep:serdect"]
+sha2 = ["dep:sha2"]
+signing = ["arithmetic", "digest", "hazmat", "rfc6979"]
+spki = ["dep:spki"]
+std = ["alloc", "elliptic-curve/std", "signature/std"]
+verifying = ["arithmetic", "digest", "hazmat"]
+
+[rust]
+name = "ecdsa"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+der = { loaf = "crates-io/der", version = "^0.7", optional = true }
+digest = { loaf = "crates-io/digest", version = "^0.10.7", features = ["oid"], default-features = false, optional = true }
+elliptic-curve = { loaf = "crates-io/elliptic-curve", version = "^0.13.6", features = ["digest", "sec1"], default-features = false }
+rfc6979 = { loaf = "crates-io/rfc6979", version = "^0.4", optional = true }
+serdect = { loaf = "crates-io/serdect", version = "^0.2", features = ["alloc"], default-features = false, optional = true }
+sha2 = { loaf = "crates-io/sha2", version = "^0.10", features = ["oid"], default-features = false, optional = true }
+signature = { loaf = "crates-io/signature", version = "^2.0, <2.3", features = ["rand_core"], default-features = false }
+spki = { loaf = "crates-io/spki", version = "^0.7.2", default-features = false, optional = true }

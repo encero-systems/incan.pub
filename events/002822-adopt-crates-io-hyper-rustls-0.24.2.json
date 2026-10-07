@@ -1,0 +1,161 @@
+{
+  "about": {
+    "description": "Rustls+hyper integration for pure rust HTTPS",
+    "documentation": "https://docs.rs/hyper-rustls/",
+    "homepage": "https://github.com/rustls/hyper-rustls",
+    "license": "Apache-2.0 OR ISC OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/rustls/hyper-rustls"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:ec3efd23720e2049821a693cbc7e65ea87c72f1c58ff2f9522ff332b1491e590",
+    "package": "hyper-rustls",
+    "registry": "crates-io",
+    "version": "0.24.2"
+  },
+  "archive": "sha256:973b9e5d988df628337edb720c5784ccb45fd4b18c35fb921b12cb92b0d90be0",
+  "at": "2026-10-07T08:35:29Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/futures-util",
+      "name": "futures-util",
+      "optional": false,
+      "req": "^0.3"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/http",
+      "name": "http",
+      "optional": false,
+      "req": "^0.2"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "client"
+      ],
+      "loaf": "crates-io/hyper",
+      "name": "hyper",
+      "optional": false,
+      "req": "^0.14"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/log",
+      "name": "log",
+      "optional": true,
+      "req": "^0.4.4"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/rustls",
+      "name": "rustls",
+      "optional": false,
+      "req": "^0.21.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustls-native-certs",
+      "name": "rustls-native-certs",
+      "optional": true,
+      "req": "^0.6"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/tokio",
+      "name": "tokio",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/tokio-rustls",
+      "name": "tokio-rustls",
+      "optional": false,
+      "req": "^0.24.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/webpki-roots",
+      "name": "webpki-roots",
+      "optional": true,
+      "req": "^0.25"
+    }
+  ],
+  "features": {
+    "acceptor": [
+      "hyper/server",
+      "tokio-runtime"
+    ],
+    "default": [
+      "native-tokio",
+      "http1",
+      "tls12",
+      "logging",
+      "acceptor"
+    ],
+    "http1": [
+      "hyper/http1"
+    ],
+    "http2": [
+      "hyper/http2"
+    ],
+    "log": [
+      "dep:log"
+    ],
+    "logging": [
+      "log",
+      "tokio-rustls/logging",
+      "rustls/logging"
+    ],
+    "native-tokio": [
+      "tokio-runtime",
+      "rustls-native-certs"
+    ],
+    "rustls-native-certs": [
+      "dep:rustls-native-certs"
+    ],
+    "tls12": [
+      "tokio-rustls/tls12",
+      "rustls/tls12"
+    ],
+    "tokio-runtime": [
+      "hyper/runtime"
+    ],
+    "webpki-roots": [
+      "dep:webpki-roots"
+    ],
+    "webpki-tokio": [
+      "tokio-runtime",
+      "webpki-roots"
+    ]
+  },
+  "id": "sha256:3a9002ed6ac219079b807e5b6960a1eaf037a91964758ba20f4c1174e540bc42",
+  "kind": "adopt",
+  "manifest": "sha256:436e1a0f5472c76822aaa55c5aeac8fea93a94a6add08f3f506351b9763eb480",
+  "rust": {
+    "build-script": false,
+    "edition": "2021",
+    "name": "hyper_rustls",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "hyper-rustls",
+    "scope": "crates-io",
+    "version": "0.24.2"
+  }
+}
