@@ -884,10 +884,17 @@ def selection_of(invocation: Invocation) -> Result[Selection, str]:
         cxx=invocation.option("cxx").unwrap_or(""),
         ar=invocation.option("ar").unwrap_or(""),
         sysroot=invocation.option("sysroot").unwrap_or(""),
-        incan=invocation.option("incan").unwrap_or(""),
-        build_lock=invocation.option("build-lock").unwrap_or(""),
+        incan=absolute_option(invocation, "incan")?,
+        build_lock=absolute_option(invocation, "build-lock")?,
         pin=canonical_path(invocation.option("root").unwrap_or("."))?,
     ))
+
+
+def absolute_option(invocation: Invocation, name: str) -> Result[str, str]:
+    """A path option made absolute: the recorder runs the tools it names from its own work directory."""
+    match invocation.option(name):
+        Some(path) => return canonical_path(path)
+        None => return Ok("")
 
 
 def native_convert(invocation: Invocation) -> Result[None, str]:
