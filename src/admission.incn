@@ -182,7 +182,7 @@ def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: E
 pub def adopt_payload(body: JsonValue) -> JsonValue:
     """The members of an `adopt` event that state the adoption, without the event envelope."""
     mut payload: Dict[str, JsonValue] = {}
-    for key in ["about", "adopted", "rust", "features", "deps", "manifest", "archive"]:
+    for key in ["about", "files", "adopted", "rust", "features", "deps", "manifest", "archive"]:
         match body.get(key):
             Some(value) => payload[key] = value
             None => pass

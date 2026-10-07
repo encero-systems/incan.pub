@@ -1,5 +1,6 @@
 """
-Projections: the rendered external-source record and the sparse index, derived from the folded state.
+Projections: the rendered external-source record, the sparse index, the package pages and the catalog, derived from
+the folded state.
 
 Nothing here is authored. `build` writes exactly these files; `check` refuses a checkout whose committed files differ
 from them by a byte.
@@ -8,10 +9,23 @@ from them by a byte.
 from std.fs import Path
 from std.json import JsonValue
 
-from adoption import about_from_json, adoption_from_payload, loaf_name, render_adopted_manifest, shown
+from adoption import (
+    about_from_json,
+    about_json,
+    adoption_from_payload,
+    file_sources_json,
+    loaf_name,
+    render_adopted_manifest,
+    rust_json,
+    shown,
+)
 from canonical import canonical, json_string, pretty
 from events import member, read_text, string_member, write_text
 from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
+
+
+const CATALOG_SCHEMA: str = "incan.pub/catalog/1"
+const CATALOG_PACKAGE_SCHEMA: str = "incan.pub/catalog-package/1"
 
 
 pub def manifest_notice() -> str:
@@ -337,6 +351,7 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
     """Every projection file, by path relative to the root."""
     mut files: Dict[str, str] = {}
     mut versions_by_name: Dict[str, list[str]] = {}
+    mut catalog: list[JsonValue] = []
     for key in sorted(keys_of(state)):
         record = state[key]
         files[f"crates-io/{record.name}/{record.version}/loaf.toml"] = render_manifest(record)?
@@ -359,6 +374,21 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
             newest_first.append(state[record_key(name, ascending[position])])
             position -= 1
         files[f"crates-io/{name}/README.md"] = render_package_page(name, newest_first)
+        match catalog_entry(name, newest_first)?:
+            Some(entry) =>
+                catalog.append(entry)
+                files[f"catalog/crates-io/{name}.json"] = render_catalog_package(name, newest_first)?
+            None => pass
+    mut fact_count = 0
+    mut asset_count = 0
+    mut adopted_count = 0
+    for key in keys_of(state):
+        fact_count += len(state[key].facts)
+        asset_count += len(state[key].assets)
+        match state[key].adopt:
+            Some(_) => adopted_count += 1
+            None => pass
+    files["catalog/index.json"] = render_catalog_index(catalog, adopted_count, fact_count, asset_count)?
     return Ok(files)
 
 
@@ -383,6 +413,7 @@ pub def committed_projections(root: Path) -> Result[Dict[str, str], str]:
     mut files: Dict[str, str] = {}
     collect_files(root / "index", "index", files, false)?
     collect_files(root / "crates-io", "crates-io", files, true)?
+    collect_files(root / "catalog", "catalog", files, false)?
     return Ok(files)
 
 
@@ -469,3 +500,130 @@ pub def write_projections(root: Path, committed: Dict[str, str], wanted: Dict[st
     for path in sorted(keys_of(wanted)):
         write_text(root / path, wanted[path], path)?
     return Ok(None)
+
+
+pub def render_catalog_package(name: str, records: list[Record]) -> Result[str, str]:
+    """
+    One package's catalog page, `catalog/crates-io/<name>.json`: every adopted version, newest first, with what its
+    manifest says about it (its authors kept apart from the registry's adopter and publisher), where its README and
+    LICENSE come from, and its facts and compiled units, each under its complete binding.
+    """
+    mut versions: list[JsonValue] = []
+    for record in records:
+        match record.adopt:
+            Some(payload) => versions.append(catalog_version(record, payload)?)
+            None => pass
+    return Ok(pretty(JsonValue.object({
+        "schema": JsonValue.string(CATALOG_PACKAGE_SCHEMA),
+        "name": JsonValue.string(loaf_name(name)),
+        "upstream": JsonValue.object({
+            "registry": JsonValue.string("crates.io"),
+            "package": JsonValue.string(name),
+            "url": JsonValue.string(f"https://crates.io/crates/{name}"),
+        }),
+        "versions": JsonValue.array(versions),
+    }))? + "\n")
+
+
+def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str]:
+    """One adopted version as the catalog shows it; `about` strings trimmed for display, as the package page does."""
+    adoption = adoption_from_payload(payload, f"{record.name} {record.version}")?
+    mut facts: list[JsonValue] = []
+    for fact in record.sorted_facts():
+        mut item = fact.binding.to_json()
+        mut owners: list[JsonValue] = []
+        for owner in fact.owners:
+            owners.append(JsonValue.string(owner))
+        item.set("owners", JsonValue.array(owners)).unwrap()
+        facts.append(item)
+    mut by_key: Dict[str, JsonValue] = {}
+    for asset in record.assets:
+        by_key[asset.binding.key() + "\n\n" + asset.unit_identity] = asset.to_json()
+    mut assets: list[JsonValue] = []
+    for key in sorted(keys_of(by_key)):
+        assets.append(by_key[key])
+    mut about = JsonValue.null()
+    match adoption.about:
+        Some(recorded) => about = about_json(shown(recorded))
+        None => pass
+    mut files = JsonValue.null()
+    match adoption.files:
+        Some(sources) => files = file_sources_json(sources)
+        None => pass
+    return Ok(JsonValue.object({
+        "version": JsonValue.string(record.version),
+        "yanked": JsonValue.bool(record.yanked),
+        "adopted": JsonValue.string(record.adopted_at),
+        "registry": JsonValue.object({
+            "adopter": JsonValue.string(record.adopter),
+            "publisher": JsonValue.string(record.publisher),
+        }),
+        "manifest": JsonValue.string(f"crates-io/{record.name}/{record.version}/loaf.toml"),
+        "archive": JsonValue.string(string_member(payload, "archive")),
+        "rust": rust_json(adoption),
+        "about": about,
+        "files": files,
+        "facts": JsonValue.array(facts),
+        "assets": JsonValue.array(assets),
+        "advisories": JsonValue.int(len(record.advisories)),
+    }))
+
+
+pub def render_catalog_index(entries: list[JsonValue], versions: int, facts: int, assets: int) -> Result[str, str]:
+    """
+    The catalog, `catalog/index.json`: one entry per adopted package, sorted by name, each naming its newest adopted
+    version that is not yanked and the page with every version. It is a projection of the index commit that holds it.
+    """
+    return Ok(pretty(JsonValue.object({
+        "schema": JsonValue.string(CATALOG_SCHEMA),
+        "counts": JsonValue.object({
+            "packages": JsonValue.int(len(entries)),
+            "versions": JsonValue.int(versions),
+            "facts": JsonValue.int(facts),
+            "assets": JsonValue.int(assets),
+        }),
+        "packages": JsonValue.array(entries),
+    }))? + "\n")
+
+
+def catalog_entry(name: str, records: list[Record]) -> Result[Option[JsonValue], str]:
+    """A package's line in the catalog, from its newest adopted version that is not yanked (or its newest adopted)."""
+    mut chosen: Option[Record] = None
+    for record in records:
+        match record.adopt:
+            Some(_) =>
+                match chosen:
+                    None => chosen = Some(record)
+                    Some(current) =>
+                        if current.yanked and not record.yanked:
+                            chosen = Some(record)
+            None => pass
+    match chosen:
+        None => return Ok(None)
+        Some(record) =>
+            adoption = adoption_from_payload(record.adopt.unwrap(), f"{record.name} {record.version}")?
+            mut description = ""
+            mut license = ""
+            match adoption.about:
+                Some(recorded) =>
+                    description = shown(recorded).description
+                    license = shown(recorded).license
+                None => pass
+            mut targets: list[str] = []
+            for asset in record.assets:
+                if not targets.contains(asset.binding.target):
+                    targets.append(asset.binding.target)
+            mut adopted_versions = 0
+            for each in records:
+                match each.adopt:
+                    Some(_) => adopted_versions += 1
+                    None => pass
+            return Ok(Some(JsonValue.object({
+                "name": JsonValue.string(loaf_name(name)),
+                "latest": JsonValue.string(record.version),
+                "versions": JsonValue.int(adopted_versions),
+                "description": JsonValue.string(description),
+                "license": JsonValue.string(license),
+                "build-targets": JsonValue.array([JsonValue.string(target) for target in sorted(targets)]),
+                "page": JsonValue.string(f"catalog/crates-io/{name}.json"),
+            })))

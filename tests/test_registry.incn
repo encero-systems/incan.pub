@@ -620,7 +620,8 @@ def test_projections_are_rendered_from_the_fold_and_compared_byte_for_byte() -> 
     add_fact(root, fact_with("debug", ["arch_enabled"]))
     state = replay(load_events(root).unwrap(), root).unwrap()
     wanted = render_projections(state).unwrap()
-    assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 3)
+    assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 4)
+    assert_true(wanted["catalog/index.json"].contains("\"packages\": []"))
     page = wanted["crates-io/libm/README.md"]
     assert_true(page.startswith("# crates-io/libm\n\nThe crates.io package [libm](https://crates.io/crates/libm)"))
     assert_true(page.contains("\n| [0.2.16](0.2.16/loaf.toml) | not adopted |  | 2 | 0 |  |\n"))

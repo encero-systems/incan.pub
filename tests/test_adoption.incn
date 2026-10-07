@@ -312,6 +312,7 @@ def leaf(version: str) -> Adoption:
         edition="2021",
         build_script=None,
         about=None,
+        files=None,
         root="src/lib.rs",
         features={"default": []},
         dependencies=[],
@@ -328,6 +329,7 @@ def top() -> Adoption:
         edition="2021",
         build_script=None,
         about=None,
+        files=None,
         root="src/lib.rs",
         features={},
         dependencies=[Dependency(key="leaf", package="leaf", req="^1.2", features=[], default_features=true, optional=false, target=None)],
@@ -370,6 +372,15 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     assert_eq(line.get("cksum").unwrap().as_str().unwrap(), digest_text("archive top"))
     assert_eq(line.get("name").unwrap().as_str().unwrap(), "crates-io/top")
     assert_true(files["crates-io/top/1.0.0/loaf.toml"].contains("\n[rust]\nname = \"top\"\n"))
+    # The catalog lists both packages and gives each a page of its adopted versions under its scoped name.
+    catalog = parse(files["catalog/index.json"]).unwrap()
+    assert_eq(catalog.get("schema").unwrap().as_str().unwrap(), "incan.pub/catalog/1")
+    assert_eq(len(catalog.get("packages").unwrap().as_array().unwrap()), 2)
+    page = parse(files["catalog/crates-io/top.json"]).unwrap()
+    assert_eq(page.get("name").unwrap().as_str().unwrap(), "crates-io/top")
+    first = page.get("versions").unwrap().as_array().unwrap()[0]
+    assert_eq(first.get("version").unwrap().as_str().unwrap(), "1.0.0")
+    assert_eq(canonical(first.get("rust").unwrap()).unwrap(), "{\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
 
 
 def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
@@ -386,6 +397,7 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
         edition="2018",
         build_script=None,
         about=None,
+        files=None,
         root=original.root,
         features=original.features,
         dependencies=original.dependencies,
@@ -413,6 +425,7 @@ def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -
         edition="2018",
         build_script=None,
         about=None,
+        files=None,
         root="src/lib.rs",
         features={"default": []},
         dependencies=[],

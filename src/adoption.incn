@@ -57,6 +57,9 @@ pub model Adoption:
     pub edition: str
     pub build_script: Option[bool]
     pub about: Option[About]
+    # Where the Loaf's `readme` and `license` come from: `package` (the package's own) or `registry` (written by
+    # incan.pub, a generated README or a LICENSE that states the declared license). None before it was recorded.
+    pub files: Option[Dict[str, str]]
     pub root: str
     pub features: Dict[str, list[str]]
     pub dependencies: list[Dependency]
@@ -210,7 +213,9 @@ pub def translate(line: JsonValue, files: list[TarEntry]) -> Result[Adoption, st
     mut adoption = library_target(package, version, manifest_text, paths)?
     adoption.checksum = "sha256:" + checksum
     document = parse_manifest(manifest_text, label)?
-    adoption.about = Some(about_of(document, label)?)
+    about = about_of(document, label)?
+    adoption.about = Some(about)
+    adoption.files = Some(loaf_file_sources(about, paths))
     match declared_build_script(document, paths, label)?:
         Some(_) => adoption.build_script = Some(true)
         None => adoption.build_script = Some(false)
@@ -274,6 +279,7 @@ def library_target(package: str, version: str, manifest_text: str, paths: list[s
         edition=edition,
         build_script=None,
         about=None,
+        files=None,
         root=root,
         features={},
         dependencies=[],
@@ -539,6 +545,9 @@ pub def adoption_payload(adoption: Adoption, manifest: str, archive: str) -> Dic
     match adoption.about:
         Some(about) => payload["about"] = about_json(about)
         None => pass
+    match adoption.files:
+        Some(sources) => payload["files"] = file_sources_json(sources)
+        None => pass
     return payload
 
 
@@ -591,6 +600,7 @@ pub def adoption_from_payload(body: JsonValue, label: str) -> Result[Adoption, s
         edition=string_member(facet, "edition"),
         build_script=build_script,
         about=about_from_json(body),
+        files=file_sources_from_json(body),
         root=string_member(facet, "root"),
         features=table,
         dependencies=deps,
@@ -844,6 +854,34 @@ def root_file_named(paths: list[str], prefixes: list[str]) -> bool:
             if lowered.startswith(prefix):
                 return true
     return false
+
+
+pub def loaf_file_sources(about: About, paths: list[str]) -> Dict[str, str]:
+    """
+    Whether the Loaf's README and LICENSE are the package's own (`package`) or written by incan.pub (`registry`), by
+    the rule `loaf_files` adds them: a reader is told which one it is reading.
+    """
+    shown_about = shown(about)
+    mut sources: Dict[str, str] = {"readme": "registry", "license": "registry"}
+    if has_readme(paths, shown_about):
+        sources["readme"] = "package"
+    if has_license_file(paths, shown_about):
+        sources["license"] = "package"
+    return sources
+
+
+pub def file_sources_json(sources: Dict[str, str]) -> JsonValue:
+    return JsonValue.object({
+        "license": JsonValue.string(sources["license"]),
+        "readme": JsonValue.string(sources["readme"]),
+    })
+
+
+pub def file_sources_from_json(body: JsonValue) -> Option[Dict[str, str]]:
+    """The `files` an adoption recorded; adoptions made before it was recorded have none."""
+    match body.get("files"):
+        Some(value) => return Some({"license": string_member(value, "license"), "readme": string_member(value, "readme")})
+        None => return None
 
 
 def has_license_file(paths: list[str], about: About) -> bool:

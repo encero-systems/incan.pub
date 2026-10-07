@@ -52,6 +52,8 @@ from adoption import (
     about_of_files,
     adoption_from_payload,
     adoption_payload,
+    file_sources_json,
+    loaf_file_sources,
     loaf_files,
     loaf_name,
     render_adopted_manifest,
@@ -758,12 +760,22 @@ def record_about(invocation: Invocation) -> Result[None, str]:
         # An `about` that says what the manifest says is right and is never rewritten; one recorded before a field
         # was read is incomplete, and is completed without changing the archive.
         recorded = event.body.contains_key("about")
+        mut paths: list[str] = []
+        for file in files:
+            paths.append(file.path)
+        sources = loaf_file_sources(about, paths)
+        mut complete = false
         match event.body.get("about"):
             Some(previous) =>
-                if canonical(previous)? == canonical(about_json(about))?:
-                    continue
+                match event.body.get("files"):
+                    Some(previous_files) =>
+                        complete = canonical(previous)? == canonical(about_json(about))? and canonical(previous_files)? == canonical(file_sources_json(sources))?
+                    None => pass
             None => pass
+        if complete:
+            continue
         adoption.about = Some(about)
+        adoption.files = Some(sources)
         manifest = render_adopted_manifest(adoption)
         if digest_text(manifest) != string_member(event.body, "manifest"):
             return Err(f"{label}: recording `about` would change the manifest; it must only add files")
