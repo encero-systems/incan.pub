@@ -9,7 +9,7 @@ version = "0.4.11"
 [project.features]
 default = ["std"]
 serde = ["dep:serde"]
-serde-json = ["serde", "dep:serde", "serde/derive", "serde_json"]
+serde-json = ["dep:serde", "serde/derive", "serde_json"]
 serde_json = ["dep:serde_json"]
 std = ["num-bigint/std", "num-integer/std", "num-traits/std"]
 string-only = []
@@ -18,6 +18,7 @@ string-only = []
 name = "bigdecimal"
 type = "lib"
 edition = "2015"
+build-script = true
 
 [dependencies]
 libm = { loaf = "crates-io/libm", version = "^0.2.6" }

@@ -12,13 +12,14 @@ force_unix_path_separator = []
 i128 = []
 no_std = []
 scale-info = ["dep:scale-info"]
-scale_info = ["scale-info", "dep:scale-info", "scale-info/derive"]
+scale_info = ["dep:scale-info", "scale-info/derive"]
 strict = []
 
 [rust]
 name = "typenum"
 type = "lib"
 edition = "2018"
+build-script = true
 
 [dependencies]
 scale-info = { loaf = "crates-io/scale-info", version = "^1.0", default-features = false, optional = true }
