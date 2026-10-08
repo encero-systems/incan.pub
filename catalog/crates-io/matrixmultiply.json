@@ -1,0 +1,117 @@
+{
+  "name": "crates-io/matrixmultiply",
+  "schema": "incan.pub/catalog-package/1",
+  "upstream": {
+    "package": "matrixmultiply",
+    "registry": "crates.io",
+    "url": "https://crates.io/crates/matrixmultiply"
+  },
+  "versions": [
+    {
+      "about": {
+        "authors": [
+          "bluss",
+          "R. Janis Goldschmidt"
+        ],
+        "description": "General matrix multiplication for f32 and f64 matrices. Operates on matrices with general layout (they can use arbitrary row and column stride). Detects and uses SIMD features on x86/x86-64 and AArch64 transparently for higher performance. Uses a microkernel strategy, so that the implementation is easy to parallelize and optimize.\n\nSupports multithreading.",
+        "documentation": "https://docs.rs/matrixmultiply/",
+        "homepage": "",
+        "license": "MIT/Apache-2.0",
+        "license-file": "",
+        "readme": "",
+        "repository": "https://github.com/bluss/matrixmultiply/",
+        "rust-version": "1.75.0"
+      },
+      "adopted": "2026-10-07T07:44:32Z",
+      "advisories": 0,
+      "archive": "sha256:7f0ed3edb89cae05046a5e47546588a0c0a6daba428fd2d16f7422bb59d28ed1",
+      "assets": [
+        {
+          "archive": "sha256:3ec88bb158189cd5755632e72d783762a12531121f5c334cd1e1e54e3c9a414b",
+          "attestation": "https://github.com/encero-systems/incan.pub/attestations/53625310",
+          "binding": {
+            "features": [
+              "avx512",
+              "default",
+              "std"
+            ],
+            "profile": "debug",
+            "target": "aarch64-apple-darwin",
+            "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+          },
+          "builder": "registry",
+          "entry": "sha256:0be44e4f919aee01dabb2937938b982600c40c3a05fcec9b71c72e8113b236b8",
+          "location": {
+            "registry": "ghcr.io",
+            "repository": "encero-systems/incan.pub/crates-io/matrixmultiply",
+            "tag": "0.3.11-d5d6c313a71a"
+          },
+          "payload": "sha256:88db10d040201d0ef1298723e243fcae6c8befce35d078fd96be981093b6cd7f",
+          "unit_identity": "sha256:e0dc0bd0a8ff3102112c6e435139b0aa61a986c262b5fad2a174a84e52ebaee1"
+        },
+        {
+          "archive": "sha256:59ac5e5bb79e5b1de68e83a363da8b38135a83f633d2a302c5059ed392bc6f9f",
+          "attestation": "https://github.com/encero-systems/incan.pub/attestations/53625310",
+          "binding": {
+            "features": [
+              "cgemm",
+              "std"
+            ],
+            "profile": "debug",
+            "target": "aarch64-apple-darwin",
+            "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+          },
+          "builder": "registry",
+          "entry": "sha256:9935bb2798696bcb0f3ba511dcd1400416d7f7c5aa40b660fa4f34500039d882",
+          "location": {
+            "registry": "ghcr.io",
+            "repository": "encero-systems/incan.pub/crates-io/matrixmultiply",
+            "tag": "0.3.11-c9ad369f694b"
+          },
+          "payload": "sha256:17e39e9c9afc006aae876c4cd7a099f07f08adf121dffcda88d937bb86cd7abd",
+          "unit_identity": "sha256:d1ed6cc646ccb6cf627ca8b8c8c6634b1970c8e78c843dec5882430a7d1319f0"
+        }
+      ],
+      "facts": [
+        {
+          "features": [
+            "avx512",
+            "default",
+            "std"
+          ],
+          "owners": [],
+          "profile": "debug",
+          "target": "aarch64-apple-darwin",
+          "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+        },
+        {
+          "features": [
+            "cgemm",
+            "std"
+          ],
+          "owners": [],
+          "profile": "debug",
+          "target": "aarch64-apple-darwin",
+          "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+        }
+      ],
+      "files": {
+        "license": "package",
+        "readme": "package"
+      },
+      "manifest": "crates-io/matrixmultiply/0.3.11/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": true,
+        "edition": "2018",
+        "name": "matrixmultiply",
+        "type": "lib"
+      },
+      "version": "0.3.11",
+      "yanked": false
+    }
+  ]
+}
