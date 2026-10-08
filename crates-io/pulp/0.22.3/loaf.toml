@@ -36,3 +36,11 @@ target = "aarch64-apple-darwin"
 profile = "debug"
 features = ["default", "relaxed-simd", "std", "x86-v3"]
 cfg = ["libpulp_const"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["default", "relaxed-simd", "std", "x86-v3"]
+cfg = ["libpulp_const"]
+out = [{ name = "x86_64_asm.rs", path = "out/fa4e0b773e1c/x86_64_asm.rs", digest = "sha256:fa4e0b773e1cbfa0cb319809b6327aaaf913cf5b12c2a00d0a902f53f2767cfa" }]

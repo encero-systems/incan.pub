@@ -17,3 +17,11 @@ build-script = true
 [dependencies]
 mime = { loaf = "crates-io/mime", version = "^0.3" }
 unicase = { loaf = "crates-io/unicase", version = "^2.4.0" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["default", "rev-mappings"]
+cfg = []
+environment = [{ name = "MIME_TYPES_GENERATED_PATH", out = "mime_types_generated.rs" }]

@@ -1,0 +1,60 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-10-08T10:25:11Z",
+  "evidence": {
+    "compiler_probes": [],
+    "domain": "target",
+    "graph": "sha256:1f3945f180227d726c9b0b5009e55acaa961bb8ac370bff38449d9513acc75ba",
+    "hazards": [],
+    "host": "x86_64-unknown-linux-gnu",
+    "method": "registry build-script run",
+    "sandbox": "bubblewrap: network namespace unshared, root read-only, writes confined to the work directory"
+  },
+  "fact": {
+    "cfg": [
+      "has_unsigned_abs",
+      "rustc_1_46",
+      "rustc_1_50",
+      "rustc_1_60",
+      "rustc_1_75"
+    ],
+    "features": [
+      "default",
+      "std"
+    ],
+    "out": [
+      {
+        "digest": "sha256:10104eb7579f46d237b3c97a8c85a885f06f78f4f028d15a10efe95ea7b303ac",
+        "name": "default_precision.rs",
+        "path": "out/10104eb7579f/default_precision.rs"
+      },
+      {
+        "digest": "sha256:80b106f47ba65f5af4c85ad17fabcef53055c9ca3fb5cd7ea2f727cb7bb61159",
+        "name": "default_rounding_mode.rs",
+        "path": "out/80b106f47ba6/default_rounding_mode.rs"
+      },
+      {
+        "digest": "sha256:5ddeb60c5a065021fb6a27d6bc173d304da99be02a86ae8fc04c79aa2f56c736",
+        "name": "exponential_format_threshold.rs",
+        "path": "out/5ddeb60c5a06/exponential_format_threshold.rs"
+      },
+      {
+        "digest": "sha256:951d1777ff40ad8691eb3a4f6a80608c28793ea39d84e62646dfa9409494604b",
+        "name": "serde_scale_limit.rs",
+        "path": "out/951d1777ff40/serde_scale_limit.rs"
+      }
+    ],
+    "profile": "debug",
+    "target": "x86_64-unknown-linux-gnu",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:60536b4ac07bf79166f42f8020986e22c45c35d9479dd0d1380362b2f6d97b06",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "bigdecimal",
+    "scope": "crates-io",
+    "version": "0.4.11"
+  }
+}

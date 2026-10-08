@@ -55,3 +55,11 @@ tracing-subscriber = { loaf = "crates-io/tracing-subscriber", version = "^0.3.18
 v_frame = { loaf = "crates-io/v_frame", version = "^0.3.8" }
 vapoursynth = { loaf = "crates-io/vapoursynth", version = "^0.4.0", features = ["vapoursynth-api-32", "vapoursynth-functions", "vsscript-api-31", "vsscript-functions"], optional = true }
 y4m = { loaf = "crates-io/y4m", version = "^0.8.0" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = []
+cfg = []
+environment = [{ name = "CARGO_CFG_TARGET_FEATURE", literal = "fxsr,sse,sse2" }, { name = "CARGO_ENCODED_RUSTFLAGS", literal = "" }, { name = "PROFILE", literal = "debug" }]

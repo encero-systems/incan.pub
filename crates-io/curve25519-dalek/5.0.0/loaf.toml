@@ -56,3 +56,24 @@ target = "aarch64-apple-darwin"
 profile = "debug"
 features = ["precomputed-tables", "zeroize"]
 cfg = ["curve25519_dalek_backend=\"serial\"", "curve25519_dalek_bits=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["alloc", "default", "precomputed-tables", "zeroize"]
+cfg = ["curve25519_dalek_backend=\"simd\"", "curve25519_dalek_bits=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["digest", "precomputed-tables", "zeroize"]
+cfg = ["curve25519_dalek_backend=\"simd\"", "curve25519_dalek_bits=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "debug"
+features = ["precomputed-tables", "zeroize"]
+cfg = ["curve25519_dalek_backend=\"simd\"", "curve25519_dalek_bits=\"64\""]

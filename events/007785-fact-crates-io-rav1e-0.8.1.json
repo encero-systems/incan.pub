@@ -1,0 +1,52 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-10-08T10:52:09Z",
+  "evidence": {
+    "compiler_probes": [],
+    "domain": "target",
+    "graph": "sha256:8d72105d17be6332a4eda96c59055ff4671ab3a86d1f7c954ec62ada71a1fa63",
+    "hazards": [],
+    "host": "x86_64-unknown-linux-gnu",
+    "method": "registry build-script run",
+    "sandbox": "bubblewrap: network namespace unshared, root read-only, writes confined to the work directory"
+  },
+  "fact": {
+    "cfg": [],
+    "environment": [
+      {
+        "literal": "fxsr,sse,sse2",
+        "name": "CARGO_CFG_TARGET_FEATURE"
+      },
+      {
+        "literal": "",
+        "name": "CARGO_ENCODED_RUSTFLAGS"
+      },
+      {
+        "literal": "debug",
+        "name": "PROFILE"
+      }
+    ],
+    "features": [
+      "threading"
+    ],
+    "out": [
+      {
+        "digest": "sha256:3150bdf7c90eed6c0fc25bc7be808ddcd34d9ac1512139b65d410064447c3b92",
+        "name": "built.rs",
+        "path": "out/3150bdf7c90e/built.rs"
+      }
+    ],
+    "profile": "debug",
+    "target": "x86_64-unknown-linux-gnu",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:9113c9e5b2b1f007e8c06e65eb46b652924d30f0b31152663fe6b71fec25dbce",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "rav1e",
+    "scope": "crates-io",
+    "version": "0.8.1"
+  }
+}
