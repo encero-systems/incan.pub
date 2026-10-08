@@ -4,7 +4,7 @@ The crates.io package [zstd-safe](https://crates.io/crates/zstd-safe), adopted b
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [8.0.0](8.0.0/loaf.toml) | 2026-10-06 | BSD-3-Clause | 5 | 0 |  |
+| [8.0.0](8.0.0/loaf.toml) | 2026-10-06 | BSD-3-Clause | 7 | 0 |  |
 | [7.3.0](7.3.0/loaf.toml) | 2026-10-06 | BSD-3-Clause | 5 | 0 |  |
 | [7.2.4](7.2.4/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 

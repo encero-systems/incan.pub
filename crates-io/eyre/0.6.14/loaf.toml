@@ -28,6 +28,13 @@ cfg = ["backtrace", "eyre_no_fmt_args_capture", "eyre_no_fmt_arguments_as_str", 
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["auto-install", "default", "track-caller"]
+cfg = ["backtrace", "eyre_no_fmt_args_capture", "eyre_no_fmt_arguments_as_str", "track_caller"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "x86_64-unknown-linux-gnu"
 profile = "debug"
 features = ["auto-install", "default", "track-caller"]

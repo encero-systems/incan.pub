@@ -40,6 +40,13 @@ harvested-from = "sha256:0c8061b2662bc8ca14686e8ca0bdae3a8ac591e732140705967e331
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["more_lengths", "zeroize"]
+cfg = ["relaxed_coherence"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "x86_64-unknown-linux-gnu"
 profile = "debug"
 features = ["more_lengths"]

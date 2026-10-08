@@ -23,3 +23,19 @@ quote = { loaf = "crates-io/quote", version = "^1" }
 syn = { loaf = "crates-io/syn", version = "^3.0.5", features = ["printing"] }
 wit-bindgen-core = { loaf = "crates-io/wit-bindgen-core", version = "^0.62.0" }
 wit-bindgen-rust = { loaf = "crates-io/wit-bindgen-rust", version = "^0.62.0" }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["default", "macro-string"]
+cfg = []
+environment = [{ name = "DEBUG_OUTPUT_DIR", out = "." }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["macro-string"]
+cfg = []
+environment = [{ name = "DEBUG_OUTPUT_DIR", out = "." }]

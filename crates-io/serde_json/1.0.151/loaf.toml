@@ -98,6 +98,34 @@ cfg = ["fast_arithmetic=\"64\""]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
 profile = "release"
+features = ["alloc"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["alloc", "default", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["alloc", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["default", "float_roundtrip", "std"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
 features = ["default", "indexmap", "preserve_order", "std"]
 cfg = ["fast_arithmetic=\"64\""]
 harvested-from = "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c"
@@ -116,6 +144,20 @@ profile = "release"
 features = ["default", "std"]
 cfg = ["fast_arithmetic=\"64\""]
 harvested-from = "sha256:c16ad44b089ea95b80a8268b1b4bea9659316cff539b72898eb9c185fceda78c"
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["default", "std", "unbounded_depth"]
+cfg = ["fast_arithmetic=\"64\""]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
+features = ["std"]
+cfg = ["fast_arithmetic=\"64\""]
 
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
