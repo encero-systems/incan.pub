@@ -4,7 +4,7 @@ The crates.io package [thiserror](https://crates.io/crates/thiserror), adopted b
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [2.0.21](2.0.21/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 12 | 32 | [units](2.0.21/assets.json) |
+| [2.0.21](2.0.21/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 12 | 35 | [units](2.0.21/assets.json) |
 | [2.0.18](2.0.18/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 1 | 0 |  |
 | [1.0.69](1.0.69/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 4 | 3 | [units](1.0.69/assets.json) |
 

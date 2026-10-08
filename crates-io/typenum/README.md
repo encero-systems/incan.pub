@@ -7,7 +7,7 @@ The crates.io package [typenum](https://crates.io/crates/typenum), adopted by [i
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.20.1](1.20.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 17 | [units](1.20.1/assets.json) |
+| [1.20.1](1.20.1/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 18 | [units](1.20.1/assets.json) |
 | [1.19.0](1.19.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/typenum`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/typenum](../../index/crates-io/typenum), the units by each version's `assets.json`.

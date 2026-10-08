@@ -4,7 +4,7 @@ The crates.io package [toml_edit](https://crates.io/crates/toml_edit), adopted b
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.25.15+spec-1.1.0](0.25.15+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 10 | [units](0.25.15+spec-1.1.0/assets.json) |
+| [0.25.15+spec-1.1.0](0.25.15+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 11 | [units](0.25.15+spec-1.1.0/assets.json) |
 | [0.25.5+spec-1.1.0](0.25.5+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.22.27](0.22.27/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 

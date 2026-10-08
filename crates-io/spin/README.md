@@ -4,7 +4,7 @@ The crates.io package [spin](https://crates.io/crates/spin), adopted by [incan.p
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.12.3](0.12.3/loaf.toml) | 2026-10-07 | MIT | 0 | 2 | [units](0.12.3/assets.json) |
+| [0.12.3](0.12.3/loaf.toml) | 2026-10-07 | MIT | 0 | 3 | [units](0.12.3/assets.json) |
 | [0.10.1](0.10.1/loaf.toml) | 2026-10-07 | MIT | 0 | 3 | [units](0.10.1/assets.json) |
 | [0.9.9](0.9.9/loaf.toml) | 2026-10-07 | MIT | 0 | 9 | [units](0.9.9/assets.json) |
 
