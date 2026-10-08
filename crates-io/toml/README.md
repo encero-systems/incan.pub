@@ -6,7 +6,7 @@ facilitate deserializing and serializing Rust structures.
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.1.6+spec-1.1.0](1.1.6+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 4 | [units](1.1.6+spec-1.1.0/assets.json) |
+| [1.1.6+spec-1.1.0](1.1.6+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 5 | [units](1.1.6+spec-1.1.0/assets.json) |
 | [0.9.12+spec-1.1.0](0.9.12+spec-1.1.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.8.23](0.8.23/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 
