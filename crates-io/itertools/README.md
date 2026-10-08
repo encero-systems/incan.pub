@@ -4,7 +4,7 @@ The crates.io package [itertools](https://crates.io/crates/itertools), adopted b
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.15.0](0.15.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 7 | [units](0.15.0/assets.json) |
+| [0.15.0](0.15.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 0 | 8 | [units](0.15.0/assets.json) |
 | [0.14.0](0.14.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 4 | [units](0.14.0/assets.json) |
 | [0.13.0](0.13.0/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 2 | [units](0.13.0/assets.json) |
 | [0.10.5](0.10.5/loaf.toml) | 2026-10-07 | MIT/Apache-2.0 | 0 | 0 |  |

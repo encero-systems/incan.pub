@@ -4,7 +4,7 @@ The crates.io package [uuid](https://crates.io/crates/uuid), adopted by [incan.p
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.27.0](1.27.0/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 0 | 5 | [units](1.27.0/assets.json) |
+| [1.27.0](1.27.0/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 0 | 7 | [units](1.27.0/assets.json) |
 | [1.26.1](1.26.1/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 1 | 0 |  |
 | [1.24.0](1.24.0/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 2 | 0 |  |
 
