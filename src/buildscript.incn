@@ -87,16 +87,17 @@ pub def record_proposal(
             ran = run_script(executable, package, version, manifest, package_dir, base, selection, label)?
             observed = directives(ran, label, manifest_string(manifest, "package.links") != "", base + "/out")?
             native = native_work(observed, base, selection, label)?
-            mut included = out_dir_includes(files, script, observed.environment)
+            environment = with_out_dir_suffixes(files, script, observed.environment, label)?
+            mut included = out_dir_includes(files, script, environment)
             # A variable naming a directory below OUT_DIR is how the crate reaches the files in it (cranelift's
             # ISLE_DIR), so they are inputs of its compile as surely as an `include!` of OUT_DIR.
-            for variable in observed.environment:
+            for variable in environment:
                 if variable[1] == "out" and variable[2] != ".":
                     for relative in files_below(Path(base + "/out/" + variable[2]), variable[2] + "/")?:
                         if not included.contains(relative):
                             included.append(relative)
             return Ok(Some(write_proposal(
-                package, version, checksum, base, observed.cfg, observed.environment, native, included, selection,
+                package, version, checksum, base, observed.cfg, environment, native, included, selection,
             )?))
         None => return Ok(None)
 
@@ -472,11 +473,11 @@ def directives(ran: Ran, label: str, links: bool, out_dir: str) -> Result[Direct
     return Ok(Directives(cfg=sorted(cfg), libraries=libraries, environment=sorted_environment(environment, label)?))
 
 
-def environment_entry(value: str, out_dir: str, label: str) -> Result[list[str], str]:
+pub def environment_entry(value: str, out_dir: str, label: str) -> Result[list[str], str]:
     """
     One `rustc-env=NAME=VALUE` as the fact states it: a path at or below the script's `OUT_DIR` becomes `out` (relative
-    to it, `.` for itself), so the consumer's own `OUT_DIR` stands in; any other absolute path names this host and is
-    refused; everything else is a literal.
+    to it, `.` for itself), so the consumer's own `OUT_DIR` stands in; any other absolute path is `host` until
+    `with_out_dir_suffixes` has read the crate's sources; everything else is a literal.
     """
     pieces = value.split("=")
     name = pieces[0]
@@ -491,8 +492,39 @@ def environment_entry(value: str, out_dir: str, label: str) -> Result[list[str],
     if trimmed.startswith(out_dir + "/"):
         return Ok([name, "out", trimmed[len(out_dir) + 1:]])
     if text.startswith("/"):
-        return Err(f"{label}: the build script sets `{name}` to the host path `{text}`, outside its OUT_DIR")
+        return Ok([name, "host", text])
     return Ok([name, "literal", text])
+
+
+pub def with_out_dir_suffixes(
+    files: list[TarEntry], script: str, environment: list[list[str]], label: str
+) -> Result[list[list[str]], str]:
+    """
+    Settle each `host` value: one the crate's sources only ever append to `OUT_DIR`, as in
+    `concat!(env!("OUT_DIR"), env!("NAME"))` (crunchy's `CRUNCHY_LIB_SUFFIX=/lib.rs`), names a file below the
+    consumer's own `OUT_DIR` and is stated as the literal it is; any other names this host and is refused.
+    """
+    sources = compile_sources(files, script)
+    mut settled: list[list[str]] = []
+    for variable in environment:
+        if variable[1] != "host":
+            settled.append(variable)
+            continue
+        marker = "env!(\"" + variable[0] + "\")"
+        mut uses = 0
+        mut suffix_uses = 0
+        for text in sources:
+            pieces = text.split(marker)
+            for index in range(1, len(pieces)):
+                uses += 1
+                if pieces[index - 1].replace(" ", "").replace("\n", "").endswith("env!(\"OUT_DIR\"),"):
+                    suffix_uses += 1
+        if uses == 0 or suffix_uses != uses:
+            name = variable[0]
+            value = variable[2]
+            return Err(f"{label}: the build script sets `{name}` to the host path `{value}`, outside its OUT_DIR")
+        settled.append([variable[0], "literal", variable[2]])
+    return Ok(settled)
 
 
 def sorted_environment(entries: list[list[str]], label: str) -> Result[list[list[str]], str]:
@@ -656,21 +688,39 @@ def write_proposal(
     return Ok(proposal_dir + "/proposal.json")
 
 
-def out_dir_includes(files: list[TarEntry], script: str, environment: list[list[str]]) -> list[str]:
+pub def out_dir_includes(files: list[TarEntry], script: str, environment: list[list[str]]) -> list[str]:
     """
     The `OUT_DIR` paths the crate's Rust sources name in `concat!(env!("OUT_DIR"), ...)`, or through a variable its
     build script set to a path below `OUT_DIR` (`concat!(env!("ISLE_DIR"), ...)`): the generated inputs its compile
     reads through `include!`, `include_str!` or `include_bytes!`. The build script, tests, benches and examples are
-    not the crate's compile.
+    not the crate's compile. A literal that begins with `/` is a suffix of `OUT_DIR` (`with_out_dir_suffixes` lets
+    no other through), so the file it names is one of them.
     """
     # Each variable that names OUT_DIR or a directory below it, as [marker, the path it adds before the name].
     mut markers: list[list[str]] = [["env!(\"OUT_DIR\")", ""]]
+    mut out: list[str] = []
     for variable in environment:
         if variable[1] == "out":
             mut prefix = ""
             if variable[2] != ".":
                 prefix = variable[2] + "/"
             markers.append(["env!(\"" + variable[0] + "\")", prefix])
+        elif variable[1] == "literal" and variable[2].startswith("/") and len(variable[2]) > 1:
+            if not out.contains(variable[2][1:]):
+                out.append(variable[2][1:])
+    for text in compile_sources(files, script):
+        for marker in markers:
+            for piece in text.split(marker[0])[1:]:
+                name = joined_literals(piece.split(")")[0])
+                if name.startswith("/"):
+                    relative = marker[1] + name[1:]
+                    if len(name) > 1 and not out.contains(relative):
+                        out.append(relative)
+    return out
+
+
+def compile_sources(files: list[TarEntry], script: str) -> list[str]:
+    """The text of every Rust source of the crate's own compile: not the build script, tests, benches or examples."""
     mut out: list[str] = []
     for file in files:
         if not file.path.endswith(".rs") or file.path == script:
@@ -678,14 +728,7 @@ def out_dir_includes(files: list[TarEntry], script: str, environment: list[list[
         if file.path.startswith("tests/") or file.path.startswith("benches/") or file.path.startswith("examples/"):
             continue
         match file.data.decode():
-            Ok(text) =>
-                for marker in markers:
-                    for piece in text.split(marker[0])[1:]:
-                        name = joined_literals(piece.split(")")[0])
-                        if name.startswith("/"):
-                            relative = marker[1] + name[1:]
-                            if len(name) > 1 and not out.contains(relative):
-                                out.append(relative)
+            Ok(text) => out.append(text)
             Err(_) => pass
     return out
 

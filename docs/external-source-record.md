@@ -47,7 +47,7 @@ Each entry of `objects` is one compile: `name`, `language` (`c`, `cpp` or `assem
 
 `link` and `tool` are rendered as `[[rust.facts.link]]` and `[[rust.facts.tool]]` sub-tables of the record they belong to. A producer name is claimed once across both lists; an argument or environment entry names a literal or one of that producer's own declared artifacts, never a path; an `outputs` entry carries no digest, because the product bytes are an asset rather than a fact.
 
-A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment is stated by `environment`: a value below the script's `OUT_DIR` as an `out` path the consumer resolves against its own `OUT_DIR`, any other value as a `literal`; a value that names another host path cannot be stated and the binding has no record.
+A consumer applies a record only when its own selection equals the binding exactly. Script-emitted environment is stated by `environment`: a value below the script's `OUT_DIR` as an `out` path the consumer resolves against its own `OUT_DIR`, any other value as a `literal`. An absolute value outside `OUT_DIR` is a `literal` only when the crate's sources use it solely directly after `env!("OUT_DIR")` in a `concat!` (crunchy's `CRUNCHY_LIB_SUFFIX=/lib.rs`): it is then a suffix of the consumer's own `OUT_DIR`, and the file it names is a committed generated input. Any other absolute value names a host path, cannot be stated, and the binding has no record.
 
 ### The vocabulary is closed
 

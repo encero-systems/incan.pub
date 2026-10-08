@@ -1,0 +1,39 @@
+"""
+Build-script recording: how the environment a script prints for the crate's compile becomes part of its fact.
+"""
+
+from std.testing import assert_eq, assert_is_err
+
+from buildscript import environment_entry, out_dir_includes, with_out_dir_suffixes
+from tar import TarEntry
+
+
+def test_a_value_appended_to_out_dir_is_a_literal_and_names_an_input() -> None:
+    # crunchy 0.2.4 prints `rustc-env=CRUNCHY_LIB_SUFFIX=/lib.rs` and includes `OUT_DIR` followed by it.
+    files = [
+        TarEntry(path="build.rs", executable=false, data=b"fn main() {}\n"),
+        TarEntry(
+            path="src/lib.rs",
+            executable=false,
+            data=b"include!(concat!(env!(\"OUT_DIR\"), env!(\"CRUNCHY_LIB_SUFFIX\")));\n",
+        ),
+    ]
+    entry = environment_entry("CRUNCHY_LIB_SUFFIX=/lib.rs", "/work/out", "crunchy 0.2.4").unwrap()
+    assert_eq("\t".join(entry), "CRUNCHY_LIB_SUFFIX\thost\t/lib.rs")
+    settled = with_out_dir_suffixes(files, "build.rs", [entry], "crunchy 0.2.4").unwrap()
+    assert_eq("\t".join(settled[0]), "CRUNCHY_LIB_SUFFIX\tliteral\t/lib.rs")
+    assert_eq(",".join(out_dir_includes(files, "build.rs", settled)), "lib.rs")
+
+
+def test_a_host_path_the_crate_reads_on_its_own_is_refused() -> None:
+    files = [TarEntry(path="src/lib.rs", executable=false, data=b"const TOOL: &str = env!(\"TOOL\");\n")]
+    entry = environment_entry("TOOL=/usr/bin/tool", "/work/out", "tool 1.0.0").unwrap()
+    assert_is_err(with_out_dir_suffixes(files, "build.rs", [entry], "tool 1.0.0"))
+    # A host path no source reads says nothing a consumer could check, so it is refused as well.
+    assert_is_err(with_out_dir_suffixes([], "build.rs", [entry], "tool 1.0.0"))
+
+
+def test_a_path_below_out_dir_is_stated_relative_to_it() -> None:
+    assert_eq("\t".join(environment_entry("ISLE_DIR=/work/out/isle/", "/work/out", "c 1.0.0").unwrap()), "ISLE_DIR\tout\tisle")
+    assert_eq("\t".join(environment_entry("DIR=/work/out", "/work/out", "c 1.0.0").unwrap()), "DIR\tout\t.")
+    assert_eq("\t".join(environment_entry("FAMILY=unix", "/work/out", "c 1.0.0").unwrap()), "FAMILY\tliteral\tunix")
