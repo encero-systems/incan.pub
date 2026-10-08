@@ -5,7 +5,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub build [--root DIR]
     incan-pub index-urls [--root DIR]
     incan-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
-    incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
+    incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--rewrite] [--actor ACTOR] [--root DIR]
     incan-pub admit-drop DIR [--actor ACTOR] [--root DIR]
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--owners SHA,...] [--actor ACTOR] [--root DIR]
@@ -323,7 +323,7 @@ def publish(invocation: Invocation) -> Result[None, str]:
 
 def add_fact(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub add-fact PROPOSAL.json")
+        return Err("usage: incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--rewrite]")
     mut notes_override: Option[str] = None
     match invocation.option("notes"):
         Some(file) => notes_override = Some(read_text(Path(file), file)?.strip())
@@ -336,7 +336,7 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         invocation.actor(),
         invocation.flag("publish"),
         notes_override,
-        false,
+        invocation.flag("rewrite"),
     )?
     return build(invocation)
 

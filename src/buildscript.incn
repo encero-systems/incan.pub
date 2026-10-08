@@ -90,10 +90,17 @@ pub def record_proposal(
             environment = with_out_dir_suffixes(files, script, observed.environment, label)?
             mut included = out_dir_includes(files, script, environment)
             # A variable naming a directory below OUT_DIR is how the crate reaches the files in it (cranelift's
-            # ISLE_DIR), so they are inputs of its compile as surely as an `include!` of OUT_DIR.
+            # ISLE_DIR), and one naming a file is how it reaches that file (mime_guess's `include!` of
+            # MIME_TYPES_GENERATED_PATH), so they are inputs of its compile as surely as an `include!` of OUT_DIR.
             for variable in environment:
                 if variable[1] == "out" and variable[2] != ".":
-                    for relative in files_below(Path(base + "/out/" + variable[2]), variable[2] + "/")?:
+                    named = Path(base + "/out/" + variable[2])
+                    mut reached: list[str] = []
+                    if named.is_file():
+                        reached = [variable[2]]
+                    else:
+                        reached = files_below(named, variable[2] + "/")?
+                    for relative in reached:
                         if not included.contains(relative):
                             included.append(relative)
             return Ok(Some(write_proposal(
