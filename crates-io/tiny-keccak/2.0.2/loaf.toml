@@ -30,6 +30,13 @@ crunchy = { loaf = "crates-io/crunchy", version = "^0.2.2" }
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
 profile = "debug"
+features = ["cshake", "default", "fips202", "k12", "keccak", "kmac", "parallel_hash", "sha3", "shake", "sp800", "tuple_hash"]
+cfg = []
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
 features = ["default", "shake"]
 cfg = []
 

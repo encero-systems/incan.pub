@@ -30,3 +30,11 @@ schemars = { loaf = "crates-io/schemars", version = "^1", default-features = fal
 schemars08 = { loaf = "crates-io/schemars", version = "^0.8", default-features = false, optional = true }
 serde = { loaf = "crates-io/serde", version = "^1", default-features = false }
 serde_json = { loaf = "crates-io/serde_json", version = "^1", features = ["alloc"], default-features = false }
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "latest", "std", "v1_36"]
+cfg = ["k8s_openapi_enabled_version=\"1.36\""]
+out = [{ name = "conditional_compilation_macros.rs", path = "out/2c4a856f569e/conditional_compilation_macros.rs", digest = "sha256:2c4a856f569e42330b106a92b712be5a2b84a5c18087dadf567016c98d9b1081" }]
