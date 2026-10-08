@@ -38,6 +38,14 @@ cfg = ["arch_enabled"]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
 profile = "release"
+features = []
+cfg = ["optimizations_enabled"]
+environment = [{ name = "CFG_CARGO_FEATURES", literal = "[]" }, { name = "CFG_OPT_LEVEL", literal = "3" }, { name = "CFG_TARGET_FEATURES", literal = "[\"aes\", \"crc\", \"dit\", \"dotprod\", \"dpb\", \"dpb2\", \"fcma\", \"fhm\", \"flagm\", \"fp16\", \"frintts\", \"jsconv\", \"lor\", \"lse\", \"neon\", \"paca\", \"pacg\", \"pan\", \"pmuv3\", \"ras\", \"rcpc\", \"rcpc2\", \"rdm\", \"sb\", \"sha2\", \"sha3\", \"ssbs\", \"vh\"]" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "release"
 features = ["arch", "default"]
 cfg = ["arch_enabled", "optimizations_enabled"]
 
