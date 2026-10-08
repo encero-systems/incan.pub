@@ -129,7 +129,7 @@ pub def plan_closure(
     Every version to adopt for `targets`, dependencies first.
 
     `adopted` holds what the log adopted, keyed `<package>\t<version>`. Each target is built with its default
-    features, and the walk follows the features every dependent enables on a dependency, through adopted versions as
+    features and any it names after its version, and the walk follows the features every dependent enables on a dependency, through adopted versions as
     well: an optional dependency that only a dependent's feature switches on is in the closure a consumer of the
     target builds, though no version's own defaults name it. A version planned for the first time also gets its own
     default features, since admission holds it to its default closure. A version with a build script brings its
@@ -148,7 +148,8 @@ pub def plan_closure(
     # Each entry is [package, version, feature...].
     mut queue: list[list[str]] = []
     for target in targets:
-        queue.append([target[0], target[1], "default"])
+        # A target is [package, version, feature...]: its defaults and any features asked of it.
+        queue.append([target[0], target[1], "default"] + target[2:])
     mut position = 0
     while position < len(queue):
         entry = queue[position]

@@ -10,7 +10,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--owners SHA,...] [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
-    incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
+    incan-pub adopt [NAME VERSION]... [--features a,b] [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
@@ -27,9 +27,10 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub describe-packages --work DIR [--registry HOST] [--namespace NS] [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
-`refused: <rule>` and exits non-zero. `adopt` adopts the named versions, or with `--records` every record not yet
-adopted, together with their dependency closure; `--cache` keeps what it downloads from crates.io and `--blobs` is the
-store source Loaf archives are written to by digest.
+`refused: <rule>` and exits non-zero. `adopt` adopts the named versions (with `--features`, built with those features
+as well as their defaults), or with `--records` every record not yet adopted, together with their dependency closure;
+`--cache` keeps what it downloads from crates.io and `--blobs` is the store source Loaf archives are written to by
+digest.
 """
 
 from std.fs import Path
@@ -664,10 +665,16 @@ def adopt(invocation: Invocation) -> Result[None, str]:
     blobs = invocation.require("blobs")?
     root = invocation.root()
     mut state = replay(load_events(root)?, root)?
+    # `--features` asks the named versions for features beyond their defaults, so the closure holds the optional
+    # dependencies those switch on (moka's `future`, derive_more's `full`).
+    mut asked: list[str] = []
+    for feature in invocation.option("features").unwrap_or("").split(","):
+        if len(feature) > 0:
+            asked.append(feature)
     mut targets: list[list[str]] = []
     mut index = 0
     while index < len(invocation.positional):
-        targets.append([invocation.positional[index], invocation.positional[index + 1]])
+        targets.append([invocation.positional[index], invocation.positional[index + 1]] + asked)
         index += 2
     if invocation.flag("records"):
         for key in sorted(list(state.keys())):
