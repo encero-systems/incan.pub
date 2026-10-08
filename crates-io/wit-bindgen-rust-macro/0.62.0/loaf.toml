@@ -27,6 +27,22 @@ wit-bindgen-rust = { loaf = "crates-io/wit-bindgen-rust", version = "^0.62.0" }
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "macro-string"]
+cfg = []
+environment = [{ name = "DEBUG_OUTPUT_DIR", out = "." }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["macro-string"]
+cfg = []
+environment = [{ name = "DEBUG_OUTPUT_DIR", out = "." }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "macro-string"]
 cfg = []

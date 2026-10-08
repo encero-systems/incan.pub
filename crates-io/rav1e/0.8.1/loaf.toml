@@ -109,6 +109,15 @@ y4m = { loaf = "crates-io/y4m", version = "^0.8", optional = true }
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["threading"]
+cfg = []
+out = [{ name = "built.rs", path = "out/ec93f3c9a072/built.rs", digest = "sha256:ec93f3c9a072641b11436a0e37e85a82a986d950acfdbff3416f3e63a35d9ea6" }]
+environment = [{ name = "CARGO_CFG_TARGET_FEATURE", literal = "aes,crc,dit,dotprod,dpb,dpb2,fcma,fhm,flagm,fp16,frintts,jsconv,lor,lse,neon,paca,pacg,pan,pmuv3,ras,rcpc,rcpc2,rdm,sb,sha2,sha3,ssbs,vh" }, { name = "CARGO_ENCODED_RUSTFLAGS", literal = "" }, { name = "PROFILE", literal = "debug" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["threading"]
 cfg = []

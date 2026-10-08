@@ -21,6 +21,15 @@ unicase = { loaf = "crates-io/unicase", version = "^2.4.0" }
 [[rust.facts]]
 toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
 target = "aarch64-apple-darwin"
+profile = "debug"
+features = ["default", "rev-mappings"]
+cfg = []
+out = [{ name = "mime_types_generated.rs", path = "out/c1b2883cbc69/mime_types_generated.rs", digest = "sha256:c1b2883cbc693e86d0f255fea8c71fb7f81b7b9e40b2b4b585ce3bf5a34b7e5e" }]
+environment = [{ name = "MIME_TYPES_GENERATED_PATH", out = "mime_types_generated.rs" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "aarch64-apple-darwin"
 profile = "release"
 features = ["default", "rev-mappings"]
 cfg = []
