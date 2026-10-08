@@ -25,5 +25,8 @@ binary="$(tr -d '\n' < target/build-report.json | sed -n 's/.*"kind":[[:space:]]
   printf 'build.sh: the build report names no executable binary artifact (see target/build-report.json)\n' >&2
   exit 1
 }
+# Replace the file rather than write into it: on macOS a running process whose executable is rewritten in place is
+# killed (its code signature no longer matches), so an admission running target/incan-pub would die mid-write.
+rm -f target/incan-pub
 cp "$binary" target/incan-pub
 printf 'built target/incan-pub\n'

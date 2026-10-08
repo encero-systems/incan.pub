@@ -241,7 +241,7 @@ def check(invocation: Invocation) -> Result[None, str]:
     root = invocation.root()
     events = load_events(root)?
     state = replay(events, root)?
-    wanted = render_projections(state)?
+    wanted = render_projections(state, events)?
     committed = committed_projections(root)?
     stale = stale_projections(committed, wanted)
     if len(stale) > 0:
@@ -283,8 +283,9 @@ def check(invocation: Invocation) -> Result[None, str]:
 
 def build(invocation: Invocation) -> Result[None, str]:
     root = invocation.root()
-    state = replay(load_events(root)?, root)?
-    wanted = render_projections(state)?
+    events = load_events(root)?
+    state = replay(events, root)?
+    wanted = render_projections(state, events)?
     write_projections(root, committed_projections(root)?, wanted)?
     mut facts = 0
     for key in keys_of(state):

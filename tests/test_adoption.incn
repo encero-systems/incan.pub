@@ -364,8 +364,9 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     adopt(root, leaf("1.2.0"))
     adopt(root, top())
     adopt(root, top())
-    state = replay(load_events(root).unwrap(), root).unwrap()
-    files = render_projections(state).unwrap()
+    events = load_events(root).unwrap()
+    state = replay(events, root).unwrap()
+    files = render_projections(state, events).unwrap()
     line = parse(files["index/crates-io/top"].strip()).unwrap()
     assert_eq(canonical(line.get("rust").unwrap()).unwrap(), "{\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
     assert_eq(canonical(line.get("deps").unwrap()).unwrap(), "[{\"default-features\":true,\"features\":[],\"loaf\":\"crates-io/leaf\",\"name\":\"leaf\",\"optional\":false,\"req\":\"^1.2\"}]")
@@ -376,6 +377,12 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     catalog = parse(files["catalog/index.json"]).unwrap()
     assert_eq(catalog.get("schema").unwrap().as_str().unwrap(), "incan.pub/catalog/1")
     assert_eq(len(catalog.get("packages").unwrap().as_array().unwrap()), 2)
+    # It names the last event it reflects, since it cannot name the commit that holds it.
+    log = catalog.get("log").unwrap()
+    assert_eq(log.get("events").unwrap().as_int().unwrap(), len(events))
+    last = events[len(events) - 1]
+    assert_eq(log.get("last").unwrap().get("id").unwrap().as_str().unwrap(), last.body.get("id").unwrap().as_str().unwrap())
+    assert_eq(log.get("last").unwrap().get("at").unwrap().as_str().unwrap(), last.at)
     page = parse(files["catalog/crates-io/top.json"]).unwrap()
     assert_eq(page.get("name").unwrap().as_str().unwrap(), "crates-io/top")
     first = page.get("versions").unwrap().as_array().unwrap()[0]
@@ -438,7 +445,7 @@ def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -
     assert_eq(events[0].at, before.at)
     assert_true(canonical(events[0].body).unwrap() != canonical(before.body).unwrap())
     assert_eq(refusal(root), "")
-    files = render_projections(replay(events, root).unwrap()).unwrap()
+    files = render_projections(replay(events, root).unwrap(), events).unwrap()
     assert_true(files["crates-io/leaf/1.2.0/loaf.toml"].contains("edition = \"2018\""))
 
 

@@ -337,7 +337,7 @@ def test_a_fact_states_the_environment_its_build_script_sets() -> None:
     add_fact(root, stated)
     assert_eq(refusal(root), "")
     state = replay(load_events(root).unwrap(), root).unwrap()
-    manifest = render_projections(state).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
+    manifest = render_projections(state, load_events(root).unwrap()).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
     assert_true(manifest.contains(
         "\nenvironment = [{ name = \"DEBUG_OUTPUT_DIR\", out = \".\" }, { name = \"ISLE_DIR\", out = \"isle\" }, "
         + "{ name = \"TARGET_FAMILY\", literal = \"unix\" }]\n"
@@ -369,7 +369,7 @@ def test_declared_publisher_work_is_admitted_and_rendered_as_its_own_sub_tables(
     add_fact(root, fact_with_producers([link_record()], [tool_record()]))
     assert_eq(refusal(root), "")
     state = replay(load_events(root).unwrap(), root).unwrap()
-    manifest = render_projections(state).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
+    manifest = render_projections(state, load_events(root).unwrap()).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
     assert_true(manifest.contains("\ncfg = []\n\n[[rust.facts.link]]\nname = \"helper\"\n"))
     assert_true(manifest.contains("\nexecutable = { digest = \"" + sha("cc") + "\", name = \"cc\", owner = \"" + sha("owner") + "\", path = \"bin/cc\" }\n"))
     assert_true(manifest.contains("\nobjects = [{ arguments = [{ literal = \"-O2\" }, { input = \"helper_c\" }, { literal = \"-o\" }, { output = \"helper.o\" }], language = \"c\", name = \"helper.o\" }]\n"))
@@ -399,7 +399,7 @@ def test_one_binding_holds_one_native_fact_per_compiler_owner() -> None:
     assert_eq(refusal(root), "")
     state = replay(load_events(root).unwrap(), root).unwrap()
     assert_eq(len(state[record_key("libm", "0.2.16")].facts), 2)
-    index = render_projections(state).unwrap()["index/crates-io/libm"]
+    index = render_projections(state, load_events(root).unwrap()).unwrap()["index/crates-io/libm"]
     assert_true(index.contains("\"owners\":[\"" + sha("owner") + "\"]"))
     assert_true(index.contains("\"owners\":[\"" + sha("runner") + "\"]"))
     mut changed = link_under("runner")
@@ -619,7 +619,7 @@ def test_projections_are_rendered_from_the_fold_and_compared_byte_for_byte() -> 
     add_fact(root, fact_with("release", ["arch_enabled", "optimizations_enabled"]))
     add_fact(root, fact_with("debug", ["arch_enabled"]))
     state = replay(load_events(root).unwrap(), root).unwrap()
-    wanted = render_projections(state).unwrap()
+    wanted = render_projections(state, load_events(root).unwrap()).unwrap()
     assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 4)
     assert_true(wanted["catalog/index.json"].contains("\"packages\": []"))
     page = wanted["crates-io/libm/README.md"]
@@ -642,12 +642,13 @@ def test_a_yank_shows_on_the_index_line_and_a_stale_projection_is_named() -> Non
     root = directory.path()
     publish_libm(root)
     state = replay(load_events(root).unwrap(), root).unwrap()
-    write_projections(root, committed_projections(root).unwrap(), render_projections(state).unwrap()).unwrap()
+    write_projections(root, committed_projections(root).unwrap(), render_projections(state, load_events(root).unwrap()).unwrap()).unwrap()
     append_event(root, "yank", "libm", "0.2.16", "tests", {}).unwrap()
     yanked = replay(load_events(root).unwrap(), root).unwrap()
-    wanted = render_projections(yanked).unwrap()
+    wanted = render_projections(yanked, load_events(root).unwrap()).unwrap()
     assert_true(wanted["index/crates-io/libm"].contains("\"yanked\":true"))
-    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["crates-io/libm/README.md", "index/crates-io/libm"])
+    # The catalog names the last event, so every event restates it.
+    assert_eq(stale_projections(committed_projections(root).unwrap(), wanted), ["catalog/index.json", "crates-io/libm/README.md", "index/crates-io/libm"])
     assert_true(wanted["crates-io/libm/README.md"].contains("[0.2.16](0.2.16/loaf.toml) (yanked)"))
 
 
@@ -687,7 +688,7 @@ def test_an_advisory_is_rendered_on_the_record_and_counted_on_the_index_line() -
     payload["advisory"] = JsonValue.object({"text": JsonValue.string("The release binding was typed, not observed.\nSee the fact events.")})
     append_event(root, "advisory", "libm", "0.2.16", "tests", payload).unwrap()
     state = replay(load_events(root).unwrap(), root).unwrap()
-    wanted = render_projections(state).unwrap()
+    wanted = render_projections(state, load_events(root).unwrap()).unwrap()
     manifest = wanted["crates-io/libm/0.2.16/loaf.toml"]
     assert_true(manifest.contains("# A second paragraph.\n#\n# Advisory: The release binding was typed, not observed.\n# Advisory: See the fact events.\n#\n# Projection"))
     assert_true(wanted["index/crates-io/libm"].contains("\"advisories\":1"))
@@ -882,7 +883,7 @@ def test_an_argument_may_point_into_the_owner_the_executable_names() -> None:
     add_fact(root, fact_with_producers([with_sdk], []))
     assert_eq(refusal(root), "")
     state = replay(load_events(root).unwrap(), root).unwrap()
-    manifest = render_projections(state).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
+    manifest = render_projections(state, load_events(root).unwrap()).unwrap()["crates-io/libm/0.2.16/loaf.toml"]
     assert_true(manifest.contains("{ owner = \"SDKs/MacOSX.sdk\" }"))
     mut absolute = link_record()
     absolute.set("objects", JsonValue.array([JsonValue.object({
@@ -920,9 +921,10 @@ def test_folding_a_prefix_then_the_rest_equals_folding_the_whole_log() -> None:
     advisory["advisory"] = JsonValue.object({"text": JsonValue.string("A note for consumers.")})
     append_event(root, "advisory", "libm", "0.2.16", "tests", advisory).unwrap()
     append_event(root, "yank", "libm", "0.2.16", "tests", {}).unwrap()
-    whole = render_projections(replay(load_events(root).unwrap(), root).unwrap()).unwrap()
+    events = load_events(root).unwrap()
+    whole = render_projections(replay(events, root).unwrap(), events).unwrap()
     for split in range(7):
         prefix = load_events(root).unwrap()[0:split]
         folded = replay_onto(replay(prefix, root).unwrap(), load_events_after(root, split).unwrap(), root).unwrap()
-        assert_eq(render_projections(folded).unwrap(), whole)
+        assert_eq(render_projections(folded, events).unwrap(), whole)
 

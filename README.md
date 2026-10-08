@@ -34,6 +34,9 @@ index
   index/crates-io/<name>                   projection: one JSON line per version, enough to resolve the whole graph
   crates-io/<name>/<version>/loaf.toml     projection: the adopted manifest followed by its bound facts
   crates-io/<name>/<version>/assets.json   projection: the asset manifest, once a version has assets
+  crates-io/<name>/README.md               projection: the package page
+  catalog/index.json                       projection: every adopted package, for a site or tool to list
+  catalog/crates-io/<name>.json            projection: a package's versions, provenance, facts and units
   crates-io/<name>/<version>/out/...       committed generated inputs a fact names
   graphs/<hex>.json                        the resolutions facts were selected from: roots, target, host
 
@@ -41,7 +44,7 @@ blob store (outside git)
   sha256/<hex>.tar                         source Loaf archives by digest
 ```
 
-Nothing under `index/`, `crates-io/**/loaf.toml` or `crates-io/**/assets.json` is edited by hand: `incan-pub build` regenerates both from the events, and `incan-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
+Nothing under `index/`, `catalog/`, `crates-io/**/loaf.toml`, `crates-io/**/assets.json` or `crates-io/*/README.md` is edited by hand: `incan-pub build` regenerates them from the events, and `incan-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
 
 In this transport a commit is the signed event and `HEAD` of `index` is the checkpoint the toolchain pins. The signed HTTPS form of RFC 125 changes how these files arrive, not what they say.
 

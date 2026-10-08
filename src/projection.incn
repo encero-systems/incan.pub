@@ -20,7 +20,7 @@ from adoption import (
     shown,
 )
 from canonical import canonical, json_string, pretty
-from events import member, read_text, string_member, write_text
+from events import Event, member, read_text, string_member, write_text
 from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
 
 
@@ -347,8 +347,8 @@ pub def index_path(name: str) -> str:
     return "index/" + loaf_name(name)
 
 
-pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], str]:
-    """Every projection file, by path relative to the root."""
+pub def render_projections(state: Dict[str, Record], events: list[Event]) -> Result[Dict[str, str], str]:
+    """Every projection file, by path relative to the root, for the state `events` replays to."""
     mut files: Dict[str, str] = {}
     mut versions_by_name: Dict[str, list[str]] = {}
     mut catalog: list[JsonValue] = []
@@ -388,7 +388,9 @@ pub def render_projections(state: Dict[str, Record]) -> Result[Dict[str, str], s
         match state[key].adopt:
             Some(_) => adopted_count += 1
             None => pass
-    files["catalog/index.json"] = render_catalog_index(catalog, adopted_count, fact_count, asset_count)?
+    files["catalog/index.json"] = render_catalog_index(
+        catalog, log_position(events), adopted_count, fact_count, asset_count
+    )?
     return Ok(files)
 
 
@@ -569,13 +571,17 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
     }))
 
 
-pub def render_catalog_index(entries: list[JsonValue], versions: int, facts: int, assets: int) -> Result[str, str]:
+pub def render_catalog_index(
+    entries: list[JsonValue], log: JsonValue, versions: int, facts: int, assets: int
+) -> Result[str, str]:
     """
     The catalog, `catalog/index.json`: one entry per adopted package, sorted by name, each naming its newest adopted
-    version that is not yanked and the page with every version. It is a projection of the index commit that holds it.
+    version that is not yanked and the page with every version. It is a projection of the index commit that holds it;
+    `log` names the last event it reflects, since a file cannot name the commit it is part of.
     """
     return Ok(pretty(JsonValue.object({
         "schema": JsonValue.string(CATALOG_SCHEMA),
+        "log": log,
         "counts": JsonValue.object({
             "packages": JsonValue.int(len(entries)),
             "versions": JsonValue.int(versions),
@@ -584,6 +590,18 @@ pub def render_catalog_index(entries: list[JsonValue], versions: int, facts: int
         }),
         "packages": JsonValue.array(entries),
     }))? + "\n")
+
+
+def log_position(events: list[Event]) -> JsonValue:
+    """How many events the log holds and the id and time of the last one; an empty log has no `last`."""
+    mut position: Dict[str, JsonValue] = {"events": JsonValue.int(len(events))}
+    if len(events) > 0:
+        last = events[len(events) - 1]
+        position["last"] = JsonValue.object({
+            "id": JsonValue.string(string_member(last.body, "id")),
+            "at": JsonValue.string(last.at),
+        })
+    return JsonValue.object(position)
 
 
 def catalog_entry(name: str, records: list[Record]) -> Result[Option[JsonValue], str]:
