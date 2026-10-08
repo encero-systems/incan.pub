@@ -4,7 +4,7 @@ The crates.io package [portable-atomic](https://crates.io/crates/portable-atomic
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.15.0](1.15.0/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 16 | 10 | [units](1.15.0/assets.json) |
+| [1.15.0](1.15.0/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 16 | 12 | [units](1.15.0/assets.json) |
 | [1.13.1](1.13.1/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 1 | 0 |  |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/portable-atomic`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/portable-atomic](../../index/crates-io/portable-atomic), the units by each version's `assets.json`.

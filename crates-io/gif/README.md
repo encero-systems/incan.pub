@@ -4,7 +4,7 @@ The crates.io package [gif](https://crates.io/crates/gif), adopted by [incan.pub
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.14.2](0.14.2/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 4 | [units](0.14.2/assets.json) |
+| [0.14.2](0.14.2/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 6 | [units](0.14.2/assets.json) |
 | [0.13.3](0.13.3/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 0 | 0 |  |
 | [0.12.0](0.12.0/loaf.toml) | 2026-10-07 | MIT/Apache-2.0 | 0 | 1 | [units](0.12.0/assets.json) |
 
