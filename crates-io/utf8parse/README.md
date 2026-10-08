@@ -4,7 +4,7 @@ The crates.io package [utf8parse](https://crates.io/crates/utf8parse), adopted b
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.2.2](0.2.2/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 0 | 11 | [units](0.2.2/assets.json) |
+| [0.2.2](0.2.2/loaf.toml) | 2026-10-06 | Apache-2.0 OR MIT | 0 | 13 | [units](0.2.2/assets.json) |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/utf8parse`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/utf8parse](../../index/crates-io/utf8parse), the units by each version's `assets.json`.
 

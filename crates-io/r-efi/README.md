@@ -4,7 +4,7 @@ The crates.io package [r-efi](https://crates.io/crates/r-efi), adopted by [incan
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [7.1.0](7.1.0/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 OR LGPL-2.1-or-later | 0 | 3 | [units](7.1.0/assets.json) |
+| [7.1.0](7.1.0/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 OR LGPL-2.1-or-later | 0 | 4 | [units](7.1.0/assets.json) |
 | [6.0.0](6.0.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 OR LGPL-2.1-or-later | 0 | 0 |  |
 | [5.3.0](5.3.0/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 OR LGPL-2.1-or-later | 0 | 0 |  |
 

@@ -4,7 +4,7 @@ The crates.io package [anyhow](https://crates.io/crates/anyhow), adopted by [inc
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [1.0.104](1.0.104/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 8 | 13 | [units](1.0.104/assets.json) |
+| [1.0.104](1.0.104/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 8 | 17 | [units](1.0.104/assets.json) |
 | [1.0.102](1.0.102/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 1 | 0 |  |
 
 Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/anyhow`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/anyhow](../../index/crates-io/anyhow), the units by each version's `assets.json`.

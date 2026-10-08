@@ -4,7 +4,7 @@ The crates.io package [yoke-derive](https://crates.io/crates/yoke-derive), adopt
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.8.4](0.8.4/loaf.toml) | 2026-10-07 | Unicode-3.0 | 0 | 12 | [units](0.8.4/assets.json) |
+| [0.8.4](0.8.4/loaf.toml) | 2026-10-07 | Unicode-3.0 | 0 | 16 | [units](0.8.4/assets.json) |
 | [0.8.3](0.8.3/loaf.toml) | 2026-10-06 | Unicode-3.0 | 1 | 0 |  |
 | [0.8.1](0.8.1/loaf.toml) | 2026-10-07 | Unicode-3.0 | 0 | 0 |  |
 

@@ -4,7 +4,7 @@ The crates.io package [arrayvec](https://crates.io/crates/arrayvec), adopted by 
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.7.8](0.7.8/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 10 | [units](0.7.8/assets.json) |
+| [0.7.8](0.7.8/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 14 | [units](0.7.8/assets.json) |
 | [0.7.6](0.7.6/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [0.5.2](0.5.2/loaf.toml) | 2026-10-07 | MIT/Apache-2.0 | 0 | 0 |  |
 
