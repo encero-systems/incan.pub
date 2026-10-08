@@ -5,7 +5,7 @@ Used when compiling Rust programs to the component model.
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.62.0](0.62.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 9 | 4 | [units](0.62.0/assets.json) |
+| [0.62.0](0.62.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 9 | 5 | [units](0.62.0/assets.json) |
 | [0.57.1](0.57.1/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 6 | 4 | [units](0.57.1/assets.json) |
 | [0.51.0](0.51.0/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
 

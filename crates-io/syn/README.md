@@ -4,7 +4,7 @@ The crates.io package [syn](https://crates.io/crates/syn), adopted by [incan.pub
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [3.0.6](3.0.6/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 64 | [units](3.0.6/assets.json) |
+| [3.0.6](3.0.6/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 65 | [units](3.0.6/assets.json) |
 | [2.0.119](2.0.119/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 53 | [units](2.0.119/assets.json) |
 | [2.0.117](2.0.117/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 2 | 0 |  |
 | [1.0.109](1.0.109/loaf.toml) | 2026-10-07 | MIT OR Apache-2.0 | 6 | 4 | [units](1.0.109/assets.json) |

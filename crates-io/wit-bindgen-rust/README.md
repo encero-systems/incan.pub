@@ -5,7 +5,7 @@ the `wit-bindgen` crate's `generate!` macro.
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.62.0](0.62.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 3 | 2 | [units](0.62.0/assets.json) |
+| [0.62.0](0.62.0/loaf.toml) | 2026-10-07 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 3 | 3 | [units](0.62.0/assets.json) |
 | [0.57.1](0.57.1/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
 | [0.51.0](0.51.0/loaf.toml) | 2026-10-06 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT | 0 | 0 |  |
 

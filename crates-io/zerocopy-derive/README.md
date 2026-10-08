@@ -4,7 +4,7 @@ The crates.io package [zerocopy-derive](https://crates.io/crates/zerocopy-derive
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.8.60](0.8.60/loaf.toml) | 2026-10-06 | BSD-2-Clause OR Apache-2.0 OR MIT | 0 | 5 | [units](0.8.60/assets.json) |
+| [0.8.60](0.8.60/loaf.toml) | 2026-10-06 | BSD-2-Clause OR Apache-2.0 OR MIT | 0 | 6 | [units](0.8.60/assets.json) |
 | [0.8.59](0.8.59/loaf.toml) | 2026-10-06 | BSD-2-Clause OR Apache-2.0 OR MIT | 1 | 0 |  |
 | [0.8.42](0.8.42/loaf.toml) | 2026-10-06 | BSD-2-Clause OR Apache-2.0 OR MIT | 0 | 0 |  |
 
