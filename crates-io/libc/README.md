@@ -4,7 +4,7 @@ The crates.io package [libc](https://crates.io/crates/libc), adopted by [incan.p
 
 | Version | Adopted | License | Build facts | Compiled units | |
 |---|---|---|---|---|---|
-| [0.2.190](0.2.190/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 12 | 20 | [units](0.2.190/assets.json) |
+| [0.2.190](0.2.190/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 16 | 20 | [units](0.2.190/assets.json) |
 | [0.2.189](0.2.189/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 1 | 0 |  |
 | [0.2.186](0.2.186/loaf.toml) | 2026-10-06 | MIT OR Apache-2.0 | 3 | 0 |  |
 

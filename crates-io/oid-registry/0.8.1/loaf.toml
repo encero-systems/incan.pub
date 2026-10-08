@@ -75,3 +75,19 @@ profile = "debug"
 features = ["default", "registry"]
 cfg = []
 out = [{ name = "oid_db.rs", path = "out/oid_db.rs", digest = "sha256:ec212569ebc316d4fe18d7ac00e1558a22dc56c08d14aaae6b5e228d347be8d2" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = ["crypto", "default", "kdf", "nist_algs", "pkcs1", "pkcs12", "pkcs7", "pkcs9", "registry", "x509", "x962"]
+cfg = []
+out = [{ name = "oid_db.rs", path = "out/ec212569ebc3/oid_db.rs", digest = "sha256:ec212569ebc316d4fe18d7ac00e1558a22dc56c08d14aaae6b5e228d347be8d2" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = ["default", "registry"]
+cfg = []
+out = [{ name = "oid_db.rs", path = "out/ec212569ebc3/oid_db.rs", digest = "sha256:ec212569ebc316d4fe18d7ac00e1558a22dc56c08d14aaae6b5e228d347be8d2" }]

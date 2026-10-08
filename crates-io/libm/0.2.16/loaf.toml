@@ -72,3 +72,19 @@ profile = "debug"
 features = ["arch", "default"]
 cfg = ["arch_enabled"]
 environment = [{ name = "CFG_CARGO_FEATURES", literal = "[\"arch\", \"default\"]" }, { name = "CFG_OPT_LEVEL", literal = "0" }, { name = "CFG_TARGET_FEATURES", literal = "[\"fxsr\", \"sse\", \"sse2\"]" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = []
+cfg = ["optimizations_enabled"]
+environment = [{ name = "CFG_CARGO_FEATURES", literal = "[]" }, { name = "CFG_OPT_LEVEL", literal = "3" }, { name = "CFG_TARGET_FEATURES", literal = "[\"fxsr\", \"sse\", \"sse2\"]" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = ["arch", "default"]
+cfg = ["arch_enabled", "optimizations_enabled"]
+environment = [{ name = "CFG_CARGO_FEATURES", literal = "[\"arch\", \"default\"]" }, { name = "CFG_OPT_LEVEL", literal = "3" }, { name = "CFG_TARGET_FEATURES", literal = "[\"fxsr\", \"sse\", \"sse2\"]" }]

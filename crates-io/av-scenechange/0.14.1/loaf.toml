@@ -79,3 +79,11 @@ profile = "debug"
 features = []
 cfg = []
 environment = [{ name = "CARGO_CFG_TARGET_FEATURE", literal = "fxsr,sse,sse2" }, { name = "CARGO_ENCODED_RUSTFLAGS", literal = "" }, { name = "PROFILE", literal = "debug" }]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = []
+cfg = []
+environment = [{ name = "CARGO_CFG_TARGET_FEATURE", literal = "fxsr,sse,sse2" }, { name = "CARGO_ENCODED_RUSTFLAGS", literal = "" }, { name = "PROFILE", literal = "release" }]

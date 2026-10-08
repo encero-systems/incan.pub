@@ -96,3 +96,24 @@ target = "x86_64-unknown-linux-gnu"
 profile = "debug"
 features = ["getrandom", "runtime-rng"]
 cfg = ["folded_multiply"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = ["default", "getrandom", "runtime-rng", "serde", "std"]
+cfg = ["folded_multiply"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = ["default", "getrandom", "runtime-rng", "std"]
+cfg = ["folded_multiply"]
+
+[[rust.facts]]
+toolchain = "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+target = "x86_64-unknown-linux-gnu"
+profile = "release"
+features = ["getrandom", "runtime-rng"]
+cfg = ["folded_multiply"]
