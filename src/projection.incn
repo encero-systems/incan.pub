@@ -528,11 +528,16 @@ pub def render_catalog_package(name: str, records: list[Record]) -> Result[str, 
 
 
 def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str]:
-    """One adopted version as the catalog shows it; `about` strings trimmed for display, as the package page does."""
+    """
+    One adopted version as the catalog shows it: what its adoption declares (features and dependencies exactly as the
+    index line has them, `upstream` naming the crates.io version and checksum it came from beside `archive`, the
+    source Loaf archive), `about` strings trimmed for display as the package page does, and each fact's status.
+    """
     adoption = adoption_from_payload(payload, f"{record.name} {record.version}")?
     mut facts: list[JsonValue] = []
     for fact in record.sorted_facts():
         mut item = fact.binding.to_json()
+        item.set("status", JsonValue.string(fact.status)).unwrap()
         mut owners: list[JsonValue] = []
         for owner in fact.owners:
             owners.append(JsonValue.string(owner))
@@ -562,7 +567,10 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
         }),
         "manifest": JsonValue.string(f"crates-io/{record.name}/{record.version}/loaf.toml"),
         "archive": JsonValue.string(string_member(payload, "archive")),
+        "upstream": member(payload, "adopted"),
         "rust": rust_json(adoption),
+        "features": member(payload, "features"),
+        "dependencies": member(payload, "deps"),
         "about": about,
         "files": files,
         "facts": JsonValue.array(facts),

@@ -388,6 +388,11 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     first = page.get("versions").unwrap().as_array().unwrap()[0]
     assert_eq(first.get("version").unwrap().as_str().unwrap(), "1.0.0")
     assert_eq(canonical(first.get("rust").unwrap()).unwrap(), "{\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
+    # A version page carries the index line's declarations and where the version came from.
+    assert_eq(canonical(first.get("dependencies").unwrap()).unwrap(), canonical(line.get("deps").unwrap()).unwrap())
+    assert_eq(canonical(first.get("features").unwrap()).unwrap(), canonical(line.get("features").unwrap()).unwrap())
+    assert_eq(canonical(first.get("upstream").unwrap()).unwrap(), canonical(line.get("adopted").unwrap()).unwrap())
+    assert_eq(first.get("archive").unwrap().as_str().unwrap(), line.get("cksum").unwrap().as_str().unwrap())
 
 
 def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:

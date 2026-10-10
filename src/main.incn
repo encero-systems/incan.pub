@@ -1133,7 +1133,7 @@ def fetch_sources(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 1:
         return Err("usage: incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
     lock = parse_event(read_text(Path(invocation.positional[0]), invocation.positional[0])?, "lock")?
-    blobs = make_directory(invocation.require("blobs")? + "/sha256")?
+    blobs = canonical_path(make_directory(invocation.require("blobs")? + "/sha256")?)?
     registry = registry_of(invocation)?
     match member(lock, "units").as_array():
         Some(units) =>
@@ -1152,11 +1152,14 @@ def fetch_sources(invocation: Invocation) -> Result[None, str]:
 
 
 def registry_of(invocation: Invocation) -> Result[Registry, str]:
-    """The registry `--registry` and `--namespace` name (GHCR under this repository by default), working in `--work`."""
+    """
+    The registry `--registry` and `--namespace` name (GHCR under this repository by default), working in `--work`,
+    made absolute: curl reads its config and writes its output by paths the client builds under it.
+    """
     return Ok(Registry(
         host=invocation.option("registry").unwrap_or("ghcr.io"),
         namespace=invocation.option("namespace").unwrap_or("encero-systems/incan.pub"),
-        work=make_directory(invocation.require("work")?)?,
+        work=canonical_path(make_directory(invocation.require("work")?)?)?,
     ))
 
 
