@@ -26,11 +26,106 @@
       "advisories": 0,
       "archive": "sha256:574a0005d5332d7f3a99c1fdabc68078f74dc282da16bac8bfc92271b516fb3f",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lazy_static",
+          "name": "lazy_static",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "dwrite",
+            "dwrite_1",
+            "dwrite_3",
+            "libloaderapi",
+            "unknwnbase",
+            "winnls",
+            "winnt"
+          ],
+          "loaf": "crates-io/winapi",
+          "name": "winapi",
+          "optional": false,
+          "req": "^0.3.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wio",
+          "name": "wio",
+          "optional": false,
+          "req": "^0.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 510,
+          "content": "content/sha256/d69d75705e2582721cbfb2d3b4b2af052c71679057a0b2ac53a22c03f1755bba",
+          "digest": "sha256:d69d75705e2582721cbfb2d3b4b2af052c71679057a0b2ac53a22c03f1755bba",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 321,
+          "content": "content/sha256/6bbbaf5158a5c2385b310fda2766550ece8f72470c3f80258a8b9cd2a9cfab2a",
+          "digest": "sha256:6bbbaf5158a5c2385b310fda2766550ece8f72470c3f80258a8b9cd2a9cfab2a",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "serde_serialization"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_derive": [
+          "dep:serde_derive"
+        ],
+        "serde_serialization": [
+          "serde",
+          "serde_derive"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/dwrote/0.11.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +136,17 @@
         "edition": "2018",
         "name": "dwrote",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9e1b35532432acc8b19ceed096e35dfa088d3ea037fe4f3c085f1f97f33b4d02",
+        "package": "dwrote",
+        "registry": "crates-io",
+        "version": "0.11.5"
+      },
+      "vcs": {
+        "commit": "5bbe910f7156213cdbaca4e1addfe85ea8b421ef",
+        "path": "",
+        "system": "git"
       },
       "version": "0.11.5",
       "yanked": false

@@ -23,11 +23,136 @@
       "advisories": 0,
       "archive": "sha256:f57c67efdaca12e75b903902482abba8f497e57caa2fa851bbaa5a8b53e8e176",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": false,
+          "req": "^0.2.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.148",
+          "target": "cfg(all(any(all(target_arch = \"aarch64\", target_endian = \"little\"), all(target_arch = \"arm\", target_endian = \"little\")), any(target_os = \"android\", target_os = \"linux\")))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.155",
+          "target": "cfg(all(all(target_arch = \"aarch64\", target_endian = \"little\"), target_vendor = \"apple\", any(target_os = \"ios\", target_os = \"macos\", target_os = \"tvos\", target_os = \"visionos\", target_os = \"watchos\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/untrusted",
+          "name": "untrusted",
+          "optional": false,
+          "req": "^0.9"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_System_Threading"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.52",
+          "target": "cfg(all(all(target_arch = \"aarch64\", target_endian = \"little\"), target_os = \"windows\"))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2086,
+          "content": "content/sha256/4c291847f83f138b087d2c7a4474cbdc6298ed9f04d32b65d3e222c7d10a2188",
+          "digest": "sha256:4c291847f83f138b087d2c7a4474cbdc6298ed9f04d32b65d3e222c7d10a2188",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 499,
+          "content": "content/sha256/b3d734001a94efff3579978d953391aa7115f877657d25eb54037a43875d078a",
+          "digest": "sha256:b3d734001a94efff3579978d953391aa7115f877657d25eb54037a43875d078a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 14870,
+          "content": "content/sha256/005fc765ddc5115da796cca915baa9557abae13ff35e0a47c47affc56f6c414d",
+          "digest": "sha256:005fc765ddc5115da796cca915baa9557abae13ff35e0a47c47affc56f6c414d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-BoringSSL",
+          "role": "license"
+        },
+        {
+          "bytes": 731,
+          "content": "content/sha256/f025ccfb7dfb6bdfedc75ca0f67acc69e6fb4998143d834f7c2f38a29989680f",
+          "digest": "sha256:f025ccfb7dfb6bdfedc75ca0f67acc69e6fb4998143d834f7c2f38a29989680f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-other-bits",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "alloc",
+          "dev_urandom_fallback"
+        ],
+        "dev_urandom_fallback": [],
+        "less-safe-getrandom-custom-or-rdrand": [],
+        "less-safe-getrandom-espidf": [],
+        "slow_tests": [],
+        "std": [
+          "alloc"
+        ],
+        "test_logging": [],
+        "unstable-testing-arm-no-hw": [],
+        "unstable-testing-arm-no-neon": [],
+        "wasm32_unknown_unknown_js": [
+          "getrandom/js"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "cryptography",
+        "rand",
+        "ECC",
+        "RSA"
+      ],
       "manifest": "crates-io/ring/0.17.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +163,18 @@
         "edition": "2021",
         "name": "ring",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a4689e6c2294d81e88dc6261c768b63bc4fcdb852be6d1352498b114f61383b7",
+        "package": "ring",
+        "registry": "crates-io",
+        "version": "0.17.14"
+      },
+      "vcs": {
+        "commit": "2723abbca9e83347d82b056d5b239c6604f786df",
+        "dirty": true,
+        "path": "",
+        "system": "git"
       },
       "version": "0.17.14",
       "yanked": false

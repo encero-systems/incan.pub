@@ -356,11 +356,309 @@
           "unit_identity": "sha256:31e5584c8341b243ee07c37c62b8226e70779e60a8939b2db06d280eff89d0d2"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "clock",
+            "std"
+          ],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": true,
+          "req": "^0.4.26"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/matchers",
+          "name": "matchers",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/nu-ansi-term",
+          "name": "nu-ansi-term",
+          "optional": true,
+          "req": "^0.50.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": true,
+          "req": "^0.12.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/regex-automata",
+          "name": "regex-automata",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.140"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0.82"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sharded-slab",
+          "name": "sharded-slab",
+          "optional": true,
+          "req": "^0.1.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thread_local",
+          "name": "thread_local",
+          "optional": true,
+          "req": "^1.1.4"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "formatting"
+          ],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.43"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing-core",
+          "name": "tracing-core",
+          "optional": false,
+          "req": "^0.1.35"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "log-tracer",
+            "std"
+          ],
+          "loaf": "crates-io/tracing-log",
+          "name": "tracing-log",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing-serde",
+          "name": "tracing-serde",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/valuable-serde",
+          "name": "valuable-serde",
+          "optional": true,
+          "req": "^0.1.0",
+          "target": "cfg(tracing_unstable)"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/valuable",
+          "name": "valuable_crate",
+          "optional": true,
+          "req": "^0.1.0",
+          "target": "cfg(tracing_unstable)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3195,
+          "content": "content/sha256/c777105924b6da54e7e149f4bd19ea71ee9b0cd9698101127179428648a5c871",
+          "digest": "sha256:c777105924b6da54e7e149f4bd19ea71ee9b0cd9698101127179428648a5c871",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "digest": "sha256:898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 53833,
+          "content": "content/sha256/1dc8d1f781bb27c9dc752c55c6639d444004064fe90cb70a2d48beb656696518",
+          "digest": "sha256:1dc8d1f781bb27c9dc752c55c6639d444004064fe90cb70a2d48beb656696518",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "ansi": [
+          "fmt",
+          "nu-ansi-term"
+        ],
+        "chrono": [
+          "dep:chrono"
+        ],
+        "default": [
+          "smallvec",
+          "fmt",
+          "ansi",
+          "tracing-log",
+          "std"
+        ],
+        "env-filter": [
+          "matchers",
+          "once_cell",
+          "tracing",
+          "std",
+          "thread_local",
+          "dep:regex-automata"
+        ],
+        "fmt": [
+          "registry",
+          "std"
+        ],
+        "json": [
+          "tracing-serde",
+          "serde",
+          "serde_json"
+        ],
+        "local-time": [
+          "dep:time",
+          "time/local-offset"
+        ],
+        "matchers": [
+          "dep:matchers"
+        ],
+        "nu-ansi-term": [
+          "dep:nu-ansi-term"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "parking_lot": [
+          "dep:parking_lot"
+        ],
+        "regex": [],
+        "registry": [
+          "sharded-slab",
+          "thread_local",
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "sharded-slab": [
+          "dep:sharded-slab"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ],
+        "std": [
+          "alloc",
+          "tracing-core/std"
+        ],
+        "thread_local": [
+          "dep:thread_local"
+        ],
+        "time": [
+          "dep:time"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "tracing-log": [
+          "dep:tracing-log"
+        ],
+        "tracing-serde": [
+          "dep:tracing-serde"
+        ],
+        "valuable": [
+          "tracing-core/valuable",
+          "valuable_crate",
+          "valuable-serde",
+          "dep:tracing-serde",
+          "tracing-serde/valuable"
+        ],
+        "valuable-serde": [
+          "dep:valuable-serde"
+        ],
+        "valuable_crate": [
+          "dep:valuable_crate"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging",
+        "tracing",
+        "metrics",
+        "subscriber"
+      ],
       "manifest": "crates-io/tracing-subscriber/0.3.23/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -371,6 +669,17 @@
         "edition": "2018",
         "name": "tracing_subscriber",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cb7f578e5945fb242538965c2d0b04418d38ec25c79d160cd279bf0731c8d319",
+        "package": "tracing-subscriber",
+        "registry": "crates-io",
+        "version": "0.3.23"
+      },
+      "vcs": {
+        "commit": "54ede4d5d85a536aed5485c5213011d9ec961935",
+        "path": "tracing-subscriber",
+        "system": "git"
       },
       "version": "0.3.23",
       "yanked": false

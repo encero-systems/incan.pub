@@ -25,11 +25,144 @@
       "advisories": 0,
       "archive": "sha256:a8b5b2cb3aca9a91ee1efe5390e4e2fd83ef9baf7cbb22c7c277c4ee1e9a6b21",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": false,
+          "req": "^0.22.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/directories-next",
+          "name": "directories-next",
+          "optional": false,
+          "req": "^2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.27"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/postcard",
+          "name": "postcard",
+          "optional": false,
+          "req": "^1.0.8"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "process"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.3",
+          "target": "cfg(not(target_os = \"windows\"))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.215"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": false,
+          "req": "^1.0.188"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": false,
+          "req": "^0.10.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml",
+          "name": "toml",
+          "optional": false,
+          "req": "^0.8.10"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_System_Threading"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.60.0",
+          "target": "cfg(target_os = \"windows\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "zstd",
+          "optional": false,
+          "req": "^0.13.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 477,
+          "content": "content/sha256/7530f24252f85bed9e9dbcd47688f7855a4574162300c4133b85c8de2eaca7f0",
+          "digest": "sha256:7530f24252f85bed9e9dbcd47688f7855a4574162300c4133b85c8de2eaca7f0",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wasmtime-internal-cache/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +173,17 @@
         "edition": "2024",
         "name": "wasmtime_internal_cache",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d4f18f22e3bb40b06b5a5c4477524481fad05c064057c3fb757f5b751e370f4d",
+        "package": "wasmtime-internal-cache",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/cache",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

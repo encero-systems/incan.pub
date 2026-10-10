@@ -116,6 +116,67 @@
           "unit_identity": "sha256:de95115c970973a0d815b1d81b6ae547dbc5918b7498ab84514a194aef482216"
         }
       ],
+      "categories": [
+        "external-ffi-bindings",
+        "api-bindings",
+        "development-tools::ffi",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/objc2-encode",
+          "name": "objc2-encode",
+          "optional": false,
+          "req": "^4.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/objc2-exception-helper",
+          "name": "objc2-exception-helper",
+          "optional": true,
+          "req": "^0.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/objc2-proc-macros",
+          "name": "objc2-proc-macros",
+          "optional": true,
+          "req": "^0.2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 847,
+          "content": "content/sha256/5da56f1508a87b982a23e6bad2ff09b329f7fcf9181ea15eac17788f8d1c6824",
+          "digest": "sha256:5da56f1508a87b982a23e6bad2ff09b329f7fcf9181ea15eac17788f8d1c6824",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 312,
+          "content": "content/sha256/3d7dc1b2c0a275e587e692dc5b83c8b96cf8d2696a5b02f468a752b16e987001",
+          "digest": "sha256:3d7dc1b2c0a275e587e692dc5b83c8b96cf8d2696a5b02f468a752b16e987001",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 66562,
+          "content": "content/sha256/e9e6a5ce0909b1f1f6737fec47bce2f4d9b813669454349188e93026da5bcfc3",
+          "digest": "sha256:e9e6a5ce0909b1f1f6737fec47bce2f4d9b813669454349188e93026da5bcfc3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -125,6 +186,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -135,6 +197,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -146,6 +209,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -156,6 +220,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -167,6 +232,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -177,6 +243,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -188,6 +255,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -198,14 +266,93 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "objc2-encode/alloc"
+        ],
+        "catch-all": [
+          "exception"
+        ],
+        "default": [
+          "std"
+        ],
+        "disable-encoding-assertions": [],
+        "exception": [
+          "dep:objc2-exception-helper"
+        ],
+        "gnustep-1-7": [
+          "unstable-static-class",
+          "objc2-exception-helper?/gnustep-1-7"
+        ],
+        "gnustep-1-8": [
+          "gnustep-1-7",
+          "objc2-exception-helper?/gnustep-1-8"
+        ],
+        "gnustep-1-9": [
+          "gnustep-1-8",
+          "objc2-exception-helper?/gnustep-1-9"
+        ],
+        "gnustep-2-0": [
+          "gnustep-1-9",
+          "objc2-exception-helper?/gnustep-2-0"
+        ],
+        "gnustep-2-1": [
+          "gnustep-2-0",
+          "objc2-exception-helper?/gnustep-2-1"
+        ],
+        "objc2-proc-macros": [],
+        "relax-sign-encoding": [],
+        "relax-void-encoding": [],
+        "std": [
+          "alloc",
+          "objc2-encode/std"
+        ],
+        "unstable-apple-new": [],
+        "unstable-arbitrary-self-types": [],
+        "unstable-autoreleasesafe": [],
+        "unstable-coerce-pointee": [],
+        "unstable-compiler-rt": [
+          "gnustep-1-7"
+        ],
+        "unstable-darwin-objc": [],
+        "unstable-gnustep-strict-apple-compat": [
+          "gnustep-1-7"
+        ],
+        "unstable-objfw": [],
+        "unstable-requires-macos": [],
+        "unstable-static-class": [
+          "dep:objc2-proc-macros"
+        ],
+        "unstable-static-class-inlined": [
+          "unstable-static-class"
+        ],
+        "unstable-static-sel": [
+          "dep:objc2-proc-macros"
+        ],
+        "unstable-static-sel-inlined": [
+          "unstable-static-sel"
+        ],
+        "unstable-winobjc": [
+          "gnustep-1-8"
+        ],
+        "verify": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "objective-c",
+        "macos",
+        "ios",
+        "objc_msgSend",
+        "objc"
+      ],
       "manifest": "crates-io/objc2/0.6.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -216,6 +363,17 @@
         "edition": "2021",
         "name": "objc2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:08849bbd4767dfae9457696856ae1c84fe4e0281bbe4a7abff2d0e06fb7981f8",
+        "package": "objc2",
+        "registry": "crates-io",
+        "version": "0.6.5"
+      },
+      "vcs": {
+        "commit": "d7d2fa23ceaa5e6096c923b081040e5d81b3b9df",
+        "path": "crates/objc2",
+        "system": "git"
       },
       "version": "0.6.5",
       "yanked": false

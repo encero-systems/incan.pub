@@ -302,11 +302,86 @@
           "unit_identity": "sha256:53f69747a1f105af26cc7cac14ef2a068ba02dce34c3eea041d658dfea99a127"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/leb128fmt",
+          "name": "leb128fmt",
+          "optional": false,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.261.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2340,
+          "content": "content/sha256/c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "digest": "sha256:c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "wasmparser?/component-model"
+        ],
+        "default": [
+          "std",
+          "component-model"
+        ],
+        "std": [
+          "wasmparser?/std"
+        ],
+        "wasmparser": [
+          "dep:wasmparser"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasm-encoder/0.261.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -317,6 +392,17 @@
         "edition": "2024",
         "name": "wasm_encoder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2608e8bb6d67fd68f5a8d0eb1363d6e7bcbc1f8ded5a0bd3a1e382462b876b22",
+        "package": "wasm-encoder",
+        "registry": "crates-io",
+        "version": "0.261.0"
+      },
+      "vcs": {
+        "commit": "5793351e3190a178d0dbdd509d183b6da896090a",
+        "path": "crates/wasm-encoder",
+        "system": "git"
       },
       "version": "0.261.0",
       "yanked": false
@@ -501,11 +587,86 @@
           "unit_identity": "sha256:978852408d505a4b75a71ded98130bcac6b34f306ffb04c5be2c533b4f9b5a11"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/leb128fmt",
+          "name": "leb128fmt",
+          "optional": false,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.259.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2340,
+          "content": "content/sha256/c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "digest": "sha256:c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "wasmparser?/component-model"
+        ],
+        "default": [
+          "std",
+          "component-model"
+        ],
+        "std": [
+          "wasmparser?/std"
+        ],
+        "wasmparser": [
+          "dep:wasmparser"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasm-encoder/0.259.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -516,6 +677,17 @@
         "edition": "2024",
         "name": "wasm_encoder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b1d0246511d901aacf25d2dc9111f0054947de5e093fe662099e709ff7530dc3",
+        "package": "wasm-encoder",
+        "registry": "crates-io",
+        "version": "0.259.0"
+      },
+      "vcs": {
+        "commit": "7fc33f279ec4fb3bf0623a14d388725ee8a1ce65",
+        "path": "crates/wasm-encoder",
+        "system": "git"
       },
       "version": "0.259.0",
       "yanked": false
@@ -538,11 +710,86 @@
       "advisories": 0,
       "archive": "sha256:8d939d3c7af2e57f7c60b952826c536258f7ce06b5b5d70b543097899bad2236",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/leb128fmt",
+          "name": "leb128fmt",
+          "optional": false,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.247.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2340,
+          "content": "content/sha256/c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "digest": "sha256:c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "wasmparser?/component-model"
+        ],
+        "default": [
+          "std",
+          "component-model"
+        ],
+        "std": [
+          "wasmparser?/std"
+        ],
+        "wasmparser": [
+          "dep:wasmparser"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasm-encoder/0.247.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -552,6 +799,17 @@
         "edition": "2021",
         "name": "wasm_encoder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:30b6733b8b91d010a6ac5b0fb237dc46a19650bc4c67db66857e2e787d437204",
+        "package": "wasm-encoder",
+        "registry": "crates-io",
+        "version": "0.247.0"
+      },
+      "vcs": {
+        "commit": "0285a4680738439cb884d2674bec8be1e8beac5c",
+        "path": "crates/wasm-encoder",
+        "system": "git"
       },
       "version": "0.247.0",
       "yanked": false
@@ -574,11 +832,68 @@
       "advisories": 0,
       "archive": "sha256:37bb026b045f60e1db8cb869cf7d035327854bda3c61192dd903905abd11c4bd",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/leb128fmt",
+          "name": "leb128fmt",
+          "optional": false,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.244.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2340,
+          "content": "content/sha256/c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "digest": "sha256:c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 385,
+          "content": "content/sha256/4595cf92044eef366a99e9ba11ea23e1cdbd1f22b54e382ba5c57f0f69fa08f0",
+          "digest": "sha256:4595cf92044eef366a99e9ba11ea23e1cdbd1f22b54e382ba5c57f0f69fa08f0",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "wasmparser?/component-model"
+        ],
+        "default": [
+          "std",
+          "component-model"
+        ],
+        "std": [
+          "wasmparser?/std"
+        ],
+        "wasmparser": [
+          "dep:wasmparser"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasm-encoder/0.244.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -588,6 +903,17 @@
         "edition": "2021",
         "name": "wasm_encoder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:990065f2fe63003fe337b932cfb5e3b80e0b4d0f5ff650e6985b1048f62c8319",
+        "package": "wasm-encoder",
+        "registry": "crates-io",
+        "version": "0.244.0"
+      },
+      "vcs": {
+        "commit": "d4e317f22c3bace76cb3205003bcc34b4929037d",
+        "path": "crates/wasm-encoder",
+        "system": "git"
       },
       "version": "0.244.0",
       "yanked": false
@@ -610,6 +936,47 @@
       "advisories": 0,
       "archive": "sha256:c4373f8c2c4eb3c5f5eab1991615c59c032ec1cfd330a0edeb13947e0cb40e83",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/leb128fmt",
+          "name": "leb128fmt",
+          "optional": false,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.236.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2340,
+          "content": "content/sha256/c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "digest": "sha256:c65cc523cd46516311fca22c82284fa0979a4638aa1cb7a02268856f43a017a8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 385,
+          "content": "content/sha256/9d82d17756084c77af5384c38af08b8c6c9fa0dd75108c2b8935c4702d7488c9",
+          "digest": "sha256:9d82d17756084c77af5384c38af08b8c6c9fa0dd75108c2b8935c4702d7488c9",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -619,14 +986,31 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "component-model": [
+          "wasmparser?/component-model"
+        ],
+        "default": [
+          "std",
+          "component-model"
+        ],
+        "std": [
+          "wasmparser?/std"
+        ],
+        "wasmparser": [
+          "dep:wasmparser"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasm-encoder/0.236.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -637,6 +1021,17 @@
         "edition": "2021",
         "name": "wasm_encoder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:724fccfd4f3c24b7e589d333fc0429c68042897a7e8a5f8694f31792471841e7",
+        "package": "wasm-encoder",
+        "registry": "crates-io",
+        "version": "0.236.1"
+      },
+      "vcs": {
+        "commit": "9dd8df4fdc53597af7534b6a4d4c11d9065690d3",
+        "path": "crates/wasm-encoder",
+        "system": "git"
       },
       "version": "0.236.1",
       "yanked": false

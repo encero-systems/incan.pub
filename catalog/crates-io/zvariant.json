@@ -462,11 +462,229 @@
           "unit_identity": "sha256:79c177258e02cd878b5326f71ed5d3627b97559b646723b375c577fb43c56f05"
         }
       ],
+      "categories": [
+        "data-structures",
+        "encoding",
+        "parsing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/arrayvec",
+          "name": "arrayvec",
+          "optional": true,
+          "req": "^0.7.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/camino",
+          "name": "camino",
+          "optional": true,
+          "req": "^1.1.9"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": true,
+          "req": "^0.4.38"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/endi",
+          "name": "endi",
+          "optional": false,
+          "req": "^1.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/enumflags2",
+          "name": "enumflags2",
+          "optional": true,
+          "req": "^0.7.9"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/heapless",
+          "name": "heapless",
+          "optional": true,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.200"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_bytes",
+          "name": "serde_bytes",
+          "optional": true,
+          "req": "^0.11.14"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": true,
+          "req": "^0.3.36"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/url",
+          "name": "url",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/uuid",
+          "name": "uuid",
+          "optional": true,
+          "req": "^1.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winnow",
+          "name": "winnow",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/zcheapstr",
+          "name": "zcheapstr",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zvariant_derive",
+          "name": "zvariant_derive",
+          "optional": false,
+          "req": "^5.15.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zvariant_utils",
+          "name": "zvariant_utils",
+          "optional": false,
+          "req": "^4.2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8253,
+          "content": "content/sha256/86aa0a84c3bd9fdbe7881d1e4c7427ceb21e2bf08483dc798017d3847c82e515",
+          "digest": "sha256:86aa0a84c3bd9fdbe7881d1e4c7427ceb21e2bf08483dc798017d3847c82e515",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/260e4ff3fc493695880c90774283eb1e3d018f898fabe655bbd52dd2cbd2fcad",
+          "digest": "sha256:260e4ff3fc493695880c90774283eb1e3d018f898fabe655bbd52dd2cbd2fcad",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 3159,
+          "content": "content/sha256/5023d53f6a8432d3997e5e0b4016dd79007d694c302a6eaad968e4bb8069c92c",
+          "digest": "sha256:5023d53f6a8432d3997e5e0b4016dd79007d694c302a6eaad968e4bb8069c92c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "arrayvec": [
+          "dep:arrayvec"
+        ],
+        "camino": [
+          "dep:camino"
+        ],
+        "chrono": [
+          "dep:chrono"
+        ],
+        "default": [],
+        "enumflags2": [
+          "dep:enumflags2"
+        ],
+        "gvariant": [
+          "zvariant_derive/gvariant",
+          "zvariant_utils/gvariant"
+        ],
+        "heapless": [
+          "dep:heapless"
+        ],
+        "option-as-array": [],
+        "ostree-tests": [
+          "gvariant"
+        ],
+        "serde_bytes": [
+          "dep:serde_bytes"
+        ],
+        "time": [
+          "dep:time"
+        ],
+        "url": [
+          "dep:url"
+        ],
+        "uuid": [
+          "dep:uuid"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "D-Bus",
+        "DBus",
+        "IPC",
+        "GVariant"
+      ],
       "manifest": "crates-io/zvariant/5.15.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -477,6 +695,17 @@
         "edition": "2024",
         "name": "zvariant",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c1d34c27cc6cdd1f458427519dd6b8612f7b7e3f7b9a0b2355d041dda9869147",
+        "package": "zvariant",
+        "registry": "crates-io",
+        "version": "5.15.0"
+      },
+      "vcs": {
+        "commit": "0f4db6980bc1566278618a46c9ffa7f5f025c18a",
+        "path": "zvariant",
+        "system": "git"
       },
       "version": "5.15.0",
       "yanked": false

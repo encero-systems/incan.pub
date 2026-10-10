@@ -102,11 +102,79 @@
           "unit_identity": "sha256:5da68212141cba363be40a7eec942cddacd967ea51e8ca330f89b2997e717e57"
         }
       ],
+      "categories": [
+        "development-tools::build-utils",
+        "no-std",
+        "no-std::no-alloc",
+        "embedded",
+        "development-tools::procedural-macro-helpers"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "link_section"
+          ],
+          "loaf": "crates-io/linktime-proc-macro",
+          "name": "linktime-proc-macro",
+          "optional": true,
+          "req": "^0.2.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 19053,
+          "content": "content/sha256/704724f6de07edf5798aa4328c7b50e94a50f8939c280de41ebccefadf79f012",
+          "digest": "sha256:704724f6de07edf5798aa4328c7b50e94a50f8939c280de41ebccefadf79f012",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11324,
+          "content": "content/sha256/a8ad31b1c3f40dca5a84119351b8fa8ddc868edd77fad8a8ebf6d8f2d16fa4ae",
+          "digest": "sha256:a8ad31b1c3f40dca5a84119351b8fa8ddc868edd77fad8a8ebf6d8f2d16fa4ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1022,
+          "content": "content/sha256/bccaa8b6c09f94e81f06696e179dbe058464bbdfbc823b6d49cada1d71e84ac3",
+          "digest": "sha256:bccaa8b6c09f94e81f06696e179dbe058464bbdfbc823b6d49cada1d71e84ac3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6132,
+          "content": "content/sha256/4e179289fcafe4a63762b54f5dd4b7165af263989ba9acc6be803029a0f1c1ef",
+          "digest": "sha256:4e179289fcafe4a63762b54f5dd4b7165af263989ba9acc6be803029a0f1c1ef",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "proc_macro",
+          "std"
+        ],
+        "proc_macro": [
+          "dep:linktime-proc-macro"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/link-section/0.19.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +185,17 @@
         "edition": "2021",
         "name": "link_section",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:39c29a617ce3df32c08497bdc1ab6e2376e0b17948ac166a2fbe5977c5954cd9",
+        "package": "link-section",
+        "registry": "crates-io",
+        "version": "0.19.3"
+      },
+      "vcs": {
+        "commit": "00ca36a7ed6d959d01866feeeec078a79b6dfa3f",
+        "path": "link-section",
+        "system": "git"
       },
       "version": "0.19.3",
       "yanked": false

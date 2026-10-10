@@ -118,11 +118,96 @@
           "unit_identity": "sha256:b0eb24292b64d52b7b04250e7c4002eb119acfe85944f08e3cb386ca6df24337"
         }
       ],
+      "categories": [
+        "compilers",
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/termcolor",
+          "name": "termcolor",
+          "optional": true,
+          "req": "^1.0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-width",
+          "name": "unicode-width",
+          "optional": false,
+          "req": ">=0.1, <0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5891,
+          "content": "content/sha256/b3425f80b0908f476be186268e70a7107c759cb89b4567a8d9c459aafeea215d",
+          "digest": "sha256:b3425f80b0908f476be186268e70a7107c759cb89b4567a8d9c459aafeea215d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11357,
+          "content": "content/sha256/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "digest": "sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 16521,
+          "content": "content/sha256/55013a57c4a1bbb0ad3f1a3510484675298a9095eac539f0bc4be6fe3c2a9415",
+          "digest": "sha256:55013a57c4a1bbb0ad3f1a3510484675298a9095eac539f0bc4be6fe3c2a9415",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "ascii-only": [],
+        "default": [
+          "std",
+          "termcolor"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serialization": [
+          "serde"
+        ],
+        "std": [
+          "serde?/std"
+        ],
+        "termcolor": [
+          "std",
+          "dep:termcolor"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "diagnostic-reporting"
+      ],
       "manifest": "crates-io/codespan-reporting/0.13.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +218,18 @@
         "edition": "2021",
         "name": "codespan_reporting",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:af491d569909a7e4dee0ad7db7f5341fef5c614d5b8ec8cf765732aba3cff681",
+        "package": "codespan-reporting",
+        "registry": "crates-io",
+        "version": "0.13.1"
+      },
+      "vcs": {
+        "commit": "ef354877a16c83e678051830b260a8f9a53778bd",
+        "dirty": true,
+        "path": "codespan-reporting",
+        "system": "git"
       },
       "version": "0.13.1",
       "yanked": false

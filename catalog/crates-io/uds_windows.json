@@ -26,11 +26,84 @@
       "advisories": 0,
       "archive": "sha256:68a30cf672a33eb7b75aa7b23388bf22ddef89d4865bc31db5b1f63dfcc06cd4",
       "assets": [],
+      "categories": [
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memoffset",
+          "name": "memoffset",
+          "optional": false,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tempfile",
+          "name": "tempfile",
+          "optional": false,
+          "req": "^3",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_System_IO",
+            "Win32_System_Threading"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.60, <0.62",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1109,
+          "content": "content/sha256/2aac1a197aa02b6c4a5ce4e65002f662a1766f183fefafc4290c11f3b742255b",
+          "digest": "sha256:2aac1a197aa02b6c4a5ce4e65002f662a1766f183fefafc4290c11f3b742255b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1162,
+          "content": "content/sha256/27ebda9d51f0a56b7e281ccd8230a27236dcb51c05f64b07869ecf6e965d68b0",
+          "digest": "sha256:27ebda9d51f0a56b7e281ccd8230a27236dcb51c05f64b07869ecf6e965d68b0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 634,
+          "content": "content/sha256/5695a91ac93962877d017af2d094f99f18c573f9a05e70cbd6814e6446316f70",
+          "digest": "sha256:5695a91ac93962877d017af2d094f99f18c573f9a05e70cbd6814e6446316f70",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "windows",
+        "uds",
+        "unix",
+        "domain",
+        "sockets"
+      ],
       "manifest": "crates-io/uds_windows/1.2.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +114,18 @@
         "edition": "2021",
         "name": "uds_windows",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f2f6fb2847f6742cd76af783a2a2c49e9375d0a111c7bef6f71cd9e738c72d6e",
+        "package": "uds_windows",
+        "registry": "crates-io",
+        "version": "1.2.1"
+      },
+      "vcs": {
+        "commit": "0b3a6ff289a0426f96bbc0310505b8531469c896",
+        "dirty": true,
+        "path": "",
+        "system": "git"
       },
       "version": "1.2.1",
       "yanked": false

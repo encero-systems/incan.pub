@@ -90,11 +90,145 @@
           "unit_identity": "sha256:071c60e5715b7917e24a2bade90e46146cb0b081b538b5da57fa7f37056850f4"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.80"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": true,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CFDictionary"
+          ],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "NSDictionary",
+            "NSObject",
+            "NSString",
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 787,
+          "content": "content/sha256/19cf0408a59e7abe800fa42d326f92942323a867fcf6ecca1c8d026617a13f40",
+          "digest": "sha256:19cf0408a59e7abe800fa42d326f92942323a867fcf6ecca1c8d026617a13f40",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 367,
+          "content": "content/sha256/54818478410e88a3f5580ae574840a62471d086673af183123a4951179ab101b",
+          "digest": "sha256:54818478410e88a3f5580ae574840a62471d086673af183123a4951179ab101b",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "IOSurface": [],
+        "IOSurfaceAPI": [],
+        "IOSurfaceBase": [],
+        "IOSurfaceRef": [
+          "bitflags"
+        ],
+        "IOSurfaceTypes": [
+          "bitflags"
+        ],
+        "ObjC": [
+          "objc2"
+        ],
+        "alloc": [],
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "default": [
+          "std",
+          "IOSurface",
+          "IOSurfaceAPI",
+          "IOSurfaceBase",
+          "IOSurfaceRef",
+          "IOSurfaceTypes",
+          "bitflags",
+          "libc",
+          "objc2",
+          "objc2-core-foundation",
+          "objc2-foundation"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "objc2": [
+          "dep:objc2",
+          "objc2-core-foundation?/objc2"
+        ],
+        "objc2-core-foundation": [
+          "dep:objc2-core-foundation"
+        ],
+        "objc2-foundation": [
+          "dep:objc2-foundation"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-io-surface/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -105,6 +239,17 @@
         "edition": "2021",
         "name": "objc2_io_surface",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:180788110936d59bab6bd83b6060ffdfffb3b922ba1396b312ae795e1de9d81d",
+        "package": "objc2-io-surface",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-io-surface",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

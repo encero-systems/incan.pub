@@ -3318,6 +3318,65 @@
           "unit_identity": "sha256:c924240139efe6157a79c6e351c27ed7f4c7598ccfae9b2c8e624b3a0c35ded9"
         }
       ],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.91"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": true,
+          "req": "^1.0.35"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-ident",
+          "name": "unicode-ident",
+          "optional": false,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10619,
+          "content": "content/sha256/a00f270c7f468863f28b9984547872efb57c7db1b9beb6e685852dc24de6846e",
+          "digest": "sha256:a00f270c7f468863f28b9984547872efb57c7db1b9beb6e685852dc24de6846e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -3335,14 +3394,44 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "clone-impls": [],
+        "default": [
+          "derive",
+          "parsing",
+          "printing",
+          "clone-impls",
+          "proc-macro"
+        ],
+        "derive": [],
+        "extra-traits": [],
+        "fold": [],
+        "full": [],
+        "parsing": [],
+        "printing": [
+          "dep:quote"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro",
+          "quote?/proc-macro"
+        ],
+        "test": [],
+        "visit": [],
+        "visit-mut": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "syn"
+      ],
       "manifest": "crates-io/syn/3.0.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -3352,6 +3441,17 @@
         "edition": "2021",
         "name": "syn",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee",
+        "package": "syn",
+        "registry": "crates-io",
+        "version": "3.0.6"
+      },
+      "vcs": {
+        "commit": "559cab55ef0c644f77660840edc3620d0d99d3d7",
+        "path": "",
+        "system": "git"
       },
       "version": "3.0.6",
       "yanked": false
@@ -6140,6 +6240,65 @@
           "unit_identity": "sha256:874f62b1efc88ba3719acbf70238fbe33a5218f63d83d723c244cfd6f929e24d"
         }
       ],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.91"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": true,
+          "req": "^1.0.35"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-ident",
+          "name": "unicode-ident",
+          "optional": false,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10342,
+          "content": "content/sha256/4a050aa3ee831ad3d27ab15d9b612bb32712f86517fa2e6be0b1cac37137ebe5",
+          "digest": "sha256:4a050aa3ee831ad3d27ab15d9b612bb32712f86517fa2e6be0b1cac37137ebe5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -6155,14 +6314,44 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "clone-impls": [],
+        "default": [
+          "derive",
+          "parsing",
+          "printing",
+          "clone-impls",
+          "proc-macro"
+        ],
+        "derive": [],
+        "extra-traits": [],
+        "fold": [],
+        "full": [],
+        "parsing": [],
+        "printing": [
+          "dep:quote"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro",
+          "quote?/proc-macro"
+        ],
+        "test": [],
+        "visit": [],
+        "visit-mut": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "syn"
+      ],
       "manifest": "crates-io/syn/2.0.119/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -6172,6 +6361,17 @@
         "edition": "2021",
         "name": "syn",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297",
+        "package": "syn",
+        "registry": "crates-io",
+        "version": "2.0.119"
+      },
+      "vcs": {
+        "commit": "3295f9e9841785ac88a5e558c884854d5fb7d67f",
+        "path": "",
+        "system": "git"
       },
       "version": "2.0.119",
       "yanked": false
@@ -6194,6 +6394,65 @@
       "advisories": 0,
       "archive": "sha256:f64068d6ac378482ef6807cf953ce866b010b9b2f26b0e75f46b45028c4309eb",
       "assets": [],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.91"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": true,
+          "req": "^1.0.35"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-ident",
+          "name": "unicode-ident",
+          "optional": false,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10340,
+          "content": "content/sha256/84d8f027ce3c19ae9cf91e68207b0bc737b71aa25706ba575bef7d4cba6fc937",
+          "digest": "sha256:84d8f027ce3c19ae9cf91e68207b0bc737b71aa25706ba575bef7d4cba6fc937",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -6207,6 +6466,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6222,14 +6482,44 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "clone-impls": [],
+        "default": [
+          "derive",
+          "parsing",
+          "printing",
+          "clone-impls",
+          "proc-macro"
+        ],
+        "derive": [],
+        "extra-traits": [],
+        "fold": [],
+        "full": [],
+        "parsing": [],
+        "printing": [
+          "dep:quote"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro",
+          "quote?/proc-macro"
+        ],
+        "test": [],
+        "visit": [],
+        "visit-mut": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "syn"
+      ],
       "manifest": "crates-io/syn/2.0.117/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -6239,6 +6529,17 @@
         "edition": "2021",
         "name": "syn",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e665b8803e7b1d2a727f4023456bbbbe74da67099c585258af0ad9c5013b9b99",
+        "package": "syn",
+        "registry": "crates-io",
+        "version": "2.0.117"
+      },
+      "vcs": {
+        "commit": "7bcb37cdb3399977658c8b52d2441d37e42e48f2",
+        "path": "",
+        "system": "git"
       },
       "version": "2.0.117",
       "yanked": false
@@ -6454,11 +6755,71 @@
           "unit_identity": "sha256:a5ea848bd1fc567e094f800181fc9e4596731cb4f2788a3cca5fd4a9600eed1a"
         }
       ],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.46"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-ident",
+          "name": "unicode-ident",
+          "optional": false,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10433,
+          "content": "content/sha256/ea9f2b6340b302b5608d2bedcda7e2d707f3eaebf4cc983c02d55071ead7096f",
+          "digest": "sha256:ea9f2b6340b302b5608d2bedcda7e2d707f3eaebf4cc983c02d55071ead7096f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6476,6 +6837,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6483,6 +6845,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6500,6 +6863,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6507,6 +6871,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6524,6 +6889,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6531,6 +6897,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -6548,14 +6915,48 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "clone-impls": [],
+        "default": [
+          "derive",
+          "parsing",
+          "printing",
+          "clone-impls",
+          "proc-macro"
+        ],
+        "derive": [],
+        "extra-traits": [],
+        "fold": [],
+        "full": [],
+        "parsing": [],
+        "printing": [
+          "quote"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro",
+          "dep:quote",
+          "quote/proc-macro"
+        ],
+        "quote": [
+          "dep:quote"
+        ],
+        "test": [],
+        "visit": [],
+        "visit-mut": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "syn"
+      ],
       "manifest": "crates-io/syn/1.0.109/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -6566,6 +6967,17 @@
         "edition": "2018",
         "name": "syn",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:72b64191b275b66ffe2469e8af2c1cfe3bafa67b529ead792a6d0160888b4237",
+        "package": "syn",
+        "registry": "crates-io",
+        "version": "1.0.109"
+      },
+      "vcs": {
+        "commit": "bfa790b8e445dc67b7ab94d75adb1a92d6296c9a",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.109",
       "yanked": false

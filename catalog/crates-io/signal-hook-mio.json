@@ -103,11 +103,143 @@
           "unit_identity": "sha256:4507b0ddaf0cbebd3548ab4cb9262604e8051ce68ff4adbbcb2000ccf51f976e"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "~0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mio",
+          "name": "mio-0_6",
+          "optional": true,
+          "req": "~0.6"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "os-util",
+            "uds"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio-0_7",
+          "optional": true,
+          "req": "~0.7"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net",
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio-0_8",
+          "optional": true,
+          "req": "~0.8"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net",
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio-1_0",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mio-uds",
+          "name": "mio-uds",
+          "optional": true,
+          "req": "~0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook",
+          "name": "signal-hook",
+          "optional": false,
+          "req": "~0.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 843,
+          "content": "content/sha256/d12e9c3a5f9e90e36812ef71291a31f56bcd45e34d48025ceea75a5b0c833c3b",
+          "digest": "sha256:d12e9c3a5f9e90e36812ef71291a31f56bcd45e34d48025ceea75a5b0c833c3b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1068,
+          "content": "content/sha256/503558bfefe66ca15e4e3f7955b3cb0ec87fd52f29bf24b336af7bd00e946d5c",
+          "digest": "sha256:503558bfefe66ca15e4e3f7955b3cb0ec87fd52f29bf24b336af7bd00e946d5c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "mio-0_6": [
+          "dep:mio-0_6"
+        ],
+        "mio-0_7": [
+          "dep:mio-0_7"
+        ],
+        "mio-0_8": [
+          "dep:mio-0_8"
+        ],
+        "mio-1_0": [
+          "dep:mio-1_0"
+        ],
+        "mio-uds": [
+          "dep:mio-uds"
+        ],
+        "support-v0_6": [
+          "mio-0_6",
+          "mio-uds"
+        ],
+        "support-v0_7": [
+          "mio-0_7"
+        ],
+        "support-v0_8": [
+          "mio-0_8"
+        ],
+        "support-v1_0": [
+          "mio-1_0"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "signal",
+        "unix",
+        "mio"
+      ],
       "manifest": "crates-io/signal-hook-mio/0.3.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -118,6 +250,17 @@
         "edition": "2018",
         "name": "signal_hook_mio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c3c965b71730d01c671d7a7f6b2c4f5729acc8fba1acb65a36576f9181076dfa",
+        "package": "signal-hook-mio",
+        "registry": "crates-io",
+        "version": "0.3.0"
+      },
+      "vcs": {
+        "commit": "2413101f2e7851483993e32a3b5a49d09af32e4f",
+        "path": "signal-hook-mio",
+        "system": "git"
       },
       "version": "0.3.0",
       "yanked": false
@@ -141,11 +284,143 @@
       "advisories": 0,
       "archive": "sha256:9c20ded39e15b83437fc41a4cd27899ae9478852b84032255c5af20b063d3987",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "~0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mio",
+          "name": "mio-0_6",
+          "optional": true,
+          "req": "~0.6"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "os-util",
+            "uds"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio-0_7",
+          "optional": true,
+          "req": "~0.7"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net",
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio-0_8",
+          "optional": true,
+          "req": "~0.8"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net",
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio-1_0",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mio-uds",
+          "name": "mio-uds",
+          "optional": true,
+          "req": "~0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook",
+          "name": "signal-hook",
+          "optional": false,
+          "req": "~0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 843,
+          "content": "content/sha256/d12e9c3a5f9e90e36812ef71291a31f56bcd45e34d48025ceea75a5b0c833c3b",
+          "digest": "sha256:d12e9c3a5f9e90e36812ef71291a31f56bcd45e34d48025ceea75a5b0c833c3b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1068,
+          "content": "content/sha256/503558bfefe66ca15e4e3f7955b3cb0ec87fd52f29bf24b336af7bd00e946d5c",
+          "digest": "sha256:503558bfefe66ca15e4e3f7955b3cb0ec87fd52f29bf24b336af7bd00e946d5c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "mio-0_6": [
+          "dep:mio-0_6"
+        ],
+        "mio-0_7": [
+          "dep:mio-0_7"
+        ],
+        "mio-0_8": [
+          "dep:mio-0_8"
+        ],
+        "mio-1_0": [
+          "dep:mio-1_0"
+        ],
+        "mio-uds": [
+          "dep:mio-uds"
+        ],
+        "support-v0_6": [
+          "mio-0_6",
+          "mio-uds"
+        ],
+        "support-v0_7": [
+          "mio-0_7"
+        ],
+        "support-v0_8": [
+          "mio-0_8"
+        ],
+        "support-v1_0": [
+          "mio-1_0"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "signal",
+        "unix",
+        "mio"
+      ],
       "manifest": "crates-io/signal-hook-mio/0.2.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -155,6 +430,17 @@
         "edition": "2018",
         "name": "signal_hook_mio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b75a19a7a740b25bc7944bdee6172368f988763b744e3d4dfe753f6b4ece40cc",
+        "package": "signal-hook-mio",
+        "registry": "crates-io",
+        "version": "0.2.5"
+      },
+      "vcs": {
+        "commit": "ac4c81cb0cc67d52af392f7d6a46655eab672477",
+        "path": "signal-hook-mio",
+        "system": "git"
       },
       "version": "0.2.5",
       "yanked": false

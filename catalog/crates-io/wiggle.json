@@ -27,11 +27,128 @@
       "advisories": 0,
       "archive": "sha256:d5f72bd044ede82e55a090b9f7e7536271db34e0d46ee42385e1b8997d6920bf",
       "assets": [],
+      "categories": [
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-trait",
+          "name": "async-trait",
+          "optional": false,
+          "req": "^0.1.71"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": false,
+          "req": "^0.1.26"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasmtime",
+          "name": "wasmtime",
+          "optional": true,
+          "req": "^36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wiggle-macro",
+          "name": "wiggle-macro",
+          "optional": false,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/witx",
+          "name": "witx",
+          "optional": true,
+          "req": "^0.9.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 940,
+          "content": "content/sha256/21422dca0d2d4fd0e55a8cb795e26fc5ba1d6ca84c309c8d7f2344b1b47bdf17",
+          "digest": "sha256:21422dca0d2d4fd0e55a8cb795e26fc5ba1d6ca84c309c8d7f2344b1b47bdf17",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "wiggle_metadata",
+          "wasmtime",
+          "wasmtime_async"
+        ],
+        "tracing_log": [
+          "tracing/log"
+        ],
+        "wasmtime": [
+          "dep:wasmtime"
+        ],
+        "wasmtime_async": [
+          "dep:wasmtime",
+          "wasmtime/async"
+        ],
+        "wiggle_metadata": [
+          "witx",
+          "wiggle-macro/wiggle_metadata"
+        ],
+        "witx": [
+          "dep:witx"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wiggle/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -42,6 +159,17 @@
         "edition": "2024",
         "name": "wiggle",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f7dfd80af8f40b70e9dda694f911f7303cec22c140ca58c5f7dab7fb34be812f",
+        "package": "wiggle",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/wiggle",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

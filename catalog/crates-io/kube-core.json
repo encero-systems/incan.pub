@@ -104,11 +104,170 @@
           "unit_identity": "sha256:80363b749e3600473cdcf1d1affb6afa3196ad60c854c7e7ffb99a960facdb43"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "encoding",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "from"
+          ],
+          "loaf": "crates-io/derive_more",
+          "name": "derive_more",
+          "optional": false,
+          "req": "^2.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/form_urlencoded",
+          "name": "form_urlencoded",
+          "optional": false,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http",
+          "name": "http",
+          "optional": false,
+          "req": "^1.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/jiff",
+          "name": "jiff",
+          "optional": false,
+          "req": "^0.2.16"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/json-patch",
+          "name": "json-patch",
+          "optional": true,
+          "req": "^4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/k8s-openapi",
+          "name": "k8s-openapi",
+          "optional": false,
+          "req": "^0.28.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "validation"
+          ],
+          "loaf": "crates-io/kube-cel",
+          "name": "kube-cel",
+          "optional": true,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/schemars",
+          "name": "schemars",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.221"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde-value",
+          "name": "serde-value",
+          "optional": false,
+          "req": "^0.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1.0.127"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0.15"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 587,
+          "content": "content/sha256/dc76551014df1ac1a2fdb267023dcd7fa87e2b967983fd14cce947c8b1aeca7e",
+          "digest": "sha256:dc76551014df1ac1a2fdb267023dcd7fa87e2b967983fd14cce947c8b1aeca7e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 331,
+          "content": "content/sha256/2cbaed5d071498c014db618e26f550259830b2fcb1d6a4c8718441f884c2da87",
+          "digest": "sha256:2cbaed5d071498c014db618e26f550259830b2fcb1d6a4c8718441f884c2da87",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "admission": [
+          "json-patch"
+        ],
+        "cel": [
+          "dep:kube-cel"
+        ],
+        "json-patch": [
+          "dep:json-patch"
+        ],
+        "jsonpatch": [
+          "json-patch"
+        ],
+        "kubelet-debug": [
+          "ws"
+        ],
+        "schema": [
+          "schemars"
+        ],
+        "schemars": [
+          "dep:schemars"
+        ],
+        "ws": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "kubernetes",
+        "apimachinery"
+      ],
       "manifest": "crates-io/kube-core/4.2.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -119,6 +278,17 @@
         "edition": "2024",
         "name": "kube_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a9d2353c118cf3462c352ee0b5bd5b0cf17990af456dfd8662d136ff9812eeb4",
+        "package": "kube-core",
+        "registry": "crates-io",
+        "version": "4.2.0"
+      },
+      "vcs": {
+        "commit": "526f1f2cfa996ed0e92510feabb2d2327df5e49f",
+        "path": "kube-core",
+        "system": "git"
       },
       "version": "4.2.0",
       "yanked": false

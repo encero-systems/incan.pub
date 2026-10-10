@@ -178,11 +178,84 @@
           "unit_identity": "sha256:7d91ecc08ca71fcf40d5a0142a8c974b5c126b94ed23236aa4d12be2477bbdb3"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "hazmat"
+          ],
+          "loaf": "crates-io/polyval",
+          "name": "polyval",
+          "optional": false,
+          "req": "^0.7"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3963,
+          "content": "content/sha256/b50aea0eefa895dac30159959abd0892ffc2521fe92e250a99721f4656dbf967",
+          "digest": "sha256:b50aea0eefa895dac30159959abd0892ffc2521fe92e250a99721f4656dbf967",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/b8c6939380a400f53e11923d50fcc4dd2fa1ba8339fd9d04cda38a0251b6c9b0",
+          "digest": "sha256:b8c6939380a400f53e11923d50fcc4dd2fa1ba8339fd9d04cda38a0251b6c9b0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3308,
+          "content": "content/sha256/a836964508d514fa4647c6a4a1f0137cf31049b77c51c7553d74ccf2cb396b5f",
+          "digest": "sha256:a836964508d514fa4647c6a4a1f0137cf31049b77c51c7553d74ccf2cb396b5f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "zeroize": [
+          "polyval/zeroize",
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "aes-gcm",
+        "crypto",
+        "universal-hashing"
+      ],
       "manifest": "crates-io/ghash/0.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +266,17 @@
         "edition": "2024",
         "name": "ghash",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2eecf2d5dc9b66b732b97707a0210906b1d30523eb773193ab777c0c84b3e8d5",
+        "package": "ghash",
+        "registry": "crates-io",
+        "version": "0.6.0"
+      },
+      "vcs": {
+        "commit": "2ec214089615c06e19560cd1222366f5d7c79163",
+        "path": "ghash",
+        "system": "git"
       },
       "version": "0.6.0",
       "yanked": false

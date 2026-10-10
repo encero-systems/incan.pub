@@ -108,11 +108,252 @@
           "unit_identity": "sha256:1d136e021304dad18ad1fd9724325c5f0bd8725c6384aa0af8bb87414eb6ed3f"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "objc2"
+          ],
+          "loaf": "crates-io/dispatch2",
+          "name": "dispatch2",
+          "optional": true,
+          "req": ">=0.3.0, <0.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CNPostalAddress"
+          ],
+          "loaf": "crates-io/objc2-contacts",
+          "name": "objc2-contacts",
+          "optional": true,
+          "req": "^0.3.2",
+          "target": "cfg(not(target_os = \"tvos\"))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 808,
+          "content": "content/sha256/3f518095b802873d6a85c5fb7d6ebd82e861d188f349f9139d3ba9704c594358",
+          "digest": "sha256:3f518095b802873d6a85c5fb7d6ebd82e861d188f349f9139d3ba9704c594358",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 376,
+          "content": "content/sha256/1c26f6bdf194d1831830174abf0b12dd6690c9c6b673a73585dc0370fba7ae73",
+          "digest": "sha256:1c26f6bdf194d1831830174abf0b12dd6690c9c6b673a73585dc0370fba7ae73",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CLAvailability": [],
+        "CLBackgroundActivitySession": [],
+        "CLBeaconIdentityCondition": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSUUID",
+          "objc2-foundation/NSValue"
+        ],
+        "CLBeaconIdentityConstraint": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSUUID"
+        ],
+        "CLBeaconRegion": [
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSUUID",
+          "objc2-foundation/NSValue"
+        ],
+        "CLCircularGeographicCondition": [
+          "objc2-foundation/NSObject"
+        ],
+        "CLCircularRegion": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CLCondition": [
+          "objc2-foundation/NSObject"
+        ],
+        "CLError": [
+          "objc2-foundation/NSString"
+        ],
+        "CLErrorDomain": [
+          "objc2-foundation/NSString"
+        ],
+        "CLGeocoder": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSLocale",
+          "objc2-foundation/NSString"
+        ],
+        "CLHeading": [
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSObject"
+        ],
+        "CLLocation": [
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSObject"
+        ],
+        "CLLocationManager": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSSet",
+          "objc2-foundation/NSString"
+        ],
+        "CLLocationManagerDelegate": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSError"
+        ],
+        "CLLocationManager_CLVisitExtensions": [],
+        "CLLocationPushServiceError": [
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSString"
+        ],
+        "CLLocationPushServiceExtension": [
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSString"
+        ],
+        "CLLocationUpdater": [],
+        "CLMonitor": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSString"
+        ],
+        "CLMonitorConfiguration": [
+          "objc2-foundation/NSString"
+        ],
+        "CLMonitoringEvent": [
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CLMonitoringRecord": [
+          "objc2-foundation/NSObject"
+        ],
+        "CLPlacemark": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSTimeZone"
+        ],
+        "CLRegion": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CLServiceSession": [
+          "objc2-foundation/NSString"
+        ],
+        "CLVisit": [
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSObject"
+        ],
+        "alloc": [],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "CLAvailability",
+          "CLBackgroundActivitySession",
+          "CLBeaconIdentityCondition",
+          "CLBeaconIdentityConstraint",
+          "CLBeaconRegion",
+          "CLCircularGeographicCondition",
+          "CLCircularRegion",
+          "CLCondition",
+          "CLError",
+          "CLErrorDomain",
+          "CLGeocoder",
+          "CLHeading",
+          "CLLocation",
+          "CLLocationManager",
+          "CLLocationManagerDelegate",
+          "CLLocationManager_CLVisitExtensions",
+          "CLLocationPushServiceError",
+          "CLLocationPushServiceExtension",
+          "CLLocationUpdater",
+          "CLMonitor",
+          "CLMonitorConfiguration",
+          "CLMonitoringEvent",
+          "CLMonitoringRecord",
+          "CLPlacemark",
+          "CLRegion",
+          "CLServiceSession",
+          "CLVisit",
+          "block2",
+          "dispatch2",
+          "objc2-contacts"
+        ],
+        "dispatch2": [
+          "dep:dispatch2"
+        ],
+        "objc2-contacts": [
+          "dep:objc2-contacts"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-core-location/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -123,6 +364,17 @@
         "edition": "2021",
         "name": "objc2_core_location",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ca347214e24bc973fc025fd0d36ebb179ff30536ed1f80252706db19ee452009",
+        "package": "objc2-core-location",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-core-location",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

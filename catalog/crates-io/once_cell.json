@@ -886,6 +886,74 @@
           "unit_identity": "sha256:2069141506243a8e39ec4bada7bebd245c7f8e354a933052cbfffe9c3208e7fd"
         }
       ],
+      "categories": [
+        "rust-patterns",
+        "memory-management"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/critical-section",
+          "name": "critical-section",
+          "optional": true,
+          "req": "^1.1.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/parking_lot_core",
+          "name": "parking_lot_core",
+          "optional": true,
+          "req": "^0.9.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2191,
+          "content": "content/sha256/2331182c8b5a6971fd0d04a0ca711d5839e93b3de6b2003108940a8c93850aaf",
+          "digest": "sha256:2331182c8b5a6971fd0d04a0ca711d5839e93b3de6b2003108940a8c93850aaf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7699,
+          "content": "content/sha256/c104a8ec44b9087539185006e8187a8412883b902318e0a0a807a23ac756a070",
+          "digest": "sha256:c104a8ec44b9087539185006e8187a8412883b902318e0a0a807a23ac756a070",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -896,6 +964,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -908,6 +977,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -919,14 +989,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "race"
+        ],
+        "atomic-polyfill": [
+          "critical-section"
+        ],
+        "critical-section": [
+          "dep:critical-section",
+          "portable-atomic"
+        ],
+        "default": [
+          "std"
+        ],
+        "parking_lot": [
+          "dep:parking_lot_core"
+        ],
+        "portable-atomic": [
+          "dep:portable-atomic"
+        ],
+        "race": [],
+        "std": [
+          "alloc"
+        ],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lazy",
+        "static"
+      ],
       "manifest": "crates-io/once_cell/1.21.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -936,6 +1037,17 @@
         "edition": "2021",
         "name": "once_cell",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50",
+        "package": "once_cell",
+        "registry": "crates-io",
+        "version": "1.21.4"
+      },
+      "vcs": {
+        "commit": "80fe900b21f6d76c1a2ed74d3343e8a3a88c46d0",
+        "path": "",
+        "system": "git"
       },
       "version": "1.21.4",
       "yanked": false

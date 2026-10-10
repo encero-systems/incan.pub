@@ -103,11 +103,82 @@
           "unit_identity": "sha256:bffd609cc98aba5ff5e85be8b6e650c46fb34d9c48621aa15cb78cd6d120791e"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hermit-abi",
+          "name": "hermit-abi",
+          "optional": false,
+          "req": "^0.5.0",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(any(unix, target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Storage_FileSystem",
+            "Win32_System_Console"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.52, <0.62",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3614,
+          "content": "content/sha256/144ede7d2e02bae955556ba940e05d75c2e0f8398944ad585bd3e7c4ac55f612",
+          "digest": "sha256:144ede7d2e02bae955556ba940e05d75c2e0f8398944ad585bd3e7c4ac55f612",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1176,
+          "content": "content/sha256/bab426a663ce3d5bbbcea9cdc300da74e94d76c3c79e46699a953f967a08e533",
+          "digest": "sha256:bab426a663ce3d5bbbcea9cdc300da74e94d76c3c79e46699a953f967a08e533",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT-atty",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "terminal",
+        "tty",
+        "isatty"
+      ],
       "manifest": "crates-io/is-terminal/0.4.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -118,6 +189,17 @@
         "edition": "2018",
         "name": "is_terminal",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46",
+        "package": "is-terminal",
+        "registry": "crates-io",
+        "version": "0.4.17"
+      },
+      "vcs": {
+        "commit": "6ce920a451436433a34e4cae89318d049f8c439c",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.17",
       "yanked": false

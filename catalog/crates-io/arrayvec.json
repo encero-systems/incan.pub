@@ -324,19 +324,110 @@
           "unit_identity": "sha256:3790c790ec113a51d6b7225671f55afaa607a441725ee4684591a97fe6ee0bc5"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/borsh",
+          "name": "borsh",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 958,
+          "content": "content/sha256/2264c34c62ea4c617d72047b00749b4786dfb9dff2fac24e0320170ee0cd19c8",
+          "digest": "sha256:2264c34c62ea4c617d72047b00749b4786dfb9dff2fac24e0320170ee0cd19c8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/4da95ec4ecb65b738d470b7d762894ad9c97da93e6cbfb18b570fc2c96f4b871",
+          "digest": "sha256:4da95ec4ecb65b738d470b7d762894ad9c97da93e6cbfb18b570fc2c96f4b871",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 11488,
+          "content": "content/sha256/3367b2d07f2135d073f90e8475e1660a6da32f0618bb530417cbca4797fe90c0",
+          "digest": "sha256:3367b2d07f2135d073f90e8475e1660a6da32f0618bb530417cbca4797fe90c0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "borsh": [
+          "dep:borsh"
+        ],
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "stack",
+        "vector",
+        "array",
+        "data-structure",
+        "no_std"
+      ],
       "manifest": "crates-io/arrayvec/0.7.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -346,6 +437,17 @@
         "edition": "2018",
         "name": "arrayvec",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56",
+        "package": "arrayvec",
+        "registry": "crates-io",
+        "version": "0.7.8"
+      },
+      "vcs": {
+        "commit": "0cb664cf505844348538230479b0040b44f3faf1",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.8",
       "yanked": false
@@ -368,11 +470,80 @@
       "advisories": 0,
       "archive": "sha256:aed5bacc6fd958bf8eafb86df7398505178f9fc7483530d8c5c24cd384a21d13",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/borsh",
+          "name": "borsh",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 958,
+          "content": "content/sha256/2264c34c62ea4c617d72047b00749b4786dfb9dff2fac24e0320170ee0cd19c8",
+          "digest": "sha256:2264c34c62ea4c617d72047b00749b4786dfb9dff2fac24e0320170ee0cd19c8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/4da95ec4ecb65b738d470b7d762894ad9c97da93e6cbfb18b570fc2c96f4b871",
+          "digest": "sha256:4da95ec4ecb65b738d470b7d762894ad9c97da93e6cbfb18b570fc2c96f4b871",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 10899,
+          "content": "content/sha256/b6cd865fb2685cf241e61f216686c87fd78e7d4b8ba4faf03857c8a2b920eee6",
+          "digest": "sha256:b6cd865fb2685cf241e61f216686c87fd78e7d4b8ba4faf03857c8a2b920eee6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -380,14 +551,37 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "borsh": [
+          "dep:borsh"
+        ],
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "stack",
+        "vector",
+        "array",
+        "data-structure",
+        "no_std"
+      ],
       "manifest": "crates-io/arrayvec/0.7.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -397,6 +591,17 @@
         "edition": "2018",
         "name": "arrayvec",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50",
+        "package": "arrayvec",
+        "registry": "crates-io",
+        "version": "0.7.6"
+      },
+      "vcs": {
+        "commit": "0aede877fe0bfb1ba5e3c2024df8c0958d503a83",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.6",
       "yanked": false
@@ -419,11 +624,82 @@
       "advisories": 0,
       "archive": "sha256:3c9a47980cf58043853f7dca6dfa5e6445010b1d452a18f05c2b04518bea603c",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1011,
+          "content": "content/sha256/f42eb73acbc7729825a836a532d1c8c6b71e006e0d87e549ea7a483da7472425",
+          "digest": "sha256:f42eb73acbc7729825a836a532d1c8c6b71e006e0d87e549ea7a483da7472425",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/0245ee104228a100ce5fceecf43e25faae450494d9173f43fd94c27d69fdac13",
+          "digest": "sha256:0245ee104228a100ce5fceecf43e25faae450494d9173f43fd94c27d69fdac13",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7325,
+          "content": "content/sha256/c9e49774ee89a3b7b533362d82060a14f2777ccefbe03b956f6f08057b6c3600",
+          "digest": "sha256:c9e49774ee89a3b7b533362d82060a14f2777ccefbe03b956f6f08057b6c3600",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "array-sizes-129-255": [],
+        "array-sizes-33-128": [],
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [],
+        "unstable-const-fn": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "stack",
+        "vector",
+        "array",
+        "data-structure",
+        "no_std"
+      ],
       "manifest": "crates-io/arrayvec/0.5.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -434,6 +710,17 @@
         "edition": "2018",
         "name": "arrayvec",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:23b62fc65de8e4e7f52534fb52b0f3ed04746ae267519eef2a83941e8085068b",
+        "package": "arrayvec",
+        "registry": "crates-io",
+        "version": "0.5.2"
+      },
+      "vcs": {
+        "commit": "d336f8c5c54df87154deb59ffc5c0a91749069be",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.2",
       "yanked": false

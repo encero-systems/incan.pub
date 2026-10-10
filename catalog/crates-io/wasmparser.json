@@ -438,11 +438,132 @@
           "unit_identity": "sha256:48798dd662c3c4483057c4712c159203cecf507044b4361abe2ccb67a5aaf1dc"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.17.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/semver",
+          "name": "semver",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.166"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1348,
+          "content": "content/sha256/aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "digest": "sha256:aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "dep:semver"
+        ],
+        "default": [
+          "std",
+          "validate",
+          "serde",
+          "features",
+          "component-model",
+          "hash-collections",
+          "simd"
+        ],
+        "features": [],
+        "hash-collections": [
+          "dep:hashbrown",
+          "dep:indexmap"
+        ],
+        "prefer-btree-collections": [],
+        "serde": [
+          "dep:serde",
+          "indexmap?/serde",
+          "hashbrown?/serde"
+        ],
+        "simd": [],
+        "std": [
+          "indexmap?/std"
+        ],
+        "try-op": [],
+        "validate": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "WebAssembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmparser/0.261.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -453,6 +574,17 @@
         "edition": "2024",
         "name": "wasmparser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4f20f20e44f7e8aeb6744823ea9d869ede51e51be4fdaedede2852282e54d2d8",
+        "package": "wasmparser",
+        "registry": "crates-io",
+        "version": "0.261.0"
+      },
+      "vcs": {
+        "commit": "5793351e3190a178d0dbdd509d183b6da896090a",
+        "path": "crates/wasmparser",
+        "system": "git"
       },
       "version": "0.261.0",
       "yanked": false
@@ -758,11 +890,132 @@
           "unit_identity": "sha256:b0acc5adb4fec7760966725a0269d914152f1b3f4df1bacd713058929e0dd151"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.17.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/semver",
+          "name": "semver",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.166"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1348,
+          "content": "content/sha256/aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "digest": "sha256:aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "dep:semver"
+        ],
+        "default": [
+          "std",
+          "validate",
+          "serde",
+          "features",
+          "component-model",
+          "hash-collections",
+          "simd"
+        ],
+        "features": [],
+        "hash-collections": [
+          "dep:hashbrown",
+          "dep:indexmap"
+        ],
+        "prefer-btree-collections": [],
+        "serde": [
+          "dep:serde",
+          "indexmap?/serde",
+          "hashbrown?/serde"
+        ],
+        "simd": [],
+        "std": [
+          "indexmap?/std"
+        ],
+        "try-op": [],
+        "validate": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "WebAssembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmparser/0.259.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -773,6 +1026,17 @@
         "edition": "2024",
         "name": "wasmparser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0f7c12eac7bb587801590f6a67ff0bc84d0748513864b71108e4b311cc3df694",
+        "package": "wasmparser",
+        "registry": "crates-io",
+        "version": "0.259.0"
+      },
+      "vcs": {
+        "commit": "7fc33f279ec4fb3bf0623a14d388725ee8a1ce65",
+        "path": "crates/wasmparser",
+        "system": "git"
       },
       "version": "0.259.0",
       "yanked": false
@@ -795,11 +1059,132 @@
       "advisories": 0,
       "archive": "sha256:cea0fc0f31ce029890b314ed9923a269cac8577c9355b6c53baff1cd21334f53",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.17.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/semver",
+          "name": "semver",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.166"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1348,
+          "content": "content/sha256/aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "digest": "sha256:aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "dep:semver"
+        ],
+        "default": [
+          "std",
+          "validate",
+          "serde",
+          "features",
+          "component-model",
+          "hash-collections",
+          "simd"
+        ],
+        "features": [],
+        "hash-collections": [
+          "dep:hashbrown",
+          "dep:indexmap"
+        ],
+        "prefer-btree-collections": [],
+        "serde": [
+          "dep:serde",
+          "indexmap?/serde",
+          "hashbrown?/serde"
+        ],
+        "simd": [],
+        "std": [
+          "indexmap?/std"
+        ],
+        "try-op": [],
+        "validate": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "WebAssembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmparser/0.247.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -809,6 +1194,17 @@
         "edition": "2021",
         "name": "wasmparser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8e6fb4c2bee46c5ea4d40f8cdb5c131725cd976718ec56f1c8e82fbde5fa2a80",
+        "package": "wasmparser",
+        "registry": "crates-io",
+        "version": "0.247.0"
+      },
+      "vcs": {
+        "commit": "0285a4680738439cb884d2674bec8be1e8beac5c",
+        "path": "crates/wasmparser",
+        "system": "git"
       },
       "version": "0.247.0",
       "yanked": false
@@ -831,11 +1227,113 @@
       "advisories": 0,
       "archive": "sha256:cd6453041bc1c88ed9d011d36515c7cb1f4781223d593efa480bb0261b39bcb0",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.15.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.7.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/semver",
+          "name": "semver",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.166"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1348,
+          "content": "content/sha256/aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "digest": "sha256:aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 379,
+          "content": "content/sha256/50c08fe92d14657becdc996c9008233c6daa37fcec816dfbb68e9c5c2e38127f",
+          "digest": "sha256:50c08fe92d14657becdc996c9008233c6daa37fcec816dfbb68e9c5c2e38127f",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "dep:semver"
+        ],
+        "default": [
+          "std",
+          "validate",
+          "serde",
+          "features",
+          "component-model",
+          "hash-collections",
+          "simd"
+        ],
+        "features": [],
+        "hash-collections": [
+          "dep:hashbrown",
+          "dep:indexmap"
+        ],
+        "prefer-btree-collections": [],
+        "serde": [
+          "dep:serde",
+          "indexmap?/serde",
+          "hashbrown?/serde"
+        ],
+        "simd": [],
+        "std": [
+          "indexmap?/std"
+        ],
+        "validate": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "WebAssembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmparser/0.244.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -845,6 +1343,17 @@
         "edition": "2021",
         "name": "wasmparser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:47b807c72e1bac69382b3a6fb3dbe8ea4c0ed87ff5629b8685ae6b9a611028fe",
+        "package": "wasmparser",
+        "registry": "crates-io",
+        "version": "0.244.0"
+      },
+      "vcs": {
+        "commit": "d4e317f22c3bace76cb3205003bcc34b4929037d",
+        "path": "crates/wasmparser",
+        "system": "git"
       },
       "version": "0.244.0",
       "yanked": false
@@ -867,6 +1376,73 @@
       "advisories": 0,
       "archive": "sha256:a7b44db83b219aa782c22f14cd72f0cde172e4e2711d3b390519d3e154a1dbfb",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.15.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.7.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/semver",
+          "name": "semver",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.166"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1348,
+          "content": "content/sha256/aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "digest": "sha256:aabf3b5930893b2a89d0114d8cd97e9b980f3c6f758b960484e06b69a504b823",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 379,
+          "content": "content/sha256/31d8a1777e054217670d9505f1531e081f23f18118c90c387126f01e360ed323",
+          "digest": "sha256:31d8a1777e054217670d9505f1531e081f23f18118c90c387126f01e360ed323",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -879,6 +1455,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -892,14 +1469,50 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "component-model": [
+          "dep:semver"
+        ],
+        "default": [
+          "std",
+          "validate",
+          "serde",
+          "features",
+          "component-model",
+          "hash-collections",
+          "simd"
+        ],
+        "features": [],
+        "hash-collections": [
+          "dep:hashbrown",
+          "dep:indexmap"
+        ],
+        "prefer-btree-collections": [],
+        "serde": [
+          "dep:serde",
+          "indexmap?/serde",
+          "hashbrown?/serde"
+        ],
+        "simd": [],
+        "std": [
+          "indexmap?/std"
+        ],
+        "validate": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "WebAssembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmparser/0.236.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -910,6 +1523,17 @@
         "edition": "2021",
         "name": "wasmparser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a9b1e81f3eb254cf7404a82cee6926a4a3ccc5aad80cc3d43608a070c67aa1d7",
+        "package": "wasmparser",
+        "registry": "crates-io",
+        "version": "0.236.1"
+      },
+      "vcs": {
+        "commit": "9dd8df4fdc53597af7534b6a4d4c11d9065690d3",
+        "path": "crates/wasmparser",
+        "system": "git"
       },
       "version": "0.236.1",
       "yanked": false

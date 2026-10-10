@@ -102,11 +102,100 @@
           "unit_identity": "sha256:c4576285105bef1c06fe903d2e2dabd884819060673e94cd1e779508e7ad87e3"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "asynchronous",
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing-core",
+          "name": "tracing-core",
+          "optional": false,
+          "req": "^0.1.28"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/valuable-serde",
+          "name": "valuable-serde",
+          "optional": true,
+          "req": "^0.1.0",
+          "target": "cfg(tracing_unstable)"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/valuable",
+          "name": "valuable_crate",
+          "optional": true,
+          "req": "^0.1.0",
+          "target": "cfg(tracing_unstable)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4042,
+          "content": "content/sha256/4867c3f1b4db3c92fcba87ff8fcb57dbf36ac237859be8acf372a543ad917f9f",
+          "digest": "sha256:4867c3f1b4db3c92fcba87ff8fcb57dbf36ac237859be8acf372a543ad917f9f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "digest": "sha256:898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 2082,
+          "content": "content/sha256/5c793509d3d4902be670c418fa38591b1980626b0138655ff9a15925b90aa4c9",
+          "digest": "sha256:5c793509d3d4902be670c418fa38591b1980626b0138655ff9a15925b90aa4c9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "valuable": [
+          "valuable_crate",
+          "valuable-serde",
+          "tracing-core/valuable"
+        ],
+        "valuable-serde": [
+          "dep:valuable-serde"
+        ],
+        "valuable_crate": [
+          "dep:valuable_crate"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging",
+        "tracing",
+        "serialization"
+      ],
       "manifest": "crates-io/tracing-serde/0.2.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +206,17 @@
         "edition": "2018",
         "name": "tracing_serde",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:704b1aeb7be0d0a84fc9828cae51dab5970fee5088f83d1dd7ee6f6246fc6ff1",
+        "package": "tracing-serde",
+        "registry": "crates-io",
+        "version": "0.2.0"
+      },
+      "vcs": {
+        "commit": "c66a692e671903712c1bd598082fc018f7f8568e",
+        "path": "tracing-serde",
+        "system": "git"
       },
       "version": "0.2.0",
       "yanked": false

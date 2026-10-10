@@ -198,11 +198,169 @@
           "unit_identity": "sha256:acae9820a7c64f65d969dfc49c30195a0361eeed297556e5228e9d99ab633ca0"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bin-proto",
+          "name": "bin-proto",
+          "optional": true,
+          "req": "^0.12.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/borsh",
+          "name": "borsh",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/defmt",
+          "name": "defmt",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/generic-array",
+          "name": "generic-array",
+          "optional": true,
+          "req": "^1.1.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/schemars",
+          "name": "schemars",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1988,
+          "content": "content/sha256/3e1fb710657302adceca0f3a5ca37670503fa376fdc60f1abfd441a023d1489b",
+          "digest": "sha256:3e1fb710657302adceca0f3a5ca37670503fa376fdc60f1abfd441a023d1489b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-APACHE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/fd80a26fbb3f644af1fa994134446702932968519797227e07a1368dea80f0bc",
+          "digest": "sha256:fd80a26fbb3f644af1fa994134446702932968519797227e07a1368dea80f0bc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-MIT.md",
+          "role": "license"
+        },
+        {
+          "bytes": 851,
+          "content": "content/sha256/84b34dd7608f7fb9b17bd588a6bf392bf7de504e2716f024a77d89f1b145a151",
+          "digest": "sha256:84b34dd7608f7fb9b17bd588a6bf392bf7de504e2716f024a77d89f1b145a151",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        },
+        {
+          "bytes": 4979,
+          "content": "content/sha256/8ca0d6ca91115af7daf0aa3f6c80e88884cea39e93476ad497afdf4543e8920b",
+          "digest": "sha256:8ca0d6ca91115af7daf0aa3f6c80e88884cea39e93476ad497afdf4543e8920b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "changelog.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "bin-proto": [
+          "dep:bin-proto"
+        ],
+        "borsh": [
+          "dep:borsh"
+        ],
+        "debugger_visualizer": [],
+        "default": [],
+        "defmt": [
+          "dep:defmt"
+        ],
+        "experimental_write_impl": [],
+        "generic-array": [
+          "dep:generic-array"
+        ],
+        "grab_spare_slice": [],
+        "latest_stable_rust": [
+          "rustc_1_61"
+        ],
+        "nightly_slice_partition_dedup": [],
+        "real_blackbox": [],
+        "rustc_1_40": [],
+        "rustc_1_55": [],
+        "rustc_1_57": [],
+        "rustc_1_61": [
+          "rustc_1_57"
+        ],
+        "schemars": [
+          "dep:schemars",
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "tinyvec_macros": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "vec",
+        "no_std",
+        "no-std"
+      ],
       "manifest": "crates-io/tinyvec/1.13.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -213,6 +371,17 @@
         "edition": "2018",
         "name": "tinyvec",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee",
+        "package": "tinyvec",
+        "registry": "crates-io",
+        "version": "1.13.3"
+      },
+      "vcs": {
+        "commit": "e343bbbb5a6594c9d57de718e6f232e6c0115dcb",
+        "path": "",
+        "system": "git"
       },
       "version": "1.13.3",
       "yanked": false

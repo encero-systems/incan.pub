@@ -178,11 +178,117 @@
           "unit_identity": "sha256:ba510f0464110add41a76ce3acff838b2e3e13a3e7f438219c2478dcc1f18ce5"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "unstable"
+          ],
+          "loaf": "crates-io/async-std",
+          "name": "async-std_1",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-io",
+          "name": "smol_2_async-io",
+          "optional": true,
+          "req": "^2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/blocking",
+          "name": "smol_2_blocking",
+          "optional": true,
+          "req": "^1.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-lite",
+          "name": "smol_2_futures-lite",
+          "optional": true,
+          "req": "^2.6"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "rt",
+            "time"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio_1",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2093,
+          "content": "content/sha256/b18fd8267f9246de3d1b6b0dcac0305fd0cba87de5ecd8b1e1f429ebcde67258",
+          "digest": "sha256:b18fd8267f9246de3d1b6b0dcac0305fd0cba87de5ecd8b1e1f429ebcde67258",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11346,
+          "content": "content/sha256/23fac4edada8cdd75ecd793864bfb3a60ef59da853425ed3e2b3d030dc730aa6",
+          "digest": "sha256:23fac4edada8cdd75ecd793864bfb3a60ef59da853425ed3e2b3d030dc730aa6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1083,
+          "content": "content/sha256/8982e37af80786707d8b8c33fb4cfe98c8a17d9d34caaa2b86895f0e84eafcca",
+          "digest": "sha256:8982e37af80786707d8b8c33fb4cfe98c8a17d9d34caaa2b86895f0e84eafcca",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2188,
+          "content": "content/sha256/620cbb60d4a3e7e3983c722e7078cb9277d34221c0c98d2f939b33cec0588094",
+          "digest": "sha256:620cbb60d4a3e7e3983c722e7078cb9277d34221c0c98d2f939b33cec0588094",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "async-std_1": [
+          "dep:async-std_1"
+        ],
+        "smol_2": [
+          "dep:smol_2_async-io",
+          "dep:smol_2_blocking",
+          "dep:smol_2_futures-lite"
+        ],
+        "tokio_1": [
+          "dep:tokio_1"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "async",
+        "database",
+        "pool",
+        "sync",
+        "utils"
+      ],
       "manifest": "crates-io/deadpool-runtime/0.3.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +299,17 @@
         "edition": "2024",
         "name": "deadpool_runtime",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2657f61fb1dd8bf37a8d51093cc7cee4e77125b22f7753f49b289f831bec2bae",
+        "package": "deadpool-runtime",
+        "registry": "crates-io",
+        "version": "0.3.1"
+      },
+      "vcs": {
+        "commit": "362391f640a0a041ec246370c67a99e7b34c9312",
+        "path": "crates/deadpool-runtime",
+        "system": "git"
       },
       "version": "0.3.1",
       "yanked": false
@@ -292,11 +409,88 @@
           "unit_identity": "sha256:354b2592845a720acce105fff67ebadfc4c32572a54c48a55a64049eaca85691"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "unstable"
+          ],
+          "loaf": "crates-io/async-std",
+          "name": "async-std_1",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "rt",
+            "time"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio_1",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1486,
+          "content": "content/sha256/85a1ecba36df1fd8fbee5a752fa38a68855c802dede9237f7cc537bb726351d5",
+          "digest": "sha256:85a1ecba36df1fd8fbee5a752fa38a68855c802dede9237f7cc537bb726351d5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11346,
+          "content": "content/sha256/23fac4edada8cdd75ecd793864bfb3a60ef59da853425ed3e2b3d030dc730aa6",
+          "digest": "sha256:23fac4edada8cdd75ecd793864bfb3a60ef59da853425ed3e2b3d030dc730aa6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1083,
+          "content": "content/sha256/8982e37af80786707d8b8c33fb4cfe98c8a17d9d34caaa2b86895f0e84eafcca",
+          "digest": "sha256:8982e37af80786707d8b8c33fb4cfe98c8a17d9d34caaa2b86895f0e84eafcca",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1287,
+          "content": "content/sha256/df50b227aa8cf38f815a1d56785b24125c686b8e3a241c3fdf7b860162be2cf6",
+          "digest": "sha256:df50b227aa8cf38f815a1d56785b24125c686b8e3a241c3fdf7b860162be2cf6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "async-std_1": [
+          "dep:async-std_1"
+        ],
+        "tokio_1": [
+          "dep:tokio_1"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "async",
+        "database",
+        "pool",
+        "sync",
+        "utils"
+      ],
       "manifest": "crates-io/deadpool-runtime/0.1.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -307,6 +501,17 @@
         "edition": "2021",
         "name": "deadpool_runtime",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:092966b41edc516079bdf31ec78a2e0588d1d0c08f78b91d8307215928642b2b",
+        "package": "deadpool-runtime",
+        "registry": "crates-io",
+        "version": "0.1.4"
+      },
+      "vcs": {
+        "commit": "c776ff5119cd01f48c9d3a6adb505b0bf957d4bd",
+        "path": "runtime",
+        "system": "git"
       },
       "version": "0.1.4",
       "yanked": false

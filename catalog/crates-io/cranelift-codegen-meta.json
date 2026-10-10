@@ -25,11 +25,80 @@
       "advisories": 0,
       "archive": "sha256:49e3940f3101b1f83f847bc68779004234fd096c4e976890dbc666b2b9ff0442",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-assembler-x64-meta",
+          "name": "cranelift-assembler-x64-meta",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-codegen-shared",
+          "name": "cranelift-codegen-shared",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-srcgen",
+          "name": "cranelift-srcgen",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/heck",
+          "name": "heck",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulley-interpreter",
+          "name": "pulley-interpreter",
+          "optional": true,
+          "req": "=36.0.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 91,
+          "content": "content/sha256/b123f056d0d458396679c5f7f2a16d2762af0258fcda4ac14b6655a95e5a0022",
+          "digest": "sha256:b123f056d0d458396679c5f7f2a16d2762af0258fcda4ac14b6655a95e5a0022",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "pulley": [
+          "dep:pulley-interpreter"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/cranelift-codegen-meta/0.123.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +109,17 @@
         "edition": "2024",
         "name": "cranelift_codegen_meta",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:85fad432ca0daf333f78b0947f8ccfcf64ad197acec6eccd5cfacb27e519a2b2",
+        "package": "cranelift-codegen-meta",
+        "registry": "crates-io",
+        "version": "0.123.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "cranelift/codegen/meta",
+        "system": "git"
       },
       "version": "0.123.17",
       "yanked": false

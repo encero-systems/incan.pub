@@ -108,6 +108,37 @@
           "unit_identity": "sha256:d4d3e449b4fe9c0cc65f6377eb04e21743ea794846ef39c20d3c3638bf843976"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2133,
+          "content": "content/sha256/ad110d50a17aebaa147bd4f95f7bfe7e0425c06b3074e461e0d6c0cab9e8cead",
+          "digest": "sha256:ad110d50a17aebaa147bd4f95f7bfe7e0425c06b3074e461e0d6c0cab9e8cead",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2123,
+          "content": "content/sha256/54e1fd7bd53273e601c9599eb162a004dacddee031ae297ee7109a7beb93b1c2",
+          "digest": "sha256:54e1fd7bd53273e601c9599eb162a004dacddee031ae297ee7109a7beb93b1c2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -115,6 +146,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -124,14 +156,43 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "__internal-fuzz-disable-checksum": [],
+        "c-allocator": [
+          "dep:libc"
+        ],
+        "custom-prefix": [
+          "export-symbols"
+        ],
+        "default": [
+          "std",
+          "stdio"
+        ],
+        "export-symbols": [],
+        "rust-allocator": [],
+        "semver-prefix": [
+          "export-symbols"
+        ],
+        "std": [
+          "rust-allocator"
+        ],
+        "stdio": [
+          "dep:libc"
+        ],
+        "testing-prefix": [
+          "export-symbols"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/libbz2-rs-sys/0.2.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -141,6 +202,17 @@
         "edition": "2021",
         "name": "libbz2_rs_sys",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:34b357333733e8260735ba5894eb928c02ecc69c78715f01a8019e7fa7f2db4c",
+        "package": "libbz2-rs-sys",
+        "registry": "crates-io",
+        "version": "0.2.5"
+      },
+      "vcs": {
+        "commit": "f47b114db88889068c1efc8394b2e38d6a1e6dd1",
+        "path": "libbz2-rs-sys",
+        "system": "git"
       },
       "version": "0.2.5",
       "yanked": false

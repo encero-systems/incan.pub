@@ -23,11 +23,73 @@
       "advisories": 0,
       "archive": "sha256:18c2459f8b9a58433b2a54897e6f34368f589a6203e77729f40de2a938a015b9",
       "assets": [],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2348,
+          "content": "content/sha256/1b4d267b8facbfa645d9e992775a4405a3a3b4acf5df19176e14fe0c242b86d6",
+          "digest": "sha256:1b4d267b8facbfa645d9e992775a4405a3a3b4acf5df19176e14fe0c242b86d6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 363,
+          "content": "content/sha256/1723b93ab7b52043edc97fb43adddfd06c6c0aff50466e064781e924587a0e85",
+          "digest": "sha256:1723b93ab7b52043edc97fb43adddfd06c6c0aff50466e064781e924587a0e85",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc"
+        ],
+        "std": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasip1/1.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +100,17 @@
         "edition": "2018",
         "name": "wasip1",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b5e26842486624357dbeb8f0381cf1fb42f022291fd787d4a816768fec8cc760",
+        "package": "wasip1",
+        "registry": "crates-io",
+        "version": "1.0.0"
+      },
+      "vcs": {
+        "commit": "e55b3b02fcda2a016f5df14573ff05c5b1e313d6",
+        "path": "crates/wasip1",
+        "system": "git"
       },
       "version": "1.0.0",
       "yanked": false

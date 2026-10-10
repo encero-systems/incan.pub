@@ -102,11 +102,135 @@
           "unit_identity": "sha256:b7c2f832127be958594aeecd665015a7d15c27822c544a0c1ac4afccc072fa68"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossbeam-deque",
+          "name": "crossbeam-deque",
+          "optional": false,
+          "req": "^0.8.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/globset",
+          "name": "globset",
+          "optional": false,
+          "req": "^0.4.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.6.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "dfa-onepass",
+            "hybrid",
+            "meta",
+            "nfa",
+            "perf",
+            "std",
+            "syntax"
+          ],
+          "loaf": "crates-io/regex-automata",
+          "name": "regex-automata",
+          "optional": false,
+          "req": "^0.4.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/same-file",
+          "name": "same-file",
+          "optional": false,
+          "req": "^1.0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/walkdir",
+          "name": "walkdir",
+          "optional": false,
+          "req": "^2.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winapi-util",
+          "name": "winapi-util",
+          "optional": false,
+          "req": "^0.1.2",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1653,
+          "content": "content/sha256/fad351a4d6dad422368750be404b7a419bc9f6ab5acc86934edb3502fba2029d",
+          "digest": "sha256:fad351a4d6dad422368750be404b7a419bc9f6ab5acc86934edb3502fba2029d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 126,
+          "content": "content/sha256/01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "digest": "sha256:01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "digest": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1211,
+          "content": "content/sha256/7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "digest": "sha256:7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "format": "text",
+          "origin": "package",
+          "path": "UNLICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "simd-accel": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "glob",
+        "ignore",
+        "gitignore",
+        "pattern",
+        "file"
+      ],
       "manifest": "crates-io/ignore/0.4.33/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +241,17 @@
         "edition": "2024",
         "name": "ignore",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:00b69833ed729dc5aa7d19541d96d6cf8e9137194207a04916d658e43168402f",
+        "package": "ignore",
+        "registry": "crates-io",
+        "version": "0.4.33"
+      },
+      "vcs": {
+        "commit": "3fce3b5bb0236da2df6d99672afb8a719642eca7",
+        "path": "crates/ignore",
+        "system": "git"
       },
       "version": "0.4.33",
       "yanked": false

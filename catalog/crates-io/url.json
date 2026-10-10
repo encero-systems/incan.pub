@@ -768,6 +768,90 @@
           "unit_identity": "sha256:dec5cc37057273ba49b1c105abf7b461d685250926042c6392b7c8f6e567f2f2"
         }
       ],
+      "categories": [
+        "parser-implementations",
+        "web-programming",
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/form_urlencoded",
+          "name": "form_urlencoded",
+          "optional": false,
+          "req": "^1.2.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "compiled_data"
+          ],
+          "loaf": "crates-io/idna",
+          "name": "idna",
+          "optional": false,
+          "req": "^1.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/percent-encoding",
+          "name": "percent-encoding",
+          "optional": false,
+          "req": "^2.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1303,
+          "content": "content/sha256/141354cfa79fe3a7e739834bf6e001ff1293169e1809cf9eb6d5c8af0b7a191f",
+          "digest": "sha256:141354cfa79fe3a7e739834bf6e001ff1293169e1809cf9eb6d5c8af0b7a191f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/b38f11f6096706e6de553dabe2a7ed142d59b6fa8c97e290c67496154745cdd5",
+          "digest": "sha256:b38f11f6096706e6de553dabe2a7ed142d59b6fa8c97e290c67496154745cdd5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -776,14 +860,36 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "debugger_visualizer": [],
+        "default": [
+          "std"
+        ],
+        "expose_internals": [],
+        "serde": [
+          "dep:serde",
+          "dep:serde_derive"
+        ],
+        "std": [
+          "idna/std",
+          "percent-encoding/std",
+          "form_urlencoded/std",
+          "serde?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "url",
+        "parser"
+      ],
       "manifest": "crates-io/url/2.5.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -793,6 +899,17 @@
         "edition": "2018",
         "name": "url",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ff67a8a4397373c3ef660812acab3268222035010ab8680ec4215f38ba3d0eed",
+        "package": "url",
+        "registry": "crates-io",
+        "version": "2.5.8"
+      },
+      "vcs": {
+        "commit": "d6ea13c5f8e7e6e627f6390161b3e185bda5e5ce",
+        "path": "url",
+        "system": "git"
       },
       "version": "2.5.8",
       "yanked": false

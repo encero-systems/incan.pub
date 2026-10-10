@@ -126,11 +126,98 @@
           "unit_identity": "sha256:1d30d40b6f9f7bd5dfcced9d88b9ced196c51d50d2bece5e7c40ca28bd4e5f8d"
         }
       ],
+      "categories": [
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/const_panic_proc_macros",
+          "name": "const_panic_proc_macros",
+          "optional": true,
+          "req": "=0.2.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/trybuild",
+          "name": "trybuild",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/typewit",
+          "name": "typewit",
+          "optional": false,
+          "req": "^1.9.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5764,
+          "content": "content/sha256/f6924d3fcadca6dc3f7e41262134209d0a2f0e82326d62d2cef32450c5012dff",
+          "digest": "sha256:f6924d3fcadca6dc3f7e41262134209d0a2f0e82326d62d2cef32450c5012dff",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 855,
+          "content": "content/sha256/573e362dc50a6d9eb444cea38ef61587e16a0645cb8098ba13a2c42fdde72acd",
+          "digest": "sha256:573e362dc50a6d9eb444cea38ef61587e16a0645cb8098ba13a2c42fdde72acd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "__ui_tests": [
+          "trybuild",
+          "test"
+        ],
+        "const_panic_proc_macros": [
+          "dep:const_panic_proc_macros"
+        ],
+        "default": [
+          "non_basic"
+        ],
+        "derive": [
+          "const_panic_proc_macros",
+          "non_basic"
+        ],
+        "docsrs": [],
+        "non_basic": [],
+        "rust_1_64": [],
+        "rust_1_82": [
+          "rust_1_64"
+        ],
+        "rust_1_88": [
+          "rust_1_82"
+        ],
+        "rust_latest_stable": [
+          "rust_1_88"
+        ],
+        "test": [],
+        "trybuild": [
+          "dep:trybuild"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no-std",
+        "format",
+        "const",
+        "panic"
+      ],
       "manifest": "crates-io/const_panic/0.2.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -141,6 +228,17 @@
         "edition": "2021",
         "name": "const_panic",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9603f79528ece8163c496f8932121cb36cfe46259e9c907bb3d8205139d7caa3",
+        "package": "const_panic",
+        "registry": "crates-io",
+        "version": "0.2.17"
+      },
+      "vcs": {
+        "commit": "7cdbcd528691aaecc59a0b9f9163ce4f1aaf767d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.17",
       "yanked": false

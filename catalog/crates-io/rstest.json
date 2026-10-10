@@ -118,11 +118,87 @@
           "unit_identity": "sha256:d0a045f263f0bd37e0e091da082d362020af049b58b3ccacfd12b603f37d3fad"
         }
       ],
+      "categories": [
+        "development-tools::testing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-timer",
+          "name": "futures-timer",
+          "optional": true,
+          "req": "^3.0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": true,
+          "req": "^0.3.30"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rstest_macros",
+          "name": "rstest_macros",
+          "optional": false,
+          "req": "^0.27.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 17977,
+          "content": "content/sha256/ca9fee9c3c275c2ef68eb698ae5086b6ad661e08c768225505b10edb58c4373b",
+          "digest": "sha256:ca9fee9c3c275c2ef68eb698ae5086b6ad661e08c768225505b10edb58c4373b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11352,
+          "content": "content/sha256/58bd62e8a40f94eb780e1ad32d8ad33a7baed34f78b833e61ebabb7b489d90f4",
+          "digest": "sha256:58bd62e8a40f94eb780e1ad32d8ad33a7baed34f78b833e61ebabb7b489d90f4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/53b5c498df966daf4ea75d92c047e4d92bc02cffa4315751109596d32a524c87",
+          "digest": "sha256:53b5c498df966daf4ea75d92c047e4d92bc02cffa4315751109596d32a524c87",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "async-timeout": [
+          "dep:futures-timer",
+          "dep:futures-util",
+          "rstest_macros/async-timeout"
+        ],
+        "crate-name": [
+          "rstest_macros/crate-name"
+        ],
+        "default": [
+          "async-timeout",
+          "crate-name"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "test",
+        "fixture"
+      ],
       "manifest": "crates-io/rstest/0.27.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +209,17 @@
         "edition": "2021",
         "name": "rstest",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:948203e6d13b83e51a90d7cf236dd58a0065f23f4b902f00f306e7eb2bd09b9c",
+        "package": "rstest",
+        "registry": "crates-io",
+        "version": "0.27.0"
+      },
+      "vcs": {
+        "commit": "59cd3d1919fc471922297606b8819af4e5bfd472",
+        "path": "rstest",
+        "system": "git"
       },
       "version": "0.27.0",
       "yanked": false

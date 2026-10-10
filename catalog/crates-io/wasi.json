@@ -184,11 +184,78 @@
           "unit_identity": "sha256:af07904a505d10995c2377d613bc2e9de7a04c05250765710c099e1c84e2dfc0"
         }
       ],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasip2",
+          "name": "wasip2",
+          "optional": false,
+          "req": "^1.0.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4279,
+          "content": "content/sha256/7a2f20fc21d361d9380431499267f3c65581ddf64214d4333a6a0ad67fd7e52e",
+          "digest": "sha256:7a2f20fc21d361d9380431499267f3c65581ddf64214d4333a6a0ad67fd7e52e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bitflags": [
+          "wasip2/bitflags"
+        ],
+        "default": [
+          "wasip2/default"
+        ],
+        "std": [
+          "wasip2/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasi/0.14.7+wasi-0.2.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -199,6 +266,17 @@
         "edition": "2021",
         "name": "wasi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:883478de20367e224c0090af9cf5f9fa85bed63a95c1abf3afc5c083ebc06e8c",
+        "package": "wasi",
+        "registry": "crates-io",
+        "version": "0.14.7+wasi-0.2.4"
+      },
+      "vcs": {
+        "commit": "1df9d19d6993c78fa5e925792a04e45c0a9862d7",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.7+wasi-0.2.4",
       "yanked": false
@@ -221,11 +299,91 @@
       "advisories": 0,
       "archive": "sha256:8657fa1583255a97688f8c855313b70319f3cd400719caf8e5e3a674c4f592d8",
       "assets": [],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "rustc-std-workspace-alloc",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3010,
+          "content": "content/sha256/c021f687a5a61d9c308581401e7aa4454585a30c418abdd02e3a1ef71daa035f",
+          "digest": "sha256:c021f687a5a61d9c308581401e7aa4454585a30c418abdd02e3a1ef71daa035f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "rustc-std-workspace-alloc"
+        ],
+        "rustc-std-workspace-alloc": [
+          "dep:rustc-std-workspace-alloc"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasi/0.11.1+wasi-snapshot-preview1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -235,6 +393,17 @@
         "edition": "2018",
         "name": "wasi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b",
+        "package": "wasi",
+        "registry": "crates-io",
+        "version": "0.11.1+wasi-snapshot-preview1"
+      },
+      "vcs": {
+        "commit": "f136a81add9706ed0b36ac3c4b0da943de8e690d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.11.1+wasi-snapshot-preview1",
       "yanked": false

@@ -575,6 +575,80 @@
           "unit_identity": "sha256:8b6d968c7001582f9b745e543bd9ede7a323d1c47ffc120de7bdda9c6ec922e5"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bincode",
+          "name": "bincode",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/malloc_size_of",
+          "name": "malloc_size_of",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unty",
+          "name": "unty",
+          "optional": true,
+          "req": "^0.0.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 649,
+          "content": "content/sha256/a01127c37308457e8d396b176fb790846be0978c173be3f13260b62efcef011b",
+          "digest": "sha256:a01127c37308457e8d396b176fb790846be0978c173be3f13260b62efcef011b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/0b28172679e0009b655da42797c03fd163a3379d5cfa67ba1f1655e974a2a1a9",
+          "digest": "sha256:0b28172679e0009b655da42797c03fd163a3379d5cfa67ba1f1655e974a2a1a9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -582,14 +656,55 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "bincode": [
+          "dep:bincode"
+        ],
+        "const_generics": [],
+        "const_new": [
+          "const_generics"
+        ],
+        "drain_filter": [],
+        "drain_keep_rest": [
+          "drain_filter"
+        ],
+        "impl_bincode": [
+          "bincode",
+          "unty"
+        ],
+        "malloc_size_of": [
+          "dep:malloc_size_of"
+        ],
+        "may_dangle": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "specialization": [],
+        "union": [],
+        "unty": [
+          "dep:unty"
+        ],
+        "write": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "small",
+        "vec",
+        "vector",
+        "stack",
+        "no_std"
+      ],
       "manifest": "crates-io/smallvec/1.16.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -599,6 +714,17 @@
         "edition": "2018",
         "name": "smallvec",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f9395f0f0eee849a9b707b2f06bb92a6a422090e2123bb2ef8e87a0e61892a8e",
+        "package": "smallvec",
+        "registry": "crates-io",
+        "version": "1.16.2"
+      },
+      "vcs": {
+        "commit": "ccf5fc71044d491c46a3d79e7ed53948e6da1590",
+        "path": "",
+        "system": "git"
       },
       "version": "1.16.2",
       "yanked": false
@@ -621,6 +747,80 @@
       "advisories": 0,
       "archive": "sha256:e11912153a4c7626fe4c38df07d19a03626654d15018e24ac23be0c58ec9599c",
       "assets": [],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bincode",
+          "name": "bincode",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/malloc_size_of",
+          "name": "malloc_size_of",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unty",
+          "name": "unty",
+          "optional": true,
+          "req": "^0.0.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 649,
+          "content": "content/sha256/a01127c37308457e8d396b176fb790846be0978c173be3f13260b62efcef011b",
+          "digest": "sha256:a01127c37308457e8d396b176fb790846be0978c173be3f13260b62efcef011b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/0b28172679e0009b655da42797c03fd163a3379d5cfa67ba1f1655e974a2a1a9",
+          "digest": "sha256:0b28172679e0009b655da42797c03fd163a3379d5cfa67ba1f1655e974a2a1a9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -629,6 +829,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -639,14 +840,56 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "bincode": [
+          "dep:bincode"
+        ],
+        "const_generics": [],
+        "const_new": [
+          "const_generics"
+        ],
+        "debugger_visualizer": [],
+        "drain_filter": [],
+        "drain_keep_rest": [
+          "drain_filter"
+        ],
+        "impl_bincode": [
+          "bincode",
+          "unty"
+        ],
+        "malloc_size_of": [
+          "dep:malloc_size_of"
+        ],
+        "may_dangle": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "specialization": [],
+        "union": [],
+        "unty": [
+          "dep:unty"
+        ],
+        "write": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "small",
+        "vec",
+        "vector",
+        "stack",
+        "no_std"
+      ],
       "manifest": "crates-io/smallvec/1.15.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -656,6 +899,17 @@
         "edition": "2018",
         "name": "smallvec",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:67b1b7a3b5fe4f1376887184045fcf45c69e92af734b7aaddc05fb777b6fbd03",
+        "package": "smallvec",
+        "registry": "crates-io",
+        "version": "1.15.1"
+      },
+      "vcs": {
+        "commit": "d0f47a3ea99296498ee940b5d99f59b403c498a2",
+        "path": "",
+        "system": "git"
       },
       "version": "1.15.1",
       "yanked": false

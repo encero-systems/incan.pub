@@ -233,11 +233,119 @@
           "unit_identity": "sha256:70439acaae60dbf9fd3d88dc61c8e0605e4e19ef609d951a0b7231047ebe49ef"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cssparser-macros",
+          "name": "cssparser-macros",
+          "optional": true,
+          "req": "^0.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/dtoa-short",
+          "name": "dtoa-short",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itoa",
+          "name": "itoa",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/malloc_size_of",
+          "name": "malloc_size_of",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "macros"
+          ],
+          "loaf": "crates-io/phf",
+          "name": "phf",
+          "optional": true,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2227,
+          "content": "content/sha256/95e81e8f22062ba196eb8229a749327c063620ccf31ce1dd01b7ea0529840280",
+          "digest": "sha256:95e81e8f22062ba196eb8229a749327c063620ccf31ce1dd01b7ea0529840280",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 16726,
+          "content": "content/sha256/fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+          "digest": "sha256:fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bench": [],
+        "default": [
+          "fast_match_byte",
+          "fast_match_color"
+        ],
+        "fast_match_byte": [
+          "dep:cssparser-macros"
+        ],
+        "fast_match_color": [
+          "dep:phf"
+        ],
+        "malloc_size_of": [
+          "dep:malloc_size_of"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "skip_long_tests": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "css",
+        "syntax",
+        "parser"
+      ],
       "manifest": "crates-io/cssparser/0.38.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -248,6 +356,17 @@
         "edition": "2024",
         "name": "cssparser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:11119743ad110e8c1bdccd930d7f5c30c99e5fc76a7b63ec9807e84eef0c5f59",
+        "package": "cssparser",
+        "registry": "crates-io",
+        "version": "0.38.0"
+      },
+      "vcs": {
+        "commit": "d128a90e1203fc4afb959420d6dc5e24f77a3191",
+        "path": "",
+        "system": "git"
       },
       "version": "0.38.0",
       "yanked": false

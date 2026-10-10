@@ -442,11 +442,87 @@
           "unit_identity": "sha256:d7a238f02053e8c62078157e3be17a2203bb433330459c6c2d24564868ffd22b"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3157,
+          "content": "content/sha256/69e6b59b0c960b96c35654420053d17eefa959dc5dff8a2cb5c252d2c2a566ba",
+          "digest": "sha256:69e6b59b0c960b96c35654420053d17eefa959dc5dff8a2cb5c252d2c2a566ba",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/9aa4f92bfcde293ebeca9e2379fa18d1d61f000977da144c7b74c2986c9b6466",
+          "digest": "sha256:9aa4f92bfcde293ebeca9e2379fa18d1d61f000977da144c7b74c2986c9b6466",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 9071,
+          "content": "content/sha256/4b9c39753a0435e2ea448e61076fa79fbccc19a422d6e15d07e7894f2d8d80df",
+          "digest": "sha256:4b9c39753a0435e2ea448e61076fa79fbccc19a422d6e15d07e7894f2d8d80df",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "digest": [
+          "dep:digest"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecdsa",
+        "ed25519",
+        "signature",
+        "signing"
+      ],
       "manifest": "crates-io/signature/3.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -457,6 +533,17 @@
         "edition": "2024",
         "name": "signature",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:28d567dcbaf0049cb8ac2608a76cd95ff9e4412e1899d389ee400918ca7537f5",
+        "package": "signature",
+        "registry": "crates-io",
+        "version": "3.0.0"
+      },
+      "vcs": {
+        "commit": "9488e7ea66763b5cbdc7a4814a96421e0114dc97",
+        "path": "signature",
+        "system": "git"
       },
       "version": "3.0.0",
       "yanked": false
@@ -664,11 +751,102 @@
           "unit_identity": "sha256:d310dc4f1116d13d3db3076460ac58cd28fb39de8f52bd38607f4add912ce044"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signature_derive",
+          "name": "derive",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.10.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.6.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2780,
+          "content": "content/sha256/abe06adcdfc61ddd24c4a1007b6da73a9c83acf9f2cad76bcb394cdb9341ba5a",
+          "digest": "sha256:abe06adcdfc61ddd24c4a1007b6da73a9c83acf9f2cad76bcb394cdb9341ba5a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/b3470648aff02beb36d7a53240fc9260ed80ed93bd43bace6b67d7ef7336ee33",
+          "digest": "sha256:b3470648aff02beb36d7a53240fc9260ed80ed93bd43bace6b67d7ef7336ee33",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7607,
+          "content": "content/sha256/2449de0a06c0b7cc8befcca6d8401ac054e96556f06c0b4dfd1e9048f92813f6",
+          "digest": "sha256:2449de0a06c0b7cc8befcca6d8401ac054e96556f06c0b4dfd1e9048f92813f6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "derive": [
+          "dep:derive"
+        ],
+        "digest": [
+          "dep:digest"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ],
+        "std": [
+          "alloc",
+          "rand_core?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecdsa",
+        "ed25519",
+        "signature",
+        "signing"
+      ],
       "manifest": "crates-io/signature/2.2.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -679,6 +857,17 @@
         "edition": "2021",
         "name": "signature",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:77549399552de45a898a580c1b41d445bf730df867cc44e6c0233bbc4b8329de",
+        "package": "signature",
+        "registry": "crates-io",
+        "version": "2.2.0"
+      },
+      "vcs": {
+        "commit": "5adcd4819b380b4aaec2b57c6bf3f2239a109060",
+        "path": "signature",
+        "system": "git"
       },
       "version": "2.2.0",
       "yanked": false

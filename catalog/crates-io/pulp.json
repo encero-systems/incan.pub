@@ -122,6 +122,107 @@
           "unit_identity": "sha256:039070359c73d3515fbf6b666e70a5acd6a5fac26aff48956732699865c5a26b"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "aarch64_simd",
+            "wasm_simd"
+          ],
+          "loaf": "crates-io/bytemuck",
+          "name": "bytemuck",
+          "optional": false,
+          "req": "^1.15"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libm",
+          "name": "libm",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "bytemuck"
+          ],
+          "loaf": "crates-io/num-complex",
+          "name": "num-complex",
+          "optional": false,
+          "req": "^0.4.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/paste",
+          "name": "paste",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulp-macro",
+          "name": "pulp-macro",
+          "optional": true,
+          "req": "^0.1.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pulp-wasm-simd-flag",
+          "name": "pulp-wasm-simd-flag",
+          "optional": false,
+          "req": "^0.1.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/raw-cpuid",
+          "name": "raw-cpuid",
+          "optional": false,
+          "req": "^11.5.0",
+          "target": "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/reborrow",
+          "name": "reborrow",
+          "optional": false,
+          "req": "^0.5"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2695,
+          "content": "content/sha256/f70e0976c7bedfe32d4dbe014483768b16184f87bb65d9068a56e9e90c0f8eee",
+          "digest": "sha256:f70e0976c7bedfe32d4dbe014483768b16184f87bb65d9068a56e9e90c0f8eee",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/d64f878c89bd5f1e5ada7e4aad57690b122727cf5229b7b87ea1980c188da1d9",
+          "digest": "sha256:d64f878c89bd5f1e5ada7e4aad57690b122727cf5229b7b87ea1980c188da1d9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -132,6 +233,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -144,6 +246,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -156,6 +259,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -168,14 +272,39 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std",
+          "x86-v3",
+          "relaxed-simd"
+        ],
+        "macro": [
+          "dep:pulp-macro"
+        ],
+        "nightly": [
+          "bytemuck/nightly_stdsimd"
+        ],
+        "relaxed-simd": [
+          "pulp-wasm-simd-flag/relaxed-simd"
+        ],
+        "std": [],
+        "x86-v3": [],
+        "x86-v4": [
+          "bytemuck/avx512_simd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "simd"
+      ],
       "manifest": "crates-io/pulp/0.22.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -186,6 +315,17 @@
         "edition": "2021",
         "name": "pulp",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:046aa45b989642ec2e4717c8e72d677b13edd831a4d3b6cf37d9a3e54912496a",
+        "package": "pulp",
+        "registry": "crates-io",
+        "version": "0.22.3"
+      },
+      "vcs": {
+        "commit": "5eb07fd7b68edf0a5e19f71737d315f72a510295",
+        "path": "pulp",
+        "system": "git"
       },
       "version": "0.22.3",
       "yanked": false

@@ -644,11 +644,97 @@
           "unit_identity": "sha256:5b43a113d91795e75fcf2d408b0ec5de223405a95288f66e3d51c9935f09d069"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "sys_rng"
+          ],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hybrid-array",
+          "name": "hybrid-array",
+          "optional": false,
+          "req": "^0.4.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1702,
+          "content": "content/sha256/9c64886cdfe000aa140834716989af95a591cfe4c62e041fc0002587f92fee01",
+          "digest": "sha256:9c64886cdfe000aa140834716989af95a591cfe4c62e041fc0002587f92fee01",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/d2e7ec5355c96eeade56b09187ceb48a6a30299da3ce7531a66d3d11405ab963",
+          "digest": "sha256:d2e7ec5355c96eeade56b09187ceb48a6a30299da3ce7531a66d3d11405ab963",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3718,
+          "content": "content/sha256/b05d54e55e67fe15ebadce31b4e1562cdaf0c872456c300bf41cec8a4491e4db",
+          "digest": "sha256:b05d54e55e67fe15ebadce31b4e1562cdaf0c872456c300bf41cec8a4491e4db",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "getrandom": [
+          "rand_core",
+          "dep:getrandom"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ],
+        "zeroize": [
+          "hybrid-array/zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "traits"
+      ],
       "manifest": "crates-io/crypto-common/0.2.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -658,6 +744,17 @@
         "edition": "2024",
         "name": "crypto_common",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ce6e4c961d6cd6c9a86db418387425e8bdeaf05b3c8bc1411e6dca4c252f1453",
+        "package": "crypto-common",
+        "registry": "crates-io",
+        "version": "0.2.2"
+      },
+      "vcs": {
+        "commit": "93dee26c6bde3741a197f1c5f6b7baac277705f3",
+        "path": "crypto-common",
+        "system": "git"
       },
       "version": "0.2.2",
       "yanked": false
@@ -1001,6 +1098,76 @@
           "unit_identity": "sha256:ad77941a6e87a6f2fe4cc47cd056072ee3b6a89ef4f359da67cf828b8e8736ed"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "more_lengths"
+          ],
+          "loaf": "crates-io/generic-array",
+          "name": "generic-array",
+          "optional": false,
+          "req": "=0.14.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typenum",
+          "name": "typenum",
+          "optional": false,
+          "req": "^1.14"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1882,
+          "content": "content/sha256/3451ce2bc0b658041902a8e792023d9874700e9292eac9153c45f203430e24a0",
+          "digest": "sha256:3451ce2bc0b658041902a8e792023d9874700e9292eac9153c45f203430e24a0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1065,
+          "content": "content/sha256/3521672491a3479422d5fe1aca6645dd2984090f85da6e5205abfb18fb7a6897",
+          "digest": "sha256:3521672491a3479422d5fe1aca6645dd2984090f85da6e5205abfb18fb7a6897",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1402,
+          "content": "content/sha256/6fcfa84d237ac5900879ebd2a91b41f680088e741ca95c965d205880382d94cb",
+          "digest": "sha256:6fcfa84d237ac5900879ebd2a91b41f680088e741ca95c965d205880382d94cb",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1008,6 +1175,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1017,14 +1185,30 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "getrandom": [
+          "rand_core",
+          "dep:rand_core",
+          "rand_core/getrandom"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "traits"
+      ],
       "manifest": "crates-io/crypto-common/0.1.7/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1034,6 +1218,17 @@
         "edition": "2018",
         "name": "crypto_common",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:78c8292055d1c1df0cce5d180393dc8cce0abec0a7102adb6c7b1eef6016d60a",
+        "package": "crypto-common",
+        "registry": "crates-io",
+        "version": "0.1.7"
+      },
+      "vcs": {
+        "commit": "66a997ccf5776ce873da5a48e2885a9908e940f6",
+        "path": "crypto-common",
+        "system": "git"
       },
       "version": "0.1.7",
       "yanked": false

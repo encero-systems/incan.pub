@@ -224,11 +224,152 @@
           "unit_identity": "sha256:7607f3ebee1ad8123ed5a460dd6e79c6b49481c6c3231816886604252b88a96c"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fallible-iterator",
+          "name": "fallible-iterator",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fnv",
+          "name": "fnv",
+          "optional": true,
+          "req": "^1.0.7"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.17.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": true,
+          "req": "^1.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2822,
+          "content": "content/sha256/d8305de205cdc5bbadba49bf213f7408fde9ab91943a6d0dfa15ecf8c75e2b76",
+          "digest": "sha256:d8305de205cdc5bbadba49bf213f7408fde9ab91943a6d0dfa15ecf8c75e2b76",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 51410,
+          "content": "content/sha256/6a0caa5dba7e8fede566e7257b2e52c222d958148a4d762141eead7da5068bff",
+          "digest": "sha256:6a0caa5dba7e8fede566e7257b2e52c222d958148a4d762141eead7da5068bff",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "read-all",
+          "write"
+        ],
+        "endian-reader": [
+          "read",
+          "dep:stable_deref_trait"
+        ],
+        "fallible-iterator": [
+          "dep:fallible-iterator"
+        ],
+        "read": [
+          "read-core"
+        ],
+        "read-all": [
+          "read",
+          "std",
+          "endian-reader"
+        ],
+        "read-core": [],
+        "rustc-dep-of-std": [
+          "dep:core",
+          "dep:alloc"
+        ],
+        "std": [
+          "stable_deref_trait?/std"
+        ],
+        "write": [
+          "dep:fnv",
+          "dep:hashbrown",
+          "dep:indexmap"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "DWARF",
+        "debug",
+        "ELF",
+        "eh_frame"
+      ],
       "manifest": "crates-io/gimli/0.34.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -239,6 +380,17 @@
         "edition": "2024",
         "name": "gimli",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1033caf0b349c518623b5396bfb2cf0bddf44f0306d543a250e5743297aafd10",
+        "package": "gimli",
+        "registry": "crates-io",
+        "version": "0.34.0"
+      },
+      "vcs": {
+        "commit": "86df12a630d43bc97b37eea4d2c7b218fa3ea2e3",
+        "path": "",
+        "system": "git"
       },
       "version": "0.34.0",
       "yanked": false
@@ -348,11 +500,136 @@
           "unit_identity": "sha256:e5aed006ee26e1c3de65e9077c61db56e69ce407a424d94d96eaad7c709f40de"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fallible-iterator",
+          "name": "fallible-iterator",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": true,
+          "req": "^1.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3305,
+          "content": "content/sha256/79fc2aa247ebf7b8a3562632aa2bfc466cd655a0886717d47e4bc693166e9745",
+          "digest": "sha256:79fc2aa247ebf7b8a3562632aa2bfc466cd655a0886717d47e4bc693166e9745",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 43299,
+          "content": "content/sha256/29c98006f14bd25b1a6593518da388be81ddb7f0ca89413836f6ae296e4c18ea",
+          "digest": "sha256:29c98006f14bd25b1a6593518da388be81ddb7f0ca89413836f6ae296e4c18ea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "read-all",
+          "write"
+        ],
+        "endian-reader": [
+          "read",
+          "dep:stable_deref_trait"
+        ],
+        "fallible-iterator": [
+          "dep:fallible-iterator"
+        ],
+        "read": [
+          "read-core"
+        ],
+        "read-all": [
+          "read",
+          "std",
+          "fallible-iterator",
+          "endian-reader"
+        ],
+        "read-core": [],
+        "rustc-dep-of-std": [
+          "dep:core",
+          "dep:alloc"
+        ],
+        "std": [
+          "fallible-iterator?/std",
+          "stable_deref_trait?/std"
+        ],
+        "write": [
+          "dep:indexmap"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "DWARF",
+        "debug",
+        "ELF",
+        "eh_frame"
+      ],
       "manifest": "crates-io/gimli/0.32.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -363,6 +640,17 @@
         "edition": "2018",
         "name": "gimli",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e629b9b98ef3dd8afe6ca2bd0f89306cec16d43d907889945bc5d6687f2f13c7",
+        "package": "gimli",
+        "registry": "crates-io",
+        "version": "0.32.3"
+      },
+      "vcs": {
+        "commit": "8bc8e622fcb9be20fc9f03c96bc6335d936b869d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.32.3",
       "yanked": false

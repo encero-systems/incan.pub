@@ -138,11 +138,234 @@
           "unit_identity": "sha256:b7f783280f31bcbbab1e914863eb8966975c0e18e1284a529a70080d4220e58d"
         }
       ],
+      "categories": [
+        "development-tools::testing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bit-set",
+          "name": "bit-set",
+          "optional": true,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bit-vec",
+          "name": "bit-vec",
+          "optional": true,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.15"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proptest-macro",
+          "name": "proptest-macro",
+          "optional": true,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": false,
+          "req": "^0.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_chacha",
+          "name": "rand_chacha",
+          "optional": false,
+          "req": "^0.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_xorshift",
+          "name": "rand_xorshift",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/regex-syntax",
+          "name": "regex-syntax",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rusty-fork",
+          "name": "rusty-fork",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tempfile",
+          "name": "tempfile",
+          "optional": true,
+          "req": "^3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unarray",
+          "name": "unarray",
+          "optional": false,
+          "req": "^0.1.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/x86",
+          "name": "x86",
+          "optional": true,
+          "req": "^0.52.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 15322,
+          "content": "content/sha256/33021737e2a55280464023c62f44c4a7e549f42c600227fc4551600661cbf808",
+          "digest": "sha256:33021737e2a55280464023c62f44c4a7e549f42c600227fc4551600661cbf808",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/d8e0806926ce9f0a5030c382ecc0ffdf6de6fbea5c69a458435fd443fa7a5b92",
+          "digest": "sha256:d8e0806926ce9f0a5030c382ecc0ffdf6de6fbea5c69a458435fd443fa7a5b92",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 38832,
+          "content": "content/sha256/0b9fad52878cd9cccd69a06983ee8f020319a4f24b75effdfdb004eca847c710",
+          "digest": "sha256:0b9fad52878cd9cccd69a06983ee8f020319a4f24b75effdfdb004eca847c710",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "atomic64bit": [],
+        "attr-macro": [
+          "proptest-macro"
+        ],
+        "bit-set": [
+          "dep:bit-set",
+          "dep:bit-vec"
+        ],
+        "default": [
+          "std",
+          "fork",
+          "timeout",
+          "bit-set"
+        ],
+        "default-code-coverage": [
+          "std",
+          "fork",
+          "timeout",
+          "bit-set"
+        ],
+        "f16": [],
+        "fork": [
+          "std",
+          "rusty-fork",
+          "tempfile"
+        ],
+        "handle-panics": [
+          "std"
+        ],
+        "hardware-rng": [
+          "x86"
+        ],
+        "no_std": [
+          "num-traits/libm"
+        ],
+        "proptest-macro": [
+          "dep:proptest-macro"
+        ],
+        "regex-syntax": [
+          "dep:regex-syntax"
+        ],
+        "rusty-fork": [
+          "dep:rusty-fork"
+        ],
+        "std": [
+          "rand/std",
+          "rand/os_rng",
+          "regex-syntax",
+          "num-traits/std"
+        ],
+        "tempfile": [
+          "dep:tempfile"
+        ],
+        "timeout": [
+          "fork",
+          "dep:rusty-fork",
+          "rusty-fork/timeout"
+        ],
+        "unstable": [
+          "f16"
+        ],
+        "x86": [
+          "dep:x86"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "property",
+        "testing",
+        "quickcheck",
+        "fuzz",
+        "hypothesis"
+      ],
       "manifest": "crates-io/proptest/1.11.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -153,6 +376,17 @@
         "edition": "2021",
         "name": "proptest",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4b45fcc2344c680f5025fe57779faef368840d0bd1f42f216291f0dc4ace4744",
+        "package": "proptest",
+        "registry": "crates-io",
+        "version": "1.11.0"
+      },
+      "vcs": {
+        "commit": "7f1367f9a4dc8440c47b93166a38ed064f63ea8c",
+        "path": "proptest",
+        "system": "git"
       },
       "version": "1.11.0",
       "yanked": false

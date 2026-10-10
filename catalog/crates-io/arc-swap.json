@@ -102,11 +102,86 @@
           "unit_identity": "sha256:029ab8e89fb4af6c39a48964cd8b5472a9188ed1b087ef07e8606f93f14b939c"
         }
       ],
+      "categories": [
+        "data-structures",
+        "memory-management"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustversion",
+          "name": "rustversion",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "rc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1689,
+          "content": "content/sha256/ac6a84fa980c519da19dee679a728e4c34b2f9ff938de99452e797a464bfdd24",
+          "digest": "sha256:ac6a84fa980c519da19dee679a728e4c34b2f9ff938de99452e797a464bfdd24",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1063,
+          "content": "content/sha256/ff3f1cd12af8866d9bde961d6cc40df774cd131d484de31d3170c4b02b21a7b5",
+          "digest": "sha256:ff3f1cd12af8866d9bde961d6cc40df774cd131d484de31d3170c4b02b21a7b5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7372,
+          "content": "content/sha256/9fdc11de6fbf63bf3287286d9be830130bd3a11a5fa38a65ee5e7fc5c3154cdf",
+          "digest": "sha256:9fdc11de6fbf63bf3287286d9be830130bd3a11a5fa38a65ee5e7fc5c3154cdf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "experimental-strategies": [],
+        "experimental-thread-local": [],
+        "internal-test-strategies": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "weak": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "atomic",
+        "Arc"
+      ],
       "manifest": "crates-io/arc-swap/1.9.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +192,17 @@
         "edition": "2018",
         "name": "arc_swap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c049c0be4daef0b145cb3555416b3b8ef5b7888a38aea1a3a155801fe7b0810b",
+        "package": "arc-swap",
+        "registry": "crates-io",
+        "version": "1.9.2"
+      },
+      "vcs": {
+        "commit": "147d6c0319d389a0aaa134a67abaa00106122f7d",
+        "path": "",
+        "system": "git"
       },
       "version": "1.9.2",
       "yanked": false

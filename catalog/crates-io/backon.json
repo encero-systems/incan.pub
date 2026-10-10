@@ -128,11 +128,127 @@
           "unit_identity": "sha256:087b1bef18bcf6ca0a6038b487f9217b2c0a8103b86038eb1cf02f8a37ddd3aa"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/embassy-time",
+          "name": "embassy-time",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fastrand",
+          "name": "fastrand",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "gloo-timers"
+          ],
+          "loaf": "crates-io/futures-timer",
+          "name": "futures-timer",
+          "optional": true,
+          "req": "^3.0.3",
+          "target": "cfg(target_arch = \"wasm32\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-timer",
+          "name": "futures-timer",
+          "optional": true,
+          "req": "^3.0.3",
+          "target": "cfg(not(target_arch = \"wasm32\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/gloo-timers",
+          "name": "gloo-timers",
+          "optional": true,
+          "req": "^0.3",
+          "target": "cfg(target_arch = \"wasm32\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1",
+          "target": "cfg(not(target_arch = \"wasm32\"))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3368,
+          "content": "content/sha256/ef47084f7ef620e2858016e90083e27284d094ce24c9339fd7452a8d89db6bed",
+          "digest": "sha256:ef47084f7ef620e2858016e90083e27284d094ce24c9339fd7452a8d89db6bed",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11342,
+          "content": "content/sha256/3e16583bb85121134f781623f64f72481a617f3c295182e60728804b05f0aeda",
+          "digest": "sha256:3e16583bb85121134f781623f64f72481a617f3c295182e60728804b05f0aeda",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "std-blocking-sleep",
+          "tokio-sleep",
+          "gloo-timers-sleep"
+        ],
+        "embassy-sleep": [
+          "embassy-time"
+        ],
+        "embassy-time": [
+          "dep:embassy-time"
+        ],
+        "futures-timer": [
+          "dep:futures-timer"
+        ],
+        "futures-timer-sleep": [
+          "futures-timer"
+        ],
+        "gloo-timers": [
+          "dep:gloo-timers"
+        ],
+        "gloo-timers-sleep": [
+          "dep:gloo-timers",
+          "gloo-timers/futures"
+        ],
+        "std": [
+          "fastrand/std"
+        ],
+        "std-blocking-sleep": [],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "tokio-sleep": [
+          "dep:tokio",
+          "tokio/time"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/backon/1.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -143,6 +259,17 @@
         "edition": "2024",
         "name": "backon",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cffb0e931875b666fc4fcb20fee52e9bbd1ef836fd9e9e04ec21555f9f85f7ef",
+        "package": "backon",
+        "registry": "crates-io",
+        "version": "1.6.0"
+      },
+      "vcs": {
+        "commit": "e24dc92742e201f7320868d46a12ff59eb82ef72",
+        "path": "backon",
+        "system": "git"
       },
       "version": "1.6.0",
       "yanked": false

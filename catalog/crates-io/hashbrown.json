@@ -861,19 +861,180 @@
           "unit_identity": "sha256:c1cf6dd976d509e561bf2a62de1b0ae1e54b7ff8362ac7550e324bcf269265e0"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/foldhash",
+          "name": "foldhash",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.9.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.221"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3482,
+          "content": "content/sha256/d58265d24271a49876da9c77eaaa00093e01e41011e7e603da1f738ecdec4f47",
+          "digest": "sha256:d58265d24271a49876da9c77eaaa00093e01e41011e7e603da1f738ecdec4f47",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "digest": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 23915,
+          "content": "content/sha256/dddef7405a9fccaffc2ca6c3a76f602bb2d2b4caac35370dbb0a3787ffcd4993",
+          "digest": "sha256:dddef7405a9fccaffc2ca6c3a76f602bb2d2b4caac35370dbb0a3787ffcd4993",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "default-hasher",
+          "inline-more",
+          "allocator-api2",
+          "equivalent",
+          "raw-entry"
+        ],
+        "default-hasher": [
+          "dep:foldhash"
+        ],
+        "equivalent": [
+          "dep:equivalent"
+        ],
+        "inline-more": [],
+        "nightly": [
+          "foldhash?/nightly"
+        ],
+        "raw-entry": [],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "rustc-dep-of-std": [
+          "nightly",
+          "core",
+          "alloc",
+          "rustc-internal-api"
+        ],
+        "rustc-internal-api": [],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "no_std",
+        "hashmap",
+        "swisstable"
+      ],
       "manifest": "crates-io/hashbrown/0.17.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -883,6 +1044,17 @@
         "edition": "2024",
         "name": "hashbrown",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a",
+        "package": "hashbrown",
+        "registry": "crates-io",
+        "version": "0.17.1"
+      },
+      "vcs": {
+        "commit": "c62a63a61b7caf2de8f9ecb7b06a66b0ab6bdf3d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.17.1",
       "yanked": false
@@ -905,11 +1077,123 @@
       "advisories": 0,
       "archive": "sha256:bb8b9f72763ad36fe97a4af4fe3752664bb91e1e956fa94d7c6f5dfbf8fafbca",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/foldhash",
+          "name": "foldhash",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.9.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.221"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3472,
+          "content": "content/sha256/f793b5cfaab5702b9e8bcf5ac7ec5bb198bdf2a89c1861070c1ad64b33a27ad3",
+          "digest": "sha256:f793b5cfaab5702b9e8bcf5ac7ec5bb198bdf2a89c1861070c1ad64b33a27ad3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "digest": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 23768,
+          "content": "content/sha256/6f0fd2619eccf0f920593293177b62fce5cb5357af4e5a656b422f1e253bf0fa",
+          "digest": "sha256:6f0fd2619eccf0f920593293177b62fce5cb5357af4e5a656b422f1e253bf0fa",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -917,14 +1201,64 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "default-hasher",
+          "inline-more",
+          "allocator-api2",
+          "equivalent",
+          "raw-entry"
+        ],
+        "default-hasher": [
+          "dep:foldhash"
+        ],
+        "equivalent": [
+          "dep:equivalent"
+        ],
+        "inline-more": [],
+        "nightly": [
+          "foldhash?/nightly"
+        ],
+        "raw-entry": [],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "rustc-dep-of-std": [
+          "nightly",
+          "core",
+          "alloc",
+          "rustc-internal-api"
+        ],
+        "rustc-internal-api": [],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "no_std",
+        "hashmap",
+        "swisstable"
+      ],
       "manifest": "crates-io/hashbrown/0.17.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -934,6 +1268,17 @@
         "edition": "2024",
         "name": "hashbrown",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4f467dd6dccf739c208452f8014c75c18bb8301b050ad1cfb27153803edb0f51",
+        "package": "hashbrown",
+        "registry": "crates-io",
+        "version": "0.17.0"
+      },
+      "vcs": {
+        "commit": "d290456969d0e89e6799d8a673c95112962b70ec",
+        "path": "",
+        "system": "git"
       },
       "version": "0.17.0",
       "yanked": false
@@ -1165,6 +1510,117 @@
           "unit_identity": "sha256:cfd4655e0ce93e16943dec2444ef51012185b964a0e3e4f05168aedb92fd763e"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/foldhash",
+          "name": "foldhash",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.9.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.221"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3344,
+          "content": "content/sha256/63da5e3fcf4da2921ae34639aad6f0921828670a19cb871cac7786546434857d",
+          "digest": "sha256:63da5e3fcf4da2921ae34639aad6f0921828670a19cb871cac7786546434857d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "digest": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 22725,
+          "content": "content/sha256/bc027bc493e90784b42132a1ec8917d0384769ba64fc866199f56633df5dacc3",
+          "digest": "sha256:bc027bc493e90784b42132a1ec8917d0384769ba64fc866199f56633df5dacc3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1177,14 +1633,64 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "default-hasher",
+          "inline-more",
+          "allocator-api2",
+          "equivalent",
+          "raw-entry"
+        ],
+        "default-hasher": [
+          "dep:foldhash"
+        ],
+        "equivalent": [
+          "dep:equivalent"
+        ],
+        "inline-more": [],
+        "nightly": [
+          "foldhash?/nightly"
+        ],
+        "raw-entry": [],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "rustc-dep-of-std": [
+          "nightly",
+          "core",
+          "alloc",
+          "rustc-internal-api"
+        ],
+        "rustc-internal-api": [],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "no_std",
+        "hashmap",
+        "swisstable"
+      ],
       "manifest": "crates-io/hashbrown/0.16.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1194,6 +1700,17 @@
         "edition": "2021",
         "name": "hashbrown",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:841d1cc9bed7f9236f321df977030373f4a4163ae1a7dbfe1a51a2c1a51d9100",
+        "package": "hashbrown",
+        "registry": "crates-io",
+        "version": "0.16.1"
+      },
+      "vcs": {
+        "commit": "1876e4f02708b93903d55ef598f68e82a826518f",
+        "path": "",
+        "system": "git"
       },
       "version": "0.16.1",
       "yanked": false
@@ -1305,6 +1822,108 @@
           "unit_identity": "sha256:e84bf089ea6be0439c4417c3dce1d87753ea45d59b4d34ea4b048e33542f121e"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/foldhash",
+          "name": "foldhash",
+          "optional": true,
+          "req": "^0.1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.25"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3343,
+          "content": "content/sha256/34a16e7bc599e9d4ec600b477176a4a1328e6fb1f3f8d1525fb54f398553daef",
+          "digest": "sha256:34a16e7bc599e9d4ec600b477176a4a1328e6fb1f3f8d1525fb54f398553daef",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "digest": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 21808,
+          "content": "content/sha256/ed7f31b98a975fee4392dc5de7bbedbabc00dcd5c3c60ade87a83b836401ba6f",
+          "digest": "sha256:ed7f31b98a975fee4392dc5de7bbedbabc00dcd5c3c60ade87a83b836401ba6f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1313,14 +1932,61 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "default-hasher",
+          "inline-more",
+          "allocator-api2",
+          "equivalent",
+          "raw-entry"
+        ],
+        "default-hasher": [
+          "dep:foldhash"
+        ],
+        "equivalent": [
+          "dep:equivalent"
+        ],
+        "inline-more": [],
+        "nightly": [],
+        "raw-entry": [],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "rustc-dep-of-std": [
+          "nightly",
+          "core",
+          "alloc",
+          "rustc-internal-api"
+        ],
+        "rustc-internal-api": [],
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "no_std",
+        "hashmap",
+        "swisstable"
+      ],
       "manifest": "crates-io/hashbrown/0.15.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1330,6 +1996,17 @@
         "edition": "2021",
         "name": "hashbrown",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1",
+        "package": "hashbrown",
+        "registry": "crates-io",
+        "version": "0.15.5"
+      },
+      "vcs": {
+        "commit": "b751eef8e99ccf3652046ef4a9e1ec47c1bfb78d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.15.5",
       "yanked": false
@@ -1513,6 +2190,126 @@
           "unit_identity": "sha256:5cbc27b969cd2df9abdc0f1dac7d568cfbfee41bf5a26fc3604ca17f01546323"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ahash",
+          "name": "ahash",
+          "optional": true,
+          "req": "^0.8.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compiler_builtins",
+          "name": "compiler_builtins",
+          "optional": true,
+          "req": "^0.1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/rkyv",
+          "name": "rkyv",
+          "optional": true,
+          "req": "^0.7.42"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.25"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7104,
+          "content": "content/sha256/84c222ce49510535419d338b7532a72a2bf22b7466e44de78d92d25b6c7d636b",
+          "digest": "sha256:84c222ce49510535419d338b7532a72a2bf22b7466e44de78d92d25b6c7d636b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "digest": "sha256:ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 18140,
+          "content": "content/sha256/1a844fe3b7466b41ca1d5914af197d5aeed7cb14f30ebe4be351367d7ca905d2",
+          "digest": "sha256:1a844fe3b7466b41ca1d5914af197d5aeed7cb14f30ebe4be351367d7ca905d2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1520,14 +2317,68 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "ahash": [
+          "dep:ahash"
+        ],
+        "alloc": [
+          "dep:alloc"
+        ],
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "compiler_builtins": [
+          "dep:compiler_builtins"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "ahash",
+          "inline-more",
+          "allocator-api2"
+        ],
+        "equivalent": [
+          "dep:equivalent"
+        ],
+        "inline-more": [],
+        "nightly": [
+          "allocator-api2?/nightly"
+        ],
+        "raw": [],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "rkyv": [
+          "dep:rkyv"
+        ],
+        "rustc-dep-of-std": [
+          "nightly",
+          "core",
+          "compiler_builtins",
+          "alloc",
+          "rustc-internal-api"
+        ],
+        "rustc-internal-api": [],
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "no_std",
+        "hashmap",
+        "swisstable"
+      ],
       "manifest": "crates-io/hashbrown/0.14.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1537,6 +2388,17 @@
         "edition": "2021",
         "name": "hashbrown",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1",
+        "package": "hashbrown",
+        "registry": "crates-io",
+        "version": "0.14.5"
+      },
+      "vcs": {
+        "commit": "025d0f58b62d074f5fd660a22fe293cdc237d589",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.5",
       "yanked": false

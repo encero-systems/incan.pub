@@ -178,11 +178,92 @@
           "unit_identity": "sha256:93ed416c1949d90a8b77ffe1da85ee97dd50a20bbe8d3d794404b7c24b2963ed"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cpufeatures",
+          "name": "cpufeatures",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(target_arch = \"aarch64\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hybrid-array",
+          "name": "hybrid-array",
+          "optional": true,
+          "req": "^0.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3753,
+          "content": "content/sha256/aaf5d12dc2a61b53c8a19ea8ea146d6c29fbe4a96200d446641e62ef64a93138",
+          "digest": "sha256:aaf5d12dc2a61b53c8a19ea8ea146d6c29fbe4a96200d446641e62ef64a93138",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/8c7516d4b27b1e495be5e38b612298b63de48d05f49cdac94f70f3cd70f8864b",
+          "digest": "sha256:8c7516d4b27b1e495be5e38b612298b63de48d05f49cdac94f70f3cd70f8864b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3140,
+          "content": "content/sha256/19dcc499c1102d94e28119913536d2b1814ce81f8b539a29fb7afbca73f09dfa",
+          "digest": "sha256:19dcc499c1102d94e28119913536d2b1814ce81f8b539a29fb7afbca73f09dfa",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "parallel": [
+          "dep:hybrid-array"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "sponge",
+        "keccak",
+        "keccak-f",
+        "keccak-p"
+      ],
       "manifest": "crates-io/keccak/0.2.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +274,17 @@
         "edition": "2024",
         "name": "keccak",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d8f198d1db720e4940b5a493201d199d9f24f568f8f746bd13706243a2f71598",
+        "package": "keccak",
+        "registry": "crates-io",
+        "version": "0.2.2"
+      },
+      "vcs": {
+        "commit": "ae480398120a0e753048dcf03dfeb2f6882c15aa",
+        "path": "keccak",
+        "system": "git"
       },
       "version": "0.2.2",
       "yanked": false
@@ -215,11 +307,65 @@
       "advisories": 0,
       "archive": "sha256:fda933d76733a01aebafd5b9ecc7c1c10e2bf942bc28dcca997c77a60e9f9a08",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cpufeatures",
+          "name": "cpufeatures",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(target_arch = \"aarch64\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2213,
+          "content": "content/sha256/d59e3d031a1ac63d098f44d47b7375f860cd919c453e26654f407f4a06ffca67",
+          "digest": "sha256:d59e3d031a1ac63d098f44d47b7375f860cd919c453e26654f407f4a06ffca67",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/bdebaf9156a298f8fdab56dd26cb5144673de522d80f4c0d88e0039145f147f9",
+          "digest": "sha256:bdebaf9156a298f8fdab56dd26cb5144673de522d80f4c0d88e0039145f147f9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1372,
+          "content": "content/sha256/2f3c61a452e6a76e2969e260c639d7e17dbc47ed6a52a06be2f53190e3924d74",
+          "digest": "sha256:2f3c61a452e6a76e2969e260c639d7e17dbc47ed6a52a06be2f53190e3924d74",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -227,14 +373,27 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "asm": [],
+        "no_unroll": [],
+        "simd": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "sponge",
+        "keccak",
+        "keccak-f",
+        "keccak-p"
+      ],
       "manifest": "crates-io/keccak/0.1.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -244,6 +403,17 @@
         "edition": "2018",
         "name": "keccak",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cb26cec98cce3a3d96cbb7bced3c4b16e3d13f27ec56dbd62cbc8f39cfb9d653",
+        "package": "keccak",
+        "registry": "crates-io",
+        "version": "0.1.6"
+      },
+      "vcs": {
+        "commit": "a8936d9662ca92fd177d289580066ceabb937b0c",
+        "path": "keccak",
+        "system": "git"
       },
       "version": "0.1.6",
       "yanked": false

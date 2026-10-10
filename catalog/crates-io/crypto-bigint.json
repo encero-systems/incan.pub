@@ -482,11 +482,192 @@
           "unit_identity": "sha256:c3b3eb2b57aee03ea9fc1a5f0364b1ee942bdcc0aada43d48eb878902b3f5ef9"
         }
       ],
+      "categories": [
+        "algorithms",
+        "cryptography",
+        "data-structures",
+        "mathematics",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cpubits",
+          "name": "cpubits",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ctutils",
+          "name": "ctutils",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "sys_rng"
+          ],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hybrid-array",
+          "name": "hybrid-array",
+          "optional": true,
+          "req": "^0.4.12"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.19"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rlp",
+          "name": "rlp",
+          "optional": true,
+          "req": "^0.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": true,
+          "req": "^2.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3420,
+          "content": "content/sha256/aa95ede1517e3cabe3e60db93355495993d596e006b679d73bcf5c1f1e41f172",
+          "digest": "sha256:aa95ede1517e3cabe3e60db93355495993d596e006b679d73bcf5c1f1e41f172",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "digest": "sha256:57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 46741,
+          "content": "content/sha256/57e6ec9e1e4080221e1147a74b3df8e475f9070df2a732e45989aea207cdc7a0",
+          "digest": "sha256:57e6ec9e1e4080221e1147a74b3df8e475f9070df2a732e45989aea207cdc7a0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serdect?/alloc"
+        ],
+        "default": [
+          "rand_core"
+        ],
+        "der": [
+          "dep:der",
+          "hybrid-array"
+        ],
+        "extra-sizes": [],
+        "getrandom": [
+          "dep:getrandom",
+          "rand_core"
+        ],
+        "hybrid-array": [
+          "dep:hybrid-array"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ],
+        "rlp": [
+          "dep:rlp"
+        ],
+        "serde": [
+          "dep:serdect"
+        ],
+        "subtle": [
+          "dep:subtle",
+          "ctutils/subtle",
+          "hybrid-array?/subtle"
+        ],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arbitrary",
+        "crypto",
+        "bignum",
+        "integer",
+        "precision"
+      ],
       "manifest": "crates-io/crypto-bigint/0.7.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -497,6 +678,17 @@
         "edition": "2024",
         "name": "crypto_bigint",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1a52aa3fcda4e6302a9f48734f234d35d4721b96f8fe07d073f07ce9df4f0271",
+        "package": "crypto-bigint",
+        "registry": "crates-io",
+        "version": "0.7.5"
+      },
+      "vcs": {
+        "commit": "2b54d248cce00457e3afb5650d9b14632ef4a116",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.5",
       "yanked": false
@@ -519,11 +711,152 @@
       "advisories": 0,
       "archive": "sha256:85e9edff50f3a10b3615ed17f0fc492bd4653c372047501cea12229970c00c08",
       "assets": [],
+      "categories": [
+        "algorithms",
+        "cryptography",
+        "data-structures",
+        "mathematics",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": true,
+          "req": "^0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/generic-array",
+          "name": "generic-array",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.6.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rlp",
+          "name": "rlp",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3030,
+          "content": "content/sha256/e7e4bb1dc815119ed5e087ce1995a6fd45657c0f6d0fd565cbc52721c378b42e",
+          "digest": "sha256:e7e4bb1dc815119ed5e087ce1995a6fd45657c0f6d0fd565cbc52721c378b42e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1077,
+          "content": "content/sha256/90c503b61dee04e1449c323ec34c229dfb68d7adcb96c7e140ee55f70fce2d8e",
+          "digest": "sha256:90c503b61dee04e1449c323ec34c229dfb68d7adcb96c7e140ee55f70fce2d8e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 14700,
+          "content": "content/sha256/dc759cacc69443dc4bbc1dd0227058905e8688f401f09eb6cc6d001315c52cf8",
+          "digest": "sha256:dc759cacc69443dc4bbc1dd0227058905e8688f401f09eb6cc6d001315c52cf8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serdect?/alloc"
+        ],
+        "default": [
+          "rand"
+        ],
+        "der": [
+          "dep:der"
+        ],
+        "extra-sizes": [],
+        "generic-array": [
+          "dep:generic-array"
+        ],
+        "rand": [
+          "dep:rand_core",
+          "rand_core/std"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ],
+        "rlp": [
+          "dep:rlp"
+        ],
+        "serde": [
+          "dep:serdect"
+        ],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arbitrary",
+        "crypto",
+        "bignum",
+        "integer",
+        "precision"
+      ],
       "manifest": "crates-io/crypto-bigint/0.5.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -534,6 +867,17 @@
         "edition": "2021",
         "name": "crypto_bigint",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0dc92fb57ca44df6db8059111ab3af99a63d5d0f8375d9972e319a379c6bab76",
+        "package": "crypto-bigint",
+        "registry": "crates-io",
+        "version": "0.5.5"
+      },
+      "vcs": {
+        "commit": "98f29002552211cbd37dd09d354d1514d84158c4",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.5",
       "yanked": false

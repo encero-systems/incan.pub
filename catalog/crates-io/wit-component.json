@@ -102,11 +102,183 @@
           "unit_identity": "sha256:0c23dfd007524b0d30869e3400565fd4b02d3c525052df6321541438b5cf8e24"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.58"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.3.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "wasmparser"
+          ],
+          "loaf": "crates-io/wasm-encoder",
+          "name": "wasm-encoder",
+          "optional": false,
+          "req": "^0.261.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.261.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "component-model",
+            "simd",
+            "std"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": false,
+          "req": "^0.261.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wast",
+          "name": "wast",
+          "optional": true,
+          "req": "^261.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wat",
+          "name": "wat",
+          "optional": true,
+          "req": "^1.261.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "decoding",
+            "serde"
+          ],
+          "loaf": "crates-io/wit-parser",
+          "name": "wit-parser",
+          "optional": false,
+          "req": "^0.261.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9423,
+          "content": "content/sha256/00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "digest": "sha256:00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "dummy-module": [
+          "dep:wat"
+        ],
+        "semver-check": [
+          "dummy-module"
+        ],
+        "wat": [
+          "dep:wast",
+          "dep:wat"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-component/0.261.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +289,17 @@
         "edition": "2024",
         "name": "wit_component",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2818766842bd2321074c348fb5c15d8fdb105a9eb78374e6d77c7d4127e1f2f9",
+        "package": "wit-component",
+        "registry": "crates-io",
+        "version": "0.261.0"
+      },
+      "vcs": {
+        "commit": "5793351e3190a178d0dbdd509d183b6da896090a",
+        "path": "crates/wit-component",
+        "system": "git"
       },
       "version": "0.261.0",
       "yanked": false
@@ -273,11 +456,183 @@
           "unit_identity": "sha256:db7ce8fc68bec5f946cf08ba7ee58a7c7057fb2badbf73d399e1efc4a6592a43"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.58"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.3.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "wasmparser"
+          ],
+          "loaf": "crates-io/wasm-encoder",
+          "name": "wasm-encoder",
+          "optional": false,
+          "req": "^0.259.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.259.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "component-model",
+            "simd",
+            "std"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": false,
+          "req": "^0.259.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wast",
+          "name": "wast",
+          "optional": true,
+          "req": "^259.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wat",
+          "name": "wat",
+          "optional": true,
+          "req": "^1.259.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "decoding",
+            "serde"
+          ],
+          "loaf": "crates-io/wit-parser",
+          "name": "wit-parser",
+          "optional": false,
+          "req": "^0.259.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9423,
+          "content": "content/sha256/00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "digest": "sha256:00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "dummy-module": [
+          "dep:wat"
+        ],
+        "semver-check": [
+          "dummy-module"
+        ],
+        "wat": [
+          "dep:wast",
+          "dep:wat"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-component/0.259.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -288,6 +643,17 @@
         "edition": "2024",
         "name": "wit_component",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:092f783dee3253265fcde131475055f8c275ac0176a9c0396db1dc7b5544bfb4",
+        "package": "wit-component",
+        "registry": "crates-io",
+        "version": "0.259.0"
+      },
+      "vcs": {
+        "commit": "7fc33f279ec4fb3bf0623a14d388725ee8a1ce65",
+        "path": "crates/wit-component",
+        "system": "git"
       },
       "version": "0.259.0",
       "yanked": false
@@ -310,11 +676,183 @@
       "advisories": 0,
       "archive": "sha256:ef223d18443dd306a02bc53bdad8c2e2133191c1257284761615f54762130d02",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.58"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.3.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "wasmparser"
+          ],
+          "loaf": "crates-io/wasm-encoder",
+          "name": "wasm-encoder",
+          "optional": false,
+          "req": "^0.247.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.247.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "component-model",
+            "simd",
+            "std"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": false,
+          "req": "^0.247.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wast",
+          "name": "wast",
+          "optional": true,
+          "req": "^247.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wat",
+          "name": "wat",
+          "optional": true,
+          "req": "^1.247.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "decoding",
+            "serde"
+          ],
+          "loaf": "crates-io/wit-parser",
+          "name": "wit-parser",
+          "optional": false,
+          "req": "^0.247.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9423,
+          "content": "content/sha256/00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "digest": "sha256:00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "dummy-module": [
+          "dep:wat"
+        ],
+        "semver-check": [
+          "dummy-module"
+        ],
+        "wat": [
+          "dep:wast",
+          "dep:wat"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-component/0.247.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -324,6 +862,17 @@
         "edition": "2021",
         "name": "wit_component",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9d567162a6b9843080e5e0053f696623ff694bae8ae017c9ec536d1873bbe3d8",
+        "package": "wit-component",
+        "registry": "crates-io",
+        "version": "0.247.0"
+      },
+      "vcs": {
+        "commit": "0285a4680738439cb884d2674bec8be1e8beac5c",
+        "path": "crates/wit-component",
+        "system": "git"
       },
       "version": "0.247.0",
       "yanked": false
@@ -346,11 +895,163 @@
       "advisories": 0,
       "archive": "sha256:ff82a76150d17ac5d94028a35d0ed5c053203c25041b40a4d21a2fa5be4da1e9",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.58"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.3.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": false,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "wasmparser"
+          ],
+          "loaf": "crates-io/wasm-encoder",
+          "name": "wasm-encoder",
+          "optional": false,
+          "req": "^0.244.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.244.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "component-model",
+            "simd",
+            "std"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": false,
+          "req": "^0.244.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wast",
+          "name": "wast",
+          "optional": true,
+          "req": "^244.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wat",
+          "name": "wat",
+          "optional": true,
+          "req": "^1.244.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "decoding",
+            "serde"
+          ],
+          "loaf": "crates-io/wit-parser",
+          "name": "wit-parser",
+          "optional": false,
+          "req": "^0.244.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9423,
+          "content": "content/sha256/00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "digest": "sha256:00d3b7547efc420a28ce22afd6d9f29f996e2a972ee0f753f988ee26e54ac8ea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 388,
+          "content": "content/sha256/12fbe712f15dacac9842b1378c4566bcf8c598b3a8526f394b03c9588c2c243e",
+          "digest": "sha256:12fbe712f15dacac9842b1378c4566bcf8c598b3a8526f394b03c9588c2c243e",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "dummy-module": [
+          "dep:wat"
+        ],
+        "semver-check": [
+          "dummy-module"
+        ],
+        "wat": [
+          "dep:wast",
+          "dep:wat"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-component/0.244.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -360,6 +1061,17 @@
         "edition": "2021",
         "name": "wit_component",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9d66ea20e9553b30172b5e831994e35fbde2d165325bec84fc43dbf6f4eb9cb2",
+        "package": "wit-component",
+        "registry": "crates-io",
+        "version": "0.244.0"
+      },
+      "vcs": {
+        "commit": "d4e317f22c3bace76cb3205003bcc34b4929037d",
+        "path": "crates/wit-component",
+        "system": "git"
       },
       "version": "0.244.0",
       "yanked": false

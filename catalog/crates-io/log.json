@@ -399,19 +399,172 @@
           "unit_identity": "sha256:da095c678c53fe102e7003dce17f70ee9a41e992b37262c7b8327bdd60bb6af6"
         }
       ],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sval",
+          "name": "sval",
+          "optional": true,
+          "req": "^2.16"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sval_ref",
+          "name": "sval_ref",
+          "optional": true,
+          "req": "^2.16"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "inline-i128"
+          ],
+          "loaf": "crates-io/value-bag",
+          "name": "value-bag",
+          "optional": true,
+          "req": "^1.12"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5427,
+          "content": "content/sha256/1b19ea8cb142b1aea5dfb4db1e6256b5180f1c1618c2490a88cffec452e94240",
+          "digest": "sha256:1b19ea8cb142b1aea5dfb4db1e6256b5180f1c1618c2490a88cffec452e94240",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "digest": "sha256:6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 23232,
+          "content": "content/sha256/910332afd746edcdf1221d34564d83b9622da92163fea84ee36d52db0f1252df",
+          "digest": "sha256:910332afd746edcdf1221d34564d83b9622da92163fea84ee36d52db0f1252df",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "kv": [],
+        "kv_serde": [
+          "kv_std",
+          "value-bag",
+          "dep:value-bag",
+          "value-bag/serde",
+          "serde"
+        ],
+        "kv_std": [
+          "std",
+          "kv",
+          "value-bag",
+          "dep:value-bag",
+          "value-bag/error"
+        ],
+        "kv_sval": [
+          "kv",
+          "value-bag",
+          "dep:value-bag",
+          "value-bag/sval",
+          "sval",
+          "sval_ref"
+        ],
+        "kv_unstable": [
+          "kv",
+          "value-bag"
+        ],
+        "kv_unstable_serde": [
+          "kv_serde",
+          "kv_unstable_std"
+        ],
+        "kv_unstable_std": [
+          "kv_std",
+          "kv_unstable"
+        ],
+        "kv_unstable_sval": [
+          "kv_sval",
+          "kv_unstable"
+        ],
+        "max_level_debug": [],
+        "max_level_error": [],
+        "max_level_info": [],
+        "max_level_off": [],
+        "max_level_trace": [],
+        "max_level_warn": [],
+        "release_max_level_debug": [],
+        "release_max_level_error": [],
+        "release_max_level_info": [],
+        "release_max_level_off": [],
+        "release_max_level_trace": [],
+        "release_max_level_warn": [],
+        "serde": [
+          "serde_core"
+        ],
+        "serde_core": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "sval": [
+          "dep:sval"
+        ],
+        "sval_ref": [
+          "dep:sval_ref"
+        ],
+        "value-bag": [
+          "dep:value-bag"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging"
+      ],
       "manifest": "crates-io/log/0.4.34/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -421,6 +574,17 @@
         "edition": "2021",
         "name": "log",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f9f8bd3e56ce4dfc153cf470fffbfa98c7620958b312ca5c3a4b8d5181fd13c6",
+        "package": "log",
+        "registry": "crates-io",
+        "version": "0.4.34"
+      },
+      "vcs": {
+        "commit": "8034743dd9d7f7583bd9a670271483d176130911",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.34",
       "yanked": false
@@ -443,11 +607,89 @@
       "advisories": 0,
       "archive": "sha256:55873f1d433d7d9b684a474705a912d4c146795fa775483745ce10c02b8e4c74",
       "assets": [],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sval",
+          "name": "sval",
+          "optional": true,
+          "req": "^2.16"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sval_ref",
+          "name": "sval_ref",
+          "optional": true,
+          "req": "^2.16"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "inline-i128"
+          ],
+          "loaf": "crates-io/value-bag",
+          "name": "value-bag",
+          "optional": true,
+          "req": "^1.12"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5270,
+          "content": "content/sha256/486c6cf85f99a2a3ea14dbd5fc6d6075fdc047a0dbf2b93682595db0de6a115f",
+          "digest": "sha256:486c6cf85f99a2a3ea14dbd5fc6d6075fdc047a0dbf2b93682595db0de6a115f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "digest": "sha256:6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 20942,
+          "content": "content/sha256/a216e6550df9437781c01c09783c59276245b0121d3d39b874675148d412d361",
+          "digest": "sha256:a216e6550df9437781c01c09783c59276245b0121d3d39b874675148d412d361",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -455,14 +697,87 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "kv": [],
+        "kv_serde": [
+          "kv_std",
+          "value-bag",
+          "dep:value-bag",
+          "value-bag/serde",
+          "serde"
+        ],
+        "kv_std": [
+          "std",
+          "kv",
+          "value-bag",
+          "dep:value-bag",
+          "value-bag/error"
+        ],
+        "kv_sval": [
+          "kv",
+          "value-bag",
+          "dep:value-bag",
+          "value-bag/sval",
+          "sval",
+          "sval_ref"
+        ],
+        "kv_unstable": [
+          "kv",
+          "value-bag"
+        ],
+        "kv_unstable_serde": [
+          "kv_serde",
+          "kv_unstable_std"
+        ],
+        "kv_unstable_std": [
+          "kv_std",
+          "kv_unstable"
+        ],
+        "kv_unstable_sval": [
+          "kv_sval",
+          "kv_unstable"
+        ],
+        "max_level_debug": [],
+        "max_level_error": [],
+        "max_level_info": [],
+        "max_level_off": [],
+        "max_level_trace": [],
+        "max_level_warn": [],
+        "release_max_level_debug": [],
+        "release_max_level_error": [],
+        "release_max_level_info": [],
+        "release_max_level_off": [],
+        "release_max_level_trace": [],
+        "release_max_level_warn": [],
+        "serde": [
+          "serde_core"
+        ],
+        "serde_core": [
+          "dep:serde_core"
+        ],
+        "std": [],
+        "sval": [
+          "dep:sval"
+        ],
+        "sval_ref": [
+          "dep:sval_ref"
+        ],
+        "value-bag": [
+          "dep:value-bag"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging"
+      ],
       "manifest": "crates-io/log/0.4.29/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -472,6 +787,17 @@
         "edition": "2021",
         "name": "log",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897",
+        "package": "log",
+        "registry": "crates-io",
+        "version": "0.4.29"
+      },
+      "vcs": {
+        "commit": "b1e2df7bce7a1b685aa9bfd1db0a5cac1f0fc27d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.29",
       "yanked": false

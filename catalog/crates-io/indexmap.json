@@ -935,6 +935,123 @@
           "unit_identity": "sha256:0994bdfcc5eaf3319fa45d0e0d5b2f1b53b95951fcef678ee699b9d8cf62a0bf"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/borsh",
+          "name": "borsh",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quickcheck",
+          "name": "quickcheck",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sval",
+          "name": "sval",
+          "optional": true,
+          "req": "^2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2818,
+          "content": "content/sha256/f002494bf69e5b7dde911cfdb99330dfdbc4780d79a8e51847dfb7d883d9ab0f",
+          "digest": "sha256:f002494bf69e5b7dde911cfdb99330dfdbc4780d79a8e51847dfb7d883d9ab0f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1049,
+          "content": "content/sha256/ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+          "digest": "sha256:ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 22871,
+          "content": "content/sha256/24ded3df9d555a1212c28ae34d13395377fc5b13812fd8325763e5210a5f62ef",
+          "digest": "sha256:24ded3df9d555a1212c28ae34d13395377fc5b13812fd8325763e5210a5f62ef",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -944,6 +1061,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -954,14 +1072,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "borsh": [
+          "dep:borsh"
+        ],
+        "default": [
+          "std"
+        ],
+        "quickcheck": [
+          "dep:quickcheck"
+        ],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ],
+        "std": [],
+        "sval": [
+          "dep:sval"
+        ],
+        "test_debug": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hashmap",
+        "no_std"
+      ],
       "manifest": "crates-io/indexmap/2.14.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -971,6 +1120,17 @@
         "edition": "2024",
         "name": "indexmap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cc4e190f5d26ca7051642629da2c52fc03bde85a03197c99408dcd291734c855",
+        "package": "indexmap",
+        "registry": "crates-io",
+        "version": "2.14.2"
+      },
+      "vcs": {
+        "commit": "41a870887c4c77adf665886e63df08f406bfe37a",
+        "path": "",
+        "system": "git"
       },
       "version": "2.14.2",
       "yanked": false
@@ -991,6 +1151,123 @@
       "advisories": 0,
       "archive": "sha256:008f236cb00f25bde24ce73694ab480ffcf0e638b443443218282250cc18e7b3",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/borsh",
+          "name": "borsh",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/equivalent",
+          "name": "equivalent",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quickcheck",
+          "name": "quickcheck",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sval",
+          "name": "sval",
+          "optional": true,
+          "req": "^2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2818,
+          "content": "content/sha256/f002494bf69e5b7dde911cfdb99330dfdbc4780d79a8e51847dfb7d883d9ab0f",
+          "digest": "sha256:f002494bf69e5b7dde911cfdb99330dfdbc4780d79a8e51847dfb7d883d9ab0f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1049,
+          "content": "content/sha256/ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+          "digest": "sha256:ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 22395,
+          "content": "content/sha256/d0337e8981562fbf48eca08cf9a9927b9b0ccdb510cb091d6f2ea1b473668e3e",
+          "digest": "sha256:d0337e8981562fbf48eca08cf9a9927b9b0ccdb510cb091d6f2ea1b473668e3e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -999,6 +1276,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1009,14 +1287,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "borsh": [
+          "dep:borsh"
+        ],
+        "default": [
+          "std"
+        ],
+        "quickcheck": [
+          "dep:quickcheck"
+        ],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ],
+        "std": [],
+        "sval": [
+          "dep:sval"
+        ],
+        "test_debug": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hashmap",
+        "no_std"
+      ],
       "manifest": "crates-io/indexmap/2.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1026,6 +1335,17 @@
         "edition": "2024",
         "name": "indexmap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d466e9454f08e4a911e14806c24e16fba1b4c121d1ea474396f396069cf949d9",
+        "package": "indexmap",
+        "registry": "crates-io",
+        "version": "2.14.0"
+      },
+      "vcs": {
+        "commit": "bcd165baeb12bdf6e57a31d9869e9839e25679c6",
+        "path": "",
+        "system": "git"
       },
       "version": "2.14.0",
       "yanked": false

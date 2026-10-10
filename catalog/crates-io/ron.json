@@ -117,11 +117,151 @@
           "unit_identity": "sha256:8e8bf3c1df81f171201bf93d8225eb53dfab453f2c3f04ad1befe784518cf571"
         }
       ],
+      "categories": [
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "race"
+          ],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.20"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.193"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": false,
+          "req": "^1.0.193"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/typeid",
+          "name": "typeid",
+          "optional": false,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unicode-ident",
+          "name": "unicode-ident",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unicode-segmentation",
+          "name": "unicode-segmentation",
+          "optional": true,
+          "req": "^1.12.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 11130,
+          "content": "content/sha256/6a297aaaed79f1fbdbbe034f0b935c3af84dfb0c874f9f9236e152c3ba3906bb",
+          "digest": "sha256:6a297aaaed79f1fbdbbe034f0b935c3af84dfb0c874f9f9236e152c3ba3906bb",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1058,
+          "content": "content/sha256/fa0598d520497731445a5bc89a2b3d47896d95568bd2be255b7bc43d771b9994",
+          "digest": "sha256:fa0598d520497731445a5bc89a2b3d47896d95568bd2be255b7bc43d771b9994",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 20584,
+          "content": "content/sha256/52ceda34f4f0dd1d1daf8cfb36c6091423e879ecfb59302fdb2e43367e5bfa5f",
+          "digest": "sha256:52ceda34f4f0dd1d1daf8cfb36c6091423e879ecfb59302fdb2e43367e5bfa5f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "indexmap": [
+          "std",
+          "dep:indexmap"
+        ],
+        "integer128": [],
+        "internal-span-substring-test": [
+          "unicode-segmentation"
+        ],
+        "std": [
+          "serde/std"
+        ],
+        "unicode-segmentation": [
+          "dep:unicode-segmentation"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "serde",
+        "serialization"
+      ],
       "manifest": "crates-io/ron/0.12.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -132,6 +272,17 @@
         "edition": "2021",
         "name": "ron",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:81116b9531d61eabc41aeb228e4b6b2435bcca3233b98cf3b3077d4e6e9debb3",
+        "package": "ron",
+        "registry": "crates-io",
+        "version": "0.12.2"
+      },
+      "vcs": {
+        "commit": "7e8ceb454ba8c03fb3647b9c65792d9f2ab375d3",
+        "path": "",
+        "system": "git"
       },
       "version": "0.12.2",
       "yanked": false

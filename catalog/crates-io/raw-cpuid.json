@@ -140,11 +140,135 @@
           "unit_identity": "sha256:24c1ee5c8795aa67d609f2900db7fa8a1a08b42c9fa5302bfdd9f9b71afc7183"
         }
       ],
+      "categories": [
+        "no-std",
+        "no-std::no-alloc"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/termimad",
+          "name": "termimad",
+          "optional": true,
+          "req": "^0.25"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2014,
+          "content": "content/sha256/123e65ef057a8e584e01d837b5895c74c804655d8372629aaf9b1a19061fd950",
+          "digest": "sha256:123e65ef057a8e584e01d837b5895c74c804655d8372629aaf9b1a19061fd950",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/cdd45f4d0c552c3a51725728215919e0dedb1e1af250f130e7c2d60eef6721fe",
+          "digest": "sha256:cdd45f4d0c552c3a51725728215919e0dedb1e1af250f130e7c2d60eef6721fe",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 8995,
+          "content": "content/sha256/b0fef7c8c7c83ab38b11a44bae1836ac1efadbf33e4656dee516c2b37d1eb3e1",
+          "digest": "sha256:b0fef7c8c7c83ab38b11a44bae1836ac1efadbf33e4656dee516c2b37d1eb3e1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "clap": [
+          "dep:clap"
+        ],
+        "cli": [
+          "display",
+          "clap"
+        ],
+        "display": [
+          "std",
+          "termimad",
+          "serde_json",
+          "serialize"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_derive": [
+          "dep:serde_derive"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "serialize": [
+          "serde",
+          "serde_derive"
+        ],
+        "std": [],
+        "termimad": [
+          "dep:termimad"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cpuid",
+        "x86",
+        "amd64",
+        "os",
+        "libcore"
+      ],
       "manifest": "crates-io/raw-cpuid/11.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -155,6 +279,17 @@
         "edition": "2018",
         "name": "raw_cpuid",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:498cd0dc59d73224351ee52a95fee0f1a617a2eae0e7d9d720cc622c73a54186",
+        "package": "raw-cpuid",
+        "registry": "crates-io",
+        "version": "11.6.0"
+      },
+      "vcs": {
+        "commit": "aefadf7dd8d9e37ad94171d617158cad2133f3f7",
+        "path": "",
+        "system": "git"
       },
       "version": "11.6.0",
       "yanked": false

@@ -330,19 +330,82 @@
           "unit_identity": "sha256:d820a53da37e9623db25067b59f73fa83877c83b022c5bdaa5825f5a2ec67078"
         }
       ],
+      "categories": [
+        "rust-patterns",
+        "memory-management",
+        "caching",
+        "no-std",
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.61"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.44"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "extra-traits"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^3.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 418,
+          "content": "content/sha256/bacbc17b2cb457c169257f5e22c78a45d1c4a399eadae383f7732af909616ebc",
+          "digest": "sha256:bacbc17b2cb457c169257f5e22c78a45d1c4a399eadae383f7732af909616ebc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "derive",
+        "serialization",
+        "zero-copy"
+      ],
       "manifest": "crates-io/zerovec-derive/0.11.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -352,6 +415,17 @@
         "edition": "2021",
         "name": "zerovec_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:34df6fc39dbd26ddc9c10e6a2984476e13acce22e64e4487636ef494369225da",
+        "package": "zerovec-derive",
+        "registry": "crates-io",
+        "version": "0.11.6"
+      },
+      "vcs": {
+        "commit": "898d79c69f37da7b45a15a5714663c9b59b3d928",
+        "path": "utils/zerovec/derive",
+        "system": "git"
       },
       "version": "0.11.6",
       "yanked": false
@@ -374,11 +448,73 @@
       "advisories": 0,
       "archive": "sha256:1a37c9fd3160c0a73d560e6f8cdcbc46e6f576cbfc52c54c33b6dab0975c4c73",
       "assets": [],
+      "categories": [
+        "rust-patterns",
+        "memory-management",
+        "caching",
+        "no-std",
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.61"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.28"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "extra-traits"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.21"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 418,
+          "content": "content/sha256/bacbc17b2cb457c169257f5e22c78a45d1c4a399eadae383f7732af909616ebc",
+          "digest": "sha256:bacbc17b2cb457c169257f5e22c78a45d1c4a399eadae383f7732af909616ebc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zerocopy",
+        "serialization",
+        "zero-copy",
+        "serde"
+      ],
       "manifest": "crates-io/zerovec-derive/0.11.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -389,6 +525,17 @@
         "edition": "2021",
         "name": "zerovec_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:eadce39539ca5cb3985590102671f2567e659fca9666581ad3411d59207951f3",
+        "package": "zerovec-derive",
+        "registry": "crates-io",
+        "version": "0.11.2"
+      },
+      "vcs": {
+        "commit": "29dfe2790b6cfdab94ca6a6b69f58ce54802dbf7",
+        "path": "utils/zerovec/derive",
+        "system": "git"
       },
       "version": "0.11.2",
       "yanked": false

@@ -70,11 +70,142 @@
           "unit_identity": "sha256:3cf5540a4b36ae4db002548f26749a5fa07f875445ad08827e6df9e7a76189ce"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": true,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CGDataConsumer",
+            "CGDataProvider",
+            "CGImage"
+          ],
+          "loaf": "crates-io/objc2-core-graphics",
+          "name": "objc2-core-graphics",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 773,
+          "content": "content/sha256/16a7defc511f07758599fa1a22176cb7f80dba7d57414b385bec30d4616e5558",
+          "digest": "sha256:16a7defc511f07758599fa1a22176cb7f80dba7d57414b385bec30d4616e5558",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 361,
+          "content": "content/sha256/38ce88575abb2085b8a4756686648e04d4c6a2eee70055618c5dbfa3d8348f6c",
+          "digest": "sha256:38ce88575abb2085b8a4756686648e04d4c6a2eee70055618c5dbfa3d8348f6c",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CGImageAnimation": [
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFURL"
+        ],
+        "CGImageDestination": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFError",
+          "objc2-core-foundation/CFURL"
+        ],
+        "CGImageMetadata": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFError"
+        ],
+        "CGImageProperties": [],
+        "CGImageSource": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFURL"
+        ],
+        "ImageIOBase": [],
+        "alloc": [],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "CGImageAnimation",
+          "CGImageDestination",
+          "CGImageMetadata",
+          "CGImageProperties",
+          "CGImageSource",
+          "ImageIOBase",
+          "block2",
+          "objc2",
+          "objc2-core-graphics"
+        ],
+        "objc2": [
+          "dep:objc2",
+          "objc2-core-foundation/objc2",
+          "objc2-core-graphics?/objc2"
+        ],
+        "objc2-core-graphics": [
+          "dep:objc2-core-graphics"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-image-io/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -85,6 +216,17 @@
         "edition": "2021",
         "name": "objc2_image_io",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:32b0446e98cf4a784cc7a0177715ff317eeaa8463841c616cfc78aa4f953c4ea",
+        "package": "objc2-image-io",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-image-io",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

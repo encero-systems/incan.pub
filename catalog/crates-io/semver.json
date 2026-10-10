@@ -675,6 +675,58 @@
           "unit_identity": "sha256:1902b06c53412793d892acbad5b31ef64a242b9681680dcd7b630429ed21aed1"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2931,
+          "content": "content/sha256/f1f736262db1f11353bca2fbdde906bfbb1d54e5eb7497dd110984f5eebb801e",
+          "digest": "sha256:f1f736262db1f11353bca2fbdde906bfbb1d54e5eb7497dd110984f5eebb801e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -684,14 +736,27 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cargo"
+      ],
       "manifest": "crates-io/semver/1.0.28/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -701,6 +766,17 @@
         "edition": "2021",
         "name": "semver",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8a7852d02fc848982e0c167ef163aaff9cd91dc640ba85e263cb1ce46fae51cd",
+        "package": "semver",
+        "registry": "crates-io",
+        "version": "1.0.28"
+      },
+      "vcs": {
+        "commit": "7625c7aa3f0e8ba21e099d1765bcebcb72aa8816",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.28",
       "yanked": false
@@ -723,6 +799,58 @@
       "advisories": 0,
       "archive": "sha256:6c530abb853c737e6210244e5009046f19d8ba5917fd7c302e310aa37564514f",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2973,
+          "content": "content/sha256/4a1a5c2b5bb8641613748cebfdb62f4f5f2ce2da639ef4921fcb4334af4e3ade",
+          "digest": "sha256:4a1a5c2b5bb8641613748cebfdb62f4f5f2ce2da639ef4921fcb4334af4e3ade",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -731,6 +859,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -741,14 +870,27 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cargo"
+      ],
       "manifest": "crates-io/semver/1.0.27/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -758,6 +900,17 @@
         "edition": "2018",
         "name": "semver",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d767eb0aabc880b29956c35734170f26ed551a859dbd361d140cdbeca61ab1e2",
+        "package": "semver",
+        "registry": "crates-io",
+        "version": "1.0.27"
+      },
+      "vcs": {
+        "commit": "6ed8561154715b2c34df417a2052597d586f2c43",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.27",
       "yanked": false

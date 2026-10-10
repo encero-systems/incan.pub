@@ -378,6 +378,60 @@
           "unit_identity": "sha256:faeeea33be145505345ffcf845321c3475fc8a650ec0f57efc5b8e5424fefa3d"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.60"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "clone-impls",
+            "derive",
+            "extra-traits",
+            "parsing",
+            "printing",
+            "visit"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4679,
+          "content": "content/sha256/9244fa75a45ddbf7ff88761bf7388a72eb7283c3b6c65247901d25500280b9b4",
+          "digest": "sha256:9244fa75a45ddbf7ff88761bf7388a72eb7283c3b6c65247901d25500280b9b4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1052,
+          "content": "content/sha256/219920e865eee70b7dcfc948a86b099e7f4fe2de01bcca2ca9a20c0a033f2b59",
+          "digest": "sha256:219920e865eee70b7dcfc948a86b099e7f4fe2de01bcca2ca9a20c0a033f2b59",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -386,14 +440,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "proc-macro"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro",
+          "syn/proc-macro",
+          "quote/proc-macro"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "syn",
+        "macros",
+        "derive",
+        "expand_substructure",
+        "enum"
+      ],
       "manifest": "crates-io/synstructure/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -403,6 +475,17 @@
         "edition": "2018",
         "name": "synstructure",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:901704edd0dfe137f1987838ee4f259e4e063c31371bdb423f7ae38ec6f77f02",
+        "package": "synstructure",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "30cfafe36e42405e717a8e55da042a2835a698d7",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -514,11 +597,82 @@
           "unit_identity": "sha256:9e45ac036f52dd7f139cbab83093df386c9c2eed6411f01b70ae19ad055a30d3"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.60"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "clone-impls",
+            "derive",
+            "extra-traits",
+            "parsing",
+            "printing",
+            "visit"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4695,
+          "content": "content/sha256/d814fda4bf729aa194392480ef0aa0d02f2b6d24cb4a5a421e62c199e1313eae",
+          "digest": "sha256:d814fda4bf729aa194392480ef0aa0d02f2b6d24cb4a5a421e62c199e1313eae",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1052,
+          "content": "content/sha256/219920e865eee70b7dcfc948a86b099e7f4fe2de01bcca2ca9a20c0a033f2b59",
+          "digest": "sha256:219920e865eee70b7dcfc948a86b099e7f4fe2de01bcca2ca9a20c0a033f2b59",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "proc-macro"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro",
+          "syn/proc-macro",
+          "quote/proc-macro"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "syn",
+        "macros",
+        "derive",
+        "expand_substructure",
+        "enum"
+      ],
       "manifest": "crates-io/synstructure/0.13.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -529,6 +683,17 @@
         "edition": "2018",
         "name": "synstructure",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:728a70f3dbaf5bab7f0c4b1ac8d7ae5ea60a4b5549c8a5914361c99147a709d2",
+        "package": "synstructure",
+        "registry": "crates-io",
+        "version": "0.13.2"
+      },
+      "vcs": {
+        "commit": "91ead072fa43c55f35880bd7f75a2b0eab72a04e",
+        "path": "",
+        "system": "git"
       },
       "version": "0.13.2",
       "yanked": false

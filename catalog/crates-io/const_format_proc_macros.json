@@ -194,11 +194,96 @@
           "unit_identity": "sha256:ac0eb1118840c988d81e918783952db6e3945a70187aa6f6a5e307aea0badccd"
         }
       ],
+      "categories": [
+        "no-std",
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.19"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.7"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "parsing",
+            "proc-macro"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": true,
+          "req": "^1.0.38"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-xid",
+          "name": "unicode-xid",
+          "optional": false,
+          "req": "^0.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 466,
+          "content": "content/sha256/8becd620054cf085d09b463c932966fa4597fbea9f08e545bc4ef1c935009bb5",
+          "digest": "sha256:8becd620054cf085d09b463c932966fa4597fbea9f08e545bc4ef1c935009bb5",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 855,
+          "content": "content/sha256/c1e018d60dd011b335b5280b919bd3a75dbba81c6fbe24e2fc90cb235bdb6883",
+          "digest": "sha256:c1e018d60dd011b335b5280b919bd3a75dbba81c6fbe24e2fc90cb235bdb6883",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": [
+          "derive"
+        ],
+        "debug": [
+          "dep:syn",
+          "syn/extra-traits"
+        ],
+        "default": [],
+        "derive": [
+          "syn",
+          "dep:syn",
+          "syn/derive",
+          "syn/printing"
+        ],
+        "syn": [
+          "dep:syn"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "no-std",
+        "format",
+        "concat"
+      ],
       "manifest": "crates-io/const_format_proc_macros/0.2.34/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +294,17 @@
         "edition": "2021",
         "name": "const_format_proc_macros",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:1d57c2eccfb16dbac1f4e61e206105db5820c9d26c3c472bc17c774259ef7744",
+        "package": "const_format_proc_macros",
+        "registry": "crates-io",
+        "version": "0.2.34"
+      },
+      "vcs": {
+        "commit": "11db5143f0008b0d6065f42d8a08f29e59fbab1e",
+        "path": "const_format_proc_macros",
+        "system": "git"
       },
       "version": "0.2.34",
       "yanked": false

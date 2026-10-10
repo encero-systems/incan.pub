@@ -102,11 +102,168 @@
           "unit_identity": "sha256:5a1af12adbf6418dcd56a8bde687693afb64efffccdd4c5a2116b565d297aeb6"
         }
       ],
+      "categories": [
+        "authentication",
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ctutils",
+          "name": "ctutils",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/kdf",
+          "name": "kdf",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mcf",
+          "name": "mcf",
+          "optional": true,
+          "req": "^0.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/password-hash",
+          "name": "password-hash",
+          "optional": true,
+          "req": "^0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pbkdf2",
+          "name": "pbkdf2",
+          "optional": false,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/salsa20",
+          "name": "salsa20",
+          "optional": false,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": false,
+          "req": "^0.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1628,
+          "content": "content/sha256/567dde89fa85d08691a8eccc5d816d38edbcb03bb008001964e78fed76fcf459",
+          "digest": "sha256:567dde89fa85d08691a8eccc5d816d38edbcb03bb008001964e78fed76fcf459",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "digest": "sha256:57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7822,
+          "content": "content/sha256/2a0e528fa5d5f21279ecc1daa3c7eab770546486d762f4f11c891bfe6f2200e3",
+          "digest": "sha256:2a0e528fa5d5f21279ecc1daa3c7eab770546486d762f4f11c891bfe6f2200e3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "password-hash?/alloc"
+        ],
+        "getrandom": [
+          "password-hash",
+          "dep:password-hash",
+          "password-hash/getrandom"
+        ],
+        "kdf": [
+          "alloc",
+          "dep:kdf"
+        ],
+        "mcf": [
+          "alloc",
+          "phc",
+          "dep:ctutils",
+          "dep:mcf"
+        ],
+        "parallel": [
+          "dep:rayon"
+        ],
+        "password-hash": [
+          "dep:password-hash"
+        ],
+        "phc": [
+          "dep:password-hash",
+          "password-hash/phc"
+        ],
+        "rand_core": [
+          "dep:password-hash",
+          "password-hash/rand_core"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "hashing",
+        "password",
+        "phf"
+      ],
       "manifest": "crates-io/scrypt/0.12.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +274,17 @@
         "edition": "2024",
         "name": "scrypt",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d87af57419b594aa23fa95f09f0e06d80d84ba01c26148c43844cad6ff4485f0",
+        "package": "scrypt",
+        "registry": "crates-io",
+        "version": "0.12.0"
+      },
+      "vcs": {
+        "commit": "a795bf6f2dea6b9700fcc78f82a2ceaa19f36da7",
+        "path": "scrypt",
+        "system": "git"
       },
       "version": "0.12.0",
       "yanked": false

@@ -273,11 +273,123 @@
           "unit_identity": "sha256:8fb749fcbcbb028fe70035ac093cfd76406c1f2e44f86971a645e4c80403a7ca"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/phf_generator",
+          "name": "phf_generator",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/phf_shared",
+          "name": "phf_shared",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.95"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "full"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/uncased",
+          "name": "uncased_",
+          "optional": true,
+          "req": "^0.9.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase_",
+          "optional": true,
+          "req": "^2.4.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4834,
+          "content": "content/sha256/145446243da24c9c902982be559dabf5d2358eb7aeba34586a16d20bda3f6eb5",
+          "digest": "sha256:145446243da24c9c902982be559dabf5d2358eb7aeba34586a16d20bda3f6eb5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 46732,
+          "content": "content/sha256/d05572b6778a00e8d1600e0d5a73926d5132f522eaad96f7aa50e1252dc83a00",
+          "digest": "sha256:d05572b6778a00e8d1600e0d5a73926d5132f522eaad96f7aa50e1252dc83a00",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "ptrhash": [
+          "phf_generator/ptrhash"
+        ],
+        "uncased": [
+          "uncased_",
+          "phf_shared/uncased"
+        ],
+        "uncased_": [
+          "dep:uncased_"
+        ],
+        "unicase": [
+          "unicase_",
+          "phf_shared/unicase"
+        ],
+        "unicase_": [
+          "dep:unicase_"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/phf_macros/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -288,6 +400,17 @@
         "edition": "2024",
         "name": "phf_macros",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:5fa8d0ca26d424d27630da600c6624696e7dec8bf7b3b492b383c5dc49e5e085",
+        "package": "phf_macros",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "1620d169aad09b02ef02a97b272470152e100bd6",
+        "path": "phf_macros",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false

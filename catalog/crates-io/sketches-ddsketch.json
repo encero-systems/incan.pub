@@ -102,11 +102,56 @@
           "unit_identity": "sha256:ccd7b63a77ecbdd05506372ee08ef26b88bac1671f99983aa90da5b90e33325c"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive",
+            "serde_derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1208,
+          "content": "content/sha256/9cc450c60f485773ee79d2ed30dc3c1458a5fa87f6891ef65000f03a2ae85b50",
+          "digest": "sha256:9cc450c60f485773ee79d2ed30dc3c1458a5fa87f6891ef65000f03a2ae85b50",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11346,
+          "content": "content/sha256/53e1575d9de4821148b6000750453877b9754319dd148cc7186b6e7662e055c4",
+          "digest": "sha256:53e1575d9de4821148b6000750453877b9754319dd148cc7186b6e7662e055c4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "serde": [
+          "dep:serde"
+        ],
+        "use_serde": [
+          "serde",
+          "dep:serde",
+          "serde/derive"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/sketches-ddsketch/0.4.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +162,17 @@
         "edition": "2018",
         "name": "sketches_ddsketch",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:513c3f5f732bfd6fbb187619c2dfe9d2f25f1a2976f01d575f0fd329d565df56",
+        "package": "sketches-ddsketch",
+        "registry": "crates-io",
+        "version": "0.4.1"
+      },
+      "vcs": {
+        "commit": "62ea33c85edc0017314a3bebe993c98e4510ad26",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.1",
       "yanked": false

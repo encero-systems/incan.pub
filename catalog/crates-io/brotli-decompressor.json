@@ -207,11 +207,83 @@
           "unit_identity": "sha256:44d7c828b8e96fdf1e3fd9043dec29a7581592f75ae0ef1980e58a02ae073b59"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-no-stdlib",
+          "name": "alloc-no-stdlib",
+          "optional": false,
+          "req": ">=3.0.0, <4.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-stdlib",
+          "name": "alloc-stdlib",
+          "optional": true,
+          "req": ">=0.3.0, <0.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10076,
+          "content": "content/sha256/b174657ac202a2561024ff1f94873439dc25be1b1f1015fcae39f330402991c2",
+          "digest": "sha256:b174657ac202a2561024ff1f94873439dc25be1b1f1015fcae39f330402991c2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1483,
+          "content": "content/sha256/c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "digest": "sha256:c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc-stdlib": [
+          "dep:alloc-stdlib"
+        ],
+        "benchmark": [],
+        "default": [
+          "std"
+        ],
+        "disable-timer": [],
+        "ffi-api": [],
+        "no-stdlib-ffi-binding": [
+          "ffi-api"
+        ],
+        "pass-through-ffi-panics": [],
+        "seccomp": [
+          "alloc-no-stdlib/unsafe"
+        ],
+        "std": [
+          "alloc-stdlib"
+        ],
+        "unsafe": [
+          "alloc-no-stdlib/unsafe",
+          "dep:alloc-stdlib",
+          "alloc-stdlib/unsafe"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "brotli",
+        "decompression",
+        "lz77",
+        "huffman",
+        "nostd"
+      ],
       "manifest": "crates-io/brotli-decompressor/6.0.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -222,6 +294,17 @@
         "edition": "2015",
         "name": "brotli_decompressor",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:941cd9bd4ddab83cb46fa5a2d428f1c857b24ac78cb876cf7beb710840934bd7",
+        "package": "brotli-decompressor",
+        "registry": "crates-io",
+        "version": "6.0.1"
+      },
+      "vcs": {
+        "commit": "e4f3bf3326256a5dc23e5fa9276d803f6a4ad527",
+        "path": "",
+        "system": "git"
       },
       "version": "6.0.1",
       "yanked": false
@@ -245,6 +328,45 @@
       "advisories": 0,
       "archive": "sha256:62e8178b0decb00b120a82d519582dc84826c327162022d96903e289d2ac38e7",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-no-stdlib",
+          "name": "alloc-no-stdlib",
+          "optional": false,
+          "req": ">=2.0.4, <3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-stdlib",
+          "name": "alloc-stdlib",
+          "optional": true,
+          "req": ">=0.2.2, <0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7254,
+          "content": "content/sha256/5d1fe1083d9940c165dda0ea76c18c54b8f6476d21040a2af9cb8784086d0c70",
+          "digest": "sha256:5d1fe1083d9940c165dda0ea76c18c54b8f6476d21040a2af9cb8784086d0c70",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1483,
+          "content": "content/sha256/c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "digest": "sha256:c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -253,14 +375,46 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc-stdlib": [
+          "dep:alloc-stdlib"
+        ],
+        "benchmark": [],
+        "default": [
+          "std"
+        ],
+        "disable-timer": [],
+        "ffi-api": [],
+        "pass-through-ffi-panics": [],
+        "seccomp": [
+          "alloc-no-stdlib/unsafe"
+        ],
+        "std": [
+          "alloc-stdlib"
+        ],
+        "unsafe": [
+          "alloc-no-stdlib/unsafe",
+          "alloc-stdlib",
+          "dep:alloc-stdlib",
+          "alloc-stdlib/unsafe"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "brotli",
+        "decompression",
+        "lz77",
+        "huffman",
+        "nostd"
+      ],
       "manifest": "crates-io/brotli-decompressor/5.0.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -270,6 +424,17 @@
         "edition": "2015",
         "name": "brotli_decompressor",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3a32acac15fe1967bc3986b2a6347dffc965602354ea6f450ad07e8bfd253583",
+        "package": "brotli-decompressor",
+        "registry": "crates-io",
+        "version": "5.0.3"
+      },
+      "vcs": {
+        "commit": "b56177b8eb3d2440536281397e5ffe06eedf1a5c",
+        "path": "",
+        "system": "git"
       },
       "version": "5.0.3",
       "yanked": false

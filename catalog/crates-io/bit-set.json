@@ -114,11 +114,113 @@
           "unit_identity": "sha256:43588bcdb8614aa3f3543c18f69b37a570e7e453e04ee0dd6e158fe762ac7b09"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bit-vec",
+          "name": "bit-vec",
+          "optional": false,
+          "req": "^0.10.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/borsh",
+          "name": "borsh",
+          "optional": true,
+          "req": "^1.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/miniserde",
+          "name": "miniserde",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3083,
+          "content": "content/sha256/b2d64d934d9feba634360ba8061f8ebf815961a4a961b6855b73c743256695d4",
+          "digest": "sha256:b2d64d934d9feba634360ba8061f8ebf815961a4a961b6855b73c743256695d4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10850,
+          "content": "content/sha256/8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "digest": "sha256:8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/f51ac2c59a222f7476ce507ca879960e2b64ea64bb2786eefdbeb7b0b538d1b7",
+          "digest": "sha256:f51ac2c59a222f7476ce507ca879960e2b64ea64bb2786eefdbeb7b0b538d1b7",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1630,
+          "content": "content/sha256/b0b80e93bbfffd37f26b58ad76f37eb08c4cb80bb27fde689542913c2293b233",
+          "digest": "sha256:b0b80e93bbfffd37f26b58ad76f37eb08c4cb80bb27fde689542913c2293b233",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "borsh": [
+          "dep:borsh",
+          "bit-vec/borsh"
+        ],
+        "default": [
+          "std"
+        ],
+        "miniserde": [
+          "dep:miniserde",
+          "bit-vec/miniserde"
+        ],
+        "serde": [
+          "dep:serde",
+          "bit-vec/serde"
+        ],
+        "std": [
+          "bit-vec/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "data-structures",
+        "bitset"
+      ],
       "manifest": "crates-io/bit-set/0.11.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +231,17 @@
         "edition": "2021",
         "name": "bit_set",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:56d87354e4229f54a44f7bf2435906a4656dba36026ab6eaca629a2c436a691c",
+        "package": "bit-set",
+        "registry": "crates-io",
+        "version": "0.11.1"
+      },
+      "vcs": {
+        "commit": "cd5b4392be151fb507f3bdbf71ce1e73885dbc28",
+        "path": "set",
+        "system": "git"
       },
       "version": "0.11.1",
       "yanked": false
@@ -324,11 +437,86 @@
           "unit_identity": "sha256:8f70ffa1a8fc280c55495f5977b1bba3a7facfa4199bd746006d1c6dc03c0109"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bit-vec",
+          "name": "bit-vec",
+          "optional": false,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2680,
+          "content": "content/sha256/b2301e8a7953cc006062459041fc9edaa9e31ad5fc2aa2009ed742380624e4c5",
+          "digest": "sha256:b2301e8a7953cc006062459041fc9edaa9e31ad5fc2aa2009ed742380624e4c5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10850,
+          "content": "content/sha256/8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "digest": "sha256:8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/f51ac2c59a222f7476ce507ca879960e2b64ea64bb2786eefdbeb7b0b538d1b7",
+          "digest": "sha256:f51ac2c59a222f7476ce507ca879960e2b64ea64bb2786eefdbeb7b0b538d1b7",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 389,
+          "content": "content/sha256/78721919b25f13b36004ff40acde09fb1beaaa4e1d721fe30c7b1eb6f9325190",
+          "digest": "sha256:78721919b25f13b36004ff40acde09fb1beaaa4e1d721fe30c7b1eb6f9325190",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde",
+          "bit-vec/serde"
+        ],
+        "std": [
+          "bit-vec/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "data-structures",
+        "bitset"
+      ],
       "manifest": "crates-io/bit-set/0.8.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -339,6 +527,17 @@
         "edition": "2015",
         "name": "bit_set",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:08807e080ed7f9d5433fa9b275196cfc35414f66a0c79d864dc51a0d825231a3",
+        "package": "bit-set",
+        "registry": "crates-io",
+        "version": "0.8.0"
+      },
+      "vcs": {
+        "commit": "2b8861d23b53d63d326d2694ddabde6e7b19fbd0",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.0",
       "yanked": false

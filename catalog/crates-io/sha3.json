@@ -118,11 +118,101 @@
           "unit_identity": "sha256:d8083b0fb033be132915f2f4078b265603e846f3aad9309f3e895f13dfa5a841"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": false,
+          "req": "^0.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/keccak",
+          "name": "keccak",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sponge-cursor",
+          "name": "sponge-cursor",
+          "optional": false,
+          "req": "^0.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2397,
+          "content": "content/sha256/47c4b785bb9c380b078ac99652729ba21bef2b6680c42c7b077f0268593734f1",
+          "digest": "sha256:47c4b785bb9c380b078ac99652729ba21bef2b6680c42c7b077f0268593734f1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1255,
+          "content": "content/sha256/6462612d92b861384dcd378168a7a0ef3ef28876d3d380d382cb5a3091e360b8",
+          "digest": "sha256:6462612d92b861384dcd378168a7a0ef3ef28876d3d380d382cb5a3091e360b8",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4181,
+          "content": "content/sha256/5e21862579c9d296711e0926ee28e3ead922ae6aee0d09c3da78fa6eac651b13",
+          "digest": "sha256:5e21862579c9d296711e0926ee28e3ead922ae6aee0d09c3da78fa6eac651b13",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "digest/alloc"
+        ],
+        "default": [
+          "alloc",
+          "oid"
+        ],
+        "oid": [
+          "digest/oid"
+        ],
+        "zeroize": [
+          "digest/zeroize",
+          "sponge-cursor/zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "keccak",
+        "hash",
+        "xof",
+        "digest"
+      ],
       "manifest": "crates-io/sha3/0.12.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +223,17 @@
         "edition": "2024",
         "name": "sha3",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bc9bad02c26382724b2d2692c6f179285e4b54eeecd7968f52a50059c3c11759",
+        "package": "sha3",
+        "registry": "crates-io",
+        "version": "0.12.0"
+      },
+      "vcs": {
+        "commit": "0bdea4f919f86c17f75c6177567520010fedb735",
+        "path": "sha3",
+        "system": "git"
       },
       "version": "0.12.0",
       "yanked": false
@@ -155,6 +256,74 @@
       "advisories": 0,
       "archive": "sha256:3f10fbc0f96b19101968780c3a639803abc19de83b25a0d6fdffc9b2caf8acdb",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": false,
+          "req": "^0.10.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/keccak",
+          "name": "keccak",
+          "optional": false,
+          "req": "^0.1.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.6.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1807,
+          "content": "content/sha256/fcf7e481b90c8792222a69388c17c60710004eb1e21d8dfdf2a7fd66ac391e54",
+          "digest": "sha256:fcf7e481b90c8792222a69388c17c60710004eb1e21d8dfdf2a7fd66ac391e54",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1197,
+          "content": "content/sha256/f18f6229547ab07f0b7b3e1f83acad8bb436f5f4c95a8a98b44f876caa00f04e",
+          "digest": "sha256:f18f6229547ab07f0b7b3e1f83acad8bb436f5f4c95a8a98b44f876caa00f04e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3022,
+          "content": "content/sha256/60d7f42c4e5186b4f3204965c1c2af5694ff101629e8a0118441d84840459444",
+          "digest": "sha256:60d7f42c4e5186b4f3204965c1c2af5694ff101629e8a0118441d84840459444",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -163,6 +332,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -173,14 +343,40 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "asm": [
+          "keccak/asm"
+        ],
+        "default": [
+          "std"
+        ],
+        "oid": [
+          "digest/oid"
+        ],
+        "reset": [],
+        "std": [
+          "digest/std"
+        ],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "sha3",
+        "keccak",
+        "hash",
+        "digest"
+      ],
       "manifest": "crates-io/sha3/0.10.9/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -190,6 +386,17 @@
         "edition": "2018",
         "name": "sha3",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:77fd7028345d415a4034cf8777cd4f8ab1851274233b45f84e3d955502d93874",
+        "package": "sha3",
+        "registry": "crates-io",
+        "version": "0.10.9"
+      },
+      "vcs": {
+        "commit": "1637e892b5658941d04a4d895165b66780c7d7ab",
+        "path": "sha3",
+        "system": "git"
       },
       "version": "0.10.9",
       "yanked": false

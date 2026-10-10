@@ -114,6 +114,53 @@
           "unit_identity": "sha256:81841ea79eb3c7df037cb83d1739d9247c9e3792f8e4576f9b7c5e54776cbb8a"
         }
       ],
+      "categories": [
+        "data-structures",
+        "memory-management",
+        "caching"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1616,
+          "content": "content/sha256/eb3e06aca2dfe10a34edaf08942603062c3871457a8bd5b68d4c43a3f0515b6b",
+          "digest": "sha256:eb3e06aca2dfe10a34edaf08942603062c3871457a8bd5b68d4c43a3f0515b6b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 884,
+          "content": "content/sha256/6cec81441b2ab2b5090954c1fb5d0bcca81b86487b5849061fa8952d20ef67d4",
+          "digest": "sha256:6cec81441b2ab2b5090954c1fb5d0bcca81b86487b5849061fa8952d20ef67d4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 5382,
+          "content": "content/sha256/0f853fee714fc980ca9a48a5d475790746be459383f7386beaef68316c505232",
+          "digest": "sha256:0f853fee714fc980ca9a48a5d475790746be459383f7386beaef68316c505232",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -122,6 +169,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -132,6 +180,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -142,6 +191,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -152,14 +202,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "slotmap",
+        "storage",
+        "allocator",
+        "arena",
+        "reference"
+      ],
       "manifest": "crates-io/slotmap/1.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -170,6 +238,17 @@
         "edition": "2018",
         "name": "slotmap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bdd58c3c93c3d278ca835519292445cb4b0d4dc59ccfdf7ceadaab3f8aeb4038",
+        "package": "slotmap",
+        "registry": "crates-io",
+        "version": "1.1.1"
+      },
+      "vcs": {
+        "commit": "2d56154b9b628f7d7a506f24ebc4f55a13ec8fed",
+        "path": "",
+        "system": "git"
       },
       "version": "1.1.1",
       "yanked": false

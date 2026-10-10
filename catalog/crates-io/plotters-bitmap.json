@@ -74,11 +74,83 @@
           "unit_identity": "sha256:c34456a4a893c1107fd25faf6aede72e66c2c380eec6d0ff3436d780b5b4359e"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/gif",
+          "name": "gif",
+          "optional": true,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "bmp",
+            "jpeg",
+            "png"
+          ],
+          "loaf": "crates-io/image",
+          "name": "image",
+          "optional": true,
+          "req": "^0.24.3",
+          "target": "cfg(not(target_arch = \"wasm32\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/plotters-backend",
+          "name": "plotters-backend",
+          "optional": false,
+          "req": "^0.3.6"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 518,
+          "content": "content/sha256/380787c97aa2a50fbdd389b979de6a9ce555a891a18f1152d5ad6a8b2dc961b2",
+          "digest": "sha256:380787c97aa2a50fbdd389b979de6a9ce555a891a18f1152d5ad6a8b2dc961b2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10,
+          "content": "content/sha256/1e881ecf2862d01e6e5bc2b861e46886d2a6fb01499c0c508a209a7271b13cf2",
+          "digest": "sha256:1e881ecf2862d01e6e5bc2b861e46886d2a6fb01499c0c508a209a7271b13cf2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "image_encoder",
+          "gif_backend"
+        ],
+        "gif": [
+          "dep:gif"
+        ],
+        "gif_backend": [
+          "gif",
+          "image_encoder"
+        ],
+        "image": [
+          "dep:image"
+        ],
+        "image_encoder": [
+          "image"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/plotters-bitmap/0.3.7/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -89,6 +161,17 @@
         "edition": "2018",
         "name": "plotters_bitmap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:72ce181e3f6bf82d6c1dc569103ca7b1bd964c60ba03d7e6cdfbb3e3eb7f7405",
+        "package": "plotters-bitmap",
+        "registry": "crates-io",
+        "version": "0.3.7"
+      },
+      "vcs": {
+        "commit": "cb7791f6814024d85aa6f9968e73051a4b295bf0",
+        "path": "plotters-bitmap",
+        "system": "git"
       },
       "version": "0.3.7",
       "yanked": false

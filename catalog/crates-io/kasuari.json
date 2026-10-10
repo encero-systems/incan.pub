@@ -26,11 +26,124 @@
       "advisories": 0,
       "archive": "sha256:f6920afa5b9c859ae3c7abc222697552c11738533e7d14dff5b5bce68c3b3e6d",
       "assets": [],
+      "categories": [
+        "algorithms",
+        "command-line-interface",
+        "graphics",
+        "gui",
+        "rendering"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/document-features",
+          "name": "document-features",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.16"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "require-cas"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1.13"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/portable-atomic-util",
+          "name": "portable-atomic-util",
+          "optional": true,
+          "req": "^0.2.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2961,
+          "content": "content/sha256/f9d1b40c1f9397bb021d894e4dd435b1b5f1dac5209d7b66ad70fb0eea91efec",
+          "digest": "sha256:f9d1b40c1f9397bb021d894e4dd435b1b5f1dac5209d7b66ad70fb0eea91efec",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11357,
+          "content": "content/sha256/000b4962e6b27176a0ff89cce4be555b16472cafb5671eb2804a8fdac6854793",
+          "digest": "sha256:000b4962e6b27176a0ff89cce4be555b16472cafb5671eb2804a8fdac6854793",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1109,
+          "content": "content/sha256/74a7056189235b49336669da4e67ad1b315de4ed17e93df751f48c3fab403812",
+          "digest": "sha256:74a7056189235b49336669da4e67ad1b315de4ed17e93df751f48c3fab403812",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6653,
+          "content": "content/sha256/9126a9a212b069e73730a666ffad798607633dac249e21dbaa47659f672df6a2",
+          "digest": "sha256:9126a9a212b069e73730a666ffad798607633dac249e21dbaa47659f672df6a2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "document-features": [
+          "dep:document-features"
+        ],
+        "portable-atomic": [
+          "dep:portable-atomic",
+          "dep:portable-atomic-util"
+        ],
+        "std": [
+          "thiserror/std",
+          "portable-atomic?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cassowary",
+        "layout",
+        "tui",
+        "solver"
+      ],
       "manifest": "crates-io/kasuari/0.4.12/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +154,17 @@
         "edition": "2021",
         "name": "kasuari",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bde5057d6143cc94e861d90f591b9303d6716c6b9602309150bd068853c10899",
+        "package": "kasuari",
+        "registry": "crates-io",
+        "version": "0.4.12"
+      },
+      "vcs": {
+        "commit": "168ae0c8a47274a8490783dd78effb474b53a74e",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.12",
       "yanked": false

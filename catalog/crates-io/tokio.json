@@ -1605,11 +1605,311 @@
           "unit_identity": "sha256:822c5bd5729eb276166b87ab6d25d89a3b427b97e8737d28047ba1d153709a42"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.58",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-uring",
+          "name": "io-uring",
+          "optional": true,
+          "req": "^0.7.11",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "os-ext",
+            "os-poll"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.2.0",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": true,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook-registry",
+          "name": "signal-hook-registry",
+          "optional": true,
+          "req": "^1.1.1",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": true,
+          "req": "^0.4.9",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "all"
+          ],
+          "loaf": "crates-io/socket2",
+          "name": "socket2",
+          "optional": true,
+          "req": "^0.6.3",
+          "target": "cfg(any(not(target_family = \"wasm\"), all(target_os = \"wasi\", not(target_env = \"p1\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tokio-macros",
+          "name": "tokio-macros",
+          "optional": true,
+          "req": "~2.7.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.29",
+          "target": "cfg(tokio_unstable)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": true,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9439,
+          "content": "content/sha256/984d7fc72e317df65f6f661a3d777df4974a612e12ce7c4972392314df68de40",
+          "digest": "sha256:984d7fc72e317df65f6f661a3d777df4974a612e12ce7c4972392314df68de40",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "digest": "sha256:253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 183119,
+          "content": "content/sha256/c87d601f995500b35231cf2412918f56840369af5acbe1b9c089a0b2d59f7a64",
+          "digest": "sha256:c87d601f995500b35231cf2412918f56840369af5acbe1b9c089a0b2d59f7a64",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bytes": [
+          "dep:bytes"
+        ],
+        "default": [],
+        "fs": [],
+        "full": [
+          "fs",
+          "io-util",
+          "io-std",
+          "macros",
+          "net",
+          "parking_lot",
+          "process",
+          "rt",
+          "rt-multi-thread",
+          "signal",
+          "sync",
+          "time"
+        ],
+        "io-std": [],
+        "io-uring": [
+          "dep:io-uring",
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "dep:slab"
+        ],
+        "io-util": [
+          "bytes"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "macros": [
+          "tokio-macros"
+        ],
+        "mio": [
+          "dep:mio"
+        ],
+        "net": [
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "mio/net",
+          "socket2",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_Security",
+          "windows-sys/Win32_Storage_FileSystem",
+          "windows-sys/Win32_System_Pipes",
+          "windows-sys/Win32_System_SystemServices"
+        ],
+        "parking_lot": [
+          "dep:parking_lot"
+        ],
+        "process": [
+          "bytes",
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "mio/net",
+          "signal-hook-registry",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_System_Threading",
+          "windows-sys/Win32_System_WindowsProgramming"
+        ],
+        "rt": [],
+        "rt-multi-thread": [
+          "rt"
+        ],
+        "schedule-latency": [],
+        "signal": [
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/net",
+          "mio/os-ext",
+          "signal-hook-registry",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_System_Console"
+        ],
+        "signal-hook-registry": [
+          "dep:signal-hook-registry"
+        ],
+        "socket2": [
+          "dep:socket2"
+        ],
+        "sync": [],
+        "taskdump": [
+          "dep:backtrace"
+        ],
+        "test-util": [
+          "rt",
+          "sync",
+          "time"
+        ],
+        "time": [],
+        "tokio-macros": [
+          "dep:tokio-macros"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "windows-sys": [
+          "dep:windows-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "async",
+        "non-blocking",
+        "futures"
+      ],
       "manifest": "crates-io/tokio/1.53.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1619,6 +1919,17 @@
         "edition": "2021",
         "name": "tokio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e95f91fcc7a621e8b030f6aa23c71fe9838ae2fb4d8118b75602a328f5144044",
+        "package": "tokio",
+        "registry": "crates-io",
+        "version": "1.53.2"
+      },
+      "vcs": {
+        "commit": "ff0c4068a4ba5f3af0fe3c5657ba42879b6ea599",
+        "path": "tokio",
+        "system": "git"
       },
       "version": "1.53.2",
       "yanked": false
@@ -1641,6 +1952,187 @@
       "advisories": 0,
       "archive": "sha256:b16bfe79cb05141ed7c95f2d46800c29c5f2fe1df7a7d78a638796432eeec0ee",
       "assets": [],
+      "categories": [
+        "asynchronous",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.58",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-uring",
+          "name": "io-uring",
+          "optional": true,
+          "req": "^0.7.11",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "os-ext",
+            "os-poll"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.2.0",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": true,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook-registry",
+          "name": "signal-hook-registry",
+          "optional": true,
+          "req": "^1.1.1",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": true,
+          "req": "^0.4.9",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "all"
+          ],
+          "loaf": "crates-io/socket2",
+          "name": "socket2",
+          "optional": true,
+          "req": "^0.6.3",
+          "target": "cfg(any(not(target_family = \"wasm\"), all(target_os = \"wasi\", not(target_env = \"p1\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tokio-macros",
+          "name": "tokio-macros",
+          "optional": true,
+          "req": "~2.7.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.29",
+          "target": "cfg(tokio_unstable)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": true,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9391,
+          "content": "content/sha256/d66d59d170ce56b4f80e16e7564fe91ca611daffffe82a8625a9a67bb85c8800",
+          "digest": "sha256:d66d59d170ce56b4f80e16e7564fe91ca611daffffe82a8625a9a67bb85c8800",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "digest": "sha256:253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 179850,
+          "content": "content/sha256/5d4cdbd3b4c873d379a0d1c0f7d26931f02ed10abc333a9622fd8e74e415942e",
+          "digest": "sha256:5d4cdbd3b4c873d379a0d1c0f7d26931f02ed10abc333a9622fd8e74e415942e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1656,14 +2148,134 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "bytes": [
+          "dep:bytes"
+        ],
+        "default": [],
+        "fs": [],
+        "full": [
+          "fs",
+          "io-util",
+          "io-std",
+          "macros",
+          "net",
+          "parking_lot",
+          "process",
+          "rt",
+          "rt-multi-thread",
+          "signal",
+          "sync",
+          "time"
+        ],
+        "io-std": [],
+        "io-uring": [
+          "dep:io-uring",
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "dep:slab"
+        ],
+        "io-util": [
+          "bytes"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "macros": [
+          "tokio-macros"
+        ],
+        "mio": [
+          "dep:mio"
+        ],
+        "net": [
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "mio/net",
+          "socket2",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_Security",
+          "windows-sys/Win32_Storage_FileSystem",
+          "windows-sys/Win32_System_Pipes",
+          "windows-sys/Win32_System_SystemServices"
+        ],
+        "parking_lot": [
+          "dep:parking_lot"
+        ],
+        "process": [
+          "bytes",
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "mio/net",
+          "signal-hook-registry",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_System_Threading",
+          "windows-sys/Win32_System_WindowsProgramming"
+        ],
+        "rt": [],
+        "rt-multi-thread": [
+          "rt"
+        ],
+        "schedule-latency": [],
+        "signal": [
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/net",
+          "mio/os-ext",
+          "signal-hook-registry",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_System_Console"
+        ],
+        "signal-hook-registry": [
+          "dep:signal-hook-registry"
+        ],
+        "socket2": [
+          "dep:socket2"
+        ],
+        "sync": [],
+        "taskdump": [
+          "dep:backtrace"
+        ],
+        "test-util": [
+          "rt",
+          "sync",
+          "time"
+        ],
+        "time": [],
+        "tokio-macros": [
+          "dep:tokio-macros"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "windows-sys": [
+          "dep:windows-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "async",
+        "non-blocking",
+        "futures"
+      ],
       "manifest": "crates-io/tokio/1.53.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1673,6 +2285,17 @@
         "edition": "2021",
         "name": "tokio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:202caea871b69668250d242070849eb495be178ed697a3e98aebce5bc81a0bed",
+        "package": "tokio",
+        "registry": "crates-io",
+        "version": "1.53.1"
+      },
+      "vcs": {
+        "commit": "75fef53d0a8590c2d1dbb63672aa7b7d1ef51155",
+        "path": "tokio",
+        "system": "git"
       },
       "version": "1.53.1",
       "yanked": false
@@ -1695,6 +2318,187 @@
       "advisories": 0,
       "archive": "sha256:2f3b91f3504570ac195761bd8076bc89dda440f16628c8d481ca91c0f090ba1a",
       "assets": [],
+      "categories": [
+        "asynchronous",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.58",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-uring",
+          "name": "io-uring",
+          "optional": true,
+          "req": "^0.7.11",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "os-ext",
+            "os-poll"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.2.0",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": true,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook-registry",
+          "name": "signal-hook-registry",
+          "optional": true,
+          "req": "^1.1.1",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": true,
+          "req": "^0.4.9",
+          "target": "cfg(all(tokio_unstable, target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "all"
+          ],
+          "loaf": "crates-io/socket2",
+          "name": "socket2",
+          "optional": true,
+          "req": "^0.6.3",
+          "target": "cfg(any(not(target_family = \"wasm\"), all(target_os = \"wasi\", not(target_env = \"p1\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tokio-macros",
+          "name": "tokio-macros",
+          "optional": true,
+          "req": "~2.7.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.29",
+          "target": "cfg(tokio_unstable)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": true,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9391,
+          "content": "content/sha256/8c7045c84df23a7dca72043d56f921af2b61e45f21b48122e05c7de88739f4ec",
+          "digest": "sha256:8c7045c84df23a7dca72043d56f921af2b61e45f21b48122e05c7de88739f4ec",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "digest": "sha256:253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 174952,
+          "content": "content/sha256/64db65899c66ce3668d9f68db8bc004feddbc5318c87a838f0af1c98cefdb35c",
+          "digest": "sha256:64db65899c66ce3668d9f68db8bc004feddbc5318c87a838f0af1c98cefdb35c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1712,6 +2516,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1731,14 +2536,133 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "bytes": [
+          "dep:bytes"
+        ],
+        "default": [],
+        "fs": [],
+        "full": [
+          "fs",
+          "io-util",
+          "io-std",
+          "macros",
+          "net",
+          "parking_lot",
+          "process",
+          "rt",
+          "rt-multi-thread",
+          "signal",
+          "sync",
+          "time"
+        ],
+        "io-std": [],
+        "io-uring": [
+          "dep:io-uring",
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "dep:slab"
+        ],
+        "io-util": [
+          "bytes"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "macros": [
+          "tokio-macros"
+        ],
+        "mio": [
+          "dep:mio"
+        ],
+        "net": [
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "mio/net",
+          "socket2",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_Security",
+          "windows-sys/Win32_Storage_FileSystem",
+          "windows-sys/Win32_System_Pipes",
+          "windows-sys/Win32_System_SystemServices"
+        ],
+        "parking_lot": [
+          "dep:parking_lot"
+        ],
+        "process": [
+          "bytes",
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/os-ext",
+          "mio/net",
+          "signal-hook-registry",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_System_Threading",
+          "windows-sys/Win32_System_WindowsProgramming"
+        ],
+        "rt": [],
+        "rt-multi-thread": [
+          "rt"
+        ],
+        "signal": [
+          "libc",
+          "dep:mio",
+          "mio/os-poll",
+          "mio/net",
+          "mio/os-ext",
+          "signal-hook-registry",
+          "dep:windows-sys",
+          "windows-sys/Win32_Foundation",
+          "windows-sys/Win32_System_Console"
+        ],
+        "signal-hook-registry": [
+          "dep:signal-hook-registry"
+        ],
+        "socket2": [
+          "dep:socket2"
+        ],
+        "sync": [],
+        "taskdump": [
+          "dep:backtrace"
+        ],
+        "test-util": [
+          "rt",
+          "sync",
+          "time"
+        ],
+        "time": [],
+        "tokio-macros": [
+          "dep:tokio-macros"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "windows-sys": [
+          "dep:windows-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "async",
+        "non-blocking",
+        "futures"
+      ],
       "manifest": "crates-io/tokio/1.52.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1748,6 +2672,17 @@
         "edition": "2021",
         "name": "tokio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8fc7f01b389ac15039e4dc9531aa973a135d7a4135281b12d7c1bc79fd57fffe",
+        "package": "tokio",
+        "registry": "crates-io",
+        "version": "1.52.3"
+      },
+      "vcs": {
+        "commit": "d87569164fb61145e79e7ffe0b25783569cc8f93",
+        "path": "tokio",
+        "system": "git"
       },
       "version": "1.52.3",
       "yanked": false

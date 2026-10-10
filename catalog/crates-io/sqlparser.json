@@ -25,6 +25,82 @@
       "advisories": 0,
       "archive": "sha256:6bd5878ff270e69325fd0da1e25b42eb75c16711ef3c9f07eb540faf4035ae82",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/bigdecimal",
+          "name": "bigdecimal",
+          "optional": true,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/recursive",
+          "name": "recursive",
+          "optional": true,
+          "req": "^0.1.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sqlparser_derive",
+          "name": "sqlparser_derive",
+          "optional": true,
+          "req": "^0.5.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 12611,
+          "content": "content/sha256/9a6585da83b092b948b091891693811d9d47fc2328a527ba44fc3c908dc0d0d9",
+          "digest": "sha256:9a6585da83b092b948b091891693811d9d47fc2328a527ba44fc3c908dc0d0d9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.TXT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -36,14 +112,57 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "bigdecimal": [
+          "dep:bigdecimal"
+        ],
+        "default": [
+          "std",
+          "recursive-protection"
+        ],
+        "derive-dialect": [
+          "sqlparser_derive"
+        ],
+        "json_example": [
+          "serde_json",
+          "serde"
+        ],
+        "recursive": [
+          "dep:recursive"
+        ],
+        "recursive-protection": [
+          "std",
+          "recursive"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "sqlparser_derive": [
+          "dep:sqlparser_derive"
+        ],
+        "std": [],
+        "visitor": [
+          "sqlparser_derive"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "ansi",
+        "sql",
+        "lexer",
+        "parser"
+      ],
       "manifest": "crates-io/sqlparser/0.61.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -54,6 +173,13 @@
         "name": "sqlparser",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:dbf5ea8d4d7c808e1af1cbabebca9a2abe603bcefc22294c5b95018d53200cb7",
+        "package": "sqlparser",
+        "registry": "crates-io",
+        "version": "0.61.0"
+      },
+      "vcs": null,
       "version": "0.61.0",
       "yanked": false
     }

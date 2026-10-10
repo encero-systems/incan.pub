@@ -178,11 +178,74 @@
           "unit_identity": "sha256:ccc2b07d33a5b76494e970031bb95eff46f690928612f2a0adcd6236a65a3075"
         }
       ],
+      "categories": [
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itoa",
+          "name": "itoa",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.220",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": false,
+          "req": "^1.0.220"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2320,
+          "content": "content/sha256/a85a795381a723c0cc19c2a75a62b309b0a01a12618da605d6166a7a5e207201",
+          "digest": "sha256:a85a795381a723c0cc19c2a75a62b309b0a01a12618da605d6166a7a5e207201",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -190,14 +253,20 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "serde",
+        "serialization"
+      ],
       "manifest": "crates-io/serde_path_to_error/0.1.20/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -207,6 +276,17 @@
         "edition": "2021",
         "name": "serde_path_to_error",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:10a9ff822e371bb5403e391ecd83e182e0e77ba7f6fe0160b795797109d1b457",
+        "package": "serde_path_to_error",
+        "registry": "crates-io",
+        "version": "0.1.20"
+      },
+      "vcs": {
+        "commit": "097ed8772815ab6a676ebf3998b6de4770af090d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.1.20",
       "yanked": false

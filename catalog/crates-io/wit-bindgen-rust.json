@@ -159,11 +159,139 @@
           "unit_identity": "sha256:230262adc94511f5c310bc7467518a92c5e9585422c9e2d919794b1bcb12979e"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.102"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/heck",
+          "name": "heck",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.228"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^3.0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.259.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-core",
+          "name": "wit-bindgen-core",
+          "optional": false,
+          "req": "^0.62.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-component",
+          "name": "wit-component",
+          "optional": false,
+          "req": "^0.259.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 550,
+          "content": "content/sha256/8530a269211447b7b65a92e5d007a091eda2a4ea7a0aaca57a7f7d66f27e72b9",
+          "digest": "sha256:8530a269211447b7b65a92e5d007a091eda2a4ea7a0aaca57a7f7d66f27e72b9",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -171,6 +299,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -178,6 +307,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -185,14 +315,26 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "clap": [
+          "dep:clap",
+          "wit-bindgen-core/clap"
+        ],
+        "serde": [
+          "dep:serde",
+          "wit-bindgen-core/serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-bindgen-rust/0.62.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -203,6 +345,17 @@
         "edition": "2024",
         "name": "wit_bindgen_rust",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:84ba5213d4332c260a0d4e69e34b0f7e4b85ddae10b6ebfbac00d9c185ba628a",
+        "package": "wit-bindgen-rust",
+        "registry": "crates-io",
+        "version": "0.62.0"
+      },
+      "vcs": {
+        "commit": "c604ee01c03f50d7301984a3c920a650752cd136",
+        "path": "crates/rust",
+        "system": "git"
       },
       "version": "0.62.0",
       "yanked": false
@@ -225,11 +378,149 @@
       "advisories": 0,
       "archive": "sha256:145d688c6781f85666dd8d352dbb8464829b39122290be52fcfcdb76a697be20",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.102"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/heck",
+          "name": "heck",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": false,
+          "req": "^0.2.20"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.228"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.89"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.247.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-core",
+          "name": "wit-bindgen-core",
+          "optional": false,
+          "req": "^0.57.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-component",
+          "name": "wit-component",
+          "optional": false,
+          "req": "^0.247.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 610,
+          "content": "content/sha256/c0ee7d8c7035824381ff7b4091035e2abfae9c06463f8acb2e4b3f8b730f8b45",
+          "digest": "sha256:c0ee7d8c7035824381ff7b4091035e2abfae9c06463f8acb2e4b3f8b730f8b45",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "clap": [
+          "dep:clap",
+          "wit-bindgen-core/clap"
+        ],
+        "serde": [
+          "dep:serde",
+          "wit-bindgen-core/serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-bindgen-rust/0.57.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -240,6 +531,17 @@
         "edition": "2024",
         "name": "wit_bindgen_rust",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b5007dae772945b7a5003d69d90a3a4a78929d41f19d004e980c4259a6af4484",
+        "package": "wit-bindgen-rust",
+        "registry": "crates-io",
+        "version": "0.57.1"
+      },
+      "vcs": {
+        "commit": "2e00369a643c0c8048b8636401e36b0cbf2dfb05",
+        "path": "crates/rust",
+        "system": "git"
       },
       "version": "0.57.1",
       "yanked": false
@@ -262,11 +564,149 @@
       "advisories": 0,
       "archive": "sha256:3c8670b94ae439347856b54bbf48dc1042c96e0670d1ec5da34d1b23569549a1",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.72"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.3.19"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/heck",
+          "name": "heck",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": false,
+          "req": "^0.2.20"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.218"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.89"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-metadata",
+          "name": "wasm-metadata",
+          "optional": false,
+          "req": "^0.244.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-core",
+          "name": "wit-bindgen-core",
+          "optional": false,
+          "req": "^0.51.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-component",
+          "name": "wit-component",
+          "optional": false,
+          "req": "^0.244.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 610,
+          "content": "content/sha256/6176e1075da4da334da206ab122666b3acf8b50298914f4ff438ce1620da0c7e",
+          "digest": "sha256:6176e1075da4da334da206ab122666b3acf8b50298914f4ff438ce1620da0c7e",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "clap": [
+          "dep:clap",
+          "wit-bindgen-core/clap"
+        ],
+        "serde": [
+          "dep:serde",
+          "wit-bindgen-core/serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-bindgen-rust/0.51.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -277,6 +717,17 @@
         "edition": "2024",
         "name": "wit_bindgen_rust",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b7c566e0f4b284dd6561c786d9cb0142da491f46a9fbed79ea69cdad5db17f21",
+        "package": "wit-bindgen-rust",
+        "registry": "crates-io",
+        "version": "0.51.0"
+      },
+      "vcs": {
+        "commit": "0c39eee9f23d0530ed81bdf68bdd91fcc09ae08f",
+        "path": "crates/rust",
+        "system": "git"
       },
       "version": "0.51.0",
       "yanked": false

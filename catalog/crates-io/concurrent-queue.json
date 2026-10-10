@@ -288,11 +288,98 @@
           "unit_identity": "sha256:dfef4ccca8432cf13058501f2122111cf214139b2b08376eff86536ac7db7ba1"
         }
       ],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crossbeam-utils",
+          "name": "crossbeam-utils",
+          "optional": false,
+          "req": "^0.8.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/loom",
+          "name": "loom",
+          "optional": true,
+          "req": "^0.7",
+          "target": "cfg(loom)"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1635,
+          "content": "content/sha256/d7a326783ef72b063a5a237b8c64e209e80fe61b9dda20e4686b5d8b19b16fb1",
+          "digest": "sha256:d7a326783ef72b063a5a237b8c64e209e80fe61b9dda20e4686b5d8b19b16fb1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1531,
+          "content": "content/sha256/e9a4a11edce8b62146fdade24e1a74ee624601b2efcaa7035359c464a1ff7ff7",
+          "digest": "sha256:e9a4a11edce8b62146fdade24e1a74ee624601b2efcaa7035359c464a1ff7ff7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "loom": [
+          "dep:loom"
+        ],
+        "portable-atomic": [
+          "dep:portable-atomic"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "channel",
+        "mpmc",
+        "spsc",
+        "spmc",
+        "mpsc"
+      ],
       "manifest": "crates-io/concurrent-queue/2.5.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -303,6 +390,17 @@
         "edition": "2021",
         "name": "concurrent_queue",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4ca0197aee26d1ae37445ee532fefce43251d24cc7c166799f4d46817f1d3973",
+        "package": "concurrent-queue",
+        "registry": "crates-io",
+        "version": "2.5.0"
+      },
+      "vcs": {
+        "commit": "e874f701f8413de01948c4903f894e5c845d8950",
+        "path": "",
+        "system": "git"
       },
       "version": "2.5.0",
       "yanked": false

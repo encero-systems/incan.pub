@@ -102,11 +102,147 @@
           "unit_identity": "sha256:c5ad31d967708495502b41eb64187301337785cc8adbde801b91fd365796721e"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cssparser",
+          "name": "cssparser",
+          "optional": false,
+          "req": "^0.38"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "add",
+            "add_assign"
+          ],
+          "loaf": "crates-io/derive_more",
+          "name": "derive_more",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/new_debug_unreachable",
+          "name": "new_debug_unreachable",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/precomputed-hash",
+          "name": "precomputed-hash",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-hash",
+          "name": "rustc-hash",
+          "optional": false,
+          "req": "^2.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/servo_arc",
+          "name": "servo_arc",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "servo"
+          ],
+          "loaf": "crates-io/to_shmem",
+          "name": "to_shmem",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/to_shmem_derive",
+          "name": "to_shmem_derive",
+          "optional": true,
+          "req": "^0.2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1171,
+          "content": "content/sha256/74030a4dc8cf91e4c7d8eee9cfaff241860671724b70a346d74e3a997ebcf9ab",
+          "digest": "sha256:74030a4dc8cf91e4c7d8eee9cfaff241860671724b70a346d74e3a997ebcf9ab",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 330,
+          "content": "content/sha256/5ef4580042b312c626e995a9669e2c13b0290898f32ed0d45324767f08b299bc",
+          "digest": "sha256:5ef4580042b312c626e995a9669e2c13b0290898f32ed0d45324767f08b299bc",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 184,
+          "content": "content/sha256/582a5cbd17faa7ebecf4d43d360bc67f8ee4cc419d056336a0dc64a1c8a1ad02",
+          "digest": "sha256:582a5cbd17faa7ebecf4d43d360bc67f8ee4cc419d056336a0dc64a1c8a1ad02",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bench": [],
+        "to_shmem": [
+          "dep:to_shmem",
+          "dep:to_shmem_derive"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "css",
+        "selectors"
+      ],
       "manifest": "crates-io/selectors/0.41.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +253,17 @@
         "edition": "2024",
         "name": "selectors",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8322aebea94a6cc288ff884e8a49bdbceef60206c400c6c46d22e62fc4fd91a6",
+        "package": "selectors",
+        "registry": "crates-io",
+        "version": "0.41.0"
+      },
+      "vcs": {
+        "commit": "34d25f741765a0bdb894f8271852e633299352d8",
+        "path": "selectors",
+        "system": "git"
       },
       "version": "0.41.0",
       "yanked": false

@@ -25,11 +25,75 @@
       "advisories": 0,
       "archive": "sha256:cb70b98862bf0b46faf059a2a8466917919b29f76c3a8c5343db6d14ae7ff779",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.58"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/termcolor",
+          "name": "termcolor",
+          "optional": false,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd",
+            "std"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": false,
+          "req": "^0.236.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1533,
+          "content": "content/sha256/48d1c591f6cd903f0cff20adecfd73f1822b3e5102afa38945a7f4309f78bf41",
+          "digest": "sha256:48d1c591f6cd903f0cff20adecfd73f1822b3e5102afa38945a7f4309f78bf41",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 382,
+          "content": "content/sha256/d13289a0115fd9b4e8b994ab0905d4731351796250e0d1f6c8340941c182dbea",
+          "digest": "sha256:d13289a0115fd9b4e8b994ab0905d4731351796250e0d1f6c8340941c182dbea",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "component-model": [
+          "wasmparser/component-model"
+        ],
+        "default": [
+          "component-model",
+          "validate"
+        ],
+        "validate": [
+          "wasmparser/validate",
+          "wasmparser/features"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasmprinter/0.236.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +104,17 @@
         "edition": "2021",
         "name": "wasmprinter",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2df225df06a6df15b46e3f73ca066ff92c2e023670969f7d50ce7d5e695abbb1",
+        "package": "wasmprinter",
+        "registry": "crates-io",
+        "version": "0.236.1"
+      },
+      "vcs": {
+        "commit": "9dd8df4fdc53597af7534b6a4d4c11d9065690d3",
+        "path": "crates/wasmprinter",
+        "system": "git"
       },
       "version": "0.236.1",
       "yanked": false

@@ -25,6 +25,170 @@
       "advisories": 0,
       "archive": "sha256:6ce597f6db17f0a9ab2d85784e11f88b90d7c2e93e6a961cfaa268c9e8ea34f3",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "chrono-tz",
+            "prettyprint"
+          ],
+          "loaf": "crates-io/arrow",
+          "name": "arrow",
+          "optional": false,
+          "req": "^58.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/arrow-ord",
+          "name": "arrow-ord",
+          "optional": false,
+          "req": "^58.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-common",
+          "name": "datafusion-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-doc",
+          "name": "datafusion-doc",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-execution",
+          "name": "datafusion-execution",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-expr",
+          "name": "datafusion-expr",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-expr-common",
+          "name": "datafusion-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-functions",
+          "name": "datafusion-functions",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-functions-aggregate",
+          "name": "datafusion-functions-aggregate",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-functions-aggregate-common",
+          "name": "datafusion-functions-aggregate-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-macros",
+          "name": "datafusion-macros",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-physical-expr-common",
+          "name": "datafusion-physical-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.16.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "use_std"
+          ],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itoa",
+          "name": "itoa",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/paste",
+          "name": "paste",
+          "optional": false,
+          "req": "^1.0.15"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1572,
+          "content": "content/sha256/d969b3506579aa339fd1872a73b2a2c4d7f10ba0c7c561f933c4eb271242f920",
+          "digest": "sha256:d969b3506579aa339fd1872a73b2a2c4d7f10ba0c7c561f933c4eb271242f920",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11645,
+          "content": "content/sha256/232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "digest": "sha256:232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -32,14 +196,29 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "sql"
+        ],
+        "sql": [
+          "datafusion-expr/sql"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "datafusion",
+        "logical",
+        "plan",
+        "expressions"
+      ],
       "manifest": "crates-io/datafusion-functions-nested/53.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -50,6 +229,13 @@
         "name": "datafusion_functions_nested",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:ef13a858e20d50f0a9bb5e96e7ac82b4e7597f247515bccca4fdd2992df0212a",
+        "package": "datafusion-functions-nested",
+        "registry": "crates-io",
+        "version": "53.1.0"
+      },
+      "vcs": null,
       "version": "53.1.0",
       "yanked": false
     }

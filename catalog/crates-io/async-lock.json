@@ -290,11 +290,108 @@
           "unit_identity": "sha256:e7df1d0772caa7ca72ead67d45637e5fef0bbddaa84415098528a0de1aba3586"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/event-listener",
+          "name": "event-listener",
+          "optional": false,
+          "req": "^5.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/event-listener-strategy",
+          "name": "event-listener-strategy",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/loom",
+          "name": "loom",
+          "optional": true,
+          "req": "^0.7",
+          "target": "cfg(loom)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1288,
+          "content": "content/sha256/97f0f9b4ccb8e97a616f14ae3e12bc40250fa55ac8ebcc45c41fab04620e0cb4",
+          "digest": "sha256:97f0f9b4ccb8e97a616f14ae3e12bc40250fa55ac8ebcc45c41fab04620e0cb4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3095,
+          "content": "content/sha256/0543a8ecced6a1e9e3aac7b5a7bb26fa4b7519f2505ba263ab7ce33fb9955e6d",
+          "digest": "sha256:0543a8ecced6a1e9e3aac7b5a7bb26fa4b7519f2505ba263ab7ce33fb9955e6d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "loom": [
+          "event-listener/loom",
+          "dep:loom"
+        ],
+        "std": [
+          "event-listener/std",
+          "event-listener-strategy/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lock",
+        "mutex",
+        "rwlock",
+        "semaphore",
+        "barrier"
+      ],
       "manifest": "crates-io/async-lock/3.4.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -305,6 +402,17 @@
         "edition": "2021",
         "name": "async_lock",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:290f7f2596bd5b78a9fec8088ccd89180d7f9f55b94b0576823bbbdc72ee8311",
+        "package": "async-lock",
+        "registry": "crates-io",
+        "version": "3.4.2"
+      },
+      "vcs": {
+        "commit": "f07ba65a02ec3eca32fa95e6d13dc754d619bb35",
+        "path": "",
+        "system": "git"
       },
       "version": "3.4.2",
       "yanked": false

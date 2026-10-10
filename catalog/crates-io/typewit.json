@@ -118,11 +118,148 @@
           "unit_identity": "sha256:3e7aa51e955cf7bf0a329b2031ade7af2ee7e28c5f1a09c3689a560e9f54ed46"
         }
       ],
+      "categories": [
+        "no-std",
+        "rust-patterns"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/postcard",
+          "name": "postcard",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde_",
+          "optional": true,
+          "req": "^1.0.200"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/trybuild",
+          "name": "trybuild",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typewit_proc_macros",
+          "name": "typewit_proc_macros",
+          "optional": true,
+          "req": "=1.8.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 17015,
+          "content": "content/sha256/881e14c7f524b048d4e360b46dcccc59518d890b0fe03dbbdee31795b0eb7965",
+          "digest": "sha256:881e14c7f524b048d4e360b46dcccc59518d890b0fe03dbbdee31795b0eb7965",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 855,
+          "content": "content/sha256/6db6d36c8aae8c2f6ebec32965bab9b4769128caed09a55b8696afce4301838a",
+          "digest": "sha256:6db6d36c8aae8c2f6ebec32965bab9b4769128caed09a55b8696afce4301838a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "__test_doc_lints": [],
+        "__test_serde": [
+          "serde",
+          "serde_json",
+          "postcard"
+        ],
+        "__ui_tests": [
+          "trybuild"
+        ],
+        "adt_const_marker": [
+          "rust_stable"
+        ],
+        "alloc": [],
+        "const_marker": [],
+        "const_marker_extra_impls": [],
+        "default": [
+          "proc_macros",
+          "const_marker_extra_impls"
+        ],
+        "docsrs": [],
+        "generic_const_exprs": [
+          "rust_stable"
+        ],
+        "mut_refs": [
+          "rust_stable"
+        ],
+        "nightly_mut_refs": [
+          "mut_refs"
+        ],
+        "postcard": [
+          "dep:postcard"
+        ],
+        "proc_macros": [
+          "typewit_proc_macros"
+        ],
+        "rust_1_61": [],
+        "rust_1_65": [
+          "rust_1_61"
+        ],
+        "rust_1_83": [
+          "rust_1_65"
+        ],
+        "rust_stable": [
+          "rust_1_83"
+        ],
+        "serde": [
+          "serde_"
+        ],
+        "serde_": [
+          "dep:serde_"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "trybuild": [
+          "dep:trybuild"
+        ],
+        "typewit_proc_macros": [
+          "dep:typewit_proc_macros"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "const_fn",
+        "GADT",
+        "type_witness",
+        "type-equality",
+        "refl"
+      ],
       "manifest": "crates-io/typewit/1.15.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +270,17 @@
         "edition": "2021",
         "name": "typewit",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:214ca0b2191785cbc06209b9ca1861e048e39b5ba33574b3cedd58363d5bb5f6",
+        "package": "typewit",
+        "registry": "crates-io",
+        "version": "1.15.2"
+      },
+      "vcs": {
+        "commit": "234645454b33dd6360a3454ed826d5976a44db50",
+        "path": "",
+        "system": "git"
       },
       "version": "1.15.2",
       "yanked": false

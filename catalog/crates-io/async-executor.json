@@ -179,11 +179,124 @@
           "unit_identity": "sha256:cf3533c357e4ef159fe1cc897ee96d9e779bed0b79db223a8c08b23c013e7f23"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-task",
+          "name": "async-task",
+          "optional": false,
+          "req": "^4.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/concurrent-queue",
+          "name": "concurrent-queue",
+          "optional": false,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/fastrand",
+          "name": "fastrand",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-lite",
+          "name": "futures-lite",
+          "optional": false,
+          "req": "^2.0.0",
+          "target": "cfg(target_family = \"wasm\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-lite",
+          "name": "futures-lite",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": false,
+          "req": "^0.4.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1613,
+          "content": "content/sha256/3f3786f7b477be50ab68b595709acc73f47f014bd83b09af05b3202298e23917",
+          "digest": "sha256:3f3786f7b477be50ab68b595709acc73f47f014bd83b09af05b3202298e23917",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3623,
+          "content": "content/sha256/b129a31dda597e56ba183dae29f8c0f283c9d106e9ace0c3452b2e3913124b79",
+          "digest": "sha256:b129a31dda597e56ba183dae29f8c0f283c9d106e9ace0c3452b2e3913124b79",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "static": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "asynchronous",
+        "executor",
+        "single",
+        "multi",
+        "spawn"
+      ],
       "manifest": "crates-io/async-executor/1.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -194,6 +307,17 @@
         "edition": "2021",
         "name": "async_executor",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c96bf972d85afc50bf5ab8fe2d54d1586b4e0b46c97c50a0c9e71e2f7bcd812a",
+        "package": "async-executor",
+        "registry": "crates-io",
+        "version": "1.14.0"
+      },
+      "vcs": {
+        "commit": "543403e773ec4941a6272e29c2ff649bfd01a4f8",
+        "path": "",
+        "system": "git"
       },
       "version": "1.14.0",
       "yanked": false

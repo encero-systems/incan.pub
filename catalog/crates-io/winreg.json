@@ -25,11 +25,103 @@
       "advisories": 0,
       "archive": "sha256:d7f2bf2365b3163089b178e1c948da881a28a730558f92f301f04b8946a7cd0a",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": true,
+          "req": "^0.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_Diagnostics_Debug",
+            "Win32_System_Registry",
+            "Win32_System_Time"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.59, <=0.61"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7966,
+          "content": "content/sha256/087ee2b97892c5793f4fdbfeb0462a9c05be408f88456eb4e1a105fe29e98640",
+          "digest": "sha256:087ee2b97892c5793f4fdbfeb0462a9c05be408f88456eb4e1a105fe29e98640",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1055,
+          "content": "content/sha256/ea021d8c6383c84d19c15ce90d3b1602cf448fdcc0bf3772c98e43c7bf1bf1d1",
+          "digest": "sha256:ea021d8c6383c84d19c15ce90d3b1602cf448fdcc0bf3772c98e43c7bf1bf1d1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 8601,
+          "content": "content/sha256/22a12c83ef1555dcb67f029aceaf9ab65dd9604f2ed2f6011006706e13c8d734",
+          "digest": "sha256:22a12c83ef1555dcb67f029aceaf9ab65dd9604f2ed2f6011006706e13c8d734",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "chrono": [
+          "dep:chrono"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serialization-serde": [
+          "transactions",
+          "serde"
+        ],
+        "transactions": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "Windows",
+        "WinSDK",
+        "Registry"
+      ],
       "manifest": "crates-io/winreg/0.56.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +132,17 @@
         "edition": "2021",
         "name": "winreg",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7d6f32a0ff4a9f6f01231eb2059cc85479330739333e0e58cadf03b6af2cca10",
+        "package": "winreg",
+        "registry": "crates-io",
+        "version": "0.56.0"
+      },
+      "vcs": {
+        "commit": "d14c8bd6758810ec679533ac4dc7b0420f598d23",
+        "path": "",
+        "system": "git"
       },
       "version": "0.56.0",
       "yanked": false

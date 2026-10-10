@@ -302,6 +302,49 @@
           "unit_identity": "sha256:f4eecbb294f0cc3a63001274e71231ba61a21ccd38cb6ebb10fbd9adde477cb6"
         }
       ],
+      "categories": [
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1891,
+          "content": "content/sha256/ec487a539f41489876f5f2143e6f2071754ad96b1ca74092bdeab8135f6a819e",
+          "digest": "sha256:ec487a539f41489876f5f2143e6f2071754ad96b1ca74092bdeab8135f6a819e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1125,
+          "content": "content/sha256/f7bdb3426d045cd50efd4953026e3eb5a83d0199f458a075602611b9344da5b9",
+          "digest": "sha256:f7bdb3426d045cd50efd4953026e3eb5a83d0199f458a075602611b9344da5b9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -311,14 +354,31 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no_std",
+        "hex"
+      ],
       "manifest": "crates-io/hex/0.4.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -328,6 +388,17 @@
         "edition": "2018",
         "name": "hex",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70",
+        "package": "hex",
+        "registry": "crates-io",
+        "version": "0.4.3"
+      },
+      "vcs": {
+        "commit": "b2b4370b5bf021b98ee7adc92233e8de3f2de792",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.3",
       "yanked": false

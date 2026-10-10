@@ -152,6 +152,122 @@
           "unit_identity": "sha256:bbf705120ba95f07e90cbe8f377d3aa489d43080c68ad26f03ac53b8635f1e22"
         }
       ],
+      "categories": [
+        "network-programming",
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.170",
+          "target": "cfg(target_vendor = \"apple\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.27",
+          "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/openssl",
+          "name": "openssl",
+          "optional": false,
+          "req": "^0.10.75",
+          "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/openssl-probe",
+          "name": "openssl-probe",
+          "optional": false,
+          "req": "^0.2.1",
+          "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/openssl-sys",
+          "name": "openssl-sys",
+          "optional": false,
+          "req": "^0.9.111",
+          "target": "cfg(not(any(target_os = \"windows\", target_vendor = \"apple\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/schannel",
+          "name": "schannel",
+          "optional": false,
+          "req": "^0.1.28",
+          "target": "cfg(target_os = \"windows\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/security-framework",
+          "name": "security-framework",
+          "optional": false,
+          "req": "^3.5.1",
+          "target": "cfg(target_vendor = \"apple\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/security-framework-sys",
+          "name": "security-framework-sys",
+          "optional": false,
+          "req": "^2.15.0",
+          "target": "cfg(target_vendor = \"apple\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tempfile",
+          "name": "tempfile",
+          "optional": false,
+          "req": "^3.1.0",
+          "target": "cfg(target_os = \"macos\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2968,
+          "content": "content/sha256/a59a63c13dd923321256b18e2417d6c34b8e4bdd3d824955ef52ed56e854e76c",
+          "digest": "sha256:a59a63c13dd923321256b18e2417d6c34b8e4bdd3d824955ef52ed56e854e76c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1074,
+          "content": "content/sha256/f2ad7982ddbfa8c45eb965315718c55b70b9cc311b49afacb50d5fe84173ae2c",
+          "digest": "sha256:f2ad7982ddbfa8c45eb965315718c55b70b9cc311b49afacb50d5fe84173ae2c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -159,6 +275,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -168,6 +285,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -177,6 +295,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -186,14 +305,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alpn": [
+          "security-framework/alpn"
+        ],
+        "alpn-accept": [],
+        "default": [],
+        "vendored": [
+          "openssl/vendored"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "tls",
+        "https",
+        "secure-transport",
+        "platform",
+        "abstraction"
+      ],
       "manifest": "crates-io/native-tls/0.2.18/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -204,6 +341,17 @@
         "edition": "2021",
         "name": "native_tls",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:465500e14ea162429d264d44189adc38b199b62b1c21eea9f69e4b73cb03bbf2",
+        "package": "native-tls",
+        "registry": "crates-io",
+        "version": "0.2.18"
+      },
+      "vcs": {
+        "commit": "3cf1877ee86814168255db6d73fbefc127211c1c",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.18",
       "yanked": false

@@ -25,11 +25,103 @@
       "advisories": 0,
       "archive": "sha256:6ddae7cafa12dfb1e615d2ee4b18f825989f035f08a72bd3fba29fcefe66a5f0",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/countme",
+          "name": "countme",
+          "optional": false,
+          "req": "^3.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "inline-more"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.14.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memoffset",
+          "name": "memoffset",
+          "optional": false,
+          "req": "^0.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-hash",
+          "name": "rustc-hash",
+          "optional": false,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.89"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/text-size",
+          "name": "text-size",
+          "optional": false,
+          "req": "^1.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 909,
+          "content": "content/sha256/69657dd291f7b245820ee01fa7bdbfdc5dc2b47284767641ffb8f94e9f9bc522",
+          "digest": "sha256:69657dd291f7b245820ee01fa7bdbfdc5dc2b47284767641ffb8f94e9f9bc522",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "serde": [
+          "dep:serde"
+        ],
+        "serde1": [
+          "serde",
+          "text-size/serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/rowan/0.15.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +132,18 @@
         "edition": "2021",
         "name": "rowan",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d4f1e4a001f863f41ea8d0e6a0c34b356d5b733db50dadab3efef640bafb779b",
+        "package": "rowan",
+        "registry": "crates-io",
+        "version": "0.15.17"
+      },
+      "vcs": {
+        "commit": "bf9a78f0178214b4f1ca6069ead55db6f8df6bf2",
+        "dirty": true,
+        "path": "",
+        "system": "git"
       },
       "version": "0.15.17",
       "yanked": false

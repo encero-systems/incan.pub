@@ -110,11 +110,109 @@
           "unit_identity": "sha256:368b04d653246e5e3e34b6856f6b195eaee5ecfef80131ee3b527892dd209664"
         }
       ],
+      "categories": [
+        "date-and-time"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/jiff-core",
+          "name": "jcore",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/jiff-tzdb",
+          "name": "jiff-tzdb",
+          "optional": true,
+          "req": "^0.1.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.38"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.98"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 819,
+          "content": "content/sha256/1703b78df7b46a4d02c3992d5cf6aeb6d6dd4686322db5d73a1a228291cb913c",
+          "digest": "sha256:1703b78df7b46a4d02c3992d5cf6aeb6d6dd4686322db5d73a1a228291cb913c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 126,
+          "content": "content/sha256/01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "digest": "sha256:01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "digest": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1211,
+          "content": "content/sha256/7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "digest": "sha256:7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "format": "text",
+          "origin": "package",
+          "path": "UNLICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [],
+        "perf-inline": [],
+        "tz-fat": [],
+        "tzdb": [
+          "dep:jiff-tzdb"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "date",
+        "time",
+        "static",
+        "zone",
+        "iana"
+      ],
       "manifest": "crates-io/jiff-static/0.2.37/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +223,17 @@
         "edition": "2021",
         "name": "jiff_static",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:378268a1116ad67ae6228701118ac9f491d78fda38a40a1f1a9e1348de6f7212",
+        "package": "jiff-static",
+        "registry": "crates-io",
+        "version": "0.2.37"
+      },
+      "vcs": {
+        "commit": "4100a7c71125b9523029566d1d18f8b227ecd18c",
+        "path": "crates/jiff-static",
+        "system": "git"
       },
       "version": "0.2.37",
       "yanked": false

@@ -118,11 +118,254 @@
           "unit_identity": "sha256:044604cf3d2f69efbd7b09abd2a962a069b4fc91a253ea7e56497ed5c0aaa00b"
         }
       ],
+      "categories": [
+        "development-tools::testing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive",
+            "env"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/console",
+          "name": "console",
+          "optional": true,
+          "req": "^0.16"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/csv",
+          "name": "csv",
+          "optional": true,
+          "req": "^1.1.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/globset",
+          "name": "globset",
+          "optional": true,
+          "req": "^0.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.20.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pest",
+          "name": "pest",
+          "optional": true,
+          "req": "^2.1.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pest_derive",
+          "name": "pest_derive",
+          "optional": true,
+          "req": "^2.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "unicode"
+          ],
+          "loaf": "crates-io/regex",
+          "name": "regex",
+          "optional": true,
+          "req": "^1.6.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ron",
+          "name": "ron",
+          "optional": true,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.117"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "inline"
+          ],
+          "loaf": "crates-io/similar",
+          "name": "similar",
+          "optional": false,
+          "req": "^2.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/strip-ansi-escapes",
+          "name": "strip-ansi-escapes",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tempfile",
+          "name": "tempfile",
+          "optional": false,
+          "req": "^3"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "display",
+            "parse",
+            "serde"
+          ],
+          "loaf": "crates-io/toml_edit",
+          "name": "toml_edit",
+          "optional": true,
+          "req": "^0.25.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_writer",
+          "name": "toml_writer",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/walkdir",
+          "name": "walkdir",
+          "optional": true,
+          "req": "^2.3.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3083,
+          "content": "content/sha256/ae34d39345bac0d90dfcfb7fc8708d75cea5ef0632a4960ca7454a4560bd5433",
+          "digest": "sha256:ae34d39345bac0d90dfcfb7fc8708d75cea5ef0632a4960ca7454a4560bd5433",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "_cargo_insta_internal": [
+          "clap"
+        ],
+        "clap": [
+          "dep:clap"
+        ],
+        "colors": [
+          "console"
+        ],
+        "console": [
+          "dep:console"
+        ],
+        "csv": [
+          "dep:csv",
+          "serde"
+        ],
+        "default": [
+          "colors"
+        ],
+        "filters": [
+          "regex",
+          "strip-ansi-escapes"
+        ],
+        "glob": [
+          "walkdir",
+          "globset"
+        ],
+        "globset": [
+          "dep:globset"
+        ],
+        "json": [
+          "serde"
+        ],
+        "pest": [
+          "dep:pest"
+        ],
+        "pest_derive": [
+          "dep:pest_derive"
+        ],
+        "redactions": [
+          "pest",
+          "pest_derive",
+          "serde"
+        ],
+        "regex": [
+          "dep:regex"
+        ],
+        "ron": [
+          "dep:ron",
+          "serde"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "strip-ansi-escapes": [
+          "dep:strip-ansi-escapes"
+        ],
+        "toml": [
+          "dep:toml_edit",
+          "dep:toml_writer",
+          "serde"
+        ],
+        "walkdir": [
+          "dep:walkdir"
+        ],
+        "yaml": [
+          "serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "snapshot",
+        "testing",
+        "jest",
+        "approval"
+      ],
       "manifest": "crates-io/insta/1.49.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +376,17 @@
         "edition": "2021",
         "name": "insta",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b67d3d2e287e4b86c10b3f3b641033d1f89b74bdb39d05f34952e2b9a6fe21cd",
+        "package": "insta",
+        "registry": "crates-io",
+        "version": "1.49.0"
+      },
+      "vcs": {
+        "commit": "5df39ceafc8a47f82ec9953aaba12072d316adc8",
+        "path": "insta",
+        "system": "git"
       },
       "version": "1.49.0",
       "yanked": false

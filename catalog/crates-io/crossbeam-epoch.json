@@ -384,6 +384,68 @@
           "unit_identity": "sha256:9e8045edaa44c2dd2bb9b5ef3fd7c3701db47d13380cb931429f5359355b3253"
         }
       ],
+      "categories": [
+        "concurrency",
+        "memory-management",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crossbeam-utils",
+          "name": "crossbeam-utils",
+          "optional": false,
+          "req": "^0.8.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/loom",
+          "name": "loom-crate",
+          "optional": true,
+          "req": "^0.7.1",
+          "target": "cfg(crossbeam_loom)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2084,
+          "content": "content/sha256/20b4b274397d2694db1254764b2cf266a33b3ce68918140f6a95b97a3653f99a",
+          "digest": "sha256:20b4b274397d2694db1254764b2cf266a33b3ce68918140f6a95b97a3653f99a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/5734ed989dfca1f625b40281ee9f4530f91b2411ec01cb748223e7eb87e201ab",
+          "digest": "sha256:5734ed989dfca1f625b40281ee9f4530f91b2411ec01cb748223e7eb87e201ab",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6264,
+          "content": "content/sha256/ebe3570ade82a6e2f140d7765071314cfdb2981a020f46da8f8816beec321abe",
+          "digest": "sha256:ebe3570ade82a6e2f140d7765071314cfdb2981a020f46da8f8816beec321abe",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -393,6 +455,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -403,6 +466,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -414,6 +478,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -424,6 +489,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -435,6 +501,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -445,6 +512,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -456,6 +524,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -466,14 +535,41 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "loom": [
+          "loom-crate",
+          "crossbeam-utils/loom"
+        ],
+        "loom-crate": [
+          "dep:loom-crate"
+        ],
+        "nightly": [
+          "crossbeam-utils/nightly"
+        ],
+        "std": [
+          "alloc",
+          "crossbeam-utils/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lock-free",
+        "rcu",
+        "atomic",
+        "garbage"
+      ],
       "manifest": "crates-io/crossbeam-epoch/0.9.21/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -484,6 +580,17 @@
         "edition": "2021",
         "name": "crossbeam_epoch",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:dc74980687109a3b14c72fd458107bf0baa1da1a1a805e178d15501ba9b86d9d",
+        "package": "crossbeam-epoch",
+        "registry": "crates-io",
+        "version": "0.9.21"
+      },
+      "vcs": {
+        "commit": "2920c984290229ab4e0ca0452ef09e48a82063f3",
+        "path": "crossbeam-epoch",
+        "system": "git"
       },
       "version": "0.9.21",
       "yanked": false
@@ -504,6 +611,68 @@
       "advisories": 0,
       "archive": "sha256:189865317a6501eeadf648de6c7c0d02f941a6586430d3f30fc283e80f622f55",
       "assets": [],
+      "categories": [
+        "concurrency",
+        "memory-management",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crossbeam-utils",
+          "name": "crossbeam-utils",
+          "optional": false,
+          "req": "^0.8.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/loom",
+          "name": "loom-crate",
+          "optional": true,
+          "req": "^0.7.1",
+          "target": "cfg(crossbeam_loom)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2086,
+          "content": "content/sha256/6ba897c52496a66705df72da33dea5f6e0ce5caa87c4ff073b0faf4e05516dad",
+          "digest": "sha256:6ba897c52496a66705df72da33dea5f6e0ce5caa87c4ff073b0faf4e05516dad",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/5734ed989dfca1f625b40281ee9f4530f91b2411ec01cb748223e7eb87e201ab",
+          "digest": "sha256:5734ed989dfca1f625b40281ee9f4530f91b2411ec01cb748223e7eb87e201ab",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6051,
+          "content": "content/sha256/4c9eb194b40755d85bc51cad9d1b8ccec3136e0abacf364c6e579128c8632aab",
+          "digest": "sha256:4c9eb194b40755d85bc51cad9d1b8ccec3136e0abacf364c6e579128c8632aab",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -512,14 +681,41 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "loom": [
+          "loom-crate",
+          "crossbeam-utils/loom"
+        ],
+        "loom-crate": [
+          "dep:loom-crate"
+        ],
+        "nightly": [
+          "crossbeam-utils/nightly"
+        ],
+        "std": [
+          "alloc",
+          "crossbeam-utils/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lock-free",
+        "rcu",
+        "atomic",
+        "garbage"
+      ],
       "manifest": "crates-io/crossbeam-epoch/0.9.20/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -530,6 +726,17 @@
         "edition": "2021",
         "name": "crossbeam_epoch",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2d6914041f254d6e9176c01941b21115dcfb7089e55135a35411081bd106ef3f",
+        "package": "crossbeam-epoch",
+        "registry": "crates-io",
+        "version": "0.9.20"
+      },
+      "vcs": {
+        "commit": "239bae00257967a109911b9ebe7c0554d6333501",
+        "path": "crossbeam-epoch",
+        "system": "git"
       },
       "version": "0.9.20",
       "yanked": false

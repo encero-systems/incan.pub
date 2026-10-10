@@ -25,11 +25,120 @@
       "advisories": 0,
       "archive": "sha256:ac4a452bf24406dfa96213ead997a1a41400b99782dca104fd50c39ac30ed6b4",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.75"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossbeam-channel",
+          "name": "crossbeam-channel",
+          "optional": false,
+          "req": "^0.5.15"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossbeam-utils",
+          "name": "crossbeam-utils",
+          "optional": false,
+          "req": "^0.8.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/jod-thread",
+          "name": "jod-thread",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.172",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/miow",
+          "name": "miow",
+          "optional": false,
+          "req": "^0.6.0",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": false,
+          "req": "^0.1.41"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.60",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 425,
+          "content": "content/sha256/c5bc28a516f8f73d218767b9fda5e82ab312f68f32a594a73f8bf3a626e7b168",
+          "digest": "sha256:c5bc28a516f8f73d218767b9fda5e82ab312f68f32a594a73f8bf3a626e7b168",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 345,
+          "content": "content/sha256/1cdbb45e8b83a7894d40532b08d3d25f68e24f5688874c3ed5618a1eb21e88c4",
+          "digest": "sha256:1cdbb45e8b83a7894d40532b08d3d25f68e24f5688874c3ed5618a1eb21e88c4",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "backtrace": [
+          "dep:backtrace"
+        ],
+        "force-always-assert": []
+      },
       "files": {
         "license": "registry",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/ra_ap_stdx/0.0.325/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +149,18 @@
         "edition": "2024",
         "name": "ra_ap_stdx",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:70c738f1ee2de95a16193417de033b3704b9713f510d76daee462d942a0acb42",
+        "package": "ra_ap_stdx",
+        "registry": "crates-io",
+        "version": "0.0.325"
+      },
+      "vcs": {
+        "commit": "b42b63f390a4dab14e6efa34a70e67f5b087cc62",
+        "dirty": true,
+        "path": "crates/stdx",
+        "system": "git"
       },
       "version": "0.0.325",
       "yanked": false

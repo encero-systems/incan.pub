@@ -210,11 +210,119 @@
           "unit_identity": "sha256:79e80a4590044bc8f8906ccf240ca608932812cc001c7e1ef735116699e64332"
         }
       ],
+      "categories": [
+        "no-std",
+        "encoding",
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flame",
+          "name": "flame",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flamer",
+          "name": "flamer",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": ">=0.8, <2.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "union"
+          ],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": ">=1.13"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 566,
+          "content": "content/sha256/20fa9fe109d08172c0d544b4cb1bbe391afd55070d18b3581833d6b711c4b599",
+          "digest": "sha256:20fa9fe109d08172c0d544b4cb1bbe391afd55070d18b3581833d6b711c4b599",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bench_it": [],
+        "default": [
+          "std",
+          "hardcoded-data"
+        ],
+        "flame": [
+          "dep:flame"
+        ],
+        "flame_it": [
+          "flame",
+          "flamer"
+        ],
+        "flamer": [
+          "dep:flamer"
+        ],
+        "hardcoded-data": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ],
+        "std": [],
+        "unstable": [],
+        "with_serde": [
+          "serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "rtl",
+        "unicode",
+        "text",
+        "layout",
+        "bidi"
+      ],
       "manifest": "crates-io/unicode-bidi/0.3.18/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -225,6 +333,17 @@
         "edition": "2018",
         "name": "unicode_bidi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5c1cb5db39152898a79168971543b1cb5020dff7fe43c8dc468b0885f5e29df5",
+        "package": "unicode-bidi",
+        "registry": "crates-io",
+        "version": "0.3.18"
+      },
+      "vcs": {
+        "commit": "580b9c6c68fdb689916017e61d5052be3ed349b5",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.18",
       "yanked": false

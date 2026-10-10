@@ -303,6 +303,138 @@
           "unit_identity": "sha256:f020905b674b214a2189a1f0ab36747dcb705e5dfd121b1c0c6f71f308a9cbc0"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cpufeatures",
+          "name": "cpufeatures",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(target_arch = \"x86_64\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/curve25519-dalek-derive",
+          "name": "curve25519-dalek-derive",
+          "optional": false,
+          "req": "^0.1",
+          "target": "cfg(all(not(curve25519_dalek_backend = \"fiat\"), not(curve25519_dalek_backend = \"serial\"), target_arch = \"x86_64\"))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "block-api"
+          ],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fiat-crypto",
+          "name": "fiat-crypto",
+          "optional": false,
+          "req": "^0.3.0",
+          "target": "cfg(curve25519_dalek_backend = \"fiat\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/group",
+          "name": "group",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "const-generics"
+          ],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 16832,
+          "content": "content/sha256/710f406d570f598e360a1398fb7a20f01fc261b4ec54b33e2742a24a3cd29b7e",
+          "digest": "sha256:710f406d570f598e360a1398fb7a20f01fc261b4ec54b33e2742a24a3cd29b7e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1559,
+          "content": "content/sha256/403c53069750101aeb9df7e15f127056ceaf7e4e92d0b919a1f4c084afd5f1d4",
+          "digest": "sha256:403c53069750101aeb9df7e15f127056ceaf7e4e92d0b919a1f4c084afd5f1d4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 11978,
+          "content": "content/sha256/7e60446ac4e6152e5162e0d379d0420314b04413c9bbbb82da6c821f8df84e13",
+          "digest": "sha256:7e60446ac4e6152e5162e0d379d0420314b04413c9bbbb82da6c821f8df84e13",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -313,6 +445,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -324,6 +457,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -334,6 +468,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -346,6 +481,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -357,6 +493,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -367,6 +504,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -379,6 +517,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -390,6 +529,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -400,6 +540,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -412,6 +553,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -423,6 +565,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -433,14 +576,58 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "zeroize?/alloc"
+        ],
+        "default": [
+          "alloc",
+          "precomputed-tables",
+          "zeroize"
+        ],
+        "digest": [
+          "dep:digest"
+        ],
+        "ff": [
+          "dep:ff"
+        ],
+        "group": [
+          "dep:group",
+          "rand_core"
+        ],
+        "legacy_compatibility": [],
+        "lizard": [
+          "digest"
+        ],
+        "precomputed-tables": [],
+        "rand_core": [
+          "dep:rand_core",
+          "dep:digest",
+          "digest/rand_core"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cryptography",
+        "crypto",
+        "ristretto",
+        "curve25519",
+        "ristretto255"
+      ],
       "manifest": "crates-io/curve25519-dalek/5.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -451,6 +638,17 @@
         "edition": "2024",
         "name": "curve25519_dalek",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b5eed333089e2e1c1ac8c6c0398e5e2497b4c9926ca6d0365ed1e099afa5bc23",
+        "package": "curve25519-dalek",
+        "registry": "crates-io",
+        "version": "5.0.0"
+      },
+      "vcs": {
+        "commit": "07bef73ff85998a206cd2cea7f2605c801d0d1c9",
+        "path": "curve25519-dalek",
+        "system": "git"
       },
       "version": "5.0.0",
       "yanked": false

@@ -25,11 +25,112 @@
       "advisories": 0,
       "archive": "sha256:fc80f3189ea587b974cd0c65c1c207ed579cf8497c34297e08142e9354a884c9",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/aws-lc-fips-sys",
+          "name": "aws-lc-fips-sys",
+          "optional": true,
+          "req": "^0.14.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/aws-lc-sys",
+          "name": "aws-lc-sys",
+          "optional": true,
+          "req": "^0.45.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/untrusted",
+          "name": "untrusted",
+          "optional": true,
+          "req": "^0.7.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": false,
+          "req": "^1.8.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 13555,
+          "content": "content/sha256/10b6644db2c18ae3143d4ca9b1927b1eb8bb4cec7a42a5a1d215f725e8a93372",
+          "digest": "sha256:10b6644db2c18ae3143d4ca9b1927b1eb8bb4cec7a42a5a1d215f725e8a93372",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11085,
+          "content": "content/sha256/b50b376e7d24a0598488b730c3034ffcd0b58dd36c0913a24b9903a3cfd04bf7",
+          "digest": "sha256:b50b376e7d24a0598488b730c3034ffcd0b58dd36c0913a24b9903a3cfd04bf7",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "asan": [
+          "aws-lc-sys?/asan",
+          "aws-lc-fips-sys?/asan"
+        ],
+        "aws-lc-sys": [
+          "dep:aws-lc-sys"
+        ],
+        "bindgen": [
+          "aws-lc-sys?/bindgen",
+          "aws-lc-fips-sys?/bindgen"
+        ],
+        "default": [
+          "aws-lc-sys",
+          "alloc",
+          "ring-io",
+          "ring-sig-verify"
+        ],
+        "dev-tests-only": [],
+        "fips": [
+          "dep:aws-lc-fips-sys"
+        ],
+        "legacy-des": [
+          "aws-lc-sys?/all-bindings"
+        ],
+        "non-fips": [
+          "aws-lc-sys"
+        ],
+        "prebuilt-nasm": [
+          "aws-lc-sys?/prebuilt-nasm"
+        ],
+        "ring-io": [
+          "dep:untrusted"
+        ],
+        "ring-sig-verify": [
+          "dep:untrusted"
+        ],
+        "test_logging": [],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "cryptography",
+        "security"
+      ],
       "manifest": "crates-io/aws-lc-rs/1.18.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +141,17 @@
         "edition": "2021",
         "name": "aws_lc_rs",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b281d307588d634de920874890732659e2e7672f72b5e10e81badc1a8a83621e",
+        "package": "aws-lc-rs",
+        "registry": "crates-io",
+        "version": "1.18.1"
+      },
+      "vcs": {
+        "commit": "22e629d5c46276497a24ee3e575be4315940e7cb",
+        "path": "aws-lc-rs",
+        "system": "git"
       },
       "version": "1.18.1",
       "yanked": false

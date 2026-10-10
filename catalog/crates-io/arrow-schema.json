@@ -178,11 +178,90 @@
           "unit_identity": "sha256:6625e6169e3d2b4e96a04aada0549b4c980e9478d255c83be6632d9c0dd55d68"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rc",
+            "std"
+          ],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 445,
+          "content": "content/sha256/06d7b8553b4229b097cf5063a0d1d334f8dece6c44939886bba99ec03d6995e2",
+          "digest": "sha256:06d7b8553b4229b097cf5063a0d1d334f8dece6c44939886bba99ec03d6995e2",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "canonical_extension_types": [
+          "dep:serde_core",
+          "dep:serde_json"
+        ],
+        "ffi": [
+          "bitflags"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow-schema/60.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -194,6 +273,13 @@
         "name": "arrow_schema",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:f85a9a58cd03560526b0066487574aacb9008e413504fa0ee23d61141e96c338",
+        "package": "arrow-schema",
+        "registry": "crates-io",
+        "version": "60.0.0"
+      },
+      "vcs": null,
       "version": "60.0.0",
       "yanked": false
     },
@@ -215,6 +301,66 @@
       "advisories": 0,
       "archive": "sha256:fb530b87e0eb5ca727f59c9f6a2da7c18084cb3b61cd40dd15a678351c9a97c7",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rc",
+            "std"
+          ],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 445,
+          "content": "content/sha256/7549848333d25cd0380e851f696bf9c31dedd9145ebec95f672866f193eb1137",
+          "digest": "sha256:7549848333d25cd0380e851f696bf9c31dedd9145ebec95f672866f193eb1137",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -222,14 +368,34 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "canonical_extension_types": [
+          "dep:serde_core",
+          "dep:serde_json"
+        ],
+        "ffi": [
+          "bitflags"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow-schema/58.4.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -240,6 +406,13 @@
         "name": "arrow_schema",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:21ca356ad6425cecb6eb7b28e4f659f1ee7880fbb1a16127de7dd62901efee9e",
+        "package": "arrow-schema",
+        "registry": "crates-io",
+        "version": "58.4.0"
+      },
+      "vcs": null,
       "version": "58.4.0",
       "yanked": false
     }

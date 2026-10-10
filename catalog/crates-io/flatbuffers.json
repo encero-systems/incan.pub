@@ -191,11 +191,55 @@
           "unit_identity": "sha256:aad79cb7b565b695d445a87c6ae15f81525769eca16a635cb68a6e50de9dafd4"
         }
       ],
+      "categories": [
+        "encoding",
+        "data-structures",
+        "memory-management"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 736,
+          "content": "content/sha256/fc17fa8996b39ec0e7542e064509be74ffc51ffccef63ea906ebad9da239d964",
+          "digest": "sha256:fc17fa8996b39ec0e7542e064509be74ffc51ffccef63ea906ebad9da239d964",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 343,
+          "content": "content/sha256/1b6ed095bc19d1b254d644d884f494751e64dc53671d1d27d3e4d7a3098921c3",
+          "digest": "sha256:1b6ed095bc19d1b254d644d884f494751e64dc53671d1d27d3e4d7a3098921c3",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -206,6 +250,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -213,6 +258,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -223,6 +269,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -230,6 +277,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -240,6 +288,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -247,6 +296,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -257,14 +307,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serialize": [
+          "serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "flatbuffers",
+        "serialization",
+        "zero-copy"
+      ],
       "manifest": "crates-io/flatbuffers/25.12.19/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -275,6 +343,17 @@
         "edition": "2018",
         "name": "flatbuffers",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:35f6839d7b3b98adde531effaf34f0c2badc6f4735d26fe74709d8e513a96ef3",
+        "package": "flatbuffers",
+        "registry": "crates-io",
+        "version": "25.12.19"
+      },
+      "vcs": {
+        "commit": "7e163021e59cca4f8e1e35a7c828b5c6b7915953",
+        "path": "rust/flatbuffers",
+        "system": "git"
       },
       "version": "25.12.19",
       "yanked": false

@@ -194,6 +194,39 @@
           "unit_identity": "sha256:8b5501690a2843c822b8cf479a2ff516e9c308c63e70d3c588188567060edbda"
         }
       ],
+      "categories": [
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1145,
+          "content": "content/sha256/608a98115ed2846984e68cbbea120473f9803c04297898c06435336a24bf4c32",
+          "digest": "sha256:608a98115ed2846984e68cbbea120473f9803c04297898c06435336a24bf4c32",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -201,6 +234,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -210,6 +244,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -219,6 +254,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -228,14 +264,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arch_z80": [],
+        "arch_zkasm": [],
+        "default": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_support": [
+          "serde",
+          "std"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "target",
+        "host",
+        "triple",
+        "compiler",
+        "jit"
+      ],
       "manifest": "crates-io/target-lexicon/0.13.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -246,6 +303,17 @@
         "edition": "2018",
         "name": "target_lexicon",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:adb6935a6f5c20170eeceb1a3835a49e12e19d792f6dd344ccc76a985ca5a6ca",
+        "package": "target-lexicon",
+        "registry": "crates-io",
+        "version": "0.13.5"
+      },
+      "vcs": {
+        "commit": "6647bd7d681d3e218c88568d8285dfd8cae2dd97",
+        "path": "",
+        "system": "git"
       },
       "version": "0.13.5",
       "yanked": false

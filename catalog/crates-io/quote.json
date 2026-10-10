@@ -890,11 +890,54 @@
           "unit_identity": "sha256:ab630da3e25ba02b027232364703200eaed7827548a382dc8b4165653e5f43f8"
         }
       ],
+      "categories": [
+        "development-tools::procedural-macro-helpers"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.80"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9203,
+          "content": "content/sha256/9d6af721967088b8263c0544c0c3c459206998252dd5632a3bdf87cb27ec92be",
+          "digest": "sha256:9d6af721967088b8263c0544c0c3c459206998252dd5632a3bdf87cb27ec92be",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -905,6 +948,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -914,6 +958,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -921,6 +966,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -931,6 +977,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -940,6 +987,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -947,6 +995,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -957,6 +1006,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -966,6 +1016,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -973,6 +1024,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -983,6 +1035,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -992,14 +1045,27 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "proc-macro"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "syn"
+      ],
       "manifest": "crates-io/quote/1.0.47/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1010,6 +1076,17 @@
         "edition": "2021",
         "name": "quote",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
+        "package": "quote",
+        "registry": "crates-io",
+        "version": "1.0.47"
+      },
+      "vcs": {
+        "commit": "723dcb47d3f0ddc896e17287c8a8d3f2ea2317d5",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.47",
       "yanked": false
@@ -1032,6 +1109,48 @@
       "advisories": 0,
       "archive": "sha256:3ebf7476748cb7b12ed3b294ebbd58e3c000ceb567459d17cacbf49af38a570b",
       "assets": [],
+      "categories": [
+        "development-tools::procedural-macro-helpers"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.80"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9203,
+          "content": "content/sha256/9d6af721967088b8263c0544c0c3c459206998252dd5632a3bdf87cb27ec92be",
+          "digest": "sha256:9d6af721967088b8263c0544c0c3c459206998252dd5632a3bdf87cb27ec92be",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1040,6 +1159,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1050,14 +1170,27 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "proc-macro"
+        ],
+        "proc-macro": [
+          "proc-macro2/proc-macro"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "syn"
+      ],
       "manifest": "crates-io/quote/1.0.45/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1068,6 +1201,17 @@
         "edition": "2021",
         "name": "quote",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924",
+        "package": "quote",
+        "registry": "crates-io",
+        "version": "1.0.45"
+      },
+      "vcs": {
+        "commit": "842ffde933fdd76cd1681a288bed136d8b95a97a",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.45",
       "yanked": false

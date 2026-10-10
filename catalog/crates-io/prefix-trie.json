@@ -68,11 +68,123 @@
           "unit_identity": "sha256:1916b8b16ffa332cec8f793c958c40d99e00c5933617a67e71007329c8ac10f4"
         }
       ],
+      "categories": [
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cidr",
+          "name": "cidr",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/either",
+          "name": "either",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ipnet",
+          "name": "ipnet",
+          "optional": true,
+          "req": "^2.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ipnetwork",
+          "name": "ipnetwork",
+          "optional": true,
+          "req": "^0.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 6641,
+          "content": "content/sha256/6e415415f8391784def283be8aa4a9f0dee85215c68f5855826fbc8a632cd338",
+          "digest": "sha256:6e415415f8391784def283be8aa4a9f0dee85215c68f5855826fbc8a632cd338",
+          "format": "markdown",
+          "origin": "package",
+          "path": "Readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11352,
+          "content": "content/sha256/87d9feb9238c6bd8e0024fc4733b06cff036f89f36d93b7df1c8a0549bbb7a5b",
+          "digest": "sha256:87d9feb9238c6bd8e0024fc4733b06cff036f89f36d93b7df1c8a0549bbb7a5b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1055,
+          "content": "content/sha256/f646f5108c9cd6740f1fe0d8e27a49c7bac35f970f02c40bda298f9771168e5c",
+          "digest": "sha256:f646f5108c9cd6740f1fe0d8e27a49c7bac35f970f02c40bda298f9771168e5c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "cidr": [
+          "dep:cidr"
+        ],
+        "default": [
+          "ipnet"
+        ],
+        "ipnet": [
+          "dep:ipnet"
+        ],
+        "ipnetwork": [
+          "dep:ipnetwork"
+        ],
+        "serde": [
+          "dep:serde",
+          "dep:ipnet",
+          "ipnet/serde",
+          "dep:ipnetwork",
+          "ipnetwork/serde",
+          "dep:cidr",
+          "cidr/serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "IP",
+        "prefix",
+        "trie",
+        "tree",
+        "collection"
+      ],
       "manifest": "crates-io/prefix-trie/0.8.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -83,6 +195,17 @@
         "edition": "2021",
         "name": "prefix_trie",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4cf6e3177f0684016a5c209b00882e15f8bdd3f3bb48f0491df10cd102d0c6e7",
+        "package": "prefix-trie",
+        "registry": "crates-io",
+        "version": "0.8.4"
+      },
+      "vcs": {
+        "commit": "c989e815360c2403a821ec4f51dd25c18a01448a",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.4",
       "yanked": false

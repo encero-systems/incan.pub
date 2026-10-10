@@ -194,11 +194,131 @@
           "unit_identity": "sha256:08e32b4af508bc8b44aff6ffac626488f0660bb149c4b83d92bcf35ceec9a67b"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "arithmetic",
+            "sec1"
+          ],
+          "loaf": "crates-io/elliptic-curve",
+          "name": "elliptic-curve",
+          "optional": false,
+          "req": "^0.14.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/primefield",
+          "name": "primefield",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wnaf",
+          "name": "wnaf",
+          "optional": false,
+          "req": "^0.14"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3151,
+          "content": "content/sha256/604c841b6959500271eb30b27d935301986e22f1abeedf00e09dc63a89a64459",
+          "digest": "sha256:604c841b6959500271eb30b27d935301986e22f1abeedf00e09dc63a89a64459",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/233b95ccbf90dc67e32f3e8995c489f6312d9191ebd141a931c3b684f1e3be6d",
+          "digest": "sha256:233b95ccbf90dc67e32f3e8995c489f6312d9191ebd141a931c3b684f1e3be6d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7714,
+          "content": "content/sha256/66403400b162ff7ca59e67bc14bf715a4db3ba8bad628f4249d4c31899a40bf5",
+          "digest": "sha256:66403400b162ff7ca59e67bc14bf715a4db3ba8bad628f4249d4c31899a40bf5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "elliptic-curve/alloc",
+          "serdect?/alloc"
+        ],
+        "basepoint-table": [],
+        "critical-section": [
+          "basepoint-table",
+          "dep:once_cell",
+          "once_cell/critical-section"
+        ],
+        "dev": [],
+        "hash2curve": [],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "serde": [
+          "elliptic-curve/serde",
+          "serdect"
+        ],
+        "serdect": [
+          "dep:serdect"
+        ],
+        "std": [
+          "alloc",
+          "elliptic-curve/std",
+          "once_cell?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc"
+      ],
       "manifest": "crates-io/primeorder/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +329,17 @@
         "edition": "2024",
         "name": "primeorder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5c9f42978c78a00e3d68f69fc03e57a234debae69da4020a4fb588fcdcd07b06",
+        "package": "primeorder",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "ef3a3b10c0ff2f48101591a15b403355c3c7adb7",
+        "path": "primeorder",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -231,11 +362,95 @@
       "advisories": 0,
       "archive": "sha256:e09382a34de5155722a65d37476f8b097fa51a8dac9e4ed0958c6ce9c79043bc",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "arithmetic",
+            "sec1"
+          ],
+          "loaf": "crates-io/elliptic-curve",
+          "name": "elliptic-curve",
+          "optional": false,
+          "req": "^0.13.7"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3423,
+          "content": "content/sha256/953232a36bb8d90d3aaa82c97314b6e21f5df48637b87fb4d7c39ad40bd085a5",
+          "digest": "sha256:953232a36bb8d90d3aaa82c97314b6e21f5df48637b87fb4d7c39ad40bd085a5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/233b95ccbf90dc67e32f3e8995c489f6312d9191ebd141a931c3b684f1e3be6d",
+          "digest": "sha256:233b95ccbf90dc67e32f3e8995c489f6312d9191ebd141a931c3b684f1e3be6d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2933,
+          "content": "content/sha256/6bbfb034a1f59e955e758d9e1d787545b2948b5349a8c7b98b81ce4a40bf2898",
+          "digest": "sha256:6bbfb034a1f59e955e758d9e1d787545b2948b5349a8c7b98b81ce4a40bf2898",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "elliptic-curve/alloc"
+        ],
+        "dev": [],
+        "serde": [
+          "elliptic-curve/serde",
+          "serdect"
+        ],
+        "serdect": [
+          "dep:serdect"
+        ],
+        "std": [
+          "alloc",
+          "elliptic-curve/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc"
+      ],
       "manifest": "crates-io/primeorder/0.13.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -246,6 +461,17 @@
         "edition": "2021",
         "name": "primeorder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:353e1ca18966c16d9deb1c69278edbc5f194139612772bd9537af60ac231e1e6",
+        "package": "primeorder",
+        "registry": "crates-io",
+        "version": "0.13.6"
+      },
+      "vcs": {
+        "commit": "bfd7b49d080270e4b260a6707a603c6ce8c66116",
+        "path": "primeorder",
+        "system": "git"
       },
       "version": "0.13.6",
       "yanked": false

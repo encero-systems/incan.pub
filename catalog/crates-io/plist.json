@@ -114,11 +114,103 @@
           "unit_identity": "sha256:5b11d0cf28c70199f5eb019a12ee72118a8efc483941c5c36c2d05429f6e0cfb"
         }
       ],
+      "categories": [
+        "config",
+        "encoding",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": false,
+          "req": "^0.23.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quick-xml",
+          "name": "quick_xml",
+          "optional": false,
+          "req": "^0.42.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "formatting",
+            "parsing"
+          ],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": false,
+          "req": "^0.3.47"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 465,
+          "content": "content/sha256/25091b2b53ea578f6fc369259070938eaeea06a0b7ba7a81b50da503198345ed",
+          "digest": "sha256:25091b2b53ea578f6fc369259070938eaeea06a0b7ba7a81b50da503198345ed",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/5b0ae40d1a35f7ae6591a28e44771240e6a88cb03a66c9189a45b9681639b466",
+          "digest": "sha256:5b0ae40d1a35f7ae6591a28e44771240e6a88cb03a66c9189a45b9681639b466",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENCE",
+          "role": "license"
+        },
+        {
+          "bytes": 2109,
+          "content": "content/sha256/44f2c8c1715372139b4d1384166274150aa71004267736a3618d1461732037ee",
+          "digest": "sha256:44f2c8c1715372139b4d1384166274150aa71004267736a3618d1461732037ee",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "serde"
+        ],
+        "enable_unstable_features_that_may_break_with_minor_version_bumps": [],
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "plist",
+        "parser"
+      ],
       "manifest": "crates-io/plist/1.10.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +221,17 @@
         "edition": "2024",
         "name": "plist",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2896bade328c13f7042a297ea5ac5b0951f6cf989dea5f32c2fd98da398195cb",
+        "package": "plist",
+        "registry": "crates-io",
+        "version": "1.10.1"
+      },
+      "vcs": {
+        "commit": "10ba3e3b44adb6246f3f5cc8e66134e03498f634",
+        "path": "",
+        "system": "git"
       },
       "version": "1.10.1",
       "yanked": false

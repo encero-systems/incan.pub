@@ -194,19 +194,72 @@
           "unit_identity": "sha256:34e3486032bd5f47bbfc443b713c072e03890cde1b27ef25df1b9a0abbe70bd3"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2101,
+          "content": "content/sha256/e389f7a05574cf84bcab6080ce1e056be3d50e48b8388594d3d91c88a0975754",
+          "digest": "sha256:e389f7a05574cf84bcab6080ce1e056be3d50e48b8388594d3d91c88a0975754",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1063,
+          "content": "content/sha256/23ce717d2face34a1ae9af6a8c8fbbf488875afee16374d7a10ce79d41e22f37",
+          "digest": "sha256:23ce717d2face34a1ae9af6a8c8fbbf488875afee16374d7a10ce79d41e22f37",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "serde_impl"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_impl": [
+          "serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/multimap/0.10.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -216,6 +269,17 @@
         "edition": "2015",
         "name": "multimap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1d87ecb2933e8aeadb3e3a02b828fed80a7528047e68b4f424523a0981a3a084",
+        "package": "multimap",
+        "registry": "crates-io",
+        "version": "0.10.1"
+      },
+      "vcs": {
+        "commit": "7d71ab594eb4c4e60bc675ea96ebefabb0bd91a0",
+        "path": "",
+        "system": "git"
       },
       "version": "0.10.1",
       "yanked": false

@@ -25,6 +25,399 @@
       "advisories": 0,
       "archive": "sha256:6a02a80c2bd6b6b9abbde505820dae5535dfbbdcc07f5ddb7da20d7020d18869",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "compile-time-rng"
+          ],
+          "loaf": "crates-io/ahash",
+          "name": "ahash",
+          "optional": false,
+          "req": "^0.8",
+          "target": "cfg(target_arch = \"wasm32\")"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "runtime-rng"
+          ],
+          "loaf": "crates-io/ahash",
+          "name": "ahash",
+          "optional": false,
+          "req": "^0.8",
+          "target": "cfg(not(target_arch = \"wasm32\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-array",
+          "name": "arrow-array",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-csv",
+          "name": "arrow-csv",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-data",
+          "name": "arrow-data",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-ipc",
+          "name": "arrow-ipc",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-select",
+          "name": "arrow-select",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": true,
+          "req": "^0.22"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/brotli",
+          "name": "brotli",
+          "optional": true,
+          "req": "^8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": false,
+          "req": "^1.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "clock"
+          ],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": false,
+          "req": "^0.4.40"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive",
+            "env",
+            "error-context",
+            "help",
+            "std",
+            "usage"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.4.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures",
+          "name": "futures",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "num-traits"
+          ],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": false,
+          "req": "^2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "frame",
+            "std"
+          ],
+          "loaf": "crates-io/lz4_flex",
+          "name": "lz4_flex",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/num-integer",
+          "name": "num-integer",
+          "optional": false,
+          "req": "^0.1.46"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.19"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "tokio"
+          ],
+          "loaf": "crates-io/object_store",
+          "name": "object_store",
+          "optional": true,
+          "req": "^0.13.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parquet-geospatial",
+          "name": "parquet-geospatial",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parquet-variant",
+          "name": "parquet-variant",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parquet-variant-compute",
+          "name": "parquet-variant-compute",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parquet-variant-json",
+          "name": "parquet-variant-json",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/paste",
+          "name": "paste",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "wasm32_unknown_unknown_js"
+          ],
+          "loaf": "crates-io/ring",
+          "name": "ring",
+          "optional": true,
+          "req": "^0.17",
+          "target": "cfg(target_arch = \"wasm32\")"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/ring",
+          "name": "ring",
+          "optional": true,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/seq-macro",
+          "name": "seq-macro",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/simdutf8",
+          "name": "simdutf8",
+          "optional": true,
+          "req": "^0.1.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/snap",
+          "name": "snap",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/thrift",
+          "name": "thrift",
+          "optional": false,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "io-util",
+            "macros",
+            "rt"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "xxhash64"
+          ],
+          "loaf": "crates-io/twox-hash",
+          "name": "twox-hash",
+          "optional": false,
+          "req": "^2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "zstd",
+          "optional": true,
+          "req": "^0.13"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4455,
+          "content": "content/sha256/b13e919fe8af687cbcbd7a257886a21103d8484376916bbea6785fe17a67a96d",
+          "digest": "sha256:b13e919fe8af687cbcbd7a257886a21103d8484376916bbea6785fe17a67a96d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -52,14 +445,164 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arrow": [
+          "base64",
+          "arrow-array",
+          "arrow-buffer",
+          "arrow-data",
+          "arrow-schema",
+          "arrow-select",
+          "arrow-ipc"
+        ],
+        "arrow-array": [
+          "dep:arrow-array"
+        ],
+        "arrow-buffer": [
+          "dep:arrow-buffer"
+        ],
+        "arrow-csv": [
+          "dep:arrow-csv"
+        ],
+        "arrow-data": [
+          "dep:arrow-data"
+        ],
+        "arrow-ipc": [
+          "dep:arrow-ipc"
+        ],
+        "arrow-schema": [
+          "dep:arrow-schema"
+        ],
+        "arrow-select": [
+          "dep:arrow-select"
+        ],
+        "arrow_canonical_extension_types": [
+          "arrow-schema?/canonical_extension_types"
+        ],
+        "async": [
+          "futures",
+          "tokio"
+        ],
+        "base64": [
+          "dep:base64"
+        ],
+        "brotli": [
+          "dep:brotli"
+        ],
+        "clap": [
+          "dep:clap"
+        ],
+        "cli": [
+          "json",
+          "base64",
+          "clap",
+          "arrow-csv",
+          "serde"
+        ],
+        "crc": [
+          "dep:crc32fast"
+        ],
+        "default": [
+          "arrow",
+          "snap",
+          "brotli",
+          "flate2-zlib-rs",
+          "lz4",
+          "zstd",
+          "base64",
+          "simdutf8"
+        ],
+        "encryption": [
+          "dep:ring"
+        ],
+        "experimental": [
+          "variant_experimental"
+        ],
+        "flate2": [
+          "dep:flate2"
+        ],
+        "flate2-rust_backened": [
+          "flate2",
+          "dep:flate2",
+          "flate2/rust_backend"
+        ],
+        "flate2-zlib-rs": [
+          "flate2",
+          "dep:flate2",
+          "flate2/zlib-rs"
+        ],
+        "futures": [
+          "dep:futures"
+        ],
+        "geospatial": [
+          "parquet-geospatial"
+        ],
+        "json": [
+          "serde_json",
+          "base64"
+        ],
+        "lz4": [
+          "lz4_flex"
+        ],
+        "lz4_flex": [
+          "dep:lz4_flex"
+        ],
+        "object_store": [
+          "dep:object_store",
+          "async"
+        ],
+        "parquet-geospatial": [
+          "dep:parquet-geospatial"
+        ],
+        "parquet-variant": [
+          "dep:parquet-variant"
+        ],
+        "parquet-variant-compute": [
+          "dep:parquet-variant-compute"
+        ],
+        "parquet-variant-json": [
+          "dep:parquet-variant-json"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "simdutf8": [
+          "dep:simdutf8"
+        ],
+        "snap": [
+          "dep:snap"
+        ],
+        "test_common": [],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "variant_experimental": [
+          "arrow",
+          "parquet-variant",
+          "parquet-variant-json",
+          "parquet-variant-compute"
+        ],
+        "zstd": [
+          "dep:zstd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arrow",
+        "parquet",
+        "hadoop"
+      ],
       "manifest": "crates-io/parquet/58.4.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -70,6 +613,13 @@
         "name": "parquet",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:d298093b2dec60289dce0684c986d0f7679e9dd15771c2c65406e1aaf604a704",
+        "package": "parquet",
+        "registry": "crates-io",
+        "version": "58.4.0"
+      },
+      "vcs": null,
       "version": "58.4.0",
       "yanked": false
     }

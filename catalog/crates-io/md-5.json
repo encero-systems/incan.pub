@@ -378,11 +378,91 @@
           "unit_identity": "sha256:ed2f5e91f8e63739f89227050da9f9eaed5b49ae8b67c2f4620dc97be0c1f97d"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": false,
+          "req": "^0.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2438,
+          "content": "content/sha256/edd3c4cd60f4f043ed6a745d9a71da427e2d1e9a65149066e72b40af512f191b",
+          "digest": "sha256:edd3c4cd60f4f043ed6a745d9a71da427e2d1e9a65149066e72b40af512f191b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1196,
+          "content": "content/sha256/831e0f43ad0bf014c1c4fec5767aae470434c1d66d6e671be2d823e729063e25",
+          "digest": "sha256:831e0f43ad0bf014c1c4fec5767aae470434c1d66d6e671be2d823e729063e25",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3149,
+          "content": "content/sha256/09abb42328a372e22a28d6c410e8edc8b1c61a4a133c4281adf294f580baa175",
+          "digest": "sha256:09abb42328a372e22a28d6c410e8edc8b1c61a4a133c4281adf294f580baa175",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "digest/alloc"
+        ],
+        "default": [
+          "alloc",
+          "oid"
+        ],
+        "oid": [
+          "digest/oid"
+        ],
+        "zeroize": [
+          "digest/zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "md5",
+        "hash",
+        "digest"
+      ],
       "manifest": "crates-io/md-5/0.11.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -393,6 +473,17 @@
         "edition": "2024",
         "name": "md5",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:69b6441f590336821bb897fb28fc622898ccceb1d6cea3fde5ea86b090c4de98",
+        "package": "md-5",
+        "registry": "crates-io",
+        "version": "0.11.0"
+      },
+      "vcs": {
+        "commit": "b5051e5a5e7dc86a6c27c1ec7a390744ebcfb97a",
+        "path": "md5",
+        "system": "git"
       },
       "version": "0.11.0",
       "yanked": false
@@ -415,6 +506,75 @@
       "advisories": 0,
       "archive": "sha256:6efac14219235ed70ec8397eb9572821ac19a9fbf8869acaf482bf36097dda8a",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": false,
+          "req": "^0.10.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/md5-asm",
+          "name": "md5-asm",
+          "optional": true,
+          "req": "^0.5",
+          "target": "cfg(any(target_arch = \"x86\", target_arch = \"x86_64\"))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2403,
+          "content": "content/sha256/23c2e70875a8ccdd29c0c7e929f1769dd8ae1f3e5be5dcd0a368f1d9fab1917b",
+          "digest": "sha256:23c2e70875a8ccdd29c0c7e929f1769dd8ae1f3e5be5dcd0a368f1d9fab1917b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1138,
+          "content": "content/sha256/b4eb00df6e2a4d22518fcaa6a2b4646f249b3a3c9814509b22bd2091f1392ff1",
+          "digest": "sha256:b4eb00df6e2a4d22518fcaa6a2b4646f249b3a3c9814509b22bd2091f1392ff1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2278,
+          "content": "content/sha256/11667f2f7ba0fca4a71350d13e2bf393c326cb0de87e723c8f10347cf2cb2052",
+          "digest": "sha256:11667f2f7ba0fca4a71350d13e2bf393c326cb0de87e723c8f10347cf2cb2052",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -423,6 +583,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -433,14 +594,40 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "asm": [
+          "md5-asm"
+        ],
+        "default": [
+          "std"
+        ],
+        "force-soft": [],
+        "loongarch64_asm": [],
+        "md5-asm": [
+          "dep:md5-asm"
+        ],
+        "oid": [
+          "digest/oid"
+        ],
+        "std": [
+          "digest/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "md5",
+        "hash",
+        "digest"
+      ],
       "manifest": "crates-io/md-5/0.10.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -450,6 +637,17 @@
         "edition": "2018",
         "name": "md5",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d89e7ee0cfbedfc4da3340218492196241d89eefb6dab27de5df917a6d2e78cf",
+        "package": "md-5",
+        "registry": "crates-io",
+        "version": "0.10.6"
+      },
+      "vcs": {
+        "commit": "026b0e81e90ba476a5d343a8e4efbc63b814737b",
+        "path": "md5",
+        "system": "git"
       },
       "version": "0.10.6",
       "yanked": false

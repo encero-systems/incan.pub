@@ -172,11 +172,273 @@
           "unit_identity": "sha256:3c680e56c66b51dba7e070c5b2a24c1403434f936a7f2ced6439934df450fc9a"
         }
       ],
+      "categories": [
+        "game-engines",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/approx",
+          "name": "approx-05",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "aarch64_simd",
+            "derive",
+            "wasm_simd"
+          ],
+          "loaf": "crates-io/bytemuck",
+          "name": "bytemuck",
+          "optional": true,
+          "req": "^1.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/encase",
+          "name": "encase-012",
+          "optional": true,
+          "req": "^0.12"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/encase",
+          "name": "encase-013",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/float_eq",
+          "name": "float_eq",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libm",
+          "name": "libm",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/mint",
+          "name": "mint-05",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand-010",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rkyv",
+          "name": "rkyv-08",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/speedy",
+          "name": "speedy-08",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/zerocopy",
+          "name": "zerocopy-08",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerocopy-derive",
+          "name": "zerocopy-derive-08",
+          "optional": true,
+          "req": "^0.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 12962,
+          "content": "content/sha256/77398e8b3309c4fbd88253aa947077670cff299d615e33900d618c68a8aa537e",
+          "digest": "sha256:77398e8b3309c4fbd88253aa947077670cff299d615e33900d618c68a8aa537e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10834,
+          "content": "content/sha256/be33ddb87a30fd321ab100e2d922cba512e50ec7a63d8e62e5bfc0798dd4b585",
+          "digest": "sha256:be33ddb87a30fd321ab100e2d922cba512e50ec7a63d8e62e5bfc0798dd4b585",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 59431,
+          "content": "content/sha256/6b692fedee27e920a71944bdea1dea2ff1252bf814ed2a38885b4612a55df732",
+          "digest": "sha256:6b692fedee27e920a71944bdea1dea2ff1252bf814ed2a38885b4612a55df732",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all-types": [
+          "float-types",
+          "integer-types",
+          "size-types"
+        ],
+        "approx-05": [
+          "dep:approx-05"
+        ],
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "bytecheck": [
+          "rkyv-08?/bytecheck"
+        ],
+        "bytemuck": [
+          "dep:bytemuck"
+        ],
+        "core-simd": [
+          "bytemuck?/nightly_portable_simd"
+        ],
+        "cuda": [],
+        "debug-glam-assert": [],
+        "default": [
+          "std",
+          "all-types"
+        ],
+        "encase-012": [
+          "dep:encase-012"
+        ],
+        "encase-013": [
+          "dep:encase-013"
+        ],
+        "f64": [],
+        "float-types": [
+          "f64"
+        ],
+        "float_eq": [
+          "dep:float_eq"
+        ],
+        "glam-assert": [],
+        "i16": [],
+        "i32": [],
+        "i64": [],
+        "i8": [],
+        "integer-types": [
+          "i8",
+          "u8",
+          "i16",
+          "u16",
+          "i32",
+          "u32",
+          "i64",
+          "u64"
+        ],
+        "isize": [],
+        "libm": [
+          "dep:libm"
+        ],
+        "mint-05": [
+          "dep:mint-05"
+        ],
+        "nostd-libm": [
+          "dep:libm"
+        ],
+        "rand-010": [
+          "dep:rand-010"
+        ],
+        "rkyv-08": [
+          "dep:rkyv-08"
+        ],
+        "scalar-math": [],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "size-types": [
+          "isize",
+          "usize"
+        ],
+        "speedy-08": [
+          "dep:speedy-08"
+        ],
+        "std": [],
+        "u16": [],
+        "u32": [],
+        "u64": [],
+        "u8": [],
+        "usize": [],
+        "zerocopy-08": [
+          "dep:zerocopy-08",
+          "dep:zerocopy-derive-08"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "gamedev",
+        "math",
+        "matrix",
+        "vector",
+        "quaternion"
+      ],
       "manifest": "crates-io/glam/0.34.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -187,6 +449,17 @@
         "edition": "2024",
         "name": "glam",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:fc148d4ddd3930c52f9e5ae79b89805c6f07e9ff417e7b083e0348cea60a5aba",
+        "package": "glam",
+        "registry": "crates-io",
+        "version": "0.34.1"
+      },
+      "vcs": {
+        "commit": "f5c5a6b635c5be1b7e904808175470ed0f29f4ff",
+        "path": "",
+        "system": "git"
       },
       "version": "0.34.1",
       "yanked": false

@@ -25,11 +25,105 @@
       "advisories": 0,
       "archive": "sha256:a0587f54740a64193385e0401d69638548abe66186efd17249dd60c284b7f62e",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "inline-more"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.15.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/idna",
+          "name": "idna",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/psl-types",
+          "name": "psl-types",
+          "optional": false,
+          "req": "^2.0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase",
+          "optional": true,
+          "req": "^2.6.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2442,
+          "content": "content/sha256/969658bab3f22a03172be92da712a403f8833aa488b75d2604d3e9fd2557c2e3",
+          "digest": "sha256:969658bab3f22a03172be92da712a403f8833aa488b75d2604d3e9fd2557c2e3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1074,
+          "content": "content/sha256/f09adf500d35265ee63ef552f8e61487e09ee549da66eaf0ec7924e3ad7cf14b",
+          "digest": "sha256:f09adf500d35265ee63ef552f8e61487e09ee549da66eaf0ec7924e3ad7cf14b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "anycase": [
+          "unicase"
+        ],
+        "default": [
+          "punycode"
+        ],
+        "hashbrown": [
+          "dep:hashbrown"
+        ],
+        "idna": [
+          "dep:idna"
+        ],
+        "punycode": [
+          "idna"
+        ],
+        "std": [],
+        "unicase": [
+          "dep:unicase"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "tld",
+        "psl",
+        "no_std",
+        "tldextract",
+        "domain"
+      ],
       "manifest": "crates-io/publicsuffix/2.3.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +134,17 @@
         "edition": "2018",
         "name": "publicsuffix",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6f42ea446cab60335f76979ec15e12619a2165b5ae2c12166bef27d283a9fadf",
+        "package": "publicsuffix",
+        "registry": "crates-io",
+        "version": "2.3.0"
+      },
+      "vcs": {
+        "commit": "4f385ebad909b764176656cb1644fdc2d16bfa23",
+        "path": "",
+        "system": "git"
       },
       "version": "2.3.0",
       "yanked": false

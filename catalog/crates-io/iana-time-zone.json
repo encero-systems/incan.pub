@@ -188,6 +188,114 @@
           "unit_identity": "sha256:837c03eff275e071e97e09262015367d083feadcfc0ebab067b362a9cab4a7b9"
         }
       ],
+      "categories": [
+        "date-and-time",
+        "internationalization",
+        "os"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/android_system_properties",
+          "name": "android_system_properties",
+          "optional": false,
+          "req": "^0.1.5",
+          "target": "cfg(target_os = \"android\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/core-foundation-sys",
+          "name": "core-foundation-sys",
+          "optional": false,
+          "req": "^0.8.6",
+          "target": "cfg(target_vendor = \"apple\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/iana-time-zone-haiku",
+          "name": "iana-time-zone-haiku",
+          "optional": false,
+          "req": "^0.1.1",
+          "target": "cfg(target_os = \"haiku\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": false,
+          "req": "^0.3.66",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.14",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": false,
+          "req": "^0.2.89",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-core",
+          "name": "windows-core",
+          "optional": false,
+          "req": ">=0.56, <=0.62",
+          "target": "cfg(target_os = \"windows\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1875,
+          "content": "content/sha256/22f9a823adec27aca10eb6dfb5e4e1e9d485e1d5f78348f788bfc81dbee2787f",
+          "digest": "sha256:22f9a823adec27aca10eb6dfb5e4e1e9d485e1d5f78348f788bfc81dbee2787f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10832,
+          "content": "content/sha256/696759d65dfe558ff7d9f031c76db19ec5c0767470fb67c4e8d990820d1e99c9",
+          "digest": "sha256:696759d65dfe558ff7d9f031c76db19ec5c0767470fb67c4e8d990820d1e99c9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1059,
+          "content": "content/sha256/da28ccc6b158fc2d8cccc74e99794b1cff1d29bd7bbeb019442fcf0c04c6cad9",
+          "digest": "sha256:da28ccc6b158fc2d8cccc74e99794b1cff1d29bd7bbeb019442fcf0c04c6cad9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 16490,
+          "content": "content/sha256/0786c7bb3568ad62b30894551223d6f119cc862d83c5781661b37c89219b5aae",
+          "digest": "sha256:0786c7bb3568ad62b30894551223d6f119cc862d83c5781661b37c89219b5aae",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -195,14 +303,22 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "fallback": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "IANA",
+        "time"
+      ],
       "manifest": "crates-io/iana-time-zone/0.1.65/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -212,6 +328,17 @@
         "edition": "2021",
         "name": "iana_time_zone",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e31bc9ad994ba00e440a8aa5c9ef0ec67d5cb5e5cb0cc7f8b744a35b389cc470",
+        "package": "iana-time-zone",
+        "registry": "crates-io",
+        "version": "0.1.65"
+      },
+      "vcs": {
+        "commit": "3726968181ae67d95c8de2f750a95b9c703ae4c8",
+        "path": "",
+        "system": "git"
       },
       "version": "0.1.65",
       "yanked": false

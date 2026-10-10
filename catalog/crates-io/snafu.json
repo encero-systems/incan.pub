@@ -122,11 +122,135 @@
           "unit_identity": "sha256:20c77221e542b1e0bcd901f0544dd352f1627f97df0b9867f23ebb70fa7f0ba5"
         }
       ],
+      "categories": [
+        "rust-patterns",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "executor"
+          ],
+          "loaf": "crates-io/futures",
+          "name": "futures",
+          "optional": true,
+          "req": "^0.3.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pin-project",
+          "name": "pin-project",
+          "optional": true,
+          "req": "^1.0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/snafu-derive",
+          "name": "snafu-derive",
+          "optional": false,
+          "req": "^0.9.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1543,
+          "content": "content/sha256/cc2ca53162bc0dcaf4ae972d2172e54b97602cda49acbfee52dfc53e366b305c",
+          "digest": "sha256:cc2ca53162bc0dcaf4ae972d2172e54b97602cda49acbfee52dfc53e366b305c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10834,
+          "content": "content/sha256/53231f493e357180e66a7f5c5c6e5027726976bc5dbb75abcff37b4710fe0133",
+          "digest": "sha256:53231f493e357180e66a7f5c5c6e5027726976bc5dbb75abcff37b4710fe0133",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1058,
+          "content": "content/sha256/7003375a1162b7510d6f053c4a505a0771bbc38d674c4d0687ff6063c000b175",
+          "digest": "sha256:7003375a1162b7510d6f053c4a505a0771bbc38d674c4d0687ff6063c000b175",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 24662,
+          "content": "content/sha256/21034fc143bd99a2142689e4447fc60e64d4efcdc1e40557f42832294a1e5811",
+          "digest": "sha256:21034fc143bd99a2142689e4447fc60e64d4efcdc1e40557f42832294a1e5811",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "backtrace": [],
+        "backtraces-impl-backtrace-crate": [
+          "dep:backtrace"
+        ],
+        "default": [
+          "std",
+          "rust_1_81"
+        ],
+        "futures": [
+          "dep:futures-core",
+          "dep:pin-project"
+        ],
+        "futures-core-crate": [],
+        "futures-crate": [],
+        "guide": [],
+        "internal-dev-dependencies": [
+          "dep:futures"
+        ],
+        "pin-project": [],
+        "rust_1_81": [],
+        "std": [
+          "alloc"
+        ],
+        "unstable-provider-api": [
+          "snafu-derive/unstable-provider-api"
+        ],
+        "unstable-try-trait": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "error",
+        "ergonomic",
+        "library",
+        "no_std"
+      ],
       "manifest": "crates-io/snafu/0.9.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -137,6 +261,17 @@
         "edition": "2018",
         "name": "snafu",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e45cb604038abb7b926b679887b3226d8d0f23874b66623625a0454be425a4b7",
+        "package": "snafu",
+        "registry": "crates-io",
+        "version": "0.9.2"
+      },
+      "vcs": {
+        "commit": "d6b22be7e31fdd308bfe637349263781edcaac29",
+        "path": "",
+        "system": "git"
       },
       "version": "0.9.2",
       "yanked": false

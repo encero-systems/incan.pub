@@ -330,11 +330,146 @@
           "unit_identity": "sha256:ef0b2034f9f7aab3a0bd7e1177a7de3d13bf30f8f97d836ec28067be3c4c39e0"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "network-programming",
+        "os"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/concurrent-queue",
+          "name": "concurrent-queue",
+          "optional": false,
+          "req": "^2.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": false,
+          "req": "^0.3.28"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-lite",
+          "name": "futures-lite",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking",
+          "name": "parking",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/polling",
+          "name": "polling",
+          "optional": false,
+          "req": "^3.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "fs",
+            "net",
+            "std"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": false,
+          "req": "^0.4.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.37"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2802,
+          "content": "content/sha256/6ab6d5bded7eec8339621031ef2dc038f5be38d8a12563f00076b87100197dbc",
+          "digest": "sha256:6ab6d5bded7eec8339621031ef2dc038f5be38d8a12563f00076b87100197dbc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6579,
+          "content": "content/sha256/f90f75cafc4e026ce751918913cfac192a64f913e9cc5d023c72d798c276033c",
+          "digest": "sha256:f90f75cafc4e026ce751918913cfac192a64f913e9cc5d023c72d798c276033c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -342,6 +477,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -349,6 +485,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -356,14 +493,26 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "mio",
+        "epoll",
+        "kqueue",
+        "iocp"
+      ],
       "manifest": "crates-io/async-io/2.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -374,6 +523,17 @@
         "edition": "2021",
         "name": "async_io",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:456b8a8feb6f42d237746d4b3e9a178494627745c3c56c6ea55d92ba50d026fc",
+        "package": "async-io",
+        "registry": "crates-io",
+        "version": "2.6.0"
+      },
+      "vcs": {
+        "commit": "576b470ca3cadefdec8b169279df23c9a0a63495",
+        "path": "",
+        "system": "git"
       },
       "version": "2.6.0",
       "yanked": false

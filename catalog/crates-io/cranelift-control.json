@@ -25,11 +25,57 @@
       "advisories": 0,
       "archive": "sha256:4efef7ce1e14852c0b737aa02c25d137c5a66aeb911fa3762df8b3e9998fc2c6",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.4.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 245,
+          "content": "content/sha256/9266e3c8ff78a0f5948eb24292a2b51ec272d9417816ffe23de0b1ea4589acb4",
+          "digest": "sha256:9266e3c8ff78a0f5948eb24292a2b51ec272d9417816ffe23de0b1ea4589acb4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "chaos": [
+          "fuzz"
+        ],
+        "default": [
+          "fuzz"
+        ],
+        "fuzz": [
+          "dep:arbitrary"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "fuzz",
+        "test"
+      ],
       "manifest": "crates-io/cranelift-control/0.123.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +86,17 @@
         "edition": "2024",
         "name": "cranelift_control",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:64c52305d3ba73f42d7351c0d550d2c68e07b4642f06d3e58fef28b575d67cc5",
+        "package": "cranelift-control",
+        "registry": "crates-io",
+        "version": "0.123.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "cranelift/control",
+        "system": "git"
       },
       "version": "0.123.17",
       "yanked": false

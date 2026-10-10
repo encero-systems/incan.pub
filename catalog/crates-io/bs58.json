@@ -116,11 +116,108 @@
           "unit_identity": "sha256:d90686d3b54069c94cde6a1a2366454c778ddf21f914b2ee8349f8cdb3504876"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "grab_spare_slice"
+          ],
+          "loaf": "crates-io/tinyvec",
+          "name": "tinyvec",
+          "optional": true,
+          "req": "^1.6.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1783,
+          "content": "content/sha256/ed5c769a3e89236e45a7106ff14d122a1a3c7fd7ec0ef8ac53b3f7e9be4d1487",
+          "digest": "sha256:ed5c769a3e89236e45a7106ff14d122a1a3c7fd7ec0ef8ac53b3f7e9be4d1487",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/42d3bf7e7d4d49d72c0555d14ed99c3ee7ce9ce3cbffbc38bbafe8c103f50969",
+          "digest": "sha256:42d3bf7e7d4d49d72c0555d14ed99c3ee7ce9ce3cbffbc38bbafe8c103f50969",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2159,
+          "content": "content/sha256/8af268e0609116b4b4debd0ebcb68f3e65a24e60ba1b8586e132b43299936ab3",
+          "digest": "sha256:8af268e0609116b4b4debd0ebcb68f3e65a24e60ba1b8586e132b43299936ab3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "tinyvec?/alloc"
+        ],
+        "cb58": [
+          "sha2"
+        ],
+        "check": [
+          "sha2"
+        ],
+        "default": [
+          "std"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ],
+        "std": [
+          "alloc",
+          "tinyvec?/std"
+        ],
+        "tinyvec": [
+          "dep:tinyvec"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "base58"
+      ],
       "manifest": "crates-io/bs58/0.5.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -131,6 +228,17 @@
         "edition": "2021",
         "name": "bs58",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bf88ba1141d185c399bee5288d850d63b8369520c1eafc32a0430b5b6c287bf4",
+        "package": "bs58",
+        "registry": "crates-io",
+        "version": "0.5.1"
+      },
+      "vcs": {
+        "commit": "7d3c9282d2595612e5474df93dd0e017db9b684f",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.1",
       "yanked": false

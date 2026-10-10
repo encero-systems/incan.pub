@@ -226,11 +226,137 @@
           "unit_identity": "sha256:170419a6f15f96d63371e0f7ad2b5b3d0e62ff2530c2c4314d1e4a447565f406"
         }
       ],
+      "categories": [
+        "multimedia::images",
+        "multimedia::encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/fax",
+          "name": "fax34",
+          "optional": true,
+          "req": "^0.2.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1.0.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/image-webp",
+          "name": "image-webp",
+          "optional": true,
+          "req": "^0.2.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quick-error",
+          "name": "quick-error",
+          "optional": false,
+          "req": "^2.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/weezl",
+          "name": "weezl",
+          "optional": true,
+          "req": "^0.1.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "zstd",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zune-jpeg",
+          "name": "zune-jpeg",
+          "optional": true,
+          "req": "^0.5.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2890,
+          "content": "content/sha256/c6ab90cfdcb820df38599e943d9bfb847832dcfc4ad8c935e5b5a801f846e26d",
+          "digest": "sha256:c6ab90cfdcb820df38599e943d9bfb847832dcfc4ad8c935e5b5a801f846e26d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1073,
+          "content": "content/sha256/20c097d0de27e2adc179140a3d542091951a030699c7e1c78655f2a2d08d4e3e",
+          "digest": "sha256:20c097d0de27e2adc179140a3d542091951a030699c7e1c78655f2a2d08d4e3e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 16422,
+          "content": "content/sha256/a06baccbb8aaea0dd276ffcc85c92d71557bc611cb07cf6cd92163ad172da78e",
+          "digest": "sha256:a06baccbb8aaea0dd276ffcc85c92d71557bc611cb07cf6cd92163ad172da78e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "deflate",
+          "fax",
+          "jpeg",
+          "lzw"
+        ],
+        "deflate": [
+          "dep:flate2"
+        ],
+        "fax": [
+          "dep:fax34"
+        ],
+        "jpeg": [
+          "dep:zune-jpeg"
+        ],
+        "lzw": [
+          "dep:weezl"
+        ],
+        "webp": [
+          "dep:image-webp"
+        ],
+        "zstd": [
+          "dep:zstd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/tiff/0.11.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -241,6 +367,17 @@
         "edition": "2021",
         "name": "tiff",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b63feaf3343d35b6ca4d50483f94843803b0f51634937cc2ec519fc32232bc52",
+        "package": "tiff",
+        "registry": "crates-io",
+        "version": "0.11.3"
+      },
+      "vcs": {
+        "commit": "e41159ce058bf193718b017599e2d7d53e9ccc92",
+        "path": "",
+        "system": "git"
       },
       "version": "0.11.3",
       "yanked": false
@@ -263,11 +400,72 @@
       "advisories": 0,
       "archive": "sha256:3dc53b8eba7616668501ca8eeeb0ea9efe649e02e63d457fc48aac7d6dc1af3f",
       "assets": [],
+      "categories": [
+        "multimedia::images",
+        "multimedia::encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": false,
+          "req": "^1.0.20"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/jpeg-decoder",
+          "name": "jpeg",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/weezl",
+          "name": "weezl",
+          "optional": false,
+          "req": "^0.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2658,
+          "content": "content/sha256/1c17af2aab3dcd95685672aecc5e5b7d1d608d41be9a8b22d327d06ebad0b72a",
+          "digest": "sha256:1c17af2aab3dcd95685672aecc5e5b7d1d608d41be9a8b22d327d06ebad0b72a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1073,
+          "content": "content/sha256/20c097d0de27e2adc179140a3d542091951a030699c7e1c78655f2a2d08d4e3e",
+          "digest": "sha256:20c097d0de27e2adc179140a3d542091951a030699c7e1c78655f2a2d08d4e3e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 8746,
+          "content": "content/sha256/ec8476c7358b3b2bdfdfda3ef1f236a5b312d052df47b6d48c2a13383e796a2a",
+          "digest": "sha256:ec8476c7358b3b2bdfdfda3ef1f236a5b312d052df47b6d48c2a13383e796a2a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/tiff/0.9.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -278,6 +476,17 @@
         "edition": "2021",
         "name": "tiff",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ba1310fcea54c6a9a4fd1aad794ecc02c31682f6bfbecdf460bf19533eed1e3e",
+        "package": "tiff",
+        "registry": "crates-io",
+        "version": "0.9.1"
+      },
+      "vcs": {
+        "commit": "b0ba4a6788cc897cd14bd20d93a6472ae1200295",
+        "path": "",
+        "system": "git"
       },
       "version": "0.9.1",
       "yanked": false

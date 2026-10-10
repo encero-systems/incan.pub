@@ -110,11 +110,117 @@
           "unit_identity": "sha256:64eb9ef1cf8ac5b70d9e65a5babc89fe2b0573df2a324390f221e48ca58901d4"
         }
       ],
+      "categories": [
+        "no-std",
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/const_format_proc_macros",
+          "name": "const_format_proc_macros",
+          "optional": false,
+          "req": "=0.2.34"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rust_1_64"
+          ],
+          "loaf": "crates-io/konst",
+          "name": "konst",
+          "optional": false,
+          "req": "^0.2.20"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10361,
+          "content": "content/sha256/350ca1fd0ff3ea3e70c340fe6c8f2955e4707b312961e6552506da1ea7991fdc",
+          "digest": "sha256:350ca1fd0ff3ea3e70c340fe6c8f2955e4707b312961e6552506da1ea7991fdc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 855,
+          "content": "content/sha256/c1e018d60dd011b335b5280b919bd3a75dbba81c6fbe24e2fc90cb235bdb6883",
+          "digest": "sha256:c1e018d60dd011b335b5280b919bd3a75dbba81c6fbe24e2fc90cb235bdb6883",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "__debug": [
+          "const_format_proc_macros/debug"
+        ],
+        "__docsrs": [],
+        "__inline_const_pat_tests": [
+          "__test",
+          "fmt"
+        ],
+        "__only_new_tests": [
+          "__test"
+        ],
+        "__test": [],
+        "all": [
+          "fmt",
+          "derive",
+          "rust_1_64",
+          "assert"
+        ],
+        "assert": [
+          "assertc"
+        ],
+        "assertc": [
+          "fmt",
+          "assertcp"
+        ],
+        "assertcp": [
+          "rust_1_51"
+        ],
+        "const_generics": [
+          "rust_1_51"
+        ],
+        "constant_time_as_str": [
+          "fmt"
+        ],
+        "default": [],
+        "derive": [
+          "fmt",
+          "const_format_proc_macros/derive"
+        ],
+        "fmt": [
+          "rust_1_83"
+        ],
+        "more_str_macros": [
+          "rust_1_64"
+        ],
+        "nightly_const_generics": [
+          "const_generics"
+        ],
+        "rust_1_51": [],
+        "rust_1_64": [
+          "rust_1_51"
+        ],
+        "rust_1_83": [
+          "rust_1_64"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no-std",
+        "format",
+        "concat"
+      ],
       "manifest": "crates-io/const_format/0.2.36/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +231,17 @@
         "edition": "2021",
         "name": "const_format",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4481a617ad9a412be3b97c5d403fef8ed023103368908b9c50af598ff467cc1e",
+        "package": "const_format",
+        "registry": "crates-io",
+        "version": "0.2.36"
+      },
+      "vcs": {
+        "commit": "6bcde171f0a9c59d8afc88492db52c7e1d343ebd",
+        "path": "const_format",
+        "system": "git"
       },
       "version": "0.2.36",
       "yanked": false

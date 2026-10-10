@@ -102,11 +102,81 @@
           "unit_identity": "sha256:660e0c3552fdf6fb02c68f74494328633ce5bf1ccf5bd387e52fe722d92104ac"
         }
       ],
+      "categories": [
+        "algorithms"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1277,
+          "content": "content/sha256/59e1ecf45fded42d8847e35f3f6afd9487ad199ad79bb36f0292084d854370ce",
+          "digest": "sha256:59e1ecf45fded42d8847e35f3f6afd9487ad199ad79bb36f0292084d854370ce",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1074,
+          "content": "content/sha256/31edd94ac845052712d8044ae23c09a451227b522e8215ab4ea4f1ce4741b160",
+          "digest": "sha256:31edd94ac845052712d8044ae23c09a451227b522e8215ab4ea4f1ce4741b160",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2683,
+          "content": "content/sha256/95e761ddd3d7e59b864af804d08e9565b0494b908bdc6b88e4099db8e676b70d",
+          "digest": "sha256:95e761ddd3d7e59b864af804d08e9565b0494b908bdc6b88e4099db8e676b70d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "random",
+        "rng"
+      ],
       "manifest": "crates-io/rand_xoshiro/0.8.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +187,17 @@
         "edition": "2024",
         "name": "rand_xoshiro",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:662effc7698e08ea324d3acccf8d9d7f7bf79b9785e270a174ea36e56900c91d",
+        "package": "rand_xoshiro",
+        "registry": "crates-io",
+        "version": "0.8.1"
+      },
+      "vcs": {
+        "commit": "be9aa09cdfec726ccbc3acc7a01a59629ee46760",
+        "path": "rand_xoshiro",
+        "system": "git"
       },
       "version": "0.8.1",
       "yanked": false

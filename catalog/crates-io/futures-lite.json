@@ -503,11 +503,146 @@
           "unit_identity": "sha256:8b9727e888f6b9f8f5e577070a56ed6befc55a4e92ce2605ea9164d4d32c51f5"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fastrand",
+          "name": "fastrand",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": false,
+          "req": "^0.3.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": true,
+          "req": "^0.3.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2.3.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking",
+          "name": "parking",
+          "optional": true,
+          "req": "^2.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1668,
+          "content": "content/sha256/0242ae3d8e434dbafb916997adfc8fea1b7c49fa9b2de25f515a69c523e8bba7",
+          "digest": "sha256:0242ae3d8e434dbafb916997adfc8fea1b7c49fa9b2de25f515a69c523e8bba7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1849,
+          "content": "content/sha256/6226d0632e2e1a80c23597e964da9812ae193c535fe058154afb034e94167aa5",
+          "digest": "sha256:6226d0632e2e1a80c23597e964da9812ae193c535fe058154afb034e94167aa5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-THIRD-PARTY",
+          "role": "license"
+        },
+        {
+          "bytes": 4802,
+          "content": "content/sha256/deed0a442b53d578f397083a5a1034a6bc546e948957218efe0f027d32a65769",
+          "digest": "sha256:deed0a442b53d578f397083a5a1034a6bc546e948957218efe0f027d32a65769",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "race",
+          "std"
+        ],
+        "fastrand": [
+          "dep:fastrand"
+        ],
+        "futures-io": [
+          "dep:futures-io"
+        ],
+        "memchr": [
+          "dep:memchr"
+        ],
+        "parking": [
+          "dep:parking"
+        ],
+        "race": [
+          "fastrand"
+        ],
+        "std": [
+          "alloc",
+          "dep:fastrand",
+          "fastrand/std",
+          "futures-io",
+          "parking"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "asynchronous",
+        "futures",
+        "async"
+      ],
       "manifest": "crates-io/futures-lite/2.6.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -518,6 +653,17 @@
         "edition": "2021",
         "name": "futures_lite",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f78e10609fe0e0b3f4157ffab1876319b5b0db102a2c60dc4626306dc46b44ad",
+        "package": "futures-lite",
+        "registry": "crates-io",
+        "version": "2.6.1"
+      },
+      "vcs": {
+        "commit": "226ce18976d8714d6bd9700b61dcc81d7200bc9a",
+        "path": "",
+        "system": "git"
       },
       "version": "2.6.1",
       "yanked": false

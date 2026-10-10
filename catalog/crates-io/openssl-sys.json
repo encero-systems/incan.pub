@@ -26,11 +26,103 @@
       "advisories": 0,
       "archive": "sha256:740a8336403bbf716f144830e9ecfec1910906258e6afe1309cea3b1b0e8ddc4",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "external-ffi-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "bindgen",
+            "ssl"
+          ],
+          "loaf": "crates-io/aws-lc-fips-sys",
+          "name": "aws-lc-fips-sys",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "ssl"
+          ],
+          "loaf": "crates-io/aws-lc-sys",
+          "name": "aws-lc-sys",
+          "optional": true,
+          "req": "^0.41"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bssl-sys",
+          "name": "bssl-sys",
+          "optional": true,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 830,
+          "content": "content/sha256/c5ddde25c2756a1115daaa671fb4297cdc83bf23009c8356ba65b5311d0dd30d",
+          "digest": "sha256:c5ddde25c2756a1115daaa671fb4297cdc83bf23009c8356ba65b5311d0dd30d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 27677,
+          "content": "content/sha256/720125114b7f8a26c742706be7a80b3029f81096a9894f0d3ee153c4238c0156",
+          "digest": "sha256:720125114b7f8a26c742706be7a80b3029f81096a9894f0d3ee153c4238c0156",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "aws-lc": [
+          "dep:aws-lc-sys"
+        ],
+        "aws-lc-fips": [
+          "dep:aws-lc-fips-sys"
+        ],
+        "bindgen": [],
+        "bssl-sys": [
+          "dep:bssl-sys"
+        ],
+        "openssl-src": [],
+        "unstable_boringssl": [
+          "bssl-sys"
+        ],
+        "vendored": [
+          "openssl-src"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/openssl-sys/0.9.117/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +133,17 @@
         "edition": "2021",
         "name": "openssl_sys",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b47e7e6bb2c38cd930d25a23b40fa52e068c10e85f3e03a7f5ba5aaca5713695",
+        "package": "openssl-sys",
+        "registry": "crates-io",
+        "version": "0.9.117"
+      },
+      "vcs": {
+        "commit": "db9c9e2f5db2ad7b45fd894e8d297ee15bfd0c7c",
+        "path": "openssl-sys",
+        "system": "git"
       },
       "version": "0.9.117",
       "yanked": false

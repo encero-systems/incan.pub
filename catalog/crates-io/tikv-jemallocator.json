@@ -29,11 +29,104 @@
       "advisories": 0,
       "archive": "sha256:e05998850031ea5280077912aa48850f7ec2825bec322eab978088a12a080609",
       "assets": [],
+      "categories": [
+        "memory-management",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tikv-jemalloc-sys",
+          "name": "tikv-jemalloc-sys",
+          "optional": false,
+          "req": "^0.7.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3916,
+          "content": "content/sha256/d9b645de95292a2791be1915d985c49a71a8c0ff83c49423636d2830316e1e87",
+          "digest": "sha256:d9b645de95292a2791be1915d985c49a71a8c0ff83c49423636d2830316e1e87",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc_trait": [],
+        "background_threads": [
+          "tikv-jemalloc-sys/background_threads"
+        ],
+        "background_threads_runtime_support": [
+          "tikv-jemalloc-sys/background_threads_runtime_support"
+        ],
+        "debug": [
+          "tikv-jemalloc-sys/debug"
+        ],
+        "default": [
+          "background_threads_runtime_support"
+        ],
+        "disable_cache_oblivious": [
+          "tikv-jemalloc-sys/disable_cache_oblivious"
+        ],
+        "disable_initial_exec_tls": [
+          "tikv-jemalloc-sys/disable_initial_exec_tls"
+        ],
+        "override_allocator_on_supported_platforms": [
+          "unprefixed_malloc_on_supported_platforms",
+          "tikv-jemalloc-sys/override_allocator_on_supported_platforms"
+        ],
+        "profiling": [
+          "tikv-jemalloc-sys/profiling"
+        ],
+        "profiling_libunwind": [
+          "tikv-jemalloc-sys/profiling_libunwind",
+          "profiling"
+        ],
+        "stats": [
+          "tikv-jemalloc-sys/stats"
+        ],
+        "unprefixed_malloc_on_supported_platforms": [
+          "tikv-jemalloc-sys/unprefixed_malloc_on_supported_platforms"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "allocator",
+        "jemalloc"
+      ],
       "manifest": "crates-io/tikv-jemallocator/0.7.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -44,6 +137,18 @@
         "edition": "2018",
         "name": "tikv_jemallocator",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:249f09e49ab1609436f34c776e84231bead18d6a955f119f939bdc1d847561bd",
+        "package": "tikv-jemallocator",
+        "registry": "crates-io",
+        "version": "0.7.0"
+      },
+      "vcs": {
+        "commit": "0e9129157d261cf6bda86d5dcd9eba94f3cd0f96",
+        "dirty": true,
+        "path": "jemallocator",
+        "system": "git"
       },
       "version": "0.7.0",
       "yanked": false

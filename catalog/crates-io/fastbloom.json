@@ -25,11 +25,134 @@
       "advisories": 0,
       "archive": "sha256:15963306ef96dd17626767051b817ee643aeafcf1925a291c7426a3d5a75207d",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "caching",
+        "algorithms"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/foldhash",
+          "name": "foldhash",
+          "optional": false,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libm",
+          "name": "libm",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/loom",
+          "name": "loom",
+          "optional": true,
+          "req": "^0.7.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "fallback"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": false,
+          "req": "^1.13.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.203"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/siphasher",
+          "name": "siphasher",
+          "optional": false,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 6661,
+          "content": "content/sha256/c23d8480d4ae13857934a24c8384c20b2ef5c91e6b0d330711e093c0e712fbe2",
+          "digest": "sha256:c23d8480d4ae13857934a24c8384c20b2ef5c91e6b0d330711e093c0e712fbe2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9897,
+          "content": "content/sha256/7cde763ba32b3ec2a84eddd8beb0dcb895fd6436aeb18491ab9572a7eb8de996",
+          "digest": "sha256:7cde763ba32b3ec2a84eddd8beb0dcb895fd6436aeb18491ab9572a7eb8de996",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/7c86aec715e38bf01c316a69de917c1245bf9945a5dc0329eecc774cdb4f26c2",
+          "digest": "sha256:7c86aec715e38bf01c316a69de917c1245bf9945a5dc0329eecc774cdb4f26c2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "rand"
+        ],
+        "loom": [
+          "dep:loom"
+        ],
+        "rand": [
+          "std",
+          "dep:rand"
+        ],
+        "serde": [
+          "dep:serde",
+          "siphasher/serde_std",
+          "portable-atomic/serde"
+        ],
+        "std": [
+          "portable-atomic/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "data-structures",
+        "bloom-filter",
+        "bloomfilter",
+        "no_std"
+      ],
       "manifest": "crates-io/fastbloom/0.17.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +163,17 @@
         "edition": "2021",
         "name": "fastbloom",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ef975e30683b2d965054bb0a836f8973857c4ebf6acf274fe46617cd285060d8",
+        "package": "fastbloom",
+        "registry": "crates-io",
+        "version": "0.17.0"
+      },
+      "vcs": {
+        "commit": "5bbfc14f98b4fc4cd5a124626174fdf54e0b0c3d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.17.0",
       "yanked": false

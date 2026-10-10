@@ -259,11 +259,114 @@
           "unit_identity": "sha256:ec6e587122a03d3bef0e26ca9c938e3da793f1627bff39ae7da6e20adb85c6dd"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.80"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": true,
+          "req": ">=0.6.2, <0.8.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 748,
+          "content": "content/sha256/eba8f5b9bc021bfaaf84478017baf838a92d56a47e691a8b8989aae1210c05d7",
+          "digest": "sha256:eba8f5b9bc021bfaaf84478017baf838a92d56a47e691a8b8989aae1210c05d7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 346,
+          "content": "content/sha256/29710a05be513550db4e4428b7ca47398d7a3bd7ba473455cf5098081e11d6d1",
+          "digest": "sha256:29710a05be513550db4e4428b7ca47398d7a3bd7ba473455cf5098081e11d6d1",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 4680,
+          "content": "content/sha256/5c72f365c9ab1cfb3730c7e843f0a6c5a46f692b1adedf6a89e64bec97125af2",
+          "digest": "sha256:5c72f365c9ab1cfb3730c7e843f0a6c5a46f692b1adedf6a89e64bec97125af2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "block2",
+          "libc",
+          "objc2"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "objc2": [
+          "dep:objc2"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "gcd",
+        "macos",
+        "ios",
+        "dispatch",
+        "libdispatch"
+      ],
       "manifest": "crates-io/dispatch2/0.3.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -274,6 +377,17 @@
         "edition": "2021",
         "name": "dispatch2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1e0e367e4e7da84520dedcac1901e4da967309406d1e51017ae1abfb97adbd38",
+        "package": "dispatch2",
+        "registry": "crates-io",
+        "version": "0.3.1"
+      },
+      "vcs": {
+        "commit": "8852b424193ca41602281b3d7540d7c8ed51e49a",
+        "path": "crates/dispatch2",
+        "system": "git"
       },
       "version": "0.3.1",
       "yanked": false

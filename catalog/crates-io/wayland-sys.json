@@ -102,11 +102,86 @@
           "unit_identity": "sha256:a41831ff9e24237e37f0ea212f9a58feec4aa01a8b7effeb4f996f26ab476333"
         }
       ],
+      "categories": [
+        "external-ffi-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/dlib",
+          "name": "dlib",
+          "optional": true,
+          "req": "^0.5.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memoffset",
+          "name": "memoffset",
+          "optional": true,
+          "req": "^0.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1398,
+          "content": "content/sha256/5ad17c5a9b8b182396a03623bef41195444d23c7542a68b2d64f2aeee17ec9e2",
+          "digest": "sha256:5ad17c5a9b8b182396a03623bef41195444d23c7542a68b2d64f2aeee17ec9e2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/1cb6f4dee8c649f175736380495f0af0c753c87f22d50931692968bb24bf2161",
+          "digest": "sha256:1cb6f4dee8c649f175736380495f0af0c753c87f22d50931692968bb24bf2161",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 797,
+          "content": "content/sha256/08ce934d669484697ee0914383151d2a4849a5b6b193339f9f673653b9fc992f",
+          "digest": "sha256:08ce934d669484697ee0914383151d2a4849a5b6b193339f9f673653b9fc992f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -114,6 +189,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -121,6 +197,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -128,14 +205,51 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "client": [
+          "dep:dlib",
+          "dep:log"
+        ],
+        "cursor": [
+          "client"
+        ],
+        "dlopen": [
+          "once_cell"
+        ],
+        "egl": [
+          "client"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "libwayland_client_1_23": [],
+        "libwayland_server_1_22": [],
+        "libwayland_server_1_23": [
+          "libwayland_server_1_22"
+        ],
+        "memoffset": [
+          "dep:memoffset"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "server": [
+          "libc",
+          "memoffset",
+          "dep:dlib",
+          "dep:log"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wayland-sys/0.31.11/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -146,6 +260,17 @@
         "edition": "2021",
         "name": "wayland_sys",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d8eab23fefc9e41f8e841df4a9c707e8a8c4ed26e944ef69297184de2785e3be",
+        "package": "wayland-sys",
+        "registry": "crates-io",
+        "version": "0.31.11"
+      },
+      "vcs": {
+        "commit": "a3d7927d87799b2955bf491b51c7c2a3a82da661",
+        "path": "wayland-sys",
+        "system": "git"
       },
       "version": "0.31.11",
       "yanked": false

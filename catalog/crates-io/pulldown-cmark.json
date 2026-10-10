@@ -275,11 +275,87 @@
           "unit_identity": "sha256:b0f28bd120de3581549d26e740e52db84ee32523dea3f1de7da6080e65e2f861"
         }
       ],
+      "categories": [
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/getopts",
+          "name": "getopts",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulldown-cmark-escape",
+          "name": "pulldown-cmark-escape",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase",
+          "optional": false,
+          "req": "^2.6"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7271,
+          "content": "content/sha256/83c86a8d5c92c4d033667da29bc16288cdf6ba855cb8368f296bd35d49eb163d",
+          "digest": "sha256:83c86a8d5c92c4d033667da29bc16288cdf6ba855cb8368f296bd35d49eb163d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1089,
+          "content": "content/sha256/c4f10f55904bdb9f27d3fbf94c354926d6cfe8b982276e556238c258941b243b",
+          "digest": "sha256:c4f10f55904bdb9f27d3fbf94c354926d6cfe8b982276e556238c258941b243b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -292,6 +368,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -299,6 +376,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -311,6 +389,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -318,6 +397,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -330,6 +410,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -337,6 +418,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -349,14 +431,41 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "getopts",
+          "html"
+        ],
+        "gen-tests": [],
+        "getopts": [
+          "dep:getopts"
+        ],
+        "html": [
+          "pulldown-cmark-escape"
+        ],
+        "pulldown-cmark-escape": [
+          "dep:pulldown-cmark-escape"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "simd": [
+          "pulldown-cmark-escape?/simd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "markdown",
+        "commonmark"
+      ],
       "manifest": "crates-io/pulldown-cmark/0.13.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -367,6 +476,17 @@
         "edition": "2021",
         "name": "pulldown_cmark",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+        "package": "pulldown-cmark",
+        "registry": "crates-io",
+        "version": "0.13.4"
+      },
+      "vcs": {
+        "commit": "38e4d08f14ec4bd9783270e9623db7681ebed968",
+        "path": "pulldown-cmark",
+        "system": "git"
       },
       "version": "0.13.4",
       "yanked": false

@@ -25,11 +25,238 @@
       "advisories": 0,
       "archive": "sha256:adfd838eaebaaf7b1e642946a1f9af825d5e730c78a4c65edfc8c0df29f55177",
       "assets": [],
+      "categories": [
+        "command-line-interface",
+        "command-line-utilities"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": true,
+          "req": "^0.22"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossterm_winapi",
+          "name": "crossterm_winapi",
+          "optional": true,
+          "req": "^0.9.1",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "is_variant"
+          ],
+          "loaf": "crates-io/derive_more",
+          "name": "derive_more",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/document-features",
+          "name": "document-features",
+          "optional": false,
+          "req": "^0.2.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/filedescriptor",
+          "name": "filedescriptor",
+          "optional": true,
+          "req": "^0.8",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "os-poll"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.0",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": false,
+          "req": "^0.12"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "stdio",
+            "termios"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook",
+          "name": "signal-hook",
+          "optional": true,
+          "req": "^0.3.17",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "support-v1_0"
+          ],
+          "loaf": "crates-io/signal-hook-mio",
+          "name": "signal-hook-mio",
+          "optional": true,
+          "req": "^0.2.4",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "winerror",
+            "winuser"
+          ],
+          "loaf": "crates-io/winapi",
+          "name": "winapi",
+          "optional": true,
+          "req": "^0.3.9",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8818,
+          "content": "content/sha256/7c812f101532cf858f43e8abe2bd2fcc4d76cd0599db9f90722d493ef0049eff",
+          "digest": "sha256:7c812f101532cf858f43e8abe2bd2fcc4d76cd0599db9f90722d493ef0049eff",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1083,
+          "content": "content/sha256/aca4760f2a5eba9ce9d4448fe7cd3fcf98245a8315ede59ebd0c6085dd542e61",
+          "digest": "sha256:aca4760f2a5eba9ce9d4448fe7cd3fcf98245a8315ede59ebd0c6085dd542e61",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 36915,
+          "content": "content/sha256/40ffad2095ee87a178b29ab9f7b190f754bf4f02c8f791c231fc5a9702e3d452",
+          "digest": "sha256:40ffad2095ee87a178b29ab9f7b190f754bf4f02c8f791c231fc5a9702e3d452",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bracketed-paste": [],
+        "default": [
+          "bracketed-paste",
+          "events",
+          "windows",
+          "derive-more"
+        ],
+        "derive-more": [
+          "dep:derive_more"
+        ],
+        "event-stream": [
+          "dep:futures-core",
+          "events"
+        ],
+        "events": [
+          "dep:mio",
+          "dep:signal-hook",
+          "dep:signal-hook-mio"
+        ],
+        "filedescriptor": [
+          "dep:filedescriptor"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "osc52": [
+          "dep:base64"
+        ],
+        "serde": [
+          "dep:serde",
+          "bitflags/serde"
+        ],
+        "use-dev-tty": [
+          "filedescriptor",
+          "rustix/process"
+        ],
+        "windows": [
+          "dep:winapi",
+          "dep:crossterm_winapi"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "event",
+        "color",
+        "cli",
+        "input",
+        "terminal"
+      ],
       "manifest": "crates-io/crossterm/0.29.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -39,6 +266,17 @@
         "edition": "2021",
         "name": "crossterm",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d8b9f2e4c67f833b660cdb0a3523065869fb35570177239812ed4c905aeff87b",
+        "package": "crossterm",
+        "registry": "crates-io",
+        "version": "0.29.0"
+      },
+      "vcs": {
+        "commit": "36d95b26a26e64b0f8c12edfe11f410a6d56a812",
+        "path": "",
+        "system": "git"
       },
       "version": "0.29.0",
       "yanked": false

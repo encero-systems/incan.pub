@@ -118,11 +118,117 @@
           "unit_identity": "sha256:6eba94da67ecedabbe712e2136ae103ea0863f2edb845aa30038600fe981d243"
         }
       ],
+      "categories": [
+        "algorithms",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "libm"
+          ],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": false,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.166"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_with",
+          "name": "serde_with",
+          "optional": true,
+          "req": "^3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2744,
+          "content": "content/sha256/3ab986dc36198100d7cf25865d7192e8a5ef8007c8be47fba75dc24ce2874407",
+          "digest": "sha256:3ab986dc36198100d7cf25865d7192e8a5ef8007c8be47fba75dc24ce2874407",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10282,
+          "content": "content/sha256/6df43f6f4b5d4587f3d8d71e45532c688fd168afa5fe89d571cb32fa09c4ef51",
+          "digest": "sha256:6df43f6f4b5d4587f3d8d71e45532c688fd168afa5fe89d571cb32fa09c4ef51",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/a771e4354f6b3ad4c92da1a5c9a239b6c291527db869632ecea4f20e24ca1135",
+          "digest": "sha256:a771e4354f6b3ad4c92da1a5c9a239b6c291527db869632ecea4f20e24ca1135",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 11429,
+          "content": "content/sha256/700610d7495ccab2b271cfec3ac4e2fb266975e510f141c05c7889d81fb16bcb",
+          "digest": "sha256:700610d7495ccab2b271cfec3ac4e2fb266975e510f141c05c7889d81fb16bcb",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "rand/alloc"
+        ],
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde",
+          "dep:serde_with",
+          "rand/serde"
+        ],
+        "std": [
+          "alloc",
+          "rand/std"
+        ],
+        "std_math": [
+          "num-traits/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "random",
+        "rng",
+        "distribution",
+        "probability"
+      ],
       "manifest": "crates-io/rand_distr/0.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +239,17 @@
         "edition": "2024",
         "name": "rand_distr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4d431c2703ccf129de4d45253c03f49ebb22b97d6ad79ee3ecfc7e3f4862c1d8",
+        "package": "rand_distr",
+        "registry": "crates-io",
+        "version": "0.6.0"
+      },
+      "vcs": {
+        "commit": "61d08aa933df68cf8004aa919ed608809be0f4b1",
+        "path": "",
+        "system": "git"
       },
       "version": "0.6.0",
       "yanked": false

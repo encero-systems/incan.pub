@@ -217,11 +217,146 @@
           "unit_identity": "sha256:a87baa918fbb860cfe221873c1e89c619aafcea035f8ad6224d3afdc59f33809"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "network-programming",
+        "os"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/concurrent-queue",
+          "name": "concurrent-queue",
+          "optional": false,
+          "req": "^2.2.0",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hermit-abi",
+          "name": "hermit-abi",
+          "optional": false,
+          "req": "^0.5.0",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.9",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "event",
+            "fs",
+            "pipe",
+            "process",
+            "std",
+            "time"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.5",
+          "target": "cfg(any(unix, target_os = \"fuchsia\", target_os = \"vxworks\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.37"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Wdk_Foundation",
+            "Wdk_Storage_FileSystem",
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO",
+            "Win32_System_LibraryLoader",
+            "Win32_System_Threading",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2801,
+          "content": "content/sha256/fa7ac320dbb9a346204de4cb36f555402ea641f9dd4ab9c0cf6adece806b5148",
+          "digest": "sha256:fa7ac320dbb9a346204de4cb36f555402ea641f9dd4ab9c0cf6adece806b5148",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6225,
+          "content": "content/sha256/0f91cec73082d9197c370ab0b2c9d265c767279e5db327d2a2d682c3f0503b42",
+          "digest": "sha256:0f91cec73082d9197c370ab0b2c9d265c767279e5db327d2a2d682c3f0503b42",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "mio",
+        "epoll",
+        "kqueue",
+        "iocp"
+      ],
       "manifest": "crates-io/polling/3.11.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -232,6 +367,17 @@
         "edition": "2021",
         "name": "polling",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5d0e4f59085d47d8241c88ead0f274e8a0cb551f3625263c05eb8dd897c34218",
+        "package": "polling",
+        "registry": "crates-io",
+        "version": "3.11.0"
+      },
+      "vcs": {
+        "commit": "f404d08dd2a61994ac5fe0ed663bc051bd94c053",
+        "path": "",
+        "system": "git"
       },
       "version": "3.11.0",
       "yanked": false

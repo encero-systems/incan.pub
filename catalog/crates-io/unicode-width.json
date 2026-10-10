@@ -203,6 +203,59 @@
           "unit_identity": "sha256:9d2bae51fe5cf7566dddeea24f561017f4807d34277a7e330ba835b935860734"
         }
       ],
+      "categories": [
+        "command-line-interface",
+        "internationalization",
+        "no-std::no-alloc",
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-std",
+          "name": "std",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2755,
+          "content": "content/sha256/dfa01289d67d1c12e44bb4d388501f2c58e386a3a34cac52b558957c7a25dae9",
+          "digest": "sha256:dfa01289d67d1c12e44bb4d388501f2c58e386a3a34cac52b558957c7a25dae9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -211,14 +264,37 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "cjk": [],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "cjk"
+        ],
+        "no_std": [],
+        "rustc-dep-of-std": [
+          "std",
+          "core"
+        ],
+        "std": [
+          "dep:std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "text",
+        "width",
+        "unicode"
+      ],
       "manifest": "crates-io/unicode-width/0.2.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -228,6 +304,17 @@
         "edition": "2021",
         "name": "unicode_width",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b4ac048d71ede7ee76d585517add45da530660ef4390e49b098733c6e897f254",
+        "package": "unicode-width",
+        "registry": "crates-io",
+        "version": "0.2.2"
+      },
+      "vcs": {
+        "commit": "9d98411769fe13c7c18cab0b3fbbab29ba8350ea",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.2",
       "yanked": false
@@ -251,11 +338,98 @@
       "advisories": 0,
       "archive": "sha256:7ec491ab06f8bc4c08d6f41f3019a0264cb82f089a8c6773acd091d22752870a",
       "assets": [],
+      "categories": [
+        "command-line-interface",
+        "internationalization",
+        "no-std::no-alloc",
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compiler_builtins",
+          "name": "compiler_builtins",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-std",
+          "name": "std",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2119,
+          "content": "content/sha256/57b83939f483d1acfce94d5eb369756e732a584dfe3b4c7054ea27751ad566db",
+          "digest": "sha256:57b83939f483d1acfce94d5eb369756e732a584dfe3b4c7054ea27751ad566db",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "cjk": [],
+        "compiler_builtins": [
+          "dep:compiler_builtins"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "cjk"
+        ],
+        "no_std": [],
+        "rustc-dep-of-std": [
+          "std",
+          "core",
+          "compiler_builtins"
+        ],
+        "std": [
+          "dep:std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "text",
+        "width",
+        "unicode"
+      ],
       "manifest": "crates-io/unicode-width/0.1.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -266,6 +440,17 @@
         "edition": "2021",
         "name": "unicode_width",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7dd6e30e90baa6f72411720665d41d89b9a3d039dc45b8faea1ddd07f617f6af",
+        "package": "unicode-width",
+        "registry": "crates-io",
+        "version": "0.1.14"
+      },
+      "vcs": {
+        "commit": "9eaafa5f91b737bb5958d46f9647aa11104c6f25",
+        "path": "",
+        "system": "git"
       },
       "version": "0.1.14",
       "yanked": false

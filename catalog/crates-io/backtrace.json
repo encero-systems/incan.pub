@@ -114,11 +114,176 @@
           "unit_identity": "sha256:28ecf516c3231d05d6474fae3861376bbb49d9326ec0c1b8a695b927b2894a7c"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/addr2line",
+          "name": "addr2line",
+          "optional": false,
+          "req": "^0.25.0",
+          "target": "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/cpp_demangle",
+          "name": "cpp_demangle",
+          "optional": true,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.156",
+          "target": "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/miniz_oxide",
+          "name": "miniz_oxide",
+          "optional": false,
+          "req": "^0.8",
+          "target": "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "archive",
+            "elf",
+            "macho",
+            "pe",
+            "read_core",
+            "unaligned",
+            "xcoff"
+          ],
+          "loaf": "crates-io/object",
+          "name": "object",
+          "optional": false,
+          "req": "^0.37.0",
+          "target": "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-demangle",
+          "name": "rustc-demangle",
+          "optional": false,
+          "req": "^0.1.24"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ruzstd",
+          "name": "ruzstd",
+          "optional": true,
+          "req": "^0.8.1",
+          "target": "cfg(not(all(windows, target_env = \"msvc\", not(target_vendor = \"uwp\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(any(windows, target_os = \"cygwin\"))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2417,
+          "content": "content/sha256/66627f6723d9c702276ae529aaf52fc2ed0fd13204ad510d0c9a2d63e6d7d68d",
+          "digest": "sha256:66627f6723d9c702276ae529aaf52fc2ed0fd13204ad510d0c9a2d63e6d7d68d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1567,
+          "content": "content/sha256/8371b53a9eb1eee16e3e092e85ad064644ff693c6a9d23d4be750a7e27995193",
+          "digest": "sha256:8371b53a9eb1eee16e3e092e85ad064644ff693c6a9d23d4be750a7e27995193",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "coresymbolication": [],
+        "cpp_demangle": [
+          "dep:cpp_demangle"
+        ],
+        "dbghelp": [],
+        "default": [
+          "std"
+        ],
+        "dl_iterate_phdr": [],
+        "dladdr": [],
+        "kernel32": [],
+        "libunwind": [],
+        "ruzstd": [
+          "dep:ruzstd"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serialize-serde": [
+          "serde"
+        ],
+        "std": [],
+        "unix-backtrace": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/backtrace/0.3.76/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +294,17 @@
         "edition": "2021",
         "name": "backtrace",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bb531853791a215d7c62a30daf0dde835f381ab5de4589cfe7c649d2cbe92bd6",
+        "package": "backtrace",
+        "registry": "crates-io",
+        "version": "0.3.76"
+      },
+      "vcs": {
+        "commit": "775f6a1ba62e7d35a1fac76e64c61d9d4687b5f2",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.76",
       "yanked": false

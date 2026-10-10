@@ -26,11 +26,213 @@
       "advisories": 0,
       "archive": "sha256:1bc3fc86ec75cde627e6977effac31a299fcab5220baa0e1d908315b59ae52e1",
       "assets": [],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.12"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/compact_str",
+          "name": "compact_str",
+          "optional": false,
+          "req": "^0.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/critical-section",
+          "name": "critical-section",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/document-features",
+          "name": "document-features",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "use_alloc"
+          ],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/kasuari",
+          "name": "kasuari",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lru",
+          "name": "lru",
+          "optional": false,
+          "req": "^0.18"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "libm"
+          ],
+          "loaf": "crates-io/palette",
+          "name": "palette",
+          "optional": true,
+          "req": "^0.7.6"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/strum",
+          "name": "strum",
+          "optional": false,
+          "req": "^0.28"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-segmentation",
+          "name": "unicode-segmentation",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unicode-truncate",
+          "name": "unicode-truncate",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-width",
+          "name": "unicode-width",
+          "optional": false,
+          "req": ">=0.2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2748,
+          "content": "content/sha256/b089dc0b5db70e83791f339cc4221259fc96dc5ecac0a1a6c6363fdcaaf49759",
+          "digest": "sha256:b089dc0b5db70e83791f339cc4221259fc96dc5ecac0a1a6c6363fdcaaf49759",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1132,
+          "content": "content/sha256/50eb43e8d742c9c61a9391e42b2184fce54dbd1893a1bb1c85b8c9ee217ab1f5",
+          "digest": "sha256:50eb43e8d742c9c61a9391e42b2184fce54dbd1893a1bb1c85b8c9ee217ab1f5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "anstyle": [
+          "dep:anstyle"
+        ],
+        "default": [],
+        "document-features": [
+          "dep:document-features"
+        ],
+        "layout-cache": [
+          "dep:critical-section"
+        ],
+        "palette": [
+          "dep:palette"
+        ],
+        "portable-atomic": [
+          "kasuari/portable-atomic"
+        ],
+        "scrolling-regions": [],
+        "serde": [
+          "bitflags/serde",
+          "compact_str/serde",
+          "dep:serde"
+        ],
+        "std": [
+          "bitflags/std",
+          "compact_str/std",
+          "itertools/use_std",
+          "kasuari/std",
+          "palette?/std",
+          "serde?/std",
+          "strum/std",
+          "thiserror/std",
+          "unicode-truncate/std"
+        ],
+        "underline-color": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "dashboard",
+        "terminal",
+        "tui"
+      ],
       "manifest": "crates-io/ratatui-core/0.1.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +243,17 @@
         "edition": "2024",
         "name": "ratatui_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cbb175c433c8e28a809d1f5773a2ae96e68c0ce40db865cbab1020bf33ae479c",
+        "package": "ratatui-core",
+        "registry": "crates-io",
+        "version": "0.1.2"
+      },
+      "vcs": {
+        "commit": "e665c36cb14752a61cd777fbd06dbef8474f2add",
+        "path": "ratatui-core",
+        "system": "git"
       },
       "version": "0.1.2",
       "yanked": false

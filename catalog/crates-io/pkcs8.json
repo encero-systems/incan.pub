@@ -194,11 +194,169 @@
           "unit_identity": "sha256:c3e89aab821adf53f6027f1263c3a0073530ec4739817882bc97ede890109ae0"
         }
       ],
+      "categories": [
+        "cryptography",
+        "data-structures",
+        "encoding",
+        "no-std",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ctutils",
+          "name": "ctutils",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": false,
+          "req": "^0.8.0-rc.12"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "sys_rng"
+          ],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "rand_core"
+          ],
+          "loaf": "crates-io/pkcs5",
+          "name": "pkcs5",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/spki",
+          "name": "spki",
+          "optional": false,
+          "req": "^0.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3106,
+          "content": "content/sha256/f9f9d417d43005bd0aedf10cc391fbd6db9f120e433bdc969c0a6fdb5afa2cde",
+          "digest": "sha256:f9f9d417d43005bd0aedf10cc391fbd6db9f120e433bdc969c0a6fdb5afa2cde",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/73b9dc2e79c7308998dd30296e073aefaefb944a68fb89aa412c23c0edcabcaa",
+          "digest": "sha256:73b9dc2e79c7308998dd30296e073aefaefb944a68fb89aa412c23c0edcabcaa",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7987,
+          "content": "content/sha256/7f6856eb7d6d9a2139092c1f511c5464e75a864834271dc788dd4a0e113a9888",
+          "digest": "sha256:7f6856eb7d6d9a2139092c1f511c5464e75a864834271dc788dd4a0e113a9888",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "3des": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/3des"
+        ],
+        "alloc": [
+          "der/alloc",
+          "der/zeroize",
+          "spki/alloc"
+        ],
+        "ctutils": [
+          "dep:ctutils"
+        ],
+        "des-insecure": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/des-insecure"
+        ],
+        "encryption": [
+          "alloc",
+          "dep:pkcs5",
+          "pkcs5/alloc",
+          "pkcs5/pbes2",
+          "dep:rand_core"
+        ],
+        "getrandom": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/getrandom",
+          "dep:getrandom"
+        ],
+        "pem": [
+          "alloc",
+          "der/pem",
+          "spki/pem"
+        ],
+        "pkcs5": [
+          "dep:pkcs5"
+        ],
+        "sha1-insecure": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/sha1-insecure"
+        ],
+        "std": [
+          "alloc",
+          "der/std",
+          "spki/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "key",
+        "pkcs",
+        "private"
+      ],
       "manifest": "crates-io/pkcs8/0.11.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +367,17 @@
         "edition": "2024",
         "name": "pkcs8",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:451913da69c775a56034ea8d9003d27ee8948e12443eae7c038ba100a4f21cb7",
+        "package": "pkcs8",
+        "registry": "crates-io",
+        "version": "0.11.0"
+      },
+      "vcs": {
+        "commit": "a582243775ec15a53ac1797b679e63344d0104d1",
+        "path": "pkcs8",
+        "system": "git"
       },
       "version": "0.11.0",
       "yanked": false
@@ -324,11 +493,158 @@
           "unit_identity": "sha256:a4cc23ead5c14e443b65d3d7a6e73caab373da554d71ce448bb0365608d5360f"
         }
       ],
+      "categories": [
+        "cryptography",
+        "data-structures",
+        "encoding",
+        "no-std",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": false,
+          "req": "^0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pkcs5",
+          "name": "pkcs5",
+          "optional": true,
+          "req": "^0.7"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/spki",
+          "name": "spki",
+          "optional": false,
+          "req": "^0.7.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": true,
+          "req": "^2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3014,
+          "content": "content/sha256/49fdb13fec069473cf11a797d4fe3dc2c3cb2c496652937ae7dab4a7b87cddfc",
+          "digest": "sha256:49fdb13fec069473cf11a797d4fe3dc2c3cb2c496652937ae7dab4a7b87cddfc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/ad64fcb9589f162720f3cc5010ad76ca6ad3764e11861f9192c489df176bb71d",
+          "digest": "sha256:ad64fcb9589f162720f3cc5010ad76ca6ad3764e11861f9192c489df176bb71d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6249,
+          "content": "content/sha256/a01855ad0a36a81e3e82f56d3d68a844489c3b17a5cb902e235924be158aee58",
+          "digest": "sha256:a01855ad0a36a81e3e82f56d3d68a844489c3b17a5cb902e235924be158aee58",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "3des": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/3des"
+        ],
+        "alloc": [
+          "der/alloc",
+          "der/zeroize",
+          "spki/alloc"
+        ],
+        "des-insecure": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/des-insecure"
+        ],
+        "encryption": [
+          "alloc",
+          "dep:pkcs5",
+          "pkcs5/alloc",
+          "pkcs5/pbes2",
+          "rand_core"
+        ],
+        "getrandom": [
+          "dep:rand_core",
+          "rand_core/getrandom"
+        ],
+        "pem": [
+          "alloc",
+          "der/pem",
+          "spki/pem"
+        ],
+        "pkcs5": [
+          "dep:pkcs5"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ],
+        "sha1-insecure": [
+          "encryption",
+          "dep:pkcs5",
+          "pkcs5/sha1-insecure"
+        ],
+        "std": [
+          "alloc",
+          "der/std",
+          "spki/std"
+        ],
+        "subtle": [
+          "dep:subtle"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "key",
+        "pkcs",
+        "private"
+      ],
       "manifest": "crates-io/pkcs8/0.10.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -339,6 +655,17 @@
         "edition": "2021",
         "name": "pkcs8",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f950b2377845cebe5cf8b5165cb3cc1a5e0fa5cfa3e1f7f55707d8fd82e0a7b7",
+        "package": "pkcs8",
+        "registry": "crates-io",
+        "version": "0.10.2"
+      },
+      "vcs": {
+        "commit": "7736dd21389b8820dfeb396e8c4c932de93d3ddf",
+        "path": "pkcs8",
+        "system": "git"
       },
       "version": "0.10.2",
       "yanked": false

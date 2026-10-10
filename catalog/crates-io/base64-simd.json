@@ -216,11 +216,77 @@
           "unit_identity": "sha256:a58d52e21388bfa9916fa05900485b3ad9ebb42eccbeb40cb172b3fd5a2a699a"
         }
       ],
+      "categories": [
+        "no-std",
+        "parser-implementations",
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/outref",
+          "name": "outref",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/vsimd",
+          "name": "vsimd",
+          "optional": false,
+          "req": "^0.8.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 463,
+          "content": "content/sha256/91d9a53a1902838f528aa622db9852c57ae6c0663cb7e5a4524b0334366ab0b5",
+          "digest": "sha256:91d9a53a1902838f528aa622db9852c57ae6c0663cb7e5a4524b0334366ab0b5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 330,
+          "content": "content/sha256/8fc8293bfce1f62a16f932debaca8ee574ac59e73bb7e62bb3a19572657fdb09",
+          "digest": "sha256:8fc8293bfce1f62a16f932debaca8ee574ac59e73bb7e62bb3a19572657fdb09",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "vsimd/alloc"
+        ],
+        "default": [
+          "std",
+          "detect"
+        ],
+        "detect": [
+          "vsimd/detect"
+        ],
+        "std": [
+          "alloc",
+          "vsimd/std"
+        ],
+        "unstable": [
+          "vsimd/unstable"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "base64",
+        "simd"
+      ],
       "manifest": "crates-io/base64-simd/0.8.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -231,6 +297,17 @@
         "edition": "2021",
         "name": "base64_simd",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:339abbe78e73178762e23bea9dfd08e697eb3f3301cd4be981c0f78ba5859195",
+        "package": "base64-simd",
+        "registry": "crates-io",
+        "version": "0.8.0"
+      },
+      "vcs": {
+        "commit": "d74c030d9dc4f3cae02146d1f497ff62726ef09a",
+        "path": "crates/base64-simd",
+        "system": "git"
       },
       "version": "0.8.0",
       "yanked": false

@@ -25,11 +25,94 @@
       "advisories": 0,
       "archive": "sha256:7e714449d6e2eb9e5261ce58a1a554085fd7f73c2073be14c7b5321e0eb3a94b",
       "assets": [],
+      "categories": [
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-trait",
+          "name": "async-trait",
+          "optional": false,
+          "req": "^0.1.71"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": false,
+          "req": "^1.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures",
+          "name": "futures",
+          "optional": false,
+          "req": "^0.3.27"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "async",
+            "component-model",
+            "runtime"
+          ],
+          "loaf": "crates-io/wasmtime",
+          "name": "wasmtime",
+          "optional": false,
+          "req": "^36.0.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 472,
+          "content": "content/sha256/685d1c4bda5e8a7d03c9d44dbe4d64de0fc70f4190286b96f9f32a2e6368c9fa",
+          "digest": "sha256:685d1c4bda5e8a7d03c9d44dbe4d64de0fc70f4190286b96f9f32a2e6368c9fa",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 376,
+          "content": "content/sha256/ef71de8f48d41d985024195c08270675c8ac6d06e2f786e7062835ae441ab4ad",
+          "digest": "sha256:ef71de8f48d41d985024195c08270675c8ac6d06e2f786e7062835ae441ab4ad",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [
+          "bytes/std",
+          "anyhow/std",
+          "wasmtime/std"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "registry"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmtime-wasi-io/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +123,17 @@
         "edition": "2024",
         "name": "wasmtime_wasi_io",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8680fbbdaee331ae1fbbe290f067419c487dc7769b755b165e1a94c4fe70b690",
+        "package": "wasmtime-wasi-io",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/wasi-io",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

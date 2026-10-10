@@ -178,11 +178,100 @@
           "unit_identity": "sha256:cd942dbcceccdb9e0b78ffccf8f5d00fc0b6b8f3e3e6f82dc1be71e933aeed14"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cipher",
+          "name": "cipher",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cpubits",
+          "name": "cpubits",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cpufeatures",
+          "name": "cpufeatures",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(any(target_arch = \"aarch64\", target_arch = \"x86_64\", target_arch = \"x86\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.9"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3390,
+          "content": "content/sha256/3148df24a219a256d5406e1cc0501ed3d99775ef390fd8315a977221dd945472",
+          "digest": "sha256:3148df24a219a256d5406e1cc0501ed3d99775ef390fd8315a977221dd945472",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1115,
+          "content": "content/sha256/25f77efa393854f7c15eaf6a2589a2071db2d7337642742763adb12bdecf0445",
+          "digest": "sha256:25f77efa393854f7c15eaf6a2589a2071db2d7337642742763adb12bdecf0445",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6674,
+          "content": "content/sha256/1f82563882faf14d271f2c5f11654cbaf076b923a1f25f139d12e1b22dcb5e7d",
+          "digest": "sha256:1f82563882faf14d271f2c5f11654cbaf076b923a1f25f139d12e1b22dcb5e7d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "hazmat": [],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "aes",
+        "rijndael",
+        "block-cipher"
+      ],
       "manifest": "crates-io/aes/0.9.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +282,17 @@
         "edition": "2024",
         "name": "aes",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:35f0f96ce78e38c3dc6d8948aa8163d06385be74000f3c7a95bf1eef35d3ea32",
+        "package": "aes",
+        "registry": "crates-io",
+        "version": "0.9.3"
+      },
+      "vcs": {
+        "commit": "c1534361e7549e29a16c3505f45a04c92d26b62a",
+        "path": "aes",
+        "system": "git"
       },
       "version": "0.9.3",
       "yanked": false

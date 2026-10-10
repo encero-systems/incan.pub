@@ -306,11 +306,95 @@
           "unit_identity": "sha256:8a16e19e269fbfc3eef3bb2d71ee7fbcfd519b7c6637c3e47981c1181fd233dd"
         }
       ],
+      "categories": [
+        "algorithms"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "thread_rng"
+          ],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": ">=0.9.0, <=0.11.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5830,
+          "content": "content/sha256/3ffe5651d979af5e1642a693597dd0a4a64e20319030ccffb52f1dcffc840a8c",
+          "digest": "sha256:3ffe5651d979af5e1642a693597dd0a4a64e20319030ccffb52f1dcffc840a8c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/f59bcb1c02654665f78a5f290bae76b6358137675f6459f51e6d474a4623d8ea",
+          "digest": "sha256:f59bcb1c02654665f78a5f290bae76b6358137675f6459f51e6d474a4623d8ea",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 4730,
+          "content": "content/sha256/f01d8c78e1b31de84abe740525ce78334bc5e273d5332c882e3307588d8ad70c",
+          "digest": "sha256:f01d8c78e1b31de84abe740525ce78334bc5e273d5332c882e3307588d8ad70c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "random",
+          "xxhash32",
+          "xxhash64",
+          "xxhash3_64",
+          "xxhash3_128",
+          "std"
+        ],
+        "random": [
+          "dep:rand"
+        ],
+        "serialize": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "xxhash32": [],
+        "xxhash3_128": [],
+        "xxhash3_64": [],
+        "xxhash64": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "hasher",
+        "xxhash",
+        "xxh3"
+      ],
       "manifest": "crates-io/twox-hash/2.1.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -320,6 +404,17 @@
         "edition": "2021",
         "name": "twox_hash",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:86a801b3cea342a06d468c8710662aa29e5e05e4f5c0d62f00bbb7f2ad7941c2",
+        "package": "twox-hash",
+        "registry": "crates-io",
+        "version": "2.1.5"
+      },
+      "vcs": {
+        "commit": "0222275b9e2faaa0a09eead8057753609ff891d1",
+        "path": "",
+        "system": "git"
       },
       "version": "2.1.5",
       "yanked": false
@@ -342,6 +437,60 @@
       "advisories": 0,
       "archive": "sha256:9070cc072eae1dac2d408664229fc39c2e5d6841b166cb2dc3bd2309c421a055",
       "assets": [],
+      "categories": [
+        "algorithms"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "thread_rng"
+          ],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": ">=0.9.0, <=0.11.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5830,
+          "content": "content/sha256/3ffe5651d979af5e1642a693597dd0a4a64e20319030ccffb52f1dcffc840a8c",
+          "digest": "sha256:3ffe5651d979af5e1642a693597dd0a4a64e20319030ccffb52f1dcffc840a8c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/f59bcb1c02654665f78a5f290bae76b6358137675f6459f51e6d474a4623d8ea",
+          "digest": "sha256:f59bcb1c02654665f78a5f290bae76b6358137675f6459f51e6d474a4623d8ea",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 4397,
+          "content": "content/sha256/3258ff36134b3a36f7f0ca0b484be011d379149c28458b84bf6d0d95bf20d346",
+          "digest": "sha256:3258ff36134b3a36f7f0ca0b484be011d379149c28458b84bf6d0d95bf20d346",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -350,14 +499,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "default": [
+          "random",
+          "xxhash32",
+          "xxhash64",
+          "xxhash3_64",
+          "xxhash3_128",
+          "std"
+        ],
+        "random": [
+          "dep:rand"
+        ],
+        "serialize": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "xxhash32": [],
+        "xxhash3_128": [],
+        "xxhash3_64": [],
+        "xxhash64": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "hasher",
+        "xxhash",
+        "xxh3"
+      ],
       "manifest": "crates-io/twox-hash/2.1.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -367,6 +547,17 @@
         "edition": "2021",
         "name": "twox_hash",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5283634e518fe9e82c7b20520bb4bc209009fd16c82077c802f8111ecbb0117a",
+        "package": "twox-hash",
+        "registry": "crates-io",
+        "version": "2.1.4"
+      },
+      "vcs": {
+        "commit": "6f866bffe73900c63df2650be4eed41e3ed9b500",
+        "path": "",
+        "system": "git"
       },
       "version": "2.1.4",
       "yanked": false

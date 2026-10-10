@@ -108,11 +108,120 @@
           "unit_identity": "sha256:14d9c806533e47fc25daf8dda191b940778b6079bf5d8bc366299013390d03fe"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": false,
+          "req": "^4.6.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/clap_lex",
+          "name": "clap_lex",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/completest",
+          "name": "completest",
+          "optional": true,
+          "req": "^1.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/completest-pty",
+          "name": "completest-pty",
+          "optional": true,
+          "req": "^1.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/is_executable",
+          "name": "is_executable",
+          "optional": true,
+          "req": "^1.0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/shlex",
+          "name": "shlex",
+          "optional": true,
+          "req": "^2.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1225,
+          "content": "content/sha256/aefbf8ac143e8d868733d29fb289e35b6923a89265fd3f008118fac779a1f268",
+          "digest": "sha256:aefbf8ac143e8d868733d29fb289e35b6923a89265fd3f008118fac779a1f268",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11349,
+          "content": "content/sha256/249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe",
+          "digest": "sha256:249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "debug": [
+          "clap/debug"
+        ],
+        "default": [],
+        "unstable-doc": [
+          "unstable-dynamic"
+        ],
+        "unstable-dynamic": [
+          "dep:clap_lex",
+          "dep:shlex",
+          "dep:is_executable",
+          "clap/unstable-ext"
+        ],
+        "unstable-shell-tests": [
+          "dep:completest",
+          "dep:completest-pty"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "clap",
+        "cli",
+        "completion",
+        "bash"
+      ],
       "manifest": "crates-io/clap_complete/4.6.11/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -123,6 +232,17 @@
         "edition": "2024",
         "name": "clap_complete",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:037e2a1a92236d0aff7e845093f64661d6df4c02c9fcc61a60e9e1d736fa392f",
+        "package": "clap_complete",
+        "registry": "crates-io",
+        "version": "4.6.11"
+      },
+      "vcs": {
+        "commit": "2cb76fdf385396f86f37af49784504da560b6e47",
+        "path": "clap_complete",
+        "system": "git"
       },
       "version": "4.6.11",
       "yanked": false

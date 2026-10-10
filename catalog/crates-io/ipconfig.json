@@ -25,11 +25,108 @@
       "advisories": 0,
       "archive": "sha256:aa2aca5c9b44cce5e977d5e8240198d7a3ef4d8fbe3057cc046b36a3f1b33ea5",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/socket2",
+          "name": "socket2",
+          "optional": false,
+          "req": "^0.6.0",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/widestring",
+          "name": "widestring",
+          "optional": false,
+          "req": "^1.0.2",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-registry",
+          "name": "windows-registry",
+          "optional": true,
+          "req": "^0.6.1",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-result",
+          "name": "windows-result",
+          "optional": true,
+          "req": "^0.4.1",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_System_Registry"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1146,
+          "content": "content/sha256/766d99824e56cdc1a31cf8f0b85a79abd7d4352c886af809ea6d53afc802d11a",
+          "digest": "sha256:766d99824e56cdc1a31cf8f0b85a79abd7d4352c886af809ea6d53afc802d11a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1056,
+          "content": "content/sha256/ca471051e1527e5f40e9b96aa697f8efc00f0bb8c8df07196cb5e5d134c68e98",
+          "digest": "sha256:ca471051e1527e5f40e9b96aa697f8efc00f0bb8c8df07196cb5e5d134c68e98",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "computer": [
+          "dep:windows-registry",
+          "dep:windows-result"
+        ],
+        "default": [
+          "computer"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "ipconfig",
+        "network",
+        "adapter",
+        "interface",
+        "windows"
+      ],
       "manifest": "crates-io/ipconfig/0.3.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +137,17 @@
         "edition": "2018",
         "name": "ipconfig",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4d40460c0ce33d6ce4b0630ad68ff63d6661961c48b6dba35e5a4d81cfb48222",
+        "package": "ipconfig",
+        "registry": "crates-io",
+        "version": "0.3.4"
+      },
+      "vcs": {
+        "commit": "b795456ed0c042e2ccd9eb8aa866ec78970e66dc",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.4",
       "yanked": false

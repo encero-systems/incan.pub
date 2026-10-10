@@ -27,19 +27,86 @@
       "advisories": 0,
       "archive": "sha256:1d93bb2ee156036b00f5cc73c3b511a697e0a59245e867ef1f0ad56dd925c935",
       "assets": [],
+      "categories": [
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "full"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.25"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wiggle-generate",
+          "name": "wiggle-generate",
+          "optional": false,
+          "req": "=36.0.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 410,
+          "content": "content/sha256/c95dd8d7cf1d4991d15d7978f4955a768eefa91250d9de8615a4935f02b21211",
+          "digest": "sha256:c95dd8d7cf1d4991d15d7978f4955a768eefa91250d9de8615a4935f02b21211",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "wiggle_metadata": []
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wiggle-macro/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -50,6 +117,17 @@
         "edition": "2024",
         "name": "wiggle_macro",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:859d73197d6c88c07a081544c4e8c27850133b7358a5b6c8a77127e40f41957f",
+        "package": "wiggle-macro",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/wiggle/macro",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

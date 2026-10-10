@@ -278,11 +278,110 @@
           "unit_identity": "sha256:7d7a416bc3f77759b15792841b934a7fb9948eacfb4463dba5c42766e1036819"
         }
       ],
+      "categories": [
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.183",
+          "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasi",
+          "name": "wasi",
+          "optional": false,
+          "req": "^0.11.0",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Wdk_Foundation",
+            "Wdk_Storage_FileSystem",
+            "Wdk_System_IO",
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7077,
+          "content": "content/sha256/3b1ddb7c071aa87f5ce7633ea772fae217249dc8dd0a219d1ed475a801480f28",
+          "digest": "sha256:3b1ddb7c071aa87f5ce7633ea772fae217249dc8dd0a219d1ed475a801480f28",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/07919255c7e04793d8ea760d6c2ce32d19f9ff02bdbdde3ce90b1e1880929a9b",
+          "digest": "sha256:07919255c7e04793d8ea760d6c2ce32d19f9ff02bdbdde3ce90b1e1880929a9b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 30378,
+          "content": "content/sha256/6994067daa8b24eb98098ab03474fafa77fdbaefc43072ae6ca4624d3f9d3c41",
+          "digest": "sha256:6994067daa8b24eb98098ab03474fafa77fdbaefc43072ae6ca4624d3f9d3c41",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "log"
+        ],
+        "log": [
+          "dep:log"
+        ],
+        "net": [],
+        "os-ext": [
+          "os-poll",
+          "windows-sys/Win32_System_Pipes",
+          "windows-sys/Win32_Security"
+        ],
+        "os-poll": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "async",
+        "non-blocking"
+      ],
       "manifest": "crates-io/mio/1.2.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -292,6 +391,17 @@
         "edition": "2021",
         "name": "mio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1788edb87fdc09c7e26304471e2f5be8cdefb1b6930d6e3985fc02ff53bf86ee",
+        "package": "mio",
+        "registry": "crates-io",
+        "version": "1.2.4"
+      },
+      "vcs": {
+        "commit": "79d1417c94e3a45c8bdd796e5422e22e8c488086",
+        "path": "",
+        "system": "git"
       },
       "version": "1.2.4",
       "yanked": false
@@ -316,6 +426,85 @@
       "advisories": 0,
       "archive": "sha256:44f9b05ce879bdabea372a62d4275f885d7faea0887e4cab7e97423b63195525",
       "assets": [],
+      "categories": [
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.183",
+          "target": "cfg(any(unix, target_os = \"hermit\", target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasi",
+          "name": "wasi",
+          "optional": false,
+          "req": "^0.11.0",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Wdk_Foundation",
+            "Wdk_Storage_FileSystem",
+            "Wdk_System_IO",
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7157,
+          "content": "content/sha256/60d9b004899a50b589dd459815fccb045270e49731f45925ad09adcc87076352",
+          "digest": "sha256:60d9b004899a50b589dd459815fccb045270e49731f45925ad09adcc87076352",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/07919255c7e04793d8ea760d6c2ce32d19f9ff02bdbdde3ce90b1e1880929a9b",
+          "digest": "sha256:07919255c7e04793d8ea760d6c2ce32d19f9ff02bdbdde3ce90b1e1880929a9b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 29434,
+          "content": "content/sha256/72bfd2ef71f99d40acb831928512f46114d7fcb7adc32a75b5182af7e7029792",
+          "digest": "sha256:72bfd2ef71f99d40acb831928512f46114d7fcb7adc32a75b5182af7e7029792",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -325,6 +514,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -336,14 +526,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "log"
+        ],
+        "log": [
+          "dep:log"
+        ],
+        "net": [],
+        "os-ext": [
+          "os-poll",
+          "windows-sys/Win32_System_Pipes",
+          "windows-sys/Win32_Security"
+        ],
+        "os-poll": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "async",
+        "non-blocking"
+      ],
       "manifest": "crates-io/mio/1.2.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -353,6 +564,17 @@
         "edition": "2021",
         "name": "mio",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:02bd0af71c67b473010cbbc60715ee815645a4dc942899111f494b4b737d6fda",
+        "package": "mio",
+        "registry": "crates-io",
+        "version": "1.2.1"
+      },
+      "vcs": {
+        "commit": "80c693cf7a1977885d6a7d416f7f5b77afe53a27",
+        "path": "",
+        "system": "git"
       },
       "version": "1.2.1",
       "yanked": false

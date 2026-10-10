@@ -504,11 +504,107 @@
           "unit_identity": "sha256:3526bc2ff745312b3ababf5c813933c4043dc95b926ec82b68eb958f8eda3cef"
         }
       ],
+      "categories": [
+        "external-ffi-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2188,
+          "content": "content/sha256/3d4ae2ec9429adfd329b4506f7ca6faa84dca30d1c3b416f8f4e6f57bdb3aa96",
+          "digest": "sha256:3d4ae2ec9429adfd329b4506f7ca6faa84dca30d1c3b416f8f4e6f57bdb3aa96",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "auxvec": [],
+        "bootparam": [],
+        "btrfs": [],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std",
+          "general",
+          "errno"
+        ],
+        "elf": [],
+        "elf_uapi": [],
+        "errno": [],
+        "general": [],
+        "if_arp": [],
+        "if_ether": [],
+        "if_packet": [],
+        "if_tun": [],
+        "image": [],
+        "io_uring": [],
+        "ioctl": [],
+        "landlock": [],
+        "loop_device": [],
+        "mempolicy": [],
+        "net": [],
+        "netlink": [],
+        "no_std": [],
+        "prctl": [],
+        "ptrace": [],
+        "rustc-dep-of-std": [
+          "core",
+          "no_std"
+        ],
+        "std": [],
+        "system": [],
+        "vm_sockets": [],
+        "xdp": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "linux",
+        "uapi",
+        "ffi"
+      ],
       "manifest": "crates-io/linux-raw-sys/0.12.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -518,6 +614,17 @@
         "edition": "2021",
         "name": "linux_raw_sys",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53",
+        "package": "linux-raw-sys",
+        "registry": "crates-io",
+        "version": "0.12.1"
+      },
+      "vcs": {
+        "commit": "0e2918cf3e366d9c923d4ca05f169b49d826db56",
+        "path": "",
+        "system": "git"
       },
       "version": "0.12.1",
       "yanked": false
@@ -540,11 +647,115 @@
       "advisories": 0,
       "archive": "sha256:2651d8ab089f396d152d7190e6176eab56c0284a1342649cce5ed951045df728",
       "assets": [],
+      "categories": [
+        "external-ffi-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compiler_builtins",
+          "name": "compiler_builtins",
+          "optional": true,
+          "req": "^0.1.49"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2188,
+          "content": "content/sha256/3d4ae2ec9429adfd329b4506f7ca6faa84dca30d1c3b416f8f4e6f57bdb3aa96",
+          "digest": "sha256:3d4ae2ec9429adfd329b4506f7ca6faa84dca30d1c3b416f8f4e6f57bdb3aa96",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bootparam": [],
+        "btrfs": [],
+        "compiler_builtins": [
+          "dep:compiler_builtins"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std",
+          "general",
+          "errno"
+        ],
+        "elf": [],
+        "elf_uapi": [],
+        "errno": [],
+        "general": [],
+        "if_arp": [],
+        "if_ether": [],
+        "if_packet": [],
+        "io_uring": [],
+        "ioctl": [],
+        "landlock": [],
+        "loop_device": [],
+        "mempolicy": [],
+        "net": [],
+        "netlink": [],
+        "no_std": [],
+        "prctl": [],
+        "ptrace": [],
+        "rustc-dep-of-std": [
+          "core",
+          "compiler_builtins",
+          "no_std"
+        ],
+        "std": [],
+        "system": [],
+        "xdp": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "linux",
+        "uapi",
+        "ffi"
+      ],
       "manifest": "crates-io/linux-raw-sys/0.4.15/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -555,6 +766,17 @@
         "edition": "2021",
         "name": "linux_raw_sys",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d26c52dbd32dccf2d10cac7725f8eae5296885fb5703b261f7d0a0739ec807ab",
+        "package": "linux-raw-sys",
+        "registry": "crates-io",
+        "version": "0.4.15"
+      },
+      "vcs": {
+        "commit": "77e4a4223b14957ad8fa2958ea411cd4b54314e7",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.15",
       "yanked": false

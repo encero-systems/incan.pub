@@ -282,11 +282,78 @@
           "unit_identity": "sha256:ac44865c20ee8470b809d068c62bf5433a1eea1d27fd60dd5278e4a571cc7617"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.172",
+          "target": "cfg(any(unix, target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_System_IO",
+            "Win32_System_Threading",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.60, <0.62",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2635,
+          "content": "content/sha256/444031b783070ac056bd95abc4b2f4a72fd98ab11270268d8ba4c4ca53dade68",
+          "digest": "sha256:444031b783070ac056bd95abc4b2f4a72fd98ab11270268d8ba4c4ca53dade68",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "socket",
+        "network"
+      ],
       "manifest": "crates-io/socket2/0.6.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -296,6 +363,17 @@
         "edition": "2021",
         "name": "socket2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c3d1e2c7f27f8d4cb10542a02c49005dbd6e93095799d6f3be745fae9f8fedd4",
+        "package": "socket2",
+        "registry": "crates-io",
+        "version": "0.6.5"
+      },
+      "vcs": {
+        "commit": "239dd83a4ced08e514d2c38942aab99791119f0d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.6.5",
       "yanked": false
@@ -319,6 +397,65 @@
       "advisories": 0,
       "archive": "sha256:f5d23394b1fd0dd57673e5288a120aac45addacbff49bae034957a4d28b7480c",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.172",
+          "target": "cfg(any(unix, target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_System_IO",
+            "Win32_System_Threading",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.60, <0.62",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2635,
+          "content": "content/sha256/444031b783070ac056bd95abc4b2f4a72fd98ab11270268d8ba4c4ca53dade68",
+          "digest": "sha256:444031b783070ac056bd95abc4b2f4a72fd98ab11270268d8ba4c4ca53dade68",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -326,6 +463,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -335,14 +473,23 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "all": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "socket",
+        "network"
+      ],
       "manifest": "crates-io/socket2/0.6.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -352,6 +499,17 @@
         "edition": "2021",
         "name": "socket2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3a766e1110788c36f4fa1c2b71b387a7815aa65f88ce0229841826633d93723e",
+        "package": "socket2",
+        "registry": "crates-io",
+        "version": "0.6.3"
+      },
+      "vcs": {
+        "commit": "642df44ae1eded922247300a83f8d60e159d9c9d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.6.3",
       "yanked": false
@@ -375,11 +533,78 @@
       "advisories": 0,
       "archive": "sha256:48821bb7bf7fab0b4a415dd72fb94e1608b720a5b85718a21e1cb36881d588ed",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.171",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_System_IO",
+            "Win32_System_Threading",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.52",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2626,
+          "content": "content/sha256/5b9d3a55525334c4abdb992a49f8dd4f9853f3c061e905334c56ab1dba1bb3ff",
+          "digest": "sha256:5b9d3a55525334c4abdb992a49f8dd4f9853f3c061e905334c56ab1dba1bb3ff",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "socket",
+        "network"
+      ],
       "manifest": "crates-io/socket2/0.5.10/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -390,6 +615,17 @@
         "edition": "2021",
         "name": "socket2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e22376abed350d73dd1cd119b57ffccad95b4e585a7cda43e286245ce23c0678",
+        "package": "socket2",
+        "registry": "crates-io",
+        "version": "0.5.10"
+      },
+      "vcs": {
+        "commit": "97fb0ab8001d34318eeb3ed3830bc656b06eb8df",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.10",
       "yanked": false

@@ -160,11 +160,99 @@
           "unit_identity": "sha256:2ebd9ae827441efe67e01b235e8323f2d2b734769c2d24cdac91ab037b524c2f"
         }
       ],
+      "categories": [
+        "algorithms",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/ppv-lite86",
+          "name": "ppv-lite86",
+          "optional": false,
+          "req": "^0.2.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1911,
+          "content": "content/sha256/c653903b67835861aa28a80821aab124950bb83badb7796486d5180485e01865",
+          "digest": "sha256:c653903b67835861aa28a80821aab124950bb83badb7796486d5180485e01865",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9724,
+          "content": "content/sha256/35242e7a83f69875e6edeff02291e688c97caafe2f8902e4e19b49d3e78b4cab",
+          "digest": "sha256:35242e7a83f69875e6edeff02291e688c97caafe2f8902e4e19b49d3e78b4cab",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1117,
+          "content": "content/sha256/209fbbe0ad52d9235e37badf9cadfe4dbdc87203179c0899e738b39ade42177b",
+          "digest": "sha256:209fbbe0ad52d9235e37badf9cadfe4dbdc87203179c0899e738b39ade42177b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4267,
+          "content": "content/sha256/cf8b239a1b057359c47ef45f442844b820cc89abc4f0c294fb904fec85327625",
+          "digest": "sha256:cf8b239a1b057359c47ef45f442844b820cc89abc4f0c294fb904fec85327625",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "ppv-lite86/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "random",
+        "rng",
+        "chacha"
+      ],
       "manifest": "crates-io/rand_chacha/0.10.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -174,6 +262,17 @@
         "edition": "2024",
         "name": "rand_chacha",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3e6af7f3e25ded52c41df4e0b1af2d047e45896c2f3281792ed68a1c243daedb",
+        "package": "rand_chacha",
+        "registry": "crates-io",
+        "version": "0.10.0"
+      },
+      "vcs": {
+        "commit": "1172d82adc728aaf0c56b8e6b703876b51c041a3",
+        "path": "rand_chacha",
+        "system": "git"
       },
       "version": "0.10.0",
       "yanked": false
@@ -443,6 +542,78 @@
           "unit_identity": "sha256:d67253af8253e449db407f92e00fd81bc02d73f1952a1463d59a6bb96adacfc0"
         }
       ],
+      "categories": [
+        "algorithms",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/ppv-lite86",
+          "name": "ppv-lite86",
+          "optional": false,
+          "req": "^0.2.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2045,
+          "content": "content/sha256/13c20fa16d5cd5abf47d10cbec09ef3e488f4b2cce4c63711b8e4c021d2d97c4",
+          "digest": "sha256:13c20fa16d5cd5abf47d10cbec09ef3e488f4b2cce4c63711b8e4c021d2d97c4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9724,
+          "content": "content/sha256/35242e7a83f69875e6edeff02291e688c97caafe2f8902e4e19b49d3e78b4cab",
+          "digest": "sha256:35242e7a83f69875e6edeff02291e688c97caafe2f8902e4e19b49d3e78b4cab",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1117,
+          "content": "content/sha256/209fbbe0ad52d9235e37badf9cadfe4dbdc87203179c0899e738b39ade42177b",
+          "digest": "sha256:209fbbe0ad52d9235e37badf9cadfe4dbdc87203179c0899e738b39ade42177b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1750,
+          "content": "content/sha256/102f114ebb898692dee1abe1e9debdf5ced6e7def8774d739043bb5afd8709b9",
+          "digest": "sha256:102f114ebb898692dee1abe1e9debdf5ced6e7def8774d739043bb5afd8709b9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -450,14 +621,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "os_rng": [
+          "rand_core/os_rng"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "ppv-lite86/std",
+          "rand_core/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "random",
+        "rng",
+        "chacha"
+      ],
       "manifest": "crates-io/rand_chacha/0.9.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -467,6 +659,17 @@
         "edition": "2021",
         "name": "rand_chacha",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d3022b5f1df60f26e1ffddd6c66e8aa15de382ae63b3a0c1bfc0e4d3e3f325cb",
+        "package": "rand_chacha",
+        "registry": "crates-io",
+        "version": "0.9.0"
+      },
+      "vcs": {
+        "commit": "96f8df65ee6b4368d91a006f9c5b4a8050abae49",
+        "path": "rand_chacha",
+        "system": "git"
       },
       "version": "0.9.0",
       "yanked": false
@@ -644,6 +847,78 @@
           "unit_identity": "sha256:a4760b1dfac36728761fb8efaec09f5881938497c67b3a2f7d807717bf9953ff"
         }
       ],
+      "categories": [
+        "algorithms",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/ppv-lite86",
+          "name": "ppv-lite86",
+          "optional": false,
+          "req": "^0.2.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2093,
+          "content": "content/sha256/f4221f35b7086649fa77807e826af020b57eb65b19cb693482d4a7e1e4d80537",
+          "digest": "sha256:f4221f35b7086649fa77807e826af020b57eb65b19cb693482d4a7e1e4d80537",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "digest": "sha256:aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1117,
+          "content": "content/sha256/209fbbe0ad52d9235e37badf9cadfe4dbdc87203179c0899e738b39ade42177b",
+          "digest": "sha256:209fbbe0ad52d9235e37badf9cadfe4dbdc87203179c0899e738b39ade42177b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1364,
+          "content": "content/sha256/deb20cd6e8be14e767b7fdea0e503ddd8226afd1253a5221aacc28a23d45db20",
+          "digest": "sha256:deb20cd6e8be14e767b7fdea0e503ddd8226afd1253a5221aacc28a23d45db20",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -651,6 +926,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -660,14 +936,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde1": [
+          "serde"
+        ],
+        "simd": [],
+        "std": [
+          "ppv-lite86/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "random",
+        "rng",
+        "chacha"
+      ],
       "manifest": "crates-io/rand_chacha/0.3.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -677,6 +974,17 @@
         "edition": "2018",
         "name": "rand_chacha",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88",
+        "package": "rand_chacha",
+        "registry": "crates-io",
+        "version": "0.3.1"
+      },
+      "vcs": {
+        "commit": "98a0339f99ecfe0467b2829c329bd8b7525a1c21",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.1",
       "yanked": false

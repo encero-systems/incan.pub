@@ -482,19 +482,145 @@
           "unit_identity": "sha256:f65d49e879ed67ab3a5881457f5abf02a01d7238eac215433b272204022c2e84"
         }
       ],
+      "categories": [
+        "internationalization",
+        "localization",
+        "no-std",
+        "embedded"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "zerovec"
+          ],
+          "loaf": "crates-io/potential_utf",
+          "name": "potential_utf",
+          "optional": false,
+          "req": "^0.1.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/utf8_iter",
+          "name": "utf8_iter",
+          "optional": false,
+          "req": "^1.0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/yoke",
+          "name": "yoke",
+          "optional": false,
+          "req": "^0.8.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zerofrom",
+          "name": "zerofrom",
+          "optional": false,
+          "req": "^0.1.6"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive",
+            "yoke"
+          ],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": false,
+          "req": "^0.11.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1598,
+          "content": "content/sha256/b1a0b37b61d42026996dda3b7d524d42888181f3e7eaf940c9b2e5f561c449e3",
+          "digest": "sha256:b1a0b37b61d42026996dda3b7d524d42888181f3e7eaf940c9b2e5f561c449e3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "serde?/alloc",
+          "zerovec/alloc"
+        ],
+        "databake": [
+          "dep:databake",
+          "zerovec/databake"
+        ],
+        "serde": [
+          "dep:serde",
+          "zerovec/serde",
+          "potential_utf/serde",
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "unicode",
+        "data-structures"
+      ],
       "manifest": "crates-io/icu_collections/2.3.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -504,6 +630,17 @@
         "edition": "2024",
         "name": "icu_collections",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:fa68d21081c4a05d5a901a1c62add574c77048b6a1c67be3b50ce0b60d4ca513",
+        "package": "icu_collections",
+        "registry": "crates-io",
+        "version": "2.3.0"
+      },
+      "vcs": {
+        "commit": "a14f2dad852be26bad277ae704abf27a15cbfed1",
+        "path": "components/collections",
+        "system": "git"
       },
       "version": "2.3.0",
       "yanked": false
@@ -526,11 +663,122 @@
       "advisories": 0,
       "archive": "sha256:0351923f38c1eccdaff30505a65b3d45bca37555ad873e424e8194fa6d9d239c",
       "assets": [],
+      "categories": [
+        "internationalization"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "zerovec"
+          ],
+          "loaf": "crates-io/potential_utf",
+          "name": "potential_utf",
+          "optional": false,
+          "req": "^0.1.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/yoke",
+          "name": "yoke",
+          "optional": false,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zerofrom",
+          "name": "zerofrom",
+          "optional": false,
+          "req": "^0.1.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive",
+            "yoke"
+          ],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": false,
+          "req": "^0.11.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1598,
+          "content": "content/sha256/b1a0b37b61d42026996dda3b7d524d42888181f3e7eaf940c9b2e5f561c449e3",
+          "digest": "sha256:b1a0b37b61d42026996dda3b7d524d42888181f3e7eaf940c9b2e5f561c449e3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serde?/alloc",
+          "zerovec/alloc"
+        ],
+        "databake": [
+          "dep:databake",
+          "zerovec/databake"
+        ],
+        "serde": [
+          "dep:serde",
+          "zerovec/serde",
+          "potential_utf/serde",
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/icu_collections/2.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -541,6 +789,17 @@
         "edition": "2021",
         "name": "icu_collections",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4c6b649701667bbe825c3b7e6388cb521c23d88644678e83c0c4d0a621a34b43",
+        "package": "icu_collections",
+        "registry": "crates-io",
+        "version": "2.1.1"
+      },
+      "vcs": {
+        "commit": "38a49da495248dd1ded84cf306e4ca42e64d5bb3",
+        "path": "components/collections",
+        "system": "git"
       },
       "version": "2.1.1",
       "yanked": false

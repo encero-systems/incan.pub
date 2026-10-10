@@ -140,11 +140,64 @@
           "unit_identity": "sha256:15df28c99fe88fbc316ec0cb195666bcf3a3aa123a6723a2dc43e924c8b1516c"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "bmp",
+            "jpeg",
+            "png"
+          ],
+          "loaf": "crates-io/image",
+          "name": "image",
+          "optional": true,
+          "req": "^0.24.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/plotters-backend",
+          "name": "plotters-backend",
+          "optional": false,
+          "req": "^0.3.6"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 512,
+          "content": "content/sha256/4e8a1eb3407b1e7366fa6cb5ebfbc87b9e64bf67fcdc2dcf775c1c6ccec04a2d",
+          "digest": "sha256:4e8a1eb3407b1e7366fa6cb5ebfbc87b9e64bf67fcdc2dcf775c1c6ccec04a2d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10,
+          "content": "content/sha256/1e881ecf2862d01e6e5bc2b861e46886d2a6fb01499c0c508a209a7271b13cf2",
+          "digest": "sha256:1e881ecf2862d01e6e5bc2b861e46886d2a6fb01499c0c508a209a7271b13cf2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bitmap_encoder": [
+          "image"
+        ],
+        "debug": [],
+        "image": [
+          "dep:image"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/plotters-svg/0.3.7/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -155,6 +208,17 @@
         "edition": "2018",
         "name": "plotters_svg",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:51bae2ac328883f7acdfea3d66a7c35751187f870bc81f94563733a154d7a670",
+        "package": "plotters-svg",
+        "registry": "crates-io",
+        "version": "0.3.7"
+      },
+      "vcs": {
+        "commit": "cb7791f6814024d85aa6f9968e73051a4b295bf0",
+        "path": "plotters-svg",
+        "system": "git"
       },
       "version": "0.3.7",
       "yanked": false

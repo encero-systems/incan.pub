@@ -178,11 +178,96 @@
           "unit_identity": "sha256:d77effa646f9732a672ec74ea786f1ec78425d52cf61293765fddfebb4385249"
         }
       ],
+      "categories": [
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.89"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/web-time",
+          "name": "web-time",
+          "optional": true,
+          "req": "^1.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4521,
+          "content": "content/sha256/8002343ad474659ca6116c491f1c180fcc930e7ef232d9e47af58020cfc4b2a0",
+          "digest": "sha256:8002343ad474659ca6116c491f1c180fcc930e7ef232d9e47af58020cfc4b2a0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10839,
+          "content": "content/sha256/b5b413d7421d728c14f33d78198d6e255a0018beef717d78c4c3f6188be3dfb4",
+          "digest": "sha256:b5b413d7421d728c14f33d78198d6e255a0018beef717d78c4c3f6188be3dfb4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1063,
+          "content": "content/sha256/b63e167d61ced1d872a588c5ac764b0dda477d62209dc4f6b6bfea5517d0a24c",
+          "digest": "sha256:b63e167d61ced1d872a588c5ac764b0dda477d62209dc4f6b6bfea5517d0a24c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1257,
+          "content": "content/sha256/70f193c11e7ffb5fdab8664bb78e9e1154942f95fd1746c06f01267440f6b233",
+          "digest": "sha256:70f193c11e7ffb5fdab8664bb78e9e1154942f95fd1746c06f01267440f6b233",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "serde": [
+          "dep:serde",
+          "bitflags/serde"
+        ],
+        "serialization-compat-6": [],
+        "web-time": [
+          "dep:web-time"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "events",
+        "filesystem",
+        "notify",
+        "watch"
+      ],
       "manifest": "crates-io/notify-types/2.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +278,17 @@
         "edition": "2021",
         "name": "notify_types",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:42b8cfee0e339a0337359f3c88165702ac6e600dc01c0cc9579a92d62b08477a",
+        "package": "notify-types",
+        "registry": "crates-io",
+        "version": "2.1.0"
+      },
+      "vcs": {
+        "commit": "c38f28ae50d2a034ba5dde9bf4e6039d9a1c9642",
+        "path": "notify-types",
+        "system": "git"
       },
       "version": "2.1.0",
       "yanked": false

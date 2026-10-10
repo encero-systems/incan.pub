@@ -179,11 +179,224 @@
           "unit_identity": "sha256:3eb7b4cd634ac07250403f86b19d28707c265faf77bb6ff3753a3503848a28db"
         }
       ],
+      "categories": [
+        "compression",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/brotli",
+          "name": "brotli",
+          "optional": true,
+          "req": "^9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bzip2",
+          "name": "bzip2",
+          "optional": true,
+          "req": "^0.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compression-core",
+          "name": "compression-core",
+          "optional": false,
+          "req": "^0.4.33"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/deflate64",
+          "name": "deflate64",
+          "optional": true,
+          "req": "^0.1.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1.1.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/liblzma",
+          "name": "liblzma",
+          "optional": true,
+          "req": "^0.4.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "libzstd",
+          "optional": true,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lz4",
+          "name": "lz4",
+          "optional": true,
+          "req": "^1.28.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "compression",
+            "decompression",
+            "std"
+          ],
+          "loaf": "crates-io/mbrotli",
+          "name": "mbrotli",
+          "optional": true,
+          "req": "^0.5.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd-safe",
+          "name": "zstd-safe",
+          "optional": true,
+          "req": "^8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2823,
+          "content": "content/sha256/5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "digest": "sha256:5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1091,
+          "content": "content/sha256/88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "digest": "sha256:88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6191,
+          "content": "content/sha256/584ab1fc8f0b66d16d4dd1f499f7e7439f0f6e9b7553cde5989617db14f8aa91",
+          "digest": "sha256:584ab1fc8f0b66d16d4dd1f499f7e7439f0f6e9b7553cde5989617db14f8aa91",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all-algorithms": [
+          "brotli",
+          "bzip2",
+          "deflate",
+          "gzip",
+          "lz4",
+          "lzma",
+          "xz-parallel",
+          "xz",
+          "zlib",
+          "zstd",
+          "deflate64"
+        ],
+        "brotli": [
+          "dep:brotli"
+        ],
+        "brotli-mbrotli": [
+          "dep:mbrotli"
+        ],
+        "bzip2": [
+          "dep:bzip2"
+        ],
+        "deflate": [
+          "flate2"
+        ],
+        "deflate64": [
+          "dep:deflate64"
+        ],
+        "flate2": [
+          "dep:flate2"
+        ],
+        "gzip": [
+          "flate2",
+          "memchr"
+        ],
+        "libzstd": [
+          "dep:libzstd"
+        ],
+        "lz4": [
+          "dep:lz4"
+        ],
+        "lzma": [
+          "dep:liblzma"
+        ],
+        "memchr": [
+          "dep:memchr"
+        ],
+        "xz": [
+          "lzma"
+        ],
+        "xz-parallel": [
+          "xz",
+          "dep:liblzma",
+          "liblzma/parallel"
+        ],
+        "xz2": [
+          "xz"
+        ],
+        "zlib": [
+          "flate2"
+        ],
+        "zstd": [
+          "libzstd",
+          "zstd-safe"
+        ],
+        "zstd-safe": [
+          "dep:zstd-safe"
+        ],
+        "zstdmt": [
+          "zstd",
+          "zstd-safe",
+          "dep:zstd-safe",
+          "zstd-safe/zstdmt"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/compression-codecs/0.4.45/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +406,17 @@
         "edition": "2018",
         "name": "compression_codecs",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:98fc98460ba0ad5317075d3632b8dfc45d0be8c4a49347c2a38272019717614a",
+        "package": "compression-codecs",
+        "registry": "crates-io",
+        "version": "0.4.45"
+      },
+      "vcs": {
+        "commit": "964d1aba649490ac1b61064fc9e0b42daaf30f07",
+        "path": "crates/compression-codecs",
+        "system": "git"
       },
       "version": "0.4.45",
       "yanked": false
@@ -216,6 +440,142 @@
       "advisories": 0,
       "archive": "sha256:63482a6c5ef986b8041682dfce699611ce04a95b7379900a22bc89c6e5ab4572",
       "assets": [],
+      "categories": [
+        "compression",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/brotli",
+          "name": "brotli",
+          "optional": true,
+          "req": "^8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bzip2",
+          "name": "bzip2",
+          "optional": true,
+          "req": "^0.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compression-core",
+          "name": "compression-core",
+          "optional": false,
+          "req": "^0.4.33"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/deflate64",
+          "name": "deflate64",
+          "optional": true,
+          "req": "^0.1.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1.1.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/liblzma",
+          "name": "liblzma",
+          "optional": true,
+          "req": "^0.4.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "libzstd",
+          "optional": true,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lz4",
+          "name": "lz4",
+          "optional": true,
+          "req": "^1.28.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "compression",
+            "decompression",
+            "std"
+          ],
+          "loaf": "crates-io/mbrotli",
+          "name": "mbrotli",
+          "optional": true,
+          "req": "^0.5.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd-safe",
+          "name": "zstd-safe",
+          "optional": true,
+          "req": "^8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2823,
+          "content": "content/sha256/5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "digest": "sha256:5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1091,
+          "content": "content/sha256/88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "digest": "sha256:88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 5926,
+          "content": "content/sha256/1b644238a725d19d1cedaebc50d702bef787aa86ab8fd14ac243e2d2ea8c2a47",
+          "digest": "sha256:1b644238a725d19d1cedaebc50d702bef787aa86ab8fd14ac243e2d2ea8c2a47",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -231,14 +591,92 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "all-algorithms": [
+          "brotli",
+          "bzip2",
+          "deflate",
+          "gzip",
+          "lz4",
+          "lzma",
+          "xz-parallel",
+          "xz",
+          "zlib",
+          "zstd",
+          "deflate64"
+        ],
+        "brotli": [
+          "dep:brotli"
+        ],
+        "brotli-mbrotli": [
+          "dep:mbrotli"
+        ],
+        "bzip2": [
+          "dep:bzip2"
+        ],
+        "deflate": [
+          "flate2"
+        ],
+        "deflate64": [
+          "dep:deflate64"
+        ],
+        "flate2": [
+          "dep:flate2"
+        ],
+        "gzip": [
+          "flate2",
+          "memchr"
+        ],
+        "libzstd": [
+          "dep:libzstd"
+        ],
+        "lz4": [
+          "dep:lz4"
+        ],
+        "lzma": [
+          "dep:liblzma"
+        ],
+        "memchr": [
+          "dep:memchr"
+        ],
+        "xz": [
+          "lzma"
+        ],
+        "xz-parallel": [
+          "xz",
+          "dep:liblzma",
+          "liblzma/parallel"
+        ],
+        "xz2": [
+          "xz"
+        ],
+        "zlib": [
+          "flate2"
+        ],
+        "zstd": [
+          "libzstd",
+          "zstd-safe"
+        ],
+        "zstd-safe": [
+          "dep:zstd-safe"
+        ],
+        "zstdmt": [
+          "zstd",
+          "zstd-safe",
+          "dep:zstd-safe",
+          "zstd-safe/zstdmt"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/compression-codecs/0.4.44/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -248,6 +686,17 @@
         "edition": "2018",
         "name": "compression_codecs",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5f018b36ac50598f7bfb0aa6094281e253e6b3cbc507a69652d2fb963a326d8d",
+        "package": "compression-codecs",
+        "registry": "crates-io",
+        "version": "0.4.44"
+      },
+      "vcs": {
+        "commit": "7246ebd079849b0ef7f8e4365546d0d6e2d07771",
+        "path": "crates/compression-codecs",
+        "system": "git"
       },
       "version": "0.4.44",
       "yanked": false

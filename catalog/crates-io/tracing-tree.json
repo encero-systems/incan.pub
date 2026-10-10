@@ -27,11 +27,105 @@
       "advisories": 0,
       "archive": "sha256:7683793f183b6cd92749e42b27de20bab5a5f3fa5c337762d93d9eb57421a937",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/nu-ansi-term",
+          "name": "nu-ansi-term",
+          "optional": false,
+          "req": "^0.50.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "formatting",
+            "local-offset"
+          ],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": true,
+          "req": "^0.3.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing-core",
+          "name": "tracing-core",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "log-tracer",
+            "std"
+          ],
+          "loaf": "crates-io/tracing-log",
+          "name": "tracing-log",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "fmt",
+            "registry",
+            "std"
+          ],
+          "loaf": "crates-io/tracing-subscriber",
+          "name": "tracing-subscriber",
+          "optional": false,
+          "req": "^0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 678,
+          "content": "content/sha256/8337ed6c0cfe5e45bd25e5ecdf3acbd65fc1f406a35813ec62157e1e470bb0fe",
+          "digest": "sha256:8337ed6c0cfe5e45bd25e5ecdf3acbd65fc1f406a35813ec62157e1e470bb0fe",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11355,
+          "content": "content/sha256/c9c77d27bd737506eee1be90c11885fad935695714eafacd6725f41fff9ec8da",
+          "digest": "sha256:c9c77d27bd737506eee1be90c11885fad935695714eafacd6725f41fff9ec8da",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/d31139de68f7e19f9b32cd7de53dbb125b3c68522bbbb1d0c186c33112d34466",
+          "digest": "sha256:d31139de68f7e19f9b32cd7de53dbb125b3c68522bbbb1d0c186c33112d34466",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "tracing-log"
+        ],
+        "time": [
+          "dep:time"
+        ],
+        "tracing-log": [
+          "dep:tracing-log"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/tracing-tree/0.4.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -42,6 +136,17 @@
         "edition": "2018",
         "name": "tracing_tree",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ac87aa03b6a4d5a7e4810d1a80c19601dbe0f8a837e9177f23af721c7ba7beec",
+        "package": "tracing-tree",
+        "registry": "crates-io",
+        "version": "0.4.1"
+      },
+      "vcs": {
+        "commit": "79627fc72ae7dcf95af16e047797e60494679678",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.1",
       "yanked": false

@@ -112,11 +112,79 @@
           "unit_identity": "sha256:411e506ef40060aaf041cd40869d5b8756eaa99e3eaf63609f37355c20707880"
         }
       ],
+      "categories": [
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.100.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-result",
+          "name": "windows-result",
+          "optional": false,
+          "req": "^0.100.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-strings",
+          "name": "windows-strings",
+          "optional": false,
+          "req": "^0.100.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 665,
+          "content": "content/sha256/5c7585ea749cbdc8bbe608b05aa00cc9a0dbb42f6ededff6c58c6903a1b9f458",
+          "digest": "sha256:5c7585ea749cbdc8bbe608b05aa00cc9a0dbb42f6ededff6c58c6903a1b9f458",
+          "format": "markdown",
+          "origin": "package",
+          "path": "readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11351,
+          "content": "content/sha256/c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "digest": "sha256:c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "format": "text",
+          "origin": "package",
+          "path": "license-apache-2.0",
+          "role": "license"
+        },
+        {
+          "bytes": 1141,
+          "content": "content/sha256/c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "digest": "sha256:c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "format": "text",
+          "origin": "package",
+          "path": "license-mit",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [
+          "windows-result/std",
+          "windows-strings/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/windows-registry/0.100.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -127,6 +195,17 @@
         "edition": "2024",
         "name": "windows_registry",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a14b75dbbc0f2bb1ebbf6dcb6dc0035ae17f10ec280045d10fa27ad8874903b2",
+        "package": "windows-registry",
+        "registry": "crates-io",
+        "version": "0.100.0"
+      },
+      "vcs": {
+        "commit": "a57cc321bfdbac6bb98c488ba49f399da8fcb98a",
+        "path": "crates/libs/registry",
+        "system": "git"
       },
       "version": "0.100.0",
       "yanked": false
@@ -147,11 +226,79 @@
       "advisories": 0,
       "archive": "sha256:1debb996e2d84df473a77da01538f65dba6b2c117bb3498bb3ae46bc1f1a763e",
       "assets": [],
+      "categories": [
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-result",
+          "name": "windows-result",
+          "optional": false,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-strings",
+          "name": "windows-strings",
+          "optional": false,
+          "req": "^0.5.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1231,
+          "content": "content/sha256/4000561ea701f2795aaaf7d1d11902ccd007efcf73e534205272fb50855e93c1",
+          "digest": "sha256:4000561ea701f2795aaaf7d1d11902ccd007efcf73e534205272fb50855e93c1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11351,
+          "content": "content/sha256/c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "digest": "sha256:c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "format": "text",
+          "origin": "package",
+          "path": "license-apache-2.0",
+          "role": "license"
+        },
+        {
+          "bytes": 1141,
+          "content": "content/sha256/c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "digest": "sha256:c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "format": "text",
+          "origin": "package",
+          "path": "license-mit",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [
+          "windows-result/std",
+          "windows-strings/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/windows-registry/0.6.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -162,6 +309,17 @@
         "edition": "2021",
         "name": "windows_registry",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:02752bf7fbdcce7f2a27a742f798510f3e5ad88dbe84871e5168e2120c3d5720",
+        "package": "windows-registry",
+        "registry": "crates-io",
+        "version": "0.6.1"
+      },
+      "vcs": {
+        "commit": "32c3144490c016fe496a0aed769bce60987a2e9d",
+        "path": "crates/libs/registry",
+        "system": "git"
       },
       "version": "0.6.1",
       "yanked": false

@@ -25,11 +25,97 @@
       "advisories": 0,
       "archive": "sha256:8b39836dc86e75f1dec2d97fc0fc1a9c76fe53308ecac592288e46223bb58777",
       "assets": [],
+      "categories": [
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "unwind"
+          ],
+          "loaf": "crates-io/cranelift-codegen",
+          "name": "cranelift-codegen",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.15"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.27"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "union"
+          ],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/target-lexicon",
+          "name": "target-lexicon",
+          "optional": false,
+          "req": "^0.13.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 348,
+          "content": "content/sha256/dea43e8044284df50f8b8772e9b48ba8b109b45c74111ff73619775d57ad8d67",
+          "digest": "sha256:dea43e8044284df50f8b8772e9b48ba8b109b45c74111ff73619775d57ad8d67",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "core": [
+          "hashbrown",
+          "cranelift-codegen/core"
+        ],
+        "default": [
+          "std"
+        ],
+        "hashbrown": [
+          "dep:hashbrown"
+        ],
+        "std": [
+          "cranelift-codegen/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/cranelift-frontend/0.123.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +126,17 @@
         "edition": "2024",
         "name": "cranelift_frontend",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d4bda41bb65ba9c05f4782cd9878df5d3bb0901c040716a6f09258acbed375c5",
+        "package": "cranelift-frontend",
+        "registry": "crates-io",
+        "version": "0.123.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "cranelift/frontend",
+        "system": "git"
       },
       "version": "0.123.17",
       "yanked": false

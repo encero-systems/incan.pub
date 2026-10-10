@@ -25,6 +25,120 @@
       "advisories": 0,
       "archive": "sha256:c82e938f7aa2ebe77609a8def1a717c3d55e5bec57c629413d85188e5966715d",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "chrono-tz",
+            "prettyprint"
+          ],
+          "loaf": "crates-io/arrow",
+          "name": "arrow",
+          "optional": false,
+          "req": "^58.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-common",
+          "name": "datafusion-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-execution",
+          "name": "datafusion-execution",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-expr",
+          "name": "datafusion-expr",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-expr-common",
+          "name": "datafusion-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-physical-expr",
+          "name": "datafusion-physical-expr",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-physical-expr-common",
+          "name": "datafusion-physical-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-physical-plan",
+          "name": "datafusion-physical-plan",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-pruning",
+          "name": "datafusion-pruning",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/recursive",
+          "name": "recursive",
+          "optional": true,
+          "req": "^0.1.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1385,
+          "content": "content/sha256/67e78c8153419a5d25fc4e9d30dccc85e4c7b413fd508e2ef317a805b981c3a9",
+          "digest": "sha256:67e78c8153419a5d25fc4e9d30dccc85e4c7b413fd508e2ef317a805b981c3a9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11645,
+          "content": "content/sha256/232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "digest": "sha256:232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -32,14 +146,25 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "recursive_protection": [
+          "dep:recursive"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "datafusion",
+        "query",
+        "optimizer"
+      ],
       "manifest": "crates-io/datafusion-physical-optimizer/53.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -50,6 +175,13 @@
         "name": "datafusion_physical_optimizer",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:7cb13397809a425918f608dfe8653f332015a3e330004ab191b4404187238b95",
+        "package": "datafusion-physical-optimizer",
+        "registry": "crates-io",
+        "version": "53.1.0"
+      },
+      "vcs": null,
       "version": "53.1.0",
       "yanked": false
     }

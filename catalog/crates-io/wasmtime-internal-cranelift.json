@@ -25,11 +25,250 @@
       "advisories": 0,
       "archive": "sha256:bbec7e948581f3d9fd0bc6dd8e966d68c0fdc6d34ede17b7f56d714a8ee8a0f8",
       "assets": [],
+      "categories": [
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "host-arch",
+            "std",
+            "timing",
+            "unwind"
+          ],
+          "loaf": "crates-io/cranelift-codegen",
+          "name": "cranelift-codegen",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-control",
+          "name": "cranelift-control",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-entity",
+          "name": "cranelift-entity",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-frontend",
+          "name": "cranelift-frontend",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-native",
+          "name": "cranelift-native",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "read",
+            "std"
+          ],
+          "loaf": "crates-io/gimli",
+          "name": "gimli",
+          "optional": false,
+          "req": "^0.32.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.27"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "elf",
+            "read_core",
+            "std",
+            "write"
+          ],
+          "loaf": "crates-io/object",
+          "name": "object",
+          "optional": false,
+          "req": "^0.37.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulley-interpreter",
+          "name": "pulley-interpreter",
+          "optional": true,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "union"
+          ],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/target-lexicon",
+          "name": "target-lexicon",
+          "optional": false,
+          "req": "^0.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0.12"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": false,
+          "req": "^0.236.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "compile"
+          ],
+          "loaf": "crates-io/wasmtime-environ",
+          "name": "wasmtime-environ",
+          "optional": false,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasmtime-internal-math",
+          "name": "wasmtime-math",
+          "optional": false,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasmtime-internal-versioned-export-macros",
+          "name": "wasmtime-versioned-export-macros",
+          "optional": false,
+          "req": "=36.0.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 485,
+          "content": "content/sha256/c0d47666f39fc24667b62b35cff684003bf4957b2753e9e77eb49e511a0920de",
+          "digest": "sha256:c0d47666f39fc24667b62b35cff684003bf4957b2753e9e77eb49e511a0920de",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all-arch": [
+          "cranelift-codegen/all-arch"
+        ],
+        "component-model": [
+          "wasmtime-environ/component-model"
+        ],
+        "gc": [
+          "wasmtime-environ/gc"
+        ],
+        "gc-drc": [
+          "gc",
+          "wasmtime-environ/gc-drc"
+        ],
+        "gc-null": [
+          "gc",
+          "wasmtime-environ/gc-null"
+        ],
+        "host-arch": [
+          "cranelift-codegen/host-arch"
+        ],
+        "incremental-cache": [
+          "cranelift-codegen/incremental-cache"
+        ],
+        "pulley": [
+          "cranelift-codegen/pulley",
+          "dep:pulley-interpreter"
+        ],
+        "stack-switching": [],
+        "threads": [
+          "wasmtime-environ/threads"
+        ],
+        "trace-log": [
+          "cranelift-codegen/trace-log"
+        ],
+        "wmemcheck": [
+          "wasmtime-environ/wmemcheck"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasmtime-internal-cranelift/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +279,17 @@
         "edition": "2024",
         "name": "wasmtime_internal_cranelift",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a04aa5a123ad96e88ac5522afa3b27012338755f1d589f628e2d7a509181a9b2",
+        "package": "wasmtime-internal-cranelift",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/cranelift",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

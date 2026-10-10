@@ -132,11 +132,216 @@
           "unit_identity": "sha256:ea582f381ec75ac18a561e33fd041725c88b22a0e8d8c7f78672bd086e0ab947"
         }
       ],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "wrap_help"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.3.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/cpp_demangle",
+          "name": "cpp_demangle",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fallible-iterator",
+          "name": "fallible-iterator",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "read"
+          ],
+          "loaf": "crates-io/gimli",
+          "name": "gimli",
+          "optional": false,
+          "req": "^0.34.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memmap2",
+          "name": "memmap2",
+          "optional": true,
+          "req": "^0.9.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "compression",
+            "read"
+          ],
+          "loaf": "crates-io/object",
+          "name": "object",
+          "optional": true,
+          "req": "^0.40.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-demangle",
+          "name": "rustc-demangle",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typed-arena",
+          "name": "typed-arena",
+          "optional": true,
+          "req": "^2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2481,
+          "content": "content/sha256/26732c033f4dfc18be2f8f07f67436a33f08166806857cd0415ac7ad78f1654b",
+          "digest": "sha256:26732c033f4dfc18be2f8f07f67436a33f08166806857cd0415ac7ad78f1654b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1069,
+          "content": "content/sha256/e99d88d232bf57d70f0fb87f6b496d44b6653f99f8a63d250a54c61ea4bcde40",
+          "digest": "sha256:e99d88d232bf57d70f0fb87f6b496d44b6653f99f8a63d250a54c61ea4bcde40",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 15241,
+          "content": "content/sha256/fb5d4d5ac551cac29ec29efc95793f16d3daf9daef9f60bbb2968204a1b2fe50",
+          "digest": "sha256:fb5d4d5ac551cac29ec29efc95793f16d3daf9daef9f60bbb2968204a1b2fe50",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": [
+          "bin",
+          "wasm"
+        ],
+        "alloc": [
+          "dep:alloc"
+        ],
+        "bin": [
+          "loader",
+          "rustc-demangle",
+          "cpp_demangle",
+          "fallible-iterator",
+          "smallvec",
+          "dep:clap"
+        ],
+        "cargo-all": [],
+        "core": [
+          "dep:core"
+        ],
+        "cpp_demangle": [
+          "dep:cpp_demangle"
+        ],
+        "default": [
+          "rustc-demangle",
+          "cpp_demangle",
+          "loader",
+          "fallible-iterator",
+          "smallvec"
+        ],
+        "fallible-iterator": [
+          "dep:fallible-iterator"
+        ],
+        "loader": [
+          "std",
+          "dep:object",
+          "dep:memmap2",
+          "dep:typed-arena"
+        ],
+        "rustc-demangle": [
+          "dep:rustc-demangle"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "gimli/rustc-dep-of-std"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ],
+        "std": [
+          "gimli/std"
+        ],
+        "wasm": [
+          "dep:object",
+          "object/wasm"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "DWARF",
+        "debug",
+        "elf",
+        "symbolicate",
+        "atos"
+      ],
       "manifest": "crates-io/addr2line/0.27.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -147,6 +352,17 @@
         "edition": "2018",
         "name": "addr2line",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e567177890eb1617b1f774005b66b26b2377afd138a2ca37aae7d8f0c81429d4",
+        "package": "addr2line",
+        "registry": "crates-io",
+        "version": "0.27.1"
+      },
+      "vcs": {
+        "commit": "61b28a49f14eb4d14ba631ba5e8e4ab3cbedf932",
+        "path": "",
+        "system": "git"
       },
       "version": "0.27.1",
       "yanked": false
@@ -244,11 +460,216 @@
           "unit_identity": "sha256:99fd7d47305c11b9f3d71009c1349884c3b393be76a4e9fa2f37085567278ed5"
         }
       ],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "wrap_help"
+          ],
+          "loaf": "crates-io/clap",
+          "name": "clap",
+          "optional": true,
+          "req": "^4.3.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/cpp_demangle",
+          "name": "cpp_demangle",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fallible-iterator",
+          "name": "fallible-iterator",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "read"
+          ],
+          "loaf": "crates-io/gimli",
+          "name": "gimli",
+          "optional": false,
+          "req": "^0.32.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memmap2",
+          "name": "memmap2",
+          "optional": true,
+          "req": "^0.9.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "compression",
+            "read"
+          ],
+          "loaf": "crates-io/object",
+          "name": "object",
+          "optional": true,
+          "req": "^0.37.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-demangle",
+          "name": "rustc-demangle",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typed-arena",
+          "name": "typed-arena",
+          "optional": true,
+          "req": "^2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2485,
+          "content": "content/sha256/c635ed91d7b0c87ff2f0f311cd1a31336d2cbc4d011965d3b58afaca073538d9",
+          "digest": "sha256:c635ed91d7b0c87ff2f0f311cd1a31336d2cbc4d011965d3b58afaca073538d9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1069,
+          "content": "content/sha256/e99d88d232bf57d70f0fb87f6b496d44b6653f99f8a63d250a54c61ea4bcde40",
+          "digest": "sha256:e99d88d232bf57d70f0fb87f6b496d44b6653f99f8a63d250a54c61ea4bcde40",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 13883,
+          "content": "content/sha256/2bfe37c8240577170e3e9122c2e17942e8b2aba73fee100eeeede47b1107f8b8",
+          "digest": "sha256:2bfe37c8240577170e3e9122c2e17942e8b2aba73fee100eeeede47b1107f8b8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": [
+          "bin",
+          "wasm"
+        ],
+        "alloc": [
+          "dep:alloc"
+        ],
+        "bin": [
+          "loader",
+          "rustc-demangle",
+          "cpp_demangle",
+          "fallible-iterator",
+          "smallvec",
+          "dep:clap"
+        ],
+        "cargo-all": [],
+        "core": [
+          "dep:core"
+        ],
+        "cpp_demangle": [
+          "dep:cpp_demangle"
+        ],
+        "default": [
+          "rustc-demangle",
+          "cpp_demangle",
+          "loader",
+          "fallible-iterator",
+          "smallvec"
+        ],
+        "fallible-iterator": [
+          "dep:fallible-iterator"
+        ],
+        "loader": [
+          "std",
+          "dep:object",
+          "dep:memmap2",
+          "dep:typed-arena"
+        ],
+        "rustc-demangle": [
+          "dep:rustc-demangle"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "gimli/rustc-dep-of-std"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ],
+        "std": [
+          "gimli/std"
+        ],
+        "wasm": [
+          "dep:object",
+          "object/wasm"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "DWARF",
+        "debug",
+        "elf",
+        "symbolicate",
+        "atos"
+      ],
       "manifest": "crates-io/addr2line/0.25.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -259,6 +680,17 @@
         "edition": "2018",
         "name": "addr2line",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1b5d307320b3181d6d7954e663bd7c774a838b8220fe0593c86d9fb09f498b4b",
+        "package": "addr2line",
+        "registry": "crates-io",
+        "version": "0.25.1"
+      },
+      "vcs": {
+        "commit": "f02db009deb9b441818afa49cb1b17453c1e4243",
+        "path": "",
+        "system": "git"
       },
       "version": "0.25.1",
       "yanked": false

@@ -114,11 +114,76 @@
           "unit_identity": "sha256:2f7d0d8b06eac1850d93cf3fdb41f311030fbfdeee6186dfcb42e8c635780cc5"
         }
       ],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "parsing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "macros"
+          ],
+          "loaf": "crates-io/phf",
+          "name": "phf",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/strum_macros",
+          "name": "strum_macros",
+          "optional": true,
+          "req": "^0.28"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4410,
+          "content": "content/sha256/89d6285990242856794ecf7cc8f280482780bef97f766f0050edb615221dfa28",
+          "digest": "sha256:89d6285990242856794ecf7cc8f280482780bef97f766f0050edb615221dfa28",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/8bce3b45e49ecd1461f223b46de133d8f62cd39f745cfdaf81bee554b908bd42",
+          "digest": "sha256:8bce3b45e49ecd1461f223b46de133d8f62cd39f745cfdaf81bee554b908bd42",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "derive": [
+          "strum_macros"
+        ],
+        "phf": [
+          "dep:phf"
+        ],
+        "std": [],
+        "strum_macros": [
+          "dep:strum_macros"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "enum",
+        "string",
+        "macros",
+        "proc-macros"
+      ],
       "manifest": "crates-io/strum/0.28.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +194,17 @@
         "edition": "2021",
         "name": "strum",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9628de9b8791db39ceda2b119bbe13134770b56c138ec1d3af810d045c04f9bd",
+        "package": "strum",
+        "registry": "crates-io",
+        "version": "0.28.0"
+      },
+      "vcs": {
+        "commit": "7376771128834d28bb9beba5c39846cba62e71ec",
+        "path": "strum",
+        "system": "git"
       },
       "version": "0.28.0",
       "yanked": false

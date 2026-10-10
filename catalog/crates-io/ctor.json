@@ -122,11 +122,91 @@
           "unit_identity": "sha256:1a4294bbce72e40b6dd1784fe9e50ad57547801e029a69f39dc9c37c00b1097b"
         }
       ],
+      "categories": [
+        "development-tools::build-utils",
+        "no-std",
+        "no-std::no-alloc",
+        "embedded",
+        "development-tools::procedural-macro-helpers"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/link-section",
+          "name": "link-section",
+          "optional": true,
+          "req": "^0.19.3"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "ctor"
+          ],
+          "loaf": "crates-io/linktime-proc-macro",
+          "name": "linktime-proc-macro",
+          "optional": true,
+          "req": "^0.2.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 15104,
+          "content": "content/sha256/856cfbc469039d21e3cd6663f932aeecd90848fb7a4fdc9cc49552fa8d3caec8",
+          "digest": "sha256:856cfbc469039d21e3cd6663f932aeecd90848fb7a4fdc9cc49552fa8d3caec8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11324,
+          "content": "content/sha256/a8ad31b1c3f40dca5a84119351b8fa8ddc868edd77fad8a8ebf6d8f2d16fa4ae",
+          "digest": "sha256:a8ad31b1c3f40dca5a84119351b8fa8ddc868edd77fad8a8ebf6d8f2d16fa4ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1022,
+          "content": "content/sha256/bccaa8b6c09f94e81f06696e179dbe058464bbdfbc823b6d49cada1d71e84ac3",
+          "digest": "sha256:bccaa8b6c09f94e81f06696e179dbe058464bbdfbc823b6d49cada1d71e84ac3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6520,
+          "content": "content/sha256/3ac108ad1752583c69eebcd41e70d29ba4b41e7bbc83f6584afcb3eec960c279",
+          "digest": "sha256:3ac108ad1752583c69eebcd41e70d29ba4b41e7bbc83f6584afcb3eec960c279",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "proc_macro",
+          "priority"
+        ],
+        "priority": [
+          "dep:link-section"
+        ],
+        "proc_macro": [
+          "dep:linktime-proc-macro"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/ctor/1.0.13/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -137,6 +217,17 @@
         "edition": "2021",
         "name": "ctor",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:914a755b7c2d4af2bdcff7ce1739e2db9a1b81a9b07123d8015786ae03c0980d",
+        "package": "ctor",
+        "registry": "crates-io",
+        "version": "1.0.13"
+      },
+      "vcs": {
+        "commit": "00ca36a7ed6d959d01866feeeec078a79b6dfa3f",
+        "path": "ctor",
+        "system": "git"
       },
       "version": "1.0.13",
       "yanked": false

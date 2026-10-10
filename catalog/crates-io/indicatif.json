@@ -116,11 +116,164 @@
           "unit_identity": "sha256:5b99f61863bd5ec412925ff55aa48880a674202a647b4b24152c789cef7ba5d1"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "ansi-parsing",
+            "std"
+          ],
+          "loaf": "crates-io/console",
+          "name": "console",
+          "optional": false,
+          "req": "^0.16.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": false,
+          "req": "^1.12.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "io-util"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-segmentation",
+          "name": "unicode-segmentation",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-width",
+          "name": "unicode-width",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unit-prefix",
+          "name": "unit-prefix",
+          "optional": false,
+          "req": "^0.5.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/vt100",
+          "name": "vt100",
+          "optional": true,
+          "req": "^0.16.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/web-time",
+          "name": "web-time",
+          "optional": true,
+          "req": "^1.1.0",
+          "target": "cfg(target_arch = \"wasm32\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1754,
+          "content": "content/sha256/8cb15d644b9fd7ab5affc2f9005b79b90484dac566ec5aabd90f2f6c223111c1",
+          "digest": "sha256:8cb15d644b9fd7ab5affc2f9005b79b90484dac566ec5aabd90f2f6c223111c1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1112,
+          "content": "content/sha256/2022c11b24fc1e50fa06a5959e40198a3464f560729ad3d00139abb8a328362d",
+          "digest": "sha256:2022c11b24fc1e50fa06a5959e40198a3464f560729ad3d00139abb8a328362d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "unicode-width",
+          "wasmbind"
+        ],
+        "futures": [
+          "dep:futures-core"
+        ],
+        "improved_unicode": [
+          "unicode-segmentation",
+          "unicode-width"
+        ],
+        "in_memory": [
+          "vt100"
+        ],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "unicode-segmentation": [
+          "dep:unicode-segmentation"
+        ],
+        "unicode-width": [
+          "dep:unicode-width",
+          "console/unicode-width"
+        ],
+        "vt100": [
+          "dep:vt100"
+        ],
+        "wasmbind": [
+          "dep:web-time"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cli",
+        "progress",
+        "pb",
+        "colors",
+        "progressbar"
+      ],
       "manifest": "crates-io/indicatif/0.18.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -131,6 +284,17 @@
         "edition": "2021",
         "name": "indicatif",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9433806cd6b4ec1aba79c021c7e4c58fb4c3b9977c085062e611ac929998fb0c",
+        "package": "indicatif",
+        "registry": "crates-io",
+        "version": "0.18.6"
+      },
+      "vcs": {
+        "commit": "e4d49d8ea6c68a80f7ee22904ee6c90322415a1d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.18.6",
       "yanked": false

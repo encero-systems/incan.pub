@@ -204,11 +204,81 @@
           "unit_identity": "sha256:5af25d0a0128482162cb78d125f55a669dfe9ffb8d22d0ed95c60117986c76c1"
         }
       ],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.29"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "perf"
+          ],
+          "loaf": "crates-io/regex",
+          "name": "regex",
+          "optional": true,
+          "req": "^1.12.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 248,
+          "content": "content/sha256/d3d7cb39fda6c7516c7f35f7ae88e1df49a5bf24a3415541e068391c34c2f6f3",
+          "digest": "sha256:d3d7cb39fda6c7516c7f35f7ae88e1df49a5bf24a3415541e068391c34c2f6f3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "regex"
+        ],
+        "regex": [
+          "dep:regex"
+        ],
+        "std": [
+          "log/std",
+          "regex?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging",
+        "log",
+        "logger"
+      ],
       "manifest": "crates-io/env_filter/2.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -219,6 +289,17 @@
         "edition": "2021",
         "name": "env_filter",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:900d271a03799a1ee8d1ca9b19893b48ca674a9284fefcfb85f05e74ed314217",
+        "package": "env_filter",
+        "registry": "crates-io",
+        "version": "2.0.0"
+      },
+      "vcs": {
+        "commit": "cc2b2efcd7454be82ca49f8ac165b3fbc3095ae3",
+        "path": "crates/env_filter",
+        "system": "git"
       },
       "version": "2.0.0",
       "yanked": false

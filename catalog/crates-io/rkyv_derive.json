@@ -194,11 +194,83 @@
           "unit_identity": "sha256:afb5f524033f50f613235784fde40c64cfd07fe0dafe94d2970a8add4c10c7ab"
         }
       ],
+      "categories": [
+        "encoding",
+        "no-std",
+        "no-std::no-alloc"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "proc-macro"
+          ],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "proc-macro"
+          ],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "clone-impls",
+            "derive",
+            "parsing",
+            "printing",
+            "proc-macro"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^3.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3586,
+          "content": "content/sha256/296e729cb0aca2ed48a6959552927763a26e43fdb9c2d4201fd73c92a5c0f8bf",
+          "digest": "sha256:296e729cb0aca2ed48a6959552927763a26e43fdb9c2d4201fd73c92a5c0f8bf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1053,
+          "content": "content/sha256/635111a955495b5d8d34b8052f69656e8e45f6437f9266329077b9aad5fbe8d3",
+          "digest": "sha256:635111a955495b5d8d34b8052f69656e8e45f6437f9266329077b9aad5fbe8d3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bytecheck": [],
+        "default": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "archive",
+        "rkyv",
+        "serialization",
+        "zero-copy",
+        "no_std"
+      ],
       "manifest": "crates-io/rkyv_derive/0.8.18/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +281,17 @@
         "edition": "2021",
         "name": "rkyv_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:1c25ef604ac7dd839d44d64648952ea23c97866f124ff671b0ed2cf3ad9bb06e",
+        "package": "rkyv_derive",
+        "registry": "crates-io",
+        "version": "0.8.18"
+      },
+      "vcs": {
+        "commit": "8db673416b5489f39793e654145ceb938d652c84",
+        "path": "rkyv_derive",
+        "system": "git"
       },
       "version": "0.8.18",
       "yanked": false

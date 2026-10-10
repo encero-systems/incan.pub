@@ -368,11 +368,82 @@
           "unit_identity": "sha256:1a3a259033a1ace467b7c7e4e600c482d7da4f14cd8d6d9e01775136120e601d"
         }
       ],
+      "categories": [
+        "network-programming",
+        "data-structures",
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/web-time",
+          "name": "web-time",
+          "optional": true,
+          "req": "^1",
+          "target": "cfg(all(target_family = \"wasm\", target_os = \"unknown\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2821,
+          "content": "content/sha256/52ab92f5b204b89f9ad02b778ca2b6ad6d32c7f94916e1917dae4e95569d0b92",
+          "digest": "sha256:52ab92f5b204b89f9ad02b778ca2b6ad6d32c7f94916e1917dae4e95569d0b92",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10835,
+          "content": "content/sha256/45fd05c4865e7c350b98ad7ac50e1b15462d49af4a91e9b0c9dd933dc9a69742",
+          "digest": "sha256:45fd05c4865e7c350b98ad7ac50e1b15462d49af4a91e9b0c9dd933dc9a69742",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/9117d922e667125508dde62b02c1f57ed22f5ad21eb536aa2e2d99e1c796e639",
+          "digest": "sha256:9117d922e667125508dde62b02c1f57ed22f5ad21eb536aa2e2d99e1c796e639",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "dep:zeroize"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "web": [
+          "web-time"
+        ],
+        "web-time": [
+          "dep:web-time"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/rustls-pki-types/1.15.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -382,6 +453,17 @@
         "edition": "2021",
         "name": "rustls_pki_types",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2f4925028c7eb5d1fcdaf196971378ed9d2c1c4efc7dc5d011256f76c99c0a96",
+        "package": "rustls-pki-types",
+        "registry": "crates-io",
+        "version": "1.15.1"
+      },
+      "vcs": {
+        "commit": "e29ad15465126acc089b39611bcec85e27ce0817",
+        "path": "",
+        "system": "git"
       },
       "version": "1.15.1",
       "yanked": false

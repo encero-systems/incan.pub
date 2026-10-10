@@ -209,6 +209,142 @@
           "unit_identity": "sha256:0bd05bb1edf8ca48176a6e2d2c9752200d120ccb67df5e9f5c8c465520c990d7"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/heck",
+          "name": "heck",
+          "optional": false,
+          "req": ">=0.4, <=0.5"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "use_alloc"
+          ],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": ">=0.10, <=0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/multimap",
+          "name": "multimap",
+          "optional": false,
+          "req": ">=0.8, <=0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/petgraph",
+          "name": "petgraph",
+          "optional": false,
+          "req": "^0.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/prost",
+          "name": "prost",
+          "optional": false,
+          "req": "^0.14.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/prost-types",
+          "name": "prost-types",
+          "optional": false,
+          "req": "^0.14.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pulldown-cmark",
+          "name": "pulldown-cmark",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulldown-cmark-to-cmark",
+          "name": "pulldown-cmark-to-cmark",
+          "optional": true,
+          "req": "^22"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "unicode-bool"
+          ],
+          "loaf": "crates-io/regex",
+          "name": "regex",
+          "optional": false,
+          "req": "^1.8.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "full"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tempfile",
+          "name": "tempfile",
+          "optional": false,
+          "req": "^3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 592,
+          "content": "content/sha256/094d454ce347d8fbd4c70e6f79f082e7b6dfa4c9dbb381e5639037b88462c5d1",
+          "digest": "sha256:094d454ce347d8fbd4c70e6f79f082e7b6dfa4c9dbb381e5639037b88462c5d1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -217,14 +353,29 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "cleanup-markdown": [
+          "dep:pulldown-cmark",
+          "dep:pulldown-cmark-to-cmark"
+        ],
+        "default": [
+          "format"
+        ],
+        "format": [
+          "dep:prettyplease",
+          "dep:syn"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/prost-build/0.14.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -234,6 +385,17 @@
         "edition": "2021",
         "name": "prost_build",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:03da047801ff44bb6a4d407d4860c05fd70bb81714e6b2f3812603d5b145b042",
+        "package": "prost-build",
+        "registry": "crates-io",
+        "version": "0.14.4"
+      },
+      "vcs": {
+        "commit": "13646cde7eab75c81b3047767aa0a86e7dbecf12",
+        "path": "prost-build",
+        "system": "git"
       },
       "version": "0.14.4",
       "yanked": false

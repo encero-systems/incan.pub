@@ -477,6 +477,47 @@
           "unit_identity": "sha256:e5193772b183480236b57ee4c7d5ff702a9bc1b0cec84925d280b99e55a67529"
         }
       ],
+      "categories": [
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prost-derive",
+          "name": "prost-derive",
+          "optional": true,
+          "req": "^0.14.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 17052,
+          "content": "content/sha256/0f12f109bff21e8eb36ca61759552d4c9545494ab1bde86301b745d9e8ebe200",
+          "digest": "sha256:0f12f109bff21e8eb36ca61759552d4c9545494ab1bde86301b745d9e8ebe200",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -486,14 +527,30 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "derive",
+          "std"
+        ],
+        "derive": [
+          "dep:prost-derive"
+        ],
+        "no-recursion-limit": [],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "protobuf",
+        "serialization"
+      ],
       "manifest": "crates-io/prost/0.14.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -503,6 +560,17 @@
         "edition": "2021",
         "name": "prost",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:528ac67416ff8646872a3c02cad9cc4ee5dc9f9540c9b10771855c95cb2e5ae1",
+        "package": "prost",
+        "registry": "crates-io",
+        "version": "0.14.4"
+      },
+      "vcs": {
+        "commit": "13646cde7eab75c81b3047767aa0a86e7dbecf12",
+        "path": "prost",
+        "system": "git"
       },
       "version": "0.14.4",
       "yanked": false

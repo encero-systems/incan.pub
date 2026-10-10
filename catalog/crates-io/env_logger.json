@@ -124,11 +124,126 @@
           "unit_identity": "sha256:251376fe73a13b7ba00fbe5c9728809f46fa2599aae2b98563b9b3d8759f01fd"
         }
       ],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "wincon"
+          ],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": true,
+          "req": "^1.0.13"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/env_filter",
+          "name": "env_filter",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/jiff",
+          "name": "jiff",
+          "optional": true,
+          "req": "^0.2.22"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.29"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4926,
+          "content": "content/sha256/4f9c5ed6e0853708cb1466af64deb019451cb7c9ac500a839b991a2cc08ec77e",
+          "digest": "sha256:4f9c5ed6e0853708cb1466af64deb019451cb7c9ac500a839b991a2cc08ec77e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "auto-color": [
+          "color",
+          "dep:anstream",
+          "anstream/auto"
+        ],
+        "color": [
+          "dep:anstream",
+          "dep:anstyle"
+        ],
+        "default": [
+          "auto-color",
+          "humantime",
+          "regex"
+        ],
+        "humantime": [
+          "dep:jiff"
+        ],
+        "kv": [
+          "log/kv"
+        ],
+        "regex": [
+          "env_filter/regex"
+        ],
+        "unstable-kv": [
+          "kv"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging",
+        "log",
+        "logger"
+      ],
       "manifest": "crates-io/env_logger/0.11.11/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -139,6 +254,17 @@
         "edition": "2021",
         "name": "env_logger",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:de671bd27a75a797dc9ae289ba1e77276e75e2026408aab65185384e2d5cd3f6",
+        "package": "env_logger",
+        "registry": "crates-io",
+        "version": "0.11.11"
+      },
+      "vcs": {
+        "commit": "b4d3f2b8dd3f1c3362f07da8f6f4a30c701358cf",
+        "path": "",
+        "system": "git"
       },
       "version": "0.11.11",
       "yanked": false

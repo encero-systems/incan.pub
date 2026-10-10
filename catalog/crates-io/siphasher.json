@@ -334,6 +334,68 @@
           "unit_identity": "sha256:e0325a137df2a2af0bb19bfa034e5d2015704ee1126268abdf400505b9084c65"
         }
       ],
+      "categories": [
+        "algorithms",
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2371,
+          "content": "content/sha256/af6d54563bbcc675b002349cd883e44d607e45cbdd640ed452804533fef00bab",
+          "digest": "sha256:af6d54563bbcc675b002349cd883e44d607e45cbdd640ed452804533fef00bab",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 281,
+          "content": "content/sha256/c962ee4d1d05ddc138b202b2540219ebc57893fcf97b364852094a9a94ce1365",
+          "digest": "sha256:c962ee4d1d05ddc138b202b2540219ebc57893fcf97b364852094a9a94ce1365",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/f9c4c77baa3828004ee54b8a4f2db2e88ed44a6237a493965bf551fac0fcb62d",
+          "digest": "sha256:f9c4c77baa3828004ee54b8a4f2db2e88ed44a6237a493965bf551fac0fcb62d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -342,14 +404,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "serde_no_std": [
+          "serde",
+          "dep:serde",
+          "serde/alloc"
+        ],
+        "serde_std": [
+          "std",
+          "serde",
+          "dep:serde",
+          "serde/std"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "siphash",
+        "hash",
+        "hasher",
+        "keyed-hash",
+        "no-std"
+      ],
       "manifest": "crates-io/siphasher/1.0.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -359,6 +452,17 @@
         "edition": "2018",
         "name": "siphasher",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:33f4fe9184a62d842c9ef383018f3306d8ba224fd9d836f56d7288308847c256",
+        "package": "siphasher",
+        "registry": "crates-io",
+        "version": "1.0.4"
+      },
+      "vcs": {
+        "commit": "ed028f01a16205b0819fa83b0cdc052e2d5ac3b7",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.4",
       "yanked": false

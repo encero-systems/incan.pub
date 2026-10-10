@@ -104,11 +104,308 @@
           "unit_identity": "sha256:af1d8a04b3ec92ae40245c51507a38ef5743ee6d15986e8fb567dfbc38264938"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/as-raw-xcb-connection",
+          "name": "as-raw-xcb-connection",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/gethostname",
+          "name": "gethostname",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libloading",
+          "name": "libloading",
+          "optional": true,
+          "req": ">=0.8.0, <0.10.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.19"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/raw-window-handle",
+          "name": "raw-window-handle",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "event",
+            "fs",
+            "net",
+            "std",
+            "system"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/x11rb-protocol",
+          "name": "x11rb-protocol",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/xcursor",
+          "name": "xcursor",
+          "optional": true,
+          "req": "^0.3.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2606,
+          "content": "content/sha256/ddbca666f3c544f1b68815dd1586736ad30609b7cfb42dc6f7988b0757acef73",
+          "digest": "sha256:ddbca666f3c544f1b68815dd1586736ad30609b7cfb42dc6f7988b0757acef73",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1058,
+          "content": "content/sha256/a72561f47c1f665535930f606739d9098a6186802d5e2e8ec491faf00f4add5b",
+          "digest": "sha256:a72561f47c1f665535930f606739d9098a6186802d5e2e8ec491faf00f4add5b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all-extensions": [
+          "x11rb-protocol/all-extensions",
+          "composite",
+          "damage",
+          "dbe",
+          "dpms",
+          "dri2",
+          "dri3",
+          "glx",
+          "present",
+          "randr",
+          "record",
+          "render",
+          "res",
+          "screensaver",
+          "shape",
+          "shm",
+          "sync",
+          "xevie",
+          "xf86dri",
+          "xf86vidmode",
+          "xfixes",
+          "xinerama",
+          "xinput",
+          "xkb",
+          "xprint",
+          "xselinux",
+          "xtest",
+          "xv",
+          "xvmc"
+        ],
+        "allow-unsafe-code": [
+          "libc",
+          "as-raw-xcb-connection"
+        ],
+        "as-raw-xcb-connection": [
+          "dep:as-raw-xcb-connection"
+        ],
+        "composite": [
+          "x11rb-protocol/composite",
+          "xfixes"
+        ],
+        "cursor": [
+          "render",
+          "resource_manager",
+          "xcursor"
+        ],
+        "damage": [
+          "x11rb-protocol/damage",
+          "xfixes"
+        ],
+        "dbe": [
+          "x11rb-protocol/dbe"
+        ],
+        "dl-libxcb": [
+          "allow-unsafe-code",
+          "libloading",
+          "once_cell"
+        ],
+        "dpms": [
+          "x11rb-protocol/dpms"
+        ],
+        "dri2": [
+          "x11rb-protocol/dri2"
+        ],
+        "dri3": [
+          "x11rb-protocol/dri3"
+        ],
+        "extra-traits": [
+          "x11rb-protocol/extra-traits"
+        ],
+        "glx": [
+          "x11rb-protocol/glx"
+        ],
+        "image": [],
+        "libc": [
+          "dep:libc"
+        ],
+        "libloading": [
+          "dep:libloading"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "present": [
+          "x11rb-protocol/present",
+          "randr",
+          "xfixes",
+          "sync"
+        ],
+        "randr": [
+          "x11rb-protocol/randr",
+          "render"
+        ],
+        "raw-window-handle": [
+          "dep:raw-window-handle"
+        ],
+        "record": [
+          "x11rb-protocol/record"
+        ],
+        "render": [
+          "x11rb-protocol/render"
+        ],
+        "request-parsing": [
+          "x11rb-protocol/request-parsing"
+        ],
+        "res": [
+          "x11rb-protocol/res"
+        ],
+        "resource_manager": [
+          "x11rb-protocol/resource_manager"
+        ],
+        "screensaver": [
+          "x11rb-protocol/screensaver"
+        ],
+        "shape": [
+          "x11rb-protocol/shape"
+        ],
+        "shm": [
+          "x11rb-protocol/shm"
+        ],
+        "sync": [
+          "x11rb-protocol/sync"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "xcursor": [
+          "dep:xcursor"
+        ],
+        "xevie": [
+          "x11rb-protocol/xevie"
+        ],
+        "xf86dri": [
+          "x11rb-protocol/xf86dri"
+        ],
+        "xf86vidmode": [
+          "x11rb-protocol/xf86vidmode"
+        ],
+        "xfixes": [
+          "x11rb-protocol/xfixes",
+          "render",
+          "shape"
+        ],
+        "xinerama": [
+          "x11rb-protocol/xinerama"
+        ],
+        "xinput": [
+          "x11rb-protocol/xinput",
+          "xfixes"
+        ],
+        "xkb": [
+          "x11rb-protocol/xkb"
+        ],
+        "xprint": [
+          "x11rb-protocol/xprint"
+        ],
+        "xselinux": [
+          "x11rb-protocol/xselinux"
+        ],
+        "xtest": [
+          "x11rb-protocol/xtest"
+        ],
+        "xv": [
+          "x11rb-protocol/xv",
+          "shm"
+        ],
+        "xvmc": [
+          "x11rb-protocol/xvmc",
+          "xv"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "xcb",
+        "X11"
+      ],
       "manifest": "crates-io/x11rb/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -119,6 +416,17 @@
         "edition": "2021",
         "name": "x11rb",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5a8885a854a8bfdf87a301e53e41b17c5f8f33639903131338b997b1eb614f44",
+        "package": "x11rb",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "6dedac4772d32174f8f1aa4ba751c7236dd76639",
+        "path": "x11rb",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false

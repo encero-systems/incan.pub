@@ -194,6 +194,61 @@
           "unit_identity": "sha256:ca756177ab282f8ad56f2b7aaf7706843cfd5d9cab2f2fb8b991777802340b33"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/protobuf-support",
+          "name": "protobuf-support",
+          "optional": false,
+          "req": "=3.7.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^1.0.30"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1278,
+          "content": "content/sha256/14dbb3068c031afbd44010a4ff0c8146aa7e02f6051579177767f218fff9cd38",
+          "digest": "sha256:14dbb3068c031afbd44010a4ff0c8146aa7e02f6051579177767f218fff9cd38",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1058,
+          "content": "content/sha256/7f2fa80a60e84f8dc0747abb0e42342f83bded04a20461a636b47c0331b92ddf",
+          "digest": "sha256:7f2fa80a60e84f8dc0747abb0e42342f83bded04a20461a636b47c0331b92ddf",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -201,6 +256,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -210,6 +266,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -219,6 +276,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -228,14 +286,25 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "bytes": [
+          "dep:bytes"
+        ],
+        "default": [],
+        "with-bytes": [
+          "bytes"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/protobuf/3.7.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -246,6 +315,17 @@
         "edition": "2021",
         "name": "protobuf",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d65a1d4ddae7d8b5de68153b48f6aa3bba8cb002b243dbdbc55a5afbc98f99f4",
+        "package": "protobuf",
+        "registry": "crates-io",
+        "version": "3.7.2"
+      },
+      "vcs": {
+        "commit": "4cb84f305c05f0376ff51b555a2740c5251c1280",
+        "path": "protobuf",
+        "system": "git"
       },
       "version": "3.7.2",
       "yanked": false

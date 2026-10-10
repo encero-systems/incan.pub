@@ -189,11 +189,83 @@
           "unit_identity": "sha256:bda1eedf2bc3314014338dbe434d7943c37285ac197eda610e2ef33991c0c92f"
         }
       ],
+      "categories": [
+        "development-tools",
+        "rust-patterns"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/derive_builder_core",
+          "name": "derive_builder_core",
+          "optional": false,
+          "req": "=0.20.2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "extra-traits",
+            "full"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.15"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1239,
+          "content": "content/sha256/97f099a1357e460ad9522da36e77a87b83cb11b9a9aeecb6c191363eb76b764c",
+          "digest": "sha256:97f099a1357e460ad9522da36e77a87b83cb11b9a9aeecb6c191363eb76b764c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/8c9612877aacfa1b42f5e80b679e6c3c93a7ba2bb99dfaf6e87e200dca4b4e6c",
+          "digest": "sha256:8c9612877aacfa1b42f5e80b679e6c3c93a7ba2bb99dfaf6e87e200dca4b4e6c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "derive_builder_core/alloc"
+        ],
+        "clippy": [
+          "derive_builder_core/clippy"
+        ],
+        "lib_has_std": [
+          "derive_builder_core/lib_has_std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "derive",
+        "macro",
+        "builder",
+        "setter",
+        "struct"
+      ],
       "manifest": "crates-io/derive_builder_macro/0.20.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -204,6 +276,17 @@
         "edition": "2018",
         "name": "derive_builder_macro",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:ab63b0e2bf4d5928aff72e83a7dace85d7bba5fe12dcc3c5a572d78caffd3f3c",
+        "package": "derive_builder_macro",
+        "registry": "crates-io",
+        "version": "0.20.2"
+      },
+      "vcs": {
+        "commit": "fc18dd236a6dc6b5b49970efdb1b78f40bb3b998",
+        "path": "derive_builder_macro",
+        "system": "git"
       },
       "version": "0.20.2",
       "yanked": false

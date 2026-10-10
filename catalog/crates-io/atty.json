@@ -102,11 +102,82 @@
           "unit_identity": "sha256:7e7c7a67cfbcf81c1f9907d92572e6f524e5fbce57d0c95297d95492a2c0acfc"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hermit-abi",
+          "name": "hermit-abi",
+          "optional": false,
+          "req": "^0.1.6",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "consoleapi",
+            "minwinbase",
+            "minwindef",
+            "processenv",
+            "winbase"
+          ],
+          "loaf": "crates-io/winapi",
+          "name": "winapi",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1728,
+          "content": "content/sha256/e559a69c0b2bd20bffcede64fd548df6c671b0d1504613c5e3e5d884d759caea",
+          "digest": "sha256:e559a69c0b2bd20bffcede64fd548df6c671b0d1504613c5e3e5d884d759caea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1061,
+          "content": "content/sha256/99fa95ba4e4cdaf71c27d73260ea069fc4515b3d02fde3020c5b562280006cbc",
+          "digest": "sha256:99fa95ba4e4cdaf71c27d73260ea069fc4515b3d02fde3020c5b562280006cbc",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 1672,
+          "content": "content/sha256/70db121262d72acc472ad1a90b78c42de570820e65b566c6b9339b62e636d572",
+          "digest": "sha256:70db121262d72acc472ad1a90b78c42de570820e65b566c6b9339b62e636d572",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "terminal",
+        "tty",
+        "isatty"
+      ],
       "manifest": "crates-io/atty/0.2.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +188,17 @@
         "edition": "2015",
         "name": "atty",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8",
+        "package": "atty",
+        "registry": "crates-io",
+        "version": "0.2.14"
+      },
+      "vcs": {
+        "commit": "7b5df17888997d57c2c1c8f91da1db5691f49953",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.14",
       "yanked": false

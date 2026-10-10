@@ -267,11 +267,128 @@
           "unit_identity": "sha256:08abf69f85dca5c491953eea556bf4f6aa3a61b00a3e67c1fbccced2cd193d29"
         }
       ],
+      "categories": [
+        "os::macos-apis",
+        "cryptography",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/core-foundation",
+          "name": "core-foundation",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/core-foundation-sys",
+          "name": "core-foundation-sys",
+          "optional": false,
+          "req": "^0.8.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.139"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.20"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/security-framework-sys",
+          "name": "security-framework-sys",
+          "optional": false,
+          "req": "^2.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 760,
+          "content": "content/sha256/ff1d022f35ff76531a361ad421ba7ee61ce186dc6516f72fc819ec4b2a5567a4",
+          "digest": "sha256:ff1d022f35ff76531a361ad421ba7ee61ce186dc6516f72fc819ec4b2a5567a4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/91e934255ba3b2f21103d68c5581c23ef34aa95c4628e4405b8c901935e11c69",
+          "digest": "sha256:91e934255ba3b2f21103d68c5581c23ef34aa95c4628e4405b8c901935e11c69",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "OSX_10_12": [],
+        "OSX_10_13": [],
+        "OSX_10_14": [],
+        "OSX_10_15": [
+          "security-framework-sys/OSX_10_15"
+        ],
+        "alpn": [],
+        "default": [
+          "OSX_10_14",
+          "alpn",
+          "session-tickets"
+        ],
+        "job-bless": [],
+        "log": [
+          "dep:log"
+        ],
+        "macos-12": [
+          "security-framework-sys/macos-12"
+        ],
+        "nightly": [],
+        "session-tickets": [],
+        "sync-keychain": [
+          "OSX_10_13"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "iOS",
+        "TLS",
+        "SSL",
+        "crypto",
+        "keychain"
+      ],
       "manifest": "crates-io/security-framework/3.7.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -282,6 +399,17 @@
         "edition": "2024",
         "name": "security_framework",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b7f4bc775c73d9a02cde8bf7b2ec4c9d12743edf609006c7facc23998404cd1d",
+        "package": "security-framework",
+        "registry": "crates-io",
+        "version": "3.7.0"
+      },
+      "vcs": {
+        "commit": "5f6e65114b77d5bc161d2b099cad09f2a67609d2",
+        "path": "security-framework",
+        "system": "git"
       },
       "version": "3.7.0",
       "yanked": false
@@ -305,11 +433,155 @@
       "advisories": 0,
       "archive": "sha256:d4e8ea13fea05110900c37f33dcf2bb308636fbc310d1e6a33d569c11bf115f7",
       "assets": [],
+      "categories": [
+        "os::macos-apis",
+        "cryptography",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/core-foundation",
+          "name": "core-foundation",
+          "optional": false,
+          "req": "^0.9.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/core-foundation-sys",
+          "name": "core-foundation-sys",
+          "optional": false,
+          "req": "^0.8.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.139"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": true,
+          "req": "^0.4.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/security-framework-sys",
+          "name": "security-framework-sys",
+          "optional": false,
+          "req": "^2.11.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 760,
+          "content": "content/sha256/ff1d022f35ff76531a361ad421ba7ee61ce186dc6516f72fc819ec4b2a5567a4",
+          "digest": "sha256:ff1d022f35ff76531a361ad421ba7ee61ce186dc6516f72fc819ec4b2a5567a4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/91e934255ba3b2f21103d68c5581c23ef34aa95c4628e4405b8c901935e11c69",
+          "digest": "sha256:91e934255ba3b2f21103d68c5581c23ef34aa95c4628e4405b8c901935e11c69",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "OSX_10_10": [
+          "OSX_10_9",
+          "security-framework-sys/OSX_10_10"
+        ],
+        "OSX_10_11": [
+          "OSX_10_10",
+          "security-framework-sys/OSX_10_11"
+        ],
+        "OSX_10_12": [
+          "OSX_10_11",
+          "security-framework-sys/OSX_10_12"
+        ],
+        "OSX_10_13": [
+          "OSX_10_12",
+          "security-framework-sys/OSX_10_13",
+          "alpn",
+          "session-tickets",
+          "serial-number-bigint"
+        ],
+        "OSX_10_14": [
+          "OSX_10_13",
+          "security-framework-sys/OSX_10_14"
+        ],
+        "OSX_10_15": [
+          "OSX_10_14",
+          "security-framework-sys/OSX_10_15"
+        ],
+        "OSX_10_9": [
+          "security-framework-sys/OSX_10_9"
+        ],
+        "alpn": [],
+        "default": [
+          "OSX_10_12"
+        ],
+        "job-bless": [],
+        "log": [
+          "dep:log"
+        ],
+        "nightly": [],
+        "serial-number-bigint": [
+          "dep:num-bigint"
+        ],
+        "session-tickets": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "iOS",
+        "TLS",
+        "SSL",
+        "crypto",
+        "keychain"
+      ],
       "manifest": "crates-io/security-framework/2.11.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -320,6 +592,17 @@
         "edition": "2021",
         "name": "security_framework",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:897b2245f0b511c87893af39b033e5ca9cce68824c4d7e7630b5a1d339658d02",
+        "package": "security-framework",
+        "registry": "crates-io",
+        "version": "2.11.1"
+      },
+      "vcs": {
+        "commit": "57c368883fc5b676c3d2b6867f3b6620d7d1bf5e",
+        "path": "security-framework",
+        "system": "git"
       },
       "version": "2.11.1",
       "yanked": false

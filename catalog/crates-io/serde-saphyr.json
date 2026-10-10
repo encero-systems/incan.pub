@@ -23,11 +23,258 @@
       "advisories": 0,
       "archive": "sha256:89920517992ae874c0926b9bd518fad056f3f5a022a0448833f68a52117ec2d9",
       "assets": [],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "config",
+        "command-line-utilities"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ahash",
+          "name": "ahash",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/annotate-snippets",
+          "name": "annotate-snippets",
+          "optional": true,
+          "req": "^0.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": true,
+          "req": ">=0.21.0, <=0.22.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/encoding_rs_io",
+          "name": "encoding_rs_io",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/figment",
+          "name": "figment",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/figment2",
+          "name": "figment2",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/garde",
+          "name": "garde",
+          "optional": true,
+          "req": ">=0.19.0, <0.24"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "wasm_js"
+          ],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(target_arch = \"wasm32\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/granit-parser",
+          "name": "granit-parser",
+          "optional": true,
+          "req": "^0.0.7"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fancy"
+          ],
+          "loaf": "crates-io/miette",
+          "name": "miette",
+          "optional": true,
+          "req": "^7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/nohash-hasher",
+          "name": "nohash-hasher",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": true,
+          "req": ">=0.2.0, <=0.2.19"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": ">=1.0.0, <1.16.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/validator",
+          "name": "validator",
+          "optional": true,
+          "req": ">=0.11, <0.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zmij",
+          "name": "zmij",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 47253,
+          "content": "content/sha256/45368166c152c7690813ee6a5dc9678e377d8a5e584a8e370012456d4a3ff484",
+          "digest": "sha256:45368166c152c7690813ee6a5dc9678e377d8a5e584a8e370012456d4a3ff484",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "serialize",
+          "deserialize"
+        ],
+        "deserialize": [
+          "dep:num-traits",
+          "dep:annotate-snippets",
+          "dep:granit-parser",
+          "dep:smallvec",
+          "dep:encoding_rs_io",
+          "dep:ahash"
+        ],
+        "figment": [
+          "dep:figment",
+          "deserialize"
+        ],
+        "figment2": [
+          "dep:figment2",
+          "deserialize"
+        ],
+        "garde": [
+          "dep:garde",
+          "deserialize"
+        ],
+        "huge_documents": [],
+        "include": [
+          "deserialize"
+        ],
+        "include_fs": [
+          "include"
+        ],
+        "miette": [
+          "dep:miette",
+          "deserialize"
+        ],
+        "properties": [
+          "deserialize"
+        ],
+        "robotics": [
+          "deserialize"
+        ],
+        "serde_derived_types": [
+          "dep:serde"
+        ],
+        "serialize": [
+          "dep:base64",
+          "dep:num-traits",
+          "dep:zmij",
+          "dep:nohash-hasher"
+        ],
+        "validator": [
+          "dep:validator",
+          "deserialize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "yaml",
+        "serde",
+        "config",
+        "ros",
+        "wasm"
+      ],
       "manifest": "crates-io/serde-saphyr/0.0.29/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +285,17 @@
         "edition": "2024",
         "name": "serde_saphyr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7bd22781911de0ca6debda95f073c8f18bec65d1a94f1fa9573f3102e514cea4",
+        "package": "serde-saphyr",
+        "registry": "crates-io",
+        "version": "0.0.29"
+      },
+      "vcs": {
+        "commit": "f23c28ce14fdfc0c254867468222e51267853b35",
+        "path": "",
+        "system": "git"
       },
       "version": "0.0.29",
       "yanked": false

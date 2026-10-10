@@ -25,11 +25,89 @@
       "advisories": 0,
       "archive": "sha256:5a955c39fb9b6e37044a93f783b4f1dd88cbbe5c7f4893f18d42762ca76e9bfc",
       "assets": [],
+      "categories": [
+        "development-tools::profiling"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/dashmap",
+          "name": "dashmap",
+          "optional": true,
+          "req": "^5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-hash",
+          "name": "rustc-hash",
+          "optional": true,
+          "req": "^1.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 421,
+          "content": "content/sha256/8a8a5d00072b2f1c99a47b50e45cd2604485d1ce1b242eb7dd2895d4c8ca8625",
+          "digest": "sha256:8a8a5d00072b2f1c99a47b50e45cd2604485d1ce1b242eb7dd2895d4c8ca8625",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "dashmap": [
+          "dep:dashmap"
+        ],
+        "enable": [
+          "dashmap",
+          "once_cell",
+          "rustc-hash"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "print_at_exit": [
+          "enable"
+        ],
+        "rustc-hash": [
+          "dep:rustc-hash"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/countme/3.0.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +118,17 @@
         "edition": "2018",
         "name": "countme",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7704b5fdd17b18ae31c4c1da5a2e0305a2bf17b5249300a9ee9ed7b72114c636",
+        "package": "countme",
+        "registry": "crates-io",
+        "version": "3.0.1"
+      },
+      "vcs": {
+        "commit": "9e037c4293fb8ef6c1c632094349734955f06d89",
+        "path": "",
+        "system": "git"
       },
       "version": "3.0.1",
       "yanked": false

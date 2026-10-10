@@ -268,11 +268,229 @@
           "unit_identity": "sha256:7a4c3bda528eae783fc6894d2cd9a959ef4280513d429591956fca1effb189c6"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.17.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ruzstd",
+          "name": "ruzstd",
+          "optional": true,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.255.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3167,
+          "content": "content/sha256/e6c285c33bbde25c60da599abdd76b84f0909f909242eecfb7a8b320568321c3",
+          "digest": "sha256:e6c285c33bbde25c60da599abdd76b84f0909f909242eecfb7a8b320568321c3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1064,
+          "content": "content/sha256/0b74dfa0bcee5c420c6b7f67b4b2658f9ab8388c97b8e733975f2cecbdd668a6",
+          "digest": "sha256:0b74dfa0bcee5c420c6b7f67b4b2658f9ab8388c97b8e733975f2cecbdd668a6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 57262,
+          "content": "content/sha256/cc283289af08d7f13058341d2c795eb1e4ff389054ad9750e72826f857a1618a",
+          "digest": "sha256:cc283289af08d7f13058341d2c795eb1e4ff389054ad9750e72826f857a1618a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": [
+          "read",
+          "write",
+          "build",
+          "std",
+          "compression",
+          "names",
+          "wasm"
+        ],
+        "alloc": [
+          "dep:alloc"
+        ],
+        "archive": [],
+        "build": [
+          "build_core",
+          "write_std",
+          "elf"
+        ],
+        "build_core": [
+          "read_core",
+          "write_core"
+        ],
+        "cargo-all": [],
+        "coff": [],
+        "compression": [
+          "dep:flate2",
+          "dep:ruzstd",
+          "std"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "read",
+          "compression"
+        ],
+        "doc": [
+          "all"
+        ],
+        "elf": [],
+        "goff": [],
+        "macho": [],
+        "names": [],
+        "pe": [
+          "coff"
+        ],
+        "read": [
+          "read_core",
+          "archive",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "xcoff"
+        ],
+        "read_core": [],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "memchr/rustc-dep-of-std"
+        ],
+        "std": [
+          "memchr/std"
+        ],
+        "unaligned": [],
+        "unstable": [],
+        "unstable-all": [
+          "all",
+          "unstable",
+          "goff"
+        ],
+        "wasm": [
+          "dep:wasmparser"
+        ],
+        "write": [
+          "write_std",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "xcoff"
+        ],
+        "write_core": [
+          "dep:crc32fast",
+          "dep:indexmap",
+          "dep:hashbrown"
+        ],
+        "write_std": [
+          "write_core",
+          "std",
+          "indexmap?/std",
+          "crc32fast?/std"
+        ],
+        "xcoff": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "object",
+        "elf",
+        "mach-o",
+        "pe",
+        "coff"
+      ],
       "manifest": "crates-io/object/0.40.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -283,6 +501,17 @@
         "edition": "2024",
         "name": "object",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:dd229a0361b9d0d4396176e02d65897f487eebeab7caa6d443855ee152ca0b9c",
+        "package": "object",
+        "registry": "crates-io",
+        "version": "0.40.0"
+      },
+      "vcs": {
+        "commit": "400e64fbcb03fddb4b1ae8aef1868976ab999acc",
+        "path": "",
+        "system": "git"
       },
       "version": "0.40.0",
       "yanked": false
@@ -420,6 +649,121 @@
           "unit_identity": "sha256:0e3e828fde221bd36164ed25c0cdce124ac3f985d4554cb5b498a6311a16002d"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.17.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ruzstd",
+          "name": "ruzstd",
+          "optional": true,
+          "req": "^0.8.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.247.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3167,
+          "content": "content/sha256/2ab3c7e4d9d73298bd970eca9a56aaac93c48d5e44aa81b536b0f3a06f3f167a",
+          "digest": "sha256:2ab3c7e4d9d73298bd970eca9a56aaac93c48d5e44aa81b536b0f3a06f3f167a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1064,
+          "content": "content/sha256/0b74dfa0bcee5c420c6b7f67b4b2658f9ab8388c97b8e733975f2cecbdd668a6",
+          "digest": "sha256:0b74dfa0bcee5c420c6b7f67b4b2658f9ab8388c97b8e733975f2cecbdd668a6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 47278,
+          "content": "content/sha256/76a4253b77417a8aa32f8615adefe654822b49dcc1c4407a10a437911123d894",
+          "digest": "sha256:76a4253b77417a8aa32f8615adefe654822b49dcc1c4407a10a437911123d894",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -435,6 +779,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -452,6 +797,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -469,6 +815,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -486,14 +833,114 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "all": [
+          "read",
+          "write",
+          "build",
+          "std",
+          "compression",
+          "wasm"
+        ],
+        "alloc": [
+          "dep:alloc"
+        ],
+        "archive": [],
+        "build": [
+          "build_core",
+          "write_std",
+          "elf"
+        ],
+        "build_core": [
+          "read_core",
+          "write_core"
+        ],
+        "cargo-all": [],
+        "coff": [],
+        "compression": [
+          "dep:flate2",
+          "dep:ruzstd",
+          "std"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "read",
+          "compression"
+        ],
+        "doc": [
+          "all"
+        ],
+        "elf": [],
+        "macho": [],
+        "pe": [
+          "coff"
+        ],
+        "read": [
+          "read_core",
+          "archive",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "xcoff"
+        ],
+        "read_core": [],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "memchr/rustc-dep-of-std"
+        ],
+        "std": [
+          "memchr/std"
+        ],
+        "unaligned": [],
+        "unstable": [],
+        "unstable-all": [
+          "all",
+          "unstable"
+        ],
+        "wasm": [
+          "dep:wasmparser"
+        ],
+        "write": [
+          "write_std",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "xcoff"
+        ],
+        "write_core": [
+          "dep:crc32fast",
+          "dep:indexmap",
+          "dep:hashbrown"
+        ],
+        "write_std": [
+          "write_core",
+          "std",
+          "indexmap?/std",
+          "crc32fast?/std"
+        ],
+        "xcoff": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "object",
+        "elf",
+        "mach-o",
+        "pe",
+        "coff"
+      ],
       "manifest": "crates-io/object/0.39.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -504,6 +951,17 @@
         "edition": "2018",
         "name": "object",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2e5a6c098c7a3b6547378093f5cc30bc54fd361ce711e05293a5cc589562739b",
+        "package": "object",
+        "registry": "crates-io",
+        "version": "0.39.1"
+      },
+      "vcs": {
+        "commit": "e5ffee99b041b9fe12b9b203da587fccecdd72a1",
+        "path": "",
+        "system": "git"
       },
       "version": "0.39.1",
       "yanked": false
@@ -637,6 +1095,121 @@
           "unit_identity": "sha256:f2e513b21d6b8af0b900a24864842a2db4429438626ac4319333a6f32d34adf6"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flate2",
+          "name": "flate2",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.15.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ruzstd",
+          "name": "ruzstd",
+          "optional": true,
+          "req": "^0.8.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasmparser",
+          "name": "wasmparser",
+          "optional": true,
+          "req": "^0.236.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2259,
+          "content": "content/sha256/287c6a1b30c7d64d91cdc02a7daaa7c840b97b20f999d3bd958993fb11c1a0ed",
+          "digest": "sha256:287c6a1b30c7d64d91cdc02a7daaa7c840b97b20f999d3bd958993fb11c1a0ed",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1064,
+          "content": "content/sha256/0b74dfa0bcee5c420c6b7f67b4b2658f9ab8388c97b8e733975f2cecbdd668a6",
+          "digest": "sha256:0b74dfa0bcee5c420c6b7f67b4b2658f9ab8388c97b8e733975f2cecbdd668a6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 40328,
+          "content": "content/sha256/3911553c97eaad230a773307ae557ccecff2e1f20dac87a3911ad4f5a22df112",
+          "digest": "sha256:3911553c97eaad230a773307ae557ccecff2e1f20dac87a3911ad4f5a22df112",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -651,6 +1224,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -670,6 +1244,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -686,6 +1261,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -702,6 +1278,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -718,14 +1295,126 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "all": [
+          "read",
+          "write",
+          "build",
+          "std",
+          "compression",
+          "wasm"
+        ],
+        "alloc": [
+          "dep:alloc"
+        ],
+        "archive": [],
+        "build": [
+          "build_core",
+          "write_std",
+          "elf"
+        ],
+        "build_core": [
+          "read_core",
+          "write_core"
+        ],
+        "cargo-all": [],
+        "coff": [],
+        "compression": [
+          "dep:flate2",
+          "dep:ruzstd",
+          "std"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "read",
+          "compression"
+        ],
+        "doc": [
+          "read_core",
+          "write_std",
+          "build_core",
+          "std",
+          "compression",
+          "archive",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "wasm",
+          "xcoff"
+        ],
+        "elf": [],
+        "macho": [],
+        "pe": [
+          "coff"
+        ],
+        "read": [
+          "read_core",
+          "archive",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "xcoff",
+          "unaligned"
+        ],
+        "read_core": [],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "memchr/rustc-dep-of-std"
+        ],
+        "std": [
+          "memchr/std"
+        ],
+        "unaligned": [],
+        "unstable": [],
+        "unstable-all": [
+          "all",
+          "unstable"
+        ],
+        "wasm": [
+          "dep:wasmparser"
+        ],
+        "write": [
+          "write_std",
+          "coff",
+          "elf",
+          "macho",
+          "pe",
+          "xcoff"
+        ],
+        "write_core": [
+          "dep:crc32fast",
+          "dep:indexmap",
+          "dep:hashbrown"
+        ],
+        "write_std": [
+          "write_core",
+          "std",
+          "indexmap?/std",
+          "crc32fast?/std"
+        ],
+        "xcoff": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "object",
+        "elf",
+        "mach-o",
+        "pe",
+        "coff"
+      ],
       "manifest": "crates-io/object/0.37.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -736,6 +1425,17 @@
         "edition": "2018",
         "name": "object",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ff76201f031d8863c38aa7f905eca4f53abbfa15f609db4277d44cd8938f33fe",
+        "package": "object",
+        "registry": "crates-io",
+        "version": "0.37.3"
+      },
+      "vcs": {
+        "commit": "916c47b90e5c0bea139ca4bdfc53811f7d2c3383",
+        "path": "",
+        "system": "git"
       },
       "version": "0.37.3",
       "yanked": false

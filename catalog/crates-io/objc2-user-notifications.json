@@ -66,11 +66,204 @@
           "unit_identity": "sha256:343342ffe4c85285c127b03c12303eb3648c26842b29ac4ab7def9f22de828be"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CLRegion"
+          ],
+          "loaf": "crates-io/objc2-core-location",
+          "name": "objc2-core-location",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 843,
+          "content": "content/sha256/b45e89caebbf8720786100a043310ea7bdc7ffa28b463ab2081ce518d9ca57a9",
+          "digest": "sha256:b45e89caebbf8720786100a043310ea7bdc7ffa28b463ab2081ce518d9ca57a9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 391,
+          "content": "content/sha256/9334809323634217cb04652e79dcbb68670efc42b1dff9ab322cd27c49ab16c1",
+          "digest": "sha256:9334809323634217cb04652e79dcbb68670efc42b1dff9ab322cd27c49ab16c1",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "NSString_UserNotifications": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSString"
+        ],
+        "UNError": [
+          "objc2-foundation/NSString"
+        ],
+        "UNNotification": [
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSObject"
+        ],
+        "UNNotificationAction": [
+          "bitflags",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "UNNotificationActionIcon": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "UNNotificationAttachment": [
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSURL"
+        ],
+        "UNNotificationAttributedMessageContext": [],
+        "UNNotificationCategory": [
+          "bitflags",
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "UNNotificationContent": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSValue"
+        ],
+        "UNNotificationRequest": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "UNNotificationResponse": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "UNNotificationServiceExtension": [],
+        "UNNotificationSettings": [
+          "objc2-foundation/NSObject"
+        ],
+        "UNNotificationSound": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "UNNotificationTrigger": [
+          "objc2-foundation/NSCalendar",
+          "objc2-foundation/NSDate",
+          "objc2-foundation/NSObject"
+        ],
+        "UNUserNotificationCenter": [
+          "bitflags",
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSSet",
+          "objc2-foundation/NSString"
+        ],
+        "alloc": [],
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "NSString_UserNotifications",
+          "UNError",
+          "UNNotification",
+          "UNNotificationAction",
+          "UNNotificationActionIcon",
+          "UNNotificationAttachment",
+          "UNNotificationAttributedMessageContext",
+          "UNNotificationCategory",
+          "UNNotificationContent",
+          "UNNotificationRequest",
+          "UNNotificationResponse",
+          "UNNotificationServiceExtension",
+          "UNNotificationSettings",
+          "UNNotificationSound",
+          "UNNotificationTrigger",
+          "UNUserNotificationCenter",
+          "bitflags",
+          "block2",
+          "objc2-core-location"
+        ],
+        "objc2-core-location": [
+          "dep:objc2-core-location"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-user-notifications/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -81,6 +274,17 @@
         "edition": "2021",
         "name": "objc2_user_notifications",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9df9128cbbfef73cda168416ccf7f837b62737d748333bfe9ab71c245d76613e",
+        "package": "objc2-user-notifications",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-user-notifications",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

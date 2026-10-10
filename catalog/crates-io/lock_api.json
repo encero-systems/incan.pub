@@ -400,6 +400,65 @@
           "unit_identity": "sha256:efc895039f296585de5938104f1b000ee6d265c0567c73fe1116bfa34f09caed"
         }
       ],
+      "categories": [
+        "concurrency",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/owning_ref",
+          "name": "owning_ref",
+          "optional": true,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/scopeguard",
+          "name": "scopeguard",
+          "optional": false,
+          "req": "^1.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.126"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 432,
+          "content": "content/sha256/57de6aea81b834b98945e4aef45da247ddb1c54cdd023f3c66f6550de8b30b97",
+          "digest": "sha256:57de6aea81b834b98945e4aef45da247ddb1c54cdd023f3c66f6550de8b30b97",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+          "digest": "sha256:c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -408,14 +467,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arc_lock": [],
+        "atomic_usize": [],
+        "default": [
+          "atomic_usize"
+        ],
+        "nightly": [],
+        "owning_ref": [
+          "dep:owning_ref"
+        ],
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "mutex",
+        "rwlock",
+        "lock",
+        "no_std"
+      ],
       "manifest": "crates-io/lock_api/0.4.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -425,6 +505,17 @@
         "edition": "2021",
         "name": "lock_api",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:224399e74b87b5f3557511d98dff8b14089b3dadafcab6bb93eab67d3aace965",
+        "package": "lock_api",
+        "registry": "crates-io",
+        "version": "0.4.14"
+      },
+      "vcs": {
+        "commit": "d7828fff7b5d6327ae608e82db45f888b344449a",
+        "path": "lock_api",
+        "system": "git"
       },
       "version": "0.4.14",
       "yanked": false

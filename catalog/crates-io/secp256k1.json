@@ -26,11 +26,119 @@
       "advisories": 0,
       "archive": "sha256:a05c035039ac859060810aa051c1273b0fc1f18ef7ca4d3d83ee55fe17b88b0f",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": "^0.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/secp256k1-sys",
+          "name": "secp256k1-sys",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.103"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3331,
+          "content": "content/sha256/455e0d7e24b54caea709b2ecca42b906ddec0c317a69c65e5ca71a5f0dc70876",
+          "digest": "sha256:455e0d7e24b54caea709b2ecca42b906ddec0c317a69c65e5ca71a5f0dc70876",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 7049,
+          "content": "content/sha256/7179683e8000e6bdc9bbc60d85edf0a4ac8e76f951857f54fcb775d5886f1309",
+          "digest": "sha256:7179683e8000e6bdc9bbc60d85edf0a4ac8e76f951857f54fcb775d5886f1309",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 29297,
+          "content": "content/sha256/e51f34e37031d4182cc95ee8a28c5ab73abd53998fe7c797c713e9dad195e315",
+          "digest": "sha256:e51f34e37031d4182cc95ee8a28c5ab73abd53998fe7c797c713e9dad195e315",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "secp256k1-sys/alloc"
+        ],
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "default": [
+          "std"
+        ],
+        "global-context": [
+          "std"
+        ],
+        "global-context-less-secure": [
+          "global-context"
+        ],
+        "lowmemory": [
+          "secp256k1-sys/lowmemory"
+        ],
+        "rand": [
+          "dep:rand"
+        ],
+        "recovery": [
+          "secp256k1-sys/recovery"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc",
+          "secp256k1-sys/std",
+          "rand?/std",
+          "rand?/std_rng",
+          "rand?/thread_rng",
+          "rand?/small_rng"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ECDSA",
+        "secp256k1",
+        "libsecp256k1",
+        "bitcoin"
+      ],
       "manifest": "crates-io/secp256k1/0.33.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +149,17 @@
         "edition": "2021",
         "name": "secp256k1",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d7f404a8dab7a7a5a631e741d8699aa9c8e1d689fc26ccf897c7187565490b69",
+        "package": "secp256k1",
+        "registry": "crates-io",
+        "version": "0.33.1"
+      },
+      "vcs": {
+        "commit": "8820a6e310be639d27ded9e3cc9bf3895fde545a",
+        "path": "",
+        "system": "git"
       },
       "version": "0.33.1",
       "yanked": false

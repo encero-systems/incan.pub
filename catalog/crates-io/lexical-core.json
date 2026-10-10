@@ -258,6 +258,92 @@
           "unit_identity": "sha256:d8625dabcdbb8b9f628604b38efe0e24dbf4dec20f48fe64c0170eb1685677bc"
         }
       ],
+      "categories": [
+        "parsing",
+        "encoding",
+        "no-std",
+        "value-formatting"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/lexical-parse-float",
+          "name": "lexical-parse-float",
+          "optional": true,
+          "req": "^1.0.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/lexical-parse-integer",
+          "name": "lexical-parse-integer",
+          "optional": true,
+          "req": "^1.0.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/lexical-util",
+          "name": "lexical-util",
+          "optional": false,
+          "req": "^1.0.7"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/lexical-write-float",
+          "name": "lexical-write-float",
+          "optional": true,
+          "req": "^1.0.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/lexical-write-integer",
+          "name": "lexical-write-integer",
+          "optional": true,
+          "req": "^1.0.6"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 22626,
+          "content": "content/sha256/9eb1bda170506c954431f288a2749710fbca9baf727c717d26dbd3342ca8cc29",
+          "digest": "sha256:9eb1bda170506c954431f288a2749710fbca9baf727c717d26dbd3342ca8cc29",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10850,
+          "content": "content/sha256/8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "digest": "sha256:8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 19251,
+          "content": "content/sha256/99aab70a96f3ecab683d8a319d9070af2213ae4c1601fb053fbe85e1361e32fe",
+          "digest": "sha256:99aab70a96f3ecab683d8a319d9070af2213ae4c1601fb053fbe85e1361e32fe",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE.md",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -272,14 +358,130 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "compact": [
+          "lexical-write-integer?/compact",
+          "lexical-write-float?/compact",
+          "lexical-parse-integer?/compact",
+          "lexical-parse-float?/compact"
+        ],
+        "default": [
+          "std",
+          "write-integers",
+          "write-floats",
+          "parse-integers",
+          "parse-floats"
+        ],
+        "f128": [
+          "lexical-util/f128",
+          "lexical-parse-float?/f128",
+          "lexical-write-float?/f128"
+        ],
+        "f16": [
+          "lexical-util/f16",
+          "lexical-parse-float?/f16",
+          "lexical-write-float?/f16"
+        ],
+        "floats": [
+          "parse-floats",
+          "write-floats"
+        ],
+        "format": [
+          "lexical-util/format",
+          "lexical-parse-integer?/format",
+          "lexical-parse-float?/format",
+          "lexical-write-integer?/format",
+          "lexical-write-float?/format"
+        ],
+        "integers": [
+          "parse-integers",
+          "write-integers"
+        ],
+        "lexical-parse-float": [
+          "dep:lexical-parse-float"
+        ],
+        "lexical-parse-integer": [
+          "dep:lexical-parse-integer"
+        ],
+        "lexical-write-float": [
+          "dep:lexical-write-float"
+        ],
+        "lexical-write-integer": [
+          "dep:lexical-write-integer"
+        ],
+        "lint": [
+          "lexical-util/lint",
+          "lexical-write-integer?/lint",
+          "lexical-write-float?/lint",
+          "lexical-parse-integer?/lint",
+          "lexical-parse-float?/lint"
+        ],
+        "parse": [
+          "parse-integers",
+          "parse-floats"
+        ],
+        "parse-floats": [
+          "lexical-parse-float"
+        ],
+        "parse-integers": [
+          "lexical-parse-integer"
+        ],
+        "power-of-two": [
+          "lexical-util/power-of-two",
+          "lexical-write-integer?/power-of-two",
+          "lexical-write-float?/power-of-two",
+          "lexical-parse-integer?/power-of-two",
+          "lexical-parse-float?/power-of-two"
+        ],
+        "radix": [
+          "power-of-two",
+          "lexical-util/radix",
+          "lexical-write-integer?/radix",
+          "lexical-write-float?/radix",
+          "lexical-parse-integer?/radix",
+          "lexical-parse-float?/radix"
+        ],
+        "std": [
+          "lexical-util/std",
+          "lexical-write-integer",
+          "dep:lexical-write-integer",
+          "lexical-write-integer/std",
+          "lexical-write-float",
+          "dep:lexical-write-float",
+          "lexical-write-float/std",
+          "lexical-parse-integer",
+          "dep:lexical-parse-integer",
+          "lexical-parse-integer/std",
+          "lexical-parse-float",
+          "dep:lexical-parse-float",
+          "lexical-parse-float/std"
+        ],
+        "write": [
+          "write-integers",
+          "write-floats"
+        ],
+        "write-floats": [
+          "lexical-write-float"
+        ],
+        "write-integers": [
+          "lexical-write-integer"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parsing",
+        "lexical",
+        "encoding",
+        "no_std"
+      ],
       "manifest": "crates-io/lexical-core/1.0.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -289,6 +491,17 @@
         "edition": "2021",
         "name": "lexical_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7d8d125a277f807e55a77304455eb7b1cb52f2b18c143b60e766c120bd64a594",
+        "package": "lexical-core",
+        "registry": "crates-io",
+        "version": "1.0.6"
+      },
+      "vcs": {
+        "commit": "ddfc0f6bfcc0085ff982f567f41f24a5541a14ea",
+        "path": "lexical-core",
+        "system": "git"
       },
       "version": "1.0.6",
       "yanked": false

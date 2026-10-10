@@ -474,11 +474,181 @@
           "unit_identity": "sha256:39e72f4e802b50bc2631a4f0035f314a527fb76859d539babafdf28e0cee1db3"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/convert_case",
+          "name": "convert_case",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.45"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-xid",
+          "name": "unicode-xid",
+          "optional": true,
+          "req": "^0.2.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 415,
+          "content": "content/sha256/9ef58c81f6e1e03c19aacdb4cc0e96370497e4566db2c495c15d824f59a948ac",
+          "digest": "sha256:9ef58c81f6e1e03c19aacdb4cc0e96370497e4566db2c495c15d824f59a948ac",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/8a35369f3ca263b3c62fbb5032947e53b6bfebc6c8a4d1bb982de1c069f6fba5",
+          "digest": "sha256:8a35369f3ca263b3c62fbb5032947e53b6bfebc6c8a4d1bb982de1c069f6fba5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "add": [
+          "syn/extra-traits",
+          "syn/visit"
+        ],
+        "add_assign": [
+          "syn/extra-traits",
+          "syn/visit"
+        ],
+        "as_ref": [
+          "syn/extra-traits",
+          "syn/visit"
+        ],
+        "constructor": [],
+        "debug": [
+          "syn/extra-traits",
+          "dep:unicode-xid"
+        ],
+        "default": [],
+        "deref": [],
+        "deref_mut": [],
+        "display": [
+          "syn/extra-traits",
+          "dep:unicode-xid",
+          "dep:convert_case"
+        ],
+        "eq": [
+          "syn/extra-traits",
+          "syn/visit"
+        ],
+        "error": [
+          "syn/extra-traits"
+        ],
+        "from": [
+          "syn/extra-traits"
+        ],
+        "from_str": [
+          "syn/full",
+          "syn/visit",
+          "dep:convert_case"
+        ],
+        "full": [
+          "add",
+          "add_assign",
+          "as_ref",
+          "constructor",
+          "debug",
+          "deref",
+          "deref_mut",
+          "display",
+          "eq",
+          "error",
+          "from",
+          "from_str",
+          "index",
+          "index_mut",
+          "into",
+          "into_iterator",
+          "is_variant",
+          "mul",
+          "mul_assign",
+          "not",
+          "sum",
+          "try_from",
+          "try_into",
+          "try_unwrap",
+          "unwrap"
+        ],
+        "index": [],
+        "index_mut": [],
+        "into": [
+          "syn/extra-traits",
+          "syn/visit-mut"
+        ],
+        "into_iterator": [],
+        "is_variant": [
+          "dep:convert_case"
+        ],
+        "mul": [
+          "syn/extra-traits",
+          "syn/visit"
+        ],
+        "mul_assign": [
+          "syn/extra-traits",
+          "syn/visit"
+        ],
+        "not": [
+          "syn/extra-traits"
+        ],
+        "sum": [],
+        "testing-helpers": [
+          "syn/full"
+        ],
+        "try_from": [],
+        "try_into": [
+          "syn/extra-traits",
+          "syn/full",
+          "syn/visit-mut"
+        ],
+        "try_unwrap": [
+          "dep:convert_case"
+        ],
+        "unwrap": [
+          "dep:convert_case"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/derive_more-impl/2.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -488,6 +658,17 @@
         "edition": "2021",
         "name": "derive_more_impl",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:799a97264921d8623a957f6c3b9011f3b5492f557bbb7a5a19b7fa6d06ba8dcb",
+        "package": "derive_more-impl",
+        "registry": "crates-io",
+        "version": "2.1.1"
+      },
+      "vcs": {
+        "commit": "f7bb41ac054c060caaf5ff3212e74e42794cb4b4",
+        "path": "impl",
+        "system": "git"
       },
       "version": "2.1.1",
       "yanked": false

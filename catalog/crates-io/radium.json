@@ -100,11 +100,70 @@
           "unit_identity": "sha256:efee91d90c1e940353b44c27e1f34ad209ae7418f024d9e626396b31e2f16807"
         }
       ],
+      "categories": [
+        "concurrency",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7323,
+          "content": "content/sha256/3ca30d4d8d796c2ecf3652091334c857bddc5e0b1a15246c301fd1911812e549",
+          "digest": "sha256:3ca30d4d8d796c2ecf3652091334c857bddc5e0b1a15246c301fd1911812e549",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1100,
+          "content": "content/sha256/f08f8e7af9d12672dc1c54f41d8ac46fbba22982d471dbc7a1c743b86e35269e",
+          "digest": "sha256:f08f8e7af9d12672dc1c54f41d8ac46fbba22982d471dbc7a1c743b86e35269e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "portable-atomic": [
+          "dep:portable-atomic"
+        ],
+        "portable-atomic-fallback": [
+          "portable-atomic",
+          "dep:portable-atomic",
+          "portable-atomic/fallback"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "atomic",
+        "cell",
+        "sync",
+        "generic",
+        "trait"
+      ],
       "manifest": "crates-io/radium/1.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -115,6 +174,17 @@
         "edition": "2021",
         "name": "radium",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1775bc532a9bfde46e26eba441ca1171b91608d14a3bae71fea371f18a00cffe",
+        "package": "radium",
+        "registry": "crates-io",
+        "version": "1.1.1"
+      },
+      "vcs": {
+        "commit": "d45d8fddb27dd9900c72adbbdb7108b355028a8f",
+        "path": "radium",
+        "system": "git"
       },
       "version": "1.1.1",
       "yanked": false
@@ -215,11 +285,37 @@
           "unit_identity": "sha256:550d9561b7c3ffea34120164b70675ee929ca0a6ad02a0cd9c5ef1353009601e"
         }
       ],
+      "categories": [
+        "concurrency",
+        "no-std"
+      ],
+      "dependencies": [],
+      "documents": [
+        {
+          "bytes": 3901,
+          "content": "content/sha256/23e6ae3cc7d7c8d7b608f87fbe79dd7af36dd9c1c00a4d2ff6bb45171a58799d",
+          "digest": "sha256:23e6ae3cc7d7c8d7b608f87fbe79dd7af36dd9c1c00a4d2ff6bb45171a58799d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1079,
+          "content": "content/sha256/13f4cc9fbc8d4a447b28aa84019c10ad4abf4b5f6919db061bf6690ccc23bc02",
+          "digest": "sha256:13f4cc9fbc8d4a447b28aa84019c10ad4abf4b5f6919db061bf6690ccc23bc02",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -227,6 +323,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -234,6 +331,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -241,14 +339,23 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "atomic",
+        "cell",
+        "sync",
+        "generic",
+        "trait"
+      ],
       "manifest": "crates-io/radium/0.7.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -259,6 +366,17 @@
         "edition": "2018",
         "name": "radium",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09",
+        "package": "radium",
+        "registry": "crates-io",
+        "version": "0.7.0"
+      },
+      "vcs": {
+        "commit": "3f27e0d827338aee919213fd071b99819a1b9fff",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.0",
       "yanked": false

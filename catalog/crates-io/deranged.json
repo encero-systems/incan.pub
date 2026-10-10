@@ -194,11 +194,146 @@
           "unit_identity": "sha256:f944d4a69b7ce991a28a0474480577fd1ac27c5af820b8ea4ad84482c3f6f1f8"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/deranged-macros",
+          "name": "deranged-macros",
+          "optional": true,
+          "req": "=0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": true,
+          "req": "^0.2.15"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/powerfmt",
+          "name": "powerfmt",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quickcheck",
+          "name": "quickcheck",
+          "optional": true,
+          "req": "^1.0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand010",
+          "optional": true,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand08",
+          "optional": true,
+          "req": "^0.8.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand09",
+          "optional": true,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 80,
+          "content": "content/sha256/fc4c9482d9e5225630da44e5371d6fa3f37220e2f4da2dac076cf4cd4f9592e7",
+          "digest": "sha256:fc4c9482d9e5225630da44e5371d6fa3f37220e2f4da2dac076cf4cd4f9592e7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11349,
+          "content": "content/sha256/edd65bdd88957a205c47d53fa499eed8865a70320f0f03f6391668cb304ea376",
+          "digest": "sha256:edd65bdd88957a205c47d53fa499eed8865a70320f0f03f6391668cb304ea376",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/231c837c45eb53f108fb48929e488965bc4fcc14e9ea21d35f50e6b99d98685b",
+          "digest": "sha256:231c837c45eb53f108fb48929e488965bc4fcc14e9ea21d35f50e6b99d98685b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [],
+        "macros": [
+          "dep:deranged-macros"
+        ],
+        "num": [
+          "dep:num-traits"
+        ],
+        "powerfmt": [
+          "dep:powerfmt"
+        ],
+        "quickcheck": [
+          "dep:quickcheck",
+          "alloc"
+        ],
+        "rand": [
+          "rand08",
+          "rand09",
+          "rand010"
+        ],
+        "rand010": [
+          "dep:rand010"
+        ],
+        "rand08": [
+          "dep:rand08"
+        ],
+        "rand09": [
+          "dep:rand09"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "integer",
+        "int",
+        "range"
+      ],
       "manifest": "crates-io/deranged/0.5.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +344,17 @@
         "edition": "2021",
         "name": "deranged",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7cd812cc2bc1d69d4764bd80df88b4317eaef9e773c75226407d9bc0876b211c",
+        "package": "deranged",
+        "registry": "crates-io",
+        "version": "0.5.8"
+      },
+      "vcs": {
+        "commit": "7d0c671e8c806b96d582af197df3c620e09cb33b",
+        "path": "deranged",
+        "system": "git"
       },
       "version": "0.5.8",
       "yanked": false

@@ -120,11 +120,217 @@
           "unit_identity": "sha256:c9dadb09a768a5382b43b23e1cc08974a63201991fd8048a49a42490e5e1004e"
         }
       ],
+      "categories": [
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.7.0",
+          "target": "cfg(target_os = \"macos\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossbeam-channel",
+          "name": "crossbeam-channel",
+          "optional": true,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/flume",
+          "name": "flume",
+          "optional": true,
+          "req": "^0.11.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/fsevent-sys",
+          "name": "fsevent-sys",
+          "optional": true,
+          "req": "^4.0.0",
+          "target": "cfg(target_os = \"macos\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/inotify",
+          "name": "inotify",
+          "optional": false,
+          "req": "^0.11.0",
+          "target": "cfg(any(target_os = \"linux\", target_os = \"android\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/kqueue",
+          "name": "kqueue",
+          "optional": false,
+          "req": "^1.1.1",
+          "target": "cfg(any(target_os = \"freebsd\", target_os = \"openbsd\", target_os = \"netbsd\", target_os = \"dragonflybsd\", target_os = \"ios\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/kqueue",
+          "name": "kqueue",
+          "optional": true,
+          "req": "^1.1.1",
+          "target": "cfg(target_os = \"macos\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": false,
+          "req": "^1.0",
+          "target": "cfg(any(target_os = \"freebsd\", target_os = \"openbsd\", target_os = \"netbsd\", target_os = \"dragonflybsd\", target_os = \"ios\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": false,
+          "req": "^1.0",
+          "target": "cfg(any(target_os = \"linux\", target_os = \"android\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.0",
+          "target": "cfg(target_os = \"macos\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/notify-types",
+          "name": "notify-types",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/walkdir",
+          "name": "walkdir",
+          "optional": false,
+          "req": "^2.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO",
+            "Win32_System_Threading",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.60.1",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3789,
+          "content": "content/sha256/cf2ca593d96e9f7bcb0461c13bad76a62f0565280288b93c2033c11b04b72b9a",
+          "digest": "sha256:cf2ca593d96e9f7bcb0461c13bad76a62f0565280288b93c2033c11b04b72b9a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 7007,
+          "content": "content/sha256/e0456cbab4f7b5e7203e678faff37eadbdfef02e822db3b7a52a1dd9d3dc514a",
+          "digest": "sha256:e0456cbab4f7b5e7203e678faff37eadbdfef02e822db3b7a52a1dd9d3dc514a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-CC0",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "crossbeam-channel": [
+          "dep:crossbeam-channel"
+        ],
+        "default": [
+          "macos_fsevent"
+        ],
+        "flume": [
+          "dep:flume"
+        ],
+        "fsevent-sys": [
+          "dep:fsevent-sys"
+        ],
+        "kqueue": [
+          "dep:kqueue"
+        ],
+        "macos_fsevent": [
+          "fsevent-sys"
+        ],
+        "macos_kqueue": [
+          "kqueue",
+          "mio"
+        ],
+        "mio": [
+          "dep:mio"
+        ],
+        "serde": [
+          "notify-types/serde"
+        ],
+        "serialization-compat-6": [
+          "notify-types/serialization-compat-6"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "events",
+        "filesystem",
+        "notify",
+        "watch"
+      ],
       "manifest": "crates-io/notify/8.2.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -135,6 +341,17 @@
         "edition": "2021",
         "name": "notify",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4d3d07927151ff8575b7087f245456e549fea62edf0ec4e565a5ee50c8402bc3",
+        "package": "notify",
+        "registry": "crates-io",
+        "version": "8.2.0"
+      },
+      "vcs": {
+        "commit": "a1d7c2d8f80786679d58ec6d5986a1d4278bc8cf",
+        "path": "notify",
+        "system": "git"
       },
       "version": "8.2.0",
       "yanked": false

@@ -102,11 +102,113 @@
           "unit_identity": "sha256:e4edb5c9ba15ac48183097c6ba45d9976f5b708f5fa6097bc22271f94d205fd9"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/aligned-vec",
+          "name": "aligned-vec",
+          "optional": false,
+          "req": ">=0.5.0, <0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/profiling",
+          "name": "profiling",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.40"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": false,
+          "req": "^0.2",
+          "target": "wasm32-unknown-unknown"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 721,
+          "content": "content/sha256/08b4c9b0d20b49767ab7f5c8bdfb6304b69be80c97172af2c5e7a49d3350bd23",
+          "digest": "sha256:08b4c9b0d20b49767ab7f5c8bdfb6304b69be80c97172af2c5e7a49d3350bd23",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1332,
+          "content": "content/sha256/02b80951ce6c1dd25d7278977222a91b2f61a883ca272b0238c52a60a03ae90a",
+          "digest": "sha256:02b80951ce6c1dd25d7278977222a91b2f61a883ca272b0238c52a60a03ae90a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 834,
+          "content": "content/sha256/b5cf70fef7729f6cf06521643ba5ff2d77184792141a3424c54a81e1edc8f9e5",
+          "digest": "sha256:b5cf70fef7729f6cf06521643ba5ff2d77184792141a3424c54a81e1edc8f9e5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "profiling": [
+          "dep:profiling"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serialize": [
+          "serde",
+          "aligned-vec/serde"
+        ],
+        "tracing": [
+          "profiling",
+          "dep:tracing",
+          "dep:profiling",
+          "profiling/profile-with-tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/v_frame/0.3.9/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +219,17 @@
         "edition": "2021",
         "name": "v_frame",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:666b7727c8875d6ab5db9533418d7c764233ac9c0cff1d469aec8fa127597be2",
+        "package": "v_frame",
+        "registry": "crates-io",
+        "version": "0.3.9"
+      },
+      "vcs": {
+        "commit": "e01ef7d4fbde65ca4daaf8bf8d93eee17a1703cc",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.9",
       "yanked": false

@@ -418,11 +418,101 @@
           "unit_identity": "sha256:9ebedf5dac2308df4b521f3062f89702db6fe99aa3a62524340bde33ba0877a3"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/phf_macros",
+          "name": "phf_macros",
+          "optional": true,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/phf_shared",
+          "name": "phf_shared",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4834,
+          "content": "content/sha256/145446243da24c9c902982be559dabf5d2358eb7aeba34586a16d20bda3f6eb5",
+          "digest": "sha256:145446243da24c9c902982be559dabf5d2358eb7aeba34586a16d20bda3f6eb5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 56629,
+          "content": "content/sha256/711b2eeb01bc41f42cfa692f6eabdd5a349d3cabbc6cf825d0a2c7d860f9adf4",
+          "digest": "sha256:711b2eeb01bc41f42cfa692f6eabdd5a349d3cabbc6cf825d0a2c7d860f9adf4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "macros": [
+          "phf_macros"
+        ],
+        "phf_macros": [
+          "dep:phf_macros"
+        ],
+        "ptrhash": [
+          "phf_macros?/ptrhash",
+          "phf_shared/ptrhash"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "phf_shared/std",
+          "serde?/std"
+        ],
+        "uncased": [
+          "phf_macros?/uncased",
+          "phf_shared/uncased"
+        ],
+        "unicase": [
+          "phf_macros?/unicase",
+          "phf_shared/unicase"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/phf/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -433,6 +523,17 @@
         "edition": "2024",
         "name": "phf",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:010378780309880b08997fae13be7834dba947d36393bd372f2b1556deb2a2f6",
+        "package": "phf",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "1620d169aad09b02ef02a97b272470152e100bd6",
+        "path": "phf",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -532,19 +633,106 @@
           "unit_identity": "sha256:d795c0dae6a57fe3ef9e793d0ab6baa6f5e148fab15bfc0cea6903b61c2bdfc5"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/phf_macros",
+          "name": "phf_macros",
+          "optional": true,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/phf_shared",
+          "name": "phf_shared",
+          "optional": false,
+          "req": "^0.12.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3091,
+          "content": "content/sha256/64d22574dafbd9664fbb908506d9fc219aeac6f4ba544ebd7bd14099cea4f309",
+          "digest": "sha256:64d22574dafbd9664fbb908506d9fc219aeac6f4ba544ebd7bd14099cea4f309",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 50706,
+          "content": "content/sha256/0daf2d29e9a4f72c9375c6af57e79388acb4ba0ed684c7de84fd05b0bb3c50ca",
+          "digest": "sha256:0daf2d29e9a4f72c9375c6af57e79388acb4ba0ed684c7de84fd05b0bb3c50ca",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "macros": [
+          "phf_macros"
+        ],
+        "phf_macros": [
+          "dep:phf_macros"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "phf_shared/std",
+          "serde?/std"
+        ],
+        "uncased": [
+          "phf_macros?/uncased",
+          "phf_shared/uncased"
+        ],
+        "unicase": [
+          "phf_macros?/unicase",
+          "phf_shared/unicase"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/phf/0.12.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -554,6 +742,17 @@
         "edition": "2021",
         "name": "phf",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:913273894cec178f401a31ec4b656318d95473527be05c0752cc41cdc32be8b7",
+        "package": "phf",
+        "registry": "crates-io",
+        "version": "0.12.1"
+      },
+      "vcs": {
+        "commit": "03a930696231da01005e762425841f91587b3e04",
+        "path": "phf",
+        "system": "git"
       },
       "version": "0.12.1",
       "yanked": false

@@ -116,6 +116,40 @@
           "unit_identity": "sha256:f6aba09cbcb5831753a85f13231746111458e65ad0ff548720f29a20e9d1ebf1"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/valuable-derive",
+          "name": "valuable-derive",
+          "optional": true,
+          "req": "=0.1.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 424,
+          "content": "content/sha256/847f41128733b704280d60b93915a38c1cbfbdbcb12362e11e4119fd5ca8eb38",
+          "digest": "sha256:847f41128733b704280d60b93915a38c1cbfbdbcb12362e11e4119fd5ca8eb38",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 321,
+          "content": "content/sha256/aaf6af9d33701d58e52e24e14b887b787e71a9f5ff965cc5fe61832dacdb2826",
+          "digest": "sha256:aaf6af9d33701d58e52e24e14b887b787e71a9f5ff965cc5fe61832dacdb2826",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -125,6 +159,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -136,6 +171,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -147,6 +183,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -158,14 +195,36 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "derive": [
+          "valuable-derive"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "valuable-derive": [
+          "dep:valuable-derive"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "valuable",
+        "serialization",
+        "debugging",
+        "no_std"
+      ],
       "manifest": "crates-io/valuable/0.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -176,6 +235,17 @@
         "edition": "2021",
         "name": "valuable",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ba73ea9cf16a25df0c8caa16c51acb937d5712a8429db78a3ee29d5dcacd3a65",
+        "package": "valuable",
+        "registry": "crates-io",
+        "version": "0.1.1"
+      },
+      "vcs": {
+        "commit": "9efc29b6e58cef28f6566a47aa7e142a55fead77",
+        "path": "valuable",
+        "system": "git"
       },
       "version": "0.1.1",
       "yanked": false

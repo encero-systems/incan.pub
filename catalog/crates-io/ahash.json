@@ -310,6 +310,103 @@
           "unit_identity": "sha256:e2af2fdae34d711105e6993a919225fd69d623f24e2d788a1d136308026f46eb"
         }
       ],
+      "categories": [
+        "algorithms",
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/const-random",
+          "name": "const-random",
+          "optional": true,
+          "req": "^0.1.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": true,
+          "req": "^0.3.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.18.0",
+          "target": "cfg(not(all(target_arch = \"arm\", target_os = \"none\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.117"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/zerocopy",
+          "name": "zerocopy",
+          "optional": false,
+          "req": "^0.8.24"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5798,
+          "content": "content/sha256/d7f74d616a751bcca23d5d3b58a6daf556356a526c5f0b6aa0504715d176549a",
+          "digest": "sha256:d7f74d616a751bcca23d5d3b58a6daf556356a526c5f0b6aa0504715d176549a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/0444c6991eead6822f7b9102e654448d51624431119546492e8b231db42c48bb",
+          "digest": "sha256:0444c6991eead6822f7b9102e654448d51624431119546492e8b231db42c48bb",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -321,6 +418,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -333,6 +431,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -343,6 +442,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -356,6 +456,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -368,6 +469,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -378,6 +480,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -391,6 +494,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -403,6 +507,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -413,6 +518,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -426,6 +532,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -438,6 +545,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -448,14 +556,50 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "atomic-polyfill": [
+          "dep:portable-atomic",
+          "once_cell/critical-section"
+        ],
+        "compile-time-rng": [
+          "const-random"
+        ],
+        "const-random": [
+          "dep:const-random"
+        ],
+        "default": [
+          "std",
+          "runtime-rng"
+        ],
+        "getrandom": [
+          "dep:getrandom"
+        ],
+        "nightly-arm-aes": [],
+        "no-rng": [],
+        "runtime-rng": [
+          "getrandom"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "hasher",
+        "hashmap",
+        "aes",
+        "no-std"
+      ],
       "manifest": "crates-io/ahash/0.8.12/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -466,6 +610,17 @@
         "edition": "2018",
         "name": "ahash",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5a15f179cd60c4584b8a8c596927aadc462e27f2ca70c04e0071964a73ba7a75",
+        "package": "ahash",
+        "registry": "crates-io",
+        "version": "0.8.12"
+      },
+      "vcs": {
+        "commit": "9aa1ba20f05ed582eda04ea625d5658c92195a57",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.12",
       "yanked": false

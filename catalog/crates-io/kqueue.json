@@ -64,11 +64,68 @@
           "unit_identity": "sha256:9d6e428177747915dd596fa1c45ba76ac71cb1a4ced201b2d77e946e5ca4e4a7"
         }
       ],
+      "categories": [
+        "os::unix-apis",
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/kqueue-sys",
+          "name": "kqueue-sys",
+          "optional": false,
+          "req": "^1.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 605,
+          "content": "content/sha256/21f106d3d6a5d346ed40302af65b77f68e7566e43d2d9f4b69573da37e72ee81",
+          "digest": "sha256:21f106d3d6a5d346ed40302af65b77f68e7566e43d2d9f4b69573da37e72ee81",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1075,
+          "content": "content/sha256/9dc7535841863372cb757676c5acd69c010572a85df23d3467d6bb3cc2829e84",
+          "digest": "sha256:9dc7535841863372cb757676c5acd69c010572a85df23d3467d6bb3cc2829e84",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 3108,
+          "content": "content/sha256/a0cd060e96c2a0912a40668f40b7131e1dbb9a5893941127037d88a01a1686ba",
+          "digest": "sha256:a0cd060e96c2a0912a40668f40b7131e1dbb9a5893941127037d88a01a1686ba",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "kqueue",
+        "kevent",
+        "bsd"
+      ],
       "manifest": "crates-io/kqueue/1.2.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -79,6 +136,17 @@
         "edition": "2021",
         "name": "kqueue",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8d763e5b24120b4ddf50de6c92308156765aabfbbccebf401da7cff2d70a41ea",
+        "package": "kqueue",
+        "registry": "crates-io",
+        "version": "1.2.1"
+      },
+      "vcs": {
+        "commit": "07a7ca818473e72467a1aa09102579d124fd8dc1",
+        "path": "",
+        "system": "git"
       },
       "version": "1.2.1",
       "yanked": false

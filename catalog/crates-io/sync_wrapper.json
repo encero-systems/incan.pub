@@ -266,11 +266,45 @@
           "unit_identity": "sha256:65311d356386c752f3644d83a3c1ec95b491861f5eb7f6521d30f57d5de82bbd"
         }
       ],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 421,
+          "content": "content/sha256/61e995daa67a37597f76b78ca3c61916a42a66034f01e9473ee7b7753029ca3a",
+          "digest": "sha256:61e995daa67a37597f76b78ca3c61916a42a66034f01e9473ee7b7753029ca3a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10174,
+          "content": "content/sha256/0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "digest": "sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -278,14 +312,26 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "futures": [
+          "futures-core"
+        ],
+        "futures-core": [
+          "dep:futures-core"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "concurrency"
+      ],
       "manifest": "crates-io/sync_wrapper/1.0.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -295,6 +341,17 @@
         "edition": "2021",
         "name": "sync_wrapper",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0bf256ce5efdfa370213c1dabab5935a12e49f2c58d15e9eac2870d3b4f27263",
+        "package": "sync_wrapper",
+        "registry": "crates-io",
+        "version": "1.0.2"
+      },
+      "vcs": {
+        "commit": "55413956c36aeab47feb8c04d1b7a044d6df336a",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.2",
       "yanked": false

@@ -25,19 +25,97 @@
       "advisories": 0,
       "archive": "sha256:ef15db2cc5765300a0961eaa5263286191abbadf52e719c89282733fe737b552",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-trait",
+          "name": "async-trait",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "io"
+          ],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "io-util"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1710,
+          "content": "content/sha256/4fd2af68d21aa72287ecbaec8e5f67ddb5034ae460ac52560a73508c5c018797",
+          "digest": "sha256:4fd2af68d21aa72287ecbaec8e5f67ddb5034ae460ac52560a73508c5c018797",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1221,
+          "content": "content/sha256/ff7b7d58d69a53ebad234527530bdd67d459ca8b6f0d6de34b769610d5fee481",
+          "digest": "sha256:ff7b7d58d69a53ebad234527530bdd67d459ca8b6f0d6de34b769610d5fee481",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "async-trait": [
+          "dep:async-trait"
+        ],
+        "futures-util": [
+          "dep:futures-util"
+        ],
+        "futures_async": [
+          "futures-util",
+          "async-trait"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "tokio_async": [
+          "tokio",
+          "async-trait"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "integer",
+        "varint",
+        "zigzag",
+        "protobuf",
+        "serialize"
+      ],
       "manifest": "crates-io/integer-encoding/3.0.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -47,6 +125,17 @@
         "edition": "2018",
         "name": "integer_encoding",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8bb03732005da905c88227371639bf1ad885cc712789c011c31c5fb3ab3ccf02",
+        "package": "integer-encoding",
+        "registry": "crates-io",
+        "version": "3.0.4"
+      },
+      "vcs": {
+        "commit": "ab48af6dc7eff54b42d4550075f96ff3e5fa1a5e",
+        "path": "",
+        "system": "git"
       },
       "version": "3.0.4",
       "yanked": false

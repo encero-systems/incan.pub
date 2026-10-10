@@ -482,11 +482,110 @@
           "unit_identity": "sha256:1d0a98006df00818e6b4bea36a60985aa605a77b63270fd04efd5d88c621035f"
         }
       ],
+      "categories": [
+        "date-and-time"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.4.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/defmt",
+          "name": "defmt",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.21"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 972,
+          "content": "content/sha256/b9c26501e63f4eaf48378a42d412f28d26b98f9d9b19722078250b9b8f418c83",
+          "digest": "sha256:b9c26501e63f4eaf48378a42d412f28d26b98f9d9b19722078250b9b8f418c83",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 126,
+          "content": "content/sha256/01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "digest": "sha256:01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "digest": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1211,
+          "content": "content/sha256/7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "digest": "sha256:7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "format": "text",
+          "origin": "package",
+          "path": "UNLICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "defmt?/alloc"
+        ],
+        "arbitrary": [
+          "dep:arbitrary",
+          "std"
+        ],
+        "default": [
+          "std",
+          "tz-fat"
+        ],
+        "defmt": [
+          "dep:defmt"
+        ],
+        "logging": [
+          "dep:log"
+        ],
+        "std": [
+          "alloc",
+          "log?/std"
+        ],
+        "tz-fat": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "date",
+        "time",
+        "civil",
+        "timestamp"
+      ],
       "manifest": "crates-io/jiff-core/0.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -497,6 +596,17 @@
         "edition": "2021",
         "name": "jiff_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5e52fe76043ccecc9005d2305ebaadf7d7fc0cc89ca6baa10a94d6bc68c7128c",
+        "package": "jiff-core",
+        "registry": "crates-io",
+        "version": "0.1.1"
+      },
+      "vcs": {
+        "commit": "7e8133168382ab8d65a795126c2c9624f61e9e89",
+        "path": "crates/jiff-core",
+        "system": "git"
       },
       "version": "0.1.1",
       "yanked": false

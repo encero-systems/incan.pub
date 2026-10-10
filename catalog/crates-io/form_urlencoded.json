@@ -566,6 +566,48 @@
           "unit_identity": "sha256:8d479bbe20612b1c0e63473e701536039eedb99b4a80ca1c438d934479dcf3a1"
         }
       ],
+      "categories": [
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/percent-encoding",
+          "name": "percent-encoding",
+          "optional": false,
+          "req": "^2.3.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 465,
+          "content": "content/sha256/305b8e9488eb67b2e8795bbdcae43d7085731a4fd0436b360284ddc7d1101e73",
+          "digest": "sha256:305b8e9488eb67b2e8795bbdcae43d7085731a4fd0436b360284ddc7d1101e73",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/20c7855c364d57ea4c97889a5e8d98470a9952dade37bd9248b9a54431670e5e",
+          "digest": "sha256:20c7855c364d57ea4c97889a5e8d98470a9952dade37bd9248b9a54431670e5e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -575,6 +617,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -586,6 +629,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -596,14 +640,28 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "percent-encoding/alloc"
+        ],
+        "default": [
+          "std"
+        ],
+        "std": [
+          "alloc",
+          "percent-encoding/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/form_urlencoded/1.2.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -613,6 +671,18 @@
         "edition": "2018",
         "name": "form_urlencoded",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cb4cb245038516f5f85277875cdaa4f7d2c9a0fa0468de06ed190163b1581fcf",
+        "package": "form_urlencoded",
+        "registry": "crates-io",
+        "version": "1.2.2"
+      },
+      "vcs": {
+        "commit": "91377f48bf35011d042aa5abef9e7f2a0a625aaa",
+        "dirty": true,
+        "path": "form_urlencoded",
+        "system": "git"
       },
       "version": "1.2.2",
       "yanked": false

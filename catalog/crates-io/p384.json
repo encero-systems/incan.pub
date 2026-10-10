@@ -159,11 +159,237 @@
           "unit_identity": "sha256:c82c1bb5918ebbb394793dfd24b0db5a5e30b7d8975539024073f0c167f84d34"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "der"
+          ],
+          "loaf": "crates-io/ecdsa",
+          "name": "ecdsa-core",
+          "optional": true,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "sec1"
+          ],
+          "loaf": "crates-io/elliptic-curve",
+          "name": "elliptic-curve",
+          "optional": false,
+          "req": "^0.14.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fiat-crypto",
+          "name": "fiat-crypto",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(p384_backend = \"fiat\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hash2curve",
+          "name": "hash2curve",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hex-literal",
+          "name": "hex-literal",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/primefield",
+          "name": "primefield",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/primeorder",
+          "name": "primeorder",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4842,
+          "content": "content/sha256/33f10ff2b8b947acf4ec542d9751c8d37a179917f9ca601b0fab80faa41a606b",
+          "digest": "sha256:33f10ff2b8b947acf4ec542d9751c8d37a179917f9ca601b0fab80faa41a606b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/02168781a5b59970e3da1784d2eb69f432598a3757f283dbffdafd9d483a9113",
+          "digest": "sha256:02168781a5b59970e3da1784d2eb69f432598a3757f283dbffdafd9d483a9113",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 9792,
+          "content": "content/sha256/39da2deed6d00d546b0cc26eba382ad9cd85667502e27b59ff30772634ce1c92",
+          "digest": "sha256:39da2deed6d00d546b0cc26eba382ad9cd85667502e27b59ff30772634ce1c92",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "ecdsa-core?/alloc",
+          "elliptic-curve/alloc",
+          "primeorder?/alloc"
+        ],
+        "arithmetic": [
+          "dep:primefield",
+          "dep:primeorder",
+          "elliptic-curve/arithmetic",
+          "elliptic-curve/digest"
+        ],
+        "default": [
+          "arithmetic",
+          "ecdsa",
+          "pem",
+          "precomputed-tables",
+          "std"
+        ],
+        "digest": [
+          "dep:ecdsa-core",
+          "ecdsa-core/digest"
+        ],
+        "ecdh": [
+          "arithmetic",
+          "elliptic-curve/ecdh"
+        ],
+        "ecdsa": [
+          "arithmetic",
+          "dep:ecdsa-core",
+          "ecdsa-core/algorithm",
+          "sha384"
+        ],
+        "ecdsa-core": [
+          "dep:ecdsa-core"
+        ],
+        "getrandom": [
+          "ecdsa-core?/getrandom",
+          "elliptic-curve/getrandom"
+        ],
+        "group-digest": [
+          "hash2curve",
+          "sha2"
+        ],
+        "hash2curve": [
+          "arithmetic",
+          "dep:hash2curve",
+          "dep:primeorder",
+          "primeorder/hash2curve"
+        ],
+        "hex-literal": [
+          "dep:hex-literal"
+        ],
+        "oprf": [
+          "group-digest"
+        ],
+        "pem": [
+          "elliptic-curve/pem",
+          "dep:ecdsa-core",
+          "ecdsa-core/pem",
+          "pkcs8"
+        ],
+        "pkcs8": [
+          "dep:ecdsa-core",
+          "ecdsa-core/pkcs8",
+          "elliptic-curve/pkcs8"
+        ],
+        "precomputed-tables": [
+          "arithmetic",
+          "dep:primeorder",
+          "primeorder/basepoint-table"
+        ],
+        "serde": [
+          "ecdsa-core?/serde",
+          "elliptic-curve/serde",
+          "primeorder?/serde",
+          "serdect"
+        ],
+        "serdect": [
+          "dep:serdect"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "sha384": [
+          "digest",
+          "sha2"
+        ],
+        "std": [
+          "alloc",
+          "ecdsa-core?/std",
+          "elliptic-curve/std",
+          "getrandom",
+          "primeorder?/std"
+        ],
+        "test-vectors": [
+          "hex-literal"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "nist",
+        "secp384r1"
+      ],
       "manifest": "crates-io/p384/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -174,6 +400,17 @@
         "edition": "2024",
         "name": "p384",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d17b851e6b3e378ab4ecb07fa2ed23f4d15f075735f8fec9fa1e7bdce5f8301f",
+        "package": "p384",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "24b65d148ceeb20f1412efed9f3588cf02bddc47",
+        "path": "p384",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false

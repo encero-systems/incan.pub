@@ -210,11 +210,135 @@
           "unit_identity": "sha256:a136686c2946ae595641874a48cab91e31192cd95058cd5fd20aa3feb2e394f3"
         }
       ],
+      "categories": [
+        "development-tools::profiling"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/optick",
+          "name": "optick",
+          "optional": true,
+          "req": "^1.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/profiling-procmacros",
+          "name": "profiling-procmacros",
+          "optional": true,
+          "req": "^1.0.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/puffin",
+          "name": "puffin",
+          "optional": true,
+          "req": "^0.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/superluminal-perf",
+          "name": "superluminal-perf",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracy-client",
+          "name": "tracy-client",
+          "optional": true,
+          "req": "^0.18"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10347,
+          "content": "content/sha256/970c9abdb06b09f7cdb52ab5b5d578e2c928d0b909320c24fcdac9e526d45b1a",
+          "digest": "sha256:970c9abdb06b09f7cdb52ab5b5d578e2c928d0b909320c24fcdac9e526d45b1a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 340,
+          "content": "content/sha256/924d1b40ba61b9d6bd8c58df6d438f260d83d6c801c428e635f11797aba9b660",
+          "digest": "sha256:924d1b40ba61b9d6bd8c58df6d438f260d83d6c801c428e635f11797aba9b660",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "procmacros"
+        ],
+        "optick": [
+          "dep:optick"
+        ],
+        "procmacros": [
+          "profiling-procmacros"
+        ],
+        "profile-with-optick": [
+          "optick",
+          "profiling-procmacros?/profile-with-optick"
+        ],
+        "profile-with-puffin": [
+          "puffin",
+          "profiling-procmacros?/profile-with-puffin"
+        ],
+        "profile-with-superluminal": [
+          "superluminal-perf",
+          "profiling-procmacros?/profile-with-superluminal"
+        ],
+        "profile-with-tracing": [
+          "tracing",
+          "profiling-procmacros?/profile-with-tracing"
+        ],
+        "profile-with-tracy": [
+          "tracy-client",
+          "profiling-procmacros?/profile-with-tracy"
+        ],
+        "profiling-procmacros": [
+          "dep:profiling-procmacros"
+        ],
+        "puffin": [
+          "dep:puffin"
+        ],
+        "superluminal-perf": [
+          "dep:superluminal-perf"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "tracy-client": [
+          "dep:tracy-client"
+        ],
+        "type-check": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "performance",
+        "profiling"
+      ],
       "manifest": "crates-io/profiling/1.0.18/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -225,6 +349,17 @@
         "edition": "2018",
         "name": "profiling",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3d595e54a326bc53c1c197b32d295e14b169e3cfeaa8dc82b529f947fba6bcf5",
+        "package": "profiling",
+        "registry": "crates-io",
+        "version": "1.0.18"
+      },
+      "vcs": {
+        "commit": "8271551172eb6fa4cba47369aedd93790c623df9",
+        "path": "profiling",
+        "system": "git"
       },
       "version": "1.0.18",
       "yanked": false

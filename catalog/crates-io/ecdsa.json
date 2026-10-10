@@ -342,11 +342,201 @@
           "unit_identity": "sha256:e5299789ac4f480b706b8dd51c523ce5f66ff89d7a3af94f4b0d9d4b8951792c"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "sec1"
+          ],
+          "loaf": "crates-io/elliptic-curve",
+          "name": "elliptic-curve",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rfc6979",
+          "name": "rfc6979",
+          "optional": true,
+          "req": "^0.6"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rand_core"
+          ],
+          "loaf": "crates-io/signature",
+          "name": "signature",
+          "optional": false,
+          "req": "^3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/spki",
+          "name": "spki",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": false,
+          "req": "^1.5"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3133,
+          "content": "content/sha256/a61fc97de7fe757ad18f68a2bf2f445b538c87b3deb5022cd77f85e34f9df6e4",
+          "digest": "sha256:a61fc97de7fe757ad18f68a2bf2f445b538c87b3deb5022cd77f85e34f9df6e4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10846,
+          "content": "content/sha256/78779d420019e6b4630376af8e86b6b335ee8a2f89ede6e0411e0469a326aaa4",
+          "digest": "sha256:78779d420019e6b4630376af8e86b6b335ee8a2f89ede6e0411e0469a326aaa4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/9aa4f92bfcde293ebeca9e2379fa18d1d61f000977da144c7b74c2986c9b6466",
+          "digest": "sha256:9aa4f92bfcde293ebeca9e2379fa18d1d61f000977da144c7b74c2986c9b6466",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 23401,
+          "content": "content/sha256/48d32aa5bca863d14a11f73e6732694b94ed10c65fac0b67f714dcfdbcc028b6",
+          "digest": "sha256:48d32aa5bca863d14a11f73e6732694b94ed10c65fac0b67f714dcfdbcc028b6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "algorithm": [
+          "dep:rfc6979",
+          "digest",
+          "elliptic-curve/arithmetic"
+        ],
+        "alloc": [
+          "elliptic-curve/alloc",
+          "signature/alloc",
+          "dep:spki",
+          "spki/alloc"
+        ],
+        "default": [
+          "digest"
+        ],
+        "der": [
+          "dep:der"
+        ],
+        "dev": [
+          "algorithm",
+          "dep:digest",
+          "digest/dev",
+          "elliptic-curve/dev"
+        ],
+        "digest": [
+          "dep:digest",
+          "elliptic-curve/digest",
+          "signature/digest"
+        ],
+        "getrandom": [
+          "elliptic-curve/getrandom"
+        ],
+        "pem": [
+          "elliptic-curve/pem",
+          "pkcs8"
+        ],
+        "pkcs8": [
+          "der",
+          "digest",
+          "elliptic-curve/pkcs8"
+        ],
+        "serde": [
+          "dep:serdect",
+          "elliptic-curve/serde",
+          "pkcs8"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "spki": [
+          "dep:spki"
+        ],
+        "std": [
+          "alloc",
+          "elliptic-curve/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "nist",
+        "secp256k1",
+        "signature"
+      ],
       "manifest": "crates-io/ecdsa/0.17.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -357,6 +547,17 @@
         "edition": "2024",
         "name": "ecdsa",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c0681a4fc24c767085329728d8dfba959af91228aa4610cca4f8ce317ba46ae0",
+        "package": "ecdsa",
+        "registry": "crates-io",
+        "version": "0.17.0"
+      },
+      "vcs": {
+        "commit": "a51becc840c9979a40da931c187cb38807514455",
+        "path": "ecdsa",
+        "system": "git"
       },
       "version": "0.17.0",
       "yanked": false
@@ -379,11 +580,206 @@
       "advisories": 0,
       "archive": "sha256:f2e45c2069f578986e4d3e47548555d9361a830eeea49d286c6875a9027f8079",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": true,
+          "req": "^0.7"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.10.7"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "digest",
+            "sec1"
+          ],
+          "loaf": "crates-io/elliptic-curve",
+          "name": "elliptic-curve",
+          "optional": false,
+          "req": "^0.13.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rfc6979",
+          "name": "rfc6979",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rand_core"
+          ],
+          "loaf": "crates-io/signature",
+          "name": "signature",
+          "optional": false,
+          "req": "^2.0, <2.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/spki",
+          "name": "spki",
+          "optional": true,
+          "req": "^0.7.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3294,
+          "content": "content/sha256/f99485065d3d5541ef1814ea8d3f75718f08cb78eb5626f9d34941799655b4b9",
+          "digest": "sha256:f99485065d3d5541ef1814ea8d3f75718f08cb78eb5626f9d34941799655b4b9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10846,
+          "content": "content/sha256/78779d420019e6b4630376af8e86b6b335ee8a2f89ede6e0411e0469a326aaa4",
+          "digest": "sha256:78779d420019e6b4630376af8e86b6b335ee8a2f89ede6e0411e0469a326aaa4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/bdebaf9156a298f8fdab56dd26cb5144673de522d80f4c0d88e0039145f147f9",
+          "digest": "sha256:bdebaf9156a298f8fdab56dd26cb5144673de522d80f4c0d88e0039145f147f9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 20202,
+          "content": "content/sha256/a6b49a96975d94d85d698369e5e1fc3cea7022c381c0ebe741efcc7a2879ba3c",
+          "digest": "sha256:a6b49a96975d94d85d698369e5e1fc3cea7022c381c0ebe741efcc7a2879ba3c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "elliptic-curve/alloc",
+          "signature/alloc",
+          "dep:spki",
+          "spki/alloc"
+        ],
+        "arithmetic": [
+          "elliptic-curve/arithmetic"
+        ],
+        "default": [
+          "digest"
+        ],
+        "der": [
+          "dep:der"
+        ],
+        "dev": [
+          "arithmetic",
+          "digest",
+          "elliptic-curve/dev",
+          "hazmat"
+        ],
+        "digest": [
+          "dep:digest",
+          "signature/digest"
+        ],
+        "hazmat": [],
+        "pem": [
+          "elliptic-curve/pem",
+          "pkcs8"
+        ],
+        "pkcs8": [
+          "digest",
+          "elliptic-curve/pkcs8",
+          "der"
+        ],
+        "rfc6979": [
+          "dep:rfc6979"
+        ],
+        "serde": [
+          "elliptic-curve/serde",
+          "serdect"
+        ],
+        "serdect": [
+          "dep:serdect"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "signing": [
+          "arithmetic",
+          "digest",
+          "hazmat",
+          "rfc6979"
+        ],
+        "spki": [
+          "dep:spki"
+        ],
+        "std": [
+          "alloc",
+          "elliptic-curve/std",
+          "signature/std"
+        ],
+        "verifying": [
+          "arithmetic",
+          "digest",
+          "hazmat"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "nist",
+        "secp256k1",
+        "signature"
+      ],
       "manifest": "crates-io/ecdsa/0.16.9/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -394,6 +790,17 @@
         "edition": "2021",
         "name": "ecdsa",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ee27f32b5c5292967d2d4a9d7f1e0b0aed2c15daded5a60300e4abb9d8020bca",
+        "package": "ecdsa",
+        "registry": "crates-io",
+        "version": "0.16.9"
+      },
+      "vcs": {
+        "commit": "abd0175f3ae2dc4b118fa914e94c1fc4b0182ba9",
+        "path": "ecdsa",
+        "system": "git"
       },
       "version": "0.16.9",
       "yanked": false

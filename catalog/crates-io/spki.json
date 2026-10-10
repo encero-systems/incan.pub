@@ -270,11 +270,137 @@
           "unit_identity": "sha256:2e28faa6296c72929601c102b0ef763bc778373eaea6bdfc07e4c0ee80fc8fd5"
         }
       ],
+      "categories": [
+        "cryptography",
+        "data-structures",
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/base64ct",
+          "name": "base64ct",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": false,
+          "req": "^0.8.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1979,
+          "content": "content/sha256/954e577615770c3f13230a6c2af28697812c3d53023781f42433f8d7d490b29b",
+          "digest": "sha256:954e577615770c3f13230a6c2af28697812c3d53023781f42433f8d7d490b29b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "digest": "sha256:57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 5617,
+          "content": "content/sha256/99ed3b52a7ee73889171db523e5808f61b6c3d0017c0f8ea066a3557e7027c08",
+          "digest": "sha256:99ed3b52a7ee73889171db523e5808f61b6c3d0017c0f8ea066a3557e7027c08",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "base64ct?/alloc",
+          "der/alloc"
+        ],
+        "arbitrary": [
+          "std",
+          "dep:arbitrary",
+          "der/arbitrary"
+        ],
+        "base64": [
+          "dep:base64ct"
+        ],
+        "digest": [
+          "dep:digest"
+        ],
+        "fingerprint": [
+          "digest",
+          "sha2"
+        ],
+        "pem": [
+          "alloc",
+          "der/pem"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "std": [
+          "der/std",
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "x509"
+      ],
       "manifest": "crates-io/spki/0.8.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -285,6 +411,17 @@
         "edition": "2024",
         "name": "spki",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7ef958a98b9d5da290cfc78946e9f3e61e1e62a18db0d92cac0b83cc161491a9",
+        "package": "spki",
+        "registry": "crates-io",
+        "version": "0.8.1"
+      },
+      "vcs": {
+        "commit": "9e21af601bf08f1d8ccd9713d08d1aba832a9ca8",
+        "path": "spki",
+        "system": "git"
       },
       "version": "0.8.1",
       "yanked": false
@@ -476,11 +613,125 @@
           "unit_identity": "sha256:5dd807e7a248ab93a5c2f1af011c8088ae2063575d4dba25ac415b6a56e7bf67"
         }
       ],
+      "categories": [
+        "cryptography",
+        "data-structures",
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/base64ct",
+          "name": "base64ct",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "oid"
+          ],
+          "loaf": "crates-io/der",
+          "name": "der",
+          "optional": false,
+          "req": "^0.7.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1892,
+          "content": "content/sha256/0738222d834cb56592ce68453f1ce42687497fd9576cd5a1a2cbbe1be5ad7164",
+          "digest": "sha256:0738222d834cb56592ce68453f1ce42687497fd9576cd5a1a2cbbe1be5ad7164",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/c995204cc6bad2ed67dd41f7d89bb9f1a9d48e0edd745732b30640d7912089a4",
+          "digest": "sha256:c995204cc6bad2ed67dd41f7d89bb9f1a9d48e0edd745732b30640d7912089a4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4561,
+          "content": "content/sha256/119ebe6bab78b405f61bfd4068a65090d1b641b1971d54aed6286f0f2b81fffc",
+          "digest": "sha256:119ebe6bab78b405f61bfd4068a65090d1b641b1971d54aed6286f0f2b81fffc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "base64ct?/alloc",
+          "der/alloc"
+        ],
+        "arbitrary": [
+          "std",
+          "dep:arbitrary",
+          "der/arbitrary"
+        ],
+        "base64": [
+          "dep:base64ct"
+        ],
+        "fingerprint": [
+          "sha2"
+        ],
+        "pem": [
+          "alloc",
+          "der/pem"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "std": [
+          "der/std",
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "x509"
+      ],
       "manifest": "crates-io/spki/0.7.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -491,6 +742,17 @@
         "edition": "2021",
         "name": "spki",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d91ed6c858b01f942cd56b37a94b3e0a1798290327d1236e4d9cf4eaca44d29d",
+        "package": "spki",
+        "registry": "crates-io",
+        "version": "0.7.3"
+      },
+      "vcs": {
+        "commit": "15ea461dc3484d48710deed932e4d3d9052c1f9b",
+        "path": "spki",
+        "system": "git"
       },
       "version": "0.7.3",
       "yanked": false

@@ -501,11 +501,95 @@
           "unit_identity": "sha256:e83040a31c6d622101c6f77b5f98090ac2c2ff20dfa905501d2656a8406c89ad"
         }
       ],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": true,
+          "req": "^1.0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/winnow",
+          "name": "winnow",
+          "optional": false,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 810,
+          "content": "content/sha256/5457b5b2529aeef7bca1ab74c5f735e43d90b27b305a98d5fc98c3866ddefb9a",
+          "digest": "sha256:5457b5b2529aeef7bca1ab74c5f735e43d90b27b305a98d5fc98c3866ddefb9a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "debug": [
+          "std",
+          "dep:anstream",
+          "dep:anstyle"
+        ],
+        "default": [
+          "std"
+        ],
+        "simd": [
+          "winnow/simd"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unsafe": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "encoding",
+        "toml",
+        "no_std"
+      ],
       "manifest": "crates-io/toml_parser/1.1.3+spec-1.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -515,6 +599,17 @@
         "edition": "2024",
         "name": "toml_parser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1d38ac1cf9b95face32296c0a3ede1fdc270627c9d9c02a7274dd6d960dc4d56",
+        "package": "toml_parser",
+        "registry": "crates-io",
+        "version": "1.1.3+spec-1.1.0"
+      },
+      "vcs": {
+        "commit": "4ec099fed591a172f82007cb2f9d605985bbecee",
+        "path": "crates/toml_parser",
+        "system": "git"
       },
       "version": "1.1.3+spec-1.1.0",
       "yanked": false
@@ -535,6 +630,67 @@
       "advisories": 0,
       "archive": "sha256:9962eec35fb6a73e3739d772b7e8999136814f2cf79e3d2bb4c523697c9a111a",
       "assets": [],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^0.6.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": true,
+          "req": "^1.0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/winnow",
+          "name": "winnow",
+          "optional": false,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 810,
+          "content": "content/sha256/5457b5b2529aeef7bca1ab74c5f735e43d90b27b305a98d5fc98c3866ddefb9a",
+          "digest": "sha256:5457b5b2529aeef7bca1ab74c5f735e43d90b27b305a98d5fc98c3866ddefb9a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -544,6 +700,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -555,14 +712,38 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "debug": [
+          "std",
+          "dep:anstream",
+          "dep:anstyle"
+        ],
+        "default": [
+          "std"
+        ],
+        "simd": [
+          "winnow/simd"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unsafe": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "encoding",
+        "toml",
+        "no_std"
+      ],
       "manifest": "crates-io/toml_parser/1.0.10+spec-1.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -572,6 +753,17 @@
         "edition": "2021",
         "name": "toml_parser",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7df25b4befd31c4816df190124375d5a20c6b6921e2cad937316de3fccd63420",
+        "package": "toml_parser",
+        "registry": "crates-io",
+        "version": "1.0.10+spec-1.1.0"
+      },
+      "vcs": {
+        "commit": "90790723370aa4981bafe054633c928eb78bcf94",
+        "path": "crates/toml_parser",
+        "system": "git"
       },
       "version": "1.0.10+spec-1.1.0",
       "yanked": false

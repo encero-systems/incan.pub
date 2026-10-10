@@ -444,11 +444,105 @@
           "unit_identity": "sha256:e5920dc4ff774a65ae5e57c3d8208d3db7d720b4a3f4f89ff2ff0a7f651320c5"
         }
       ],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.60"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.95",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/petgraph",
+          "name": "petgraph",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/redox_syscall",
+          "name": "redox_syscall",
+          "optional": false,
+          "req": "^0.5",
+          "target": "cfg(target_os = \"redox\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.6.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.2.0",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 446,
+          "content": "content/sha256/826a80da838ad900d0dd8a448d740b3aa1ed14b49194afd3483aec5d63918511",
+          "digest": "sha256:826a80da838ad900d0dd8a448d740b3aa1ed14b49194afd3483aec5d63918511",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+          "digest": "sha256:c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -456,6 +550,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -463,6 +558,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -470,14 +566,35 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "backtrace": [
+          "dep:backtrace"
+        ],
+        "deadlock_detection": [
+          "petgraph",
+          "backtrace"
+        ],
+        "nightly": [],
+        "petgraph": [
+          "dep:petgraph"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "mutex",
+        "condvar",
+        "rwlock",
+        "once",
+        "thread"
+      ],
       "manifest": "crates-io/parking_lot_core/0.9.12/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -488,6 +605,17 @@
         "edition": "2021",
         "name": "parking_lot_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2621685985a2ebf1c516881c026032ac7deafcda1a2c9b7850dc81e3dfcb64c1",
+        "package": "parking_lot_core",
+        "registry": "crates-io",
+        "version": "0.9.12"
+      },
+      "vcs": {
+        "commit": "d7828fff7b5d6327ae608e82db45f888b344449a",
+        "path": "core",
+        "system": "git"
       },
       "version": "0.9.12",
       "yanked": false

@@ -508,6 +508,119 @@
           "unit_identity": "sha256:f221e96e79300833f32c5f50aa72c2023c1dc0740de28fdde1d9715d81914e77"
         }
       ],
+      "categories": [
+        "date-and-time"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/defmt",
+          "name": "defmt",
+          "optional": true,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fallback"
+          ],
+          "loaf": "crates-io/iana-time-zone",
+          "name": "iana-time-zone",
+          "optional": true,
+          "req": "^0.1.45",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": true,
+          "req": "^0.3",
+          "target": "cfg(all(target_arch = \"wasm32\", not(any(target_os = \"emscripten\", target_os = \"wasi\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pure-rust-locales",
+          "name": "pure-rust-locales",
+          "optional": true,
+          "req": "^0.8.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rkyv",
+          "name": "rkyv",
+          "optional": true,
+          "req": "^0.7.43"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.99"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": true,
+          "req": "^0.2",
+          "target": "cfg(all(target_arch = \"wasm32\", not(any(target_os = \"emscripten\", target_os = \"wasi\"))))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": true,
+          "req": "^0.2",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4504,
+          "content": "content/sha256/7be722f3881a8ce9a3c6fbc427bfcf2c3888f7f7bdd8681dbf65e6161686da02",
+          "digest": "sha256:7be722f3881a8ce9a3c6fbc427bfcf2c3888f7f7bdd8681dbf65e6161686da02",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12307,
+          "content": "content/sha256/946c9835d8034d24404f8cfec5f4654cee5dad17e944afc3d06d742cf2882831",
+          "digest": "sha256:946c9835d8034d24404f8cfec5f4654cee5dad17e944afc3d06d742cf2882831",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -521,14 +634,99 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "__internal_bench": [],
+        "alloc": [],
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "clock": [
+          "winapi",
+          "iana-time-zone",
+          "now"
+        ],
+        "core-error": [],
+        "default": [
+          "clock",
+          "std",
+          "oldtime",
+          "wasmbind"
+        ],
+        "defmt": [
+          "dep:defmt",
+          "pure-rust-locales?/defmt"
+        ],
+        "iana-time-zone": [
+          "dep:iana-time-zone"
+        ],
+        "js-sys": [
+          "dep:js-sys"
+        ],
+        "libc": [],
+        "now": [
+          "std"
+        ],
+        "oldtime": [],
+        "pure-rust-locales": [
+          "dep:pure-rust-locales"
+        ],
+        "rkyv": [
+          "dep:rkyv",
+          "rkyv",
+          "rkyv/size_32"
+        ],
+        "rkyv-16": [
+          "dep:rkyv",
+          "rkyv?/size_16"
+        ],
+        "rkyv-32": [
+          "dep:rkyv",
+          "rkyv?/size_32"
+        ],
+        "rkyv-64": [
+          "dep:rkyv",
+          "rkyv?/size_64"
+        ],
+        "rkyv-validation": [
+          "rkyv?/validation"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-locales": [
+          "pure-rust-locales"
+        ],
+        "wasm-bindgen": [
+          "dep:wasm-bindgen"
+        ],
+        "wasmbind": [
+          "wasm-bindgen",
+          "js-sys"
+        ],
+        "winapi": [
+          "windows-link"
+        ],
+        "windows-link": [
+          "dep:windows-link"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "date",
+        "time",
+        "calendar"
+      ],
       "manifest": "crates-io/chrono/0.4.45/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -538,6 +736,17 @@
         "edition": "2021",
         "name": "chrono",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1aa79e62e7697b8e29b513a68abacf485adcd1fe8284a4316c5ae868e6633327",
+        "package": "chrono",
+        "registry": "crates-io",
+        "version": "0.4.45"
+      },
+      "vcs": {
+        "commit": "170338250e836976a211e64728ec956e45e78a39",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.45",
       "yanked": false

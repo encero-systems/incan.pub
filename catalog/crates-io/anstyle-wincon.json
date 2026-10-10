@@ -100,11 +100,81 @@
           "unit_identity": "sha256:1d3fe7fc7327c48dd0b80478ccc150e6adcfe3c9f96593e7a5a07f1d62075b89"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell_polyfill",
+          "name": "once_cell_polyfill",
+          "optional": false,
+          "req": "^1.56.1",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_System_Console"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.60.2, <0.62",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1096,
+          "content": "content/sha256/b979881246703593aad26da21f5d467c03c35142d6f5965f7e7253cb89695c9f",
+          "digest": "sha256:b979881246703593aad26da21f5d467c03c35142d6f5965f7e7253cb89695c9f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "ansi",
+        "terminal",
+        "color",
+        "windows"
+      ],
       "manifest": "crates-io/anstyle-wincon/3.0.11/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -114,6 +184,17 @@
         "edition": "2021",
         "name": "anstyle_wincon",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:291e6a250ff86cd4a820112fb8898808a366d8f9f58ce16d1f538353ad55747d",
+        "package": "anstyle-wincon",
+        "registry": "crates-io",
+        "version": "3.0.11"
+      },
+      "vcs": {
+        "commit": "368a8719474357f9d54be800b4163c9074561e37",
+        "path": "crates/anstyle-wincon",
+        "system": "git"
       },
       "version": "3.0.11",
       "yanked": false

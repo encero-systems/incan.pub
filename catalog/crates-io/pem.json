@@ -114,11 +114,80 @@
           "unit_identity": "sha256:341cc8706a70d6bfead7b113dbbf9cc3612141f4a82ec6c4818211f09c6d3baa"
         }
       ],
+      "categories": [
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": false,
+          "req": "^0.23.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1009,
+          "content": "content/sha256/0f96e3ccaadcaa6b59c2947e7148e12c762865db05802ba2d2f5e7edf3a7fc30",
+          "digest": "sha256:0f96e3ccaadcaa6b59c2947e7148e12c762865db05802ba2d2f5e7edf3a7fc30",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1085,
+          "content": "content/sha256/b7c76ff4466a3aeb6a7d903e81b651335e97d64ecb857e2ee9812a36c6fd1acf",
+          "digest": "sha256:b7c76ff4466a3aeb6a7d903e81b651335e97d64ecb857e2ee9812a36c6fd1acf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 1176,
+          "content": "content/sha256/fdb68a7fbdd3c35fff2852f18e2b75e2ba7b32dbaf210f800f39c27ac7947dbd",
+          "digest": "sha256:fdb68a7fbdd3c35fff2852f18e2b75e2ba7b32dbaf210f800f39c27ac7947dbd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "base64/std",
+          "serde_core?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no-std",
+        "no_std",
+        "pem"
+      ],
       "manifest": "crates-io/pem/4.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +198,17 @@
         "edition": "2021",
         "name": "pem",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d354a98a3d1251555de99e8fdd8afda05573c31b82f59063a7b0a29b5527f120",
+        "package": "pem",
+        "registry": "crates-io",
+        "version": "4.0.0"
+      },
+      "vcs": {
+        "commit": "99c15c08f1389153ed037c33750f8605bbf8bd55",
+        "path": "",
+        "system": "git"
       },
       "version": "4.0.0",
       "yanked": false
@@ -240,11 +320,80 @@
           "unit_identity": "sha256:e6bb10e3ea63d4d0afdb705a783ba064dd27ec76a41ac8bb034d4344730ff08a"
         }
       ],
+      "categories": [
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": false,
+          "req": "^0.22.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1009,
+          "content": "content/sha256/0f96e3ccaadcaa6b59c2947e7148e12c762865db05802ba2d2f5e7edf3a7fc30",
+          "digest": "sha256:0f96e3ccaadcaa6b59c2947e7148e12c762865db05802ba2d2f5e7edf3a7fc30",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1085,
+          "content": "content/sha256/b7c76ff4466a3aeb6a7d903e81b651335e97d64ecb857e2ee9812a36c6fd1acf",
+          "digest": "sha256:b7c76ff4466a3aeb6a7d903e81b651335e97d64ecb857e2ee9812a36c6fd1acf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 1176,
+          "content": "content/sha256/fdb68a7fbdd3c35fff2852f18e2b75e2ba7b32dbaf210f800f39c27ac7947dbd",
+          "digest": "sha256:fdb68a7fbdd3c35fff2852f18e2b75e2ba7b32dbaf210f800f39c27ac7947dbd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "base64/std",
+          "serde_core?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no-std",
+        "no_std",
+        "pem"
+      ],
       "manifest": "crates-io/pem/3.0.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -255,6 +404,17 @@
         "edition": "2021",
         "name": "pem",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1d30c53c26bc5b31a98cd02d20f25a7c8567146caf63ed593a9d87b2775291be",
+        "package": "pem",
+        "registry": "crates-io",
+        "version": "3.0.6"
+      },
+      "vcs": {
+        "commit": "7d6157704805dcedf703229926938a71b1ddd0b1",
+        "path": "",
+        "system": "git"
       },
       "version": "3.0.6",
       "yanked": false

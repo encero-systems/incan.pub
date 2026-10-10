@@ -238,6 +238,40 @@
           "unit_identity": "sha256:464ae8f76ae6c18aae7f7dcb971a7d5f851f3d1080f7007e51c1bad82bf03c33"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crunchy",
+          "name": "crunchy",
+          "optional": false,
+          "req": "^0.2.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2165,
+          "content": "content/sha256/44668b11e891dfdb78974e86ec42eefd45d44499715a3d83bd4a2200b892bc7d",
+          "digest": "sha256:44668b11e891dfdb78974e86ec42eefd45d44499715a3d83bd4a2200b892bc7d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 7048,
+          "content": "content/sha256/a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+          "digest": "sha256:a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -255,6 +289,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -265,6 +300,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -284,6 +320,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -294,6 +331,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -313,6 +351,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -323,6 +362,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -342,6 +382,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -352,14 +393,49 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "cshake": [],
+        "default": [],
+        "fips202": [
+          "keccak",
+          "shake",
+          "sha3"
+        ],
+        "k12": [],
+        "keccak": [],
+        "kmac": [
+          "cshake"
+        ],
+        "parallel_hash": [
+          "cshake"
+        ],
+        "sha3": [],
+        "shake": [],
+        "sp800": [
+          "cshake",
+          "kmac",
+          "tuple_hash"
+        ],
+        "tuple_hash": [
+          "cshake"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "hash",
+        "sha3",
+        "keccak",
+        "crypto",
+        "kangarootwelve"
+      ],
       "manifest": "crates-io/tiny-keccak/2.0.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -370,6 +446,17 @@
         "edition": "2018",
         "name": "tiny_keccak",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2c9d3793400a45f954c52e73d068316d76b6f4e36977e3fcebb13a2721e80237",
+        "package": "tiny-keccak",
+        "registry": "crates-io",
+        "version": "2.0.2"
+      },
+      "vcs": {
+        "commit": "f034411460d0012925052017c1658b3ce9cda532",
+        "path": "",
+        "system": "git"
       },
       "version": "2.0.2",
       "yanked": false

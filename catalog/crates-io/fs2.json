@@ -102,11 +102,76 @@
           "unit_identity": "sha256:57fda23dc0ee500b414aae7c3e9fdbb825b785dda25acc6161b3ae42f552bdf3"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.30",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fileapi",
+            "handleapi",
+            "processthreadsapi",
+            "std",
+            "winbase",
+            "winerror"
+          ],
+          "loaf": "crates-io/winapi",
+          "name": "winapi",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1881,
+          "content": "content/sha256/4dda80a0599cc235f8eaf56c33117fcc7cbeb48aece7f7b262f374ee12e3f1f4",
+          "digest": "sha256:4dda80a0599cc235f8eaf56c33117fcc7cbeb48aece7f7b262f374ee12e3f1f4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "file",
+        "file-system",
+        "lock",
+        "duplicate",
+        "flock"
+      ],
       "manifest": "crates-io/fs2/0.4.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -118,6 +183,13 @@
         "name": "fs2",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:9564fc758e15025b46aa6643b1b77d047d1a56a1aea6e01002ac0c7026876213",
+        "package": "fs2",
+        "registry": "crates-io",
+        "version": "0.4.3"
+      },
+      "vcs": null,
       "version": "0.4.3",
       "yanked": false
     }

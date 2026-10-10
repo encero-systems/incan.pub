@@ -25,6 +25,129 @@
       "advisories": 0,
       "archive": "sha256:95c0ce61d4acf230c070dbece1434dfca980b15d79907cd9029a2a70caf6e97e",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "chrono-tz",
+            "prettyprint"
+          ],
+          "loaf": "crates-io/arrow",
+          "name": "arrow",
+          "optional": false,
+          "req": "^58.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bigdecimal",
+          "name": "bigdecimal",
+          "optional": false,
+          "req": "^0.4.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": false,
+          "req": "^0.4.44"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "sql"
+          ],
+          "loaf": "crates-io/datafusion-common",
+          "name": "datafusion-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "sql"
+          ],
+          "loaf": "crates-io/datafusion-expr",
+          "name": "datafusion-expr",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "sql"
+          ],
+          "loaf": "crates-io/datafusion-functions-nested",
+          "name": "datafusion-functions-nested",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/recursive",
+          "name": "recursive",
+          "optional": true,
+          "req": "^0.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/regex",
+          "name": "regex",
+          "optional": false,
+          "req": "^1.12"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "visitor"
+          ],
+          "loaf": "crates-io/sqlparser",
+          "name": "sqlparser",
+          "optional": false,
+          "req": "^0.61.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3651,
+          "content": "content/sha256/19892601f706cd0919541682669eb7dfec6aae83a43e12dca496363ed31f64a7",
+          "digest": "sha256:19892601f706cd0919541682669eb7dfec6aae83a43e12dca496363ed31f64a7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11645,
+          "content": "content/sha256/232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "digest": "sha256:232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -35,14 +158,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "unicode_expressions",
+          "unparser"
+        ],
+        "recursive_protection": [
+          "dep:recursive"
+        ],
+        "unicode_expressions": [],
+        "unparser": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "datafusion",
+        "sql",
+        "parser",
+        "planner"
+      ],
       "manifest": "crates-io/datafusion-sql/53.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -53,6 +194,13 @@
         "name": "datafusion_sql",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:fa0d133ddf8b9b3b872acac900157f783e7b879fe9a6bccf389abebbfac45ec1",
+        "package": "datafusion-sql",
+        "registry": "crates-io",
+        "version": "53.1.0"
+      },
+      "vcs": null,
       "version": "53.1.0",
       "yanked": false
     }

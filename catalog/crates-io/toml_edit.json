@@ -330,11 +330,153 @@
           "unit_identity": "sha256:e49cb96e3938c32b5fbeba8ed387b04bd510f1b08a360a5b785c7bf7e94ff67a"
         }
       ],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": true,
+          "req": "^1.0.14"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.228"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/serde_spanned",
+          "name": "serde_spanned",
+          "optional": true,
+          "req": "^1.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_datetime",
+          "name": "toml_datetime",
+          "optional": false,
+          "req": "^1.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_parser",
+          "name": "toml_parser",
+          "optional": true,
+          "req": "^1.1.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_writer",
+          "name": "toml_writer",
+          "optional": true,
+          "req": "^1.1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winnow",
+          "name": "winnow",
+          "optional": true,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1821,
+          "content": "content/sha256/9b9cf09bba3555ce10ffff46382067ef450fe19ee9052368284ef62e3f6093ae",
+          "digest": "sha256:9b9cf09bba3555ce10ffff46382067ef450fe19ee9052368284ef62e3f6093ae",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "debug": [
+          "toml_parser?/debug",
+          "dep:anstream",
+          "dep:anstyle",
+          "display"
+        ],
+        "default": [
+          "parse",
+          "display"
+        ],
+        "display": [
+          "dep:toml_writer"
+        ],
+        "parse": [
+          "dep:toml_parser",
+          "dep:winnow"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "toml_datetime/serde",
+          "dep:serde_spanned"
+        ],
+        "unbounded": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "encoding",
+        "toml"
+      ],
       "manifest": "crates-io/toml_edit/0.25.15+spec-1.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -344,6 +486,17 @@
         "edition": "2024",
         "name": "toml_edit",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1340ea94a5856333492c9064b02c778b191dd2c853778d9609debdcdfea3a614",
+        "package": "toml_edit",
+        "registry": "crates-io",
+        "version": "0.25.15+spec-1.1.0"
+      },
+      "vcs": {
+        "commit": "8e1d5a85c361ac012957441bb4788ae82f5dc9c8",
+        "path": "crates/toml_edit",
+        "system": "git"
       },
       "version": "0.25.15+spec-1.1.0",
       "yanked": false
@@ -364,6 +517,119 @@
       "advisories": 0,
       "archive": "sha256:a81fb3d145c2ee51358e8849914a975464ba69925d5c440ca88765e91987989f",
       "assets": [],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^0.6.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": true,
+          "req": "^1.0.11"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.11.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.225"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/serde_spanned",
+          "name": "serde_spanned",
+          "optional": true,
+          "req": "^1.0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_datetime",
+          "name": "toml_datetime",
+          "optional": false,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_parser",
+          "name": "toml_parser",
+          "optional": true,
+          "req": "^1.0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_writer",
+          "name": "toml_writer",
+          "optional": true,
+          "req": "^1.0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winnow",
+          "name": "winnow",
+          "optional": true,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1735,
+          "content": "content/sha256/09b2dc2ff0ad374bdea85ad463c7f459d7b312c471f3732e910ddea8c04f92b2",
+          "digest": "sha256:09b2dc2ff0ad374bdea85ad463c7f459d7b312c471f3732e910ddea8c04f92b2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -374,6 +640,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -386,14 +653,44 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "debug": [
+          "toml_parser?/debug",
+          "dep:anstream",
+          "dep:anstyle",
+          "display"
+        ],
+        "default": [
+          "parse",
+          "display"
+        ],
+        "display": [
+          "dep:toml_writer"
+        ],
+        "parse": [
+          "dep:toml_parser",
+          "dep:winnow"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "toml_datetime/serde",
+          "dep:serde_spanned"
+        ],
+        "unbounded": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "encoding",
+        "toml"
+      ],
       "manifest": "crates-io/toml_edit/0.25.5+spec-1.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -403,6 +700,17 @@
         "edition": "2021",
         "name": "toml_edit",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8ca1a40644a28bce036923f6a431df0b34236949d111cc07cb6dca830c9ef2e1",
+        "package": "toml_edit",
+        "registry": "crates-io",
+        "version": "0.25.5+spec-1.1.0"
+      },
+      "vcs": {
+        "commit": "90790723370aa4981bafe054633c928eb78bcf94",
+        "path": "crates/toml_edit",
+        "system": "git"
       },
       "version": "0.25.5+spec-1.1.0",
       "yanked": false
@@ -423,11 +731,138 @@
       "advisories": 0,
       "archive": "sha256:2996a420481e6337c9ff1e0662d8e07dc904a367a428ea81a6c23d2e28dec867",
       "assets": [],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "max_inline"
+          ],
+          "loaf": "crates-io/kstring",
+          "name": "kstring",
+          "optional": true,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.145"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/serde_spanned",
+          "name": "serde_spanned",
+          "optional": true,
+          "req": "^0.6.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_datetime",
+          "name": "toml_datetime",
+          "optional": false,
+          "req": "^0.6.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml_write",
+          "name": "toml_write",
+          "optional": true,
+          "req": "^0.1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winnow",
+          "name": "winnow",
+          "optional": true,
+          "req": "^0.7.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2024,
+          "content": "content/sha256/751d746789806a3df90f5e95da6d764ba459b65fd2b1ec31a1e0d0ebf7d7ab87",
+          "digest": "sha256:751d746789806a3df90f5e95da6d764ba459b65fd2b1ec31a1e0d0ebf7d7ab87",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "parse",
+          "display"
+        ],
+        "display": [
+          "dep:toml_write"
+        ],
+        "parse": [
+          "dep:winnow"
+        ],
+        "perf": [
+          "dep:kstring"
+        ],
+        "serde": [
+          "dep:serde",
+          "toml_datetime/serde",
+          "dep:serde_spanned"
+        ],
+        "unbounded": [],
+        "unstable-debug": [
+          "winnow?/debug"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "encoding",
+        "toml"
+      ],
       "manifest": "crates-io/toml_edit/0.22.27/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -438,6 +873,17 @@
         "edition": "2021",
         "name": "toml_edit",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:41fe8c660ae4257887cf66394862d21dbca4a6ddd26f04a3560410406a2f819a",
+        "package": "toml_edit",
+        "registry": "crates-io",
+        "version": "0.22.27"
+      },
+      "vcs": {
+        "commit": "838a0223142a2137b530e020cb7231aba46f7946",
+        "path": "crates/toml_edit",
+        "system": "git"
       },
       "version": "0.22.27",
       "yanked": false

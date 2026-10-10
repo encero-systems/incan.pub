@@ -178,11 +178,81 @@
           "unit_identity": "sha256:ae039c4839560c77a6227e0d71ca4d2880bb2ada994b21070ad2181100752805"
         }
       ],
+      "categories": [
+        "development-tools::testing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.75"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.35"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "extra-traits",
+            "full"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.52"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 359,
+          "content": "content/sha256/1130d0b4978d91ce55225202a26706365ddfdbf19ee35bca09edd35db2259b57",
+          "digest": "sha256:1130d0b4978d91ce55225202a26706365ddfdbf19ee35bca09edd35db2259b57",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1055,
+          "content": "content/sha256/a6ba0ec436e84b1517c6371beb6db11eab6a8e4a39d895be8584fb2c65303b5a",
+          "digest": "sha256:a6ba0ec436e84b1517c6371beb6db11eab6a8e4a39d895be8584fb2c65303b5a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -190,6 +260,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -197,6 +268,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -204,14 +276,25 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "nightly_derive": [
+          "proc-macro2/nightly"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "mock",
+        "mocking",
+        "testing"
+      ],
       "manifest": "crates-io/mockall_derive/0.15.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -222,6 +305,17 @@
         "edition": "2021",
         "name": "mockall_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:9cfe16fbe8a314aeec0b861ac24e60b1e123e97634bab045475b9d6a18416fd8",
+        "package": "mockall_derive",
+        "registry": "crates-io",
+        "version": "0.15.0"
+      },
+      "vcs": {
+        "commit": "fc2c853cf7491c49147170d9f442eeb8d7589c2e",
+        "path": "mockall_derive",
+        "system": "git"
       },
       "version": "0.15.0",
       "yanked": false

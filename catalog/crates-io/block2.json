@@ -114,11 +114,101 @@
           "unit_identity": "sha256:dcdd2253964622875c1a05d9816a06379d758e6aca7ad7124c6ac7f6ec1e17c4"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "os::macos-apis",
+        "external-ffi-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 875,
+          "content": "content/sha256/99073a83cfe6ee090546e3063f41251f7309fe2a017c4add8494e4ad7990d058",
+          "digest": "sha256:99073a83cfe6ee090546e3063f41251f7309fe2a017c4add8494e4ad7990d058",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 315,
+          "content": "content/sha256/092f250039f51cb554f3fc2bd5d63a1009b7851883a809c9cee295df91b83773",
+          "digest": "sha256:092f250039f51cb554f3fc2bd5d63a1009b7851883a809c9cee295df91b83773",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 10056,
+          "content": "content/sha256/36c27561beba905bb52eb4c942884ba51cf120f437861f2928408191e20835c6",
+          "digest": "sha256:36c27561beba905bb52eb4c942884ba51cf120f437861f2928408191e20835c6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "compiler-rt": [
+          "objc2/unstable-compiler-rt"
+        ],
+        "default": [
+          "std"
+        ],
+        "gnustep-1-7": [
+          "objc2/gnustep-1-7"
+        ],
+        "gnustep-1-8": [
+          "gnustep-1-7",
+          "objc2/gnustep-1-8"
+        ],
+        "gnustep-1-9": [
+          "gnustep-1-8",
+          "objc2/gnustep-1-9"
+        ],
+        "gnustep-2-0": [
+          "gnustep-1-9",
+          "objc2/gnustep-2-0"
+        ],
+        "gnustep-2-1": [
+          "gnustep-2-0",
+          "objc2/gnustep-2-1"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-coerce-pointee": [],
+        "unstable-objfw": [],
+        "unstable-private": [],
+        "unstable-winobjc": [
+          "gnustep-1-8"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "objective-c",
+        "macos",
+        "ios",
+        "blocks"
+      ],
       "manifest": "crates-io/block2/0.6.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +219,17 @@
         "edition": "2021",
         "name": "block2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cdeb9d870516001442e364c5220d3574d2da8dc765554b4a617230d33fa58ef5",
+        "package": "block2",
+        "registry": "crates-io",
+        "version": "0.6.2"
+      },
+      "vcs": {
+        "commit": "b4167b582b2f75f9a1be75495c41b765344fd03c",
+        "path": "crates/block2",
+        "system": "git"
       },
       "version": "0.6.2",
       "yanked": false

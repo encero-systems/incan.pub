@@ -114,11 +114,128 @@
           "unit_identity": "sha256:97380cd733a4a84de868e284123bc2219b0202c3f49c7ef8092bdf6e5640f360"
         }
       ],
+      "categories": [
+        "science"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytemuck",
+          "name": "bytemuck",
+          "optional": true,
+          "req": "^1.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/malloc_size_of",
+          "name": "malloc_size_of",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mint",
+          "name": "mint",
+          "optional": true,
+          "req": "^0.5.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.15"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "serde_derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 245,
+          "content": "content/sha256/625bec69c76ce5423fdd05cfe46922b2680ec517f97c5854ce34798d1d8a9541",
+          "digest": "sha256:625bec69c76ce5423fdd05cfe46922b2680ec517f97c5854ce34798d1d8a9541",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1067,
+          "content": "content/sha256/62065228e42caebca7e7d7db1204cbb867033de5982ca4009928915e4095f3a3",
+          "digest": "sha256:62065228e42caebca7e7d7db1204cbb867033de5982ca4009928915e4095f3a3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "bytemuck": [
+          "dep:bytemuck"
+        ],
+        "default": [
+          "std"
+        ],
+        "libm": [
+          "num-traits/libm"
+        ],
+        "malloc_size_of": [
+          "dep:malloc_size_of"
+        ],
+        "mint": [
+          "dep:mint"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "num-traits/std"
+        ],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "matrix",
+        "vector",
+        "linear-algebra",
+        "geometry"
+      ],
       "manifest": "crates-io/euclid/0.22.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +246,17 @@
         "edition": "2021",
         "name": "euclid",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f1a05365e3b1c6d1650318537c7460c6923f1abdd272ad6842baa2b509957a06",
+        "package": "euclid",
+        "registry": "crates-io",
+        "version": "0.22.14"
+      },
+      "vcs": {
+        "commit": "60f2bd96deec0c0683eeddd737e0dc070a25e9af",
+        "path": "",
+        "system": "git"
       },
       "version": "0.22.14",
       "yanked": false

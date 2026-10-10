@@ -286,6 +286,88 @@
           "unit_identity": "sha256:5b57aed6e93b31d8154e878506cb643e5993e39f6a9400cfeedda027fa09331a"
         }
       ],
+      "categories": [
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen-macro",
+          "name": "wasm-bindgen-macro",
+          "optional": false,
+          "req": "=0.2.129"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen-shared",
+          "name": "wasm-bindgen-shared",
+          "optional": false,
+          "req": "=0.2.129"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5549,
+          "content": "content/sha256/e88c60961da4fa313efa49752e4ffc659d2654c2e4be0dc1d4e9e8f0b961929a",
+          "digest": "sha256:e88c60961da4fa313efa49752e4ffc659d2654c2e4be0dc1d4e9e8f0b961929a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -294,6 +376,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -303,6 +386,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -313,6 +397,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -322,6 +407,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -332,6 +418,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -341,6 +428,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -351,6 +439,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -360,14 +449,44 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "enable-interning": [
+          "std"
+        ],
+        "gg-alloc": [],
+        "msrv": [],
+        "rustversion": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde-serialize": [
+          "serde",
+          "serde_json",
+          "std"
+        ],
+        "serde_json": [
+          "dep:serde_json"
+        ],
+        "spans": [],
+        "std": [],
+        "strict-macro": [
+          "wasm-bindgen-macro/strict-macro"
+        ],
+        "xxx_debug_only_print_generated_code": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wasm-bindgen/0.2.129/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -378,6 +497,17 @@
         "edition": "2021",
         "name": "wasm_bindgen",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9bb54f33acc68fd454578d9820b0bde1a1a3d17aa17bb7b6595806d02886d409",
+        "package": "wasm-bindgen",
+        "registry": "crates-io",
+        "version": "0.2.129"
+      },
+      "vcs": {
+        "commit": "165586f854c852bcbc4d14d8a75a0a0e0d0abc12",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.129",
       "yanked": false

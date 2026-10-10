@@ -119,11 +119,127 @@
           "unit_identity": "sha256:429cce23d7ebbd5d51d5a2c81b3e718f985cb223bf13206c84283a5c95c5e3c7"
         }
       ],
+      "categories": [
+        "compression",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-no-stdlib",
+          "name": "alloc-no-stdlib",
+          "optional": false,
+          "req": ">=3.0.0, <4.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-stdlib",
+          "name": "alloc-stdlib",
+          "optional": true,
+          "req": ">=0.3.0, <0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/brotli-decompressor",
+          "name": "brotli-decompressor",
+          "optional": false,
+          "req": "~6.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "~0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 20021,
+          "content": "content/sha256/2973b41b01a2a428eedf2dc958d15e7961f95c3c37cc2cb2f3058b2d354eb562",
+          "digest": "sha256:2973b41b01a2a428eedf2dc958d15e7961f95c3c37cc2cb2f3058b2d354eb562",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1483,
+          "content": "content/sha256/c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "digest": "sha256:c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.BSD-3-Clause",
+          "role": "license"
+        },
+        {
+          "bytes": 1084,
+          "content": "content/sha256/3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+          "digest": "sha256:3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc-stdlib": [
+          "dep:alloc-stdlib"
+        ],
+        "benchmark": [
+          "brotli-decompressor/benchmark"
+        ],
+        "billing": [],
+        "default": [
+          "std"
+        ],
+        "disable-timer": [
+          "brotli-decompressor/disable-timer"
+        ],
+        "disallow_large_window_size": [],
+        "external-literal-probability": [],
+        "ffi-api": [
+          "brotli-decompressor/ffi-api"
+        ],
+        "float64": [],
+        "floating_point_context_mixing": [],
+        "no-stdlib-ffi-binding": [],
+        "pass-through-ffi-panics": [],
+        "portable-float": [],
+        "safe": [],
+        "seccomp": [
+          "alloc-no-stdlib/unsafe",
+          "brotli-decompressor/seccomp"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "simd": [],
+        "std": [
+          "alloc-stdlib",
+          "brotli-decompressor/std"
+        ],
+        "validation": [
+          "sha2"
+        ],
+        "vector_scratch_space": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "brotli",
+        "decompression",
+        "lz77",
+        "huffman",
+        "nostd"
+      ],
       "manifest": "crates-io/brotli/9.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -134,6 +250,17 @@
         "edition": "2015",
         "name": "brotli",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f8b851b75c23ca7873623d612fe49bd1989aeb03d08fb9432187eb253d3d4c6b",
+        "package": "brotli",
+        "registry": "crates-io",
+        "version": "9.0.0"
+      },
+      "vcs": {
+        "commit": "a51b65e75f68e3485be12bc816118e523e95647d",
+        "path": "",
+        "system": "git"
       },
       "version": "9.0.0",
       "yanked": false
@@ -157,6 +284,73 @@
       "advisories": 0,
       "archive": "sha256:53ebab9caa7c638eea790aa32c547e93032263a4d185cb8d361a117e72e73160",
       "assets": [],
+      "categories": [
+        "compression",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-no-stdlib",
+          "name": "alloc-no-stdlib",
+          "optional": false,
+          "req": ">=2.0.4, <3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/alloc-stdlib",
+          "name": "alloc-stdlib",
+          "optional": true,
+          "req": "~0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/brotli-decompressor",
+          "name": "brotli-decompressor",
+          "optional": false,
+          "req": "~5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "~0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 14327,
+          "content": "content/sha256/c9095e02c156baa91ba7e168523a281eaa575a3fc8e553501e8a64a0778796b4",
+          "digest": "sha256:c9095e02c156baa91ba7e168523a281eaa575a3fc8e553501e8a64a0778796b4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1483,
+          "content": "content/sha256/c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "digest": "sha256:c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.BSD-3-Clause",
+          "role": "license"
+        },
+        {
+          "bytes": 1084,
+          "content": "content/sha256/3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+          "digest": "sha256:3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -165,14 +359,61 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc-stdlib": [
+          "dep:alloc-stdlib"
+        ],
+        "benchmark": [
+          "brotli-decompressor/benchmark"
+        ],
+        "billing": [],
+        "default": [
+          "std"
+        ],
+        "disable-timer": [
+          "brotli-decompressor/disable-timer"
+        ],
+        "disallow_large_window_size": [],
+        "external-literal-probability": [],
+        "ffi-api": [
+          "brotli-decompressor/ffi-api"
+        ],
+        "float64": [],
+        "floating_point_context_mixing": [],
+        "no-stdlib-ffi-binding": [],
+        "pass-through-ffi-panics": [],
+        "seccomp": [
+          "brotli-decompressor/seccomp"
+        ],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "simd": [],
+        "std": [
+          "alloc-stdlib",
+          "brotli-decompressor/std"
+        ],
+        "validation": [
+          "sha2"
+        ],
+        "vector_scratch_space": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "brotli",
+        "decompression",
+        "lz77",
+        "huffman",
+        "nostd"
+      ],
       "manifest": "crates-io/brotli/8.0.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -182,6 +423,17 @@
         "edition": "2015",
         "name": "brotli",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5cc91aac060a7a1e25823bdccbfb6af1875b88f17c6daac97894eed8207166b3",
+        "package": "brotli",
+        "registry": "crates-io",
+        "version": "8.0.4"
+      },
+      "vcs": {
+        "commit": "9651aa3ebfd23be83ca14d914fba2d7c12b32d2f",
+        "path": "",
+        "system": "git"
       },
       "version": "8.0.4",
       "yanked": false

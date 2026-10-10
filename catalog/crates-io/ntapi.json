@@ -114,6 +114,59 @@
           "unit_identity": "sha256:7f6f966d91df66f8d3b1d3ba36a988c15d90b68b2da0defa6f5becc19b751e16"
         }
       ],
+      "categories": [
+        "external-ffi-bindings",
+        "no-std",
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "cfg",
+            "evntrace",
+            "in6addr",
+            "inaddr",
+            "minwinbase",
+            "ntsecapi",
+            "windef",
+            "winioctl"
+          ],
+          "loaf": "crates-io/winapi",
+          "name": "winapi",
+          "optional": false,
+          "req": "^0.3.9"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1017,
+          "content": "content/sha256/99136e0f3f3e03e96a87d7050b4e9d0a2a45475d81fb31b93934293eea3246b2",
+          "digest": "sha256:99136e0f3f3e03e96a87d7050b4e9d0a2a45475d81fb31b93934293eea3246b2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11360,
+          "content": "content/sha256/cf90d659de5c1e6418267ab8043b756e65508ee5d8d50b29eb2d2fe444c2c3eb",
+          "digest": "sha256:cf90d659de5c1e6418267ab8043b756e65508ee5d8d50b29eb2d2fe444c2c3eb",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/11a7964ccc0dd115d16720ab1d826c5d03e52838748ffaba3d21bae8bcacd82a",
+          "digest": "sha256:11a7964ccc0dd115d16720ab1d826c5d03e52838748ffaba3d21bae8bcacd82a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -122,6 +175,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -132,6 +186,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -142,6 +197,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -152,14 +208,33 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "user"
+        ],
+        "func-types": [],
+        "impl-default": [
+          "winapi/impl-default"
+        ],
+        "kernel": [],
+        "user": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "windows",
+        "ffi",
+        "ntapi",
+        "native",
+        "win32"
+      ],
       "manifest": "crates-io/ntapi/0.4.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -170,6 +245,17 @@
         "edition": "2018",
         "name": "ntapi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c3b335231dfd352ffb0f8017f3b6027a4917f7df785ea2143d8af2adc66980ae",
+        "package": "ntapi",
+        "registry": "crates-io",
+        "version": "0.4.3"
+      },
+      "vcs": {
+        "commit": "3f8ac79fdfea53d8fbe1282237173cee8c4f198c",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.3",
       "yanked": false

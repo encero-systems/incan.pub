@@ -205,11 +205,81 @@
           "unit_identity": "sha256:f0240509832fa556d092577907ed314955945bc06da6f072f3f77e8a7d84f843"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.152"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_Console"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows",
+          "optional": false,
+          "req": ">=0.59, <=0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8435,
+          "content": "content/sha256/74db2a9c27cc6cc5f8b4291f07987752ccfeaa82dd7798ebbdc0c06b576d5a0a",
+          "digest": "sha256:74db2a9c27cc6cc5f8b4291f07987752ccfeaa82dd7798ebbdc0c06b576d5a0a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1157,
+          "content": "content/sha256/284465860407420254e39be4e1bdcaaf2e7f2d18e06f9bab75bc75341a5d8501",
+          "digest": "sha256:284465860407420254e39be4e1bdcaaf2e7f2d18e06f9bab75bc75341a5d8501",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 2281,
+          "content": "content/sha256/2bb8b5954c5543b9169ee8abf7680144ef15f3eea403ba034efdb9b5e6b9f5b8",
+          "digest": "sha256:2bb8b5954c5543b9169ee8abf7680144ef15f3eea403ba034efdb9b5e6b9f5b8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "derive_serde_style": [
+          "serde"
+        ],
+        "gnu_legacy": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/nu-ansi-term/0.50.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -220,6 +290,17 @@
         "edition": "2021",
         "name": "nu_ansi_term",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7957b9740744892f114936ab4a57b3f487491bbeafaf8083688b16841a4240e5",
+        "package": "nu-ansi-term",
+        "registry": "crates-io",
+        "version": "0.50.3"
+      },
+      "vcs": {
+        "commit": "a23b71dae8efc17ca89d6bfe86134e15c3b157f5",
+        "path": "",
+        "system": "git"
       },
       "version": "0.50.3",
       "yanked": false

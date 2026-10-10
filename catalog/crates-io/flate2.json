@@ -327,6 +327,93 @@
           "unit_identity": "sha256:f25f9ef4b2d9415fc959685020c52c4709c61d93388411bf82e65709430c7a24"
         }
       ],
+      "categories": [
+        "compression",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/document-features",
+          "name": "document-features",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libz-ng-sys",
+          "name": "libz-ng-sys",
+          "optional": true,
+          "req": "^1.1.16"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libz-sys",
+          "name": "libz-sys",
+          "optional": true,
+          "req": "^1.1.20"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/miniz_oxide",
+          "name": "miniz_oxide",
+          "optional": true,
+          "req": "^0.9.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rust-allocator"
+          ],
+          "loaf": "crates-io/zlib-rs",
+          "name": "zlib-rs",
+          "optional": true,
+          "req": "^0.6.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4087,
+          "content": "content/sha256/f14e438f37a22eb8b81a1160b7dd15b8e37a2fdbcb32e729e00b9e639b370a66",
+          "digest": "sha256:f14e438f37a22eb8b81a1160b7dd15b8e37a2fdbcb32e729e00b9e639b370a66",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/025436edff4cfcdde17a5811fdea78892d8482efd1abdec5a17872d07a4f2112",
+          "digest": "sha256:025436edff4cfcdde17a5811fdea78892d8482efd1abdec5a17872d07a4f2112",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -340,14 +427,91 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "any_c_zlib": [
+          "any_zlib"
+        ],
+        "any_impl": [],
+        "any_zlib": [
+          "any_impl"
+        ],
+        "cloudflare_zlib": [
+          "zlib"
+        ],
+        "default": [
+          "rust_backend",
+          "runtime_detection"
+        ],
+        "document-features": [
+          "dep:document-features"
+        ],
+        "libz-ng-sys": [
+          "dep:libz-ng-sys"
+        ],
+        "libz-sys": [
+          "dep:libz-sys"
+        ],
+        "miniz-sys": [
+          "rust_backend"
+        ],
+        "miniz_oxide": [
+          "any_impl",
+          "dep:miniz_oxide",
+          "dep:crc32fast"
+        ],
+        "runtime_detection": [
+          "zlib-rs?/std",
+          "crc32fast?/std"
+        ],
+        "rust_backend": [
+          "miniz_oxide",
+          "any_impl"
+        ],
+        "zlib": [
+          "any_c_zlib",
+          "libz-sys",
+          "dep:crc32fast"
+        ],
+        "zlib-default": [
+          "any_c_zlib",
+          "libz-sys",
+          "dep:libz-sys",
+          "libz-sys/default",
+          "dep:crc32fast"
+        ],
+        "zlib-ng": [
+          "any_c_zlib",
+          "libz-ng-sys",
+          "dep:crc32fast"
+        ],
+        "zlib-ng-compat": [
+          "zlib",
+          "libz-sys",
+          "dep:libz-sys",
+          "libz-sys/zlib-ng",
+          "dep:crc32fast"
+        ],
+        "zlib-rs": [
+          "any_zlib",
+          "dep:zlib-rs"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "gzip",
+        "deflate",
+        "zlib",
+        "zlib-ng",
+        "encoding"
+      ],
       "manifest": "crates-io/flate2/1.1.10/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -357,6 +521,17 @@
         "edition": "2018",
         "name": "flate2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6e634e2e0ebac1ee034020da1ca582e17ffe4e0f5e985823721e168928136dcb",
+        "package": "flate2",
+        "registry": "crates-io",
+        "version": "1.1.10"
+      },
+      "vcs": {
+        "commit": "ed93d4fc60eaf876c6aded741bf992d524551930",
+        "path": "",
+        "system": "git"
       },
       "version": "1.1.10",
       "yanked": false
@@ -380,6 +555,115 @@
       "advisories": 0,
       "archive": "sha256:b09595a79a1e9f3ebad2e69e5da265bc9f9254160967221d2df3f36e751cdeeb",
       "assets": [],
+      "categories": [
+        "compression",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cloudflare-zlib-sys",
+          "name": "cloudflare-zlib-sys",
+          "optional": true,
+          "req": "^0.3.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/document-features",
+          "name": "document-features",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libz-ng-sys",
+          "name": "libz-ng-sys",
+          "optional": true,
+          "req": "^1.1.16"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libz-sys",
+          "name": "libz-sys",
+          "optional": true,
+          "req": "^1.1.20"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd",
+            "with-alloc"
+          ],
+          "loaf": "crates-io/miniz_oxide",
+          "name": "miniz_oxide",
+          "optional": false,
+          "req": "^0.8.5",
+          "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"emscripten\")))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "simd",
+            "with-alloc"
+          ],
+          "loaf": "crates-io/miniz_oxide",
+          "name": "miniz_oxide",
+          "optional": true,
+          "req": "^0.8.5"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rust-allocator",
+            "std"
+          ],
+          "loaf": "crates-io/zlib-rs",
+          "name": "zlib-rs",
+          "optional": true,
+          "req": "^0.6.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4652,
+          "content": "content/sha256/7958879222474ae6e290335294d3e752bb9142d611bcf800bb1c8ba0a9620871",
+          "digest": "sha256:7958879222474ae6e290335294d3e752bb9142d611bcf800bb1c8ba0a9620871",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/025436edff4cfcdde17a5811fdea78892d8482efd1abdec5a17872d07a4f2112",
+          "digest": "sha256:025436edff4cfcdde17a5811fdea78892d8482efd1abdec5a17872d07a4f2112",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -390,6 +674,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -402,14 +687,91 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "any_c_zlib": [
+          "any_zlib"
+        ],
+        "any_impl": [],
+        "any_zlib": [
+          "any_impl"
+        ],
+        "cloudflare-zlib-sys": [
+          "dep:cloudflare-zlib-sys"
+        ],
+        "cloudflare_zlib": [
+          "any_c_zlib",
+          "cloudflare-zlib-sys",
+          "dep:crc32fast"
+        ],
+        "default": [
+          "rust_backend"
+        ],
+        "document-features": [
+          "dep:document-features"
+        ],
+        "libz-ng-sys": [
+          "dep:libz-ng-sys"
+        ],
+        "libz-sys": [
+          "dep:libz-sys"
+        ],
+        "miniz-sys": [
+          "rust_backend"
+        ],
+        "miniz_oxide": [
+          "any_impl",
+          "dep:miniz_oxide",
+          "dep:crc32fast"
+        ],
+        "rust_backend": [
+          "miniz_oxide",
+          "any_impl"
+        ],
+        "zlib": [
+          "any_c_zlib",
+          "libz-sys",
+          "dep:crc32fast"
+        ],
+        "zlib-default": [
+          "any_c_zlib",
+          "libz-sys",
+          "dep:libz-sys",
+          "libz-sys/default",
+          "dep:crc32fast"
+        ],
+        "zlib-ng": [
+          "any_c_zlib",
+          "libz-ng-sys",
+          "dep:crc32fast"
+        ],
+        "zlib-ng-compat": [
+          "zlib",
+          "libz-sys",
+          "dep:libz-sys",
+          "libz-sys/zlib-ng",
+          "dep:crc32fast"
+        ],
+        "zlib-rs": [
+          "any_zlib",
+          "dep:zlib-rs"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "gzip",
+        "deflate",
+        "zlib",
+        "zlib-ng",
+        "encoding"
+      ],
       "manifest": "crates-io/flate2/1.1.9/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -419,6 +781,17 @@
         "edition": "2018",
         "name": "flate2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:843fba2746e448b37e26a819579957415c8cef339bf08564fe8b7ddbd959573c",
+        "package": "flate2",
+        "registry": "crates-io",
+        "version": "1.1.9"
+      },
+      "vcs": {
+        "commit": "19ddb18bf11199858fbc6504d079448fafd1606e",
+        "path": "",
+        "system": "git"
       },
       "version": "1.1.9",
       "yanked": false

@@ -198,11 +198,94 @@
           "unit_identity": "sha256:07327161a6ce567b8203668a523a92abf421dd821f6c4cbc884184e20a88f7c5"
         }
       ],
+      "categories": [
+        "encoding",
+        "no-std",
+        "no-std::no-alloc"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytecheck_derive",
+          "name": "bytecheck_derive",
+          "optional": false,
+          "req": "=0.8.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ptr_meta",
+          "name": "ptr_meta",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rancor",
+          "name": "rancor",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/simdutf8",
+          "name": "simdutf8",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/uuid",
+          "name": "uuid-1",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2585,
+          "content": "content/sha256/b12297b9b5e1ca666b26d7bdc95016cb8d6e5510fa74bcbd024d977d9a4aa7f5",
+          "digest": "sha256:b12297b9b5e1ca666b26d7bdc95016cb8d6e5510fa74bcbd024d977d9a4aa7f5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1053,
+          "content": "content/sha256/744ba853c063f56a8d79385406413e5e3600adbc6aae359c74022701fb55a42a",
+          "digest": "sha256:744ba853c063f56a8d79385406413e5e3600adbc6aae359c74022701fb55a42a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "simdutf8"
+        ],
+        "simdutf8": [
+          "dep:simdutf8"
+        ],
+        "uuid-1": [
+          "dep:uuid-1"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no_std",
+        "validation",
+        "serialization"
+      ],
       "manifest": "crates-io/bytecheck/0.8.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -213,6 +296,17 @@
         "edition": "2021",
         "name": "bytecheck",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:26333eeac754f0ad8a6bcd0eb0ac012156302e4e16b852b72ee399aea4f12c29",
+        "package": "bytecheck",
+        "registry": "crates-io",
+        "version": "0.8.3"
+      },
+      "vcs": {
+        "commit": "cb5cc5a70b24c409be7fd72ee1ababc00fffa51f",
+        "path": "bytecheck",
+        "system": "git"
       },
       "version": "0.8.3",
       "yanked": false

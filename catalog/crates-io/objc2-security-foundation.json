@@ -23,11 +23,97 @@
       "advisories": 0,
       "archive": "sha256:bdef2e18105df235316314eef1f1df99c8cc8f4fe958799d3cc59b2d96507e35",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "Authorization",
+            "objc2"
+          ],
+          "loaf": "crates-io/objc2-security",
+          "name": "objc2-security",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 850,
+          "content": "content/sha256/dcbeade1a27499d6b83a1307b5bfdbff13721ece1d5a3f29378c61d6bd06fb43",
+          "digest": "sha256:dcbeade1a27499d6b83a1307b5bfdbff13721ece1d5a3f29378c61d6bd06fb43",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 394,
+          "content": "content/sha256/94514ca4045ba434116b456caee6358d38eb5bccffd2e2056eb0f26b037b6de1",
+          "digest": "sha256:94514ca4045ba434116b456caee6358d38eb5bccffd2e2056eb0f26b037b6de1",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "SFAuthorization": [
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSObject"
+        ],
+        "SFDefines": [],
+        "alloc": [],
+        "default": [
+          "std",
+          "SFAuthorization",
+          "SFDefines",
+          "objc2-security"
+        ],
+        "objc2-security": [
+          "dep:objc2-security"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos"
+      ],
       "manifest": "crates-io/objc2-security-foundation/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +124,17 @@
         "edition": "2021",
         "name": "objc2_security_foundation",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ef76382e9cedd18123099f17638715cc3d81dba3637d4c0d39ab69df2ef345a5",
+        "package": "objc2-security-foundation",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-security-foundation",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

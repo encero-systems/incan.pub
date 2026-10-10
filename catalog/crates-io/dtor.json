@@ -118,11 +118,79 @@
           "unit_identity": "sha256:51be39ce92b0eb9e25e459612c2ea013ae9ecd794af9d057b584a78d26aebb84"
         }
       ],
+      "categories": [
+        "development-tools::build-utils",
+        "no-std",
+        "no-std::no-alloc",
+        "embedded",
+        "development-tools::procedural-macro-helpers"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "dtor"
+          ],
+          "loaf": "crates-io/linktime-proc-macro",
+          "name": "linktime-proc-macro",
+          "optional": true,
+          "req": "^0.2.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 13932,
+          "content": "content/sha256/45256b7365ae9ed5838e5b8c4569d231749ce50d15f62f6c75a93e7e3cf06e9b",
+          "digest": "sha256:45256b7365ae9ed5838e5b8c4569d231749ce50d15f62f6c75a93e7e3cf06e9b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11324,
+          "content": "content/sha256/a8ad31b1c3f40dca5a84119351b8fa8ddc868edd77fad8a8ebf6d8f2d16fa4ae",
+          "digest": "sha256:a8ad31b1c3f40dca5a84119351b8fa8ddc868edd77fad8a8ebf6d8f2d16fa4ae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1022,
+          "content": "content/sha256/bccaa8b6c09f94e81f06696e179dbe058464bbdfbc823b6d49cada1d71e84ac3",
+          "digest": "sha256:bccaa8b6c09f94e81f06696e179dbe058464bbdfbc823b6d49cada1d71e84ac3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4009,
+          "content": "content/sha256/e9f21aaf14b1a077cbb5165f61f60c9b4263f3eee8e7e9f06e39729307fd3daa",
+          "digest": "sha256:e9f21aaf14b1a077cbb5165f61f60c9b4263f3eee8e7e9f06e39729307fd3daa",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "proc_macro"
+        ],
+        "proc_macro": [
+          "dep:linktime-proc-macro"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/dtor/1.0.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +201,17 @@
         "edition": "2021",
         "name": "dtor",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cd3f6c362b2bbd7063090886afd78978f5dbf1f11da7efcc40f81d32c943fac1",
+        "package": "dtor",
+        "registry": "crates-io",
+        "version": "1.0.6"
+      },
+      "vcs": {
+        "commit": "00ca36a7ed6d959d01866feeeec078a79b6dfa3f",
+        "path": "dtor",
+        "system": "git"
       },
       "version": "1.0.6",
       "yanked": false

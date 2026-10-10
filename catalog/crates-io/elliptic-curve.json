@@ -426,11 +426,277 @@
           "unit_identity": "sha256:5d1d0601d6252863b69da691096412493e8c08112103b0c7026cd9419dac9cdc"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "zeroize"
+          ],
+          "loaf": "crates-io/hybrid-array",
+          "name": "array",
+          "optional": false,
+          "req": "^0.4.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base16ct",
+          "name": "base16ct",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "hybrid-array",
+            "rand_core",
+            "subtle",
+            "zeroize"
+          ],
+          "loaf": "crates-io/crypto-bigint",
+          "name": "bigint",
+          "optional": false,
+          "req": "^0.7.5"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "rand_core"
+          ],
+          "loaf": "crates-io/crypto-common",
+          "name": "common",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/group",
+          "name": "group",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hex-literal",
+          "name": "hex-literal",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hkdf",
+          "name": "hkdf",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/pem-rfc7468",
+          "name": "pem-rfc7468",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pkcs8",
+          "name": "pkcs8",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "ctutils",
+            "subtle",
+            "zeroize"
+          ],
+          "loaf": "crates-io/sec1",
+          "name": "sec1",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": false,
+          "req": "^1.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1645,
+          "content": "content/sha256/a6d6efb6acefb135f4a6e92a3a1d2c17a498c40ecc40e6f2b5a9e10b16ad51bc",
+          "digest": "sha256:a6d6efb6acefb135f4a6e92a3a1d2c17a498c40ecc40e6f2b5a9e10b16ad51bc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/d8c4ab431f20da8452c9a217084163822e5fd9d134e1343903c929f2859fc8fd",
+          "digest": "sha256:d8c4ab431f20da8452c9a217084163822e5fd9d134e1343903c929f2859fc8fd",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 34557,
+          "content": "content/sha256/b6d25f7d44d1940b997945d37ee7580f69b76a724b851bcd4b9855001f629fc8",
+          "digest": "sha256:b6d25f7d44d1940b997945d37ee7580f69b76a724b851bcd4b9855001f629fc8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "base16ct/alloc",
+          "ff?/alloc",
+          "group?/alloc",
+          "array/alloc",
+          "pkcs8?/alloc",
+          "sec1?/alloc",
+          "zeroize/alloc"
+        ],
+        "arithmetic": [
+          "group"
+        ],
+        "default": [
+          "arithmetic"
+        ],
+        "dev": [
+          "arithmetic",
+          "dep:hex-literal",
+          "pem",
+          "pkcs8"
+        ],
+        "digest": [
+          "dep:digest"
+        ],
+        "ecdh": [
+          "arithmetic",
+          "digest",
+          "dep:hkdf"
+        ],
+        "ff": [
+          "dep:ff"
+        ],
+        "getrandom": [
+          "arithmetic",
+          "bigint/getrandom",
+          "common/getrandom"
+        ],
+        "group": [
+          "dep:group",
+          "ff"
+        ],
+        "pem": [
+          "dep:pem-rfc7468",
+          "alloc",
+          "arithmetic",
+          "dep:pkcs8",
+          "pkcs8/pem",
+          "dep:sec1",
+          "sec1/pem"
+        ],
+        "pkcs8": [
+          "dep:pkcs8",
+          "sec1"
+        ],
+        "sec1": [
+          "dep:sec1"
+        ],
+        "serde": [
+          "dep:serdect",
+          "alloc",
+          "pkcs8",
+          "dep:sec1",
+          "sec1/serde"
+        ],
+        "std": [
+          "alloc",
+          "pkcs8?/std",
+          "sec1?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "elliptic",
+        "weierstrass"
+      ],
       "manifest": "crates-io/elliptic-curve/0.14.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -441,6 +707,17 @@
         "edition": "2024",
         "name": "elliptic_curve",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9d65aa39b3a5c1c9c1b745c9a019234bb7a21b77abcb4f4d266d706e2d577d65",
+        "package": "elliptic-curve",
+        "registry": "crates-io",
+        "version": "0.14.1"
+      },
+      "vcs": {
+        "commit": "049d1fcc3ee4d9ebce4e65a0b5beb492bcb470de",
+        "path": "elliptic-curve",
+        "system": "git"
       },
       "version": "0.14.1",
       "yanked": false
@@ -463,11 +740,308 @@
       "advisories": 0,
       "archive": "sha256:138c5881dba8c408165403208dd162b79094e7d0d1ad4f3daa38330aaab71131",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base16ct",
+          "name": "base16ct",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/base64ct",
+          "name": "base64ct",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "generic-array",
+            "rand_core",
+            "zeroize"
+          ],
+          "loaf": "crates-io/crypto-bigint",
+          "name": "crypto-bigint",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "zeroize"
+          ],
+          "loaf": "crates-io/generic-array",
+          "name": "generic-array",
+          "optional": false,
+          "req": "^0.14.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/group",
+          "name": "group",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hex-literal",
+          "name": "hex-literal",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hkdf",
+          "name": "hkdf",
+          "optional": true,
+          "req": "^0.12.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/pem-rfc7468",
+          "name": "pem-rfc7468",
+          "optional": true,
+          "req": "^0.7"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pkcs8",
+          "name": "pkcs8",
+          "optional": true,
+          "req": "^0.10.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.6.4"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "subtle",
+            "zeroize"
+          ],
+          "loaf": "crates-io/sec1",
+          "name": "sec1",
+          "optional": true,
+          "req": "^0.7.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0.47"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serdect",
+          "name": "serdect",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tap",
+          "name": "tap",
+          "optional": true,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": false,
+          "req": "^1.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1957,
+          "content": "content/sha256/1ec3f5114bbba41528da8017c76a5d7f5cd995ae444705c279b776eeea350216",
+          "digest": "sha256:1ec3f5114bbba41528da8017c76a5d7f5cd995ae444705c279b776eeea350216",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/d27687b51f2874822c1530976b7e837eac4f308d94bf3dd42047011b7d437b47",
+          "digest": "sha256:d27687b51f2874822c1530976b7e837eac4f308d94bf3dd42047011b7d437b47",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 27575,
+          "content": "content/sha256/0b10798f0b729a76ffe1799c4ff8eb8264c784207150daac900e470a5d84b48a",
+          "digest": "sha256:0b10798f0b729a76ffe1799c4ff8eb8264c784207150daac900e470a5d84b48a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "base16ct/alloc",
+          "ff?/alloc",
+          "group?/alloc",
+          "pkcs8?/alloc",
+          "sec1?/alloc",
+          "zeroize/alloc"
+        ],
+        "arithmetic": [
+          "group"
+        ],
+        "bits": [
+          "arithmetic",
+          "dep:ff",
+          "ff/bits",
+          "dep:tap"
+        ],
+        "default": [
+          "arithmetic"
+        ],
+        "dev": [
+          "arithmetic",
+          "dep:hex-literal",
+          "pem",
+          "pkcs8"
+        ],
+        "digest": [
+          "dep:digest"
+        ],
+        "ecdh": [
+          "arithmetic",
+          "digest",
+          "dep:hkdf"
+        ],
+        "ff": [
+          "dep:ff"
+        ],
+        "group": [
+          "dep:group",
+          "ff"
+        ],
+        "hash2curve": [
+          "arithmetic",
+          "digest"
+        ],
+        "hazmat": [],
+        "jwk": [
+          "dep:base64ct",
+          "dep:serde_json",
+          "alloc",
+          "serde",
+          "zeroize/alloc"
+        ],
+        "pem": [
+          "dep:pem-rfc7468",
+          "alloc",
+          "arithmetic",
+          "pkcs8",
+          "dep:sec1",
+          "sec1/pem"
+        ],
+        "pkcs8": [
+          "dep:pkcs8",
+          "sec1"
+        ],
+        "sec1": [
+          "dep:sec1"
+        ],
+        "serde": [
+          "dep:serdect",
+          "alloc",
+          "pkcs8",
+          "dep:sec1",
+          "sec1/serde"
+        ],
+        "std": [
+          "alloc",
+          "rand_core/std",
+          "pkcs8?/std",
+          "sec1?/std"
+        ],
+        "voprf": [
+          "digest"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "elliptic",
+        "weierstrass"
+      ],
       "manifest": "crates-io/elliptic-curve/0.13.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -478,6 +1052,17 @@
         "edition": "2021",
         "name": "elliptic_curve",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b5e6043086bf7973472e0c7dff2142ea0b680d30e18d9cc40f267efbf222bd47",
+        "package": "elliptic-curve",
+        "registry": "crates-io",
+        "version": "0.13.8"
+      },
+      "vcs": {
+        "commit": "5ddf0f52f07f65f319ffd423c52e696406924d90",
+        "path": "elliptic-curve",
+        "system": "git"
       },
       "version": "0.13.8",
       "yanked": false

@@ -116,11 +116,151 @@
           "unit_identity": "sha256:0cd17daddf3bd111bbf9831ee426dc72f54384e869b52002a774b5cd084b8e3a"
         }
       ],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.10.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http",
+          "name": "http",
+          "optional": true,
+          "req": "^1.3.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http-body",
+          "name": "http-body",
+          "optional": true,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": true,
+          "req": "^2.0.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "async"
+          ],
+          "loaf": "crates-io/wit-bindgen",
+          "name": "wit-bindgen",
+          "optional": false,
+          "req": "^0.62.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2047,
+          "content": "content/sha256/21211412f5aa8ecdc8ebbb93dc24c05cd75dbd8b9579a8ea0c4a5401defbb5a0",
+          "digest": "sha256:21211412f5aa8ecdc8ebbb93dc24c05cd75dbd8b9579a8ea0c4a5401defbb5a0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "async-spawn": [
+          "wit-bindgen/async-spawn"
+        ],
+        "bitflags": [
+          "wit-bindgen/bitflags"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std",
+          "bitflags"
+        ],
+        "http-compat": [
+          "dep:bytes",
+          "dep:http-body",
+          "dep:http",
+          "dep:thiserror",
+          "async-spawn"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "wit-bindgen/rustc-dep-of-std"
+        ],
+        "std": [],
+        "wit-bindgen-macros": [
+          "wit-bindgen/macros"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasip3/0.9.0+wasi-0.3.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -131,6 +271,17 @@
         "edition": "2021",
         "name": "wasip3",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f1d5749fdf69bb9400562eba50f8f25f5cd800ef4b74300038b6f99ae7409674",
+        "package": "wasip3",
+        "registry": "crates-io",
+        "version": "0.9.0+wasi-0.3.0"
+      },
+      "vcs": {
+        "commit": "78855bdce7b4c17d3dfbc0abff1b4940bcac0388",
+        "path": "crates/wasip3",
+        "system": "git"
       },
       "version": "0.9.0+wasi-0.3.0",
       "yanked": false
@@ -151,11 +302,92 @@
       "advisories": 0,
       "archive": "sha256:25d742e0781b0f0e43e12c9d16ac96d214c3d786a53b9d92c4e605a8057bfca6",
       "assets": [],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.10.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http",
+          "name": "http",
+          "optional": true,
+          "req": "^1.3.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http-body",
+          "name": "http-body",
+          "optional": true,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": true,
+          "req": "^2.0.17"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "async"
+          ],
+          "loaf": "crates-io/wit-bindgen",
+          "name": "wit-bindgen",
+          "optional": false,
+          "req": "^0.51.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1983,
+          "content": "content/sha256/325b35fceb296aef996435dc7d68537af56fa1983012a9e170630ac78ce0334e",
+          "digest": "sha256:325b35fceb296aef996435dc7d68537af56fa1983012a9e170630ac78ce0334e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 413,
+          "content": "content/sha256/7b6192d2fde712a126c7d4fa088271780e3d12bc9a6eebe47e15dc6c6c2851d6",
+          "digest": "sha256:7b6192d2fde712a126c7d4fa088271780e3d12bc9a6eebe47e15dc6c6c2851d6",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "http-compat": [
+          "dep:bytes",
+          "dep:http-body",
+          "dep:http",
+          "dep:thiserror",
+          "wit-bindgen/async-spawn"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasip3/0.4.0+wasi-0.3.0-rc-2026-01-06/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -165,6 +397,17 @@
         "edition": "2021",
         "name": "wasip3",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5428f8bf88ea5ddc08faddef2ac4a67e390b88186c703ce6dbd955e1c145aca5",
+        "package": "wasip3",
+        "registry": "crates-io",
+        "version": "0.4.0+wasi-0.3.0-rc-2026-01-06"
+      },
+      "vcs": {
+        "commit": "06ce201370fcde0d1b0d47cac8ecb1b0b312c9f9",
+        "path": "crates/wasip3",
+        "system": "git"
       },
       "version": "0.4.0+wasi-0.3.0-rc-2026-01-06",
       "yanked": false

@@ -118,11 +118,130 @@
           "unit_identity": "sha256:073d56d3c61567df4f16458062070bd46c5b236ed8bfcfe74afba90bef8b1ea6"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/aead",
+          "name": "aead",
+          "optional": false,
+          "req": "^0.6"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "xchacha"
+          ],
+          "loaf": "crates-io/chacha20",
+          "name": "chacha20",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cipher",
+          "name": "cipher",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/poly1305",
+          "name": "poly1305",
+          "optional": false,
+          "req": "^0.9"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3691,
+          "content": "content/sha256/3ef6cfd941096d8ce8dda11058eb59cb0252fa08ebc4dfbc7adb44e33c5f60ea",
+          "digest": "sha256:3ef6cfd941096d8ce8dda11058eb59cb0252fa08ebc4dfbc7adb44e33c5f60ea",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/b8c6939380a400f53e11923d50fcc4dd2fa1ba8339fd9d04cda38a0251b6c9b0",
+          "digest": "sha256:b8c6939380a400f53e11923d50fcc4dd2fa1ba8339fd9d04cda38a0251b6c9b0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6294,
+          "content": "content/sha256/58c36da6ae24394c5e39a2c494e93b88db4a22b6a4641d490bff59f025930064",
+          "digest": "sha256:58c36da6ae24394c5e39a2c494e93b88db4a22b6a4641d490bff59f025930064",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "aead/alloc"
+        ],
+        "arrayvec": [
+          "aead/arrayvec"
+        ],
+        "bytes": [
+          "aead/bytes"
+        ],
+        "default": [
+          "alloc",
+          "getrandom"
+        ],
+        "getrandom": [
+          "aead/getrandom"
+        ],
+        "rand_core": [
+          "aead/rand_core"
+        ],
+        "reduced-round": [],
+        "zeroize": [
+          "dep:zeroize",
+          "chacha20/zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "aead",
+        "chacha20",
+        "poly1305",
+        "xchacha20",
+        "xchacha20poly1305"
+      ],
       "manifest": "crates-io/chacha20poly1305/0.11.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +252,17 @@
         "edition": "2024",
         "name": "chacha20poly1305",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9b89e1c441e926b9c82a8d023f6e1b7ae0adcfaa7d621814e4d60789bac751cb",
+        "package": "chacha20poly1305",
+        "registry": "crates-io",
+        "version": "0.11.0"
+      },
+      "vcs": {
+        "commit": "e37a978ccf0992d9053fbc039470d6527108e393",
+        "path": "chacha20poly1305",
+        "system": "git"
       },
       "version": "0.11.0",
       "yanked": false

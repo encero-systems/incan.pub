@@ -110,11 +110,140 @@
           "unit_identity": "sha256:b06a0e84c9154aa787dc36476f8a0bd48f69dbcc792d792474abecc818705970"
         }
       ],
+      "categories": [
+        "encoding",
+        "filesystem",
+        "graphics",
+        "multimedia"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bit_field",
+          "name": "bit_field",
+          "optional": false,
+          "req": "^0.10.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": false,
+          "req": "^2.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lebe",
+          "name": "lebe",
+          "optional": false,
+          "req": "^0.5.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/miniz_oxide",
+          "name": "miniz_oxide",
+          "optional": false,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-complex",
+          "name": "num-complex",
+          "optional": false,
+          "req": "^0.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulp",
+          "name": "pulp",
+          "optional": false,
+          "req": "^0.22.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon-core",
+          "name": "rayon-core",
+          "optional": true,
+          "req": "^1.11.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.7.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "zlib"
+          ],
+          "loaf": "crates-io/zune-inflate",
+          "name": "zune-inflate",
+          "optional": false,
+          "req": "^0.2.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 17627,
+          "content": "content/sha256/2dbc36c36f02f9c32943b8c390736b23bdadde221845cea377a93141eff082d3",
+          "digest": "sha256:2dbc36c36f02f9c32943b8c390736b23bdadde221845cea377a93141eff082d3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 3566,
+          "content": "content/sha256/97e4d3aa7a9e8ac31979c16ca8bb2b628a9cb72c3362185ad2bf4ad77f43551f",
+          "digest": "sha256:97e4d3aa7a9e8ac31979c16ca8bb2b628a9cb72c3362185ad2bf4ad77f43551f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 569,
+          "content": "content/sha256/212a5ed50cc9a30ab05c8e41d95f2ba73d71359b31dfd8707618632ed0f31423",
+          "digest": "sha256:212a5ed50cc9a30ab05c8e41d95f2ba73d71359b31dfd8707618632ed0f31423",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "avx2-tests": [],
+        "default": [
+          "rayon"
+        ],
+        "rayon": [
+          "dep:rayon-core"
+        ],
+        "simd-benches": [],
+        "sse2-tests": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "exr",
+        "openexr",
+        "file",
+        "binary",
+        "io"
+      ],
       "manifest": "crates-io/exr/1.74.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +254,17 @@
         "edition": "2018",
         "name": "exr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:711fe42c9964295e01ee3fba3f9fe0e1d24b98886950d68efe81b1c76e21adf3",
+        "package": "exr",
+        "registry": "crates-io",
+        "version": "1.74.2"
+      },
+      "vcs": {
+        "commit": "719d14e57bc6be8db98d8ebdc0b0872bec3cfea7",
+        "path": "",
+        "system": "git"
       },
       "version": "1.74.2",
       "yanked": false

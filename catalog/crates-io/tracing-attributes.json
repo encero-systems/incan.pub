@@ -370,19 +370,98 @@
           "unit_identity": "sha256:fc74da0b13ff1212834a397c96b9d028c62ebd33a09a15291195471d6ed9d797"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.60"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.20"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "clone-impls",
+            "extra-traits",
+            "full",
+            "parsing",
+            "printing",
+            "proc-macro",
+            "visit-mut"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3152,
+          "content": "content/sha256/f44ccf3699cd55de04c4a545d84f55dda6a9f61af105f159fc2dac29c8a6b007",
+          "digest": "sha256:f44ccf3699cd55de04c4a545d84f55dda6a9f61af105f159fc2dac29c8a6b007",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "digest": "sha256:898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 13943,
+          "content": "content/sha256/c37d95cb1e7b62a2ee7dedecd56e5c4a110aecc0b98582cf5dbe5a49d528c885",
+          "digest": "sha256:c37d95cb1e7b62a2ee7dedecd56e5c4a110aecc0b98582cf5dbe5a49d528c885",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "async-await": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging",
+        "tracing",
+        "macro",
+        "instrument",
+        "log"
+      ],
       "manifest": "crates-io/tracing-attributes/0.1.31/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -392,6 +471,17 @@
         "edition": "2018",
         "name": "tracing_attributes",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:7490cfa5ec963746568740651ac6781f701c9c5ea257c58e057f3ba8cf69e8da",
+        "package": "tracing-attributes",
+        "registry": "crates-io",
+        "version": "0.1.31"
+      },
+      "vcs": {
+        "commit": "55086231ec4aaeffcaab9932e696f40278f06bd1",
+        "path": "tracing-attributes",
+        "system": "git"
       },
       "version": "0.1.31",
       "yanked": false

@@ -363,11 +363,122 @@
           "unit_identity": "sha256:f7fea83a4825a6d6ce466d2e019c1abfe1c48d577b2397ae7b3c91b7dc971c10"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bitvec",
+          "name": "bitvec",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/byteorder",
+          "name": "byteorder",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ff_derive",
+          "name": "ff_derive",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "i128"
+          ],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.2.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2339,
+          "content": "content/sha256/3ec2748d60866637af6c72e997375666c43e12c48b842e0cf8587c49bfeb9409",
+          "digest": "sha256:3ec2748d60866637af6c72e997375666c43e12c48b842e0cf8587c49bfeb9409",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10848,
+          "content": "content/sha256/3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+          "digest": "sha256:3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1076,
+          "content": "content/sha256/8d0c1d1d4b2bebf5b9211f0e883d5a482b7808f3ed31320da14ddee95811f4ef",
+          "digest": "sha256:8d0c1d1d4b2bebf5b9211f0e883d5a482b7808f3ed31320da14ddee95811f4ef",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6390,
+          "content": "content/sha256/4faafdf0a8a559933b44157947d1ec57b6ce18ab621448a817c9b197127484d0",
+          "digest": "sha256:4faafdf0a8a559933b44157947d1ec57b6ce18ab621448a817c9b197127484d0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "bits": [
+          "bitvec",
+          "ff_derive?/bits"
+        ],
+        "bitvec": [
+          "dep:bitvec"
+        ],
+        "byteorder": [
+          "dep:byteorder"
+        ],
+        "default": [
+          "bits",
+          "std"
+        ],
+        "derive": [
+          "byteorder",
+          "ff_derive"
+        ],
+        "ff_derive": [
+          "dep:ff_derive"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/ff/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -378,6 +489,17 @@
         "edition": "2021",
         "name": "ff",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a1f686ab92a9fb0eaf188f6c6c87b89490baa6fdb0db4544ba4dc47f7942489f",
+        "package": "ff",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "8cf62cd9c7a37ee8c4abb0b89308df8e873b21c3",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -401,11 +523,126 @@
       "advisories": 0,
       "archive": "sha256:f00f2f513b1a8b106e5ec9a027d954d3c5c5b62c1ac63ac46a7354db06933cbf",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bitvec",
+          "name": "bitvec",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/byteorder",
+          "name": "byteorder",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ff_derive",
+          "name": "ff_derive",
+          "optional": true,
+          "req": "^0.13.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.6"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "i128"
+          ],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.2.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2339,
+          "content": "content/sha256/ff72f1eb5a6e71e0771253c6b6f2e9fea294e1566fe620169fcb25047eb216a4",
+          "digest": "sha256:ff72f1eb5a6e71e0771253c6b6f2e9fea294e1566fe620169fcb25047eb216a4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10848,
+          "content": "content/sha256/3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+          "digest": "sha256:3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1076,
+          "content": "content/sha256/8d0c1d1d4b2bebf5b9211f0e883d5a482b7808f3ed31320da14ddee95811f4ef",
+          "digest": "sha256:8d0c1d1d4b2bebf5b9211f0e883d5a482b7808f3ed31320da14ddee95811f4ef",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 5744,
+          "content": "content/sha256/bcc60c58cb1fd5333fb1885230c139496c02769a6116a9f038c40703b3c8c64d",
+          "digest": "sha256:bcc60c58cb1fd5333fb1885230c139496c02769a6116a9f038c40703b3c8c64d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "bits": [
+          "bitvec"
+        ],
+        "bitvec": [
+          "dep:bitvec"
+        ],
+        "byteorder": [
+          "dep:byteorder"
+        ],
+        "default": [
+          "bits",
+          "std"
+        ],
+        "derive": [
+          "byteorder",
+          "ff_derive"
+        ],
+        "derive_bits": [
+          "bits",
+          "dep:ff_derive",
+          "ff_derive/bits"
+        ],
+        "ff_derive": [
+          "dep:ff_derive"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/ff/0.13.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -416,6 +653,17 @@
         "edition": "2021",
         "name": "ff",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c0b50bfb653653f9ca9095b427bed08ab8d75a137839d9ad64eb11810d5b6393",
+        "package": "ff",
+        "registry": "crates-io",
+        "version": "0.13.1"
+      },
+      "vcs": {
+        "commit": "851b0f61bbcf9a5b61027307144d8bd1f9b756ba",
+        "path": "",
+        "system": "git"
       },
       "version": "0.13.1",
       "yanked": false

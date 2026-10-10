@@ -302,11 +302,61 @@
           "unit_identity": "sha256:0fa64f9ff3dbf89fb901e60e5fe4a3dae764247e8ce15350ffd904d3a04900d7"
         }
       ],
+      "categories": [
+        "no-std",
+        "no-std::no-alloc"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ptr_meta_derive",
+          "name": "ptr_meta_derive",
+          "optional": true,
+          "req": "=0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2056,
+          "content": "content/sha256/ecab8de808eabbbdad691cb872c5447a4833a1970b5defe85802cbd1826fb56a",
+          "digest": "sha256:ecab8de808eabbbdad691cb872c5447a4833a1970b5defe85802cbd1826fb56a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1053,
+          "content": "content/sha256/635111a955495b5d8d34b8052f69656e8e45f6437f9266329077b9aad5fbe8d3",
+          "digest": "sha256:635111a955495b5d8d34b8052f69656e8e45f6437f9266329077b9aad5fbe8d3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "derive",
+          "std"
+        ],
+        "derive": [
+          "ptr_meta_derive"
+        ],
+        "ptr_meta_derive": [
+          "dep:ptr_meta_derive"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "no_std"
+      ],
       "manifest": "crates-io/ptr_meta/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -317,6 +367,17 @@
         "edition": "2021",
         "name": "ptr_meta",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:743da816b98c921cdbe8628ef7381b76f25ecf4da599fc80aca90eae7ef70cc0",
+        "package": "ptr_meta",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "403bd1daba381cf6ca239636436c57f69f071bfb",
+        "path": "ptr_meta",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

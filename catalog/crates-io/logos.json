@@ -123,11 +123,83 @@
           "unit_identity": "sha256:f8176e2077af98d45434b5345d3e590a535d03fa8fca9ad3af391457f37f0f93"
         }
       ],
+      "categories": [
+        "parsing",
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/logos-derive",
+          "name": "logos-derive",
+          "optional": true,
+          "req": "^0.16.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4013,
+          "content": "content/sha256/c0b477ba706d1e31be9949e7837ea987d04f8baf03b104dbe57f00f5571f9848",
+          "digest": "sha256:c0b477ba706d1e31be9949e7837ea987d04f8baf03b104dbe57f00f5571f9848",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10860,
+          "content": "content/sha256/f30735c11407534952947e1c7b7457ddf28847000bb038402495ad66f3d020a4",
+          "digest": "sha256:f30735c11407534952947e1c7b7457ddf28847000bb038402495ad66f3d020a4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1104,
+          "content": "content/sha256/112fcdb9f4935988cc2313e4cc38faaeccfff53eb1296499e618932d472908e0",
+          "digest": "sha256:112fcdb9f4935988cc2313e4cc38faaeccfff53eb1296499e618932d472908e0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "debug": [
+          "logos-derive?/debug"
+        ],
+        "default": [
+          "export_derive",
+          "std"
+        ],
+        "export_derive": [
+          "logos-derive"
+        ],
+        "forbid_unsafe": [
+          "logos-derive?/forbid_unsafe"
+        ],
+        "logos-derive": [
+          "dep:logos-derive"
+        ],
+        "state_machine_codegen": [
+          "logos-derive?/state_machine_codegen"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lexer",
+        "lexical",
+        "tokenizer",
+        "parser",
+        "no_std"
+      ],
       "manifest": "crates-io/logos/0.16.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -138,6 +210,17 @@
         "edition": "2021",
         "name": "logos",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:eb2c55a318a87600ea870ff8c2012148b44bf18b74fad48d0f835c38c7d07c5f",
+        "package": "logos",
+        "registry": "crates-io",
+        "version": "0.16.1"
+      },
+      "vcs": {
+        "commit": "8c77ac03c9de98b87d5a8317d441e6a9b4c4b9b2",
+        "path": "",
+        "system": "git"
       },
       "version": "0.16.1",
       "yanked": false

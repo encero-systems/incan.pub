@@ -25,6 +25,98 @@
       "advisories": 0,
       "archive": "sha256:fae16269e7c771c8be992f20d7e9ad58713ae78d12faef1e0e0c90a35dad522b",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2.2.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/openssl-sys",
+          "name": "ffi",
+          "optional": false,
+          "req": "^0.9.117"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/foreign-types",
+          "name": "foreign-types",
+          "optional": false,
+          "req": "^0.3.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/openssl-macros",
+          "name": "openssl-macros",
+          "optional": false,
+          "req": "^0.1.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 830,
+          "content": "content/sha256/c5ddde25c2756a1115daaa671fb4297cdc83bf23009c8356ba65b5311d0dd30d",
+          "digest": "sha256:c5ddde25c2756a1115daaa671fb4297cdc83bf23009c8356ba65b5311d0dd30d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 618,
+          "content": "content/sha256/f3d4287b4a21c5176fea2f9bd4ae800696004e2fb8e05cbc818be513f188a941",
+          "digest": "sha256:f3d4287b4a21c5176fea2f9bd4ae800696004e2fb8e05cbc818be513f188a941",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 46721,
+          "content": "content/sha256/71e36b3749f1fbfaa5ab8ccca303d0c7572a7d6356c5c3358fa39f082f187072",
+          "digest": "sha256:71e36b3749f1fbfaa5ab8ccca303d0c7572a7d6356c5c3358fa39f082f187072",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -32,6 +124,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -41,6 +134,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -50,6 +144,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -59,14 +154,43 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "aws-lc": [
+          "ffi/aws-lc"
+        ],
+        "aws-lc-fips": [
+          "ffi/aws-lc-fips"
+        ],
+        "bindgen": [
+          "ffi/bindgen"
+        ],
+        "default": [],
+        "unstable_boringssl": [
+          "ffi/unstable_boringssl"
+        ],
+        "v101": [],
+        "v102": [],
+        "v110": [],
+        "v111": [],
+        "vendored": [
+          "ffi/vendored"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "tls",
+        "ssl",
+        "dtls"
+      ],
       "manifest": "crates-io/openssl/0.10.81/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -77,6 +201,17 @@
         "edition": "2021",
         "name": "openssl",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:77823a27f0babb03091cb9ed9ef80af3b39dbc82f97e8fa530374b7dafd87a45",
+        "package": "openssl",
+        "registry": "crates-io",
+        "version": "0.10.81"
+      },
+      "vcs": {
+        "commit": "db9c9e2f5db2ad7b45fd894e8d297ee15bfd0c7c",
+        "path": "openssl",
+        "system": "git"
       },
       "version": "0.10.81",
       "yanked": false

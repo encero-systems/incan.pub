@@ -308,6 +308,101 @@
           "unit_identity": "sha256:be6afdfd231d2af9c31889ea1dff59e121415c74a75e66cf5c4c77356780cebf"
         }
       ],
+      "categories": [
+        "compression"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/adler2",
+          "name": "adler2",
+          "optional": false,
+          "req": "^2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/simd-adler32",
+          "name": "simd-adler32",
+          "optional": true,
+          "req": "^0.3.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4489,
+          "content": "content/sha256/223adc19e791c521f7cbc160c6f77959c74a86c58450855fead310461839fdd9",
+          "digest": "sha256:223adc19e791c521f7cbc160c6f77959c74a86c58450855fead310461839fdd9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "Readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1213,
+          "content": "content/sha256/4108245a1f2df9d4e94df8abed5b4ba0759bb2f9b40a6b939f1be141077ae50b",
+          "digest": "sha256:4108245a1f2df9d4e94df8abed5b4ba0759bb2f9b40a6b939f1be141077ae50b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 10174,
+          "content": "content/sha256/0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "digest": "sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-APACHE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 1212,
+          "content": "content/sha256/799e9ca9d179295ef372f25d3769cdda7d25bb2668add6a6a1e22d1e4c678b8d",
+          "digest": "sha256:799e9ca9d179295ef372f25d3769cdda7d25bb2668add6a6a1e22d1e4c678b8d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-MIT.md",
+          "role": "license"
+        },
+        {
+          "bytes": 984,
+          "content": "content/sha256/0a54e647fe54104658b5e563c04c6f9edf251710e47bce692e0bd990a4ddaa39",
+          "digest": "sha256:0a54e647fe54104658b5e563c04c6f9edf251710e47bce692e0bd990a4ddaa39",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -318,14 +413,51 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "block-boundary": [],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "with-alloc"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "adler2/rustc-dep-of-std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "simd": [
+          "simd-adler32"
+        ],
+        "simd-adler32": [
+          "dep:simd-adler32"
+        ],
+        "std": [
+          "serde?/std"
+        ],
+        "with-alloc": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zlib",
+        "miniz",
+        "deflate",
+        "encoding"
+      ],
       "manifest": "crates-io/miniz_oxide/0.9.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -335,6 +467,17 @@
         "edition": "2021",
         "name": "miniz_oxide",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b63fbc4a50860e98e7b2aa7804ded1db5cbc3aff9193adaff57a6931bf7c4b4c",
+        "package": "miniz_oxide",
+        "registry": "crates-io",
+        "version": "0.9.1"
+      },
+      "vcs": {
+        "commit": "4e582392df3a739d2b0dfd2c537dc33e8942be38",
+        "path": "miniz_oxide",
+        "system": "git"
       },
       "version": "0.9.1",
       "yanked": false
@@ -532,6 +675,100 @@
           "unit_identity": "sha256:74a0881fbbe161c4d8d0ef7ecbd09089da0ec91914445b0570d7b26ed837ac6e"
         }
       ],
+      "categories": [
+        "compression"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/adler2",
+          "name": "adler2",
+          "optional": false,
+          "req": "^2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/simd-adler32",
+          "name": "simd-adler32",
+          "optional": true,
+          "req": "^0.3.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4489,
+          "content": "content/sha256/223adc19e791c521f7cbc160c6f77959c74a86c58450855fead310461839fdd9",
+          "digest": "sha256:223adc19e791c521f7cbc160c6f77959c74a86c58450855fead310461839fdd9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "Readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1213,
+          "content": "content/sha256/4108245a1f2df9d4e94df8abed5b4ba0759bb2f9b40a6b939f1be141077ae50b",
+          "digest": "sha256:4108245a1f2df9d4e94df8abed5b4ba0759bb2f9b40a6b939f1be141077ae50b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 10174,
+          "content": "content/sha256/0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "digest": "sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-APACHE.md",
+          "role": "license"
+        },
+        {
+          "bytes": 1212,
+          "content": "content/sha256/799e9ca9d179295ef372f25d3769cdda7d25bb2668add6a6a1e22d1e4c678b8d",
+          "digest": "sha256:799e9ca9d179295ef372f25d3769cdda7d25bb2668add6a6a1e22d1e4c678b8d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-MIT.md",
+          "role": "license"
+        },
+        {
+          "bytes": 984,
+          "content": "content/sha256/0a54e647fe54104658b5e563c04c6f9edf251710e47bce692e0bd990a4ddaa39",
+          "digest": "sha256:0a54e647fe54104658b5e563c04c6f9edf251710e47bce692e0bd990a4ddaa39",
+          "format": "markdown",
+          "origin": "package",
+          "path": "LICENSE-ZLIB.md",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -541,6 +778,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -552,14 +790,49 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "block-boundary": [],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "with-alloc"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "adler2/rustc-dep-of-std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "simd": [
+          "simd-adler32"
+        ],
+        "simd-adler32": [
+          "dep:simd-adler32"
+        ],
+        "std": [],
+        "with-alloc": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zlib",
+        "miniz",
+        "deflate",
+        "encoding"
+      ],
       "manifest": "crates-io/miniz_oxide/0.8.9/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -569,6 +842,17 @@
         "edition": "2021",
         "name": "miniz_oxide",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1fa76a2c86f704bdb222d66965fb3d63269ce38518b83cb0575fca855ebb6316",
+        "package": "miniz_oxide",
+        "registry": "crates-io",
+        "version": "0.8.9"
+      },
+      "vcs": {
+        "commit": "44e43c7786e379b2b1a7fde4aa0e63be719e583d",
+        "path": "miniz_oxide",
+        "system": "git"
       },
       "version": "0.8.9",
       "yanked": false

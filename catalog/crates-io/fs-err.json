@@ -102,11 +102,74 @@
           "unit_identity": "sha256:1db03a36c860e401ffb44ae8fa1364dc47ec58b44d908b3343d76f58db6ddcd3"
         }
       ],
+      "categories": [
+        "command-line-interface",
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/path_facts",
+          "name": "path_facts",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "fs"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.21"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5009,
+          "content": "content/sha256/443c6cdea1d76dc31a3e09e12dbd8d7d24a61f9f3f57557f07a269eb99d6ef60",
+          "digest": "sha256:443c6cdea1d76dc31a3e09e12dbd8d7d24a61f9f3f57557f07a269eb99d6ef60",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11048,
+          "content": "content/sha256/7cfd738c53d61c79f07e348f622bf7707c9084237054d37fbe07788a75f5881c",
+          "digest": "sha256:7cfd738c53d61c79f07e348f622bf7707c9084237054d37fbe07788a75f5881c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1046,
+          "content": "content/sha256/36516aefdc84c5d5a1e7485425913a22dbda69eb1930c5e84d6ae4972b5194b9",
+          "digest": "sha256:36516aefdc84c5d5a1e7485425913a22dbda69eb1930c5e84d6ae4972b5194b9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 8007,
+          "content": "content/sha256/800cd7a94d9de3824b401043702f0767c4dbf452b76effd967bf915cab302433",
+          "digest": "sha256:800cd7a94d9de3824b401043702f0767c4dbf452b76effd967bf915cab302433",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -114,6 +177,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -121,6 +185,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -128,14 +193,33 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "debug": [
+          "path_facts"
+        ],
+        "debug_tokio": [
+          "debug",
+          "dep:tokio",
+          "tokio/rt-multi-thread"
+        ],
+        "expose_original_error": [],
+        "path_facts": [
+          "dep:path_facts"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/fs-err/3.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -146,6 +230,17 @@
         "edition": "2018",
         "name": "fs_err",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b5c95b673b8f6f7235229ae11c5642d81b04c2e64c1e2fb417bc0cf73ca45f29",
+        "package": "fs-err",
+        "registry": "crates-io",
+        "version": "3.3.2"
+      },
+      "vcs": {
+        "commit": "c1d41344bd76ff9465a50947dbdb852abb45de47",
+        "path": "",
+        "system": "git"
       },
       "version": "3.3.2",
       "yanked": false

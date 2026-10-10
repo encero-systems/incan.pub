@@ -26,6 +26,57 @@
       "advisories": 0,
       "archive": "sha256:29c63e9bf3237b263800d5cbb26d384f1ea395308ca57abdcdd372325531f1bf",
       "assets": [],
+      "categories": [
+        "compression",
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/liblzma-sys",
+          "name": "liblzma-sys",
+          "optional": false,
+          "req": "^0.4.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num_cpus",
+          "name": "num_cpus",
+          "optional": true,
+          "req": "^1.16.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1772,
+          "content": "content/sha256/3f50aacb3e302b8be3897387a5cac8b557277314515ad078ff0c6cb810f9708b",
+          "digest": "sha256:3f50aacb3e302b8be3897387a5cac8b557277314515ad078ff0c6cb810f9708b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1102,
+          "content": "content/sha256/a90e2da47bdc152cfb89e1fb09972143056c417ddbf86122babc83d0a8ad81d1",
+          "digest": "sha256:a90e2da47bdc152cfb89e1fb09972143056c417ddbf86122babc83d0a8ad81d1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -35,14 +86,51 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "bindgen": [
+          "liblzma-sys/bindgen"
+        ],
+        "default": [
+          "bindgen"
+        ],
+        "fat-lto": [
+          "liblzma-sys/fat-lto"
+        ],
+        "num_cpus": [
+          "dep:num_cpus"
+        ],
+        "parallel": [
+          "liblzma-sys/parallel",
+          "num_cpus"
+        ],
+        "static": [
+          "liblzma-sys/static"
+        ],
+        "thin-lto": [
+          "liblzma-sys/thin-lto"
+        ],
+        "uncheck_liblzma_version": [
+          "liblzma-sys/uncheck_liblzma_version"
+        ],
+        "wasm": [
+          "liblzma-sys/wasm"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lzma",
+        "xz",
+        "encoding",
+        "wasm"
+      ],
       "manifest": "crates-io/liblzma/0.4.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -52,6 +140,17 @@
         "edition": "2021",
         "name": "liblzma",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2fe0a34ca854fd4f20c07f696fc8675aec78f87d88d29f5e10257a7490a1b2e1",
+        "package": "liblzma",
+        "registry": "crates-io",
+        "version": "0.4.8"
+      },
+      "vcs": {
+        "commit": "67e5e8ec99ab3ba93561f76b411fc7037fb154dc",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.8",
       "yanked": false

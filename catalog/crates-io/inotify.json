@@ -110,11 +110,107 @@
           "unit_identity": "sha256:076cb62743a8c95cfdbc8717f590d4719119e709eff52407cf230c1fb8756e96"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": true,
+          "req": "^0.3.30"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/inotify-sys",
+          "name": "inotify-sys",
+          "optional": false,
+          "req": "^0.1.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.40.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5558,
+          "content": "content/sha256/51f2300c3e418cc881b75e2a7330b319b76784d0cdfe2a6fb01c4048663f5ec4",
+          "digest": "sha256:51f2300c3e418cc881b75e2a7330b319b76784d0cdfe2a6fb01c4048663f5ec4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 741,
+          "content": "content/sha256/7f78b31de4e7a3e2ac8de40e2b409eda313f03637aa62b8416fbde9bdc5ce4c9",
+          "digest": "sha256:7f78b31de4e7a3e2ac8de40e2b409eda313f03637aa62b8416fbde9bdc5ce4c9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 6102,
+          "content": "content/sha256/286f46a62bd4b1834b6719f4db65a5b31fe40a2cb052bd5a6b79d4ef255d57d8",
+          "digest": "sha256:286f46a62bd4b1834b6719f4db65a5b31fe40a2cb052bd5a6b79d4ef255d57d8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "stream"
+        ],
+        "futures-util": [
+          "dep:futures-util"
+        ],
+        "stream": [
+          "futures-util",
+          "tokio"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "inotify",
+        "linux"
+      ],
       "manifest": "crates-io/inotify/0.11.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +221,17 @@
         "edition": "2018",
         "name": "inotify",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4cc00ea907cab49550b7da656f80ebb97be1b997d931fbcd28d39734e17ce592",
+        "package": "inotify",
+        "registry": "crates-io",
+        "version": "0.11.5"
+      },
+      "vcs": {
+        "commit": "7f1a8001400b59e75345c47ab991eb21f0ba5a86",
+        "path": "",
+        "system": "git"
       },
       "version": "0.11.5",
       "yanked": false

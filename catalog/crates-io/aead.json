@@ -206,11 +206,125 @@
           "unit_identity": "sha256:73e7d052fbbc4639f2ef4f33b8070faf813b0f6764a6441e9ad6af99ff4466f3"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/arrayvec",
+          "name": "arrayvec",
+          "optional": true,
+          "req": "^0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/blobby",
+          "name": "blobby",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1.11.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crypto-common",
+          "name": "common",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/inout",
+          "name": "inout",
+          "optional": false,
+          "req": "^0.2.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2289,
+          "content": "content/sha256/9b68d9e33e8b1ee904455d7e834b2a0a01a1d9eba4ae2ee279ca98941b8e2a28",
+          "digest": "sha256:9b68d9e33e8b1ee904455d7e834b2a0a01a1d9eba4ae2ee279ca98941b8e2a28",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10850,
+          "content": "content/sha256/b1cf9a3333ca78152b859012cd4a804156e5243e9ca20ad1df7327ba5ea7405c",
+          "digest": "sha256:b1cf9a3333ca78152b859012cd4a804156e5243e9ca20ad1df7327ba5ea7405c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1117,
+          "content": "content/sha256/33b32a251d445c5c03a634e64c53314c55540fc367fabdd45d9b6c8f260c028c",
+          "digest": "sha256:33b32a251d445c5c03a634e64c53314c55540fc367fabdd45d9b6c8f260c028c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4887,
+          "content": "content/sha256/449fbb0fbfbf401b5e1d4b8383d1938b981d2bb03940109993b9e1811cdbe4f3",
+          "digest": "sha256:449fbb0fbfbf401b5e1d4b8383d1938b981d2bb03940109993b9e1811cdbe4f3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "arrayvec": [
+          "dep:arrayvec"
+        ],
+        "blobby": [
+          "dep:blobby"
+        ],
+        "bytes": [
+          "dep:bytes"
+        ],
+        "default": [
+          "rand_core"
+        ],
+        "dev": [
+          "blobby",
+          "alloc"
+        ],
+        "getrandom": [
+          "common/getrandom",
+          "rand_core"
+        ],
+        "rand_core": [
+          "common/rand_core"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "encryption"
+      ],
       "manifest": "crates-io/aead/0.6.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -221,6 +335,17 @@
         "edition": "2024",
         "name": "aead",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1973cfbc1a2daf9cf550e74e1f088c28e7f7d8c1e1418fb6c9dc5184b7e84c99",
+        "package": "aead",
+        "registry": "crates-io",
+        "version": "0.6.1"
+      },
+      "vcs": {
+        "commit": "3d2d90045bffc402af4edb6a5a4dbb1e217329d1",
+        "path": "aead",
+        "system": "git"
       },
       "version": "0.6.1",
       "yanked": false

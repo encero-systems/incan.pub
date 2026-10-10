@@ -176,11 +176,70 @@
           "unit_identity": "sha256:6e5747177f9176b666f537dae51ed269434c06ce3b1fe58eadc7c264fa62f327"
         }
       ],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossbeam-deque",
+          "name": "crossbeam-deque",
+          "optional": false,
+          "req": "^0.8.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crossbeam-utils",
+          "name": "crossbeam-utils",
+          "optional": false,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm_sync",
+          "name": "wasm_sync",
+          "optional": true,
+          "req": "^0.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 781,
+          "content": "content/sha256/37a9a028cb507dbaebe7bb60fce9194f0f5b51fb3a52b2ac616969cf6ff4ef95",
+          "digest": "sha256:37a9a028cb507dbaebe7bb60fce9194f0f5b51fb3a52b2ac616969cf6ff4ef95",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+          "digest": "sha256:0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -188,6 +247,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -195,6 +255,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -202,14 +263,27 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "web_spin_lock": [
+          "dep:wasm_sync"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parallel",
+        "thread",
+        "concurrency",
+        "join",
+        "performance"
+      ],
       "manifest": "crates-io/rayon-core/1.13.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -220,6 +294,17 @@
         "edition": "2021",
         "name": "rayon_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:22e18b0f0062d30d4230b2e85ff77fdfe4326feb054b9783a3460d8435c8ab91",
+        "package": "rayon-core",
+        "registry": "crates-io",
+        "version": "1.13.0"
+      },
+      "vcs": {
+        "commit": "7af20d7692d5decbcb4adcaa079cd607e3e50814",
+        "path": "rayon-core",
+        "system": "git"
       },
       "version": "1.13.0",
       "yanked": false

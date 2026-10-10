@@ -25,6 +25,45 @@
       "advisories": 0,
       "archive": "sha256:1127c5486dc2a3789686ee402848b99f85ee865524dcae2c91eb984538491b26",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/codespan-reporting",
+          "name": "codespan-reporting",
+          "optional": true,
+          "req": "^0.11.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.27"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 498,
+          "content": "content/sha256/f9f14c3a3cccda76ac4eb9f911839c708434fc9d95c660bcac92d3ca5df273cb",
+          "digest": "sha256:f9f14c3a3cccda76ac4eb9f911839c708434fc9d95c660bcac92d3ca5df273cb",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 372,
+          "content": "content/sha256/d1fc77c7a1ef9b867ef32b0f6c64070ab2a77432d00016dc8284e311a28ae5e6",
+          "digest": "sha256:d1fc77c7a1ef9b867ef32b0f6c64070ab2a77432d00016dc8284e311a28ae5e6",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -32,14 +71,31 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "codespan-reporting": [
+          "dep:codespan-reporting"
+        ],
+        "default": [],
+        "fancy-errors": [
+          "codespan-reporting"
+        ],
+        "log": [
+          "dep:log"
+        ],
+        "logging": [
+          "log"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/cranelift-isle/0.123.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -50,6 +106,17 @@
         "edition": "2024",
         "name": "cranelift_isle",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2319cb332b35da0fd1d39b27e746bd60b5224ecae260e393c9ef168f78d10053",
+        "package": "cranelift-isle",
+        "registry": "crates-io",
+        "version": "0.123.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "cranelift/isle/isle",
+        "system": "git"
       },
       "version": "0.123.17",
       "yanked": false

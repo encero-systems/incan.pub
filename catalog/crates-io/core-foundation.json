@@ -332,11 +332,91 @@
           "unit_identity": "sha256:fe14fa70517a16fd49589e033fd304382af62265443f13ab7af5b4d5319069b2"
         }
       ],
+      "categories": [
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/core-foundation-sys",
+          "name": "core-foundation-sys",
+          "optional": false,
+          "req": "^0.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/uuid",
+          "name": "uuid",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 421,
+          "content": "content/sha256/b20b3ea5f073c304337602986956acb2488f1e661fe26172762eabe56415a524",
+          "digest": "sha256:b20b3ea5f073c304337602986956acb2488f1e661fe26172762eabe56415a524",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1067,
+          "content": "content/sha256/62065228e42caebca7e7d7db1204cbb867033de5982ca4009928915e4095f3a3",
+          "digest": "sha256:62065228e42caebca7e7d7db1204cbb867033de5982ca4009928915e4095f3a3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "link"
+        ],
+        "link": [
+          "core-foundation-sys/link"
+        ],
+        "mac_os_10_7_support": [
+          "core-foundation-sys/mac_os_10_7_support"
+        ],
+        "mac_os_10_8_features": [
+          "core-foundation-sys/mac_os_10_8_features"
+        ],
+        "with-uuid": [
+          "dep:uuid"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "macos",
+        "framework",
+        "objc"
+      ],
       "manifest": "crates-io/core-foundation/0.10.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -347,6 +427,17 @@
         "edition": "2021",
         "name": "core_foundation",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b2a6cd9ae233e7f62ba4e9353e81a88df7fc8a5987b8d445b4d90c879bd156f6",
+        "package": "core-foundation",
+        "registry": "crates-io",
+        "version": "0.10.1"
+      },
+      "vcs": {
+        "commit": "548b65cd3046bb46fc5cebb9f39e7bfd56eaeaa2",
+        "path": "core-foundation",
+        "system": "git"
       },
       "version": "0.10.1",
       "yanked": false
@@ -414,11 +505,108 @@
           "unit_identity": "sha256:a24342dac10d1605700de9208a6f351dcfc7ecd668b47d35a683a6c81c985aef"
         }
       ],
+      "categories": [
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/core-foundation-sys",
+          "name": "core-foundation-sys",
+          "optional": false,
+          "req": "^0.8.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/uuid",
+          "name": "uuid",
+          "optional": true,
+          "req": "^0.5"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 474,
+          "content": "content/sha256/70c4e380a07a8bb61b46fd23fbb4c43e9311bff3c8f26e152cc8581b60229892",
+          "digest": "sha256:70c4e380a07a8bb61b46fd23fbb4c43e9311bff3c8f26e152cc8581b60229892",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1067,
+          "content": "content/sha256/62065228e42caebca7e7d7db1204cbb867033de5982ca4009928915e4095f3a3",
+          "digest": "sha256:62065228e42caebca7e7d7db1204cbb867033de5982ca4009928915e4095f3a3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "chrono": [
+          "dep:chrono"
+        ],
+        "default": [
+          "link"
+        ],
+        "link": [
+          "core-foundation-sys/link"
+        ],
+        "mac_os_10_7_support": [
+          "core-foundation-sys/mac_os_10_7_support"
+        ],
+        "mac_os_10_8_features": [
+          "core-foundation-sys/mac_os_10_8_features"
+        ],
+        "uuid": [
+          "dep:uuid"
+        ],
+        "with-chrono": [
+          "chrono"
+        ],
+        "with-uuid": [
+          "uuid"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "macos",
+        "framework",
+        "objc"
+      ],
       "manifest": "crates-io/core-foundation/0.9.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -429,6 +617,17 @@
         "edition": "2018",
         "name": "core_foundation",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:91e195e091a93c46f7102ec7818a2aa394e1e1771c3ab4825963fa03e45afb8f",
+        "package": "core-foundation",
+        "registry": "crates-io",
+        "version": "0.9.4"
+      },
+      "vcs": {
+        "commit": "795398aa3775bbdaf03419fcd2cc0dad7ebbc4dc",
+        "path": "core-foundation",
+        "system": "git"
       },
       "version": "0.9.4",
       "yanked": false

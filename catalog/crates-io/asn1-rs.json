@@ -386,11 +386,203 @@
           "unit_identity": "sha256:7e35996bb797f0b189be557a35cc5269031a681807651d6631a9e5159f77ec4f"
         }
       ],
+      "categories": [
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/asn1-rs-derive",
+          "name": "asn1-rs-derive",
+          "optional": false,
+          "req": "^0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/asn1-rs-impl",
+          "name": "asn1-rs-impl",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bitvec",
+          "name": "bitvec",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/colored",
+          "name": "colored",
+          "optional": true,
+          "req": "^3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cookie-factory",
+          "name": "cookie-factory",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/nom",
+          "name": "nom",
+          "optional": false,
+          "req": "^7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rusticata-macros",
+          "name": "rusticata-macros",
+          "optional": false,
+          "req": "^4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "formatting",
+            "macros",
+            "parsing"
+          ],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": true,
+          "req": "^0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 6653,
+          "content": "content/sha256/9bdd641fd76d1b4894a5877b0cfad59b9eab8fe97bc43c8431eb92cc6d44a1ee",
+          "digest": "sha256:9bdd641fd76d1b4894a5877b0cfad59b9eab8fe97bc43c8431eb92cc6d44a1ee",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/a5c61b93b6ee1d104af9920cf020ff3c7efe818e31fe562c72261847a728f513",
+          "digest": "sha256:a5c61b93b6ee1d104af9920cf020ff3c7efe818e31fe562c72261847a728f513",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 5768,
+          "content": "content/sha256/8839d9679c6ccf41b48ff597b6c30f2e30d492fec6b616c5e91fa29060b5ad50",
+          "digest": "sha256:8839d9679c6ccf41b48ff597b6c30f2e30d492fec6b616c5e91fa29060b5ad50",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bigint": [
+          "num-bigint"
+        ],
+        "bits": [
+          "bitvec"
+        ],
+        "bitvec": [
+          "dep:bitvec"
+        ],
+        "colored": [
+          "dep:colored"
+        ],
+        "cookie-factory": [
+          "dep:cookie-factory"
+        ],
+        "datetime": [
+          "time"
+        ],
+        "debug": [
+          "std",
+          "colored"
+        ],
+        "default": [
+          "std"
+        ],
+        "num-bigint": [
+          "dep:num-bigint"
+        ],
+        "serialize": [
+          "cookie-factory"
+        ],
+        "std": [],
+        "time": [
+          "dep:time"
+        ],
+        "trace": [
+          "debug"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "BER",
+        "DER",
+        "ASN1",
+        "parser",
+        "nom"
+      ],
       "manifest": "crates-io/asn1-rs/0.7.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -401,6 +593,17 @@
         "edition": "2018",
         "name": "asn1_rs",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b7f43a50ac4fdca5df8e885c21b835997f0a1cdee65494a6847694a98652d9d8",
+        "package": "asn1-rs",
+        "registry": "crates-io",
+        "version": "0.7.2"
+      },
+      "vcs": {
+        "commit": "84c7ac4cc40616497d922c7e5730fb75cff59256",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.2",
       "yanked": false

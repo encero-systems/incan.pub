@@ -102,19 +102,74 @@
           "unit_identity": "sha256:e6e34725bfcb4a3df6ec06969e2531bedb35353206077f5dab317561e34f0bb0"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": false,
+          "req": "^0.4",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.171",
+          "target": "cfg(unix)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 841,
+          "content": "content/sha256/de412b60535de63bd312ab0df197f72b89d6aaeab166ed090f58a26dcda72bcf",
+          "digest": "sha256:de412b60535de63bd312ab0df197f72b89d6aaeab166ed090f58a26dcda72bcf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/jobserver/0.1.35/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -124,6 +179,17 @@
         "edition": "2021",
         "name": "jobserver",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1c00acbd29eabad4a2392fa0e921c874934dbbf4194312ad20f04a0ed67a3cb3",
+        "package": "jobserver",
+        "registry": "crates-io",
+        "version": "0.1.35"
+      },
+      "vcs": {
+        "commit": "85ba04e3cf89e5c10e7b82de69f6be6dff9d3ec3",
+        "path": "",
+        "system": "git"
       },
       "version": "0.1.35",
       "yanked": false
@@ -146,11 +212,64 @@
       "advisories": 0,
       "archive": "sha256:e54918dc723c52ae3b4acd014e420f23740a2cdfbd9ae705f981e1cad3d6b0d5",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": false,
+          "req": "^0.3.2",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.171",
+          "target": "cfg(unix)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 841,
+          "content": "content/sha256/de412b60535de63bd312ab0df197f72b89d6aaeab166ed090f58a26dcda72bcf",
+          "digest": "sha256:de412b60535de63bd312ab0df197f72b89d6aaeab166ed090f58a26dcda72bcf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "digest": "sha256:378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -158,14 +277,17 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/jobserver/0.1.34/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -175,6 +297,17 @@
         "edition": "2021",
         "name": "jobserver",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:9afb3de4395d6b3e67a780b6de64b51c978ecf11cb9a462c66be7d4ca9039d33",
+        "package": "jobserver",
+        "registry": "crates-io",
+        "version": "0.1.34"
+      },
+      "vcs": {
+        "commit": "4bcd123ffc997020367416a970ae20577a76a583",
+        "path": "",
+        "system": "git"
       },
       "version": "0.1.34",
       "yanked": false

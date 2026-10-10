@@ -176,11 +176,72 @@
           "unit_identity": "sha256:7f997b39e500a4ae5983402af4e7b568d99891babc6463c8aa24f962f95e5487"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::procedural-macro-helpers"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/simd_cesu8",
+          "name": "simd_cesu8",
+          "optional": false,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "full"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 870,
+          "content": "content/sha256/63f0514a834dc4edb120465921d35191377db10f1351c2ccba9285582ae25618",
+          "digest": "sha256:63f0514a834dc4edb120465921d35191377db10f1351c2ccba9285582ae25618",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 343,
+          "content": "content/sha256/a5a0fcb32799ddb849dfb9c8c30c93819c5a0ac68111573297c2997e7d6b17ea",
+          "digest": "sha256:a5a0fcb32799ddb849dfb9c8c30c93819c5a0ac68111573297c2997e7d6b17ea",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -188,6 +249,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -195,6 +257,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -202,14 +265,23 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "jni",
+        "java",
+        "jvm",
+        "android",
+        "ndk"
+      ],
       "manifest": "crates-io/jni-macros/0.22.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -220,6 +292,17 @@
         "edition": "2024",
         "name": "jni_macros",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:a00109accc170f0bdb141fed3e393c565b6f5e072365c3bd58f5b062591560a3",
+        "package": "jni-macros",
+        "registry": "crates-io",
+        "version": "0.22.4"
+      },
+      "vcs": {
+        "commit": "33045a124105c939d1e2cbdcb5a39e5d868ffa03",
+        "path": "crates/jni-macros",
+        "system": "git"
       },
       "version": "0.22.4",
       "yanked": false

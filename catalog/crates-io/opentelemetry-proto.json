@@ -268,11 +268,206 @@
           "unit_identity": "sha256:de72a3c818b09b13755b01b8a8f69d5b2d8f167750bd138c27e219b26f4d43d8"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": true,
+          "req": "^0.22.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/const-hex",
+          "name": "const-hex",
+          "optional": true,
+          "req": "^1.14.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/opentelemetry",
+          "name": "opentelemetry",
+          "optional": false,
+          "req": "^0.33"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/opentelemetry_sdk",
+          "name": "opentelemetry_sdk",
+          "optional": false,
+          "req": "^0.33"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prost",
+          "name": "prost",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/schemars",
+          "name": "schemars",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "serde_derive",
+            "std"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "codegen"
+          ],
+          "loaf": "crates-io/tonic",
+          "name": "tonic",
+          "optional": true,
+          "req": "^0.14.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tonic-prost",
+          "name": "tonic-prost",
+          "optional": true,
+          "req": "^0.14.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3743,
+          "content": "content/sha256/326f6d93d49d2c20bf2b08b5ebba91cc5b039d4f7b44bca2eb20534c88878e59",
+          "digest": "sha256:326f6d93d49d2c20bf2b08b5ebba91cc5b039d4f7b44bca2eb20534c88878e59",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 363,
+          "content": "content/sha256/7ced365b7bf30c57a3ff8e95e6d41c430c2f86564a5c2b15e25a8f6f1b631f47",
+          "digest": "sha256:7ced365b7bf30c57a3ff8e95e6d41c430c2f86564a5c2b15e25a8f6f1b631f47",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 6911,
+          "content": "content/sha256/818fab2da7f12c92bc4a805d6caf41b9b47fff138eab93b613dd940bd171a1bd",
+          "digest": "sha256:818fab2da7f12c92bc4a805d6caf41b9b47fff138eab93b613dd940bd171a1bd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "base64": [
+          "dep:base64"
+        ],
+        "const-hex": [
+          "dep:const-hex"
+        ],
+        "default": [
+          "full"
+        ],
+        "full": [
+          "gen-tonic",
+          "trace",
+          "logs",
+          "metrics",
+          "zpages",
+          "with-serde",
+          "internal-logs"
+        ],
+        "gen-tonic": [
+          "gen-tonic-messages",
+          "tonic",
+          "tonic-prost",
+          "dep:tonic",
+          "tonic/channel"
+        ],
+        "gen-tonic-messages": [
+          "prost"
+        ],
+        "internal-logs": [
+          "opentelemetry/internal-logs"
+        ],
+        "logs": [
+          "opentelemetry/logs",
+          "opentelemetry_sdk/logs"
+        ],
+        "metrics": [
+          "opentelemetry/metrics",
+          "opentelemetry_sdk/metrics"
+        ],
+        "profiles": [],
+        "prost": [
+          "dep:prost"
+        ],
+        "schemars": [
+          "dep:schemars"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "testing": [
+          "opentelemetry/testing"
+        ],
+        "tonic": [
+          "dep:tonic"
+        ],
+        "tonic-prost": [
+          "dep:tonic-prost"
+        ],
+        "trace": [
+          "opentelemetry/trace",
+          "opentelemetry_sdk/trace"
+        ],
+        "with-schemars": [
+          "schemars"
+        ],
+        "with-serde": [
+          "serde",
+          "const-hex",
+          "base64"
+        ],
+        "zpages": [
+          "trace"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "opentelemetry",
+        "otlp",
+        "logging",
+        "tracing",
+        "metrics"
+      ],
       "manifest": "crates-io/opentelemetry-proto/0.33.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -283,6 +478,17 @@
         "edition": "2021",
         "name": "opentelemetry_proto",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:25da1ac11a0aeccf38d7f77ee0348715adaf8340f65ad46c94a02c6b20e2f65d",
+        "package": "opentelemetry-proto",
+        "registry": "crates-io",
+        "version": "0.33.0"
+      },
+      "vcs": {
+        "commit": "19833847cab86c8464c1dfb6d28b1de9c0b50038",
+        "path": "opentelemetry-proto",
+        "system": "git"
       },
       "version": "0.33.0",
       "yanked": false

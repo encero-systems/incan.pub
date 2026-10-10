@@ -211,6 +211,124 @@
           "unit_identity": "sha256:3dd3ebf43e22e8c87d8328e385ce17e946a20179b22d85329531a5db08d9304c"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/dot-parser",
+          "name": "dot-parser",
+          "optional": true,
+          "req": "^0.5.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/dot-parser-macros",
+          "name": "dot-parser-macros",
+          "optional": true,
+          "req": "^0.5.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/fixedbitset",
+          "name": "fixedbitset",
+          "optional": false,
+          "req": "^0.5.7"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "default-hasher",
+            "inline-more"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.15.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quickcheck",
+          "name": "quickcheck",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.5.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5922,
+          "content": "content/sha256/5cfa07aceaf68bcb229ac82143e74321621ed270594f105697e5d9ff4ad7a919",
+          "digest": "sha256:5cfa07aceaf68bcb229ac82143e74321621ed270594f105697e5d9ff4ad7a919",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1043,
+          "content": "content/sha256/7576269ea71f767b99297934c0b2367532690f8c4badc695edf8e04ab6a1e545",
+          "digest": "sha256:7576269ea71f767b99297934c0b2367532690f8c4badc695edf8e04ab6a1e545",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 33778,
+          "content": "content/sha256/e740341ebf251e9bbd9449617715f873834a8ca29b3319e8b3bd22c607eb3e2a",
+          "digest": "sha256:e740341ebf251e9bbd9449617715f873834a8ca29b3319e8b3bd22c607eb3e2a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -222,6 +340,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -231,14 +350,77 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "all": [
+          "unstable",
+          "quickcheck",
+          "matrix_graph",
+          "stable_graph",
+          "graphmap",
+          "rayon",
+          "dot_parser"
+        ],
+        "default": [
+          "std",
+          "graphmap",
+          "stable_graph",
+          "matrix_graph"
+        ],
+        "dot_parser": [
+          "std",
+          "dep:dot-parser",
+          "dep:dot-parser-macros"
+        ],
+        "generate": [],
+        "graphmap": [],
+        "matrix_graph": [],
+        "quickcheck": [
+          "std",
+          "dep:quickcheck",
+          "graphmap",
+          "stable_graph"
+        ],
+        "rayon": [
+          "std",
+          "dep:rayon",
+          "indexmap/rayon",
+          "hashbrown/rayon"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde-1": [
+          "serde",
+          "serde_derive"
+        ],
+        "serde_derive": [
+          "dep:serde_derive"
+        ],
+        "stable_graph": [
+          "serde?/alloc"
+        ],
+        "std": [
+          "indexmap/std"
+        ],
+        "unstable": [
+          "generate"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "data-structure",
+        "graph",
+        "unionfind",
+        "graph-algorithms"
+      ],
       "manifest": "crates-io/petgraph/0.8.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -248,6 +430,17 @@
         "edition": "2021",
         "name": "petgraph",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8701b58ea97060d5e5b155d383a69952a60943f0e6dfe30b04c287beb0b27455",
+        "package": "petgraph",
+        "registry": "crates-io",
+        "version": "0.8.3"
+      },
+      "vcs": {
+        "commit": "162903562ce5b00cdba390a0d9c1bb80f1c75bf5",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.3",
       "yanked": false

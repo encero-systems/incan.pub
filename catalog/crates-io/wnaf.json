@@ -178,11 +178,103 @@
           "unit_identity": "sha256:81234d71fc33cd60ce2e7f9a02a3cb9bbe86f6154556f6b294e47467a262ba1f"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hybrid-array",
+          "name": "array",
+          "optional": false,
+          "req": "^0.4.13"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/group",
+          "name": "group",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/primefield",
+          "name": "primefield",
+          "optional": false,
+          "req": "^0.14"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2967,
+          "content": "content/sha256/db09fa1c915d8f852a5fad1f89ef7a660d42434ddf6515c1fdbb3e46fe494b79",
+          "digest": "sha256:db09fa1c915d8f852a5fad1f89ef7a660d42434ddf6515c1fdbb3e46fe494b79",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1114,
+          "content": "content/sha256/c1c9d5ca65122bab96e368709f8cfe9b92b443a3c21306c3260fc98eaac7e5fc",
+          "digest": "sha256:c1c9d5ca65122bab96e368709f8cfe9b92b443a3c21306c3260fc98eaac7e5fc",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 638,
+          "content": "content/sha256/c8d96bf19e6b2426c1178847d3c82065f619b291fda33a1c68d2c0bcb2acbc7a",
+          "digest": "sha256:c8d96bf19e6b2426c1178847d3c82065f619b291fda33a1c68d2c0bcb2acbc7a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "array/alloc",
+          "ff/alloc",
+          "group/alloc"
+        ],
+        "default": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "multiscalar",
+        "no_alloc"
+      ],
       "manifest": "crates-io/wnaf/0.14.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +285,17 @@
         "edition": "2024",
         "name": "wnaf",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:795ca18b3fdb5e62bf982199278341ddcf7ebf7d32e25e212ad05d496e95f6fa",
+        "package": "wnaf",
+        "registry": "crates-io",
+        "version": "0.14.1"
+      },
+      "vcs": {
+        "commit": "f722e37cee96e31e1b98b970f58bde43ef1a7b88",
+        "path": "wnaf",
+        "system": "git"
       },
       "version": "0.14.1",
       "yanked": false

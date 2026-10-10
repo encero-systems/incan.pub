@@ -176,11 +176,117 @@
           "unit_identity": "sha256:98d5907e3738cd72c00db6c7edf0851109854334ed5e2687a026ab50eab78b8d"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-channel",
+          "name": "async-channel",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-task",
+          "name": "async-task",
+          "optional": false,
+          "req": "^4.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": false,
+          "req": "^0.3.28"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-lite",
+          "name": "futures-lite",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/piper",
+          "name": "piper",
+          "optional": false,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.37"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2913,
+          "content": "content/sha256/089df6dc70b716bea3875b06fde3c3b7e284777aefd809b3bea136c10c05e208",
+          "digest": "sha256:089df6dc70b716bea3875b06fde3c3b7e284777aefd809b3bea136c10c05e208",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2833,
+          "content": "content/sha256/8c23b39a3871fb4290f3165c5b4e68a5e00f18f8d0c5beea3d0c51a2165716ac",
+          "digest": "sha256:8c23b39a3871fb4290f3165c5b4e68a5e00f18f8d0c5beea3d0c51a2165716ac",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "async",
+        "file",
+        "stdio",
+        "stdin",
+        "process"
+      ],
       "manifest": "crates-io/blocking/1.7.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -191,6 +297,17 @@
         "edition": "2021",
         "name": "blocking",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a70e4329df6cb94385eed412ec92375c3cdd8a6e502493d1229b6414e4036dfa",
+        "package": "blocking",
+        "registry": "crates-io",
+        "version": "1.7.0"
+      },
+      "vcs": {
+        "commit": "e29a5e6979f56c7537b04ab17ca7bdceee66ef5f",
+        "path": "",
+        "system": "git"
       },
       "version": "1.7.0",
       "yanked": false

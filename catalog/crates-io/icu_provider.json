@@ -686,6 +686,164 @@
           "unit_identity": "sha256:fdf4382aa2af0e5b1dac5ca4fa34dda4c4d8e0a71a975b0f67e834ccd9cde900"
         }
       ],
+      "categories": [
+        "internationalization",
+        "localization",
+        "no-std",
+        "embedded"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bincode",
+          "name": "bincode",
+          "optional": true,
+          "req": "^1.3.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/erased-serde",
+          "name": "erased-serde",
+          "optional": true,
+          "req": "^0.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/icu_locale_core",
+          "name": "icu_locale_core",
+          "optional": false,
+          "req": "^2.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/postcard",
+          "name": "postcard",
+          "optional": true,
+          "req": "^1.0.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0.45"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/writeable",
+          "name": "writeable",
+          "optional": true,
+          "req": "^0.6.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/yoke",
+          "name": "yoke",
+          "optional": false,
+          "req": "^0.8.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zerofrom",
+          "name": "zerofrom",
+          "optional": false,
+          "req": "^0.1.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerotrie",
+          "name": "zerotrie",
+          "optional": true,
+          "req": "^0.2.5"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": false,
+          "req": "^0.11.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4119,
+          "content": "content/sha256/ad48d613d1d5e9eb96583dc996b733b7fd270b11a99fea52e45d05d9e64b07c7",
+          "digest": "sha256:ad48d613d1d5e9eb96583dc996b733b7fd270b11a99fea52e45d05d9e64b07c7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -693,14 +851,69 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "icu_locale_core/alloc",
+          "serde?/alloc",
+          "yoke/alloc",
+          "zerofrom/alloc",
+          "zerovec/alloc",
+          "zerotrie?/alloc",
+          "dep:stable_deref_trait",
+          "dep:writeable"
+        ],
+        "baked": [
+          "dep:zerotrie",
+          "dep:writeable"
+        ],
+        "deserialize_bincode_1": [
+          "serde",
+          "dep:bincode",
+          "std"
+        ],
+        "deserialize_json": [
+          "serde",
+          "dep:serde_json"
+        ],
+        "deserialize_postcard_1": [
+          "serde",
+          "dep:postcard"
+        ],
+        "export": [
+          "serde",
+          "dep:erased-serde",
+          "dep:databake",
+          "std",
+          "sync",
+          "dep:postcard",
+          "zerovec/databake"
+        ],
+        "logging": [
+          "dep:log"
+        ],
+        "serde": [
+          "dep:serde",
+          "yoke/serde"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "sync": [],
+        "zerotrie": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "data-loading",
+        "data"
+      ],
       "manifest": "crates-io/icu_provider/2.3.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -710,6 +923,17 @@
         "edition": "2024",
         "name": "icu_provider",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d27bbb9d3abbefac45d55f647c9de1d44aafcd1186eb91879afef17c396c3e73",
+        "package": "icu_provider",
+        "registry": "crates-io",
+        "version": "2.3.1"
+      },
+      "vcs": {
+        "commit": "898d79c69f37da7b45a15a5714663c9b59b3d928",
+        "path": "provider/core",
+        "system": "git"
       },
       "version": "2.3.1",
       "yanked": false
@@ -732,11 +956,217 @@
       "advisories": 0,
       "archive": "sha256:1f17a680caeae47362aa635f07838e6f3e016b2003cca7f8aeab777b33cef9e9",
       "assets": [],
+      "categories": [
+        "internationalization"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bincode",
+          "name": "bincode",
+          "optional": true,
+          "req": "^1.3.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/erased-serde",
+          "name": "erased-serde",
+          "optional": true,
+          "req": "^0.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/icu_locale_core",
+          "name": "icu_locale_core",
+          "optional": false,
+          "req": "^2.1.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/postcard",
+          "name": "postcard",
+          "optional": true,
+          "req": "^1.0.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0.45"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": true,
+          "req": "^1.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/writeable",
+          "name": "writeable",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/yoke",
+          "name": "yoke",
+          "optional": false,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zerofrom",
+          "name": "zerofrom",
+          "optional": false,
+          "req": "^0.1.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerotrie",
+          "name": "zerotrie",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": false,
+          "req": "^0.11.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4061,
+          "content": "content/sha256/2fef28533e883b656b0899debe782bd3bb9e0fcee7a83df9d8726ad545ef74b4",
+          "digest": "sha256:2fef28533e883b656b0899debe782bd3bb9e0fcee7a83df9d8726ad545ef74b4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "icu_locale_core/alloc",
+          "serde?/alloc",
+          "yoke/alloc",
+          "zerofrom/alloc",
+          "zerovec/alloc",
+          "zerotrie?/alloc",
+          "dep:stable_deref_trait",
+          "dep:writeable"
+        ],
+        "baked": [
+          "dep:zerotrie",
+          "dep:writeable"
+        ],
+        "deserialize_bincode_1": [
+          "serde",
+          "dep:bincode",
+          "std"
+        ],
+        "deserialize_json": [
+          "serde",
+          "dep:serde_json"
+        ],
+        "deserialize_postcard_1": [
+          "serde",
+          "dep:postcard"
+        ],
+        "export": [
+          "serde",
+          "dep:erased-serde",
+          "dep:databake",
+          "std",
+          "sync",
+          "dep:postcard",
+          "zerovec/databake"
+        ],
+        "logging": [
+          "dep:log"
+        ],
+        "serde": [
+          "dep:serde",
+          "yoke/serde"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "sync": [],
+        "zerotrie": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/icu_provider/2.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -747,6 +1177,17 @@
         "edition": "2021",
         "name": "icu_provider",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:85962cf0ce02e1e0a629cc34e7ca3e373ce20dda4c4d7294bbd0bf1fdb59e614",
+        "package": "icu_provider",
+        "registry": "crates-io",
+        "version": "2.1.1"
+      },
+      "vcs": {
+        "commit": "38a49da495248dd1ded84cf306e4ca42e64d5bb3",
+        "path": "provider/core",
+        "system": "git"
       },
       "version": "2.1.1",
       "yanked": false

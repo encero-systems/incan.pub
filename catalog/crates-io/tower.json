@@ -634,6 +634,141 @@
           "unit_identity": "sha256:fb7b26146f795b6e844323f411f2be8a0f070bd0bc23cc6d8d16f00e3489f3bf"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3.22"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": true,
+          "req": "^0.3.22"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hdrhistogram",
+          "name": "hdrhistogram",
+          "optional": true,
+          "req": "^7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2.0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": true,
+          "req": "^0.2.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": true,
+          "req": "^0.4.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sync_wrapper",
+          "name": "sync_wrapper",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.6.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tokio-util",
+          "name": "tokio-util",
+          "optional": true,
+          "req": "^0.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tower-layer",
+          "name": "tower-layer",
+          "optional": false,
+          "req": "^0.3.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tower-service",
+          "name": "tower-service",
+          "optional": false,
+          "req": "^0.3.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8550,
+          "content": "content/sha256/f8cd5239719594b9157fce747eb09255f848017aabed2848d210aa377b39ca98",
+          "digest": "sha256:f8cd5239719594b9157fce747eb09255f848017aabed2848d210aa377b39ca98",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/4249c8e6c5ebb85f97c77e6457c6fafc1066406eb8f1ef61e796fbdc5ff18482",
+          "digest": "sha256:4249c8e6c5ebb85f97c77e6457c6fafc1066406eb8f1ef61e796fbdc5ff18482",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 19551,
+          "content": "content/sha256/1a9b6cd0f70c3d696301d91e3e67d749dcb0b1e9cddaa92ccc01b78c3e0d348e",
+          "digest": "sha256:1a9b6cd0f70c3d696301d91e3e67d749dcb0b1e9cddaa92ccc01b78c3e0d348e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -649,6 +784,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -666,14 +802,178 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "balance": [
+          "discover",
+          "load",
+          "ready-cache",
+          "make",
+          "slab",
+          "util"
+        ],
+        "buffer": [
+          "tokio",
+          "dep:tokio",
+          "tokio/sync",
+          "tokio/rt",
+          "tokio-util",
+          "tracing",
+          "pin-project-lite"
+        ],
+        "discover": [
+          "futures-core",
+          "pin-project-lite"
+        ],
+        "filter": [
+          "futures-util",
+          "pin-project-lite"
+        ],
+        "full": [
+          "balance",
+          "buffer",
+          "discover",
+          "filter",
+          "hedge",
+          "limit",
+          "load",
+          "load-shed",
+          "make",
+          "ready-cache",
+          "reconnect",
+          "retry",
+          "spawn-ready",
+          "steer",
+          "timeout",
+          "util"
+        ],
+        "futures-core": [
+          "dep:futures-core"
+        ],
+        "futures-util": [
+          "dep:futures-util"
+        ],
+        "hdrhistogram": [
+          "dep:hdrhistogram"
+        ],
+        "hedge": [
+          "util",
+          "filter",
+          "futures-util",
+          "hdrhistogram",
+          "tokio",
+          "dep:tokio",
+          "tokio/time",
+          "tracing"
+        ],
+        "indexmap": [
+          "dep:indexmap"
+        ],
+        "limit": [
+          "tokio",
+          "dep:tokio",
+          "tokio/time",
+          "tokio/sync",
+          "tokio-util",
+          "tracing",
+          "pin-project-lite"
+        ],
+        "load": [
+          "tokio",
+          "dep:tokio",
+          "tokio/time",
+          "tracing",
+          "pin-project-lite"
+        ],
+        "load-shed": [
+          "pin-project-lite"
+        ],
+        "log": [
+          "tracing",
+          "dep:tracing",
+          "tracing/log"
+        ],
+        "make": [
+          "pin-project-lite",
+          "tokio"
+        ],
+        "pin-project-lite": [
+          "dep:pin-project-lite"
+        ],
+        "ready-cache": [
+          "futures-core",
+          "futures-util",
+          "indexmap",
+          "tokio",
+          "dep:tokio",
+          "tokio/sync",
+          "tracing",
+          "pin-project-lite"
+        ],
+        "reconnect": [
+          "make",
+          "tracing"
+        ],
+        "retry": [
+          "tokio",
+          "dep:tokio",
+          "tokio/time",
+          "util"
+        ],
+        "slab": [
+          "dep:slab"
+        ],
+        "spawn-ready": [
+          "futures-util",
+          "tokio",
+          "dep:tokio",
+          "tokio/sync",
+          "tokio/rt",
+          "util",
+          "tracing"
+        ],
+        "steer": [],
+        "sync_wrapper": [
+          "dep:sync_wrapper"
+        ],
+        "timeout": [
+          "pin-project-lite",
+          "tokio",
+          "dep:tokio",
+          "tokio/time"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "tokio-stream": [],
+        "tokio-util": [
+          "dep:tokio-util"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ],
+        "util": [
+          "futures-core",
+          "futures-util",
+          "pin-project-lite",
+          "sync_wrapper"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "io",
+        "async",
+        "non-blocking",
+        "futures",
+        "service"
+      ],
       "manifest": "crates-io/tower/0.5.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -683,6 +983,17 @@
         "edition": "2018",
         "name": "tower",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ebe5ef63511595f1344e2d5cfa636d973292adc0eec1f0ad45fae9f0851ab1d4",
+        "package": "tower",
+        "registry": "crates-io",
+        "version": "0.5.3"
+      },
+      "vcs": {
+        "commit": "4b0a6b0e688bd177eb2c9c97f5268dd9703c66fc",
+        "path": "tower",
+        "system": "git"
       },
       "version": "0.5.3",
       "yanked": false

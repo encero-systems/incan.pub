@@ -110,11 +110,160 @@
           "unit_identity": "sha256:4a79fffe7bcdcc83574026f20f21f1fcbdd71919c6d1b8293e6d4d6c6fbc5140"
         }
       ],
+      "categories": [
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ark-ff-asm",
+          "name": "ark-ff-asm",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ark-ff-macros",
+          "name": "ark-ff-macros",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/ark-serialize",
+          "name": "ark-serialize",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ark-std",
+          "name": "ark-std",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "Clone",
+            "Copy",
+            "Debug",
+            "Default",
+            "Eq",
+            "Hash",
+            "Ord",
+            "PartialEq",
+            "PartialOrd"
+          ],
+          "loaf": "crates-io/educe",
+          "name": "educe",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": false,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 10554,
+          "content": "content/sha256/ef5f924d1c65c393cfec0f7e68b11cfee99a30a23a3aa988eaaf12a186f394d6",
+          "digest": "sha256:ef5f924d1c65c393cfec0f7e68b11cfee99a30a23a3aa988eaaf12a186f394d6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10846,
+          "content": "content/sha256/e8d77d4bbe96e1b46ec0f40d1f12e19825e718c764bb3e9a695633ade9289f9e",
+          "digest": "sha256:e8d77d4bbe96e1b46ec0f40d1f12e19825e718c764bb3e9a695633ade9289f9e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1046,
+          "content": "content/sha256/8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+          "digest": "sha256:8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "asm": [],
+        "default": [],
+        "parallel": [
+          "std",
+          "rayon",
+          "ark-std/parallel",
+          "ark-serialize/parallel"
+        ],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "std": [
+          "ark-std/std",
+          "ark-serialize/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cryptography",
+        "finite-fields"
+      ],
       "manifest": "crates-io/ark-ff/0.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +274,17 @@
         "edition": "2021",
         "name": "ark_ff",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f7a806ac6c8307b929df4645776290a50ee2aac754ad09d8bdf73391309e43af",
+        "package": "ark-ff",
+        "registry": "crates-io",
+        "version": "0.6.0"
+      },
+      "vcs": {
+        "commit": "d168323a6c7adf25210030fdd2c0be734b52f85b",
+        "path": "ff",
+        "system": "git"
       },
       "version": "0.6.0",
       "yanked": false

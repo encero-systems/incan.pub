@@ -690,6 +690,63 @@
           "unit_identity": "sha256:a61b678e8f9a4105db7125cdef082b6bfaca179f058788f919813d92d0fb30ab"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": true,
+          "req": "^0.11.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1832,
+          "content": "content/sha256/b7b7a33a29865bc653a6696b079c1527ba61cd58a815fc792ed6fa5bfc680ad5",
+          "digest": "sha256:b7b7a33a29865bc653a6696b079c1527ba61cd58a815fc792ed6fa5bfc680ad5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -697,14 +754,40 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "serde_core?/alloc",
+          "zerovec?/alloc"
+        ],
+        "databake": [
+          "dep:databake"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [],
+        "zerovec": [
+          "dep:zerovec"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "small-string",
+        "ascii",
+        "string",
+        "str"
+      ],
       "manifest": "crates-io/tinystr/0.8.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -714,6 +797,17 @@
         "edition": "2021",
         "name": "tinystr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b1e27c91459209c2986af3dcf603a5a74a4368754ce37414f59acc971167f643",
+        "package": "tinystr",
+        "registry": "crates-io",
+        "version": "0.8.4"
+      },
+      "vcs": {
+        "commit": "a14f2dad852be26bad277ae704abf27a15cbfed1",
+        "path": "utils/tinystr",
+        "system": "git"
       },
       "version": "0.8.4",
       "yanked": false
@@ -736,11 +830,94 @@
       "advisories": 0,
       "archive": "sha256:9a643c05f98e3ca6dd39bf2a41c100afb881e6da63f0007609dad666289bd6ce",
       "assets": [],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/displaydoc",
+          "name": "displaydoc",
+          "optional": false,
+          "req": "^0.2.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": true,
+          "req": "^0.11.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1832,
+          "content": "content/sha256/b7b7a33a29865bc653a6696b079c1527ba61cd58a815fc792ed6fa5bfc680ad5",
+          "digest": "sha256:b7b7a33a29865bc653a6696b079c1527ba61cd58a815fc792ed6fa5bfc680ad5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serde_core?/alloc",
+          "zerovec?/alloc"
+        ],
+        "databake": [
+          "dep:databake"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [],
+        "zerovec": [
+          "dep:zerovec"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "string",
+        "str",
+        "small",
+        "tiny",
+        "no_std"
+      ],
       "manifest": "crates-io/tinystr/0.8.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -751,6 +928,17 @@
         "edition": "2021",
         "name": "tinystr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:42d3e9c45c09de15d06dd8acf5f4e0e399e85927b7f00711024eb7ae10fa4869",
+        "package": "tinystr",
+        "registry": "crates-io",
+        "version": "0.8.2"
+      },
+      "vcs": {
+        "commit": "29dfe2790b6cfdab94ca6a6b69f58ce54802dbf7",
+        "path": "utils/tinystr",
+        "system": "git"
       },
       "version": "0.8.2",
       "yanked": false

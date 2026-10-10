@@ -136,11 +136,143 @@
           "unit_identity": "sha256:b55f6d35ff6fa8b255ef48a3b5d7b9142639ec65689053ff693826e484966eff"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "fancy"
+          ],
+          "loaf": "crates-io/miette",
+          "name": "miette",
+          "optional": true,
+          "req": "^7.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.219"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0.140"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": true,
+          "req": "^1.0.109",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml",
+          "name": "toml",
+          "optional": true,
+          "req": "^0.9"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 11712,
+          "content": "content/sha256/d0887f01b21707d38c420772ffaca0c13b50318815ba93cef23fca3da0188638",
+          "digest": "sha256:d0887f01b21707d38c420772ffaca0c13b50318815ba93cef23fca3da0188638",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10867,
+          "content": "content/sha256/2cf31f2ae7f3feba667d50fc1d4d21ecf217703c04c3068b83c9a73b6dde723a",
+          "digest": "sha256:2cf31f2ae7f3feba667d50fc1d4d21ecf217703c04c3068b83c9a73b6dde723a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/2bc107bdc18a74263d20bdefdb8073e17bc1a01b6b374dc5835683a33ee5ba7d",
+          "digest": "sha256:2bc107bdc18a74263d20bdefdb8073e17bc1a01b6b374dc5835683a33ee5ba7d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 11123,
+          "content": "content/sha256/ef14880f56799f770c1ae3ebc7a39a6d6477e025b8e753e890e9dda8d0ae548b",
+          "digest": "sha256:ef14880f56799f770c1ae3ebc7a39a6d6477e025b8e753e890e9dda8d0ae548b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "assign": [],
+        "default": [
+          "std",
+          "serde",
+          "json",
+          "resolve",
+          "assign",
+          "delete"
+        ],
+        "delete": [
+          "resolve"
+        ],
+        "json": [
+          "dep:serde_json",
+          "serde"
+        ],
+        "miette": [
+          "dep:miette",
+          "std"
+        ],
+        "resolve": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "dep:serde",
+          "serde/std",
+          "serde_json?/std"
+        ],
+        "syn": [
+          "dep:syn"
+        ],
+        "toml": [
+          "dep:toml",
+          "serde",
+          "std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "json-pointer",
+        "rfc-6901",
+        "6901"
+      ],
       "manifest": "crates-io/jsonptr/0.8.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -151,6 +283,17 @@
         "edition": "2021",
         "name": "jsonptr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:72c22d99362c7aac7d77efab6b49c2181674b165d7e6e7c755b3432ded64bf51",
+        "package": "jsonptr",
+        "registry": "crates-io",
+        "version": "0.8.2"
+      },
+      "vcs": {
+        "commit": "41a813bd4e7e89a0251bf2fc559c7159933a1066",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.2",
       "yanked": false
@@ -284,11 +427,143 @@
           "unit_identity": "sha256:eda9854143f5fe6fc839b6e2c1dfbb016813315a45a3085a391df815e6ac3d9c"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "fancy"
+          ],
+          "loaf": "crates-io/miette",
+          "name": "miette",
+          "optional": true,
+          "req": "^7.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.203"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": true,
+          "req": "^1.0.119"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": true,
+          "req": "^1.0.109",
+          "target": "cfg(any())"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/toml",
+          "name": "toml",
+          "optional": true,
+          "req": "^0.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 11686,
+          "content": "content/sha256/ee78b7b08ab8e2ee7884c931f70764c419e3203ea7f8c3184cdbc9acf2588b6b",
+          "digest": "sha256:ee78b7b08ab8e2ee7884c931f70764c419e3203ea7f8c3184cdbc9acf2588b6b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10867,
+          "content": "content/sha256/2cf31f2ae7f3feba667d50fc1d4d21ecf217703c04c3068b83c9a73b6dde723a",
+          "digest": "sha256:2cf31f2ae7f3feba667d50fc1d4d21ecf217703c04c3068b83c9a73b6dde723a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/2bc107bdc18a74263d20bdefdb8073e17bc1a01b6b374dc5835683a33ee5ba7d",
+          "digest": "sha256:2bc107bdc18a74263d20bdefdb8073e17bc1a01b6b374dc5835683a33ee5ba7d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 7981,
+          "content": "content/sha256/92ce91d46c9350151c5a21bb52ace6326d085e385286198b57e4f766c66f8545",
+          "digest": "sha256:92ce91d46c9350151c5a21bb52ace6326d085e385286198b57e4f766c66f8545",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "assign": [],
+        "default": [
+          "std",
+          "serde",
+          "json",
+          "resolve",
+          "assign",
+          "delete"
+        ],
+        "delete": [
+          "resolve"
+        ],
+        "json": [
+          "dep:serde_json",
+          "serde"
+        ],
+        "miette": [
+          "dep:miette",
+          "std"
+        ],
+        "resolve": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "dep:serde",
+          "serde/std",
+          "serde_json?/std"
+        ],
+        "syn": [
+          "dep:syn"
+        ],
+        "toml": [
+          "dep:toml",
+          "serde",
+          "std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "json-pointer",
+        "rfc-6901",
+        "6901"
+      ],
       "manifest": "crates-io/jsonptr/0.7.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -299,6 +574,17 @@
         "edition": "2021",
         "name": "jsonptr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a5a3cc660ba5d72bce0b3bb295bf20847ccbb40fd423f3f05b61273672e561fe",
+        "package": "jsonptr",
+        "registry": "crates-io",
+        "version": "0.7.1"
+      },
+      "vcs": {
+        "commit": "c0201c7c45ab3f9982601cfe6947c64a0106d589",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.1",
       "yanked": false

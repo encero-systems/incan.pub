@@ -102,11 +102,78 @@
           "unit_identity": "sha256:da88811977255971fc11da7270529e7b525e9f9d61762abe7a189b4f32a5cca0"
         }
       ],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "fallback"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(target_pointer_width = \"32\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rapidhash",
+          "name": "rapidhash",
+          "optional": false,
+          "req": "^4.4.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1153,
+          "content": "content/sha256/f7421982f6e138481bc12cc0e8a1866c7e11f45184c388765a9173ac2afc2668",
+          "digest": "sha256:f7421982f6e138481bc12cc0e8a1866c7e11f45184c388765a9173ac2afc2668",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1064,
+          "content": "content/sha256/efab6bad93b11c2a2bbecbd303e0844de04bbf9c7c3db9bdf4fc7ecc980c37e4",
+          "digest": "sha256:efab6bad93b11c2a2bbecbd303e0844de04bbf9c7c3db9bdf4fc7ecc980c37e4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 13671,
+          "content": "content/sha256/ab4e743619efb77dfa73e0fc0f5b73b952ecff294ff4cad8662c2e91b9b90c9e",
+          "digest": "sha256:ab4e743619efb77dfa73e0fc0f5b73b952ecff294ff4cad8662c2e91b9b90c9e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        },
+        {
+          "bytes": 15004,
+          "content": "content/sha256/b49c6e46303d4e4838c34eb0a72fbfa4cba170fd5ba7f8644d8c570cd1f960af",
+          "digest": "sha256:b49c6e46303d4e4838c34eb0a72fbfa4cba170fd5ba7f8644d8c570cd1f960af",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "metrics",
+        "facade"
+      ],
       "manifest": "crates-io/metrics/0.24.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +184,17 @@
         "edition": "2018",
         "name": "metrics",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:89550ee9f79e88fef3119de263694973a8adb26c21d75322164fb8c493039fe2",
+        "package": "metrics",
+        "registry": "crates-io",
+        "version": "0.24.6"
+      },
+      "vcs": {
+        "commit": "23cc597488f119a2d54b0ffd4a0d7d1a50651b76",
+        "path": "metrics",
+        "system": "git"
       },
       "version": "0.24.6",
       "yanked": false

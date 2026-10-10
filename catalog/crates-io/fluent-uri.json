@@ -222,11 +222,85 @@
           "unit_identity": "sha256:78ab7f4e43e2ca83beec8d05e23a3f23b2f11e7ac2a10f45f14d39935292c3db"
         }
       ],
+      "categories": [
+        "encoding",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/borrow-or-share",
+          "name": "borrow-or-share",
+          "optional": false,
+          "req": "^0.2.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ref-cast",
+          "name": "ref-cast",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5578,
+          "content": "content/sha256/a498cd2480dcdefb4466b057368c587718dedfbee2848c131029576114091c05",
+          "digest": "sha256:a498cd2480dcdefb4466b057368c587718dedfbee2848c131029576114091c05",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1066,
+          "content": "content/sha256/9fa38f610a00115dd1f612bdd3559e3b381ea579538b6ff25a5899da250a5fce",
+          "digest": "sha256:9fa38f610a00115dd1f612bdd3559e3b381ea579538b6ff25a5899da250a5fce",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "borrow-or-share/alloc",
+          "serde?/alloc"
+        ],
+        "default": [
+          "std"
+        ],
+        "impl-error": [],
+        "net": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc",
+          "impl-error"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "builder",
+        "parser",
+        "uri",
+        "iri"
+      ],
       "manifest": "crates-io/fluent-uri/0.4.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -237,6 +311,17 @@
         "edition": "2021",
         "name": "fluent_uri",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bc74ac4d8359ae70623506d512209619e5cf8f347124910440dbc221714b328e",
+        "package": "fluent-uri",
+        "registry": "crates-io",
+        "version": "0.4.1"
+      },
+      "vcs": {
+        "commit": "d9a6a20614f34b00476837eb8904fb01ca3e54df",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.1",
       "yanked": false

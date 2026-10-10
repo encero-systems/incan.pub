@@ -23,11 +23,89 @@
       "advisories": 0,
       "archive": "sha256:d4ebe52076d3f83f93fd87b8fc30b79b0a92eed392fa1e6ded789b1c0dc9b8c9",
       "assets": [],
+      "categories": [
+        "no-std",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/outref",
+          "name": "outref",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/uuid",
+          "name": "uuid",
+          "optional": true,
+          "req": "^1.2.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/vsimd",
+          "name": "vsimd",
+          "optional": false,
+          "req": "^0.8.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 437,
+          "content": "content/sha256/7ab240fee8858bc5f779430196578adbddd80dc74725bb37d2ddb5ea590cdb30",
+          "digest": "sha256:7ab240fee8858bc5f779430196578adbddd80dc74725bb37d2ddb5ea590cdb30",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 324,
+          "content": "content/sha256/5d0afc028338f2a5704dd5029d31df603e12f26a9fbfa08d4dd8d58548faa249",
+          "digest": "sha256:5d0afc028338f2a5704dd5029d31df603e12f26a9fbfa08d4dd8d58548faa249",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "vsimd/alloc"
+        ],
+        "default": [
+          "std",
+          "detect",
+          "uuid"
+        ],
+        "detect": [
+          "vsimd/detect"
+        ],
+        "std": [
+          "alloc",
+          "vsimd/std"
+        ],
+        "unstable": [
+          "vsimd/unstable"
+        ],
+        "uuid": [
+          "dep:uuid"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "uuid",
+        "guid",
+        "simd"
+      ],
       "manifest": "crates-io/uuid-simd/0.8.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +116,17 @@
         "edition": "2021",
         "name": "uuid_simd",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:23b082222b4f6619906941c17eb2297fff4c2fb96cb60164170522942a200bd8",
+        "package": "uuid-simd",
+        "registry": "crates-io",
+        "version": "0.8.0"
+      },
+      "vcs": {
+        "commit": "d74c030d9dc4f3cae02146d1f497ff62726ef09a",
+        "path": "crates/uuid-simd",
+        "system": "git"
       },
       "version": "0.8.0",
       "yanked": false

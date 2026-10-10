@@ -25,11 +25,86 @@
       "advisories": 0,
       "archive": "sha256:5fff6b9a82b45a838e3133aa772fe14e5134227285a61fa5e8fe2f80675763ef",
       "assets": [],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "elf",
+            "read_core"
+          ],
+          "loaf": "crates-io/object",
+          "name": "object",
+          "optional": true,
+          "req": "^0.37.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "mm",
+            "time"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": true,
+          "req": "^1.0.3",
+          "target": "cfg(target_os = \"linux\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasmtime-internal-versioned-export-macros",
+          "name": "wasmtime-versioned-export-macros",
+          "optional": false,
+          "req": "=36.0.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 98,
+          "content": "content/sha256/8d4c2672c511d7841784444d71651693c38e408dff63311c38d0535e26884a5b",
+          "digest": "sha256:8d4c2672c511d7841784444d71651693c38e408dff63311c38d0535e26884a5b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 409,
+          "content": "content/sha256/a20d00c93dbfb80e1aedae25a2ef5106ebc89db8d8631ad9900fad40d28bd2e9",
+          "digest": "sha256:a20d00c93dbfb80e1aedae25a2ef5106ebc89db8d8631ad9900fad40d28bd2e9",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "gdb_jit_int": [],
+        "object": [
+          "dep:object"
+        ],
+        "perf_jitdump": [
+          "rustix",
+          "object",
+          "std"
+        ],
+        "rustix": [
+          "dep:rustix"
+        ],
+        "std": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "gdb",
+        "jit"
+      ],
       "manifest": "crates-io/wasmtime-internal-jit-debug/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +115,17 @@
         "edition": "2024",
         "name": "wasmtime_internal_jit_debug",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b254d438db151a17ead4af0bfce573d7e5d914e6a09a9aad5656118069962f1e",
+        "package": "wasmtime-internal-jit-debug",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/jit-debug",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

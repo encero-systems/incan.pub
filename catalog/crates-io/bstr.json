@@ -298,11 +298,109 @@
           "unit_identity": "sha256:9b3be064f58a5dc476262cd96312c2a943fa12693b2dc703814e94d468157fa4"
         }
       ],
+      "categories": [
+        "text-processing",
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.7.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "dfa-search"
+          ],
+          "loaf": "crates-io/regex-automata",
+          "name": "regex-automata",
+          "optional": true,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.85"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8669,
+          "content": "content/sha256/e3833d78fffa45662201f1d5bc563859ee434d2a77d9959f393c46674866a5ee",
+          "digest": "sha256:e3833d78fffa45662201f1d5bc563859ee434d2a77d9959f393c46674866a5ee",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 262,
+          "content": "content/sha256/68653aaa727a2bfa31b7a751e31701ce33c49d695c12dd291a07d1c54da4c14b",
+          "digest": "sha256:68653aaa727a2bfa31b7a751e31701ce33c49d695c12dd291a07d1c54da4c14b",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1086,
+          "content": "content/sha256/6b7374c39a57e57fc2c38eb529c4c88340152b10f51dd5ae2d819dfa67f61715",
+          "digest": "sha256:6b7374c39a57e57fc2c38eb529c4c88340152b10f51dd5ae2d819dfa67f61715",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "memchr/alloc",
+          "serde_core?/alloc"
+        ],
+        "default": [
+          "std",
+          "unicode"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "alloc",
+          "memchr/std",
+          "serde_core?/std"
+        ],
+        "unicode": [
+          "dep:regex-automata"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "string",
+        "str",
+        "byte",
+        "bytes",
+        "text"
+      ],
       "manifest": "crates-io/bstr/1.13.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -313,6 +411,17 @@
         "edition": "2021",
         "name": "bstr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6bb31b46c14244e20ee9984b11bf5c992b91fb6939fea616e3512c8baecdbe5f",
+        "package": "bstr",
+        "registry": "crates-io",
+        "version": "1.13.1"
+      },
+      "vcs": {
+        "commit": "134195be38c7c9a4887980fd0f6f8bae042dd91e",
+        "path": "",
+        "system": "git"
       },
       "version": "1.13.1",
       "yanked": false
@@ -335,11 +444,109 @@
       "advisories": 0,
       "archive": "sha256:6a52b349c20358d082e9858dffea8187a69da47bb256b521f354f407b2a6bcbb",
       "assets": [],
+      "categories": [
+        "text-processing",
+        "encoding"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.7.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "dfa-search"
+          ],
+          "loaf": "crates-io/regex-automata",
+          "name": "regex-automata",
+          "optional": true,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.85"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8669,
+          "content": "content/sha256/d316b3ae5b764493f1dfb3879d405e4f7c215b43e04162ee9ab758a1963dda1d",
+          "digest": "sha256:d316b3ae5b764493f1dfb3879d405e4f7c215b43e04162ee9ab758a1963dda1d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 262,
+          "content": "content/sha256/68653aaa727a2bfa31b7a751e31701ce33c49d695c12dd291a07d1c54da4c14b",
+          "digest": "sha256:68653aaa727a2bfa31b7a751e31701ce33c49d695c12dd291a07d1c54da4c14b",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1086,
+          "content": "content/sha256/6b7374c39a57e57fc2c38eb529c4c88340152b10f51dd5ae2d819dfa67f61715",
+          "digest": "sha256:6b7374c39a57e57fc2c38eb529c4c88340152b10f51dd5ae2d819dfa67f61715",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "memchr/alloc",
+          "serde?/alloc"
+        ],
+        "default": [
+          "std",
+          "unicode"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc",
+          "memchr/std",
+          "serde?/std"
+        ],
+        "unicode": [
+          "dep:regex-automata"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "string",
+        "str",
+        "byte",
+        "bytes",
+        "text"
+      ],
       "manifest": "crates-io/bstr/1.12.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -350,6 +557,17 @@
         "edition": "2021",
         "name": "bstr",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:63044e1ae8e69f3b5a92c736ca6269b8d12fa7efe39bf34ddb06d102cf0e2cab",
+        "package": "bstr",
+        "registry": "crates-io",
+        "version": "1.12.1"
+      },
+      "vcs": {
+        "commit": "a90f36f0de8c984662c49fb5742027ca24a88cbb",
+        "path": "",
+        "system": "git"
       },
       "version": "1.12.1",
       "yanked": false

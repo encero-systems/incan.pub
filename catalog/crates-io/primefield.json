@@ -178,11 +178,118 @@
           "unit_identity": "sha256:93bf351171984e6a19e4a0d2e2105c8383e247875bb8f90f77cf6cb32dd0186a"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "hybrid-array",
+            "rand_core",
+            "subtle"
+          ],
+          "loaf": "crates-io/crypto-bigint",
+          "name": "bigint",
+          "optional": false,
+          "req": "^0.7.5"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "rand_core"
+          ],
+          "loaf": "crates-io/crypto-common",
+          "name": "common",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "const-generics"
+          ],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": false,
+          "req": "^1.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2749,
+          "content": "content/sha256/c039d587e6a0063272fc43ee76b780ad5146ecd165516cf04846cc00d08e89d9",
+          "digest": "sha256:c039d587e6a0063272fc43ee76b780ad5146ecd165516cf04846cc00d08e89d9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/4621bda86773a67b5645bbd25cf1bf8b6820d4fcec3885b23b9ceec612007f63",
+          "digest": "sha256:4621bda86773a67b5645bbd25cf1bf8b6820d4fcec3885b23b9ceec612007f63",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 293,
+          "content": "content/sha256/cd3f021f6ed3a35a06c2c3c93427423f2362845d29b466f0a1a5d0593ac3b0e3",
+          "digest": "sha256:cd3f021f6ed3a35a06c2c3c93427423f2362845d29b466f0a1a5d0593ac3b0e3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "ecc",
+        "field",
+        "prime"
+      ],
       "manifest": "crates-io/primefield/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +300,17 @@
         "edition": "2024",
         "name": "primefield",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c555a6e4eb7d4e158fcb028c835c3b8642206ddc279b5c6b202ef9a8bdb592f4",
+        "package": "primefield",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "77794648133400fea7634fcad10b4ad67e4385bf",
+        "path": "primefield",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false

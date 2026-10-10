@@ -178,11 +178,78 @@
           "unit_identity": "sha256:f995d1831f3c353d6a6e7f58f0f47cc37314a68354ed94872d6797b46a71bcb6"
         }
       ],
+      "categories": [
+        "hardware-support"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hermit-abi",
+          "name": "hermit-abi",
+          "optional": false,
+          "req": "^0.5.0",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.26",
+          "target": "cfg(not(windows))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 595,
+          "content": "content/sha256/c1412b9d035de412ec90f23a479c0c774ddbff26213a3cef39ca69b9fcd6858a",
+          "digest": "sha256:c1412b9d035de412ec90f23a479c0c774ddbff26213a3cef39ca69b9fcd6858a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1063,
+          "content": "content/sha256/391a5396cec6230bfabd4ef4eb2350eb895bc5efce377a2218f5702ed020d3e3",
+          "digest": "sha256:391a5396cec6230bfabd4ef4eb2350eb895bc5efce377a2218f5702ed020d3e3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2093,
+          "content": "content/sha256/f7666d32847ddd01ff72ab9926194b2d386ae35d5bcb7c80a9186a73603fe812",
+          "digest": "sha256:f7666d32847ddd01ff72ab9926194b2d386ae35d5bcb7c80a9186a73603fe812",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cpu",
+        "cpus",
+        "cores"
+      ],
       "manifest": "crates-io/num_cpus/1.17.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -192,6 +259,17 @@
         "edition": "2015",
         "name": "num_cpus",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:91df4bbde75afed763b708b7eee1e8e7651e02d97f6d5dd763e89367e957b23b",
+        "package": "num_cpus",
+        "registry": "crates-io",
+        "version": "1.17.0"
+      },
+      "vcs": {
+        "commit": "342af76b486335e5a955c7314fc96cd104e7a17b",
+        "path": "",
+        "system": "git"
       },
       "version": "1.17.0",
       "yanked": false

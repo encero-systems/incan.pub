@@ -128,11 +128,106 @@
           "unit_identity": "sha256:110afbabfcf833cf4158142d063587bd5dc8f58785a1e3626265afd945a74013"
         }
       ],
+      "categories": [
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bit-set",
+          "name": "bit-set",
+          "optional": false,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "dfa-onepass",
+            "dfa-search",
+            "hybrid",
+            "meta",
+            "nfa",
+            "syntax"
+          ],
+          "loaf": "crates-io/regex-automata",
+          "name": "regex-automata",
+          "optional": false,
+          "req": "^0.4.16"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/regex-syntax",
+          "name": "regex-syntax",
+          "optional": false,
+          "req": "^0.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8279,
+          "content": "content/sha256/50cb9b16a6e7daf74b4c86fd8fd83512c1d85e3fb77b6a9d24a0d7adf4e6d2fc",
+          "digest": "sha256:50cb9b16a6e7daf74b4c86fd8fd83512c1d85e3fb77b6a9d24a0d7adf4e6d2fc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/3bc70e239e91272782006c638fc0452a714d384224f11f0923036b7be07cf9b5",
+          "digest": "sha256:3bc70e239e91272782006c638fc0452a714d384224f11f0923036b7be07cf9b5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 19521,
+          "content": "content/sha256/8c0f61315af04d199af00e96ba890a86203ba5499bbf39943c04955257e6fc28",
+          "digest": "sha256:8c0f61315af04d199af00e96ba890a86203ba5499bbf39943c04955257e6fc28",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "unicode",
+          "perf",
+          "std",
+          "variable-lookbehinds"
+        ],
+        "leftmost_longest": [],
+        "perf": [
+          "regex-automata/perf"
+        ],
+        "perf-dfa-full": [
+          "regex-automata/dfa-build"
+        ],
+        "std": [
+          "regex-automata/std",
+          "regex-syntax/std",
+          "bit-set/std"
+        ],
+        "track_caller": [],
+        "unicode": [
+          "regex-automata/unicode",
+          "regex-syntax/unicode"
+        ],
+        "variable-lookbehinds": [
+          "regex-automata/dfa-search"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/fancy-regex/0.19.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -143,6 +238,17 @@
         "edition": "2018",
         "name": "fancy_regex",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d301f5bf187b3c295fce6468d3875037a0bccc5f6b151c63cac2f85babf21912",
+        "package": "fancy-regex",
+        "registry": "crates-io",
+        "version": "0.19.2"
+      },
+      "vcs": {
+        "commit": "e2684857abcfd723562864077c6bc5f3f70ecedf",
+        "path": "",
+        "system": "git"
       },
       "version": "0.19.2",
       "yanked": false

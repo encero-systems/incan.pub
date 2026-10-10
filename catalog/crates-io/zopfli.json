@@ -120,11 +120,93 @@
           "unit_identity": "sha256:5434186b55544115d3016523235ccd7be16a65c8d63eca557bb032e1c1d39e52"
         }
       ],
+      "categories": [
+        "compression",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bumpalo",
+          "name": "bumpalo",
+          "optional": false,
+          "req": "^3.19.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/crc32fast",
+          "name": "crc32fast",
+          "optional": true,
+          "req": "^1.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.28"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/simd-adler32",
+          "name": "simd-adler32",
+          "optional": true,
+          "req": "^0.3.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1736,
+          "content": "content/sha256/e6127f10c2753d01d0f5ff5ac4407fda836f2eba2dcd129ee0416d28c41fd743",
+          "digest": "sha256:e6127f10c2753d01d0f5ff5ac4407fda836f2eba2dcd129ee0416d28c41fd743",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11341,
+          "content": "content/sha256/018b1cb87efdf7a04c2fcc13d57ed63f62149113fb207b27ea13430d64f13513",
+          "digest": "sha256:018b1cb87efdf7a04c2fcc13d57ed63f62149113fb207b27ea13430d64f13513",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "gzip",
+          "std",
+          "zlib"
+        ],
+        "gzip": [
+          "dep:crc32fast"
+        ],
+        "nightly": [
+          "crc32fast?/nightly"
+        ],
+        "std": [
+          "crc32fast?/std",
+          "dep:log",
+          "simd-adler32?/std"
+        ],
+        "zlib": [
+          "dep:simd-adler32"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "compression"
+      ],
       "manifest": "crates-io/zopfli/0.8.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -135,6 +217,17 @@
         "edition": "2021",
         "name": "zopfli",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f05cd8797d63865425ff89b5c4a48804f35ba0ce8d125800027ad6017d2b5249",
+        "package": "zopfli",
+        "registry": "crates-io",
+        "version": "0.8.3"
+      },
+      "vcs": {
+        "commit": "91a34e5d2ce57883a82145158bc74222d7da5229",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.3",
       "yanked": false

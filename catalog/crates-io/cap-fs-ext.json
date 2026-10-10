@@ -26,6 +26,127 @@
       "advisories": 0,
       "archive": "sha256:1efb2f23165a5c8d8e42adf19fff705c34ffcda50e12d40cfa512e05d460dd75",
       "assets": [],
+      "categories": [
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arf-strings",
+          "name": "arf-strings",
+          "optional": true,
+          "req": "^0.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "attributes",
+            "io_safety"
+          ],
+          "loaf": "crates-io/async-std",
+          "name": "async-std",
+          "optional": true,
+          "req": "^1.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-trait",
+          "name": "async-trait",
+          "optional": true,
+          "req": "^0.1.42"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/camino",
+          "name": "camino",
+          "optional": true,
+          "req": "^1.0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cap-async-std",
+          "name": "cap-async-std",
+          "optional": true,
+          "req": "^3.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cap-primitives",
+          "name": "cap-primitives",
+          "optional": false,
+          "req": "^3.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cap-std",
+          "name": "cap-std",
+          "optional": true,
+          "req": "^3.4.6"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-lifetimes",
+          "name": "io-lifetimes",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Storage_FileSystem"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.52, <=0.59",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 879,
+          "content": "content/sha256/735dc9e737b6c6ba47cdc0fcca09bff9c7d4c119c0c854c6da33de8719213367",
+          "digest": "sha256:735dc9e737b6c6ba47cdc0fcca09bff9c7d4c119c0c854c6da33de8719213367",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -35,14 +156,72 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arf-strings": [
+          "dep:arf-strings"
+        ],
+        "arf_strings": [
+          "dep:cap-std",
+          "cap-std/arf_strings",
+          "fs_utf8",
+          "arf-strings"
+        ],
+        "async-std": [
+          "dep:async-std"
+        ],
+        "async-trait": [
+          "dep:async-trait"
+        ],
+        "async_std": [
+          "cap-async-std",
+          "async-std",
+          "io-lifetimes/async-std",
+          "async-trait"
+        ],
+        "async_std_arf_strings": [
+          "dep:cap-async-std",
+          "cap-async-std/arf_strings",
+          "async_std_fs_utf8",
+          "arf-strings"
+        ],
+        "async_std_fs_utf8": [
+          "dep:cap-async-std",
+          "cap-async-std/fs_utf8",
+          "camino"
+        ],
+        "camino": [
+          "dep:camino"
+        ],
+        "cap-async-std": [
+          "dep:cap-async-std"
+        ],
+        "cap-std": [
+          "dep:cap-std"
+        ],
+        "default": [
+          "std"
+        ],
+        "fs_utf8": [
+          "dep:cap-std",
+          "cap-std/fs_utf8",
+          "camino"
+        ],
+        "std": [
+          "cap-std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "filesystem"
+      ],
       "manifest": "crates-io/cap-fs-ext/3.4.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -53,6 +232,17 @@
         "edition": "2021",
         "name": "cap_fs_ext",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:476f0d0003a760918ed4b1e039a59e11769030416f79c8222551d22785f7f70d",
+        "package": "cap-fs-ext",
+        "registry": "crates-io",
+        "version": "3.4.6"
+      },
+      "vcs": {
+        "commit": "cd4c6330089e3731c68b7b98d4dde0cda27402ff",
+        "path": "cap-fs-ext",
+        "system": "git"
       },
       "version": "3.4.6",
       "yanked": false

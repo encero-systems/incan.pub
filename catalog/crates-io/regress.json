@@ -25,6 +25,54 @@
       "advisories": 0,
       "archive": "sha256:c47bd7c5630e8da1d836712340fad9b973353eb2e1ca548ce124387d65caca1d",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.16.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.4.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3314,
+          "content": "content/sha256/ef3875d93b30214d789ee9ff1f35ad3e908f290092db703af17d6cdff1ae7458",
+          "digest": "sha256:ef3875d93b30214d789ee9ff1f35ad3e908f290092db703af17d6cdff1ae7458",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10835,
+          "content": "content/sha256/e36d55837170195cdf934aa6a48c0ad6efba1bde3f5b4a1b9259c171d5aeb647",
+          "digest": "sha256:e36d55837170195cdf934aa6a48c0ad6efba1bde3f5b4a1b9259c171d5aeb647",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/3f8a05fc8617c5ce569fa5a4f2301cd847fe00fa011bdaa8f353fd55a2691a54",
+          "digest": "sha256:3f8a05fc8617c5ce569fa5a4f2301cd847fe00fa011bdaa8f353fd55a2691a54",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -34,14 +82,33 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "backend-pikevm": [],
+        "default": [
+          "backend-pikevm",
+          "std"
+        ],
+        "index-positions": [],
+        "pattern": [],
+        "prohibit-unsafe": [],
+        "std": [
+          "memchr/std"
+        ],
+        "utf16": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "regex",
+        "regexp"
+      ],
       "manifest": "crates-io/regress/0.10.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -51,6 +118,17 @@
         "edition": "2024",
         "name": "regress",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2057b2325e68a893284d1538021ab90279adac1139957ca2a74426c6f118fb48",
+        "package": "regress",
+        "registry": "crates-io",
+        "version": "0.10.5"
+      },
+      "vcs": {
+        "commit": "f74c8c3723b0d351e1bba764f1a6000040d339e2",
+        "path": "",
+        "system": "git"
       },
       "version": "0.10.5",
       "yanked": false

@@ -200,11 +200,156 @@
           "unit_identity": "sha256:11687368c5b3c893b42fc0845ff59b855be27d995898c31ba86ff5b7095e8b73"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-trait",
+          "name": "async-trait",
+          "optional": false,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/http",
+          "name": "http",
+          "optional": false,
+          "req": "^1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http-body-util",
+          "name": "http-body-util",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hyper",
+          "name": "hyper",
+          "optional": true,
+          "req": "^1.3"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "client-legacy",
+            "http1",
+            "http2"
+          ],
+          "loaf": "crates-io/hyper-util",
+          "name": "hyper-util",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "trace"
+          ],
+          "loaf": "crates-io/opentelemetry",
+          "name": "opentelemetry",
+          "optional": false,
+          "req": "^0.33"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/reqwest",
+          "name": "reqwest",
+          "optional": true,
+          "req": "^0.13.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "time"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4022,
+          "content": "content/sha256/aadbb374b0c17a57d0a712a4d769d16a61142eae05b92277ea82c01d3b839d42",
+          "digest": "sha256:aadbb374b0c17a57d0a712a4d769d16a61142eae05b92277ea82c01d3b839d42",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 360,
+          "content": "content/sha256/66cb8a63eeac5b29004b8756108b9a5b3fce03141ef9085dac9fc85141602381",
+          "digest": "sha256:66cb8a63eeac5b29004b8756108b9a5b3fce03141ef9085dac9fc85141602381",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 6313,
+          "content": "content/sha256/d86dd966d0fd8fe4ec2496210a45754bd872914584d2d08b957097043f844abc",
+          "digest": "sha256:d86dd966d0fd8fe4ec2496210a45754bd872914584d2d08b957097043f844abc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "internal-logs"
+        ],
+        "hyper": [
+          "dep:http-body-util",
+          "dep:hyper",
+          "dep:hyper-util",
+          "dep:tokio"
+        ],
+        "internal-logs": [
+          "opentelemetry/internal-logs"
+        ],
+        "reqwest": [
+          "dep:reqwest"
+        ],
+        "reqwest-blocking": [
+          "dep:reqwest",
+          "reqwest/blocking"
+        ],
+        "reqwest-rustls": [
+          "dep:reqwest",
+          "reqwest/rustls"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "opentelemetry",
+        "tracing",
+        "context",
+        "propagation"
+      ],
       "manifest": "crates-io/opentelemetry-http/0.33.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -215,6 +360,17 @@
         "edition": "2021",
         "name": "opentelemetry_http",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ee2c3625b8aa04209f7e01e513bc8044da9687fa38a9eacf59628ca5f3b87300",
+        "package": "opentelemetry-http",
+        "registry": "crates-io",
+        "version": "0.33.0"
+      },
+      "vcs": {
+        "commit": "19833847cab86c8464c1dfb6d28b1de9c0b50038",
+        "path": "opentelemetry-http",
+        "system": "git"
       },
       "version": "0.33.0",
       "yanked": false

@@ -120,11 +120,154 @@
           "unit_identity": "sha256:b2de91afbb95bbf518764cb49d3d480af6bc42872b5a3ea3184287dbf5ff9df1"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": false,
+          "req": "^0.3.64",
+          "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lazy_static",
+          "name": "lazy_static",
+          "optional": true,
+          "req": "^1.0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "trace"
+          ],
+          "loaf": "crates-io/opentelemetry",
+          "name": "opentelemetry",
+          "optional": false,
+          "req": "^0.33.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": false,
+          "req": "^0.1.35"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tracing-core",
+          "name": "tracing-core",
+          "optional": false,
+          "req": "^0.1.28"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing-log",
+          "name": "tracing-log",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "registry",
+            "std"
+          ],
+          "loaf": "crates-io/tracing-subscriber",
+          "name": "tracing-subscriber",
+          "optional": false,
+          "req": "^0.3.22"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/web-time",
+          "name": "web-time",
+          "optional": false,
+          "req": "^1.0.0",
+          "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4428,
+          "content": "content/sha256/c4794b793600f45ca514ac15ee8bb597cc00e689332bb66f4754c6147b67e71d",
+          "digest": "sha256:c4794b793600f45ca514ac15ee8bb597cc00e689332bb66f4754c6147b67e71d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "digest": "sha256:898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 17763,
+          "content": "content/sha256/5d9e24103ae5762b6899b777ab9f6738012b95b7130ac4edaf385ec8b52c24ba",
+          "digest": "sha256:5d9e24103ae5762b6899b777ab9f6738012b95b7130ac4edaf385ec8b52c24ba",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "tracing-log",
+          "metrics"
+        ],
+        "lazy_static": [
+          "dep:lazy_static"
+        ],
+        "metrics": [
+          "opentelemetry/metrics",
+          "smallvec"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ],
+        "tracing-log": [
+          "dep:tracing-log"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "tracing",
+        "opentelemetry",
+        "jaeger",
+        "zipkin",
+        "async"
+      ],
       "manifest": "crates-io/tracing-opentelemetry/0.34.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -135,6 +278,17 @@
         "edition": "2021",
         "name": "tracing_opentelemetry",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0a904802a1b902f43638b677ff2a650847e3b4404101b6c586d648e8c1e3e8fe",
+        "package": "tracing-opentelemetry",
+        "registry": "crates-io",
+        "version": "0.34.0"
+      },
+      "vcs": {
+        "commit": "8c1a02d68034de317607ada0b1dd0d98abefd6cd",
+        "path": "",
+        "system": "git"
       },
       "version": "0.34.0",
       "yanked": false

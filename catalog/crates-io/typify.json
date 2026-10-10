@@ -23,6 +23,48 @@
       "advisories": 0,
       "archive": "sha256:de4f4390ffa26d699c3495dd91ae64499299f79b3d998092edc1adec9a8ffd58",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "compilers"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typify-impl",
+          "name": "typify-impl",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typify-macro",
+          "name": "typify-macro",
+          "optional": true,
+          "req": "^0.5.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 12601,
+          "content": "content/sha256/9e6e4065dec723fdc2ccd0f6751f01dadf851b389812e6d58f7b225ad915855c",
+          "digest": "sha256:9e6e4065dec723fdc2ccd0f6751f01dadf851b389812e6d58f7b225ad915855c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 322,
+          "content": "content/sha256/e71900f68b7ee7fb57e89444f125652c8b21e622171b98cc5cc067df36ea751c",
+          "digest": "sha256:e71900f68b7ee7fb57e89444f125652c8b21e622171b98cc5cc067df36ea751c",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -32,14 +74,31 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "macro"
+        ],
+        "macro": [
+          "typify-macro"
+        ],
+        "typify-macro": [
+          "dep:typify-macro"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "json",
+        "schema",
+        "proc_macro"
+      ],
       "manifest": "crates-io/typify/0.5.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -49,6 +108,17 @@
         "edition": "2021",
         "name": "typify",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e6d5bcc6f62eb1fa8aa4098f39b29f93dcb914e17158b76c50360911257aa629",
+        "package": "typify",
+        "registry": "crates-io",
+        "version": "0.5.0"
+      },
+      "vcs": {
+        "commit": "c99b5fbd97aece0037f0cbfe3a67b91b18fcd2de",
+        "path": "typify",
+        "system": "git"
       },
       "version": "0.5.0",
       "yanked": false

@@ -124,11 +124,235 @@
           "unit_identity": "sha256:21d12d5d6cdf5e283818c26ea35c553ec9a0beca88c98e25292531e10b915eff"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.80"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": true,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CGContext",
+            "CGFont",
+            "CGImage",
+            "CGPath"
+          ],
+          "loaf": "crates-io/objc2-core-graphics",
+          "name": "objc2-core-graphics",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 780,
+          "content": "content/sha256/055ed475047a908398289da206178ad9c0e76224b6f55dbea3613227b1c070bf",
+          "digest": "sha256:055ed475047a908398289da206178ad9c0e76224b6f55dbea3613227b1c070bf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 364,
+          "content": "content/sha256/520ccc45e71a86e8217d2c420bc28e512a4f3a84bb00199c3f293ef9e909bfee",
+          "digest": "sha256:520ccc45e71a86e8217d2c420bc28e512a4f3a84bb00199c3f293ef9e909bfee",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CTDefines": [],
+        "CTFont": [
+          "bitflags",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFCGTypes",
+          "objc2-core-foundation/CFCharacterSet",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFString"
+        ],
+        "CTFontCollection": [
+          "bitflags",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFSet"
+        ],
+        "CTFontDescriptor": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFCGTypes",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFNumber",
+          "objc2-core-foundation/CFSet"
+        ],
+        "CTFontManager": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFBundle",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFError",
+          "objc2-core-foundation/CFRunLoop",
+          "objc2-core-foundation/CFURL"
+        ],
+        "CTFontManagerErrors": [],
+        "CTFontTraits": [
+          "bitflags"
+        ],
+        "CTFrame": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFCGTypes",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "CTFramesetter": [
+          "objc2-core-foundation/CFAttributedString",
+          "objc2-core-foundation/CFCGTypes",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "CTGlyphInfo": [],
+        "CTLine": [
+          "bitflags",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFAttributedString",
+          "objc2-core-foundation/CFCGTypes"
+        ],
+        "CTParagraphStyle": [],
+        "CTRubyAnnotation": [
+          "objc2-core-foundation/CFCGTypes",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "CTRun": [
+          "bitflags",
+          "objc2-core-foundation/CFCGTypes",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "CTRunDelegate": [
+          "objc2-core-foundation/CFCGTypes"
+        ],
+        "CTStringAttributes": [
+          "bitflags"
+        ],
+        "CTTextTab": [
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "CTTypesetter": [
+          "objc2-core-foundation/CFAttributedString",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "SFNTLayoutTypes": [],
+        "SFNTTypes": [],
+        "alloc": [],
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "CTDefines",
+          "CTFont",
+          "CTFontCollection",
+          "CTFontDescriptor",
+          "CTFontManager",
+          "CTFontManagerErrors",
+          "CTFontTraits",
+          "CTFrame",
+          "CTFramesetter",
+          "CTGlyphInfo",
+          "CTLine",
+          "CTParagraphStyle",
+          "CTRubyAnnotation",
+          "CTRun",
+          "CTRunDelegate",
+          "CTStringAttributes",
+          "CTTextTab",
+          "CTTypesetter",
+          "SFNTLayoutTypes",
+          "SFNTTypes",
+          "bitflags",
+          "block2",
+          "libc",
+          "objc2",
+          "objc2-core-graphics"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "objc2": [
+          "dep:objc2",
+          "objc2-core-foundation/objc2",
+          "objc2-core-graphics?/objc2"
+        ],
+        "objc2-core-graphics": [
+          "dep:objc2-core-graphics"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-core-text/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -139,6 +363,17 @@
         "edition": "2021",
         "name": "objc2_core_text",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0cde0dfb48d25d2b4862161a4d5fcc0e3c24367869ad306b0c9ec0073bfed92d",
+        "package": "objc2-core-text",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-core-text",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

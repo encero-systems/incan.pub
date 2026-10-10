@@ -96,6 +96,62 @@
           "unit_identity": "sha256:642f278a1f6077b36f8fb0f351599333abde550feda3caac098ee5cf796f0c46"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/glob",
+          "name": "glob",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.39"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libloading",
+          "name": "libloading",
+          "optional": true,
+          "req": "^0.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7766,
+          "content": "content/sha256/d9e22655429bb8aaa14bcf589635b59ddffe35625d3b3db53c87c31a2b366b81",
+          "digest": "sha256:d9e22655429bb8aaa14bcf589635b59ddffe35625d3b3db53c87c31a2b366b81",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 15079,
+          "content": "content/sha256/d9d0654947196e04382ef854e749a9e9177a7d76edeff88b4c40127f3c35f229",
+          "digest": "sha256:d9d0654947196e04382ef854e749a9e9177a7d76edeff88b4c40127f3c35f229",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -117,6 +173,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -140,6 +197,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -163,14 +221,90 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "clang_10_0": [
+          "clang_9_0"
+        ],
+        "clang_11_0": [
+          "clang_10_0"
+        ],
+        "clang_12_0": [
+          "clang_11_0"
+        ],
+        "clang_13_0": [
+          "clang_12_0"
+        ],
+        "clang_14_0": [
+          "clang_13_0"
+        ],
+        "clang_15_0": [
+          "clang_14_0"
+        ],
+        "clang_16_0": [
+          "clang_15_0"
+        ],
+        "clang_17_0": [
+          "clang_16_0"
+        ],
+        "clang_18_0": [
+          "clang_17_0"
+        ],
+        "clang_19_0": [
+          "clang_18_0"
+        ],
+        "clang_20_0": [
+          "clang_19_0"
+        ],
+        "clang_3_5": [],
+        "clang_3_6": [
+          "clang_3_5"
+        ],
+        "clang_3_7": [
+          "clang_3_6"
+        ],
+        "clang_3_8": [
+          "clang_3_7"
+        ],
+        "clang_3_9": [
+          "clang_3_8"
+        ],
+        "clang_4_0": [
+          "clang_3_9"
+        ],
+        "clang_5_0": [
+          "clang_4_0"
+        ],
+        "clang_6_0": [
+          "clang_5_0"
+        ],
+        "clang_7_0": [
+          "clang_6_0"
+        ],
+        "clang_8_0": [
+          "clang_7_0"
+        ],
+        "clang_9_0": [
+          "clang_8_0"
+        ],
+        "libcpp": [],
+        "libloading": [
+          "dep:libloading"
+        ],
+        "runtime": [
+          "libloading"
+        ],
+        "static": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/clang-sys/1.9.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -181,6 +315,17 @@
         "edition": "2021",
         "name": "clang_sys",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:157a8ba7b480713b56f4c09fd13fc3e0a22a5dfab8097ba61cbc5feef950788a",
+        "package": "clang-sys",
+        "registry": "crates-io",
+        "version": "1.9.1"
+      },
+      "vcs": {
+        "commit": "8844c21292e54818d200980cd90a5498e2a5a644",
+        "path": "",
+        "system": "git"
       },
       "version": "1.9.1",
       "yanked": false

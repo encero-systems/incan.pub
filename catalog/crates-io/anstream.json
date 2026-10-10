@@ -388,11 +388,122 @@
           "unit_identity": "sha256:807c501638fe33a20508df60eb91e882ddbd1c355bf68c723616091ebf7b0c83"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle-parse",
+          "name": "anstyle-parse",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle-query",
+          "name": "anstyle-query",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle-wincon",
+          "name": "anstyle-wincon",
+          "optional": true,
+          "req": "^3.0.5",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/colorchoice",
+          "name": "colorchoice",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/is_terminal_polyfill",
+          "name": "is_terminal_polyfill",
+          "optional": false,
+          "req": "^1.48"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/utf8parse",
+          "name": "utf8parse",
+          "optional": false,
+          "req": "^0.2.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1211,
+          "content": "content/sha256/7e90b134ad15dc4368d2a27efeb8db9d155dcd0886b72a032ffb367616255807",
+          "digest": "sha256:7e90b134ad15dc4368d2a27efeb8db9d155dcd0886b72a032ffb367616255807",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "auto": [
+          "dep:anstyle-query"
+        ],
+        "default": [
+          "auto",
+          "wincon"
+        ],
+        "test": [],
+        "wincon": [
+          "dep:anstyle-wincon"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "ansi",
+        "terminal",
+        "color",
+        "strip",
+        "wincon"
+      ],
       "manifest": "crates-io/anstream/1.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -402,6 +513,17 @@
         "edition": "2021",
         "name": "anstream",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:824a212faf96e9acacdbd09febd34438f8f711fb84e09a8916013cd7815ca28d",
+        "package": "anstream",
+        "registry": "crates-io",
+        "version": "1.0.0"
+      },
+      "vcs": {
+        "commit": "3048fe7820055a6c995170d822e725c62b3d63e1",
+        "path": "crates/anstream",
+        "system": "git"
       },
       "version": "1.0.0",
       "yanked": false

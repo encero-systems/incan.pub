@@ -275,11 +275,125 @@
           "unit_identity": "sha256:00fe445af585e21439ccca528d5207353b93bc28730d5082cf6f4345adf9f84c"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memuse",
+          "name": "memuse",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_xorshift",
+          "name": "rand_xorshift",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.2.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1122,
+          "content": "content/sha256/9fec31778792da618941758c51dc92ef11db157997949dae7c94df8c75fccf1d",
+          "digest": "sha256:9fec31778792da618941758c51dc92ef11db157997949dae7c94df8c75fccf1d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4063,
+          "content": "content/sha256/af1ac54ba3463fbd49a5b8bda8c554f53990ae9045862d4ee6e704bfcf64dd4d",
+          "digest": "sha256:af1ac54ba3463fbd49a5b8bda8c554f53990ae9045862d4ee6e704bfcf64dd4d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "alloc"
+        ],
+        "memuse": [
+          "dep:memuse"
+        ],
+        "rand": [
+          "dep:rand"
+        ],
+        "rand_xorshift": [
+          "dep:rand_xorshift"
+        ],
+        "tests": [
+          "alloc",
+          "rand",
+          "rand_xorshift"
+        ],
+        "wnaf-memuse": [
+          "alloc",
+          "memuse"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/group/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -290,6 +404,17 @@
         "edition": "2021",
         "name": "group",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7fd1a1c7a5206c5b7a3f5a0d7ccd3ff85d0c8f5133d62a02680255b0004af5f4",
+        "package": "group",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "f9a84a7587f47fab4ad65a25b58c8a01d1b26d39",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -313,11 +438,125 @@
       "advisories": 0,
       "archive": "sha256:40904e1483c1deb1b45c92490d16045685d42a1ef9546a8cc1c26ae0611b8464",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ff",
+          "name": "ff",
+          "optional": false,
+          "req": "^0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memuse",
+          "name": "memuse",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_xorshift",
+          "name": "rand_xorshift",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": false,
+          "req": "^2.2.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 668,
+          "content": "content/sha256/f0a93bc0b7139543f09b54045b4fdc180575d30948ee781beb9771c17b9178ba",
+          "digest": "sha256:f0a93bc0b7139543f09b54045b4fdc180575d30948ee781beb9771c17b9178ba",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2382,
+          "content": "content/sha256/cf3d53107bd2a496c38077226782c468f7ad48e6de4fe73fcc8b187566889dae",
+          "digest": "sha256:cf3d53107bd2a496c38077226782c468f7ad48e6de4fe73fcc8b187566889dae",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "alloc"
+        ],
+        "memuse": [
+          "dep:memuse"
+        ],
+        "rand": [
+          "dep:rand"
+        ],
+        "rand_xorshift": [
+          "dep:rand_xorshift"
+        ],
+        "tests": [
+          "alloc",
+          "rand",
+          "rand_xorshift"
+        ],
+        "wnaf-memuse": [
+          "alloc",
+          "memuse"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/group/0.13.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -328,6 +567,17 @@
         "edition": "2021",
         "name": "group",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f0f9ef7462f7c099f518d754361858f86d8a07af53ba9af0fe635bbccb151a63",
+        "package": "group",
+        "registry": "crates-io",
+        "version": "0.13.0"
+      },
+      "vcs": {
+        "commit": "090a7ec2f2fca9b4ddec05e39123e57dc0d73a2f",
+        "path": "",
+        "system": "git"
       },
       "version": "0.13.0",
       "yanked": false

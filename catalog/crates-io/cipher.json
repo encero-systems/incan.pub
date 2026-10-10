@@ -438,11 +438,130 @@
           "unit_identity": "sha256:2b19ff74ce79afc338b58b21d0d69d31ec367bc01e9b49e2b426ce115066f392"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/blobby",
+          "name": "blobby",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/block-buffer",
+          "name": "block-buffer",
+          "optional": true,
+          "req": "^0.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/crypto-common",
+          "name": "common",
+          "optional": false,
+          "req": "^0.2.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/inout",
+          "name": "inout",
+          "optional": false,
+          "req": "^0.2.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2106,
+          "content": "content/sha256/274b6472f637fdc8211b7396716016b9a91b5cbc59a7a3d59552355db785b11a",
+          "digest": "sha256:274b6472f637fdc8211b7396716016b9a91b5cbc59a7a3d59552355db785b11a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/950d712c518a02fcb7cff96950aee304a1cc5283361712c980ea21e8d6d669a5",
+          "digest": "sha256:950d712c518a02fcb7cff96950aee304a1cc5283361712c980ea21e8d6d669a5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 6572,
+          "content": "content/sha256/a8a99f9731115fa0eb271e2e687bfc580315648c5789b9559ad83e80e591db72",
+          "digest": "sha256:a8a99f9731115fa0eb271e2e687bfc580315648c5789b9559ad83e80e591db72",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "blobby": [
+          "dep:blobby"
+        ],
+        "block-buffer": [
+          "dep:block-buffer"
+        ],
+        "block-padding": [
+          "inout/block-padding"
+        ],
+        "dev": [
+          "blobby"
+        ],
+        "getrandom": [
+          "common/getrandom"
+        ],
+        "rand_core": [
+          "common/rand_core"
+        ],
+        "stream-wrapper": [
+          "block-buffer"
+        ],
+        "zeroize": [
+          "dep:zeroize",
+          "common/zeroize",
+          "block-buffer?/zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypto",
+        "block-cipher",
+        "stream-cipher",
+        "trait"
+      ],
       "manifest": "crates-io/cipher/0.5.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -452,6 +571,17 @@
         "edition": "2024",
         "name": "cipher",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e8cf2a2c93cd704877c0858356ed03480ff301ee950b43f1cbe4573b088bfa6c",
+        "package": "cipher",
+        "registry": "crates-io",
+        "version": "0.5.2"
+      },
+      "vcs": {
+        "commit": "f836f71fadb3b975b577a293d57851d044f0a44b",
+        "path": "cipher",
+        "system": "git"
       },
       "version": "0.5.2",
       "yanked": false

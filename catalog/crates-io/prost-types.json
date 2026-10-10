@@ -281,6 +281,57 @@
           "unit_identity": "sha256:483ff2e96b0416cf94c7efc8dab12df6a6c26f238593990d0418720cbe3439a2"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": true,
+          "req": "^0.4.34"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/prost",
+          "name": "prost",
+          "optional": false,
+          "req": "^0.14.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 752,
+          "content": "content/sha256/f6d87e99c5ea8bc5ac79b1158571b5f5edf175258ca1dd31763fae6a258fa008",
+          "digest": "sha256:f6d87e99c5ea8bc5ac79b1158571b5f5edf175258ca1dd31763fae6a258fa008",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -289,14 +340,30 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "chrono": [
+          "dep:chrono"
+        ],
+        "default": [
+          "std"
+        ],
+        "std": [
+          "prost/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/prost-types/0.14.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -306,6 +373,17 @@
         "edition": "2021",
         "name": "prost_types",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f94967dc7688f3054c7fac87473ffae4cc4c3904800e2d9f5b857246d8963b0a",
+        "package": "prost-types",
+        "registry": "crates-io",
+        "version": "0.14.4"
+      },
+      "vcs": {
+        "commit": "13646cde7eab75c81b3047767aa0a86e7dbecf12",
+        "path": "prost-types",
+        "system": "git"
       },
       "version": "0.14.4",
       "yanked": false

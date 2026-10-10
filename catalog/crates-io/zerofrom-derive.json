@@ -330,19 +330,90 @@
           "unit_identity": "sha256:fea5bacf6169734d62ea9d554ee61f196c9a1c760796bd5700f7baa393938ab2"
         }
       ],
+      "categories": [
+        "data-structures",
+        "memory-management",
+        "caching",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.61"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.44"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fold",
+            "visit"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/synstructure",
+          "name": "synstructure",
+          "optional": false,
+          "req": "^0.14.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 395,
+          "content": "content/sha256/2ef78913a98fb26c912c47c3c96167b9b57524754dc4857fe18a2122fec4985e",
+          "digest": "sha256:2ef78913a98fb26c912c47c3c96167b9b57524754dc4857fe18a2122fec4985e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "macros",
+        "derive",
+        "zero-copy",
+        "serialization"
+      ],
       "manifest": "crates-io/zerofrom-derive/0.1.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -352,6 +423,17 @@
         "edition": "2021",
         "name": "zerofrom_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:f75b4683f6c7f45248d4d64056a24298c6281e0993356d7d1b4a1a962ef10d4a",
+        "package": "zerofrom-derive",
+        "registry": "crates-io",
+        "version": "0.1.8"
+      },
+      "vcs": {
+        "commit": "ce235d80cf7cbd028e8bd59920420e1203b205b3",
+        "path": "utils/zerofrom/derive",
+        "system": "git"
       },
       "version": "0.1.8",
       "yanked": false
@@ -374,11 +456,80 @@
       "advisories": 0,
       "archive": "sha256:f2a3429289f0caf1804bde4364b13721d36b054dce2a4bb0c686608b304ffbef",
       "assets": [],
+      "categories": [
+        "data-structures",
+        "memory-management",
+        "caching",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.61"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1.0.28"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fold"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/synstructure",
+          "name": "synstructure",
+          "optional": false,
+          "req": "^0.13.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 395,
+          "content": "content/sha256/2ef78913a98fb26c912c47c3c96167b9b57524754dc4857fe18a2122fec4985e",
+          "digest": "sha256:2ef78913a98fb26c912c47c3c96167b9b57524754dc4857fe18a2122fec4985e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zerocopy",
+        "serialization",
+        "lifetime",
+        "borrow"
+      ],
       "manifest": "crates-io/zerofrom-derive/0.1.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -389,6 +540,17 @@
         "edition": "2021",
         "name": "zerofrom_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:d71e5d6e06ab090c67b5e44993ec16b72dcbaabc526db883a360057678b48502",
+        "package": "zerofrom-derive",
+        "registry": "crates-io",
+        "version": "0.1.6"
+      },
+      "vcs": {
+        "commit": "f4290a877dfcb0f87cad6de4abdd65f0cbb33c9c",
+        "path": "utils/zerofrom/derive",
+        "system": "git"
       },
       "version": "0.1.6",
       "yanked": false

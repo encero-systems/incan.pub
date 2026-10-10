@@ -103,11 +103,173 @@
           "unit_identity": "sha256:5af5cee6bdc7d415422aa392525c76aebb82bda973118b1c71258febfc087204"
         }
       ],
+      "categories": [
+        "compression",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compression-codecs",
+          "name": "compression-codecs",
+          "optional": false,
+          "req": "^0.4.45"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compression-core",
+          "name": "compression-core",
+          "optional": false,
+          "req": "^0.4.33"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.24.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2823,
+          "content": "content/sha256/5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "digest": "sha256:5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1091,
+          "content": "content/sha256/88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "digest": "sha256:88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 14719,
+          "content": "content/sha256/7a708df56a88a0a9b2af52e9006bc9704658582cdfad042649217855a47989de",
+          "digest": "sha256:7a708df56a88a0a9b2af52e9006bc9704658582cdfad042649217855a47989de",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "all": [
+          "all-implementations",
+          "all-algorithms"
+        ],
+        "all-algorithms": [
+          "brotli",
+          "bzip2",
+          "deflate",
+          "deflate64",
+          "gzip",
+          "lz4",
+          "lzma",
+          "xz",
+          "xz-parallel",
+          "zlib",
+          "zstd"
+        ],
+        "all-implementations": [
+          "futures-io",
+          "tokio"
+        ],
+        "brotli": [
+          "compression-codecs/brotli"
+        ],
+        "brotli-mbrotli": [
+          "compression-codecs/brotli-mbrotli"
+        ],
+        "bzip2": [
+          "compression-codecs/bzip2"
+        ],
+        "deflate": [
+          "compression-codecs/deflate"
+        ],
+        "deflate64": [
+          "compression-codecs/deflate64"
+        ],
+        "futures-io": [
+          "dep:futures-io"
+        ],
+        "gzip": [
+          "compression-codecs/gzip"
+        ],
+        "lz4": [
+          "compression-codecs/lz4"
+        ],
+        "lzma": [
+          "compression-codecs/lzma"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "xz": [
+          "compression-codecs/xz",
+          "lzma"
+        ],
+        "xz-parallel": [
+          "compression-codecs/xz-parallel",
+          "xz"
+        ],
+        "xz2": [
+          "compression-codecs/xz2",
+          "xz"
+        ],
+        "zlib": [
+          "compression-codecs/zlib"
+        ],
+        "zstd": [
+          "compression-codecs/zstd"
+        ],
+        "zstdmt": [
+          "compression-codecs/zstdmt",
+          "zstd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/async-compression/0.4.50/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -118,6 +280,17 @@
         "edition": "2018",
         "name": "async_compression",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ee19bd99b43e3691acbad4e840420a4881cea6c0b66a208125a824f8fd53f5a1",
+        "package": "async-compression",
+        "registry": "crates-io",
+        "version": "0.4.50"
+      },
+      "vcs": {
+        "commit": "964d1aba649490ac1b61064fc9e0b42daaf30f07",
+        "path": "crates/async-compression",
+        "system": "git"
       },
       "version": "0.4.50",
       "yanked": false
@@ -141,6 +314,92 @@
       "advisories": 0,
       "archive": "sha256:1bad41dd50a48cc75320f09ccc8f8fb57e2995fc342d29e8152b7cea38031bd5",
       "assets": [],
+      "categories": [
+        "compression",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compression-codecs",
+          "name": "compression-codecs",
+          "optional": false,
+          "req": "^0.4.44"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compression-core",
+          "name": "compression-core",
+          "optional": false,
+          "req": "^0.4.33"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.24.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2823,
+          "content": "content/sha256/5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "digest": "sha256:5a7f048730d9cadc4d3ba7d4e635a28b4681e8e7bee276d914cc088855fdc4e0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1091,
+          "content": "content/sha256/88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "digest": "sha256:88d1e3160df48926ad3310a8ec5699b502889565908f1be7e77cd21282c7a709",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 14456,
+          "content": "content/sha256/59ebed143baef824176fb706fa7ce4547bb38483f38539c4c7d57ef057d4fab6",
+          "digest": "sha256:59ebed143baef824176fb706fa7ce4547bb38483f38539c4c7d57ef057d4fab6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -153,14 +412,91 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "all": [
+          "all-implementations",
+          "all-algorithms"
+        ],
+        "all-algorithms": [
+          "brotli",
+          "bzip2",
+          "deflate",
+          "deflate64",
+          "gzip",
+          "lz4",
+          "lzma",
+          "xz",
+          "xz-parallel",
+          "zlib",
+          "zstd"
+        ],
+        "all-implementations": [
+          "futures-io",
+          "tokio"
+        ],
+        "brotli": [
+          "compression-codecs/brotli"
+        ],
+        "brotli-mbrotli": [
+          "compression-codecs/brotli-mbrotli"
+        ],
+        "bzip2": [
+          "compression-codecs/bzip2"
+        ],
+        "deflate": [
+          "compression-codecs/deflate"
+        ],
+        "deflate64": [
+          "compression-codecs/deflate64"
+        ],
+        "futures-io": [
+          "dep:futures-io"
+        ],
+        "gzip": [
+          "compression-codecs/gzip"
+        ],
+        "lz4": [
+          "compression-codecs/lz4"
+        ],
+        "lzma": [
+          "compression-codecs/lzma"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "xz": [
+          "compression-codecs/xz",
+          "lzma"
+        ],
+        "xz-parallel": [
+          "compression-codecs/xz-parallel",
+          "xz"
+        ],
+        "xz2": [
+          "compression-codecs/xz2",
+          "xz"
+        ],
+        "zlib": [
+          "compression-codecs/zlib"
+        ],
+        "zstd": [
+          "compression-codecs/zstd"
+        ],
+        "zstdmt": [
+          "compression-codecs/zstdmt",
+          "zstd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/async-compression/0.4.49/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -170,6 +506,17 @@
         "edition": "2018",
         "name": "async_compression",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a3789ca2cd1c4e8ce71fe9bd6312566014e20ff3016fc87bc71c59ff93b5fa61",
+        "package": "async-compression",
+        "registry": "crates-io",
+        "version": "0.4.49"
+      },
+      "vcs": {
+        "commit": "7246ebd079849b0ef7f8e4365546d0d6e2d07771",
+        "path": "crates/async-compression",
+        "system": "git"
       },
       "version": "0.4.49",
       "yanked": false

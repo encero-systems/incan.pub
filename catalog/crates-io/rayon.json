@@ -176,11 +176,91 @@
           "unit_identity": "sha256:cc5255af026da0138482f24259abcfec2bcc15d5cebf26dea2951e7422bf7726"
         }
       ],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/either",
+          "name": "either",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon-core",
+          "name": "rayon-core",
+          "optional": false,
+          "req": "^1.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm_sync",
+          "name": "wasm_sync",
+          "optional": true,
+          "req": "^0.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5732,
+          "content": "content/sha256/9bd7b1a9b53023afc7220db62f6b7f580f56f2d2d98b521b07569749bfea6329",
+          "digest": "sha256:9bd7b1a9b53023afc7220db62f6b7f580f56f2d2d98b521b07569749bfea6329",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+          "digest": "sha256:0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 37217,
+          "content": "content/sha256/3120f4b516120b1a6fd005916d914a639f21bbf3b66e524aa05339a4345a85e8",
+          "digest": "sha256:3120f4b516120b1a6fd005916d914a639f21bbf3b66e524aa05339a4345a85e8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "web_spin_lock": [
+          "dep:wasm_sync",
+          "rayon-core/web_spin_lock"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parallel",
+        "thread",
+        "concurrency",
+        "join",
+        "performance"
+      ],
       "manifest": "crates-io/rayon/1.12.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -191,6 +271,17 @@
         "edition": "2021",
         "name": "rayon",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:fb39b166781f92d482534ef4b4b1b2568f42613b53e5b6c160e24cfbfa30926d",
+        "package": "rayon",
+        "registry": "crates-io",
+        "version": "1.12.0"
+      },
+      "vcs": {
+        "commit": "c9ced185ae3508246a9eb70c8407a1199bb1b77f",
+        "path": "",
+        "system": "git"
       },
       "version": "1.12.0",
       "yanked": false
@@ -211,11 +302,91 @@
       "advisories": 0,
       "archive": "sha256:b646698c0551a34ff1a41f803e8bd7679b119053b5ec2f720ebf7bf043667738",
       "assets": [],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/either",
+          "name": "either",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon-core",
+          "name": "rayon-core",
+          "optional": false,
+          "req": "^1.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasm_sync",
+          "name": "wasm_sync",
+          "optional": true,
+          "req": "^0.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5732,
+          "content": "content/sha256/1f55d6c63c8663ba26a3df7ade14e5ad6d6253437f0946e8dc6b73399643d79e",
+          "digest": "sha256:1f55d6c63c8663ba26a3df7ade14e5ad6d6253437f0946e8dc6b73399643d79e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+          "digest": "sha256:0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 36893,
+          "content": "content/sha256/d93d9bdcd13f00357518ad9eccba727c0cdfabe56ec324ee5e599fa2a0881875",
+          "digest": "sha256:d93d9bdcd13f00357518ad9eccba727c0cdfabe56ec324ee5e599fa2a0881875",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "web_spin_lock": [
+          "dep:wasm_sync",
+          "rayon-core/web_spin_lock"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parallel",
+        "thread",
+        "concurrency",
+        "join",
+        "performance"
+      ],
       "manifest": "crates-io/rayon/1.11.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -226,6 +397,17 @@
         "edition": "2021",
         "name": "rayon",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:368f01d005bf8fd9b1206fb6fa653e6c4a81ceb1466406b81792d87c5677a58f",
+        "package": "rayon",
+        "registry": "crates-io",
+        "version": "1.11.0"
+      },
+      "vcs": {
+        "commit": "7af20d7692d5decbcb4adcaa079cd607e3e50814",
+        "path": "",
+        "system": "git"
       },
       "version": "1.11.0",
       "yanked": false

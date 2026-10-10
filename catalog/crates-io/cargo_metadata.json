@@ -110,11 +110,118 @@
           "unit_identity": "sha256:126be6e092a706029371e5294a257b6c7d5df66ffbb1a551cbace44c6177fe28"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "serde1"
+          ],
+          "loaf": "crates-io/camino",
+          "name": "camino",
+          "optional": false,
+          "req": "^1.1.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cargo-platform",
+          "name": "cargo-platform",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/derive_builder",
+          "name": "derive_builder",
+          "optional": true,
+          "req": "^0.20"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde"
+          ],
+          "loaf": "crates-io/semver",
+          "name": "semver",
+          "optional": false,
+          "req": "^1.0.26"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.219"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "unbounded_depth"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1.0.142"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0.12"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 714,
+          "content": "content/sha256/6be7aaba23d8646b470a966eef2f00c9fa04cf4d1de25cfb71680cef562e1574",
+          "digest": "sha256:6be7aaba23d8646b470a966eef2f00c9fa04cf4d1de25cfb71680cef562e1574",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2556,
+          "content": "content/sha256/2299f5639c1014e34cbbff8e09e54e5b784585e5db9f0f581d51f3bedf33a304",
+          "digest": "sha256:2299f5639c1014e34cbbff8e09e54e5b784585e5db9f0f581d51f3bedf33a304",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "builder": [
+          "derive_builder"
+        ],
+        "default": [],
+        "derive_builder": [
+          "dep:derive_builder"
+        ],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/cargo_metadata/0.23.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +232,17 @@
         "edition": "2021",
         "name": "cargo_metadata",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ef987d17b0a113becdd19d3d0022d04d7ef41f9efe4f3fb63ac44ba61df3ade9",
+        "package": "cargo_metadata",
+        "registry": "crates-io",
+        "version": "0.23.1"
+      },
+      "vcs": {
+        "commit": "c08e66cdf534313085ef810ce6f2e0df8a83fc50",
+        "path": "",
+        "system": "git"
       },
       "version": "0.23.1",
       "yanked": false

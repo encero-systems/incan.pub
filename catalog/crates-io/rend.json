@@ -194,11 +194,86 @@
           "unit_identity": "sha256:c2a62631eb2d75aeec013ad33b6efe8b566448d3ea3ae4d2f2d26a5bfa2d2b7e"
         }
       ],
+      "categories": [
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytecheck",
+          "name": "bytecheck",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytemuck",
+          "name": "bytemuck-1",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerocopy",
+          "name": "zerocopy",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerocopy-derive",
+          "name": "zerocopy-derive",
+          "optional": true,
+          "req": "^0.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1437,
+          "content": "content/sha256/46ac80d45cb5169ee8af629879dcc7b9f063bc564df9da9b30f964410c10dad8",
+          "digest": "sha256:46ac80d45cb5169ee8af629879dcc7b9f063bc564df9da9b30f964410c10dad8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1053,
+          "content": "content/sha256/635111a955495b5d8d34b8052f69656e8e45f6437f9266329077b9aad5fbe8d3",
+          "digest": "sha256:635111a955495b5d8d34b8052f69656e8e45f6437f9266329077b9aad5fbe8d3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bytecheck": [
+          "dep:bytecheck"
+        ],
+        "bytemuck-1": [
+          "dep:bytemuck-1"
+        ],
+        "default": [],
+        "zerocopy-0_8": [
+          "dep:zerocopy",
+          "dep:zerocopy-derive"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "endian",
+        "no_std"
+      ],
       "manifest": "crates-io/rend/0.5.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +284,17 @@
         "edition": "2021",
         "name": "rend",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:663ba70707f96e871406fe10d68128412e619b06d1d47cb91c3a4c6501176240",
+        "package": "rend",
+        "registry": "crates-io",
+        "version": "0.5.4"
+      },
+      "vcs": {
+        "commit": "5542ebe4c5ad012eef67a119e5c7929974e3f0e4",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.4",
       "yanked": false

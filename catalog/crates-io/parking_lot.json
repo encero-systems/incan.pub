@@ -564,6 +564,65 @@
           "unit_identity": "sha256:bde8595d1f892c9b6583a3879fac1f4d621870a0dcc1411efaf22846f2ea34fe"
         }
       ],
+      "categories": [
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lock_api",
+          "name": "lock_api",
+          "optional": false,
+          "req": "^0.4.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot_core",
+          "name": "parking_lot_core",
+          "optional": false,
+          "req": "^0.9.12"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 6902,
+          "content": "content/sha256/b7bd81c23dec91e3128c686d33b7c2a036ac802dcaf02b6a45b498cb3233a945",
+          "digest": "sha256:b7bd81c23dec91e3128c686d33b7c2a036ac802dcaf02b6a45b498cb3233a945",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+          "digest": "sha256:c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 11519,
+          "content": "content/sha256/d6f5cd986599e8dff728b31810d6a2365f60debd54e46ac0367a0315dcfffaeb",
+          "digest": "sha256:d6f5cd986599e8dff728b31810d6a2365f60debd54e46ac0367a0315dcfffaeb",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -571,14 +630,43 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arc_lock": [
+          "lock_api/arc_lock"
+        ],
+        "deadlock_detection": [
+          "parking_lot_core/deadlock_detection"
+        ],
+        "default": [],
+        "hardware-lock-elision": [],
+        "nightly": [
+          "parking_lot_core/nightly",
+          "lock_api/nightly"
+        ],
+        "owning_ref": [
+          "lock_api/owning_ref"
+        ],
+        "send_guard": [],
+        "serde": [
+          "lock_api/serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "mutex",
+        "condvar",
+        "rwlock",
+        "once",
+        "thread"
+      ],
       "manifest": "crates-io/parking_lot/0.12.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -588,6 +676,17 @@
         "edition": "2021",
         "name": "parking_lot",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:93857453250e3077bd71ff98b6a65ea6621a19bb0f559a85248955ac12c45a1a",
+        "package": "parking_lot",
+        "registry": "crates-io",
+        "version": "0.12.5"
+      },
+      "vcs": {
+        "commit": "d7828fff7b5d6327ae608e82db45f888b344449a",
+        "path": "",
+        "system": "git"
       },
       "version": "0.12.5",
       "yanked": false

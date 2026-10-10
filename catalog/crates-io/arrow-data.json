@@ -178,11 +178,90 @@
           "unit_identity": "sha256:44b57486a789ef1c9fd8b002e98c4a2c5ea9c10f24c3cc0405cf8896ef865eea"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": false,
+          "req": "^2.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/num-integer",
+          "name": "num-integer",
+          "optional": false,
+          "req": "^0.1.46"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.19"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 435,
+          "content": "content/sha256/7e214825b8e027a2070782ce6cba1ca978acb35639e7a43feb49a9e67ccd032c",
+          "digest": "sha256:7e214825b8e027a2070782ce6cba1ca978acb35639e7a43feb49a9e67ccd032c",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "ffi": [
+          "arrow-schema/ffi"
+        ],
+        "force_validate": [],
+        "pool": [
+          "arrow-buffer/pool"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow-data/60.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -194,6 +273,13 @@
         "name": "arrow_data",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:5aa06d5e22786c4966ffc4d2f171d0cb65d95f6bdea108a14e8c335e9faa437f",
+        "package": "arrow-data",
+        "registry": "crates-io",
+        "version": "60.0.0"
+      },
+      "vcs": null,
       "version": "60.0.0",
       "yanked": false
     },
@@ -215,19 +301,99 @@
       "advisories": 0,
       "archive": "sha256:c56b088061b070059f66e350e9ea99dc3d654746ebc17c2db8468809d1e73559",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": false,
+          "req": "^2.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/num-integer",
+          "name": "num-integer",
+          "optional": false,
+          "req": "^0.1.46"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.19"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 435,
+          "content": "content/sha256/c253227043508bbb644cb00223a133b03c45c0cdf9cd074631b6b2c0452f7149",
+          "digest": "sha256:c253227043508bbb644cb00223a133b03c45c0cdf9cd074631b6b2c0452f7149",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "ffi": [
+          "arrow-schema/ffi"
+        ],
+        "force_validate": [],
+        "pool": [
+          "arrow-buffer/pool"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow-data/58.4.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -238,6 +404,13 @@
         "name": "arrow_data",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:2b24852db04738907e06c04ea61e42fe7fda962a34513022dc0d0e754fb7976b",
+        "package": "arrow-data",
+        "registry": "crates-io",
+        "version": "58.4.0"
+      },
+      "vcs": null,
       "version": "58.4.0",
       "yanked": false
     }

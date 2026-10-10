@@ -494,6 +494,133 @@
           "unit_identity": "sha256:77d0b6c7412f4491522a07301c08ecd12b4525468f03ef098ad62ab12ff07844"
         }
       ],
+      "categories": [
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": false,
+          "req": "^1.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-sink",
+          "name": "futures-sink",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.15.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.168",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": true,
+          "req": "^0.4.4"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "sync"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": false,
+          "req": "^1.47.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.29"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 320,
+          "content": "content/sha256/91c8da557ba5fbfb5a9b6e58d5efd5fd1700dd836509cf017628155c249e192c",
+          "digest": "sha256:91c8da557ba5fbfb5a9b6e58d5efd5fd1700dd836509cf017628155c249e192c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1070,
+          "content": "content/sha256/253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "digest": "sha256:253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 20531,
+          "content": "content/sha256/a30b5bf14f10a3b4f41d0ad61e9af8212f89d2278040ef867aa57e501095e809",
+          "digest": "sha256:a30b5bf14f10a3b4f41d0ad61e9af8212f89d2278040ef867aa57e501095e809",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -502,14 +629,77 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "__docs_rs": [
+          "futures-util"
+        ],
+        "codec": [
+          "libc"
+        ],
+        "compat": [
+          "futures-io"
+        ],
+        "default": [],
+        "full": [
+          "codec",
+          "compat",
+          "io-util",
+          "time",
+          "net",
+          "rt",
+          "join-map"
+        ],
+        "futures-io": [
+          "dep:futures-io"
+        ],
+        "futures-util": [
+          "dep:futures-util"
+        ],
+        "hashbrown": [
+          "dep:hashbrown"
+        ],
+        "io": [],
+        "io-util": [
+          "io",
+          "tokio/rt",
+          "tokio/io-util"
+        ],
+        "join-map": [
+          "rt",
+          "hashbrown"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "net": [
+          "tokio/net"
+        ],
+        "rt": [
+          "tokio/rt",
+          "tokio/sync",
+          "futures-util"
+        ],
+        "slab": [
+          "dep:slab"
+        ],
+        "time": [
+          "tokio/time",
+          "slab"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/tokio-util/0.7.19/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -519,6 +709,17 @@
         "edition": "2021",
         "name": "tokio_util",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:494815d09bf52b5548659851081238f0ca39ff638363907596da739561c62c52",
+        "package": "tokio-util",
+        "registry": "crates-io",
+        "version": "0.7.19"
+      },
+      "vcs": {
+        "commit": "f2189d3bd69d22638158a0ca8163b2e8daf18c5f",
+        "path": "tokio-util",
+        "system": "git"
       },
       "version": "0.7.19",
       "yanked": false

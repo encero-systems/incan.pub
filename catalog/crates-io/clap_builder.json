@@ -532,11 +532,169 @@
           "unit_identity": "sha256:f9869f23a6500fbc41ba65b72621f6873a4dccc7c2af18b8bc600fd0406784d5"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": false,
+          "req": "^1.0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.76"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/clap_lex",
+          "name": "clap_lex",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/strsim",
+          "name": "strsim",
+          "optional": true,
+          "req": "^0.11.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/terminal_size",
+          "name": "terminal_size",
+          "optional": true,
+          "req": "^0.4.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase",
+          "optional": true,
+          "req": "^2.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-width",
+          "name": "unicode-width",
+          "optional": true,
+          "req": "^0.2.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 798,
+          "content": "content/sha256/f42fbb1b8c923e94e17446f00e820da68ff3932d008610298e91ab68558326e7",
+          "digest": "sha256:f42fbb1b8c923e94e17446f00e820da68ff3932d008610298e91ab68558326e7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11349,
+          "content": "content/sha256/249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe",
+          "digest": "sha256:249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "cargo": [],
+        "color": [
+          "dep:anstream"
+        ],
+        "debug": [
+          "dep:backtrace"
+        ],
+        "default": [
+          "std",
+          "color",
+          "help",
+          "usage",
+          "error-context",
+          "suggestions"
+        ],
+        "deprecated": [],
+        "env": [],
+        "error-context": [],
+        "help": [],
+        "std": [
+          "anstyle/std"
+        ],
+        "string": [],
+        "suggestions": [
+          "dep:strsim",
+          "error-context"
+        ],
+        "unicode": [
+          "dep:unicode-width",
+          "dep:unicase"
+        ],
+        "unstable-doc": [
+          "cargo",
+          "wrap_help",
+          "env",
+          "unicode",
+          "string",
+          "unstable-ext"
+        ],
+        "unstable-ext": [],
+        "unstable-styles": [
+          "color"
+        ],
+        "unstable-v5": [
+          "deprecated"
+        ],
+        "usage": [],
+        "wrap_help": [
+          "help",
+          "dep:terminal_size"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "argument",
+        "cli",
+        "arg",
+        "parser",
+        "parse"
+      ],
       "manifest": "crates-io/clap_builder/4.6.7/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -546,6 +704,17 @@
         "edition": "2024",
         "name": "clap_builder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ec0797fb7aeb1406c84efac526901f7ec3ead2124f946b494e72879d4b54704d",
+        "package": "clap_builder",
+        "registry": "crates-io",
+        "version": "4.6.7"
+      },
+      "vcs": {
+        "commit": "13f2db5072d600c11d8d6298e4e9ba53ffc6c1ab",
+        "path": "clap_builder",
+        "system": "git"
       },
       "version": "4.6.7",
       "yanked": false
@@ -566,11 +735,169 @@
       "advisories": 0,
       "archive": "sha256:c1c6158f61ad7fbbb5c0f3916390e895b52fcb2795d5b6a6eeba8dcc902c19b8",
       "assets": [],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstream",
+          "name": "anstream",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anstyle",
+          "name": "anstyle",
+          "optional": false,
+          "req": "^1.0.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/backtrace",
+          "name": "backtrace",
+          "optional": true,
+          "req": "^0.3.76"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/clap_lex",
+          "name": "clap_lex",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/strsim",
+          "name": "strsim",
+          "optional": true,
+          "req": "^0.11.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/terminal_size",
+          "name": "terminal_size",
+          "optional": true,
+          "req": "^0.4.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase",
+          "optional": true,
+          "req": "^2.9.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-width",
+          "name": "unicode-width",
+          "optional": true,
+          "req": "^0.2.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 798,
+          "content": "content/sha256/f42fbb1b8c923e94e17446f00e820da68ff3932d008610298e91ab68558326e7",
+          "digest": "sha256:f42fbb1b8c923e94e17446f00e820da68ff3932d008610298e91ab68558326e7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "cargo": [],
+        "color": [
+          "dep:anstream"
+        ],
+        "debug": [
+          "dep:backtrace"
+        ],
+        "default": [
+          "std",
+          "color",
+          "help",
+          "usage",
+          "error-context",
+          "suggestions"
+        ],
+        "deprecated": [],
+        "env": [],
+        "error-context": [],
+        "help": [],
+        "std": [
+          "anstyle/std"
+        ],
+        "string": [],
+        "suggestions": [
+          "dep:strsim",
+          "error-context"
+        ],
+        "unicode": [
+          "dep:unicode-width",
+          "dep:unicase"
+        ],
+        "unstable-doc": [
+          "cargo",
+          "wrap_help",
+          "env",
+          "unicode",
+          "string",
+          "unstable-ext"
+        ],
+        "unstable-ext": [],
+        "unstable-styles": [
+          "color"
+        ],
+        "unstable-v5": [
+          "deprecated"
+        ],
+        "usage": [],
+        "wrap_help": [
+          "help",
+          "dep:terminal_size"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "argument",
+        "cli",
+        "arg",
+        "parser",
+        "parse"
+      ],
       "manifest": "crates-io/clap_builder/4.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -581,6 +908,17 @@
         "edition": "2024",
         "name": "clap_builder",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:714a53001bf66416adb0e2ef5ac857140e7dc3a0c48fb28b2f10762fc4b5069f",
+        "package": "clap_builder",
+        "registry": "crates-io",
+        "version": "4.6.0"
+      },
+      "vcs": {
+        "commit": "9ab6dee710aa384e02ec5e9e2cfeadb2f35abf2a",
+        "path": "clap_builder",
+        "system": "git"
       },
       "version": "4.6.0",
       "yanked": false

@@ -203,11 +203,94 @@
           "unit_identity": "sha256:8ad633aeea7eaaa6d3d9791f230d60e3f6440a11b9903b437a2b7195e7b41da1"
         }
       ],
+      "categories": [
+        "graphics",
+        "rust-patterns",
+        "multimedia::images"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytemuck",
+          "name": "bytemuck",
+          "optional": true,
+          "req": "^1.16"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/defmt",
+          "name": "defmt",
+          "optional": true,
+          "req": "^0.3.8"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.200"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4136,
+          "content": "content/sha256/b69a452a62f1d85cc25581feca75d9b3fc154d48cafdc248c8df5b8049ed2c8c",
+          "digest": "sha256:b69a452a62f1d85cc25581feca75d9b3fc154d48cafdc248c8df5b8049ed2c8c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1063,
+          "content": "content/sha256/457b464bc0fba8a3d67d2458569104f5611869f0c1563a1a12d9c51a0bca9261",
+          "digest": "sha256:457b464bc0fba8a3d67d2458569104f5611869f0c1563a1a12d9c51a0bca9261",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "argb": [],
+        "as-bytes": [
+          "bytemuck"
+        ],
+        "bytemuck": [
+          "dep:bytemuck"
+        ],
+        "checked_fns": [],
+        "default": [
+          "as-bytes",
+          "argb",
+          "grb"
+        ],
+        "defmt-03": [
+          "dep:defmt"
+        ],
+        "grb": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "unstable-experimental": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "rgb",
+        "rgba",
+        "bgra",
+        "pixel",
+        "color"
+      ],
       "manifest": "crates-io/rgb/0.8.53/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -218,6 +301,17 @@
         "edition": "2021",
         "name": "rgb",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:47b34b781b31e5d73e9fbc8689c70551fd1ade9a19e3e28cfec8580a79290cc4",
+        "package": "rgb",
+        "registry": "crates-io",
+        "version": "0.8.53"
+      },
+      "vcs": {
+        "commit": "f453adedbbd1a672c654239b0eb0576de606d7d2",
+        "path": "",
+        "system": "git"
       },
       "version": "0.8.53",
       "yanked": false

@@ -110,6 +110,140 @@
           "unit_identity": "sha256:0a8640d181095ea262f1ee36c68404beb085511e29d55b158b1bb21030118460"
         }
       ],
+      "categories": [
+        "os",
+        "rust-patterns"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "io_safety"
+          ],
+          "loaf": "crates-io/async-std",
+          "name": "async-std",
+          "optional": true,
+          "req": "^1.13.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hermit-abi",
+          "name": "hermit-abi",
+          "optional": true,
+          "req": ">=0.3, <=0.5",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.96",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net",
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^1.0.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "io_safety"
+          ],
+          "loaf": "crates-io/os_pipe",
+          "name": "os_pipe",
+          "optional": true,
+          "req": "^1.0.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/socket2",
+          "name": "socket2",
+          "optional": true,
+          "req": "^0.6.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fs",
+            "io-std",
+            "net",
+            "process"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.6.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": true,
+          "req": ">=0.52, <=0.60",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8129,
+          "content": "content/sha256/6b58e40f336fedb89139a14bc82288d83f2fd5b8cd80c6f9b5462916654d2bab",
+          "digest": "sha256:6b58e40f336fedb89139a14bc82288d83f2fd5b8cd80c6f9b5462916654d2bab",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -117,6 +251,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -126,6 +261,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -135,6 +271,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -144,14 +281,51 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "async-std": [
+          "dep:async-std"
+        ],
+        "close": [
+          "libc",
+          "hermit-abi",
+          "windows-sys"
+        ],
+        "default": [],
+        "hermit-abi": [
+          "dep:hermit-abi"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "mio": [
+          "dep:mio"
+        ],
+        "os_pipe": [
+          "dep:os_pipe"
+        ],
+        "socket2": [
+          "dep:socket2"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "windows-sys": [
+          "dep:windows-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "api",
+        "io"
+      ],
       "manifest": "crates-io/io-lifetimes/3.0.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -162,6 +336,17 @@
         "edition": "2021",
         "name": "io_lifetimes",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:2f0fb0570afe1fed943c5c3d4102d5358592d8625fda6a0007fdbe65a92fba96",
+        "package": "io-lifetimes",
+        "registry": "crates-io",
+        "version": "3.0.1"
+      },
+      "vcs": {
+        "commit": "a260eb48d54cab4555fcf21bb496ca7235277034",
+        "path": "",
+        "system": "git"
       },
       "version": "3.0.1",
       "yanked": false
@@ -184,6 +369,140 @@
       "advisories": 0,
       "archive": "sha256:7ccd0659455d15067f50c7a3b8607ca4894948299d1f226b16aa289047accc26",
       "assets": [],
+      "categories": [
+        "os",
+        "rust-patterns"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "io_safety"
+          ],
+          "loaf": "crates-io/async-std",
+          "name": "async-std",
+          "optional": true,
+          "req": "^1.13.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hermit-abi",
+          "name": "hermit-abi",
+          "optional": true,
+          "req": ">=0.3, <=0.4",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.96",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "net",
+            "os-ext"
+          ],
+          "loaf": "crates-io/mio",
+          "name": "mio",
+          "optional": true,
+          "req": "^0.8.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "io_safety"
+          ],
+          "loaf": "crates-io/os_pipe",
+          "name": "os_pipe",
+          "optional": true,
+          "req": "^1.0.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/socket2",
+          "name": "socket2",
+          "optional": true,
+          "req": "^0.5.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fs",
+            "io-std",
+            "net",
+            "process"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": true,
+          "req": "^1.6.0",
+          "target": "cfg(not(target_os = \"wasi\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Networking_WinSock",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": true,
+          "req": ">=0.52, <=0.59",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8188,
+          "content": "content/sha256/b0a0efb257932113f6ee584aa69f01e336e7ba4ea41baf15db62b299ab756f84",
+          "digest": "sha256:b0a0efb257932113f6ee584aa69f01e336e7ba4ea41baf15db62b299ab756f84",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -191,14 +510,51 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "async-std": [
+          "dep:async-std"
+        ],
+        "close": [
+          "libc",
+          "hermit-abi",
+          "windows-sys"
+        ],
+        "default": [],
+        "hermit-abi": [
+          "dep:hermit-abi"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "mio": [
+          "dep:mio"
+        ],
+        "os_pipe": [
+          "dep:os_pipe"
+        ],
+        "socket2": [
+          "dep:socket2"
+        ],
+        "tokio": [
+          "dep:tokio"
+        ],
+        "windows-sys": [
+          "dep:windows-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "api",
+        "io"
+      ],
       "manifest": "crates-io/io-lifetimes/2.0.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -209,6 +565,17 @@
         "edition": "2021",
         "name": "io_lifetimes",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:06432fb54d3be7964ecd3649233cddf80db2832f47fec34c01f65b3d9d774983",
+        "package": "io-lifetimes",
+        "registry": "crates-io",
+        "version": "2.0.4"
+      },
+      "vcs": {
+        "commit": "37b9d1bc5d70ec81c0ea862f34b853aef4c4b949",
+        "path": "",
+        "system": "git"
       },
       "version": "2.0.4",
       "yanked": false

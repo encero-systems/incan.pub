@@ -110,6 +110,114 @@
           "unit_identity": "sha256:0ac992782b4293ecabf0ffa1e1e41c395e97055e2dc33b7aca4b0ff27a6c20e1"
         }
       ],
+      "categories": [
+        "api-bindings"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/combine",
+          "name": "combine",
+          "optional": false,
+          "req": "^4.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/java-locator",
+          "name": "java-locator",
+          "optional": true,
+          "req": "^0.1.3",
+          "target": "cfg(not(target_os = \"android\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/jni-macros",
+          "name": "jni-macros",
+          "optional": false,
+          "req": "=0.22.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/jni-sys",
+          "name": "jni-sys",
+          "optional": false,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libloading",
+          "name": "libloading",
+          "optional": true,
+          "req": "^0.8",
+          "target": "cfg(not(target_os = \"android\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/simd_cesu8",
+          "name": "simd_cesu8",
+          "optional": false,
+          "req": "^1.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1069,
+          "content": "content/sha256/1bca3c013019e523686966a36fe6f74d7436331547d202a8f042c5fa4c39226c",
+          "digest": "sha256:1bca3c013019e523686966a36fe6f74d7436331547d202a8f042c5fa4c39226c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 322,
+          "content": "content/sha256/8efed8a9491554df9f5cf0e8e35486b2344d53ef6209de2285a03882e799df7e",
+          "digest": "sha256:8efed8a9491554df9f5cf0e8e35486b2344d53ef6209de2285a03882e799df7e",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -117,6 +225,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -126,6 +235,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -135,6 +245,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -144,14 +255,28 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "_cfg_test": [],
+        "default": [],
+        "invocation": [
+          "dep:java-locator",
+          "dep:libloading"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "ffi",
+        "jni",
+        "java"
+      ],
       "manifest": "crates-io/jni/0.22.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -162,6 +287,17 @@
         "edition": "2024",
         "name": "jni",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5efd9a482cf3a427f00d6b35f14332adc7902ce91efb778580e180ff90fa3498",
+        "package": "jni",
+        "registry": "crates-io",
+        "version": "0.22.4"
+      },
+      "vcs": {
+        "commit": "5ae9458a4ec44c5318f37ddc7569c1d4ae8a69e7",
+        "path": "crates/jni",
+        "system": "git"
       },
       "version": "0.22.4",
       "yanked": false

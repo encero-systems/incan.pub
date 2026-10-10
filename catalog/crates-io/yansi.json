@@ -210,11 +210,83 @@
           "unit_identity": "sha256:b39ea1916f5d4885c18e0029a862222833084ca6e5540c5c258293c7bfaa127b"
         }
       ],
+      "categories": [
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/is-terminal",
+          "name": "is-terminal",
+          "optional": true,
+          "req": "^0.4.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3942,
+          "content": "content/sha256/9dc47127789cc349f5b13ae70b064449e4a17f4ee3020e6e11194f67692e9f2a",
+          "digest": "sha256:9dc47127789cc349f5b13ae70b064449e4a17f4ee3020e6e11194f67692e9f2a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10834,
+          "content": "content/sha256/a8410ec5312922e0edae227ae056c7ea78093092503717ae377a2be4f0d295f1",
+          "digest": "sha256:a8410ec5312922e0edae227ae056c7ea78093092503717ae377a2be4f0d295f1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/ce1f970284c4ab06e90671a984086692dc44da3e2b8ee86444d79b6f77bcf9e7",
+          "digest": "sha256:ce1f970284c4ab06e90671a984086692dc44da3e2b8ee86444d79b6f77bcf9e7",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "_nightly": [],
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "detect-env": [
+          "std"
+        ],
+        "detect-tty": [
+          "is-terminal",
+          "std"
+        ],
+        "hyperlink": [
+          "std"
+        ],
+        "is-terminal": [
+          "dep:is-terminal"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "ansi",
+        "terminal",
+        "color",
+        "format",
+        "paint"
+      ],
       "manifest": "crates-io/yansi/1.0.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -225,6 +297,17 @@
         "edition": "2021",
         "name": "yansi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cfe53a6657fd280eaa890a3bc59152892ffa3e30101319d168b781ed6529b049",
+        "package": "yansi",
+        "registry": "crates-io",
+        "version": "1.0.1"
+      },
+      "vcs": {
+        "commit": "3e35184fc181fef63bc11dedb22413e821168255",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.1",
       "yanked": false

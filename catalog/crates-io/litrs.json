@@ -121,11 +121,90 @@
           "unit_identity": "sha256:b1f7fce9a04bc5f66e8589055ee1828fa8a18e828e97e2a9e2b43da18ac70644"
         }
       ],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "parser-implementations",
+        "development-tools::build-utils"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": true,
+          "req": "^1.0.63"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicode-xid",
+          "name": "unicode-xid",
+          "optional": true,
+          "req": "^0.2.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3445,
+          "content": "content/sha256/3d376ba6ba8a46bdc35ab8aed3220fa56de68e40d1728e1984896a55569527a0",
+          "digest": "sha256:3d376ba6ba8a46bdc35ab8aed3220fa56de68e40d1728e1984896a55569527a0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 9723,
+          "content": "content/sha256/62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "digest": "sha256:62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/7dc1552e88f49132cb358b1b962fc5e79fa42d70bcbb88c526d33e45b8e98036",
+          "digest": "sha256:7dc1552e88f49132cb358b1b962fc5e79fa42d70bcbb88c526d33e45b8e98036",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 5948,
+          "content": "content/sha256/e6f2abaff82776a5b536d1720ac2064cbcdae374b3dd2e058de6cc3aed47ed15",
+          "digest": "sha256:e6f2abaff82776a5b536d1720ac2064cbcdae374b3dd2e058de6cc3aed47ed15",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "check_suffix": [
+          "unicode-xid"
+        ],
+        "proc-macro2": [
+          "dep:proc-macro2"
+        ],
+        "unicode-xid": [
+          "dep:unicode-xid"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "literal",
+        "parsing",
+        "proc-macro",
+        "type",
+        "procedural"
+      ],
       "manifest": "crates-io/litrs/1.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -135,6 +214,17 @@
         "edition": "2021",
         "name": "litrs",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:11d3d7f243d5c5a8b9bb5d6dd2b1602c0cb0b9db1621bafc7ed66e35ff9fe092",
+        "package": "litrs",
+        "registry": "crates-io",
+        "version": "1.0.0"
+      },
+      "vcs": {
+        "commit": "66ceed89adfd30d1fd04fabfdfe436aedc4cadbf",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.0",
       "yanked": false

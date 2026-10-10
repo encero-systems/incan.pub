@@ -248,11 +248,340 @@
           "unit_identity": "sha256:8e0cb38d0e43a6575446336a13155a75f94bd1988beab2e95de49ab1a177f41d"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.80"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CFCGTypes",
+            "CFDate",
+            "objc2"
+          ],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CGColor",
+            "CGColorSpace",
+            "CGContext",
+            "CGPath",
+            "objc2"
+          ],
+          "loaf": "crates-io/objc2-core-graphics",
+          "name": "objc2-core-graphics",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CVBase",
+            "objc2"
+          ],
+          "loaf": "crates-io/objc2-core-video",
+          "name": "objc2-core-video",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "MTLAllocation",
+            "MTLDevice",
+            "MTLDrawable",
+            "MTLPixelFormat",
+            "MTLResidencySet",
+            "MTLResource",
+            "MTLTexture"
+          ],
+          "loaf": "crates-io/objc2-metal",
+          "name": "objc2-metal",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CGLTypes"
+          ],
+          "loaf": "crates-io/objc2-open-gl",
+          "name": "objc2-open-gl",
+          "optional": true,
+          "req": "^0.3.2",
+          "target": "cfg(target_os = \"macos\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 794,
+          "content": "content/sha256/655e91cca9d73db675f3ceb77d74c77a2261425c9b250a904f732704abcd4650",
+          "digest": "sha256:655e91cca9d73db675f3ceb77d74c77a2261425c9b250a904f732704abcd4650",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 370,
+          "content": "content/sha256/85fce955fe3e571e272f4ef4a3408748bbf4affb7eb8638bb4cb86980ac1e1bb",
+          "digest": "sha256:85fce955fe3e571e272f4ef4a3408748bbf4affb7eb8638bb4cb86980ac1e1bb",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CAAnimation": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSValue"
+        ],
+        "CABase": [],
+        "CAConstraintLayoutManager": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CADisplayLink": [
+          "objc2-foundation/NSObjCRuntime",
+          "objc2-foundation/NSRunLoop",
+          "objc2-foundation/NSString"
+        ],
+        "CAEAGLLayer": [],
+        "CAEDRMetadata": [
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSObject"
+        ],
+        "CAEmitterCell": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CAEmitterLayer": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CAFrameRateRange": [],
+        "CAGradientLayer": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSValue"
+        ],
+        "CALayer": [
+          "bitflags",
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSNull",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CAMediaTiming": [
+          "objc2-foundation/NSString"
+        ],
+        "CAMediaTimingFunction": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CAMetalDisplayLink": [
+          "objc2-foundation/NSObjCRuntime",
+          "objc2-foundation/NSRunLoop",
+          "objc2-foundation/NSString"
+        ],
+        "CAMetalLayer": [
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSObject"
+        ],
+        "CAOpenGLLayer": [
+          "objc2-foundation/NSObject"
+        ],
+        "CARemoteLayerClient": [],
+        "CARemoteLayerServer": [],
+        "CARenderer": [
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSString"
+        ],
+        "CAReplicatorLayer": [
+          "objc2-foundation/NSObject"
+        ],
+        "CAScrollLayer": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CAShapeLayer": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/NSValue"
+        ],
+        "CATextLayer": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CATiledLayer": [
+          "objc2-foundation/NSObject"
+        ],
+        "CATransaction": [
+          "objc2-foundation/NSString"
+        ],
+        "CATransform3D": [
+          "objc2-foundation/NSValue"
+        ],
+        "CATransformLayer": [
+          "objc2-foundation/NSObject"
+        ],
+        "CAValueFunction": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CoreAnimation": [],
+        "alloc": [],
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "CAAnimation",
+          "CABase",
+          "CAConstraintLayoutManager",
+          "CADisplayLink",
+          "CAEAGLLayer",
+          "CAEDRMetadata",
+          "CAEmitterCell",
+          "CAEmitterLayer",
+          "CAFrameRateRange",
+          "CAGradientLayer",
+          "CALayer",
+          "CAMediaTiming",
+          "CAMediaTimingFunction",
+          "CAMetalDisplayLink",
+          "CAMetalLayer",
+          "CAOpenGLLayer",
+          "CARemoteLayerClient",
+          "CARemoteLayerServer",
+          "CARenderer",
+          "CAReplicatorLayer",
+          "CAScrollLayer",
+          "CAShapeLayer",
+          "CATextLayer",
+          "CATiledLayer",
+          "CATransaction",
+          "CATransform3D",
+          "CATransformLayer",
+          "CAValueFunction",
+          "CoreAnimation",
+          "bitflags",
+          "block2",
+          "libc",
+          "objc2-core-foundation",
+          "objc2-core-graphics",
+          "objc2-core-video",
+          "objc2-metal"
+        ],
+        "gnustep-1-7": [],
+        "gnustep-1-8": [],
+        "gnustep-1-9": [],
+        "gnustep-2-0": [],
+        "gnustep-2-1": [],
+        "libc": [
+          "dep:libc"
+        ],
+        "objc2-core-foundation": [
+          "dep:objc2-core-foundation"
+        ],
+        "objc2-core-graphics": [
+          "dep:objc2-core-graphics"
+        ],
+        "objc2-core-video": [
+          "dep:objc2-core-video"
+        ],
+        "objc2-metal": [
+          "dep:objc2-metal"
+        ],
+        "objc2-open-gl": [
+          "dep:objc2-open-gl"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-quartz-core/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -263,6 +592,17 @@
         "edition": "2021",
         "name": "objc2_quartz_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:96c1358452b371bf9f104e21ec536d37a650eb10f7ee379fff67d2e08d537f1f",
+        "package": "objc2-quartz-core",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-quartz-core",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

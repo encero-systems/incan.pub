@@ -260,6 +260,140 @@
           "unit_identity": "sha256:d1f35178a3aaf92bb05a46e21873637ec816c7497b6ea5a9172b405e22763018"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "network-programming",
+        "web-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": false,
+          "req": "^1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http",
+          "name": "http",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http-body",
+          "name": "http-body",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/http-body-util",
+          "name": "http-body-util",
+          "optional": false,
+          "req": "^0.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mime",
+          "name": "mime",
+          "optional": false,
+          "req": "^0.3.16"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sync_wrapper",
+          "name": "sync_wrapper",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "limit"
+          ],
+          "loaf": "crates-io/tower-http",
+          "name": "tower-http",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tower-layer",
+          "name": "tower-layer",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tower-service",
+          "name": "tower-service",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.37"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1442,
+          "content": "content/sha256/7cdbf181d88f894f16c587d2611fb7cef18a04df836f70af6ef5bd68ae8fc00d",
+          "digest": "sha256:7cdbf181d88f894f16c587d2611fb7cef18a04df836f70af6ef5bd68ae8fc00d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/008c87afcd2e626eaf564093250bed06dd7efb5732113264bba3dda8f1c556a1",
+          "digest": "sha256:008c87afcd2e626eaf564093250bed06dd7efb5732113264bba3dda8f1c556a1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 12271,
+          "content": "content/sha256/346edcbb253fa2bdc3737392e66fbabd7eafb429a21e99c111b301e4cf5f16f2",
+          "digest": "sha256:346edcbb253fa2bdc3737392e66fbabd7eafb429a21e99c111b301e4cf5f16f2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -267,6 +401,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -276,14 +411,28 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "__private_docs": [
+          "dep:tower-http"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "http",
+        "web",
+        "framework"
+      ],
       "manifest": "crates-io/axum-core/0.5.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -293,6 +442,17 @@
         "edition": "2021",
         "name": "axum_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:08c78f31d7b1291f7ee735c1c6780ccde7785daae9a9206026862dab7d8792d1",
+        "package": "axum-core",
+        "registry": "crates-io",
+        "version": "0.5.6"
+      },
+      "vcs": {
+        "commit": "e710a97a5a8e1e2f629f78e0377d7ab17e597eaf",
+        "path": "axum-core",
+        "system": "git"
       },
       "version": "0.5.6",
       "yanked": false

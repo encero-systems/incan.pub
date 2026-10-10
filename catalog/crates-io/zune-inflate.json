@@ -112,11 +112,76 @@
           "unit_identity": "sha256:d9ca57c80f45807064b1d8e5250e29dca98c562aaf36f629a9619e6ddc4bf979"
         }
       ],
+      "categories": [
+        "compression"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/simd-adler32",
+          "name": "simd-adler32",
+          "optional": true,
+          "req": "^0.3.4"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3430,
+          "content": "content/sha256/ad9675f80fd32f89ceabc856d8e5c4fea145aa8bbbf2cba423fdb3687ac634d9",
+          "digest": "sha256:ad9675f80fd32f89ceabc856d8e5c4fea145aa8bbbf2cba423fdb3687ac634d9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 357,
+          "content": "content/sha256/9fb3bf7b02c65f13b65d17257f6256b329233b19c8dd0e3debe4fceb204592b9",
+          "digest": "sha256:9fb3bf7b02c65f13b65d17257f6256b329233b19c8dd0e3debe4fceb204592b9",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 835,
+          "content": "content/sha256/e82df64959cb3ecd8c54555ff2296157455a52f9c19027a051b6c04b02ca2b6a",
+          "digest": "sha256:e82df64959cb3ecd8c54555ff2296157455a52f9c19027a051b6c04b02ca2b6a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "zlib",
+          "gzip",
+          "std"
+        ],
+        "gzip": [],
+        "simd-adler32": [
+          "dep:simd-adler32"
+        ],
+        "std": [
+          "dep:simd-adler32",
+          "simd-adler32/std"
+        ],
+        "zlib": [
+          "simd-adler32"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "compression",
+        "inflate",
+        "deflate"
+      ],
       "manifest": "crates-io/zune-inflate/0.2.54/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -127,6 +192,17 @@
         "edition": "2021",
         "name": "zune_inflate",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:73ab332fe2f6680068f3582b16a24f90ad7096d5d39b974d1c0aff0125116f02",
+        "package": "zune-inflate",
+        "registry": "crates-io",
+        "version": "0.2.54"
+      },
+      "vcs": {
+        "commit": "69502ce83fdfecdd0beefd677e2abb3781b29d98",
+        "path": "zune-inflate",
+        "system": "git"
       },
       "version": "0.2.54",
       "yanked": false

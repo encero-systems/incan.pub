@@ -657,11 +657,171 @@
           "unit_identity": "sha256:bd558253c4641691a242264c9d532d255066d51278e9b060fdbc4a6d997a3d7f"
         }
       ],
+      "categories": [
+        "os",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": true,
+          "req": "^0.3.77",
+          "target": "cfg(all(target_family = \"wasm\", any(target_os = \"unknown\", target_os = \"none\"), target_feature = \"atomics\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"netbsd\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"solaris\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"vxworks\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/r-efi",
+          "name": "r-efi",
+          "optional": false,
+          "req": "^6",
+          "target": "cfg(all(target_os = \"uefi\", getrandom_backend = \"efi_rng\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": true,
+          "req": "^0.2.98",
+          "target": "cfg(all(target_family = \"wasm\", any(target_os = \"unknown\", target_os = \"none\")))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 20325,
+          "content": "content/sha256/700180aadb3c22383920a2c9dd2fa7fedaf2e5992a0924a061ae09aae19cc69e",
+          "digest": "sha256:700180aadb3c22383920a2c9dd2fa7fedaf2e5992a0924a061ae09aae19cc69e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "digest": "sha256:aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1130,
+          "content": "content/sha256/523a42c25d245dde9c015f882cec7f4555aad883382a6cf19b4b7d9b2cd5419b",
+          "digest": "sha256:523a42c25d245dde9c015f882cec7f4555aad883382a6cf19b4b7d9b2cd5419b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 29493,
+          "content": "content/sha256/c1cfcc3d23705b5f2c921c65534246baf66c55a4438cd7b937b0393305bace67",
+          "digest": "sha256:c1cfcc3d23705b5f2c921c65534246baf66c55a4438cd7b937b0393305bace67",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -671,6 +831,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -681,6 +842,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -690,6 +852,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -697,6 +860,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -706,6 +870,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -716,6 +881,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -725,6 +891,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -732,6 +899,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -741,6 +909,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -751,6 +920,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -760,6 +930,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -767,6 +938,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -776,6 +948,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -786,6 +959,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -795,14 +969,26 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "std": [],
+        "sys_rng": [
+          "dep:rand_core"
+        ],
+        "wasm_js": [
+          "dep:wasm-bindgen",
+          "dep:js-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/getrandom/0.4.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -813,6 +999,17 @@
         "edition": "2024",
         "name": "getrandom",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:300e883d756b2e4ec94e02791f39b04b522276138852cfc41d9fb7e904106099",
+        "package": "getrandom",
+        "registry": "crates-io",
+        "version": "0.4.3"
+      },
+      "vcs": {
+        "commit": "5e7cd5733536844a9856dc7259bd4696bbe5e3ae",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.3",
       "yanked": false
@@ -835,11 +1032,189 @@
       "advisories": 0,
       "archive": "sha256:570c0131e5fb5ef18c110e159014bff4871c8f3a2ec6a9c064c754fd7d325955",
       "assets": [],
+      "categories": [
+        "os",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": true,
+          "req": "^0.3.77",
+          "target": "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\"), target_feature = \"atomics\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"netbsd\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"solaris\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"vxworks\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/r-efi",
+          "name": "r-efi",
+          "optional": false,
+          "req": "^6",
+          "target": "cfg(all(target_os = \"uefi\", getrandom_backend = \"efi_rng\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasip2",
+          "name": "wasip2",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p2\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasip3",
+          "name": "wasip3",
+          "optional": false,
+          "req": "^0.4",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p3\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": true,
+          "req": "^0.2.98",
+          "target": "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\")))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 20213,
+          "content": "content/sha256/dc7c2f0442f08fd633b5ad1cce52f0c10d36cb92965f72bf22b3151525862753",
+          "digest": "sha256:dc7c2f0442f08fd633b5ad1cce52f0c10d36cb92965f72bf22b3151525862753",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "digest": "sha256:aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1130,
+          "content": "content/sha256/523a42c25d245dde9c015f882cec7f4555aad883382a6cf19b4b7d9b2cd5419b",
+          "digest": "sha256:523a42c25d245dde9c015f882cec7f4555aad883382a6cf19b4b7d9b2cd5419b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 29106,
+          "content": "content/sha256/ffa0395680034d5493e9a96737f5e393630fc1bd1622c1c6463a85b3bb9c119f",
+          "digest": "sha256:ffa0395680034d5493e9a96737f5e393630fc1bd1622c1c6463a85b3bb9c119f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -847,14 +1222,26 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "std": [],
+        "sys_rng": [
+          "dep:rand_core"
+        ],
+        "wasm_js": [
+          "dep:wasm-bindgen",
+          "dep:js-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/getrandom/0.4.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -865,6 +1252,17 @@
         "edition": "2024",
         "name": "getrandom",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0de51e6874e94e7bf76d726fc5d13ba782deca734ff60d5bb2fb2607c7406555",
+        "package": "getrandom",
+        "registry": "crates-io",
+        "version": "0.4.2"
+      },
+      "vcs": {
+        "commit": "4d826731b20a09e69cca91c66aea57ab3cf00072",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.2",
       "yanked": false
@@ -1208,11 +1606,172 @@
           "unit_identity": "sha256:60ad9c777d69ff68c9a7593235597e275a8118e3a5f3cb7820d6db6a37918d1d"
         }
       ],
+      "categories": [
+        "os",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": true,
+          "req": "^0.3.77",
+          "target": "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\"), target_feature = \"atomics\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(all(any(target_os = \"linux\", target_os = \"android\"), not(any(all(target_os = \"linux\", target_env = \"\"), getrandom_backend = \"custom\", getrandom_backend = \"linux_raw\", getrandom_backend = \"rdrand\", getrandom_backend = \"rndr\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"hurd\", target_os = \"illumos\", target_os = \"cygwin\", all(target_os = \"horizon\", target_arch = \"arm\")))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"haiku\", target_os = \"redox\", target_os = \"nto\", target_os = \"aix\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"ios\", target_os = \"visionos\", target_os = \"watchos\", target_os = \"tvos\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(any(target_os = \"macos\", target_os = \"openbsd\", target_os = \"vita\", target_os = \"emscripten\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"netbsd\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"solaris\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(target_os = \"vxworks\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/r-efi",
+          "name": "r-efi",
+          "optional": false,
+          "req": "^5.1",
+          "target": "cfg(all(target_os = \"uefi\", getrandom_backend = \"efi_rng\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasip2",
+          "name": "wasip2",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p2\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": true,
+          "req": "^0.2.98",
+          "target": "cfg(all(target_arch = \"wasm32\", any(target_os = \"unknown\", target_os = \"none\")))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 18941,
+          "content": "content/sha256/39a9371cee9b72f7aff7fcbe0018e1a90c1a0692266cacdcaac25166080b9cb0",
+          "digest": "sha256:39a9371cee9b72f7aff7fcbe0018e1a90c1a0692266cacdcaac25166080b9cb0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "digest": "sha256:aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1130,
+          "content": "content/sha256/29e9fe5074bd27e0e5d5d110394fbbcd841baee2651a3c4b4560a632702cede4",
+          "digest": "sha256:29e9fe5074bd27e0e5d5d110394fbbcd841baee2651a3c4b4560a632702cede4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 27305,
+          "content": "content/sha256/3793e1d3c10656813cf278d674fe943c7ec251b30cba434d8f6c7d6b4948a830",
+          "digest": "sha256:3793e1d3c10656813cf278d674fe943c7ec251b30cba434d8f6c7d6b4948a830",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1222,6 +1781,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1229,6 +1789,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1238,6 +1799,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1245,6 +1807,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1254,6 +1817,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1261,6 +1825,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1270,14 +1835,23 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "std": [],
+        "wasm_js": [
+          "dep:wasm-bindgen",
+          "dep:js-sys"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/getrandom/0.3.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1288,6 +1862,17 @@
         "edition": "2021",
         "name": "getrandom",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd",
+        "package": "getrandom",
+        "registry": "crates-io",
+        "version": "0.3.4"
+      },
+      "vcs": {
+        "commit": "38e4ad38309a85b56eef4fc759535ccfc322ba9a",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.4",
       "yanked": false
@@ -1471,6 +2056,110 @@
           "unit_identity": "sha256:2b02389c1373078fdc3ec2e090a68f126c42d6ce0cf34617cae16cbacc667fc2"
         }
       ],
+      "categories": [
+        "os",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compiler_builtins",
+          "name": "compiler_builtins",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": true,
+          "req": "^0.3",
+          "target": "cfg(all(any(target_arch = \"wasm32\", target_arch = \"wasm64\"), target_os = \"unknown\"))"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.154",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasi",
+          "name": "wasi",
+          "optional": false,
+          "req": "^0.11",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wasm-bindgen",
+          "name": "wasm-bindgen",
+          "optional": true,
+          "req": "^0.2.62",
+          "target": "cfg(all(any(target_arch = \"wasm32\", target_arch = \"wasm64\"), target_os = \"unknown\"))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3152,
+          "content": "content/sha256/543f0efa922ff55d3cdc1c96a188dff669f57a2ff3b7dfa0c95368b8e646b5dd",
+          "digest": "sha256:543f0efa922ff55d3cdc1c96a188dff669f57a2ff3b7dfa0c95368b8e646b5dd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "digest": "sha256:aaff376532ea30a0cd5330b9502ad4a4c8bf769c539c87ffe78819d188a18ebf",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1130,
+          "content": "content/sha256/42fa16951ce7f24b5a467a40e5b449a1d41e662f97ca779864f053f39e097737",
+          "digest": "sha256:42fa16951ce7f24b5a467a40e5b449a1d41e662f97ca779864f053f39e097737",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 19733,
+          "content": "content/sha256/265048f136f2faa5418cb775377c1b43d03afa22d0d5f5a70aee5819381e5703",
+          "digest": "sha256:265048f136f2faa5418cb775377c1b43d03afa22d0d5f5a70aee5819381e5703",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -1478,6 +2167,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -1487,14 +2177,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "compiler_builtins": [
+          "dep:compiler_builtins"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "custom": [],
+        "js": [
+          "wasm-bindgen",
+          "js-sys"
+        ],
+        "js-sys": [
+          "dep:js-sys"
+        ],
+        "linux_disable_fallback": [],
+        "rdrand": [],
+        "rustc-dep-of-std": [
+          "compiler_builtins",
+          "core",
+          "libc/rustc-dep-of-std",
+          "wasi/rustc-dep-of-std"
+        ],
+        "std": [],
+        "test-in-browser": [],
+        "wasm-bindgen": [
+          "dep:wasm-bindgen"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/getrandom/0.2.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -1504,6 +2225,17 @@
         "edition": "2018",
         "name": "getrandom",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0",
+        "package": "getrandom",
+        "registry": "crates-io",
+        "version": "0.2.17"
+      },
+      "vcs": {
+        "commit": "b625985d852600a3eeb68556811e59e7c9a6a098",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.17",
       "yanked": false

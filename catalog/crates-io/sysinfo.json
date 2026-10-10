@@ -130,11 +130,256 @@
           "unit_identity": "sha256:ec09608dbb6547fdef29b2757374d5d273b93f73f74cbb64a048b127030a7dca"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.173",
+          "target": "cfg(not(any(target_os = \"unknown\", target_arch = \"wasm32\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ntapi",
+          "name": "ntapi",
+          "optional": true,
+          "req": "^0.4",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": true,
+          "req": "^0.3.2",
+          "target": "cfg(any(target_os = \"macos\", target_os = \"ios\"))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "libc",
+            "std"
+          ],
+          "loaf": "crates-io/objc2-io-kit",
+          "name": "objc2-io-kit",
+          "optional": true,
+          "req": "^0.3.2",
+          "target": "cfg(any(target_os = \"macos\", target_os = \"ios\"))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CFODNode",
+            "CFODQuery",
+            "CFODRecord",
+            "CFODSession",
+            "CFOpenDirectory",
+            "CFOpenDirectoryConstants",
+            "objc2-core-foundation",
+            "std"
+          ],
+          "loaf": "crates-io/objc2-open-directory",
+          "name": "objc2-open-directory",
+          "optional": true,
+          "req": "^0.3.2",
+          "target": "cfg(target_os = \"macos\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.8"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.190"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/windows",
+          "name": "windows",
+          "optional": true,
+          "req": ">=0.62, <0.63",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7778,
+          "content": "content/sha256/2498093fd2c4847312a1aa769420f3dd4f9beb60082191889fb235256f1a8f6a",
+          "digest": "sha256:2498093fd2c4847312a1aa769420f3dd4f9beb60082191889fb235256f1a8f6a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1083,
+          "content": "content/sha256/1f14f9ce70a5fdedab449bb32cd7d3f20e6e9d18c2a2b74221fc203db8684d43",
+          "digest": "sha256:1f14f9ce70a5fdedab449bb32cd7d3f20e6e9d18c2a2b74221fc203db8684d43",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 29386,
+          "content": "content/sha256/8104d86dfe896903ab082b4f6608616488be40c00cdc9ec35751e4738bbac6ba",
+          "digest": "sha256:8104d86dfe896903ab082b4f6608616488be40c00cdc9ec35751e4738bbac6ba",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "apple-app-store": [
+          "apple-sandbox"
+        ],
+        "apple-sandbox": [],
+        "c-interface": [
+          "default"
+        ],
+        "component": [
+          "dep:windows",
+          "windows/Win32_Foundation",
+          "windows/Win32_Security",
+          "windows/Win32_System_Com",
+          "windows/Win32_System_Ole",
+          "windows/Win32_System_Rpc",
+          "windows/Win32_System_Variant",
+          "windows/Win32_System_Wmi",
+          "dep:objc2-core-foundation",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFBase",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFNumber",
+          "objc2-core-foundation/CFString",
+          "dep:objc2-io-kit",
+          "objc2-io-kit/hidsystem"
+        ],
+        "debug": [
+          "libc/extra_traits"
+        ],
+        "default": [
+          "component",
+          "disk",
+          "network",
+          "system",
+          "user"
+        ],
+        "disk": [
+          "dep:windows",
+          "windows/Win32_Foundation",
+          "windows/Win32_Storage_FileSystem",
+          "windows/Win32_Security",
+          "windows/Win32_System_IO",
+          "windows/Win32_System_Ioctl",
+          "windows/Win32_System_SystemServices",
+          "windows/Win32_System_WindowsProgramming",
+          "dep:objc2-core-foundation",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFBase",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFError",
+          "objc2-core-foundation/CFNumber",
+          "objc2-core-foundation/CFString",
+          "objc2-core-foundation/CFURL",
+          "dep:objc2-io-kit"
+        ],
+        "linux-netdevs": [],
+        "linux-tmpfs": [],
+        "multithread": [
+          "dep:rayon"
+        ],
+        "network": [
+          "dep:windows",
+          "windows/Win32_Foundation",
+          "windows/Win32_NetworkManagement_IpHelper",
+          "windows/Win32_NetworkManagement_Ndis",
+          "windows/Win32_Networking_WinSock"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "system": [
+          "dep:windows",
+          "windows/Win32_Foundation",
+          "windows/Win32_System_Diagnostics_ToolHelp",
+          "windows/Wdk_System_SystemInformation",
+          "windows/Wdk_System_SystemServices",
+          "windows/Wdk_System_Threading",
+          "windows/Win32_Security_Authorization",
+          "windows/Win32_System_Diagnostics_Debug",
+          "windows/Win32_System_Kernel",
+          "windows/Win32_System_Memory",
+          "windows/Win32_System_Performance",
+          "windows/Win32_System_Power",
+          "windows/Win32_System_ProcessStatus",
+          "windows/Win32_System_Registry",
+          "windows/Win32_System_RemoteDesktop",
+          "windows/Win32_System_SystemInformation",
+          "windows/Win32_System_SystemServices",
+          "windows/Win32_System_Threading",
+          "windows/Win32_UI_Shell",
+          "dep:ntapi",
+          "dep:memchr",
+          "dep:objc2-core-foundation",
+          "objc2-core-foundation/CFBase",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFString",
+          "dep:objc2-io-kit"
+        ],
+        "unknown-ci": [],
+        "user": [
+          "dep:windows",
+          "windows/Win32_Foundation",
+          "windows/Win32_NetworkManagement_NetManagement",
+          "windows/Win32_Security",
+          "windows/Win32_Security_Authentication_Identity",
+          "windows/Win32_Security_Authorization",
+          "dep:objc2-core-foundation",
+          "objc2-core-foundation/CFString",
+          "dep:objc2-open-directory"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "system-information",
+        "disk",
+        "process",
+        "network",
+        "cpu"
+      ],
       "manifest": "crates-io/sysinfo/0.39.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -145,6 +390,17 @@
         "edition": "2024",
         "name": "sysinfo",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d2071df9448915b71c4fe6d25deaf1c22f12bd234f01540b77312bb8e41361e6",
+        "package": "sysinfo",
+        "registry": "crates-io",
+        "version": "0.39.6"
+      },
+      "vcs": {
+        "commit": "1bc6ed4f7d0dd03606de572a1531a165438b63ec",
+        "path": "",
+        "system": "git"
       },
       "version": "0.39.6",
       "yanked": false

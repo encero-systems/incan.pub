@@ -433,11 +433,67 @@
           "unit_identity": "sha256:caef6e66b6211da314286b64325dd6ff46f7c137ec2edcb8baf044817d3a7be9"
         }
       ],
+      "categories": [
+        "network-programming",
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "require-cas"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "extra-platforms",
+          "optional": true,
+          "req": "^1.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.60"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1878,
+          "content": "content/sha256/275ac7bc295e3cc659d28f05261645ac5bd6286476afe2ee3c1ed719f7b6df02",
+          "digest": "sha256:275ac7bc295e3cc659d28f05261645ac5bd6286476afe2ee3c1ed719f7b6df02",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1055,
+          "content": "content/sha256/45f522cacecb1023856e46df79ca625dfc550c94910078bd8aec6e02880b3d42",
+          "digest": "sha256:45f522cacecb1023856e46df79ca625dfc550c94910078bd8aec6e02880b3d42",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 12646,
+          "content": "content/sha256/0c4407c0700f0d64663f5c07579ac734e70b5febcbd491fb53367232e22ab820",
+          "digest": "sha256:0c4407c0700f0d64663f5c07579ac734e70b5febcbd491fb53367232e22ab820",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -448,14 +504,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "extra-platforms": [
+          "dep:extra-platforms"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "buffers",
+        "zero-copy",
+        "io"
+      ],
       "manifest": "crates-io/bytes/1.12.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -465,6 +539,17 @@
         "edition": "2021",
         "name": "bytes",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04",
+        "package": "bytes",
+        "registry": "crates-io",
+        "version": "1.12.1"
+      },
+      "vcs": {
+        "commit": "76c0fbb54ed4336caf9d2311658a2f4a5627c21d",
+        "path": "",
+        "system": "git"
       },
       "version": "1.12.1",
       "yanked": false
@@ -488,6 +573,61 @@
       "advisories": 0,
       "archive": "sha256:c24948387cea111966901e11a1e9c7c8b302e85a3ff79939464ee78e28d77a91",
       "assets": [],
+      "categories": [
+        "network-programming",
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "require-cas"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "extra-platforms",
+          "optional": true,
+          "req": "^1.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.60"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1878,
+          "content": "content/sha256/275ac7bc295e3cc659d28f05261645ac5bd6286476afe2ee3c1ed719f7b6df02",
+          "digest": "sha256:275ac7bc295e3cc659d28f05261645ac5bd6286476afe2ee3c1ed719f7b6df02",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1055,
+          "content": "content/sha256/45f522cacecb1023856e46df79ca625dfc550c94910078bd8aec6e02880b3d42",
+          "digest": "sha256:45f522cacecb1023856e46df79ca625dfc550c94910078bd8aec6e02880b3d42",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 12159,
+          "content": "content/sha256/98b59d530d4ee459b9183c8601aad783bdc5f5ce01c68f2df7f29438f47fe871",
+          "digest": "sha256:98b59d530d4ee459b9183c8601aad783bdc5f5ce01c68f2df7f29438f47fe871",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -496,6 +636,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -506,14 +647,32 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "extra-platforms": [
+          "dep:extra-platforms"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "buffers",
+        "zero-copy",
+        "io"
+      ],
       "manifest": "crates-io/bytes/1.11.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -523,6 +682,17 @@
         "edition": "2021",
         "name": "bytes",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33",
+        "package": "bytes",
+        "registry": "crates-io",
+        "version": "1.11.1"
+      },
+      "vcs": {
+        "commit": "417dccdeff249e0c011327de7d92e0d6fbe7cc43",
+        "path": "",
+        "system": "git"
       },
       "version": "1.11.1",
       "yanked": false

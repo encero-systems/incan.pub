@@ -314,11 +314,83 @@
           "unit_identity": "sha256:e02dc5a29f44bf5ac2ca294c4a00d4412ea674628f092dec0dffc1713e0d82fe"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": false,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lock_api",
+          "name": "lock_api",
+          "optional": false,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": true,
+          "req": "^0.12.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1417,
+          "content": "content/sha256/abbeef37d552601ce91f8328c9e34c465297d5334418cd705b6da150d14a62b0",
+          "digest": "sha256:abbeef37d552601ce91f8328c9e34c465297d5334418cd705b6da150d14a62b0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10839,
+          "content": "content/sha256/4618209e13998293f82505724827ea83d927070af1c038b11e7a2ff6fd12d911",
+          "digest": "sha256:4618209e13998293f82505724827ea83d927070af1c038b11e7a2ff6fd12d911",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1059,
+          "content": "content/sha256/161c4bcb09e94e97cf5d917129bbd78574ca2238704d602465cd54ebb9e570d6",
+          "digest": "sha256:161c4bcb09e94e97cf5d917129bbd78574ca2238704d602465cd54ebb9e570d6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "futures-core/alloc"
+        ],
+        "default": [
+          "std"
+        ],
+        "parking_lot": [
+          "dep:parking_lot"
+        ],
+        "std": [
+          "alloc",
+          "parking_lot"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/futures-intrusive/0.5.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -329,6 +401,17 @@
         "edition": "2018",
         "name": "futures_intrusive",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1d930c203dd0b6ff06e0201a4a2fe9149b43c684fd4420555b26d21b1a02956f",
+        "package": "futures-intrusive",
+        "registry": "crates-io",
+        "version": "0.5.0"
+      },
+      "vcs": {
+        "commit": "0adfe0e6690d95d8c1d958416955b7a69b203655",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.0",
       "yanked": false

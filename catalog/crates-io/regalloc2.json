@@ -26,11 +26,130 @@
       "advisories": 0,
       "archive": "sha256:a9d6d73f0534f1da29e9c3419a6a173c952645421bc0736ff4464975c32f9560",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": false,
+          "req": "^0.2.18"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "allocator-api2"
+          ],
+          "loaf": "crates-io/bumpalo",
+          "name": "bumpalo",
+          "optional": false,
+          "req": "^3.16.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.15"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libfuzzer-sys",
+          "name": "libfuzzer-sys",
+          "optional": true,
+          "req": "^0.4.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rustc-hash",
+          "name": "rustc-hash",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.136"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "union"
+          ],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": false,
+          "req": "^1.6.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 865,
+          "content": "content/sha256/07c682e768c3ee0c63b7738978da6374a6c44bc70a8cc743990e8944985157e7",
+          "digest": "sha256:07c682e768c3ee0c63b7738978da6374a6c44bc70a8cc743990e8944985157e7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "checker": [],
+        "default": [
+          "std"
+        ],
+        "enable-serde": [
+          "serde"
+        ],
+        "fuzzing": [
+          "libfuzzer-sys",
+          "checker",
+          "trace-log"
+        ],
+        "libfuzzer-sys": [
+          "dep:libfuzzer-sys"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [],
+        "trace-log": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/regalloc2/0.12.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +160,17 @@
         "edition": "2018",
         "name": "regalloc2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5216b1837de2149f8bc8e6d5f88a9326b63b8c836ed58ce4a0a29ec736a59734",
+        "package": "regalloc2",
+        "registry": "crates-io",
+        "version": "0.12.2"
+      },
+      "vcs": {
+        "commit": "36f34e3d3a93a8829533c576211c57aebc0e1d90",
+        "path": "",
+        "system": "git"
       },
       "version": "0.12.2",
       "yanked": false

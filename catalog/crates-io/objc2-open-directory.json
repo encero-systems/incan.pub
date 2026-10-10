@@ -82,11 +82,204 @@
           "unit_identity": "sha256:c5a4e5b664cd01179d0c1de0fb224b39e4c0eee22fce2fbac9d1acaeb9a520f0"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "objc2"
+          ],
+          "loaf": "crates-io/dispatch2",
+          "name": "dispatch2",
+          "optional": true,
+          "req": ">=0.3.0, <0.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CFArray",
+            "CFData",
+            "CFDictionary",
+            "CFError",
+            "CFRunLoop",
+            "objc2"
+          ],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "NSString",
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "SFAuthorization"
+          ],
+          "loaf": "crates-io/objc2-security-foundation",
+          "name": "objc2-security-foundation",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 815,
+          "content": "content/sha256/2cef613ac1602bf07cb98bcc1a31c92b4c4fbab4c769c0ac6b294538dcaf8536",
+          "digest": "sha256:2cef613ac1602bf07cb98bcc1a31c92b4c4fbab4c769c0ac6b294538dcaf8536",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 379,
+          "content": "content/sha256/67c2920c77710e37389451688215b9e8dedbc5557f0ca0c0bd8de0243ad0a469",
+          "digest": "sha256:67c2920c77710e37389451688215b9e8dedbc5557f0ca0c0bd8de0243ad0a469",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CFODContext": [],
+        "CFODNode": [
+          "objc2-foundation/NSString"
+        ],
+        "CFODQuery": [
+          "objc2-foundation/NSString"
+        ],
+        "CFODRecord": [
+          "objc2-foundation/NSString"
+        ],
+        "CFODSession": [],
+        "CFOpenDirectory": [],
+        "CFOpenDirectoryConstants": [
+          "objc2-foundation/NSString"
+        ],
+        "ODAttributeMap": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSString"
+        ],
+        "ODConfiguration": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSString"
+        ],
+        "ODMappings": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSString"
+        ],
+        "ODModuleEntry": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSString"
+        ],
+        "ODNode": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSString"
+        ],
+        "ODQuery": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSOperation",
+          "objc2-foundation/NSRunLoop",
+          "objc2-foundation/NSString"
+        ],
+        "ODRecord": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSString"
+        ],
+        "ODRecordMap": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSString"
+        ],
+        "ODSession": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSString"
+        ],
+        "alloc": [],
+        "default": [
+          "std",
+          "CFODContext",
+          "CFODNode",
+          "CFODQuery",
+          "CFODRecord",
+          "CFODSession",
+          "CFOpenDirectory",
+          "CFOpenDirectoryConstants",
+          "ODAttributeMap",
+          "ODConfiguration",
+          "ODMappings",
+          "ODModuleEntry",
+          "ODNode",
+          "ODQuery",
+          "ODRecord",
+          "ODRecordMap",
+          "ODSession",
+          "dispatch2",
+          "objc2-core-foundation",
+          "objc2-security-foundation"
+        ],
+        "dispatch2": [
+          "dep:dispatch2"
+        ],
+        "objc2-core-foundation": [
+          "dep:objc2-core-foundation"
+        ],
+        "objc2-security-foundation": [
+          "dep:objc2-security-foundation"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos"
+      ],
       "manifest": "crates-io/objc2-open-directory/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -97,6 +290,17 @@
         "edition": "2021",
         "name": "objc2_open_directory",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bb82bed227edf5201dfedf072bba4015a33d3d4a98519837295a90f0a23f676d",
+        "package": "objc2-open-directory",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-open-directory",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

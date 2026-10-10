@@ -478,11 +478,83 @@
           "unit_identity": "sha256:bd98294af7a16ca5443f8e04b612cc9c5458c7379cc9806a5c235e3a7c747790"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/siphasher",
+          "name": "siphasher",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/uncased",
+          "name": "uncased",
+          "optional": true,
+          "req": "^0.9.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase",
+          "optional": true,
+          "req": "^2.8.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 127,
+          "content": "content/sha256/9fe30ff85b7670ed85175c5f572cf499d0ed231f1b60de4189aff394afa8fe9d",
+          "digest": "sha256:9fe30ff85b7670ed85175c5f572cf499d0ed231f1b60de4189aff394afa8fe9d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 38526,
+          "content": "content/sha256/8d87758885f55f81e3aafcd69c8a682695e97686254f63f1b9b24ab549da30ed",
+          "digest": "sha256:8d87758885f55f81e3aafcd69c8a682695e97686254f63f1b9b24ab549da30ed",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "ptrhash": [],
+        "std": [],
+        "uncased": [
+          "dep:uncased"
+        ],
+        "unicase": [
+          "dep:unicase"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/phf_shared/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -493,6 +565,17 @@
         "edition": "2024",
         "name": "phf_shared",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c6fd9027e2d9319be6349febd1db4e8d02aa544921200c9b777720ac34a3aa89",
+        "package": "phf_shared",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "1620d169aad09b02ef02a97b272470152e100bd6",
+        "path": "phf_shared",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -592,19 +675,91 @@
           "unit_identity": "sha256:31cf00dcc7c672e6b2187e516e4bd91e2af3c8810012733bc579595e6e6c2a1e"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/siphasher",
+          "name": "siphasher",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/uncased",
+          "name": "uncased",
+          "optional": true,
+          "req": "^0.9.9"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/unicase",
+          "name": "unicase",
+          "optional": true,
+          "req": "^2.4.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 127,
+          "content": "content/sha256/9fe30ff85b7670ed85175c5f572cf499d0ed231f1b60de4189aff394afa8fe9d",
+          "digest": "sha256:9fe30ff85b7670ed85175c5f572cf499d0ed231f1b60de4189aff394afa8fe9d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 33259,
+          "content": "content/sha256/b02f7b92559e6feeeb238365be367eb4ff0ff1b53c3448e13318e4076b1de39d",
+          "digest": "sha256:b02f7b92559e6feeeb238365be367eb4ff0ff1b53c3448e13318e4076b1de39d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [],
+        "uncased": [
+          "dep:uncased"
+        ],
+        "unicase": [
+          "dep:unicase"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/phf_shared/0.12.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -614,6 +769,17 @@
         "edition": "2021",
         "name": "phf_shared",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:06005508882fb681fd97892ecff4b7fd0fee13ef1aa569f8695dae7ab9099981",
+        "package": "phf_shared",
+        "registry": "crates-io",
+        "version": "0.12.1"
+      },
+      "vcs": {
+        "commit": "03a930696231da01005e762425841f91587b3e04",
+        "path": "phf_shared",
+        "system": "git"
       },
       "version": "0.12.1",
       "yanked": false

@@ -23,11 +23,78 @@
       "advisories": 0,
       "archive": "sha256:9d0e254a76e22c4853fa79c33cc2032565df8ac090abf7175db401b9a3aa21f3",
       "assets": [],
+      "categories": [
+        "compression",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/sha2",
+          "name": "sha2",
+          "optional": true,
+          "req": "^0.11"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2570,
+          "content": "content/sha256/477ecbe9893cb92e17bfadabb8b12189b2ad4fbfb14f9c4ee23b7d8e4d841a9a",
+          "digest": "sha256:477ecbe9893cb92e17bfadabb8b12189b2ad4fbfb14f9c4ee23b7d8e4d841a9a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11356,
+          "content": "content/sha256/43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+          "digest": "sha256:43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 8306,
+          "content": "content/sha256/9adf6e2456b4fb49b05983bfb6eb024e0ef97cba14dcb161afdde91be5520ac0",
+          "digest": "sha256:9adf6e2456b4fb49b05983bfb6eb024e0ef97cba14dcb161afdde91be5520ac0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "encoder",
+          "optimization",
+          "lzip",
+          "xz"
+        ],
+        "encoder": [],
+        "lzip": [],
+        "optimization": [],
+        "sha2": [
+          "dep:sha2"
+        ],
+        "std": [],
+        "xz": [
+          "sha2"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "lzma",
+        "lzip",
+        "xz"
+      ],
       "manifest": "crates-io/lzma-rust2/0.16.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +105,17 @@
         "edition": "2024",
         "name": "lzma_rust2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ca93e534d1142d1d0dcca6d25fe302508a5dfb40b302802904577725ea0b695b",
+        "package": "lzma-rust2",
+        "registry": "crates-io",
+        "version": "0.16.5"
+      },
+      "vcs": {
+        "commit": "1e05e7bcb3e2a5991e9c204caeb6475e384577ad",
+        "path": "",
+        "system": "git"
       },
       "version": "0.16.5",
       "yanked": false

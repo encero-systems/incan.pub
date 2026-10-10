@@ -25,11 +25,89 @@
       "advisories": 0,
       "archive": "sha256:816d9b82e21437234f10a9fafaf5061db4aff7ce1675f550ab0faccad0de3f38",
       "assets": [],
+      "categories": [
+        "filesystem",
+        "os",
+        "os::macos-apis",
+        "os::unix-apis",
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fs"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.0",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.52.0, <0.60.0",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2534,
+          "content": "content/sha256/ede6ce06722fa6bc718ef44ba9605ef1ff4f0d13551dfb648f889c2d08826f01",
+          "digest": "sha256:ede6ce06722fa6bc718ef44ba9605ef1ff4f0d13551dfb648f889c2d08826f01",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10757,
+          "content": "content/sha256/b00ec75cd7ef2a62ff1f26c0ddafbc508282d15dce149506f983ce6c8e7a4876",
+          "digest": "sha256:b00ec75cd7ef2a62ff1f26c0ddafbc508282d15dce149506f983ce6c8e7a4876",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1079,
+          "content": "content/sha256/ce688e08d0454a032063ff701c4e88051ed89f0c5c9c391cbe58e4099769ae5d",
+          "digest": "sha256:ce688e08d0454a032063ff701c4e88051ed89f0c5c9c391cbe58e4099769ae5d",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "file",
+        "fd",
+        "lock",
+        "windows",
+        "unix"
+      ],
       "manifest": "crates-io/fd-lock/4.0.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +118,17 @@
         "edition": "2021",
         "name": "fd_lock",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0ce92ff622d6dadf7349484f42c93271a0d49b7cc4d466a936405bacbe10aa78",
+        "package": "fd-lock",
+        "registry": "crates-io",
+        "version": "4.0.4"
+      },
+      "vcs": {
+        "commit": "af18798c1790003815a8180fb1929c0a7da1f512",
+        "path": "",
+        "system": "git"
       },
       "version": "4.0.4",
       "yanked": false

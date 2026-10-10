@@ -134,11 +134,237 @@
           "unit_identity": "sha256:d52fddd893097848b62e5f7fef273a0dc7a551c700a0e61b91fb12e5fec8a9df"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-arith",
+          "name": "arrow-arith",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-array",
+          "name": "arrow-array",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-cast",
+          "name": "arrow-cast",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-csv",
+          "name": "arrow-csv",
+          "optional": true,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-data",
+          "name": "arrow-data",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-ipc",
+          "name": "arrow-ipc",
+          "optional": true,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-json",
+          "name": "arrow-json",
+          "optional": true,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-ord",
+          "name": "arrow-ord",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-pyarrow",
+          "name": "arrow-pyarrow",
+          "optional": true,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-row",
+          "name": "arrow-row",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-select",
+          "name": "arrow-select",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-string",
+          "name": "arrow-string",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": true,
+          "req": "^2.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "std_rng",
+            "thread_rng"
+          ],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": "^0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8622,
+          "content": "content/sha256/a7d8a5e5254036eba079cb2924059550ad16621a7a6204a87280db1fc6534f9a",
+          "digest": "sha256:a7d8a5e5254036eba079cb2924059550ad16621a7a6204a87280db1fc6534f9a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "arrow-csv": [
+          "dep:arrow-csv"
+        ],
+        "arrow-ipc": [
+          "dep:arrow-ipc"
+        ],
+        "arrow-json": [
+          "dep:arrow-json"
+        ],
+        "async": [
+          "arrow-array/async"
+        ],
+        "canonical_extension_types": [
+          "arrow-schema/canonical_extension_types"
+        ],
+        "chrono-tz": [
+          "arrow-array/chrono-tz"
+        ],
+        "csv": [
+          "arrow-csv"
+        ],
+        "default": [
+          "csv",
+          "ipc",
+          "json"
+        ],
+        "ffi": [
+          "arrow-schema/ffi",
+          "arrow-data/ffi",
+          "arrow-array/ffi"
+        ],
+        "force_validate": [
+          "arrow-array/force_validate",
+          "arrow-data/force_validate"
+        ],
+        "ipc": [
+          "arrow-ipc"
+        ],
+        "ipc_compression": [
+          "ipc",
+          "dep:arrow-ipc",
+          "arrow-ipc/lz4",
+          "arrow-ipc/zstd"
+        ],
+        "json": [
+          "arrow-json"
+        ],
+        "pool": [
+          "arrow-array/pool"
+        ],
+        "prettyprint": [
+          "arrow-cast/prettyprint"
+        ],
+        "pyarrow": [
+          "ffi",
+          "dep:arrow-pyarrow"
+        ],
+        "pyarrow-experimental-inspect": [
+          "pyarrow",
+          "dep:arrow-pyarrow",
+          "arrow-pyarrow/experimental-inspect"
+        ],
+        "test_utils": [
+          "dep:rand",
+          "dep:half"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow/60.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -150,6 +376,13 @@
         "name": "arrow",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:234ce58e76c04e8162c2e4bc3fe53fa7c2418ef5fba7bb2838b8531b7d4fbf14",
+        "package": "arrow",
+        "registry": "crates-io",
+        "version": "60.0.0"
+      },
+      "vcs": null,
       "version": "60.0.0",
       "yanked": false
     },
@@ -171,6 +404,163 @@
       "advisories": 0,
       "archive": "sha256:ed4795a4a6ed4c84412ff2e72943936dd92ae62fecf5e811c40a475964312826",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-arith",
+          "name": "arrow-arith",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-array",
+          "name": "arrow-array",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-cast",
+          "name": "arrow-cast",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-csv",
+          "name": "arrow-csv",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-data",
+          "name": "arrow-data",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-ipc",
+          "name": "arrow-ipc",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-json",
+          "name": "arrow-json",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-ord",
+          "name": "arrow-ord",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-pyarrow",
+          "name": "arrow-pyarrow",
+          "optional": true,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-row",
+          "name": "arrow-row",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-select",
+          "name": "arrow-select",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-string",
+          "name": "arrow-string",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "rand_distr"
+          ],
+          "loaf": "crates-io/half",
+          "name": "half",
+          "optional": true,
+          "req": "^2.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "std_rng",
+            "thread_rng"
+          ],
+          "loaf": "crates-io/rand",
+          "name": "rand",
+          "optional": true,
+          "req": "^0.9"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8554,
+          "content": "content/sha256/4aee29ec28c367ea65d572b238a43e4e47fc1f4fb05e801c7e0fc73d266c5d83",
+          "digest": "sha256:4aee29ec28c367ea65d572b238a43e4e47fc1f4fb05e801c7e0fc73d266c5d83",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -186,14 +576,82 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arrow-csv": [
+          "dep:arrow-csv"
+        ],
+        "arrow-ipc": [
+          "dep:arrow-ipc"
+        ],
+        "arrow-json": [
+          "dep:arrow-json"
+        ],
+        "async": [
+          "arrow-array/async"
+        ],
+        "canonical_extension_types": [
+          "arrow-schema/canonical_extension_types"
+        ],
+        "chrono-tz": [
+          "arrow-array/chrono-tz"
+        ],
+        "csv": [
+          "arrow-csv"
+        ],
+        "default": [
+          "csv",
+          "ipc",
+          "json"
+        ],
+        "ffi": [
+          "arrow-schema/ffi",
+          "arrow-data/ffi",
+          "arrow-array/ffi"
+        ],
+        "force_validate": [
+          "arrow-array/force_validate",
+          "arrow-data/force_validate"
+        ],
+        "ipc": [
+          "arrow-ipc"
+        ],
+        "ipc_compression": [
+          "ipc",
+          "arrow-ipc",
+          "dep:arrow-ipc",
+          "arrow-ipc/lz4",
+          "arrow-ipc/zstd"
+        ],
+        "json": [
+          "arrow-json"
+        ],
+        "pool": [
+          "arrow-array/pool"
+        ],
+        "prettyprint": [
+          "arrow-cast/prettyprint"
+        ],
+        "pyarrow": [
+          "ffi",
+          "dep:arrow-pyarrow"
+        ],
+        "test_utils": [
+          "dep:rand",
+          "dep:half"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow/58.4.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -204,6 +662,13 @@
         "name": "arrow",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:6cfdd0833e32a9874d2b55089333ad310c0be208aafa277385ce2461dec90be3",
+        "package": "arrow",
+        "registry": "crates-io",
+        "version": "58.4.0"
+      },
+      "vcs": null,
       "version": "58.4.0",
       "yanked": false
     }

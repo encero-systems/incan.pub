@@ -120,11 +120,117 @@
           "unit_identity": "sha256:2d3ef352757ae9400cb77942a306853dc2d2011bc3fedc48e6da11eed10d9bac"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/curve25519-dalek",
+          "name": "curve25519-dalek",
+          "optional": false,
+          "req": "^5.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7551,
+          "content": "content/sha256/c9c07e89815dea3bad364557c8a4901432e575296662d1b81aa1a8806b6265f4",
+          "digest": "sha256:c9c07e89815dea3bad364557c8a4901432e575296662d1b81aa1a8806b6265f4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1555,
+          "content": "content/sha256/bebc725b8cb1ba1ed1798cb505cf31bf9bce4cbe942baf358b642666ba8186bd",
+          "digest": "sha256:bebc725b8cb1ba1ed1798cb505cf31bf9bce4cbe942baf358b642666ba8186bd",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 3949,
+          "content": "content/sha256/e86eccf0faa46f7c53cb8ddede4b003991d6cc814e7c5dbdb15bb49c3f179092",
+          "digest": "sha256:e86eccf0faa46f7c53cb8ddede4b003991d6cc814e7c5dbdb15bb49c3f179092",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "precomputed-tables",
+          "zeroize"
+        ],
+        "getrandom": [
+          "dep:getrandom"
+        ],
+        "precomputed-tables": [
+          "curve25519-dalek/precomputed-tables"
+        ],
+        "reusable_secrets": [],
+        "serde": [
+          "dep:serde",
+          "curve25519-dalek/serde"
+        ],
+        "static_secrets": [],
+        "zeroize": [
+          "dep:zeroize",
+          "curve25519-dalek/zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cryptography",
+        "curve25519",
+        "key-exchange",
+        "x25519",
+        "diffie-hellman"
+      ],
       "manifest": "crates-io/x25519-dalek/3.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -135,6 +241,17 @@
         "edition": "2024",
         "name": "x25519_dalek",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e7e8131a03190127fb2263afc72b322ecadae46b6ff8c6f399ff5d02f5559af6",
+        "package": "x25519-dalek",
+        "registry": "crates-io",
+        "version": "3.0.0"
+      },
+      "vcs": {
+        "commit": "07bef73ff85998a206cd2cea7f2605c801d0d1c9",
+        "path": "x25519-dalek",
+        "system": "git"
       },
       "version": "3.0.0",
       "yanked": false

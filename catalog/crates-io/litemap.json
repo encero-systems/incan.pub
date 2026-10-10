@@ -350,19 +350,97 @@
           "unit_identity": "sha256:306ecd9de3febba7b6042533e34c5cb49e7dd23925787442afb11ae66d1fec54"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/yoke",
+          "name": "yoke",
+          "optional": true,
+          "req": "^0.8.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2401,
+          "content": "content/sha256/34cd913e9410be17d4f8ada19fb1d3660d8415e2e92b59ad2bd38e30f18b1de3",
+          "digest": "sha256:34cd913e9410be17d4f8ada19fb1d3660d8415e2e92b59ad2bd38e30f18b1de3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "databake": [
+          "dep:databake"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "alloc"
+        ],
+        "testing": [
+          "alloc"
+        ],
+        "yoke": [
+          "dep:yoke"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "data-structures",
+        "memory-efficiency",
+        "sorted",
+        "vec",
+        "map"
+      ],
       "manifest": "crates-io/litemap/0.8.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -372,6 +450,17 @@
         "edition": "2021",
         "name": "litemap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:47d9d19d1d6efa0109d2f65ff4c85cddd50bd572e5a00127ab10987290bcefae",
+        "package": "litemap",
+        "registry": "crates-io",
+        "version": "0.8.3"
+      },
+      "vcs": {
+        "commit": "a14f2dad852be26bad277ae704abf27a15cbfed1",
+        "path": "utils/litemap",
+        "system": "git"
       },
       "version": "0.8.3",
       "yanked": false
@@ -394,11 +483,88 @@
       "advisories": 0,
       "archive": "sha256:52e708318b94207e92d338fba5b433096ad6a6390841d16fef50894aeda1ca28",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/yoke",
+          "name": "yoke",
+          "optional": true,
+          "req": "^0.8.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2401,
+          "content": "content/sha256/34cd913e9410be17d4f8ada19fb1d3660d8415e2e92b59ad2bd38e30f18b1de3",
+          "digest": "sha256:34cd913e9410be17d4f8ada19fb1d3660d8415e2e92b59ad2bd38e30f18b1de3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "databake": [
+          "dep:databake"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core",
+          "alloc"
+        ],
+        "testing": [
+          "alloc"
+        ],
+        "yoke": [
+          "dep:yoke"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "sorted",
+        "vec",
+        "map",
+        "hashmap",
+        "btreemap"
+      ],
       "manifest": "crates-io/litemap/0.8.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -409,6 +575,17 @@
         "edition": "2021",
         "name": "litemap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6373607a59f0be73a39b6fe456b8192fcc3585f602af20751600e974dd455e77",
+        "package": "litemap",
+        "registry": "crates-io",
+        "version": "0.8.1"
+      },
+      "vcs": {
+        "commit": "29dfe2790b6cfdab94ca6a6b69f58ce54802dbf7",
+        "path": "utils/litemap",
+        "system": "git"
       },
       "version": "0.8.1",
       "yanked": false

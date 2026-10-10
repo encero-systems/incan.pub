@@ -25,11 +25,108 @@
       "advisories": 0,
       "archive": "sha256:0d607fb9aa622cce9370226b99efb2a467469402950e558e91294093db174033",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": true,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cranelift-bitset",
+          "name": "cranelift-bitset",
+          "optional": false,
+          "req": "^0.123.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.27"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pulley-macros",
+          "name": "pulley-macros",
+          "optional": false,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasmtime-internal-math",
+          "name": "wasmtime-math",
+          "optional": true,
+          "req": "=36.0.17"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4994,
+          "content": "content/sha256/778777792438a905f76d97617b38509a7cd0f0450b950fc27fbbdf328cf51125",
+          "digest": "sha256:778777792438a905f76d97617b38509a7cd0f0450b950fc27fbbdf328cf51125",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 382,
+          "content": "content/sha256/b5e3dbf2e09af2ecc422f8c6751ffd48b6337dde273f9a5a51911272935c403f",
+          "digest": "sha256:b5e3dbf2e09af2ecc422f8c6751ffd48b6337dde273f9a5a51911272935c403f",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary",
+          "arbitrary/derive",
+          "std",
+          "cranelift-bitset/arbitrary"
+        ],
+        "decode": [],
+        "disas": [
+          "decode"
+        ],
+        "encode": [],
+        "interp": [
+          "decode",
+          "encode",
+          "dep:wasmtime-math"
+        ],
+        "profile": [
+          "std",
+          "dep:anyhow"
+        ],
+        "std": [
+          "wasmtime-math?/std"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/pulley-interpreter/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +137,17 @@
         "edition": "2024",
         "name": "pulley_interpreter",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:818d286c25f82cd1e459d3c5e4481751e2b1ca54beb8fc021271845744a5828a",
+        "package": "pulley-interpreter",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "pulley",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

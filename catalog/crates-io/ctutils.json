@@ -346,11 +346,82 @@
           "unit_identity": "sha256:fb4bab79c69658cdb999353e7276377aa2196fcb60c09d6b6b4423a5763228f9"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cmov",
+          "name": "cmov",
+          "optional": false,
+          "req": "^0.5.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/subtle",
+          "name": "subtle",
+          "optional": true,
+          "req": "^2.6"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4133,
+          "content": "content/sha256/4811de370f75587948eaab5ef2fcb8f3c483e262865a2bd219f057b0dc10bf00",
+          "digest": "sha256:4811de370f75587948eaab5ef2fcb8f3c483e262865a2bd219f057b0dc10bf00",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/91585c36e4fb9ab4ca0d3dfac5d66d3c0c62cc51f640a0e1196542daf2267eae",
+          "digest": "sha256:91585c36e4fb9ab4ca0d3dfac5d66d3c0c62cc51f640a0e1196542daf2267eae",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4871,
+          "content": "content/sha256/82cd87b8b1f431ec1373de0bbb6d49eba0852c51199cff51a60cd1733a88de16",
+          "digest": "sha256:82cd87b8b1f431ec1373de0bbb6d49eba0852c51199cff51a60cd1733a88de16",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "subtle": [
+          "dep:subtle"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "constant-time",
+        "crypto",
+        "intrinsics"
+      ],
       "manifest": "crates-io/ctutils/0.4.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -361,6 +432,17 @@
         "edition": "2024",
         "name": "ctutils",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:03bb0e1cc970d482d121d9a1744999169b69a07470b3d644a7894e53fcaf4574",
+        "package": "ctutils",
+        "registry": "crates-io",
+        "version": "0.4.3"
+      },
+      "vcs": {
+        "commit": "3c5aa70180232b57a485a14269adf1380d1807c1",
+        "path": "ctutils",
+        "system": "git"
       },
       "version": "0.4.3",
       "yanked": false

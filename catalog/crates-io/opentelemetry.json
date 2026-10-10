@@ -728,11 +728,148 @@
           "unit_identity": "sha256:56e9f344ed4cb0b3df4fc2f172036ea8295619ce8c31b55e2778559784c944c3"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "api-bindings",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-sink",
+          "name": "futures-sink",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/js-sys",
+          "name": "js-sys",
+          "optional": false,
+          "req": "^0.3.63",
+          "target": "cfg(all(target_arch = \"wasm32\", not(target_os = \"wasi\")))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": ">=0.1.40"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8353,
+          "content": "content/sha256/0e3d8baed5a28f6ddc3b400c101d6a62c1e1eb8b9d961686ba68f3455e28a96f",
+          "digest": "sha256:0e3d8baed5a28f6ddc3b400c101d6a62c1e1eb8b9d961686ba68f3455e28a96f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 345,
+          "content": "content/sha256/4647fedd94d10cdac0236822c0a03a28cbed83dd9957009b702975b3b59863c9",
+          "digest": "sha256:4647fedd94d10cdac0236822c0a03a28cbed83dd9957009b702975b3b59863c9",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        },
+        {
+          "bytes": 43247,
+          "content": "content/sha256/6caf460ee19ea4d9f3373e5e2f2965946481505d29b336cd83245b31885bd19a",
+          "digest": "sha256:6caf460ee19ea4d9f3373e5e2f2965946481505d29b336cd83245b31885bd19a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "trace",
+          "metrics",
+          "logs",
+          "internal-logs",
+          "futures"
+        ],
+        "experimental_context_observer": [],
+        "experimental_metrics_bound_instruments": [
+          "metrics"
+        ],
+        "futures": [
+          "futures-core",
+          "futures-sink",
+          "pin-project-lite"
+        ],
+        "futures-core": [
+          "dep:futures-core"
+        ],
+        "futures-sink": [
+          "dep:futures-sink"
+        ],
+        "internal-logs": [
+          "tracing"
+        ],
+        "logs": [],
+        "metrics": [],
+        "pin-project-lite": [
+          "dep:pin-project-lite"
+        ],
+        "testing": [
+          "trace"
+        ],
+        "thiserror": [
+          "dep:thiserror"
+        ],
+        "trace": [
+          "futures",
+          "thiserror"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "opentelemetry",
+        "logging",
+        "tracing",
+        "metrics"
+      ],
       "manifest": "crates-io/opentelemetry/0.33.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -743,6 +880,17 @@
         "edition": "2021",
         "name": "opentelemetry",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6cdb0b1b267eb9db3331b434ed9ddab10d50e280a9adf9d13e5233e2002b61b5",
+        "package": "opentelemetry",
+        "registry": "crates-io",
+        "version": "0.33.0"
+      },
+      "vcs": {
+        "commit": "19833847cab86c8464c1dfb6d28b1de9c0b50038",
+        "path": "opentelemetry",
+        "system": "git"
       },
       "version": "0.33.0",
       "yanked": false

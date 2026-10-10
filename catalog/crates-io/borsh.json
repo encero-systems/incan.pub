@@ -114,6 +114,97 @@
           "unit_identity": "sha256:ee5c7aa0d95f54e467841a531a41bbe6eaf3abbebcca8af8d5464494257985e8"
         }
       ],
+      "categories": [
+        "encoding",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ascii",
+          "name": "ascii",
+          "optional": true,
+          "req": "^1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/borsh-derive",
+          "name": "borsh-derive",
+          "optional": true,
+          "req": "~1.8.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bson",
+          "name": "bson",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": ">=0.11, <0.16.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": true,
+          "req": "^2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/uuid",
+          "name": "uuid",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3087,
+          "content": "content/sha256/aef615027ce75e09ab5355834af1b270bdbb14c8f11293020aaaf5e72c5684fc",
+          "digest": "sha256:aef615027ce75e09ab5355834af1b270bdbb14c8f11293020aaaf5e72c5684fc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11334,
+          "content": "content/sha256/7b724c8fa4a82af733caccabdaa21e2bf8bcb0822fe62d5cf03f99d458438705",
+          "digest": "sha256:7b724c8fa4a82af733caccabdaa21e2bf8bcb0822fe62d5cf03f99d458438705",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -122,6 +213,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -132,6 +224,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -142,6 +235,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -152,14 +246,55 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "ascii": [
+          "dep:ascii"
+        ],
+        "borsh-derive": [
+          "dep:borsh-derive"
+        ],
+        "bson": [
+          "dep:bson"
+        ],
+        "bytes": [
+          "dep:bytes"
+        ],
+        "de_strict_order": [],
+        "default": [
+          "std"
+        ],
+        "derive": [
+          "borsh-derive"
+        ],
+        "hashbrown": [
+          "dep:hashbrown"
+        ],
+        "indexmap": [
+          "dep:indexmap"
+        ],
+        "rc": [],
+        "std": [
+          "bytes?/std"
+        ],
+        "unstable__schema": [
+          "derive",
+          "dep:borsh-derive",
+          "borsh-derive/schema"
+        ],
+        "uuid": [
+          "dep:uuid"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/borsh/1.8.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -170,6 +305,17 @@
         "edition": "2018",
         "name": "borsh",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:553c5d846a6ba5150c65e3b1b8ec073bcf1abc20f9b7220de384a4443ea4e20a",
+        "package": "borsh",
+        "registry": "crates-io",
+        "version": "1.8.1"
+      },
+      "vcs": {
+        "commit": "fe778bec428d5b44cd4922c896af0a7c39a863dd",
+        "path": "borsh",
+        "system": "git"
       },
       "version": "1.8.1",
       "yanked": false

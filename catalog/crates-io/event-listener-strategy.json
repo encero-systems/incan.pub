@@ -370,11 +370,92 @@
           "unit_identity": "sha256:94827a904cf02b080f224970c0bb73245969f608749179f39efedee0e385ab01"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/event-listener",
+          "name": "event-listener",
+          "optional": false,
+          "req": "^5.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pin-project-lite",
+          "name": "pin-project-lite",
+          "optional": false,
+          "req": "^0.2.12"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2745,
+          "content": "content/sha256/df6555ffb5946bbaf931b71be241ec638b54a614ffd808185407b5071f348b28",
+          "digest": "sha256:df6555ffb5946bbaf931b71be241ec638b54a614ffd808185407b5071f348b28",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 840,
+          "content": "content/sha256/3fbfc89860f733a54c5ccec504e45baebdf6d89b289780bccebda2e28c09c616",
+          "digest": "sha256:3fbfc89860f733a54c5ccec504e45baebdf6d89b289780bccebda2e28c09c616",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "loom": [
+          "event-listener/loom"
+        ],
+        "portable-atomic": [
+          "event-listener/portable-atomic"
+        ],
+        "std": [
+          "event-listener/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "condvar",
+        "envcount",
+        "wake",
+        "blocking",
+        "park"
+      ],
       "manifest": "crates-io/event-listener-strategy/0.5.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -385,6 +466,17 @@
         "edition": "2021",
         "name": "event_listener_strategy",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8be9f3dfaaffdae2972880079a491a1a8bb7cbed0b8dd7a347f668b4150a3b93",
+        "package": "event-listener-strategy",
+        "registry": "crates-io",
+        "version": "0.5.4"
+      },
+      "vcs": {
+        "commit": "f533c437e8a6561e9b625c3ee036a8ea7d19375c",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.4",
       "yanked": false

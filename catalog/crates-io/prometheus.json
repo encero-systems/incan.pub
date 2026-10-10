@@ -116,6 +116,121 @@
           "unit_identity": "sha256:f3c79d37324eabe03c99ebe7d69d756498749998a116f0bb9f5af3faff7bb200"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/fnv",
+          "name": "fnv",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lazy_static",
+          "name": "lazy_static",
+          "optional": false,
+          "req": "^1.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": false,
+          "req": "^0.12"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/procfs",
+          "name": "procfs",
+          "optional": true,
+          "req": "^0.17",
+          "target": "cfg(target_os = \"linux\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/protobuf",
+          "name": "protobuf",
+          "optional": true,
+          "req": "^3.7.2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "blocking"
+          ],
+          "loaf": "crates-io/reqwest",
+          "name": "reqwest",
+          "optional": true,
+          "req": "^0.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thiserror",
+          "name": "thiserror",
+          "optional": false,
+          "req": "^2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1769,
+          "content": "content/sha256/8b432cdbdae274d4d4dfecc9f56037ee9f12c1b216e33f02d70335cb2a103837",
+          "digest": "sha256:8b432cdbdae274d4d4dfecc9f56037ee9f12c1b216e33f02d70335cb2a103837",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11351,
+          "content": "content/sha256/977db9027cdb329d938c8ee9b101192431b1da6278c1b69492840fec148212a4",
+          "digest": "sha256:977db9027cdb329d938c8ee9b101192431b1da6278c1b69492840fec148212a4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 4574,
+          "content": "content/sha256/154303e6cfd37f48d5a005d64fd55fb62d04fee2895469cad8d73c2314f92135",
+          "digest": "sha256:154303e6cfd37f48d5a005d64fd55fb62d04fee2895469cad8d73c2314f92135",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -124,6 +239,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -134,6 +250,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -144,6 +261,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -154,14 +272,52 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "protobuf"
+        ],
+        "gen": [
+          "protobuf-codegen"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "nightly": [
+          "libc"
+        ],
+        "process": [
+          "libc",
+          "procfs"
+        ],
+        "procfs": [
+          "dep:procfs"
+        ],
+        "protobuf": [
+          "dep:protobuf"
+        ],
+        "protobuf-codegen": [],
+        "push": [
+          "reqwest",
+          "libc",
+          "protobuf"
+        ],
+        "reqwest": [
+          "dep:reqwest"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "prometheus",
+        "metrics"
+      ],
       "manifest": "crates-io/prometheus/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -172,6 +328,17 @@
         "edition": "2018",
         "name": "prometheus",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3ca5326d8d0b950a9acd87e6a3f94745394f62e4dae1b1ee22b2bc0c394af43a",
+        "package": "prometheus",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "e07efb4f372f1245bf7410b71e822c69877bcb32",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false

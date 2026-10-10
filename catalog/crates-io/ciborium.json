@@ -114,11 +114,82 @@
           "unit_identity": "sha256:7abf957cb7f2f96ecdf009e696142fd2533e8027631cd8a77e0096055793abee"
         }
       ],
+      "categories": [
+        "data-structures",
+        "embedded",
+        "encoding",
+        "no-std",
+        "parsing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/ciborium-io",
+          "name": "ciborium-io",
+          "optional": false,
+          "req": "^0.2.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ciborium-ll",
+          "name": "ciborium-ll",
+          "optional": false,
+          "req": "^0.2.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1.0.100"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4468,
+          "content": "content/sha256/3ed22336e9c4f8c537588fda015009ad31259876fbfa4a427d10563cc82e0058",
+          "digest": "sha256:3ed22336e9c4f8c537588fda015009ad31259876fbfa4a427d10563cc82e0058",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11357,
+          "content": "content/sha256/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "digest": "sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [
+          "ciborium-io/std",
+          "serde/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cbor",
+        "serde"
+      ],
       "manifest": "crates-io/ciborium/0.2.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +200,17 @@
         "edition": "2021",
         "name": "ciborium",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:42e69ffd6f0917f5c029256a24d0161db17cea3997d185db0d35926308770f0e",
+        "package": "ciborium",
+        "registry": "crates-io",
+        "version": "0.2.2"
+      },
+      "vcs": {
+        "commit": "fdf3ec5c53256000f8e12f06c361ca18026a8d99",
+        "path": "ciborium",
+        "system": "git"
       },
       "version": "0.2.2",
       "yanked": false

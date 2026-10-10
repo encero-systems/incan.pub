@@ -114,11 +114,91 @@
           "unit_identity": "sha256:f3da48a44fa2e66113a43fb98f12939bb8aa3d50dfe7316f953993d9e04caaea"
         }
       ],
+      "categories": [
+        "os",
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2",
+          "target": "cfg(any(unix, target_os = \"wasi\", target_os = \"redox\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/regex",
+          "name": "regex",
+          "optional": true,
+          "req": "^1.10.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": true,
+          "req": "^0.1.40"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2406,
+          "content": "content/sha256/b5bb9c9e9f5b7fcd563d1272121a77a036f749f3695cd209a51838add31980b0",
+          "digest": "sha256:b5bb9c9e9f5b7fcd563d1272121a77a036f749f3695cd209a51838add31980b0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1056,
+          "content": "content/sha256/0041560f5d419c30e1594567f3b7ac2bc078ff6a68f437e0348ba85d9cf99112",
+          "digest": "sha256:0041560f5d419c30e1594567f3b7ac2bc078ff6a68f437e0348ba85d9cf99112",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 3561,
+          "content": "content/sha256/53c478477d3c498dd84b317bb753123aa819afcf62bc5eafcd8d32f16d0b2579",
+          "digest": "sha256:53c478477d3c498dd84b317bb753123aa819afcf62bc5eafcd8d32f16d0b2579",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "real-sys"
+        ],
+        "real-sys": [
+          "dep:libc"
+        ],
+        "regex": [
+          "dep:regex"
+        ],
+        "tracing": [
+          "dep:tracing"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "which",
+        "which-rs",
+        "unix",
+        "command"
+      ],
       "manifest": "crates-io/which/8.0.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +209,17 @@
         "edition": "2021",
         "name": "which",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bae2f2b2b816647a1cab1acc91f5bd20812d53cb344382635ec2181940c8034f",
+        "package": "which",
+        "registry": "crates-io",
+        "version": "8.0.6"
+      },
+      "vcs": {
+        "commit": "17fde4abb85f24d39954b012067c14f9f809ed27",
+        "path": "",
+        "system": "git"
       },
       "version": "8.0.6",
       "yanked": false

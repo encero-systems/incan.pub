@@ -701,6 +701,48 @@
           "unit_identity": "sha256:e9aeefe092d21c6676a6324e175ec8f57b70dd862ab96a12c7f2470ee9a56b7d"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "require-cas"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 580,
+          "content": "content/sha256/e8258273fed6f1796485777655118f2369fd3f000191e9d8cdbd10bf052946a9",
+          "digest": "sha256:e8258273fed6f1796485777655118f2369fd3f000191e9d8cdbd10bf052946a9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10874,
+          "content": "content/sha256/275c491d6d1160553c32fd6127061d7f9606c3ea25abfad6ca3f6ed088785427",
+          "digest": "sha256:275c491d6d1160553c32fd6127061d7f9606c3ea25abfad6ca3f6ed088785427",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1094,
+          "content": "content/sha256/6652c868f35dfe5e8ef636810a4e576b9d663f3a17fb0f5613ad73583e1b88fd",
+          "digest": "sha256:6652c868f35dfe5e8ef636810a4e576b9d663f3a17fb0f5613ad73583e1b88fd",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -710,14 +752,30 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "cfg-target-has-atomic": [],
+        "default": [
+          "std"
+        ],
+        "portable-atomic": [
+          "dep:portable-atomic"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/futures-core/0.3.34/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -727,6 +785,17 @@
         "edition": "2018",
         "name": "futures_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:92d699e522242e69e3003b94ecc1f960f3a5e015aa7c5d7486e65ad01dd94f5e",
+        "package": "futures-core",
+        "registry": "crates-io",
+        "version": "0.3.34"
+      },
+      "vcs": {
+        "commit": "705e6b5c0f06535b1aac1cb1989a172b3d45be8c",
+        "path": "futures-core",
+        "system": "git"
       },
       "version": "0.3.34",
       "yanked": false
@@ -747,6 +816,48 @@
       "advisories": 0,
       "archive": "sha256:1b6549c7df02b2c8a5b784f067c9cfbf745af279fae9bc238daedb26f99be3ca",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "require-cas"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 580,
+          "content": "content/sha256/e8258273fed6f1796485777655118f2369fd3f000191e9d8cdbd10bf052946a9",
+          "digest": "sha256:e8258273fed6f1796485777655118f2369fd3f000191e9d8cdbd10bf052946a9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10874,
+          "content": "content/sha256/275c491d6d1160553c32fd6127061d7f9606c3ea25abfad6ca3f6ed088785427",
+          "digest": "sha256:275c491d6d1160553c32fd6127061d7f9606c3ea25abfad6ca3f6ed088785427",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1094,
+          "content": "content/sha256/6652c868f35dfe5e8ef636810a4e576b9d663f3a17fb0f5613ad73583e1b88fd",
+          "digest": "sha256:6652c868f35dfe5e8ef636810a4e576b9d663f3a17fb0f5613ad73583e1b88fd",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -756,6 +867,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -767,14 +879,30 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "cfg-target-has-atomic": [],
+        "default": [
+          "std"
+        ],
+        "portable-atomic": [
+          "dep:portable-atomic"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/futures-core/0.3.32/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -784,6 +912,17 @@
         "edition": "2018",
         "name": "futures_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7e3450815272ef58cec6d564423f6e755e25379b217b0bc688e295ba24df6b1d",
+        "package": "futures-core",
+        "registry": "crates-io",
+        "version": "0.3.32"
+      },
+      "vcs": {
+        "commit": "d9bba94c239daa1175a5bb2958f37a5c72db3f6a",
+        "path": "futures-core",
+        "system": "git"
       },
       "version": "0.3.32",
       "yanked": false

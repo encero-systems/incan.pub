@@ -114,11 +114,110 @@
           "unit_identity": "sha256:78ba4330d8bee1cbbd4e339ebda531f92a22d908a879ead68afa7fdc5418b81b"
         }
       ],
+      "categories": [
+        "cryptography",
+        "authentication",
+        "encoding",
+        "no-std",
+        "parser-implementations"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/base64ct",
+          "name": "base64ct",
+          "optional": false,
+          "req": "^1.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ctutils",
+          "name": "ctutils",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/getrandom",
+          "name": "getrandom",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": true,
+          "req": "^0.10"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1998,
+          "content": "content/sha256/80022b8f6f07858de4637bc5b029814fe13befeb11d20de6e2328697b3f2f59a",
+          "digest": "sha256:80022b8f6f07858de4637bc5b029814fe13befeb11d20de6e2328697b3f2f59a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10849,
+          "content": "content/sha256/a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "digest": "sha256:a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "digest": "sha256:57a4d75c1d095bb94754a478f3cd15e60ac66a5c5627d844be01a918eea5fe88",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 640,
+          "content": "content/sha256/bc4f0ed1d0166cead53c0fedebf8f4c692eeda7e620b89a5645748f8b28002f9",
+          "digest": "sha256:bc4f0ed1d0166cead53c0fedebf8f4c692eeda7e620b89a5645748f8b28002f9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "base64ct/alloc"
+        ],
+        "default": [
+          "rand_core"
+        ],
+        "getrandom": [
+          "dep:getrandom"
+        ],
+        "rand_core": [
+          "dep:rand_core"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crypt",
+        "crypto",
+        "password-hash",
+        "password-hashing"
+      ],
       "manifest": "crates-io/phc/0.6.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +228,17 @@
         "edition": "2024",
         "name": "phc",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:44dc769b75f93afdddd8c7fa12d685292ddeff1e66f7f0f3a234cf1818afe892",
+        "package": "phc",
+        "registry": "crates-io",
+        "version": "0.6.1"
+      },
+      "vcs": {
+        "commit": "02a43929d75c8f7a515dcc240648c26d2fe4ee5f",
+        "path": "phc",
+        "system": "git"
       },
       "version": "0.6.1",
       "yanked": false

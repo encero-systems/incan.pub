@@ -178,11 +178,77 @@
           "unit_identity": "sha256:fea6afa3d56c70c29bcb80e38dbd68ce03a30001769ad2e2284a6ceeed71459e"
         }
       ],
+      "categories": [
+        "memory-management",
+        "data-structures",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/lazy_static",
+          "name": "lazy_static",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "checkpoint"
+          ],
+          "loaf": "crates-io/loom",
+          "name": "loom",
+          "optional": true,
+          "req": "^0.5",
+          "target": "cfg(loom)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 9262,
+          "content": "content/sha256/51409ab641f970e4bb7e04286344f38ba6b12b6d676e1e26211234b717e60da9",
+          "digest": "sha256:51409ab641f970e4bb7e04286344f38ba6b12b6d676e1e26211234b717e60da9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1057,
+          "content": "content/sha256/eafbfa606bc005ed7fd2f623d65af17ffe4ef7c017221ac14405bf4140771ea9",
+          "digest": "sha256:eafbfa606bc005ed7fd2f623d65af17ffe4ef7c017221ac14405bf4140771ea9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 6985,
+          "content": "content/sha256/7e3afcfd86e5fb650b0193a4c6e5247bf8d82ca2162202883cdba2a55d1b1452",
+          "digest": "sha256:7e3afcfd86e5fb650b0193a4c6e5247bf8d82ca2162202883cdba2a55d1b1452",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "loom": [
+          "dep:loom"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "slab",
+        "allocator",
+        "lock-free",
+        "atomic"
+      ],
       "manifest": "crates-io/sharded-slab/0.1.7/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -193,6 +259,17 @@
         "edition": "2018",
         "name": "sharded_slab",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f40ca3c46823713e0d4209592e8d6e826aa57e928f09752619fc696c499637f6",
+        "package": "sharded-slab",
+        "registry": "crates-io",
+        "version": "0.1.7"
+      },
+      "vcs": {
+        "commit": "40579b92debe2ef283a455eb379945e023080ff3",
+        "path": "",
+        "system": "git"
       },
       "version": "0.1.7",
       "yanked": false

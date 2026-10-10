@@ -210,6 +210,87 @@
           "unit_identity": "sha256:4eb570f4cb5bc35ad1d9b5c8d3e0769a4a0c3789171c28590d5fdc20d7203f5c"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "web-programming::http-client"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/base64",
+          "name": "base64",
+          "optional": false,
+          "req": "^0.22"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "serde"
+          ],
+          "loaf": "crates-io/jiff",
+          "name": "jiff",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/schemars",
+          "name": "schemars",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/schemars",
+          "name": "schemars08",
+          "optional": true,
+          "req": "^0.8"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2712,
+          "content": "content/sha256/296c40237e8920043e8fb05364fe1bc908eca4f5181e7ea91b380879578551f4",
+          "digest": "sha256:296c40237e8920043e8fb05364fe1bc908eca4f5181e7ea91b380879578551f4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -220,6 +301,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -230,6 +312,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -242,6 +325,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -252,6 +336,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -264,6 +349,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -274,6 +360,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -286,6 +373,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -296,14 +384,44 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "earliest": [
+          "v1_32"
+        ],
+        "latest": [
+          "v1_36"
+        ],
+        "schemars": [
+          "dep:schemars"
+        ],
+        "schemars08": [
+          "dep:schemars08"
+        ],
+        "std": [],
+        "v1_32": [],
+        "v1_33": [],
+        "v1_34": [],
+        "v1_35": [],
+        "v1_36": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "client",
+        "kubernetes",
+        "k8s",
+        "http"
+      ],
       "manifest": "crates-io/k8s-openapi/0.28.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -314,6 +432,17 @@
         "edition": "2021",
         "name": "k8s_openapi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d9c6922f6afe80418dd6019818af5d0d34584c371780ff09b9752370c25b4abb",
+        "package": "k8s-openapi",
+        "registry": "crates-io",
+        "version": "0.28.0"
+      },
+      "vcs": {
+        "commit": "b2c839b8b1828e9035ff8467cdac87756190aa4e",
+        "path": "",
+        "system": "git"
       },
       "version": "0.28.0",
       "yanked": false

@@ -134,11 +134,125 @@
           "unit_identity": "sha256:8abadf05550b25f139746a821d1f2daf8f949655874355cd7ed0092b66120f8c"
         }
       ],
+      "categories": [
+        "concurrency",
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "js",
+            "std"
+          ],
+          "loaf": "crates-io/fastrand",
+          "name": "fastrand",
+          "optional": true,
+          "req": "^2.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/futures-sink",
+          "name": "futures-sink",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "mutex"
+          ],
+          "loaf": "crates-io/spin",
+          "name": "spin1",
+          "optional": false,
+          "req": "^0.9.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3636,
+          "content": "content/sha256/84bd3ddff0ded8622857a9452cf920b547936d7d79d38fe4fdb4d989da92f97e",
+          "digest": "sha256:84bd3ddff0ded8622857a9452cf920b547936d7d79d38fe4fdb4d989da92f97e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11326,
+          "content": "content/sha256/d8621ec2eee5b9ca3c65f8492505f3590de8574fac0fdf5132a77232dba47abc",
+          "digest": "sha256:d8621ec2eee5b9ca3c65f8492505f3590de8574fac0fdf5132a77232dba47abc",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1022,
+          "content": "content/sha256/30fefc3a7d6a0041541858293bcbea2dde4caa4c0a5802f996a7f7e8c0085652",
+          "digest": "sha256:30fefc3a7d6a0041541858293bcbea2dde4caa4c0a5802f996a7f7e8c0085652",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3182,
+          "content": "content/sha256/0ad4458ab4158716e9cecf5f388663f84cd3a2f38493da4d794ff5a0fc7894fc",
+          "digest": "sha256:0ad4458ab4158716e9cecf5f388663f84cd3a2f38493da4d794ff5a0fc7894fc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "async": [
+          "futures-sink",
+          "futures-core"
+        ],
+        "default": [
+          "async",
+          "select",
+          "eventual-fairness"
+        ],
+        "eventual-fairness": [
+          "select",
+          "fastrand"
+        ],
+        "fastrand": [
+          "dep:fastrand"
+        ],
+        "futures-core": [
+          "dep:futures-core"
+        ],
+        "futures-sink": [
+          "dep:futures-sink"
+        ],
+        "select": [],
+        "spin": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "mpsc",
+        "fifo",
+        "channel",
+        "thread",
+        "mpmc"
+      ],
       "manifest": "crates-io/flume/0.12.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -149,6 +263,17 @@
         "edition": "2018",
         "name": "flume",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5e139bc46ca777eb5efaf62df0ab8cc5fd400866427e56c68b22e414e53bd3be",
+        "package": "flume",
+        "registry": "crates-io",
+        "version": "0.12.0"
+      },
+      "vcs": {
+        "commit": "58e0c09b7af2c135d13017c1fd56b8ed9d0c76a5",
+        "path": "",
+        "system": "git"
       },
       "version": "0.12.0",
       "yanked": false

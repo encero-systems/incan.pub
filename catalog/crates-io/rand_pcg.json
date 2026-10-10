@@ -102,11 +102,83 @@
           "unit_identity": "sha256:7ee5565f3e9e79fbc95498f0aead079b8d10674af9480c57f398b6b91496c3dd"
         }
       ],
+      "categories": [
+        "algorithms",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rand_core",
+          "name": "rand_core",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1538,
+          "content": "content/sha256/c843dd7d6b5fecbd72d826845cc553dfd743ab260507dfedceb3eba5818e80bd",
+          "digest": "sha256:c843dd7d6b5fecbd72d826845cc553dfd743ab260507dfedceb3eba5818e80bd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10282,
+          "content": "content/sha256/6df43f6f4b5d4587f3d8d71e45532c688fd168afa5fe89d571cb32fa09c4ef51",
+          "digest": "sha256:6df43f6f4b5d4587f3d8d71e45532c688fd168afa5fe89d571cb32fa09c4ef51",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1139,
+          "content": "content/sha256/2234e3cefee876aeb686ad89e978bdb07bf118a1186ab1cf161bcdf69d4b4f57",
+          "digest": "sha256:2234e3cefee876aeb686ad89e978bdb07bf118a1186ab1cf161bcdf69d4b4f57",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 2994,
+          "content": "content/sha256/610725b9a58a814e774c578507b233c1c56d8def77f33e32ddb145a25338565b",
+          "digest": "sha256:610725b9a58a814e774c578507b233c1c56d8def77f33e32ddb145a25338565b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "random",
+        "rng",
+        "pcg"
+      ],
       "manifest": "crates-io/rand_pcg/0.10.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +189,17 @@
         "edition": "2024",
         "name": "rand_pcg",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:caa0f4137e1c0a72f4c651489402276c8e8e1cf081f3b0ba156d2cbeef09e86a",
+        "package": "rand_pcg",
+        "registry": "crates-io",
+        "version": "0.10.2"
+      },
+      "vcs": {
+        "commit": "cc285e994b4dc236f138fafe2a59377ef63cdcfa",
+        "path": "rand_pcg",
+        "system": "git"
       },
       "version": "0.10.2",
       "yanked": false

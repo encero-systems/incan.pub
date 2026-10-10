@@ -25,11 +25,91 @@
       "advisories": 0,
       "archive": "sha256:515904eb4a2dd0ec0ab184ddbb09b0f7aeb2db432c829dc9b4b071f7e75996e6",
       "assets": [],
+      "categories": [
+        "filesystem"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-lifetimes",
+          "name": "io-lifetimes",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fs",
+            "time"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.0",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Storage_FileSystem"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.52, <0.60",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 989,
+          "content": "content/sha256/72d68487884aed494cae030f0dc6e288f41f3a7237984e6aa824742f09827036",
+          "digest": "sha256:72d68487884aed494cae030f0dc6e288f41f3a7237984e6aa824742f09827036",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "api",
+        "file"
+      ],
       "manifest": "crates-io/fs-set-times/0.20.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +120,17 @@
         "edition": "2021",
         "name": "fs_set_times",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:94e7099f6313ecacbe1256e8ff9d617b75d1bcb16a6fddef94866d225a01a14a",
+        "package": "fs-set-times",
+        "registry": "crates-io",
+        "version": "0.20.3"
+      },
+      "vcs": {
+        "commit": "56406c912238a253f01f10446541f2cf2d9a88c3",
+        "path": "",
+        "system": "git"
       },
       "version": "0.20.3",
       "yanked": false

@@ -114,11 +114,79 @@
           "unit_identity": "sha256:bac501d46555c222f4ef28862ca38f57b213245a75c842c47df18316532676a1"
         }
       ],
+      "categories": [
+        "parsing"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pest",
+          "name": "pest",
+          "optional": false,
+          "req": "^2.9.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/pest_generator",
+          "name": "pest_generator",
+          "optional": false,
+          "req": "^2.9.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8113,
+          "content": "content/sha256/214e60d12802a3c5990520ff21e6e8a788b800cb49b16663e45ebdc417202ac4",
+          "digest": "sha256:214e60d12802a3c5990520ff21e6e8a788b800cb49b16663e45ebdc417202ac4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "_README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "grammar-extras": [
+          "pest_generator/grammar-extras"
+        ],
+        "std": [
+          "pest/std",
+          "pest_generator/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "pest",
+        "parser",
+        "peg",
+        "grammar"
+      ],
       "manifest": "crates-io/pest_derive/2.9.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -129,6 +197,17 @@
         "edition": "2021",
         "name": "pest_derive",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:284b60557f2c4a2e72ad3f2d34d42685a2fa4a6a61d0d2a10c0ae2a5e916c2cf",
+        "package": "pest_derive",
+        "registry": "crates-io",
+        "version": "2.9.2"
+      },
+      "vcs": {
+        "commit": "67e5acbbe622fab0771cf9d515e4ea7744f482d5",
+        "path": "derive",
+        "system": "git"
       },
       "version": "2.9.2",
       "yanked": false

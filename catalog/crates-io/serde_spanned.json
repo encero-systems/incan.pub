@@ -323,11 +323,76 @@
           "unit_identity": "sha256:0ec0f53fbfca9edebc60a14f08165e149d9c573ed23ecc139d30c5542e8a9a48"
         }
       ],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.228"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 977,
+          "content": "content/sha256/09901668a8a5cb5a6a187e155aba756f1f58e260de112fafc1c2aaed45dd8480",
+          "digest": "sha256:09901668a8a5cb5a6a187e155aba756f1f58e260de112fafc1c2aaed45dd8480",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serde_core?/alloc"
+        ],
+        "default": [
+          "std",
+          "serde"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "alloc",
+          "serde_core?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "serde",
+        "span"
+      ],
       "manifest": "crates-io/serde_spanned/1.1.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -337,6 +402,17 @@
         "edition": "2024",
         "name": "serde_spanned",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6662b5879511e06e8999a8a235d848113e942c9124f211511b16466ee2995f26",
+        "package": "serde_spanned",
+        "registry": "crates-io",
+        "version": "1.1.1"
+      },
+      "vcs": {
+        "commit": "9db8aad6eafbc62f6b9d1950117649cc41eaf695",
+        "path": "crates/serde_spanned",
+        "system": "git"
       },
       "version": "1.1.1",
       "yanked": false
@@ -357,6 +433,51 @@
       "advisories": 0,
       "archive": "sha256:88daba4f39823b055fde605d42d44d49892cb11ab0bb509147a65d2bf1cbaf77",
       "assets": [],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.225"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 977,
+          "content": "content/sha256/09901668a8a5cb5a6a187e155aba756f1f58e260de112fafc1c2aaed45dd8480",
+          "digest": "sha256:09901668a8a5cb5a6a187e155aba756f1f58e260de112fafc1c2aaed45dd8480",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -367,6 +488,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -379,14 +501,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "serde_core?/alloc"
+        ],
+        "default": [
+          "std",
+          "serde"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "std": [
+          "alloc",
+          "serde_core?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "serde",
+        "span"
+      ],
       "manifest": "crates-io/serde_spanned/1.0.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -396,6 +539,17 @@
         "edition": "2021",
         "name": "serde_spanned",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f8bbf91e5a4d6315eee45e704372590b30e260ee83af6639d64557f51b067776",
+        "package": "serde_spanned",
+        "registry": "crates-io",
+        "version": "1.0.4"
+      },
+      "vcs": {
+        "commit": "34d45f282ef1be836f192b0a8e4b52ac5024f1be",
+        "path": "crates/serde_spanned",
+        "system": "git"
       },
       "version": "1.0.4",
       "yanked": false
@@ -416,11 +570,65 @@
       "advisories": 0,
       "archive": "sha256:d0e7eba5be02d0bd9bee12a4aeabf642f137d5b73115fc489c135066087ba1ce",
       "assets": [],
+      "categories": [
+        "encoding",
+        "parser-implementations",
+        "parsing",
+        "config"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.145"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 905,
+          "content": "content/sha256/1f3ced4e8c5ddad315e6ac6e8e1e07a411b2dce5e6c8db3bcce064e1de51e153",
+          "digest": "sha256:1f3ced4e8c5ddad315e6ac6e8e1e07a411b2dce5e6c8db3bcce064e1de51e153",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "digest": "sha256:6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "serde": [
+          "dep:serde"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "serde",
+        "span"
+      ],
       "manifest": "crates-io/serde_spanned/0.6.9/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -431,6 +639,17 @@
         "edition": "2021",
         "name": "serde_spanned",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:bf41e0cfaf7226dca15e8197172c295a782857fcb97fad1808a166870dee75a3",
+        "package": "serde_spanned",
+        "registry": "crates-io",
+        "version": "0.6.9"
+      },
+      "vcs": {
+        "commit": "838a0223142a2137b530e020cb7231aba46f7946",
+        "path": "crates/serde_spanned",
+        "system": "git"
       },
       "version": "0.6.9",
       "yanked": false

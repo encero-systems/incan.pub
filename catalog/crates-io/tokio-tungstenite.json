@@ -123,11 +123,214 @@
           "unit_identity": "sha256:5b3e7cf7c63ce5c86396e5455f43a55dee6732209a2840eea766fea2b44c973f"
         }
       ],
+      "categories": [
+        "web-programming::websocket",
+        "network-programming",
+        "asynchronous",
+        "concurrency"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "sink",
+            "std"
+          ],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": false,
+          "req": "^0.3.28"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/native-tls",
+          "name": "native-tls-crate",
+          "optional": true,
+          "req": "^0.2.11"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rustls",
+          "name": "rustls",
+          "optional": true,
+          "req": "^0.23.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustls-native-certs",
+          "name": "rustls-native-certs",
+          "optional": true,
+          "req": "^0.8.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustls-pki-types",
+          "name": "rustls-pki-types",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "io-util"
+          ],
+          "loaf": "crates-io/tokio",
+          "name": "tokio",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tokio-native-tls",
+          "name": "tokio-native-tls",
+          "optional": true,
+          "req": "^0.3.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tokio-rustls",
+          "name": "tokio-rustls",
+          "optional": true,
+          "req": "^0.26.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/tungstenite",
+          "name": "tungstenite",
+          "optional": false,
+          "req": "^0.30.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/webpki-roots",
+          "name": "webpki-roots",
+          "optional": true,
+          "req": "^0.26.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3029,
+          "content": "content/sha256/ff6376adb37c3f09445aaa97cfc356e35ba0e4fcfee3452fdd1fa791cdbd97da",
+          "digest": "sha256:ff6376adb37c3f09445aaa97cfc356e35ba0e4fcfee3452fdd1fa791cdbd97da",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1093,
+          "content": "content/sha256/fdd55e2b2da854b0fbdc1e607df7c2ba1e1ebf91ecb77c515511ebeef972bc8f",
+          "digest": "sha256:fdd55e2b2da854b0fbdc1e607df7c2ba1e1ebf91ecb77c515511ebeef972bc8f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 4689,
+          "content": "content/sha256/e374356eacf72059d3a65ee08a6a41a171c0424d2a67735bae7ee59da50fcb43",
+          "digest": "sha256:e374356eacf72059d3a65ee08a6a41a171c0424d2a67735bae7ee59da50fcb43",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "__rustls-tls": [
+          "rustls",
+          "rustls-pki-types",
+          "tokio-rustls",
+          "stream",
+          "tungstenite/__rustls-tls",
+          "handshake"
+        ],
+        "connect": [
+          "stream",
+          "tokio/net",
+          "handshake"
+        ],
+        "default": [
+          "connect",
+          "handshake"
+        ],
+        "handshake": [
+          "tungstenite/handshake"
+        ],
+        "native-tls": [
+          "native-tls-crate",
+          "tokio-native-tls",
+          "stream",
+          "tungstenite/native-tls",
+          "handshake"
+        ],
+        "native-tls-crate": [
+          "dep:native-tls-crate"
+        ],
+        "native-tls-vendored": [
+          "native-tls",
+          "dep:native-tls-crate",
+          "native-tls-crate/vendored",
+          "tungstenite/native-tls-vendored"
+        ],
+        "rustls": [
+          "dep:rustls"
+        ],
+        "rustls-native-certs": [
+          "dep:rustls-native-certs"
+        ],
+        "rustls-pki-types": [
+          "dep:rustls-pki-types"
+        ],
+        "rustls-tls-native-roots": [
+          "__rustls-tls",
+          "rustls-native-certs"
+        ],
+        "rustls-tls-webpki-roots": [
+          "__rustls-tls",
+          "webpki-roots"
+        ],
+        "stream": [],
+        "tokio-native-tls": [
+          "dep:tokio-native-tls"
+        ],
+        "tokio-rustls": [
+          "dep:tokio-rustls"
+        ],
+        "url": [
+          "tungstenite/url"
+        ],
+        "webpki-roots": [
+          "dep:webpki-roots"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "websocket",
+        "io",
+        "web"
+      ],
       "manifest": "crates-io/tokio-tungstenite/0.30.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -138,6 +341,17 @@
         "edition": "2018",
         "name": "tokio_tungstenite",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:17a073bfed563fa236697a068031408a93cd9522e08abf9933ead3e73411bd71",
+        "package": "tokio-tungstenite",
+        "registry": "crates-io",
+        "version": "0.30.0"
+      },
+      "vcs": {
+        "commit": "4994a078037a18a9347b8cf49291a5031d63d9e0",
+        "path": "",
+        "system": "git"
       },
       "version": "0.30.0",
       "yanked": false

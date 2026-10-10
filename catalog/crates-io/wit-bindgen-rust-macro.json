@@ -133,6 +133,113 @@
           "unit_identity": "sha256:e01cc3287687a5c837a073657a62fc6027b3663c929b5763c80fe347645f07d5"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.102"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/macro-string",
+          "name": "macro-string",
+          "optional": true,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^3.0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-core",
+          "name": "wit-bindgen-core",
+          "optional": false,
+          "req": "^0.62.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-rust",
+          "name": "wit-bindgen-rust",
+          "optional": false,
+          "req": "^0.62.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 503,
+          "content": "content/sha256/68ba46dd031604e67502d81c51a706ebe978219bb435a79437dd8132c1763ccc",
+          "digest": "sha256:68ba46dd031604e67502d81c51a706ebe978219bb435a79437dd8132c1763ccc",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -141,6 +248,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -150,6 +258,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -160,6 +269,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -169,6 +279,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -179,6 +290,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -188,14 +300,24 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "macro-string"
+        ],
+        "macro-string": [
+          "dep:macro-string"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-bindgen-rust-macro/0.62.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -206,6 +328,17 @@
         "edition": "2024",
         "name": "wit_bindgen_rust_macro",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:8f19d63da8e478a370ef8192d90ccb517965b7747d6b46cd2d831dd0ef4d2541",
+        "package": "wit-bindgen-rust-macro",
+        "registry": "crates-io",
+        "version": "0.62.0"
+      },
+      "vcs": {
+        "commit": "c604ee01c03f50d7301984a3c920a650752cd136",
+        "path": "crates/guest-rust/macro",
+        "system": "git"
       },
       "version": "0.62.0",
       "yanked": false
@@ -228,11 +361,127 @@
       "advisories": 0,
       "archive": "sha256:d066ac2a252a903e0f8008ffdc666fef5f962edafc3cb849fad2327cad9cd370",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.102"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/macro-string",
+          "name": "macro-string",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": false,
+          "req": "^0.2.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.89"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-core",
+          "name": "wit-bindgen-core",
+          "optional": false,
+          "req": "^0.57.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-rust",
+          "name": "wit-bindgen-rust",
+          "optional": false,
+          "req": "^0.57.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 563,
+          "content": "content/sha256/2752154b0d2b7794d3b1eaa5bc3a3e5038d85bb5fea5398e35a7aa144f0493c7",
+          "digest": "sha256:2752154b0d2b7794d3b1eaa5bc3a3e5038d85bb5fea5398e35a7aa144f0493c7",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "macro-string"
+        ],
+        "macro-string": [
+          "dep:macro-string"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-bindgen-rust-macro/0.57.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -243,6 +492,17 @@
         "edition": "2024",
         "name": "wit_bindgen_rust_macro",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:af9237d678e3513ad24e96fe98beacdc0db6405284ba2a2400418cf0d42caa89",
+        "package": "wit-bindgen-rust-macro",
+        "registry": "crates-io",
+        "version": "0.57.1"
+      },
+      "vcs": {
+        "commit": "2e00369a643c0c8048b8636401e36b0cbf2dfb05",
+        "path": "crates/guest-rust/macro",
+        "system": "git"
       },
       "version": "0.57.1",
       "yanked": false
@@ -265,11 +525,114 @@
       "advisories": 0,
       "archive": "sha256:2f9036a4cd23680a8e5d589d781625c145adb739aa1e36d0a696d57dc41985e8",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.72"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/prettyplease",
+          "name": "prettyplease",
+          "optional": false,
+          "req": "^0.2.20"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": false,
+          "req": "^2.0.89"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-core",
+          "name": "wit-bindgen-core",
+          "optional": false,
+          "req": "^0.51.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen-rust",
+          "name": "wit-bindgen-rust",
+          "optional": false,
+          "req": "^0.51.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 563,
+          "content": "content/sha256/5eaa0eb81a4370ff5734beb1d489211c3a40e14d10f131045a1a0da1a34f81ac",
+          "digest": "sha256:5eaa0eb81a4370ff5734beb1d489211c3a40e14d10f131045a1a0da1a34f81ac",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "async": []
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wit-bindgen-rust-macro/0.51.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -280,6 +643,17 @@
         "edition": "2024",
         "name": "wit_bindgen_rust_macro",
         "type": "proc-macro"
+      },
+      "upstream": {
+        "checksum": "sha256:0c0f9bfd77e6a48eccf51359e3ae77140a7f50b1e2ebfe62422d8afdaffab17a",
+        "package": "wit-bindgen-rust-macro",
+        "registry": "crates-io",
+        "version": "0.51.0"
+      },
+      "vcs": {
+        "commit": "0c39eee9f23d0530ed81bdf68bdd91fcc09ae08f",
+        "path": "crates/guest-rust/macro",
+        "system": "git"
       },
       "version": "0.51.0",
       "yanked": false

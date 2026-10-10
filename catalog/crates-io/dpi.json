@@ -112,11 +112,89 @@
           "unit_identity": "sha256:8bc3588a8650912ef3811071613a902f52e4ca2da1d3f3b060f726bd8accae7a"
         }
       ],
+      "categories": [
+        "gui"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/mint",
+          "name": "mint",
+          "optional": true,
+          "req": "^0.5.6"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde_derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1064,
+          "content": "content/sha256/0b83337b6da62eb54dc956d3deb4071b07b16365dba27fe795f9d22efaa05698",
+          "digest": "sha256:0b83337b6da62eb54dc956d3deb4071b07b16365dba27fe795f9d22efaa05698",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11323,
+          "content": "content/sha256/6dc0e068dcf3a5bc8e054205b85b7720e1d49265bbc64bf515d2cf79197df69a",
+          "digest": "sha256:6dc0e068dcf3a5bc8e054205b85b7720e1d49265bbc64bf515d2cf79197df69a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 2444,
+          "content": "content/sha256/9eff396a99bafd208e7126602420d6864f6066c08b84485a5b032320a9c01997",
+          "digest": "sha256:9eff396a99bafd208e7126602420d6864f6066c08b84485a5b032320a9c01997",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-LIBM-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 768,
+          "content": "content/sha256/3d2a8557592fe70901a4c2cd9794d02ef8f764cbcad00aba52255e0d735ff8dd",
+          "digest": "sha256:3d2a8557592fe70901a4c2cd9794d02ef8f764cbcad00aba52255e0d735ff8dd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "mint": [
+          "dep:mint"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "DPI",
+        "HiDPI",
+        "scale-factor"
+      ],
       "manifest": "crates-io/dpi/0.1.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -127,6 +205,17 @@
         "edition": "2021",
         "name": "dpi",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d8b14ccef22fc6f5a8f4d7d768562a182c04ce9a3b3157b91390b52ddfdf1a76",
+        "package": "dpi",
+        "registry": "crates-io",
+        "version": "0.1.2"
+      },
+      "vcs": {
+        "commit": "587ade844dfb0eada3696ba1cb263c66eea80581",
+        "path": "dpi",
+        "system": "git"
       },
       "version": "0.1.2",
       "yanked": false

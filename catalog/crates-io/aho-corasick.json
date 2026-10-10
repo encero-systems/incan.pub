@@ -723,6 +723,65 @@
           "unit_identity": "sha256:96944ab6932a73534e3a702d896b50e58d560ddda9384bc597989b1386fd9b69"
         }
       ],
+      "categories": [
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2.4.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5849,
+          "content": "content/sha256/afc4d559a98cf190029af0bf320fc0022725e349cd2a303aac860254e28f3c53",
+          "digest": "sha256:afc4d559a98cf190029af0bf320fc0022725e349cd2a303aac860254e28f3c53",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 126,
+          "content": "content/sha256/01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "digest": "sha256:01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "digest": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1211,
+          "content": "content/sha256/7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "digest": "sha256:7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "format": "text",
+          "origin": "package",
+          "path": "UNLICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -731,14 +790,37 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std",
+          "perf-literal"
+        ],
+        "logging": [
+          "dep:log"
+        ],
+        "perf-literal": [
+          "dep:memchr"
+        ],
+        "std": [
+          "memchr?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "string",
+        "search",
+        "text",
+        "pattern",
+        "multi"
+      ],
       "manifest": "crates-io/aho-corasick/1.1.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -748,6 +830,17 @@
         "edition": "2021",
         "name": "aho_corasick",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c982642fa9e8606056828ee9a8505737230110bb1099153c79efe865c59d12ba",
+        "package": "aho-corasick",
+        "registry": "crates-io",
+        "version": "1.1.5"
+      },
+      "vcs": {
+        "commit": "5178060ce73d91938f8582d0360e3be031380440",
+        "path": "",
+        "system": "git"
       },
       "version": "1.1.5",
       "yanked": false
@@ -770,6 +863,65 @@
       "advisories": 0,
       "archive": "sha256:558ce67508564870256e326b6b08126e4c04f1787c1f39980df12dd58c1ba3ad",
       "assets": [],
+      "categories": [
+        "text-processing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2.4.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5849,
+          "content": "content/sha256/afc4d559a98cf190029af0bf320fc0022725e349cd2a303aac860254e28f3c53",
+          "digest": "sha256:afc4d559a98cf190029af0bf320fc0022725e349cd2a303aac860254e28f3c53",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 126,
+          "content": "content/sha256/01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "digest": "sha256:01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+          "format": "text",
+          "origin": "package",
+          "path": "COPYING",
+          "role": "license"
+        },
+        {
+          "bytes": 1081,
+          "content": "content/sha256/0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "digest": "sha256:0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1211,
+          "content": "content/sha256/7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "digest": "sha256:7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c",
+          "format": "text",
+          "origin": "package",
+          "path": "UNLICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -778,6 +930,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -788,14 +941,37 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std",
+          "perf-literal"
+        ],
+        "logging": [
+          "dep:log"
+        ],
+        "perf-literal": [
+          "dep:memchr"
+        ],
+        "std": [
+          "memchr?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "string",
+        "search",
+        "text",
+        "pattern",
+        "multi"
+      ],
       "manifest": "crates-io/aho-corasick/1.1.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -805,6 +981,17 @@
         "edition": "2021",
         "name": "aho_corasick",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ddd31a130427c27518df266943a5308ed92d4b226cc639f5a8f1002816174301",
+        "package": "aho-corasick",
+        "registry": "crates-io",
+        "version": "1.1.4"
+      },
+      "vcs": {
+        "commit": "17f8b32e3b7c845ef3c5429b823804f552f14ec9",
+        "path": "",
+        "system": "git"
       },
       "version": "1.1.4",
       "yanked": false

@@ -26,6 +26,101 @@
       "advisories": 0,
       "archive": "sha256:3146deea6659ba99171b72f9ea67cc756f2d3149614d8e11e2bea51658bbdd41",
       "assets": [],
+      "categories": [
+        "filesystem",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arf-strings",
+          "name": "arf-strings",
+          "optional": true,
+          "req": "^0.7.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/camino",
+          "name": "camino",
+          "optional": true,
+          "req": "^1.0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cap-primitives",
+          "name": "cap-primitives",
+          "optional": false,
+          "req": "^3.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/io-extras",
+          "name": "io-extras",
+          "optional": false,
+          "req": "^0.18.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-lifetimes",
+          "name": "io-lifetimes",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fs"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.0",
+          "target": "cfg(not(windows))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2684,
+          "content": "content/sha256/090b59006735b2e2352d3ef6315becf729ed788f5c6f813d60c4bc3bf44e1b6e",
+          "digest": "sha256:090b59006735b2e2352d3ef6315becf729ed788f5c6f813d60c4bc3bf44e1b6e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -33,14 +128,37 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arf-strings": [
+          "dep:arf-strings"
+        ],
+        "arf_strings": [
+          "fs_utf8",
+          "arf-strings"
+        ],
+        "camino": [
+          "dep:camino"
+        ],
+        "default": [],
+        "fs_utf8": [
+          "camino"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "std",
+        "api",
+        "network",
+        "file"
+      ],
       "manifest": "crates-io/cap-std/3.4.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -51,6 +169,17 @@
         "edition": "2021",
         "name": "cap_std",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a59e59fa26472d29680ece6a9f8ee8b0551a719a33df2f5240bde065ecbddfd7",
+        "package": "cap-std",
+        "registry": "crates-io",
+        "version": "3.4.6"
+      },
+      "vcs": {
+        "commit": "cd4c6330089e3731c68b7b98d4dde0cda27402ff",
+        "path": "cap-std",
+        "system": "git"
       },
       "version": "3.4.6",
       "yanked": false

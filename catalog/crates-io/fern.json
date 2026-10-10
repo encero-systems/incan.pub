@@ -25,11 +25,197 @@
       "advisories": 0,
       "archive": "sha256:f689f026d3bae381ee5e04d480a740112bf4bef865447986342b4a2a9b85f40c",
       "assets": [],
+      "categories": [
+        "development-tools::debugging"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "clock",
+            "std"
+          ],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/colored",
+          "name": "colored",
+          "optional": true,
+          "req": "^2.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.58",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/reopen",
+          "name": "reopen03",
+          "optional": true,
+          "req": "^0.3",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "signals"
+          ],
+          "loaf": "crates-io/reopen",
+          "name": "reopen1",
+          "optional": true,
+          "req": "~1",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syslog",
+          "name": "syslog3",
+          "optional": true,
+          "req": "^3",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syslog",
+          "name": "syslog4",
+          "optional": true,
+          "req": "^4",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syslog",
+          "name": "syslog6",
+          "optional": true,
+          "req": "^6",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/syslog",
+          "name": "syslog7",
+          "optional": true,
+          "req": "^7",
+          "target": "cfg(not(windows))"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3541,
+          "content": "content/sha256/3c4fa5c7fc9e13dc11728c07c63ee397372d7f0c400686a0b928f2f547b25e97",
+          "digest": "sha256:3c4fa5c7fc9e13dc11728c07c63ee397372d7f0c400686a0b928f2f547b25e97",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1059,
+          "content": "content/sha256/618bcda011fe31b4710082efc2785b51da642e236ed99fc1b5e34229836c915e",
+          "digest": "sha256:618bcda011fe31b4710082efc2785b51da642e236ed99fc1b5e34229836c915e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 15656,
+          "content": "content/sha256/bda9a40b1f91f3687ccaea697cf4ef3828899258bf77717c7e7fdc0fea637a8e",
+          "digest": "sha256:bda9a40b1f91f3687ccaea697cf4ef3828899258bf77717c7e7fdc0fea637a8e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "chrono": [
+          "dep:chrono"
+        ],
+        "colored": [
+          "dep:colored"
+        ],
+        "date-based": [
+          "chrono"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "meta-logging-in-format": [],
+        "reopen-03": [
+          "reopen03",
+          "libc"
+        ],
+        "reopen-1": [
+          "reopen1",
+          "libc"
+        ],
+        "reopen03": [
+          "dep:reopen03"
+        ],
+        "reopen1": [
+          "dep:reopen1"
+        ],
+        "syslog-3": [
+          "syslog3"
+        ],
+        "syslog-4": [
+          "syslog4"
+        ],
+        "syslog-6": [
+          "syslog6"
+        ],
+        "syslog-7": [
+          "syslog7"
+        ],
+        "syslog3": [
+          "dep:syslog3"
+        ],
+        "syslog4": [
+          "dep:syslog4"
+        ],
+        "syslog6": [
+          "dep:syslog6"
+        ],
+        "syslog7": [
+          "dep:syslog7"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "log",
+        "logging",
+        "logger"
+      ],
       "manifest": "crates-io/fern/0.7.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +226,17 @@
         "edition": "2018",
         "name": "fern",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4316185f709b23713e41e3195f90edef7fb00c3ed4adc79769cf09cc762a3b29",
+        "package": "fern",
+        "registry": "crates-io",
+        "version": "0.7.1"
+      },
+      "vcs": {
+        "commit": "988003f04dce6e961695962fc81da98c319cdcfc",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.1",
       "yanked": false

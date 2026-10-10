@@ -206,11 +206,102 @@
           "unit_identity": "sha256:5d1ac234264dcbfb18b520a54fc1fc222cc268298ff639ad483ace7494394c74"
         }
       ],
+      "categories": [
+        "development-tools::testing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/fnv",
+          "name": "fnv",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quick-error",
+          "name": "quick-error",
+          "optional": false,
+          "req": "^1.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tempfile",
+          "name": "tempfile",
+          "optional": false,
+          "req": "^3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wait-timeout",
+          "name": "wait-timeout",
+          "optional": true,
+          "req": "^0.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3773,
+          "content": "content/sha256/7216e8b27e304a3045b9b58666ca92f92e5746c5ee934bf758e914920d3a67bb",
+          "digest": "sha256:7216e8b27e304a3045b9b58666ca92f92e5746c5ee934bf758e914920d3a67bb",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/d8e0806926ce9f0a5030c382ecc0ffdf6de6fbea5c69a458435fd443fa7a5b92",
+          "digest": "sha256:d8e0806926ce9f0a5030c382ecc0ffdf6de6fbea5c69a458435fd443fa7a5b92",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1100,
+          "content": "content/sha256/f40048ac0d22ae86929ff00df6fff3941a38c82383fc47312140a5138589ba4c",
+          "digest": "sha256:f40048ac0d22ae86929ff00df6fff3941a38c82383fc47312140a5138589ba4c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "timeout"
+        ],
+        "timeout": [
+          "wait-timeout"
+        ],
+        "wait-timeout": [
+          "dep:wait-timeout"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "testing",
+        "process",
+        "fork"
+      ],
       "manifest": "crates-io/rusty-fork/0.3.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -221,6 +312,17 @@
         "edition": "2018",
         "name": "rusty_fork",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cc6bf79ff24e648f6da1f8d1f011e9cac26491b619e6b9280f2b47f1774e6ee2",
+        "package": "rusty-fork",
+        "registry": "crates-io",
+        "version": "0.3.1"
+      },
+      "vcs": {
+        "commit": "22b6d890319f6041f7add41e014feb72c56488ed",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.1",
       "yanked": false

@@ -72,11 +72,201 @@
           "unit_identity": "sha256:a5bb7709bb27b46b18e848ba81931e5b043177a10c9d0d1e7ff54b63bed5b017"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc",
+            "block2"
+          ],
+          "loaf": "crates-io/dispatch2",
+          "name": "dispatch2",
+          "optional": true,
+          "req": ">=0.3.0, <0.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.80"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": true,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CFArray",
+            "CFData",
+            "CFDictionary",
+            "CFPlugInCOM",
+            "CFRunLoop",
+            "CFURL",
+            "CFUUID"
+          ],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 759,
+          "content": "content/sha256/64c30d7808e763add513e0ee114c695bc58624d7ab987c228d19ee242a4c9f3b",
+          "digest": "sha256:64c30d7808e763add513e0ee114c695bc58624d7ab987c228d19ee242a4c9f3b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 355,
+          "content": "content/sha256/d86f2e83c29af00b53db2cf19b62ecab642b90eb811e1797dce90448fd7f42cb",
+          "digest": "sha256:d86f2e83c29af00b53db2cf19b62ecab642b90eb811e1797dce90448fd7f42cb",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "AppleUSBDefinitions": [],
+        "IOUSBHostFamilyDefinitions": [],
+        "IOUSBLib": [
+          "objc2-core-foundation/CFPlugInCOM",
+          "objc2-core-foundation/CFRunLoop",
+          "objc2-core-foundation/CFUUID"
+        ],
+        "USB": [],
+        "USBSpec": [],
+        "alloc": [],
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "AppleUSBDefinitions",
+          "IOUSBHostFamilyDefinitions",
+          "IOUSBLib",
+          "USB",
+          "USBSpec",
+          "bitflags",
+          "block2",
+          "dispatch2",
+          "graphics",
+          "hid",
+          "hidsystem",
+          "libc",
+          "network",
+          "objc2",
+          "ps",
+          "pwr_mgt",
+          "serial",
+          "usb"
+        ],
+        "dispatch2": [
+          "dep:dispatch2"
+        ],
+        "graphics": [
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFPlugInCOM",
+          "objc2-core-foundation/CFUUID"
+        ],
+        "hid": [
+          "bitflags",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDate",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFPlugInCOM",
+          "objc2-core-foundation/CFRunLoop",
+          "objc2-core-foundation/CFSet",
+          "objc2-core-foundation/CFUUID"
+        ],
+        "hidsystem": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "network": [],
+        "objc2": [
+          "dep:objc2",
+          "dispatch2?/objc2",
+          "objc2-core-foundation/objc2"
+        ],
+        "ps": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDate",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFPlugInCOM",
+          "objc2-core-foundation/CFRunLoop",
+          "objc2-core-foundation/CFSet",
+          "objc2-core-foundation/CFUUID"
+        ],
+        "pwr_mgt": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDate",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "serial": [],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": [],
+        "usb": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-io-kit/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -87,6 +277,17 @@
         "edition": "2021",
         "name": "objc2_io_kit",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:33fafba39597d6dc1fb709123dfa8289d39406734be322956a69f0931c73bb15",
+        "package": "objc2-io-kit",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-io-kit",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

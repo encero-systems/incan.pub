@@ -25,6 +25,40 @@
       "advisories": 0,
       "archive": "sha256:933e8ec47c5507a45015fd6f034d7bd9f0a215436f8a6b920b3700c894bb7b1e",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "compression"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd-sys",
+          "name": "zstd-sys",
+          "optional": false,
+          "req": "^2.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 438,
+          "content": "content/sha256/db2e504468fe11556528df4949f492a2a91377ba6a71967732a3e460b7ae4941",
+          "digest": "sha256:db2e504468fe11556528df4949f492a2a91377ba6a71967732a3e460b7ae4941",
+          "format": "markdown",
+          "origin": "package",
+          "path": "Readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1501,
+          "content": "content/sha256/ce4868c8e4ebe47a7d4b3c93dbf6b802033e5ae2fa7638098173f80836daac60",
+          "digest": "sha256:ce4868c8e4ebe47a7d4b3c93dbf6b802033e5ae2fa7638098173f80836daac60",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -35,6 +69,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -47,6 +82,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -59,6 +95,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -71,6 +108,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -80,6 +118,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -92,6 +131,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -104,6 +144,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -116,6 +157,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -128,14 +170,74 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arrays": [],
+        "bindgen": [
+          "zstd-sys/bindgen"
+        ],
+        "cmake": [
+          "zstd-sys/cmake"
+        ],
+        "debug": [
+          "zstd-sys/debug"
+        ],
+        "default": [
+          "legacy",
+          "arrays",
+          "zdict_builder"
+        ],
+        "doc-cfg": [],
+        "experimental": [
+          "zstd-sys/experimental"
+        ],
+        "fat-lto": [
+          "zstd-sys/fat-lto"
+        ],
+        "legacy": [
+          "zstd-sys/legacy"
+        ],
+        "no_asm": [
+          "zstd-sys/no_asm"
+        ],
+        "pkg-config": [
+          "zstd-sys/pkg-config"
+        ],
+        "seekable": [
+          "zstd-sys/seekable"
+        ],
+        "std": [
+          "zstd-sys/std"
+        ],
+        "thin": [
+          "zstd-sys/thin"
+        ],
+        "thin-lto": [
+          "zstd-sys/thin-lto"
+        ],
+        "vendored": [
+          "zstd-sys/vendored"
+        ],
+        "zdict_builder": [
+          "zstd-sys/zdict_builder"
+        ],
+        "zstdmt": [
+          "zstd-sys/zstdmt"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zstd",
+        "zstandard",
+        "compression"
+      ],
       "manifest": "crates-io/zstd-safe/8.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -146,6 +248,17 @@
         "edition": "2018",
         "name": "zstd_safe",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ae42c0555055784c70058d19ba8e275528e8a99a706684868ace5da4e716a4ab",
+        "package": "zstd-safe",
+        "registry": "crates-io",
+        "version": "8.0.0"
+      },
+      "vcs": {
+        "commit": "648acb476da66b4bb856043c9b8ea1fdbfe69093",
+        "path": "zstd-safe",
+        "system": "git"
       },
       "version": "8.0.0",
       "yanked": false
@@ -168,6 +281,40 @@
       "advisories": 0,
       "archive": "sha256:a2767eb67894dfc95c62a822a39c4db643916a6e9abda5895f9c6f87928b0025",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "compression"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd-sys",
+          "name": "zstd-sys",
+          "optional": false,
+          "req": "^2.0.15"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 438,
+          "content": "content/sha256/db2e504468fe11556528df4949f492a2a91377ba6a71967732a3e460b7ae4941",
+          "digest": "sha256:db2e504468fe11556528df4949f492a2a91377ba6a71967732a3e460b7ae4941",
+          "format": "markdown",
+          "origin": "package",
+          "path": "Readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1501,
+          "content": "content/sha256/ce4868c8e4ebe47a7d4b3c93dbf6b802033e5ae2fa7638098173f80836daac60",
+          "digest": "sha256:ce4868c8e4ebe47a7d4b3c93dbf6b802033e5ae2fa7638098173f80836daac60",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -178,6 +325,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -187,6 +335,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -199,6 +348,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -208,6 +358,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -217,6 +368,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -226,14 +378,68 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arrays": [],
+        "bindgen": [
+          "zstd-sys/bindgen"
+        ],
+        "debug": [
+          "zstd-sys/debug"
+        ],
+        "default": [
+          "legacy",
+          "arrays",
+          "zdict_builder"
+        ],
+        "doc-cfg": [],
+        "experimental": [
+          "zstd-sys/experimental"
+        ],
+        "fat-lto": [
+          "zstd-sys/fat-lto"
+        ],
+        "legacy": [
+          "zstd-sys/legacy"
+        ],
+        "no_asm": [
+          "zstd-sys/no_asm"
+        ],
+        "pkg-config": [
+          "zstd-sys/pkg-config"
+        ],
+        "seekable": [
+          "zstd-sys/seekable"
+        ],
+        "std": [
+          "zstd-sys/std"
+        ],
+        "thin": [
+          "zstd-sys/thin"
+        ],
+        "thin-lto": [
+          "zstd-sys/thin-lto"
+        ],
+        "zdict_builder": [
+          "zstd-sys/zdict_builder"
+        ],
+        "zstdmt": [
+          "zstd-sys/zstdmt"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zstd",
+        "zstandard",
+        "compression"
+      ],
       "manifest": "crates-io/zstd-safe/7.3.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -244,6 +450,17 @@
         "edition": "2018",
         "name": "zstd_safe",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:64d80649ab6db9d9f6f9c80a40becd948eda4714a0a5ac8c4d157a32231c7882",
+        "package": "zstd-safe",
+        "registry": "crates-io",
+        "version": "7.3.0"
+      },
+      "vcs": {
+        "commit": "4726ad6e7ff67e77fd036964d60603e3db1a48fe",
+        "path": "zstd-safe",
+        "system": "git"
       },
       "version": "7.3.0",
       "yanked": false
@@ -266,6 +483,58 @@
       "advisories": 0,
       "archive": "sha256:f2e0d0dbe3b64ad8d8473c3b0f26153e7370decb1703c68902176fc8f6907aad",
       "assets": [],
+      "categories": [
+        "api-bindings",
+        "compression"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd-sys",
+          "name": "zstd-sys",
+          "optional": false,
+          "req": "^2.0.15"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 438,
+          "content": "content/sha256/db2e504468fe11556528df4949f492a2a91377ba6a71967732a3e460b7ae4941",
+          "digest": "sha256:db2e504468fe11556528df4949f492a2a91377ba6a71967732a3e460b7ae4941",
+          "format": "markdown",
+          "origin": "package",
+          "path": "Readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 18,
+          "content": "content/sha256/a77b7cfeaf911ed410ffbe76f0cb2b24ad8a4d94e7ead5727e914425c416cc63",
+          "digest": "sha256:a77b7cfeaf911ed410ffbe76f0cb2b24ad8a4d94e7ead5727e914425c416cc63",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 10174,
+          "content": "content/sha256/0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "digest": "sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.Apache-2.0",
+          "role": "license"
+        },
+        {
+          "bytes": 1080,
+          "content": "content/sha256/129e8edef29e9abcd2ebabe252f4ef1b1289cdca356bf0040284a2fbccfb96c8",
+          "digest": "sha256:129e8edef29e9abcd2ebabe252f4ef1b1289cdca356bf0040284a2fbccfb96c8",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.Mit",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -276,6 +545,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -288,14 +558,68 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arrays": [],
+        "bindgen": [
+          "zstd-sys/bindgen"
+        ],
+        "debug": [
+          "zstd-sys/debug"
+        ],
+        "default": [
+          "legacy",
+          "arrays",
+          "zdict_builder"
+        ],
+        "doc-cfg": [],
+        "experimental": [
+          "zstd-sys/experimental"
+        ],
+        "fat-lto": [
+          "zstd-sys/fat-lto"
+        ],
+        "legacy": [
+          "zstd-sys/legacy"
+        ],
+        "no_asm": [
+          "zstd-sys/no_asm"
+        ],
+        "pkg-config": [
+          "zstd-sys/pkg-config"
+        ],
+        "seekable": [
+          "zstd-sys/seekable"
+        ],
+        "std": [
+          "zstd-sys/std"
+        ],
+        "thin": [
+          "zstd-sys/thin"
+        ],
+        "thin-lto": [
+          "zstd-sys/thin-lto"
+        ],
+        "zdict_builder": [
+          "zstd-sys/zdict_builder"
+        ],
+        "zstdmt": [
+          "zstd-sys/zstdmt"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "zstd",
+        "zstandard",
+        "compression"
+      ],
       "manifest": "crates-io/zstd-safe/7.2.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -306,6 +630,17 @@
         "edition": "2018",
         "name": "zstd_safe",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8f49c4d5f0abb602a93fb8736af2a4f4dd9512e36f7f570d66e65ff867ed3b9d",
+        "package": "zstd-safe",
+        "registry": "crates-io",
+        "version": "7.2.4"
+      },
+      "vcs": {
+        "commit": "229054099aa73f7e861762f687d7e07cac1d9b3b",
+        "path": "zstd-safe",
+        "system": "git"
       },
       "version": "7.2.4",
       "yanked": false

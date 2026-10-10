@@ -26,11 +26,123 @@
       "advisories": 0,
       "archive": "sha256:89379da159035afb380c03748a5bcb24bf79c224ee359861b264f1fa246139cf",
       "assets": [],
+      "categories": [
+        "date-and-time"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ambient-authority",
+          "name": "ambient-authority",
+          "optional": false,
+          "req": "^0.0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cap-primitives",
+          "name": "cap-primitives",
+          "optional": false,
+          "req": "^3.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cap-std",
+          "name": "cap-std",
+          "optional": true,
+          "req": "^3.4.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/iana-time-zone",
+          "name": "iana-time-zone",
+          "optional": false,
+          "req": "^0.1.57"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.5.2",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "time"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.0",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winx",
+          "name": "winx",
+          "optional": false,
+          "req": "^0.36.0",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 945,
+          "content": "content/sha256/7eadd7ca9a8ebd4c3ea38d810859f61f6198468e863b1863c4a6ff8f3cee32e4",
+          "digest": "sha256:7eadd7ca9a8ebd4c3ea38d810859f61f6198468e863b1863c4a6ff8f3cee32e4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "cap-std": [
+          "dep:cap-std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "time"
+      ],
       "manifest": "crates-io/cap-time-ext/3.4.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -41,6 +153,17 @@
         "edition": "2021",
         "name": "cap_time_ext",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b54c289326c70f1c697ebf0a31842a480932e5942b5fac92fcc46e87286b48e2",
+        "package": "cap-time-ext",
+        "registry": "crates-io",
+        "version": "3.4.6"
+      },
+      "vcs": {
+        "commit": "cd4c6330089e3731c68b7b98d4dde0cda27402ff",
+        "path": "cap-time-ext",
+        "system": "git"
       },
       "version": "3.4.6",
       "yanked": false

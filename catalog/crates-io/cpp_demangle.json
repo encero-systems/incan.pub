@@ -204,6 +204,66 @@
           "unit_identity": "sha256:e0c52471a07bbf15760670b92ea1c17c36ef47f399acc1e45cd327013c72958a"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::ffi"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/afl",
+          "name": "afl",
+          "optional": true,
+          "req": "^0.16"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3888,
+          "content": "content/sha256/3f898d36599fe52cafa1a8849f540173a0330f46d3361d304078f02a97466d53",
+          "digest": "sha256:3f898d36599fe52cafa1a8849f540173a0330f46d3361d304078f02a97466d53",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 14013,
+          "content": "content/sha256/b03efdf33711db01090c91e97f5263d945e5de6cfbab8b9d68655836f95f0a7b",
+          "digest": "sha256:b03efdf33711db01090c91e97f5263d945e5de6cfbab8b9d68655836f95f0a7b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -211,6 +271,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -222,6 +283,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -231,6 +293,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -242,6 +305,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -251,6 +315,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -262,6 +327,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -271,6 +337,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -282,14 +349,40 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "afl": [
+          "dep:afl"
+        ],
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "fuzz": [
+          "afl"
+        ],
+        "logging": [
+          "std"
+        ],
+        "run_libiberty_tests": [],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "demangle",
+        "symbolicate",
+        "c-plus-plus",
+        "itanium"
+      ],
       "manifest": "crates-io/cpp_demangle/0.5.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -300,6 +393,17 @@
         "edition": "2018",
         "name": "cpp_demangle",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:0667304c32ea56cb4cd6d2d7c0cfe9a2f8041229db8c033af7f8d69492429def",
+        "package": "cpp_demangle",
+        "registry": "crates-io",
+        "version": "0.5.1"
+      },
+      "vcs": {
+        "commit": "6fc3a53ba2ae11bdcf470ed44058a233af517160",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.1",
       "yanked": false
@@ -324,11 +428,96 @@
       "advisories": 0,
       "archive": "sha256:012a1274bf28e93330048fe66c79a08c3d5c23c36fc57105956710a5784d107c",
       "assets": [],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::ffi"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/afl",
+          "name": "afl",
+          "optional": true,
+          "req": "^0.15"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3927,
+          "content": "content/sha256/22e68f0bfa196ba79954779ec10b0fe1eac96134cb7f16f6aac2a781222bfbbe",
+          "digest": "sha256:22e68f0bfa196ba79954779ec10b0fe1eac96134cb7f16f6aac2a781222bfbbe",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "digest": "sha256:7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 12104,
+          "content": "content/sha256/c74eb5096eeaf8181a264e85814a9a901ce5c4317c93387bb229c7c016bab7ae",
+          "digest": "sha256:c74eb5096eeaf8181a264e85814a9a901ce5c4317c93387bb229c7c016bab7ae",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "afl": [
+          "dep:afl"
+        ],
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "fuzz": [
+          "afl"
+        ],
+        "logging": [
+          "std"
+        ],
+        "run_libiberty_tests": [],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "demangle",
+        "symbolicate",
+        "c-plus-plus",
+        "itanium"
+      ],
       "manifest": "crates-io/cpp_demangle/0.4.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -339,6 +528,17 @@
         "edition": "2018",
         "name": "cpp_demangle",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f2bb79cb74d735044c972aae58ed0aaa9a837e85b01106a54c39e42e97f62253",
+        "package": "cpp_demangle",
+        "registry": "crates-io",
+        "version": "0.4.5"
+      },
+      "vcs": {
+        "commit": "1e679dd1979e1d323de26f81535dd9566263174c",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.5",
       "yanked": false

@@ -278,11 +278,93 @@
           "unit_identity": "sha256:b82d298a1e4028fb36ff8d5244ed287d142e1c91fed7217a7ed621c47c2c3773"
         }
       ],
+      "categories": [
+        "memory-management",
+        "rust-patterns",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.171"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8207,
+          "content": "content/sha256/050b1853333be74aa06088e47f5d53bc18840319d4dd256760d3d860e5e52879",
+          "digest": "sha256:050b1853333be74aa06088e47f5d53bc18840319d4dd256760d3d860e5e52879",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1059,
+          "content": "content/sha256/65f94e99ddaf4f5d1782a6dae23f35d4293a9a01444a13135a6887017d353cee",
+          "digest": "sha256:65f94e99ddaf4f5d1782a6dae23f35d4293a9a01444a13135a6887017d353cee",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 27270,
+          "content": "content/sha256/ea0358e7d2ca93b2a6f0a1cd192bb671a5bec93bf43c593df341f7dc213cbf06",
+          "digest": "sha256:ea0358e7d2ca93b2a6f0a1cd192bb671a5bec93bf43c593df341f7dc213cbf06",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "allocator_api": [],
+        "bench_allocator_api": [
+          "allocator_api"
+        ],
+        "boxed": [],
+        "collections": [],
+        "default": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arena",
+        "bump",
+        "allocator"
+      ],
       "manifest": "crates-io/bumpalo/3.20.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -292,6 +374,17 @@
         "edition": "2021",
         "name": "bumpalo",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:72f5acc6cb2ba439de613abc23857ec3d78374d8ed5ac84e9d11336e87da8649",
+        "package": "bumpalo",
+        "registry": "crates-io",
+        "version": "3.20.3"
+      },
+      "vcs": {
+        "commit": "84654ace6be4444da3ff102a0a0af3b38c4df4fb",
+        "path": "",
+        "system": "git"
       },
       "version": "3.20.3",
       "yanked": false
@@ -314,11 +407,89 @@
       "advisories": 0,
       "archive": "sha256:3b8b68a16a0fc4c35814903b1f0c0296bb6ee8cba9f5fedb9ede570fe2992a75",
       "assets": [],
+      "categories": [
+        "memory-management",
+        "rust-patterns",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": true,
+          "req": "^0.2.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.171"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8207,
+          "content": "content/sha256/050b1853333be74aa06088e47f5d53bc18840319d4dd256760d3d860e5e52879",
+          "digest": "sha256:050b1853333be74aa06088e47f5d53bc18840319d4dd256760d3d860e5e52879",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1059,
+          "content": "content/sha256/65f94e99ddaf4f5d1782a6dae23f35d4293a9a01444a13135a6887017d353cee",
+          "digest": "sha256:65f94e99ddaf4f5d1782a6dae23f35d4293a9a01444a13135a6887017d353cee",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 26791,
+          "content": "content/sha256/6b4984917b525372cc892936e1d44d2461965c3fa2a1a6a3d4472550422921b8",
+          "digest": "sha256:6b4984917b525372cc892936e1d44d2461965c3fa2a1a6a3d4472550422921b8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "allocator-api2": [
+          "dep:allocator-api2"
+        ],
+        "allocator_api": [],
+        "bench_allocator_api": [
+          "allocator_api"
+        ],
+        "boxed": [],
+        "collections": [],
+        "default": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/bumpalo/3.20.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -329,6 +500,17 @@
         "edition": "2021",
         "name": "bumpalo",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:5d20789868f4b01b2f2caec9f5c4e0213b41e3e5702a50157d699ae31ced2fcb",
+        "package": "bumpalo",
+        "registry": "crates-io",
+        "version": "3.20.2"
+      },
+      "vcs": {
+        "commit": "1aad072f93d8a4cf5885446ead554927c7c94f9c",
+        "path": "",
+        "system": "git"
       },
       "version": "3.20.2",
       "yanked": false

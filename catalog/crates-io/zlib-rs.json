@@ -120,6 +120,47 @@
           "unit_identity": "sha256:04ea996a7489adcd582c834ae506e9571598e44a3c86b2134de1de7ff250f065"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/quickcheck",
+          "name": "quickcheck",
+          "optional": true,
+          "req": "^1.0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1171,
+          "content": "content/sha256/8e906735af9e4778dad561aaa7f6627f24c9a8d7527eb2334c3e7cd64f196390",
+          "digest": "sha256:8e906735af9e4778dad561aaa7f6627f24c9a8d7527eb2334c3e7cd64f196390",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 856,
+          "content": "content/sha256/e72111c52b7d96ebe25348dee19f0744f444d3c95ae6b1ecb6ccaecc5bce05ba",
+          "digest": "sha256:e72111c52b7d96ebe25348dee19f0744f444d3c95ae6b1ecb6ccaecc5bce05ba",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -128,14 +169,47 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "ZLIB_DEBUG": [],
+        "__internal-api": [],
+        "__internal-fuzz": [
+          "arbitrary"
+        ],
+        "__internal-fuzz-disable-checksum": [],
+        "__internal-test": [
+          "quickcheck"
+        ],
+        "arbitrary": [
+          "dep:arbitrary"
+        ],
+        "avx512": [
+          "vpclmulqdq"
+        ],
+        "c-allocator": [],
+        "default": [
+          "std",
+          "c-allocator"
+        ],
+        "lsx": [],
+        "quickcheck": [
+          "dep:quickcheck"
+        ],
+        "rust-allocator": [],
+        "std": [
+          "rust-allocator"
+        ],
+        "vpclmulqdq": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/zlib-rs/0.6.8/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -145,6 +219,17 @@
         "edition": "2021",
         "name": "zlib_rs",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b268e58e7c693d7c271f93ffc4ba3b380412554231c85bf61ca7af91042a4112",
+        "package": "zlib-rs",
+        "registry": "crates-io",
+        "version": "0.6.8"
+      },
+      "vcs": {
+        "commit": "0254e07204884bfc902d6ebb68c8b703d0ea49cf",
+        "path": "zlib-rs",
+        "system": "git"
       },
       "version": "0.6.8",
       "yanked": false

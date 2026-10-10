@@ -23,11 +23,151 @@
       "advisories": 0,
       "archive": "sha256:196891b60f53bcc066cf41e7bee9a3c7fc9ed44faa142ea33c34f1c93116a73b",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/aws-lc-rs",
+          "name": "aws-lc-rs",
+          "optional": true,
+          "req": "^1.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pem",
+          "name": "pem",
+          "optional": true,
+          "req": "^4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustls-pki-types",
+          "name": "pki-types",
+          "optional": false,
+          "req": "^1.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ring",
+          "name": "ring",
+          "optional": true,
+          "req": "^0.17"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": false,
+          "req": "^0.3.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/x509-parser",
+          "name": "x509-parser",
+          "optional": true,
+          "req": "^0.18"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "std",
+            "time"
+          ],
+          "loaf": "crates-io/yasna",
+          "name": "yasna",
+          "optional": false,
+          "req": "^0.6"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1866,
+          "content": "content/sha256/c826632d281e4a37549e2797eca39340cfe4df703dba9bdf30fb1fb18fcfd08f",
+          "digest": "sha256:c826632d281e4a37549e2797eca39340cfe4df703dba9bdf30fb1fb18fcfd08f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11670,
+          "content": "content/sha256/debe6fed7ac143217c7f533759c54b14f18cd01d5fe195c51d83c2ae2d136cb4",
+          "digest": "sha256:debe6fed7ac143217c7f533759c54b14f18cd01d5fe195c51d83c2ae2d136cb4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 12783,
+          "content": "content/sha256/7627cd14712eb404ac6589ae8b6bc0071fdf46019b2a43bcba437000996ad794",
+          "digest": "sha256:7627cd14712eb404ac6589ae8b6bc0071fdf46019b2a43bcba437000996ad794",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "aws_lc_rs": [
+          "crypto",
+          "dep:aws-lc-rs",
+          "aws-lc-rs/aws-lc-sys",
+          "x509-parser?/verify-aws"
+        ],
+        "aws_lc_rs_unstable": [
+          "aws_lc_rs"
+        ],
+        "crypto": [],
+        "default": [
+          "crypto",
+          "pem",
+          "ring"
+        ],
+        "fips": [
+          "crypto",
+          "dep:aws-lc-rs",
+          "aws-lc-rs/fips"
+        ],
+        "pem": [
+          "dep:pem"
+        ],
+        "ring": [
+          "crypto",
+          "dep:ring",
+          "x509-parser?/verify"
+        ],
+        "x509-parser": [
+          "dep:x509-parser"
+        ],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "mkcert",
+        "ca",
+        "certificate"
+      ],
       "manifest": "crates-io/rcgen/0.14.10/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -38,6 +178,17 @@
         "edition": "2021",
         "name": "rcgen",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8774e05a7d0de114588e6a28fe7e71694b82614ed569d86d8b389dfbc98b8ad8",
+        "package": "rcgen",
+        "registry": "crates-io",
+        "version": "0.14.10"
+      },
+      "vcs": {
+        "commit": "f4a3b165c467c070d5c74b86acc2c3f0a0be10ab",
+        "path": "rcgen",
+        "system": "git"
       },
       "version": "0.14.10",
       "yanked": false

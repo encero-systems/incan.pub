@@ -110,11 +110,87 @@
           "unit_identity": "sha256:11e892aefaaecc5fd072de210fbc5aff4e7af956e7e856a29bd4d64c1fe90c1c"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bit-vec",
+          "name": "bit-vec",
+          "optional": true,
+          "req": "^0.9.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": true,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/time",
+          "name": "time",
+          "optional": true,
+          "req": "^0.3.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3290,
+          "content": "content/sha256/59859d611057ba577ffacea3f8188ba079a080a7e8c09282dccf90bd0c7642cc",
+          "digest": "sha256:59859d611057ba577ffacea3f8188ba079a080a7e8c09282dccf90bd0c7642cc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1055,
+          "content": "content/sha256/2a7df90e60fd5512b8bca35d3ce90e068f21c52d962855053fd1d9e2e7ca0f16",
+          "digest": "sha256:2a7df90e60fd5512b8bca35d3ce90e068f21c52d962855053fd1d9e2e7ca0f16",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "bit-vec": [
+          "dep:bit-vec"
+        ],
+        "default": [],
+        "num-bigint": [
+          "dep:num-bigint"
+        ],
+        "std": [
+          "bit-vec?/std",
+          "time?/std"
+        ],
+        "time": [
+          "dep:time"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "parser",
+        "serialization"
+      ],
       "manifest": "crates-io/yasna/0.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -125,6 +201,17 @@
         "edition": "2021",
         "name": "yasna",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b5f6765e852b9b4dc8e2a76843e4d64d1cea8e79bcde0b6901aea8e7c7f08282",
+        "package": "yasna",
+        "registry": "crates-io",
+        "version": "0.6.0"
+      },
+      "vcs": {
+        "commit": "3c7f2ba61cfb59c478137051a7e79ad8af0e2247",
+        "path": "",
+        "system": "git"
       },
       "version": "0.6.0",
       "yanked": false

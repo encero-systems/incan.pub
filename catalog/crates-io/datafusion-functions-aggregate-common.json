@@ -25,19 +25,95 @@
       "advisories": 0,
       "archive": "sha256:8cf2a7fd7e614488d48de2909346a2b0ebe5980cd143fd7567ee926bff698b22",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "runtime-rng"
+          ],
+          "loaf": "crates-io/ahash",
+          "name": "ahash",
+          "optional": false,
+          "req": "^0.8"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "chrono-tz",
+            "prettyprint"
+          ],
+          "loaf": "crates-io/arrow",
+          "name": "arrow",
+          "optional": false,
+          "req": "^58.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-common",
+          "name": "datafusion-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-expr-common",
+          "name": "datafusion-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-physical-expr-common",
+          "name": "datafusion-physical-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1433,
+          "content": "content/sha256/b17404b9507b5bf35334af384bb31a5a273f9538f6f5510b0bac9d7c6ad97997",
+          "digest": "sha256:b17404b9507b5bf35334af384bb31a5a273f9538f6f5510b0bac9d7c6ad97997",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11645,
+          "content": "content/sha256/232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "digest": "sha256:232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "datafusion",
+        "logical",
+        "plan",
+        "expressions"
+      ],
       "manifest": "crates-io/datafusion-functions-aggregate-common/53.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -48,6 +124,13 @@
         "name": "datafusion_functions_aggregate_common",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:b511250349407db7c43832ab2de63f5557b19a20dfd236b39ca2c04468b50d47",
+        "package": "datafusion-functions-aggregate-common",
+        "registry": "crates-io",
+        "version": "53.1.0"
+      },
+      "vcs": null,
       "version": "53.1.0",
       "yanked": false
     }

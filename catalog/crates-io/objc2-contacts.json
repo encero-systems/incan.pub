@@ -66,11 +66,256 @@
           "unit_identity": "sha256:babf6f2880df3111d7e7b21cbbdefa8fbfc70874829066fe8fef2187b5253e1c"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/block2",
+          "name": "block2",
+          "optional": true,
+          "req": ">=0.6.1, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": false,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/objc2-foundation",
+          "name": "objc2-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 774,
+          "content": "content/sha256/2148cbda05cd40dab6a1102f60cb25b3b97333ed105a9d69b3b57d1a46d693ad",
+          "digest": "sha256:2148cbda05cd40dab6a1102f60cb25b3b97333ed105a9d69b3b57d1a46d693ad",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 361,
+          "content": "content/sha256/31e4b2aff92e9aacb53575638227c2b4ca688f87f012fd95e049107d19f44676",
+          "digest": "sha256:31e4b2aff92e9aacb53575638227c2b4ca688f87f012fd95e049107d19f44676",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CNChangeHistoryEvent": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNChangeHistoryFetchRequest": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNContact": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSCalendar",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSObjCRuntime",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString",
+          "objc2-foundation/block2"
+        ],
+        "CNContactFetchRequest": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSPredicate"
+        ],
+        "CNContactFormatter": [
+          "objc2-foundation/NSAttributedString",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSFormatter",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNContactProperty": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNContactRelation": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNContactStore": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSEnumerator",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSPredicate",
+          "objc2-foundation/NSString"
+        ],
+        "CNContactVCardSerialization": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSError",
+          "objc2-foundation/NSObject"
+        ],
+        "CNContact_NSItemProvider": [
+          "objc2-foundation/NSItemProvider"
+        ],
+        "CNContact_Predicates": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSPredicate",
+          "objc2-foundation/NSString"
+        ],
+        "CNContactsUserDefaults": [
+          "objc2-foundation/NSString"
+        ],
+        "CNContainer": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNContainer_Predicates": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSPredicate",
+          "objc2-foundation/NSString"
+        ],
+        "CNError": [
+          "objc2-foundation/NSString"
+        ],
+        "CNFetchRequest": [],
+        "CNFetchResult": [
+          "objc2-foundation/NSData"
+        ],
+        "CNGroup": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNGroup_Predicates": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSPredicate",
+          "objc2-foundation/NSString"
+        ],
+        "CNInstantMessageAddress": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNLabeledValue": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNMutableContact": [
+          "objc2-foundation/NSArray",
+          "objc2-foundation/NSCalendar",
+          "objc2-foundation/NSData",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNMutableGroup": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNMutablePostalAddress": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNPhoneNumber": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNPostalAddress": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNPostalAddressFormatter": [
+          "objc2-foundation/NSAttributedString",
+          "objc2-foundation/NSDictionary",
+          "objc2-foundation/NSFormatter",
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "CNSaveRequest": [
+          "objc2-foundation/NSString"
+        ],
+        "CNSocialProfile": [
+          "objc2-foundation/NSObject",
+          "objc2-foundation/NSString"
+        ],
+        "ContactsDefines": [],
+        "alloc": [],
+        "block2": [
+          "dep:block2"
+        ],
+        "default": [
+          "std",
+          "CNChangeHistoryEvent",
+          "CNChangeHistoryFetchRequest",
+          "CNContact",
+          "CNContactFetchRequest",
+          "CNContactFormatter",
+          "CNContactProperty",
+          "CNContactRelation",
+          "CNContactStore",
+          "CNContactVCardSerialization",
+          "CNContact_NSItemProvider",
+          "CNContact_Predicates",
+          "CNContactsUserDefaults",
+          "CNContainer",
+          "CNContainer_Predicates",
+          "CNError",
+          "CNFetchRequest",
+          "CNFetchResult",
+          "CNGroup",
+          "CNGroup_Predicates",
+          "CNInstantMessageAddress",
+          "CNLabeledValue",
+          "CNMutableContact",
+          "CNMutableGroup",
+          "CNMutablePostalAddress",
+          "CNPhoneNumber",
+          "CNPostalAddress",
+          "CNPostalAddressFormatter",
+          "CNSaveRequest",
+          "CNSocialProfile",
+          "ContactsDefines",
+          "block2"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-contacts/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -81,6 +326,17 @@
         "edition": "2021",
         "name": "objc2_contacts",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b034b578389f89a85c055eacc8d8b368be5f04a6c1b07f672bf3aec21d0ef621",
+        "package": "objc2-contacts",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-contacts",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

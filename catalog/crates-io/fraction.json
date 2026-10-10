@@ -126,11 +126,176 @@
           "unit_identity": "sha256:f57a41662b4dc0dfed00a1e7293a8cd96c33aca2a6c1d5795a50e1f72d05801c"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/byteorder",
+          "name": "byteorder",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/juniper",
+          "name": "juniper",
+          "optional": true,
+          "req": "^0.15"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num",
+          "name": "num",
+          "optional": false,
+          "req": "^0.4.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": true,
+          "req": "^0.4.8"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/postgres-types",
+          "name": "postgres-types",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_derive",
+          "name": "serde_derive",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7969,
+          "content": "content/sha256/74bc5e53d2a63e0eff7194796e500d445d60ce852aee786b14327f1b3f391d00",
+          "digest": "sha256:74bc5e53d2a63e0eff7194796e500d445d60ce852aee786b14327f1b3f391d00",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "digest": "sha256:6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 16605,
+          "content": "content/sha256/95262c041bda2537a61efc597ab1cc1624be7685ac86925ac9c0ea6d1204d4c7",
+          "digest": "sha256:95262c041bda2537a61efc597ab1cc1624be7685ac86925ac9c0ea6d1204d4c7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "byteorder": [
+          "dep:byteorder"
+        ],
+        "bytes": [
+          "dep:bytes"
+        ],
+        "default": [
+          "with-bigint",
+          "with-decimal",
+          "with-dynaint"
+        ],
+        "juniper": [
+          "dep:juniper"
+        ],
+        "num-bigint": [
+          "dep:num-bigint"
+        ],
+        "postgres-types": [
+          "dep:postgres-types"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serde_derive": [
+          "dep:serde_derive"
+        ],
+        "with-approx": [
+          "with-bigint"
+        ],
+        "with-bigint": [
+          "num/num-bigint",
+          "num/std",
+          "num-bigint"
+        ],
+        "with-decimal": [],
+        "with-dynaint": [],
+        "with-juniper-support": [
+          "juniper"
+        ],
+        "with-postgres-support": [
+          "postgres-types",
+          "byteorder",
+          "bytes"
+        ],
+        "with-serde-support": [
+          "serde",
+          "serde_derive",
+          "num/serde"
+        ],
+        "with-unicode": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "fraction",
+        "decimal",
+        "float",
+        "numeric"
+      ],
       "manifest": "crates-io/fraction/0.17.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -141,6 +306,17 @@
         "edition": "2015",
         "name": "fraction",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e246562084dde8ebbcc943b261c406ce4f68e5032ec28029a251a47d6a295500",
+        "package": "fraction",
+        "registry": "crates-io",
+        "version": "0.17.0"
+      },
+      "vcs": {
+        "commit": "53d04cddb4640d1fe7756c289b3ce34be14da504",
+        "path": "",
+        "system": "git"
       },
       "version": "0.17.0",
       "yanked": false

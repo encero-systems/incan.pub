@@ -128,11 +128,135 @@
           "unit_identity": "sha256:6b901f548e6e8a9b6606c0e6df92bb7b46464f7bd27fcc91050a35a441d40583"
         }
       ],
+      "categories": [
+        "text-processing",
+        "command-line-interface"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "embed_en-us"
+          ],
+          "loaf": "crates-io/hyphenation",
+          "name": "hyphenation",
+          "optional": true,
+          "req": "^0.8.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "compiled_data"
+          ],
+          "loaf": "crates-io/icu_segmenter",
+          "name": "icu_segmenter",
+          "optional": true,
+          "req": "^2.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smawk",
+          "name": "smawk",
+          "optional": true,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/terminal_size",
+          "name": "terminal_size",
+          "optional": true,
+          "req": "^0.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/unicode-width",
+          "name": "unicode-width",
+          "optional": true,
+          "req": "^0.2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 6313,
+          "content": "content/sha256/93e53a0dc961edcffa14fcd118236a672dc66f3747c4ab35e2cfae4b06770f56",
+          "digest": "sha256:93e53a0dc961edcffa14fcd118236a672dc66f3747c4ab35e2cfae4b06770f56",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1071,
+          "content": "content/sha256/ce93600c49fbb3e14df32efe752264644f6a2f8e08a735ba981725799e5309ef",
+          "digest": "sha256:ce93600c49fbb3e14df32efe752264644f6a2f8e08a735ba981725799e5309ef",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 24818,
+          "content": "content/sha256/10c194e29a05aabefc4f2868f22cee38883966a545cf4cdcefca63e39b386fc7",
+          "digest": "sha256:10c194e29a05aabefc4f2868f22cee38883966a545cf4cdcefca63e39b386fc7",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "unicode-linebreak",
+          "unicode-width",
+          "smawk"
+        ],
+        "hyphenation": [
+          "std",
+          "dep:hyphenation"
+        ],
+        "icu_segmenter": [
+          "dep:icu_segmenter"
+        ],
+        "smawk": [
+          "std",
+          "dep:smawk"
+        ],
+        "std": [
+          "unicode-width?/default"
+        ],
+        "terminal_size": [
+          "std",
+          "dep:terminal_size"
+        ],
+        "unicode-linebreak": [
+          "std",
+          "icu_segmenter"
+        ],
+        "unicode-linebreak-complex": [
+          "unicode-linebreak",
+          "dep:icu_segmenter",
+          "icu_segmenter/auto"
+        ],
+        "unicode-width": [
+          "dep:unicode-width"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "text",
+        "formatting",
+        "wrap",
+        "typesetting",
+        "hyphenation"
+      ],
       "manifest": "crates-io/textwrap/0.16.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -143,6 +267,17 @@
         "edition": "2021",
         "name": "textwrap",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:6ecfad6c3abc80a577f2b91c1e412ee57e7a060d430b553c1b0c940974ebcd49",
+        "package": "textwrap",
+        "registry": "crates-io",
+        "version": "0.16.4"
+      },
+      "vcs": {
+        "commit": "5246c6367058468f5813abb47a48dcc138e2a5d5",
+        "path": "",
+        "system": "git"
       },
       "version": "0.16.4",
       "yanked": false

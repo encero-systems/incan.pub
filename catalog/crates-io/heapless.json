@@ -180,11 +180,139 @@
           "unit_identity": "sha256:cb9a9a1d812b560263e2422326a215259d717196854427a35b4df4d904645cce"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/bytes",
+          "name": "bytes",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/defmt",
+          "name": "defmt",
+          "optional": true,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/embedded-io",
+          "name": "embedded-io",
+          "optional": true,
+          "req": "^0.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hash32",
+          "name": "hash32",
+          "optional": false,
+          "req": "^0.3.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(any(target_arch = \"arm\", target_pointer_width = \"32\", target_pointer_width = \"64\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ufmt",
+          "name": "ufmt",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ufmt-write",
+          "name": "ufmt-write",
+          "optional": true,
+          "req": "^0.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/zeroize",
+          "name": "zeroize",
+          "optional": true,
+          "req": "^1.8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1615,
+          "content": "content/sha256/1ce816ccc884c93f0e797eadfc10c378b0183fc9c87197745c9cb720adc4c9d2",
+          "digest": "sha256:1ce816ccc884c93f0e797eadfc10c378b0183fc9c87197745c9cb720adc4c9d2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1058,
+          "content": "content/sha256/035e70219855119df4273b3c5b97543ae82e0dd60c520416e759107c602f651b",
+          "digest": "sha256:035e70219855119df4273b3c5b97543ae82e0dd60c520416e759107c602f651b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 27292,
+          "content": "content/sha256/4d7d09246a5163d3859a930900edde1daab76a6f3de632b096eb663b531951dd",
+          "digest": "sha256:4d7d09246a5163d3859a930900edde1daab76a6f3de632b096eb663b531951dd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -192,6 +320,7 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -199,6 +328,7 @@
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -206,14 +336,56 @@
           "features": [],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [],
+        "bytes": [
+          "dep:bytes"
+        ],
+        "defmt": [
+          "dep:defmt"
+        ],
+        "embedded-io-v0.7": [
+          "dep:embedded-io"
+        ],
+        "mpmc_large": [],
+        "nightly": [],
+        "portable-atomic": [
+          "dep:portable-atomic"
+        ],
+        "portable-atomic-critical-section": [
+          "dep:portable-atomic",
+          "portable-atomic",
+          "portable-atomic?/critical-section"
+        ],
+        "portable-atomic-unsafe-assume-single-core": [
+          "dep:portable-atomic",
+          "portable-atomic",
+          "portable-atomic?/unsafe-assume-single-core"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "ufmt": [
+          "dep:ufmt",
+          "dep:ufmt-write"
+        ],
+        "zeroize": [
+          "dep:zeroize"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "static",
+        "no-heap"
+      ],
       "manifest": "crates-io/heapless/0.9.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -224,6 +396,17 @@
         "edition": "2021",
         "name": "heapless",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:25ba4bd83f9415b58b4ed8dc5714c76e626a105be4646c02630ad730ad3b5aa4",
+        "package": "heapless",
+        "registry": "crates-io",
+        "version": "0.9.3"
+      },
+      "vcs": {
+        "commit": "ca95c4beaf7340d678acefe44817e87547a9b8b4",
+        "path": "",
+        "system": "git"
       },
       "version": "0.9.3",
       "yanked": false
@@ -341,6 +524,144 @@
           "unit_identity": "sha256:c1040e6a30ad6423a7ed032869a801480df8c878a69822230ddaffe4d2d0b6c7"
         }
       ],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/atomic-polyfill",
+          "name": "atomic-polyfill",
+          "optional": false,
+          "req": "^1",
+          "target": "riscv32i-unknown-none-elf"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/atomic-polyfill",
+          "name": "atomic-polyfill",
+          "optional": false,
+          "req": "^1",
+          "target": "riscv32imc-unknown-none-elf"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/atomic-polyfill",
+          "name": "atomic-polyfill",
+          "optional": false,
+          "req": "^1",
+          "target": "xtensa-esp32s2-none-elf"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/atomic-polyfill",
+          "name": "atomic-polyfill",
+          "optional": true,
+          "req": "^1",
+          "target": "cfg(target_arch = \"avr\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/atomic-polyfill",
+          "name": "atomic-polyfill",
+          "optional": true,
+          "req": "^1",
+          "target": "thumbv6m-none-eabi"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/defmt",
+          "name": "defmt",
+          "optional": true,
+          "req": ">=0.2.0, <0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hash32",
+          "name": "hash32",
+          "optional": false,
+          "req": "^0.2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/spin",
+          "name": "spin",
+          "optional": false,
+          "req": "^0.9.2",
+          "target": "cfg(target_arch = \"x86_64\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ufmt-write",
+          "name": "ufmt-write",
+          "optional": true,
+          "req": "^0.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1063,
+          "content": "content/sha256/72b5cd2bfae334bdd3b086c4a9565a73e0273da119a39f271bbf6cd9201f7131",
+          "digest": "sha256:72b5cd2bfae334bdd3b086c4a9565a73e0273da119a39f271bbf6cd9201f7131",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1058,
+          "content": "content/sha256/035e70219855119df4273b3c5b97543ae82e0dd60c520416e759107c602f651b",
+          "digest": "sha256:035e70219855119df4273b3c5b97543ae82e0dd60c520416e759107c602f651b",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 15768,
+          "content": "content/sha256/46e477bd279c92a0177da4074f7c8b47999e0abf7094a0e3d8d73d70b62df22a",
+          "digest": "sha256:46e477bd279c92a0177da4074f7c8b47999e0abf7094a0e3d8d73d70b62df22a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -350,6 +671,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -361,6 +683,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -372,6 +695,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -383,14 +707,48 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "__trybuild": [],
+        "atomic-polyfill": [
+          "dep:atomic-polyfill"
+        ],
+        "cas": [
+          "atomic-polyfill"
+        ],
+        "default": [
+          "cas"
+        ],
+        "defmt": [
+          "dep:defmt"
+        ],
+        "defmt-impl": [
+          "defmt"
+        ],
+        "mpmc_large": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "ufmt-impl": [
+          "ufmt-write"
+        ],
+        "ufmt-write": [
+          "dep:ufmt-write"
+        ],
+        "x86-sync-pool": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "static",
+        "no-heap"
+      ],
       "manifest": "crates-io/heapless/0.7.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -401,6 +759,17 @@
         "edition": "2018",
         "name": "heapless",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:cdc6457c0eb62c71aac4bc17216026d8410337c4126773b9c5daba343f17964f",
+        "package": "heapless",
+        "registry": "crates-io",
+        "version": "0.7.17"
+      },
+      "vcs": {
+        "commit": "0eea6da5bc159823d0564fcd6974eab299073dcf",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.17",
       "yanked": false

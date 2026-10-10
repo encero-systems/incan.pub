@@ -102,11 +102,65 @@
           "unit_identity": "sha256:685fa11182e3e49aea36d266056c20a223c20b062cc46460ea0873bc41077e58"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.62",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_Security",
+            "Win32_System_Pipes"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.28, <=0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5246,
+          "content": "content/sha256/d7601c6ac3395c575b11bf958f7f1363a423ab2588abbc0108ee22398a25b7e0",
+          "digest": "sha256:d7601c6ac3395c575b11bf958f7f1363a423ab2588abbc0108ee22398a25b7e0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1046,
+          "content": "content/sha256/8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+          "digest": "sha256:8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "io_safety": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "pipe",
+        "pipe2",
+        "createpipe",
+        "dup"
+      ],
       "manifest": "crates-io/os_pipe/1.2.3/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +171,17 @@
         "edition": "2021",
         "name": "os_pipe",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7d8fae84b431384b68627d0f9b3b1245fcf9f46f6c0e3dc902e9dce64edd1967",
+        "package": "os_pipe",
+        "registry": "crates-io",
+        "version": "1.2.3"
+      },
+      "vcs": {
+        "commit": "228ee175117faf1bf0cce99942ce579244215da4",
+        "path": "",
+        "system": "git"
       },
       "version": "1.2.3",
       "yanked": false

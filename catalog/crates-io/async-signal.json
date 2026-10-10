@@ -254,11 +254,157 @@
           "unit_identity": "sha256:bd9f3324d9612c3df07ef7ad163754fd0f1e1ce9cd7e65ac38e35a5568b48133"
         }
       ],
+      "categories": [
+        "asynchronous",
+        "concurrency",
+        "os"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-io",
+          "name": "async-io",
+          "optional": false,
+          "req": "^2.0.0",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-lock",
+          "name": "async-lock",
+          "optional": false,
+          "req": "^3.3.0",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/atomic-waker",
+          "name": "atomic-waker",
+          "optional": false,
+          "req": "^1.1.1",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-core",
+          "name": "futures-core",
+          "optional": false,
+          "req": "^0.3.26"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/futures-io",
+          "name": "futures-io",
+          "optional": false,
+          "req": "^0.3.26",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "process",
+            "std"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.7",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/signal-hook-registry",
+          "name": "signal-hook-registry",
+          "optional": false,
+          "req": "^1.4.0",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/slab",
+          "name": "slab",
+          "optional": false,
+          "req": "^0.4.8",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "Win32_Foundation",
+            "Win32_System_Console"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2647,
+          "content": "content/sha256/c5e3adbb3e4dc1e74572d750acd3e4a9574cff05f1373ea4d3153b88d996dc52",
+          "digest": "sha256:c5e3adbb3e4dc1e74572d750acd3e4a9574cff05f1373ea4d3153b88d996dc52",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 1132,
+          "content": "content/sha256/3966591bbe880892d312b8d102de6d0f4584c9eb9896772a01a2f23b8cb81a1b",
+          "digest": "sha256:3966591bbe880892d312b8d102de6d0f4584c9eb9896772a01a2f23b8cb81a1b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "async",
+        "signal",
+        "signal-hook",
+        "signal-hook-registry"
+      ],
       "manifest": "crates-io/async-signal/0.2.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -269,6 +415,17 @@
         "edition": "2021",
         "name": "async_signal",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:52b5aaafa020cf5053a01f2a60e8ff5dccf550f0f77ec54a4e47285ac2bab485",
+        "package": "async-signal",
+        "registry": "crates-io",
+        "version": "0.2.14"
+      },
+      "vcs": {
+        "commit": "d750e57adccbd90c4c4e93d184aeabcf5b22f057",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.14",
       "yanked": false

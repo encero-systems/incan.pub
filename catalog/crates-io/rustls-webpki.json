@@ -204,11 +204,98 @@
           "unit_identity": "sha256:b1176d72bf0495e76ee7a73f4c83d0554507d3da1625b7f1259f165e95cee899"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/aws-lc-rs",
+          "name": "aws-lc-rs",
+          "optional": true,
+          "req": "^1.18"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/rustls-pki-types",
+          "name": "pki-types",
+          "optional": false,
+          "req": "^1.12"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ring",
+          "name": "ring",
+          "optional": true,
+          "req": "^0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/untrusted",
+          "name": "untrusted",
+          "optional": false,
+          "req": "^0.9"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2996,
+          "content": "content/sha256/084c37ee4b35887c813373cb98f3712e20d42e238cd16b59bd90dd8ae870dbf2",
+          "digest": "sha256:084c37ee4b35887c813373cb98f3712e20d42e238cd16b59bd90dd8ae870dbf2",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 916,
+          "content": "content/sha256/5b698ca13897be3afdb7174256fa1574f8c6892b8bea1a66dd6469d3fe27885a",
+          "digest": "sha256:5b698ca13897be3afdb7174256fa1574f8c6892b8bea1a66dd6469d3fe27885a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "ring?/alloc",
+          "pki-types/alloc"
+        ],
+        "aws-lc-rs": [
+          "dep:aws-lc-rs",
+          "aws-lc-rs/aws-lc-sys",
+          "aws-lc-rs/prebuilt-nasm"
+        ],
+        "aws-lc-rs-fips": [
+          "dep:aws-lc-rs",
+          "aws-lc-rs/fips"
+        ],
+        "aws-lc-rs-unstable": [
+          "aws-lc-rs"
+        ],
+        "default": [
+          "std"
+        ],
+        "ring": [
+          "dep:ring"
+        ],
+        "std": [
+          "alloc",
+          "pki-types/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/rustls-webpki/0.103.15/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -218,6 +305,17 @@
         "edition": "2021",
         "name": "webpki",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f3c3cf1d8b1e7d4927e2d154c3fcb02979afb9939629c62cd9048d4f07b60ac2",
+        "package": "rustls-webpki",
+        "registry": "crates-io",
+        "version": "0.103.15"
+      },
+      "vcs": {
+        "commit": "c14836d8de33c0ad0ac7dcb28fe9aade20831a4d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.103.15",
       "yanked": false
@@ -238,11 +336,65 @@
       "advisories": 0,
       "archive": "sha256:9120a6a1fc388bf37f076292278ec70ad1c7ce2ced6d7635c54ff8e39665f4c8",
       "assets": [],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ring",
+          "name": "ring",
+          "optional": false,
+          "req": "^0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/untrusted",
+          "name": "untrusted",
+          "optional": false,
+          "req": "^0.9"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2957,
+          "content": "content/sha256/d7e5ef7c9b447cde530b46bdf71b3dffc35cdbc3f0e56c39945ff8d9e69446c6",
+          "digest": "sha256:d7e5ef7c9b447cde530b46bdf71b3dffc35cdbc3f0e56c39945ff8d9e69446c6",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 916,
+          "content": "content/sha256/5b698ca13897be3afdb7174256fa1574f8c6892b8bea1a66dd6469d3fe27885a",
+          "digest": "sha256:5b698ca13897be3afdb7174256fa1574f8c6892b8bea1a66dd6469d3fe27885a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "ring/alloc"
+        ],
+        "default": [
+          "std"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/rustls-webpki/0.101.7/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -253,6 +405,17 @@
         "edition": "2021",
         "name": "webpki",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8b6275d1ee7a1cd780b64aca7726599a1dbc893b1e64144529e55c3c2f745765",
+        "package": "rustls-webpki",
+        "registry": "crates-io",
+        "version": "0.101.7"
+      },
+      "vcs": {
+        "commit": "ee5aab1dff6b76aad650e69b0c2d4f999c24d2ee",
+        "path": "",
+        "system": "git"
       },
       "version": "0.101.7",
       "yanked": false

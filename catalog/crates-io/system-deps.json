@@ -111,6 +111,108 @@
           "unit_identity": "sha256:5aeb42cd98f3d519fbef2a8a1db7f2606760087391bb6dc6b45039e2a4865140"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "targets"
+          ],
+          "loaf": "crates-io/cfg-expr",
+          "name": "cfg-expr",
+          "optional": false,
+          "req": ">=0.17, <0.21"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/heck",
+          "name": "heck",
+          "optional": false,
+          "req": "^0.5"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/pkg-config",
+          "name": "pkg-config",
+          "optional": false,
+          "req": "^0.3.34"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/system-deps-meta",
+          "name": "system-deps-meta",
+          "optional": true,
+          "req": "^9.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "parse",
+            "std"
+          ],
+          "loaf": "crates-io/toml",
+          "name": "toml",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/version-compare",
+          "name": "version-compare",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/which",
+          "name": "which",
+          "optional": true,
+          "req": "^8"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1612,
+          "content": "content/sha256/75efcaae74cb7b27ebfb8d254e97445f53d63db4eb9bf10baec382f29f1078de",
+          "digest": "sha256:75efcaae74cb7b27ebfb8d254e97445f53d63db4eb9bf10baec382f29f1078de",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 3564,
+          "content": "content/sha256/c0af42e5a5b29b4571826c198d9b9053777374abd822c17ce2547dc083cb8c67",
+          "digest": "sha256:c0af42e5a5b29b4571826c198d9b9053777374abd822c17ce2547dc083cb8c67",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -118,6 +220,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -127,6 +230,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -136,6 +240,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -145,14 +250,54 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "binary": [
+          "dep:system-deps-meta",
+          "system-deps-meta/binary",
+          "dep:which",
+          "toml/serde"
+        ],
+        "default": [],
+        "gz": [
+          "dep:system-deps-meta",
+          "system-deps-meta/gz"
+        ],
+        "inno": [
+          "dep:system-deps-meta",
+          "system-deps-meta/inno"
+        ],
+        "pkg": [
+          "dep:system-deps-meta",
+          "system-deps-meta/pkg"
+        ],
+        "system-deps-meta": [
+          "dep:system-deps-meta"
+        ],
+        "xz": [
+          "dep:system-deps-meta",
+          "system-deps-meta/xz"
+        ],
+        "zip": [
+          "dep:system-deps-meta",
+          "system-deps-meta/zip"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "pkg-config",
+        "build-dependencies",
+        "build-depends",
+        "manifest",
+        "metadata"
+      ],
       "manifest": "crates-io/system-deps/9.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -163,6 +308,17 @@
         "edition": "2018",
         "name": "system_deps",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8a0dae2cbca1f0ff93795713cfe0a4c02f760e3c0b8ae2ab4ec4045808ff429f",
+        "package": "system-deps",
+        "registry": "crates-io",
+        "version": "9.0.0"
+      },
+      "vcs": {
+        "commit": "4aa15281c6e104fd44b50df4e2113de418da4012",
+        "path": "",
+        "system": "git"
       },
       "version": "9.0.0",
       "yanked": false

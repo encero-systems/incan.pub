@@ -368,6 +368,89 @@
           "unit_identity": "sha256:926ba5eccb6b2676a421c0afe076d89cf848ebc4d2b3328e3c1f740c8eadef03"
         }
       ],
+      "categories": [
+        "no-std",
+        "os"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(target_os = \"hermit\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(target_os = \"wasi\")"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_System_Diagnostics_Debug"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.52, <0.62",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1418,
+          "content": "content/sha256/c3054b1c0013a44cefdfce77d86308fc14d26b5b17feea831a0fedb2ac940b37",
+          "digest": "sha256:c3054b1c0013a44cefdfce77d86308fc14d26b5b17feea831a0fedb2ac940b37",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1054,
+          "content": "content/sha256/8764a597675778ddfd4e25f81b08a05dbcf089ac05662df7613fe67f150e3aa2",
+          "digest": "sha256:8764a597675778ddfd4e25f81b08a05dbcf089ac05662df7613fe67f150e3aa2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4479,
+          "content": "content/sha256/8e2bbd60d570bdf1f36df193608f7d1b982b644a9e9e40f90a9ab33d7a67039c",
+          "digest": "sha256:8e2bbd60d570bdf1f36df193608f7d1b982b644a9e9e40f90a9ab33d7a67039c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -375,6 +458,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -384,14 +468,24 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [
+          "libc/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/errno/0.3.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -401,6 +495,17 @@
         "edition": "2018",
         "name": "errno",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb",
+        "package": "errno",
+        "registry": "crates-io",
+        "version": "0.3.14"
+      },
+      "vcs": {
+        "commit": "ffc03bfb9eb491013567115e6eea560948cd9e52",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.14",
       "yanked": false

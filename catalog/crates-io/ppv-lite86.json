@@ -352,6 +352,60 @@
           "unit_identity": "sha256:067b168d96a4889ba566c19b33506c45d22934b06df8d78a8ff1435730336383"
         }
       ],
+      "categories": [
+        "cryptography",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "simd"
+          ],
+          "loaf": "crates-io/zerocopy",
+          "name": "zerocopy",
+          "optional": false,
+          "req": "^0.8.23"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 431,
+          "content": "content/sha256/f3b1188f94945fa69302afcdcf567cc61b86cd91d71bc5dd0ad8ae7bdcce8194",
+          "digest": "sha256:f3b1188f94945fa69302afcdcf567cc61b86cd91d71bc5dd0ad8ae7bdcce8194",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10854,
+          "content": "content/sha256/0218327e7a480793ffdd4eb792379a9709e5c135c7ba267f709d6f6d4d70af0a",
+          "digest": "sha256:0218327e7a480793ffdd4eb792379a9709e5c135c7ba267f709d6f6d4d70af0a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1076,
+          "content": "content/sha256/4cada0bd02ea3692eee6f16400d86c6508bbd3bafb2b65fed0419f36d4f83e8f",
+          "digest": "sha256:4cada0bd02ea3692eee6f16400d86c6508bbd3bafb2b65fed0419f36d4f83e8f",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 443,
+          "content": "content/sha256/0bd1d2bdb4a940a0d867a782644eb007e79611be0a8d74d4ba106e83597716df",
+          "digest": "sha256:0bd1d2bdb4a940a0d867a782644eb007e79611be0a8d74d4ba106e83597716df",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -360,6 +414,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -370,14 +425,28 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "no_simd": [],
+        "simd": [],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [
+        "crypto",
+        "simd",
+        "x86"
+      ],
       "manifest": "crates-io/ppv-lite86/0.2.21/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -387,6 +456,17 @@
         "edition": "2021",
         "name": "ppv_lite86",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:85eae3c4ed2f50dcfe72643da4befc30deadb458a9b590d720cde2f2b1e97da9",
+        "package": "ppv-lite86",
+        "registry": "crates-io",
+        "version": "0.2.21"
+      },
+      "vcs": {
+        "commit": "000a6cd6bbcb0b091381dc5f8fe6d6efa480b818",
+        "path": "utils-simd/ppv-lite86",
+        "system": "git"
       },
       "version": "0.2.21",
       "yanked": false

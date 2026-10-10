@@ -115,11 +115,195 @@
           "unit_identity": "sha256:12b2b98fa68acc6af4859e1aaf85c0523850e3497d73cdd2524a1d6a144357fe"
         }
       ],
+      "categories": [
+        "data-structures",
+        "science"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/approx",
+          "name": "approx",
+          "optional": true,
+          "req": "^0.5"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/cblas-sys",
+          "name": "cblas-sys",
+          "optional": true,
+          "req": "^0.1.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.82"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "cgemm"
+          ],
+          "loaf": "crates-io/matrixmultiply",
+          "name": "matrixmultiply",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-complex",
+          "name": "num-complex",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-integer",
+          "name": "num-integer",
+          "optional": false,
+          "req": "^0.1.39"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": false,
+          "req": "^1.6.0",
+          "target": "cfg(not(target_has_atomic = \"ptr\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/portable-atomic-util",
+          "name": "portable-atomic-util",
+          "optional": false,
+          "req": "^0.2.0",
+          "target": "cfg(not(target_has_atomic = \"ptr\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rawpointer",
+          "name": "rawpointer",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1.10.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 867,
+          "content": "content/sha256/dc89d5f37b071ad5b3fa7db077f06f5a26224bc3363c47eff253432b8a766dbc",
+          "digest": "sha256:dc89d5f37b071ad5b3fa7db077f06f5a26224bc3363c47eff253432b8a766dbc",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README-crates.io.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1119,
+          "content": "content/sha256/1fd6747d2c8e80f9fa766f57c5888864774621deb85cc2838ccaed727db32d45",
+          "digest": "sha256:1fd6747d2c8e80f9fa766f57c5888864774621deb85cc2838ccaed727db32d45",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 82087,
+          "content": "content/sha256/f7417f581bb7248ed197c317beb095e43e14390694e6b474ddce25283d50d0bd",
+          "digest": "sha256:f7417f581bb7248ed197c317beb095e43e14390694e6b474ddce25283d50d0bd",
+          "format": "markdown",
+          "origin": "package",
+          "path": "RELEASES.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "approx": [
+          "dep:approx"
+        ],
+        "blas": [
+          "dep:cblas-sys",
+          "dep:libc"
+        ],
+        "default": [
+          "std"
+        ],
+        "matrixmultiply-threading": [
+          "matrixmultiply/threading"
+        ],
+        "portable-atomic-critical-section": [
+          "portable-atomic/critical-section"
+        ],
+        "rayon": [
+          "dep:rayon",
+          "std"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "num-traits/std",
+          "matrixmultiply/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "array",
+        "data-structure",
+        "multidimensional",
+        "matrix",
+        "blas"
+      ],
       "manifest": "crates-io/ndarray/0.17.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -130,6 +314,17 @@
         "edition": "2021",
         "name": "ndarray",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:520080814a7a6b4a6e9070823bb24b4531daac8c4627e08ba5de8c5ef2f2752d",
+        "package": "ndarray",
+        "registry": "crates-io",
+        "version": "0.17.2"
+      },
+      "vcs": {
+        "commit": "2cf23d6abf5f7a8a5e638fa1c69779dc4d7219a0",
+        "path": "",
+        "system": "git"
       },
       "version": "0.17.2",
       "yanked": false

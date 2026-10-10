@@ -200,11 +200,100 @@
           "unit_identity": "sha256:e2de588515c5dee0a495a94290889d17b1f231fefd6030d59cc48e4d82804339"
         }
       ],
+      "categories": [
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-implement",
+          "name": "windows-implement",
+          "optional": true,
+          "req": "^0.100.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-interface",
+          "name": "windows-interface",
+          "optional": true,
+          "req": "^0.100.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.100.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-result",
+          "name": "windows-result",
+          "optional": false,
+          "req": "^0.100.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-strings",
+          "name": "windows-strings",
+          "optional": false,
+          "req": "^0.100.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 793,
+          "content": "content/sha256/3e8c37010d954f19d7cffe6b742b400ff6901690940121cecebaf14bd63f2e75",
+          "digest": "sha256:3e8c37010d954f19d7cffe6b742b400ff6901690940121cecebaf14bd63f2e75",
+          "format": "markdown",
+          "origin": "package",
+          "path": "readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11351,
+          "content": "content/sha256/c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "digest": "sha256:c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "format": "text",
+          "origin": "package",
+          "path": "license-apache-2.0",
+          "role": "license"
+        },
+        {
+          "bytes": 1141,
+          "content": "content/sha256/c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "digest": "sha256:c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "format": "text",
+          "origin": "package",
+          "path": "license-mit",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std",
+          "proc-macros"
+        ],
+        "proc-macros": [
+          "dep:windows-implement",
+          "dep:windows-interface"
+        ],
+        "std": [
+          "windows-result/std",
+          "windows-strings/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/windows-core/0.100.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -215,6 +304,17 @@
         "edition": "2024",
         "name": "windows_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:803590c6856f51d15fa2e9fabe4f4703122c8737f72ef2741b4ac09d4c2192f5",
+        "package": "windows-core",
+        "registry": "crates-io",
+        "version": "0.100.0"
+      },
+      "vcs": {
+        "commit": "a57cc321bfdbac6bb98c488ba49f399da8fcb98a",
+        "path": "crates/libs/core",
+        "system": "git"
       },
       "version": "0.100.0",
       "yanked": false
@@ -235,11 +335,95 @@
       "advisories": 0,
       "archive": "sha256:860c422e58f7b7ada67ccc50a061f1a86f3245db2ea112da6df88bf355aeb742",
       "assets": [],
+      "categories": [
+        "os::windows-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-implement",
+          "name": "windows-implement",
+          "optional": false,
+          "req": "^0.60.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-interface",
+          "name": "windows-interface",
+          "optional": false,
+          "req": "^0.59.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-link",
+          "name": "windows-link",
+          "optional": false,
+          "req": "^0.2.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-result",
+          "name": "windows-result",
+          "optional": false,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/windows-strings",
+          "name": "windows-strings",
+          "optional": false,
+          "req": "^0.5.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 377,
+          "content": "content/sha256/0f426dba1cf9f879c1a47a26706c4ca86a7f20809bef92d1dd132a2f2e5e39d1",
+          "digest": "sha256:0f426dba1cf9f879c1a47a26706c4ca86a7f20809bef92d1dd132a2f2e5e39d1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "readme.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11351,
+          "content": "content/sha256/c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "digest": "sha256:c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
+          "format": "text",
+          "origin": "package",
+          "path": "license-apache-2.0",
+          "role": "license"
+        },
+        {
+          "bytes": 1141,
+          "content": "content/sha256/c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "digest": "sha256:c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "format": "text",
+          "origin": "package",
+          "path": "license-mit",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "std": [
+          "windows-result/std",
+          "windows-strings/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/windows-core/0.62.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -249,6 +433,17 @@
         "edition": "2021",
         "name": "windows_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b8e83a14d34d0623b51dce9581199302a221863196a1dde71a7663a4c2be9deb",
+        "package": "windows-core",
+        "registry": "crates-io",
+        "version": "0.62.2"
+      },
+      "vcs": {
+        "commit": "32c3144490c016fe496a0aed769bce60987a2e9d",
+        "path": "crates/libs/core",
+        "system": "git"
       },
       "version": "0.62.2",
       "yanked": false

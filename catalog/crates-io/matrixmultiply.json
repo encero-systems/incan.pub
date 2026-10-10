@@ -207,6 +207,72 @@
           "unit_identity": "sha256:6772cbf4981b6a9ffbee7f1671627fe3abcd05249d94c3da3e1d090dc764bb27"
         }
       ],
+      "categories": [
+        "science"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num_cpus",
+          "name": "num_cpus",
+          "optional": true,
+          "req": "^1.13"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.7"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rawpointer",
+          "name": "rawpointer",
+          "optional": false,
+          "req": "^0.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/thread-tree",
+          "name": "thread-tree",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 11520,
+          "content": "content/sha256/8aad919207b4a6f223eb7811088004cc7af64deacc1140180eb3b8e6deb0d493",
+          "digest": "sha256:8aad919207b4a6f223eb7811088004cc7af64deacc1140180eb3b8e6deb0d493",
+          "format": "restructuredtext",
+          "origin": "package",
+          "path": "README.rst",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1159,
+          "content": "content/sha256/792d075c7bad6dac258a44e799eb64cbf465e24d9932d27669be08c5ec957e27",
+          "digest": "sha256:792d075c7bad6dac258a44e799eb64cbf465e24d9932d27669be08c5ec957e27",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -216,6 +282,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -226,6 +293,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -237,6 +305,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -247,6 +316,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -258,6 +328,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -268,6 +339,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -279,6 +351,7 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -289,14 +362,45 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "x86_64-unknown-linux-gnu",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "avx512": [],
+        "cgemm": [],
+        "constconf": [],
+        "default": [
+          "std",
+          "avx512"
+        ],
+        "num_cpus": [
+          "dep:num_cpus"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "std": [],
+        "thread-tree": [
+          "dep:thread-tree"
+        ],
+        "threading": [
+          "thread-tree",
+          "std",
+          "once_cell",
+          "num_cpus"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "matrix",
+        "sgemm",
+        "dgemm"
+      ],
       "manifest": "crates-io/matrixmultiply/0.3.11/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -307,6 +411,17 @@
         "edition": "2018",
         "name": "matrixmultiply",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:3f607c237553f086e7043417a51df26b2eb899d3caff94e6a67592ff992fedc7",
+        "package": "matrixmultiply",
+        "registry": "crates-io",
+        "version": "0.3.11"
+      },
+      "vcs": {
+        "commit": "07f968c20e0df41e3fd694e9c47ef5368ec9eee1",
+        "path": "",
+        "system": "git"
       },
       "version": "0.3.11",
       "yanked": false

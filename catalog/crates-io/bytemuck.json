@@ -312,11 +312,144 @@
           "unit_identity": "sha256:d31d738eed192860da1b6a3966e2433a7eebf3bc455984e2cc2b79ea1c8835c0"
         }
       ],
+      "categories": [
+        "encoding",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/bytemuck_derive",
+          "name": "bytemuck_derive",
+          "optional": true,
+          "req": "^1.10.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustversion",
+          "name": "rustversion",
+          "optional": true,
+          "req": "^1.0.22"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3052,
+          "content": "content/sha256/23799f000c1e48b9a09179cee8a9f0a63f456893d959d3ebae3b34c8133beb8e",
+          "digest": "sha256:23799f000c1e48b9a09179cee8a9f0a63f456893d959d3ebae3b34c8133beb8e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10398,
+          "content": "content/sha256/e3ba223bb1423f0aad8c3dfce0fe3148db48926d41e6fbc3afbbf5ff9e1c89cb",
+          "digest": "sha256:e3ba223bb1423f0aad8c3dfce0fe3148db48926d41e6fbc3afbbf5ff9e1c89cb",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1110,
+          "content": "content/sha256/9df9ba60a11af705f2e451b53762686e615d86f76b169cf075c3237730dbd7e2",
+          "digest": "sha256:9df9ba60a11af705f2e451b53762686e615d86f76b169cf075c3237730dbd7e2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 851,
+          "content": "content/sha256/84b34dd7608f7fb9b17bd588a6bf392bf7de504e2716f024a77d89f1b145a151",
+          "digest": "sha256:84b34dd7608f7fb9b17bd588a6bf392bf7de504e2716f024a77d89f1b145a151",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-ZLIB",
+          "role": "license"
+        },
+        {
+          "bytes": 16235,
+          "content": "content/sha256/99c896a1069522e860321038a5a62829d80da3ff6e43756a01a88a05a1b82e21",
+          "digest": "sha256:99c896a1069522e860321038a5a62829d80da3ff6e43756a01a88a05a1b82e21",
+          "format": "markdown",
+          "origin": "package",
+          "path": "changelog.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "aarch64_simd": [],
+        "align_offset": [],
+        "alloc_uninit": [],
+        "avx512_simd": [],
+        "bytemuck_derive": [
+          "dep:bytemuck_derive"
+        ],
+        "const_zeroed": [],
+        "derive": [
+          "bytemuck_derive"
+        ],
+        "extern_crate_alloc": [],
+        "extern_crate_std": [
+          "extern_crate_alloc"
+        ],
+        "impl_core_error": [],
+        "latest_stable_rust": [
+          "aarch64_simd",
+          "avx512_simd",
+          "align_offset",
+          "alloc_uninit",
+          "const_zeroed",
+          "derive",
+          "impl_core_error",
+          "min_const_generics",
+          "must_cast",
+          "must_cast_extra",
+          "pod_saturating",
+          "track_caller",
+          "transparentwrapper_extra",
+          "wasm_simd",
+          "zeroable_atomics",
+          "zeroable_maybe_uninit",
+          "zeroable_unwind_fn"
+        ],
+        "min_const_generics": [],
+        "must_cast": [],
+        "must_cast_extra": [
+          "must_cast"
+        ],
+        "nightly_docs": [],
+        "nightly_float": [],
+        "nightly_portable_simd": [
+          "rustversion"
+        ],
+        "nightly_stdsimd": [],
+        "pod_saturating": [],
+        "rustversion": [
+          "dep:rustversion"
+        ],
+        "track_caller": [],
+        "transparentwrapper_extra": [],
+        "unsound_ptr_pod_impl": [],
+        "wasm_simd": [],
+        "zeroable_atomics": [],
+        "zeroable_maybe_uninit": [],
+        "zeroable_unwind_fn": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "transmute",
+        "bytes",
+        "casting"
+      ],
       "manifest": "crates-io/bytemuck/1.25.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -327,6 +460,17 @@
         "edition": "2018",
         "name": "bytemuck",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:95832e849adfb21180ccb6826a99da14e5d266ae5c2e668e1602cf234f153797",
+        "package": "bytemuck",
+        "registry": "crates-io",
+        "version": "1.25.2"
+      },
+      "vcs": {
+        "commit": "f363643e951a7ac9e4b9921de982f2b0918902e3",
+        "path": "",
+        "system": "git"
       },
       "version": "1.25.2",
       "yanked": false

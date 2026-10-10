@@ -194,11 +194,116 @@
           "unit_identity": "sha256:3138bfab7bdf53f36739684179d17afca146c6caa45d27a6a3f91b4bd9228e97"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-array",
+          "name": "arrow-array",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-data",
+          "name": "arrow-data",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-select",
+          "name": "arrow-select",
+          "optional": false,
+          "req": "^60.0.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/flatbuffers",
+          "name": "flatbuffers",
+          "optional": false,
+          "req": "^25.2.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "frame",
+            "std"
+          ],
+          "loaf": "crates-io/lz4_flex",
+          "name": "lz4_flex",
+          "optional": true,
+          "req": "^0.14"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "zstd",
+          "optional": true,
+          "req": "^0.14.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1422,
+          "content": "content/sha256/bbd58fd1c7d2910a2b7887c188d858dc6e56d87742891dc5da407885049f96d8",
+          "digest": "sha256:bbd58fd1c7d2910a2b7887c188d858dc6e56d87742891dc5da407885049f96d8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [],
+        "lz4": [
+          "lz4_flex"
+        ],
+        "lz4_flex": [
+          "dep:lz4_flex"
+        ],
+        "zstd": [
+          "dep:zstd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow-ipc/60.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -210,6 +315,13 @@
         "name": "arrow_ipc",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:86c523472d22e31f984df7a44fc36e6323d3c9b05ffe53d267ee4c3aa7c128d2",
+        "package": "arrow-ipc",
+        "registry": "crates-io",
+        "version": "60.0.0"
+      },
+      "vcs": null,
       "version": "60.0.0",
       "yanked": false
     },
@@ -231,6 +343,96 @@
       "advisories": 0,
       "archive": "sha256:82b4f7f03e59c70fa7fa99517778f02ab86c6367ca9c1702f17c92f983ca32ba",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-array",
+          "name": "arrow-array",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-buffer",
+          "name": "arrow-buffer",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-data",
+          "name": "arrow-data",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-schema",
+          "name": "arrow-schema",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrow-select",
+          "name": "arrow-select",
+          "optional": false,
+          "req": "^58.4.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/flatbuffers",
+          "name": "flatbuffers",
+          "optional": false,
+          "req": "^25.2.10"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "frame",
+            "std"
+          ],
+          "loaf": "crates-io/lz4_flex",
+          "name": "lz4_flex",
+          "optional": true,
+          "req": "^0.13"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zstd",
+          "name": "zstd",
+          "optional": true,
+          "req": "^0.13.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1422,
+          "content": "content/sha256/bbd58fd1c7d2910a2b7887c188d858dc6e56d87742891dc5da407885049f96d8",
+          "digest": "sha256:bbd58fd1c7d2910a2b7887c188d858dc6e56d87742891dc5da407885049f96d8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -241,14 +443,30 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [],
+        "lz4": [
+          "lz4_flex"
+        ],
+        "lz4_flex": [
+          "dep:lz4_flex"
+        ],
+        "zstd": [
+          "dep:zstd"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "arrow"
+      ],
       "manifest": "crates-io/arrow-ipc/58.4.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -259,6 +477,13 @@
         "name": "arrow_ipc",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:29a908a11fcfb3fb2f6730f4ac15e367bc644e419155e96238f68cf3adde572b",
+        "package": "arrow-ipc",
+        "registry": "crates-io",
+        "version": "58.4.0"
+      },
+      "vcs": null,
       "version": "58.4.0",
       "yanked": false
     }

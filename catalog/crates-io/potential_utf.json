@@ -546,6 +546,66 @@
           "unit_identity": "sha256:bc97c8675902b45f859c2d3a3da8813a9cd03e14ed33f92b27c6e50f3261a8ab"
         }
       ],
+      "categories": [
+        "internationalization",
+        "localization",
+        "no-std",
+        "embedded"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/writeable",
+          "name": "writeable",
+          "optional": true,
+          "req": "^0.6.4"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": true,
+          "req": "^0.11.7"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 390,
+          "content": "content/sha256/c077e4d9e1438c188f0f8319b41376784562725e80bac136a3ca82062ac15b45",
+          "digest": "sha256:c077e4d9e1438c188f0f8319b41376784562725e80bac136a3ca82062ac15b45",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -553,14 +613,43 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "alloc": [
+          "serde_core?/alloc",
+          "writeable",
+          "dep:writeable",
+          "writeable/alloc",
+          "zerovec?/alloc"
+        ],
+        "databake": [
+          "dep:databake"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "writeable": [
+          "dep:writeable"
+        ],
+        "zerovec": [
+          "dep:zerovec"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "text-processing",
+        "encoding"
+      ],
       "manifest": "crates-io/potential_utf/0.1.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -570,6 +659,17 @@
         "edition": "2021",
         "name": "potential_utf",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d83eb9bc6d8e5cf568e7a1101d60ee05e81ed50ea106026f3d18deeb046d7661",
+        "package": "potential_utf",
+        "registry": "crates-io",
+        "version": "0.1.6"
+      },
+      "vcs": {
+        "commit": "a14f2dad852be26bad277ae704abf27a15cbfed1",
+        "path": "utils/potential_utf",
+        "system": "git"
       },
       "version": "0.1.6",
       "yanked": false
@@ -592,11 +692,92 @@
       "advisories": 0,
       "archive": "sha256:0bf93595e969e81358b1327c57bf2700dc4d6288913f5fbed16e6d6272f460b8",
       "assets": [],
+      "categories": [
+        "internationalization"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/databake",
+          "name": "databake",
+          "optional": true,
+          "req": "^0.2.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_core",
+          "name": "serde_core",
+          "optional": true,
+          "req": "^1.0.220"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/writeable",
+          "name": "writeable",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/zerovec",
+          "name": "zerovec",
+          "optional": true,
+          "req": "^0.11.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 390,
+          "content": "content/sha256/c077e4d9e1438c188f0f8319b41376784562725e80bac136a3ca82062ac15b45",
+          "digest": "sha256:c077e4d9e1438c188f0f8319b41376784562725e80bac136a3ca82062ac15b45",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 2195,
+          "content": "content/sha256/f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "digest": "sha256:f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serde_core?/alloc",
+          "dep:writeable",
+          "writeable/alloc",
+          "zerovec?/alloc"
+        ],
+        "databake": [
+          "dep:databake"
+        ],
+        "default": [
+          "alloc"
+        ],
+        "serde": [
+          "dep:serde_core"
+        ],
+        "writeable": [
+          "dep:writeable"
+        ],
+        "zerovec": [
+          "dep:zerovec"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/potential_utf/0.1.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -607,6 +788,17 @@
         "edition": "2021",
         "name": "potential_utf",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b73949432f5e2a09657003c25bca5e19a0e9c84f8058ca374f49e0ebe605af77",
+        "package": "potential_utf",
+        "registry": "crates-io",
+        "version": "0.1.4"
+      },
+      "vcs": {
+        "commit": "29dfe2790b6cfdab94ca6a6b69f58ce54802dbf7",
+        "path": "utils/potential_utf",
+        "system": "git"
       },
       "version": "0.1.4",
       "yanked": false

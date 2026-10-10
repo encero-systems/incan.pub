@@ -118,11 +118,93 @@
           "unit_identity": "sha256:867e1dd4699abcfe3fac42f9ad92fb07ee24c8e7fb5825692b466d8fb44d7bfa"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": true,
+          "req": "^2.4.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.103"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2904,
+          "content": "content/sha256/5380881b998004ce36045d775ba411e288c301269eab63041531f6dd7a09b492",
+          "digest": "sha256:5380881b998004ce36045d775ba411e288c301269eab63041531f6dd7a09b492",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 1060,
+          "content": "content/sha256/21ab3c8e9af71d0212606c98a210f71d6a86234b179b3babff0ccc4798b90f33",
+          "digest": "sha256:21ab3c8e9af71d0212606c98a210f71d6a86234b179b3babff0ccc4798b90f33",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT.txt",
+          "role": "license"
+        },
+        {
+          "bytes": 59341,
+          "content": "content/sha256/a1c6ec67fd0e7df94c6b466a40d83b670b2109b89e1be7ffd29a3d9a6705fcd3",
+          "digest": "sha256:a1c6ec67fd0e7df94c6b466a40d83b670b2109b89e1be7ffd29a3d9a6705fcd3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "serde?/alloc"
+        ],
+        "default": [
+          "std"
+        ],
+        "memchr": [
+          "dep:memchr"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "alloc",
+          "memchr?/std",
+          "serde?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "IRI",
+        "URI"
+      ],
       "manifest": "crates-io/iri-string/0.7.14/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +215,17 @@
         "edition": "2021",
         "name": "iri_string",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1663ee7d8cf2900cc1414b1e1eec9f348d6eaa3bcab07579f4726a4b8499f447",
+        "package": "iri-string",
+        "registry": "crates-io",
+        "version": "0.7.14"
+      },
+      "vcs": {
+        "commit": "b3a2d7a195a241a0aaf924468eaeac2865ea779d",
+        "path": "",
+        "system": "git"
       },
       "version": "0.7.14",
       "yanked": false

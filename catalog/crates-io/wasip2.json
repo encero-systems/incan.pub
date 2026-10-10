@@ -116,11 +116,104 @@
           "unit_identity": "sha256:4e51592ac56588f74903b98d278a3e09c9221c0cb59ef2d3f8e504ff8649cc6d"
         }
       ],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen",
+          "name": "wit-bindgen",
+          "optional": false,
+          "req": "^0.62.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2242,
+          "content": "content/sha256/a1728680d45922d434e910078fccbea1ef436af46e1c85c67a1c65925aa08d9e",
+          "digest": "sha256:a1728680d45922d434e910078fccbea1ef436af46e1c85c67a1c65925aa08d9e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "bitflags": [
+          "wit-bindgen/bitflags"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std",
+          "bitflags"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "wit-bindgen/rustc-dep-of-std"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasip2/2.0.1+wasi-0.2.12/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -131,6 +224,17 @@
         "edition": "2021",
         "name": "wasip2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:89aafd4b69fb41a64cfd5d7f214cde92ab422ec4d9bcd55fcc816d3f5f49bbf3",
+        "package": "wasip2",
+        "registry": "crates-io",
+        "version": "2.0.1+wasi-0.2.12"
+      },
+      "vcs": {
+        "commit": "43007ef51303552f60fd6f1528ec5f778c33e87e",
+        "path": "crates/wasip2",
+        "system": "git"
       },
       "version": "2.0.1+wasi-0.2.12",
       "yanked": false
@@ -320,11 +424,104 @@
           "unit_identity": "sha256:e6464bfd9c40e6514f2e4248b37286d0709825144e93735ae464c2a09cbc1847"
         }
       ],
+      "categories": [
+        "no-std",
+        "wasm"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-alloc",
+          "name": "alloc",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-std-workspace-core",
+          "name": "core",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/wit-bindgen",
+          "name": "wit-bindgen",
+          "optional": false,
+          "req": "^0.57.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2242,
+          "content": "content/sha256/a1728680d45922d434e910078fccbea1ef436af46e1c85c67a1c65925aa08d9e",
+          "digest": "sha256:a1728680d45922d434e910078fccbea1ef436af46e1c85c67a1c65925aa08d9e",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "dep:alloc"
+        ],
+        "bitflags": [
+          "wit-bindgen/bitflags"
+        ],
+        "core": [
+          "dep:core"
+        ],
+        "default": [
+          "std",
+          "bitflags"
+        ],
+        "rustc-dep-of-std": [
+          "core",
+          "alloc",
+          "wit-bindgen/rustc-dep-of-std"
+        ],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "webassembly",
+        "wasm"
+      ],
       "manifest": "crates-io/wasip2/1.0.4+wasi-0.2.12/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -334,6 +531,17 @@
         "edition": "2021",
         "name": "wasip2",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b67efb37e106e55ce722a510d6b5f9c17f083e5fc79afc2badeb12cc313d9487",
+        "package": "wasip2",
+        "registry": "crates-io",
+        "version": "1.0.4+wasi-0.2.12"
+      },
+      "vcs": {
+        "commit": "1edbc7add705b075d28436b26057ca9aa5a5a492",
+        "path": "crates/wasip2",
+        "system": "git"
       },
       "version": "1.0.4+wasi-0.2.12",
       "yanked": false

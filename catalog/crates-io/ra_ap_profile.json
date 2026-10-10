@@ -25,11 +25,90 @@
       "advisories": 0,
       "archive": "sha256:af864526b3b0b5dfead55b5e1b0511586b9aa8588ca9544db00f8205a5a1e525",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tikv-jemalloc-ctl",
+          "name": "jemalloc-ctl",
+          "optional": true,
+          "req": "^0.5.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.172",
+          "target": "cfg(all(target_os = \"linux\", target_env = \"gnu\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/perf-event",
+          "name": "perf-event",
+          "optional": false,
+          "req": "=0.4.7",
+          "target": "cfg(all(target_os = \"linux\", not(target_env = \"ohos\")))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_System_ProcessStatus",
+            "Win32_System_Threading"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.60",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 428,
+          "content": "content/sha256/93aed256f891eb87ba98d2ca00c7382e1363e9138e7a56e1a33770b069ac9ebf",
+          "digest": "sha256:93aed256f891eb87ba98d2ca00c7382e1363e9138e7a56e1a33770b069ac9ebf",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 354,
+          "content": "content/sha256/7bf40ee21a41a17b1b6bdb167a2818720d8a31dc4f201d50e5fd136db1b26804",
+          "digest": "sha256:7bf40ee21a41a17b1b6bdb167a2818720d8a31dc4f201d50e5fd136db1b26804",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "cpu_profiler": [],
+        "jemalloc": [
+          "jemalloc-ctl"
+        ],
+        "jemalloc-ctl": [
+          "dep:jemalloc-ctl"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/ra_ap_profile/0.0.325/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +119,18 @@
         "edition": "2024",
         "name": "ra_ap_profile",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a9298b8d1bb31def05b1f396df44ed8d608a7826ea2f9f5e3ff5244eef20fb71",
+        "package": "ra_ap_profile",
+        "registry": "crates-io",
+        "version": "0.0.325"
+      },
+      "vcs": {
+        "commit": "b42b63f390a4dab14e6efa34a70e67f5b087cc62",
+        "dirty": true,
+        "path": "crates/profile",
+        "system": "git"
       },
       "version": "0.0.325",
       "yanked": false

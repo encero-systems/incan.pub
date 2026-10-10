@@ -198,11 +198,143 @@
           "unit_identity": "sha256:f1bf5fc9ca26be5b5463e52549e37cd4abd3ee931af98c844838bbf6069617ea"
         }
       ],
+      "categories": [
+        "cryptography"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ark-serialize-derive",
+          "name": "ark-serialize-derive",
+          "optional": true,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/ark-std",
+          "name": "ark-std",
+          "optional": false,
+          "req": "^0.6.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": false,
+          "req": "^0.10"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": false,
+          "req": "^0.4"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rayon",
+          "name": "rayon",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "base64"
+          ],
+          "loaf": "crates-io/serde-encoded-bytes",
+          "name": "serde-encoded-bytes",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/serde_with",
+          "name": "serde_with",
+          "optional": true,
+          "req": "^3.12"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 8307,
+          "content": "content/sha256/0f5ff249d1791a7468a0309675e7bb0d81e14cc7919c35eab0287d4b9ec09a06",
+          "digest": "sha256:0f5ff249d1791a7468a0309675e7bb0d81e14cc7919c35eab0287d4b9ec09a06",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10846,
+          "content": "content/sha256/e8d77d4bbe96e1b46ec0f40d1f12e19825e718c764bb3e9a695633ade9289f9e",
+          "digest": "sha256:e8d77d4bbe96e1b46ec0f40d1f12e19825e718c764bb3e9a695633ade9289f9e",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1046,
+          "content": "content/sha256/8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+          "digest": "sha256:8f71659370c5268d9a1dc962a46232540e8fca63462586d8efaa95aab492a208",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "ark-serialize-derive": [
+          "dep:ark-serialize-derive"
+        ],
+        "default": [],
+        "derive": [
+          "ark-serialize-derive"
+        ],
+        "parallel": [
+          "rayon"
+        ],
+        "rayon": [
+          "dep:rayon"
+        ],
+        "serde": [
+          "dep:serde",
+          "dep:serde-encoded-bytes",
+          "dep:serde_with"
+        ],
+        "serde_with": [
+          "serde",
+          "dep:serde_with"
+        ],
+        "std": [
+          "ark-std/std",
+          "serde_with?/std"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cryptography",
+        "serialization"
+      ],
       "manifest": "crates-io/ark-serialize/0.6.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -213,6 +345,17 @@
         "edition": "2021",
         "name": "ark_serialize",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a74dd304fd536fb95d0a328e72be759209cc496a9da094c5bc56e5fea4f9e86b",
+        "package": "ark-serialize",
+        "registry": "crates-io",
+        "version": "0.6.0"
+      },
+      "vcs": {
+        "commit": "d168323a6c7adf25210030fdd2c0be734b52f85b",
+        "path": "serialize",
+        "system": "git"
       },
       "version": "0.6.0",
       "yanked": false

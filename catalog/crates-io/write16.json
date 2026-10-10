@@ -184,11 +184,75 @@
           "unit_identity": "sha256:f3cc00dd3ad71543ba773a2b3e2622c326c7f98c7ccdb54360e9ec161ef86af5"
         }
       ],
+      "categories": [
+        "text-processing",
+        "internationalization"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrayvec",
+          "name": "arrayvec",
+          "optional": true,
+          "req": "^0.7.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1.9.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 845,
+          "content": "content/sha256/ea27b433d28b9f0bc411147079740bd28c45bcf80c0f70698a3cf6432ba3046b",
+          "digest": "sha256:ea27b433d28b9f0bc411147079740bd28c45bcf80c0f70698a3cf6432ba3046b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "digest": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1053,
+          "content": "content/sha256/3fa4ca83dcc9237839b1bdeb2e6d16bdfb5ec0c5ce42b24694d8bbf0dcbef72c",
+          "digest": "sha256:3fa4ca83dcc9237839b1bdeb2e6d16bdfb5ec0c5ce42b24694d8bbf0dcbef72c",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "arrayvec": [
+          "dep:arrayvec"
+        ],
+        "smallvec": [
+          "dep:smallvec"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "unicode",
+        "utf-16"
+      ],
       "manifest": "crates-io/write16/1.0.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -198,6 +262,17 @@
         "edition": "2021",
         "name": "write16",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:d1890f4022759daae28ed4fe62859b1236caebfc61ede2f63ed4e695f3f6d936",
+        "package": "write16",
+        "registry": "crates-io",
+        "version": "1.0.0"
+      },
+      "vcs": {
+        "commit": "0fea9edd7f7aaafee59859ff91eb6560d861b6bc",
+        "path": "",
+        "system": "git"
       },
       "version": "1.0.0",
       "yanked": false

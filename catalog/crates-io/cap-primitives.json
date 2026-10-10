@@ -26,19 +26,182 @@
       "advisories": 0,
       "archive": "sha256:1febabcd4148f9a82ebd121bb66c60ee57f1d9d4ef2679fdab299fa1a15dc7a0",
       "assets": [],
+      "categories": [
+        "filesystem",
+        "network-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ambient-authority",
+          "name": "ambient-authority",
+          "optional": false,
+          "req": "^0.0.2"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/arbitrary",
+          "name": "arbitrary",
+          "optional": true,
+          "req": "^1.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/fs-set-times",
+          "name": "fs-set-times",
+          "optional": false,
+          "req": "^0.20.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/io-extras",
+          "name": "io-extras",
+          "optional": false,
+          "req": "^0.18.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/io-lifetimes",
+          "name": "io-lifetimes",
+          "optional": false,
+          "req": "^2.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ipnet",
+          "name": "ipnet",
+          "optional": false,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/maybe-owned",
+          "name": "maybe-owned",
+          "optional": false,
+          "req": "^0.3.4"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "fs",
+            "process",
+            "termios",
+            "time"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.0",
+          "target": "cfg(not(windows))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustix-linux-procfs",
+          "name": "rustix-linux-procfs",
+          "optional": false,
+          "req": "^0.1.1",
+          "target": "cfg(any(target_os = \"android\", target_os = \"linux\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Wdk_Foundation",
+            "Wdk_Storage_FileSystem",
+            "Win32_Foundation",
+            "Win32_Security",
+            "Win32_Storage_FileSystem",
+            "Win32_System_IO",
+            "Win32_System_Kernel",
+            "Win32_System_WindowsProgramming"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.52, <=0.59",
+          "target": "cfg(windows)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/winx",
+          "name": "winx",
+          "optional": false,
+          "req": "^0.36.0",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1441,
+          "content": "content/sha256/89d58eda34e1f4c661a8bc97c6355f8bf19ecd0373396f8bc9e5a2fb095eb0c8",
+          "digest": "sha256:89d58eda34e1f4c661a8bc97c6355f8bf19ecd0373396f8bc9e5a2fb095eb0c8",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "arbitrary": [
+          "dep:arbitrary"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "api",
+        "network",
+        "file"
+      ],
       "manifest": "crates-io/cap-primitives/3.4.6/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -49,6 +212,17 @@
         "edition": "2021",
         "name": "cap_primitives",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8e0bf07d379916947be6c4a07f43684153d710a2896c31f9e97781362895596c",
+        "package": "cap-primitives",
+        "registry": "crates-io",
+        "version": "3.4.6"
+      },
+      "vcs": {
+        "commit": "cd4c6330089e3731c68b7b98d4dde0cda27402ff",
+        "path": "cap-primitives",
+        "system": "git"
       },
       "version": "3.4.6",
       "yanked": false

@@ -102,11 +102,74 @@
           "unit_identity": "sha256:d31b8e0e604bfb450cb95c28a30377280eeb8329edcbe9289222c56fdc6395b9"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "termios"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.1",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_System_Console"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": ">=0.59, <=0.61",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1035,
+          "content": "content/sha256/065688c59fba71d7948d3d18d5ffbf562a3c650e281564fd7c5ab27bc7da6ad4",
+          "digest": "sha256:065688c59fba71d7948d3d18d5ffbf562a3c650e281564fd7c5ab27bc7da6ad4",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11358,
+          "content": "content/sha256/c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "digest": "sha256:c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1072,
+          "content": "content/sha256/bc8dcbbd559a61b8a8c0c89d5c3e15d0dc47c6fae94e78ac428d6a7b7da3c4f9",
+          "digest": "sha256:bc8dcbbd559a61b8a8c0c89d5c3e15d0dc47c6fae94e78ac428d6a7b7da3c4f9",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {},
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "terminal",
+        "console",
+        "term",
+        "size",
+        "dimensions"
+      ],
       "manifest": "crates-io/terminal_size/0.4.4/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +180,17 @@
         "edition": "2021",
         "name": "terminal_size",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:230a1b821ccbd75b185820a1f1ff7b14d21da1e442e22c0863ea5f08771a8874",
+        "package": "terminal_size",
+        "registry": "crates-io",
+        "version": "0.4.4"
+      },
+      "vcs": {
+        "commit": "cad29f6450c6873fe2f719b93d17bba14c15737e",
+        "path": "",
+        "system": "git"
       },
       "version": "0.4.4",
       "yanked": false

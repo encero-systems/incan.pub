@@ -25,11 +25,96 @@
       "advisories": 0,
       "archive": "sha256:5b551c45970800e06b47308856d47a2917275d6bcee0f55bac931bc97c89cb3a",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ra_ap_intern",
+          "name": "intern",
+          "optional": false,
+          "req": "=0.0.325"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-hash",
+          "name": "rustc-hash",
+          "optional": false,
+          "req": "^2.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ra_ap_span",
+          "name": "span",
+          "optional": true,
+          "req": "=0.0.325"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ra_ap_syntax",
+          "name": "syntax",
+          "optional": true,
+          "req": "=0.0.325"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/tracing",
+          "name": "tracing",
+          "optional": false,
+          "req": "^0.1.41"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ra_ap_tt",
+          "name": "tt",
+          "optional": true,
+          "req": "=0.0.325"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 448,
+          "content": "content/sha256/0695ebb32d46ce86342a501d0e1b23506e9ba3b70946b71749f8ee4433444ed2",
+          "digest": "sha256:0695ebb32d46ce86342a501d0e1b23506e9ba3b70946b71749f8ee4433444ed2",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 342,
+          "content": "content/sha256/b2c04ea6bdcdccff0784374beaead05682dffa918d37686d4b61550a17358fbc",
+          "digest": "sha256:b2c04ea6bdcdccff0784374beaead05682dffa918d37686d4b61550a17358fbc",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [],
+        "in-rust-tree": [],
+        "syntax": [
+          "dep:syntax",
+          "dep:span"
+        ],
+        "tt": [
+          "dep:tt"
+        ]
+      },
       "files": {
         "license": "registry",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/ra_ap_cfg/0.0.325/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -40,6 +125,18 @@
         "edition": "2024",
         "name": "ra_ap_cfg",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1827ceaa481ad5774d7c9a2607852cd680ca1e6fe74ae09b05d994dedc3b6c1c",
+        "package": "ra_ap_cfg",
+        "registry": "crates-io",
+        "version": "0.0.325"
+      },
+      "vcs": {
+        "commit": "b42b63f390a4dab14e6efa34a70e67f5b087cc62",
+        "dirty": true,
+        "path": "crates/cfg",
+        "system": "git"
       },
       "version": "0.0.325",
       "yanked": false

@@ -102,11 +102,87 @@
           "unit_identity": "sha256:ff1a7eb03a824a126b34b364b633b818a5f23df9e2954231a15f3519305c9df2"
         }
       ],
+      "categories": [
+        "data-structures"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/phf_generator",
+          "name": "phf_generator",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/phf_shared",
+          "name": "phf_shared",
+          "optional": false,
+          "req": "^0.14.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4834,
+          "content": "content/sha256/145446243da24c9c902982be559dabf5d2358eb7aeba34586a16d20bda3f6eb5",
+          "digest": "sha256:145446243da24c9c902982be559dabf5d2358eb7aeba34586a16d20bda3f6eb5",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 34317,
+          "content": "content/sha256/ec34e2fb36117872c559faa2551b239a0dbc92b45cfe76341404d7506bb9d849",
+          "digest": "sha256:ec34e2fb36117872c559faa2551b239a0dbc92b45cfe76341404d7506bb9d849",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "ptrhash": [
+          "phf_generator/ptrhash"
+        ],
+        "quote": [
+          "dep:proc-macro2",
+          "dep:quote"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/phf_codegen/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +193,17 @@
         "edition": "2024",
         "name": "phf_codegen",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:41b585a510fb76fdebead6897982ef2a03a21d8e6cbcca904999742a4afc6ffe",
+        "package": "phf_codegen",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "1620d169aad09b02ef02a97b272470152e100bd6",
+        "path": "phf_codegen",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false

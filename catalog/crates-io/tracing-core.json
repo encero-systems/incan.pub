@@ -707,6 +707,59 @@
           "unit_identity": "sha256:c625c92bd1f9c826371c468e67fd1054d6bf386f9ba1ed38e1da4f326bafd2ff"
         }
       ],
+      "categories": [
+        "development-tools::debugging",
+        "development-tools::profiling",
+        "asynchronous"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1.13.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/valuable",
+          "name": "valuable",
+          "optional": true,
+          "req": "^0.1.0",
+          "target": "cfg(tracing_unstable)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5013,
+          "content": "content/sha256/e3008819ba561550f2a258aeeda96aebf049b85e3a427433dc58514d8362f4db",
+          "digest": "sha256:e3008819ba561550f2a258aeeda96aebf049b85e3a427433dc58514d8362f4db",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1062,
+          "content": "content/sha256/898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "digest": "sha256:898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 18814,
+          "content": "content/sha256/f33c4cce31b558333bc494d06239831a2590cabf3c147de19cf52d6a23b4c301",
+          "digest": "sha256:f33c4cce31b558333bc494d06239831a2590cabf3c147de19cf52d6a23b4c301",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -715,6 +768,7 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         },
@@ -725,14 +779,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "std",
+          "valuable?/std"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "std": [
+          "once_cell"
+        ],
+        "valuable": [
+          "dep:valuable"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "logging",
+        "tracing",
+        "profiling"
+      ],
       "manifest": "crates-io/tracing-core/0.1.36/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -742,6 +817,17 @@
         "edition": "2018",
         "name": "tracing_core",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a",
+        "package": "tracing-core",
+        "registry": "crates-io",
+        "version": "0.1.36"
+      },
+      "vcs": {
+        "commit": "10a9e838a35e6ded79d66af246be2ee05417136d",
+        "path": "tracing-core",
+        "system": "git"
       },
       "version": "0.1.36",
       "yanked": false

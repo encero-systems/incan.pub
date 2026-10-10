@@ -25,6 +25,93 @@
       "advisories": 0,
       "archive": "sha256:a71f9cb95cc7bebf3cd75d6b8fc0896fb1285c3a8564435b25b8ed58b0b5d0fd",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.93"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cfg-if",
+          "name": "cfg-if",
+          "optional": false,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.112",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "mm"
+          ],
+          "loaf": "crates-io/rustix",
+          "name": "rustix",
+          "optional": false,
+          "req": "^1.0.3",
+          "target": "cfg(unix)"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasmtime-internal-asm-macros",
+          "name": "wasmtime-asm-macros",
+          "optional": false,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasmtime-internal-versioned-export-macros",
+          "name": "wasmtime-versioned-export-macros",
+          "optional": false,
+          "req": "=36.0.17"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_Foundation",
+            "Win32_System_Threading"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.60.0",
+          "target": "cfg(windows)"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 469,
+          "content": "content/sha256/b9c1292baa7e1c1f32f310cb0147fdaa918639634e79a71834101c8a1ffe09cc",
+          "digest": "sha256:b9c1292baa7e1c1f32f310cb0147fdaa918639634e79a71834101c8a1ffe09cc",
+          "format": "markdown",
+          "origin": "registry",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 12243,
+          "content": "content/sha256/268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "digest": "sha256:268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -32,14 +119,19 @@
           ],
           "owners": [],
           "profile": "debug",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "registry"
       },
+      "keywords": [],
       "manifest": "crates-io/wasmtime-internal-fiber/36.0.17/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -50,6 +142,17 @@
         "edition": "2024",
         "name": "wasmtime_internal_fiber",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:821e764d43c160cf0989c55d63245856164bac8a09d345d2a0e9402fba68a3e5",
+        "package": "wasmtime-internal-fiber",
+        "registry": "crates-io",
+        "version": "36.0.17"
+      },
+      "vcs": {
+        "commit": "5cbcb3944d300349cdb1d9da268dc142d8227ff4",
+        "path": "crates/fiber",
+        "system": "git"
       },
       "version": "36.0.17",
       "yanked": false

@@ -68,11 +68,198 @@
           "unit_identity": "sha256:3378495e3a6b4a22f103b6ead870f64273d323820162938bd94a540164c6b541"
         }
       ],
+      "categories": [
+        "api-bindings",
+        "development-tools::ffi",
+        "external-ffi-bindings",
+        "os::macos-apis"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/bitflags",
+          "name": "bitflags",
+          "optional": true,
+          "req": "^2.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/dispatch2",
+          "name": "dispatch2",
+          "optional": true,
+          "req": ">=0.3.0, <0.5.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": true,
+          "req": "^0.2.80"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/objc2",
+          "name": "objc2",
+          "optional": true,
+          "req": ">=0.6.2, <0.8.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "CFError"
+          ],
+          "loaf": "crates-io/objc2-core-foundation",
+          "name": "objc2-core-foundation",
+          "optional": false,
+          "req": "^0.3.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "Authorization"
+          ],
+          "loaf": "crates-io/objc2-security",
+          "name": "objc2-security",
+          "optional": true,
+          "req": "^0.3.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 857,
+          "content": "content/sha256/4916e3fca1c9674d2235eb612782365a95bfb2ec511df5cb84c3e2edc6294fd9",
+          "digest": "sha256:4916e3fca1c9674d2235eb612782365a95bfb2ec511df5cb84c3e2edc6294fd9",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 397,
+          "content": "content/sha256/1833a32d220a97dd34db043a68730f5bed136122c60d148e44c3617cf136986c",
+          "digest": "sha256:1833a32d220a97dd34db043a68730f5bed136122c60d148e44c3617cf136986c",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
       "facts": [],
+      "features": {
+        "CaptiveNetwork": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "DHCPClientPreferences": [],
+        "SCDynamicStore": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFRunLoop"
+        ],
+        "SCDynamicStoreCopyDHCPInfo": [
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFDate",
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "SCDynamicStoreCopySpecific": [
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFString"
+        ],
+        "SCDynamicStoreKey": [],
+        "SCNetwork": [],
+        "SCNetworkConfiguration": [
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFNumber"
+        ],
+        "SCNetworkConnection": [
+          "objc2-core-foundation/CFDictionary",
+          "objc2-core-foundation/CFRunLoop"
+        ],
+        "SCNetworkReachability": [
+          "bitflags",
+          "objc2-core-foundation/CFRunLoop"
+        ],
+        "SCPreferences": [
+          "bitflags",
+          "objc2-core-foundation/CFArray",
+          "objc2-core-foundation/CFData",
+          "objc2-core-foundation/CFRunLoop"
+        ],
+        "SCPreferencesPath": [
+          "objc2-core-foundation/CFDictionary"
+        ],
+        "SCPreferencesSetSpecific": [
+          "objc2-core-foundation/CFString"
+        ],
+        "SCSchemaDefinitions": [],
+        "alloc": [],
+        "bitflags": [
+          "dep:bitflags"
+        ],
+        "default": [
+          "std",
+          "CaptiveNetwork",
+          "DHCPClientPreferences",
+          "SCDynamicStore",
+          "SCDynamicStoreCopyDHCPInfo",
+          "SCDynamicStoreCopySpecific",
+          "SCDynamicStoreKey",
+          "SCNetwork",
+          "SCNetworkConfiguration",
+          "SCNetworkConnection",
+          "SCNetworkReachability",
+          "SCPreferences",
+          "SCPreferencesPath",
+          "SCPreferencesSetSpecific",
+          "SCSchemaDefinitions",
+          "bitflags",
+          "dispatch2",
+          "libc",
+          "objc2",
+          "objc2-security"
+        ],
+        "dispatch2": [
+          "dep:dispatch2"
+        ],
+        "libc": [
+          "dep:libc"
+        ],
+        "objc2": [
+          "dep:objc2",
+          "dispatch2?/objc2",
+          "objc2-core-foundation/objc2",
+          "objc2-security?/objc2"
+        ],
+        "objc2-security": [
+          "dep:objc2-security"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "unstable-darwin-objc": []
+      },
       "files": {
         "license": "registry",
         "readme": "package"
       },
+      "keywords": [
+        "cocoa",
+        "apple",
+        "framework",
+        "macos",
+        "ios"
+      ],
       "manifest": "crates-io/objc2-system-configuration/0.3.2/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -83,6 +270,17 @@
         "edition": "2021",
         "name": "objc2_system_configuration",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7216bd11cbda54ccabcab84d523dc93b858ec75ecfb3a7d89513fa22464da396",
+        "package": "objc2-system-configuration",
+        "registry": "crates-io",
+        "version": "0.3.2"
+      },
+      "vcs": {
+        "commit": "7b1abfd750a2cacaea71d6a56ecfb83cb7de560b",
+        "path": "framework-crates/objc2-system-configuration",
+        "system": "git"
       },
       "version": "0.3.2",
       "yanked": false

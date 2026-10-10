@@ -202,11 +202,74 @@
           "unit_identity": "sha256:ca966f465f2d213ae9fed7b51544f0c3715eaf2dab8dc2720c03ca33d838c329"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/stable_deref_trait",
+          "name": "stable_deref_trait",
+          "optional": false,
+          "req": "^1.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 7396,
+          "content": "content/sha256/59b1db611079186865d636abe5311c434d748955a97ea6f1ba1ec55ebaf9a84a",
+          "digest": "sha256:59b1db611079186865d636abe5311c434d748955a97ea6f1ba1ec55ebaf9a84a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 10847,
+          "content": "content/sha256/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1023,
+          "content": "content/sha256/23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "digest": "sha256:23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "track_alloc_size"
+        ],
+        "gecko_refcount_logging": [],
+        "serde": [
+          "dep:serde"
+        ],
+        "servo": [
+          "serde",
+          "track_alloc_size"
+        ],
+        "track_alloc_size": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/servo_arc/0.5.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -217,6 +280,17 @@
         "edition": "2024",
         "name": "servo_arc",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:b4eceb519ec34d8290aaf6e46f435102f2bfa63f22b05a144fb16ab266d3b198",
+        "package": "servo_arc",
+        "registry": "crates-io",
+        "version": "0.5.0"
+      },
+      "vcs": {
+        "commit": "34d25f741765a0bdb894f8271852e633299352d8",
+        "path": "servo_arc",
+        "system": "git"
       },
       "version": "0.5.0",
       "yanked": false

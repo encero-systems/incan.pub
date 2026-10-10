@@ -234,11 +234,177 @@
           "unit_identity": "sha256:f5aad805c43ea0e74492d1a1fd533758ea2546f60ec7573ddfbcba8a274edb64"
         }
       ],
+      "categories": [
+        "algorithms",
+        "encoding",
+        "hardware-support"
+      ],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "alloc"
+          ],
+          "loaf": "crates-io/digest",
+          "name": "digest",
+          "optional": true,
+          "req": "^0.10"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": true,
+          "req": "^0.16.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "mutex",
+            "once",
+            "rwlock",
+            "spin_mutex"
+          ],
+          "loaf": "crates-io/spin",
+          "name": "spin",
+          "optional": false,
+          "req": "^0.10.0",
+          "target": "cfg(target_arch = \"aarch64\")"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "mutex",
+            "once",
+            "rwlock",
+            "spin_mutex"
+          ],
+          "loaf": "crates-io/spin",
+          "name": "spin",
+          "optional": false,
+          "req": "^0.10.0",
+          "target": "cfg(target_arch = \"x86\")"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "mutex",
+            "once",
+            "rwlock",
+            "spin_mutex"
+          ],
+          "loaf": "crates-io/spin",
+          "name": "spin",
+          "optional": false,
+          "req": "^0.10.0",
+          "target": "cfg(target_arch = \"x86_64\")"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "mutex",
+            "once",
+            "rwlock",
+            "spin_mutex"
+          ],
+          "loaf": "crates-io/spin",
+          "name": "spin",
+          "optional": true,
+          "req": "^0.10.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 25324,
+          "content": "content/sha256/a6097596aefe671472218b5f90b0f9587d52db068b91bfb848a5432ad38e4db3",
+          "digest": "sha256:a6097596aefe671472218b5f90b0f9587d52db068b91bfb848a5432ad38e4db3",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11357,
+          "content": "content/sha256/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "digest": "sha256:c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-Apache",
+          "role": "license"
+        },
+        {
+          "bytes": 1053,
+          "content": "content/sha256/60cbee3cadaf204efc23e2b24d616648b2e4c9bd033ca3831c864b9fafa3e0a7",
+          "digest": "sha256:60cbee3cadaf204efc23e2b24d616648b2e4c9bd033ca3831c864b9fafa3e0a7",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 4878,
+          "content": "content/sha256/1dd57249051c02747517c24339974e2c7f6a24e16714505cf7707c080229e923",
+          "digest": "sha256:1dd57249051c02747517c24339974e2c7f6a24e16714505cf7707c080229e923",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [
+          "digest"
+        ],
+        "cache": [
+          "alloc",
+          "hashbrown",
+          "spin"
+        ],
+        "cli": [
+          "std"
+        ],
+        "default": [
+          "std",
+          "panic-handler",
+          "ffi"
+        ],
+        "digest": [
+          "dep:digest"
+        ],
+        "ffi": [],
+        "hashbrown": [
+          "dep:hashbrown"
+        ],
+        "optimize_crc32_auto": [],
+        "optimize_crc32_avx512_v4s3x3": [],
+        "optimize_crc32_avx512_vpclmulqdq_v3x2": [],
+        "optimize_crc32_neon_blended": [],
+        "optimize_crc32_neon_eor3_v9s3x2e_s3": [],
+        "optimize_crc32_neon_v12e_v1": [],
+        "optimize_crc32_neon_v3s4x2e_v2": [],
+        "optimize_crc32_sse_v4s3x3": [],
+        "panic-handler": [],
+        "spin": [
+          "dep:spin"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "vpclmulqdq": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "crc",
+        "checksum",
+        "simd",
+        "accelerated",
+        "fast"
+      ],
       "manifest": "crates-io/crc-fast/1.10.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -249,6 +415,17 @@
         "edition": "2021",
         "name": "crc_fast",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:e75b2483e97a5a7da73ac68a05b629f9c53cff58d8ed1c77866079e18b00dba5",
+        "package": "crc-fast",
+        "registry": "crates-io",
+        "version": "1.10.0"
+      },
+      "vcs": {
+        "commit": "3a853cc7daf2cd47cc4466f198680cabdfb0b5fa",
+        "path": "",
+        "system": "git"
       },
       "version": "1.10.0",
       "yanked": false

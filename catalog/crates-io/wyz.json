@@ -118,11 +118,65 @@
           "unit_identity": "sha256:284c77489d6f69cf286716d6d4e0fb5831784d5670b7bdcfc39580951c9ee1b0"
         }
       ],
+      "categories": [
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tap",
+          "name": "tap",
+          "optional": false,
+          "req": "^1.0.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4138,
+          "content": "content/sha256/039eec1589cedbb51b688f433aca3b3a70319198441efdc6336ed2f884f8c436",
+          "digest": "sha256:039eec1589cedbb51b688f433aca3b3a70319198441efdc6336ed2f884f8c436",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/411781fd38700f2357a14126d0ab048164ab881f1dcb335c1bb932e232c9a2f5",
+          "digest": "sha256:411781fd38700f2357a14126d0ab048164ab881f1dcb335c1bb932e232c9a2f5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wyz/0.6.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +187,17 @@
         "edition": "2018",
         "name": "wyz",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:4eee9a828e072dd4920c6ecddb1f693ff5660a8c4dfc1ab1fb8487dc69d021ea",
+        "package": "wyz",
+        "registry": "crates-io",
+        "version": "0.6.1"
+      },
+      "vcs": {
+        "commit": "112ad644d62580d59aaaba69f3609474980fd7fb",
+        "path": "",
+        "system": "git"
       },
       "version": "0.6.1",
       "yanked": false
@@ -232,11 +297,80 @@
           "unit_identity": "sha256:8f00a5a05aac518932faba9999b9a7aa42264f85f62c69bee0f01dc98691571f"
         }
       ],
+      "categories": [
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/tap",
+          "name": "tap",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/typemap",
+          "name": "typemap",
+          "optional": true,
+          "req": "^0.3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 6789,
+          "content": "content/sha256/d81c5d35f31d81f9ba87092ac7c470e736730a3fb81230bcce70667c8661e9cf",
+          "digest": "sha256:d81c5d35f31d81f9ba87092ac7c470e736730a3fb81230bcce70667c8661e9cf",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1082,
+          "content": "content/sha256/411781fd38700f2357a14126d0ab048164ab881f1dcb335c1bb932e232c9a2f5",
+          "digest": "sha256:411781fd38700f2357a14126d0ab048164ab881f1dcb335c1bb932e232c9a2f5",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "default": [
+          "std"
+        ],
+        "garbage": [
+          "once_cell",
+          "typemap"
+        ],
+        "once_cell": [
+          "dep:once_cell"
+        ],
+        "std": [
+          "alloc"
+        ],
+        "typemap": [
+          "dep:typemap"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/wyz/0.5.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -247,6 +381,17 @@
         "edition": "2018",
         "name": "wyz",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed",
+        "package": "wyz",
+        "registry": "crates-io",
+        "version": "0.5.1"
+      },
+      "vcs": {
+        "commit": "83f076970d745dc1706b46126d5700aa072af031",
+        "path": "",
+        "system": "git"
       },
       "version": "0.5.1",
       "yanked": false

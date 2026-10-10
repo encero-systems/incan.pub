@@ -136,11 +136,138 @@
           "unit_identity": "sha256:dbc3742dda46584c42a562b354bf9db7804332f7dfc8ee94bb8241b077956cdd"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/anyhow",
+          "name": "anyhow",
+          "optional": false,
+          "req": "^1.0.58"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/arrayvec",
+          "name": "arrayvec",
+          "optional": false,
+          "req": "^0.7.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": false,
+          "req": "^0.4.17"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/nom",
+          "name": "nom",
+          "optional": true,
+          "req": "^8.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-rational",
+          "name": "num-rational",
+          "optional": true,
+          "req": "^0.4.1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "derive"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.140"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/v_frame",
+          "name": "v_frame",
+          "optional": true,
+          "req": "^0.3.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1781,
+          "content": "content/sha256/50eb5d2b97462b9ccac9a12472c6bb2e312c6587125668511fca0d7c8c89f14c",
+          "digest": "sha256:50eb5d2b97462b9ccac9a12472c6bb2e312c6587125668511fca0d7c8c89f14c",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1332,
+          "content": "content/sha256/acc9e236b0011c638714a16f5634fa5bcd3be111182e237c3049db700c3521e2",
+          "digest": "sha256:acc9e236b0011c638714a16f5634fa5bcd3be111182e237c3049db700c3521e2",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 1482,
+          "content": "content/sha256/654123144c912afacf2ac11964b99f7e60291ead867679650cf5ea97cfc9fa89",
+          "digest": "sha256:654123144c912afacf2ac11964b99f7e60291ead867679650cf5ea97cfc9fa89",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "create": [],
+        "default": [
+          "create",
+          "parse",
+          "diff",
+          "estimate"
+        ],
+        "diff": [
+          "num-rational",
+          "v_frame"
+        ],
+        "estimate": [
+          "v_frame"
+        ],
+        "nom": [
+          "dep:nom"
+        ],
+        "num-rational": [
+          "dep:num-rational"
+        ],
+        "parse": [
+          "nom"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "serialize": [
+          "serde",
+          "arrayvec/serde"
+        ],
+        "unstable": [],
+        "v_frame": [
+          "dep:v_frame"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [],
       "manifest": "crates-io/av1-grain/0.2.5/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -151,6 +278,17 @@
         "edition": "2021",
         "name": "av1_grain",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:8cfddb07216410377231960af4fcab838eaa12e013417781b78bd95ee22077f8",
+        "package": "av1-grain",
+        "registry": "crates-io",
+        "version": "0.2.5"
+      },
+      "vcs": {
+        "commit": "4cff686adc70186b59f3d035079cca93c191d88c",
+        "path": "",
+        "system": "git"
       },
       "version": "0.2.5",
       "yanked": false

@@ -25,6 +25,155 @@
       "advisories": 0,
       "archive": "sha256:18d4ae6aa20370902597df29cf70fe4144a7a1b7c1dfe9443b2051fff3ecfbb1",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [
+            "chrono-tz",
+            "prettyprint"
+          ],
+          "loaf": "crates-io/arrow",
+          "name": "arrow",
+          "optional": false,
+          "req": "^58.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/async-trait",
+          "name": "async-trait",
+          "optional": false,
+          "req": "^0.1.89"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/chrono",
+          "name": "chrono",
+          "optional": false,
+          "req": "^0.4.44"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-common",
+          "name": "datafusion-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-doc",
+          "name": "datafusion-doc",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-expr-common",
+          "name": "datafusion-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-functions-aggregate-common",
+          "name": "datafusion-functions-aggregate-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/datafusion-functions-window-common",
+          "name": "datafusion-functions-window-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/datafusion-physical-expr-common",
+          "name": "datafusion-physical-expr-common",
+          "optional": false,
+          "req": "^53.1.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/indexmap",
+          "name": "indexmap",
+          "optional": false,
+          "req": "^2.13.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itertools",
+          "name": "itertools",
+          "optional": false,
+          "req": "^0.14"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/paste",
+          "name": "paste",
+          "optional": false,
+          "req": "^1.0.15"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/recursive",
+          "name": "recursive",
+          "optional": true,
+          "req": "^0.1.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde_json",
+          "name": "serde_json",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std",
+            "visitor"
+          ],
+          "loaf": "crates-io/sqlparser",
+          "name": "sqlparser",
+          "optional": true,
+          "req": "^0.61.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1450,
+          "content": "content/sha256/8b117ab02ed82a4474cbf891560c3dfc4deeb12a3779adf2aa9ed6d9f3d2d881",
+          "digest": "sha256:8b117ab02ed82a4474cbf891560c3dfc4deeb12a3779adf2aa9ed6d9f3d2d881",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11645,
+          "content": "content/sha256/232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "digest": "sha256:232588dc9ad2096eb589a4f46bd58aafc3b57a38b146196c3d38dec884359888",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE.txt",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -35,14 +184,35 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "default": [
+          "sql"
+        ],
+        "recursive_protection": [
+          "dep:recursive"
+        ],
+        "sql": [
+          "sqlparser"
+        ],
+        "sqlparser": [
+          "dep:sqlparser"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "datafusion",
+        "logical",
+        "plan",
+        "expressions"
+      ],
       "manifest": "crates-io/datafusion-expr/53.1.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -53,6 +223,13 @@
         "name": "datafusion_expr",
         "type": "lib"
       },
+      "upstream": {
+        "checksum": "sha256:574b9b6977fedbd2a611cbff12e5caf90f31640ad9dc5870f152836d94bad0dd",
+        "package": "datafusion-expr",
+        "registry": "crates-io",
+        "version": "53.1.0"
+      },
+      "vcs": null,
       "version": "53.1.0",
       "yanked": false
     }

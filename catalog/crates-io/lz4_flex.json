@@ -136,11 +136,72 @@
           "unit_identity": "sha256:6c1c1cdea6d9f80f69a23e1e4f2bfa4d58f0ff94b5367da3095288598529fe39"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "xxhash32"
+          ],
+          "loaf": "crates-io/twox-hash",
+          "name": "twox-hash",
+          "optional": true,
+          "req": "^2.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5757,
+          "content": "content/sha256/4c120037041b2f48f3d9144f361c487c9e9bec276a7c19c24806d1f1efad9162",
+          "digest": "sha256:4c120037041b2f48f3d9144f361c487c9e9bec276a7c19c24806d1f1efad9162",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1079,
+          "content": "content/sha256/0982c33390159842ecce8e9d6ce2e5e39961fe0e0ffbb2eec39c9ba46db6db10",
+          "digest": "sha256:0982c33390159842ecce8e9d6ce2e5e39961fe0e0ffbb2eec39c9ba46db6db10",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "checked-decode": [],
+        "default": [
+          "std",
+          "safe-encode",
+          "safe-decode",
+          "frame",
+          "checked-decode"
+        ],
+        "frame": [
+          "std",
+          "dep:twox-hash"
+        ],
+        "nightly": [],
+        "safe-decode": [],
+        "safe-encode": [],
+        "std": [
+          "alloc"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "compression",
+        "lz4",
+        "compress",
+        "decompression",
+        "decompress"
+      ],
       "manifest": "crates-io/lz4_flex/0.14.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -151,6 +212,17 @@
         "edition": "2021",
         "name": "lz4_flex",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ecbdfe44b1bd960b68170b417450a628c43f7cf56bb3c5317e61cb230ee7f226",
+        "package": "lz4_flex",
+        "registry": "crates-io",
+        "version": "0.14.0"
+      },
+      "vcs": {
+        "commit": "1bffdcbbf906a234b913937cb2f57c0245915038",
+        "path": "",
+        "system": "git"
       },
       "version": "0.14.0",
       "yanked": false
@@ -175,6 +247,39 @@
       "advisories": 0,
       "archive": "sha256:ca3e46e546e9f6c12f8fea13bd7dede80622d72ba4d327bd2b2c2d456a1b16f8",
       "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "xxhash32"
+          ],
+          "loaf": "crates-io/twox-hash",
+          "name": "twox-hash",
+          "optional": true,
+          "req": "^2.0.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 5409,
+          "content": "content/sha256/c68cd1bf7fa38cfc647f25f7a456d9a6a5d2734288b7653f68971c3711ec4d3a",
+          "digest": "sha256:c68cd1bf7fa38cfc647f25f7a456d9a6a5d2734288b7653f68971c3711ec4d3a",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1079,
+          "content": "content/sha256/0982c33390159842ecce8e9d6ce2e5e39961fe0e0ffbb2eec39c9ba46db6db10",
+          "digest": "sha256:0982c33390159842ecce8e9d6ce2e5e39961fe0e0ffbb2eec39c9ba46db6db10",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [
         {
           "features": [
@@ -183,14 +288,40 @@
           ],
           "owners": [],
           "profile": "release",
+          "status": "harvested",
           "target": "aarch64-apple-darwin",
           "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
         }
       ],
+      "features": {
+        "checked-decode": [],
+        "default": [
+          "std",
+          "safe-encode",
+          "safe-decode",
+          "frame",
+          "checked-decode"
+        ],
+        "frame": [
+          "std",
+          "dep:twox-hash"
+        ],
+        "nightly": [],
+        "safe-decode": [],
+        "safe-encode": [],
+        "std": []
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "compression",
+        "lz4",
+        "compress",
+        "decompression",
+        "decompress"
+      ],
       "manifest": "crates-io/lz4_flex/0.13.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -200,6 +331,17 @@
         "edition": "2021",
         "name": "lz4_flex",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:7ef0d4ed8669f8f8826eb00dc878084aa8f253506c4fd5e8f58f5bce72ddb97e",
+        "package": "lz4_flex",
+        "registry": "crates-io",
+        "version": "0.13.1"
+      },
+      "vcs": {
+        "commit": "8507d2e68ba2477fd087b7fa55d6806ca63f8138",
+        "path": "",
+        "system": "git"
       },
       "version": "0.13.1",
       "yanked": false

@@ -118,11 +118,146 @@
           "unit_identity": "sha256:b28acdb1ba6cee2f584ddd1ffafb1f2cef878b473e50862f4f29d912eca1c99a"
         }
       ],
+      "categories": [
+        "development-tools::testing"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/document-features",
+          "name": "document-features",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/env_logger",
+          "name": "env_logger",
+          "optional": true,
+          "req": ">=0.6.1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/fslock",
+          "name": "fslock",
+          "optional": true,
+          "req": "^0.2"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-executor",
+          "name": "futures-executor",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/futures-util",
+          "name": "futures-util",
+          "optional": true,
+          "req": "^0.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/log",
+          "name": "log",
+          "optional": true,
+          "req": ">=0.4.4"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/once_cell",
+          "name": "once_cell",
+          "optional": false,
+          "req": "^1.19"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/parking_lot",
+          "name": "parking_lot",
+          "optional": false,
+          "req": "^0.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serial_test_derive",
+          "name": "serial_test_derive",
+          "optional": false,
+          "req": "~4.0.1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 2894,
+          "content": "content/sha256/f237463dc6b9fcc1faf8c625fcc45d2c70711ec5b36a6238d79cba1fe927657f",
+          "digest": "sha256:f237463dc6b9fcc1faf8c625fcc45d2c70711ec5b36a6238d79cba1fe927657f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1061,
+          "content": "content/sha256/ac7e05bd11cc1cfc3f9452c1b9986a9b1d54e180fa88e44e69caf955f95dc8a6",
+          "digest": "sha256:ac7e05bd11cc1cfc3f9452c1b9986a9b1d54e180fa88e44e69caf955f95dc8a6",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        }
+      ],
       "facts": [],
+      "features": {
+        "async": [
+          "dep:futures-executor",
+          "dep:futures-util",
+          "serial_test_derive/async"
+        ],
+        "default": [
+          "logging",
+          "async"
+        ],
+        "docsrs": [
+          "dep:document-features"
+        ],
+        "file_locks": [
+          "dep:fslock"
+        ],
+        "logging": [
+          "dep:log"
+        ],
+        "test_logging": [
+          "logging",
+          "dep:env_logger",
+          "serial_test_derive/test_logging"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "sequential",
+        "testing",
+        "parallel"
+      ],
       "manifest": "crates-io/serial_test/4.0.1/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +268,17 @@
         "edition": "2018",
         "name": "serial_test",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:a6df5ed973ad8d834e09f824f9e9f449af6b9a3745f78dec7cc752770bd3bf11",
+        "package": "serial_test",
+        "registry": "crates-io",
+        "version": "4.0.1"
+      },
+      "vcs": {
+        "commit": "383c8946c51b679755bc7118b6eddc8aa4db5723",
+        "path": "serial_test",
+        "system": "git"
       },
       "version": "4.0.1",
       "yanked": false

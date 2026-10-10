@@ -118,11 +118,148 @@
           "unit_identity": "sha256:a6cd66e303af28a361df5a0dd90c45b37714a32dc86bf626ce92a6c545341d43"
         }
       ],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/libc",
+          "name": "libc",
+          "optional": false,
+          "req": "^0.2.183",
+          "target": "cfg(any(target_os = \"emscripten\", not(any(target_os = \"windows\", target_arch = \"wasm32\"))))"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "fallback"
+          ],
+          "loaf": "crates-io/portable-atomic",
+          "name": "portable-atomic",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/prost-types",
+          "name": "prost-types",
+          "optional": true,
+          "req": "^0.11"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/raw-cpuid",
+          "name": "raw-cpuid",
+          "optional": false,
+          "req": "^11.0",
+          "target": "cfg(target_arch = \"x86\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/raw-cpuid",
+          "name": "raw-cpuid",
+          "optional": false,
+          "req": "^11.0",
+          "target": "cfg(target_arch = \"x86_64\")"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasip1",
+          "name": "wasip1",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p1\"))"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/wasip2",
+          "name": "wasip2",
+          "optional": false,
+          "req": "^1",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"wasi\", target_env = \"p2\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Performance",
+            "Window"
+          ],
+          "loaf": "crates-io/web-sys",
+          "name": "web-sys",
+          "optional": false,
+          "req": "^0.3",
+          "target": "cfg(all(target_arch = \"wasm32\", target_os = \"unknown\"))"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_System_Performance"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": false,
+          "req": "^0.61",
+          "target": "cfg(target_os = \"windows\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4779,
+          "content": "content/sha256/7e94b2a6354a7df0c776037732fd3c2bc686cfbb0dbfd055a3bf39237b99d8e1",
+          "digest": "sha256:7e94b2a6354a7df0c776037732fd3c2bc686cfbb0dbfd055a3bf39237b99d8e1",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1113,
+          "content": "content/sha256/7bdd587c9ff64c56323455bad7ec590698fbf56c02291c8e515b2afc85306282",
+          "digest": "sha256:7bdd587c9ff64c56323455bad7ec590698fbf56c02291c8e515b2afc85306282",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 11324,
+          "content": "content/sha256/6d5409c15a7e341759bea6250dbce3bcde63a5f3ffb0a685f78ed86fc2b7adbe",
+          "digest": "sha256:6d5409c15a7e341759bea6250dbce3bcde63a5f3ffb0a685f78ed86fc2b7adbe",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "default": [
+          "flaky_tests",
+          "mock"
+        ],
+        "flaky_tests": [],
+        "mock": [],
+        "prost": [
+          "prost-types"
+        ],
+        "prost-types": [
+          "dep:prost-types"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "rdtsc",
+        "timing",
+        "nanosecond"
+      ],
       "manifest": "crates-io/quanta/0.13.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -133,6 +270,17 @@
         "edition": "2021",
         "name": "quanta",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:73be39b77b45d82a4d1a5793fe9a89a5c143ceaa6ad0d8417982566bb0f34e11",
+        "package": "quanta",
+        "registry": "crates-io",
+        "version": "0.13.0"
+      },
+      "vcs": {
+        "commit": "1e2505d0457ed394ab3c89187cee53b951536726",
+        "path": "",
+        "system": "git"
       },
       "version": "0.13.0",
       "yanked": false

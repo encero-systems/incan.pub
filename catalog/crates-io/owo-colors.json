@@ -102,11 +102,79 @@
           "unit_identity": "sha256:4ae6e0f9764f8a4e85c8cc5d13b0964be67dc78266661950bb9b8fc12f250881"
         }
       ],
+      "categories": [
+        "command-line-interface",
+        "no-std::no-alloc"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/supports-color",
+          "name": "supports-color",
+          "optional": true,
+          "req": "^3.0.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/supports-color",
+          "name": "supports-color-2",
+          "optional": true,
+          "req": "^2.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3583,
+          "content": "content/sha256/e79f4b6be51978bd16ce94be8f22fda61ffcdc75c488485934e639b7c22995f0",
+          "digest": "sha256:e79f4b6be51978bd16ce94be8f22fda61ffcdc75c488485934e639b7c22995f0",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1092,
+          "content": "content/sha256/267afe8db5697b4b668d36a5a0d481b67d16ae751465e9ddf03d1e77a79c140a",
+          "digest": "sha256:267afe8db5697b4b668d36a5a0d481b67d16ae751465e9ddf03d1e77a79c140a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 3614,
+          "content": "content/sha256/092b803288d99df767f34c590784fcc088d9745eb6667687218ab70c1ca97964",
+          "digest": "sha256:092b803288d99df767f34c590784fcc088d9745eb6667687218ab70c1ca97964",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
       "facts": [],
+      "features": {
+        "alloc": [],
+        "supports-color": [
+          "dep:supports-color"
+        ],
+        "supports-colors": [
+          "dep:supports-color-2",
+          "supports-color"
+        ]
+      },
       "files": {
         "license": "package",
         "readme": "package"
       },
+      "keywords": [
+        "cli",
+        "color",
+        "no-std",
+        "terminal",
+        "ansi_term"
+      ],
       "manifest": "crates-io/owo-colors/4.4.0/loaf.toml",
       "registry": {
         "adopter": "encero-systems/incan.pub maintainers",
@@ -117,6 +185,17 @@
         "edition": "2021",
         "name": "owo_colors",
         "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:13c45bb4a6ae1280ec0803b1ef9d3455eb50f01efbbe1447ab020f1d54fba9d8",
+        "package": "owo-colors",
+        "registry": "crates-io",
+        "version": "4.4.0"
+      },
+      "vcs": {
+        "commit": "7392e40d0093a02ec12b3695e388d123817283b8",
+        "path": "",
+        "system": "git"
       },
       "version": "4.4.0",
       "yanked": false
