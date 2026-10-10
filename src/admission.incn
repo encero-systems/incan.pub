@@ -9,7 +9,15 @@ cannot establish that a `cfg` answer is true; that is what harvest evidence and 
 from std.fs import Path
 from std.json import JsonValue
 
-from adoption import Adoption, adoption_from_payload, loaf_name, render_adopted_manifest, required_dependencies
+from adoption import (
+    Adoption,
+    adoption_from_payload,
+    among,
+    content_path,
+    loaf_name,
+    render_adopted_manifest,
+    required_dependencies,
+)
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity
 from events import Event, member, string_list_member, string_member
 from graph import validate_evidence
@@ -58,7 +66,7 @@ pub def replay_onto(initial: Dict[str, Record], events: list[Event], root: Path)
             state[key] = fold_publish(event)?
             continue
         if event.kind == "adopt":
-            state[key] = fold_adopt(state, adopted, event)?
+            state[key] = fold_adopt(state, adopted, event, root)?
             mut versions: list[str] = []
             if event.name in adopted:
                 versions = adopted[event.name]
@@ -123,7 +131,9 @@ pub def adopted_versions(state: Dict[str, Record]) -> Dict[str, list[str]]:
     return out
 
 
-def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: Event) -> Result[Record, str]:
+def fold_adopt(
+    state: Dict[str, Record], adopted: Dict[str, list[str]], event: Event, root: Path
+) -> Result[Record, str]:
     """
     Admit an `adopt` event: a payload in shape, a manifest digest the payload reproduces, and every dependency
     requirement active under its default features, on any target, already met by an adopted version.
@@ -140,6 +150,7 @@ def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: E
         return Err(f"{label}: `manifest` and `archive` must be `sha256:` identities")
     if digest_text(render_adopted_manifest(adoption)) != manifest:
         return Err(f"{label}: `manifest` is not the digest of the manifest this payload renders")
+    validate_documents(event.body, root, label)?
     for dependency in required_dependencies(adoption):
         if not requirement_met(adopted, dependency.package, dependency.req, label)?:
             return Err(
@@ -179,10 +190,62 @@ def fold_adopt(state: Dict[str, Record], adopted: Dict[str, list[str]], event: E
     return Ok(record)
 
 
+const DOCUMENT_ROLES: FrozenList[str] = ["readme", "license", "license-notice", "changelog"]
+const DOCUMENT_FORMATS: FrozenList[str] = ["markdown", "text", "restructuredtext", "asciidoc"]
+
+
+def validate_documents(body: JsonValue, root: Path, label: str) -> Result[None, str]:
+    """
+    An adoption's `documents` in shape, each held to its bytes at `content/sha256/<hex>`: a role, the path in the
+    archive, a `sha256:` digest, the byte count, a format and an origin. Adoptions recorded before documents have none.
+    """
+    match body.get("documents"):
+        Some(value) =>
+            match value.as_array():
+                Some(documents) =>
+                    for document in documents:
+                        validate_document(document, root, label)?
+                None => return Err(f"{label}: `documents` must be a list")
+        None => pass
+    return Ok(None)
+
+
+def validate_document(document: JsonValue, root: Path, label: str) -> Result[None, str]:
+    path = string_member(document, "path")
+    for key in document.keys():
+        if not ["role", "path", "digest", "bytes", "format", "origin"].contains(key):
+            return Err(f"{label}: document {path} has an unknown key `{key}`")
+    role = string_member(document, "role")
+    if not among(DOCUMENT_ROLES, role):
+        return Err(f"{label}: document {path} has role `{role}`, not one of readme, license, license-notice, changelog")
+    if len(path) == 0 or path.startswith("/") or path.split("/").contains(".."):
+        return Err(f"{label}: a document needs a plain relative path in the archive")
+    if not among(DOCUMENT_FORMATS, string_member(document, "format")):
+        return Err(f"{label}: document {path} has an unknown format")
+    origin = string_member(document, "origin")
+    if origin != "package" and origin != "registry":
+        return Err(f"{label}: document {path} has origin `{origin}`, not package or registry")
+    digest = string_member(document, "digest")
+    if not is_sha256_identity(digest):
+        return Err(f"{label}: document {path} needs a `sha256:` digest")
+    content = root / content_path(digest)
+    match content.read_bytes():
+        Ok(data) =>
+            if digest_bytes(data) != digest:
+                return Err(f"{label}: document {path}: {content_path(digest)} does not hold its bytes")
+            match document.get("bytes"):
+                Some(count) =>
+                    if count.as_int().unwrap_or(-1) != len(data):
+                        return Err(f"{label}: document {path} states a byte count other than its bytes'")
+                None => return Err(f"{label}: document {path} needs its byte count")
+        Err(_) => return Err(f"{label}: document {path} names {content_path(digest)}, which the checkout lacks")
+    return Ok(None)
+
+
 pub def adopt_payload(body: JsonValue) -> JsonValue:
     """The members of an `adopt` event that state the adoption, without the event envelope."""
     mut payload: Dict[str, JsonValue] = {}
-    for key in ["about", "files", "adopted", "rust", "features", "deps", "manifest", "archive"]:
+    for key in ["about", "files", "documents", "vcs", "taxonomy", "adopted", "rust", "features", "deps", "manifest", "archive"]:
         match body.get(key):
             Some(value) => payload[key] = value
             None => pass

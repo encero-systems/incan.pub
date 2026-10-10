@@ -38,6 +38,7 @@ index
   catalog/index.json                       projection: every adopted package, for a site or tool to list
   catalog/crates-io/<name>.json            projection: a package's versions, provenance, facts and units
   crates-io/<name>/<version>/out/...       committed generated inputs a fact names
+  content/sha256/<hex>                     the README, license and changelog bytes adoptions name
   graphs/<hex>.json                        the resolutions facts were selected from: roots, target, host
 
 blob store (outside git)

@@ -13,6 +13,7 @@ from adoption import (
     about_from_json,
     about_json,
     adoption_from_payload,
+    content_path,
     file_sources_json,
     loaf_name,
     render_adopted_manifest,
@@ -434,6 +435,30 @@ def collect_files(directory: Path, relative: str, mut files: Dict[str, str], man
         Err(error) => return Err(f"{relative}/: {error.message()}")
 
 
+def member_or_empty_list(value: JsonValue, key: str) -> JsonValue:
+    match value.get(key):
+        Some(found) => return found
+        None => return JsonValue.array([])
+
+
+pub def unclaimed_content(root: Path, state: Dict[str, Record]) -> Result[list[str], str]:
+    """Committed bytes under `content/` that no adoption's documents name."""
+    mut claimed: Dict[str, bool] = {}
+    for key in keys_of(state):
+        match state[key].adopt:
+            Some(payload) =>
+                for document in member(payload, "documents").as_array().unwrap_or([]):
+                    claimed[content_path(string_member(document, "digest"))] = true
+            None => pass
+    mut committed: list[str] = []
+    collect_paths(root / "content", "content", committed)?
+    mut unclaimed: list[str] = []
+    for path in sorted(committed):
+        if path not in claimed:
+            unclaimed.append(path)
+    return Ok(unclaimed)
+
+
 pub def unclaimed_generated_inputs(root: Path, state: Dict[str, Record]) -> Result[list[str], str]:
     """
     Committed bytes under `crates-io/` that no fact names.
@@ -557,6 +582,17 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
     match adoption.files:
         Some(sources) => files = file_sources_json(sources)
         None => pass
+    # Each document points to its bytes under the index checkpoint; an adoption recorded before documents were has none.
+    mut documents: list[JsonValue] = []
+    for document in member(payload, "documents").as_array().unwrap_or([]):
+        mut item = document
+        item.set("content", JsonValue.string(content_path(string_member(document, "digest")))).unwrap()
+        documents.append(item)
+    taxonomy = member(payload, "taxonomy")
+    mut vcs = JsonValue.null()
+    match payload.get("vcs"):
+        Some(value) => vcs = value
+        None => pass
     return Ok(JsonValue.object({
         "version": JsonValue.string(record.version),
         "yanked": JsonValue.bool(record.yanked),
@@ -572,7 +608,11 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
         "features": member(payload, "features"),
         "dependencies": member(payload, "deps"),
         "about": about,
+        "keywords": member_or_empty_list(taxonomy, "keywords"),
+        "categories": member_or_empty_list(taxonomy, "categories"),
+        "vcs": vcs,
         "files": files,
+        "documents": JsonValue.array(documents),
         "facts": JsonValue.array(facts),
         "assets": JsonValue.array(assets),
         "advisories": JsonValue.int(len(record.advisories)),

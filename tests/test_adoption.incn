@@ -17,10 +17,12 @@ from adoption import (
     Adoption,
     Dependency,
     about_from_json,
+    about_of_files,
     activations,
     adoption_from_payload,
     adoption_payload,
     build_activations,
+    description_json,
     loaf_files,
     render_adopted_manifest,
     required_dependencies,
@@ -29,8 +31,8 @@ from adoption import (
     translate,
     unpack_crate,
 )
-from canonical import canonical, digest_text
-from events import append_event, load_events, rewrite_event
+from canonical import canonical, digest_bytes, digest_text
+from events import append_event, load_events, rewrite_event, string_member
 from projection import render_projections
 from semver import compare, parse_requirement, parse_version, satisfies
 from tar import TarEntry, read_archive, write_archive
@@ -546,3 +548,83 @@ def test_an_adoption_without_about_keeps_its_files_exactly() -> None:
     mut older = translate(demo_line(), demo_files(demo_manifest())).unwrap()
     older.about = None
     assert_eq(len(loaf_files(older, demo_files(demo_manifest()))), len(demo_files(demo_manifest())))
+
+
+def roles_and_paths(documents: JsonValue) -> str:
+    mut out: list[str] = []
+    for document in documents.as_array().unwrap():
+        out.append(string_member(document, "role") + ":" + string_member(document, "path"))
+    return ",".join(out)
+
+
+def described_files() -> list[TarEntry]:
+    manifest = b"[package]\nname = \"x\"\nversion = \"1.0.0\"\nreadme = \"crates-io.md\"\nkeywords = [\"parser\", \"json\"]\ncategories = [\"encoding\"]\n"
+    return [
+        TarEntry(path="Cargo.toml", executable=false, data=manifest),
+        TarEntry(path="README.md", executable=false, data=b"# root readme\n"),
+        TarEntry(path="crates-io.md", executable=false, data=b"# declared readme\n"),
+        TarEntry(path="LICENSE-MIT", executable=false, data=b"MIT\n"),
+        TarEntry(path="UNLICENSE", executable=false, data=b"Unlicense\n"),
+        TarEntry(path="COPYING", executable=false, data=b"dual\n"),
+        TarEntry(path="CHANGELOG.md", executable=false, data=b"# 1.0.0\n"),
+        TarEntry(path="release.toml", executable=false, data=b"sign-commit = true\n"),
+        TarEntry(path="src/lib.rs", executable=false, data=b"pub fn x() {}\n"),
+        TarEntry(path=".cargo_vcs_info.json", executable=false, data=b"{\"git\":{\"sha1\":\"abc123\"},\"path_in_vcs\":\"crates/x\"}"),
+    ]
+
+
+def test_a_description_names_the_declared_readme_every_license_and_the_changelog() -> None:
+    files = described_files()
+    about = about_of_files(files, "x 1.0.0").unwrap()
+    description = description_json(files, about, {"readme": "package", "license": "package"}, "x 1.0.0").unwrap()
+    # The declared README wins over README.md; release.toml is not a changelog.
+    assert_eq(
+        roles_and_paths(description["documents"]),
+        "readme:crates-io.md,license:COPYING,license:LICENSE-MIT,license:UNLICENSE,changelog:CHANGELOG.md",
+    )
+    first = description["documents"].as_array().unwrap()[0]
+    assert_eq(string_member(first, "format"), "markdown")
+    assert_eq(string_member(first, "origin"), "package")
+    assert_eq(first.get("bytes").unwrap().as_int().unwrap(), 18)
+    assert_eq(canonical(description["vcs"]).unwrap(), "{\"commit\":\"abc123\",\"path\":\"crates/x\",\"system\":\"git\"}")
+    assert_eq(canonical(description["taxonomy"]).unwrap(), "{\"categories\":[\"encoding\"],\"keywords\":[\"parser\",\"json\"]}")
+
+
+def test_a_registry_written_license_is_a_notice_and_a_package_without_vcs_info_has_none() -> None:
+    files = [
+        TarEntry(path="Cargo.toml", executable=false, data=b"[package]\nname = \"y\"\nversion = \"1.0.0\"\nlicense = \"MIT\"\n"),
+        TarEntry(path="LICENSE", executable=false, data=b"y 1.0.0, as published on crates.io, carries no license file.\n"),
+        TarEntry(path="README.md", executable=false, data=b"# y 1.0.0\n"),
+    ]
+    about = about_of_files(files, "y 1.0.0").unwrap()
+    description = description_json(files, about, {"readme": "registry", "license": "registry"}, "y 1.0.0").unwrap()
+    assert_eq(roles_and_paths(description["documents"]), "readme:README.md,license-notice:LICENSE")
+    for document in description["documents"].as_array().unwrap():
+        assert_eq(string_member(document, "origin"), "registry")
+    assert_true(description["vcs"].is_null())
+    assert_eq(canonical(description["taxonomy"]).unwrap(), "{\"categories\":[],\"keywords\":[]}")
+
+
+def test_an_adoption_document_is_held_to_its_committed_bytes() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    readme = b"# leaf\n"
+    digest = digest_bytes(readme)
+    adoption = leaf("1.2.0")
+    mut payload = adoption_payload(adoption, digest_text(render_adopted_manifest(adoption)), digest_text("archive leaf"))
+    payload["documents"] = JsonValue.array([JsonValue.object({
+        "role": JsonValue.string("readme"),
+        "path": JsonValue.string("README.md"),
+        "digest": JsonValue.string(digest),
+        "bytes": JsonValue.int(len(readme)),
+        "format": JsonValue.string("markdown"),
+        "origin": JsonValue.string("package"),
+    })])
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", payload).unwrap()
+    # Its bytes are not in the checkout yet, then are, then are not what the digest says.
+    assert_true(refusal(root).contains("which the checkout lacks"))
+    (root / "content" / "sha256").mkdir(parents=true, exist_ok=true).unwrap()
+    (root / "content" / "sha256" / digest[7:]).write_bytes(readme).unwrap()
+    assert_eq(refusal(root), "")
+    (root / "content" / "sha256" / digest[7:]).write_bytes(b"# other\n").unwrap()
+    assert_true(refusal(root).contains("does not hold its bytes"))

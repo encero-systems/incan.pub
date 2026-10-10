@@ -19,10 +19,10 @@ unchanged, in a deterministic source Loaf archive whose digest is the Loaf's ide
 """
 
 from std.compression import gzip
-from std.json import JsonValue
+from std.json import JsonValue, parse
 from std.toml import TomlValue
 
-from canonical import canonical, json_string
+from canonical import canonical, digest_bytes, json_string
 from events import member, string_list_member, string_member
 from tar import TarEntry, read_archive, write_archive
 from target import normalize_target
@@ -882,6 +882,204 @@ pub def file_sources_from_json(body: JsonValue) -> Option[Dict[str, str]]:
     match body.get("files"):
         Some(value) => return Some({"license": string_member(value, "license"), "readme": string_member(value, "readme")})
         None => return None
+
+
+@derive(Clone)
+pub model Document:
+    """
+    A document a source Loaf carries that a reader is shown. `path` is where it sits in the archive, `digest` and
+    `bytes` identify its bytes (the index keeps them at `content/sha256/<hex>`), `format` is read from its extension
+    and `origin` says whether the package shipped it (`package`) or incan.pub wrote it (`registry`).
+    """
+
+    pub role: str
+    pub path: str
+    pub digest: str
+    pub bytes: int
+    pub format: str
+    pub origin: str
+
+
+# The README files Cargo itself looks for, in its order, when the manifest declares none.
+const CARGO_READMES: FrozenList[str] = ["README.md", "README.txt", "README"]
+const CHANGELOG_PREFIXES: FrozenList[str] = ["changelog", "changes", "history", "news", "releases", "release-notes", "release_notes"]
+const TEXT_EXTENSIONS: FrozenList[str] = ["", ".md", ".markdown", ".txt", ".rst", ".adoc", ".asciidoc"]
+
+
+pub def among(values: FrozenList[str], value: str) -> bool:
+    """Whether `value` is one of `values`: `FrozenList` has no `contains` on the pinned 7bfe19aec line."""
+    for each in values:
+        if each == value:
+            return true
+    return false
+
+
+pub def loaf_documents(entries: list[TarEntry], about: About, sources: Dict[str, str]) -> list[Document]:
+    """
+    The documents among a source Loaf's files (`loaf_files`, without `loaf.toml`), chosen by rules a reader can
+    repeat. The README is the one the manifest declares, else the first Cargo looks for, else the first other root
+    `README*`; incan.pub's generated one is the registry's. The license texts are every root license file and the
+    declared `license-file`; where incan.pub wrote the LICENSE it is a `license-notice`, a statement of the declared
+    license rather than its text. The changelogs are the root `CHANGELOG*`, `CHANGES*`, `HISTORY*`, `NEWS*` and
+    `RELEASES*` files in a text format.
+    """
+    about_shown = shown(about)
+    mut by_path: Dict[str, TarEntry] = {}
+    mut roots: list[str] = []
+    for entry in entries:
+        by_path[entry.path] = entry
+        if not entry.path.contains("/"):
+            roots.append(entry.path)
+    roots = sorted(roots)
+    mut out: list[Document] = []
+    # README
+    mut readme = ""
+    if sources["readme"] == "registry":
+        readme = "README.md"
+    elif len(about_shown.readme) > 0 and about_shown.readme in by_path:
+        readme = about_shown.readme
+    else:
+        for name in CARGO_READMES:
+            if len(readme) == 0 and name in by_path:
+                readme = name
+        for name in roots:
+            if len(readme) == 0 and name.lower().startswith("readme"):
+                readme = name
+    if len(readme) > 0 and readme in by_path:
+        out.append(document_of(by_path[readme], "readme", sources["readme"]))
+    # Licenses
+    if sources["license"] == "registry":
+        if "LICENSE" in by_path:
+            out.append(document_of(by_path["LICENSE"], "license-notice", "registry"))
+    else:
+        mut licenses: list[str] = []
+        for name in roots:
+            lowered = name.lower()
+            for prefix in ["license", "licence", "copying", "unlicense"]:
+                if lowered.startswith(prefix) and not licenses.contains(name):
+                    licenses.append(name)
+        if len(about_shown.license_file) > 0 and about_shown.license_file in by_path and not licenses.contains(about_shown.license_file):
+            licenses.append(about_shown.license_file)
+        for name in licenses:
+            out.append(document_of(by_path[name], "license", "package"))
+    # Changelogs
+    for name in roots:
+        stem_and_extension = split_extension(name)
+        if not among(TEXT_EXTENSIONS, stem_and_extension[1]):
+            continue
+        for prefix in CHANGELOG_PREFIXES:
+            if stem_and_extension[0].lower().startswith(prefix):
+                out.append(document_of(by_path[name], "changelog", "package"))
+                break
+    return out
+
+
+def document_of(entry: TarEntry, role: str, origin: str) -> Document:
+    extension = split_extension(entry.path)[1]
+    mut format = "text"
+    if extension == ".md" or extension == ".markdown":
+        format = "markdown"
+    elif extension == ".rst":
+        format = "restructuredtext"
+    elif extension == ".adoc" or extension == ".asciidoc":
+        format = "asciidoc"
+    return Document(
+        role=role, path=entry.path, digest=digest_bytes(entry.data), bytes=len(entry.data), format=format, origin=origin
+    )
+
+
+def split_extension(path: str) -> list[str]:
+    """A file name's stem and its lower-cased extension with the dot (empty when it has none, or is a dotfile)."""
+    name = path.split("/")[len(path.split("/")) - 1]
+    pieces = name.split(".")
+    if len(pieces) < 2 or len(pieces[0]) == 0:
+        return [name, ""]
+    extension = "." + pieces[len(pieces) - 1]
+    return [name[0:len(name) - len(extension)], extension.lower()]
+
+
+pub def content_path(digest: str) -> str:
+    """Where the index keeps a document's bytes: `content/sha256/<hex>`, by the digest its adoption records."""
+    return "content/sha256/" + digest[7:]
+
+
+pub def document_json(document: Document) -> JsonValue:
+    return JsonValue.object({
+        "role": JsonValue.string(document.role),
+        "path": JsonValue.string(document.path),
+        "digest": JsonValue.string(document.digest),
+        "bytes": JsonValue.int(document.bytes),
+        "format": JsonValue.string(document.format),
+        "origin": JsonValue.string(document.origin),
+    })
+
+
+pub def vcs_of(entries: list[TarEntry]) -> JsonValue:
+    """
+    Where the package was packaged from, as `cargo package` recorded it in `.cargo_vcs_info.json`: the git `commit`,
+    the package's `path` in the repository (empty at its root) and, when recorded, whether the tree was `dirty`. `null`
+    when the package carries no readable record, since a repository URL alone does not say which commit or directory.
+    """
+    for entry in entries:
+        if entry.path == ".cargo_vcs_info.json":
+            match entry.data.decode():
+                Ok(text) =>
+                    match parse(text):
+                        Ok(record) =>
+                            git = member(record, "git")
+                            commit = string_member(git, "sha1")
+                            if len(commit) == 0:
+                                return JsonValue.null()
+                            mut out: Dict[str, JsonValue] = {
+                                "system": JsonValue.string("git"),
+                                "commit": JsonValue.string(commit),
+                                "path": JsonValue.string(string_member(record, "path_in_vcs")),
+                            }
+                            match git.get("dirty"):
+                                Some(flag) => out["dirty"] = flag
+                                None => pass
+                            return JsonValue.object(out)
+                        Err(_) => return JsonValue.null()
+                Err(_) => return JsonValue.null()
+    return JsonValue.null()
+
+
+pub def taxonomy_of(entries: list[TarEntry], label: str) -> Result[JsonValue, str]:
+    """The manifest's `keywords` and `categories`, exactly as declared; a package that declares none has empty lists."""
+    for entry in entries:
+        if entry.path == "Cargo.toml":
+            match entry.data.decode():
+                Ok(text) =>
+                    document = parse_manifest(text, label)?
+                    mut keywords: list[str] = []
+                    match document.get_optional[list[str]]("package.keywords"):
+                        Ok(found) => keywords = found.unwrap_or([])
+                        Err(_) => pass
+                    mut categories: list[str] = []
+                    match document.get_optional[list[str]]("package.categories"):
+                        Ok(found) => categories = found.unwrap_or([])
+                        Err(_) => pass
+                    return Ok(JsonValue.object({"keywords": strings_json(keywords), "categories": strings_json(categories)}))
+                Err(error) => return Err(f"{label}: Cargo.toml is not UTF-8: {error}")
+    return Err(f"{label}: the archive has no Cargo.toml")
+
+
+pub def description_json(
+    entries: list[TarEntry], about: About, sources: Dict[str, str], label: str
+) -> Result[Dict[str, JsonValue], str]:
+    """
+    What a reader is told about a version beyond `about`, from its source Loaf's files: its `documents`, where it was
+    packaged from (`vcs`) and how it classifies itself (`taxonomy`). Recorded on the `adopt` event; the catalog
+    projects it.
+    """
+    mut documents: list[JsonValue] = []
+    for document in loaf_documents(entries, about, sources):
+        documents.append(document_json(document))
+    return Ok({
+        "documents": JsonValue.array(documents),
+        "vcs": vcs_of(entries),
+        "taxonomy": taxonomy_of(entries, label)?,
+    })
 
 
 def has_license_file(paths: list[str], about: About) -> bool:

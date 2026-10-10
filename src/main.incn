@@ -49,10 +49,15 @@ from admission import (
     validate_fact,
 )
 from adoption import (
+    Adoption,
+    about_from_json,
     about_json,
     about_of_files,
     adoption_from_payload,
     adoption_payload,
+    content_path,
+    description_json,
+    file_sources_from_json,
     file_sources_json,
     loaf_file_sources,
     loaf_files,
@@ -81,6 +86,7 @@ from oci import (
     repository,
     version_tag,
 )
+from tar import TarEntry, read_archive
 from units import Packed, pack_closure, push_units, read_units, reproduction_differences, write_units
 from events import (
     append_event,
@@ -99,6 +105,7 @@ from projection import (
     committed_projections,
     render_projections,
     stale_projections,
+    unclaimed_content,
     unclaimed_generated_inputs,
     write_projections,
 )
@@ -248,7 +255,7 @@ def check(invocation: Invocation) -> Result[None, str]:
     if len(stale) > 0:
         listed = ", ".join(stale)
         return Err(f"projections are out of date for [{listed}]; run incan-pub build")
-    unclaimed = unclaimed_generated_inputs(root, state)? + unclaimed_graphs(root, events)?
+    unclaimed = unclaimed_generated_inputs(root, state)? + unclaimed_graphs(root, events)? + unclaimed_content(root, state)?
     if len(unclaimed) > 0:
         listed = ", ".join(unclaimed)
         return Err(f"committed bytes no record names: [{listed}]; remove them or admit the fact that names them")
@@ -687,7 +694,10 @@ def adopt(invocation: Invocation) -> Result[None, str]:
     plan = plan_closure(adopted_adoptions(state)?, targets, cache, blobs)?
     mut folded = len(event_files(root)?)
     for item in plan:
-        payload = adoption_payload(item.adoption, item.manifest, item.archive)
+        label = f"{item.adoption.package} {item.adoption.version}"
+        payload = with_description(
+            adoption_payload(item.adoption, item.manifest, item.archive), root, blobs, label
+        )?
         written = append_event(root, "adopt", item.adoption.package, item.adoption.version, invocation.actor(), payload)?
         appended = load_events_after(root, folded)?
         state = replay_onto(state, appended, root)?
@@ -721,7 +731,9 @@ def readopt(invocation: Invocation) -> Result[None, str]:
             if event.kind == "adopt" and event.name == name and event.version == version:
                 found = true
                 item = prepare(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?)?
-                payload = adoption_payload(item.adoption, item.manifest, item.archive)
+                payload = with_description(
+                    adoption_payload(item.adoption, item.manifest, item.archive), root, blobs, event.label
+                )?
                 if canonical(JsonValue.object(payload))? == canonical(adopt_payload(event.body))?:
                     return Err(f"{name} {version}: the translation comes out the same; a right adoption is not rewritten")
                 rewrite_event(root, event.label, event.body, payload)?
@@ -738,10 +750,11 @@ def record_about(invocation: Invocation) -> Result[None, str]:
     authors, rust-version) on the `adopt` events whose `about` is missing or no longer says all of it, so every Loaf
     carries a license and a README, its package page can name them, and Oven can set Cargo's package environment.
 
-    The recorded payload is kept as it is and only gains or completes `about`, so the manifest is unchanged. An event
-    without `about` may gain a LICENSE or README.md where the package ships none; completing a recorded `about` must
-    leave the archive as it is. An `about` that already says what the manifest says is not rewritten. Each event keeps
-    its place, time and actor. With no versions named, every adoption is considered.
+    The recorded payload is kept as it is and only gains or completes `about` and the description read from the source
+    Loaf archive (`documents`, whose bytes it keeps under `content/`, `vcs` and `taxonomy`), so the manifest is
+    unchanged. An event without `about` may gain a LICENSE or README.md where the package ships none; completing a
+    recorded `about` must leave the archive as it is. A payload that already says all of it is not rewritten. Each
+    event keeps its place, time and actor. With no versions named, every adoption is considered.
     """
     if len(invocation.positional) % 2 != 0:
         return Err("usage: incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]")
@@ -767,7 +780,6 @@ def record_about(invocation: Invocation) -> Result[None, str]:
         about = about_of_files(files, label)?
         # An `about` that says what the manifest says is right and is never rewritten; one recorded before a field
         # was read is incomplete, and is completed without changing the archive.
-        recorded = event.body.contains_key("about")
         mut paths: list[str] = []
         for file in files:
             paths.append(file.path)
@@ -780,32 +792,105 @@ def record_about(invocation: Invocation) -> Result[None, str]:
                         complete = canonical(previous)? == canonical(about_json(about))? and canonical(previous_files)? == canonical(file_sources_json(sources))?
                     None => pass
             None => pass
-        if complete:
+        mut digest = string_member(event.body, "archive")
+        if not complete:
+            adoption.about = Some(about)
+            adoption.files = Some(sources)
+            digest = completed_archive(adoption, files, event.body, blobs, label)?
+            if digest != string_member(event.body, "archive"):
+                archives += 1
+        # The description (documents, vcs, taxonomy) is read from the archive; a payload that comes out the same is
+        # right and is not rewritten.
+        manifest_digest = string_member(event.body, "manifest")
+        payload = with_description(adoption_payload(adoption, manifest_digest, digest), root, blobs, label)?
+        if canonical(JsonValue.object(payload))? == canonical(adopt_payload(event.body))?:
             continue
-        adoption.about = Some(about)
-        adoption.files = Some(sources)
-        manifest = render_adopted_manifest(adoption)
-        if digest_text(manifest) != string_member(event.body, "manifest"):
-            return Err(f"{label}: recording `about` would change the manifest; it must only add files")
-        archive = source_archive(manifest, loaf_files(adoption, files))?
-        digest = digest_bytes(archive)
-        path = blob_path(Path(blobs), digest)
-        if not path.is_file():
-            match Path(blobs + "/sha256").mkdir(parents=true, exist_ok=true):
-                Ok(_) => pass
-                Err(error) => return Err(f"{blobs}: {error.message()}")
-            match path.write_bytes(archive):
-                Ok(_) => pass
-                Err(error) => return Err(f"{blobs}: {error.message()}")
-        if digest != string_member(event.body, "archive"):
-            if recorded:
-                return Err(f"{label}: completing its recorded `about` would change its archive; only the record may change")
-            archives += 1
-        rewrite_event(root, event.label, event.body, adoption_payload(adoption, string_member(event.body, "manifest"), digest))?
+        rewrite_event(root, event.label, event.body, payload)?
         rewritten += 1
     println(f"recorded about: {rewritten} adoption(s), {archives} archive(s) gained a LICENSE or README")
     replay(load_events(root)?, root)?
     return build(invocation)
+
+
+def completed_archive(
+    adoption: Adoption, files: list[TarEntry], body: JsonValue, blobs: str, label: str
+) -> Result[str, str]:
+    """
+    The digest of the source Loaf `adoption` renders now that its `about` is complete, stored in `blobs`. The manifest
+    must stay as it is, and so must the archive of an adoption that already recorded `about`: only an adoption that
+    recorded none may gain a LICENSE or README.md.
+    """
+    manifest = render_adopted_manifest(adoption)
+    if digest_text(manifest) != string_member(body, "manifest"):
+        return Err(f"{label}: recording `about` would change the manifest; it must only add files")
+    archive = source_archive(manifest, loaf_files(adoption, files))?
+    digest = digest_bytes(archive)
+    path = blob_path(Path(blobs), digest)
+    if not path.is_file():
+        make_directory(blobs + "/sha256")?
+        match path.write_bytes(archive):
+            Ok(_) => pass
+            Err(error) => return Err(f"{blobs}: {error.message()}")
+    if digest != string_member(body, "archive") and body.contains_key("about"):
+        return Err(f"{label}: completing its recorded `about` would change its archive; only the record may change")
+    return Ok(digest)
+
+
+def with_description(
+    payload: Dict[str, JsonValue], root: Path, blobs: str, label: str
+) -> Result[Dict[str, JsonValue], str]:
+    """
+    `payload` with what a reader is told about the version (`description_json`), read from its source Loaf archive in
+    `blobs`, and each document's bytes kept at `content/sha256/<hex>` under `root`, where the catalog points to them
+    and admission holds them to their digests. An adoption that recorded no `about` gains no description.
+    """
+    body = JsonValue.object(payload)
+    match about_from_json(body):
+        Some(about) =>
+            match file_sources_from_json(body):
+                Some(sources) =>
+                    archive = string_member(body, "archive")
+                    mut data = b""
+                    match blob_path(Path(blobs), archive).read_bytes():
+                        Ok(bytes) => data = bytes
+                        Err(error) => return Err(f"{label}: source Loaf archive {archive}: {error.message()}")
+                    if digest_bytes(data) != archive:
+                        return Err(f"{label}: the blob store's source Loaf archive is not {archive}")
+                    mut entries: list[TarEntry] = []
+                    for entry in read_archive(data)?:
+                        if entry.path != "loaf.toml":
+                            entries.append(entry)
+                    description = description_json(entries, about, sources, label)?
+                    keep_documents(root, entries, description["documents"], label)?
+                    mut out: Dict[str, JsonValue] = {}
+                    for key in payload.keys():
+                        out[key] = payload[key]
+                    for key in description.keys():
+                        out[key] = description[key]
+                    return Ok(out)
+                None => return Ok(payload)
+        None => return Ok(payload)
+
+
+def keep_documents(root: Path, entries: list[TarEntry], documents: JsonValue, label: str) -> Result[None, str]:
+    """Write each document's bytes to `content/sha256/<hex>` under `root`, unless they are there already."""
+    mut by_path: Dict[str, bytes] = {}
+    for entry in entries:
+        by_path[entry.path] = entry.data
+    for document in documents.as_array().unwrap_or([]):
+        path = string_member(document, "path")
+        digest = string_member(document, "digest")
+        if path not in by_path:
+            return Err(f"{label}: document {path} is not in the source Loaf archive")
+        target = root / content_path(digest)
+        if not target.is_file():
+            match (root / "content" / "sha256").mkdir(parents=true, exist_ok=true):
+                Ok(_) => pass
+                Err(error) => return Err(f"{label}: content/sha256: {error.message()}")
+            match target.write_bytes(by_path[path]):
+                Ok(_) => pass
+                Err(error) => return Err(f"{label}: {content_path(digest)}: {error.message()}")
+    return Ok(None)
 
 
 def print_build_roots(invocation: Invocation) -> Result[None, str]:
