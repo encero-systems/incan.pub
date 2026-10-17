@@ -5,7 +5,7 @@ The standard library has no argument vector, no HTTP client, no symlink reading 
 from Rust's standard library here and nowhere else. Downloads go through the host's `curl`.
 """
 
-from rust::std::env import args, current_dir, current_exe, var
+from rust::std::env import args, current_dir, current_exe, var, vars_os
 from rust::std::fs import canonicalize, read_link
 from rust::std::process import Command, exit
 
@@ -41,11 +41,14 @@ pub def run_program(program: str, arguments: list[str], environment: Dict[str, s
         Err(error) => return Err(f"{program} could not run: {error}")
 
 
-pub def run_passthrough(program: str, arguments: list[str]) -> Result[int, str]:
-    """Run `program` with this process's environment, working directory and standard streams; return its exit code."""
+pub def run_passthrough(program: str, arguments: list[str], overrides: Dict[str, str]) -> Result[int, str]:
+    """Run with inherited streams and only the explicit environment; return the child exit code."""
     mut command = Command.new(program.to_string())
     for argument in arguments:
         command.arg(argument.to_string())
+    command.env_clear()
+    for key in overrides.keys():
+        command.env(key.to_string(), overrides[key].to_string())
     match command.status():
         Ok(status) =>
             code: i32 = status.code().unwrap_or(1)
@@ -105,3 +108,12 @@ pub def download(url: str, destination: str) -> Result[None, str]:
                 return Ok(None)
             return Err(f"download failed: {url}")
         Err(error) => return Err(f"curl could not run: {error}")
+
+
+pub def environment_has_prefix(prefix: str) -> bool:
+    """Detect inherited variable names without requiring their values or names to be valid Unicode."""
+    for name, value in vars_os():
+        text: str = name.to_string_lossy().to_string()
+        if text.startswith(prefix):
+            return true
+    return false
