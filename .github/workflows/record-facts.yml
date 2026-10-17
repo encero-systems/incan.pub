@@ -26,16 +26,25 @@ on:
       bindings:
         description: "The bindings file, by its path in this repository (bake/facts/...)"
         required: true
+      publisher_run_id:
+        description: "Optional successful check run for this exact branch/revision; otherwise use the published tool key"
+        required: false
+        default: ""
+      native_owner:
+        description: "Optional checked-in native-owner.json describing exact Linux compiler packages and header inputs"
+        required: false
+        default: ""
 
 permissions:
   contents: read
+  actions: read
 
 env:
   RUST_TOOLCHAIN: 1.98.0
 
 jobs:
   record:
-    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-latest' || 'macos-latest' }}
+    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-24.04' || 'macos-latest' }}
     env:
       TARGET: ${{ inputs.target }}
       BINDINGS: ${{ inputs.bindings }}
@@ -52,11 +61,45 @@ jobs:
       - name: Install oras
         uses: oras-project/setup-oras@v1
       - name: Download the tool
+        if: inputs.publisher_run_id == ''
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
           oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" --output "$RUNNER_TEMP/tool" \
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+      - name: Verify and download an explicitly selected tested candidate
+        if: inputs.publisher_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISHER_RUN_ID: ${{ inputs.publisher_run_id }}
+        run: |
+          [[ "$PUBLISHER_RUN_ID" =~ ^[1-9][0-9]*$ ]] || { echo "::error::publisher_run_id must be numeric"; exit 1; }
+          revision="$(git -C tool rev-parse HEAD)"
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          compiler="$(sed -n 's/^  INCAN_COMMIT: //p' tool/.github/workflows/check.yml)"
+          [[ "$compiler" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::invalid candidate compiler pin"; exit 1; }
+          workflow="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/check.yml" --jq '.id')"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PUBLISHER_RUN_ID" > "$RUNNER_TEMP/candidate-run.json"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg branch "$GITHUB_REF_NAME" --arg revision "$revision" \
+            --argjson workflow "$workflow" \
+            '.repository.full_name == $repo and .head_repository.full_name == $repo and
+             .head_branch == $branch and .head_sha == $revision and .workflow_id == $workflow and
+             (.event == "pull_request" or .event == "push") and
+             .status == "completed" and .conclusion == "success"' "$RUNNER_TEMP/candidate-run.json" > /dev/null \
+            || { echo "::error::candidate must come from a successful same-repository check of this exact branch and revision"; exit 1; }
+          gh run download "$PUBLISHER_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name "incan-pub-candidate-$TARGET" --dir "$RUNNER_TEMP/candidate"
+          jq -e --arg revision "$revision" --arg key "$key" --arg target "$TARGET" --arg compiler "$compiler" \
+            '.schema == "incan.pub.tested-candidate/1" and .source_commit == $revision and
+             .tool_key == $key and .target == $target and .compiler_commit == $compiler and
+             (.sha256 | test("^[0-9a-f]{64}$"))' "$RUNNER_TEMP/candidate/manifest.json" > /dev/null \
+            || { echo "::error::candidate manifest does not match the selected source, tool key, target or compiler"; exit 1; }
+          expected="$(jq -r '.sha256' "$RUNNER_TEMP/candidate/manifest.json")"
+          actual="$(shasum -a 256 "$RUNNER_TEMP/candidate/incan-pub" | cut -d ' ' -f1)"
+          [ "$actual" = "$expected" ] || { echo "::error::candidate executable digest mismatch"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/tool"
+          cp "$RUNNER_TEMP/candidate/incan-pub" "$RUNNER_TEMP/tool/incan-pub"
+          chmod +x "$RUNNER_TEMP/tool/incan-pub"
       # A build script with build dependencies links against them, compiled by Oven from their adopted archives: the
       # compiler is the one the bake workflow pins, so both read their commit from bake.yml.
       - name: Download the compiler that compiles build dependencies
@@ -80,6 +123,112 @@ jobs:
         run: |
           sudo apt-get install -y bubblewrap
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Prepare the exact declared Linux native owner
+        if: inputs.native_owner != ''
+        env:
+          NATIVE_OWNER: ${{ inputs.native_owner }}
+        run: |
+          [ "$TARGET" = x86_64-unknown-linux-gnu ] || { echo "::error::native owner preparation requires Linux"; exit 1; }
+          . /etc/os-release
+          [ "$ID" = ubuntu ] && [ "$VERSION_ID" = 24.04 ] || { echo "::error::native owner requires Ubuntu 24.04"; exit 1; }
+          case "$NATIVE_OWNER" in bake/facts/*/native-owner.json) ;; *) echo "::error::invalid native owner manifest path"; exit 1;; esac
+          tool="$(realpath tool)"
+          manifest="$(realpath "tool/$NATIVE_OWNER")"
+          case "$manifest" in "$tool"/bake/facts/*/native-owner.json) ;; *) echo "::error::native owner manifest escaped checked-in recipes"; exit 1;; esac
+          jq -e '.schema == "incan.review.linux-header-installation/1" and .owner == "/usr" and
+            (.compiler_sha256 | test("^[0-9a-f]{64}$")) and (.ar_sha256 | test("^[0-9a-f]{64}$")) and
+            (.header_inventory_sha256 | test("^[0-9a-f]{64}$")) and .header_count > 0' "$manifest" > /dev/null
+          root="$(jq -r '.root' "$manifest")"
+          case "$root" in /usr/local/share/incan-native-sysroots/*) ;; *) echo "::error::unconfined native header root"; exit 1;; esac
+          [ "$(realpath -m "$root")" = "$root" ] || { echo "::error::noncanonical native header root"; exit 1; }
+          # Extract historical header packages without modifying the runner's libc or other base packages.
+          staging="$RUNNER_TEMP/native-package-inputs"
+          mkdir "$staging"
+          versions="$RUNNER_TEMP/native-package-versions.txt"
+          : > "$versions"
+          jq -r '.package_versions | split("\n")[] | select(length > 0)' "$manifest" > "$RUNNER_TEMP/native-packages.txt"
+          while IFS=$'\t' read -r package version architecture; do
+            [[ "$package=$version" =~ ^[a-z0-9][a-z0-9+.:_-]*=[a-zA-Z0-9.+:~_-]+$ ]] && [ "$architecture" = amd64 ] \
+              || { echo "::error::invalid pinned package"; exit 1; }
+            case "$package" in
+              libc6-dev:amd64|linux-libc-dev:amd64)
+                download="$RUNNER_TEMP/package-${package%%:*}"
+                mkdir "$download"
+                (cd "$download" && apt-get download "$package=$version")
+                mapfile -t archives < <(find "$download" -maxdepth 1 -type f -name '*.deb')
+                [ "${#archives[@]}" = 1 ] || { echo "::error::expected one exact header package"; exit 1; }
+                archive="${archives[0]}"
+                [ "$(dpkg-deb -f "$archive" Package)" = "${package%%:*}" ] && \
+                  [ "$(dpkg-deb -f "$archive" Version)" = "$version" ] && \
+                  [ "$(dpkg-deb -f "$archive" Architecture)" = "$architecture" ] \
+                  || { echo "::error::downloaded header package identity differs"; exit 1; }
+                dpkg-deb -x "$archive" "$staging"
+                printf '%s\t%s\t%s\n' "$package" "$version" "$architecture" >> "$versions"
+                ;;
+              *)
+                actual="$(dpkg-query -W -f='${binary:Package}\t${Version}\t${Architecture}' "$package")"
+                [ "$actual" = "$package"$'\t'"$version"$'\t'"$architecture" ] \
+                  || { echo "::error::runner toolchain package differs: $package; refusing to replace system packages"; exit 1; }
+                printf '%s\n' "$actual" >> "$versions"
+                ;;
+            esac
+          done < "$RUNNER_TEMP/native-packages.txt"
+          [ "$(cat "$versions")" = "$(jq -r '.package_versions' "$manifest")" ] || { echo "::error::actual package versions differ"; exit 1; }
+          cc="$(jq -r '.cc' "$manifest")"
+          cxx="$(jq -r '.cxx' "$manifest")"
+          ar="$(jq -r '.ar' "$manifest")"
+          compiler="$(realpath -e "$cc")"
+          [ "$compiler" = "$(jq -r '.compiler' "$manifest")" ] && [ "$(realpath -e "$cxx")" = "$compiler" ]
+          case "$compiler" in /usr/*) ;; *) echo "::error::compiler escapes native owner"; exit 1;; esac
+          [ "$(sha256sum "$compiler" | cut -d ' ' -f1)" = "$(jq -r '.compiler_sha256' "$manifest")" ] || { echo "::error::compiler bytes differ"; exit 1; }
+          case "$(realpath -e "$ar")" in /usr/*) ;; *) echo "::error::archiver escapes native owner"; exit 1;; esac
+          [ "$(sha256sum "$ar" | cut -d ' ' -f1)" = "$(jq -r '.ar_sha256' "$manifest")" ] || { echo "::error::archiver bytes differ"; exit 1; }
+          resource="$(realpath -e "$("$compiler" -print-resource-dir)")"
+          [ "$resource" = "$(jq -r '.resource' "$manifest")" ] || { echo "::error::compiler resource coordinate differs"; exit 1; }
+          case "$resource" in /usr/*) ;; *) echo "::error::compiler resources escape native owner"; exit 1;; esac
+          [ ! -e "$root" ] && [ ! -L "$root" ] || { echo "::error::native root must be fresh and task-owned"; exit 1; }
+          rows="$RUNNER_TEMP/native-header-rows.jsonl"
+          : > "$rows"
+          find "$staging/usr/include" \( -type f -o -type l \) -print | sed "s|^$staging||" | LC_ALL=C sort -u > "$RUNNER_TEMP/native-header-paths.txt"
+          while IFS= read -r source; do
+            case "$source" in /usr/include/*) ;; *) continue;; esac
+            resolved="$(realpath -e "$staging$source")"
+            case "$resolved" in "$staging"/usr/include/*) ;; *) echo "::error::header escapes installed package inputs"; exit 1;; esac
+            [ -f "$resolved" ] || { echo "::error::header is not a regular file"; exit 1; }
+            digest="$(sha256sum "$resolved" | cut -d ' ' -f1)"
+            bytes="$(stat -c '%s' "$resolved")"
+            jq -nc --arg path "$source" --arg resolved "${resolved#"$staging"}" --arg digest "$digest" --argjson bytes "$bytes" \
+              '{path: $path, resolved_source: $resolved, sha256: $digest, bytes: $bytes}' >> "$rows"
+          done < "$RUNNER_TEMP/native-header-paths.txt"
+          jq -scS '.' "$rows" > "$RUNNER_TEMP/native-headers.json"
+          digest="$(jq -jcS '.' "$RUNNER_TEMP/native-headers.json" | sha256sum | cut -d ' ' -f1)"
+          count="$(jq 'length' "$RUNNER_TEMP/native-headers.json")"
+          [ "$digest" = "$(jq -r '.header_inventory_sha256' "$manifest")" ] && [ "$count" = "$(jq -r '.header_count' "$manifest")" ] \
+            || { echo "::error::actual package header inventory differs"; exit 1; }
+          jq -S 'del(.root, .owner, .cc, .cxx, .ar, .ar_sha256)' "$manifest" > "$RUNNER_TEMP/native-toolchain.json"
+          # Admission happens before installation; a fresh root cannot contain unrecorded headers.
+          sudo mkdir -p "$(dirname "$root")"
+          sudo mkdir "$root"
+          while IFS= read -r source; do
+            resolved="$(realpath -e "$staging$source")"
+            case "$resolved" in "$staging"/usr/include/*) ;; *) echo "::error::header changed outside extracted inputs"; exit 1;; esac
+            sudo install -D -m 0444 "$resolved" "$root$source"
+          done < "$RUNNER_TEMP/native-header-paths.txt"
+          sudo install -m 0444 "$RUNNER_TEMP/native-toolchain.json" "$root/incan-toolchain.json"
+          { cat "$RUNNER_TEMP/native-header-paths.txt"; printf '%s\n' /incan-toolchain.json; } | LC_ALL=C sort > "$RUNNER_TEMP/native-expected-paths.txt"
+          find "$root" ! -type d -print | sed "s|^$root||" | LC_ALL=C sort > "$RUNNER_TEMP/native-actual-paths.txt"
+          cmp -s "$RUNNER_TEMP/native-expected-paths.txt" "$RUNNER_TEMP/native-actual-paths.txt" \
+            || { echo "::error::native root contains unexpected entries"; exit 1; }
+          jq -r '.[] | [.path, .sha256, .bytes] | @tsv' "$RUNNER_TEMP/native-headers.json" > "$RUNNER_TEMP/native-installed-checks.tsv"
+          while IFS=$'\t' read -r source expected bytes; do
+            destination="$root$source"
+            [ -f "$destination" ] && [ ! -L "$destination" ]
+            case "$(realpath -e "$destination")" in "$root"/*) ;; *) echo "::error::installed header escaped sysroot"; exit 1;; esac
+            [ "$(sha256sum "$destination" | cut -d ' ' -f1)" = "$expected" ] && [ "$(stat -c '%s' "$destination")" = "$bytes" ] \
+              || { echo "::error::installed header bytes differ: $source"; exit 1; }
+          done < "$RUNNER_TEMP/native-installed-checks.tsv"
+          jq -n --arg cc "$cc" --arg cxx "$cxx" --arg ar "$ar" --arg sysroot "$root" \
+            '{cc: $cc, cxx: $cxx, ar: $ar, sysroot: $sysroot}' > "$RUNNER_TEMP/native-owner-arguments.json"
       - name: Fetch the source Loaf archives of the bindings' shards
         run: |
           [ -s "tool/$BINDINGS" ] || { echo "::error::no bindings at $BINDINGS; name the file by its path in this repository"; exit 1; }
@@ -99,6 +248,13 @@ jobs:
           rustc="$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
           mkdir -p "$RUNNER_TEMP/proposals"
           : > "$RUNNER_TEMP/proposals/refused.tsv"
+          native=()
+          if [ -f "$RUNNER_TEMP/native-owner-arguments.json" ]; then
+            native=(--cc "$(jq -r '.cc' "$RUNNER_TEMP/native-owner-arguments.json")"
+              --cxx "$(jq -r '.cxx' "$RUNNER_TEMP/native-owner-arguments.json")"
+              --ar "$(jq -r '.ar' "$RUNNER_TEMP/native-owner-arguments.json")"
+              --sysroot "$(jq -r '.sysroot' "$RUNNER_TEMP/native-owner-arguments.json")")
+          fi
           index=0
           # Fields are split on `|`, not tab: a shell `read` collapses adjacent tabs, and an empty feature set is a field.
           tr "\t" "|" < "tool/$BINDINGS" | while IFS="|" read -r name version features profile domain graph lock; do
@@ -109,7 +265,7 @@ jobs:
             if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
                 --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
                 --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose \
-                "${build[@]}" 2>&1)"; then
+                "${build[@]}" "${native[@]}" 2>&1)"; then
               printf '%s\n' "$output" > "$RUNNER_TEMP/proposals/$index-$name-$version-$profile.log"
               echo "$output"
               proposal="$(printf '%s\n' "$output" | sed -n 's/^proposed: //p')"
