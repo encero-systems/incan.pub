@@ -15,10 +15,10 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
-                          --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
+                          --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR --runtime-files FILE]
                           [--incan PATH --build-lock LOCK.json]
                           [--propose] [--actor ACTOR] [--root DIR]
-    incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
+    incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR [--runtime-files FILE]
     incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]
     incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]
@@ -70,9 +70,9 @@ from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, 
 from closure import blob_path, crate_archive, crates_io_lines, find_line, plan_closure, prepare, reproduce
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
-from buildscript import Selection, build_roots, record_proposal
+from buildscript import Selection, build_roots, record_proposal, resource_directory
 from graph import stage_graph, unclaimed_graphs, validate_graph
-from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
+from native import Compiler, convert, declared_runtime_files, read_traces, run_wrapper, wrapper_role
 from oci import (
     Layer,
     Registry,
@@ -989,6 +989,7 @@ def selection_of(invocation: Invocation) -> Result[Selection, str]:
         cxx=invocation.option("cxx").unwrap_or(""),
         ar=invocation.option("ar").unwrap_or(""),
         sysroot=invocation.option("sysroot").unwrap_or(""),
+        runtime_files=runtime_files_option(invocation)?,
         incan=absolute_option(invocation, "incan")?,
         build_lock=absolute_option(invocation, "build-lock")?,
         pin=canonical_path(invocation.option("root").unwrap_or("."))?,
@@ -1004,15 +1005,18 @@ def absolute_option(invocation: Invocation, name: str) -> Result[str, str]:
 
 def native_convert(invocation: Invocation) -> Result[None, str]:
     """Print the link records a directory of native traces converts to: the inspection side of `record-fact`."""
+    runtime_files = runtime_files_option(invocation)?
     compilers = [
         Compiler(
             executable=canonical_path(invocation.require("cc")?)?,
-            resource_dir=compiler_resource_dir(invocation.require("cc")?)?,
+            resource_dir=resource_directory(invocation.require("cc")?, canonical_path(".")?, runtime_files)?,
+            runtime_files=runtime_files,
             sysroot=canonical_path(invocation.require("sysroot")?)?,
         ),
         Compiler(
             executable=canonical_path(invocation.require("cxx")?)?,
-            resource_dir=compiler_resource_dir(invocation.require("cxx")?)?,
+            resource_dir=resource_directory(invocation.require("cxx")?, canonical_path(".")?, runtime_files)?,
+            runtime_files=runtime_files,
             sysroot=canonical_path(invocation.require("sysroot")?)?,
         ),
     ]
@@ -1028,13 +1032,11 @@ def native_convert(invocation: Invocation) -> Result[None, str]:
     return Ok(None)
 
 
-def compiler_resource_dir(compiler: str) -> Result[str, str]:
-    ran = run_program(compiler, ["-print-resource-dir"], {"PATH": "/usr/bin:/bin"}, ".")?
-    if not ran.success:
-        return Err(f"{compiler} did not report its resource directory")
-    match ran.stdout.decode():
-        Ok(text) => return canonical_path(text.strip())
-        Err(error) => return Err(f"{compiler}: {error}")
+def runtime_files_option(invocation: Invocation) -> Result[list[str], str]:
+    """An optional explicit runtime declaration; absence keeps existing static and Apple facts unchanged."""
+    match invocation.option("runtime-files"):
+        None => return Ok([])
+        Some(path) => return declared_runtime_files(read_text(Path(path), path)?)
 
 
 def push_source(invocation: Invocation) -> Result[None, str]:

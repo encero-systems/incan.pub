@@ -712,11 +712,30 @@ def validate_executable(executable: JsonValue, label: str) -> Result[None, str]:
     """An executable is identified, not carried: an owner identity, an owner-relative path, and its exact bytes."""
     mut unknown: list[str] = []
     for key in sorted(executable.keys()):
-        if not ["digest", "name", "owner", "path"].contains(key):
+        if not ["digest", "name", "owner", "path", "runtime_files"].contains(key):
             unknown.append(key)
     if len(unknown) > 0:
         listed = ", ".join(unknown)
         return Err(f"{label}: executable has unknown keys [{listed}]")
+    if executable.contains_key("runtime_files"):
+        runtime = member(executable, "runtime_files")
+        if not runtime.is_array():
+            return Err(f"{label}: executable runtime_files must be an array")
+        mut previous = ""
+        mut count = 0
+        for entry in runtime.as_array().unwrap_or([]):
+            if not entry.is_object() or len(entry.keys()) != 2 or not entry.contains_key("path") or not entry.contains_key("digest"):
+                return Err(f"{label}: runtime file requires exactly path and digest")
+            path = string_member(entry, "path")
+            validate_portable_path(path, f"{label}: executable runtime file")?
+            if len(previous) > 0 and not (previous < path):
+                return Err(f"{label}: runtime files must be sorted by unique path")
+            if not is_sha256_identity(string_member(entry, "digest")):
+                return Err(f"{label}: runtime file digest must be a sha256 identity")
+            previous = path
+            count += 1
+        if count == 0:
+            return Err(f"{label}: empty runtime_files must be omitted")
     validate_producer_name(string_member(executable, "name"), f"{label}: executable name")?
     validate_portable_path(string_member(executable, "path"), f"{label}: executable path")?
     for key in ["digest", "owner"]:

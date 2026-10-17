@@ -26,7 +26,7 @@ from closure import crates_io_lines, find_line
 from events import member, string_list_member, string_member, write_text
 from graph import graph_text
 from host import Ran, canonical_path, environment_value, executable_path, run_program
-from native import Compiler, Conversion, Invocation, convert, read_traces, trace_variable
+from native import BUBBLEWRAP, linux_compiler_command, Compiler, Conversion, Invocation, convert, read_traces, runtime_environment, trace_variable
 from registry import crates_io_index
 from semver import parse_version
 from tar import TarEntry, read_archive
@@ -48,6 +48,7 @@ pub model Selection:
     pub cxx: str
     pub ar: str
     pub sysroot: str
+    pub runtime_files: list[str]
     pub incan: str
     pub build_lock: str
     pub pin: str
@@ -313,7 +314,6 @@ def run_script(
 
 
 const SANDBOX_EXEC: str = "/usr/bin/sandbox-exec"
-const BUBBLEWRAP: str = "/usr/bin/bwrap"
 
 
 def run_sandboxed(executable: str, environment: Dict[str, str], package_dir: str, base: str, label: str) -> Result[Ran, str]:
@@ -325,7 +325,7 @@ def run_sandboxed(executable: str, environment: Dict[str, str], package_dir: str
     if Path(SANDBOX_EXEC).is_file():
         profile = "(version 1)(allow default)(deny network*)(deny file-write*)(allow file-write* (subpath \"" + base + "\") (literal \"/dev/null\"))"
         return run_program(SANDBOX_EXEC, ["-p", profile, executable], environment, package_dir)
-    if Path(BUBBLEWRAP).is_file():
+    if Path(BUBBLEWRAP.to_string()).is_file():
         return run_program(BUBBLEWRAP, [
             "--unshare-net",
             "--ro-bind", "/", "/",
@@ -564,8 +564,17 @@ def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selec
     environment["INCAN_PUB_NATIVE_CC"] = selection.cc
     environment["INCAN_PUB_NATIVE_CXX"] = selection.cxx
     environment["INCAN_PUB_NATIVE_AR"] = selection.ar
-    # The explicit compiler finds its headers through SDKROOT; the link record names that sysroot as an owner path.
-    environment["SDKROOT"] = canonical_path(selection.sysroot)?
+    environment["INCAN_PUB_NATIVE_RUNTIME_FILES"] = canonical(JsonValue.object({"runtime_files": JsonValue.array([JsonValue.string(path) for path in selection.runtime_files])}))?
+    # Every platform names the selected sysroot as a link-record owner path.
+    sysroot = canonical_path(selection.sysroot)?
+    # Only Apple toolchains read SDKROOT.
+    environment["SDKROOT"] = sysroot
+    # Every other compiler in scope is a Linux one, which takes the sysroot only as an argument: the wrapper adds it
+    # before the compiler runs, so the run and its trace name the same root.
+    if selection.target.contains("-linux-"):
+        environment["INCAN_PUB_NATIVE_SYSROOT"] = sysroot
+        environment["INCAN_PUB_NATIVE_RESOURCE_CC"] = resource_directory(selection.cc, base, selection.runtime_files)?
+        environment["INCAN_PUB_NATIVE_RESOURCE_CXX"] = resource_directory(selection.cxx, base, selection.runtime_files)?
     return Ok(None)
 
 
@@ -580,7 +589,8 @@ def native_work(observed: Directives, base: str, selection: Selection, label: st
     for executable in [selection.cc, selection.cxx]:
         compilers.append(Compiler(
             executable=canonical_path(executable)?,
-            resource_dir=resource_directory(executable, base)?,
+            resource_dir=resource_directory(executable, base, selection.runtime_files)?,
+            runtime_files=selection.runtime_files,
             sysroot=canonical_path(selection.sysroot)?,
         ))
     match convert(traces, observed.libraries, compilers):
@@ -594,8 +604,21 @@ def native_work(observed: Directives, base: str, selection: Selection, label: st
         Err(message) => return Err(f"{label}: {message}")
 
 
-def resource_directory(compiler: str, base: str) -> Result[str, str]:
-    ran = run_program(compiler, ["-print-resource-dir"], plain_environment(base), base)?
+pub def resource_directory(compiler: str, base: str, runtime_files: list[str]) -> Result[str, str]:
+    """Probe the selected compiler using the same declared loader inputs as its recorded compiles."""
+    mut environment = plain_environment(base)
+    runtime = runtime_environment(runtime_files)
+    for key in runtime.keys():
+        environment[key] = runtime[key]
+    mut program = compiler
+    mut arguments = ["-print-resource-dir"]
+    if not Path(SANDBOX_EXEC).is_file():
+        if not Path(BUBBLEWRAP.to_string()).is_file():
+            return Err("native compiler resource probe requires bubblewrap on this host")
+        arguments = linux_compiler_command(compiler, arguments, runtime_files, [], [], base)?
+        program = BUBBLEWRAP
+        environment = {}
+    ran = run_program(program, arguments, environment, base)?
     if not ran.success:
         return Err(f"{compiler} did not report its resource directory")
     return canonical_path(text_of(ran.stdout).strip())

@@ -26,16 +26,25 @@ on:
       bindings:
         description: "The bindings file, by its path in this repository (bake/facts/...)"
         required: true
+      publisher_run_id:
+        description: "Optional successful check run for this exact branch/revision; otherwise use the published tool key"
+        required: false
+        default: ""
+      native_owner:
+        description: "Optional checked-in native-owner.json describing exact Linux compiler packages and header inputs"
+        required: false
+        default: ""
 
 permissions:
   contents: read
+  actions: read
 
 env:
   RUST_TOOLCHAIN: 1.98.0
 
 jobs:
   record:
-    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-latest' || 'macos-latest' }}
+    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-24.04' || 'macos-latest' }}
     env:
       TARGET: ${{ inputs.target }}
       BINDINGS: ${{ inputs.bindings }}
@@ -52,11 +61,45 @@ jobs:
       - name: Install oras
         uses: oras-project/setup-oras@v1
       - name: Download the tool
+        if: inputs.publisher_run_id == ''
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
           oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" --output "$RUNNER_TEMP/tool" \
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+      - name: Verify and download an explicitly selected tested candidate
+        if: inputs.publisher_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISHER_RUN_ID: ${{ inputs.publisher_run_id }}
+        run: |
+          [[ "$PUBLISHER_RUN_ID" =~ ^[1-9][0-9]*$ ]] || { echo "::error::publisher_run_id must be numeric"; exit 1; }
+          revision="$(git -C tool rev-parse HEAD)"
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          compiler="$(sed -n 's/^  INCAN_COMMIT: //p' tool/.github/workflows/check.yml)"
+          [[ "$compiler" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::invalid candidate compiler pin"; exit 1; }
+          workflow="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/check.yml" --jq '.id')"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PUBLISHER_RUN_ID" > "$RUNNER_TEMP/candidate-run.json"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg branch "$GITHUB_REF_NAME" --arg revision "$revision" \
+            --argjson workflow "$workflow" \
+            '.repository.full_name == $repo and .head_repository.full_name == $repo and
+             .head_branch == $branch and .head_sha == $revision and .workflow_id == $workflow and
+             (.event == "pull_request" or .event == "push") and
+             .status == "completed" and .conclusion == "success"' "$RUNNER_TEMP/candidate-run.json" > /dev/null \
+            || { echo "::error::candidate must come from a successful same-repository check of this exact branch and revision"; exit 1; }
+          gh run download "$PUBLISHER_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name "incan-pub-candidate-$TARGET" --dir "$RUNNER_TEMP/candidate"
+          jq -e --arg revision "$revision" --arg key "$key" --arg target "$TARGET" --arg compiler "$compiler" \
+            '.schema == "incan.pub.tested-candidate/1" and .source_commit == $revision and
+             .tool_key == $key and .target == $target and .compiler_commit == $compiler and
+             (.sha256 | test("^[0-9a-f]{64}$"))' "$RUNNER_TEMP/candidate/manifest.json" > /dev/null \
+            || { echo "::error::candidate manifest does not match the selected source, tool key, target or compiler"; exit 1; }
+          expected="$(jq -r '.sha256' "$RUNNER_TEMP/candidate/manifest.json")"
+          actual="$(shasum -a 256 "$RUNNER_TEMP/candidate/incan-pub" | cut -d ' ' -f1)"
+          [ "$actual" = "$expected" ] || { echo "::error::candidate executable digest mismatch"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/tool"
+          cp "$RUNNER_TEMP/candidate/incan-pub" "$RUNNER_TEMP/tool/incan-pub"
+          chmod +x "$RUNNER_TEMP/tool/incan-pub"
       # A build script with build dependencies links against them, compiled by Oven from their adopted archives: the
       # compiler is the one the bake workflow pins, so both read their commit from bake.yml.
       - name: Download the compiler that compiles build dependencies
@@ -79,7 +122,17 @@ jobs:
         # Ubuntu confines unprivileged user namespaces, which bubblewrap needs for its network namespace.
         run: |
           sudo apt-get install -y bubblewrap
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          if [ "$(sysctl -n kernel.apparmor_restrict_unprivileged_userns 2>/dev/null || true)" = 1 ]; then
+            profile="$RUNNER_TEMP/incan-pub-record-bwrap.apparmor"
+            printf '%s\n' 'abi <abi/4.0>,' 'include <tunables/global>' \
+              'profile incan-pub-record-bwrap /usr/bin/bwrap flags=(unconfined) {' '  userns,' '}' > "$profile"
+            sudo apparmor_parser -r "$profile"
+          fi
+      - name: Prepare the exact declared Linux native owner
+        if: inputs.native_owner != ''
+        env:
+          NATIVE_OWNER: ${{ inputs.native_owner }}
+        run: bash tool/scripts/prepare-native-owner.sh
       - name: Fetch the source Loaf archives of the bindings' shards
         run: |
           [ -s "tool/$BINDINGS" ] || { echo "::error::no bindings at $BINDINGS; name the file by its path in this repository"; exit 1; }
@@ -99,6 +152,16 @@ jobs:
           rustc="$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
           mkdir -p "$RUNNER_TEMP/proposals"
           : > "$RUNNER_TEMP/proposals/refused.tsv"
+          native=()
+          if [ -f "$RUNNER_TEMP/native-owner-arguments.json" ]; then
+            native=(--cc "$(jq -r '.cc' "$RUNNER_TEMP/native-owner-arguments.json")"
+              --cxx "$(jq -r '.cxx' "$RUNNER_TEMP/native-owner-arguments.json")"
+              --ar "$(jq -r '.ar' "$RUNNER_TEMP/native-owner-arguments.json")"
+              --sysroot "$(jq -r '.sysroot' "$RUNNER_TEMP/native-owner-arguments.json")")
+          fi
+          if [ -f "$RUNNER_TEMP/native-runtime-files.json" ]; then
+            native+=(--runtime-files "$RUNNER_TEMP/native-runtime-files.json")
+          fi
           index=0
           # Fields are split on `|`, not tab: a shell `read` collapses adjacent tabs, and an empty feature set is a field.
           tr "\t" "|" < "tool/$BINDINGS" | while IFS="|" read -r name version features profile domain graph lock; do
@@ -109,7 +172,8 @@ jobs:
             if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
                 --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
                 --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose \
-                "${build[@]}" 2>&1)"; then
+                "${build[@]}" "${native[@]}" 2>&1)"; then
+              printf '%s\n' "$output" > "$RUNNER_TEMP/proposals/$index-$name-$version-$profile.log"
               echo "$output"
               proposal="$(printf '%s\n' "$output" | sed -n 's/^proposed: //p')"
               if [ -n "$proposal" ]; then
@@ -117,6 +181,7 @@ jobs:
                 cp -R "$(dirname "$proposal")" "$RUNNER_TEMP/proposals/$index-$name-$version"
               fi
             else
+              printf '%s\n' "$output" > "$RUNNER_TEMP/proposals/$index-$name-$version-$profile.log"
               printf '%s\t%s\t%s\t%s\n' "$name" "$version" "$features" "$(printf '%s\n' "$output" | grep -m1 '^refused:')" >> "$RUNNER_TEMP/proposals/refused.tsv"
             fi
           done
