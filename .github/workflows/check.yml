@@ -23,7 +23,8 @@ jobs:
       - name: Check out the tool
         uses: actions/checkout@v4
         with:
-          ref: main
+          # Validate this schema with the exact reviewed prerequisite tool, independently of its merge order.
+          ref: 5753c23aa6fc52a8c47324702711a58b499958c3
           path: tool
       - name: Check out the Incan toolchain
         uses: actions/checkout@v4
