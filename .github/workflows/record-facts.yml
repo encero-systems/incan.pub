@@ -110,6 +110,7 @@ jobs:
                 --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
                 --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose \
                 "${build[@]}" 2>&1)"; then
+              printf '%s\n' "$output" > "$RUNNER_TEMP/proposals/$index-$name-$version-$profile.log"
               echo "$output"
               proposal="$(printf '%s\n' "$output" | sed -n 's/^proposed: //p')"
               if [ -n "$proposal" ]; then
@@ -117,6 +118,7 @@ jobs:
                 cp -R "$(dirname "$proposal")" "$RUNNER_TEMP/proposals/$index-$name-$version"
               fi
             else
+              printf '%s\n' "$output" > "$RUNNER_TEMP/proposals/$index-$name-$version-$profile.log"
               printf '%s\t%s\t%s\t%s\n' "$name" "$version" "$features" "$(printf '%s\n' "$output" | grep -m1 '^refused:')" >> "$RUNNER_TEMP/proposals/refused.tsv"
             fi
           done
