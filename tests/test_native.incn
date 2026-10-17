@@ -8,10 +8,10 @@ wrappers; these tests pin the pieces it is made of, on scratch trees whose expec
 from std.fs import Path
 from std.testing import assert_eq, assert_is_err, assert_true
 
-from canonical import digest_bytes, digest_text
-from host import environment_value
-from native import common_ancestor, logical_name, owner_identity, portable_beneath, stable_object_name, tree_artifact
-from events import string_member
+from canonical import canonical, digest_bytes, digest_text
+from host import canonical_path, environment_value
+from native import Compiler, Invocation, convert, common_ancestor, logical_name, owner_identity, portable_beneath, recorded_compiler_arguments, stable_object_name, tree_artifact
+from events import string_member, write_text
 
 
 def scratch(name: str) -> str:
@@ -72,3 +72,81 @@ def test_an_owner_identity_inventories_files_directories_and_symlinks() -> None:
     assert_eq(owner_identity(root, ["sdk", "bin/clang"]).unwrap(), digest_text(expected))
     assert_eq(owner_identity(root, ["bin/clang", "sdk"]).unwrap(), digest_text(expected))
     Path(root).remove_tree().unwrap()
+
+
+
+def test_linux_compile_and_probe_arguments_bind_the_selected_sysroot() -> None:
+    """Observation must see the same sysroot that conversion will name as an owner path during replay."""
+    for arguments in [["-c", "source.c", "-o", "source.o"], ["-E", "probe.c"], ["--version"]]:
+        match recorded_compiler_arguments(arguments, "/owner/sysroot"):
+            Ok(actual) => assert_eq("\n".join(actual), "\n".join(["--sysroot", "/owner/sysroot"] + arguments))
+            Err(error) => assert_true(false, error)
+
+
+def test_linux_explicit_sysroot_is_preserved_and_conflicting_or_missing_values_are_refused() -> None:
+    """Do not silently override a build script's conflicting root or duplicate an already bound root."""
+    for arguments in [
+        ["--sysroot", "/owner/sysroot", "-c", "source.c"],
+        ["--sysroot=/owner/sysroot", "-c", "source.c"],
+        ["-isysroot", "/owner/sysroot", "-c", "source.c"],
+    ]:
+        match recorded_compiler_arguments(arguments, "/owner/sysroot"):
+            Ok(actual) => assert_eq("\n".join(actual), "\n".join(arguments))
+            Err(error) => assert_true(false, error)
+    for arguments in [
+        ["--sysroot"],
+        ["-isysroot"],
+        ["--sysroot="],
+        ["--sysroot", "/other"],
+        ["--sysroot=/other"],
+        ["-isysroot", "/other"],
+        ["-isysroot/other"],
+        ["-isysroot=/other"],
+        ["--sysroot", "/owner/sysroot", "--sysroot=/other"],
+    ]:
+        assert_is_err(recorded_compiler_arguments(arguments, "/owner/sysroot"))
+
+
+def linux_sysroot_conversion(root: str) -> Result[str, str]:
+    """Exercise actual trace conversion on real source/tool paths, without inventing or admitting a registry fact."""
+    for directory in ["package", "out", "tool/bin", "tool/resource", "tool/sysroot/usr/include"]:
+        match Path(root + "/" + directory).mkdir(parents=true, exist_ok=true):
+            Ok(_) => pass
+            Err(error) => return Err(error.message())
+    for path in ["package/probe.c", "out/probe.o", "out/libprobe.a", "tool/bin/clang", "tool/sysroot/usr/include/probe.h"]:
+        write_text(Path(root + "/" + path), "fixture\n", path)?
+    package = canonical_path(root + "/package")?
+    output = canonical_path(root + "/out")?
+    tool = canonical_path(root + "/tool")?
+    arguments = recorded_compiler_arguments(["-c", package + "/probe.c", "-o", output + "/probe.o"], tool + "/sysroot")?
+    traces = [
+        Invocation(
+            reason="compile", executable=tool + "/bin/clang", directory=package,
+            arguments=arguments, manifest_dir=package, out_dir=output, target="x86_64-unknown-linux-gnu",
+            reads=[package + "/probe.c", tool + "/sysroot/usr/include/probe.h"], read_set=true,
+        ),
+        Invocation(
+            reason="archive", executable="/usr/bin/ar", directory=package,
+            arguments=["rcs", output + "/libprobe.a", output + "/probe.o"],
+            manifest_dir=package, out_dir=output, target="x86_64-unknown-linux-gnu", reads=[], read_set=false,
+        ),
+    ]
+    converted = convert(traces, ["static=probe"], [Compiler(executable=tool + "/bin/clang", resource_dir=tool + "/resource", sysroot=tool + "/sysroot")])?
+    if len(converted.records) != 1:
+        return Err("the conversion must produce exactly one native link record")
+    return canonical(converted.records[0])
+
+
+def test_linux_sysroot_arguments_convert_to_owner_coordinates_without_absolute_paths() -> None:
+    """The wrapper's paired --sysroot must survive real conversion as the selected owner coordinate."""
+    root = scratch("linux-sysroot-conversion")
+    match linux_sysroot_conversion(root):
+        Ok(record) =>
+            assert_true(record.contains("\"literal\":\"--sysroot\""), record)
+            assert_true(record.contains("\"owner\":\"sysroot\""), record)
+            assert_true(not record.contains("-isysroot"), record)
+            assert_true(not record.contains(root), record)
+        Err(error) => assert_true(false, error)
+    match Path(root).remove_tree():
+        Ok(_) => pass
+        Err(error) => assert_true(false, error.message())

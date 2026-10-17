@@ -90,7 +90,10 @@ pub def run_wrapper(role: str) -> Result[int, str]:
     executable = environment_value("INCAN_PUB_NATIVE_" + role.upper()).unwrap_or("")
     if len(executable) == 0:
         return Err(f"no INCAN_PUB_NATIVE_{role.upper()} names the {role} this wrapper stands for")
-    arguments = argv()[1:]
+    mut arguments = argv()[1:]
+    sysroot = environment_value("INCAN_PUB_NATIVE_SYSROOT").unwrap_or("")
+    if role != "ar" and len(sysroot) > 0:
+        arguments = recorded_compiler_arguments(arguments, sysroot)?
     trace = environment_value(trace_variable()).unwrap_or("")
     directory = working_directory()?
     # A compile also writes its dependency file, the exact set of files it read; the object is unchanged.
@@ -130,6 +133,38 @@ pub def run_wrapper(role: str) -> Result[int, str]:
     match Path(trace + "/" + digest_text(text)[7:] + ".json").write_text(text, "utf-8", "strict", None):
         Ok(_) => return Ok(0)
         Err(error) => return Err(f"native trace: {error.message()}")
+
+
+pub def recorded_compiler_arguments(arguments: list[str], sysroot: str) -> Result[list[str], str]:
+    """
+    Bind Linux observation to the selected sysroot before executing or recording any compiler invocation, including
+    feature probes. The trace carries these exact arguments into replay. A build script may repeat the selected
+    canonical spelling but cannot replace it with another sysroot; Apple SDK selection stays on its existing path.
+    """
+    mut selected = false
+    mut index = 0
+    while index < len(arguments):
+        argument = arguments[index]
+        mut value = ""
+        if argument == "--sysroot" or argument == "-isysroot":
+            if index + 1 >= len(arguments):
+                return Err(f"native compiler argument {argument} has no value")
+            value = arguments[index + 1]
+            index += 1
+        elif argument.startswith("--sysroot="):
+            value = argument[10:]
+        elif argument.startswith("-isysroot"):
+            return Err("native compiler invocation uses an unsupported joined sysroot argument")
+        else:
+            index += 1
+            continue
+        if value != sysroot:
+            return Err("native compiler invocation changes the selected sysroot")
+        selected = true
+        index += 1
+    if selected:
+        return Ok(arguments)
+    return Ok(["--sysroot", sysroot] + arguments)
 
 
 def names_dependency_output(arguments: list[str]) -> bool:

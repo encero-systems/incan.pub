@@ -564,8 +564,12 @@ def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selec
     environment["INCAN_PUB_NATIVE_CC"] = selection.cc
     environment["INCAN_PUB_NATIVE_CXX"] = selection.cxx
     environment["INCAN_PUB_NATIVE_AR"] = selection.ar
-    # The explicit compiler finds its headers through SDKROOT; the link record names that sysroot as an owner path.
-    environment["SDKROOT"] = canonical_path(selection.sysroot)?
+    # Apple compilers retain SDKROOT; every platform names the selected sysroot as a link-record owner path.
+    sysroot = canonical_path(selection.sysroot)?
+    environment["SDKROOT"] = sysroot
+    # Linux cc does not consume SDKROOT. The wrapper must execute and record the same explicit sysroot.
+    if selection.target.contains("-linux-"):
+        environment["INCAN_PUB_NATIVE_SYSROOT"] = sysroot
     return Ok(None)
 
 
