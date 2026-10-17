@@ -565,10 +565,12 @@ def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selec
     environment["INCAN_PUB_NATIVE_CXX"] = selection.cxx
     environment["INCAN_PUB_NATIVE_AR"] = selection.ar
     environment["INCAN_PUB_NATIVE_RUNTIME_FILES"] = canonical(JsonValue.object({"runtime_files": JsonValue.array([JsonValue.string(path) for path in selection.runtime_files])}))?
-    # Apple compilers retain SDKROOT; every platform names the selected sysroot as a link-record owner path.
+    # Every platform names the selected sysroot as a link-record owner path.
     sysroot = canonical_path(selection.sysroot)?
+    # Only Apple toolchains read SDKROOT.
     environment["SDKROOT"] = sysroot
-    # Linux cc does not consume SDKROOT. The wrapper must execute and record the same explicit sysroot.
+    # Every other compiler in scope is a Linux one, which takes the sysroot only as an argument: the wrapper adds it
+    # before the compiler runs, so the run and its trace name the same root.
     if selection.target.contains("-linux-"):
         environment["INCAN_PUB_NATIVE_SYSROOT"] = sysroot
         environment["INCAN_PUB_NATIVE_RESOURCE_CC"] = resource_directory(selection.cc, base, selection.runtime_files)?

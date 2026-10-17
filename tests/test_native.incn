@@ -11,7 +11,22 @@ from std.testing import assert_eq, assert_is_err, assert_true
 
 from canonical import canonical, digest_bytes, digest_text
 from host import canonical_path, environment_value
-from native import linux_compiler_command, Compiler, Invocation, convert, declared_runtime_files, runtime_environment, runtime_observation, common_ancestor, logical_name, owner_identity, portable_beneath, recorded_compiler_arguments, stable_object_name, tree_artifact
+from native import (
+    Compiler,
+    Invocation,
+    common_ancestor,
+    convert,
+    declared_runtime_files,
+    linux_compiler_command,
+    logical_name,
+    owner_identity,
+    portable_beneath,
+    recorded_compiler_arguments,
+    runtime_environment,
+    runtime_observation,
+    stable_object_name,
+    tree_artifact,
+)
 from events import string_member, write_text
 
 
@@ -75,7 +90,6 @@ def test_an_owner_identity_inventories_files_directories_and_symlinks() -> None:
     Path(root).remove_tree().unwrap()
 
 
-
 def test_linux_compile_and_probe_arguments_bind_the_selected_sysroot() -> None:
     """Observation must see the same sysroot that conversion will name as an owner path during replay."""
     for arguments in [["-c", "source.c", "-o", "source.o"], ["-E", "probe.c"], ["--version"]]:
@@ -89,11 +103,15 @@ def test_linux_explicit_sysroot_is_preserved_and_conflicting_or_missing_values_a
     for arguments in [
         ["--sysroot", "/owner/sysroot", "-c", "source.c"],
         ["--sysroot=/owner/sysroot", "-c", "source.c"],
-        ["-isysroot", "/owner/sysroot", "-c", "source.c"],
     ]:
         match recorded_compiler_arguments(arguments, "/owner/sysroot"):
             Ok(actual) => assert_eq("\n".join(actual), "\n".join(arguments))
             Err(error) => assert_true(false, error)
+    # `-isysroot` moves only the header search, so the selected root is still bound for the library search.
+    headers_only = ["-isysroot", "/owner/sysroot", "-c", "source.c"]
+    match recorded_compiler_arguments(headers_only, "/owner/sysroot"):
+        Ok(actual) => assert_eq("\n".join(actual), "\n".join(["--sysroot", "/owner/sysroot"] + headers_only))
+        Err(error) => assert_true(false, error)
     for arguments in [
         ["--sysroot"],
         ["-isysroot"],
@@ -114,7 +132,10 @@ def linux_sysroot_conversion(root: str, runtime_mode: str = "") -> Result[str, s
         match Path(root + "/" + directory).mkdir(parents=true, exist_ok=true):
             Ok(_) => pass
             Err(error) => return Err(error.message())
-    for path in ["package/probe.c", "out/probe.o", "out/libprobe.a", "tool/bin/clang", "tool/sysroot/usr/include/probe.h"]:
+    fixtures = [
+        "package/probe.c", "out/probe.o", "out/libprobe.a", "tool/bin/clang", "tool/sysroot/usr/include/probe.h",
+    ]
+    for path in fixtures:
         write_text(Path(root + "/" + path), "fixture\n", path)?
     package = canonical_path(root + "/package")?
     output = canonical_path(root + "/out")?
@@ -129,17 +150,37 @@ def linux_sysroot_conversion(root: str, runtime_mode: str = "") -> Result[str, s
     arguments = recorded_compiler_arguments(["-c", package + "/probe.c", "-o", output + "/probe.o"], tool + "/sysroot")?
     traces = [
         Invocation(
-            reason="compile", executable=tool + "/bin/clang", directory=package,
-            arguments=arguments, manifest_dir=package, out_dir=output, target="x86_64-unknown-linux-gnu",
-            reads=[package + "/probe.c", tool + "/sysroot/usr/include/probe.h"], read_set=true, runtime_files=observed_runtime,
+            reason="compile",
+            executable=tool + "/bin/clang",
+            directory=package,
+            arguments=arguments,
+            manifest_dir=package,
+            out_dir=output,
+            target="x86_64-unknown-linux-gnu",
+            reads=[package + "/probe.c", tool + "/sysroot/usr/include/probe.h"],
+            read_set=true,
+            runtime_files=observed_runtime,
         ),
         Invocation(
-            reason="archive", executable="/usr/bin/ar", directory=package,
+            reason="archive",
+            executable="/usr/bin/ar",
+            directory=package,
             arguments=["rcs", output + "/libprobe.a", output + "/probe.o"],
-            manifest_dir=package, out_dir=output, target="x86_64-unknown-linux-gnu", reads=[], read_set=false, runtime_files=[],
+            manifest_dir=package,
+            out_dir=output,
+            target="x86_64-unknown-linux-gnu",
+            reads=[],
+            read_set=false,
+            runtime_files=[],
         ),
     ]
-    converted = convert(traces, ["static=probe"], [Compiler(executable=tool + "/bin/clang", resource_dir=tool + "/resource", sysroot=tool + "/sysroot", runtime_files=runtime_files)])?
+    compiler = Compiler(
+        executable=tool + "/bin/clang",
+        resource_dir=tool + "/resource",
+        sysroot=tool + "/sysroot",
+        runtime_files=runtime_files,
+    )
+    converted = convert(traces, ["static=probe"], [compiler])?
     if len(converted.records) != 1:
         return Err("the conversion must produce exactly one native link record")
     return canonical(converted.records[0])

@@ -168,8 +168,10 @@ pub def recorded_compiler_arguments(arguments: list[str], sysroot: str) -> Resul
     Bind Linux observation to the selected sysroot before executing or recording any compiler invocation, including
     feature probes. The trace carries these exact arguments into replay. A build script may repeat the selected
     canonical spelling but cannot replace it with another sysroot; Apple SDK selection stays on its existing path.
+    Only `--sysroot` moves both the header and the library search, so an `-isysroot` naming the selected root is kept
+    and `--sysroot` is still added.
     """
-    mut selected = false
+    mut bound = false
     mut index = 0
     while index < len(arguments):
         argument = arguments[index]
@@ -188,9 +190,10 @@ pub def recorded_compiler_arguments(arguments: list[str], sysroot: str) -> Resul
             continue
         if value != sysroot:
             return Err("native compiler invocation changes the selected sysroot")
-        selected = true
+        if argument.startswith("--sysroot"):
+            bound = true
         index += 1
-    if selected:
+    if bound:
         return Ok(arguments)
     return Ok(["--sysroot", sysroot] + arguments)
 
