@@ -98,10 +98,9 @@ jobs:
                 cp -p "$path" "/sysroot$target"
               fi
             done < /out/keep.txt
-            # The distribution's top-level library links, which the linker scripts name through the sysroot.
-            ls -la /sysroot /sysroot/usr | head -20
-            grep -E "^/lib/" /out/keep.txt | head -10 || true
-            ln -sfn usr/lib64 /sysroot/lib64 || { ls -la /sysroot/lib64; readlink /sysroot/lib64 || true; exit 1; }
+            # The top-level library links of the distribution, which its linker scripts name through the sysroot.
+            # (No apostrophes in this script: it is one single-quoted argument.)
+            ln -sfn usr/lib64 /sysroot/lib64
             ln -sfn usr/lib /sysroot/lib
             chown -R "$(stat -c %u /out)":"$(stat -c %g /out)" /sysroot
           '
