@@ -69,7 +69,7 @@ from adoption import (
 )
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, pretty
 from closure import (
-    addition_names,
+    additions,
     blob_path,
     crate_archive,
     crates_io_lines,
@@ -694,11 +694,12 @@ def adopt(invocation: Invocation) -> Result[None, str]:
     while index < len(invocation.positional):
         targets.append([invocation.positional[index], invocation.positional[index + 1]] + asked)
         index += 2
-    # An additions list names packages adopted beyond the download ranking, each at its newest stable version.
+    # An additions list names packages adopted beyond the download ranking, each at its newest stable version with the
+    # features its consumers turn on; its defaults are planned whatever the entry's shape.
     match invocation.option("additions"):
         Some(file) =>
-            for name in addition_names(read_text(Path(file), file)?, file)?:
-                targets.append([name, newest_stable(cache, name)?])
+            for entry in additions(read_text(Path(file), file)?, file)?:
+                targets.append([entry.name, newest_stable(cache, entry.name)?] + entry.features)
         None => pass
     if invocation.flag("records"):
         for key in sorted(list(state.keys())):

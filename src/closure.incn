@@ -246,22 +246,61 @@ pub def newest_stable(cache: str, package: str) -> Result[str, str]:
     return choose(crates_io_lines(cache, package)?, package, "*")
 
 
-pub def addition_names(text: str, label: str) -> Result[list[str], str]:
+@derive(Clone)
+pub model Addition:
     """
-    The crates.io package names an additions list holds, in order and each once: one per line, with blank lines
-    and `#` comments skipped, and a comment allowed after a name.
+    One additions-list entry: the package, and the feature shape its consumers build it with: whether they keep its
+    default features, and the features they turn on. Adoption plans the defaults whatever the shape, because admission
+    holds every adoption to its default closure; the shape is what the package's bake shards request.
     """
-    mut out: list[str] = []
+
+    pub name: str
+    pub default_features: bool
+    pub features: list[str]
+
+
+pub def additions(text: str, label: str) -> Result[list[Addition], str]:
+    """
+    The entries an additions list holds, in order and each package once. An entry is a crates.io package name, then
+    optionally `-default` when its consumers turn default features off and `+feature` for each feature they turn on;
+    blank lines and `#` comments are skipped, and a comment may follow an entry.
+    """
+    mut out: list[Addition] = []
+    mut seen: list[str] = []
     for line in text.split("\n"):
-        name = line.split("#")[0].strip()
-        if len(name) == 0:
+        mut tokens: list[str] = []
+        for token in line.split("#")[0].replace("\t", " ").split(" "):
+            if len(token) > 0:
+                tokens.append(token)
+        if len(tokens) == 0:
             continue
-        for character in name:
-            if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-".contains(character):
-                return Err(f"{label}: `{name}` is not a crates.io package name")
-        if not out.contains(name):
-            out.append(name)
+        name = tokens[0]
+        if not crates_io_name(name):
+            return Err(f"{label}: `{name}` is not a crates.io package name")
+        mut entry = Addition(name=name, default_features=true, features=[])
+        for token in tokens[1:]:
+            if token == "-default":
+                entry.default_features = false
+            elif token.startswith("+") and crates_io_name(token[1:]):
+                if not entry.features.contains(token[1:]):
+                    entry.features.append(token[1:])
+            else:
+                return Err(f"{label}: `{name}`: `{token}` is neither `-default` nor `+feature`")
+        if seen.contains(name):
+            return Err(f"{label}: `{name}` is listed twice")
+        seen.append(name)
+        out.append(entry)
     return Ok(out)
+
+
+def crates_io_name(text: str) -> bool:
+    """Whether `text` is spelled as a crates.io package or feature name: ASCII letters, digits, `_` and `-`."""
+    if len(text) == 0:
+        return false
+    for character in text:
+        if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-".contains(character):
+            return false
+    return true
 
 
 def choose(lines: list[JsonValue], package: str, requirement: str) -> Result[str, str]:
