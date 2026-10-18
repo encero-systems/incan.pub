@@ -32,6 +32,7 @@ from adoption import (
     unpack_crate,
 )
 from canonical import canonical, digest_bytes, digest_text
+from closure import addition_names
 from events import append_event, load_events, rewrite_event, string_member
 from projection import render_projections
 from semver import compare, parse_requirement, parse_version, satisfies
@@ -628,3 +629,9 @@ def test_an_adoption_document_is_held_to_its_committed_bytes() -> None:
     assert_eq(refusal(root), "")
     (root / "content" / "sha256" / digest[7:]).write_bytes(b"# other\n").unwrap()
     assert_true(refusal(root).contains("does not hold its bytes"))
+
+
+def test_an_additions_list_names_each_package_once_in_order() -> None:
+    text = "# DataFusion\ndatafusion\n\n  ruff_python_parser  # the parser\ndatafusion\naws-sdk-glue\n"
+    assert_eq(",".join(addition_names(text, "additions").unwrap()), "datafusion,ruff_python_parser,aws-sdk-glue")
+    assert_is_err(addition_names("datafusion 55.2.0\n", "additions"))

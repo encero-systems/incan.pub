@@ -10,7 +10,8 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--owners SHA,...] [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
-    incan-pub adopt [NAME VERSION]... [--features a,b] [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
+    incan-pub adopt [NAME VERSION]... [--features a,b] [--additions FILE] [--records] --cache DIR --blobs DIR
+        [--actor ACTOR] [--root DIR]
     incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
     incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
@@ -28,9 +29,9 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions (with `--features`, built with those features
-as well as their defaults), or with `--records` every record not yet adopted, together with their dependency closure;
-`--cache` keeps what it downloads from crates.io and `--blobs` is the store source Loaf archives are written to by
-digest.
+as well as their defaults), the newest stable version of each package an `--additions` list names, or with
+`--records` every record not yet adopted, together with their dependency closure; `--cache` keeps what it downloads
+from crates.io and `--blobs` is the store source Loaf archives are written to by digest.
 """
 
 from std.fs import Path
@@ -67,7 +68,17 @@ from adoption import (
     unpack_crate,
 )
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, pretty
-from closure import blob_path, crate_archive, crates_io_lines, find_line, plan_closure, prepare, reproduce
+from closure import (
+    addition_names,
+    blob_path,
+    crate_archive,
+    crates_io_lines,
+    find_line,
+    newest_stable,
+    plan_closure,
+    prepare,
+    reproduce,
+)
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from buildscript import Selection, build_roots, record_proposal
@@ -667,7 +678,7 @@ def adopt(invocation: Invocation) -> Result[None, str]:
     dependency order, folding each before the next so admission checks every one as it lands.
     """
     if len(invocation.positional) % 2 != 0:
-        return Err("usage: incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR")
+        return Err("usage: incan-pub adopt [NAME VERSION]... [--additions FILE] [--records] --cache DIR --blobs DIR")
     cache = invocation.require("cache")?
     blobs = invocation.require("blobs")?
     root = invocation.root()
@@ -683,6 +694,12 @@ def adopt(invocation: Invocation) -> Result[None, str]:
     while index < len(invocation.positional):
         targets.append([invocation.positional[index], invocation.positional[index + 1]] + asked)
         index += 2
+    # An additions list names packages adopted beyond the download ranking, each at its newest stable version.
+    match invocation.option("additions"):
+        Some(file) =>
+            for name in addition_names(read_text(Path(file), file)?, file)?:
+                targets.append([name, newest_stable(cache, name)?])
+        None => pass
     if invocation.flag("records"):
         for key in sorted(list(state.keys())):
             record = state[key]
@@ -690,7 +707,7 @@ def adopt(invocation: Invocation) -> Result[None, str]:
                 Some(_) => pass
                 None => targets.append([record.name, record.version])
     if len(targets) == 0:
-        return Err("name at least one version, or pass --records")
+        return Err("name at least one version, or pass --additions or --records")
     plan = plan_closure(adopted_adoptions(state)?, targets, cache, blobs)?
     mut folded = len(event_files(root)?)
     for item in plan:

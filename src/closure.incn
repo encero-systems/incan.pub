@@ -241,6 +241,29 @@ pub def find_line(lines: list[JsonValue], package: str, version: str) -> Result[
     return Err(f"crates.io publishes no {package} {version}")
 
 
+pub def newest_stable(cache: str, package: str) -> Result[str, str]:
+    """The newest crates.io version of `package` that is not a pre-release, preferring one that is not yanked."""
+    return choose(crates_io_lines(cache, package)?, package, "*")
+
+
+pub def addition_names(text: str, label: str) -> Result[list[str], str]:
+    """
+    The crates.io package names an additions list holds, in order and each once: one per line, with blank lines
+    and `#` comments skipped, and a comment allowed after a name.
+    """
+    mut out: list[str] = []
+    for line in text.split("\n"):
+        name = line.split("#")[0].strip()
+        if len(name) == 0:
+            continue
+        for character in name:
+            if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-".contains(character):
+                return Err(f"{label}: `{name}` is not a crates.io package name")
+        if not out.contains(name):
+            out.append(name)
+    return Ok(out)
+
+
 def choose(lines: list[JsonValue], package: str, requirement: str) -> Result[str, str]:
     """The newest version satisfying `requirement`, preferring one that is not yanked."""
     comparators = parse_requirement(requirement)?

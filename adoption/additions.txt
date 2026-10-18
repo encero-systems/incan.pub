@@ -1,0 +1,29 @@
+# crates.io packages incan.pub adopts beyond the download ranking (bake/top100, bake/top1000).
+#
+# `incan-pub adopt --additions adoption/additions.txt` adopts each at its newest stable version, with its dependency
+# closure; a package already adopted at that version adopts nothing. One package name per line; `#` starts a comment.
+
+# DataFusion: the query engine IncQL builds on. The datafusion-* crates and the Arrow stack come with its closure.
+datafusion
+
+# Ruff: Python parsing, syntax tree, semantic model, linting and formatting, as libraries.
+ruff_python_parser
+ruff_python_ast
+ruff_python_semantic
+ruff_python_formatter
+ruff_linter
+
+# AWS: services Encero's data-platform and migration work talks to, beyond the S3, STS and SSO clients the ranking
+# already brought in.
+aws-sdk-glue
+aws-sdk-athena
+aws-sdk-redshiftdata
+aws-sdk-rds
+aws-sdk-databasemigration
+aws-sdk-lakeformation
+aws-sdk-dynamodb
+aws-sdk-secretsmanager
+aws-sdk-kms
+aws-sdk-sqs
+aws-sdk-lambda
+aws-sdk-bedrockruntime
