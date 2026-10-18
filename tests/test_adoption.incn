@@ -32,6 +32,7 @@ from adoption import (
     unpack_crate,
 )
 from canonical import canonical, digest_bytes, digest_text
+from closure import additions
 from events import append_event, load_events, rewrite_event, string_member
 from projection import render_projections
 from semver import compare, parse_requirement, parse_version, satisfies
@@ -628,3 +629,24 @@ def test_an_adoption_document_is_held_to_its_committed_bytes() -> None:
     assert_eq(refusal(root), "")
     (root / "content" / "sha256" / digest[7:]).write_bytes(b"# other\n").unwrap()
     assert_true(refusal(root).contains("does not hold its bytes"))
+
+
+def test_an_additions_list_names_packages_in_order_with_their_feature_shape() -> None:
+    text = (
+        "# DataFusion\ndatafusion\n\n"
+        + "  aws-sdk-s3\t-default +rt-tokio +behavior-version-latest +rt-tokio  # the spike's shape\n"
+        + "ruff_python_parser\n"
+    )
+    entries = additions(text, "additions").unwrap()
+    mut names: list[str] = []
+    for entry in entries:
+        names.append(entry.name)
+    assert_eq(",".join(names), "datafusion,aws-sdk-s3,ruff_python_parser")
+    assert_true(entries[0].default_features)
+    assert_eq(len(entries[0].features), 0)
+    assert_true(not entries[1].default_features)
+    assert_eq(",".join(entries[1].features), "rt-tokio,behavior-version-latest")
+    # A version, a bare feature name or a repeated package is refused rather than guessed at.
+    assert_is_err(additions("datafusion 55.2.0\n", "additions"))
+    assert_is_err(additions("aws-sdk-s3 rt-tokio\n", "additions"))
+    assert_is_err(additions("datafusion\ndatafusion\n", "additions"))
