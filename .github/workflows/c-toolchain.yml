@@ -97,10 +97,12 @@ jobs:
           actual="$( (sha256sum llvm.tar.xz 2> /dev/null || shasum -a 256 llvm.tar.xz) | cut -d ' ' -f1)"
           [ "$actual" = "$LLVM_SOURCE_SHA256" ] || { echo "::error::LLVM source digest $actual, expected $LLVM_SOURCE_SHA256"; exit 1; }
           mkdir -p src
-          # The release's symlinks all live in test and utility directories the build does not read; leaving them out
+          # The release's symlinks are test inputs and three utility scripts the build does not read; leaving them out
           # lets every host, Windows included, extract the same tree.
           tar -xJf llvm.tar.xz -C src --strip-components=1 \
-            --exclude='*/clang/test' --exclude='*/lldb/test' --exclude='*/llvm/utils/mlgo-utils'
+            --exclude='*/clang/test' --exclude='*/lldb/test' \
+            --exclude='*/llvm/utils/mlgo-utils/combine_training_corpus.py' \
+            --exclude='*/llvm/utils/mlgo-utils/extract_ir.py' --exclude='*/llvm/utils/mlgo-utils/make_corpus.py'
       - name: Set up the MSVC environment
         if: env.EXISTS != '1' && runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
