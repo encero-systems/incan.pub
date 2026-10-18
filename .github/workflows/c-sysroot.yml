@@ -65,11 +65,12 @@ jobs:
           '
           cat "$RUNNER_TEMP/out/packages.tsv"
           wc -l "$RUNNER_TEMP/out/files.txt" "$RUNNER_TEMP/out/gcc-files.txt"
+          grep -E "ld-linux" "$RUNNER_TEMP/out/files.txt" || true
       - name: Copy the package files into the sysroot
         run: |
           # Development files only: headers, startup objects, archives, shared libraries and linker scripts. Binaries,
           # documentation, locales and configuration are not part of a sysroot.
-          grep -E '^(/usr/include/|/usr/lib64/[^/]+\.(o|a|so)$|/usr/lib64/[^/]+\.so\.[0-9.]+$|/lib64/[^/]+\.so(\.[0-9.]+)?$|/lib/[^/]+\.so(\.[0-9.]+)?$)' \
+          grep -E '^(/usr/include/|/usr/lib64/[^/]+\.(o|a|so)$|/usr/lib64/[^/]+\.so\.[0-9.]+$|/lib64/[^/]+\.so(\.[0-9.]+)?$|/lib/[^/]+\.so(\.[0-9.]+)?$|/usr/lib/[^/]+\.so(\.[0-9.]+)?$)' \
             "$RUNNER_TEMP/out/files.txt" > "$RUNNER_TEMP/out/keep.txt" || true
           cat "$RUNNER_TEMP/out/gcc-files.txt" >> "$RUNNER_TEMP/out/keep.txt"
           sort -u "$RUNNER_TEMP/out/keep.txt" -o "$RUNNER_TEMP/out/keep.txt"
