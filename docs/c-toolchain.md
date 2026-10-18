@@ -9,10 +9,10 @@ The C toolchain release is what RFC 159 compiles every Clove (C-library Loaf) wi
 | `schema` | `incan.c-toolchain-release/1` |
 | `llvm` | the LLVM release every Clang build is made from |
 | `llvm_source_sha256` | digest of `llvm-project-<llvm>.src.tar.xz` as LLVM publishes it |
-| `clang` | build host triple → registry reference of that host's Clang build |
-| `sysroots` | target triple → registry reference of that target's sysroot |
+| `clang` | build host triple → that host's Clang build |
+| `sysroots` | target triple → that target's sysroot |
 
-References are relative to `ghcr.io/encero-systems/incan.pub/`. Every reference is an OCI artifact anyone can pull without signing in.
+Each build and sysroot is named by `repository` (relative to `ghcr.io/encero-systems/incan.pub/`), `tag` and `digest`, the digest of its OCI manifest. Consumers pull by digest; the tag is for people. Every artifact can be pulled without signing in.
 
 ## Clang builds: `toolchain/clang:<llvm>-<host>`
 
@@ -20,7 +20,7 @@ Built by `.github/workflows/c-toolchain.yml` on each build host from the pinned 
 
 - projects `clang` and `lld`; backends `X86` and `AArch64`; release build without assertions;
 - no optional host libraries (zlib, zstd, libxml2, libedit), tests, examples, benchmarks or docs;
-- the C++ standard library linked statically on Linux, so the build runs on any glibc 2.28-or-newer host; deployment target macOS 13.0 on Apple hosts;
+- the C++ standard library linked statically on Linux, so the build runs on any glibc 2.28-or-newer host; deployment target macOS 13.0 on Apple hosts; on Windows, built with MSVC against the static C runtime (`MultiThreaded`);
 - distribution components `clang`, `clang-resource-headers`, `lld`, `llvm-ar`, `llvm-ranlib`, `llvm-nm`, `llvm-objcopy`, `llvm-strip`, `llvm-objdump`, `llvm-readobj`.
 
 The artifact is one deterministic `clang-<llvm>-<host>.tar.gz` (sorted entries, zero mtimes and owners) holding `clang-<llvm>-<host>/bin`, `lib` and `include`, with the annotations `dev.incan.c-toolchain.llvm`, `.llvm-source-sha256`, `.host` and `.commit`.
@@ -30,6 +30,9 @@ The artifact is one deterministic `clang-<llvm>-<host>.tar.gz` (sorted entries, 
 | `x86_64-unknown-linux-gnu` | `ubuntu-latest` |
 | `aarch64-unknown-linux-gnu` | `ubuntu-24.04-arm` |
 | `aarch64-apple-darwin` | `macos-latest` |
+| `x86_64-pc-windows-msvc` | `windows-latest` |
+
+The workflow runs on dispatch, for every host or for the hosts named in `hosts`. A tag is never overwritten: a host whose tag exists keeps its build, and the run skips it.
 
 ## Linux sysroots: `toolchain/c-sysroot:glibc-2.28-<target>-<12 hex>`
 
@@ -50,13 +53,13 @@ The Apple and Windows SDKs cannot be redistributed, so their units are compiled 
 
 ## Reproduction gate
 
-`.github/workflows/c-reproduction.yml` runs on every build host with that host's Clang build:
+`.github/workflows/c-reproduction.yml` runs on every build host `release.json` names, with that host's Clang build:
 
-1. For every Linux target, it compiles each library of `bake/c-toolchain/corpus.tsv` against the target's sysroot with `-O2 -fPIC`, paths relative to the source root and `-ffile-prefix-map` of the source root, and archives the objects in sorted order with `llvm-ar rcsD`.
-2. It compiles one freestanding unit for every target in the table above and both Linux targets, with the pinned spellings and flags.
+1. It compiles one freestanding unit for every target in the table above and both Linux targets, with the pinned spellings and flags (`freestanding.tsv`).
+2. On every host that can hold the Linux sysroots (Linux and Apple hosts), it compiles each library of `bake/c-toolchain/corpus.tsv` for every Linux target against the target's sysroot with `-O2 -fPIC`, paths relative to the source root and `-ffile-prefix-map` of the source root, and archives the objects in sorted order with `llvm-ar rcsD` (`archives.tsv`, with every object in `objects.tsv`).
 3. On the Apple host, it also compiles the corpus for `arm64-apple-macos13.0` against the runner's Xcode SDK. That build is reported, not compared.
 
-The gate passes only if every host's list of archive and object digests is identical.
+The gate passes only if every host that wrote `freestanding.tsv` or `archives.tsv` wrote the same bytes, and at least two hosts wrote each.
 
 `corpus.tsv` columns: `name`, `version`, `url` and `sha256` of the upstream source release, `sources` (globs relative to the source root), `include` (directories) and `defines`, the last three separated by spaces.
 

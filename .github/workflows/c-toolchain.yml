@@ -6,15 +6,20 @@ name: c-toolchain
 #
 # LLVM 22.1.8 is the LLVM release the pinned Rust toolchain (1.98.0) is built on, so Rust and C code share one code
 # generator. The configuration is the same on every host: the X86 and AArch64 backends, no optional host libraries
-# (zlib, zstd, libxml2, libedit), no tests or examples, and the C++ standard library linked statically on Linux so the
-# build runs on any glibc 2.28-or-newer host. Each build host's compiler is a different binary; whether they compile the
-# same input to the same bytes is what the c-reproduction workflow checks.
+# (zlib, zstd, libxml2, libedit), no tests or examples, and the C++ (on Windows, C) runtime linked statically so the
+# build runs without the build host's runtime libraries. Each build host's compiler is a different binary; whether they
+# compile the same input to the same bytes is what the c-reproduction workflow checks.
+#
+# A release tag is never overwritten: bake/c-toolchain/release.json pins each build by digest, and a host whose tag
+# exists keeps its build. Dispatch with `hosts` to build only the named hosts.
 
 on:
-  push:
-    branches: [feature/c-toolchain]
-    paths: [.github/workflows/c-toolchain.yml]
   workflow_dispatch:
+    inputs:
+      hosts:
+        description: Build host triples to build, separated by spaces (empty builds every host)
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -25,50 +30,94 @@ env:
   LLVM_SOURCE_SHA256: 922f1817a0df7b1489272d18134ee0087a8b068828f87ac63b9861b1a9965888
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - id: plan
+        env:
+          HOSTS: ${{ inputs.hosts }}
+        run: |
+          all='[
+            {"runner": "ubuntu-latest", "host": "x86_64-unknown-linux-gnu"},
+            {"runner": "ubuntu-24.04-arm", "host": "aarch64-unknown-linux-gnu"},
+            {"runner": "macos-latest", "host": "aarch64-apple-darwin"},
+            {"runner": "windows-latest", "host": "x86_64-pc-windows-msvc"}
+          ]'
+          matrix="$(jq -c --arg hosts "$HOSTS" '($hosts | split(" ") | map(select(length > 0))) as $named
+            | map(select(($named | length) == 0 or (.host as $host | $named | index($host))))' <<< "$all")"
+          [ "$matrix" != "[]" ] || { echo "::error::no build host is named $HOSTS"; exit 1; }
+          echo "matrix={\"include\":$matrix}" >> "$GITHUB_OUTPUT"
+          echo "$matrix"
   build:
+    needs: plan
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - runner: ubuntu-latest
-            host: x86_64-unknown-linux-gnu
-          - runner: ubuntu-24.04-arm
-            host: aarch64-unknown-linux-gnu
-          - runner: macos-latest
-            host: aarch64-apple-darwin
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 350
+    defaults:
+      run:
+        shell: bash
     env:
       HOST: ${{ matrix.host }}
     steps:
-      - name: Fetch and verify the LLVM source release
+      - name: Choose the work directory
         run: |
-          curl -fsSL -o "$RUNNER_TEMP/llvm.tar.xz" \
-            "https://github.com/llvm/llvm-project/releases/download/llvmorg-$LLVM_VERSION/llvm-project-$LLVM_VERSION.src.tar.xz"
-          actual="$(shasum -a 256 "$RUNNER_TEMP/llvm.tar.xz" | cut -d ' ' -f1)"
-          [ "$actual" = "$LLVM_SOURCE_SHA256" ] || { echo "::error::LLVM source digest $actual, expected $LLVM_SOURCE_SHA256"; exit 1; }
-          mkdir -p "$RUNNER_TEMP/src"
-          tar -xJf "$RUNNER_TEMP/llvm.tar.xz" -C "$RUNNER_TEMP/src" --strip-components=1
-      - name: Install the build tools
+          # Native Windows tools read D:/a/_temp; the same spelling works for the shell's tools.
+          work="$RUNNER_TEMP"
+          [ "$RUNNER_OS" != Windows ] || work="$(cygpath -m "$RUNNER_TEMP")"
+          echo "WORK=$work" >> "$GITHUB_ENV"
+      - name: Install oras
+        uses: oras-project/setup-oras@v1
+      - name: Keep an existing build
         run: |
-          if [ "$RUNNER_OS" = Linux ]; then
-            sudo apt-get update -q && sudo apt-get install -y -q ninja-build
-          else
-            brew install ninja gnu-tar
+          # The registry allows anonymous pulls, so an existing tag is visible without signing in.
+          if oras manifest fetch --descriptor "ghcr.io/encero-systems/incan.pub/toolchain/clang:$LLVM_VERSION-$HOST" > "$WORK/existing.json" 2> /dev/null; then
+            echo "::notice::toolchain/clang:$LLVM_VERSION-$HOST exists ($(jq -r .digest "$WORK/existing.json")); keeping it"
+            echo "EXISTS=1" >> "$GITHUB_ENV"
           fi
-          cmake --version | head -1
+      - name: Install the build tools
+        if: env.EXISTS != '1'
+        run: |
+          case "$RUNNER_OS" in
+            Linux) sudo apt-get update -q && sudo apt-get install -y -q ninja-build;;
+            macOS) brew install ninja gnu-tar;;
+            Windows) choco install -y --no-progress ninja; command -v xz > /dev/null || choco install -y --no-progress xz;;
+          esac
+          cmake --version | sed -n 1p
           ninja --version
+      - name: Fetch and verify the LLVM source release
+        if: env.EXISTS != '1'
+        run: |
+          cd "$WORK"
+          curl -fsSL -o llvm.tar.xz \
+            "https://github.com/llvm/llvm-project/releases/download/llvmorg-$LLVM_VERSION/llvm-project-$LLVM_VERSION.src.tar.xz"
+          actual="$( (sha256sum llvm.tar.xz 2> /dev/null || shasum -a 256 llvm.tar.xz) | cut -d ' ' -f1)"
+          [ "$actual" = "$LLVM_SOURCE_SHA256" ] || { echo "::error::LLVM source digest $actual, expected $LLVM_SOURCE_SHA256"; exit 1; }
+          mkdir -p src
+          # The release's symlinks all live in test and utility directories the build does not read; leaving them out
+          # lets every host, Windows included, extract the same tree.
+          tar -xJf llvm.tar.xz -C src --strip-components=1 \
+            --exclude='*/clang/test' --exclude='*/lldb/test' --exclude='*/llvm/utils/mlgo-utils'
+      - name: Set up the MSVC environment
+        if: env.EXISTS != '1' && runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
       - name: Configure
+        if: env.EXISTS != '1'
         run: |
           extra=()
-          if [ "$RUNNER_OS" = Linux ]; then
-            extra+=(-DLLVM_STATIC_LINK_CXX_STDLIB=ON)
-          else
-            extra+=(-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0)
-          fi
-          cmake -G Ninja -S "$RUNNER_TEMP/src/llvm" -B "$RUNNER_TEMP/build" \
+          case "$RUNNER_OS" in
+            Linux) extra+=(-DLLVM_STATIC_LINK_CXX_STDLIB=ON);;
+            macOS) extra+=(-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0);;
+            Windows) extra+=(-DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded);;
+          esac
+          cmake -G Ninja -S "$WORK/src/llvm" -B "$WORK/build" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/install" \
+            -DCMAKE_INSTALL_PREFIX="$WORK/install" \
             -DLLVM_ENABLE_PROJECTS="clang;lld" \
             -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
             -DLLVM_ENABLE_ASSERTIONS=OFF \
@@ -79,37 +128,42 @@ jobs:
             -DLLVM_DISTRIBUTION_COMPONENTS="clang;clang-resource-headers;lld;llvm-ar;llvm-ranlib;llvm-nm;llvm-objcopy;llvm-strip;llvm-objdump;llvm-readobj" \
             "${extra[@]}"
       - name: Build and install the distribution
-        run: ninja -C "$RUNNER_TEMP/build" install-distribution
+        if: env.EXISTS != '1'
+        run: ninja -C "$WORK/build" install-distribution
       - name: Smoke test
+        if: env.EXISTS != '1'
         run: |
-          bin="$RUNNER_TEMP/install/bin"
+          bin="$WORK/install/bin"
           "$bin/clang" --version
           "$bin/ld.lld" --version
-          printf 'int answer(void) { return 42; }\n' > "$RUNNER_TEMP/answer.c"
+          cd "$WORK"
+          printf 'int answer(void) { return 42; }\n' > answer.c
           for target in x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu aarch64-apple-darwin x86_64-pc-windows-msvc; do
-            "$bin/clang" --target="$target" -ffreestanding -O2 -c "$RUNNER_TEMP/answer.c" -o "$RUNNER_TEMP/answer-$target.o"
-            echo "$target $(shasum -a 256 "$RUNNER_TEMP/answer-$target.o" | cut -d ' ' -f1)"
+            "$bin/clang" --target="$target" -ffreestanding -O2 -c answer.c -o "answer-$target.o"
+            echo "$target $( (sha256sum "answer-$target.o" 2> /dev/null || shasum -a 256 "answer-$target.o") | cut -d ' ' -f1 | tr -d '*')"
           done
       - name: Package
+        if: env.EXISTS != '1'
         run: |
           tar_cmd=tar
-          [ "$RUNNER_OS" = Linux ] || tar_cmd=gtar
+          [ "$RUNNER_OS" != macOS ] || tar_cmd=gtar
           name="clang-$LLVM_VERSION-$HOST"
-          mv "$RUNNER_TEMP/install" "$RUNNER_TEMP/$name"
-          "$tar_cmd" --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner --format=gnu \
-            -C "$RUNNER_TEMP" -cf "$RUNNER_TEMP/$name.tar" "$name"
-          gzip -n -9 "$RUNNER_TEMP/$name.tar"
-          echo "ARCHIVE=$RUNNER_TEMP/$name.tar.gz" >> "$GITHUB_ENV"
-          echo "archive sha256 $(shasum -a 256 "$RUNNER_TEMP/$name.tar.gz" | cut -d ' ' -f1), $(du -h "$RUNNER_TEMP/$name.tar.gz" | cut -f1)"
+          cd "$WORK"
+          mv install "$name"
+          # Relative names only: GNU tar reads `D:` in an archive name as a remote host.
+          "$tar_cmd" --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner --format=gnu -cf "$name.tar" "$name"
+          gzip -n -9 "$name.tar"
+          echo "ARCHIVE=$WORK/$name.tar.gz" >> "$GITHUB_ENV"
+          echo "archive sha256 $( (sha256sum "$name.tar.gz" 2> /dev/null || shasum -a 256 "$name.tar.gz") | cut -d ' ' -f1), $(du -h "$name.tar.gz" | cut -f1)"
       - name: Keep the build as an artifact
+        if: env.EXISTS != '1'
         uses: actions/upload-artifact@v4
         with:
           name: clang-${{ env.LLVM_VERSION }}-${{ matrix.host }}
           path: ${{ env.ARCHIVE }}
           retention-days: 30
-      - name: Install oras
-        uses: oras-project/setup-oras@v1
       - name: Push to the registry
+        if: env.EXISTS != '1'
         env:
           REGISTRY_USER: ${{ github.actor }}
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}

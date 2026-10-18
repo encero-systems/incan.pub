@@ -3,12 +3,32 @@
   "llvm": "22.1.8",
   "llvm_source_sha256": "922f1817a0df7b1489272d18134ee0087a8b068828f87ac63b9861b1a9965888",
   "clang": {
-    "aarch64-apple-darwin": "toolchain/clang:22.1.8-aarch64-apple-darwin",
-    "aarch64-unknown-linux-gnu": "toolchain/clang:22.1.8-aarch64-unknown-linux-gnu",
-    "x86_64-unknown-linux-gnu": "toolchain/clang:22.1.8-x86_64-unknown-linux-gnu"
+    "aarch64-apple-darwin": {
+      "repository": "toolchain/clang",
+      "tag": "22.1.8-aarch64-apple-darwin",
+      "digest": "sha256:8cc12635b32726ab2625a4bb8835dd2c5dc100b9cd5be860845f494b64132ac0"
+    },
+    "aarch64-unknown-linux-gnu": {
+      "repository": "toolchain/clang",
+      "tag": "22.1.8-aarch64-unknown-linux-gnu",
+      "digest": "sha256:c90485f5b038c5e202f4c1cc85b302ec2eea44dded602847eb5e7816d343c064"
+    },
+    "x86_64-unknown-linux-gnu": {
+      "repository": "toolchain/clang",
+      "tag": "22.1.8-x86_64-unknown-linux-gnu",
+      "digest": "sha256:10c1931e3c9db6191ffbe8f7df4056b810d74eb7b06edd39c908e5933a72c25d"
+    }
   },
   "sysroots": {
-    "aarch64-unknown-linux-gnu": "toolchain/c-sysroot:glibc-2.28-aarch64-unknown-linux-gnu-7e30ec94e159",
-    "x86_64-unknown-linux-gnu": "toolchain/c-sysroot:glibc-2.28-x86_64-unknown-linux-gnu-81490a014fd0"
+    "aarch64-unknown-linux-gnu": {
+      "repository": "toolchain/c-sysroot",
+      "tag": "glibc-2.28-aarch64-unknown-linux-gnu-7e30ec94e159",
+      "digest": "sha256:02cd277c347f94d5395ce33c6d3ca5a45444a2f6db8a184a174ec546e50c1201"
+    },
+    "x86_64-unknown-linux-gnu": {
+      "repository": "toolchain/c-sysroot",
+      "tag": "glibc-2.28-x86_64-unknown-linux-gnu-81490a014fd0",
+      "digest": "sha256:2c9fb8f57c533d039a03f615db02d18c92d45510a9a40e83ed89e25f623d04d9"
+    }
   }
 }
