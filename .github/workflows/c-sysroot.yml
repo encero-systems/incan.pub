@@ -99,7 +99,9 @@ jobs:
               fi
             done < /out/keep.txt
             # The distribution's top-level library links, which the linker scripts name through the sysroot.
-            ln -sfn usr/lib64 /sysroot/lib64
+            ls -la /sysroot /sysroot/usr | head -20
+            grep -E "^/lib/" /out/keep.txt | head -10 || true
+            ln -sfn usr/lib64 /sysroot/lib64 || { ls -la /sysroot/lib64; readlink /sysroot/lib64 || true; exit 1; }
             ln -sfn usr/lib /sysroot/lib
             chown -R "$(stat -c %u /out)":"$(stat -c %g /out)" /sysroot
           '
