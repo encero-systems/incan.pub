@@ -69,7 +69,7 @@ jobs:
         run: |
           # Development files only: headers, startup objects, archives, shared libraries and linker scripts. Binaries,
           # documentation, locales and configuration are not part of a sysroot.
-          grep -E '^(/usr/include/|/usr/lib64/[^/]+\.(o|a|so)$|/usr/lib64/[^/]+\.so\.[0-9.]+$|/lib64/[^/]+\.so(\.[0-9.]+)?$)' \
+          grep -E '^(/usr/include/|/usr/lib64/[^/]+\.(o|a|so)$|/usr/lib64/[^/]+\.so\.[0-9.]+$|/lib64/[^/]+\.so(\.[0-9.]+)?$|/lib/[^/]+\.so(\.[0-9.]+)?$)' \
             "$RUNNER_TEMP/out/files.txt" > "$RUNNER_TEMP/out/keep.txt" || true
           cat "$RUNNER_TEMP/out/gcc-files.txt" >> "$RUNNER_TEMP/out/keep.txt"
           sort -u "$RUNNER_TEMP/out/keep.txt" -o "$RUNNER_TEMP/out/keep.txt"
@@ -79,26 +79,28 @@ jobs:
             while IFS= read -r path; do
               [ -e "$path" ] || [ -L "$path" ] || continue
               [ -d "$path" ] && [ ! -L "$path" ] && continue
-              # /lib64 is a symlink to usr/lib64 in this image; every file lands under usr/. GCC files land at
-              # usr/lib/gcc/<triple>/<version>, where Clang looks for them under a sysroot, wherever the toolset put them.
+              # /lib64 and /lib are symlinks to usr/lib64 and usr/lib in this image (aarch64 keeps its dynamic loader
+              # in /lib); every file lands under usr/. GCC files land at usr/lib/gcc/<triple>/<version>, where Clang
+              # looks for them under a sysroot, wherever the toolset put them.
               case "$path" in
-                /lib64/*) target="/usr${path}";;
                 */lib/gcc/*) target="/usr/lib/gcc/${path#*/lib/gcc/}";;
+                /lib64/*|/lib/*) target="/usr${path}";;
                 *) target="$path";;
               esac
               mkdir -p "/sysroot$(dirname "$target")"
               if [ -L "$path" ]; then
                 link="$(readlink "$path")"
                 # Absolute links inside the sysroot become relative so the tree can move.
-                case "$link" in /lib64/*) link="/usr${link}";; esac
+                case "$link" in /lib64/*|/lib/*) link="/usr${link}";; esac
                 case "$link" in /*) link="$(realpath -m --relative-to="$(dirname "$target")" "$link")";; esac
                 ln -sfn "$link" "/sysroot$target"
               else
                 cp -p "$path" "/sysroot$target"
               fi
             done < /out/keep.txt
-            # GCC objects stay at the path Clang searches: usr/lib/gcc/<triple>/<version> under the sysroot.
+            # The distribution's top-level library links, which the linker scripts name through the sysroot.
             ln -sfn usr/lib64 /sysroot/lib64
+            ln -sfn usr/lib /sysroot/lib
             chown -R "$(stat -c %u /out)":"$(stat -c %g /out)" /sysroot
           '
           du -sh "$RUNNER_TEMP/sysroot"
