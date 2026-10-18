@@ -1,0 +1,179 @@
+name: c-reproduction
+
+# RFC 159's cross-host reproduction gate: every build host compiles the same corpus of C libraries with its build of the
+# toolchain release in bake/c-toolchain/release.json, for every Linux target against that target's published sysroot,
+# and the gate passes only if every host produces byte-identical archives. A unit's identity can then name the release
+# rather than the host that compiled it.
+#
+# The corpus (bake/c-toolchain/corpus.tsv) is upstream source releases pinned by digest, compiled with fixed flags:
+# -O2 -fPIC, paths relative to the source root, and deterministic archives (llvm-ar D). On the macOS host the corpus is
+# also compiled for aarch64-apple-darwin against the runner's Xcode SDK; that build is reported, not compared, since
+# only an Apple host can hold the SDK.
+
+on:
+  push:
+    branches: [feature/c-toolchain]
+    paths:
+      - .github/workflows/c-reproduction.yml
+      - bake/c-toolchain/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            host: x86_64-unknown-linux-gnu
+          - runner: ubuntu-24.04-arm
+            host: aarch64-unknown-linux-gnu
+          - runner: macos-latest
+            host: aarch64-apple-darwin
+    runs-on: ${{ matrix.runner }}
+    env:
+      HOST: ${{ matrix.host }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install oras
+        uses: oras-project/setup-oras@v1
+      - name: Pull this host's toolchain build and the Linux sysroots
+        run: |
+          release=bake/c-toolchain/release.json
+          clang_ref="$(jq -r --arg host "$HOST" '.clang[$host]' "$release")"
+          oras pull "ghcr.io/encero-systems/incan.pub/$clang_ref" -o "$RUNNER_TEMP/clang-pull"
+          mkdir -p "$RUNNER_TEMP/clang"
+          tar -xzf "$RUNNER_TEMP"/clang-pull/*.tar.gz -C "$RUNNER_TEMP/clang" --strip-components=1
+          "$RUNNER_TEMP/clang/bin/clang" --version | head -1
+          sysroots="$RUNNER_TEMP/sysroots"
+          if [ "$RUNNER_OS" = macOS ]; then
+            # The Linux kernel headers hold names that differ only in case (xt_MARK.h and xt_mark.h), so on an Apple
+            # host the sysroots live on a case-sensitive volume.
+            hdiutil create -size 4g -fs "Case-sensitive APFS" -volname sysroots -type SPARSE "$RUNNER_TEMP/sysroots" > /dev/null
+            mkdir -p "$sysroots"
+            hdiutil attach "$RUNNER_TEMP/sysroots.sparseimage" -mountpoint "$sysroots" -nobrowse > /dev/null
+          fi
+          echo "SYSROOTS=$sysroots" >> "$GITHUB_ENV"
+          for target in $(jq -r '.sysroots | keys[]' "$release"); do
+            ref="$(jq -r --arg t "$target" '.sysroots[$t]' "$release")"
+            oras pull "ghcr.io/encero-systems/incan.pub/$ref" -o "$RUNNER_TEMP/sysroot-pull-$target"
+            mkdir -p "$sysroots/$target"
+            tar -xzf "$RUNNER_TEMP/sysroot-pull-$target"/*.tar.gz -C "$sysroots/$target"
+            echo "$target $(find "$sysroots/$target" -type f | wc -l | tr -d ' ') files"
+          done
+      - name: Compile the corpus for every Linux target
+        run: |
+          shopt -s nullglob
+          cc="$RUNNER_TEMP/clang/bin/clang"
+          ar="$RUNNER_TEMP/clang/bin/llvm-ar"
+          digest() { shasum -a 256 "$1" | cut -d ' ' -f1; }
+          mkdir -p "$RUNNER_TEMP/out"
+          : > "$RUNNER_TEMP/out/archives.tsv"
+          : > "$RUNNER_TEMP/out/objects.tsv"
+          # Fields are split on `|`: a shell `read` collapses adjacent tabs, and an empty define list is a field.
+          tail -n +2 bake/c-toolchain/corpus.tsv | tr '\t' '|' | while IFS='|' read -r name version url sha sources include defines; do
+            curl -fsSL -o "$RUNNER_TEMP/$name.tar.gz" "$url"
+            [ "$(digest "$RUNNER_TEMP/$name.tar.gz")" = "$sha" ] || { echo "::error::$name source digest differs"; exit 1; }
+            src="$RUNNER_TEMP/src/$name"
+            mkdir -p "$src"
+            tar -xzf "$RUNNER_TEMP/$name.tar.gz" -C "$src" --strip-components=1
+            flags=(-O2 -fPIC)
+            for dir in $include; do flags+=("-I$dir"); done
+            for define in $defines; do flags+=("-D$define"); done
+            for target in $(jq -r '.sysroots | keys[]' bake/c-toolchain/release.json); do
+              objects="$RUNNER_TEMP/obj/$target/$name"
+              mkdir -p "$objects"
+              files="$(cd "$src" && for pattern in $sources; do printf '%s\n' $pattern; done | LC_ALL=C sort -u)"
+              for file in $files; do
+                object="$objects/$(printf '%s' "$file" | tr '/' '_').o"
+                ( cd "$src" && "$cc" --target="$target" --sysroot="$SYSROOTS/$target" "${flags[@]}" \
+                    -ffile-prefix-map="$src"=. -c "$file" -o "$object" )
+                printf '%s\t%s\t%s\t%s\n' "$target" "$name" "$file" "$(digest "$object")" >> "$RUNNER_TEMP/out/objects.tsv"
+              done
+              archive="$RUNNER_TEMP/out/$target-lib$name.a"
+              ( cd "$objects" && "$ar" rcsD "$archive" $(ls | LC_ALL=C sort) )
+              printf '%s\t%s\t%s\t%s\n' "$target" "$name" "$version" "$(digest "$archive")" >> "$RUNNER_TEMP/out/archives.tsv"
+            done
+          done
+          cat "$RUNNER_TEMP/out/archives.tsv"
+      - name: Compile a freestanding unit for every target
+        run: |
+          cc="$RUNNER_TEMP/clang/bin/clang"
+          printf 'int answer(int x) { return x * 42; }\n' > "$RUNNER_TEMP/answer.c"
+          # The spellings a bake pins for targets without a published sysroot: an explicit macOS deployment target
+          # (without one, an Apple host writes its own OS version into the object) and no incremental-linker
+          # timestamp in COFF objects (the MSVC environment's default writes the compile time).
+          while read -r target flags; do
+            object="$RUNNER_TEMP/answer-$target.o"
+            ( cd "$RUNNER_TEMP" && "$cc" --target="$target" $flags -ffreestanding -O2 -c answer.c -o "$object" )
+            printf '%s\t%s\t%s\t%s\n' "$target" freestanding - "$(shasum -a 256 "$object" | cut -d ' ' -f1)" \
+              | tee -a "$RUNNER_TEMP/out/archives.tsv"
+          done <<'EOF'
+          x86_64-unknown-linux-gnu
+          aarch64-unknown-linux-gnu
+          arm64-apple-macos13.0
+          x86_64-pc-windows-msvc -mno-incremental-linker-compatible
+          EOF
+      - name: Compile the corpus for Apple against the Xcode SDK
+        if: runner.os == 'macOS'
+        run: |
+          shopt -s nullglob
+          sdk="$(xcrun --show-sdk-path)"
+          echo "SDK $(xcrun --show-sdk-version) $(xcrun --show-sdk-build-version) at $sdk"
+          cc="$RUNNER_TEMP/clang/bin/clang"
+          ar="$RUNNER_TEMP/clang/bin/llvm-ar"
+          tail -n +2 bake/c-toolchain/corpus.tsv | tr '\t' '|' | while IFS='|' read -r name version url sha sources include defines; do
+            src="$RUNNER_TEMP/src/$name"
+            flags=(-O2 -fPIC)
+            for dir in $include; do flags+=("-I$dir"); done
+            for define in $defines; do flags+=("-D$define"); done
+            objects="$RUNNER_TEMP/obj/aarch64-apple-darwin/$name"
+            mkdir -p "$objects"
+            files="$(cd "$src" && for pattern in $sources; do printf '%s\n' $pattern; done | LC_ALL=C sort -u)"
+            for file in $files; do
+              ( cd "$src" && "$cc" --target=arm64-apple-macos13.0 -isysroot "$sdk" "${flags[@]}" \
+                  -ffile-prefix-map="$src"=. -c "$file" -o "$objects/$(printf '%s' "$file" | tr '/' '_').o" )
+            done
+            ( cd "$objects" && "$ar" rcsD "$RUNNER_TEMP/out/aarch64-apple-darwin-lib$name.a" $(ls | LC_ALL=C sort) )
+            echo "aarch64-apple-darwin $name $(shasum -a 256 "$RUNNER_TEMP/out/aarch64-apple-darwin-lib$name.a" | cut -d ' ' -f1)"
+          done
+      - name: Keep the digests
+        uses: actions/upload-artifact@v4
+        with:
+          name: reproduction-${{ matrix.host }}
+          path: |
+            ${{ runner.temp }}/out/archives.tsv
+            ${{ runner.temp }}/out/objects.tsv
+          retention-days: 30
+  compare:
+    needs: compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: reproduction-*
+          path: reproduction
+      - name: Every host must produce the same archives
+        run: |
+          cd reproduction
+          ls
+          first=""
+          status=0
+          for host in reproduction-*; do
+            if [ -z "$first" ]; then first="$host"; continue; fi
+            if cmp -s "$first/archives.tsv" "$host/archives.tsv"; then
+              echo "$host matches $first"
+            else
+              status=1
+              echo "::error::$host archives differ from $first"
+              diff "$first/archives.tsv" "$host/archives.tsv" || true
+              echo "differing objects:"
+              diff "$first/objects.tsv" "$host/objects.tsv" | head -40 || true
+            fi
+          done
+          echo "--- archives"
+          cat "$first/archives.tsv"
+          exit $status
