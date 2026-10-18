@@ -1,0 +1,126 @@
+name: c-toolchain
+
+# Build the managed C toolchain of RFC 159: Clang, its resource headers, lld and the LLVM binary tools, from one pinned
+# LLVM source release with one configuration on every build host, and push each host's build to the GitHub Container
+# Registry as `ghcr.io/encero-systems/incan.pub/toolchain/clang:<llvm version>-<build host triple>`.
+#
+# LLVM 22.1.8 is the LLVM release the pinned Rust toolchain (1.98.0) is built on, so Rust and C code share one code
+# generator. The configuration is the same on every host: the X86 and AArch64 backends, no optional host libraries
+# (zlib, zstd, libxml2, libedit), no tests or examples, and the C++ standard library linked statically on Linux so the
+# build runs on any glibc 2.28-or-newer host. Each build host's compiler is a different binary; whether they compile the
+# same input to the same bytes is what the c-reproduction workflow checks.
+
+on:
+  push:
+    branches: [feature/c-toolchain]
+    paths: [.github/workflows/c-toolchain.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  LLVM_VERSION: 22.1.8
+  LLVM_SOURCE_SHA256: 922f1817a0df7b1489272d18134ee0087a8b068828f87ac63b9861b1a9965888
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            host: x86_64-unknown-linux-gnu
+          - runner: ubuntu-24.04-arm
+            host: aarch64-unknown-linux-gnu
+          - runner: macos-latest
+            host: aarch64-apple-darwin
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 350
+    env:
+      HOST: ${{ matrix.host }}
+    steps:
+      - name: Fetch and verify the LLVM source release
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/llvm.tar.xz" \
+            "https://github.com/llvm/llvm-project/releases/download/llvmorg-$LLVM_VERSION/llvm-project-$LLVM_VERSION.src.tar.xz"
+          actual="$(shasum -a 256 "$RUNNER_TEMP/llvm.tar.xz" | cut -d ' ' -f1)"
+          [ "$actual" = "$LLVM_SOURCE_SHA256" ] || { echo "::error::LLVM source digest $actual, expected $LLVM_SOURCE_SHA256"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/src"
+          tar -xJf "$RUNNER_TEMP/llvm.tar.xz" -C "$RUNNER_TEMP/src" --strip-components=1
+      - name: Install the build tools
+        run: |
+          if [ "$RUNNER_OS" = Linux ]; then
+            sudo apt-get update -q && sudo apt-get install -y -q ninja-build
+          else
+            brew install ninja gnu-tar
+          fi
+          cmake --version | head -1
+          ninja --version
+      - name: Configure
+        run: |
+          extra=()
+          if [ "$RUNNER_OS" = Linux ]; then
+            extra+=(-DLLVM_STATIC_LINK_CXX_STDLIB=ON)
+          else
+            extra+=(-DCMAKE_OSX_DEPLOYMENT_TARGET=13.0)
+          fi
+          cmake -G Ninja -S "$RUNNER_TEMP/src/llvm" -B "$RUNNER_TEMP/build" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/install" \
+            -DLLVM_ENABLE_PROJECTS="clang;lld" \
+            -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
+            -DLLVM_ENABLE_ASSERTIONS=OFF \
+            -DLLVM_PARALLEL_LINK_JOBS=1 \
+            -DLLVM_ENABLE_ZLIB=OFF -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_LIBEDIT=OFF \
+            -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_DOCS=OFF \
+            -DCLANG_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_DOCS=OFF \
+            -DLLVM_DISTRIBUTION_COMPONENTS="clang;clang-resource-headers;lld;llvm-ar;llvm-ranlib;llvm-nm;llvm-objcopy;llvm-strip;llvm-objdump;llvm-readobj" \
+            "${extra[@]}"
+      - name: Build and install the distribution
+        run: ninja -C "$RUNNER_TEMP/build" install-distribution
+      - name: Smoke test
+        run: |
+          bin="$RUNNER_TEMP/install/bin"
+          "$bin/clang" --version
+          "$bin/ld.lld" --version
+          printf 'int answer(void) { return 42; }\n' > "$RUNNER_TEMP/answer.c"
+          for target in x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu aarch64-apple-darwin x86_64-pc-windows-msvc; do
+            "$bin/clang" --target="$target" -ffreestanding -O2 -c "$RUNNER_TEMP/answer.c" -o "$RUNNER_TEMP/answer-$target.o"
+            echo "$target $(shasum -a 256 "$RUNNER_TEMP/answer-$target.o" | cut -d ' ' -f1)"
+          done
+      - name: Package
+        run: |
+          tar_cmd=tar
+          [ "$RUNNER_OS" = Linux ] || tar_cmd=gtar
+          name="clang-$LLVM_VERSION-$HOST"
+          mv "$RUNNER_TEMP/install" "$RUNNER_TEMP/$name"
+          "$tar_cmd" --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner --format=gnu \
+            -C "$RUNNER_TEMP" -cf "$RUNNER_TEMP/$name.tar" "$name"
+          gzip -n -9 "$RUNNER_TEMP/$name.tar"
+          echo "ARCHIVE=$RUNNER_TEMP/$name.tar.gz" >> "$GITHUB_ENV"
+          echo "archive sha256 $(shasum -a 256 "$RUNNER_TEMP/$name.tar.gz" | cut -d ' ' -f1), $(du -h "$RUNNER_TEMP/$name.tar.gz" | cut -f1)"
+      - name: Keep the build as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-${{ env.LLVM_VERSION }}-${{ matrix.host }}
+          path: ${{ env.ARCHIVE }}
+          retention-days: 30
+      - name: Install oras
+        uses: oras-project/setup-oras@v1
+      - name: Push to the registry
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd "$(dirname "$ARCHIVE")"
+          printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
+          oras push "ghcr.io/encero-systems/incan.pub/toolchain/clang:$LLVM_VERSION-$HOST" \
+            --artifact-type application/vnd.incan.c-toolchain.v1 \
+            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
+            --annotation "dev.incan.c-toolchain.llvm=$LLVM_VERSION" \
+            --annotation "dev.incan.c-toolchain.llvm-source-sha256=$LLVM_SOURCE_SHA256" \
+            --annotation "dev.incan.c-toolchain.host=$HOST" \
+            --annotation "dev.incan.c-toolchain.commit=$GITHUB_SHA" \
+            "$(basename "$ARCHIVE"):application/vnd.incan.c-toolchain.v1.tar+gzip"
