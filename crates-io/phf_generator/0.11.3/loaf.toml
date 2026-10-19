@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/phf_generator"
+version = "0.11.3"
+
+[project.features]
+criterion = ["dep:criterion"]
+
+[rust]
+name = "phf_generator"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+criterion = { loaf = "crates-io/criterion", version = "^0.3.6", optional = true }
+phf_shared = { loaf = "crates-io/phf_shared", version = "^0.11.2", default-features = false }
+rand = { loaf = "crates-io/rand", version = "^0.8", features = ["small_rng"], default-features = false }

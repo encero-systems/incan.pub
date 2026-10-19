@@ -756,6 +756,138 @@
       },
       "version": "0.12.1",
       "yanked": false
+    },
+    {
+      "about": {
+        "authors": [
+          "Steven Fackler <sfackler@gmail.com>"
+        ],
+        "description": "Runtime support for perfect hash function data structures",
+        "documentation": "",
+        "homepage": "",
+        "license": "MIT",
+        "license-file": "",
+        "readme": "README.md",
+        "repository": "https://github.com/rust-phf/rust-phf",
+        "rust-version": "1.61"
+      },
+      "adopted": "2026-10-19T08:13:09Z",
+      "advisories": 0,
+      "archive": "sha256:07d84273231ddba33d647d192f7e290577e1b9c533647e730f5f44fb8c84b82c",
+      "assets": [],
+      "categories": [
+        "data-structures",
+        "no-std"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/phf_macros",
+          "name": "phf_macros",
+          "optional": true,
+          "req": "^0.11.3"
+        },
+        {
+          "default-features": false,
+          "features": [],
+          "loaf": "crates-io/phf_shared",
+          "name": "phf_shared",
+          "optional": false,
+          "req": "^0.11.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 3095,
+          "content": "content/sha256/9d60f32c11cb2ceea7fa6425d5623b799e2bebe611ade9167b6ffbfecb0eda89",
+          "digest": "sha256:9d60f32c11cb2ceea7fa6425d5623b799e2bebe611ade9167b6ffbfecb0eda89",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 1099,
+          "content": "content/sha256/0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "digest": "sha256:0ab4d106b6faac07fb6a051815fd1b4d862d730895e2d7d7358c2f13565e7a38",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE",
+          "role": "license"
+        },
+        {
+          "bytes": 48220,
+          "content": "content/sha256/fa3cc91cd18f7d72535f45ce8d6ca6703674b6f6e08063ae5456707c76fa542f",
+          "digest": "sha256:fa3cc91cd18f7d72535f45ce8d6ca6703674b6f6e08063ae5456707c76fa542f",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
+      "facts": [],
+      "features": {
+        "default": [
+          "std"
+        ],
+        "macros": [
+          "phf_macros"
+        ],
+        "phf_macros": [
+          "dep:phf_macros"
+        ],
+        "serde": [
+          "dep:serde"
+        ],
+        "std": [
+          "phf_shared/std"
+        ],
+        "uncased": [
+          "phf_shared/uncased"
+        ],
+        "unicase": [
+          "phf_macros?/unicase",
+          "phf_shared/unicase"
+        ]
+      },
+      "files": {
+        "license": "package",
+        "readme": "package"
+      },
+      "keywords": [],
+      "manifest": "crates-io/phf/0.11.3/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": false,
+        "edition": "2021",
+        "name": "phf",
+        "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:1fd6780a80ae0c52cc120a26a1a42c1ae51b247a253e4e06113d23d2c2edd078",
+        "package": "phf",
+        "registry": "crates-io",
+        "version": "0.11.3"
+      },
+      "vcs": {
+        "commit": "9b679189639fec8d449cd2f1759fad5dc0ef38db",
+        "path": "phf",
+        "system": "git"
+      },
+      "version": "0.11.3",
+      "yanked": false
     }
   ]
 }

@@ -1,0 +1,16 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/get-size-derive2"
+version = "0.11.1"
+
+[rust]
+name = "get_size_derive2"
+type = "proc-macro"
+edition = "2024"
+build-script = false
+
+[dependencies]
+attribute-derive = { loaf = "crates-io/attribute-derive", version = "^0.11" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^3", features = ["derive", "parsing"] }

@@ -1,0 +1,24 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/proc-macro-utils"
+version = "0.10.0"
+
+[project.features]
+default = ["proc-macro2", "proc-macro", "parser", "quote"]
+parser = ["smallvec", "proc-macro2"]
+proc-macro = []
+proc-macro2 = ["dep:proc-macro2"]
+quote = ["dep:quote"]
+smallvec = ["dep:smallvec"]
+
+[rust]
+name = "proc_macro_utils"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1", optional = true }
+quote = { loaf = "crates-io/quote", version = "^1", optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.5", features = ["const_generics"], optional = true }

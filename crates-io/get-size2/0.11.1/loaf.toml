@@ -1,0 +1,58 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/get-size2"
+version = "0.11.1"
+
+[project.features]
+all-features-no-std = ["alloc", "derive", "arcstr", "bytes", "chrono", "chrono-tz", "compact-str", "half", "hashbrown", "indexmap", "ordermap", "orx-concurrent-vec", "portable-atomic", "roaring", "smallvec", "thin-vec", "url", "uuid"]
+alloc = []
+arcstr = ["dep:arcstr", "alloc"]
+bytes = ["dep:bytes"]
+chrono = ["dep:chrono"]
+chrono-tz = ["dep:chrono-tz"]
+compact-str = ["dep:compact_str"]
+dashmap = ["dep:dashmap", "std"]
+default = ["std"]
+derive = ["get-size-derive2"]
+get-size-derive2 = ["dep:get-size-derive2"]
+half = ["dep:half"]
+hashbrown = ["dep:hashbrown"]
+indexmap = ["dep:indexmap"]
+ordermap = ["dep:ordermap"]
+orx-concurrent-vec = ["dep:orx-concurrent-vec"]
+parking_lot = ["dep:parking_lot", "std"]
+portable-atomic = ["dep:portable-atomic"]
+roaring = ["dep:roaring"]
+smallvec = ["dep:smallvec"]
+std = ["alloc"]
+thin-vec = ["dep:thin-vec"]
+url = ["dep:url"]
+uuid = ["dep:uuid"]
+
+[rust]
+name = "get_size2"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arcstr = { loaf = "crates-io/arcstr", version = "^1", features = ["substr"], default-features = false, optional = true }
+bytes = { loaf = "crates-io/bytes", version = "^1", default-features = false, optional = true }
+chrono = { loaf = "crates-io/chrono", version = "^0.4", default-features = false, optional = true }
+chrono-tz = { loaf = "crates-io/chrono-tz", version = "^0.10", default-features = false, optional = true }
+compact_str = { loaf = "crates-io/compact_str", version = "^0.10", default-features = false, optional = true }
+dashmap = { loaf = "crates-io/dashmap", version = "^6", default-features = false, optional = true }
+get-size-derive2 = { loaf = "crates-io/get-size-derive2", version = "^0.11.1", optional = true }
+half = { loaf = "crates-io/half", version = "^2", default-features = false, optional = true }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17", default-features = false, optional = true }
+indexmap = { loaf = "crates-io/indexmap", version = "^2.14", default-features = false, optional = true }
+ordermap = { loaf = "crates-io/ordermap", version = "^1.2", default-features = false, optional = true }
+orx-concurrent-vec = { loaf = "crates-io/orx-concurrent-vec", version = "^3.10", default-features = false, optional = true }
+parking_lot = { loaf = "crates-io/parking_lot", version = "^0.12", default-features = false, optional = true }
+portable-atomic = { loaf = "crates-io/portable-atomic", version = "^1", features = ["fallback"], default-features = false, optional = true }
+roaring = { loaf = "crates-io/roaring", version = "^0.11", default-features = false, optional = true }
+smallvec = { loaf = "crates-io/smallvec", version = "^1", default-features = false, optional = true }
+thin-vec = { loaf = "crates-io/thin-vec", version = "^0.2", default-features = false, optional = true }
+url = { loaf = "crates-io/url", version = "^2", default-features = false, optional = true }
+uuid = { loaf = "crates-io/uuid", version = "^1", default-features = false, optional = true }

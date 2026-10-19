@@ -1,0 +1,29 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ruff_python_parser"
+version = "0.0.18"
+
+[rust]
+name = "ruff_python_parser"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.5.0", default-features = false }
+bstr = { loaf = "crates-io/bstr", version = "^1.9.1", features = ["std"], default-features = false }
+drop_bomb = { loaf = "crates-io/drop_bomb", version = "^0.1.5", default-features = false }
+get-size2 = { loaf = "crates-io/get-size2", version = "^0.11.0", features = ["compact-str", "derive", "hashbrown", "ordermap", "smallvec", "std", "thin-vec"], default-features = false }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17.0", features = ["inline-more"], default-features = false }
+memchr = { loaf = "crates-io/memchr", version = "^2.7.1", features = ["std"], default-features = false }
+ruff_python_ast = { loaf = "crates-io/ruff_python_ast", version = "^0.0.18", features = ["get-size"] }
+ruff_python_trivia = { loaf = "crates-io/ruff_python_trivia", version = "^0.0.18" }
+ruff_text_size = { loaf = "crates-io/ruff_text_size", version = "^0.0.18", features = ["get-size"] }
+ruff_unicode_names2 = { loaf = "crates-io/ruff_unicode_names2", version = "^0.0.18" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.0.0", features = ["std"], default-features = false }
+stacker = { loaf = "crates-io/stacker", version = "^0.1.24", default-features = false }
+static_assertions = { loaf = "crates-io/static_assertions", version = "^1.1.0", default-features = false }
+thin-vec = { loaf = "crates-io/thin-vec", version = "^0.2.14", features = ["std"], default-features = false }
+unicode-ident = { loaf = "crates-io/unicode-ident", version = "^1.0.12", default-features = false }
+unicode-normalization = { loaf = "crates-io/unicode-normalization", version = "^0.1.23", features = ["std"], default-features = false }

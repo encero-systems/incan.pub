@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/attribute-derive-macro"
+version = "0.11.0"
+
+[rust]
+name = "attribute_derive_macro"
+type = "proc-macro"
+edition = "2021"
+build-script = false
+
+[dependencies]
+collection_literals = { loaf = "crates-io/collection_literals", version = "^1" }
+interpolator = { loaf = "crates-io/interpolator", version = "^0.5.0", features = ["iter"] }
+manyhow = { loaf = "crates-io/manyhow", version = "^0.14" }
+proc-macro-utils = { loaf = "crates-io/proc-macro-utils", version = "^0.10.0" }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+quote-use = { loaf = "crates-io/quote-use", version = "^0.9" }
+syn = { loaf = "crates-io/syn", version = "^3" }

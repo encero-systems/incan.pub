@@ -1,0 +1,19 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/quote-use"
+version = "0.9.0"
+
+[project.features]
+syn = ["dep:syn"]
+
+[rust]
+name = "quote_use"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+quote = { loaf = "crates-io/quote", version = "^1" }
+quote-use-macros = { loaf = "crates-io/quote-use-macros", version = "^0.9.0" }
+syn = { loaf = "crates-io/syn", version = "^3", features = ["parsing", "printing"], default-features = false, optional = true }

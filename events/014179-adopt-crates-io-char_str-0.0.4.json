@@ -1,0 +1,180 @@
+{
+  "about": {
+    "authors": [
+      "Charlie Marsh <charlie.r.marsh@gmail.com>",
+      "ryota2357"
+    ],
+    "description": "Compact owned string types forked from lean_string for Ruff and ty.",
+    "documentation": "",
+    "homepage": "",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/astral-sh/char_str",
+    "rust-version": ""
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c9cba78a5abb515610e10af297615434b019755b5d7be14e559ff5340dff50c4",
+    "package": "char_str",
+    "registry": "crates-io",
+    "version": "0.0.4"
+  },
+  "archive": "sha256:a3edf37d6ec024940c9fd998fe135625d85457b0622ce1aa32b2b7525e07f982",
+  "at": "2026-10-19T08:13:08Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "alloc"
+      ],
+      "loaf": "crates-io/castaway",
+      "name": "castaway",
+      "optional": false,
+      "req": "^0.2.4"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/get-size2",
+      "name": "get-size2",
+      "optional": true,
+      "req": "^0.11.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/itoa",
+      "name": "itoa",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/loom",
+      "name": "loom",
+      "optional": true,
+      "req": "^0.7.2",
+      "target": "cfg(loom)"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/ryu",
+      "name": "ryu",
+      "optional": false,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/salsa",
+      "name": "salsa",
+      "optional": true,
+      "req": "^0.27.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0"
+    }
+  ],
+  "documents": [
+    {
+      "bytes": 701,
+      "digest": "sha256:2df79504659c01a973ab46cec8cf74e30ca1df8f297d1b5d196cd1e67c726ace",
+      "format": "markdown",
+      "origin": "package",
+      "path": "README.md",
+      "role": "readme"
+    },
+    {
+      "bytes": 1066,
+      "digest": "sha256:edca60b1d5f5069be6c33a0e4266b82faa32d896ed6136167430fed6787d8419",
+      "format": "text",
+      "origin": "package",
+      "path": "LICENSE",
+      "role": "license"
+    },
+    {
+      "bytes": 1798,
+      "digest": "sha256:c236fc4d17a8d2c60ab9c293d56646d4e640aba18c3ed27e0e4a0c71f0dfda63",
+      "format": "markdown",
+      "origin": "package",
+      "path": "CHANGELOG.md",
+      "role": "changelog"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary"
+    ],
+    "default": [
+      "std"
+    ],
+    "get-size": [
+      "std",
+      "dep:get-size2"
+    ],
+    "loom": [
+      "dep:loom"
+    ],
+    "salsa": [
+      "std",
+      "dep:salsa"
+    ],
+    "serde": [
+      "dep:serde_core"
+    ],
+    "std": []
+  },
+  "files": {
+    "license": "package",
+    "readme": "package"
+  },
+  "id": "sha256:9483578e9e646030e583e77df558d4d74927a362dc328ff34635baf08f371292",
+  "kind": "adopt",
+  "manifest": "sha256:4626700b48ccf7bd5ce57e247cab6eac529516ca86c8d1bbd52b10bf7de8b15a",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "char_str",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "char_str",
+    "scope": "crates-io",
+    "version": "0.0.4"
+  },
+  "taxonomy": {
+    "categories": [
+      "data-structures",
+      "no-std"
+    ],
+    "keywords": [
+      "string",
+      "sso",
+      "cow"
+    ]
+  },
+  "vcs": {
+    "commit": "4b401e93e6c382a380f7a8541ca4133179ae8ef1",
+    "path": "",
+    "system": "git"
+  }
+}

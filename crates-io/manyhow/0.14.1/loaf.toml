@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/manyhow"
+version = "0.14.1"
+
+[project.features]
+darling = ["darling_core"]
+darling_core = ["dep:darling_core"]
+default = ["syn", "macros"]
+macros = ["dep:macros"]
+syn = ["dep:syn"]
+
+[rust]
+name = "manyhow"
+type = "lib"
+edition = "2021"
+build-script = false
+
+[dependencies]
+darling_core = { loaf = "crates-io/darling_core", version = "^0.24.0", optional = true }
+macros = { loaf = "crates-io/manyhow-macros", version = "^0.14.1", optional = true }
+proc-macro2 = { loaf = "crates-io/proc-macro2", version = "^1.0.60" }
+quote = { loaf = "crates-io/quote", version = "^1" }
+syn = { loaf = "crates-io/syn", version = "^3", features = ["parsing", "printing"], default-features = false, optional = true }

@@ -1,0 +1,30 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/char_str"
+version = "0.0.4"
+
+[project.features]
+arbitrary = ["dep:arbitrary"]
+default = ["std"]
+get-size = ["std", "dep:get-size2"]
+loom = ["dep:loom"]
+salsa = ["std", "dep:salsa"]
+serde = ["dep:serde_core"]
+std = []
+
+[rust]
+name = "char_str"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+arbitrary = { loaf = "crates-io/arbitrary", version = "^1", default-features = false, optional = true }
+castaway = { loaf = "crates-io/castaway", version = "^0.2.4", features = ["alloc"], default-features = false }
+get-size2 = { loaf = "crates-io/get-size2", version = "^0.11.0", optional = true }
+itoa = { loaf = "crates-io/itoa", version = "^1.0" }
+loom = { loaf = "crates-io/loom", version = "^0.7.2", optional = true, target = "cfg(loom)" }
+ryu = { loaf = "crates-io/ryu", version = "^1.0" }
+salsa = { loaf = "crates-io/salsa", version = "^0.27.2", default-features = false, optional = true }
+serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false, optional = true }

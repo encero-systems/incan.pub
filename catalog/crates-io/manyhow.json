@@ -1,0 +1,167 @@
+{
+  "name": "crates-io/manyhow",
+  "schema": "incan.pub/catalog-package/1",
+  "upstream": {
+    "package": "manyhow",
+    "registry": "crates.io",
+    "url": "https://crates.io/crates/manyhow"
+  },
+  "versions": [
+    {
+      "about": {
+        "authors": [],
+        "description": "proc macro error handling à la anyhow x proc-macro-error",
+        "documentation": "https://docs.rs/manyhow",
+        "homepage": "",
+        "license": "MIT OR Apache-2.0",
+        "license-file": "",
+        "readme": "README.md",
+        "repository": "https://github.com/ModProg/manyhow",
+        "rust-version": ""
+      },
+      "adopted": "2026-10-19T08:13:10Z",
+      "advisories": 0,
+      "archive": "sha256:b5567cd29415cdb92ad8da1c8df52d751d4d9b0195e59f674bead833cb14a73f",
+      "assets": [],
+      "categories": [
+        "development-tools::procedural-macro-helpers",
+        "rust-patterns"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/darling_core",
+          "name": "darling_core",
+          "optional": true,
+          "req": "^0.24.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/manyhow-macros",
+          "name": "macros",
+          "optional": true,
+          "req": "^0.14.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/proc-macro2",
+          "name": "proc-macro2",
+          "optional": false,
+          "req": "^1.0.60"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/quote",
+          "name": "quote",
+          "optional": false,
+          "req": "^1"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "parsing",
+            "printing"
+          ],
+          "loaf": "crates-io/syn",
+          "name": "syn",
+          "optional": true,
+          "req": "^3"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 4820,
+          "content": "content/sha256/5b310fa68c96f6d728f10ef31633d554e217bb4b874162babd4ca4de2d57931d",
+          "digest": "sha256:5b310fa68c96f6d728f10ef31633d554e217bb4b874162babd4ca4de2d57931d",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 11357,
+          "content": "content/sha256/abf8f3253498c07abb340315b01c73c2151f9f2a5622ea0b44bd8cadfa34072a",
+          "digest": "sha256:abf8f3253498c07abb340315b01c73c2151f9f2a5622ea0b44bd8cadfa34072a",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-APACHE",
+          "role": "license"
+        },
+        {
+          "bytes": 1075,
+          "content": "content/sha256/23d6f253d73a884498c6979c2d94f9aeaeb9d244557729b7706a332c16bce2f1",
+          "digest": "sha256:23d6f253d73a884498c6979c2d94f9aeaeb9d244557729b7706a332c16bce2f1",
+          "format": "text",
+          "origin": "package",
+          "path": "LICENSE-MIT",
+          "role": "license"
+        },
+        {
+          "bytes": 5941,
+          "content": "content/sha256/c22f7bb5d3753d8334b4b3656d950edbdc5831f80705b75478a198c13665d679",
+          "digest": "sha256:c22f7bb5d3753d8334b4b3656d950edbdc5831f80705b75478a198c13665d679",
+          "format": "markdown",
+          "origin": "package",
+          "path": "CHANGELOG.md",
+          "role": "changelog"
+        }
+      ],
+      "facts": [],
+      "features": {
+        "darling": [
+          "darling_core"
+        ],
+        "darling_core": [
+          "dep:darling_core"
+        ],
+        "default": [
+          "syn",
+          "macros"
+        ],
+        "macros": [
+          "dep:macros"
+        ],
+        "syn": [
+          "dep:syn"
+        ]
+      },
+      "files": {
+        "license": "package",
+        "readme": "package"
+      },
+      "keywords": [
+        "proc-macro",
+        "error",
+        "error-handling"
+      ],
+      "manifest": "crates-io/manyhow/0.14.1/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": false,
+        "edition": "2021",
+        "name": "manyhow",
+        "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f1704b073316272a6785b70599f91f73b49022c2e290b065591ee6b9109ed8c7",
+        "package": "manyhow",
+        "registry": "crates-io",
+        "version": "0.14.1"
+      },
+      "vcs": {
+        "commit": "e2627cd8c29e585a457efcc5ab7f4059ab185d7e",
+        "path": "",
+        "system": "git"
+      },
+      "version": "0.14.1",
+      "yanked": false
+    }
+  ]
+}

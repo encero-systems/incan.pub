@@ -1,0 +1,138 @@
+{
+  "name": "crates-io/ruff_source_file",
+  "schema": "incan.pub/catalog-package/1",
+  "upstream": {
+    "package": "ruff_source_file",
+    "registry": "crates.io",
+    "url": "https://crates.io/crates/ruff_source_file"
+  },
+  "versions": [
+    {
+      "about": {
+        "authors": [
+          "Charlie Marsh <charlie.r.marsh@gmail.com>"
+        ],
+        "description": "This is an internal component crate of Ruff",
+        "documentation": "https://docs.astral.sh/ruff",
+        "homepage": "https://docs.astral.sh/ruff",
+        "license": "MIT",
+        "license-file": "",
+        "readme": "README.md",
+        "repository": "https://github.com/astral-sh/ruff",
+        "rust-version": "1.97"
+      },
+      "adopted": "2026-10-19T08:13:09Z",
+      "advisories": 0,
+      "archive": "sha256:cf9ceb65c430b60cd3b70f5b6a9f41ff42914f39910e1a3a08214f7062e4c5bb",
+      "assets": [],
+      "categories": [],
+      "dependencies": [
+        {
+          "default-features": false,
+          "features": [
+            "compact-str",
+            "derive",
+            "hashbrown",
+            "ordermap",
+            "smallvec",
+            "std",
+            "thin-vec"
+          ],
+          "loaf": "crates-io/get-size2",
+          "name": "get-size2",
+          "optional": true,
+          "req": "^0.11.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "std"
+          ],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.7.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/ruff_text_size",
+          "name": "ruff_text_size",
+          "optional": false,
+          "req": "^0.0.18"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "derive",
+            "std"
+          ],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1.0.197"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 543,
+          "content": "content/sha256/7c4107667646b8bf16211d1cb84ed9abcd3cf420dbb66a905f0f5471ae48e299",
+          "digest": "sha256:7c4107667646b8bf16211d1cb84ed9abcd3cf420dbb66a905f0f5471ae48e299",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 347,
+          "content": "content/sha256/c6ad9e8bacaa3819ace601c29c5089c0ad91517d5bb2ff748cda08d089aa6717",
+          "digest": "sha256:c6ad9e8bacaa3819ace601c29c5089c0ad91517d5bb2ff748cda08d089aa6717",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
+      "facts": [],
+      "features": {
+        "get-size": [
+          "dep:get-size2",
+          "ruff_text_size/get-size"
+        ],
+        "serde": [
+          "dep:serde",
+          "ruff_text_size/serde"
+        ]
+      },
+      "files": {
+        "license": "registry",
+        "readme": "package"
+      },
+      "keywords": [],
+      "manifest": "crates-io/ruff_source_file/0.0.18/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": false,
+        "edition": "2024",
+        "name": "ruff_source_file",
+        "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:ed363bf1302918442b8111a8be328c82821fb69e57695eb523b93937b7c48d0d",
+        "package": "ruff_source_file",
+        "registry": "crates-io",
+        "version": "0.0.18"
+      },
+      "vcs": {
+        "commit": "4683270c69cbdaf6ad64d3f983fc458d5a43b41f",
+        "path": "crates/ruff_source_file",
+        "system": "git"
+      },
+      "version": "0.0.18",
+      "yanked": false
+    }
+  ]
+}

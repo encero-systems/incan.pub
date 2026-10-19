@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ruff_text_size"
+version = "0.0.18"
+
+[project.features]
+get-size = ["dep:get-size2"]
+schemars = ["dep:schemars"]
+serde = ["dep:serde"]
+
+[rust]
+name = "ruff_text_size"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+get-size2 = { loaf = "crates-io/get-size2", version = "^0.11.0", features = ["compact-str", "derive", "hashbrown", "ordermap", "smallvec", "std", "thin-vec"], default-features = false, optional = true }
+schemars = { loaf = "crates-io/schemars", version = "^1.0.4", features = ["derive", "std"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.197", features = ["derive", "std"], default-features = false, optional = true }

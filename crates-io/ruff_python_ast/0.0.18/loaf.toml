@@ -1,0 +1,40 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/ruff_python_ast"
+version = "0.0.18"
+
+[project.features]
+cache = ["dep:ruff_cache", "dep:ruff_macros"]
+get-size = ["dep:get-size2", "char_str/get-size", "ruff_text_size/get-size"]
+salsa = ["dep:salsa"]
+schemars = ["dep:schemars", "dep:serde_json"]
+serde = ["dep:serde", "ruff_text_size/serde", "dep:ruff_cache", "char_str/serde", "compact_str/serde", "thin-vec/serde"]
+
+[rust]
+name = "ruff_python_ast"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+aho-corasick = { loaf = "crates-io/aho-corasick", version = "^1.1.3", features = ["perf-literal", "std"], default-features = false }
+arrayvec = { loaf = "crates-io/arrayvec", version = "^0.7.6", default-features = false }
+bitflags = { loaf = "crates-io/bitflags", version = "^2.5.0", default-features = false }
+char_str = { loaf = "crates-io/char_str", version = "^0.0.4", features = ["std"], default-features = false }
+compact_str = { loaf = "crates-io/compact_str", version = "^0.10.0", features = ["std"], default-features = false }
+get-size2 = { loaf = "crates-io/get-size2", version = "^0.11.0", features = ["compact-str", "derive", "hashbrown", "ordermap", "smallvec", "std", "thin-vec"], default-features = false, optional = true }
+is-macro = { loaf = "crates-io/is-macro", version = "^0.3.5", default-features = false }
+memchr = { loaf = "crates-io/memchr", version = "^2.7.1", features = ["std"], default-features = false }
+ruff_cache = { loaf = "crates-io/ruff_cache", version = "^0.0.18", optional = true }
+ruff_macros = { loaf = "crates-io/ruff_macros", version = "^0.0.18", optional = true }
+ruff_python_trivia = { loaf = "crates-io/ruff_python_trivia", version = "^0.0.18" }
+ruff_source_file = { loaf = "crates-io/ruff_source_file", version = "^0.0.18" }
+ruff_text_size = { loaf = "crates-io/ruff_text_size", version = "^0.0.18" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2.0.0", features = ["std"], default-features = false }
+salsa = { loaf = "crates-io/salsa", version = "^0.28.5", features = ["compact_str", "inventory", "macros", "salsa_unstable"], default-features = false, optional = true }
+schemars = { loaf = "crates-io/schemars", version = "^1.0.4", features = ["derive", "std"], default-features = false, optional = true }
+serde = { loaf = "crates-io/serde", version = "^1.0.197", features = ["derive", "std"], default-features = false, optional = true }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.113", features = ["std"], default-features = false, optional = true }
+thin-vec = { loaf = "crates-io/thin-vec", version = "^0.2.14", features = ["std"], default-features = false }
+thiserror = { loaf = "crates-io/thiserror", version = "^2.0.0", features = ["std"], default-features = false }
