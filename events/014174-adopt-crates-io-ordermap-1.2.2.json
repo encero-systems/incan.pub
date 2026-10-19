@@ -1,0 +1,192 @@
+{
+  "about": {
+    "authors": [],
+    "description": "A hash table with consistent order and fast iteration.",
+    "documentation": "https://docs.rs/ordermap/",
+    "homepage": "",
+    "license": "Apache-2.0 OR MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/indexmap-rs/ordermap",
+    "rust-version": "1.85"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:16a756ddcdeb6c0efc8927bdf0ed112885815a35ba350472a467be5104f01ca1",
+    "package": "ordermap",
+    "registry": "crates-io",
+    "version": "1.2.2"
+  },
+  "archive": "sha256:7c144d60d65d05dfab71c75247b494830d75c23eb1120ce0e0a8ca0859ba06ab",
+  "at": "2026-10-19T08:13:08Z",
+  "deps": [
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/arbitrary",
+      "name": "arbitrary",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/borsh",
+      "name": "borsh",
+      "optional": true,
+      "req": "^1.5.6"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/indexmap",
+      "name": "indexmap",
+      "optional": false,
+      "req": "^2.14.2"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/quickcheck",
+      "name": "quickcheck",
+      "optional": true,
+      "req": "^1.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rayon",
+      "name": "rayon",
+      "optional": true,
+      "req": "^1.9"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1.0.220",
+      "target": "cfg(any())"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/serde_core",
+      "name": "serde_core",
+      "optional": true,
+      "req": "^1.0.220"
+    },
+    {
+      "default-features": false,
+      "features": [],
+      "loaf": "crates-io/sval",
+      "name": "sval",
+      "optional": true,
+      "req": "^2"
+    }
+  ],
+  "documents": [
+    {
+      "bytes": 3219,
+      "digest": "sha256:eca3606eddd2b13d3b38ec97f672effae9e4f905504a049bdf6d9407a64c56ff",
+      "format": "markdown",
+      "origin": "package",
+      "path": "README.md",
+      "role": "readme"
+    },
+    {
+      "bytes": 10847,
+      "digest": "sha256:a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "format": "text",
+      "origin": "package",
+      "path": "LICENSE-APACHE",
+      "role": "license"
+    },
+    {
+      "bytes": 1049,
+      "digest": "sha256:ecc269ef87fd38a1d98e30bfac9ba964a9dbd9315c3770fed98d4d7cb5882055",
+      "format": "text",
+      "origin": "package",
+      "path": "LICENSE-MIT",
+      "role": "license"
+    },
+    {
+      "bytes": 9134,
+      "digest": "sha256:3317d214256e4d074b266776debef7760a8d4802dc723d74d6894e23f872511f",
+      "format": "markdown",
+      "origin": "package",
+      "path": "RELEASES.md",
+      "role": "changelog"
+    }
+  ],
+  "features": {
+    "arbitrary": [
+      "dep:arbitrary",
+      "indexmap/arbitrary"
+    ],
+    "borsh": [
+      "dep:borsh",
+      "borsh/indexmap"
+    ],
+    "default": [
+      "std"
+    ],
+    "quickcheck": [
+      "dep:quickcheck",
+      "indexmap/quickcheck"
+    ],
+    "rayon": [
+      "dep:rayon",
+      "indexmap/rayon"
+    ],
+    "serde": [
+      "dep:serde_core",
+      "dep:serde",
+      "indexmap/serde"
+    ],
+    "std": [
+      "indexmap/std"
+    ],
+    "sval": [
+      "dep:sval",
+      "indexmap/sval"
+    ]
+  },
+  "files": {
+    "license": "package",
+    "readme": "package"
+  },
+  "id": "sha256:72ea01553dbf247b77c901265d503e0aeeecf9f2665bf6070ee30c2c45bbf642",
+  "kind": "adopt",
+  "manifest": "sha256:491a95488d80dfa29c4b3c62a1fa49eccbc4487957b47e2643d54b9bff5d31c9",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "ordermap",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "ordermap",
+    "scope": "crates-io",
+    "version": "1.2.2"
+  },
+  "taxonomy": {
+    "categories": [
+      "data-structures",
+      "no-std"
+    ],
+    "keywords": [
+      "hashmap",
+      "no_std"
+    ]
+  },
+  "vcs": {
+    "commit": "b488712fe97cfd39d88ebb902f56792c4dc45083",
+    "path": "",
+    "system": "git"
+  }
+}
