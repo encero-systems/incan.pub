@@ -1,0 +1,22 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/lsp-types"
+version = "0.94.1"
+
+[project.features]
+default = []
+proposed = []
+
+[rust]
+name = "lsp_types"
+type = "lib"
+edition = "2018"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^1.0.1" }
+serde = { loaf = "crates-io/serde", version = "^1.0.34", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1.0.50" }
+serde_repr = { loaf = "crates-io/serde_repr", version = "^0.1" }
+url = { loaf = "crates-io/url", version = "^2.0.0", features = ["serde"] }
