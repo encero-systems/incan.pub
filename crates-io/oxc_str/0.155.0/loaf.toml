@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_str"
+version = "0.155.0"
+
+[project.features]
+default = []
+schemars = ["dep:schemars"]
+serialize = ["compact_str/serde", "dep:serde", "oxc_estree/serialize"]
+
+[rust]
+name = "oxc_str"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+compact_str = { loaf = "crates-io/compact_str", version = "^0.10.0" }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17.1", features = ["inline-more"], default-features = false }
+memchr = { loaf = "crates-io/memchr", version = "^2.8.2" }
+oxc_allocator = { loaf = "crates-io/oxc_allocator", version = "^0.155.0" }
+oxc_estree = { loaf = "crates-io/oxc_estree", version = "^0.155.0" }
+schemars = { loaf = "crates-io/oxc-schemars", version = "^0.9.1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }

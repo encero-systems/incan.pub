@@ -1,0 +1,163 @@
+{
+  "name": "crates-io/oxc_str",
+  "schema": "incan.pub/catalog-package/1",
+  "upstream": {
+    "package": "oxc_str",
+    "registry": "crates.io",
+    "url": "https://crates.io/crates/oxc_str"
+  },
+  "versions": [
+    {
+      "about": {
+        "authors": [
+          "Boshen <boshenc@gmail.com>",
+          "Oxc contributors"
+        ],
+        "description": "A collection of JavaScript tools written in Rust.",
+        "documentation": "",
+        "homepage": "https://oxc.rs",
+        "license": "MIT",
+        "license-file": "",
+        "readme": "README.md",
+        "repository": "https://github.com/oxc-project/oxc",
+        "rust-version": "1.97.0"
+      },
+      "adopted": "2026-10-25T11:56:27Z",
+      "advisories": 0,
+      "archive": "sha256:a252219445938b51b45dd8b426509ccc24a1533d6fcc5d6c1b4b739f26e5ce39",
+      "assets": [],
+      "categories": [
+        "compilers",
+        "development-tools",
+        "web-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/compact_str",
+          "name": "compact_str",
+          "optional": false,
+          "req": "^0.10.0"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "inline-more"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.17.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/memchr",
+          "name": "memchr",
+          "optional": false,
+          "req": "^2.8.2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_allocator",
+          "name": "oxc_allocator",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_estree",
+          "name": "oxc_estree",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc-schemars",
+          "name": "schemars",
+          "optional": true,
+          "req": "^0.9.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 0,
+          "content": "content/sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 322,
+          "content": "content/sha256/5120d3cfe2f2922870e6c5554aca18a1c6ed41c0df18ba12ad665df5db74f45c",
+          "digest": "sha256:5120d3cfe2f2922870e6c5554aca18a1c6ed41c0df18ba12ad665df5db74f45c",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
+      "facts": [],
+      "features": {
+        "default": [],
+        "schemars": [
+          "dep:schemars"
+        ],
+        "serialize": [
+          "compact_str/serde",
+          "dep:serde",
+          "oxc_estree/serialize"
+        ]
+      },
+      "files": {
+        "license": "registry",
+        "readme": "package"
+      },
+      "keywords": [
+        "JavaScript",
+        "TypeScript",
+        "linter",
+        "minifier",
+        "parser"
+      ],
+      "manifest": "crates-io/oxc_str/0.155.0/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": false,
+        "edition": "2024",
+        "name": "oxc_str",
+        "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:c04d966af690d3b780ee4c47436174e558750eed6ca40b07d695fa4910ad8e33",
+        "package": "oxc_str",
+        "registry": "crates-io",
+        "version": "0.155.0"
+      },
+      "vcs": {
+        "commit": "73e6b564737a29ecebf428d276421dcc492836df",
+        "path": "crates/oxc_str",
+        "system": "git"
+      },
+      "version": "0.155.0",
+      "yanked": false
+    }
+  ]
+}

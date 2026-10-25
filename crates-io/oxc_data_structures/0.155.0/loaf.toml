@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_data_structures"
+version = "0.155.0"
+
+[project.features]
+all = ["assert_unchecked", "box_macros", "branch_hints", "code_buffer", "fieldless_enum", "inline_string", "non_null", "rope", "slice_iter", "stack", "str", "string_ext", "types"]
+assert_unchecked = []
+box_macros = []
+branch_hints = []
+code_buffer = ["assert_unchecked"]
+default = []
+fieldless_enum = []
+inline_string = ["assert_unchecked"]
+non_null = []
+rope = ["dep:ropey"]
+slice_iter = ["assert_unchecked"]
+stack = []
+str = []
+string_ext = ["assert_unchecked"]
+types = []
+
+[rust]
+name = "oxc_data_structures"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+ropey = { loaf = "crates-io/ropey", version = "^1.6.1", optional = true }

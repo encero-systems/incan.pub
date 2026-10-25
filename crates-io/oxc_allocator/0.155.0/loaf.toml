@@ -1,0 +1,32 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_allocator"
+version = "0.155.0"
+
+[project.features]
+bitset = []
+disable_track_allocations = []
+fixed_size = ["from_raw_parts", "pool", "dep:oxc_ast_macros", "dep:windows-sys"]
+from_raw_parts = []
+oxc_estree = ["dep:oxc_estree"]
+pool = []
+serialize = ["dep:serde", "dep:oxc_estree", "oxc_estree/serialize"]
+testing = []
+track_allocations = []
+
+[rust]
+name = "oxc_allocator"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+allocator-api2 = { loaf = "crates-io/allocator-api2", version = "=0.2.21" }
+hashbrown = { loaf = "crates-io/hashbrown", version = "^0.17.1", features = ["allocator-api2", "inline-more"], default-features = false }
+oxc_ast_macros = { loaf = "crates-io/oxc_ast_macros", version = "^0.155.0", optional = true }
+oxc_data_structures = { loaf = "crates-io/oxc_data_structures", version = "^0.155.0", features = ["assert_unchecked", "stack"] }
+oxc_estree = { loaf = "crates-io/oxc_estree", version = "^0.155.0", optional = true }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2" }
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }
+windows-sys = { loaf = "crates-io/windows-sys", version = "^0.61.2", features = ["Win32_System_Memory"], optional = true, target = "cfg(target_os = \"windows\")" }

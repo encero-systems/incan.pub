@@ -1,0 +1,20 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_estree"
+version = "0.155.0"
+
+[project.features]
+default = []
+serialize = ["dep:oxc_data_structures", "dep:itoa", "dep:dragonbox_ecma"]
+
+[rust]
+name = "oxc_estree"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+dragonbox_ecma = { loaf = "crates-io/dragonbox_ecma", version = "^0.1.12", optional = true }
+itoa = { loaf = "crates-io/itoa", version = "^1.0.18", optional = true }
+oxc_data_structures = { loaf = "crates-io/oxc_data_structures", version = "^0.155.0", features = ["code_buffer", "slice_iter", "stack"], optional = true }

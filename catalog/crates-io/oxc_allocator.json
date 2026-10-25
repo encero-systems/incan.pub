@@ -1,0 +1,189 @@
+{
+  "name": "crates-io/oxc_allocator",
+  "schema": "incan.pub/catalog-package/1",
+  "upstream": {
+    "package": "oxc_allocator",
+    "registry": "crates.io",
+    "url": "https://crates.io/crates/oxc_allocator"
+  },
+  "versions": [
+    {
+      "about": {
+        "authors": [
+          "Boshen <boshenc@gmail.com>",
+          "Oxc contributors"
+        ],
+        "description": "A collection of JavaScript tools written in Rust.",
+        "documentation": "",
+        "homepage": "https://oxc.rs",
+        "license": "MIT",
+        "license-file": "",
+        "readme": "README.md",
+        "repository": "https://github.com/oxc-project/oxc",
+        "rust-version": "1.97.0"
+      },
+      "adopted": "2026-10-25T11:56:26Z",
+      "advisories": 0,
+      "archive": "sha256:54d04dccf998fc220fd8d5a555653a6459d59cef6afbaa8402e182bfb9f6b6c8",
+      "assets": [],
+      "categories": [
+        "compilers",
+        "development-tools",
+        "web-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/allocator-api2",
+          "name": "allocator-api2",
+          "optional": false,
+          "req": "=0.2.21"
+        },
+        {
+          "default-features": false,
+          "features": [
+            "allocator-api2",
+            "inline-more"
+          ],
+          "loaf": "crates-io/hashbrown",
+          "name": "hashbrown",
+          "optional": false,
+          "req": "^0.17.1"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_ast_macros",
+          "name": "oxc_ast_macros",
+          "optional": true,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "assert_unchecked",
+            "stack"
+          ],
+          "loaf": "crates-io/oxc_data_structures",
+          "name": "oxc_data_structures",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_estree",
+          "name": "oxc_estree",
+          "optional": true,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/rustc-hash",
+          "name": "rustc-hash",
+          "optional": false,
+          "req": "^2"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/serde",
+          "name": "serde",
+          "optional": true,
+          "req": "^1"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "Win32_System_Memory"
+          ],
+          "loaf": "crates-io/windows-sys",
+          "name": "windows-sys",
+          "optional": true,
+          "req": "^0.61.2",
+          "target": "cfg(target_os = \"windows\")"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 1991,
+          "content": "content/sha256/6db3118988b308114f6dbeef037179000fb1e91ceb46fc58450c028917438c32",
+          "digest": "sha256:6db3118988b308114f6dbeef037179000fb1e91ceb46fc58450c028917438c32",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 340,
+          "content": "content/sha256/939ab3a13780f8d2ae67a8b64bf0cf779dd6b62323b3732dc73d07768c74876b",
+          "digest": "sha256:939ab3a13780f8d2ae67a8b64bf0cf779dd6b62323b3732dc73d07768c74876b",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
+      "facts": [],
+      "features": {
+        "bitset": [],
+        "disable_track_allocations": [],
+        "fixed_size": [
+          "from_raw_parts",
+          "pool",
+          "dep:oxc_ast_macros",
+          "dep:windows-sys"
+        ],
+        "from_raw_parts": [],
+        "oxc_estree": [
+          "dep:oxc_estree"
+        ],
+        "pool": [],
+        "serialize": [
+          "dep:serde",
+          "dep:oxc_estree",
+          "oxc_estree/serialize"
+        ],
+        "testing": [],
+        "track_allocations": []
+      },
+      "files": {
+        "license": "registry",
+        "readme": "package"
+      },
+      "keywords": [
+        "JavaScript",
+        "TypeScript",
+        "linter",
+        "minifier",
+        "parser"
+      ],
+      "manifest": "crates-io/oxc_allocator/0.155.0/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": false,
+        "edition": "2024",
+        "name": "oxc_allocator",
+        "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:45c8f46c8923b4afb4dd588d4684d5dd32332f1341225c066cc6af31094e7e3d",
+        "package": "oxc_allocator",
+        "registry": "crates-io",
+        "version": "0.155.0"
+      },
+      "vcs": {
+        "commit": "73e6b564737a29ecebf428d276421dcc492836df",
+        "path": "crates/oxc_allocator",
+        "system": "git"
+      },
+      "version": "0.155.0",
+      "yanked": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_sourcemap"
+version = "9.0.0"
+
+[project.features]
+codspeed = []
+default = []
+napi = ["dep:napi", "dep:napi-derive"]
+
+[rust]
+name = "oxc_sourcemap"
+type = "lib"
+edition = "2024"
+build-script = true
+
+[dependencies]
+base64-simd = { loaf = "crates-io/base64-simd", version = "^0.8" }
+json-escape-simd = { loaf = "crates-io/json-escape-simd", version = "^3" }
+napi = { loaf = "crates-io/napi", version = "^3", optional = true }
+napi-derive = { loaf = "crates-io/napi-derive", version = "^3", optional = true }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2" }
+serde = { loaf = "crates-io/serde", version = "^1", features = ["derive"] }
+serde_json = { loaf = "crates-io/serde_json", version = "^1" }

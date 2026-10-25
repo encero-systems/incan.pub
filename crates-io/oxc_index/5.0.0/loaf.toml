@@ -1,0 +1,21 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_index"
+version = "5.0.0"
+
+[project.features]
+nonmax = ["dep:nonmax"]
+rayon = ["dep:rayon"]
+serde = ["dep:serde"]
+
+[rust]
+name = "oxc_index"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+nonmax = { loaf = "crates-io/nonmax", version = "^0.5", optional = true }
+rayon = { loaf = "crates-io/rayon", version = "^1", optional = true }
+serde = { loaf = "crates-io/serde", version = "^1", optional = true }

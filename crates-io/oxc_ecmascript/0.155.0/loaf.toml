@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_ecmascript"
+version = "0.155.0"
+
+[project.features]
+constant_evaluation = ["side_effects", "dep:cow-utils", "dep:smallvec"]
+side_effects = ["dep:oxc_allocator", "dep:oxc_compat", "dep:oxc_regular_expression"]
+
+[rust]
+name = "oxc_ecmascript"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+cow-utils = { loaf = "crates-io/cow-utils", version = "^0.1.3", optional = true }
+dragonbox_ecma = { loaf = "crates-io/dragonbox_ecma", version = "^0.1.12" }
+itoa = { loaf = "crates-io/itoa", version = "^1.0.18" }
+num-bigint = { loaf = "crates-io/num-bigint", version = "^0.5.0" }
+num-traits = { loaf = "crates-io/num-traits", version = "^0.2.19" }
+oxc_allocator = { loaf = "crates-io/oxc_allocator", version = "^0.155.0", optional = true }
+oxc_ast = { loaf = "crates-io/oxc_ast", version = "^0.155.0" }
+oxc_compat = { loaf = "crates-io/oxc_compat", version = "^0.155.0", optional = true }
+oxc_data_structures = { loaf = "crates-io/oxc_data_structures", version = "^0.155.0", features = ["inline_string"] }
+oxc_regular_expression = { loaf = "crates-io/oxc_regular_expression", version = "^0.155.0", optional = true }
+oxc_span = { loaf = "crates-io/oxc_span", version = "^0.155.0" }
+oxc_str = { loaf = "crates-io/oxc_str", version = "^0.155.0" }
+oxc_syntax = { loaf = "crates-io/oxc_syntax", version = "^0.155.0", features = ["to_js_string"] }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15.2", features = ["serde", "union"], optional = true }

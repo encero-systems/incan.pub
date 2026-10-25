@@ -1,0 +1,154 @@
+{
+  "about": {
+    "authors": [
+      "Boshen <boshenc@gmail.com>",
+      "Oxc contributors"
+    ],
+    "description": "A collection of JavaScript tools written in Rust.",
+    "documentation": "",
+    "homepage": "https://oxc.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/oxc-project/oxc",
+    "rust-version": "1.97.0"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:c04d966af690d3b780ee4c47436174e558750eed6ca40b07d695fa4910ad8e33",
+    "package": "oxc_str",
+    "registry": "crates-io",
+    "version": "0.155.0"
+  },
+  "archive": "sha256:a252219445938b51b45dd8b426509ccc24a1533d6fcc5d6c1b4b739f26e5ce39",
+  "at": "2026-10-25T11:56:27Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/compact_str",
+      "name": "compact_str",
+      "optional": false,
+      "req": "^0.10.0"
+    },
+    {
+      "default-features": false,
+      "features": [
+        "inline-more"
+      ],
+      "loaf": "crates-io/hashbrown",
+      "name": "hashbrown",
+      "optional": false,
+      "req": "^0.17.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.8.2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_allocator",
+      "name": "oxc_allocator",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_estree",
+      "name": "oxc_estree",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc-schemars",
+      "name": "schemars",
+      "optional": true,
+      "req": "^0.9.1"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/serde",
+      "name": "serde",
+      "optional": true,
+      "req": "^1"
+    }
+  ],
+  "documents": [
+    {
+      "bytes": 0,
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "format": "markdown",
+      "origin": "package",
+      "path": "README.md",
+      "role": "readme"
+    },
+    {
+      "bytes": 322,
+      "digest": "sha256:5120d3cfe2f2922870e6c5554aca18a1c6ed41c0df18ba12ad665df5db74f45c",
+      "format": "text",
+      "origin": "registry",
+      "path": "LICENSE",
+      "role": "license-notice"
+    }
+  ],
+  "features": {
+    "default": [],
+    "schemars": [
+      "dep:schemars"
+    ],
+    "serialize": [
+      "compact_str/serde",
+      "dep:serde",
+      "oxc_estree/serialize"
+    ]
+  },
+  "files": {
+    "license": "registry",
+    "readme": "package"
+  },
+  "id": "sha256:b106429180ec72109e69866912c31cb633ad274c4ae814b0942238bd3950fca2",
+  "kind": "adopt",
+  "manifest": "sha256:ece26e5aef2a926b8d443eba736a28775686ccc4b2c108a0b80451edad3334dd",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "oxc_str",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "oxc_str",
+    "scope": "crates-io",
+    "version": "0.155.0"
+  },
+  "taxonomy": {
+    "categories": [
+      "compilers",
+      "development-tools",
+      "web-programming"
+    ],
+    "keywords": [
+      "JavaScript",
+      "TypeScript",
+      "linter",
+      "minifier",
+      "parser"
+    ]
+  },
+  "vcs": {
+    "commit": "73e6b564737a29ecebf428d276421dcc492836df",
+    "path": "crates/oxc_str",
+    "system": "git"
+  }
+}

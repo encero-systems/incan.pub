@@ -1,0 +1,225 @@
+{
+  "name": "crates-io/oxc_ecmascript",
+  "schema": "incan.pub/catalog-package/1",
+  "upstream": {
+    "package": "oxc_ecmascript",
+    "registry": "crates.io",
+    "url": "https://crates.io/crates/oxc_ecmascript"
+  },
+  "versions": [
+    {
+      "about": {
+        "authors": [
+          "Boshen <boshenc@gmail.com>",
+          "Oxc contributors"
+        ],
+        "description": "A collection of JavaScript tools written in Rust.",
+        "documentation": "",
+        "homepage": "https://oxc.rs",
+        "license": "MIT",
+        "license-file": "",
+        "readme": "README.md",
+        "repository": "https://github.com/oxc-project/oxc",
+        "rust-version": "1.97.0"
+      },
+      "adopted": "2026-10-25T11:56:28Z",
+      "advisories": 0,
+      "archive": "sha256:f231debe741b69509b5fc29b0e1964f3987283893a9972f1038d67c722d16857",
+      "assets": [],
+      "categories": [
+        "compilers",
+        "development-tools",
+        "web-programming"
+      ],
+      "dependencies": [
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/cow-utils",
+          "name": "cow-utils",
+          "optional": true,
+          "req": "^0.1.3"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/dragonbox_ecma",
+          "name": "dragonbox_ecma",
+          "optional": false,
+          "req": "^0.1.12"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/itoa",
+          "name": "itoa",
+          "optional": false,
+          "req": "^1.0.18"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-bigint",
+          "name": "num-bigint",
+          "optional": false,
+          "req": "^0.5.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/num-traits",
+          "name": "num-traits",
+          "optional": false,
+          "req": "^0.2.19"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_allocator",
+          "name": "oxc_allocator",
+          "optional": true,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_ast",
+          "name": "oxc_ast",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_compat",
+          "name": "oxc_compat",
+          "optional": true,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "inline_string"
+          ],
+          "loaf": "crates-io/oxc_data_structures",
+          "name": "oxc_data_structures",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_regular_expression",
+          "name": "oxc_regular_expression",
+          "optional": true,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_span",
+          "name": "oxc_span",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [],
+          "loaf": "crates-io/oxc_str",
+          "name": "oxc_str",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "to_js_string"
+          ],
+          "loaf": "crates-io/oxc_syntax",
+          "name": "oxc_syntax",
+          "optional": false,
+          "req": "^0.155.0"
+        },
+        {
+          "default-features": true,
+          "features": [
+            "serde",
+            "union"
+          ],
+          "loaf": "crates-io/smallvec",
+          "name": "smallvec",
+          "optional": true,
+          "req": "^1.15.2"
+        }
+      ],
+      "documents": [
+        {
+          "bytes": 336,
+          "content": "content/sha256/6df3df382ba7e510b65a76b75d269c8ff04fe8b88d0bdde157b3f9072555589b",
+          "digest": "sha256:6df3df382ba7e510b65a76b75d269c8ff04fe8b88d0bdde157b3f9072555589b",
+          "format": "markdown",
+          "origin": "package",
+          "path": "README.md",
+          "role": "readme"
+        },
+        {
+          "bytes": 343,
+          "content": "content/sha256/5affe48dc8282feddd15901d6dec950a3ce25927bb8fff5746a9f0975e38e892",
+          "digest": "sha256:5affe48dc8282feddd15901d6dec950a3ce25927bb8fff5746a9f0975e38e892",
+          "format": "text",
+          "origin": "registry",
+          "path": "LICENSE",
+          "role": "license-notice"
+        }
+      ],
+      "facts": [],
+      "features": {
+        "constant_evaluation": [
+          "side_effects",
+          "dep:cow-utils",
+          "dep:smallvec"
+        ],
+        "side_effects": [
+          "dep:oxc_allocator",
+          "dep:oxc_compat",
+          "dep:oxc_regular_expression"
+        ]
+      },
+      "files": {
+        "license": "registry",
+        "readme": "package"
+      },
+      "keywords": [
+        "JavaScript",
+        "TypeScript",
+        "linter",
+        "minifier",
+        "parser"
+      ],
+      "manifest": "crates-io/oxc_ecmascript/0.155.0/loaf.toml",
+      "registry": {
+        "adopter": "encero-systems/incan.pub maintainers",
+        "publisher": "encero-systems/incan.pub maintainers"
+      },
+      "rust": {
+        "build-script": false,
+        "edition": "2024",
+        "name": "oxc_ecmascript",
+        "type": "lib"
+      },
+      "upstream": {
+        "checksum": "sha256:f8c634665e0be5dde95549146734ab4939b8d1b5d2e7cc006d38b9f5d17a58a2",
+        "package": "oxc_ecmascript",
+        "registry": "crates-io",
+        "version": "0.155.0"
+      },
+      "vcs": {
+        "commit": "73e6b564737a29ecebf428d276421dcc492836df",
+        "path": "crates/oxc_ecmascript",
+        "system": "git"
+      },
+      "version": "0.155.0",
+      "yanked": false
+    }
+  ]
+}

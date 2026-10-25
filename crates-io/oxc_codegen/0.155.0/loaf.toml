@@ -1,0 +1,31 @@
+# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit.
+
+[project]
+name = "crates-io/oxc_codegen"
+version = "0.155.0"
+
+[project.features]
+default = ["sourcemap"]
+sourcemap = ["dep:oxc_sourcemap"]
+
+[rust]
+name = "oxc_codegen"
+type = "lib"
+edition = "2024"
+build-script = false
+
+[dependencies]
+bitflags = { loaf = "crates-io/bitflags", version = "^2.13.0" }
+cow-utils = { loaf = "crates-io/cow-utils", version = "^0.1.3" }
+oxc_allocator = { loaf = "crates-io/oxc_allocator", version = "^0.155.0" }
+oxc_ast = { loaf = "crates-io/oxc_ast", version = "^0.155.0" }
+oxc_data_structures = { loaf = "crates-io/oxc_data_structures", version = "^0.155.0", features = ["code_buffer", "slice_iter", "stack"] }
+oxc_ecmascript = { loaf = "crates-io/oxc_ecmascript", version = "^0.155.0" }
+oxc_index = { loaf = "crates-io/oxc_index", version = "^5.0.0", features = ["nonmax", "serde"] }
+oxc_semantic = { loaf = "crates-io/oxc_semantic", version = "^0.155.0" }
+oxc_sourcemap = { loaf = "crates-io/oxc_sourcemap", version = "^9.0.0", optional = true }
+oxc_span = { loaf = "crates-io/oxc_span", version = "^0.155.0" }
+oxc_str = { loaf = "crates-io/oxc_str", version = "^0.155.0" }
+oxc_syntax = { loaf = "crates-io/oxc_syntax", version = "^0.155.0" }
+rustc-hash = { loaf = "crates-io/rustc-hash", version = "^2" }
+smallvec = { loaf = "crates-io/smallvec", version = "^1.15.2", features = ["serde", "union"] }

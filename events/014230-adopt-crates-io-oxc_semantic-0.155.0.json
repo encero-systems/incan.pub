@@ -1,0 +1,247 @@
+{
+  "about": {
+    "authors": [
+      "Boshen <boshenc@gmail.com>",
+      "Oxc contributors"
+    ],
+    "description": "A collection of JavaScript tools written in Rust.",
+    "documentation": "",
+    "homepage": "https://oxc.rs",
+    "license": "MIT",
+    "license-file": "",
+    "readme": "README.md",
+    "repository": "https://github.com/oxc-project/oxc",
+    "rust-version": "1.97.0"
+  },
+  "actor": "encero-systems/incan.pub maintainers",
+  "adopted": {
+    "checksum": "sha256:b24ee2095e2ddac60c2063b59693bbf2b80936c8a9e036463b153a203857831b",
+    "package": "oxc_semantic",
+    "registry": "crates-io",
+    "version": "0.155.0"
+  },
+  "archive": "sha256:1b086284a4b92dc61330c76111aedf55bd166691a9e660cf67cedcdb17b09612",
+  "at": "2026-10-25T11:56:28Z",
+  "deps": [
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/itertools",
+      "name": "itertools",
+      "optional": false,
+      "req": "^0.15.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/memchr",
+      "name": "memchr",
+      "optional": false,
+      "req": "^2.8.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "bitset"
+      ],
+      "loaf": "crates-io/oxc_allocator",
+      "name": "oxc_allocator",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_ast",
+      "name": "oxc_ast",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_ast_visit",
+      "name": "oxc_ast_visit",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_cfg",
+      "name": "oxc_cfg",
+      "optional": true,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_data_structures",
+      "name": "oxc_data_structures",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_diagnostics",
+      "name": "oxc_diagnostics",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_ecmascript",
+      "name": "oxc_ecmascript",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "nonmax",
+        "serde"
+      ],
+      "loaf": "crates-io/oxc_index",
+      "name": "oxc_index",
+      "optional": false,
+      "req": "^5.0.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_jsdoc",
+      "name": "oxc_jsdoc",
+      "optional": true,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_span",
+      "name": "oxc_span",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/oxc_str",
+      "name": "oxc_str",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "to_js_string"
+      ],
+      "loaf": "crates-io/oxc_syntax",
+      "name": "oxc_syntax",
+      "optional": false,
+      "req": "^0.155.0"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/rustc-hash",
+      "name": "rustc-hash",
+      "optional": false,
+      "req": "^2"
+    },
+    {
+      "default-features": true,
+      "features": [],
+      "loaf": "crates-io/self_cell",
+      "name": "self_cell",
+      "optional": false,
+      "req": "^1.2.2"
+    },
+    {
+      "default-features": true,
+      "features": [
+        "serde",
+        "union"
+      ],
+      "loaf": "crates-io/smallvec",
+      "name": "smallvec",
+      "optional": false,
+      "req": "^1.15.2"
+    }
+  ],
+  "documents": [
+    {
+      "bytes": 2223,
+      "digest": "sha256:369fa1022c5cf8c35902065c26eefd6d036d3f91a0a18fe8f95b26bd1f04a749",
+      "format": "markdown",
+      "origin": "package",
+      "path": "README.md",
+      "role": "readme"
+    },
+    {
+      "bytes": 337,
+      "digest": "sha256:5440ad9914acdb4e809222f52e5311d15b277ebb421b97a5e19593e7e3e64ff5",
+      "format": "text",
+      "origin": "registry",
+      "path": "LICENSE",
+      "role": "license-notice"
+    }
+  ],
+  "features": {
+    "cfg": [
+      "dep:oxc_cfg"
+    ],
+    "default": [],
+    "jsdoc": [
+      "dep:oxc_jsdoc"
+    ],
+    "linter": [
+      "jsdoc"
+    ],
+    "serialize": [
+      "oxc_span/serialize",
+      "oxc_syntax/serialize"
+    ]
+  },
+  "files": {
+    "license": "registry",
+    "readme": "package"
+  },
+  "id": "sha256:f822d595869de4ef21e4c8c6624937940d6d01e46d7973ee8d61dc04d31a501e",
+  "kind": "adopt",
+  "manifest": "sha256:7120acf585ddf5f9875614567de2c156b088a22f0d5ef3a567fac57c7d1b5810",
+  "rust": {
+    "build-script": false,
+    "edition": "2024",
+    "name": "oxc_semantic",
+    "root": "src/lib.rs",
+    "type": "lib"
+  },
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "oxc_semantic",
+    "scope": "crates-io",
+    "version": "0.155.0"
+  },
+  "taxonomy": {
+    "categories": [
+      "compilers",
+      "development-tools",
+      "web-programming"
+    ],
+    "keywords": [
+      "JavaScript",
+      "TypeScript",
+      "linter",
+      "minifier",
+      "parser"
+    ]
+  },
+  "vcs": {
+    "commit": "73e6b564737a29ecebf428d276421dcc492836df",
+    "path": "crates/oxc_semantic",
+    "system": "git"
+  }
+}
