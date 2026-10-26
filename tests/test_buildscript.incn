@@ -151,7 +151,7 @@ def write_closure(directory: str, refused: str) -> str:
     closure = directory + "/closure.json"
     host_cc = entries + "/sha256-aa/artifacts/libcc.rlib"
     host_shlex = entries + "/sha256-bb/artifacts/libshlex.rlib"
-    text = "{\"schema\":\"incan.oven.closure/1\",\"compiler\":\"rustc 1.98.0\",\"refused\":" + refused + ",\"units\":["
+    mut text = "{\"schema\":\"incan.oven.closure/1\",\"compiler\":\"rustc 1.98.0\",\"refused\":" + refused + ",\"units\":["
     text = text + "{\"loaf\":\"crates-io/cc\",\"name\":\"cc\",\"version\":\"1.2.57\",\"profile\":\"debug\",\"domain\":\"host\","
     text = text + "\"target\":\"aarch64-apple-darwin\",\"kind\":\"lib\",\"features\":[\"default\"],\"entry\":\"sha256:aa\","
     text = text + "\"artifact\":\"" + host_cc + "\",\"dependencies\":[{\"alias\":\"shlex\",\"entry\":\"sha256:bb\",\"artifact\":\"" + host_shlex + "\"}]},"
@@ -205,7 +205,7 @@ def test_a_cross_target_finds_its_sysroot_through_the_target_flags() -> None:
 def test_the_host_is_the_rustc_host_line() -> None:
     reported = "rustc 1.98.0 (88d9e12ae 2026-08-18)\nbinary: rustc\nhost: aarch64-apple-darwin\nrelease: 1.98.0\n"
     assert_eq(rustc_host(reported).unwrap_or(""), "aarch64-apple-darwin")
-    assert_true(rustc_host("rustc 1.98.0\n").is_none())
+    assert_true(rustc_host("rustc 1.98.0\n") == None)
 
 
 def test_oven_builds_a_registry_source_for_the_host() -> None:
