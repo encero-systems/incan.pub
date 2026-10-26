@@ -294,12 +294,12 @@ pub def reported_links(closure: str, names: list[str], label: str) -> Result[lis
     mut missing: list[str] = []
     mut entries = ""
     for name in sorted(names):
-        crate = name.replace("-", "_")
-        if not externs.contains_key(crate):
+        extern_name = name.replace("-", "_")
+        if not externs.contains_key(extern_name):
             missing.append(name)
             continue
-        artifact = string_member(member(externs, crate), "path")
-        out.append(["--extern", crate + "=" + artifact])
+        artifact = string_member(member(externs, extern_name), "path")
+        out.append(["--extern", extern_name + "=" + artifact])
         parts = artifact.split("/")
         entries = "/".join(parts[0:len(parts) - 3])
     if len(missing) > 0:
