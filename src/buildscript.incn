@@ -21,8 +21,8 @@ from std.json import JsonValue
 from std.toml import TomlValue
 
 from canonical import canonical, digest_bytes, digest_text, pretty
-from adoption import build_activations, declared_build_script
-from closure import crates_io_lines, find_line
+from adoption import Adoption, build_activations, declared_build_script
+from closure import Requested, Resolution, crates_io_lines, find_line, resolved_closure
 from events import member, string_list_member, string_member, write_text
 from graph import graph_text
 from host import Ran, canonical_path, environment_value, executable_path, run_program
@@ -48,9 +48,14 @@ pub model Selection:
     pub cxx: str
     pub ar: str
     pub sysroot: str
-    pub incan: str
-    pub build_lock: str
-    pub pin: str
+    pub oven: str
+
+
+pub model RegistryView:
+    """What the index adopted, keyed `<package>\t<version>`: each version's adoption and its source archive digest."""
+
+    pub adopted: Dict[str, Adoption]
+    pub archives: Dict[str, str]
 
 
 pub def record_proposal(
@@ -62,10 +67,11 @@ pub def record_proposal(
     cache: str,
     work: str,
     selection: Selection,
+    registry: RegistryView,
 ) -> Result[Option[str], str]:
     """
     Run the build script for one binding and write a proposal directory under `work`; `None` when the package has no
-    build script, so no fact is needed.
+    build script, so no fact is needed. `registry` resolves and supplies the build dependencies' sources.
     """
     label = f"{package} {version}"
     files = archive_files(blobs, string_member(adopt, "archive"), label)?
@@ -77,7 +83,7 @@ pub def record_proposal(
             # Before anything runs: compiling the build dependencies already uses this TMPDIR and HOME.
             for directory in ["out", "tmp", "home", "proposal"]:
                 make_dir(base + "/" + directory)?
-            linked = build_dependencies(cache, blobs, package, version, base, selection, label)?
+            linked = build_dependencies(cache, blobs, package, version, base, selection, registry, label)?
             package_dir = base + "/package"
             for file in files:
                 write_file(package_dir + "/" + file.path, file.data)?
@@ -147,67 +153,162 @@ def build_dependencies(
     version: str,
     base: str,
     selection: Selection,
+    registry: RegistryView,
     label: str,
 ) -> Result[list[list[str]], str]:
     """
-    The `rustc` flags that link the build script against its build dependencies: Oven compiles them for the host from
-    their adopted archives (`incan oven compile-closure`), and this recorder links against what it returns. None when
-    the script has none.
+    The `rustc` flags that link the build script against its build dependencies. None when the script has none.
+
+    1. Resolve the active build dependencies against what the index adopted; nothing is adopted on the side.
+    2. Unpack the source snapshot of every version the build reaches from the blob store.
+    3. Oven builds them for the host as the `[rust-dependencies]` of a generated project, admitting the snapshots as
+       sources (`oven build --registry-source`), and reports the registry closure it built.
+    4. The script links against exactly those units; a build dependency missing from the closure is refused by name.
     """
     roots = build_roots(cache, package, version, selection.features, label)?
     if len(roots) == 0:
         return Ok([])
-    if len(selection.incan) == 0 or len(selection.build_lock) == 0:
-        return Err(f"{label}: the build script has build dependencies; pass --incan and --build-lock to compile them")
-    graph = JsonValue.object({
+    if len(selection.oven) == 0:
+        return Err(f"{label}: the build script has build dependencies; pass --oven (the toolchain's Oven) to build them")
+    # 1. The roots and every version they reach, by the rule adoption plans with.
+    resolution = resolved_closure(registry.adopted, requests_of(roots), cache)?
+    write_text(Path(base + "/build-roots.json"), graph_text(JsonValue.object({
         "roots": JsonValue.array(roots),
         "target": JsonValue.string(selection.host),
         "host": JsonValue.string(selection.host),
-    })
-    write_text(Path(base + "/build-roots.json"), graph_text(graph)?, "build-roots.json")?
-    commit = run_program("/usr/bin/git", ["-C", selection.pin, "rev-parse", "HEAD"], plain_environment(base), base)?
-    if not commit.success:
-        return Err(f"{label}: {selection.pin} is not a git checkout of the index")
+    }))?, "build-roots.json")?
+    # 2. A source snapshot is the adopted Loaf archive's files, checked against the digest adoption recorded.
+    mut snapshots: list[str] = []
+    for key in sorted(list(resolution.reached.keys())):
+        if key not in registry.archives:
+            shown = key.replace("\t", " ")
+            return Err(f"{label}: {shown} has no adopted archive")
+        snapshots.append(source_snapshot(blobs, key, registry.archives[key], base, label)?)
+    # 3. Oven builds the generated project for the host, so build tools stay in the host domain.
+    project = base + "/build-dependencies"
+    write_text(Path(project + "/loaf.toml"), build_dependency_manifest(roots, resolution)?, "loaf.toml")?
+    write_text(Path(project + "/src/lib.rs"), "", "lib.rs")?
+    closure = base + "/build-dependencies.closure.json"
     mut environment = plain_environment(base)
     environment["INCAN_HOME"] = environment_value("INCAN_HOME").unwrap_or(environment_value("HOME").unwrap_or("") + "/.incan")
     environment["INCAN_NO_BANNER"] = "1"
-    closure = run_program(selection.incan, [
-        "oven", "compile-closure",
-        "--pin", selection.pin,
-        "--index-commit", text_of(commit.stdout).strip(),
-        "--roots", base + "/build-roots.json",
-        "--profile", "debug",
-        "--out", base + "/closure/closure.json",
-        "--lock", selection.build_lock,
-        "--blobs", blobs + "/sha256",
-        "--rustc", selection.rustc,
-    ], environment, base)?
-    if not closure.success:
-        return Err(f"{label}: compiling the build dependencies failed: {text_of(closure.stderr)}{text_of(closure.stdout)}")
-    return closure_links(base + "/closure", label)
+    ran = run_program(selection.oven, oven_build_arguments(project, snapshots, closure), environment, base)?
+    if not ran.success:
+        return Err(f"{label}: building the build dependencies failed: {text_of(ran.stderr)}{text_of(ran.stdout)}")
+    # 4. Exactly the units Oven reports, and every root among them.
+    mut names: list[str] = []
+    for root in roots:
+        names.append(string_member(root, "name"))
+    return reported_links(closure, names, label)
 
 
-def closure_links(directory: str, label: str) -> Result[list[list[str]], str]:
-    """`--extern` for each root and `-L dependency=` for every unit the closure compiled."""
+pub def requests_of(roots: list[JsonValue]) -> list[Requested]:
+    """The build-dependency roots as resolution requests: the package, its requirement and the features asked of it."""
+    mut requests: list[Requested] = []
+    for root in roots:
+        requests.append(Requested(
+            package=string_member(root, "loaf").replace("crates-io/", ""),
+            req=string_member(root, "req"),
+            default_features=flag_value(root, "default-features", true),
+            features=string_list_member(root, "features"),
+        ))
+    return requests
+
+
+pub def build_dependency_manifest(roots: list[JsonValue], resolution: Resolution) -> Result[str, str]:
+    """
+    The generated project's `loaf.toml`: an empty library whose `[rust-dependencies]` are the build-dependency roots,
+    each pinned to the version the resolution chose, with the features the binding enables on it.
+    """
+    mut lines = [
+        "[project]",
+        "name = \"build_dependencies\"",
+        "version = \"0.0.0\"",
+        "",
+        "[[rust.lib]]",
+        "path = \"src/lib.rs\"",
+        "",
+        "[rust-dependencies]",
+    ]
+    for root in roots:
+        name = string_member(root, "name")
+        package = string_member(root, "loaf").replace("crates-io/", "")
+        mut version = ""
+        for chosen in resolution.roots:
+            if chosen[0] == package:
+                version = chosen[1]
+        if len(version) == 0:
+            return Err(f"build dependency `{name}` has no resolved version")
+        mut fields: list[str] = []
+        if package != name:
+            fields.append("package = " + canonical(JsonValue.string(package))?)
+        fields.append("version = " + canonical(JsonValue.string("=" + version))?)
+        if not flag_value(root, "default-features", true):
+            fields.append("default-features = false")
+        features = string_list_member(root, "features")
+        if len(features) > 0:
+            fields.append("features = " + canonical(JsonValue.array([JsonValue.string(item) for item in features]))?)
+        lines.append(name + " = { " + ", ".join(fields) + " }")
+    return Ok("\n".join(lines) + "\n")
+
+
+pub def oven_build_arguments(project: str, snapshots: list[str], closure: str) -> list[str]:
+    """`oven build` for the host: the generated project, each source snapshot it may build, where to report the closure."""
+    mut arguments = ["build", project]
+    for snapshot in snapshots:
+        arguments.append("--registry-source")
+        arguments.append(snapshot)
+    arguments.append("--registry-closure")
+    arguments.append(closure)
+    return arguments
+
+
+def source_snapshot(blobs: str, key: str, digest: str, base: str, label: str) -> Result[str, str]:
+    """Unpack one adopted version's source Loaf archive, verified against its digest, as a source Oven may build."""
+    directory = base + "/registry-sources/" + key.replace("\t", "-")
+    for file in archive_files(blobs, digest, label)?:
+        write_file(directory + "/" + file.path, file.data)?
+    return Ok(directory)
+
+
+pub def reported_links(closure: str, names: list[str], label: str) -> Result[list[list[str]], str]:
+    """
+    `--extern` for each build-dependency root and `-L dependency=` for every unit of the registry closure Oven reported.
+    The closure has the toolchain's `registry_units` shape: its units' entries sit side by side, three levels above
+    each extern's artifact. A root the closure does not name is refused by name, and so is a closure Oven refused.
+    """
     mut result = JsonValue.null()
-    match Path(directory + "/closure.json").read_text("utf-8", "strict"):
+    match Path(closure).read_text("utf-8", "strict"):
         Ok(text) =>
             match JsonValue.parse(text):
                 Ok(value) => result = value
-                Err(error) => return Err(f"{label}: closure.json: {error.message()}")
-        Err(error) => return Err(f"{label}: closure.json: {error.message()}")
+                Err(error) => return Err(f"{label}: {closure}: {error.message()}")
+        Err(error) => return Err(f"{label}: {closure}: {error.message()}")
     match result.get("refused"):
         Some(refused) =>
             if refused.len() > 0:
                 return Err(f"{label}: Oven refused build dependencies: {canonical(refused)?}")
         None => pass
-    mut out: list[list[str]] = []
     externs = member(result, "externs")
-    for name in sorted(externs.keys()):
-        out.append(["--extern", name.replace("-", "_") + "=" + string_member(member(externs, name), "path")])
-    entries = directory + "/closure-store/store/entries"
-    for entry in files_or_directories(entries)?:
-        out.append(["-L", "dependency=" + entries + "/" + entry + "/artifacts"])
+    mut out: list[list[str]] = []
+    mut missing: list[str] = []
+    mut entries = ""
+    for name in sorted(names):
+        crate = name.replace("-", "_")
+        if not externs.contains_key(crate):
+            missing.append(name)
+            continue
+        artifact = string_member(member(externs, crate), "path")
+        out.append(["--extern", crate + "=" + artifact])
+        parts = artifact.split("/")
+        entries = "/".join(parts[0:len(parts) - 3])
+    if len(missing) > 0:
+        return Err(f"{label}: Oven built no host unit for the build dependencies {', '.join(missing)}")
+    match result.get("units"):
+        Some(units) =>
+            for unit in units.as_array().unwrap_or([]):
+                out.append(["-L", "dependency=" + entries + "/" + string_member(unit, "entry").replace(":", "-") + "/artifacts"])
+        None => return Err(f"{label}: {closure}: no `units`")
     return Ok(out)
 
 
@@ -243,16 +344,6 @@ def flag_value(value: JsonValue, key: str, absent: bool) -> bool:
     match value.get(key):
         Some(found) => return found.as_bool().unwrap_or(absent)
         None => return absent
-
-
-def files_or_directories(directory: str) -> Result[list[str], str]:
-    mut names: list[str] = []
-    match Path(directory).iterdir():
-        Ok(children) =>
-            for child in children:
-                names.append(child.name())
-        Err(error) => return Err(f"{directory}: {error.message()}")
-    return Ok(sorted(names))
 
 
 def compile_script(
@@ -565,8 +656,32 @@ def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selec
     environment["INCAN_PUB_NATIVE_CXX"] = selection.cxx
     environment["INCAN_PUB_NATIVE_AR"] = selection.ar
     # The explicit compiler finds its headers through SDKROOT; the link record names that sysroot as an owner path.
-    environment["SDKROOT"] = canonical_path(selection.sysroot)?
+    sysroot = canonical_path(selection.sysroot)?
+    environment["SDKROOT"] = sysroot
+    flags = cross_compile_flags(selection.target, selection.host, sysroot)
+    for key in flags.keys():
+        environment[key] = flags[key]
     return Ok(None)
+
+
+pub def cross_compile_flags(target: str, host: str, sysroot: str) -> Dict[str, str]:
+    """
+    Clang reads SDKROOT for Apple targets only. A target other than the host and not Apple's finds its sysroot through
+    the target's compile flags, which the `cc` crate passes to every compile when the target is not the host.
+    """
+    mut flags: Dict[str, str] = {}
+    if target != host and not target.contains("apple"):
+        flags["TARGET_CFLAGS"] = "--sysroot=" + sysroot
+        flags["TARGET_CXXFLAGS"] = "--sysroot=" + sysroot
+    return flags
+
+
+pub def rustc_host(verbose_version: str) -> Option[str]:
+    """The `host:` line of `rustc -vV`: the triple the build script and its build dependencies are compiled for."""
+    for line in verbose_version.split("\n"):
+        if line.startswith("host: "):
+            return Some(line[6:].strip())
+    return None
 
 
 def native_work(observed: Directives, base: str, selection: Selection, label: str) -> Result[Conversion, str]:

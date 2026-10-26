@@ -41,6 +41,31 @@ pub model Planned:
     pub archive: str
 
 
+@derive(Clone)
+pub model Requested:
+    """One root of a resolution: a package, the requirement it must meet, and the features it asks for."""
+
+    pub package: str
+    pub req: str
+    pub default_features: bool
+    pub features: list[str]
+
+
+pub model Resolution:
+    """What a build of some roots reaches: each root's chosen [package, version], and every version reached, keyed
+    `<package>\t<version>`, with the features enabled on it."""
+
+    pub roots: list[list[str]]
+    pub reached: Dict[str, list[str]]
+
+
+pub model Walk:
+    """The versions a walk reached, keyed `<package>\t<version>` with the features enabled on each, and those it planned."""
+
+    pub enabled: Dict[str, list[str]]
+    pub planned: Dict[str, Planned]
+
+
 pub def crates_io_lines(cache: str, package: str) -> Result[list[JsonValue], str]:
     """Every crates.io index line of `package`, fetched into the cache the first time it is needed."""
     relative = "index/" + sparse_index_path(package)
@@ -136,9 +161,59 @@ pub def plan_closure(
     active build dependencies too: recording the script's fact compiles it against them. A requirement is met by the
     newest version adopted or planned that satisfies it.
     """
+    mut entries: list[list[str]] = []
+    for target in targets:
+        # A target is [package, version, feature...]: its defaults and any features asked of it.
+        entries.append([target[0], target[1], "default"] + target[2:])
+    walk = walk_closure(adopted, entries, cache, blobs, true)?
+    return dependency_order(walk.planned, package_versions(adopted))
+
+
+pub def resolved_closure(adopted: Dict[str, Adoption], requests: list[Requested], cache: str) -> Result[Resolution, str]:
+    """
+    The adopted versions a build of `requests` reaches, by the rule adoption plans with: each request is met by the
+    newest adopted version satisfying it, and the walk follows the features every dependent enables. Nothing is
+    planned: a requirement no adopted version meets is refused, so a build-script recording never adopts on the side.
+    """
+    known = package_versions(adopted)
+    mut roots: list[list[str]] = []
+    mut entries: list[list[str]] = []
+    for request in requests:
+        version = newest_meeting(known, request.package, request.req)?
+        if len(version) == 0:
+            return Err(f"no adopted version of {request.package} meets `{request.req}`; adopt it first")
+        roots.append([request.package, version])
+        mut entry = [request.package, version]
+        if request.default_features:
+            entry.append("default")
+        for feature in request.features:
+            entry.append(feature)
+        entries.append(entry)
+    walk = walk_closure(adopted, entries, cache, "", false)?
+    return Ok(Resolution(roots=roots, reached=walk.enabled))
+
+
+def package_versions(adopted: Dict[str, Adoption]) -> Dict[str, list[str]]:
+    """The adopted versions of each package."""
     mut versions: Dict[str, list[str]] = {}
     for key in adopted.keys():
         remember(versions, adopted[key].package, adopted[key].version)
+    return versions
+
+
+def walk_closure(
+    adopted: Dict[str, Adoption],
+    entries: list[list[str]],
+    cache: str,
+    blobs: str,
+    plan: bool,
+) -> Result[Walk, str]:
+    """
+    Walk from `entries` (each [package, version, feature...]) through every dependency the enabled features activate,
+    and through the build dependencies of each version with a build script. With `plan`, a version or requirement the
+    log has not adopted is planned from crates.io; without it, it is refused.
+    """
+    versions = package_versions(adopted)
     mut known: Dict[str, list[str]] = {}
     for package in versions.keys():
         known[package] = versions[package]
@@ -147,9 +222,8 @@ pub def plan_closure(
     mut enabled: Dict[str, list[str]] = {}
     # Each entry is [package, version, feature...].
     mut queue: list[list[str]] = []
-    for target in targets:
-        # A target is [package, version, feature...]: its defaults and any features asked of it.
-        queue.append([target[0], target[1], "default"] + target[2:])
+    for entry in entries:
+        queue.append(entry)
     mut position = 0
     while position < len(queue):
         entry = queue[position]
@@ -170,6 +244,8 @@ pub def plan_closure(
         if not grew:
             continue
         if key not in adopted and key not in planned:
+            if not plan:
+                return Err(f"{package} {version} is not adopted; adopt it first")
             item = prepare(cache, blobs, find_line(crates_io_lines(cache, package)?, package, version)?)?
             planned[key] = item
             remember(known, package, version)
@@ -188,13 +264,15 @@ pub def plan_closure(
             dependency = activation.dependency
             mut choice = newest_meeting(known, dependency.package, dependency.req)?
             if len(choice) == 0:
+                if not plan:
+                    return Err(f"no adopted version of {dependency.package} meets `{dependency.req}`; adopt it first")
                 choice = choose(crates_io_lines(cache, dependency.package)?, dependency.package, dependency.req)?
                 remember(known, dependency.package, choice)
             mut next = [dependency.package, choice]
             for feature in activation.features:
                 next.append(feature)
             queue.append(next)
-    return dependency_order(planned, versions)
+    return Ok(Walk(enabled=enabled, planned=planned))
 
 
 def adoption_of(adopted: Dict[str, Adoption], planned: Dict[str, Planned], key: str) -> Adoption:

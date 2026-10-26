@@ -105,7 +105,8 @@ jobs:
             index=$((index + 1))
             work="$RUNNER_TEMP/work/$index"
             build=()
-            if [ -n "$lock" ]; then build=(--incan "$RUNNER_TEMP/incan/incan" --build-lock "tool/$lock"); fi
+            # A binding whose script has build dependencies names one in the last field; the toolchain's Oven builds them.
+            if [ -n "$lock" ] && [ -x "$RUNNER_TEMP/incan/oven" ]; then build=(--oven "$RUNNER_TEMP/incan/oven"); fi
             if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
                 --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
                 --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose \

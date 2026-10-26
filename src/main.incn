@@ -16,7 +16,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
-                          [--incan PATH --build-lock LOCK.json]
+                          [--oven PATH] [--target TRIPLE]
                           [--propose] [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
     incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
@@ -70,7 +70,7 @@ from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, 
 from closure import blob_path, crate_archive, crates_io_lines, find_line, plan_closure, prepare, reproduce
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
-from buildscript import Selection, build_roots, record_proposal
+from buildscript import RegistryView, Selection, build_roots, record_proposal, rustc_host
 from graph import stage_graph, unclaimed_graphs, validate_graph
 from native import Compiler, convert, read_traces, run_wrapper, wrapper_role
 from oci import (
@@ -896,7 +896,7 @@ def keep_documents(root: Path, entries: list[TarEntry], documents: JsonValue, la
 def print_build_roots(invocation: Invocation) -> Result[None, str]:
     """
     The root requests a build script's build dependencies are resolved from, for one binding's features, as
-    `{"deps": [...]}`: what `record-fact --build-lock` expects a lock of.
+    `{"deps": [...]}`: what `record-fact` resolves against the adopted versions and has Oven build for the host.
     """
     if len(invocation.positional) != 2:
         return Err("usage: incan-pub build-roots NAME VERSION [--features a,b] --cache DIR")
@@ -933,7 +933,8 @@ def record_fact(invocation: Invocation) -> Result[None, str]:
         Some(payload) => adopt = payload
         None => return Err(f"{name} {version} is not adopted")
     selection = selection_of(invocation)?
-    match record_proposal(name, version, adopt, state[key].checksum, invocation.require("blobs")?, invocation.require("cache")?, invocation.require("work")?, selection)?:
+    registry = RegistryView(adopted=adopted_adoptions(state)?, archives=adopted_archives(state))
+    match record_proposal(name, version, adopt, state[key].checksum, invocation.require("blobs")?, invocation.require("cache")?, invocation.require("work")?, selection, registry)?:
         Some(proposal) =>
             if invocation.flag("propose"):
                 println(f"proposed: {proposal}")
@@ -945,8 +946,29 @@ def record_fact(invocation: Invocation) -> Result[None, str]:
             return Ok(None)
 
 
+def adopted_archives(state: Dict[str, Record]) -> Dict[str, str]:
+    """The source archive digest of every adopted version, keyed `<package>\t<version>`."""
+    mut out: Dict[str, str] = {}
+    for key in state.keys():
+        record = state[key]
+        match record.adopt:
+            Some(payload) => out[record.name + "\t" + record.version] = string_member(payload, "archive")
+            None => pass
+    return out
+
+
 def selection_of(invocation: Invocation) -> Result[Selection, str]:
-    """The binding from the command line, its toolchain identity read from the `rustc` that will compile the script."""
+    """
+    The binding from the command line, its toolchain identity read from the `rustc` that will compile the script.
+
+    The graph names the target the fact is for and the host the build script runs on. `--target`, when given, must be
+    the graph's target, and the graph's host must be this `rustc`'s host: the script and its build dependencies are
+    compiled for the host and run here, while `TARGET` and `CARGO_CFG_*` describe the target. A fact is recorded for
+    the target it names and never copied from another.
+    """
+    for retired in ["incan", "build-lock"]:
+        if invocation.flag(retired):
+            return Err(f"`--{retired}` is retired: build dependencies are built by the toolchain's Oven; pass --oven")
     rustc = invocation.require("rustc")?
     version = run_program(rustc, ["--version"], {"PATH": "/usr/bin:/bin"}, ".")?
     if not version.success:
@@ -976,11 +998,27 @@ def selection_of(invocation: Invocation) -> Result[Selection, str]:
         "host": JsonValue.string(string_member(described, "host")),
     })
     validate_graph(graph, graph_file)?
+    target = string_member(described, "target")
+    host = string_member(described, "host")
+    match invocation.option("target"):
+        Some(explicit) =>
+            if explicit != target:
+                return Err(f"`--target {explicit}` is not the graph's target `{target}`; the graph is the binding's evidence")
+        None => pass
+    verbose = run_program(rustc, ["-vV"], {"PATH": "/usr/bin:/bin"}, ".")?
+    match verbose.stdout.decode():
+        Ok(text) =>
+            match rustc_host(text):
+                Some(actual) =>
+                    if actual != host:
+                        return Err(f"the graph's host `{host}` is not {rustc}'s host `{actual}`; build scripts run on the host")
+                None => return Err(f"{rustc} -vV names no host")
+        Err(error) => return Err(f"{rustc} -vV: {error}")
     return Ok(Selection(
         toolchain=toolchain,
         rustc=rustc,
-        target=string_member(described, "target"),
-        host=string_member(described, "host"),
+        target=target,
+        host=host,
         profile=profile,
         features=sorted(features),
         domain=domain,
@@ -989,9 +1027,7 @@ def selection_of(invocation: Invocation) -> Result[Selection, str]:
         cxx=invocation.option("cxx").unwrap_or(""),
         ar=invocation.option("ar").unwrap_or(""),
         sysroot=invocation.option("sysroot").unwrap_or(""),
-        incan=absolute_option(invocation, "incan")?,
-        build_lock=absolute_option(invocation, "build-lock")?,
-        pin=canonical_path(invocation.option("root").unwrap_or("."))?,
+        oven=absolute_option(invocation, "oven")?,
     ))
 
 
