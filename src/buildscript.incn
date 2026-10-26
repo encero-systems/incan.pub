@@ -198,10 +198,10 @@ def build_dependencies(
     # 4. Exactly the units Oven reports, and every root among them at the version it was pinned to.
     mut wanted: list[list[str]] = []
     for root in roots:
-        package = string_member(root, "loaf").replace("crates-io/", "")
+        dependency = string_member(root, "loaf").replace("crates-io/", "")
         for chosen in resolution.roots:
-            if chosen[0] == package:
-                wanted.append([string_member(root, "name"), package, chosen[1]])
+            if chosen[0] == dependency:
+                wanted.append([string_member(root, "name"), dependency, chosen[1]])
     return reported_links(closure, wanted, label)
 
 
@@ -213,7 +213,7 @@ pub def requests_of(roots: list[JsonValue]) -> list[Requested]:
             package=string_member(root, "loaf").replace("crates-io/", ""),
             req=string_member(root, "req"),
             default_features=flag_value(root, "default-features", true),
-            features=string_list_member(root, "features"),
+            features=string_list_member(root, "features").unwrap_or([]),
         ))
     return requests
 
@@ -248,7 +248,7 @@ pub def build_dependency_manifest(roots: list[JsonValue], resolution: Resolution
         fields.append("version = " + canonical(JsonValue.string("=" + version))?)
         if not flag_value(root, "default-features", true):
             fields.append("default-features = false")
-        features = string_list_member(root, "features")
+        features = string_list_member(root, "features").unwrap_or([])
         if len(features) > 0:
             fields.append("features = " + canonical(JsonValue.array([JsonValue.string(item) for item in features]))?)
         lines.append(name + " = { " + ", ".join(fields) + " }")
