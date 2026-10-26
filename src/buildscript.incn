@@ -195,11 +195,14 @@ def build_dependencies(
     ran = run_program(selection.oven, oven_build_arguments(project, snapshots, closure), environment, base)?
     if not ran.success:
         return Err(f"{label}: building the build dependencies failed: {text_of(ran.stderr)}{text_of(ran.stdout)}")
-    # 4. Exactly the units Oven reports, and every root among them.
-    mut names: list[str] = []
+    # 4. Exactly the units Oven reports, and every root among them at the version it was pinned to.
+    mut wanted: list[list[str]] = []
     for root in roots:
-        names.append(string_member(root, "name"))
-    return reported_links(closure, names, label)
+        package = string_member(root, "loaf").replace("crates-io/", "")
+        for chosen in resolution.roots:
+            if chosen[0] == package:
+                wanted.append([string_member(root, "name"), package, chosen[1]])
+    return reported_links(closure, wanted, label)
 
 
 pub def requests_of(roots: list[JsonValue]) -> list[Requested]:
@@ -258,24 +261,36 @@ pub def oven_build_arguments(project: str, snapshots: list[str], closure: str) -
     for snapshot in snapshots:
         arguments.append("--registry-source")
         arguments.append(snapshot)
-    arguments.append("--registry-closure")
+    arguments.append("--registry-closure-out")
     arguments.append(closure)
     return arguments
 
 
-def source_snapshot(blobs: str, key: str, digest: str, base: str, label: str) -> Result[str, str]:
-    """Unpack one adopted version's source Loaf archive, verified against its digest, as a source Oven may build."""
-    directory = base + "/registry-sources/" + key.replace("\t", "-")
-    for file in archive_files(blobs, digest, label)?:
-        write_file(directory + "/" + file.path, file.data)?
-    return Ok(directory)
-
-
-pub def reported_links(closure: str, names: list[str], label: str) -> Result[list[list[str]], str]:
+pub def source_snapshot(blobs: str, key: str, digest: str, base: str, label: str) -> Result[str, str]:
     """
-    `--extern` for each build-dependency root and `-L dependency=` for every unit of the registry closure Oven reported.
-    The closure has the toolchain's `registry_units` shape: its units' entries sit side by side, three levels above
-    each extern's artifact. A root the closure does not name is refused by name, and so is a closure Oven refused.
+    One adopted version's source Loaf as Oven admits a registry source: its files under `artifacts/source`, verified
+    against the archive digest adoption recorded, and beside them the receipt `artifact.json`, which names the archive
+    as the snapshot's identity and lists every file with its digest in archive order. Returns the source directory.
+    """
+    directory = base + "/registry-sources/" + key.replace("\t", "-")
+    mut materialized: list[JsonValue] = []
+    for file in archive_files(blobs, digest, label)?:
+        write_file(directory + "/artifacts/source/" + file.path, file.data)?
+        materialized.append(JsonValue.object({
+            "relative_path": JsonValue.string("source/" + file.path),
+            "digest": JsonValue.string(digest_bytes(file.data)),
+        }))
+    receipt = JsonValue.object({"identity": JsonValue.string(digest), "materialized_files": JsonValue.array(materialized)})
+    write_text(Path(directory + "/artifact.json"), canonical(receipt)?, "artifact.json")?
+    return Ok(directory + "/artifacts/source")
+
+
+pub def reported_links(closure: str, wanted: list[list[str]], label: str) -> Result[list[list[str]], str]:
+    """
+    `--extern` for each build-dependency root and `-L dependency=` for the directory of every host unit in the
+    registry closure Oven reported (`incan.oven.closure/1`). Each root is [alias, package, version]; its unit is the
+    host-domain unit of that package and version. A root the closure lacks is refused by name, as is a closure that
+    lists refusals.
     """
     mut result = JsonValue.null()
     match Path(closure).read_text("utf-8", "strict"):
@@ -289,26 +304,35 @@ pub def reported_links(closure: str, names: list[str], label: str) -> Result[lis
             if refused.len() > 0:
                 return Err(f"{label}: Oven refused build dependencies: {canonical(refused)?}")
         None => pass
-    externs = member(result, "externs")
-    mut out: list[list[str]] = []
-    mut missing: list[str] = []
-    mut entries = ""
-    for name in sorted(names):
-        extern_name = name.replace("-", "_")
-        if not externs.contains_key(extern_name):
-            missing.append(name)
-            continue
-        artifact = string_member(member(externs, extern_name), "path")
-        out.append(["--extern", extern_name + "=" + artifact])
-        parts = artifact.split("/")
-        entries = "/".join(parts[0:len(parts) - 3])
-    if len(missing) > 0:
-        return Err(f"{label}: Oven built no host unit for the build dependencies {', '.join(missing)}")
+    mut host: list[JsonValue] = []
     match result.get("units"):
         Some(units) =>
             for unit in units.as_array().unwrap_or([]):
-                out.append(["-L", "dependency=" + entries + "/" + string_member(unit, "entry").replace(":", "-") + "/artifacts"])
+                if string_member(unit, "domain") == "host":
+                    host.append(unit)
         None => return Err(f"{label}: {closure}: no `units`")
+    mut out: list[list[str]] = []
+    mut missing: list[str] = []
+    for root in wanted:
+        mut artifact = ""
+        for unit in host:
+            if string_member(unit, "loaf") == "crates-io/" + root[1] and string_member(unit, "version") == root[2]:
+                artifact = string_member(unit, "artifact")
+        if len(artifact) == 0:
+            missing.append(root[0])
+        else:
+            out.append(["--extern", root[0].replace("-", "_") + "=" + artifact])
+    if len(missing) > 0:
+        listed = ", ".join(missing)
+        return Err(f"{label}: Oven built no host unit for the build dependencies {listed}")
+    mut directories: list[str] = []
+    for unit in host:
+        parts = string_member(unit, "artifact").split("/")
+        directory = "/".join(parts[0:len(parts) - 1])
+        if not directories.contains(directory):
+            directories.append(directory)
+    for directory in sorted(directories):
+        out.append(["-L", "dependency=" + directory])
     return Ok(out)
 
 

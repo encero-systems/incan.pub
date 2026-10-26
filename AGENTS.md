@@ -54,7 +54,7 @@ A script that compiles C or C++ needs `--cc`, `--cxx`, `--ar` and `--sysroot`: `
 A script with build dependencies needs `--oven`, the toolchain's Oven:
 1. The recorder resolves the active build dependencies against the adopted versions; a requirement no adopted version meets is refused, never adopted on the side.
 2. It unpacks the source snapshot of every version the build reaches from the blob store.
-3. Oven builds them for the host as the `[rust-dependencies]` of a generated project (`oven build --registry-source <snapshot>... --registry-closure <file>`).
+3. Oven builds them for the host as the `[rust-dependencies]` of a generated project (`oven build --registry-source <snapshot>... --registry-closure-out <file>`).
 4. The script links against exactly the units Oven reports; a build dependency missing from that closure is refused by name.
 
 The graph names the fact's `target` and the `host` the script runs on. `--target`, when given, must be the graph's target, and the graph's host must be the `rustc` host. A fact for another target is recorded from this host with the target's `cfg` answers, and with `--sysroot` passed through the target's compile flags when the script compiles C. A fact is never copied from another target.
