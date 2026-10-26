@@ -1,7 +1,8 @@
 name: check
 
 # Test and build the tool on every OS a workflow runs it on, admit the published log with it, and on a push to main
-# publish the binary as `ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:<tool key>-<target triple>`. The bake and
+# publish the binary as `ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:<tool key>-<target triple>` (a pull
+# request keeps it as the run artifact `incan-pub-<target triple>`). The bake and
 # publish-sources workflows pull that binary instead of building the tool, which from an empty Oven home spends most
 # of a run compiling the standard library. The tool key is the git hash of the listing of everything the binary is
 # built from: build.sh, loaf.toml, oven.lock, src, tests, and this file, which pins the compiler. A commit that changes
@@ -87,6 +88,15 @@ jobs:
         if: steps.published.outputs.present != 'true'
         working-directory: tool
         run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
+      # A pull request's binary is not published; it stays a run artifact, so a recording can try the branch's tool
+      # without building it.
+      - name: Keep the pull request's tool binary
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: incan-pub-${{ matrix.triple }}
+          path: tool/target/incan-pub
+          retention-days: 7
       - name: Publish the tool binary
         if: github.event_name == 'push' && steps.published.outputs.present != 'true'
         env:
