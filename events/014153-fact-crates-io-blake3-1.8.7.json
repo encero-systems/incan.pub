@@ -1,0 +1,367 @@
+{
+  "actor": "encero-systems/incan.pub maintainers",
+  "at": "2026-10-27T08:14:31Z",
+  "evidence": {
+    "compiler_probes": [
+      "sha256:2b1aef69eb989137438eeccc42ab7e658605bd797fb6e46b082643ad4f8ea3a2",
+      "sha256:312907ee5ef8038b4aeb1cbfb7c7b426acbbceadb7eb9370732fc7a5bbb4c644",
+      "sha256:3b65a3530708aec62b022e6ee5538f375d80b21747f86f9ceafc632ee3c0e81f",
+      "sha256:4a8270a5fb26d5c83dcd680096e404729ffe6c8874a79f13e54363fd88b0534e",
+      "sha256:646e22375dbb2efd803fd083665bf5e02be49728e49129cea0145b363590a735",
+      "sha256:78b706271d02523656b4c90333f23d47c531963e1616153503b1d9da7b79afd0",
+      "sha256:bef590ab195064cc3c646f7081aa695adee329530aecf3975323a0efe20bed6d"
+    ],
+    "domain": "target",
+    "graph": "sha256:c183708a86dad8807dc5b39259d0813bac0bd64d169872f41084dd7d84b9ba14",
+    "hazards": [],
+    "host": "aarch64-apple-darwin",
+    "method": "registry build-script run",
+    "sandbox": "sandbox-exec: network denied, writes confined to the work directory"
+  },
+  "fact": {
+    "cfg": [
+      "blake3_avx2_ffi",
+      "blake3_avx512_ffi",
+      "blake3_sse2_ffi",
+      "blake3_sse41_ffi"
+    ],
+    "features": [
+      "default",
+      "std"
+    ],
+    "link": [
+      {
+        "environment": [],
+        "executable": {
+          "digest": "sha256:af5c932173468119c0dab0f1b61313d4200c89248459007d3c145e90c7bdb7fb",
+          "name": "clang-22",
+          "owner": "sha256:69c521df934625c66ae3dc7b7571eef9c92840b85a10c7f9eab9760559a126b3",
+          "path": "clang/bin/clang-22"
+        },
+        "library": {
+          "kind": "static",
+          "name": "blake3_avx512_assembly"
+        },
+        "name": "blake3_avx512_assembly",
+        "objects": [
+          {
+            "arguments": [
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "clang/lib/clang/22"
+              },
+              {
+                "literal": "-O0"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "-g"
+              },
+              {
+                "literal": "-gdwarf-4"
+              },
+              {
+                "literal": "-fno-omit-frame-pointer"
+              },
+              {
+                "literal": "-mno-omit-leaf-frame-pointer"
+              },
+              {
+                "literal": "-m64"
+              },
+              {
+                "literal": "--target=x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-std=c11"
+              },
+              {
+                "literal": "-mavx512f"
+              },
+              {
+                "literal": "-mavx512vl"
+              },
+              {
+                "literal": "--sysroot"
+              },
+              {
+                "owner": "sysroot-x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "blake3_avx512_x86-64_unix.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-c-blake3-avx512-x86-64-unix-S"
+              }
+            ],
+            "language": "assembly",
+            "name": "blake3_avx512_x86-64_unix.o"
+          }
+        ],
+        "sources": [
+          {
+            "digest": "sha256:c641987dd82fabed59d527f1a3413c4a2ff3df919af6d13ff2788c95e4035c0d",
+            "kind": "file",
+            "name": "source-c-blake3-avx512-x86-64-unix-S",
+            "path": "c/blake3_avx512_x86-64_unix.S"
+          }
+        ],
+        "target": "x86_64-unknown-linux-gnu"
+      },
+      {
+        "environment": [],
+        "executable": {
+          "digest": "sha256:af5c932173468119c0dab0f1b61313d4200c89248459007d3c145e90c7bdb7fb",
+          "name": "clang-22",
+          "owner": "sha256:69c521df934625c66ae3dc7b7571eef9c92840b85a10c7f9eab9760559a126b3",
+          "path": "clang/bin/clang-22"
+        },
+        "library": {
+          "kind": "static",
+          "name": "blake3_sse2_sse41_avx2_assembly"
+        },
+        "name": "blake3_sse2_sse41_avx2_assembly",
+        "objects": [
+          {
+            "arguments": [
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "clang/lib/clang/22"
+              },
+              {
+                "literal": "-O0"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "-g"
+              },
+              {
+                "literal": "-gdwarf-4"
+              },
+              {
+                "literal": "-fno-omit-frame-pointer"
+              },
+              {
+                "literal": "-mno-omit-leaf-frame-pointer"
+              },
+              {
+                "literal": "-m64"
+              },
+              {
+                "literal": "--target=x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-std=c11"
+              },
+              {
+                "literal": "--sysroot"
+              },
+              {
+                "owner": "sysroot-x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "blake3_avx2_x86-64_unix.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-c-blake3-avx2-x86-64-unix-S"
+              }
+            ],
+            "language": "assembly",
+            "name": "blake3_avx2_x86-64_unix.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "clang/lib/clang/22"
+              },
+              {
+                "literal": "-O0"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "-g"
+              },
+              {
+                "literal": "-gdwarf-4"
+              },
+              {
+                "literal": "-fno-omit-frame-pointer"
+              },
+              {
+                "literal": "-mno-omit-leaf-frame-pointer"
+              },
+              {
+                "literal": "-m64"
+              },
+              {
+                "literal": "--target=x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-std=c11"
+              },
+              {
+                "literal": "--sysroot"
+              },
+              {
+                "owner": "sysroot-x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "blake3_sse2_x86-64_unix.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-c-blake3-sse2-x86-64-unix-S"
+              }
+            ],
+            "language": "assembly",
+            "name": "blake3_sse2_x86-64_unix.o"
+          },
+          {
+            "arguments": [
+              {
+                "literal": "-resource-dir"
+              },
+              {
+                "owner": "clang/lib/clang/22"
+              },
+              {
+                "literal": "-O0"
+              },
+              {
+                "literal": "-ffunction-sections"
+              },
+              {
+                "literal": "-fdata-sections"
+              },
+              {
+                "literal": "-fPIC"
+              },
+              {
+                "literal": "-g"
+              },
+              {
+                "literal": "-gdwarf-4"
+              },
+              {
+                "literal": "-fno-omit-frame-pointer"
+              },
+              {
+                "literal": "-mno-omit-leaf-frame-pointer"
+              },
+              {
+                "literal": "-m64"
+              },
+              {
+                "literal": "--target=x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-std=c11"
+              },
+              {
+                "literal": "--sysroot"
+              },
+              {
+                "owner": "sysroot-x86_64-unknown-linux-gnu"
+              },
+              {
+                "literal": "-o"
+              },
+              {
+                "output": "blake3_sse41_x86-64_unix.o"
+              },
+              {
+                "literal": "-c"
+              },
+              {
+                "input": "source-c-blake3-sse41-x86-64-unix-S"
+              }
+            ],
+            "language": "assembly",
+            "name": "blake3_sse41_x86-64_unix.o"
+          }
+        ],
+        "sources": [
+          {
+            "digest": "sha256:a2d95519fd9845cf80252110e21a93124e81c03da836eaac0bca0537be4f8324",
+            "kind": "file",
+            "name": "source-c-blake3-avx2-x86-64-unix-S",
+            "path": "c/blake3_avx2_x86-64_unix.S"
+          },
+          {
+            "digest": "sha256:94baa998f4114bf57b99e1791a21e9f0bcdc4bd5803864eb30a2477440b7380c",
+            "kind": "file",
+            "name": "source-c-blake3-sse2-x86-64-unix-S",
+            "path": "c/blake3_sse2_x86-64_unix.S"
+          },
+          {
+            "digest": "sha256:135048e4a81a6f9e86960b115141874a55954dbfd2cd1e8e9818837b46b498ad",
+            "kind": "file",
+            "name": "source-c-blake3-sse41-x86-64-unix-S",
+            "path": "c/blake3_sse41_x86-64_unix.S"
+          }
+        ],
+        "target": "x86_64-unknown-linux-gnu"
+      }
+    ],
+    "profile": "debug",
+    "target": "x86_64-unknown-linux-gnu",
+    "toolchain": "rustc 1.98.0 (88d9e12ae 2026-08-18)"
+  },
+  "id": "sha256:5596e573ece0445fa04e69f864549386949740b5abae00ead21682d627cf1db2",
+  "kind": "fact",
+  "schema": "incan.pub/event/1",
+  "signature": null,
+  "subject": {
+    "name": "blake3",
+    "scope": "crates-io",
+    "version": "1.8.7"
+  }
+}
