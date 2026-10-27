@@ -1,11 +1,58 @@
 """
-Build-script recording: how the environment a script prints for the crate's compile becomes part of its fact.
+Build-script recording: how the environment a script prints for the crate's compile becomes part of its fact, how
+its build dependencies reach Oven and come back as the units it links, and how a fact is recorded for a target other
+than the host.
 """
 
-from std.testing import assert_eq, assert_is_err
+from std.fs import Path
+from std.json import JsonValue, parse
+from std.testing import assert_eq, assert_is_err, assert_true
 
-from buildscript import environment_entry, out_dir_includes, with_out_dir_suffixes
-from tar import TarEntry
+from buildscript import (
+    build_dependency_manifest,
+    cross_compile_flags,
+    environment_entry,
+    out_dir_includes,
+    oven_build_arguments,
+    reported_links,
+    requests_of,
+    rustc_host,
+    source_snapshot,
+    with_out_dir_suffixes,
+)
+from canonical import digest_bytes, digest_text
+from closure import Resolution
+from events import string_member, write_text
+from host import environment_value, run_program
+from tar import TarEntry, write_archive
+
+
+def scratch(name: str) -> str:
+    """A fresh directory under the system temporary directory, as a path string."""
+    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/incan-pub-buildscript-" + name
+    path = Path(location)
+    if path.is_dir():
+        path.remove_tree().unwrap()
+    path.mkdir(parents=true, exist_ok=true).unwrap()
+    return location
+
+
+def error_of[T](result: Result[T, str]) -> str:
+    match result:
+        Ok(_) => return ""
+        Err(message) => return message
+
+
+def root(name: str, package: str, req: str, defaults: bool, features: list[str]) -> JsonValue:
+    """A build-dependency root as `build_roots` writes it."""
+    return JsonValue.object({
+        "name": JsonValue.string(name),
+        "loaf": JsonValue.string("crates-io/" + package),
+        "req": JsonValue.string(req),
+        "features": JsonValue.array([JsonValue.string(item) for item in features]),
+        "default-features": JsonValue.bool(defaults),
+        "optional": JsonValue.bool(false),
+    })
 
 
 def test_a_value_appended_to_out_dir_is_a_literal_and_names_an_input() -> None:
@@ -37,3 +84,154 @@ def test_a_path_below_out_dir_is_stated_relative_to_it() -> None:
     assert_eq("\t".join(environment_entry("ISLE_DIR=/work/out/isle/", "/work/out", "c 1.0.0").unwrap()), "ISLE_DIR\tout\tisle")
     assert_eq("\t".join(environment_entry("DIR=/work/out", "/work/out", "c 1.0.0").unwrap()), "DIR\tout\t.")
     assert_eq("\t".join(environment_entry("FAMILY=unix", "/work/out", "c 1.0.0").unwrap()), "FAMILY\tliteral\tunix")
+
+
+def test_build_dependency_roots_become_resolution_requests() -> None:
+    requests = requests_of([root("cc", "cc", "^1.1.12", true, []), root("gen", "bindgen", "^0.69", false, ["runtime"])])
+    assert_eq(requests[0].package, "cc")
+    assert_eq(requests[0].req, "^1.1.12")
+    assert_true(requests[0].default_features)
+    assert_eq(requests[1].package, "bindgen")
+    assert_true(not requests[1].default_features)
+    assert_eq(",".join(requests[1].features), "runtime")
+
+
+def test_the_build_dependencies_are_a_generated_projects_rust_dependencies_at_their_resolved_versions() -> None:
+    roots = [root("cc", "cc", "^1.1.12", true, []), root("gen", "bindgen", "^0.69", false, ["runtime"])]
+    resolution = Resolution(roots=[["cc", "1.2.57"], ["bindgen", "0.69.5"]], reached={})
+    assert_eq(
+        build_dependency_manifest(roots, resolution).unwrap(),
+        "[project]\nname = \"build_dependencies\"\nversion = \"0.0.0\"\n\n[[rust.lib]]\npath = \"src/lib.rs\"\n\n"
+        + "[rust-dependencies]\n"
+        + "cc = { version = \"=1.2.57\" }\n"
+        + "gen = { package = \"bindgen\", version = \"=0.69.5\", default-features = false, features = [\"runtime\"] }\n",
+    )
+    # A root the resolution did not choose a version for is refused, never left unpinned.
+    assert_is_err(build_dependency_manifest(roots, Resolution(roots=[["cc", "1.2.57"]], reached={})))
+
+
+def test_oven_builds_the_project_for_the_host_from_each_source_snapshot() -> None:
+    arguments = oven_build_arguments("/w/build-dependencies", ["/w/sources/cc-1.2.57", "/w/sources/shlex-1.3.0"], "/w/closure.json")
+    assert_eq(
+        " ".join(arguments),
+        "build /w/build-dependencies --registry-source /w/sources/cc-1.2.57 --registry-source /w/sources/shlex-1.3.0 "
+        + "--registry-closure-out /w/closure.json",
+    )
+    # No target: the build script and its build dependencies are host tools whatever the fact's target is.
+    assert_true(not arguments.contains("--target"))
+
+
+def test_a_source_snapshot_carries_the_receipt_oven_admits_it_by() -> None:
+    directory = scratch("snapshot")
+    files = [
+        TarEntry(path="loaf.toml", executable=false, data=b"[project]\nname = \"crates-io/leaf\"\nversion = \"1.0.0\"\n"),
+        TarEntry(path="src/lib.rs", executable=false, data=b"pub fn answer() -> u32 {\n    42\n}\n"),
+    ]
+    archive = write_archive(files).unwrap()
+    digest = digest_bytes(archive)
+    Path(directory + "/blobs/sha256").mkdir(parents=true, exist_ok=true).unwrap()
+    Path(directory + "/blobs/sha256/" + digest[7:] + ".tar").write_bytes(archive).unwrap()
+    source = source_snapshot(directory + "/blobs", "leaf\t1.0.0", digest, directory, "leaf 1.0.0").unwrap()
+    assert_eq(source, directory + "/registry-sources/leaf-1.0.0/artifacts/source")
+    assert_true(Path(source + "/src/lib.rs").is_file())
+    receipt = parse(Path(directory + "/registry-sources/leaf-1.0.0/artifact.json").read_text("utf-8", "strict").unwrap()).unwrap()
+    # The archive is the snapshot's identity, and every file is receipted under `source/` in archive order.
+    assert_eq(string_member(receipt, "identity"), digest)
+    listed = receipt.get("materialized_files").unwrap().as_array().unwrap()
+    assert_eq(string_member(listed[0], "relative_path"), "source/loaf.toml")
+    assert_eq(string_member(listed[1], "relative_path"), "source/src/lib.rs")
+    assert_eq(string_member(listed[1], "digest"), digest_bytes(b"pub fn answer() -> u32 {\n    42\n}\n"))
+    # A digest the blob store does not hold is refused before anything is unpacked.
+    assert_is_err(source_snapshot(directory + "/blobs", "leaf\t1.0.0", digest_text("other"), directory, "leaf 1.0.0"))
+
+
+def write_closure(directory: str, refused: str) -> str:
+    """A reported `incan.oven.closure/1`: cc and its dependency shlex for the host, and a target cc that must not link."""
+    entries = directory + "/store/entries"
+    closure = directory + "/closure.json"
+    host_cc = entries + "/sha256-aa/artifacts/libcc.rlib"
+    host_shlex = entries + "/sha256-bb/artifacts/libshlex.rlib"
+    mut text = "{\"schema\":\"incan.oven.closure/1\",\"compiler\":\"rustc 1.98.0\",\"refused\":" + refused + ",\"units\":["
+    text = text + "{\"loaf\":\"crates-io/cc\",\"name\":\"cc\",\"version\":\"1.2.57\",\"profile\":\"debug\",\"domain\":\"host\","
+    text = text + "\"target\":\"aarch64-apple-darwin\",\"kind\":\"lib\",\"features\":[\"default\"],\"entry\":\"sha256:aa\","
+    text = text + "\"artifact\":\"" + host_cc + "\",\"dependencies\":[{\"alias\":\"shlex\",\"entry\":\"sha256:bb\",\"artifact\":\"" + host_shlex + "\"}]},"
+    text = text + "{\"loaf\":\"crates-io/shlex\",\"name\":\"shlex\",\"version\":\"1.3.0\",\"profile\":\"debug\",\"domain\":\"host\","
+    text = text + "\"target\":\"aarch64-apple-darwin\",\"kind\":\"lib\",\"features\":[\"default\",\"std\"],\"entry\":\"sha256:bb\","
+    text = text + "\"artifact\":\"" + host_shlex + "\",\"dependencies\":[]},"
+    text = text + "{\"loaf\":\"crates-io/cc\",\"name\":\"cc\",\"version\":\"1.2.57\",\"profile\":\"debug\",\"domain\":\"target\","
+    text = text + "\"target\":\"x86_64-unknown-linux-gnu\",\"kind\":\"lib\",\"features\":[\"default\"],\"entry\":\"sha256:cc\","
+    text = text + "\"artifact\":\"" + entries + "/sha256-cc/artifacts/libcc.rlib\",\"dependencies\":[]}],"
+    text = text + "\"externs\":{\"cc\":{\"path\":\"" + host_cc + "\"}}}"
+    write_text(Path(closure), text, "closure.json").unwrap()
+    return closure
+
+
+def test_the_script_links_exactly_the_host_units_oven_reports() -> None:
+    directory = scratch("reported")
+    closure = write_closure(directory, "[]")
+    entries = directory + "/store/entries"
+    links = reported_links(closure, [["cc", "cc", "1.2.57"]], "blake3 1.8.7").unwrap()
+    assert_eq(
+        " | ".join([" ".join(pair) for pair in links]),
+        "--extern cc=" + entries + "/sha256-aa/artifacts/libcc.rlib | -L dependency=" + entries
+        + "/sha256-aa/artifacts | -L dependency=" + entries + "/sha256-bb/artifacts",
+    )
+
+
+def test_a_build_dependency_the_closure_lacks_is_refused_by_name() -> None:
+    closure = write_closure(scratch("missing"), "[]")
+    assert_eq(
+        error_of(reported_links(closure, [["cc", "cc", "1.2.57"], ["pkg-config", "pkg-config", "0.3.32"]], "blake3 1.8.7")),
+        "blake3 1.8.7: Oven built no host unit for the build dependencies pkg-config",
+    )
+    # A unit of another version, or only in the target domain, is not the build dependency.
+    assert_is_err(reported_links(closure, [["cc", "cc", "1.2.58"]], "blake3 1.8.7"))
+
+
+def test_a_closure_oven_refused_is_refused() -> None:
+    closure = write_closure(scratch("refused"), "[{\"loaf\":\"crates-io/cc\",\"reason\":\"no source\"}]")
+    assert_true(error_of(reported_links(closure, [["cc", "cc", "1.2.57"]], "blake3 1.8.7")).startswith("blake3 1.8.7: Oven refused build dependencies"))
+
+
+def test_a_cross_target_finds_its_sysroot_through_the_target_flags() -> None:
+    flags = cross_compile_flags("x86_64-unknown-linux-gnu", "aarch64-apple-darwin", "/sysroots/glibc-2.28")
+    assert_eq(flags["TARGET_CFLAGS"], "--sysroot=/sysroots/glibc-2.28")
+    assert_eq(flags["TARGET_CXXFLAGS"], "--sysroot=/sysroots/glibc-2.28")
+    # On its own host the compiler already has the sysroot, and Apple targets read SDKROOT.
+    assert_eq(len(cross_compile_flags("x86_64-unknown-linux-gnu", "x86_64-unknown-linux-gnu", "/s").keys()), 0)
+    assert_eq(len(cross_compile_flags("x86_64-apple-darwin", "aarch64-apple-darwin", "/s").keys()), 0)
+
+
+def test_the_host_is_the_rustc_host_line() -> None:
+    reported = "rustc 1.98.0 (88d9e12ae 2026-08-18)\nbinary: rustc\nhost: aarch64-apple-darwin\nrelease: 1.98.0\n"
+    assert_eq(rustc_host(reported).unwrap_or(""), "aarch64-apple-darwin")
+    assert_true(rustc_host("rustc 1.98.0\n") == None)
+
+
+def test_oven_builds_a_registry_source_for_the_host() -> None:
+    # The recorder's route against a real Oven: set INCAN_PUB_OVEN to a 0.6.0-dev.8 `oven` and INCAN_PUB_OVEN_HOME to
+    # its home to run it.
+    oven = environment_value("INCAN_PUB_OVEN").unwrap_or("").strip()
+    if len(oven) == 0:
+        return
+    directory = scratch("oven")
+    files = [
+        TarEntry(path="loaf.toml", executable=false, data=b"[project]\nname = \"crates-io/leaf\"\nversion = \"1.0.0\"\n\n[rust]\nname = \"leaf\"\ntype = \"lib\"\nedition = \"2021\"\n"),
+        TarEntry(path="Cargo.toml", executable=false, data=b"[package]\nname = \"leaf\"\nversion = \"1.0.0\"\nedition = \"2021\"\n"),
+        TarEntry(path="src/lib.rs", executable=false, data=b"pub fn answer() -> u32 {\n    42\n}\n"),
+    ]
+    archive = write_archive(files).unwrap()
+    digest = digest_bytes(archive)
+    Path(directory + "/blobs/sha256").mkdir(parents=true, exist_ok=true).unwrap()
+    Path(directory + "/blobs/sha256/" + digest[7:] + ".tar").write_bytes(archive).unwrap()
+    source = source_snapshot(directory + "/blobs", "leaf\t1.0.0", digest, directory, "leaf 1.0.0").unwrap()
+    project = directory + "/build-dependencies"
+    roots = [root("leaf", "leaf", "^1", true, [])]
+    write_text(Path(project + "/loaf.toml"), build_dependency_manifest(roots, Resolution(roots=[["leaf", "1.0.0"]], reached={})).unwrap(), "loaf.toml").unwrap()
+    write_text(Path(project + "/src/lib.rs"), "", "lib.rs").unwrap()
+    closure = directory + "/closure.json"
+    environment = {"PATH": "/usr/bin:/bin", "HOME": directory, "INCAN_NO_BANNER": "1", "INCAN_HOME": environment_value("INCAN_PUB_OVEN_HOME").unwrap_or(directory + "/incan-home").strip()}
+    ran = run_program(oven, oven_build_arguments(project, [source], closure), environment, directory).unwrap()
+    assert_true(ran.success)
+    links = reported_links(closure, [["leaf", "leaf", "1.0.0"]], "leaf 1.0.0").unwrap()
+    assert_true(links[0][1].startswith("leaf="))

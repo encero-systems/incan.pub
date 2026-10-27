@@ -32,6 +32,7 @@ from adoption import (
     unpack_crate,
 )
 from canonical import canonical, digest_bytes, digest_text
+from closure import Requested, resolved_closure
 from events import append_event, load_events, rewrite_event, string_member
 from projection import render_projections
 from semver import compare, parse_requirement, parse_version, satisfies
@@ -336,6 +337,24 @@ def top() -> Adoption:
         features={},
         dependencies=[Dependency(key="leaf", package="leaf", req="^1.2", features=[], default_features=true, optional=false, target=None)],
     )
+
+
+def test_a_recording_resolves_build_dependencies_against_adopted_versions_only() -> None:
+    adopted = {"top\t1.0.0": top(), "leaf\t1.2.0": leaf("1.2.0"), "leaf\t1.3.1": leaf("1.3.1")}
+    resolution = resolved_closure(adopted, [Requested(package="top", req="^1", default_features=true, features=[])], "").unwrap()
+    assert_eq(" ".join(resolution.roots[0]), "top 1.0.0")
+    # The newest adopted version meeting top's `^1.2` on leaf, and nothing the log has not adopted.
+    assert_eq(",".join(sorted(list(resolution.reached.keys()))).replace("\t", " "), "leaf 1.3.1,top 1.0.0")
+
+
+def test_a_recording_never_adopts_on_the_side() -> None:
+    missing = {"top\t1.0.0": top()}
+    match resolved_closure(missing, [Requested(package="top", req="^1", default_features=true, features=[])], ""):
+        Ok(_) => assert_true(false)
+        Err(message) => assert_eq(message, "no adopted version of leaf meets `^1.2`; adopt it first")
+    match resolved_closure(missing, [Requested(package="absent", req="^1", default_features=true, features=[])], ""):
+        Ok(_) => assert_true(false)
+        Err(message) => assert_eq(message, "no adopted version of absent meets `^1`; adopt it first")
 
 
 def adopt(root: Path, adoption: Adoption) -> None:
