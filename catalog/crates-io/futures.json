@@ -21,7 +21,7 @@
       },
       "adopted": "2026-10-06T13:11:46Z",
       "advisories": 0,
-      "archive": "sha256:a34a6c11dc6ce832d7be32826f85ad87627c47616f77d4b98184e81f32ab4739",
+      "archive": "sha256:53e4b2033fef3247816d2355b391c9743eec7e3506dfd1f31d5c6948ca7100ad",
       "assets": [
         {
           "archive": "sha256:d51d1cc3de995f29472477d26ce8329cd81b1a7bda4b54d9a8c37e114bcfcd19",
@@ -370,7 +370,6 @@
         ],
         "executor": [
           "std",
-          "futures-executor",
           "dep:futures-executor",
           "futures-executor/std"
         ],
@@ -396,7 +395,6 @@
         ],
         "thread-pool": [
           "executor",
-          "futures-executor",
           "dep:futures-executor",
           "futures-executor/thread-pool"
         ],
@@ -426,6 +424,7 @@
         "publisher": "encero-systems/incan.pub maintainers"
       },
       "rust": {
+        "build-script": false,
         "edition": "2018",
         "name": "futures",
         "type": "lib"

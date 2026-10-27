@@ -19,7 +19,7 @@ matched-path = []
 multipart = ["dep:multer"]
 original-uri = []
 query = ["dep:form_urlencoded", "dep:serde_urlencoded", "dep:serde_path_to_error"]
-tokio = ["dep:hyper-util", "dep:tokio", "tokio", "tokio/net", "tokio/rt", "tower/make", "tokio/macros"]
+tokio = ["dep:hyper-util", "dep:tokio", "tokio/net", "tokio/rt", "tower/make", "tokio/macros"]
 tower-log = ["tower/log"]
 tracing = ["dep:tracing", "axum-core/tracing"]
 ws = ["dep:hyper", "tokio", "dep:tokio-tungstenite", "dep:sha1", "dep:base64"]
@@ -28,6 +28,7 @@ ws = ["dep:hyper", "tokio", "dep:tokio-tungstenite", "dep:sha1", "dep:base64"]
 name = "axum"
 type = "lib"
 edition = "2021"
+build-script = false
 
 [dependencies]
 axum-core = { loaf = "crates-io/axum-core", version = "^0.5.5" }

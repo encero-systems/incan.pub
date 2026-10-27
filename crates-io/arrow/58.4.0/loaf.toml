@@ -18,7 +18,7 @@ default = ["csv", "ipc", "json"]
 ffi = ["arrow-schema/ffi", "arrow-data/ffi", "arrow-array/ffi"]
 force_validate = ["arrow-array/force_validate", "arrow-data/force_validate"]
 ipc = ["arrow-ipc"]
-ipc_compression = ["ipc", "arrow-ipc", "dep:arrow-ipc", "arrow-ipc/lz4", "arrow-ipc/zstd"]
+ipc_compression = ["ipc", "dep:arrow-ipc", "arrow-ipc/lz4", "arrow-ipc/zstd"]
 json = ["arrow-json"]
 pool = ["arrow-array/pool"]
 prettyprint = ["arrow-cast/prettyprint"]
@@ -29,6 +29,7 @@ test_utils = ["dep:rand", "dep:half"]
 name = "arrow"
 type = "lib"
 edition = "2024"
+build-script = false
 
 [dependencies]
 arrow-arith = { loaf = "crates-io/arrow-arith", version = "^58.4.0" }

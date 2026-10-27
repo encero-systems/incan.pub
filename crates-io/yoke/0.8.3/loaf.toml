@@ -7,9 +7,9 @@ name = "crates-io/yoke"
 version = "0.8.3"
 
 [project.features]
-alloc = ["stable_deref_trait/alloc", "zerofrom", "dep:zerofrom", "zerofrom/alloc"]
+alloc = ["stable_deref_trait/alloc", "dep:zerofrom", "zerofrom/alloc"]
 default = ["alloc", "zerofrom"]
-derive = ["dep:yoke-derive", "zerofrom", "dep:zerofrom", "zerofrom/derive"]
+derive = ["dep:yoke-derive", "dep:zerofrom", "zerofrom/derive"]
 serde = []
 zerofrom = ["dep:zerofrom"]
 
@@ -17,6 +17,7 @@ zerofrom = ["dep:zerofrom"]
 name = "yoke"
 type = "lib"
 edition = "2021"
+build-script = false
 
 [dependencies]
 stable_deref_trait = { loaf = "crates-io/stable_deref_trait", version = "^1.2.0", default-features = false }

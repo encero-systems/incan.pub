@@ -26,8 +26,8 @@ default = ["arrow", "snap", "brotli", "flate2-zlib-rs", "lz4", "zstd", "base64",
 encryption = ["dep:ring"]
 experimental = ["variant_experimental"]
 flate2 = ["dep:flate2"]
-flate2-rust_backened = ["flate2", "dep:flate2", "flate2/rust_backend"]
-flate2-zlib-rs = ["flate2", "dep:flate2", "flate2/zlib-rs"]
+flate2-rust_backened = ["dep:flate2", "flate2/rust_backend"]
+flate2-zlib-rs = ["dep:flate2", "flate2/zlib-rs"]
 futures = ["dep:futures"]
 geospatial = ["parquet-geospatial"]
 json = ["serde_json", "base64"]
@@ -51,6 +51,7 @@ zstd = ["dep:zstd"]
 name = "parquet"
 type = "lib"
 edition = "2024"
+build-script = false
 
 [dependencies]
 ahash = [{ loaf = "crates-io/ahash", version = "^0.8", features = ["compile-time-rng"], default-features = false, target = "cfg(target_arch = \"wasm32\")" }, { loaf = "crates-io/ahash", version = "^0.8", features = ["runtime-rng"], default-features = false, target = "cfg(not(target_arch = \"wasm32\"))" }]

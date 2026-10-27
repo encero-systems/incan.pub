@@ -20,15 +20,16 @@ miniz_oxide = ["any_impl", "dep:miniz_oxide", "dep:crc32fast"]
 runtime_detection = ["zlib-rs?/std", "crc32fast?/std"]
 rust_backend = ["miniz_oxide", "any_impl"]
 zlib = ["any_c_zlib", "libz-sys", "dep:crc32fast"]
-zlib-default = ["any_c_zlib", "libz-sys", "dep:libz-sys", "libz-sys/default", "dep:crc32fast"]
+zlib-default = ["any_c_zlib", "dep:libz-sys", "libz-sys/default", "dep:crc32fast"]
 zlib-ng = ["any_c_zlib", "libz-ng-sys", "dep:crc32fast"]
-zlib-ng-compat = ["zlib", "libz-sys", "dep:libz-sys", "libz-sys/zlib-ng", "dep:crc32fast"]
+zlib-ng-compat = ["zlib", "dep:libz-sys", "libz-sys/zlib-ng", "dep:crc32fast"]
 zlib-rs = ["any_zlib", "dep:zlib-rs"]
 
 [rust]
 name = "flate2"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 crc32fast = { loaf = "crates-io/crc32fast", version = "^1.2.0", default-features = false, optional = true }

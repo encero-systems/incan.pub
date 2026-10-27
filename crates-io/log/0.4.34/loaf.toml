@@ -9,9 +9,9 @@ version = "0.4.34"
 [project.features]
 alloc = []
 kv = []
-kv_serde = ["kv_std", "value-bag", "dep:value-bag", "value-bag/serde", "serde"]
-kv_std = ["std", "kv", "value-bag", "dep:value-bag", "value-bag/error"]
-kv_sval = ["kv", "value-bag", "dep:value-bag", "value-bag/sval", "sval", "sval_ref"]
+kv_serde = ["kv_std", "dep:value-bag", "value-bag/serde", "serde"]
+kv_std = ["std", "kv", "dep:value-bag", "value-bag/error"]
+kv_sval = ["kv", "dep:value-bag", "value-bag/sval", "sval", "sval_ref"]
 kv_unstable = ["kv", "value-bag"]
 kv_unstable_serde = ["kv_serde", "kv_unstable_std"]
 kv_unstable_std = ["kv_std", "kv_unstable"]
@@ -39,6 +39,7 @@ value-bag = ["dep:value-bag"]
 name = "log"
 type = "lib"
 edition = "2021"
+build-script = false
 
 [dependencies]
 serde_core = { loaf = "crates-io/serde_core", version = "^1.0", default-features = false, optional = true }

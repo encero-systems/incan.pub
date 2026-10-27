@@ -25,13 +25,13 @@ io-compat = ["io", "compat", "tokio-io", "libc"]
 libc = ["dep:libc"]
 memchr = ["dep:memchr"]
 portable-atomic = ["futures-core/portable-atomic", "portable_atomic_crate"]
-portable-atomic-alloc = ["portable-atomic-util", "dep:portable-atomic-util", "portable-atomic-util/alloc", "portable-atomic"]
+portable-atomic-alloc = ["dep:portable-atomic-util", "portable-atomic-util/alloc", "portable-atomic"]
 portable-atomic-util = ["dep:portable-atomic-util"]
 portable_atomic_crate = ["dep:portable_atomic_crate"]
 sink = ["futures-sink"]
 slab = ["dep:slab"]
 spin = ["dep:spin"]
-std = ["alloc", "futures-core/std", "futures-task/std", "slab", "dep:slab", "slab/std"]
+std = ["alloc", "futures-core/std", "futures-task/std", "dep:slab", "slab/std"]
 tokio-io = ["dep:tokio-io"]
 unstable = ["futures-core/unstable", "futures-task/unstable"]
 write-all-vectored = ["io"]
@@ -40,6 +40,7 @@ write-all-vectored = ["io"]
 name = "futures_util"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3.34", features = ["std"], default-features = false, optional = true }

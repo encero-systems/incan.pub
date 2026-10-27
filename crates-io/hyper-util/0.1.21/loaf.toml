@@ -7,8 +7,8 @@ version = "0.1.21"
 [project.features]
 __internal_happy_eyeballs_tests = []
 client = ["hyper/client", "dep:tracing", "dep:futures-channel", "dep:tower-service"]
-client-legacy = ["client", "tokio", "dep:tokio", "tokio/net", "dep:socket2", "tokio/sync", "dep:libc", "dep:futures-util", "dep:httparse"]
-client-pool = ["client", "dep:futures-util", "dep:tower-layer", "tokio", "dep:tokio", "tokio/sync"]
+client-legacy = ["client", "dep:tokio", "tokio/net", "dep:socket2", "tokio/sync", "dep:libc", "dep:futures-util", "dep:httparse"]
+client-pool = ["client", "dep:futures-util", "dep:tower-layer", "dep:tokio", "tokio/sync"]
 client-proxy = ["client", "dep:base64", "dep:ipnet", "dep:percent-encoding"]
 client-proxy-system = ["dep:system-configuration", "dep:windows-registry"]
 default = []
@@ -18,15 +18,16 @@ http2 = ["hyper/http2"]
 rt-tracing-exec-force = ["tokio", "tracing"]
 server = ["hyper/server"]
 server-auto = ["server", "http1", "http2"]
-server-graceful = ["server", "tokio", "dep:tokio", "tokio/sync"]
+server-graceful = ["server", "dep:tokio", "tokio/sync"]
 service = ["dep:tower-service"]
-tokio = ["dep:tokio", "tokio", "tokio/rt", "tokio/time"]
+tokio = ["dep:tokio", "tokio/rt", "tokio/time"]
 tracing = ["dep:tracing"]
 
 [rust]
 name = "hyper_util"
 type = "lib"
 edition = "2024"
+build-script = false
 
 [dependencies]
 base64 = { loaf = "crates-io/base64", version = "^0.23", optional = true }

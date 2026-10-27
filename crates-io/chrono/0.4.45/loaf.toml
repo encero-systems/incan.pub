@@ -20,7 +20,7 @@ libc = []
 now = ["std"]
 oldtime = []
 pure-rust-locales = ["dep:pure-rust-locales"]
-rkyv = ["dep:rkyv", "rkyv", "rkyv/size_32"]
+rkyv = ["dep:rkyv", "rkyv/size_32"]
 rkyv-16 = ["dep:rkyv", "rkyv?/size_16"]
 rkyv-32 = ["dep:rkyv", "rkyv?/size_32"]
 rkyv-64 = ["dep:rkyv", "rkyv?/size_64"]
@@ -37,6 +37,7 @@ windows-link = ["dep:windows-link"]
 name = "chrono"
 type = "lib"
 edition = "2021"
+build-script = false
 
 [dependencies]
 arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0.0", features = ["derive"], optional = true }

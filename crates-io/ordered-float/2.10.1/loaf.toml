@@ -11,7 +11,7 @@ arbitrary = ["dep:arbitrary"]
 default = ["std"]
 proptest = ["dep:proptest"]
 rand = ["dep:rand"]
-randtest = ["rand", "dep:rand", "rand/std", "rand/std_rng"]
+randtest = ["dep:rand", "rand/std", "rand/std_rng"]
 rkyv = ["dep:rkyv"]
 schemars = ["dep:schemars"]
 serde = ["dep:serde"]
@@ -21,6 +21,7 @@ std = ["num-traits/std"]
 name = "ordered_float"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 arbitrary = { loaf = "crates-io/arbitrary", version = "^1.0.0", optional = true }

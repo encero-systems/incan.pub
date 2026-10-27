@@ -27,7 +27,7 @@ liblzma = ["dep:liblzma"]
 math_expressions = ["datafusion-functions/math_expressions"]
 nested_expressions = ["datafusion-functions-nested"]
 parquet = ["datafusion-common/parquet", "dep:parquet", "datafusion-datasource-parquet"]
-parquet_encryption = ["parquet", "dep:parquet", "parquet/encryption", "datafusion-common/parquet_encryption", "datafusion-datasource-parquet", "dep:datafusion-datasource-parquet", "datafusion-datasource-parquet/parquet_encryption"]
+parquet_encryption = ["parquet", "dep:parquet", "parquet/encryption", "datafusion-common/parquet_encryption", "dep:datafusion-datasource-parquet", "datafusion-datasource-parquet/parquet_encryption"]
 recursive_protection = ["datafusion-common/recursive_protection", "datafusion-expr/recursive_protection", "datafusion-optimizer/recursive_protection", "datafusion-physical-optimizer/recursive_protection", "datafusion-physical-expr/recursive_protection", "datafusion-sql?/recursive_protection", "sqlparser?/recursive-protection"]
 regex_expressions = ["datafusion-functions/regex_expressions"]
 serde = ["dep:serde", "arrow-schema/serde"]
@@ -41,6 +41,7 @@ zstd = ["dep:zstd"]
 name = "datafusion"
 type = "lib"
 edition = "2024"
+build-script = false
 
 [dependencies]
 arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }

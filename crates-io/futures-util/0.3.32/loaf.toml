@@ -28,7 +28,7 @@ portable-atomic = ["futures-core/portable-atomic"]
 sink = ["futures-sink"]
 slab = ["dep:slab"]
 spin = ["dep:spin"]
-std = ["alloc", "futures-core/std", "futures-task/std", "slab", "dep:slab", "slab/std"]
+std = ["alloc", "futures-core/std", "futures-task/std", "dep:slab", "slab/std"]
 tokio-io = ["dep:tokio-io"]
 unstable = ["futures-core/unstable", "futures-task/unstable"]
 write-all-vectored = ["io"]
@@ -37,6 +37,7 @@ write-all-vectored = ["io"]
 name = "futures_util"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 futures-channel = { loaf = "crates-io/futures-channel", version = "^0.3.32", features = ["std"], default-features = false, optional = true }

@@ -12,7 +12,7 @@ databake = ["dep:databake", "zerovec?/databake"]
 default = []
 dense = ["dep:zerovec"]
 litemap = ["dep:litemap", "alloc"]
-serde = ["dep:serde_core", "dep:litemap", "alloc", "litemap", "litemap/serde", "zerovec?/serde"]
+serde = ["dep:serde_core", "dep:litemap", "alloc", "litemap/serde", "zerovec?/serde"]
 yoke = ["dep:yoke"]
 zerofrom = ["dep:zerofrom"]
 zerovec = ["dep:zerovec"]
@@ -21,6 +21,7 @@ zerovec = ["dep:zerovec"]
 name = "zerotrie"
 type = "lib"
 edition = "2021"
+build-script = false
 
 [dependencies]
 databake = { loaf = "crates-io/databake", version = "^0.2.0", features = ["derive"], default-features = false, optional = true }

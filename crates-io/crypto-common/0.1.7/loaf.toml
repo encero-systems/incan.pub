@@ -7,7 +7,7 @@ name = "crates-io/crypto-common"
 version = "0.1.7"
 
 [project.features]
-getrandom = ["rand_core", "dep:rand_core", "rand_core/getrandom"]
+getrandom = ["dep:rand_core", "rand_core/getrandom"]
 rand_core = ["dep:rand_core"]
 std = []
 
@@ -15,6 +15,7 @@ std = []
 name = "crypto_common"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 generic-array = { loaf = "crates-io/generic-array", version = "=0.14.7", features = ["more_lengths"] }

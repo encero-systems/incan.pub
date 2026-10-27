@@ -18,13 +18,14 @@ rand_chacha = ["dep:rand_chacha"]
 serde = ["dep:serde"]
 serde1 = ["serde", "rand_core/serde1"]
 small_rng = []
-std = ["rand_core/std", "rand_chacha", "dep:rand_chacha", "rand_chacha/std", "alloc", "getrandom", "libc"]
+std = ["rand_core/std", "dep:rand_chacha", "rand_chacha/std", "alloc", "getrandom", "libc"]
 std_rng = ["rand_chacha"]
 
 [rust]
 name = "rand"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 libc = { loaf = "crates-io/libc", version = "^0.2.22", default-features = false, optional = true, target = "cfg(unix)" }

@@ -10,13 +10,14 @@ version = "53.1.0"
 arrow_buffer_pool = ["arrow-buffer/pool"]
 default = ["sql"]
 parquet = ["dep:parquet"]
-parquet_encryption = ["parquet", "dep:parquet", "parquet/encryption"]
+parquet_encryption = ["dep:parquet", "parquet/encryption"]
 sql = []
 
 [rust]
 name = "datafusion_execution"
 type = "lib"
 edition = "2024"
+build-script = false
 
 [dependencies]
 arrow = { loaf = "crates-io/arrow", version = "^58.0.0", features = ["chrono-tz", "prettyprint"] }

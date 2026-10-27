@@ -25,12 +25,13 @@ xz2 = ["xz"]
 zlib = ["flate2"]
 zstd = ["libzstd", "zstd-safe"]
 zstd-safe = ["dep:zstd-safe"]
-zstdmt = ["zstd", "zstd-safe", "dep:zstd-safe", "zstd-safe/zstdmt"]
+zstdmt = ["zstd", "dep:zstd-safe", "zstd-safe/zstdmt"]
 
 [rust]
 name = "compression_codecs"
 type = "lib"
 edition = "2018"
+build-script = false
 
 [dependencies]
 brotli = { loaf = "crates-io/brotli", version = "^8", optional = true }
