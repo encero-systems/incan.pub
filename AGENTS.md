@@ -38,12 +38,14 @@ Records the harvest declines to propose keep whatever record they have: a script
 Adoption turns a crates.io package version into a Loaf ([RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md), "Adoption from crates.io"): one `adopt` event per version, whose manifest follows RFC 119's Rust facet grammar and whose source Loaf archive is stored by digest. Admission refuses an `adopt` event while a dependency active under the version's default features, on any target, is not adopted yet, so `adopt` plans the whole closure first and appends in dependency order. The plan is what a consumer of each named version builds with its default features: it follows the features every dependent enables on a dependency, through versions already adopted as well, so an optional dependency that only a dependent's feature switches on is adopted too, and naming an adopted version again adopts whatever its build still lacks. Against a checkout of `index`:
 
 ```sh
-incan-pub adopt --records --cache <cache> --blobs <blob store>   # or: adopt NAME VERSION ...
+incan-pub adopt --records --cache <cache> --blobs <blob store>   # or: adopt NAME VERSION ..., or --additions FILE
 incan-pub check --crates-io-index <snapshot> --blobs <blob store>
 git commit && git push
 ```
 
 `--cache` keeps the crates.io index files and `.crate` archives adoption downloads, each checked against its crates.io checksum before it is read; `--blobs` receives every source Loaf archive as `sha256/<hex>.tar`. A requirement no adopted version meets is met by the newest crates.io version satisfying it, preferring one that is not yanked. `--features a,b` asks the named versions for those features as well as their defaults, for a package whose defaults do not compile on their own (moka needs `sync` or `future`); take the features its `[package.metadata.docs.rs]` builds with. Report the resulting `index` HEAD as for a harvest.
+
+The download ranking (`bake/top100`, `bake/top1000`) is not the whole of what incan.pub adopts. [adoption/additions.txt](adoption/additions.txt) names the packages adopted beyond it because an Encero or Incan project needs them (DataFusion, Ruff's libraries, AWS clients, the Lambda runtime), one per line under a comment saying why. An entry may add the feature shape its consumers build it with (`-default` when they turn default features off, `+feature` for each feature they turn on); `adopt --additions adoption/additions.txt` adopts each at its newest stable version with its defaults and those features, and the shape is what its bake shards request. Add a package there rather than adopting it by hand, so the next refresh adopts it again.
 
 ## Recording build facts
 
