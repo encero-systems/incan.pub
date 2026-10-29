@@ -19,8 +19,11 @@ from std.fs import Path
 from std.json import JsonValue, parse
 
 from canonical import canonical, digest_bytes, digest_text, json_string
-from events import string_list_member, string_member
-from host import argv, canonical_path, environment_value, link_target, run_passthrough, working_directory
+from events import member, string_list_member, string_member
+from host import argv, canonical_path, environment_has_prefix, environment_value, link_target, run_passthrough, working_directory
+
+
+pub const BUBBLEWRAP: str = "/usr/bin/bwrap"
 
 
 @derive(Clone)
@@ -36,15 +39,17 @@ pub model Invocation:
     pub target: str
     pub reads: list[str]
     pub read_set: bool
+    pub runtime_files: list[JsonValue]
 
 
 @derive(Clone)
 pub model Compiler:
-    """An explicit compiler with the resource directory and sysroot that belong to it, all canonical."""
+    """An explicit compiler and its canonical resource, sysroot and exact regular-file runtime inputs."""
 
     pub executable: str
     pub resource_dir: str
     pub sysroot: str
+    pub runtime_files: list[str]
 
 
 @derive(Clone)
@@ -87,10 +92,15 @@ pub def wrapper_role() -> Option[str]:
 
 pub def run_wrapper(role: str) -> Result[int, str]:
     """Run the real tool for `role`; after a successful run, write its trace file."""
+    if environment_has_prefix("LD_"):
+        return Err("native wrapper refuses inherited LD_* loader overrides")
     executable = environment_value("INCAN_PUB_NATIVE_" + role.upper()).unwrap_or("")
     if len(executable) == 0:
         return Err(f"no INCAN_PUB_NATIVE_{role.upper()} names the {role} this wrapper stands for")
-    arguments = argv()[1:]
+    mut arguments = argv()[1:]
+    sysroot = environment_value("INCAN_PUB_NATIVE_SYSROOT").unwrap_or("")
+    if role != "ar" and len(sysroot) > 0:
+        arguments = recorded_compiler_arguments(arguments, sysroot)?
     trace = environment_value(trace_variable()).unwrap_or("")
     directory = working_directory()?
     # A compile also writes its dependency file, the exact set of files it read; the object is unchanged.
@@ -99,7 +109,27 @@ pub def run_wrapper(role: str) -> Result[int, str]:
     if role != "ar" and arguments.contains("-c") and not names_dependency_output(arguments):
         depfile = trace + "/" + digest_text(directory + "\n" + "\n".join(arguments))[7:] + ".d"
         actual = arguments + ["-MD", "-MF", depfile]
-    code = run_passthrough(executable, actual)?
+    mut runtime_files: list[str] = []
+    if role != "ar":
+        runtime_files = declared_runtime_files(environment_value("INCAN_PUB_NATIVE_RUNTIME_FILES").unwrap_or("{\"runtime_files\":[]}"))?
+    observed_runtime = runtime_observation(runtime_files)?
+    mut child_environment = runtime_environment(runtime_files)
+    mut child = executable
+    if role != "ar" and len(sysroot) > 0:
+        resource = environment_value("INCAN_PUB_NATIVE_RESOURCE_" + role.upper()).unwrap_or("")
+        package = environment_value("CARGO_MANIFEST_DIR").unwrap_or("")
+        output = environment_value("OUT_DIR").unwrap_or("")
+        actual = linux_compiler_command(executable, actual, runtime_files, [resource, sysroot, package], [output, trace], directory)?
+        child = BUBBLEWRAP
+        child_environment = {}
+    else:
+        # Apple compilers consume the explicitly selected SDKROOT; other ambient variables are not compiler authority.
+        sdkroot = environment_value("SDKROOT").unwrap_or("")
+        if len(sdkroot) > 0:
+            child_environment["SDKROOT"] = sdkroot
+    code = run_passthrough(child, actual, child_environment)?
+    if canonical(JsonValue.array(observed_runtime))? != canonical(JsonValue.array(runtime_observation(runtime_files)?))?:
+        return Err("native compiler runtime bytes changed during execution")
     if code != 0:
         return Ok(code)
     mut reads: list[JsonValue] = []
@@ -125,11 +155,47 @@ pub def run_wrapper(role: str) -> Result[int, str]:
         "target": JsonValue.string(environment_value("TARGET").unwrap_or("")),
         "reads": JsonValue.array(reads),
         "read_set": JsonValue.bool(len(depfile) > 0),
+        "runtime_files": JsonValue.array(observed_runtime),
     })
     text = canonical(record)?
     match Path(trace + "/" + digest_text(text)[7:] + ".json").write_text(text, "utf-8", "strict", None):
         Ok(_) => return Ok(0)
         Err(error) => return Err(f"native trace: {error.message()}")
+
+
+pub def recorded_compiler_arguments(arguments: list[str], sysroot: str) -> Result[list[str], str]:
+    """
+    Bind Linux observation to the selected sysroot before executing or recording any compiler invocation, including
+    feature probes. The trace carries these exact arguments into replay. A build script may repeat the selected
+    canonical spelling but cannot replace it with another sysroot; Apple SDK selection stays on its existing path.
+    Only `--sysroot` moves both the header and the library search, so an `-isysroot` naming the selected root is kept
+    and `--sysroot` is still added.
+    """
+    mut bound = false
+    mut index = 0
+    while index < len(arguments):
+        argument = arguments[index]
+        mut value = ""
+        if argument == "--sysroot" or argument == "-isysroot":
+            if index + 1 >= len(arguments):
+                return Err(f"native compiler argument {argument} has no value")
+            value = arguments[index + 1]
+            index += 1
+        elif argument.startswith("--sysroot="):
+            value = argument[10:]
+        elif argument.startswith("-isysroot"):
+            return Err("native compiler invocation uses an unsupported joined sysroot argument")
+        else:
+            index += 1
+            continue
+        if value != sysroot:
+            return Err("native compiler invocation changes the selected sysroot")
+        if argument.startswith("--sysroot"):
+            bound = true
+        index += 1
+    if bound:
+        return Ok(arguments)
+    return Ok(["--sysroot", sysroot] + arguments)
 
 
 def names_dependency_output(arguments: list[str]) -> bool:
@@ -194,6 +260,7 @@ pub def read_traces(directory: str) -> Result[list[Invocation], str]:
                             target=string_member(value, "target"),
                             reads=string_list_member(value, "reads").unwrap_or([]),
                             read_set=flag_member(value, "read_set"),
+                            runtime_files=member(value, "runtime_files").as_array().unwrap_or([]),
                         ))
                     Err(error) => return Err(f"native trace {name}: {error.message()}")
             Err(error) => return Err(f"native trace {name}: {error.message()}")
@@ -292,7 +359,12 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
     if len(executables) != 1:
         return Err("one archive combines objects from different compiler executables")
     authority = compiler_for(executables[0], compilers)?
-    owner_root = common_ancestor([authority.executable, authority.resource_dir, authority.sysroot])?
+    declared_runtime_files(canonical(JsonValue.object({"runtime_files": JsonValue.array([JsonValue.string(path) for path in authority.runtime_files])}))?)?
+    owner_root = common_ancestor([authority.executable, authority.resource_dir, authority.sysroot] + authority.runtime_files)?
+    selected_runtime = canonical(JsonValue.array(runtime_observation(authority.runtime_files)?))?
+    for compile in member_compiles:
+        if canonical(JsonValue.array(compile.invocation.runtime_files))? != selected_runtime:
+            return Err("native trace runtime files differ from the selected compiler runtime")
     executable_path = portable_beneath(owner_root, authority.executable, "compiler executable")?
     resource_path = portable_beneath(owner_root, authority.resource_dir, "compiler resource directory")?
     sysroot_path = portable_beneath(owner_root, authority.sysroot, "C sysroot")?
@@ -300,6 +372,11 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
     mut objects: list[JsonValue] = []
     mut object_names: list[str] = []
     mut owner_paths = [executable_path, resource_path, sysroot_path]
+    mut runtime_members: list[JsonValue] = []
+    for path in authority.runtime_files:
+        relative = portable_beneath(owner_root, path, "compiler runtime file")?
+        runtime_members.append(JsonValue.object({"path": JsonValue.string(relative), "digest": JsonValue.string(file_digest(path)?)}))
+        owner_paths.append(relative)
     # The archive's read set: every file its compiles read, when every compile reported one.
     mut reads: list[str] = []
     mut read_set = true
@@ -346,15 +423,20 @@ def link_record(member_compiles: list[Compile], library: str, compilers: list[Co
     mut inputs: list[JsonValue] = []
     for name in sorted(list(sources.keys())):
         inputs.append(sources[name])
+    mut executable_record = JsonValue.object({
+        "name": JsonValue.string(last_component(authority.executable)),
+        "owner": JsonValue.string(owner_identity(owner_root, owner_paths)?),
+        "path": JsonValue.string(executable_path),
+        "digest": JsonValue.string(file_digest(authority.executable)?),
+    })
+    if len(runtime_members) > 0:
+        match executable_record.set("runtime_files", JsonValue.array(runtime_members)):
+            Ok(_) => pass
+            Err(error) => return Err(error.message())
     return Ok(JsonValue.object({
         "name": JsonValue.string(library),
         "target": JsonValue.string(target),
-        "executable": JsonValue.object({
-            "name": JsonValue.string(last_component(authority.executable)),
-            "owner": JsonValue.string(owner_identity(owner_root, owner_paths)?),
-            "path": JsonValue.string(executable_path),
-            "digest": JsonValue.string(file_digest(authority.executable)?),
-        }),
+        "executable": executable_record,
         "environment": JsonValue.array([]),
         "sources": JsonValue.array(inputs),
         "objects": JsonValue.array(sorted_by_name(objects)),
@@ -839,3 +921,94 @@ def sorted_by_name(records: list[JsonValue]) -> list[JsonValue]:
     for name in sorted(list(by_name.keys())):
         out.append(by_name[name])
     return out
+
+
+pub def declared_runtime_files(text: str) -> Result[list[str], str]:
+    """Read an explicit runtime declaration; every file must already be canonical, regular and unique."""
+    match parse(text):
+        Err(error) => return Err(f"native runtime declaration: {error.message()}")
+        Ok(value) =>
+            if not value.is_object() or len(value.keys()) != 1:
+                return Err("native runtime declaration must contain only runtime_files")
+            match string_list_member(value, "runtime_files"):
+                None => return Err("runtime_files must be a string list")
+                Some(paths) =>
+                    mut previous = ""
+                    for path in paths:
+                        if not path.startswith("/") or path.contains(":") or path.contains(";") or path.contains("$") or path.contains("\n"):
+                            return Err("runtime files must be absolute paths without loader metacharacters (:, ; or $) or newline")
+                        if len(previous) > 0 and not (previous < path):
+                            return Err("runtime files must be sorted and unique")
+                        if Path(path).is_symlink() or not Path(path).is_file():
+                            return Err(f"runtime file is not a regular file: {path}")
+                        if canonical_path(path)? != path:
+                            return Err(f"runtime file path is not canonical: {path}")
+                        previous = path
+                    return Ok(paths)
+
+
+pub def runtime_environment(paths: list[str]) -> Dict[str, str]:
+    """Derive the loader search path solely from explicitly declared runtime files."""
+    mut directories: list[str] = []
+    for path in paths:
+        pieces = path.split("/")
+        directory = "/".join(pieces[:len(pieces) - 1])
+        if not directories.contains(directory):
+            directories.append(directory)
+    if len(directories) == 0:
+        return {}
+    return {"LD_LIBRARY_PATH": ":".join(directories)}
+
+
+pub def runtime_observation(paths: list[str]) -> Result[list[JsonValue], str]:
+    """Bind wrapper evidence to the runtime bytes actually present before and after compiler execution."""
+    mut entries: list[JsonValue] = []
+    for path in paths:
+        if Path(path).is_symlink() or not Path(path).is_file():
+            return Err(f"runtime file is not regular: {path}")
+        entries.append(JsonValue.object({"path": JsonValue.string(path), "digest": JsonValue.string(file_digest(path)?)}))
+    return Ok(entries)
+
+
+pub def linux_compiler_command(executable: str, arguments: list[str], runtime_files: list[str], read_paths: list[str], write_paths: list[str], directory: str) -> Result[list[str], str]:
+    """Confine a Linux compiler to its selected owner and package inputs, with no host loader fallback or environment."""
+    mut reads: list[str] = []
+    for path in [executable] + read_paths + runtime_files:
+        resolved = canonical_path(path)?
+        if not reads.contains(resolved):
+            reads.append(resolved)
+    mut writes: list[str] = []
+    for path in write_paths:
+        resolved = canonical_path(path)?
+        if not Path(resolved).is_dir():
+            return Err("native compiler writable root must be an existing directory")
+        for read in reads:
+            if read == resolved or read.startswith(resolved + "/") or resolved.startswith(read + "/"):
+                return Err("native compiler read and writable roots overlap")
+        if not writes.contains(resolved):
+            writes.append(resolved)
+    mut command = ["--unshare-user", "--unshare-pid", "--unshare-net", "--unshare-ipc", "--unshare-uts", "--disable-userns", "--cap-drop", "ALL", "--new-session", "--die-with-parent", "--clearenv"]
+    for path in sorted(reads):
+        command = command + ["--ro-bind", path, path]
+    mut names: list[str] = []
+    for path in runtime_files:
+        pieces = path.split("/")
+        name = pieces[len(pieces) - 1]
+        if names.contains(name):
+            return Err("native compiler runtime files have ambiguous loader basenames")
+        names.append(name)
+        if name == "ld-linux-x86-64.so.2":
+            command = command + ["--ro-bind", path, "/lib64/ld-linux-x86-64.so.2"]
+        elif name == "ld-linux-aarch64.so.1":
+            command = command + ["--ro-bind", path, "/lib/ld-linux-aarch64.so.1"]
+    command = command + ["--dir", canonical_path(directory)?]
+    for path in writes:
+        command = command + ["--bind", path, path]
+    command = command + ["--remount-ro", "/", "--chdir", canonical_path(directory)?]
+    # Assembly and compiler probes may need temporary files; use only an already admitted product root.
+    if len(writes) > 0:
+        command = command + ["--setenv", "TMPDIR", writes[0]]
+    environment = runtime_environment(runtime_files)
+    for key in environment.keys():
+        command = command + ["--setenv", key, environment[key]]
+    return Ok(command + ["--", canonical_path(executable)?] + arguments)

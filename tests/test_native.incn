@@ -6,12 +6,28 @@ wrappers; these tests pin the pieces it is made of, on scratch trees whose expec
 """
 
 from std.fs import Path
+from std.json import JsonValue
 from std.testing import assert_eq, assert_is_err, assert_true
 
-from canonical import digest_bytes, digest_text
-from host import environment_value
-from native import common_ancestor, logical_name, owner_identity, portable_beneath, stable_object_name, tree_artifact
-from events import string_member
+from canonical import canonical, digest_bytes, digest_text
+from host import canonical_path, environment_value
+from native import (
+    Compiler,
+    Invocation,
+    common_ancestor,
+    convert,
+    declared_runtime_files,
+    linux_compiler_command,
+    logical_name,
+    owner_identity,
+    portable_beneath,
+    recorded_compiler_arguments,
+    runtime_environment,
+    runtime_observation,
+    stable_object_name,
+    tree_artifact,
+)
+from events import string_member, write_text
 
 
 def scratch(name: str) -> str:
@@ -72,3 +88,184 @@ def test_an_owner_identity_inventories_files_directories_and_symlinks() -> None:
     assert_eq(owner_identity(root, ["sdk", "bin/clang"]).unwrap(), digest_text(expected))
     assert_eq(owner_identity(root, ["bin/clang", "sdk"]).unwrap(), digest_text(expected))
     Path(root).remove_tree().unwrap()
+
+
+def test_linux_compile_and_probe_arguments_bind_the_selected_sysroot() -> None:
+    """Observation must see the same sysroot that conversion will name as an owner path during replay."""
+    for arguments in [["-c", "source.c", "-o", "source.o"], ["-E", "probe.c"], ["--version"]]:
+        match recorded_compiler_arguments(arguments, "/owner/sysroot"):
+            Ok(actual) => assert_eq("\n".join(actual), "\n".join(["--sysroot", "/owner/sysroot"] + arguments))
+            Err(error) => assert_true(false, error)
+
+
+def test_linux_explicit_sysroot_is_preserved_and_conflicting_or_missing_values_are_refused() -> None:
+    """Do not silently override a build script's conflicting root or duplicate an already bound root."""
+    for arguments in [
+        ["--sysroot", "/owner/sysroot", "-c", "source.c"],
+        ["--sysroot=/owner/sysroot", "-c", "source.c"],
+    ]:
+        match recorded_compiler_arguments(arguments, "/owner/sysroot"):
+            Ok(actual) => assert_eq("\n".join(actual), "\n".join(arguments))
+            Err(error) => assert_true(false, error)
+    # `-isysroot` moves only the header search, so the selected root is still bound for the library search.
+    headers_only = ["-isysroot", "/owner/sysroot", "-c", "source.c"]
+    match recorded_compiler_arguments(headers_only, "/owner/sysroot"):
+        Ok(actual) => assert_eq("\n".join(actual), "\n".join(["--sysroot", "/owner/sysroot"] + headers_only))
+        Err(error) => assert_true(false, error)
+    for arguments in [
+        ["--sysroot"],
+        ["-isysroot"],
+        ["--sysroot="],
+        ["--sysroot", "/other"],
+        ["--sysroot=/other"],
+        ["-isysroot", "/other"],
+        ["-isysroot/other"],
+        ["-isysroot=/other"],
+        ["--sysroot", "/owner/sysroot", "--sysroot=/other"],
+    ]:
+        assert_is_err(recorded_compiler_arguments(arguments, "/owner/sysroot"))
+
+
+def linux_sysroot_conversion(root: str, runtime_mode: str = "") -> Result[str, str]:
+    """Exercise actual trace conversion on real source/tool paths, without inventing or admitting a registry fact."""
+    for directory in ["package", "out", "tool/bin", "tool/resource", "tool/sysroot/usr/include"]:
+        match Path(root + "/" + directory).mkdir(parents=true, exist_ok=true):
+            Ok(_) => pass
+            Err(error) => return Err(error.message())
+    fixtures = [
+        "package/probe.c", "out/probe.o", "out/libprobe.a", "tool/bin/clang", "tool/sysroot/usr/include/probe.h",
+    ]
+    for path in fixtures:
+        write_text(Path(root + "/" + path), "fixture\n", path)?
+    package = canonical_path(root + "/package")?
+    output = canonical_path(root + "/out")?
+    tool = canonical_path(root + "/tool")?
+    mut runtime_files: list[str] = []
+    if len(runtime_mode) > 0:
+        write_text(Path(tool + "/libprobe.so"), "runtime bytes", "runtime fixture")?
+        runtime_files = [tool + "/libprobe.so"]
+    mut observed_runtime = runtime_observation(runtime_files)?
+    if runtime_mode == "mismatch":
+        observed_runtime = []
+    arguments = recorded_compiler_arguments(["-c", package + "/probe.c", "-o", output + "/probe.o"], tool + "/sysroot")?
+    traces = [
+        Invocation(
+            reason="compile",
+            executable=tool + "/bin/clang",
+            directory=package,
+            arguments=arguments,
+            manifest_dir=package,
+            out_dir=output,
+            target="x86_64-unknown-linux-gnu",
+            reads=[package + "/probe.c", tool + "/sysroot/usr/include/probe.h"],
+            read_set=true,
+            runtime_files=observed_runtime,
+        ),
+        Invocation(
+            reason="archive",
+            executable="/usr/bin/ar",
+            directory=package,
+            arguments=["rcs", output + "/libprobe.a", output + "/probe.o"],
+            manifest_dir=package,
+            out_dir=output,
+            target="x86_64-unknown-linux-gnu",
+            reads=[],
+            read_set=false,
+            runtime_files=[],
+        ),
+    ]
+    compiler = Compiler(
+        executable=tool + "/bin/clang",
+        resource_dir=tool + "/resource",
+        sysroot=tool + "/sysroot",
+        runtime_files=runtime_files,
+    )
+    converted = convert(traces, ["static=probe"], [compiler])?
+    if len(converted.records) != 1:
+        return Err("the conversion must produce exactly one native link record")
+    return canonical(converted.records[0])
+
+
+def test_linux_sysroot_arguments_convert_to_owner_coordinates_without_absolute_paths() -> None:
+    """The wrapper's paired --sysroot must survive real conversion as the selected owner coordinate."""
+    root = scratch("linux-sysroot-conversion")
+    match linux_sysroot_conversion(root):
+        Ok(record) =>
+            assert_true(record.contains("\"literal\":\"--sysroot\""), record)
+            assert_true(record.contains("\"owner\":\"sysroot\""), record)
+            assert_true(not record.contains("-isysroot"), record)
+            assert_true(not record.contains(root), record)
+        Err(error) => assert_true(false, error)
+    match Path(root).remove_tree():
+        Ok(_) => pass
+        Err(error) => assert_true(false, error.message())
+
+
+def runtime_declaration(paths: list[str]) -> Result[str, str]:
+    """Encode a checked explicit runtime list without adding a second declaration format."""
+    return canonical(JsonValue.object({"runtime_files": JsonValue.array([JsonValue.string(path) for path in paths])}))
+
+
+def test_runtime_files_bind_regular_bytes_and_derive_only_declared_directories() -> Result[None, str]:
+    """Changing a runtime byte changes the existing owner identity; no directory scan or symlink is trusted."""
+    root = canonical_path(scratch("runtime-files"))?
+    first = root + "/a.so"
+    second = root + "/b.so"
+    write_text(Path(first), "first", first)?
+    write_text(Path(second), "second", second)?
+    paths = declared_runtime_files(runtime_declaration([first, second])?)?
+    assert_eq("\n".join(paths), first + "\n" + second)
+    assert_eq(runtime_environment(paths)["LD_LIBRARY_PATH"], root)
+    before = owner_identity(root, ["a.so", "b.so"])?
+    write_text(Path(second), "edited", second)?
+    assert_true(before != owner_identity(root, ["a.so", "b.so"])?)
+    for invalid in [[second, first], [first, first], [root], [root + "/missing"], [root + "/../runtime-files/a.so"]]:
+        assert_is_err(declared_runtime_files(runtime_declaration(invalid)?))
+    assert_is_err(declared_runtime_files("{\"runtime_files\": [123]}"))
+    assert_is_err(declared_runtime_files("{\"runtime_files\": [], \"extra\": true}"))
+    match Path(root).remove_tree():
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(error.message())
+
+
+
+def test_runtime_files_roundtrip_and_trace_mismatch_refuses() -> Result[None, str]:
+    """Actual native conversion carries declared runtimes and refuses declarations absent from observation."""
+    root = scratch("runtime-conversion")
+    record = linux_sysroot_conversion(root, "present")?
+    assert_true(record.contains("\"runtime_files\":[{\"digest\":"), record)
+    assert_true(record.contains("\"path\":\"libprobe.so\""), record)
+    assert_true(not record.contains(root), record)
+    assert_is_err(linux_sysroot_conversion(root, "mismatch"))
+    match Path(root).remove_tree():
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(error.message())
+
+
+def test_linux_compiler_command_has_only_explicit_mounts_and_loader_environment() -> Result[None, str]:
+    """Recording cannot use an ambient loader, library directory or inherited compiler environment."""
+    root = canonical_path(scratch("compiler-confinement"))?
+    for directory in ["owner", "package", "output", "trace"]:
+        match Path(root + "/" + directory).mkdir(parents=true, exist_ok=true):
+            Ok(_) => pass
+            Err(error) => return Err(error.message())
+    compiler = root + "/owner/clang"
+    loader = root + "/owner/ld-linux-x86-64.so.2"
+    write_text(Path(compiler), "compiler", compiler)?
+    write_text(Path(loader), "loader", loader)?
+    arguments = linux_compiler_command(compiler, ["--version"], [loader], [root + "/package"], [root + "/output", root + "/trace"], root + "/package")?
+    text = "\n".join(arguments)
+    assert_true(text.contains("--clearenv"))
+    assert_true(text.contains("--ro-bind\n" + loader + "\n/lib64/ld-linux-x86-64.so.2"))
+    assert_true(text.contains("--setenv\nLD_LIBRARY_PATH\n" + root + "/owner"))
+    assert_true(not text.contains("--ro-bind\n/\n/"))
+    assert_true(not text.contains("--dev"))
+    assert_true(text.contains("--setenv\nTMPDIR\n" + root + "/output"))
+    probe = linux_compiler_command(compiler, ["-print-resource-dir"], [loader], [], [], root + "/package")?
+    assert_true(not "\n".join(probe).contains("TMPDIR"))
+    assert_is_err(linux_compiler_command(compiler, [], [loader], [], [root], root))
+    for bad in [root + "/semi;colon/file", root + "/$ORIGIN/file"]:
+        assert_is_err(declared_runtime_files(runtime_declaration([bad])?))
+    match Path(root).remove_tree():
+        Ok(_) => return Ok(None)
+        Err(error) => return Err(error.message())
