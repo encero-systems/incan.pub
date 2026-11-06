@@ -356,7 +356,7 @@ pub def render_asset_manifest(record: Record, revision: int) -> Result[str, str]
 
 pub def render_package_page(name: str, records: list[Record]) -> str:
     """
-    The page of one crates.io package (`crates-io/<name>/README.md`): where it comes from and every version incan.pub
+    The page of one crates.io package (`crates-io/<name>/README.md`): where it comes from and every version loaves.pub
     holds, newest first, with its adoption date, license, facts and compiled units. It changes as versions are adopted,
     which is why it is a projection and not part of any Loaf.
     """
@@ -370,7 +370,7 @@ pub def render_package_page(name: str, records: list[Record]) -> str:
                         Some(about) => description = shown(about).description
                         None => pass
                 None => pass
-    mut intro = f"The crates.io package [{name}](https://crates.io/crates/{name}), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves."
+    mut intro = f"The crates.io package [{name}](https://crates.io/crates/{name}), adopted by [loaves.pub](https://loaves.pub) as Loaves."
     if len(description) > 0:
         intro = intro + " " + description
     lines.append(intro)
@@ -381,7 +381,7 @@ pub def render_package_page(name: str, records: list[Record]) -> str:
         lines.append(package_page_row(record))
     lines.append("")
     lines.append(
-        "Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package "
+        "Each version's Loaf carries the package's own LICENSE and README, or ones loaves.pub wrote where the package "
         + f"shipped none. Source archives and compiled units are on the GitHub Container Registry as "
         + f"`ghcr.io/encero-systems/incan.pub/{loaf_name(name)}`; a client verifies them against this index: the archive "
         + f"by the `cksum` on its version's line in [index/{loaf_name(name)}](../../{index_path(name)}), the units by "
@@ -691,6 +691,9 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
     match payload.get("vcs"):
         Some(value) => vcs = value
         None => pass
+    mut advisory_notes: list[JsonValue] = []
+    for advisory in record.advisories:
+        advisory_notes.append(JsonValue.string(string_member(advisory, "text")))
     mut revisions: list[JsonValue] = []
     for view in revision_views(record):
         revisions.append(JsonValue.object({
@@ -705,6 +708,7 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
         "revision": JsonValue.int(record.revision),
         "revisions": JsonValue.array(revisions),
         "yanked": JsonValue.bool(record.yanked),
+        "yank-reason": JsonValue.string(record.yank_reason),
         "adopted": JsonValue.string(record.adopted_at),
         "registry": JsonValue.object({
             "adopter": JsonValue.string(record.adopter),
@@ -725,6 +729,7 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
         "facts": JsonValue.array(facts),
         "assets": JsonValue.array(assets),
         "advisories": JsonValue.int(len(record.advisories)),
+        "advisory-notes": JsonValue.array(advisory_notes),
     }))
 
 

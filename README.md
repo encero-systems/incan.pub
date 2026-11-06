@@ -1,6 +1,8 @@
-# incan.pub
+# loaves.pub
 
-The registry for Oven-built projects, as specified by [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md). This repository is its interim home, in the repository-based shape [docs/v0.md](docs/v0.md) defines: this branch holds the tool and the docs; the [`index`](https://github.com/encero-systems/incan.pub/tree/index) branch holds the data. Today the registry holds crates.io packages **adopted as Loaves**, the **bound build facts** recorded for them, and the event log both are folded from. [docs/model.md](docs/model.md) states what Incan does to publish and what the registry does to manage.
+The registry for Oven-built projects, as specified by [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md). Browse it at [loaves.pub](https://loaves.pub). This repository is its interim home, in the repository-based shape [docs/v0.md](docs/v0.md) defines: this branch holds the tool and the docs; the [`index`](https://github.com/encero-systems/incan.pub/tree/index) branch holds the data. Today the registry holds crates.io packages **adopted as Loaves**, the **bound build facts** recorded for them, and the event log both are folded from. [docs/model.md](docs/model.md) states what Incan does to publish and what the registry does to manage.
+
+`loaves.pub` is the registry's public name. This repository, the `incan-pub` tool, the container-registry paths and the event and catalog schemas keep `incan.pub`, because they are permanent identifiers: the strings are hashed into event ids and sit inside archives that published digests name.
 
 ## The packages
 

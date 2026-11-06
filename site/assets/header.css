@@ -1,0 +1,22 @@
+/* One global header for home, catalog and package documents. */
+.forge-theme{--forge-header-height:68px}
+.forge-theme .site-header{height:var(--forge-header-height);background:#222521 url('forge-masthead.webp') left top/130% 500px no-repeat;border-bottom:1px solid #716044}
+.forge-theme .header-inner{max-width:1500px;height:100%;margin:auto;padding:10px 68px;display:flex;align-items:center;flex-wrap:nowrap;gap:30px}
+.forge-theme .brand{align-items:flex-end;gap:1px;color:#d8ad68}
+.forge-theme .brand img{width:110px;height:38px}
+.forge-theme .brand span{font:400 18px/1 var(--inc-font-display);padding:0;margin-bottom:2px}
+.forge-theme .site-header nav{display:flex;align-items:center;gap:36px;margin-left:auto;font:400 16px/1.55 var(--inc-font-body)}
+.forge-theme .site-header nav>a{color:#efeee8;display:flex;align-items:center;min-height:44px}
+.forge-theme .site-header nav>a[aria-current]{color:#e3bf73}
+.header-search{margin:0;font:inherit}
+.header-search summary{display:flex;align-items:center;gap:7px;color:#efeee8;cursor:pointer;min-height:44px;padding:0;list-style:none}
+.header-search summary::-webkit-details-marker{display:none}
+.header-search summary img{width:18px;height:18px;filter:brightness(0) invert(1);opacity:.85}
+.header-search[open] summary{color:#e3bf73}
+.forge-theme .header-search .global-search{position:absolute;right:max(68px,calc((100vw - 1500px)/2 + 68px));top:calc(var(--forge-header-height) + 8px);width:500px;max-width:calc(100vw - 40px);display:flex;gap:10px;padding:14px;border:1px solid #8e7449;border-radius:5px;background:#252723;box-shadow:0 10px 28px #17191033;z-index:22}
+.forge-theme .header-search input{min-width:0;flex:1;width:auto;height:42px;padding:9px 12px;font:400 14px/1.5 var(--inc-font-body);background:#30322d;color:#eeece6;border:1px solid #707168;border-radius:4px}
+.forge-theme .header-search .global-search button{padding:9px 12px;font:600 14px/1.5 var(--inc-font-body);background:#765525;color:#fff;border:1px solid #b59350;border-radius:4px}
+@media(max-width:1250px){.forge-theme .header-inner{padding-left:40px;padding-right:40px}.forge-theme .header-search .global-search{right:40px}}
+@media(max-width:760px){.forge-theme{--forge-header-height:60px}.forge-theme .header-inner{padding:10px 24px;gap:20px}.forge-theme .brand img{width:92px;height:31px}.forge-theme .brand span{font-size:16px;margin-bottom:0}.forge-theme .site-header nav{font-size:13px;gap:22px}.header-search summary span{display:none}.header-search summary{width:44px;justify-content:center}.forge-theme .header-search .global-search{right:24px;max-width:calc(100vw - 48px)}}
+@media(max-width:400px){.forge-theme .header-inner{padding-left:20px;padding-right:20px;gap:12px}.forge-theme .site-header nav{font-size:12px;gap:15px}.header-search summary{width:44px}.forge-theme .header-search .global-search{right:20px;max-width:calc(100vw - 40px)}}
+@media(max-width:340px){.forge-theme .header-inner{padding-left:16px;padding-right:16px;gap:8px}.forge-theme .site-header nav{font-size:11px;gap:8px}.forge-theme .brand img{width:80px;height:27px}.forge-theme .brand span{font-size:14px}}

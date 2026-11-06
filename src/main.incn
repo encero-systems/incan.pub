@@ -24,6 +24,7 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
     incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub describe-packages --work DIR [--registry HOST] [--namespace NS] [--root DIR]
+    incan-pub site --formatted DIR --templates DIR --checkpoint COMMIT --out DIR [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions (with `--features`, built with those features
@@ -102,6 +103,7 @@ from projection import (
     write_projections,
 )
 from registry import Record, builders, crates_io_index, fact_key, has_key, is_toolchain_identity, keys_of, parse_digits, record_key
+from site import render_site
 
 
 def flags() -> list[str]:
@@ -232,6 +234,8 @@ def run(arguments: list[str]) -> Result[None, str]:
         return describe_packages(invocation)
     if invocation.command == "build-roots":
         return print_build_roots(invocation)
+    if invocation.command == "site":
+        return write_site(invocation)
     return Err(f"unknown command `{invocation.command}`; see the usage at the top of src/main.incn")
 
 
@@ -764,6 +768,22 @@ def keep_documents(root: Path, entries: list[TarEntry], documents: JsonValue, la
             match target.write_bytes(by_path[path]):
                 Ok(_) => pass
                 Err(error) => return Err(f"{label}: {content_path(digest)}: {error.message()}")
+    return Ok(None)
+
+
+def write_site(invocation: Invocation) -> Result[None, str]:
+    """
+    The web surface, from the catalog at `--root` and the documents `site/format-documents.mjs` formatted into
+    `--formatted`. `--checkpoint` is the `index` commit the pages say they show.
+    """
+    written = render_site(
+        invocation.root(),
+        Path(invocation.require("formatted")?),
+        Path(invocation.require("templates")?),
+        Path(invocation.require("out")?),
+        invocation.require("checkpoint")?,
+    )?
+    println(f"wrote the pages of {written} versions")
     return Ok(None)
 
 

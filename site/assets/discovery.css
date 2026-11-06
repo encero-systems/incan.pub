@@ -1,0 +1,24 @@
+/* Shared discovery surfaces inherit whichever registry palette is selected. */
+.item-types{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 7px}
+.item-types button,.surface-choice select{font:600 14px/1.4 var(--inc-font-body);border:1px solid var(--line);color:var(--ink);background:var(--surface);padding:6px 12px;border-radius:4px;cursor:pointer}
+.item-types [aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.directory-rows .kind{font-size:12px;color:var(--muted);letter-spacing:.035em}
+.related{max-width:1450px;margin:auto;padding:38px clamp(20px,4vw,64px) 15px;color:var(--ink);scroll-margin-top:62px}
+.related-head{border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:20px 14px}
+.related-head h2{font:400 clamp(21px,2.4vw,30px)/1.1 var(--inc-font-display);margin:0}.related-head a{font-size:14px;color:var(--ui-teal)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.pick{display:flex;align-items:flex-start;flex-direction:column;padding:16px 18px;border:1px solid var(--line);border-radius:5px;background:var(--surface);text-decoration:none;color:var(--ink)}
+.pick:hover,.pick:focus-visible{border-color:var(--ui-teal);text-decoration:none}.pick strong{color:var(--ui-teal);font:400 23px/1.25 var(--inc-font-display);margin:.35em 0 .25em}
+.pick small{font:600 12px/1.35 var(--inc-font-body);color:var(--muted)}.pick .why{font:15px/1.45 var(--inc-font-body)}
+.pick.sponsored small{color:#7a5825}.pick.sponsored{border-top:2px solid #ac8645}
+.surface-choice{display:inline-flex;align-items:center;gap:8px;font-size:13px}.surface-choice select{padding:4px 8px}
+.catalog-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+:root:not([data-surface=parchment]) .registry-theme{--obsidian:#222829;--obsidian-edge:#3e4545;--paper:#f4f0e7;--surface:#faf7ef;--ink:#302d26;--muted:#605e57}
+:root:not([data-surface=parchment]) .registry-theme :is(.site-header,.site-footer,.forge-masthead,.example-toolbar){background-color:var(--obsidian);border-color:var(--obsidian-edge)}
+:root:not([data-surface=parchment]) .registry-theme :is(.site-header,.site-footer,.example-toolbar){background-image:none}
+:root:not([data-surface=parchment]) .registry-theme .footer-main{border-color:var(--obsidian-edge)}
+:root:not([data-surface=parchment]) .registry-theme .language-strip{background:#15191a}
+.registry-theme :is(.directory-rows,.promo-grid,.related-grid) a strong,.registry-theme .relation-list a,.registry-theme #dependencies td:first-child a{font:400 17px/1.35 Line,monospace;color:var(--ink)}
+.registry-theme :is(.directory-rows,.promo-grid,.related-grid) a:hover strong{color:var(--ui-teal)}
+@media(max-width:580px){.related-head{align-items:baseline}.pick{padding:12px 15px}.related{padding-block:24px 4px}}

@@ -1,0 +1,39 @@
+/* Give the footer the unused height above it while leaving long pages in flow. */
+body#top{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+body#top>footer{margin-top:auto;flex-shrink:0}body#top>header,body#top>.forge-masthead{flex-shrink:0}
+body#top.directory>main{box-sizing:border-box;width:100%}
+body#top>.package-shell{width:100%;box-sizing:border-box}
+.incus-return .incus-figure{width:40px;height:40px}.incus-return .incus-figure img{width:40px;height:40px;position:static;transform:none;image-rendering:pixelated}
+.run-launch{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:40px;position:relative}
+.run-launch img,.run-sprite{image-rendering:pixelated}.run-launch img{width:32px;height:32px}
+.site-header .header-inner{position:relative}.site-header .brand+.run-launch{margin-left:4px;margin-right:auto}
+.run-sprite{position:absolute;bottom:2px;left:0;width:32px;height:32px;background:url(/arcade/loaf-run/incus-run-v2.png) 0 0 / 128px 32px;pointer-events:none;z-index:2}
+body.arcade{background:#222829;color:#ede8db;font-family:var(--inc-font-body,"Source Sans 3",sans-serif)}
+.arcade main{width:min(960px,calc(100% - 36px));margin:36px auto 44px}
+.arcade .game-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:18px 0 10px}
+.arcade h1{font:400 clamp(32px,5vw,52px)/1.05 Square,monospace;color:#e7c583;margin:0}.game-heading a,.arcade main>a{color:#a3dcd6}
+.arcade .game-stage{position:relative;border:1px solid #6c695a;border-radius:5px;overflow:hidden;background:#151b24}
+.arcade canvas{width:100%;display:block;image-rendering:pixelated}
+.arcade .game-strip{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;gap:8px;flex-wrap:wrap;background:#171c20;color:#e9dbbd;font-variant-numeric:tabular-nums;border-top:1px solid #505350}
+.arcade .game-actions,.arcade .game-pad{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.arcade button{font:600 15px var(--inc-font-body,sans-serif);border:1px solid #938668;padding:7px 14px;color:#f4e5c6;background:#262c31;border-radius:4px;cursor:pointer}
+.arcade .main-game-button{background:linear-gradient(165deg,#efd9a8,#cead71);color:#2e251a}.arcade button:disabled{opacity:.5}
+.arcade .game-pad{margin-top:12px}.game-pad button{touch-action:none;user-select:none;min-height:44px;min-width:50px}.arcade .game-pad button:last-of-type{padding-inline:23px}
+.arcade .game-caption{margin:12px 0;color:#d7d5ca;font-size:16px}
+@media(max-width:600px){.arcade main{width:calc(100% - 16px);margin-top:16px}.arcade .game-heading{margin-top:14px}.site-header .brand+.run-launch{margin-inline:0}.run-launch{min-width:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.footer-game{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;text-decoration:none;color:#e8d8af;font-size:14px}.footer-game img{width:40px;height:40px;image-rendering:pixelated}.footer-game:hover,.footer-game:focus-visible{text-decoration:underline}
+.arcade #receipt{margin:18px 0;padding:14px 18px;border:1px solid #7b725e;border-radius:4px;background:#171d21}.arcade #receipt h2{font:22px Square,monospace;color:#e6c183;margin:0}.arcade #receipt p{margin:6px 0}.arcade #packed-items{display:flex;list-style:none;gap:12px;flex-wrap:wrap;padding:0}.arcade #packed-items a{color:#a3dcd6}.arcade #clock{font-variant-numeric:tabular-nums}.arcade .game-strip .game-actions{margin-left:auto}
+.oven-break{display:flex;align-items:center;gap:12px;margin:24px 0 0;padding:12px 0;border-top:1px solid var(--line);color:var(--ink)}.oven-break img{width:48px;height:48px;image-rendering:pixelated}.oven-break a{color:var(--ui-teal);font-weight:600}.oven-break p{margin:0;font-size:14px;color:var(--muted)}
+
+html:has(dialog.loaf-modal[open]){overflow:hidden}
+dialog.loaf-modal,body.forge-theme dialog.loaf-modal{box-sizing:border-box;width:min(900px,calc(100vw - 24px));max-width:none;height:min(760px,calc(100dvh - 32px));max-height:none;padding:0;border:1px solid #777267;border-radius:8px;background:#222829;color:#f4e5c6;box-shadow:0 16px 70px #10141470;overflow:hidden}
+dialog.loaf-modal[open]{display:flex;flex-direction:column}
+dialog.loaf-modal::backdrop,body.forge-theme dialog.loaf-modal::backdrop{background:#111719ba}
+.loaf-modal-bar{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;border-bottom:1px solid #515856;font:22px/1.25 Square,monospace;color:#e7c583}
+.loaf-modal-bar strong{font-weight:400}.loaf-modal-bar button{position:static;border:1px solid #726f63;border-radius:4px;padding:6px 12px;background:#2d3333;color:#f4ead6;cursor:pointer;font:600 15px/1.4 sans-serif}
+.loaf-modal iframe{display:block;flex:1 1 0;min-height:0;width:100%;border:0}
+.arcade-embed body.arcade{display:block;min-height:0}.arcade-embed body>header,.arcade-embed body>footer,.arcade-embed .game-heading,.arcade-embed main>a{display:none}
+.arcade-embed .arcade main{width:calc(100% - 28px);max-width:960px;margin:12px auto}.arcade-embed #state{margin:10px 0}
+@media(max-width:600px){dialog.loaf-modal,body.forge-theme dialog.loaf-modal{height:min(535px,calc(100dvh - 16px))}}

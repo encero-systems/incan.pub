@@ -1,0 +1,742 @@
+"""
+The web surface (RFC 125, "Documents, references and the web surface"): static pages generated from the catalog.
+
+`incan-pub site` reads a checkout of `index` and writes a page for every package and indexed version, the paginated
+catalog, its search index and the home page. `site/format-documents.mjs` formats each document's Markdown and code
+beforehand, and the pages embed what it wrote. Nothing on a page needs a live service. Everything a package says about
+itself comes from its upstream, so every value is escaped and a link out must be `http` or `https`.
+"""
+
+from std.fs import Path
+from std.json import JsonValue
+
+from events import member, read_text, string_member, write_text
+from oci import SOURCE_REPOSITORY
+from registry import has_key, keys_of
+
+
+# How many packages a catalog page lists.
+const CATALOG_PAGE_SIZE: int = 50
+
+
+def starters() -> list[str]:
+    """The packages the home page starts a reader on."""
+    return [
+        "crates-io/serde",
+        "crates-io/tokio",
+        "crates-io/regex",
+        "crates-io/memchr",
+        "crates-io/serde_json",
+        "crates-io/anyhow",
+        "crates-io/clap",
+    ]
+
+
+class Site:
+    """What every page is rendered from: the checkout, the formatted documents, and the partials a page embeds."""
+    pub root: Path
+    pub formatted: Path
+    pub checkpoint: str
+    pub package_template: str
+    pub head: str
+    pub header: str
+    pub footer: str
+    pub known: Dict[str, bool]
+    pub dependents: Dict[str, str]
+
+
+pub def escape(text: str) -> str:
+    """`text` as HTML, safe in an element or a quoted attribute."""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;")
+
+
+pub def safe_link(url: str, label: str) -> str:
+    """A link out, or the bare label for anything but `http` and `https`: an upstream manifest can say `javascript:`."""
+    if url.startswith("https://") or url.startswith("http://"):
+        return "<a href=\"" + escape(url) + "\" rel=\"nofollow noopener\">" + escape(label) + "</a>"
+    return escape(label)
+
+
+pub def checked_component(component: str) -> Result[str, str]:
+    """A version or name as one path component of the output, refusing anything that could leave its directory."""
+    if len(component) == 0 or component == "." or component == "..":
+        return Err(f"`{component}` cannot be a path component")
+    for character in component:
+        if not "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.+".contains(character):
+            return Err(f"`{component}` cannot be a path component")
+    return Ok(component)
+
+
+pub def checked_identity(name: str) -> Result[str, str]:
+    """A scoped package name as two path components."""
+    parts = name.split("/")
+    if len(parts) != 2:
+        return Err(f"`{name}` is not a scoped package name")
+    checked_component(parts[0])?
+    checked_component(parts[1])?
+    return Ok(name)
+
+
+pub def expand(template: str, values: Dict[str, str]) -> Result[str, str]:
+    """Fill a template's `{{token}}`s once: a value is never expanded again, so a README can say `{{root}}`."""
+    chunks = template.split("{{")
+    mut out = chunks[0]
+    for chunk in chunks[1:]:
+        parts = chunk.split("}}")
+        if len(parts) < 2 or not has_key(values, parts[0]):
+            return Err(f"unknown template token `{parts[0]}`")
+        out = out + values[parts[0]] + "}}".join(parts[1:])
+    return Ok(out)
+
+
+def items_of(value: JsonValue, key: str) -> list[JsonValue]:
+    return member(value, key).as_array().unwrap_or([])
+
+
+def joined(value: JsonValue, key: str) -> str:
+    mut names: list[str] = []
+    for item in items_of(value, key):
+        names.append(item.as_str().unwrap_or(""))
+    return ", ".join(names)
+
+
+def int_text(value: JsonValue, key: str) -> str:
+    return str(member(value, key).as_int().unwrap_or(0))
+
+
+def is_true(value: JsonValue, key: str) -> bool:
+    return member(value, key).as_bool().unwrap_or(false)
+
+
+def section(id: str, title: str, label: str, body: str) -> str:
+    return "<section id=\"" + id + "\"><div class=\"section-heading\"><h2>" + title + "</h2><span class=\"eyebrow\">" + label + "</span></div>" + body + "</section>"
+
+
+def table(headings: list[str], body: str) -> str:
+    mut heads = ""
+    for heading in headings:
+        heads = heads + "<th scope=\"col\">" + heading + "</th>"
+    return "<div class=\"table-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Package records\"><table><thead><tr>" + heads + "</tr></thead><tbody>" + body + "</tbody></table></div>"
+
+
+def repository_of(version: JsonValue) -> str:
+    """The version's repository as `https://host/owner/name` on a forge whose file URLs are known, or nothing."""
+    repository = string_member(member(version, "about"), "repository")
+    if not repository.startswith("https://github.com/") and not repository.startswith("https://gitlab.com/"):
+        return ""
+    parts = repository.split("/")
+    if len(parts) < 5:
+        return ""
+    base = "/".join(parts[0:5])
+    if base.endswith(".git"):
+        return base[0:len(base) - 4]
+    return base
+
+
+def source_url(version: JsonValue, document: JsonValue, url: str) -> str:
+    """Where a document's relative link points: the file at its recorded commit, or the upstream page without one."""
+    upstream = member(version, "upstream")
+    fallback = "https://crates.io/crates/" + string_member(upstream, "package") + "/" + string_member(version, "version")
+    commit = string_member(member(version, "vcs"), "commit")
+    repository = repository_of(version)
+    if len(commit) == 0 or len(repository) == 0:
+        return fallback
+    package_path = string_member(member(version, "vcs"), "path")
+    document_path = string_member(document, "path")
+    if url.startswith("#"):
+        mut full = document_path
+        if len(package_path) > 0:
+            full = package_path + "/" + document_path
+        return repository + "/blob/" + commit + "/" + full + url
+    mut directory = package_path
+    parts = document_path.split("/")
+    if len(parts) > 1:
+        if len(directory) > 0:
+            directory = directory + "/"
+        directory = directory + "/".join(parts[0:len(parts) - 1])
+    if len(directory) > 0:
+        directory = directory + "/"
+    return repository + "/blob/" + commit + "/" + directory + url
+
+
+def rewrite_links(fragment: str, version: JsonValue, document: JsonValue) -> str:
+    """A document's relative links resolved against its source: on this site they would point nowhere."""
+    chunks = fragment.split("href=\"")
+    mut out = chunks[0]
+    for chunk in chunks[1:]:
+        parts = chunk.split("\"")
+        mut destination = parts[0]
+        if not destination.contains(":") and not destination.startswith("//"):
+            destination = escape(source_url(version, document, destination))
+        out = out + "href=\"" + destination + "\"" + "\"".join(parts[1:])
+    return out
+
+
+def documents_of(site: Site, version: JsonValue, role: str) -> Result[str, str]:
+    """The version's formatted documents of one role, the README open and every other collapsed."""
+    mut body = ""
+    for document in items_of(version, "documents"):
+        if string_member(document, "role") != role:
+            continue
+        digest = string_member(document, "digest")
+        file_name = digest[7:] + "." + string_member(document, "format") + ".html"
+        fragment = rewrite_links(read_text(site.formatted / file_name, file_name)?, version, document)
+        mut origin = "Author-provided"
+        if string_member(document, "origin") == "registry":
+            origin = "Registry-generated"
+        label = escape(string_member(document, "path")) + " · " + origin
+        if role == "readme":
+            body = body + "<p class=\"document-source\">" + label + "</p><div class=\"readme\">" + fragment + "</div>"
+        else:
+            body = body + "<details class=\"document-file\"><summary>" + label + "</summary><div class=\"readme\">" + fragment + "</div><p class=\"table-note\">" + escape(digest) + "</p></details>"
+    return Ok(body)
+
+
+pub def feature_paths(features: JsonValue) -> Dict[str, str]:
+    """How each feature the defaults reach is reached, breadth first over sorted edges; a cycle never enqueues twice."""
+    mut paths: Dict[str, str] = {}
+    mut pending: list[str] = []
+    if features.contains_key("default"):
+        paths["default"] = "default"
+        pending.append("default")
+    mut cursor = 0
+    while cursor < len(pending):
+        name = pending[cursor]
+        cursor += 1
+        mut edges: list[str] = []
+        for edge in items_of(features, name):
+            edges.append(edge.as_str().unwrap_or(""))
+        for edge in sorted(edges):
+            if features.contains_key(edge) and not edge.contains("/") and not edge.startswith("dep:") and not has_key(paths, edge):
+                paths[edge] = paths[name] + " → " + edge
+                pending.append(edge)
+    return paths
+
+
+pub def activated_dependencies(features: JsonValue, paths: Dict[str, str]) -> Dict[str, str]:
+    """The optional dependencies the defaults switch on, by the path that does; `dep?/feature` switches on nothing."""
+    mut active: Dict[str, str] = {}
+    for name in sorted(keys_of(paths)):
+        for item in items_of(features, name):
+            edge = item.as_str().unwrap_or("")
+            mut dependency = ""
+            if edge.startswith("dep:"):
+                dependency = edge[4:]
+            elif edge.contains("/") and not edge.contains("?/"):
+                dependency = edge.split("/")[0]
+            if len(dependency) > 0 and not has_key(active, dependency):
+                active[dependency] = paths[name]
+    return active
+
+
+def features_section(version: JsonValue) -> str:
+    features = member(version, "features")
+    if not features.is_object() or len(features.keys()) == 0:
+        return "<p>No feature declarations recorded.</p>"
+    paths = feature_paths(features)
+    mut names: list[str] = []
+    for name in features.keys():
+        names.append(name)
+    mut body = ""
+    for name in sorted(names):
+        mut state = "No"
+        if has_key(paths, name):
+            state = "Yes<small>" + escape(paths[name]) + "</small>"
+        mut edges = ""
+        for edge in items_of(features, name):
+            edges = edges + "<li><code>" + escape(edge.as_str().unwrap_or("")) + "</code></li>"
+        if len(edges) == 0:
+            edges = "<li class=\"muted\">No additional activation edges declared.</li>"
+        body = body + "<tr><th scope=\"row\"><code>" + escape(name) + "</code></th><td>" + state + "</td><td><ul class=\"effects\">" + edges + "</ul></td></tr>"
+    return "<p class=\"section-intro\">Default activation follows the complete local feature graph. Forwarded edges remain declarations, not a resolved build.</p>" + table(["Feature", "Default", "Activation edges"], body)
+
+
+def dependency_state(dependency: JsonValue, active: Dict[str, str]) -> str:
+    mut state = "Required"
+    if is_true(dependency, "optional"):
+        state = "Optional · not enabled by defaults"
+        if has_key(active, string_member(dependency, "name")):
+            state = "Enabled through " + active[string_member(dependency, "name")]
+    target = string_member(dependency, "target")
+    if len(target) > 0:
+        state = state + " · when " + target
+    return state
+
+
+def dependencies_section(site: Site, version: JsonValue, root: str) -> str:
+    features = member(version, "features")
+    active = activated_dependencies(features, feature_paths(features))
+    mut body = ""
+    for dependency in items_of(version, "dependencies"):
+        loaf = string_member(dependency, "loaf")
+        mut label = "<code>" + escape(loaf) + "</code>"
+        if has_key(site.known, loaf):
+            label = "<a href=\"" + root + "packages/" + escape(loaf) + "/\">" + label + "</a>"
+        mut defaults = "enabled"
+        if not member(dependency, "default-features").as_bool().unwrap_or(true):
+            defaults = "disabled"
+        mut requests = ""
+        if len(joined(dependency, "features")) > 0:
+            requests = "<small>Requests: " + escape(joined(dependency, "features")) + "</small>"
+        body = body + "<tr><th scope=\"row\">" + label + "<small>Alias: " + escape(string_member(dependency, "name")) + "</small></th><td><code>" + escape(string_member(dependency, "req")) + "</code><small>Default features: " + defaults + "</small>" + requests + "</td><td>" + escape(dependency_state(dependency, active)) + "</td></tr>"
+    if len(body) == 0:
+        return "<p>No dependencies declared.</p>"
+    return "<p class=\"section-intro\">Version requirements are declarations, not resolved versions. Target conditions apply to each declaration individually.</p>" + table(["Dependency", "Requirement &amp; features", "Activation"], body)
+
+
+def dependents_section(site: Site, name: str, root: str) -> str:
+    if not has_key(site.dependents, name):
+        return "<p>No declared dependents in this checkpoint.</p>"
+    rows = site.dependents[name]
+    count = len(rows.split("<li>")) - 1
+    mut noun = "dependency declarations"
+    if count == 1:
+        noun = "dependency declaration"
+    return "<details class=\"dependents-details\"><summary>" + str(count) + " " + noun + "</summary><p class=\"section-intro\">Direct declarations from all indexed versions. Requirements and target or feature conditions may select a different version than the one shown here.</p><ul class=\"relation-list\">" + rows.replace("{{root}}", root) + "</ul></details>"
+
+
+def target_title(target: str) -> str:
+    if target == "aarch64-apple-darwin":
+        return "macOS · Apple silicon"
+    if target == "x86_64-apple-darwin":
+        return "macOS · Intel"
+    if target == "x86_64-unknown-linux-gnu":
+        return "Linux · x86-64"
+    if target == "aarch64-unknown-linux-gnu":
+        return "Linux · Arm64"
+    return target
+
+
+def unit_line(asset: JsonValue) -> str:
+    return "<li><code>" + escape(string_member(asset, "unit_identity")) + "</code> · " + safe_link(string_member(asset, "attestation"), "Attestation reference") + "<small>Built by " + escape(string_member(asset, "builder")) + " · archive " + escape(string_member(asset, "archive")) + "</small></li>"
+
+
+def plural(count: int, noun: str) -> str:
+    if count == 1:
+        return f"{count} {noun}"
+    return f"{count} {noun}s"
+
+
+def builds_markup(version: JsonValue) -> str:
+    """
+    The asset matrix: target, then profile and toolchain, then feature set, each collapsed down to its units. The keys
+    sort in that order, so one pass over them opens and closes each level as its prefix changes.
+    """
+    mut units: Dict[str, str] = {}
+    mut counts: Dict[str, int] = {}
+    for asset in items_of(version, "assets"):
+        binding = member(asset, "binding")
+        key = string_member(binding, "target") + "\t" + string_member(binding, "profile") + "\t" + string_member(binding, "toolchain") + "\t" + joined(binding, "features")
+        if not has_key(units, key):
+            units[key] = ""
+            counts[key] = 0
+        units[key] = units[key] + unit_line(asset)
+        counts[key] = counts[key] + 1
+    keys = sorted(keys_of(units))
+    mut groups: Dict[str, int] = {}
+    for key in keys:
+        parts = key.split("\t")
+        group = parts[0] + "\t" + parts[1] + "\t" + parts[2]
+        if not has_key(groups, group):
+            groups[group] = 0
+        groups[group] = groups[group] + 1
+    mut out = ""
+    mut current_target = ""
+    mut current_group = ""
+    for key in keys:
+        parts = key.split("\t")
+        group = parts[0] + "\t" + parts[1] + "\t" + parts[2]
+        if group != current_group and len(current_group) > 0:
+            out = out + "</ul></details>"
+        if parts[0] != current_target:
+            if len(current_target) > 0:
+                out = out + "</section>"
+            out = out + "<section class=\"build-target\"><h3>" + escape(target_title(parts[0])) + "</h3><code>" + escape(parts[0]) + "</code>"
+            current_target = parts[0]
+        if group != current_group:
+            out = out + "<details class=\"profile-group\"><summary><strong>" + escape(parts[1]) + "</strong><span>" + plural(groups[group], "feature set") + "</span></summary><p class=\"build-tool\">" + escape(parts[2]) + "</p><ul class=\"build-variants\">"
+            current_group = group
+        mut label = parts[3]
+        if len(label) == 0:
+            label = "No enabled features"
+        out = out + "<li><details><summary><span>" + escape(label) + "</span><small>" + plural(counts[key], "unit") + "</small></summary><ul class=\"unit-list\">" + units[key] + "</ul></details></li>"
+    if len(keys) > 0:
+        out = out + "</ul></details></section>"
+    return out
+
+
+def builds_section(version: JsonValue) -> str:
+    mut facts = ""
+    for fact in items_of(version, "facts"):
+        facts = facts + "<tr><th scope=\"row\">" + escape(string_member(fact, "target")) + "</th><td>" + escape(string_member(fact, "profile")) + "</td><td>" + escape(string_member(fact, "status")) + "</td><td>" + escape(joined(fact, "features")) + "</td></tr>"
+    if len(facts) > 0:
+        facts = "<details class=\"document-file\"><summary>Recorded build-fact bindings</summary>" + table(["Target", "Profile", "Status", "Features"], facts) + "</details>"
+    matrix = builds_markup(version)
+    if len(matrix) == 0:
+        return "<p class=\"notice\">No compiled units are indexed for this version, so Oven bakes it from source. This does not establish whether upstream supports a platform.</p>" + facts
+    return "<p class=\"section-intro\">Oven takes a unit only when its identity equals what the build needs, and bakes from source when none does. Select a profile to see its feature sets, compiled units, builders and attestation links.</p>" + matrix + facts
+
+
+def version_label(choice: JsonValue, url: str) -> str:
+    number = string_member(choice, "version")
+    mut label = "<a href=\"" + escape(url) + "\">" + escape(number) + "</a>"
+    revision = member(choice, "revision").as_int().unwrap_or(1)
+    if revision > 1:
+        label = label + "<small>Revision " + str(revision) + "</small>"
+    if is_true(choice, "yanked"):
+        mut reason = string_member(choice, "yank-reason")
+        if len(reason) == 0:
+            reason = "No reason recorded"
+        label = label + "<small>Yanked · " + escape(reason) + "</small>"
+    return label
+
+
+def releases_section(site: Site, package: JsonValue, version: JsonValue, root: str) -> Result[str, str]:
+    name = string_member(package, "name")
+    upstream = member(package, "upstream")
+    mut rows = ""
+    for choice in items_of(package, "versions"):
+        number = string_member(choice, "version")
+        url = root + "packages/" + name + "/versions/" + number + "/"
+        upstream_url = string_member(upstream, "url") + "/" + number
+        rows = rows + "<tr><th scope=\"row\">" + version_label(choice, url) + "</th><td>" + escape(string_member(choice, "adopted")[0:10]) + "</td><td>" + safe_link(upstream_url, "Upstream record") + "</td></tr>"
+    mut changelog = documents_of(site, version, "changelog")?
+    if len(changelog) == 0:
+        changelog = "<p class=\"muted\">No changelog document is recorded for this version.</p>"
+    return Ok("<p class=\"section-intro\">Dates below record adoption into the registry, not upstream publication. Changelogs are shown as packaged; they can cover multiple releases.</p>" + table(["Version", "Adopted", "Upstream"], rows) + changelog)
+
+
+def security_section(version: JsonValue) -> str:
+    mut state = "This version is not yanked."
+    if is_true(version, "yanked"):
+        state = "This version is yanked. A lockfile that names it still resolves."
+        reason = string_member(version, "yank-reason")
+        if len(reason) > 0:
+            state = state + " Reason: " + escape(reason)
+    mut advisories = "<p>No advisory is recorded for this version.</p>"
+    notes = items_of(version, "advisory-notes")
+    if len(notes) > 0:
+        advisories = ""
+        for note in notes:
+            advisories = advisories + "<p class=\"notice\">" + escape(note.as_str().unwrap_or("")) + "</p>"
+    return "<p>" + state + "</p>" + advisories + "<p class=\"notice\">An upstream vulnerability feed has not been collected. No advisories here does not establish that a package is free of vulnerabilities.</p>"
+
+
+def provenance_section(site: Site, package: JsonValue, version: JsonValue) -> Result[str, str]:
+    name = string_member(package, "name")
+    number = string_member(version, "version")
+    upstream = member(version, "upstream")
+    pin = site.checkpoint
+    mut body = "<dl class=\"provenance\"><dt>Index checkpoint</dt><dd>" + safe_link(SOURCE_REPOSITORY + "/tree/" + pin, pin) + "</dd>"
+    body = body + "<dt>Source Loaf</dt><dd><code>" + escape(string_member(version, "archive")) + "</code></dd>"
+    body = body + "<dt>Stored at</dt><dd><code>ghcr.io/encero-systems/incan.pub/" + escape(name) + "</code></dd>"
+    body = body + "<dt>Adopted from</dt><dd>crates.io, as <code>" + escape(string_member(upstream, "package")) + "</code> " + escape(string_member(upstream, "version")) + "</dd>"
+    body = body + "<dt>Upstream checksum</dt><dd><code>" + escape(string_member(upstream, "checksum")) + "</code></dd>"
+    body = body + "<dt>Adopted by</dt><dd>" + escape(string_member(member(version, "registry"), "adopter")) + "</dd>"
+    body = body + "<dt>Scope owner</dt><dd>The project operates the reserved <code>" + escape(name.split("/")[0]) + "</code> scope.</dd>"
+    body = body + "<dt>Trusted publishers</dt><dd>None: the registry adopts these versions itself.</dd></dl>"
+    for revision in items_of(version, "revisions"):
+        reason = string_member(revision, "reason")
+        if len(reason) > 0:
+            body = body + "<p class=\"table-note\">Revision " + int_text(revision, "revision") + " corrected the one before it: " + escape(reason) + "</p>"
+    fragment = "manifests/" + name + "/" + number + ".html"
+    body = body + "<details><summary>Recorded loaf.toml</summary>" + read_text(site.formatted / fragment, fragment)? + "</details>"
+    return Ok(body)
+
+
+def metadata_section(package: JsonValue, version: JsonValue, root: str) -> str:
+    about = member(version, "about")
+    mut authors = joined(about, "authors")
+    if len(authors) == 0:
+        authors = "Not declared"
+    mut minimum = string_member(about, "rust-version")
+    if len(minimum) == 0:
+        minimum = "Not declared"
+    number = string_member(version, "version")
+    mut links = "<li>" + safe_link(string_member(member(package, "upstream"), "url") + "/" + number, "crates.io package") + "</li>"
+    if len(string_member(about, "repository")) > 0:
+        links = links + "<li>" + safe_link(string_member(about, "repository"), "Source repository") + "</li>"
+    if len(string_member(about, "documentation")) > 0:
+        links = links + "<li>" + safe_link(string_member(about, "documentation"), "Documentation") + "</li>"
+    if len(string_member(about, "homepage")) > 0:
+        links = links + "<li>" + safe_link(string_member(about, "homepage"), "Homepage") + "</li>"
+    mut body = "<div class=\"metadata-block\"><h2>Metadata</h2><dl><dt>Authors</dt><dd>" + escape(authors) + "</dd><dt>Adopted</dt><dd>" + escape(string_member(version, "adopted")[0:10]) + "</dd><dt>Minimum Rust</dt><dd>" + escape(minimum) + "</dd></dl><h3 class=\"metadata-label\">Links</h3><ul class=\"source-links\">" + links + "</ul></div>"
+    body = body + "<div class=\"metadata-block\"><h2>Indexed platforms</h2>"
+    for platform in [("apple", "macOS"), ("linux", "Linux"), ("windows", "Windows")]:
+        mut state = "No indexed build"
+        for asset in items_of(version, "assets"):
+            if string_member(member(asset, "binding"), "target").contains(platform[0]):
+                state = "Indexed"
+        body = body + "<a class=\"platform\" href=\"#builds\"><img src=\"" + root + "assets/platform-" + platform[0] + ".svg\" alt=\"\"><span>" + platform[1] + "<small>" + state + "</small></span></a>"
+    body = body + "</div><button class=\"text-button\" data-open=\"footer-reporting-dialog\">Report abuse</button>"
+    return body + "<div class=\"rail-install\"><button type=\"button\" class=\"primary\" data-open=\"install-dialog\"><img src=\"" + root + "assets/plus.svg\" alt=\"\">Add to project</button></div>"
+
+
+def section_rail() -> str:
+    mut rail = ""
+    for anchor in [
+        ("readme", "README"),
+        ("features", "Features"),
+        ("dependencies", "Dependencies"),
+        ("dependents", "Dependents"),
+        ("builds", "Indexed builds"),
+        ("releases", "Versions &amp; notes"),
+        ("licenses", "Licenses"),
+        ("security", "Security"),
+        ("provenance", "Provenance"),
+        ("metadata", "Metadata"),
+    ]:
+        rail = rail + "<a href=\"#" + anchor[0] + "\">" + anchor[1] + "</a>"
+    return rail
+
+
+def seal(root: str) -> str:
+    return "<span class=\"incus-secret\" id=\"kiln-seal\"><button type=\"button\" title=\"Knock on the kiln seal\" aria-label=\"Knock on the kiln seal\" aria-pressed=\"false\"><img class=\"seal\" src=\"" + root + "assets/loaf-seal.svg\" alt=\"\"><img class=\"cameo-pose peek\" src=\"" + root + "arcade/loaf-run/cameos/peek.png\" alt=\"\"><img class=\"cameo-pose doze\" src=\"" + root + "arcade/loaf-run/cameos/doze.png\" alt=\"\"></button></span>"
+
+
+def package_document(site: Site, package: JsonValue, version: JsonValue, root: str) -> Result[str, str]:
+    """A version's document, every section in the page's HTML so the browser's Find reaches all of it."""
+    name = string_member(package, "name")
+    mut readme = documents_of(site, version, "readme")?
+    if len(readme) == 0:
+        readme = "<p class=\"muted\">No README is recorded for this version.</p>"
+    licenses = documents_of(site, version, "license")? + documents_of(site, version, "license-notice")?
+    declared = escape(string_member(member(version, "about"), "license"))
+    mut main = "<section id=\"readme\"><div class=\"section-heading\"><h2>README</h2>" + seal(root) + "<span class=\"eyebrow\">Recorded documentation</span></div><p class=\"section-intro\">Upstream documentation. Cargo examples describe the Rust crate; Add to project provides the Oven dependency.</p>" + readme + "</section>"
+    main = main + section("features", "Features", "Declared activation", features_section(version))
+    main = main + section("dependencies", "Dependencies", "Version requirements", dependencies_section(site, version, root))
+    main = main + section("dependents", "Dependents", "Whole index", dependents_section(site, name, root))
+    main = main + section("builds", "Indexed builds", "Bound assets", builds_section(version))
+    main = main + section("releases", "Versions &amp; release notes", "Indexed versions", releases_section(site, package, version, root)?)
+    main = main + section("licenses", "License documents", "Recorded files", "<p>Declared license: <strong>" + declared + "</strong></p>" + licenses)
+    main = main + section("security", "Security", "Coverage", security_section(version))
+    return Ok(main + section("provenance", "Provenance", "Pinned evidence", provenance_section(site, package, version)?))
+
+
+def package_page(site: Site, package: JsonValue, version: JsonValue, latest: str, root: str) -> Result[str, str]:
+    name = string_member(package, "name")
+    parts = name.split("/")
+    number = string_member(version, "version")
+    about = member(version, "about")
+    mut versions = ""
+    for choice in items_of(package, "versions"):
+        other = string_member(choice, "version")
+        mut selected = ""
+        if other == number:
+            selected = " selected"
+        versions = versions + "<option value=\"" + root + "packages/" + escape(name) + "/versions/" + escape(other) + "/\"" + selected + ">" + escape(other) + "</option>"
+    mut warning = ""
+    if number != latest:
+        warning = "<p class=\"version-warning\">Viewing an older indexed version. <a href=\"" + root + "packages/" + escape(name) + "/\">View latest indexed version " + escape(latest) + " →</a></p>"
+    return expand(site.package_template, {
+        "head": site.head.replace("{{root}}", root),
+        "header": site.header.replace("{{root}}", root).replace("{{current}}", ""),
+        "footer": site.footer.replace("{{root}}", root),
+        "root": root,
+        "scope": escape(parts[0]),
+        "name": escape(parts[1]),
+        "key": escape(parts[1].replace("-", "_")),
+        "id": escape(name),
+        "version": escape(number),
+        "versions": versions,
+        "description": escape(string_member(about, "description")),
+        "license": escape(string_member(about, "license")),
+        "warning": warning,
+        "rail": section_rail(),
+        "main": package_document(site, package, version, root)?,
+        "metadata": metadata_section(package, version, root),
+    })
+
+
+def catalog_row(summary: JsonValue, root: str) -> str:
+    """One row of the catalog: `site/assets/catalog.js` writes the same row when it filters."""
+    name = string_member(summary, "name")
+    return "<li data-kind=\"Loaf\"><a href=\"" + root + "packages/" + escape(name) + "/\"><span><strong>" + escape(name.split("/")[1]) + "</strong><small class=\"kind\">Loaf</small><small>" + escape(name) + "</small></span><span class=\"result-desc\">" + escape(string_member(summary, "description")) + "</span><code>" + escape(string_member(summary, "latest")) + "</code></a></li>"
+
+
+def category_options(summaries: list[JsonValue]) -> str:
+    mut names: list[str] = []
+    for summary in summaries:
+        for category in items_of(summary, "categories"):
+            name = category.as_str().unwrap_or("")
+            if not names.contains(name):
+                names.append(name)
+    mut options = "<option value=\"\">All categories</option>"
+    for name in sorted(names):
+        options = options + "<option>" + escape(name) + "</option>"
+    return options
+
+
+def license_options(summaries: list[JsonValue]) -> str:
+    mut names: list[str] = []
+    for summary in summaries:
+        name = string_member(summary, "license")
+        if not names.contains(name):
+            names.append(name)
+    mut options = "<option value=\"\">All licenses</option><optgroup label=\"Contains identifier\"><option value=\"id:MIT\">MIT</option><option value=\"id:Apache-2.0\">Apache-2.0</option><option value=\"id:BSD-3-Clause\">BSD-3-Clause</option><option value=\"id:Unlicense\">Unlicense</option></optgroup><optgroup label=\"Exact expression\">"
+    for name in sorted(names):
+        options = options + "<option value=\"expression:" + escape(name) + "\">" + escape(name) + "</option>"
+    return options + "</optgroup>"
+
+
+def pagination_of(index: int, pages: int, root: str) -> str:
+    mut out = ""
+    if index > 0:
+        mut url = root + "catalog/"
+        if index > 1:
+            url = url + "page/" + str(index) + "/"
+        out = out + "<a data-page=\"previous\" href=\"" + url + "\">← Previous</a>"
+    out = out + "<span>Page " + str(index + 1) + " of " + str(pages) + "</span>"
+    if index + 1 < pages:
+        out = out + "<a data-page=\"next\" href=\"" + root + "catalog/page/" + str(index + 2) + "/\">Next →</a>"
+    return out
+
+
+def catalog_pages(site: Site, summaries: list[JsonValue], templates: Path, out: Path) -> Result[None, str]:
+    """The catalog as plain numbered pages: everything is reachable with JavaScript off, and search only narrows it."""
+    template = read_text(templates / "catalog.html", "catalog.html")?
+    categories = category_options(summaries)
+    licenses = license_options(summaries)
+    total = len(summaries)
+    pages = (total + CATALOG_PAGE_SIZE - 1) // CATALOG_PAGE_SIZE
+    for index in range(pages):
+        mut root = "../"
+        mut relative = "catalog/index.html"
+        if index > 0:
+            root = "../../../"
+            relative = "catalog/page/" + str(index + 1) + "/index.html"
+        first = index * CATALOG_PAGE_SIZE
+        last = min([first + CATALOG_PAGE_SIZE, total])
+        mut rows = ""
+        for summary in summaries[first:last]:
+            rows = rows + catalog_row(summary, root)
+        html = expand(template, {
+            "head": site.head.replace("{{root}}", root),
+            "header": site.header.replace("{{root}}", root).replace("{{current}}", " aria-current=\"page\""),
+            "footer": site.footer.replace("{{root}}", root),
+            "root": root,
+            "seal": seal(root),
+            "packages": rows,
+            "categories": categories,
+            "licenses": licenses,
+            "pagination": pagination_of(index, pages, root),
+            "count": str(first + 1) + "–" + str(last) + " of " + str(total) + " items",
+            "page": str(index + 1),
+            "checkpoint": escape(site.checkpoint),
+        })?
+        write_text(out / relative, html, relative)?
+    return Ok(None)
+
+
+def home_page(site: Site, summaries: list[JsonValue], counts: JsonValue, templates: Path, out: Path) -> Result[None, str]:
+    root = "./"
+    mut rows = ""
+    for wanted in starters():
+        for summary in summaries:
+            if string_member(summary, "name") == wanted:
+                rows = rows + catalog_row(summary, root)
+    html = expand(read_text(templates / "home.html", "home.html")?, {
+        "head": site.head.replace("{{root}}", root),
+        "header": site.header.replace("{{root}}", root).replace("{{current}}", ""),
+        "footer": site.footer.replace("{{root}}", root),
+        "root": root,
+        "starters": rows,
+        "packages": int_text(counts, "packages"),
+        "versions": int_text(counts, "versions"),
+        "facts": int_text(counts, "facts"),
+        "assets": int_text(counts, "assets"),
+    })?
+    return write_text(out / "index.html", html, "index.html")
+
+
+def shell_page(site: Site, template_name: str, root: str, templates: Path, out: Path, relative: str) -> Result[None, str]:
+    """A page around the shared header and footer with nothing from the catalog: the game and the not-found page."""
+    html = expand(read_text(templates / template_name, template_name)?, {
+        "head": site.head.replace("{{root}}", root),
+        "header": site.header.replace("{{root}}", root).replace("{{current}}", ""),
+        "footer": site.footer.replace("{{root}}", root),
+        "root": root,
+    })?
+    return write_text(out / relative, html, relative)
+
+
+def dependent_line(name: str, number: str, dependency: JsonValue) -> str:
+    """A reverse edge, with the page's root still to fill: it is rendered once and embedded at every depth."""
+    mut detail = "Requires " + escape(string_member(dependency, "req")) + " · alias " + escape(string_member(dependency, "name"))
+    target = string_member(dependency, "target")
+    if len(target) > 0:
+        detail = detail + " · when " + escape(target)
+    return "<li><a href=\"{{root}}packages/" + escape(name) + "/versions/" + escape(number) + "/\">" + escape(name) + " " + escape(number) + "</a><span>" + detail + "</span></li>"
+
+
+def read_json(path: Path, label: str) -> Result[JsonValue, str]:
+    match JsonValue.parse(read_text(path, label)?):
+        Ok(value) => return Ok(value)
+        Err(error) => return Err(f"{label}: {error.message()}")
+
+
+def searchable(summary: JsonValue, latest: JsonValue) -> JsonValue:
+    """A catalog line with the taxonomy of its latest version, which is all that filtering the catalog downloads."""
+    return JsonValue.object({
+        "name": member(summary, "name"),
+        "latest": member(summary, "latest"),
+        "versions": member(summary, "versions"),
+        "description": member(summary, "description"),
+        "license": member(summary, "license"),
+        "build-targets": member(summary, "build-targets"),
+        "categories": member(latest, "categories"),
+        "keywords": member(latest, "keywords"),
+    })
+
+
+pub def render_site(root: Path, formatted: Path, templates: Path, out: Path, checkpoint: str) -> Result[int, str]:
+    """Write every page under `out` from the catalog at `root`, and return how many version pages it wrote."""
+    catalog = read_json(root / "catalog" / "index.json", "catalog/index.json")?
+    mut packages: list[JsonValue] = []
+    mut summaries: list[JsonValue] = []
+    mut known: Dict[str, bool] = {}
+    mut dependents: Dict[str, str] = {}
+    for summary in items_of(catalog, "packages"):
+        name = checked_identity(string_member(summary, "name"))?
+        known[name] = true
+        package = read_json(root / string_member(summary, "page"), string_member(summary, "page"))?
+        packages.append(package)
+        for version in items_of(package, "versions"):
+            number = checked_component(string_member(version, "version"))?
+            if number == string_member(summary, "latest"):
+                summaries.append(searchable(summary, version))
+            for dependency in items_of(version, "dependencies"):
+                loaf = string_member(dependency, "loaf")
+                if not has_key(dependents, loaf):
+                    dependents[loaf] = ""
+                dependents[loaf] = dependents[loaf] + dependent_line(name, number, dependency)
+    site = Site(
+        root=root,
+        formatted=formatted,
+        checkpoint=checkpoint,
+        package_template=read_text(templates / "package.html", "package.html")?,
+        head=read_text(templates / "head.html", "head.html")?,
+        header=read_text(templates / "header.html", "header.html")?,
+        footer=read_text(templates / "footer.html", "footer.html")?.replace("{{checkpoint}}", escape(checkpoint)).replace("{{short}}", escape(checkpoint[0:12])),
+        known=known,
+        dependents=dependents,
+    )
+    write_text(out / "assets" / "search.json", JsonValue.array(summaries).to_json().unwrap() + "\n", "assets/search.json")?
+    mut written = 0
+    for index in range(len(packages)):
+        package = packages[index]
+        name = string_member(package, "name")
+        latest = string_member(summaries[index], "latest")
+        for version in items_of(package, "versions"):
+            number = string_member(version, "version")
+            relative = "packages/" + name + "/versions/" + number + "/index.html"
+            write_text(out / relative, package_page(site, package, version, latest, "../../../../../")?, relative)?
+            written += 1
+            if number == latest:
+                landing = "packages/" + name + "/index.html"
+                write_text(out / landing, package_page(site, package, version, latest, "../../../")?, landing)?
+    catalog_pages(site, summaries, templates, out)?
+    home_page(site, summaries, member(catalog, "counts"), templates, out)?
+    shell_page(site, "loaf-run.html", "../../", templates, out, "arcade/loaf-run/index.html")?
+    shell_page(site, "404.html", "/", templates, out, "404.html")?
+    return Ok(written)

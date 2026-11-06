@@ -32,6 +32,6 @@ def test_a_manifest_names_the_empty_config_its_layers_and_its_source_repository(
 
 def test_a_package_describes_itself_within_the_registry_limit() -> None:
     text = package_description("crates-io", "regex-automata")
-    assert_true(text.startswith("crates-io/regex-automata on incan.pub: the crates.io package regex-automata adopted as a Loaf."))
-    assert_true(text.contains("https://github.com/encero-systems/incan.pub/blob/index/crates-io/regex-automata/README.md"))
+    assert_true(text.startswith("crates-io/regex-automata on loaves.pub: the crates.io package regex-automata adopted as a Loaf."))
+    assert_true(text.contains("https://loaves.pub/packages/crates-io/regex-automata/"))
     assert_true(len(text) <= 512)

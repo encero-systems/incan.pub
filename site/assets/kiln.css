@@ -1,0 +1,25 @@
+/* The reflection belongs to the lettering; its highlight never sweeps the hero image. */
+.kiln-title{position:relative;width:fit-content}
+@media (prefers-reduced-motion:no-preference) and (forced-colors:none){
+ @supports (background-clip:text) or (-webkit-background-clip:text){
+  .forge-theme .forge-masthead .title-row .kiln-title{
+    color:#ddbf85;background:linear-gradient(112deg,transparent 39%,#fff6dc 49%,transparent 59%) 150% center / 250% 100% no-repeat,linear-gradient(162deg,#f1dfb5 6%,#dbbd83 42%,#bd965d 74%,#e0c184);
+    background-clip:text;-webkit-background-clip:text;color:transparent;
+    animation:kiln-polish 1.25s .28s ease-in-out both
+  }
+  .kiln-title::after{content:"";position:absolute;right:13%;top:22%;width:.23em;height:.23em;pointer-events:none;opacity:0;background:#fff3d3;clip-path:polygon(50% 0,59% 40%,100% 50%,59% 58%,50% 100%,41% 59%,0 50%,41% 41%);animation:kiln-spark 1.25s .28s ease-out both}
+ }
+}
+@keyframes kiln-polish{from{background-position:150% center,center}to{background-position:-50% center,center}}
+@keyframes kiln-spark{0%,47%,88%,100%{opacity:0;transform:scale(.45)}60%{opacity:.87;transform:scale(1)}}
+.kiln-random[hidden]{display:none}
+.kiln-random{font:600 15px/1.35 var(--inc-font-body,"Source Sans 3",sans-serif);color:#58401c;background:transparent;border:1px solid #ae9363;border-radius:4px;padding:9px 12px;cursor:pointer}
+.kiln-random:hover,.kiln-random:focus-visible{background:#eee2ca;color:#2f281b}
+.kiln-random:disabled{opacity:.5;cursor:default}
+.registry-search-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+main .search button.kiln-random{background:transparent;color:inherit;box-shadow:none}
+.incus-return{display:inline-flex;align-items:center;gap:4px;min-height:44px;text-decoration:none;color:#e1d1b0;font:600 13px/1.3 var(--inc-font-body,"Source Sans 3",sans-serif);white-space:nowrap}
+.incus-return:hover,.incus-return:focus-visible{color:#fff1cc;text-decoration:underline;text-underline-offset:3px}
+.incus-figure{display:inline-block;position:relative;width:38px;height:40px;overflow:hidden}.incus-figure img{display:block;height:61px;max-width:none;position:absolute;bottom:-8px;left:50%;transform:translateX(-50%)}
+@media(prefers-reduced-motion:no-preference){.incus-return:is(:hover,:focus-visible,:active) .incus-figure img{animation:incus-visor .5s ease-out}@keyframes incus-visor{45%{filter:brightness(1.3) drop-shadow(0 0 1px #92dbde)}}}
+@media(max-width:580px){.registry-search-row{align-items:stretch}.incus-return{margin:0}}
