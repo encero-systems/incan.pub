@@ -62,6 +62,26 @@ pub def builders() -> list[str]:
     return ["publisher", "registry", "local"]
 
 
+pub def first_recorded_form() -> int:
+    """
+    The first event that must state what RFC 125 requires of a new one: an `adopt` its revision, the adoption tool
+    version and whether the package has a build script, an `asset` its full toolchain identity. The events before it
+    were recorded before those rules, and the log is append-only, so they stay as they are: an adoption among them is
+    revision 1 with its tool version unrecorded, and an asset names only its Rust compiler.
+    """
+    return 14157
+
+
+pub def is_toolchain_identity(text: str) -> bool:
+    """Whether `text` names one toolchain as an asset's record must: `incan@` and the commit it was built from."""
+    if not text.startswith("incan@") or len(text) != 46:
+        return false
+    for character in text[6:]:
+        if not "0123456789abcdef".contains(character):
+            return false
+    return true
+
+
 @derive(Clone)
 pub class Binding:
     """One exact selection: the toolchain, target, profile and complete feature set a fact holds under."""
@@ -152,7 +172,8 @@ pub def fact_key(binding: Binding, owners: list[str]) -> str:
 pub class Asset:
     """
     A baked unit available for one binding: the archive holding its store entry, the unit and entry identities and
-    payload digest inside it, who built it and on what attestation, and where the archive is pushed.
+    payload digest inside it, who built it and on what attestation, where the archive is pushed, the full toolchain
+    that built it (empty on an asset recorded before asset records named it) and the revisions of the version it serves.
     """
 
     pub binding: Binding
@@ -163,9 +184,11 @@ pub class Asset:
     pub builder: str
     pub attestation: str
     pub location: JsonValue
+    pub toolchain: str
+    pub revisions: list[int]
 
     def to_json(self) -> JsonValue:
-        return JsonValue.object({
+        mut fields: Dict[str, JsonValue] = {
             "binding": self.binding.to_json(),
             "archive": JsonValue.string(self.archive),
             "unit_identity": JsonValue.string(self.unit_identity),
@@ -174,7 +197,19 @@ pub class Asset:
             "builder": JsonValue.string(self.builder),
             "attestation": JsonValue.string(self.attestation),
             "location": self.location,
-        })
+        }
+        if len(self.toolchain) > 0:
+            fields["toolchain"] = JsonValue.string(self.toolchain)
+        return JsonValue.object(fields)
+
+
+@derive(Clone)
+pub class EarlierRevision:
+    """A revision a later `adopt` superseded: a lockfile pinned to it keeps resolving to it."""
+
+    pub revision: int
+    pub payload: JsonValue
+    pub at: str
 
 
 @derive(Clone)
@@ -182,8 +217,9 @@ pub class Record:
     """
     The record of one crates.io package version: published as an external-source record, adopted as a Loaf.
 
-    `adopt` is the `adopt` event's payload once the version is adopted: its Rust facet, features, dependencies and
-    the digests of its manifest and source Loaf archive. A record without it is a v0 external-source record.
+    `adopt` is the payload of the highest revision's `adopt` event: its Rust facet, features, dependencies and the
+    digests of its manifest and source Loaf archive. A record without it is a v0 external-source record. `earlier`
+    holds the revisions it superseded, oldest first; facts and yanks belong to the version, across its revisions.
     """
 
     pub name: str
@@ -199,6 +235,8 @@ pub class Record:
     pub adopt: Option[JsonValue]
     pub publisher: str
     pub adopted_at: str
+    pub revision: int
+    pub earlier: list[EarlierRevision]
 
     def sorted_facts(self) -> list[Fact]:
         """The bound facts in binding order."""

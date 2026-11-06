@@ -5,23 +5,22 @@ incan-pub: the interim registry's tool. Admission (`check`), projection (`build`
     incan-pub build [--root DIR]
     incan-pub index-urls [--root DIR]
     incan-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
-    incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--rewrite] [--actor ACTOR] [--root DIR]
+    incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
     incan-pub admit-drop DIR [--actor ACTOR] [--root DIR]
     incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--owners SHA,...] [--actor ACTOR] [--root DIR]
     incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
     incan-pub adopt [NAME VERSION]... [--features a,b] [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
-    incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
-    incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]
+    incan-pub readopt NAME VERSION [NAME VERSION]... --reason TEXT --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
     incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
     incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
                           [--incan PATH --build-lock LOCK.json]
                           [--propose] [--actor ACTOR] [--root DIR]
     incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
-    incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
+    incan-pub push-source NAME VERSION [--revision N] --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]
-    incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]
+    incan-pub push-units DIR --builder KIND --attestation REF --toolchain ID --proposals DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
     incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
     incan-pub describe-packages --work DIR [--registry HOST] [--namespace NS] [--root DIR]
@@ -38,36 +37,28 @@ from std.json import JsonValue
 
 from admission import (
     admit_asset,
-    adopt_payload,
+    adoption_statement,
     adopted_adoptions,
     describe_binding,
     describe_owners,
-    fact_owners,
     replay,
     replay_onto,
+    require_toolchain,
     validate_binding,
     validate_fact,
 )
 from adoption import (
-    Adoption,
     about_from_json,
-    about_json,
-    about_of_files,
     adoption_from_payload,
     adoption_payload,
     content_path,
     description_json,
     file_sources_from_json,
-    file_sources_json,
-    loaf_file_sources,
-    loaf_files,
     loaf_name,
-    render_adopted_manifest,
-    source_archive,
-    unpack_crate,
+    revision_keeps_sources,
 )
 from canonical import canonical, digest_bytes, digest_text, is_sha256_identity, pretty
-from closure import blob_path, crate_archive, crates_io_lines, find_line, plan_closure, prepare, reproduce
+from closure import blob_path, crates_io_lines, find_line, plan_closure, prepare, reproduce
 from cratesio import index_urls, verify_checksums
 from drop import drop_contradictions, drop_proposals, drop_refusals, proposal_subjects
 from buildscript import Selection, build_roots, record_proposal
@@ -82,6 +73,7 @@ from oci import (
     annotate,
     anonymous_fetch,
     package_description,
+    source_tag,
     push,
     repository,
     version_tag,
@@ -96,7 +88,6 @@ from events import (
     member,
     parse_event,
     read_text,
-    rewrite_event,
     string_list_member,
     string_member,
 )
@@ -104,17 +95,18 @@ from host import argv, canonical_path, exit_with, run_program
 from projection import (
     committed_projections,
     render_projections,
+    revision_views,
     stale_projections,
     unclaimed_content,
     unclaimed_generated_inputs,
     write_projections,
 )
-from registry import Record, builders, crates_io_index, fact_key, has_key, keys_of, record_key
+from registry import Record, builders, crates_io_index, fact_key, has_key, is_toolchain_identity, keys_of, parse_digits, record_key
 
 
 def flags() -> list[str]:
     """Options that take no value."""
-    return ["propose", "publish", "records", "rewrite"]
+    return ["propose", "publish", "records"]
 
 
 def default_actor() -> str:
@@ -238,8 +230,6 @@ def run(arguments: list[str]) -> Result[None, str]:
         return fetch_sources(invocation)
     if invocation.command == "describe-packages":
         return describe_packages(invocation)
-    if invocation.command == "record-about":
-        return record_about(invocation)
     if invocation.command == "build-roots":
         return print_build_roots(invocation)
     return Err(f"unknown command `{invocation.command}`; see the usage at the top of src/main.incn")
@@ -331,7 +321,7 @@ def publish(invocation: Invocation) -> Result[None, str]:
 
 def add_fact(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--rewrite]")
+        return Err("usage: incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE]")
     mut notes_override: Option[str] = None
     match invocation.option("notes"):
         Some(file) => notes_override = Some(read_text(Path(file), file)?.strip())
@@ -344,7 +334,6 @@ def add_fact(invocation: Invocation) -> Result[None, str]:
         invocation.actor(),
         invocation.flag("publish"),
         notes_override,
-        invocation.flag("rewrite"),
     )?
     return build(invocation)
 
@@ -356,7 +345,6 @@ def admit_proposal(
     actor: str,
     publish: bool,
     notes_override: Option[str],
-    rewrite: bool,
 ) -> Result[str, str]:
     """
     Admit one harvest proposal against `state`, returning what it did: `published`, `admitted` or `no-op`.
@@ -405,7 +393,7 @@ def admit_proposal(
     staged = stage_generated_inputs(fact, proposal_path.parent(), root / "crates-io" / name / version)?
     label = f"proposal {proposal_path.name()}"
     # A refused proposal leaves nothing behind: the files it staged would otherwise be bytes no record names.
-    match settle_binding(root, state, key, name, version, fact, evidence, proposal_path, label, create, rewrite):
+    match settle_binding(root, state, key, name, version, fact, evidence, proposal_path, label, create):
         Ok(outcome) =>
             if outcome != "new":
                 return Ok(outcome)
@@ -436,43 +424,6 @@ def admit_proposal(
     return Ok("admitted")
 
 
-def remove_superseded_inputs(
-    root: Path,
-    record: Record,
-    binding_key: str,
-    replaced: JsonValue,
-    replacement: JsonValue,
-) -> Result[None, str]:
-    """
-    Delete the generated inputs only the replaced record named, so a rewrite leaves no committed bytes that no record
-    names; a path the replacement or another fact of the version also names stays.
-    """
-    mut kept = out_paths(replacement)
-    for other in record.facts.keys():
-        if other != binding_key:
-            for entry in record.facts[other].out:
-                kept.append(entry.path)
-    for path in out_paths(replaced):
-        if kept.contains(path):
-            continue
-        committed = root / "crates-io" / record.name / record.version / path
-        if committed.is_file():
-            match committed.unlink():
-                Ok(_) => println(f"removed superseded input: crates-io/{record.name}/{record.version}/{path}")
-                Err(error) => return Err(f"{path}: {error.message()}")
-    return Ok(None)
-
-
-def out_paths(fact: JsonValue) -> list[str]:
-    mut paths: list[str] = []
-    match fact.get("out"):
-        Some(value) =>
-            for entry in value.as_array().unwrap_or([]):
-                paths.append(string_member(entry, "path"))
-        None => pass
-    return paths
-
-
 def settle_binding(
     root: Path,
     state: Dict[str, Record],
@@ -484,11 +435,10 @@ def settle_binding(
     proposal_path: Path,
     label: str,
     create: bool,
-    rewrite: bool,
 ) -> Result[str, str]:
     """
     Decide what a proposal's binding needs: `new` when nothing is on record, `no-op` when the record is the same, and
-    a refusal when it differs, unless `rewrite` replaces a record that is wrong because of a bug in place.
+    a refusal when it differs, because a fact is immutable per binding.
     """
     typed = validate_fact(fact, name, version, label, root)?
     binding_key = typed.key()
@@ -498,18 +448,7 @@ def settle_binding(
     if state[key].facts[binding_key].comparable == typed.comparable:
         println(f"already admitted: {name} {version} {describe_binding(typed.binding)}")
         return Ok("no-op")
-    if not rewrite:
-        return Err(f"the proposal's binding{describe_owners(typed.owners)} already has a different record; a fact is immutable")
-    for event in load_events(root)?:
-        if event.kind == "fact" and event.name == name and event.version == version:
-            recorded = member(event.body, "fact")
-            if fact_key(validate_binding(recorded, event.label)?, fact_owners(recorded)) == binding_key:
-                stage_graph(evidence, proposal_path.parent(), root)?
-                rewrite_event(root, event.label, event.body, {"fact": fact, "evidence": evidence})?
-                remove_superseded_inputs(root, state[key], binding_key, recorded, fact)?
-                println(f"rewritten: {event.label}")
-                return Ok("rewritten")
-    return Err(f"{name} {version} {describe_binding(typed.binding)} has no fact event to rewrite")
+    return Err(f"the proposal's binding{describe_owners(typed.owners)} already has a different record; a fact is immutable")
 
 
 def admit_drop(invocation: Invocation) -> Result[None, str]:
@@ -537,7 +476,7 @@ def admit_drop(invocation: Invocation) -> Result[None, str]:
     mut admitted = 0
     mut repeated = 0
     for subject in proposals:
-        outcome = admit_proposal(root, state, drop / subject / "proposal.json", invocation.actor(), true, None, false)?
+        outcome = admit_proposal(root, state, drop / subject / "proposal.json", invocation.actor(), true, None)?
         appended = load_events_after(root, folded)?
         state = replay_onto(state, appended, root)?
         folded += len(appended)
@@ -698,7 +637,7 @@ def adopt(invocation: Invocation) -> Result[None, str]:
         payload = with_description(
             adoption_payload(item.adoption, item.manifest, item.archive), root, blobs, label
         )?
-        written = append_event(root, "adopt", item.adoption.package, item.adoption.version, invocation.actor(), payload)?
+        written = append_event(root, "adopt", item.adoption.package.lower(), item.adoption.version, invocation.actor(), payload)?
         appended = load_events_after(root, folded)?
         state = replay_onto(state, appended, root)?
         folded += len(appended)
@@ -709,131 +648,66 @@ def adopt(invocation: Invocation) -> Result[None, str]:
 
 def readopt(invocation: Invocation) -> Result[None, str]:
     """
-    Rewrite the `adopt` events of versions whose adoption is wrong because of a translation bug.
+    Correct adoptions that are wrong because of a translation bug, by appending the next revision of each (RFC 125).
 
-    Each named version is translated again with this tool; its `adopt` event keeps its place, time and actor and
-    takes the corrected payload. A version whose translation comes out the same is right, and right adoptions are not
-    rewritten, so it is refused. The whole log is folded again before the projections are rebuilt.
+    Each named version is translated again with this tool and takes a new `adopt` event naming the revision it
+    supersedes and `--reason`; a lockfile pinned to the old revision keeps resolving to it. A version whose translation
+    comes out the same is right, so it is refused. A revision may change only `loaf.toml` and the files adoption adds.
     """
     if len(invocation.positional) == 0 or len(invocation.positional) % 2 != 0:
-        return Err("usage: incan-pub readopt NAME VERSION [NAME VERSION]... --cache DIR --blobs DIR")
+        return Err("usage: incan-pub readopt NAME VERSION [NAME VERSION]... --reason TEXT --cache DIR --blobs DIR")
+    reason = invocation.require("reason")?.strip()
+    if len(reason) == 0:
+        return Err("a correction says why in --reason")
     cache = invocation.require("cache")?
     blobs = invocation.require("blobs")?
     root = invocation.root()
-    events = load_events(root)?
+    mut state = replay(load_events(root)?, root)?
+    mut folded = len(event_files(root)?)
     mut index = 0
     while index < len(invocation.positional):
-        name = invocation.positional[index]
+        name = invocation.positional[index].lower()
         version = invocation.positional[index + 1]
         index += 2
-        mut found = false
-        for event in events:
-            if event.kind == "adopt" and event.name == name and event.version == version:
-                found = true
+        label = f"{name} {version}"
+        key = record_key(name, version)
+        if not has_key(state, key):
+            return Err(f"{label} has no adoption to correct")
+        match state[key].adopt:
+            Some(current) =>
                 item = prepare(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?)?
-                payload = with_description(
-                    adoption_payload(item.adoption, item.manifest, item.archive), root, blobs, event.label
+                mut payload = with_description(
+                    adoption_payload(item.adoption, item.manifest, item.archive), root, blobs, label
                 )?
-                if canonical(JsonValue.object(payload))? == canonical(adopt_payload(event.body))?:
-                    return Err(f"{name} {version}: the translation comes out the same; a right adoption is not rewritten")
-                rewrite_event(root, event.label, event.body, payload)?
-                println(f"rewritten: {event.label}")
-        if not found:
-            return Err(f"{name} {version} has no adopt event to rewrite")
-    replay(load_events(root)?, root)?
+                if canonical(adoption_statement(JsonValue.object(payload)))? == canonical(adoption_statement(current))?:
+                    return Err(f"{label}: the translation comes out the same; a right adoption takes no new revision")
+                revision_keeps_sources(
+                    archive_entries(blobs, string_member(current, "archive"), label)?,
+                    archive_entries(blobs, item.archive, label)?,
+                    current,
+                    JsonValue.object(payload),
+                    label,
+                )?
+                payload["revision"] = JsonValue.int(state[key].revision + 1)
+                payload["supersedes"] = JsonValue.int(state[key].revision)
+                payload["reason"] = JsonValue.string(reason)
+                written = append_event(root, "adopt", name, version, invocation.actor(), payload)?
+                appended = load_events_after(root, folded)?
+                state = replay_onto(state, appended, root)?
+                folded += len(appended)
+                println(f"adopted revision {state[key].revision}: {written}")
+            None => return Err(f"{label} has no adoption to correct")
     return build(invocation)
 
 
-def record_about(invocation: Invocation) -> Result[None, str]:
-    """
-    Record what each adopted package's manifest says about it (`about`: license, README, description, links,
-    authors, rust-version) on the `adopt` events whose `about` is missing or no longer says all of it, so every Loaf
-    carries a license and a README, its package page can name them, and Oven can set Cargo's package environment.
-
-    The recorded payload is kept as it is and only gains or completes `about` and the description read from the source
-    Loaf archive (`documents`, whose bytes it keeps under `content/`, `vcs` and `taxonomy`), so the manifest is
-    unchanged. An event without `about` may gain a LICENSE or README.md where the package ships none; completing a
-    recorded `about` must leave the archive as it is. A payload that already says all of it is not rewritten. Each
-    event keeps its place, time and actor. With no versions named, every adoption is considered.
-    """
-    if len(invocation.positional) % 2 != 0:
-        return Err("usage: incan-pub record-about [NAME VERSION]... --cache DIR --blobs DIR [--root DIR]")
-    cache = invocation.require("cache")?
-    blobs = invocation.require("blobs")?
-    root = invocation.root()
-    mut named: list[str] = []
-    mut index = 0
-    while index < len(invocation.positional):
-        named.append(invocation.positional[index] + "\t" + invocation.positional[index + 1])
-        index += 2
-    mut rewritten = 0
-    mut archives = 0
-    for event in load_events(root)?:
-        if event.kind != "adopt":
-            continue
-        if len(named) > 0 and not named.contains(event.name + "\t" + event.version):
-            continue
-        label = f"{event.name} {event.version}"
-        mut adoption = adoption_from_payload(event.body, label)?
-        line = find_line(crates_io_lines(cache, event.name)?, event.name, event.version)?
-        files = unpack_crate(event.name, event.version, crate_archive(cache, event.name, event.version, string_member(line, "cksum"))?)?
-        about = about_of_files(files, label)?
-        # An `about` that says what the manifest says is right and is never rewritten; one recorded before a field
-        # was read is incomplete, and is completed without changing the archive.
-        mut paths: list[str] = []
-        for file in files:
-            paths.append(file.path)
-        sources = loaf_file_sources(about, paths)
-        mut complete = false
-        match event.body.get("about"):
-            Some(previous) =>
-                match event.body.get("files"):
-                    Some(previous_files) =>
-                        complete = canonical(previous)? == canonical(about_json(about))? and canonical(previous_files)? == canonical(file_sources_json(sources))?
-                    None => pass
-            None => pass
-        mut digest = string_member(event.body, "archive")
-        if not complete:
-            adoption.about = Some(about)
-            adoption.files = Some(sources)
-            digest = completed_archive(adoption, files, event.body, blobs, label)?
-            if digest != string_member(event.body, "archive"):
-                archives += 1
-        # The description (documents, vcs, taxonomy) is read from the archive; a payload that comes out the same is
-        # right and is not rewritten.
-        manifest_digest = string_member(event.body, "manifest")
-        payload = with_description(adoption_payload(adoption, manifest_digest, digest), root, blobs, label)?
-        if canonical(JsonValue.object(payload))? == canonical(adopt_payload(event.body))?:
-            continue
-        rewrite_event(root, event.label, event.body, payload)?
-        rewritten += 1
-    println(f"recorded about: {rewritten} adoption(s), {archives} archive(s) gained a LICENSE or README")
-    replay(load_events(root)?, root)?
-    return build(invocation)
-
-
-def completed_archive(
-    adoption: Adoption, files: list[TarEntry], body: JsonValue, blobs: str, label: str
-) -> Result[str, str]:
-    """
-    The digest of the source Loaf `adoption` renders now that its `about` is complete, stored in `blobs`. The manifest
-    must stay as it is, and so must the archive of an adoption that already recorded `about`: only an adoption that
-    recorded none may gain a LICENSE or README.md.
-    """
-    manifest = render_adopted_manifest(adoption)
-    if digest_text(manifest) != string_member(body, "manifest"):
-        return Err(f"{label}: recording `about` would change the manifest; it must only add files")
-    archive = source_archive(manifest, loaf_files(adoption, files))?
-    digest = digest_bytes(archive)
-    path = blob_path(Path(blobs), digest)
-    if not path.is_file():
-        make_directory(blobs + "/sha256")?
-        match path.write_bytes(archive):
-            Ok(_) => pass
-            Err(error) => return Err(f"{blobs}: {error.message()}")
-    if digest != string_member(body, "archive") and body.contains_key("about"):
-        return Err(f"{label}: completing its recorded `about` would change its archive; only the record may change")
-    return Ok(digest)
+def archive_entries(blobs: str, digest: str, label: str) -> Result[list[TarEntry], str]:
+    """The files of a source Loaf archive in the blob store, held to its digest."""
+    match blob_path(Path(blobs), digest).read_bytes():
+        Ok(data) =>
+            if digest_bytes(data) != digest:
+                return Err(f"{label}: the blob store's source Loaf archive is not {digest}")
+            return read_archive(data)
+        Err(error) => return Err(f"{label}: source Loaf archive {digest}: {error.message()}")
 
 
 def with_description(
@@ -938,7 +812,7 @@ def record_fact(invocation: Invocation) -> Result[None, str]:
             if invocation.flag("propose"):
                 println(f"proposed: {proposal}")
                 return Ok(None)
-            admit_proposal(root, state, Path(proposal), invocation.actor(), false, None, invocation.flag("rewrite"))?
+            admit_proposal(root, state, Path(proposal), invocation.actor(), false, None)?
             return build(invocation)
         None =>
             println(f"no build script: {name} {version} needs no fact")
@@ -1046,7 +920,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     never carry other bytes than the adoption.
     """
     if len(invocation.positional) != 2:
-        return Err("usage: incan-pub push-source NAME VERSION --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
+        return Err("usage: incan-pub push-source NAME VERSION [--revision N] --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
     name = invocation.positional[0]
     version = invocation.positional[1]
     root = invocation.root()
@@ -1055,9 +929,18 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     if key not in state:
         return Err(f"{name} {version} is not adopted")
     mut payload = JsonValue.null()
-    match state[key].adopt:
-        Some(found) => payload = found
-        None => return Err(f"{name} {version} is not adopted")
+    mut revision = state[key].revision
+    match invocation.option("revision"):
+        Some(text) =>
+            match parse_digits(text):
+                Some(number) => revision = number
+                None => return Err(f"--revision is a number, not `{text}`")
+        None => pass
+    for view in revision_views(state[key]):
+        if view.revision == revision:
+            payload = view.payload
+    if payload.is_null():
+        return Err(f"{name} {version} has no revision {revision}")
     digest = string_member(payload, "archive")
     blobs = invocation.require("blobs")?
     archive = blobs + "/sha256/" + digest[7:] + ".tar"
@@ -1068,7 +951,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
             return Err(f"{name} {version}: the crate and the adoption's own manifest give {made}, not the archive {digest} the index names")
     registry = registry_of(invocation)?
     repository_name = repository(registry, "crates-io", name)
-    tag = version_tag(version)?
+    tag = source_tag(version, revision)?
     layer = Layer(
         path=archive,
         media_type=SOURCE_LAYER,
@@ -1118,14 +1001,17 @@ def pack_units(invocation: Invocation) -> Result[None, str]:
 def push_units_verb(invocation: Invocation) -> Result[None, str]:
     """Push packed units, one tag per binding, and write the asset proposals `admit-assets` records."""
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub push-units DIR --builder KIND --attestation REF --proposals DIR --work DIR [--registry HOST] [--namespace NS]")
+        return Err("usage: incan-pub push-units DIR --builder KIND --attestation REF --toolchain ID --proposals DIR --work DIR [--registry HOST] [--namespace NS]")
     builder = invocation.require("builder")?
     if not builders().contains(builder):
         return Err("--builder must be publisher, registry or local")
     attestation = invocation.require("attestation")?
+    toolchain = invocation.require("toolchain")?
+    if not is_toolchain_identity(toolchain):
+        return Err("--toolchain is `incan@` and the 40-digit commit the toolchain was built from")
     proposals = make_directory(invocation.require("proposals")?)?
     registry = registry_of(invocation)?
-    for line in push_units(registry, read_units(invocation.positional[0])?, builder, attestation, proposals)?:
+    for line in push_units(registry, read_units(invocation.positional[0])?, builder, attestation, toolchain, proposals)?:
         println(f"pushed: {line}")
     return Ok(None)
 
@@ -1159,9 +1045,14 @@ def admit_assets(invocation: Invocation) -> Result[None, str]:
         key = record_key(name, version)
         if not has_key(state, key):
             return Err(f"{label}: {name} {version} has no record")
-        asset = member(proposal, "asset")
+        mut asset = member(proposal, "asset")
+        require_toolchain(asset, label)?
+        # A proposal that names no revision serves the one a resolver selects: the highest.
+        match asset.get("revision"):
+            Some(_) => pass
+            None => asset.set("revision", JsonValue.int(state[key].revision)).unwrap()
         record = admit_asset(state[key], member(proposal, "binding"), asset, label)?
-        if len(record.assets) == len(state[key].assets):
+        if canonical(asset_revisions(record))? == canonical(asset_revisions(state[key]))?:
             println(f"no-op: {label} is already recorded")
             continue
         location = member(asset, "location")
@@ -1174,6 +1065,14 @@ def admit_assets(invocation: Invocation) -> Result[None, str]:
         state[key] = record
         println(f"admitted asset: {written}")
     return build(invocation)
+
+
+def asset_revisions(record: Record) -> JsonValue:
+    """Which revisions each asset of a record serves: what admitting an asset can change."""
+    mut entries: Dict[str, JsonValue] = {}
+    for asset in record.assets:
+        entries[asset.unit_identity] = JsonValue.array([JsonValue.int(revision) for revision in asset.revisions])
+    return JsonValue.object(entries)
 
 
 def describe_packages(invocation: Invocation) -> Result[None, str]:
@@ -1196,7 +1095,9 @@ def describe_packages(invocation: Invocation) -> Result[None, str]:
             continue
         repository_name = repository(registry, "crates-io", record.name)
         annotations: Dict[str, str] = {"org.opencontainers.image.description": package_description("crates-io", record.name)}
-        mut tags: list[str] = [version_tag(record.version)?]
+        mut tags: list[str] = []
+        for view in revision_views(record):
+            tags.append(source_tag(record.version, view.revision)?)
         for asset in record.assets:
             tag = string_member(asset.location, "tag")
             if not tags.contains(tag):
@@ -1259,19 +1160,17 @@ def verify_archives(state: Dict[str, Record], blobs: Path) -> Result[list[str], 
     mut problems: list[str] = []
     for key in sorted(list(state.keys())):
         record = state[key]
-        match record.adopt:
-            Some(payload) =>
-                digest = string_member(payload, "archive")
-                path = blob_path(blobs, digest)
-                if not path.is_file():
-                    problems.append(f"{record.name} {record.version}: no archive {digest}")
-                    continue
-                match path.read_bytes():
-                    Ok(data) =>
-                        if digest_bytes(data) != digest:
-                            problems.append(f"{record.name} {record.version}: the stored archive is not {digest}")
-                    Err(error) => problems.append(f"{record.name} {record.version}: {error.message()}")
-            None => pass
+        for view in revision_views(record):
+            digest = string_member(view.payload, "archive")
+            path = blob_path(blobs, digest)
+            if not path.is_file():
+                problems.append(f"{record.name} {record.version}: no archive {digest}")
+                continue
+            match path.read_bytes():
+                Ok(data) =>
+                    if digest_bytes(data) != digest:
+                        problems.append(f"{record.name} {record.version}: the stored archive is not {digest}")
+                Err(error) => problems.append(f"{record.name} {record.version}: {error.message()}")
     return Ok(problems)
 
 

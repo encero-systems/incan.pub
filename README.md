@@ -34,9 +34,11 @@ index
   index/crates-io/<name>                   projection: one JSON line per version, enough to resolve the whole graph
   crates-io/<name>/<version>/loaf.toml     projection: the adopted manifest followed by its bound facts
   crates-io/<name>/<version>/assets.json   projection: the asset manifest, once a version has assets
+  crates-io/<name>/<version>/r<N>/...      projection: both files again for each revision a later one superseded
   crates-io/<name>/README.md               projection: the package page
   catalog/index.json                       projection: every adopted package, for a site or tool to list
   catalog/crates-io/<name>.json            projection: a package's versions, provenance, facts and units
+  catalog/policy.json                      projection: the reserved scopes and supported toolchains
   crates-io/<name>/<version>/out/...       committed generated inputs a fact names
   content/sha256/<hex>                     the README, license and changelog bytes adoptions name
   graphs/<hex>.json                        the resolutions facts were selected from: roots, target, host
@@ -47,7 +49,7 @@ blob store (outside git)
 
 Nothing under `index/`, `catalog/`, `crates-io/**/loaf.toml`, `crates-io/**/assets.json` or `crates-io/*/README.md` is edited by hand: `incan-pub build` regenerates them from the events, and `incan-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
 
-In this transport a commit is the signed event and `HEAD` of `index` is the checkpoint the toolchain pins. The signed HTTPS form of RFC 125 changes how these files arrive, not what they say.
+In this transport `HEAD` of `index` is the checkpoint a toolchain pins, and nothing signs it yet. The signed HTTPS form of RFC 125 changes how these files arrive, not what they say.
 
 ## Using the tool
 
@@ -59,7 +61,7 @@ cd ../incan.pub-index
 ../incan.pub/target/incan-pub adopt --records --cache <cache> --blobs <blob store>
 ```
 
-`adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, `readopt NAME VERSION ...` rewrites an adoption that is wrong because of a bug, and `record-fact NAME VERSION ...` records a build fact by running the build script sandboxed under one binding. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know, and `admit-assets DIR` records the compiled units a bake pushed to the registry. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built on the Incan dev line; [AGENTS.md](AGENTS.md) says how.
+`adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, `readopt NAME VERSION ... --reason TEXT` corrects an adoption that is wrong because of a bug by appending its next revision, and `record-fact NAME VERSION ...` records a build fact by running the build script sandboxed under one binding. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know, and `admit-assets DIR` records the compiled units a bake pushed to the registry. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built with a published Incan release; [AGENTS.md](AGENTS.md) says how.
 
 ## How facts get here
 

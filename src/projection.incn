@@ -22,7 +22,8 @@ from adoption import (
 )
 from canonical import canonical, json_string, pretty
 from events import Event, member, read_text, string_member, write_text
-from registry import Record, compare_versions, has_key, keys_of, producer_key_order, record_key
+from policy import render_policy
+from registry import Asset, Record, compare_versions, has_key, keys_of, parse_digits, producer_key_order, record_key
 
 
 const CATALOG_SCHEMA: str = "incan.pub/catalog/1"
@@ -31,6 +32,42 @@ const CATALOG_PACKAGE_SCHEMA: str = "incan.pub/catalog-package/1"
 
 pub def manifest_notice() -> str:
     return "# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit."
+
+
+@derive(Clone)
+pub class RevisionView:
+    """One revision of an adopted version: what it adopted, when, and the directory of its own records."""
+
+    pub revision: int
+    pub payload: JsonValue
+    pub at: str
+    pub directory: str
+
+
+pub def revision_views(record: Record) -> list[RevisionView]:
+    """
+    A record's revisions, oldest first. The highest keeps the version's directory, which answers a request that names
+    no revision; each one it superseded has `r<N>` below it. An index line's `manifest` names the path of its own.
+    """
+    directory = f"crates-io/{record.name}/{record.version}"
+    mut views: list[RevisionView] = []
+    for earlier in record.earlier:
+        views.append(RevisionView(
+            revision=earlier.revision,
+            payload=earlier.payload,
+            at=earlier.at,
+            directory=f"{directory}/r{earlier.revision}",
+        ))
+    match record.adopt:
+        Some(payload) =>
+            views.append(RevisionView(revision=record.revision, payload=payload, at=record.adopted_at, directory=directory))
+        None => pass
+    return views
+
+
+pub def assets_of(record: Record, revision: int) -> list[Asset]:
+    """The assets that serve one revision."""
+    return [asset for asset in record.assets if asset.revisions.contains(revision)]
 
 
 pub def render_manifest(record: Record) -> Result[str, str]:
@@ -53,11 +90,39 @@ pub def render_manifest(record: Record) -> Result[str, str]:
             lines.append("[source]")
             lines.append("registry = " + json_string(record.registry))
             lines.append("checksum = " + json_string(record.checksum))
-    for fact_lines in render_facts(record):
+    for fact_lines in render_facts(record, ""):
         lines.append("")
         for line in fact_lines:
             lines.append(line)
     return Ok("\n".join(lines) + "\n")
+
+
+def render_earlier_manifest(record: Record, view: RevisionView) -> Result[str, str]:
+    """
+    A superseded revision's `loaf.toml`: what it adopted, what superseded it and why, and the version's facts, which
+    hold across its revisions because a revision never changes the package's sources. Its directory is one below the
+    version's, where the committed generated inputs stay.
+    """
+    mut lines = header_comments(record)
+    lines.append(f"# Superseded by revision {view.revision + 1}: {superseding_reason(record, view.revision)}")
+    lines.append("#")
+    lines.append(manifest_notice())
+    lines.append("")
+    adoption = adoption_from_payload(view.payload, f"{record.name} {record.version}")?
+    lines.append(render_adopted_manifest(adoption).strip())
+    for fact_lines in render_facts(record, "../"):
+        lines.append("")
+        for line in fact_lines:
+            lines.append(line)
+    return Ok("\n".join(lines) + "\n")
+
+
+def superseding_reason(record: Record, revision: int) -> str:
+    """Why the revision after `revision` was adopted, on one line."""
+    for view in revision_views(record):
+        if view.revision == revision + 1:
+            return " ".join(string_member(view.payload, "reason").split("\n"))
+    return ""
 
 
 def header_comments(record: Record) -> list[str]:
@@ -83,8 +148,11 @@ def header_comments(record: Record) -> list[str]:
     return lines
 
 
-def render_facts(record: Record) -> list[list[str]]:
-    """Each bound fact as its `[[rust.facts]]` element, producer sub-tables included, in binding order."""
+def render_facts(record: Record, out_prefix: str) -> list[list[str]]:
+    """
+    Each bound fact as its `[[rust.facts]]` element, producer sub-tables included, in binding order. An `out` path is
+    relative to the manifest, so `out_prefix` leads from a revision's directory back to the version's.
+    """
     mut blocks: list[list[str]] = []
     for fact in record.sorted_facts():
         mut lines: list[str] = []
@@ -98,7 +166,7 @@ def render_facts(record: Record) -> list[list[str]]:
             mut entries: list[str] = []
             for entry in fact.out:
                 entries.append(
-                    "{ name = " + json_string(entry.name) + ", path = " + json_string(entry.path)
+                    "{ name = " + json_string(entry.name) + ", path = " + json_string(out_prefix + entry.path)
                     + ", digest = " + json_string(entry.digest) + " }"
                 )
             lines.append("out = [" + ", ".join(entries) + "]")
@@ -197,13 +265,21 @@ def rstrip(text: str) -> str:
     return text[0:end]
 
 
-pub def index_line(record: Record) -> JsonValue:
+pub def index_lines(record: Record) -> list[JsonValue]:
     """
-    One index line (RFC 125, "Sparse index"). An adopted version carries everything resolution needs before any
-    record or archive is fetched: its Rust facet, its dependencies and its features, with `cksum` naming the source
-    Loaf archive and `adopted` the crates.io version it came from. A version not yet adopted keeps the v0 shape, its
-    `cksum` the crates.io checksum.
+    A version's index lines (RFC 125, "Index"): one per revision, oldest first. An adopted revision carries everything
+    resolution needs before any record or archive is fetched: its Rust facet, its dependencies and its features, with
+    `cksum` naming its source Loaf archive and `adopted` the crates.io version and revision it came from. A version not
+    yet adopted keeps the v0 shape, its `cksum` the crates.io checksum.
     """
+    views = revision_views(record)
+    if len(views) == 0:
+        return [index_line(record, None)]
+    return [index_line(record, Some(view)) for view in views]
+
+
+def index_line(record: Record, adopted: Option[RevisionView]) -> JsonValue:
+    """One index line, of an adopted revision or of a version not yet adopted."""
     mut facts: list[JsonValue] = []
     for fact in record.sorted_facts():
         mut entry = fact.binding.to_json()
@@ -225,8 +301,11 @@ pub def index_line(record: Record) -> JsonValue:
         "assets": JsonValue.int(len(record.assets)),
         "advisories": JsonValue.int(len(record.advisories)),
     }
-    match record.adopt:
-        Some(payload) =>
+    match adopted:
+        Some(view) =>
+            payload = view.payload
+            line["manifest"] = JsonValue.string(f"{view.directory}/loaf.toml")
+            line["assets"] = JsonValue.int(len(assets_of(record, view.revision)))
             line["cksum"] = member(payload, "archive")
             line["facets"] = JsonValue.array([JsonValue.string("rust")])
             mut facet = member(payload, "rust")
@@ -241,7 +320,9 @@ pub def index_line(record: Record) -> JsonValue:
             line["rust"] = facet_line
             line["deps"] = member(payload, "deps")
             line["features"] = member(payload, "features")
-            line["adopted"] = member(payload, "adopted")
+            mut provenance = member(payload, "adopted")
+            provenance.set("revision", JsonValue.int(view.revision)).unwrap()
+            line["adopted"] = provenance
             line["publisher"] = JsonValue.string(record.publisher)
         None =>
             line["cksum"] = JsonValue.string(record.checksum)
@@ -250,23 +331,27 @@ pub def index_line(record: Record) -> JsonValue:
     return JsonValue.object(line)
 
 
-pub def render_asset_manifest(record: Record) -> Result[str, str]:
+pub def render_asset_manifest(record: Record, revision: int) -> Result[str, str]:
     """
-    The per-version asset manifest (RFC 125): every admitted asset with its binding, archive digest, unit and entry
-    identities, payload digest, builder kind, attestation and registry location, ordered by binding and unit. A client
-    decides from it which units it can fetch before it downloads anything.
+    One revision's asset manifest (RFC 125): every admitted asset that serves it, with its binding, archive digest, unit
+    and entry identities, payload digest, builder kind, attestation, registry location and, where recorded, its full
+    toolchain, ordered by binding and unit. A client decides from it which units it can fetch before it downloads
+    anything. A version with one revision names none.
     """
     mut by_key: Dict[str, JsonValue] = {}
-    for asset in record.assets:
+    for asset in assets_of(record, revision):
         by_key[asset.binding.key() + "\n\n" + asset.unit_identity] = asset.to_json()
     mut assets: list[JsonValue] = []
     for key in sorted(keys_of(by_key)):
         assets.append(by_key[key])
-    return Ok(pretty(JsonValue.object({
+    mut fields: Dict[str, JsonValue] = {
         "name": JsonValue.string(loaf_name(record.name)),
         "vers": JsonValue.string(record.version),
         "assets": JsonValue.array(assets),
-    }))? + "\n")
+    }
+    if record.revision > 1:
+        fields["revision"] = JsonValue.int(revision)
+    return Ok(pretty(JsonValue.object(fields))? + "\n")
 
 
 pub def render_package_page(name: str, records: list[Record]) -> str:
@@ -323,23 +408,29 @@ def package_page_row(record: Record) -> str:
                 None => license = f"[crates.io](https://crates.io/crates/{record.name}/{record.version})"
         None => pass
     mut version = f"[{record.version}]({record.version}/loaf.toml)"
+    if record.revision > 1:
+        version = version + f" (revision {record.revision})"
     if record.yanked:
         version = version + " (yanked)"
-    mut units = str(len(record.assets))
+    current = assets_of(record, record.revision)
+    mut units = str(len(current))
     mut links = ""
-    if len(record.assets) > 0:
+    if len(current) > 0:
         links = f"[units]({record.version}/assets.json)"
     return f"| {version} | {adopted} | {license.replace('|', '\\|')} | {len(record.facts)} | {units} | {links} |"
 
 
 def is_projection_file(path: str) -> bool:
     """
-    `crates-io/<name>/README.md`, and `crates-io/<name>/<version>/loaf.toml` with the `assets.json` beside it, are
-    rendered; everything else under a version is a generated input, `out/assets.json` included.
+    `crates-io/<name>/README.md`, and `crates-io/<name>/<version>/loaf.toml` with the `assets.json` beside it, and the
+    same two under a superseded revision's `r<N>`, are rendered; everything else under a version is a generated input,
+    `out/assets.json` included.
     """
     parts = path.split("/")
     if len(parts) == 3:
         return parts[2] == "README.md"
+    if len(parts) == 5 and parts[3].startswith("r") and parse_digits(parts[3][1:]) != None:
+        return parts[4] == "loaf.toml" or parts[4] == "assets.json"
     return len(parts) == 4 and (parts[3] == "loaf.toml" or parts[3] == "assets.json")
 
 
@@ -356,8 +447,11 @@ pub def render_projections(state: Dict[str, Record], events: list[Event]) -> Res
     for key in sorted(keys_of(state)):
         record = state[key]
         files[f"crates-io/{record.name}/{record.version}/loaf.toml"] = render_manifest(record)?
-        if len(record.assets) > 0:
-            files[f"crates-io/{record.name}/{record.version}/assets.json"] = render_asset_manifest(record)?
+        for view in revision_views(record):
+            if view.revision < record.revision:
+                files[f"{view.directory}/loaf.toml"] = render_earlier_manifest(record, view)?
+            if len(assets_of(record, view.revision)) > 0:
+                files[f"{view.directory}/assets.json"] = render_asset_manifest(record, view.revision)?
         mut versions: list[str] = []
         if has_key(versions_by_name, record.name):
             versions = versions_by_name[record.name]
@@ -366,7 +460,8 @@ pub def render_projections(state: Dict[str, Record], events: list[Event]) -> Res
     for name in sorted(keys_of(versions_by_name)):
         mut text = ""
         for version in sort_versions(versions_by_name[name]):
-            text = text + canonical(index_line(state[record_key(name, version)]))? + "\n"
+            for line in index_lines(state[record_key(name, version)]):
+                text = text + canonical(line)? + "\n"
         files[index_path(name)] = text
         ascending = sort_versions(versions_by_name[name])
         mut newest_first: list[Record] = []
@@ -392,6 +487,7 @@ pub def render_projections(state: Dict[str, Record], events: list[Event]) -> Res
     files["catalog/index.json"] = render_catalog_index(
         catalog, log_position(events), adopted_count, fact_count, asset_count
     )?
+    files["catalog/policy.json"] = render_policy()?
     return Ok(files)
 
 
@@ -445,11 +541,9 @@ pub def unclaimed_content(root: Path, state: Dict[str, Record]) -> Result[list[s
     """Committed bytes under `content/` that no adoption's documents name."""
     mut claimed: Dict[str, bool] = {}
     for key in keys_of(state):
-        match state[key].adopt:
-            Some(payload) =>
-                for document in member(payload, "documents").as_array().unwrap_or([]):
-                    claimed[content_path(string_member(document, "digest"))] = true
-            None => pass
+        for view in revision_views(state[key]):
+            for document in member(view.payload, "documents").as_array().unwrap_or([]):
+                claimed[content_path(string_member(document, "digest"))] = true
     mut committed: list[str] = []
     collect_paths(root / "content", "content", committed)?
     mut unclaimed: list[str] = []
@@ -536,17 +630,21 @@ pub def render_catalog_package(name: str, records: list[Record]) -> Result[str, 
     LICENSE come from, and its facts and compiled units, each under its complete binding.
     """
     mut versions: list[JsonValue] = []
+    # The upstream's exact spelling: a Loaf name is lowercase, and the package it was adopted from may not be.
+    mut upstream = name
     for record in records:
         match record.adopt:
-            Some(payload) => versions.append(catalog_version(record, payload)?)
+            Some(payload) =>
+                versions.append(catalog_version(record, payload)?)
+                upstream = string_member(member(payload, "adopted"), "package")
             None => pass
     return Ok(pretty(JsonValue.object({
         "schema": JsonValue.string(CATALOG_PACKAGE_SCHEMA),
         "name": JsonValue.string(loaf_name(name)),
         "upstream": JsonValue.object({
             "registry": JsonValue.string("crates.io"),
-            "package": JsonValue.string(name),
-            "url": JsonValue.string(f"https://crates.io/crates/{name}"),
+            "package": JsonValue.string(upstream),
+            "url": JsonValue.string(f"https://crates.io/crates/{upstream}"),
         }),
         "versions": JsonValue.array(versions),
     }))? + "\n")
@@ -569,7 +667,7 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
         item.set("owners", JsonValue.array(owners)).unwrap()
         facts.append(item)
     mut by_key: Dict[str, JsonValue] = {}
-    for asset in record.assets:
+    for asset in assets_of(record, record.revision):
         by_key[asset.binding.key() + "\n\n" + asset.unit_identity] = asset.to_json()
     mut assets: list[JsonValue] = []
     for key in sorted(keys_of(by_key)):
@@ -593,8 +691,19 @@ def catalog_version(record: Record, payload: JsonValue) -> Result[JsonValue, str
     match payload.get("vcs"):
         Some(value) => vcs = value
         None => pass
+    mut revisions: list[JsonValue] = []
+    for view in revision_views(record):
+        revisions.append(JsonValue.object({
+            "revision": JsonValue.int(view.revision),
+            "adopted": JsonValue.string(view.at),
+            "archive": JsonValue.string(string_member(view.payload, "archive")),
+            "manifest": JsonValue.string(f"{view.directory}/loaf.toml"),
+            "reason": JsonValue.string(string_member(view.payload, "reason")),
+        }))
     return Ok(JsonValue.object({
         "version": JsonValue.string(record.version),
+        "revision": JsonValue.int(record.revision),
+        "revisions": JsonValue.array(revisions),
         "yanked": JsonValue.bool(record.yanked),
         "adopted": JsonValue.string(record.adopted_at),
         "registry": JsonValue.object({
@@ -676,7 +785,7 @@ def catalog_entry(name: str, records: list[Record]) -> Result[Option[JsonValue],
                     license = shown(recorded).license
                 None => pass
             mut targets: list[str] = []
-            for asset in record.assets:
+            for asset in assets_of(record, record.revision):
                 if not targets.contains(asset.binding.target):
                     targets.append(asset.binding.target)
             mut adopted_versions = 0

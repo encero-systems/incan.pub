@@ -25,6 +25,7 @@ from registry import (
     Asset,
     Attestation,
     Binding,
+    EarlierRevision,
     EnvironmentEntry,
     Fact,
     OutEntry,
@@ -34,7 +35,9 @@ from registry import (
     crates_io_index,
     fact_key,
     fact_keys,
+    first_recorded_form,
     has_key,
+    is_toolchain_identity,
     profiles,
     record_key,
     sorted_unique,
@@ -100,6 +103,8 @@ def fold_publish(event: Event) -> Result[Record, str]:
         adopt=None,
         publisher="",
         adopted_at="",
+        revision=1,
+        earlier=[],
     ))
 
 
@@ -136,12 +141,15 @@ def fold_adopt(
 ) -> Result[Record, str]:
     """
     Admit an `adopt` event: a payload in shape, a manifest digest the payload reproduces, and every dependency
-    requirement active under its default features, on any target, already met by an adopted version.
+    requirement active under its default features, on any target, already met by an adopted version. A version already
+    adopted takes only an identical repetition, which is a no-op, or its next revision.
     """
     label = event.label
     adoption = adoption_from_payload(event.body, label)?
-    if adoption.package != event.name or adoption.version != event.version:
+    if adoption.package.lower() != event.name or adoption.version != event.version:
         return Err(f"{label}: the adopted package and version must be the event's subject")
+    check_recorded_adoption(event, adoption)?
+    revision = revision_of(event.body, label)?
     if not is_sha256_identity(adoption.checksum):
         return Err(f"{label}: adopted.checksum must be a `sha256:` identity")
     manifest = string_member(event.body, "manifest")
@@ -160,6 +168,8 @@ def fold_adopt(
     payload = adopt_payload(event.body)
     key = record_key(event.name, event.version)
     if key not in state:
+        if revision != 1:
+            return Err(f"{label}: revision {revision} of a version with no revision 1; revisions are contiguous")
         return Ok(Record(
             name=event.name,
             version=event.version,
@@ -174,20 +184,90 @@ def fold_adopt(
             adopt=Some(payload),
             publisher=event.actor,
             adopted_at=event.at,
+            revision=1,
+            earlier=[],
         ))
     mut record = state[key]
-    match record.adopt:
-        Some(existing) =>
-            if canonical(existing)? != canonical(payload)?:
-                return Err(f"{label}: {event.name} {event.version} is already adopted differently; an adoption is immutable")
-            return Ok(record)
-        None => pass
     if record.checksum != adoption.checksum:
         return Err(f"{label}: the adopted checksum differs from the published record's")
+    match record.adopt:
+        Some(current) => return fold_revision(record, current, payload, revision, event)
+        None => pass
+    if revision != 1:
+        return Err(f"{label}: revision {revision} of a version with no revision 1; revisions are contiguous")
     record.adopt = Some(payload)
     record.publisher = event.actor
     record.adopted_at = event.at
     return Ok(record)
+
+
+def fold_revision(
+    initial: Record, current: JsonValue, payload: JsonValue, revision: int, event: Event
+) -> Result[Record, str]:
+    """
+    An `adopt` event for a version already adopted: a repeated revision must be identical, and a correction must be the
+    next revision, naming the revision it supersedes and why, with an archive of its own. Revisions are immutable.
+    """
+    mut record = initial
+    label = event.label
+    if revision <= record.revision:
+        mut recorded = current
+        for earlier in record.earlier:
+            if earlier.revision == revision:
+                recorded = earlier.payload
+        if canonical(recorded)? != canonical(payload)?:
+            return Err(f"{label}: revision {revision} of {event.name} {event.version} is already adopted differently; a revision is immutable, and a correction is a new revision")
+        return Ok(record)
+    if revision != record.revision + 1:
+        return Err(f"{label}: revision {revision} follows revision {record.revision}; revisions are contiguous")
+    match member(payload, "supersedes").as_int():
+        Some(superseded) =>
+            if superseded < 1 or superseded > record.revision:
+                return Err(f"{label}: `supersedes` must name an existing revision of {event.name} {event.version}")
+        None => return Err(f"{label}: a correction names the revision it supersedes in `supersedes`")
+    if len(string_member(payload, "reason").strip()) == 0:
+        return Err(f"{label}: a correction says why in `reason`")
+    if string_member(payload, "archive") == string_member(current, "archive"):
+        return Err(f"{label}: a correction changes the archive; this one is revision {record.revision}'s")
+    record.earlier.append(EarlierRevision(revision=record.revision, payload=current, at=record.adopted_at))
+    record.adopt = Some(payload)
+    record.revision = revision
+    record.publisher = event.actor
+    record.adopted_at = event.at
+    return Ok(record)
+
+
+pub def check_recorded_adoption(event: Event, adoption: Adoption) -> Result[None, str]:
+    """
+    What a new `adopt` event must state (RFC 125): its revision, the adoption tool version, and whether the package has
+    a build script, so that a package with a real one can't read as having none. Only the events before
+    `first_recorded_form` may lack them.
+    """
+    label = event.label
+    match event.body.get("revision"):
+        Some(_) => pass
+        None =>
+            if event.sequence >= first_recorded_form():
+                return Err(f"{label}: a new adoption states its `revision`")
+            return Ok(None)
+    if len(string_member(event.body, "tool")) == 0:
+        return Err(f"{label}: a new adoption states the adoption tool version in `tool`")
+    match adoption.build_script:
+        Some(_) => return Ok(None)
+        None => return Err(f"{label}: a new adoption states `[rust] build-script`")
+
+
+pub def revision_of(value: JsonValue, label: str) -> Result[int, str]:
+    """The revision an `adopt` event or an asset names; an older record names none, and that is revision 1."""
+    match value.get("revision"):
+        Some(stated) =>
+            match stated.as_int():
+                Some(number) =>
+                    if number < 1:
+                        return Err(f"{label}: a revision counts from 1")
+                    return Ok(number)
+                None => return Err(f"{label}: `revision` must be a number")
+        None => return Ok(1)
 
 
 const DOCUMENT_ROLES: FrozenList[str] = ["readme", "license", "license-notice", "changelog"]
@@ -245,11 +325,23 @@ def validate_document(document: JsonValue, root: Path, label: str) -> Result[Non
 pub def adopt_payload(body: JsonValue) -> JsonValue:
     """The members of an `adopt` event that state the adoption, without the event envelope."""
     mut payload: Dict[str, JsonValue] = {}
-    for key in ["about", "files", "documents", "vcs", "taxonomy", "adopted", "rust", "features", "deps", "manifest", "archive"]:
+    for key in [
+        "revision", "supersedes", "reason", "tool",
+        "about", "files", "documents", "vcs", "taxonomy", "adopted", "rust", "features", "deps", "manifest", "archive",
+    ]:
         match body.get(key):
             Some(value) => payload[key] = value
             None => pass
     return JsonValue.object(payload)
+
+
+pub def adoption_statement(payload: JsonValue) -> JsonValue:
+    """What an adoption says about the package, without which revision says it: what a correction must change."""
+    mut statement: Dict[str, JsonValue] = {}
+    for key in payload.keys():
+        if key != "revision" and key != "supersedes" and key != "reason" and key != "tool":
+            statement[key] = member(payload, key)
+    return JsonValue.object(statement)
 
 
 pub def requirement_met(adopted: Dict[str, list[str]], package: str, requirement: str, label: str) -> Result[bool, str]:
@@ -307,6 +399,8 @@ def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Recor
         fact.status = status_attested()
         record.facts[binding_key] = fact
     elif event.kind == "asset":
+        if event.sequence >= first_recorded_form():
+            require_toolchain(event.payload("asset"), event.label)?
         record = admit_asset(record, event.payload("binding"), event.payload("asset"), event.label)?
     elif event.kind == "yank":
         record.yanked = true
@@ -348,13 +442,25 @@ pub def admit_asset(initial: Record, binding_value: JsonValue, asset: JsonValue,
     match record.adopt:
         Some(_) => pass
         None => return Err(f"{label}: an asset is compiled from an adopted source Loaf; {record.name} {record.version} is not adopted")
+    toolchain = string_member(asset, "toolchain")
+    if len(toolchain) > 0 and not is_toolchain_identity(toolchain):
+        return Err(f"{label}: an asset's toolchain is `incan@` and the 40-digit commit it was built from, not `{toolchain}`")
+    revision = revision_of(asset, label)?
+    if revision > record.revision:
+        return Err(f"{label}: the asset names revision {revision}; {record.name} {record.version} has {record.revision}")
     unit_identity = string_member(asset, "unit_identity")
     archive = string_member(asset, "archive")
-    for present in record.assets:
+    mut index = 0
+    while index < len(record.assets):
+        mut present = record.assets[index]
         if present.unit_identity == unit_identity:
-            if present.archive == archive:
-                return Ok(record)
-            return Err(f"{label}: unit {unit_identity} already has asset {present.archive}; a second archive for one unit is a determinism conflict")
+            if present.archive != archive:
+                return Err(f"{label}: unit {unit_identity} already has asset {present.archive}; a second archive for one unit is a determinism conflict")
+            if not present.revisions.contains(revision):
+                present.revisions.append(revision)
+                record.assets[index] = present
+            return Ok(record)
+        index += 1
     record.assets.append(Asset(
         binding=binding,
         archive=archive,
@@ -364,8 +470,17 @@ pub def admit_asset(initial: Record, binding_value: JsonValue, asset: JsonValue,
         builder=string_member(asset, "builder"),
         attestation=string_member(asset, "attestation"),
         location=location,
+        toolchain=toolchain,
+        revisions=[revision],
     ))
     return Ok(record)
+
+
+pub def require_toolchain(asset: JsonValue, label: str) -> Result[None, str]:
+    """A new asset's record names its full toolchain identity, so retention can tell which toolchain it belongs to."""
+    if len(string_member(asset, "toolchain")) == 0:
+        return Err(f"{label}: a new asset names its full toolchain identity in `toolchain`")
+    return Ok(None)
 
 
 pub def validate_binding(binding: JsonValue, label: str) -> Result[Binding, str]:

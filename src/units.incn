@@ -195,7 +195,9 @@ pub def unit_tag(version: str, binding: Binding) -> Result[str, str]:
     return Ok(tag)
 
 
-pub def push_units(registry: Registry, packed: list[Packed], builder: str, attestation: str, proposals: str) -> Result[list[str], str]:
+pub def push_units(
+    registry: Registry, packed: list[Packed], builder: str, attestation: str, toolchain: str, proposals: str
+) -> Result[list[str], str]:
     """
     Push every binding's units under that binding's tag, one layer per unit, and write one asset proposal per unit.
 
@@ -250,6 +252,7 @@ pub def push_units(registry: Registry, packed: list[Packed], builder: str, attes
                     "payload": JsonValue.string(item.payload),
                     "builder": JsonValue.string(builder),
                     "attestation": JsonValue.string(attestation),
+                    "toolchain": JsonValue.string(toolchain),
                     "location": location,
                 }),
             })

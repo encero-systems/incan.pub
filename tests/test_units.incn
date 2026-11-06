@@ -7,13 +7,14 @@ from std.json import JsonValue, parse
 from std.tempfile import TemporaryDirectory
 from std.testing import assert_eq, assert_true
 
-from admission import replay
+from admission import admit_asset, replay, require_toolchain
 from adoption import Adoption, adoption_payload, render_adopted_manifest
 from canonical import canonical, digest_bytes, digest_text
 from events import append_event, load_events, write_text
 from projection import render_projections
 from host import environment_value
-from registry import Binding, record_key
+from oci import source_tag
+from registry import Binding, Record, record_key
 from tar import read_archive
 from units import CompiledUnit, Packed, closure_units, pack_unit, reproduction_differences, unit_tag
 
@@ -40,6 +41,9 @@ def refusal(root: Path) -> str:
         Err(message) => return message
 
 
+const TOOLCHAIN: str = "incan@0cb030e9c6d9817c620e481854e7d6f6440fd9d6"
+
+
 def leaf() -> Adoption:
     return Adoption(
         package="leaf",
@@ -48,7 +52,7 @@ def leaf() -> Adoption:
         rust_name="leaf",
         rust_type="lib",
         edition="2021",
-        build_script=None,
+        build_script=Some(false),
         about=None,
         files=None,
         root="src/lib.rs",
@@ -88,6 +92,104 @@ def add_asset(root: Path, profile: str, unit: str, archive: str) -> None:
         }),
     })
     append_event(root, "asset", "leaf", "1.2.0", "tests", payload).unwrap()
+
+
+def adopt_second_revision(root: Path) -> None:
+    mut corrected = leaf()
+    corrected.edition = "2018"
+    mut payload = adoption_payload(corrected, digest_text(render_adopted_manifest(corrected)), digest_text("archive r2"))
+    payload["revision"] = JsonValue.int(2)
+    payload["supersedes"] = JsonValue.int(1)
+    payload["reason"] = JsonValue.string("the edition was read wrong")
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", payload).unwrap()
+
+
+def recorded_asset(unit: str, revision: int, toolchain: str) -> JsonValue:
+    mut fields: Dict[str, JsonValue] = {
+        "archive": JsonValue.string(digest_text("archive " + unit)),
+        "unit_identity": JsonValue.string(digest_text(unit)),
+        "entry": JsonValue.string(digest_text("entry " + unit)),
+        "payload": JsonValue.string(digest_text("payload " + unit)),
+        "builder": JsonValue.string("registry"),
+        "attestation": JsonValue.string("https://github.com/encero-systems/incan.pub/attestations/1"),
+        "location": JsonValue.object({
+            "registry": JsonValue.string("ghcr.io"),
+            "repository": JsonValue.string("encero-systems/incan.pub/crates-io/leaf"),
+            "tag": JsonValue.string("1.2.0-000000000000"),
+        }),
+        "revision": JsonValue.int(revision),
+    }
+    if len(toolchain) > 0:
+        fields["toolchain"] = JsonValue.string(toolchain)
+    return JsonValue.object(fields)
+
+
+def test_an_asset_serves_the_revisions_it_names() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt_leaf(root)
+    adopt_second_revision(root)
+    add_asset(root, "debug", "first", "archive first")
+    mut payload: Dict[str, JsonValue] = {}
+    payload["binding"] = binding_json("release")
+    payload["asset"] = recorded_asset("second", 2, TOOLCHAIN)
+    append_event(root, "asset", "leaf", "1.2.0", "tests", payload).unwrap()
+    assert_eq(refusal(root), "")
+    events = load_events(root).unwrap()
+    state = replay(events, root).unwrap()
+    files = render_projections(state, events).unwrap()
+    # An asset that names no revision was recorded against revision 1.
+    assert_true(files["crates-io/leaf/1.2.0/r1/assets.json"].contains(digest_text("first")))
+    assert_true(not files["crates-io/leaf/1.2.0/r1/assets.json"].contains(digest_text("second")))
+    assert_true(files["crates-io/leaf/1.2.0/assets.json"].contains(digest_text("second")))
+    assert_true(files["crates-io/leaf/1.2.0/assets.json"].contains(f"\"toolchain\": \"{TOOLCHAIN}\""))
+    assert_true(not files["crates-io/leaf/1.2.0/assets.json"].contains(digest_text("first")))
+    # The unit a revision's new bake did not change serves it too, under the same archive.
+    record = admit_asset(state[record_key("leaf", "1.2.0")], binding_json("debug"), recorded_asset_of_first(), "again").unwrap()
+    assert_eq(len(record.assets), 2)
+    assert_eq(record.assets[0].revisions, [1, 2])
+
+
+def recorded_asset_of_first() -> JsonValue:
+    mut asset = recorded_asset("first", 2, "")
+    asset.set("archive", JsonValue.string(digest_text("archive first"))).unwrap()
+    return asset
+
+
+def test_an_asset_names_an_existing_revision_and_a_well_formed_toolchain() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt_leaf(root)
+    state = replay(load_events(root).unwrap(), root).unwrap()
+    record = state[record_key("leaf", "1.2.0")]
+    assert_true(
+        error_of_record(admit_asset(record, binding_json("debug"), recorded_asset("unit", 2, TOOLCHAIN), "new"))
+        .contains("the asset names revision 2")
+    )
+    assert_true(
+        error_of_record(admit_asset(record, binding_json("debug"), recorded_asset("unit", 1, "rustc 1.98.0"), "new"))
+        .contains("an asset's toolchain is `incan@`")
+    )
+    assert_eq(error_of_none(require_toolchain(recorded_asset("unit", 1, TOOLCHAIN), "new")), "")
+    assert_eq(
+        error_of_none(require_toolchain(recorded_asset("unit", 1, ""), "new")),
+        "new: a new asset names its full toolchain identity in `toolchain`",
+    )
+    # A later revision's source archive has its own tag; revision 1 keeps the version's.
+    assert_eq(source_tag("2.1.0+zstd.1.5.7", 1).unwrap(), "2.1.0_zstd.1.5.7")
+    assert_eq(source_tag("2.1.0+zstd.1.5.7", 2).unwrap(), "2.1.0_zstd.1.5.7-r2")
+
+
+def error_of_record(result: Result[Record, str]) -> str:
+    match result:
+        Ok(_) => return ""
+        Err(message) => return message
+
+
+def error_of_none(result: Result[None, str]) -> str:
+    match result:
+        Ok(_) => return ""
+        Err(message) => return message
 
 
 def test_an_asset_is_compiled_from_an_adopted_version_and_one_unit_has_one_archive() -> None:

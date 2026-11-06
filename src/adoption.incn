@@ -28,6 +28,11 @@ from tar import TarEntry, read_archive, write_archive
 from target import normalize_target
 
 
+# The adoption tool version each new revision records (RFC 125, "Determinism"): rebuilding an archive takes the tool at
+# the version that made it. It changes with anything that changes the bytes adoption writes.
+pub const ADOPTION_VERSION: str = "1"
+
+
 pub def conventional_root() -> str:
     return "src/lib.rs"
 
@@ -171,8 +176,12 @@ def active_declarations(
 
 
 pub def loaf_name(package: str) -> str:
-    """The Loaf a crates.io package is adopted as: the registry-owned `crates-io` scope."""
-    return "crates-io/" + package
+    """
+    The Loaf a crates.io package is adopted as: the registry-owned `crates-io` scope, its upstream spelling in
+    lowercase. No Loaf name has a capital letter, and crates.io treats names as equal regardless of case, so
+    lowercasing cannot make two packages collide. `adopted.package` keeps the upstream spelling.
+    """
+    return "crates-io/" + package.lower()
 
 
 pub def unpack_crate(package: str, version: str, archive: bytes) -> Result[list[TarEntry], str]:
@@ -359,7 +368,7 @@ def declarations_of(line: JsonValue, wanted: str, label: str) -> Result[list[Dep
             None => pass
         dependency = Dependency(
             key=key,
-            package=package,
+            package=package.lower(),
             req=string_member(declaration, "req"),
             features=requested,
             default_features=flag(declaration, "default_features", true),
@@ -535,6 +544,8 @@ pub def adoption_payload(adoption: Adoption, manifest: str, archive: str) -> Dic
     mut facet = rust_json(adoption)
     facet.set("root", JsonValue.string(adoption.root)).unwrap()
     mut payload: Dict[str, JsonValue] = {
+        "revision": JsonValue.int(1),
+        "tool": JsonValue.string(ADOPTION_VERSION),
         "adopted": provenance_json(adoption),
         "rust": facet,
         "features": features_json(adoption.features),
@@ -842,6 +853,44 @@ pub def loaf_files(adoption: Adoption, files: list[TarEntry]) -> list[TarEntry]:
                 out.append(TarEntry(path="README.md", executable=false, data=generated_readme(adoption, about).encode()))
         None => pass
     return out
+
+
+def adoption_authored(payload: JsonValue) -> list[str]:
+    """The files of an adoption's archive it wrote itself, rather than took from the package."""
+    mut authored = ["loaf.toml"]
+    match file_sources_from_json(payload):
+        Some(sources) =>
+            if sources["license"] == "registry":
+                authored.append("LICENSE")
+            if sources["readme"] == "registry":
+                authored.append("README.md")
+        None => pass
+    return authored
+
+
+pub def revision_keeps_sources(
+    earlier: list[TarEntry], corrected: list[TarEntry], earlier_payload: JsonValue, corrected_payload: JsonValue, label: str
+) -> Result[None, str]:
+    """
+    A revision may change only `loaf.toml` and the files adoption adds, never the package's sources (RFC 125), which is
+    why build facts carry across a version's revisions. Every other file must be in both archives with the same bytes.
+    """
+    authored = adoption_authored(earlier_payload) + adoption_authored(corrected_payload)
+    mut before: Dict[str, bytes] = {}
+    for entry in earlier:
+        before[entry.path] = entry.data
+    mut after: Dict[str, bytes] = {}
+    for entry in corrected:
+        after[entry.path] = entry.data
+    for path in sorted(list(before.keys())):
+        if authored.contains(path):
+            continue
+        if path not in after or after[path] != before[path]:
+            return Err(f"{label}: a revision may not change the package's `{path}`")
+    for path in sorted(list(after.keys())):
+        if not authored.contains(path) and path not in before:
+            return Err(f"{label}: a revision may not add `{path}` to the package's sources")
+    return Ok(None)
 
 
 def root_file_named(paths: list[str], prefixes: list[str]) -> bool:
