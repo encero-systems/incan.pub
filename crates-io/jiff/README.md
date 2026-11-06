@@ -1,6 +1,6 @@
 # crates-io/jiff
 
-The crates.io package [jiff](https://crates.io/crates/jiff), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves. A date-time library that encourages you to jump into the pit of success.
+The crates.io package [jiff](https://crates.io/crates/jiff), adopted by [loaves.pub](https://loaves.pub) as Loaves. A date-time library that encourages you to jump into the pit of success.
 
 This library is heavily inspired by the Temporal project.
 
@@ -8,6 +8,6 @@ This library is heavily inspired by the Temporal project.
 |---|---|---|---|---|---|
 | [0.2.37](0.2.37/loaf.toml) | 2026-10-07 | Unlicense OR MIT | 0 | 16 | [units](0.2.37/assets.json) |
 
-Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/jiff`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/jiff](../../index/crates-io/jiff), the units by each version's `assets.json`.
+Each version's Loaf carries the package's own LICENSE and README, or ones loaves.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/jiff`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/jiff](../../index/crates-io/jiff), the units by each version's `assets.json`.
 
 <!-- Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit. -->

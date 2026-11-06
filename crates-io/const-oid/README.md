@@ -1,6 +1,6 @@
 # crates-io/const-oid
 
-The crates.io package [const-oid](https://crates.io/crates/const-oid), adopted by [incan.pub](https://github.com/encero-systems/incan.pub) as Loaves. Const-friendly implementation of the ISO/IEC Object Identifier (OID) standard
+The crates.io package [const-oid](https://crates.io/crates/const-oid), adopted by [loaves.pub](https://loaves.pub) as Loaves. Const-friendly implementation of the ISO/IEC Object Identifier (OID) standard
 as defined in ITU X.660, with support for BER/DER encoding/decoding as well as
 heapless no_std (i.e. embedded) support
 
@@ -9,6 +9,6 @@ heapless no_std (i.e. embedded) support
 | [0.10.2](0.10.2/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 0 | 11 | [units](0.10.2/assets.json) |
 | [0.9.6](0.9.6/loaf.toml) | 2026-10-07 | Apache-2.0 OR MIT | 0 | 4 | [units](0.9.6/assets.json) |
 
-Each version's Loaf carries the package's own LICENSE and README, or ones incan.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/const-oid`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/const-oid](../../index/crates-io/const-oid), the units by each version's `assets.json`.
+Each version's Loaf carries the package's own LICENSE and README, or ones loaves.pub wrote where the package shipped none. Source archives and compiled units are on the GitHub Container Registry as `ghcr.io/encero-systems/incan.pub/crates-io/const-oid`; a client verifies them against this index: the archive by the `cksum` on its version's line in [index/crates-io/const-oid](../../index/crates-io/const-oid), the units by each version's `assets.json`.
 
 <!-- Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit. -->
