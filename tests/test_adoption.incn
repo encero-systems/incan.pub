@@ -508,7 +508,9 @@ def test_every_loaf_carries_a_license_and_a_readme() -> None:
     only_license = translate(demo_line(), demo_files(licensed_manifest)).unwrap()
     for file in loaf_files(only_license, demo_files(licensed_manifest)):
         if file.path == "LICENSE":
-            assert_true(file.data.decode().unwrap().contains("declares the license `MIT OR Apache-2.0`"))
+            match file.data.decode():
+                Ok(text) => assert_true(text.contains("declares the license `MIT OR Apache-2.0`"))
+                Err(_) => assert_true(false, "a generated license is text")
 
 
 def test_about_records_authors_and_rust_version_for_the_package_environment() -> None:

@@ -223,7 +223,10 @@ def octal(value: int, width: int) -> str:
 
 
 def nul() -> str:
-    return b"\0".decode().unwrap()
+    # `"\0"` is two characters, and `unwrap` on a decode result has no Debug lowering in 0.6.0-dev.8.
+    match b"\0".decode():
+        Ok(text) => return text
+        Err(_) => return ""
 
 
 def before_nul(text: str) -> str:
