@@ -8,6 +8,12 @@ name: bake
 # Every shard is compiled twice, in two roots, and `pack-units --reproduces` refuses the run unless both give every unit
 # the same identity, entry and archive bytes: a unit that depends on where it was compiled is never published.
 #
+# Compiling runs third-party code: every proc macro in a closure executes inside rustc. So the `compile` job holds no
+# credential at all, with a read-only token that its checkouts do not keep, no package write and no OIDC token, and it
+# hands the packed units to the `publish` job as an artifact. Only `publish` can attest and push, and it runs nothing
+# but this repository's own tool. A macro can therefore neither push a package, overwrite a tag another run pulls, nor
+# mint a provenance attestation.
+#
 # The run proposes; it does not record. It uploads the asset proposals as the `asset-proposals` artifact, and
 # `incan-pub admit-assets` on a checkout of `index` records them after pulling each archive anonymously, so the index
 # stays the authority. Packages this workflow creates take the visibility of this public repository; a package first
@@ -47,36 +53,40 @@ on:
 
 permissions:
   contents: read
-  packages: write
-  id-token: write
-  attestations: write
 
 env:
   # The compiler whose `oven compile-closure` lists the units it compiled, downloaded from the GHCR package the toolchain
-  # workflow pushes (`toolchain/incan:<commit>-<triple>`). The tool itself is the binary the check workflow published
-  # for this commit's tool key (`toolchain/incan-pub:<tool key>-<triple>`; see check.yml).
+  # workflow pushes (`toolchain/incan:<commit>-<triple>`), by the digest of each target's image, so a tag pushed again
+  # cannot change what compiles a unit. The tool itself is the binary the check workflow published for this commit's
+  # tool key (`toolchain/incan-pub:<tool key>-<triple>`; see check.yml). The record-facts workflow reads all three.
   CLOSURE_INCAN: 5ee13ce39b0955d028781f8941b77212c2c6258c
+  CLOSURE_INCAN_LINUX: sha256:56cd927aca5b06a5a2394629e97fe3ecbf955d34b5c9dab57d6f590ca7c069d9
+  CLOSURE_INCAN_MACOS: sha256:a2a8dbd1f5002cca11fe2b17cddd21579de145a7f8306916110ef0f7a5966ef6
   RUST_TOOLCHAIN: 1.98.0
 
 jobs:
-  bake:
+  compile:
     runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-latest' || 'macos-latest' }}
+    permissions:
+      contents: read
     env:
       SHARDS: ${{ inputs.shards }}
       PROFILE: ${{ inputs.profile }}
       TARGET: ${{ inputs.target }}
     steps:
       - name: Check out the tool
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           path: tool
+          persist-credentials: false
       - name: Check out the index branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: index
           path: index
+          persist-credentials: false
       - name: Install oras
-        uses: oras-project/setup-oras@v1
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
       - name: Download the tool and the closure compiler
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
@@ -84,7 +94,9 @@ jobs:
             --output "$RUNNER_TEMP/tool" \
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$CLOSURE_INCAN-$TARGET" --output "$RUNNER_TEMP/incan"
+          digest="$CLOSURE_INCAN_LINUX"
+          [ "$TARGET" = aarch64-apple-darwin ] && digest="$CLOSURE_INCAN_MACOS"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan@$digest" --output "$RUNNER_TEMP/incan"
           tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
       - name: Install the Rust toolchain the units are compiled with, twice
         # The second root compiles with a second copy at another path that also carries rust-src, so the gate below
@@ -100,11 +112,12 @@ jobs:
               --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
           done
       - name: Check out the closure compiler's sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: encero-systems/incan
           ref: ${{ env.CLOSURE_INCAN }}
           path: incan
+          persist-credentials: false
       - name: Compile each shard twice, in two roots, and pack the units that reproduce
         env:
           ONLY: ${{ inputs.only }}
@@ -116,6 +129,7 @@ jobs:
           commit="$(git -C index rev-parse HEAD)"
           first_rustc="$(rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
           second_rustc="$(RUSTUP_HOME="$RUNNER_TEMP/rustup-src" CARGO_HOME="$RUNNER_TEMP/cargo-src" rustup which --toolchain "$RUST_TOOLCHAIN" rustc)"
+          mkdir -p "$RUNNER_TEMP/units" "$RUNNER_TEMP/proposals"
           for shard in $SHARDS; do
             for root in first second; do
               rustc="$first_rustc"
@@ -129,7 +143,6 @@ jobs:
             # is listed at the end; the other shards still bake. Units that compiled but differ between the roots
             # fail the run below.
             if ! jq -e '.refused | length == 0' "$RUNNER_TEMP/first/closure/closure.json" > /dev/null; then
-              mkdir -p "$RUNNER_TEMP/proposals"
               jq -r --arg shard "$shard" '.refused[] | "\($shard)\t\(.loaf) \(.version)\t\(.reason | split("\n")[0] | .[0:300])"' \
                 "$RUNNER_TEMP/first/closure/closure.json" >> "$RUNNER_TEMP/proposals/refused-shards.tsv"
               continue
@@ -142,14 +155,55 @@ jobs:
             echo "::warning::$(cut -f1 "$RUNNER_TEMP/proposals/refused-shards.tsv" | sort -u | wc -l) shard(s) refused; see refused-shards.tsv in the asset-proposals artifact"
             cat "$RUNNER_TEMP/proposals/refused-shards.tsv"
           fi
-          # One copy of each archive to attest: shards that share a unit pack the same bytes under the same name.
-          mkdir -p "$RUNNER_TEMP/attest"
+      - name: Hand the packed units to the publish job
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: packed-units
+          path: |
+            ${{ runner.temp }}/units
+            ${{ runner.temp }}/proposals
+          retention-days: 1
+
+  publish:
+    needs: compile
+    runs-on: ${{ inputs.target == 'x86_64-unknown-linux-gnu' && 'ubuntu-latest' || 'macos-latest' }}
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+    env:
+      TARGET: ${{ inputs.target }}
+    steps:
+      - name: Check out the tool
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          path: tool
+          persist-credentials: false
+      - name: Install oras
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
+      - name: Download the tool
+        run: |
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" \
+            --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+      - name: Take the packed units from the compile job
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: packed-units
+          path: ${{ runner.temp }}
+      - name: Collect one copy of each archive to attest
+        # Shards that share a unit pack the same bytes under the same name.
+        run: |
+          mkdir -p "$RUNNER_TEMP/attest" "$RUNNER_TEMP/proposals"
           for archive in "$RUNNER_TEMP"/units/*/*.tar; do
             [ -e "$RUNNER_TEMP/attest/$(basename "$archive")" ] || cp "$archive" "$RUNNER_TEMP/attest/"
           done
       - name: Attest the unit archives
         id: attest
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
         with:
           subject-path: ${{ runner.temp }}/attest/*.tar
       - name: Push the units
@@ -163,7 +217,7 @@ jobs:
               --proposals "$RUNNER_TEMP/proposals" --work "$RUNNER_TEMP/push"
           done
       - name: Upload the asset proposals
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: asset-proposals
           path: ${{ runner.temp }}/proposals

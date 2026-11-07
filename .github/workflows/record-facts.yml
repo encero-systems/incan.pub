@@ -41,16 +41,18 @@ jobs:
       BINDINGS: ${{ inputs.bindings }}
     steps:
       - name: Check out the tool
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           path: tool
+          persist-credentials: false
       - name: Check out the index branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: index
           path: index
+          persist-credentials: false
       - name: Install oras
-        uses: oras-project/setup-oras@v1
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
       - name: Download the tool
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
@@ -58,20 +60,24 @@ jobs:
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
           tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       # A build script with build dependencies links against them, compiled by Oven from their adopted archives: the
-      # compiler is the one the bake workflow pins, so both read their commit from bake.yml.
+      # compiler is the one the bake workflow pins, so both read its commit and image digests from bake.yml.
       - name: Download the compiler that compiles build dependencies
         id: closure
         run: |
           commit="$(sed -n 's/^  CLOSURE_INCAN: //p' tool/.github/workflows/bake.yml)"
+          variable=CLOSURE_INCAN_LINUX
+          [ "$TARGET" = aarch64-apple-darwin ] && variable=CLOSURE_INCAN_MACOS
+          digest="$(sed -n "s/^  $variable: //p" tool/.github/workflows/bake.yml)"
           echo "commit=$commit" >> "$GITHUB_OUTPUT"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$commit-$TARGET" --output "$RUNNER_TEMP/incan"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan@$digest" --output "$RUNNER_TEMP/incan"
           tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
       - name: Check out that compiler's sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: encero-systems/incan
           ref: ${{ steps.closure.outputs.commit }}
           path: incan
+          persist-credentials: false
       - name: Install the Rust toolchain the build scripts are compiled with
         run: rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
       - name: Install the build-script sandbox
@@ -122,7 +128,7 @@ jobs:
           done
           echo "proposals: $(find "$RUNNER_TEMP/proposals" -name proposal.json | wc -l), refused: $(wc -l < "$RUNNER_TEMP/proposals/refused.tsv")"
       - name: Upload the fact proposals
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: fact-proposals
           path: ${{ runner.temp }}/proposals
