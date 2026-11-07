@@ -6,36 +6,45 @@ on:
   pull_request:
     branches: [index]
 
+# Checking the log writes nothing, so the job holds a read-only token that no checkout keeps.
+permissions:
+  contents: read
+
 env:
   # The Incan dev line the tool is built with, downloaded from the GHCR package the toolchain workflow on `main`
   # pushes (`toolchain/incan:<commit>-<triple>`). The compiler reads its standard library from the checkout of this
-  # commit at `incan`.
+  # commit at `incan`. It is pulled by the digest the toolchain run printed, so a later push to the same tag changes
+  # nothing here.
   INCAN_COMMIT: 7bfe19aec30971e3377323ae9107ea5d642ebd96
+  INCAN_DIGEST: sha256:2e5c6469f49d17f9d114fb94fca54bdd0fe4a73cfe2992444877155aaec39de1
 
 jobs:
   registry:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the index branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           path: index
+          persist-credentials: false
       - name: Check out the tool
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: main
           path: tool
+          persist-credentials: false
       - name: Check out the Incan toolchain
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: encero-systems/incan
           ref: ${{ env.INCAN_COMMIT }}
           path: incan
+          persist-credentials: false
       - name: Install oras
-        uses: oras-project/setup-oras@v1
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
       - name: Download the Incan compiler built at this commit
         run: |
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$INCAN_COMMIT-x86_64-unknown-linux-gnu" --output "$RUNNER_TEMP/toolchain"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan@$INCAN_DIGEST" --output "$RUNNER_TEMP/toolchain"
           mkdir -p incan/target/debug
           tar -xzf "$RUNNER_TEMP/toolchain/incan.tar.gz" -C incan/target/debug
       - name: Add the Rust target the standard library's vocab desugarer builds for
