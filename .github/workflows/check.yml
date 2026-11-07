@@ -8,6 +8,9 @@ name: check
 # none of them, a workflow edit say, keeps the key and so the binary. The binary is published once its own tests pass,
 # before the log is admitted with it: a change to what the tool renders lands on `index` only after the tool that
 # renders it, so the `index` this run checks out can lag behind it, and that lag must not withhold the binary.
+#
+# Building the tool compiles the standard library and its dependencies, so the `tool` job holds a read-only token that
+# its checkouts do not keep. It hands each binary to the `publish` job, which only pushes it.
 
 on:
   push:
@@ -21,12 +24,11 @@ concurrency:
 
 permissions:
   contents: read
-  packages: write
 
 env:
   # The Incan dev line this tool is built with, downloaded from the GHCR package the toolchain workflow pushes
-  # (`toolchain/incan:<commit>-<triple>`). The compiler reads its standard library from the checkout of this commit
-  # at `incan`.
+  # (`toolchain/incan:<commit>-<triple>`) by each target's image digest, in the matrix below. The compiler reads its
+  # standard library from the checkout of this commit at `incan`.
   INCAN_COMMIT: 7bfe19aec30971e3377323ae9107ea5d642ebd96
 
 jobs:
@@ -37,18 +39,23 @@ jobs:
         include:
           - runner: ubuntu-latest
             triple: x86_64-unknown-linux-gnu
+            compiler: sha256:2e5c6469f49d17f9d114fb94fca54bdd0fe4a73cfe2992444877155aaec39de1
           - runner: macos-latest
             triple: aarch64-apple-darwin
+            compiler: sha256:1cc85d4417346f020d5bd28be7cad69d31e644193ec253d02ce180c7767648c4
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
     env:
       TRIPLE: ${{ matrix.triple }}
     steps:
       - name: Check out the tool
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           path: tool
+          persist-credentials: false
       - name: Install oras
-        uses: oras-project/setup-oras@v1
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
       # A push that changes none of the binary's inputs (a workflow or shard edit) keeps the tool key, and the binary
       # for that key is published by the run of the push that changed it; runs on one ref queue (`concurrency`), so
       # a later run finds it and builds nothing.
@@ -63,21 +70,25 @@ jobs:
           fi
       - name: Check out the index branch
         if: steps.published.outputs.present != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: index
           path: index
+          persist-credentials: false
       - name: Check out the Incan toolchain
         if: steps.published.outputs.present != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: encero-systems/incan
           ref: ${{ env.INCAN_COMMIT }}
           path: incan
+          persist-credentials: false
       - name: Download the Incan compiler built at this commit
         if: steps.published.outputs.present != 'true'
+        env:
+          COMPILER: ${{ matrix.compiler }}
         run: |
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan:$INCAN_COMMIT-$TRIPLE" --output "$RUNNER_TEMP/toolchain"
+          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan@$COMPILER" --output "$RUNNER_TEMP/toolchain"
           mkdir -p incan/target/debug
           tar -xzf "$RUNNER_TEMP/toolchain/incan.tar.gz" -C incan/target/debug
       - name: Add the Rust target the standard library's vocab desugarer builds for
@@ -87,22 +98,16 @@ jobs:
         if: steps.published.outputs.present != 'true'
         working-directory: tool
         run: INCAN="$GITHUB_WORKSPACE/incan/target/debug/incan" ./build.sh
-      - name: Publish the tool binary
+      - name: Pack the tool binary
         if: github.event_name == 'push' && steps.published.outputs.present != 'true'
-        env:
-          REGISTRY_USER: ${{ github.actor }}
-          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
-          tar -czf incan-pub.tar.gz -C tool/target incan-pub
-          printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
-          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" \
-            --artifact-type application/vnd.incan.tool.v1 \
-            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
-            --annotation "dev.incan.tool.commit=$GITHUB_SHA" \
-            --annotation "dev.incan.tool.key=$key" \
-            --annotation "dev.incan.toolchain.target=$TRIPLE" \
-            incan-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip
+        run: tar -czf "$RUNNER_TEMP/incan-pub.tar.gz" -C tool/target incan-pub
+      - name: Hand the tool binary to the publish job
+        if: github.event_name == 'push' && steps.published.outputs.present != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: incan-pub-${{ matrix.triple }}
+          path: ${{ runner.temp }}/incan-pub.tar.gz
+          retention-days: 1
       - name: Snapshot the crates.io index lines the log names
         if: matrix.triple == 'x86_64-unknown-linux-gnu' && steps.published.outputs.present != 'true'
         working-directory: index
@@ -111,3 +116,51 @@ jobs:
         if: matrix.triple == 'x86_64-unknown-linux-gnu' && steps.published.outputs.present != 'true'
         working-directory: index
         run: ../tool/target/incan-pub check --crates-io-index .crates-io-snapshot
+
+  # Runs even when the admission above fails, so that lag never withholds a binary that passed its own tests. A target
+  # with no binary to hand over, because it was already published or did not build, pushes nothing.
+  publish:
+    needs: tool
+    if: ${{ !cancelled() && github.event_name == 'push' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        triple: [x86_64-unknown-linux-gnu, aarch64-apple-darwin]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      TRIPLE: ${{ matrix.triple }}
+    steps:
+      - name: Check out the tool
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          path: tool
+          persist-credentials: false
+      - name: Take the tool binary from the tool job
+        id: binary
+        continue-on-error: true
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: incan-pub-${{ matrix.triple }}
+          path: ${{ runner.temp }}
+      - name: Install oras
+        if: steps.binary.outcome == 'success'
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
+      - name: Publish the tool binary
+        if: steps.binary.outcome == 'success'
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          cd "$RUNNER_TEMP"
+          printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
+          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" \
+            --artifact-type application/vnd.incan.tool.v1 \
+            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
+            --annotation "dev.incan.tool.commit=$GITHUB_SHA" \
+            --annotation "dev.incan.tool.key=$key" \
+            --annotation "dev.incan.toolchain.target=$TRIPLE" \
+            incan-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip

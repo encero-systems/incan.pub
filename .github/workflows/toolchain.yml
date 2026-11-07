@@ -10,6 +10,10 @@ name: toolchain
 # absolute path (INCAN_SOURCE_ROOT and INCAN_STDLIB move part of it, not the derive provider). Every job of this
 # repository has the same workspace path, so a job that downloads the binary checks out `encero-systems/incan` at the
 # same commit into `incan`, exactly where this workflow built it. The binary only runs under the file name `incan`.
+#
+# Building runs every build script and proc macro of the compiler's dependencies, so the `build` job holds a read-only
+# token that its checkout does not keep, and hands each binary to the `push` job, which only pushes it. The workflows
+# that use a binary pin it by the digest this run prints.
 
 on:
   workflow_dispatch:
@@ -20,7 +24,6 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
   build:
@@ -33,26 +36,60 @@ jobs:
           - runner: macos-latest
             triple: aarch64-apple-darwin
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
     steps:
       - name: Check out the Incan toolchain
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: encero-systems/incan
           ref: ${{ inputs.commit }}
           path: incan
+          persist-credentials: false
       - name: Build the Incan CLI
         working-directory: incan
         run: cargo build -p incan-cli
+      - name: Pack the binary
+        run: tar -czf "$RUNNER_TEMP/incan.tar.gz" -C incan/target/debug incan
+      - name: Hand the binary to the push job
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: incan-${{ matrix.triple }}
+          path: ${{ runner.temp }}/incan.tar.gz
+          retention-days: 1
+
+  # A target whose build failed has no binary to hand over and pushes nothing; the other target still goes up.
+  push:
+    needs: build
+    if: ${{ !cancelled() }}
+    strategy:
+      fail-fast: false
+      matrix:
+        triple: [x86_64-unknown-linux-gnu, aarch64-apple-darwin]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Take the binary from the build job
+        id: binary
+        continue-on-error: true
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: incan-${{ matrix.triple }}
+          path: ${{ runner.temp }}
       - name: Install oras
-        uses: oras-project/setup-oras@v1
+        if: steps.binary.outcome == 'success'
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
       - name: Push the binary
+        if: steps.binary.outcome == 'success'
         env:
           COMMIT: ${{ inputs.commit }}
           TRIPLE: ${{ matrix.triple }}
           REGISTRY_USER: ${{ github.actor }}
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tar -czf incan.tar.gz -C incan/target/debug incan
+          cd "$RUNNER_TEMP"
           printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
           oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan:$COMMIT-$TRIPLE" \
             --artifact-type application/vnd.incan.toolchain.v1 \
@@ -60,3 +97,4 @@ jobs:
             --annotation "dev.incan.toolchain.commit=$COMMIT" \
             --annotation "dev.incan.toolchain.target=$TRIPLE" \
             incan.tar.gz:application/vnd.incan.toolchain.v1.tar+gzip
+          echo "pinned as ghcr.io/encero-systems/incan.pub/toolchain/incan@$(oras manifest fetch --descriptor "ghcr.io/encero-systems/incan.pub/toolchain/incan:$COMMIT-$TRIPLE" | jq -r .digest)"
