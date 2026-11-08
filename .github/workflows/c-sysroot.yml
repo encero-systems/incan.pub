@@ -1,0 +1,178 @@
+name: c-sysroot
+
+# Assemble the Linux sysroot of RFC 159 from PyPA's `manylinux_2_28` build image, the environment Python wheels are
+# built in (AlmaLinux 8, glibc 2.28), and push it to the GitHub Container Registry as
+# `ghcr.io/encero-systems/incan.pub/toolchain/c-sysroot:glibc-2.28-<target>-<12 hex of the archive digest>`.
+#
+# The sysroot holds exactly the files of the packages a C compile and a final link need: glibc's headers, startup
+# objects, linker scripts and libraries; the kernel headers; libxcrypt; and libgcc's runtime with GCC's startup objects
+# (crtbegin/crtend, libgcc.a, libgcc_eh.a). Every file comes from an RPM the image has installed, listed by `rpm -ql`,
+# so the sysroot never picks up another package's headers. The archive is deterministic and its manifest lists every
+# entry with its digest. Before it is pushed, a program is compiled and linked against it with Clang and lld and run
+# inside the same image, which proves the sysroot links programs for its glibc.
+
+on:
+  push:
+    branches: [feature/c-toolchain]
+    paths: [.github/workflows/c-sysroot.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  assemble:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            image: quay.io/pypa/manylinux_2_28_x86_64
+          - runner: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            image: quay.io/pypa/manylinux_2_28_aarch64
+    runs-on: ${{ matrix.runner }}
+    env:
+      TARGET: ${{ matrix.target }}
+      IMAGE: ${{ matrix.image }}
+    steps:
+      - name: Pull the build image and record its digest
+        run: |
+          docker pull -q "$IMAGE"
+          digest="$(docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE")"
+          echo "IMAGE_DIGEST=$digest" >> "$GITHUB_ENV"
+          echo "image $digest"
+      - name: List the packages the sysroot is made of
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          docker run --rm -v "$RUNNER_TEMP/out:/out" "$IMAGE_DIGEST" bash -euo pipefail -c '
+            packages=""
+            for p in glibc glibc-devel glibc-headers kernel-headers libxcrypt libxcrypt-devel libgcc; do
+              if rpm -q "$p" > /dev/null 2>&1; then packages="$packages $p"; else echo "not installed: $p"; fi
+            done
+            # GCC startup objects and libgcc archives: the base compiler if installed, else the newest gcc-toolset.
+            if rpm -q gcc > /dev/null 2>&1; then
+              gcc_package=gcc
+            else
+              gcc_package="$(rpm -qa --qf "%{NAME}\n" "gcc-toolset-*-gcc" | sort -V | tail -1)"
+            fi
+            for p in $packages $gcc_package; do rpm -q --qf "%{NAME}\t%{VERSION}-%{RELEASE}\t%{ARCH}\n" "$p"; done > /out/packages.tsv
+            for p in $packages; do rpm -ql "$p"; done > /out/files.txt
+            rpm -ql "$gcc_package" | grep -E "/lib/gcc/[^/]+/[^/]+/((crtbegin|crtend)[A-Za-z]*\.o|libgcc(_eh)?\.a|libgcc_s\.so)$" > /out/gcc-files.txt
+            cat /etc/os-release | grep -E "^(ID|VERSION_ID)=" > /out/os-release
+          '
+          cat "$RUNNER_TEMP/out/packages.tsv"
+          wc -l "$RUNNER_TEMP/out/files.txt" "$RUNNER_TEMP/out/gcc-files.txt"
+          grep -E "ld-linux" "$RUNNER_TEMP/out/files.txt" || true
+      - name: Copy the package files into the sysroot
+        run: |
+          # Development files only: headers, startup objects, archives, shared libraries and linker scripts. Binaries,
+          # documentation, locales and configuration are not part of a sysroot.
+          grep -E '^(/usr/include/|/usr/lib64/[^/]+\.(o|a|so)$|/usr/lib64/[^/]+\.so\.[0-9.]+$|/lib64/[^/]+\.so(\.[0-9.]+)?$|/lib/[^/]+\.so(\.[0-9.]+)?$|/usr/lib/[^/]+\.so(\.[0-9.]+)?$)' \
+            "$RUNNER_TEMP/out/files.txt" > "$RUNNER_TEMP/out/keep.txt" || true
+          cat "$RUNNER_TEMP/out/gcc-files.txt" >> "$RUNNER_TEMP/out/keep.txt"
+          sort -u "$RUNNER_TEMP/out/keep.txt" -o "$RUNNER_TEMP/out/keep.txt"
+          wc -l < "$RUNNER_TEMP/out/keep.txt"
+          mkdir -p "$RUNNER_TEMP/sysroot"
+          docker run --rm -v "$RUNNER_TEMP/out:/out" -v "$RUNNER_TEMP/sysroot:/sysroot" "$IMAGE_DIGEST" bash -euo pipefail -c '
+            while IFS= read -r path; do
+              [ -e "$path" ] || [ -L "$path" ] || continue
+              [ -d "$path" ] && [ ! -L "$path" ] && continue
+              # /lib64 and /lib are symlinks to usr/lib64 and usr/lib in this image (aarch64 keeps its dynamic loader
+              # in /lib); every file lands under usr/. GCC files land at usr/lib/gcc/<triple>/<version>, where Clang
+              # looks for them under a sysroot, wherever the toolset put them.
+              case "$path" in
+                */lib/gcc/*) target="/usr/lib/gcc/${path#*/lib/gcc/}";;
+                /lib64/*|/lib/*) target="/usr${path}";;
+                *) target="$path";;
+              esac
+              mkdir -p "/sysroot$(dirname "$target")"
+              if [ -L "$path" ]; then
+                link="$(readlink "$path")"
+                # Absolute links inside the sysroot become relative so the tree can move.
+                case "$link" in /lib64/*|/lib/*) link="/usr${link}";; esac
+                case "$link" in /*) link="$(realpath -m --relative-to="$(dirname "$target")" "$link")";; esac
+                ln -sfn "$link" "/sysroot$target"
+              else
+                cp -p "$path" "/sysroot$target"
+              fi
+            done < /out/keep.txt
+            # The top-level library links of the distribution, which its linker scripts name through the sysroot.
+            # (No apostrophes in this script: it is one single-quoted argument.)
+            ln -sfn usr/lib64 /sysroot/lib64
+            ln -sfn usr/lib /sysroot/lib
+            chown -R "$(stat -c %u /out)":"$(stat -c %g /out)" /sysroot
+          '
+          du -sh "$RUNNER_TEMP/sysroot"
+          find "$RUNNER_TEMP/sysroot" -path '*/gcc/*' | head -8
+      - name: Link and run a program against the sysroot
+        run: |
+          sudo apt-get install -y -q clang lld > /dev/null
+          cat > "$RUNNER_TEMP/hello.c" <<'EOF'
+          #include <stdio.h>
+          #include <pthread.h>
+          #include <math.h>
+          static void *work(void *arg) { return arg; }
+          int main(void) {
+            pthread_t thread;
+            pthread_create(&thread, 0, work, 0);
+            pthread_join(thread, 0);
+            printf("sysroot ok %.1f\n", sqrt(4.0));
+            return 0;
+          }
+          EOF
+          clang --target="$TARGET" --sysroot="$RUNNER_TEMP/sysroot" -fuse-ld=lld -O2 \
+            "$RUNNER_TEMP/hello.c" -o "$RUNNER_TEMP/out/hello" -lpthread -lm
+          docker run --rm -v "$RUNNER_TEMP/out:/out" "$IMAGE_DIGEST" /out/hello
+      - name: Archive and describe the sysroot
+        run: |
+          name="c-sysroot-glibc-2.28-$TARGET"
+          tar --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner --format=gnu \
+            -C "$RUNNER_TEMP/sysroot" -cf "$RUNNER_TEMP/$name.tar" .
+          gzip -n -9 "$RUNNER_TEMP/$name.tar"
+          archive="$RUNNER_TEMP/$name.tar.gz"
+          digest="$(sha256sum "$archive" | cut -d ' ' -f1)"
+          ( cd "$RUNNER_TEMP/sysroot" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum ) \
+            | sed 's|  \./|\t|' > "$RUNNER_TEMP/$name.files.tsv"
+          ( cd "$RUNNER_TEMP/sysroot" && find . -type l -print0 | LC_ALL=C sort -z | xargs -0 -I{} sh -c 'printf "%s\t%s\n" "${1#./}" "$(readlink "$1")"' _ {} ) \
+            > "$RUNNER_TEMP/$name.links.tsv"
+          jq -n --arg target "$TARGET" --arg image "$IMAGE_DIGEST" --arg archive "sha256:$digest" \
+            --rawfile packages "$RUNNER_TEMP/out/packages.tsv" --rawfile os "$RUNNER_TEMP/out/os-release" \
+            '{schema: "incan.c-sysroot/1", target: $target, glibc: "2.28", image: $image, archive: $archive,
+              os: $os, packages: ($packages | split("\n") | map(select(length > 0) | split("\t") | {name: .[0], version: .[1], arch: .[2]}))}' \
+            > "$RUNNER_TEMP/$name.json"
+          cat "$RUNNER_TEMP/$name.json"
+          echo "files $(wc -l < "$RUNNER_TEMP/$name.files.tsv"), links $(wc -l < "$RUNNER_TEMP/$name.links.tsv"), archive $(du -h "$archive" | cut -f1)"
+          echo "NAME=$name" >> "$GITHUB_ENV"
+          echo "DIGEST=$digest" >> "$GITHUB_ENV"
+      - name: Keep the sysroot as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.NAME }}
+          path: |
+            ${{ runner.temp }}/${{ env.NAME }}.tar.gz
+            ${{ runner.temp }}/${{ env.NAME }}.json
+            ${{ runner.temp }}/${{ env.NAME }}.files.tsv
+            ${{ runner.temp }}/${{ env.NAME }}.links.tsv
+          retention-days: 30
+      - name: Install oras
+        uses: oras-project/setup-oras@v1
+      - name: Push to the registry
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd "$RUNNER_TEMP"
+          printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
+          oras push "ghcr.io/encero-systems/incan.pub/toolchain/c-sysroot:glibc-2.28-$TARGET-${DIGEST:0:12}" \
+            --artifact-type application/vnd.incan.c-sysroot.v1 \
+            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
+            --annotation "dev.incan.c-sysroot.target=$TARGET" \
+            --annotation "dev.incan.c-sysroot.glibc=2.28" \
+            --annotation "dev.incan.c-sysroot.image=$IMAGE_DIGEST" \
+            --annotation "dev.incan.c-sysroot.commit=$GITHUB_SHA" \
+            "$NAME.tar.gz:application/vnd.incan.c-sysroot.v1.tar+gzip" \
+            "$NAME.json:application/vnd.incan.c-sysroot.manifest.v1+json" \
+            "$NAME.files.tsv:text/tab-separated-values"
