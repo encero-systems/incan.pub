@@ -9,10 +9,10 @@ A record is not a file anyone edits. It is the fold of the events published for 
 | event | meaning | admission |
 |---|---|---|
 | `publish` | the record exists for one `(name, version)` and names the crates.io source checksum | published once; checksum is the one crates.io publishes for that version |
-| `adopt` | the version is adopted as a Loaf: its Rust facet, features, dependencies, provenance, and the digests of its manifest and source Loaf archive; what its manifest says about it (`about`), whether its README and LICENSE are the package's or incan.pub's (`files`), its `documents` (each `role`: `readme`, `license`, `license-notice` for a LICENSE incan.pub wrote, or `changelog`; its `path` in the archive, `digest`, `bytes`, `format` and `origin`), where it was packaged from (`vcs`: the git `commit`, `path` and `dirty` flag `cargo package` recorded, or `null`) and its declared `taxonomy` (`keywords`, `categories`) | once per version, an identical repeat is a no-op; the manifest digest is the digest of the manifest the payload renders; every dependency active under the default features is already adopted; on a published record, the checksum matches; each document's bytes are committed at `content/sha256/<hex>` |
+| `adopt` | the version is adopted as a Loaf: its Rust facet, features, dependencies, provenance, and the digests of its manifest and source Loaf archive; what its manifest says about it (`about`), whether its README and LICENSE are the package's or incan.pub's (`files`), its `documents` (each `role`: `readme`, `license`, `license-notice` for a LICENSE incan.pub wrote, or `changelog`; its `path` in the archive, `digest`, `bytes`, `format` and `origin`), where it was packaged from (`vcs`: the git `commit`, `path` and `dirty` flag `cargo package` recorded, or `null`) and its declared `taxonomy` (`keywords`, `categories`); on a new event, its `revision` and the adoption tool version (`tool`), and on a correction the revision it `supersedes` and the `reason` | once per revision, an identical repeat is a no-op, a different one is refused, and a correction is the next revision; a new event states `[rust] build-script`; the manifest digest is the digest of the manifest the payload renders; every dependency active under the default features is already adopted; on a published record, the checksum matches; each document's bytes are committed at `content/sha256/<hex>` |
 | `fact` | one bound fact record was harvested | binding not yet present, or present with identical `cfg` and `out`; committed `out` bytes match their digests; no key outside the vocabulary below |
-| `attest` | an Oven-baked unit for one binding was proven equivalent to the Cargo-built unit | names an existing binding; carries the asset digest, the RFC 124 unit identity and an attestation reference; sets the binding's status to `attested` |
-| `asset` | a baked unit for one binding is available | names an existing binding, the archive digest, unit identity, builder kind (`publisher`, `registry`, `local`) and attestation |
+| `attest` | two independent recordings of one binding agree on its facts, and Oven's bakes from those facts agree | names an existing binding; carries the asset digest, the RFC 124 unit identity and an attestation reference; sets the binding's status to `attested` |
+| `asset` | a baked unit for one binding is available | names the binding, the archive digest, unit identity, builder kind (`publisher`, `registry`, `local`) and attestation, and on a new event its full `toolchain` (`incan@<commit>`) and the `revision` it serves |
 | `yank` / `unyank` | governance | recorded; `yanked` on the index line |
 | `advisory` | something a consumer of the record should know, in `text` | non-empty `text`; rendered as `# Advisory:` header lines of the record and counted on the index line (`advisories`) |
 
@@ -51,7 +51,7 @@ A consumer applies a record only when its own selection equals the binding exact
 
 ### The vocabulary is closed
 
-A record states only the keys in the table above, and `link` and `tool` are reserved: RFC 119 names them as declared build work, and a proposal that carries either is refused by name until their manifest grammar is fixed. A unit that needs them is refused by the harvest rather than declared short.
+A record states only the keys in the table above. `link` and `tool` state declared build work (RFC 119); a unit whose work cannot be bound completely is refused by the harvest rather than declared short.
 
 The vocabulary grows only with the compiler's `RustFactRecord`, because the rendered record is a manifest the compiler parses; a key the compiler does not read is not a fact it can apply. A key entering the vocabulary must satisfy what the existing keys satisfy:
 
@@ -67,4 +67,4 @@ A record declares work and its inputs; the product of that work is an `asset`. A
 
 ## Status
 
-The index line carries, per binding, `status`: `harvested` until an `attest` event exists for it, then `attested`. A record's truth has three sources, and the registry stores references to them rather than judging it: the harvest evidence (what Cargo observed), the attested asset (Oven reproduced the bytes), and the consumer's cross-check while both paths coexist. A consumer may refuse `harvested` records by policy.
+The index line carries, per binding, `status`: `harvested` until an `attest` event exists for it, then `attested`. The registry stores references to what a record rests on rather than judging its truth: the harvest evidence (what the build script answered under the binding) and the attestation (independent recordings and bakes agree). A consumer may refuse `harvested` records by policy.

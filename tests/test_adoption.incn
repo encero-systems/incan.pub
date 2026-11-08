@@ -12,8 +12,9 @@ from std.json import JsonValue, parse
 from std.tempfile import TemporaryDirectory
 from std.testing import assert_eq, assert_is_err, assert_true
 
-from admission import replay
+from admission import check_recorded_adoption, replay
 from adoption import (
+    ADOPTION_VERSION,
     Adoption,
     Dependency,
     about_from_json,
@@ -24,7 +25,9 @@ from adoption import (
     build_activations,
     description_json,
     loaf_files,
+    loaf_name,
     render_adopted_manifest,
+    revision_keeps_sources,
     required_dependencies,
     shown,
     source_archive,
@@ -32,8 +35,10 @@ from adoption import (
     unpack_crate,
 )
 from canonical import canonical, digest_bytes, digest_text
-from events import append_event, load_events, rewrite_event, string_member
+from events import Event, append_event, load_events, string_member
+from policy import is_reserved_scope, supported_toolchains
 from projection import render_projections
+from registry import first_recorded_form, is_toolchain_identity
 from semver import compare, parse_requirement, parse_version, satisfies
 from tar import TarEntry, read_archive, write_archive
 from target import normalize_target
@@ -312,7 +317,7 @@ def leaf(version: str) -> Adoption:
         rust_name="leaf",
         rust_type="lib",
         edition="2021",
-        build_script=None,
+        build_script=Some(false),
         about=None,
         files=None,
         root="src/lib.rs",
@@ -329,7 +334,7 @@ def top() -> Adoption:
         rust_name="top",
         rust_type="lib",
         edition="2021",
-        build_script=None,
+        build_script=Some(false),
         about=None,
         files=None,
         root="src/lib.rs",
@@ -370,7 +375,7 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     state = replay(events, root).unwrap()
     files = render_projections(state, events).unwrap()
     line = parse(files["index/crates-io/top"].strip()).unwrap()
-    assert_eq(canonical(line.get("rust").unwrap()).unwrap(), "{\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
+    assert_eq(canonical(line.get("rust").unwrap()).unwrap(), "{\"build-script\":false,\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
     assert_eq(canonical(line.get("deps").unwrap()).unwrap(), "[{\"default-features\":true,\"features\":[],\"loaf\":\"crates-io/leaf\",\"name\":\"leaf\",\"optional\":false,\"req\":\"^1.2\"}]")
     assert_eq(line.get("cksum").unwrap().as_str().unwrap(), digest_text("archive top"))
     assert_eq(line.get("name").unwrap().as_str().unwrap(), "crates-io/top")
@@ -389,11 +394,11 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     assert_eq(page.get("name").unwrap().as_str().unwrap(), "crates-io/top")
     first = page.get("versions").unwrap().as_array().unwrap()[0]
     assert_eq(first.get("version").unwrap().as_str().unwrap(), "1.0.0")
-    assert_eq(canonical(first.get("rust").unwrap()).unwrap(), "{\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
+    assert_eq(canonical(first.get("rust").unwrap()).unwrap(), "{\"build-script\":false,\"edition\":\"2021\",\"name\":\"top\",\"type\":\"lib\"}")
     # A version page carries the index line's declarations and where the version came from.
     assert_eq(canonical(first.get("dependencies").unwrap()).unwrap(), canonical(line.get("deps").unwrap()).unwrap())
     assert_eq(canonical(first.get("features").unwrap()).unwrap(), canonical(line.get("features").unwrap()).unwrap())
-    assert_eq(canonical(first.get("upstream").unwrap()).unwrap(), canonical(line.get("adopted").unwrap()).unwrap())
+    assert_eq(string_member(first.get("upstream").unwrap(), "checksum"), string_member(line.get("adopted").unwrap(), "checksum"))
     assert_eq(first.get("archive").unwrap().as_str().unwrap(), line.get("cksum").unwrap().as_str().unwrap())
 
 
@@ -409,7 +414,7 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
         rust_name=original.rust_name,
         rust_type=original.rust_type,
         edition="2018",
-        build_script=None,
+        build_script=Some(false),
         about=None,
         files=None,
         root=original.root,
@@ -417,7 +422,7 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
         dependencies=original.dependencies,
     )
     adopt(root, changed)
-    assert_eq(refusal(root), "events/000002-adopt-crates-io-leaf-1.2.0.json: leaf 1.2.0 is already adopted differently; an adoption is immutable")
+    assert_eq(refusal(root), "events/000002-adopt-crates-io-leaf-1.2.0.json: revision 1 of leaf 1.2.0 is already adopted differently; a revision is immutable, and a correction is a new revision")
     other = TemporaryDirectory.try_new().unwrap()
     other_root = other.path()
     payload = adoption_payload(leaf("1.0.0"), digest_text("not the manifest"), digest_text("archive"))
@@ -425,35 +430,230 @@ def test_an_adoption_is_immutable_and_its_manifest_digest_is_checked() -> None:
     assert_eq(refusal(other_root), "events/000001-adopt-crates-io-leaf-1.0.0.json: `manifest` is not the digest of the manifest this payload renders")
 
 
-def test_a_rewritten_adoption_keeps_its_place_and_time_and_is_admitted_again() -> None:
+def correction(revision: int, edition: str) -> Dict[str, JsonValue]:
+    """The next revision of `leaf 1.2.0`, whose translation came out with another edition."""
+    mut corrected = leaf("1.2.0")
+    corrected.edition = edition
+    mut payload = adoption_payload(
+        corrected, digest_text(render_adopted_manifest(corrected)), digest_text(f"archive leaf {edition}")
+    )
+    payload["revision"] = JsonValue.int(revision)
+    payload["supersedes"] = JsonValue.int(revision - 1)
+    payload["reason"] = JsonValue.string("the edition was read wrong")
+    return payload
+
+
+def without(payload: Dict[str, JsonValue], key: str) -> Dict[str, JsonValue]:
+    mut out: Dict[str, JsonValue] = {}
+    for name in payload.keys():
+        if name != key:
+            out[name] = payload[name]
+    return out
+
+
+def test_a_superseded_revision_finds_the_generated_inputs_of_its_version() -> None:
+    """Facts belong to the version: a revision never changes the package's sources, so they hold across its revisions."""
     directory = TemporaryDirectory.try_new().unwrap()
     root = directory.path()
     adopt(root, leaf("1.2.0"))
-    before = load_events(root).unwrap()[0]
-    corrected = Adoption(
-        package="leaf",
-        version="1.2.0",
-        checksum=digest_text("leaf 1.2.0"),
-        rust_name="leaf",
-        rust_type="lib",
-        edition="2018",
-        build_script=None,
-        about=None,
-        files=None,
-        root="src/lib.rs",
-        features={"default": []},
-        dependencies=[],
-    )
-    payload = adoption_payload(corrected, digest_text(render_adopted_manifest(corrected)), digest_text("archive leaf"))
-    rewrite_event(root, before.label, before.body, payload).unwrap()
+    generated = b"pub const X: u8 = 1;\n"
+    (root / "crates-io" / "leaf" / "1.2.0" / "out").mkdir(parents=true, exist_ok=true).unwrap()
+    (root / "crates-io" / "leaf" / "1.2.0" / "out" / "gen.rs").write_bytes(generated).unwrap()
+    mut fact: Dict[str, JsonValue] = {}
+    fact["fact"] = parse(
+        "{\"toolchain\":\"rustc 1.98.0 (88d9e12ae 2026-08-18)\",\"target\":\"aarch64-apple-darwin\",\"profile\":\"debug\","
+        + "\"features\":[],\"cfg\":[],\"out\":[{\"name\":\"gen.rs\",\"path\":\"out/gen.rs\",\"digest\":\""
+        + digest_bytes(generated)
+        + "\"}]}"
+    ).unwrap()
+    fact["evidence"] = JsonValue.object({"method": JsonValue.string("test")})
+    append_event(root, "fact", "leaf", "1.2.0", "tests", fact).unwrap()
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", correction(2, "2018")).unwrap()
     events = load_events(root).unwrap()
-    assert_eq(len(events), 1)
-    assert_eq(events[0].label, before.label)
-    assert_eq(events[0].at, before.at)
-    assert_true(canonical(events[0].body).unwrap() != canonical(before.body).unwrap())
-    assert_eq(refusal(root), "")
     files = render_projections(replay(events, root).unwrap(), events).unwrap()
+    assert_true(files["crates-io/leaf/1.2.0/loaf.toml"].contains("path = \"out/gen.rs\""))
+    assert_true(files["crates-io/leaf/1.2.0/r1/loaf.toml"].contains("path = \"../out/gen.rs\""))
+
+
+def corrected_refusal(payload: Dict[str, JsonValue]) -> str:
+    """What admission says of `payload` as the event after `leaf 1.2.0`'s first adoption."""
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt(root, leaf("1.2.0"))
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", payload).unwrap()
+    return refusal(root)
+
+
+def test_a_correction_is_the_next_revision_and_every_revision_stays_addressable() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt(root, leaf("1.2.0"))
+    first = load_events(root).unwrap()[0]
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", correction(2, "2018")).unwrap()
+    events = load_events(root).unwrap()
+    assert_eq(canonical(events[0].body).unwrap(), canonical(first.body).unwrap())
+    state = replay(events, root).unwrap()
+    assert_eq(state["leaf\t1.2.0"].revision, 2)
+    files = render_projections(state, events).unwrap()
+    # The highest revision keeps the version's directory, and the one it superseded says why it is one below.
     assert_true(files["crates-io/leaf/1.2.0/loaf.toml"].contains("edition = \"2018\""))
+    assert_true(files["crates-io/leaf/1.2.0/r1/loaf.toml"].contains("edition = \"2021\""))
+    assert_true(files["crates-io/leaf/1.2.0/r1/loaf.toml"].contains("# Superseded by revision 2: the edition was read wrong"))
+    lines = files["index/crates-io/leaf"].strip().split("\n")
+    assert_eq(len(lines), 2)
+    older = parse(lines[0]).unwrap()
+    newer = parse(lines[1]).unwrap()
+    assert_eq(string_member(older, "manifest"), "crates-io/leaf/1.2.0/r1/loaf.toml")
+    assert_eq(string_member(newer, "manifest"), "crates-io/leaf/1.2.0/loaf.toml")
+    assert_eq(canonical(older.get("adopted").unwrap().get("revision").unwrap()).unwrap(), "1")
+    assert_eq(canonical(newer.get("adopted").unwrap().get("revision").unwrap()).unwrap(), "2")
+    assert_eq(string_member(older, "cksum"), digest_text("archive leaf"))
+    assert_eq(string_member(newer, "cksum"), digest_text("archive leaf 2018"))
+
+
+def test_a_single_revision_changes_no_path_and_says_it_is_revision_one() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt(root, leaf("1.2.0"))
+    events = load_events(root).unwrap()
+    files = render_projections(replay(events, root).unwrap(), events).unwrap()
+    assert_true("crates-io/leaf/1.2.0/r1/loaf.toml" not in files)
+    line = parse(files["index/crates-io/leaf"].strip()).unwrap()
+    assert_eq(string_member(line, "manifest"), "crates-io/leaf/1.2.0/loaf.toml")
+    assert_eq(canonical(line.get("adopted").unwrap().get("revision").unwrap()).unwrap(), "1")
+
+
+def test_a_revision_is_immutable_and_revisions_are_contiguous() -> None:
+    assert_eq(corrected_refusal(correction(2, "2018")), "")
+    skipped = correction(3, "2018")
+    assert_true(corrected_refusal(skipped).contains("revision 3 follows revision 1; revisions are contiguous"))
+    # The same revision again is a no-op; another one under its number is refused.
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt(root, leaf("1.2.0"))
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", correction(2, "2018")).unwrap()
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", correction(2, "2018")).unwrap()
+    assert_eq(refusal(root), "")
+    append_event(root, "adopt", "leaf", "1.2.0", "tests", correction(2, "2015")).unwrap()
+    assert_true(refusal(root).contains("a revision is immutable, and a correction is a new revision"))
+
+
+def test_a_correction_names_what_it_supersedes_and_why_and_changes_the_archive() -> None:
+    unnamed = without(correction(2, "2018"), "supersedes")
+    assert_true(corrected_refusal(unnamed).contains("names the revision it supersedes"))
+    mut unexplained = correction(2, "2018")
+    unexplained["reason"] = JsonValue.string("  ")
+    assert_true(corrected_refusal(unexplained).contains("says why in `reason`"))
+    mut same_archive = correction(2, "2018")
+    same_archive["archive"] = JsonValue.string(digest_text("archive leaf"))
+    assert_true(corrected_refusal(same_archive).contains("a correction changes the archive"))
+    no_first_revision = correction(2, "2018")
+    directory = TemporaryDirectory.try_new().unwrap()
+    append_event(directory.path(), "adopt", "leaf", "1.2.0", "tests", no_first_revision).unwrap()
+    assert_true(refusal(directory.path()).contains("revision 2 of a version with no revision 1"))
+
+
+def test_a_revision_keeps_the_packages_sources() -> None:
+    payload = JsonValue.object({"files": JsonValue.object({"license": JsonValue.string("registry"), "readme": JsonValue.string("package")})})
+    source = TarEntry(path="src/lib.rs", executable=false, data=b"pub fn x() {}\n")
+    manifest = TarEntry(path="loaf.toml", executable=false, data=b"a")
+    license = TarEntry(path="LICENSE", executable=false, data=b"a")
+    changed_manifest = TarEntry(path="loaf.toml", executable=false, data=b"b")
+    changed_license = TarEntry(path="LICENSE", executable=false, data=b"b")
+    assert_eq(
+        error_of(revision_keeps_sources([source, manifest, license], [source, changed_manifest, changed_license], payload, payload, "leaf")),
+        "",
+    )
+    changed = TarEntry(path="src/lib.rs", executable=false, data=b"pub fn y() {}\n")
+    assert_eq(
+        error_of(revision_keeps_sources([source, manifest], [changed, manifest], payload, payload, "leaf")),
+        "leaf: a revision may not change the package's `src/lib.rs`",
+    )
+    added = TarEntry(path="src/more.rs", executable=false, data=b"")
+    assert_eq(
+        error_of(revision_keeps_sources([source], [source, added], payload, payload, "leaf")),
+        "leaf: a revision may not add `src/more.rs` to the package's sources",
+    )
+    assert_eq(
+        error_of(revision_keeps_sources([source, manifest], [manifest], payload, payload, "leaf")),
+        "leaf: a revision may not change the package's `src/lib.rs`",
+    )
+
+
+def recorded_adoption_refusal(sequence: int, adoption: Adoption, body: JsonValue) -> str:
+    event = Event(
+        label="events/new", sequence=sequence, kind="adopt", at="now", actor="tests", name="leaf", version="1.2.0", body=body,
+    )
+    return error_of(check_recorded_adoption(event, adoption))
+
+
+def test_a_new_adoption_states_its_revision_tool_and_build_script() -> None:
+    stated = leaf("1.2.0")
+    payload = adoption_payload(stated, "sha256:m", "sha256:a")
+    assert_eq(recorded_adoption_refusal(first_recorded_form(), stated, JsonValue.object(payload)), "")
+    # An event from before the rule stands as it was recorded; after it, the same event is refused.
+    empty = JsonValue.object({})
+    assert_eq(recorded_adoption_refusal(first_recorded_form() - 1, stated, empty), "")
+    assert_eq(recorded_adoption_refusal(first_recorded_form(), stated, empty), "events/new: a new adoption states its `revision`")
+    no_tool = without(adoption_payload(stated, "sha256:m", "sha256:a"), "tool")
+    assert_eq(
+        recorded_adoption_refusal(first_recorded_form(), stated, JsonValue.object(no_tool)),
+        "events/new: a new adoption states the adoption tool version in `tool`",
+    )
+    mut unstated = leaf("1.2.0")
+    unstated.build_script = None
+    assert_eq(
+        recorded_adoption_refusal(first_recorded_form(), unstated, JsonValue.object(payload)),
+        "events/new: a new adoption states `[rust] build-script`",
+    )
+
+
+def test_an_adopted_name_is_lowercase_and_its_provenance_keeps_the_upstream_spelling() -> None:
+    assert_eq(loaf_name("Inflector"), "crates-io/inflector")
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    mut upstream = leaf("0.11.4")
+    upstream.package = "Inflector"
+    upstream.checksum = digest_text("Inflector")
+    manifest = render_adopted_manifest(upstream)
+    assert_true(manifest.contains("name = \"crates-io/inflector\""))
+    payload = adoption_payload(upstream, digest_text(manifest), digest_text("archive"))
+    append_event(root, "adopt", "inflector", "0.11.4", "tests", payload).unwrap()
+    assert_eq(refusal(root), "")
+    events = load_events(root).unwrap()
+    files = render_projections(replay(events, root).unwrap(), events).unwrap()
+    line = parse(files["index/crates-io/inflector"].strip()).unwrap()
+    assert_eq(string_member(line, "name"), "crates-io/inflector")
+    assert_eq(string_member(line.get("adopted").unwrap(), "package"), "Inflector")
+    page = parse(files["catalog/crates-io/inflector.json"]).unwrap()
+    assert_eq(string_member(page.get("upstream").unwrap(), "package"), "Inflector")
+    # A subject with a capital letter is refused, not folded.
+    other = TemporaryDirectory.try_new().unwrap()
+    append_event(other.path(), "adopt", "Inflector", "0.11.4", "tests", payload).unwrap()
+    assert_true(error_of(load_events(other.path())).contains("a package name has no capital letter"))
+
+
+def test_the_policy_is_published_with_the_catalog() -> None:
+    directory = TemporaryDirectory.try_new().unwrap()
+    root = directory.path()
+    adopt(root, leaf("1.2.0"))
+    events = load_events(root).unwrap()
+    files = render_projections(replay(events, root).unwrap(), events).unwrap()
+    policy = parse(files["catalog/policy.json"]).unwrap()
+    assert_eq(string_member(policy, "schema"), "incan.pub/policy/1")
+    assert_true(is_reserved_scope("crates-io"))
+    assert_true(is_reserved_scope("std"))
+    assert_true(not is_reserved_scope("acme"))
+    assert_true(canonical(policy.get("reserved-scopes").unwrap()).unwrap().contains("\"incan\""))
+    assert_true(is_toolchain_identity(supported_toolchains()[0]))
+
+
+def test_the_adoption_version_moves_with_the_bytes_adoption_writes() -> None:
+    """A change this test catches changes what adoption writes: change `ADOPTION_VERSION` with it, then this digest."""
+    adoption = translate(demo_line(), demo_files(demo_manifest())).unwrap()
+    archive = source_archive(render_adopted_manifest(adoption), loaf_files(adoption, demo_files(demo_manifest()))).unwrap()
+    assert_eq(ADOPTION_VERSION, "1")
+    assert_true(digest_bytes(archive) == "sha256:df777a1f9e6981e8be53dda7fcd163c769586d59ae50f6a50fcb5bfa7e05bd1c", digest_bytes(archive))
 
 
 def test_adoption_states_whether_the_package_declares_a_build_script() -> None:

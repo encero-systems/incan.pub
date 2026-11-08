@@ -214,6 +214,7 @@ jobs:
         run: |
           for units in "$RUNNER_TEMP"/units/*/; do
             "$RUNNER_TEMP/tool/incan-pub" push-units "$units" --builder registry --attestation "$ATTESTATION" \
+              --toolchain "incan@$CLOSURE_INCAN" \
               --proposals "$RUNNER_TEMP/proposals" --work "$RUNNER_TEMP/push"
           done
       - name: Upload the asset proposals

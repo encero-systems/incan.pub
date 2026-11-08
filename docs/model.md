@@ -16,7 +16,7 @@ Bound facts accrue over time exactly as assets do — a new toolchain, another t
 
 ## What gets things in
 
-1. **`incan-pub adopt`** adopts crates.io package versions and their dependency closure as Loaves: one `adopt` event per version, the source Loaf archive stored by digest. Adoption happens once per version, on the registry's side.
+1. **`incan-pub adopt`** adopts crates.io package versions and their dependency closure as Loaves: one `adopt` event per revision, the source Loaf archive stored by digest. Adoption happens once per version, on the registry's side, and a faulty one is corrected by its next revision.
 2. **`oven publish`** bakes, signs and uploads a source Loaf; publisher-built assets ride along. (RFC 125, unchanged.)
 3. **A harvest** observes one exact selection once and emits a [harvest proposal](harvest-proposal.md): the bound record and the evidence of its observation. Harvest is observation, not publication.
 4. **Admitting the proposal** (`incan-pub add-fact`) publishes it as a `fact` event on `crates-io/<name>@<version>`. This is declaration, by an identity authorized for the `crates-io` scope.
@@ -27,7 +27,7 @@ Bound facts accrue over time exactly as assets do — a new toolchain, another t
 
 - **Admit.** Authorization for the scope; `(name, version)` published once; each event's identity matches its body and the log has no gaps; for a source Loaf, the manifest describes the archive; for an adopted Loaf, the archive was verified against the crates.io checksum before it was read, the manifest digest is the digest of the manifest the event renders, and every dependency active under the default features is already adopted; records are closed, sorted and bound once; committed generated inputs match their digests. `incan-pub check` is this step.
 - **Project.** Rebuild index lines and rendered records from the events and artifacts. `incan-pub build` is this step; nothing is written twice.
-- **Attest and checkpoint.** In the signed form, sign index files and publish a periodic checkpoint so mirrors carry no trust. In this transport, the commit is the signature and `HEAD` the checkpoint.
+- **Attest and checkpoint.** In the signed form, sign index files and publish a periodic checkpoint so mirrors carry no trust. In this transport, `HEAD` of `index` is the checkpoint, and nothing signs it yet.
 - **Govern.** Yank, advisory and supersession as events; ownership and trusted publishers per scope. The `crates-io` scope is reserved and operated by the toolchain, like the unscoped standard library: a wrong record is wrong bytes for everyone, so only the toolchain's trusted publisher adds facts.
 - **Answer, statically.** Which bindings a record covers, and how firmly, is on the index line; which assets are admissible for a plan is in the asset manifest. A client decides before it downloads.
 

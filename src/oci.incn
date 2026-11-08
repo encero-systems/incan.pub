@@ -60,6 +60,14 @@ pub def version_tag(version: str) -> Result[str, str]:
     return Ok(tag)
 
 
+pub def source_tag(version: str, revision: int) -> Result[str, str]:
+    """The tag of a source Loaf archive: the version's for revision 1, `<version>-r<N>` for a later revision."""
+    tag = version_tag(version)?
+    if revision == 1:
+        return Ok(tag)
+    return version_tag(f"{tag}-r{revision}")
+
+
 pub def package_description(scope: str, name: str) -> str:
     """
     What a package page says about itself (`org.opencontainers.image.description`, at most 512 characters): which

@@ -138,7 +138,7 @@ pub def plan_closure(
     """
     mut versions: Dict[str, list[str]] = {}
     for key in adopted.keys():
-        remember(versions, adopted[key].package, adopted[key].version)
+        remember(versions, adopted[key].package.lower(), adopted[key].version)
     mut known: Dict[str, list[str]] = {}
     for package in versions.keys():
         known[package] = versions[package]
@@ -149,7 +149,7 @@ pub def plan_closure(
     mut queue: list[list[str]] = []
     for target in targets:
         # A target is [package, version, feature...]: its defaults and any features asked of it.
-        queue.append([target[0], target[1], "default"] + target[2:])
+        queue.append([target[0].lower(), target[1], "default"] + target[2:])
     mut position = 0
     while position < len(queue):
         entry = queue[position]
@@ -228,7 +228,7 @@ def dependency_order(planned: Dict[str, Planned], adopted: Dict[str, list[str]])
             listed = ", ".join([key.replace("\t", " ") for key in waiting])
             return Err(f"the closure has a dependency cycle no single adoption can open: [{listed}]")
         for item in ready:
-            remember(done, item.adoption.package, item.adoption.version)
+            remember(done, item.adoption.package.lower(), item.adoption.version)
             out.append(item)
         remaining = waiting
     return Ok(out)

@@ -1,0 +1,40 @@
+"""
+The registry's published policy (RFC 125): the scopes it reserves and the toolchains it supports.
+
+`catalog/policy.json` renders it, so a reader gets it from the checkpoint it pins, and `check` holds it to these lists
+like every other projection. docs/policy.md says what it means. A publish to a reserved scope must be refused from an
+identity not authorized for it; today the only scope events can name is `crates-io`, and `load_event` refuses any other.
+"""
+
+from std.json import JsonValue
+
+from canonical import pretty
+from registry import string_list_json
+
+const POLICY_SCHEMA: str = "incan.pub/policy/1"
+
+
+pub def reserved_scopes() -> list[str]:
+    """The scopes no community publisher can claim, sorted."""
+    return ["c", "crates-io", "encero", "encero-systems", "incan", "oven", "std"]
+
+
+pub def supported_toolchains() -> list[str]:
+    """
+    The toolchains an asset is kept for, as an asset's record names them, sorted. An asset whose toolchain has left this
+    list may be retired; nothing is removed because of age or total size.
+    """
+    return ["incan@0cb030e9c6d9817c620e481854e7d6f6440fd9d6"]
+
+
+pub def is_reserved_scope(scope: str) -> bool:
+    return reserved_scopes().contains(scope)
+
+
+pub def render_policy() -> Result[str, str]:
+    """`catalog/policy.json`."""
+    return Ok(pretty(JsonValue.object({
+        "schema": JsonValue.string(POLICY_SCHEMA),
+        "reserved-scopes": string_list_json(reserved_scopes()),
+        "supported-toolchains": string_list_json(supported_toolchains()),
+    }))? + "\n")
