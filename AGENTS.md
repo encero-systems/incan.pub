@@ -1,10 +1,10 @@
-# Working on incan.pub
+# Working on loaves.pub
 
 This repository is the interim registry of [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md), in the repository-based v0 shape [docs/v0.md](docs/v0.md) defines. `main` holds the tool and the docs; the orphan [`index`](https://github.com/encero-systems/incan.pub/tree/index) branch holds the data a toolchain reads and pins by commit.
 
 ## Rules
 
-1. **The tool is written in Incan.** Not Python, not shell beyond the two CI helpers. A registry whose admission were written in another language would be a claim the language cannot make about itself.
+1. **The tool is written in Incan.** Not Python, not shell beyond the two CI helpers. The site's formatter and browser scripts are the one exception. A registry whose admission were written in another language would be a claim the language cannot make about itself.
 2. **Projections are never edited.** Change the log under `events/`, run `incan-pub build`, commit both. `incan-pub check` refuses a checkout whose events, committed generated inputs or projections disagree, and CI runs it on both branches.
 3. **The fact vocabulary is closed** and mirrors the compiler's `RustFactRecord`; [docs/external-source-record.md](docs/external-source-record.md) states what a key entering it must satisfy. Adding a key here without the compiler reading it publishes a fact no consumer can apply.
 4. **The tool is built with a published Incan release.** `.github/workflows/check.yml` pins the release and each target's bundle by digest. A compiler gap is worked around in place with a comment naming it, and reported to the dev line rather than patched here.
@@ -70,6 +70,23 @@ A package must first be created by a workflow of this repository: it then takes 
 The log is append-only, so an adoption that is wrong because of a bug is corrected by its next revision (RFC 125, "Adoption from crates.io", rule 8): fix the translation, raise `ADOPTION_VERSION` in `src/adoption.incn` when the bytes adoption writes change, then run `incan-pub readopt NAME VERSION ... --reason TEXT --cache <cache> --blobs <blob store>` against a checkout of `index`. Each named version takes a new `adopt` event naming the revision it supersedes and why. A version whose translation comes out the same is right and is refused, and a revision may change only `loaf.toml` and the files adoption adds, so a package's sources never change. A lockfile pinned to the old revision keeps resolving to it. The highest revision keeps the version's directory, and each one it superseded moves to `r<N>/` below it. Its source archive goes to the registry under the tag `<version>-r<N>`. Commit, push and report the new `index` HEAD as for any other change.
 
 Adoptions and assets recorded before event 14157 lack what a new event must state, and the log keeps them as they are: such an adoption is revision 1 with its tool version unrecorded, and absent `build-script` means `false`. An asset among them names only its Rust compiler.
+
+## The web surface
+
+The site is generated, and nothing on it is edited or asks a live service for anything. `site/` holds its design: the templates, the styles and scripts, its fonts and art, and the game. Everything a page says about a package comes from the catalog on `index`. Against a checkout of `index`:
+
+```sh
+(cd site && npm ci --ignore-scripts)
+node site/format-documents.mjs <index> <formatted>      # checks each document against its digest, then formats it
+incan-pub site --root <index> --formatted <formatted> --templates site/templates --checkpoint "$(git -C <index> rev-parse HEAD)" --out <out>
+cp -R site/assets site/arcade <out>/
+(cd <index> && cp -R catalog index crates-io content graphs events <out>/)
+SITE_OUT=<out> npm --prefix site test
+```
+
+The `site` workflow does the same, and publishes the result. `check` on `index` dispatches it after each push there, and a change under `site/` runs it too. Rendering keeps three rules. An upstream value is always escaped, and a link out must be `http` or `https`. Author HTML stays inert and a remote image becomes its alternate text, so reading a package page requests nothing from elsewhere. A page states what the registry records and no more: a missing record is shown as missing, never as zero.
+
+Only `format-documents.mjs` and the browser scripts are JavaScript. What a page says, and where, is in `src/site.incn`.
 
 ## Where the contract lives
 

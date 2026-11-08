@@ -98,6 +98,7 @@ def fold_publish(event: Event) -> Result[Record, str]:
         adopter=event.actor,
         facts={},
         yanked=false,
+        yank_reason="",
         assets=[],
         advisories=[],
         adopt=None,
@@ -179,6 +180,7 @@ def fold_adopt(
             adopter=event.actor,
             facts={},
             yanked=false,
+            yank_reason="",
             assets=[],
             advisories=[],
             adopt=Some(payload),
@@ -404,8 +406,10 @@ def fold_record_event(initial: Record, event: Event, root: Path) -> Result[Recor
         record = admit_asset(record, event.payload("binding"), event.payload("asset"), event.label)?
     elif event.kind == "yank":
         record.yanked = true
+        record.yank_reason = string_member(event.body, "reason")
     elif event.kind == "unyank":
         record.yanked = false
+        record.yank_reason = ""
     elif event.kind == "advisory":
         advisory = event.payload("advisory")
         if len(string_member(advisory, "text").strip()) == 0:

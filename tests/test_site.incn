@@ -1,0 +1,177 @@
+"""
+The web surface: every value an upstream package supplies is escaped, a link out must be `http` or `https`, and the pages
+come from the catalog alone.
+"""
+
+from std.fs import Path
+from std.json import parse
+from std.tempfile import TemporaryDirectory
+from std.testing import assert_eq, assert_is_err, assert_true
+
+from events import read_text, write_text
+from site import activated_dependencies, checked_component, checked_identity, escape, expand, feature_paths, render_site, safe_link
+
+
+def catalog() -> str:
+    return (
+        "{\"schema\":\"incan.pub/catalog/1\",\"log\":{\"events\":7},\"counts\":{\"packages\":1,\"versions\":2,\"facts\":3,\"assets\":4},"
+        + "\"packages\":[{\"name\":\"crates-io/demo-kit\",\"latest\":\"1.1.0\",\"versions\":2,\"description\":\"<script>x</script>\","
+        + "\"license\":\"MIT\",\"build-targets\":[],\"page\":\"catalog/crates-io/demo-kit.json\"}]}"
+    )
+
+
+def version(number: str, repository: str, yanked: str, advisory: str) -> str:
+    return (
+        "{\"version\":\"" + number + "\",\"revision\":2,\"revisions\":[{\"revision\":2,\"reason\":\"the features were wrong\"}],"
+        + "\"yanked\":" + yanked + ",\"yank-reason\":\"it <broke>\",\"adopted\":\"2026-11-07T00:00:00Z\","
+        + "\"advisories\":0,\"advisory-notes\":[" + advisory + "],"
+        + "\"about\":{\"description\":\"<b>a demo</b>\",\"license\":\"MIT\",\"repository\":\"" + repository + "\",\"authors\":[]},"
+        + "\"rust\":{\"name\":\"demo_kit\"},\"archive\":\"sha256:b\",\"registry\":{\"adopter\":\"the maintainers\"},\"manifest\":\"m\","
+        + "\"upstream\":{\"package\":\"Demo\",\"version\":\"" + number + "\",\"checksum\":\"sha256:c\"},\"vcs\":null,"
+        + "\"features\":{\"default\":[\"std\"],\"std\":[\"dep:leaf\"],\"extra\":[]},\"categories\":[\"web\"],\"keywords\":[],"
+        + "\"dependencies\":[{\"loaf\":\"crates-io/leaf\",\"name\":\"leaf\",\"req\":\"^1\",\"optional\":true,\"features\":[]},"
+        + "{\"loaf\":\"crates-io/demo-kit\",\"name\":\"own\",\"req\":\"^1\",\"optional\":false,\"features\":[]}],"
+        + "\"documents\":[{\"role\":\"readme\",\"format\":\"markdown\",\"path\":\"README.md\",\"origin\":\"package\",\"digest\":\"sha256:abc\"}],"
+        + "\"facts\":[],"
+        + "\"assets\":[{\"binding\":{\"target\":\"aarch64-apple-darwin\",\"profile\":\"debug\",\"toolchain\":\"incan@abc\",\"features\":[]},"
+        + "\"builder\":\"registry\",\"unit_identity\":\"sha256:u\",\"archive\":\"sha256:a\",\"attestation\":\"https://example.test/a\"}]}"
+    )
+
+
+def package(repository: str, yanked: str, advisory: str) -> str:
+    return (
+        "{\"name\":\"crates-io/demo-kit\",\"upstream\":{\"registry\":\"crates.io\",\"package\":\"Demo\",\"url\":\"https://crates.io/crates/Demo\"},\"versions\":["
+        + version("1.1.0", repository, yanked, advisory)
+        + ","
+        + version("1.0.0", repository, yanked, advisory)
+        + "]}"
+    )
+
+
+def templates(directory: Path) -> None:
+    write_text(directory / "head.html", "<link href=\"{{root}}assets/site.css\">", "head").unwrap()
+    write_text(directory / "header.html", "<a href=\"{{root}}catalog/\"{{current}}>Catalog</a>", "header").unwrap()
+    write_text(directory / "footer.html", "<a href=\"{{root}}\">{{short}} {{checkpoint}}</a>", "footer").unwrap()
+    write_text(
+        directory / "package.html",
+        "{{head}}{{header}}{{scope}}{{name}}{{key}}{{id}}{{version}}{{versions}}{{description}}{{license}}{{warning}}{{rail}}{{main}}{{metadata}}{{root}}{{footer}}",
+        "package",
+    ).unwrap()
+    write_text(
+        directory / "catalog.html",
+        "{{head}}{{header}}{{seal}}{{packages}}{{categories}}{{licenses}}{{pagination}}{{count}}{{page}}{{checkpoint}}{{root}}{{footer}}",
+        "catalog",
+    ).unwrap()
+    write_text(directory / "home.html", "{{head}}{{header}}{{starters}}{{packages}}{{versions}}{{facts}}{{assets}}{{root}}{{footer}}", "home").unwrap()
+    write_text(directory / "loaf-run.html", "{{head}}{{header}}game{{root}}{{footer}}", "game").unwrap()
+    write_text(directory / "404.html", "{{head}}{{header}}gone{{root}}{{footer}}", "404").unwrap()
+
+
+def rendered(repository: str, yanked: str, advisory: str) -> tuple[str, str, str]:
+    """A one-package site, as its landing page, its older version's page and its catalog page."""
+    work = TemporaryDirectory.try_new().unwrap()
+    root = work.path() / "index"
+    formatted = work.path() / "formatted"
+    out = work.path() / "out"
+    templates(work.path() / "templates")
+    write_text(root / "catalog" / "index.json", catalog(), "catalog").unwrap()
+    write_text(root / "catalog" / "crates-io" / "demo-kit.json", package(repository, yanked, advisory), "page").unwrap()
+    write_text(formatted / "abc.markdown.html", "<p><a href=\"docs/x.md\">x</a> <a href=\"https://example.test/y\">y</a></p>", "readme").unwrap()
+    write_text(formatted / "manifests" / "crates-io" / "demo-kit" / "1.1.0.html", "<pre>manifest</pre>", "manifest").unwrap()
+    write_text(formatted / "manifests" / "crates-io" / "demo-kit" / "1.0.0.html", "<pre>manifest</pre>", "manifest").unwrap()
+    assert_eq(render_site(root, formatted, work.path() / "templates", out, "0123456789abcdef").unwrap(), 2)
+    assert_true((out / "index.html").is_file())
+    assert_true((out / "assets" / "search.json").is_file())
+    assert_true((out / "arcade" / "loaf-run" / "index.html").is_file())
+    assert_true((out / "404.html").is_file())
+    return (
+        read_text(out / "packages" / "crates-io" / "demo-kit" / "index.html", "landing").unwrap(),
+        read_text(out / "packages" / "crates-io" / "demo-kit" / "versions" / "1.0.0" / "index.html", "older").unwrap(),
+        read_text(out / "catalog" / "index.html", "catalog").unwrap(),
+    )
+
+
+def test_everything_an_upstream_supplies_is_escaped() -> None:
+    assert_eq(escape("<a href=\"x\">&'"), "&lt;a href=&quot;x&quot;&gt;&amp;&#39;")
+    pages = rendered("https://example.test/demo", "false", "\"<i>careful</i>\"")
+    landing = pages[0]
+    listing = pages[2]
+    assert_true(landing.contains("&lt;b&gt;a demo&lt;/b&gt;"))
+    assert_true(not landing.contains("<b>a demo"))
+    assert_true(landing.contains("&lt;i&gt;careful&lt;/i&gt;"))
+    assert_true(listing.contains("&lt;script&gt;x&lt;/script&gt;"))
+    assert_true(not listing.contains("<script>x"))
+
+
+def test_a_link_out_must_be_http_or_https() -> None:
+    assert_eq(safe_link("javascript:alert(1)", "x"), "x")
+    assert_eq(safe_link("data:text/html,x", "x"), "x")
+    assert_true(safe_link("https://example.test/?a=\"b", "x").contains("&quot;"))
+    landing = rendered("javascript:alert(1)", "false", "")[0]
+    assert_true(not landing.contains("javascript:"))
+
+
+def test_only_a_plain_component_can_name_an_output_path() -> None:
+    assert_eq(checked_component("1.0.0+build.1").unwrap(), "1.0.0+build.1")
+    assert_is_err(checked_component(".."))
+    assert_is_err(checked_component("a/b"))
+    assert_is_err(checked_component(""))
+    assert_eq(checked_identity("crates-io/serde").unwrap(), "crates-io/serde")
+    assert_is_err(checked_identity("serde"))
+    assert_is_err(checked_identity("a/b/c"))
+
+
+def test_a_value_is_never_expanded_again() -> None:
+    assert_eq(expand("<{{a}}>", {"a": "{{root}}"}).unwrap(), "<{{root}}>")
+    assert_is_err(expand("{{missing}}", {"a": "b"}))
+
+
+def test_defaults_follow_the_whole_feature_graph() -> None:
+    features = parse("{\"default\":[\"std\"],\"std\":[\"alloc\",\"dep:libc\",\"memchr?/std\"],\"alloc\":[\"serde/alloc\"],\"loop\":[\"default\"],\"other\":[\"dep:other\"]}").unwrap()
+    paths = feature_paths(features)
+    assert_eq(paths["alloc"], "default → std → alloc")
+    assert_true(not paths.contains_key("other"))
+    active = activated_dependencies(features, paths)
+    assert_eq(active["libc"], "default → std")
+    assert_eq(active["serde"], "default → std → alloc")
+    assert_true(not active.contains_key("memchr"))
+    assert_true(not active.contains_key("other"))
+
+
+def test_a_package_page_shows_what_rfc_125_asks_for() -> None:
+    pages = rendered("https://example.test/demo", "false", "")
+    landing = pages[0]
+    older = pages[1]
+    # Versions, with a correction's reason; the asset matrix with its builders; dependencies; scope owner and publishers.
+    assert_true(landing.contains("Revision 2"))
+    assert_true(landing.contains("the features were wrong"))
+    assert_true(landing.contains("macOS · Apple silicon"))
+    assert_true(landing.contains("Built by registry"))
+    assert_true(landing.contains("incan@abc"))
+    assert_true(landing.contains("Enabled through default → std"))
+    assert_true(landing.contains("Scope owner"))
+    assert_true(landing.contains("Trusted publishers"))
+    # A key that an Incan namespace can spell, and a link to the package's own reverse edge.
+    assert_true(landing.contains("demo_kit"))
+    assert_true(landing.contains("../../../packages/crates-io/demo-kit/versions/1.1.0/"))
+    assert_true(older.contains("../../../../../packages/crates-io/demo-kit/versions/1.0.0/"))
+    assert_true(older.contains("Viewing an older indexed version"))
+    assert_true(not landing.contains("Viewing an older indexed version"))
+    # A document's relative link resolves against its source; an absolute one stays.
+    assert_true(landing.contains("https://crates.io/crates/Demo/1.1.0"))
+    assert_true(landing.contains("https://example.test/y"))
+
+
+def test_a_yank_and_an_advisory_show_their_text() -> None:
+    landing = rendered("https://example.test/demo", "true", "\"read this first\"")[0]
+    assert_true(landing.contains("This version is yanked"))
+    assert_true(landing.contains("it &lt;broke&gt;"))
+    assert_true(landing.contains("read this first"))
+
+
+def test_the_catalog_lists_every_package_without_a_script() -> None:
+    listing = rendered("https://example.test/demo", "false", "")[2]
+    assert_true(listing.contains("<strong>demo-kit</strong>"))
+    assert_true(listing.contains("../packages/crates-io/demo-kit/"))
+    assert_true(listing.contains("1–1 of 1 items"))
+    assert_true(listing.contains("Page 1 of 1"))

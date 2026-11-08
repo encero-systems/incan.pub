@@ -1,7 +1,7 @@
 """
 Pushing to an OCI registry: blobs by digest and one manifest per tag, over the host's `curl`.
 
-incan.pub stores source Loaf archives and compiled units on the GitHub Container Registry, as packages linked to its
+loaves.pub stores source Loaf archives and compiled units on the GitHub Container Registry, as packages linked to its
 repository. The index stays the authority: the registry only holds bytes under their digests, and every consumer
 verifies what it fetches. This module speaks just enough of the OCI distribution API to put them there: a bearer token
 for the repository, `HEAD` to skip a blob already present, a monolithic upload (`POST`, then `PUT ?digest=`), and a
@@ -74,10 +74,10 @@ pub def package_description(scope: str, name: str) -> str:
     package it is, what its tags hold, and that the index, not the registry, is the authority.
     """
     return (
-        f"{scope}/{name} on incan.pub: the crates.io package {name} adopted as a Loaf. A <version> tag holds its source "
-        + "Loaf archive; a <version>-<12 hex> tag holds the units Oven compiled for one binding. The incan.pub index "
+        f"{scope}/{name} on loaves.pub: the crates.io package {name} adopted as a Loaf. A <version> tag holds its source "
+        + "Loaf archive; a <version>-<12 hex> tag holds the units Oven compiled for one binding. The loaves.pub index "
         + "names every digest; verify what you pull against it. Versions, licenses and units: "
-        + f"{SOURCE_REPOSITORY}/blob/index/{scope}/{name}/README.md"
+        + f"https://loaves.pub/packages/{scope}/{name}/"
     )
 
 

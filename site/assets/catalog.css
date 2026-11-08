@@ -1,0 +1,26 @@
+/* What only this registry's real data needs: catalog filters and pages, and the home page. */
+.catalog-filters{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 14px;margin:14px 0 4px}
+.catalog-filters[hidden]{display:none}
+.catalog-filters label{display:flex;flex-direction:column;gap:3px;font:600 13px/1.35 var(--inc-font-body);color:var(--muted)}
+.catalog-filters select,.catalog-filters button{font:14px/1.4 var(--inc-font-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:6px 9px;max-width:220px}
+.catalog-filters button{cursor:pointer;font-weight:600}
+.catalog-filters button:hover,.catalog-filters button:focus-visible{border-color:var(--ui-teal)}
+.catalog-pagination{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:0 0 30px;font-size:15px}
+.catalog-pagination span{color:var(--muted)}
+.catalog-note{font-size:14px;color:var(--muted);max-width:70ch}
+#empty-state{margin:24px 0}
+#empty-state[hidden]{display:none}
+.home-hero{background:linear-gradient(90deg,#222829 8%,#222829e8 38%,transparent 66%),url('home-hero.jpg') 64% center/cover no-repeat;border-bottom:1px solid #3e4545}
+.home-hero>div{max-width:1000px;min-height:230px;margin:0 auto;padding:30px clamp(20px,4vw,48px);display:flex;flex-direction:column;justify-content:center;box-sizing:content-box}
+.home-hero h1{margin:0;font:400 clamp(34px,4.6vw,60px)/1.08 Square,monospace;letter-spacing:-.02em;color:#daba7f;background:linear-gradient(165deg,#f0dfb3 8%,#dbbc80 43%,#bf9556 72%,#e2c78e);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.home-hero p{margin:14px 0 0;font:18px/1.4 var(--inc-font-body);color:#f0eee7;max-width:32ch}
+.home-search{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:0 0 30px}
+.directory .home-search input{flex:1 1 280px;width:auto;margin:0;padding:12px 14px;font:16px/1.4 var(--inc-font-body);color:var(--ink);background:var(--surface);border:1px solid #94897a;border-radius:4px}
+.home-search .primary{padding:0 22px;border-radius:4px;font:600 15px/1.35 var(--inc-font-body);cursor:pointer}
+.directory main h2{font:400 clamp(23px,2.7vw,32px)/1.15 var(--inc-font-display);margin:26px 0 12px;color:var(--ink)}
+.home-about{margin:38px 0 28px;padding-top:6px;border-top:1px solid var(--line)}
+.home-about p{max-width:70ch}
+.home-counts{display:flex;flex-wrap:wrap;gap:12px 40px;margin:22px 0 0}
+.home-counts dt{font-size:14px;color:var(--muted)}
+.home-counts dd{margin:0;font:400 28px/1.2 Square,monospace;color:var(--ink);font-variant-numeric:tabular-nums}
+@media(max-width:600px){.home-hero{background:linear-gradient(90deg,#222829 22%,#222829cc 62%,#22282940),url('home-hero.jpg') 58% center/cover no-repeat}.home-hero>div{min-height:170px}.home-hero p{background:#222829b8;width:fit-content}}

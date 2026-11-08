@@ -1,0 +1,40 @@
+.secret-row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px}
+.incus-secret{position:relative;display:inline-flex;align-self:center;align-items:flex-end;justify-content:flex-end;flex:0 0 auto;width:var(--peek-width);height:44px;overflow:visible;--peek-width:90px;margin-left:auto}
+.incus-secret button{display:grid;place-items:center;position:relative;width:48px;height:44px;cursor:pointer;background:none;border:0;color:#806a42;padding:0}
+.incus-secret button:focus-visible{outline:2px solid #087675;outline-offset:-3px;border-radius:4px}
+.incus-secret button:after{content:"";position:absolute;bottom:1px;height:1px;width:38px;background:linear-gradient(90deg,transparent,#978461 22%,#978461 78%,transparent)}
+.incus-secret .seal{width:19px;height:19px;opacity:.79;transition:opacity .18s}
+.incus-secret button:hover .seal,.incus-secret button:focus-visible .seal{opacity:1}
+.cameo-pose{display:none;position:absolute;bottom:2px;height:40px;width:42px;object-fit:contain;object-position:bottom;image-rendering:pixelated;pointer-events:none}
+.incus-secret .peek{width:var(--peek-width);height:auto;max-width:none;right:0}
+.incus-secret[data-pose=peek]{z-index:1}
+.incus-secret[data-pose=peek] .peek{pointer-events:auto}
+.incus-secret[data-pose=peek] button:after{width:var(--peek-width);right:0}
+.incus-secret[data-pose] button .seal{opacity:0}
+@media(max-width:660px){
+  .incus-secret{--peek-width:70px;height:78px}
+}
+.incus-secret[data-pose=peek] .peek,.incus-secret[data-pose=doze] .doze{display:block}
+.incus-dozing{pointer-events:none;position:absolute;bottom:1px;width:48px;height:44px;object-fit:contain;object-position:bottom;image-rendering:pixelated}
+.incus-dozing[hidden]{display:none}
+.section-heading:has(.incus-secret){gap:12px}.section-heading>.incus-secret{margin-left:auto}
+@media(prefers-reduced-motion:no-preference){
+.incus-secret[data-pose] .cameo-pose,.incus-dozing:not([hidden]){animation:incus-peek-in .33s cubic-bezier(.2,.7,.25,1) both}
+@keyframes incus-peek-in{from{clip-path:inset(100% 0 0);transform:translateY(8px)}to{clip-path:inset(0);transform:translateY(0)}}
+}
+
+/* Ground the paws on the actual section rule, including at narrow widths. */
+.secret-row{margin-top:10px}
+.secret-row+.directory-rows{margin-top:0}
+.secret-row .incus-secret{align-self:stretch}
+/* Let the knuckles cover the rule; the lowest row of the sprite is antialiased. */
+.secret-row .peek{bottom:calc(var(--peek-width) / -15)}
+.secret-row .incus-secret[data-pose=peek] button:after,.section-heading .incus-secret[data-pose=peek] button:after{display:none}
+.section-heading:has(.incus-secret){position:relative}
+.section-heading .incus-secret[data-pose=peek],.section-heading .incus-secret[data-pose=peek] button{position:static}
+.section-heading .incus-secret[data-pose=peek] .peek{right:auto;bottom:calc(var(--peek-width) / -15)}
+
+/* Keep the original image as a still fallback and as the layout reference. */
+.incus-secret[data-pose=peek] .gaze{display:none}
+.incus-secret[data-gaze=on] img.peek{visibility:hidden}
+.incus-secret[data-gaze=on] canvas.gaze{display:block}

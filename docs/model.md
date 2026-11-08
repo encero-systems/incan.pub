@@ -1,6 +1,6 @@
 # The model: what Incan does to publish, what the registry does to manage
 
-`incan.pub` holds three kinds of publication and the events that change them. This page states the loop from both ends, so that the toolchain and the registry are built against the same shape. It follows [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md); where this interim transport differs from the RFC's signed HTTPS form, the difference is named.
+`loaves.pub` holds three kinds of publication and the events that change them. This page states the loop from both ends, so that the toolchain and the registry are built against the same shape. It follows [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md); where this interim transport differs from the RFC's signed HTTPS form, the difference is named.
 
 ## The things
 
