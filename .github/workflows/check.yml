@@ -40,15 +40,15 @@ jobs:
       - name: Pull the tool of main's key
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" --output "$RUNNER_TEMP/tool" \
-            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow on main publishes it when it passes"; exit 1; }
-          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TRIPLE" --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no loaves-pub binary for tool key $key yet; the check workflow on main publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/loaves-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       - name: Snapshot the crates.io index lines the log names
         working-directory: index
-        run: ../tool/scripts/snapshot-crates-io-index.sh "$RUNNER_TEMP/tool/incan-pub" .crates-io-snapshot
+        run: ../tool/scripts/snapshot-crates-io-index.sh "$RUNNER_TEMP/tool/loaves-pub" .crates-io-snapshot
       - name: Admit the log and compare the projections
         working-directory: index
-        run: '"$RUNNER_TEMP/tool/incan-pub" check --crates-io-index .crates-io-snapshot'
+        run: '"$RUNNER_TEMP/tool/loaves-pub" check --crates-io-index .crates-io-snapshot'
 
   site:
     needs: registry
