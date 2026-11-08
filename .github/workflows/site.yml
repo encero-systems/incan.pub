@@ -1,20 +1,20 @@
 name: site
 
-# Publish the web surface: the pages `incan-pub site` generates from the catalog on `index`, beside the index, records,
-# event log and content they describe. `check` on `index` dispatches this workflow after each push there, and a push
-# here that changes the design runs it too. It pulls the tool for this commit's key (see check.yml) instead of building
-# it, and everything but the last job is independent of who hosts the result.
+# Publish the web surface: the pages `loaves-pub site` generates from the catalog on `index`, beside the index, records,
+# event log and content they describe. `check` on `index` dispatches this workflow after each push there, and `check`
+# on a push here runs it once it has published the tool binary, so a change to the design or the tool reaches the site.
+# It pulls the tool for this commit's key (see check.yml) instead of building it, and everything but the last job is
+# independent of who hosts the result.
 #
 # Rendering runs the formatter's packages over documents every upstream supplies, so the `render` job holds a read-only
 # token that its checkouts do not keep. It hands the site to the `publish` job, which only deploys it.
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows: [check]
+    types: [completed]
     branches: [main]
-    paths:
-      - site/**
-      - .github/workflows/site.yml
 
 permissions:
   contents: read
@@ -28,6 +28,9 @@ env:
 
 jobs:
   render:
+    # `check` runs for pull requests too; only a run for a push to main publishes a binary. Its admission of the log can
+    # fail while `index` lags behind the tool, which withholds nothing, so any finished run will do.
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion != 'cancelled')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -50,9 +53,9 @@ jobs:
       - name: Pull the tool of this commit's key
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" --output "$RUNNER_TEMP/tool" \
-            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
-          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TRIPLE" --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no loaves-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/loaves-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       - name: Install Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -65,7 +68,7 @@ jobs:
         run: node format-documents.mjs "$GITHUB_WORKSPACE/index" "$RUNNER_TEMP/formatted"
       - name: Render the pages
         run: |
-          "$RUNNER_TEMP/tool/incan-pub" site --root index --formatted "$RUNNER_TEMP/formatted" \
+          "$RUNNER_TEMP/tool/loaves-pub" site --root index --formatted "$RUNNER_TEMP/formatted" \
             --templates tool/site/templates --checkpoint "$(git -C index rev-parse HEAD)" --out out
           cp -R tool/site/assets tool/site/arcade out/
           cp -R index/catalog index/index index/crates-io index/content index/graphs index/events out/

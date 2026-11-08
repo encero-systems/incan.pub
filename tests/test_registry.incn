@@ -235,6 +235,41 @@ def test_the_file_name_must_carry_the_event_kind() -> None:
     assert_eq(refusal(root), "events/000001-fact-crates-io-libm-0.2.16.json: kind must be one of publish, adopt, fact, attest, asset, yank, unyank, advisory and match the file name")
 
 
+def raw_publish(schema: str) -> str:
+    return (
+        "{\"schema\": \"" + schema + "\", \"kind\": \"publish\", \"at\": \"t\", \"actor\": \"encero-systems/incan.pub maintainers\", "
+        + "\"subject\": {\"scope\": \"crates-io\", \"name\": \"libm\", \"version\": \"0.2.16\"}, "
+        + "\"source\": {\"registry\": \"https://github.com/rust-lang/crates.io-index\", \"checksum\": \"" + libm_checksum() + "\"}}"
+    )
+
+
+def test_events_written_as_incan_pub_read_as_the_same_records() -> None:
+    directory = scratch()
+    root = directory.path()
+    write_raw_event(root, "000001", "publish", raw_publish("incan.pub/event/1"))
+    add_fact(root, fact_with("release", ["arch_enabled"]))
+    assert_eq(refusal(root), "")
+    events = load_events(root).unwrap()
+    assert_eq(events[0].schema, "incan.pub/event/1")
+    # A new event takes the current label.
+    assert_eq(events[1].schema, "loaves.pub/event/1")
+
+
+def test_an_earlier_label_after_the_current_one_is_refused() -> None:
+    directory = scratch()
+    root = directory.path()
+    publish_libm(root)
+    write_raw_event(root, "000002", "fact", raw_publish("incan.pub/event/1").replace("\"kind\": \"publish\"", "\"kind\": \"fact\""))
+    assert_eq(refusal(root), "events/000002-fact-crates-io-libm-0.2.16.json: written as incan.pub/event/1 after the log's first loaves.pub/event/1 event; a new event takes the current format")
+
+
+def test_an_unknown_label_is_refused() -> None:
+    directory = scratch()
+    root = directory.path()
+    write_raw_event(root, "000001", "publish", raw_publish("other/event/1"))
+    assert_eq(refusal(root), "events/000001-publish-crates-io-libm-0.2.16.json: schema must be loaves.pub/event/1, or incan.pub/event/1 for an event written before the registry was named loaves.pub")
+
+
 def sha(seed: str) -> str:
     return digest_text(seed)
 
@@ -628,7 +663,7 @@ def test_projections_are_rendered_from_the_fold_and_compared_byte_for_byte() -> 
     write_projections(root, committed_projections(root).unwrap(), wanted).unwrap()
     assert_eq(len(stale_projections(committed_projections(root).unwrap(), wanted)), 0)
     manifest = wanted["crates-io/libm/0.2.16/loaf.toml"]
-    assert_true(manifest.startswith("# A note.\n#\n# A second paragraph.\n#\n# Projection of the incan.pub event log"))
+    assert_true(manifest.startswith("# A note.\n#\n# A second paragraph.\n#\n# Projection of the loaves.pub event log"))
     assert_true(manifest.contains("\n[project]\nname = \"libm\"\nversion = \"0.2.16\"\n"))
     assert_true(manifest.contains("\n[source]\nregistry = \"https://github.com/rust-lang/crates.io-index\"\nchecksum = \"" + libm_checksum() + "\"\n"))
     assert_true(manifest.contains("\n[[rust.facts]]\ntoolchain = \"" + toolchain() + "\"\ntarget = \"" + target() + "\"\nprofile = \"debug\"\nfeatures = [\"arch\", \"default\"]\ncfg = [\"arch_enabled\"]\n\n[[rust.facts]]"))

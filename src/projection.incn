@@ -26,12 +26,12 @@ from policy import render_policy
 from registry import Asset, Record, compare_versions, has_key, keys_of, parse_digits, producer_key_order, record_key
 
 
-const CATALOG_SCHEMA: str = "incan.pub/catalog/1"
-const CATALOG_PACKAGE_SCHEMA: str = "incan.pub/catalog-package/1"
+const CATALOG_SCHEMA: str = "loaves.pub/catalog/1"
+const CATALOG_PACKAGE_SCHEMA: str = "loaves.pub/catalog-package/1"
 
 
 pub def manifest_notice() -> str:
-    return "# Projection of the incan.pub event log; regenerate with `incan-pub build`, never edit."
+    return "# Projection of the loaves.pub event log; regenerate with `loaves-pub build`, never edit."
 
 
 @derive(Clone)
@@ -42,6 +42,7 @@ pub class RevisionView:
     pub payload: JsonValue
     pub at: str
     pub directory: str
+    pub adopted_under: str
 
 
 pub def revision_views(record: Record) -> list[RevisionView]:
@@ -57,10 +58,17 @@ pub def revision_views(record: Record) -> list[RevisionView]:
             payload=earlier.payload,
             at=earlier.at,
             directory=f"{directory}/r{earlier.revision}",
+            adopted_under=earlier.adopted_under,
         ))
     match record.adopt:
         Some(payload) =>
-            views.append(RevisionView(revision=record.revision, payload=payload, at=record.adopted_at, directory=directory))
+            views.append(RevisionView(
+                revision=record.revision,
+                payload=payload,
+                at=record.adopted_at,
+                directory=directory,
+                adopted_under=record.adopted_under,
+            ))
         None => pass
     return views
 
@@ -383,7 +391,7 @@ pub def render_package_page(name: str, records: list[Record]) -> str:
     lines.append(
         "Each version's Loaf carries the package's own LICENSE and README, or ones loaves.pub wrote where the package "
         + f"shipped none. Source archives and compiled units are on the GitHub Container Registry as "
-        + f"`ghcr.io/encero-systems/incan.pub/{loaf_name(name)}`; a client verifies them against this index: the archive "
+        + f"`ghcr.io/encero-systems/loaves.pub/{loaf_name(name)}`; a client verifies them against this index: the archive "
         + f"by the `cksum` on its version's line in [index/{loaf_name(name)}](../../{index_path(name)}), the units by "
         + "each version's `assets.json`."
     )

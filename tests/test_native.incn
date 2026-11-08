@@ -16,7 +16,7 @@ from events import string_member
 
 def scratch(name: str) -> str:
     """A fresh directory under the system temporary directory, as a path string."""
-    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/incan-pub-native-" + name
+    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/loaves-pub-native-" + name
     path = Path(location)
     if path.is_dir():
         path.remove_tree().unwrap()

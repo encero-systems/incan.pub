@@ -53,32 +53,52 @@ jobs:
           REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
-          copy_package() {
+          # GHCR answers more than 2,000 requests a minute with `toomanyrequests`, so every call backs off and retries.
+          # Its output goes to stdout; the last attempt's error to stderr.
+          retry() {
+            errors="$(mktemp)"
+            for attempt in 1 2 3 4 5; do
+              if "$@" 2> "$errors"; then rm -f "$errors"; return 0; fi
+              sleep $((attempt * 5))
+            done
+            cat "$errors" >&2
+            rm -f "$errors"
+            return 1
+          }
+          # One tag: a failure names its package and tag and the registry's answer, and the other tags still copy.
+          copy_tag() {
             source="ghcr.io/encero-systems/incan.pub/$1"
             target="ghcr.io/encero-systems/loaves.pub/$1"
-            # A name the index lists whose sources were never pushed has no package.
-            tags="$(oras repo tags "$source" 2> /dev/null)" || { printf 'no package: %s\n' "$1" >&2; return 0; }
-            printf '%s\n' "$tags" | while read -r tag; do
-              [ -n "$tag" ] || continue
-              want="$(oras resolve "$source:$tag")" || exit 1
-              have="$(oras resolve "$target:$tag" 2> /dev/null || true)"
-              if [ "$have" != "$want" ]; then
-                oras cp "$source:$tag" "$target:$tag" > /dev/null || exit 1
-                have="$(oras resolve "$target:$tag")" || exit 1
-              fi
-              [ "$have" = "$want" ] || { printf '::error::%s:%s is %s, not %s\n' "$target" "$tag" "$have" "$want"; exit 1; }
-              printf '%s\t%s\t%s\n' "$1" "$tag" "$want"
-            done
+            want="$(retry oras resolve "$source:$2" 2>&1)" || { printf '::error::%s:%s: resolving the source: %s\n' "$1" "$2" "$want"; return 1; }
+            have="$(oras resolve "$target:$2" 2> /dev/null || true)"
+            if [ "$have" != "$want" ]; then
+              copied="$(retry oras cp "$source:$2" "$target:$2" 2>&1 > /dev/null)" || { printf '::error::%s:%s: copying: %s\n' "$1" "$2" "$copied"; return 1; }
+              have="$(retry oras resolve "$target:$2" 2>&1)" || { printf '::error::%s:%s: resolving the copy: %s\n' "$1" "$2" "$have"; return 1; }
+            fi
+            [ "$have" = "$want" ] || { printf '::error::%s:%s is %s at its loaves.pub path, not %s\n' "$1" "$2" "$have" "$want"; return 1; }
+            printf '%s\t%s\t%s\n' "$1" "$2" "$want" >> "$RUNNER_TEMP/copied-$SHARD.tsv"
           }
-          export -f copy_package
+          copy_package() {
+            # A name the index lists whose sources were never pushed has no package.
+            tags="$(retry oras repo tags "ghcr.io/encero-systems/incan.pub/$1" 2> /dev/null)" || { printf 'no package: %s\n' "$1"; return 0; }
+            status=0
+            while read -r tag; do
+              [ -n "$tag" ] || continue
+              copy_tag "$1" "$tag" || status=1
+            done <<< "$tags"
+            return $status
+          }
+          export -f retry copy_tag copy_package
+          : > "$RUNNER_TEMP/copied-$SHARD.tsv"
           if [ -n "$PACKAGES" ]; then
             printf '%s\n' $PACKAGES
           else
             printf 'toolchain/%s\n' incan incan-pub c-sysroot clang
             ls index/index/crates-io | sed 's#^#crates-io/#'
           fi | sort | awk -v shard="$SHARD" -v shards="$SHARDS" '(NR - 1) % shards == shard' \
-            | xargs -P 8 -I {} bash -c 'copy_package "$1"' _ {} > "$RUNNER_TEMP/copied-$SHARD.tsv"
+            | xargs -P 4 -I {} bash -c 'copy_package "$1"' _ {} || failed=1
           echo "$(wc -l < "$RUNNER_TEMP/copied-$SHARD.tsv") tags of $(cut -f1 "$RUNNER_TEMP/copied-$SHARD.tsv" | sort -u | wc -l) packages are at their loaves.pub paths with their source digests"
+          exit "${failed:-0}"
       - name: Upload the list of copied tags
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

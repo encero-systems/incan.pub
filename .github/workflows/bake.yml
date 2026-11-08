@@ -15,7 +15,7 @@ name: bake
 # mint a provenance attestation.
 #
 # The run proposes; it does not record. It uploads the asset proposals as the `asset-proposals` artifact, and
-# `incan-pub admit-assets` on a checkout of `index` records them after pulling each archive anonymously, so the index
+# `loaves-pub admit-assets` on a checkout of `index` records them after pulling each archive anonymously, so the index
 # stays the authority. Packages this workflow creates take the visibility of this public repository; a package first
 # pushed from anywhere else comes out private.
 #
@@ -58,7 +58,7 @@ env:
   # The compiler whose `oven compile-closure` lists the units it compiled, downloaded from the GHCR package the toolchain
   # workflow pushes (`toolchain/incan:<commit>-<triple>`), by the digest of each target's image, so a tag pushed again
   # cannot change what compiles a unit. The tool itself is the binary the check workflow published for this commit's
-  # tool key (`toolchain/incan-pub:<tool key>-<triple>`; see check.yml). The record-facts workflow reads all three.
+  # tool key (`toolchain/loaves-pub:<tool key>-<triple>`; see check.yml). The record-facts workflow reads all three.
   CLOSURE_INCAN: 5ee13ce39b0955d028781f8941b77212c2c6258c
   CLOSURE_INCAN_LINUX: sha256:56cd927aca5b06a5a2394629e97fe3ecbf955d34b5c9dab57d6f590ca7c069d9
   CLOSURE_INCAN_MACOS: sha256:a2a8dbd1f5002cca11fe2b17cddd21579de145a7f8306916110ef0f7a5966ef6
@@ -90,13 +90,13 @@ jobs:
       - name: Download the tool and the closure compiler
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" \
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TARGET" \
             --output "$RUNNER_TEMP/tool" \
-            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
-          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+            || { echo "::error::no loaves-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/loaves-pub.tar.gz" -C "$RUNNER_TEMP/tool"
           digest="$CLOSURE_INCAN_LINUX"
           [ "$TARGET" = aarch64-apple-darwin ] && digest="$CLOSURE_INCAN_MACOS"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan@$digest" --output "$RUNNER_TEMP/incan"
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/incan@$digest" --output "$RUNNER_TEMP/incan"
           tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
       - name: Install the Rust toolchain the units are compiled with, twice
         # The second root compiles with a second copy at another path that also carries rust-src, so the gate below
@@ -108,7 +108,7 @@ jobs:
       - name: Fetch the shards' source Loaf archives
         run: |
           for shard in $SHARDS; do
-            "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/bake/$shard/lock.json" \
+            "$RUNNER_TEMP/tool/loaves-pub" fetch-sources "tool/bake/$shard/lock.json" \
               --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
           done
       - name: Check out the closure compiler's sources
@@ -148,7 +148,7 @@ jobs:
               continue
             fi
             out="$RUNNER_TEMP/units/$(echo "$shard" | tr '/' '-')"
-            "$RUNNER_TEMP/tool/incan-pub" pack-units "$RUNNER_TEMP/first/closure" --out "$out" --only "$ONLY" \
+            "$RUNNER_TEMP/tool/loaves-pub" pack-units "$RUNNER_TEMP/first/closure" --out "$out" --only "$ONLY" \
               --reproduces "$RUNNER_TEMP/second/closure"
           done
           if [ -s "$RUNNER_TEMP/proposals/refused-shards.tsv" ]; then
@@ -185,10 +185,10 @@ jobs:
       - name: Download the tool
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" \
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TARGET" \
             --output "$RUNNER_TEMP/tool" \
-            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
-          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+            || { echo "::error::no loaves-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/loaves-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       - name: Take the packed units from the compile job
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
@@ -208,12 +208,12 @@ jobs:
           subject-path: ${{ runner.temp }}/attest/*.tar
       - name: Push the units
         env:
-          INCAN_PUB_REGISTRY_USER: ${{ github.actor }}
-          INCAN_PUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LOAVES_PUB_REGISTRY_USER: ${{ github.actor }}
+          LOAVES_PUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ATTESTATION: ${{ steps.attest.outputs.attestation-url }}
         run: |
           for units in "$RUNNER_TEMP"/units/*/; do
-            "$RUNNER_TEMP/tool/incan-pub" push-units "$units" --builder registry --attestation "$ATTESTATION" \
+            "$RUNNER_TEMP/tool/loaves-pub" push-units "$units" --builder registry --attestation "$ATTESTATION" \
               --toolchain "incan@$CLOSURE_INCAN" \
               --proposals "$RUNNER_TEMP/proposals" --work "$RUNNER_TEMP/push"
           done

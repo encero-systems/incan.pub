@@ -382,7 +382,7 @@ def test_an_adopted_version_projects_its_resolution_facts_onto_the_index_line() 
     assert_true(files["crates-io/top/1.0.0/loaf.toml"].contains("\n[rust]\nname = \"top\"\n"))
     # The catalog lists both packages and gives each a page of its adopted versions under its scoped name.
     catalog = parse(files["catalog/index.json"]).unwrap()
-    assert_eq(catalog.get("schema").unwrap().as_str().unwrap(), "incan.pub/catalog/1")
+    assert_eq(catalog.get("schema").unwrap().as_str().unwrap(), "loaves.pub/catalog/1")
     assert_eq(len(catalog.get("packages").unwrap().as_array().unwrap()), 2)
     # It names the last event it reflects, since it cannot name the commit that holds it.
     log = catalog.get("log").unwrap()
@@ -582,7 +582,15 @@ def test_a_revision_keeps_the_packages_sources() -> None:
 
 def recorded_adoption_refusal(sequence: int, adoption: Adoption, body: JsonValue) -> str:
     event = Event(
-        label="events/new", sequence=sequence, kind="adopt", at="now", actor="tests", name="leaf", version="1.2.0", body=body,
+        label="events/new",
+        sequence=sequence,
+        schema="loaves.pub/event/1",
+        kind="adopt",
+        at="now",
+        actor="tests",
+        name="leaf",
+        version="1.2.0",
+        body=body,
     )
     return error_of(check_recorded_adoption(event, adoption))
 
@@ -640,7 +648,7 @@ def test_the_policy_is_published_with_the_catalog() -> None:
     events = load_events(root).unwrap()
     files = render_projections(replay(events, root).unwrap(), events).unwrap()
     policy = parse(files["catalog/policy.json"]).unwrap()
-    assert_eq(string_member(policy, "schema"), "incan.pub/policy/1")
+    assert_eq(string_member(policy, "schema"), "loaves.pub/policy/1")
     assert_true(is_reserved_scope("crates-io"))
     assert_true(is_reserved_scope("std"))
     assert_true(not is_reserved_scope("acme"))
@@ -651,9 +659,12 @@ def test_the_policy_is_published_with_the_catalog() -> None:
 def test_the_adoption_version_moves_with_the_bytes_adoption_writes() -> None:
     """A change this test catches changes what adoption writes: change `ADOPTION_VERSION` with it, then this digest."""
     adoption = translate(demo_line(), demo_files(demo_manifest())).unwrap()
-    archive = source_archive(render_adopted_manifest(adoption), loaf_files(adoption, demo_files(demo_manifest()))).unwrap()
+    archive = source_archive(render_adopted_manifest(adoption), loaf_files(adoption, demo_files(demo_manifest()), "loaves.pub")).unwrap()
     assert_eq(ADOPTION_VERSION, "1")
-    assert_true(digest_bytes(archive) == "sha256:df777a1f9e6981e8be53dda7fcd163c769586d59ae50f6a50fcb5bfa7e05bd1c", digest_bytes(archive))
+    assert_true(digest_bytes(archive) == "sha256:67a30339d437b1bb5ccb832767afaf0c16aac625a9178fe0236d79ff59cfcbdb", digest_bytes(archive))
+    # An adoption recorded while the registry was named incan.pub rebuilds to the archive its digest names.
+    earlier = source_archive(render_adopted_manifest(adoption), loaf_files(adoption, demo_files(demo_manifest()), "incan.pub")).unwrap()
+    assert_true(digest_bytes(earlier) == "sha256:df777a1f9e6981e8be53dda7fcd163c769586d59ae50f6a50fcb5bfa7e05bd1c", digest_bytes(earlier))
 
 
 def test_adoption_states_whether_the_package_declares_a_build_script() -> None:
@@ -688,25 +699,40 @@ def test_an_adoption_made_before_build_script_was_stated_reads_back_unstated() -
     assert_eq(adoption_from_payload(stated_body, "demo 1.0.0").unwrap().build_script, Some(false))
 
 
+def text_of(file: TarEntry) -> str:
+    # dev.8 has no Debug lowering for `unwrap` on a `decode` result.
+    match file.data.decode():
+        Ok(text) => return text
+        Err(_) => return ""
+
+
 def test_every_loaf_carries_a_license_and_a_readme() -> None:
     """The package's own files count; adoption writes a LICENSE or README.md only where the package ships none."""
     plain = translate(demo_line(), demo_files(demo_manifest())).unwrap()
     mut written: list[str] = []
-    for file in loaf_files(plain, demo_files(demo_manifest())):
+    for file in loaf_files(plain, demo_files(demo_manifest()), "loaves.pub"):
         written.append(file.path)
+        if file.path == "LICENSE":
+            assert_true(text_of(file).contains("loaves.pub wrote this file when it adopted the package"))
+        if file.path == "README.md":
+            assert_true(text_of(file).contains("loaves.pub wrote this one when it adopted the package"))
     assert_true(written.contains("LICENSE"))
     assert_true(written.contains("README.md"))
+    # The name is the registry's as the adoption was recorded, so an earlier adoption's files keep theirs.
+    for file in loaf_files(plain, demo_files(demo_manifest()), "incan.pub"):
+        if file.path == "LICENSE":
+            assert_true(text_of(file).contains("incan.pub wrote this file when it adopted the package"))
     licensed_manifest = demo_manifest().replace("name = \"demo\"\nversion", "license = \"MIT OR Apache-2.0\"\nname = \"demo\"\nversion")
     mut shipped = demo_files(licensed_manifest)
     shipped.append(TarEntry(path="LICENSE-MIT", executable=false, data=b"MIT\n"))
     shipped.append(TarEntry(path="README.md", executable=false, data=b"# demo\n"))
     licensed = translate(demo_line(), shipped).unwrap()
-    assert_eq(len(loaf_files(licensed, shipped)), len(shipped))
+    assert_eq(len(loaf_files(licensed, shipped, "loaves.pub")), len(shipped))
     match licensed.about:
         Some(about) => assert_eq(about.license, "MIT OR Apache-2.0")
         None => assert_true(false, "a new adoption records what its manifest says about the package")
     only_license = translate(demo_line(), demo_files(licensed_manifest)).unwrap()
-    for file in loaf_files(only_license, demo_files(licensed_manifest)):
+    for file in loaf_files(only_license, demo_files(licensed_manifest), "loaves.pub"):
         if file.path == "LICENSE":
             match file.data.decode():
                 Ok(text) => assert_true(text.contains("declares the license `MIT OR Apache-2.0`"))
@@ -749,7 +775,7 @@ def test_about_records_authors_and_rust_version_for_the_package_environment() ->
 def test_an_adoption_without_about_keeps_its_files_exactly() -> None:
     mut older = translate(demo_line(), demo_files(demo_manifest())).unwrap()
     older.about = None
-    assert_eq(len(loaf_files(older, demo_files(demo_manifest()))), len(demo_files(demo_manifest())))
+    assert_eq(len(loaf_files(older, demo_files(demo_manifest()), "loaves.pub")), len(demo_files(demo_manifest())))
 
 
 def roles_and_paths(documents: JsonValue) -> str:

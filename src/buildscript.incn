@@ -561,9 +561,9 @@ def native_wrappers(mut environment: Dict[str, str], base: str, selection: Selec
     environment["CXX"] = base + "/bin/c++"
     environment["AR"] = base + "/bin/ar"
     environment[trace_variable()] = base + "/trace"
-    environment["INCAN_PUB_NATIVE_CC"] = selection.cc
-    environment["INCAN_PUB_NATIVE_CXX"] = selection.cxx
-    environment["INCAN_PUB_NATIVE_AR"] = selection.ar
+    environment["LOAVES_PUB_NATIVE_CC"] = selection.cc
+    environment["LOAVES_PUB_NATIVE_CXX"] = selection.cxx
+    environment["LOAVES_PUB_NATIVE_AR"] = selection.ar
     # The explicit compiler finds its headers through SDKROOT; the link record names that sysroot as an owner path.
     environment["SDKROOT"] = canonical_path(selection.sysroot)?
     return Ok(None)

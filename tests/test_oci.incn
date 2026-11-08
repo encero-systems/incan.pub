@@ -17,17 +17,17 @@ def test_a_version_becomes_a_tag_with_plus_mapped_to_underscore() -> None:
 
 
 def test_a_repository_is_the_lowercase_scoped_loaf_under_the_namespace() -> None:
-    registry = Registry(host="ghcr.io", namespace="encero-systems/incan.pub", work="/tmp")
-    assert_eq(repository(registry, "crates-io", "Inflector"), "encero-systems/incan.pub/crates-io/inflector")
+    registry = Registry(host="ghcr.io", namespace="encero-systems/loaves.pub", work="/tmp")
+    assert_eq(repository(registry, "crates-io", "Inflector"), "encero-systems/loaves.pub/crates-io/inflector")
 
 
 def test_a_manifest_names_the_empty_config_its_layers_and_its_source_repository() -> None:
     layer = descriptor("application/vnd.incan.loaf.source.v1.tar", "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 10, {"dev.incan.loaf.archive": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
-    text = canonical(manifest(SOURCE_ARTIFACT, [layer], {"org.opencontainers.image.source": "https://github.com/encero-systems/incan.pub"})).unwrap()
+    text = canonical(manifest(SOURCE_ARTIFACT, [layer], {"org.opencontainers.image.source": "https://github.com/encero-systems/loaves.pub"})).unwrap()
     assert_true(text.contains("\"config\":{\"digest\":\"sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a\",\"mediaType\":\"application/vnd.oci.empty.v1+json\",\"size\":2}"))
     assert_true(text.contains("\"artifactType\":\"application/vnd.incan.loaf.source.v1\""))
     assert_true(text.contains("\"schemaVersion\":2"))
-    assert_true(text.contains("\"org.opencontainers.image.source\":\"https://github.com/encero-systems/incan.pub\""))
+    assert_true(text.contains("\"org.opencontainers.image.source\":\"https://github.com/encero-systems/loaves.pub\""))
 
 
 def test_a_package_describes_itself_within_the_registry_limit() -> None:

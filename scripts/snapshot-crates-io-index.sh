@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
-# Snapshot the crates.io sparse-index files that the log names, for `incan-pub check --crates-io-index`.
+# Snapshot the crates.io sparse-index files that the log names, for `loaves-pub check --crates-io-index`.
 #
 # The tool opens no socket; this is the only network step of a check. It asks the tool which packages the log names
-# (`incan-pub index-urls`), fetches each package's index file from index.crates.io and lays them out as the sparse
+# (`loaves-pub index-urls`), fetches each package's index file from index.crates.io and lays them out as the sparse
 # index does, so the snapshot directory reads like a checkout of the index.
 #
-#   snapshot-crates-io-index.sh <incan-pub binary> <snapshot directory> [--root <index checkout>]
+#   snapshot-crates-io-index.sh <loaves-pub binary> <snapshot directory> [--root <index checkout>]
 set -eu
 tool="$1"
 snapshot="$2"

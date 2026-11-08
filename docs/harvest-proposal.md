@@ -1,6 +1,6 @@
 # Harvest proposal
 
-A harvest proposal is what the release bake emits with `--harvest-dir` (`oven legacy-cargo bake-loafs --envelope release --harvest-dir DIR`, one proposal per registry unit whose build script the compatibility publisher observed, per profile) and what `incan-pub add-fact` admits: one bound fact record for one crates.io package version, observed under one exact selection, with the evidence that observation left behind.
+A harvest proposal is what the release bake emits with `--harvest-dir` (`oven legacy-cargo bake-loafs --envelope release --harvest-dir DIR`, one proposal per registry unit whose build script the compatibility publisher observed, per profile) and what `loaves-pub add-fact` admits: one bound fact record for one crates.io package version, observed under one exact selection, with the evidence that observation left behind.
 
 Harvest is observation. Admitting the proposal is declaration. The two are kept apart so that what Cargo happened to do on one machine never becomes a registry fact without a reviewable step in between.
 

@@ -64,7 +64,7 @@ model Compile:
 
 
 pub def trace_variable() -> str:
-    return "INCAN_PUB_NATIVE_TRACE"
+    return "LOAVES_PUB_NATIVE_TRACE"
 
 
 pub def wrapper_role() -> Option[str]:
@@ -87,9 +87,9 @@ pub def wrapper_role() -> Option[str]:
 
 pub def run_wrapper(role: str) -> Result[int, str]:
     """Run the real tool for `role`; after a successful run, write its trace file."""
-    executable = environment_value("INCAN_PUB_NATIVE_" + role.upper()).unwrap_or("")
+    executable = environment_value("LOAVES_PUB_NATIVE_" + role.upper()).unwrap_or("")
     if len(executable) == 0:
-        return Err(f"no INCAN_PUB_NATIVE_{role.upper()} names the {role} this wrapper stands for")
+        return Err(f"no LOAVES_PUB_NATIVE_{role.upper()} names the {role} this wrapper stands for")
     arguments = argv()[1:]
     trace = environment_value(trace_variable()).unwrap_or("")
     directory = working_directory()?

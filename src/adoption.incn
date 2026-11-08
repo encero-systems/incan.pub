@@ -62,8 +62,8 @@ pub model Adoption:
     pub edition: str
     pub build_script: Option[bool]
     pub about: Option[About]
-    # Where the Loaf's `readme` and `license` come from: `package` (the package's own) or `registry` (written by
-    # incan.pub, a generated README or a LICENSE that states the declared license). None before it was recorded.
+    # Where the Loaf's `readme` and `license` come from: `package` (the package's own) or `registry` (written by the
+    # registry, a generated README or a LICENSE that states the declared license). None before it was recorded.
     pub files: Option[Dict[str, str]]
     pub root: str
     pub features: Dict[str, list[str]]
@@ -834,11 +834,14 @@ pub def about_from_json(body: JsonValue) -> Option[About]:
         None => return None
 
 
-pub def loaf_files(adoption: Adoption, files: list[TarEntry]) -> list[TarEntry]:
+pub def loaf_files(adoption: Adoption, files: list[TarEntry], registry: str) -> list[TarEntry]:
     """
     The files a source Loaf carries besides its manifest: the package's own, unchanged, and, for an adoption that
     recorded what its manifest says about the package, a `LICENSE` and a `README.md` where the package ships none.
     Every Loaf then carries a license and a README; an adoption recorded before that rule renders as it always did.
+
+    The added files say that `registry` wrote them: the registry's name when the adoption was recorded, so an archive
+    rebuilt from an adoption recorded under `incan.pub` keeps the bytes its digest names.
     """
     mut out = files.clone()
     match adoption.about:
@@ -848,9 +851,9 @@ pub def loaf_files(adoption: Adoption, files: list[TarEntry]) -> list[TarEntry]:
             for file in files:
                 paths.append(file.path)
             if not has_license_file(paths, about):
-                out.append(TarEntry(path="LICENSE", executable=false, data=generated_license(adoption, about).encode()))
+                out.append(TarEntry(path="LICENSE", executable=false, data=generated_license(adoption, about, registry).encode()))
             if not has_readme(paths, about):
-                out.append(TarEntry(path="README.md", executable=false, data=generated_readme(adoption, about).encode()))
+                out.append(TarEntry(path="README.md", executable=false, data=generated_readme(adoption, about, registry).encode()))
         None => pass
     return out
 
@@ -907,7 +910,7 @@ def root_file_named(paths: list[str], prefixes: list[str]) -> bool:
 
 pub def loaf_file_sources(about: About, paths: list[str]) -> Dict[str, str]:
     """
-    Whether the Loaf's README and LICENSE are the package's own (`package`) or written by incan.pub (`registry`), by
+    Whether the Loaf's README and LICENSE are the package's own (`package`) or written by the registry (`registry`), by
     the rule `loaf_files` adds them: a reader is told which one it is reading.
     """
     shown_about = shown(about)
@@ -938,7 +941,7 @@ pub model Document:
     """
     A document a source Loaf carries that a reader is shown. `path` is where it sits in the archive, `digest` and
     `bytes` identify its bytes (the index keeps them at `content/sha256/<hex>`), `format` is read from its extension
-    and `origin` says whether the package shipped it (`package`) or incan.pub wrote it (`registry`).
+    and `origin` says whether the package shipped it (`package`) or the registry wrote it (`registry`).
     """
 
     pub role: str
@@ -967,8 +970,8 @@ pub def loaf_documents(entries: list[TarEntry], about: About, sources: Dict[str,
     """
     The documents among a source Loaf's files (`loaf_files`, without `loaf.toml`), chosen by rules a reader can
     repeat. The README is the one the manifest declares, else the first Cargo looks for, else the first other root
-    `README*`; incan.pub's generated one is the registry's. The license texts are every root license file and the
-    declared `license-file`; where incan.pub wrote the LICENSE it is a `license-notice`, a statement of the declared
+    `README*`; a generated one is the registry's. The license texts are every root license file and the
+    declared `license-file`; where the registry wrote the LICENSE it is a `license-notice`, a statement of the declared
     license rather than its text. The changelogs are the root `CHANGELOG*`, `CHANGES*`, `HISTORY*`, `NEWS*` and
     `RELEASES*` files in a text format.
     """
@@ -1143,7 +1146,7 @@ def has_readme(paths: list[str], about: About) -> bool:
     return root_file_named(paths, ["readme"])
 
 
-def generated_license(adoption: Adoption, about: About) -> str:
+def generated_license(adoption: Adoption, about: About, registry: str) -> str:
     """A LICENSE for a package that ships no license file: what its manifest declares, said plainly."""
     mut declared = "declares no license"
     if len(about.license) > 0:
@@ -1154,11 +1157,11 @@ def generated_license(adoption: Adoption, about: About) -> str:
         f"{adoption.package} {adoption.version}, as published on crates.io, carries no license file. Its manifest "
         + declared
         + f". See https://crates.io/crates/{adoption.package}/{adoption.version}.\n\n"
-        + f"incan.pub wrote this file when it adopted the package as the Loaf `{loaf_name(adoption.package)}`.\n"
+        + f"{registry} wrote this file when it adopted the package as the Loaf `{loaf_name(adoption.package)}`.\n"
     )
 
 
-def generated_readme(adoption: Adoption, about: About) -> str:
+def generated_readme(adoption: Adoption, about: About, registry: str) -> str:
     """A README.md for a package that ships none, from what its manifest says about it."""
     mut lines: list[str] = [f"# {adoption.package} {adoption.version}", ""]
     if len(about.description) > 0:
@@ -1176,7 +1179,7 @@ def generated_readme(adoption: Adoption, about: About) -> str:
     if len(about.license) > 0:
         lines.append(f"- License: {about.license}")
     lines.append("")
-    lines.append(f"The package as published on crates.io carries no README. incan.pub wrote this one when it adopted the package as the Loaf `{loaf_name(adoption.package)}`.")
+    lines.append(f"The package as published on crates.io carries no README. {registry} wrote this one when it adopted the package as the Loaf `{loaf_name(adoption.package)}`.")
     return "\n".join(lines) + "\n"
 
 

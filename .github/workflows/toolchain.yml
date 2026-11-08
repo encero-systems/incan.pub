@@ -1,7 +1,7 @@
 name: toolchain
 
 # Build the Incan compiler once per operating system at one commit and push it to the GitHub Container Registry as
-# `ghcr.io/encero-systems/incan.pub/toolchain/incan:<commit>-<target triple>`, so the other workflows download it
+# `ghcr.io/encero-systems/loaves.pub/toolchain/incan:<commit>-<target triple>`, so the other workflows download it
 # instead of building it or keeping its target directory in the Actions cache. No Incan release installs the dev line
 # yet; this goes away when one does. Releases cannot hold these binaries: this repository's releases are immutable once
 # published, and a build-cache binary is not a release.
@@ -91,10 +91,10 @@ jobs:
         run: |
           cd "$RUNNER_TEMP"
           printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
-          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan:$COMMIT-$TRIPLE" \
+          oras push "ghcr.io/encero-systems/loaves.pub/toolchain/incan:$COMMIT-$TRIPLE" \
             --artifact-type application/vnd.incan.toolchain.v1 \
-            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
+            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/loaves.pub" \
             --annotation "dev.incan.toolchain.commit=$COMMIT" \
             --annotation "dev.incan.toolchain.target=$TRIPLE" \
             incan.tar.gz:application/vnd.incan.toolchain.v1.tar+gzip
-          echo "pinned as ghcr.io/encero-systems/incan.pub/toolchain/incan@$(oras manifest fetch --descriptor "ghcr.io/encero-systems/incan.pub/toolchain/incan:$COMMIT-$TRIPLE" | jq -r .digest)"
+          echo "pinned as ghcr.io/encero-systems/loaves.pub/toolchain/incan@$(oras manifest fetch --descriptor "ghcr.io/encero-systems/loaves.pub/toolchain/incan:$COMMIT-$TRIPLE" | jq -r .digest)"

@@ -27,7 +27,7 @@ def error_of[T](result: Result[T, str]) -> str:
 
 def scratch(name: str) -> str:
     """A fresh directory under the system temporary directory, as a path string."""
-    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/incan-pub-units-" + name
+    location = environment_value("TMPDIR").unwrap_or("/tmp").strip() + "/loaves-pub-units-" + name
     path = Path(location)
     if path.is_dir():
         path.remove_tree().unwrap()
@@ -84,10 +84,10 @@ def add_asset(root: Path, profile: str, unit: str, archive: str) -> None:
         "entry": JsonValue.string(digest_text("entry " + unit)),
         "payload": JsonValue.string(digest_text("payload " + unit)),
         "builder": JsonValue.string("registry"),
-        "attestation": JsonValue.string("https://github.com/encero-systems/incan.pub/attestations/1"),
+        "attestation": JsonValue.string("https://github.com/encero-systems/loaves.pub/attestations/1"),
         "location": JsonValue.object({
             "registry": JsonValue.string("ghcr.io"),
-            "repository": JsonValue.string("encero-systems/incan.pub/crates-io/leaf"),
+            "repository": JsonValue.string("encero-systems/loaves.pub/crates-io/leaf"),
             "tag": JsonValue.string("1.2.0-000000000000"),
         }),
     })
@@ -111,10 +111,10 @@ def recorded_asset(unit: str, revision: int, toolchain: str) -> JsonValue:
         "entry": JsonValue.string(digest_text("entry " + unit)),
         "payload": JsonValue.string(digest_text("payload " + unit)),
         "builder": JsonValue.string("registry"),
-        "attestation": JsonValue.string("https://github.com/encero-systems/incan.pub/attestations/1"),
+        "attestation": JsonValue.string("https://github.com/encero-systems/loaves.pub/attestations/1"),
         "location": JsonValue.object({
             "registry": JsonValue.string("ghcr.io"),
-            "repository": JsonValue.string("encero-systems/incan.pub/crates-io/leaf"),
+            "repository": JsonValue.string("encero-systems/loaves.pub/crates-io/leaf"),
             "tag": JsonValue.string("1.2.0-000000000000"),
         }),
         "revision": JsonValue.int(revision),

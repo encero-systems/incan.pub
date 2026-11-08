@@ -9,8 +9,28 @@ are projections of a `Record`; nothing here is authored.
 from std.json import JsonValue
 
 
+pub def registry_name() -> str:
+    return "loaves.pub"
+
+
 pub def event_schema() -> str:
+    """The format every new event is written in."""
+    return "loaves.pub/event/1"
+
+
+pub def earlier_event_schema() -> str:
+    """
+    The same format as the registry wrote it while it was named `incan.pub`. Those events keep the label they were
+    written with, since it is hashed into their ids, and they read as the records they always were.
+    """
     return "incan.pub/event/1"
+
+
+pub def name_under(schema: str) -> str:
+    """The registry's name as an event of this format wrote it, which the files an adoption added say too."""
+    if schema == earlier_event_schema():
+        return "incan.pub"
+    return registry_name()
 
 
 pub def crates_io_index() -> str:
@@ -210,6 +230,8 @@ pub class EarlierRevision:
     pub revision: int
     pub payload: JsonValue
     pub at: str
+    # The registry's name when this revision was adopted (`name_under` its event's format), which the files it added say.
+    pub adopted_under: str
 
 
 @derive(Clone)
@@ -236,6 +258,7 @@ pub class Record:
     pub adopt: Option[JsonValue]
     pub publisher: str
     pub adopted_at: str
+    pub adopted_under: str
     pub revision: int
     pub earlier: list[EarlierRevision]
 
