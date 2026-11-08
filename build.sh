@@ -1,28 +1,20 @@
 #!/usr/bin/env sh
-# Test incan-pub, build it with an Incan toolchain and place the binary at target/incan-pub.
+# Test incan-pub, build it with an installed Incan toolchain and place the binary at target/incan-pub, one stable
+# location CI and the index branch's workflow can call without knowing Oven's output layout.
 #
-# `incan build --report json` names the binary it published as the artifact of kind `binary`; this copies it to one
-# stable location so CI and the index branch's workflow can call `target/incan-pub` without knowing the Oven output
-# layout. `INCAN` selects the toolchain binary; the one on PATH when unset.
+# `INCAN` selects the toolchain's `incan`; the one on PATH when unset. INCAN_HOME names its installation and
+# INCAN_STDLIB the standard library sources of that release.
 set -eu
 cd "$(dirname "$0")"
 export INCAN_NO_BANNER=1
 INCAN="${INCAN:-incan}"
-# Own Oven home. The default `~/.incan` is shared with every other toolchain on the machine, and a store entry
-# written by one toolchain is an integrity failure to another ("manifest identity does not match its immutable
-# content"); the same lesson as a shared Cargo target. Override INCAN_HOME to reuse a warm store deliberately.
-export INCAN_HOME="${INCAN_HOME:-$PWD/target/incan-home}"
-mkdir -p "$INCAN_HOME"
-# The bake establishes the project inspection authority for the `rust::` imports in src/host.incn; check, test and
-# build then reuse the sealed Loaf. Any source change needs a fresh bake on this toolchain.
-"$INCAN" lock
-"$INCAN" oven bake --project .
-"$INCAN" test
-mkdir -p target
-"$INCAN" build src/main.incn --report json --report-output target/build-report.json
-binary="$(tr -d '\n' < target/build-report.json | sed -n 's/.*"kind":[[:space:]]*"binary",[[:space:]]*"path":[[:space:]]*"\([^"]*\)".*/\1/p')"
-[ -n "$binary" ] && [ -x "$binary" ] || {
-  printf 'build.sh: the build report names no executable binary artifact (see target/build-report.json)\n' >&2
+for tests in tests/test_*.incn; do
+  "$INCAN" test "$tests"
+done
+"$INCAN" build src/main.incn --profile release
+binary=target/incan/release/bin/incan_pub
+[ -x "$binary" ] || {
+  printf 'build.sh: the build left no executable at %s\n' "$binary" >&2
   exit 1
 }
 # Replace the file rather than write into it: on macOS a running process whose executable is rewritten in place is

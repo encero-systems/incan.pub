@@ -35,7 +35,7 @@ jobs:
         uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
       - name: Download the tool
         run: |
-          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml oven.lock src tests .github/workflows/check.yml | git hash-object --stdin)"
+          key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
           oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-x86_64-unknown-linux-gnu" \
             --output "$RUNNER_TEMP/tool" \
             || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }

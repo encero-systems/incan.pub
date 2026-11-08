@@ -52,7 +52,7 @@ In this transport a commit is the signed event and `HEAD` of `index` is the chec
 ## Using the tool
 
 ```sh
-INCAN=/path/to/incan ./build.sh               # lock, bake, test, build → target/incan-pub
+./build.sh                                    # test, build → target/incan-pub (AGENTS.md: which toolchain)
 git worktree add ../incan.pub-index index     # a checkout of the data branch
 cd ../incan.pub-index
 ../incan.pub/target/incan-pub check           # admit the log, compare the projections
