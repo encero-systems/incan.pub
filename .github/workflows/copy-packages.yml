@@ -1,0 +1,88 @@
+name: copy-packages
+
+# Copy every tagged version of the registry's container packages from `ghcr.io/encero-systems/incan.pub/*` to the same
+# names under `ghcr.io/encero-systems/loaves.pub/*`, the registry's paths now that it is named loaves.pub. A copy keeps
+# the manifest bytes, so every version keeps its digest, and an attestation, which names a digest, holds for the copy as
+# it does for the original. Each copied tag is resolved again at its new path and must name its source's digest. A tag
+# that already names that digest there is skipped, so a later run only catches up.
+#
+# The packages are the adopted ones the index lists and the toolchain packages. A package must first be created by a
+# workflow of this repository to take its public visibility, which is why the copy runs here. The job runs nothing but
+# oras, so it may hold `packages: write`.
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: "Space-separated package names below incan.pub/, such as crates-io/serde; every package when empty"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  copy:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      SHARD: ${{ matrix.shard }}
+      SHARDS: 4
+      PACKAGES: ${{ inputs.packages }}
+    steps:
+      - name: Check out the index's package names
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: index
+          path: index
+          sparse-checkout: index
+          persist-credentials: false
+      - name: Install oras
+        uses: oras-project/setup-oras@22ce207df3b08e061f537244349aac6ae1d214f6 # v1.2.4
+        with:
+          version: 1.3.0
+      - name: Copy this shard's packages and check every digest
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
+          copy_package() {
+            source="ghcr.io/encero-systems/incan.pub/$1"
+            target="ghcr.io/encero-systems/loaves.pub/$1"
+            # A name the index lists whose sources were never pushed has no package.
+            tags="$(oras repo tags "$source" 2> /dev/null)" || { printf 'no package: %s\n' "$1" >&2; return 0; }
+            printf '%s\n' "$tags" | while read -r tag; do
+              [ -n "$tag" ] || continue
+              want="$(oras resolve "$source:$tag")" || exit 1
+              have="$(oras resolve "$target:$tag" 2> /dev/null || true)"
+              if [ "$have" != "$want" ]; then
+                oras cp "$source:$tag" "$target:$tag" > /dev/null || exit 1
+                have="$(oras resolve "$target:$tag")" || exit 1
+              fi
+              [ "$have" = "$want" ] || { printf '::error::%s:%s is %s, not %s\n' "$target" "$tag" "$have" "$want"; exit 1; }
+              printf '%s\t%s\t%s\n' "$1" "$tag" "$want"
+            done
+          }
+          export -f copy_package
+          if [ -n "$PACKAGES" ]; then
+            printf '%s\n' $PACKAGES
+          else
+            printf 'toolchain/%s\n' incan incan-pub c-sysroot clang
+            ls index/index/crates-io | sed 's#^#crates-io/#'
+          fi | sort | awk -v shard="$SHARD" -v shards="$SHARDS" '(NR - 1) % shards == shard' \
+            | xargs -P 8 -I {} bash -c 'copy_package "$1"' _ {} > "$RUNNER_TEMP/copied-$SHARD.tsv"
+          echo "$(wc -l < "$RUNNER_TEMP/copied-$SHARD.tsv") tags of $(cut -f1 "$RUNNER_TEMP/copied-$SHARD.tsv" | sort -u | wc -l) packages are at their loaves.pub paths with their source digests"
+      - name: Upload the list of copied tags
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: copied-${{ matrix.shard }}
+          path: ${{ runner.temp }}/copied-${{ matrix.shard }}.tsv
+          retention-days: 1
