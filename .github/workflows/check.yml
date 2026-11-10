@@ -1,10 +1,10 @@
 name: check
 
 # Test and build the tool on every OS a workflow runs it on, admit the published log with it, and on a push to main
-# publish the binary as `ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:<tool key>-<target triple>`. The bake and
-# publish-sources workflows pull that binary instead of building the tool, which from an empty Oven home spends most
-# of a run compiling the standard library. The tool key is the git hash of the listing of everything the binary is
-# built from: build.sh, loaf.toml, src, tests, and this file, which pins the compiler. A commit that changes
+# publish the binary as `ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:<tool key>-<target triple>`. The
+# bake and publish-sources workflows pull that binary instead of building the tool, which from an empty Oven home
+# spends most of a run compiling the standard library. The tool key is the git hash of the listing of everything the
+# binary is built from: build.sh, loaf.toml, src, tests, and this file, which pins the compiler. A commit that changes
 # none of them, a workflow edit say, keeps the key and so the binary. The binary is published once its own tests pass,
 # before the log is admitted with it: a change to what the tool renders lands on `index` only after the tool that
 # renders it, so the `index` this run checks out can lag behind it, and that lag must not withhold the binary.
@@ -28,7 +28,8 @@ permissions:
 env:
   # The Incan release this tool is built with: the commit its tag names. A job installs the release bundle, pinned by
   # image digest in the matrix below for each target, with the installer of the checkout of this commit, which also
-  # holds the standard library sources the compiler reads.
+  # holds the standard library sources the compiler reads. That installer accepts only the path the release was
+  # published under, `incan.pub/toolchain/incan`, so the pins name it until the tool moves to a later release.
   INCAN_RELEASE: 43161e5eda16e96b0f6b472e6690581db7ac0a93 # 0.6.0-dev.8
 
 jobs:
@@ -66,9 +67,9 @@ jobs:
         if: github.event_name == 'push'
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
-          if oras manifest fetch "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" > /dev/null 2>&1; then
+          if oras manifest fetch "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TRIPLE" > /dev/null 2>&1; then
             echo "present=true" >> "$GITHUB_OUTPUT"
-            echo "incan-pub:$key-$TRIPLE is already published"
+            echo "loaves-pub:$key-$TRIPLE is already published"
           fi
       - name: Check out the index branch
         if: steps.published.outputs.present != 'true'
@@ -91,28 +92,28 @@ jobs:
           CI_DEV8_OUT: ${{ runner.temp }}/incan
           TOOLCHAIN: ${{ matrix.toolchain }}
         run: incan/scripts/ci-dev8.sh --install "$TOOLCHAIN"
-      - name: Test and build incan-pub
+      - name: Test and build loaves-pub
         if: steps.published.outputs.present != 'true'
         working-directory: tool
         run: ./build.sh
       - name: Pack the tool binary
         if: github.event_name == 'push' && steps.published.outputs.present != 'true'
-        run: tar -czf "$RUNNER_TEMP/incan-pub.tar.gz" -C tool/target incan-pub
+        run: tar -czf "$RUNNER_TEMP/loaves-pub.tar.gz" -C tool/target loaves-pub
       - name: Hand the tool binary to the publish job
         if: github.event_name == 'push' && steps.published.outputs.present != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: incan-pub-${{ matrix.triple }}
-          path: ${{ runner.temp }}/incan-pub.tar.gz
+          name: loaves-pub-${{ matrix.triple }}
+          path: ${{ runner.temp }}/loaves-pub.tar.gz
           retention-days: 1
       - name: Snapshot the crates.io index lines the log names
         if: matrix.triple == 'x86_64-unknown-linux-gnu' && steps.published.outputs.present != 'true'
         working-directory: index
-        run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/incan-pub .crates-io-snapshot
+        run: ../tool/scripts/snapshot-crates-io-index.sh ../tool/target/loaves-pub .crates-io-snapshot
       - name: Admit the published log with this tool
         if: matrix.triple == 'x86_64-unknown-linux-gnu' && steps.published.outputs.present != 'true'
         working-directory: index
-        run: ../tool/target/incan-pub check --crates-io-index .crates-io-snapshot
+        run: ../tool/target/loaves-pub check --crates-io-index .crates-io-snapshot
 
   # Runs even when the admission above fails, so that lag never withholds a binary that passed its own tests. A target
   # with no binary to hand over, because it was already published or did not build, pushes nothing.
@@ -140,7 +141,7 @@ jobs:
         continue-on-error: true
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: incan-pub-${{ matrix.triple }}
+          name: loaves-pub-${{ matrix.triple }}
           path: ${{ runner.temp }}
       - name: Install oras
         if: steps.binary.outcome == 'success'
@@ -154,10 +155,10 @@ jobs:
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
           cd "$RUNNER_TEMP"
           printf '%s' "$REGISTRY_TOKEN" | oras login ghcr.io --username "$REGISTRY_USER" --password-stdin
-          oras push "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TRIPLE" \
+          oras push "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TRIPLE" \
             --artifact-type application/vnd.incan.tool.v1 \
-            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/incan.pub" \
+            --annotation "org.opencontainers.image.source=https://github.com/encero-systems/loaves.pub" \
             --annotation "dev.incan.tool.commit=$GITHUB_SHA" \
             --annotation "dev.incan.tool.key=$key" \
             --annotation "dev.incan.toolchain.target=$TRIPLE" \
-            incan-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip
+            loaves-pub.tar.gz:application/vnd.incan.tool.v1.tar+gzip

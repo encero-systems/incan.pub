@@ -5,7 +5,7 @@ loaves.pub stores source Loaf archives and compiled units on the GitHub Containe
 repository. The index stays the authority: the registry only holds bytes under their digests, and every consumer
 verifies what it fetches. This module speaks just enough of the OCI distribution API to put them there: a bearer token
 for the repository, `HEAD` to skip a blob already present, a monolithic upload (`POST`, then `PUT ?digest=`), and a
-manifest `PUT` by tag. Credentials come from `INCAN_PUB_REGISTRY_USER` and `INCAN_PUB_REGISTRY_TOKEN` (in a workflow,
+manifest `PUT` by tag. Credentials come from `LOAVES_PUB_REGISTRY_USER` and `LOAVES_PUB_REGISTRY_TOKEN` (in a workflow,
 the actor and `GITHUB_TOKEN` with `packages: write`) and only ever reach curl through a config file, never its argv.
 """
 
@@ -20,7 +20,7 @@ pub const MANIFEST_TYPE: str = "application/vnd.oci.image.manifest.v1+json"
 pub const EMPTY_TYPE: str = "application/vnd.oci.empty.v1+json"
 pub const SOURCE_ARTIFACT: str = "application/vnd.incan.loaf.source.v1"
 pub const SOURCE_LAYER: str = "application/vnd.incan.loaf.source.v1.tar"
-pub const SOURCE_REPOSITORY: str = "https://github.com/encero-systems/incan.pub"
+pub const SOURCE_REPOSITORY: str = "https://github.com/encero-systems/loaves.pub"
 
 
 @derive(Clone)
@@ -267,10 +267,10 @@ def upload(registry: Registry, repository_name: str, auth: str, path: str) -> Re
 
 def bearer(registry: Registry, repository_name: str) -> Result[str, str]:
     """A token for pulling and pushing one repository, from the registry's token endpoint."""
-    user = environment_value("INCAN_PUB_REGISTRY_USER").unwrap_or("")
-    secret = environment_value("INCAN_PUB_REGISTRY_TOKEN").unwrap_or("")
+    user = environment_value("LOAVES_PUB_REGISTRY_USER").unwrap_or("")
+    secret = environment_value("LOAVES_PUB_REGISTRY_TOKEN").unwrap_or("")
     if len(user) == 0 or len(secret) == 0:
-        return Err("pushing needs INCAN_PUB_REGISTRY_USER and INCAN_PUB_REGISTRY_TOKEN")
+        return Err("pushing needs LOAVES_PUB_REGISTRY_USER and LOAVES_PUB_REGISTRY_TOKEN")
     login = registry.work + "/login.curl"
     write_text(Path(login), "user = " + json_string(user + ":" + secret) + "\n", "login.curl")?
     url = "https://" + registry.host + "/token?service=" + registry.host + "&scope=repository:" + repository_name + ":pull,push"

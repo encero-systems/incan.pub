@@ -1,30 +1,30 @@
 """
-incan-pub: the interim registry's tool. Admission (`check`), projection (`build`) and the publishing verbs.
+loaves-pub: the interim registry's tool. Admission (`check`), projection (`build`) and the publishing verbs.
 
-    incan-pub check [--root DIR] [--crates-io-index DIR]
-    incan-pub build [--root DIR]
-    incan-pub index-urls [--root DIR]
-    incan-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
-    incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
-    incan-pub admit-drop DIR [--actor ACTOR] [--root DIR]
-    incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
+    loaves-pub check [--root DIR] [--crates-io-index DIR]
+    loaves-pub build [--root DIR]
+    loaves-pub index-urls [--root DIR]
+    loaves-pub publish NAME VERSION CHECKSUM [--notes FILE] [--actor ACTOR] [--root DIR]
+    loaves-pub add-fact PROPOSAL.json [--publish] [--notes FILE] [--actor ACTOR] [--root DIR]
+    loaves-pub admit-drop DIR [--actor ACTOR] [--root DIR]
+    loaves-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b]
                      --asset SHA --unit-identity SHA --attestation REF [--owners SHA,...] [--actor ACTOR] [--root DIR]
-    incan-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
-    incan-pub adopt [NAME VERSION]... [--features a,b] [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
-    incan-pub readopt NAME VERSION [NAME VERSION]... --reason TEXT --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
-    incan-pub build-roots NAME VERSION [--features a,b] --cache DIR
-    incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
+    loaves-pub advise NAME VERSION --text TEXT [--actor ACTOR] [--root DIR]
+    loaves-pub adopt [NAME VERSION]... [--features a,b] [--records] --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
+    loaves-pub readopt NAME VERSION [NAME VERSION]... --reason TEXT --cache DIR --blobs DIR [--actor ACTOR] [--root DIR]
+    loaves-pub build-roots NAME VERSION [--features a,b] --cache DIR
+    loaves-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH
                           --cache DIR --blobs DIR --work DIR [--cc PATH --cxx PATH --ar PATH --sysroot DIR]
                           [--incan PATH --build-lock LOCK.json]
                           [--propose] [--actor ACTOR] [--root DIR]
-    incan-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
-    incan-pub push-source NAME VERSION [--revision N] --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
-    incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]
-    incan-pub push-units DIR --builder KIND --attestation REF --toolchain ID --proposals DIR --work DIR [--registry HOST] [--namespace NS]
-    incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
-    incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
-    incan-pub describe-packages --work DIR [--registry HOST] [--namespace NS] [--root DIR]
-    incan-pub site --formatted DIR --templates DIR --checkpoint COMMIT --out DIR [--root DIR]
+    loaves-pub native-convert --trace DIR --libraries static=a,static=b --cc PATH --cxx PATH --sysroot DIR
+    loaves-pub push-source NAME VERSION [--revision N] --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]
+    loaves-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]
+    loaves-pub push-units DIR --builder KIND --attestation REF --toolchain ID --proposals DIR --work DIR [--registry HOST] [--namespace NS]
+    loaves-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]
+    loaves-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]
+    loaves-pub describe-packages --work DIR [--registry HOST] [--namespace NS] [--root DIR]
+    loaves-pub site --formatted DIR --templates DIR --checkpoint COMMIT --out DIR [--root DIR]
 
 `--root` is the checkout of the `index` branch; the current directory when omitted. A refusal prints
 `refused: <rule>` and exits non-zero. `adopt` adopts the named versions (with `--features`, built with those features
@@ -112,7 +112,7 @@ def flags() -> list[str]:
 
 
 def default_actor() -> str:
-    return "encero-systems/incan.pub maintainers"
+    return "encero-systems/loaves.pub maintainers"
 
 
 @derive(Clone)
@@ -149,7 +149,7 @@ class Invocation:
 
 def parse_invocation(arguments: list[str]) -> Result[Invocation, str]:
     if len(arguments) < 2:
-        return Err("usage: incan-pub <check|build|index-urls|publish|add-fact|attest> [arguments]")
+        return Err("usage: loaves-pub <check|build|index-urls|publish|add-fact|attest> [arguments]")
     mut positional: list[str] = []
     mut options: Dict[str, str] = {}
     mut index = 2
@@ -180,7 +180,7 @@ def main() -> Result[None, str]:
                         exit_with(code)
                     return Ok(None)
                 Err(message) =>
-                    println(f"incan-pub native wrapper: {message}")
+                    println(f"loaves-pub native wrapper: {message}")
                     exit_with(1)
                     return Ok(None)
         None => pass
@@ -248,7 +248,7 @@ def check(invocation: Invocation) -> Result[None, str]:
     stale = stale_projections(committed, wanted)
     if len(stale) > 0:
         listed = ", ".join(stale)
-        return Err(f"projections are out of date for [{listed}]; run incan-pub build")
+        return Err(f"projections are out of date for [{listed}]; run loaves-pub build")
     unclaimed = unclaimed_generated_inputs(root, state)? + unclaimed_graphs(root, events)? + unclaimed_content(root, state)?
     if len(unclaimed) > 0:
         listed = ", ".join(unclaimed)
@@ -298,7 +298,7 @@ def build(invocation: Invocation) -> Result[None, str]:
 
 def publish(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 3:
-        return Err("usage: incan-pub publish NAME VERSION CHECKSUM [--notes FILE]")
+        return Err("usage: loaves-pub publish NAME VERSION CHECKSUM [--notes FILE]")
     name = invocation.positional[0]
     version = invocation.positional[1]
     checksum = invocation.positional[2]
@@ -325,7 +325,7 @@ def publish(invocation: Invocation) -> Result[None, str]:
 
 def add_fact(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub add-fact PROPOSAL.json [--publish] [--notes FILE]")
+        return Err("usage: loaves-pub add-fact PROPOSAL.json [--publish] [--notes FILE]")
     mut notes_override: Option[str] = None
     match invocation.option("notes"):
         Some(file) => notes_override = Some(read_text(Path(file), file)?.strip())
@@ -464,7 +464,7 @@ def admit_drop(invocation: Invocation) -> Result[None, str]:
     says nothing about the work it omits. A refusal names the drop and admits none of it.
     """
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub admit-drop DIR")
+        return Err("usage: loaves-pub admit-drop DIR")
     drop = Path(invocation.positional[0])
     proposals = drop_proposals(drop)?
     if len(proposals) == 0:
@@ -537,7 +537,7 @@ def stage_generated_inputs(fact: JsonValue, proposal_dir: Path, out_dir: Path) -
 
 def attest(invocation: Invocation) -> Result[None, str]:
     if len(invocation.positional) != 2:
-        return Err("usage: incan-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b] --asset SHA --unit-identity SHA --attestation REF")
+        return Err("usage: loaves-pub attest NAME VERSION --toolchain T --target TRIPLE --profile P [--features a,b] --asset SHA --unit-identity SHA --attestation REF")
     name = invocation.positional[0]
     version = invocation.positional[1]
     mut features: list[str] = []
@@ -587,7 +587,7 @@ def attest(invocation: Invocation) -> Result[None, str]:
 def advise(invocation: Invocation) -> Result[None, str]:
     """Record something a consumer of a record should know; rendered as a header comment and counted on the index line."""
     if len(invocation.positional) != 2:
-        return Err("usage: incan-pub advise NAME VERSION --text TEXT")
+        return Err("usage: loaves-pub advise NAME VERSION --text TEXT")
     name = invocation.positional[0]
     version = invocation.positional[1]
     text = invocation.require("text")?.strip()
@@ -610,7 +610,7 @@ def adopt(invocation: Invocation) -> Result[None, str]:
     dependency order, folding each before the next so admission checks every one as it lands.
     """
     if len(invocation.positional) % 2 != 0:
-        return Err("usage: incan-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR")
+        return Err("usage: loaves-pub adopt [NAME VERSION]... [--records] --cache DIR --blobs DIR")
     cache = invocation.require("cache")?
     blobs = invocation.require("blobs")?
     root = invocation.root()
@@ -659,7 +659,7 @@ def readopt(invocation: Invocation) -> Result[None, str]:
     comes out the same is right, so it is refused. A revision may change only `loaf.toml` and the files adoption adds.
     """
     if len(invocation.positional) == 0 or len(invocation.positional) % 2 != 0:
-        return Err("usage: incan-pub readopt NAME VERSION [NAME VERSION]... --reason TEXT --cache DIR --blobs DIR")
+        return Err("usage: loaves-pub readopt NAME VERSION [NAME VERSION]... --reason TEXT --cache DIR --blobs DIR")
     reason = invocation.require("reason")?.strip()
     if len(reason) == 0:
         return Err("a correction says why in --reason")
@@ -793,7 +793,7 @@ def print_build_roots(invocation: Invocation) -> Result[None, str]:
     `{"deps": [...]}`: what `record-fact --build-lock` expects a lock of.
     """
     if len(invocation.positional) != 2:
-        return Err("usage: incan-pub build-roots NAME VERSION [--features a,b] --cache DIR")
+        return Err("usage: loaves-pub build-roots NAME VERSION [--features a,b] --cache DIR")
     name = invocation.positional[0]
     version = invocation.positional[1]
     mut features: list[str] = []
@@ -814,7 +814,7 @@ def record_fact(invocation: Invocation) -> Result[None, str]:
     it is committed with the fact. A version without a build script needs no fact and is reported as such.
     """
     if len(invocation.positional) != 2:
-        return Err("usage: incan-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH --cache DIR --blobs DIR --work DIR")
+        return Err("usage: loaves-pub record-fact NAME VERSION --features a,b --profile P --domain D --graph FILE --rustc PATH --cache DIR --blobs DIR --work DIR")
     name = invocation.positional[0]
     version = invocation.positional[1]
     root = invocation.root()
@@ -940,7 +940,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     never carry other bytes than the adoption.
     """
     if len(invocation.positional) != 2:
-        return Err("usage: incan-pub push-source NAME VERSION [--revision N] --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
+        return Err("usage: loaves-pub push-source NAME VERSION [--revision N] --cache DIR --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
     name = invocation.positional[0]
     version = invocation.positional[1]
     root = invocation.root()
@@ -949,6 +949,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     if key not in state:
         return Err(f"{name} {version} is not adopted")
     mut payload = JsonValue.null()
+    mut adopted_under = ""
     mut revision = state[key].revision
     match invocation.option("revision"):
         Some(text) =>
@@ -959,6 +960,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     for view in revision_views(state[key]):
         if view.revision == revision:
             payload = view.payload
+            adopted_under = view.adopted_under
     if payload.is_null():
         return Err(f"{name} {version} has no revision {revision}")
     digest = string_member(payload, "archive")
@@ -966,7 +968,7 @@ def push_source(invocation: Invocation) -> Result[None, str]:
     archive = blobs + "/sha256/" + digest[7:] + ".tar"
     if not Path(archive).is_file():
         cache = invocation.require("cache")?
-        made = reproduce(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?, payload)?
+        made = reproduce(cache, blobs, find_line(crates_io_lines(cache, name)?, name, version)?, payload, adopted_under)?
         if made != digest:
             return Err(f"{name} {version}: the crate and the adoption's own manifest give {made}, not the archive {digest} the index names")
     registry = registry_of(invocation)?
@@ -997,7 +999,7 @@ def pack_units(invocation: Invocation) -> Result[None, str]:
     identity, entry and archive bytes: a unit that depends on where it was compiled is refused before it is published.
     """
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]")
+        return Err("usage: loaves-pub pack-units CLOSURE_DIR --out DIR [--only NAME@VERSION,...] [--reproduces CLOSURE_DIR]")
     out = make_directory(invocation.require("out")?)?
     mut only: list[str] = []
     for item in invocation.option("only").unwrap_or("").split(","):
@@ -1021,7 +1023,7 @@ def pack_units(invocation: Invocation) -> Result[None, str]:
 def push_units_verb(invocation: Invocation) -> Result[None, str]:
     """Push packed units, one tag per binding, and write the asset proposals `admit-assets` records."""
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub push-units DIR --builder KIND --attestation REF --toolchain ID --proposals DIR --work DIR [--registry HOST] [--namespace NS]")
+        return Err("usage: loaves-pub push-units DIR --builder KIND --attestation REF --toolchain ID --proposals DIR --work DIR [--registry HOST] [--namespace NS]")
     builder = invocation.require("builder")?
     if not builders().contains(builder):
         return Err("--builder must be publisher, registry or local")
@@ -1045,7 +1047,7 @@ def admit_assets(invocation: Invocation) -> Result[None, str]:
     is private, missing or other bytes.
     """
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]")
+        return Err("usage: loaves-pub admit-assets DIR --work DIR [--actor ACTOR] [--root DIR]")
     directory = invocation.positional[0]
     root = invocation.root()
     mut state = replay(load_events(root)?, root)?
@@ -1137,7 +1139,7 @@ def fetch_sources(invocation: Invocation) -> Result[None, str]:
     credentials and checked against the digest the lock gives it; an archive already there is kept.
     """
     if len(invocation.positional) != 1:
-        return Err("usage: incan-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
+        return Err("usage: loaves-pub fetch-sources LOCK.json --blobs DIR --work DIR [--registry HOST] [--namespace NS]")
     lock = parse_event(read_text(Path(invocation.positional[0]), invocation.positional[0])?, "lock")?
     blobs = canonical_path(make_directory(invocation.require("blobs")? + "/sha256")?)?
     registry = registry_of(invocation)?
@@ -1164,7 +1166,7 @@ def registry_of(invocation: Invocation) -> Result[Registry, str]:
     """
     return Ok(Registry(
         host=invocation.option("registry").unwrap_or("ghcr.io"),
-        namespace=invocation.option("namespace").unwrap_or("encero-systems/incan.pub"),
+        namespace=invocation.option("namespace").unwrap_or("encero-systems/loaves.pub"),
         work=canonical_path(make_directory(invocation.require("work")?)?)?,
     ))
 

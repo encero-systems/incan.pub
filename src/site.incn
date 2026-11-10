@@ -1,7 +1,7 @@
 """
 The web surface (RFC 125, "Documents, references and the web surface"): static pages generated from the catalog.
 
-`incan-pub site` reads a checkout of `index` and writes a page for every package and indexed version, the paginated
+`loaves-pub site` reads a checkout of `index` and writes a page for every package and indexed version, the paginated
 catalog, its search index and the home page. `site/format-documents.mjs` formats each document's Markdown and code
 beforehand, and the pages embed what it wrote. Nothing on a page needs a live service. Everything a package says about
 itself comes from its upstream, so every value is escaped and a link out must be `http` or `https`.
@@ -429,7 +429,7 @@ def provenance_section(site: Site, package: JsonValue, version: JsonValue) -> Re
     pin = site.checkpoint
     mut body = "<dl class=\"provenance\"><dt>Index checkpoint</dt><dd>" + safe_link(SOURCE_REPOSITORY + "/tree/" + pin, pin) + "</dd>"
     body = body + "<dt>Source Loaf</dt><dd><code>" + escape(string_member(version, "archive")) + "</code></dd>"
-    body = body + "<dt>Stored at</dt><dd><code>ghcr.io/encero-systems/incan.pub/" + escape(name) + "</code></dd>"
+    body = body + "<dt>Stored at</dt><dd><code>ghcr.io/encero-systems/loaves.pub/" + escape(name) + "</code></dd>"
     body = body + "<dt>Adopted from</dt><dd>crates.io, as <code>" + escape(string_member(upstream, "package")) + "</code> " + escape(string_member(upstream, "version")) + "</dd>"
     body = body + "<dt>Upstream checksum</dt><dd><code>" + escape(string_member(upstream, "checksum")) + "</code></dd>"
     body = body + "<dt>Adopted by</dt><dd>" + escape(string_member(member(version, "registry"), "adopter")) + "</dd>"

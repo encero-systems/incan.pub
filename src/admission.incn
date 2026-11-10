@@ -38,6 +38,7 @@ from registry import (
     first_recorded_form,
     has_key,
     is_toolchain_identity,
+    name_under,
     profiles,
     record_key,
     sorted_unique,
@@ -104,6 +105,7 @@ def fold_publish(event: Event) -> Result[Record, str]:
         adopt=None,
         publisher="",
         adopted_at="",
+        adopted_under="",
         revision=1,
         earlier=[],
     ))
@@ -186,6 +188,7 @@ def fold_adopt(
             adopt=Some(payload),
             publisher=event.actor,
             adopted_at=event.at,
+            adopted_under=name_under(event.schema),
             revision=1,
             earlier=[],
         ))
@@ -200,6 +203,7 @@ def fold_adopt(
     record.adopt = Some(payload)
     record.publisher = event.actor
     record.adopted_at = event.at
+    record.adopted_under = name_under(event.schema)
     return Ok(record)
 
 
@@ -231,11 +235,14 @@ def fold_revision(
         return Err(f"{label}: a correction says why in `reason`")
     if string_member(payload, "archive") == string_member(current, "archive"):
         return Err(f"{label}: a correction changes the archive; this one is revision {record.revision}'s")
-    record.earlier.append(EarlierRevision(revision=record.revision, payload=current, at=record.adopted_at))
+    record.earlier.append(EarlierRevision(
+        revision=record.revision, payload=current, at=record.adopted_at, adopted_under=record.adopted_under
+    ))
     record.adopt = Some(payload)
     record.revision = revision
     record.publisher = event.actor
     record.adopted_at = event.at
+    record.adopted_under = name_under(event.schema)
     return Ok(record)
 
 

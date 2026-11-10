@@ -5,6 +5,10 @@ The event log: reading it in sequence and appending to it.
 `schema`, `kind`, `at`, `actor`, `subject` and an `id` equal to the digest of its canonical body; a file whose id does
 not match its body is refused before any rule is applied to it. In this transport the commit is the signature, so
 `signature` is written as `null` and reserved for the signed form.
+
+New events are written as `loaves.pub/event/1`. The events written while the registry was named `incan.pub` keep
+`incan.pub/event/1`, and read as the same format; once the log has an event of the current label, an earlier label is
+refused after it.
 """
 
 from std.datetime import DateTime
@@ -12,7 +16,7 @@ from std.fs import Path
 from std.json import JsonValue, parse
 
 from canonical import canonical, digest_text, pretty
-from registry import event_kinds, event_schema, keys_of, parse_digits, scope
+from registry import earlier_event_schema, event_kinds, event_schema, keys_of, parse_digits, scope
 
 
 @derive(Clone)
@@ -21,6 +25,7 @@ pub class Event:
 
     pub label: str
     pub sequence: int
+    pub schema: str
     pub kind: str
     pub at: str
     pub actor: str
@@ -73,8 +78,14 @@ pub def load_events_after(root: Path, count: int) -> Result[list[Event], str]:
     """
     mut events: list[Event] = []
     mut expected = count + 1
+    mut current = false
     for name in event_files(root)?[count:]:
-        events.append(load_event(root, name, expected)?)
+        event = load_event(root, name, expected)?
+        if event.schema == event_schema():
+            current = true
+        elif current:
+            return Err(f"{event.label}: written as {event.schema} after the log's first {event_schema()} event; a new event takes the current format")
+        events.append(event)
         expected += 1
     return Ok(events)
 
@@ -89,8 +100,9 @@ def load_event(root: Path, name: str, expected: int) -> Result[Event, str]:
     if not event_kinds().contains(event_kind) or event_kind != kind:
         kinds = ", ".join(event_kinds())
         return Err(f"{label}: kind must be one of {kinds} and match the file name")
-    if string_member(event, "schema") != event_schema():
-        return Err(f"{label}: schema must be {event_schema()}")
+    schema = string_member(event, "schema")
+    if schema != event_schema() and schema != earlier_event_schema():
+        return Err(f"{label}: schema must be {event_schema()}, or {earlier_event_schema()} for an event written before the registry was named loaves.pub")
     if string_member(event, "id") != event_id(event)?:
         return Err(f"{label}: id does not match the canonical event body")
     subject = member(event, "subject")
@@ -107,6 +119,7 @@ def load_event(root: Path, name: str, expected: int) -> Result[Event, str]:
     return Ok(Event(
         label=label,
         sequence=expected,
+        schema=schema,
         kind=event_kind,
         at=at,
         actor=actor,

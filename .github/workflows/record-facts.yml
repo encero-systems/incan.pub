@@ -6,8 +6,8 @@ name: record-facts
 # domain (target or host), the graph file the binding's feature set came from, and, for a script with build
 # dependencies, the build lock that resolves them for this host.
 #
-# `incan-pub record-fact --propose` compiles and runs each build script in the platform's sandbox (bubblewrap on Linux,
-# sandbox-exec on macOS) and leaves a proposal; the run uploads them as the `fact-proposals` artifact, and `incan-pub
+# `loaves-pub record-fact --propose` compiles and runs each build script in the platform's sandbox (bubblewrap on Linux,
+# sandbox-exec on macOS) and leaves a proposal; the run uploads them as the `fact-proposals` artifact, and `loaves-pub
 # add-fact` on a checkout of `index` admits them, so the index stays the authority. A binding the recorder refuses is
 # listed in `refused.tsv` in the same artifact and does not fail the others.
 #
@@ -56,9 +56,9 @@ jobs:
       - name: Download the tool
         run: |
           key="$(git -C tool ls-tree HEAD -- build.sh loaf.toml src tests .github/workflows/check.yml | git hash-object --stdin)"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan-pub:$key-$TARGET" --output "$RUNNER_TEMP/tool" \
-            || { echo "::error::no incan-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
-          tar -xzf "$RUNNER_TEMP/tool/incan-pub.tar.gz" -C "$RUNNER_TEMP/tool"
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/loaves-pub:$key-$TARGET" --output "$RUNNER_TEMP/tool" \
+            || { echo "::error::no loaves-pub binary for tool key $key yet; the check workflow publishes it when it passes"; exit 1; }
+          tar -xzf "$RUNNER_TEMP/tool/loaves-pub.tar.gz" -C "$RUNNER_TEMP/tool"
       # A build script with build dependencies links against them, compiled by Oven from their adopted archives: the
       # compiler is the one the bake workflow pins, so both read its commit and image digests from bake.yml.
       - name: Download the compiler that compiles build dependencies
@@ -69,7 +69,7 @@ jobs:
           [ "$TARGET" = aarch64-apple-darwin ] && variable=CLOSURE_INCAN_MACOS
           digest="$(sed -n "s/^  $variable: //p" tool/.github/workflows/bake.yml)"
           echo "commit=$commit" >> "$GITHUB_OUTPUT"
-          oras pull "ghcr.io/encero-systems/incan.pub/toolchain/incan@$digest" --output "$RUNNER_TEMP/incan"
+          oras pull "ghcr.io/encero-systems/loaves.pub/toolchain/incan@$digest" --output "$RUNNER_TEMP/incan"
           tar -xzf "$RUNNER_TEMP/incan/incan.tar.gz" -C "$RUNNER_TEMP/incan"
       - name: Check out that compiler's sources
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -90,12 +90,12 @@ jobs:
         run: |
           [ -s "tool/$BINDINGS" ] || { echo "::error::no bindings at $BINDINGS; name the file by its path in this repository"; exit 1; }
           cut -f6 "tool/$BINDINGS" | sort -u | while read -r graph; do
-            "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/$(dirname "$graph")/lock.json" \
+            "$RUNNER_TEMP/tool/loaves-pub" fetch-sources "tool/$(dirname "$graph")/lock.json" \
               --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
           done
           # The build locks a binding names in its seventh field resolve its build dependencies for this host.
           cut -f7 "tool/$BINDINGS" | grep . | sort -u | while read -r lock; do
-            "$RUNNER_TEMP/tool/incan-pub" fetch-sources "tool/$lock" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
+            "$RUNNER_TEMP/tool/loaves-pub" fetch-sources "tool/$lock" --blobs "$RUNNER_TEMP/blobs" --work "$RUNNER_TEMP/fetch"
           done
       - name: Record each binding's fact as a proposal
         env:
@@ -112,7 +112,7 @@ jobs:
             work="$RUNNER_TEMP/work/$index"
             build=()
             if [ -n "$lock" ]; then build=(--incan "$RUNNER_TEMP/incan/incan" --build-lock "tool/$lock"); fi
-            if output="$("$RUNNER_TEMP/tool/incan-pub" record-fact "$name" "$version" --features "$features" \
+            if output="$("$RUNNER_TEMP/tool/loaves-pub" record-fact "$name" "$version" --features "$features" \
                 --profile "$profile" --domain "$domain" --graph "tool/$graph" --rustc "$rustc" \
                 --cache "$RUNNER_TEMP/cache" --blobs "$RUNNER_TEMP/blobs" --work "$work" --root index --propose \
                 "${build[@]}" 2>&1)"; then

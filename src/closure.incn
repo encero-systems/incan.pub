@@ -28,7 +28,7 @@ from adoption import (
 from canonical import digest_bytes, digest_text
 from events import read_text, string_member
 from host import download
-from registry import crates_io_sparse_url, sparse_index_path
+from registry import crates_io_sparse_url, registry_name, sparse_index_path
 from semver import Version, compare, parse_requirement, parse_version, satisfies
 
 
@@ -78,7 +78,7 @@ pub def prepare(cache: str, blobs: str, line: JsonValue) -> Result[Planned, str]
     files = unpack_crate(package, version, crate_archive(cache, package, version, string_member(line, "cksum"))?)?
     adoption = translate(line, files)?
     manifest = render_adopted_manifest(adoption)
-    archive = source_archive(manifest, loaf_files(adoption, files))?
+    archive = source_archive(manifest, loaf_files(adoption, files, registry_name()))?
     digest = digest_bytes(archive)
     location = blobs + "/sha256/" + digest[7:] + ".tar"
     path = Path(location)
@@ -90,19 +90,20 @@ pub def prepare(cache: str, blobs: str, line: JsonValue) -> Result[Planned, str]
     return Ok(Planned(adoption=adoption, manifest=digest_text(manifest), archive=digest))
 
 
-pub def reproduce(cache: str, blobs: str, line: JsonValue, payload: JsonValue) -> Result[str, str]:
+pub def reproduce(cache: str, blobs: str, line: JsonValue, payload: JsonValue, adopted_under: str) -> Result[str, str]:
     """
     Rebuild the source Loaf archive an `adopt` event recorded and store it; return its digest.
 
     The manifest is rendered from the event's own payload, not from translating the package again, so the archive is
-    the one adopted whatever the translation has learned since (a rule added, an equivalent spelling changed).
+    the one adopted whatever the translation has learned since (a rule added, an equivalent spelling changed). The
+    files adoption added name the registry as it was named when the event was recorded (`adopted_under`).
     """
     package = string_member(line, "name")
     version = string_member(line, "vers")
     files = unpack_crate(package, version, crate_archive(cache, package, version, string_member(line, "cksum"))?)?
     adoption = adoption_from_payload(payload, f"{package} {version}")?
     manifest = render_adopted_manifest(adoption)
-    archive = source_archive(manifest, loaf_files(adoption, files))?
+    archive = source_archive(manifest, loaf_files(adoption, files, adopted_under))?
     digest = digest_bytes(archive)
     location = blobs + "/sha256/" + digest[7:] + ".tar"
     path = Path(location)

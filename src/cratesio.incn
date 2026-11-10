@@ -2,7 +2,7 @@
 The crates.io cross-check: a record's checksum must be the one crates.io publishes for that version.
 
 The registry never mirrors archives and this tool never opens a socket: CI snapshots the index lines the log names
-(`incan-pub index-urls` lists them) and `check --crates-io-index DIR` reads the snapshot. A snapshot is a directory
+(`loaves-pub index-urls` lists them) and `check --crates-io-index DIR` reads the snapshot. A snapshot is a directory
 laid out like the crates.io sparse index, one file per package, one JSON line per version.
 """
 

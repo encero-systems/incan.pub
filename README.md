@@ -1,12 +1,12 @@
 # loaves.pub
 
-The registry for Oven-built projects, as specified by [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md). Browse it at [loaves.pub](https://loaves.pub). This repository is its interim home, in the repository-based shape [docs/v0.md](docs/v0.md) defines: this branch holds the tool and the docs; the [`index`](https://github.com/encero-systems/incan.pub/tree/index) branch holds the data. Today the registry holds crates.io packages **adopted as Loaves**, the **bound build facts** recorded for them, and the event log both are folded from. [docs/model.md](docs/model.md) states what Incan does to publish and what the registry does to manage.
+The registry for Oven-built projects, as specified by [RFC 125](https://github.com/encero-systems/incan/blob/main/workspaces/docs-site/docs/RFCs/125_incan_pub_loaf_registry_and_baked_asset_distribution.md). Browse it at [loaves.pub](https://loaves.pub). This repository is its interim home, in the repository-based shape [docs/v0.md](docs/v0.md) defines: this branch holds the tool and the docs; the [`index`](https://github.com/encero-systems/loaves.pub/tree/index) branch holds the data. Today the registry holds crates.io packages **adopted as Loaves**, the **bound build facts** recorded for them, and the event log both are folded from. [docs/model.md](docs/model.md) states what Incan does to publish and what the registry does to manage.
 
-`loaves.pub` is the registry's public name. This repository, the `incan-pub` tool, the container-registry paths and the event and catalog schemas keep `incan.pub`, because they are permanent identifiers: the strings are hashed into event ids and sit inside archives that published digests name.
+`loaves.pub` is the registry's only name: this repository, the `loaves-pub` tool, the container-registry paths, the event schema `loaves.pub/event/1`, its actor and the catalog schemas all carry it. The registry was first named `incan.pub`, and what it recorded then keeps that name: events written as `incan.pub/event/1` and their actor, the attestations of builds that ran under the earlier repository name, and the notice in the files adoption added to the archives it published then. Those strings are hashed into event ids or sit inside archives that published digests name, so they stay as written and read as the same records.
 
 ## The packages
 
-Every adopted crates.io package has a package on the GitHub Container Registry, `ghcr.io/encero-systems/incan.pub/crates-io/<name>`, and its page links back here. A `<version>` tag holds the version's source Loaf archive (a `+` in the version is written `_`). A `<version>-<12 hex>` tag holds the units Oven compiled for one binding (toolchain, target, profile and feature set), one layer per unit, each annotated with its unit identity. The tags are transport, not authority. The [`index`](https://github.com/encero-systems/incan.pub/tree/index) branch names the digest of every archive: the source archive as `cksum` on the version's index line, and the units in the `assets.json` beside its `loaf.toml`. A client pulls by digest and verifies against the index. Units are published only when they come out byte-identical in two independent builds.
+Every adopted crates.io package has a package on the GitHub Container Registry, `ghcr.io/encero-systems/loaves.pub/crates-io/<name>`, and its page links back here. A `<version>` tag holds the version's source Loaf archive (a `+` in the version is written `_`). A `<version>-<12 hex>` tag holds the units Oven compiled for one binding (toolchain, target, profile and feature set), one layer per unit, each annotated with its unit identity. The tags are transport, not authority. The [`index`](https://github.com/encero-systems/loaves.pub/tree/index) branch names the digest of every archive: the source archive as `cksum` on the version's index line, and the units in the `assets.json` beside its `loaf.toml`. A client pulls by digest and verifies against the index. Units are published only when they come out byte-identical in two independent builds.
 
 ## What an adopted Loaf is
 
@@ -26,8 +26,8 @@ Oven never executes a package's `build.rs`. What a build script would have disco
 
 ```
 main
-  loaf.toml, src/, tests/                  incan-pub: admission (`check`), projection (`build`), adoption, the publishing verbs
-  build.sh                                 test and build the tool with an Incan toolchain → target/incan-pub
+  loaf.toml, src/, tests/                  loaves-pub: admission (`check`), projection (`build`), adoption, the publishing verbs
+  build.sh                                 test and build the tool with an Incan toolchain → target/loaves-pub
   scripts/snapshot-crates-io-index.sh      fetch the crates.io index lines the log names, for `check --crates-io-index`
   docs/                                    the v0 design, the loop, the record, the harvest proposal
 
@@ -49,25 +49,25 @@ blob store (outside git)
   sha256/<hex>.tar                         source Loaf archives by digest
 ```
 
-Nothing under `index/`, `catalog/`, `crates-io/**/loaf.toml`, `crates-io/**/assets.json` or `crates-io/*/README.md` is edited by hand: `incan-pub build` regenerates them from the events, and `incan-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
+Nothing under `index/`, `catalog/`, `crates-io/**/loaf.toml`, `crates-io/**/assets.json` or `crates-io/*/README.md` is edited by hand: `loaves-pub build` regenerates them from the events, and `loaves-pub check` — run in CI on every push to either branch — refuses a checkout whose events, committed generated inputs or projections disagree. With `--crates-io-index` it verifies every crates.io checksum, and with `--blobs` every source Loaf archive. An index line carries the version's `rust` table, `deps`, `features` and `adopted` provenance, its archive digest as `cksum`, and the status of each binding: `harvested` or `attested`.
 
 In this transport `HEAD` of `index` is the checkpoint a toolchain pins, and nothing signs it yet. The signed HTTPS form of RFC 125 changes how these files arrive, not what they say.
 
 ## Using the tool
 
 ```sh
-./build.sh                                    # test, build → target/incan-pub (AGENTS.md: which toolchain)
-git worktree add ../incan.pub-index index     # a checkout of the data branch
-cd ../incan.pub-index
-../incan.pub/target/incan-pub check           # admit the log, compare the projections
-../incan.pub/target/incan-pub adopt --records --cache <cache> --blobs <blob store>
+./build.sh                                    # test, build → target/loaves-pub (AGENTS.md: which toolchain)
+git worktree add ../loaves.pub-index index     # a checkout of the data branch
+cd ../loaves.pub-index
+../loaves.pub/target/loaves-pub check           # admit the log, compare the projections
+../loaves.pub/target/loaves-pub adopt --records --cache <cache> --blobs <blob store>
 ```
 
 `adopt [NAME VERSION]... [--records]` adopts versions and their dependency closure, `readopt NAME VERSION ... --reason TEXT` corrects an adoption that is wrong because of a bug by appending its next revision, and `record-fact NAME VERSION ...` records a build fact by running the build script sandboxed under one binding. `publish NAME VERSION CHECKSUM` creates a v0 record, `add-fact PROPOSAL.json [--publish]` admits a harvested fact, `admit-drop DIR` admits a whole harvest drop after cross-checking it, `attest …` records an equivalence-attested asset, `advise NAME VERSION --text TEXT` records something a consumer should know, and `admit-assets DIR` records the compiled units a bake pushed to the registry. Each appends events and rebuilds the projections; `--root DIR` names the checkout when it is not the current directory. The tool is written in Incan and built with a published Incan release; [AGENTS.md](AGENTS.md) says how.
 
 ## How facts get here
 
-A fact is harvested, not guessed. A harvest observes each unit's build-script directives and generated outputs under one exact selection and emits that observation as a [proposal](docs/harvest-proposal.md), which `incan-pub add-fact` admits as a `fact` event. A binding becomes `attested` when an Oven-baked unit is proven equivalent. A harvest is only a fact of the toolchain when nothing ambient influenced it: a probe answered under `RUSTC_BOOTSTRAP`, for example, is not a stable compiler's answer and must not be recorded as one.
+A fact is harvested, not guessed. A harvest observes each unit's build-script directives and generated outputs under one exact selection and emits that observation as a [proposal](docs/harvest-proposal.md), which `loaves-pub add-fact` admits as a `fact` event. A binding becomes `attested` when an Oven-baked unit is proven equivalent. A harvest is only a fact of the toolchain when nothing ambient influenced it: a probe answered under `RUSTC_BOOTSTRAP`, for example, is not a stable compiler's answer and must not be recorded as one.
 
 ## Status
 
